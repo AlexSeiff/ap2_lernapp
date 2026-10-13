@@ -5,7 +5,7 @@ import { DEV_PORT } from './shared/config';
 
 export default defineConfig(async ({ mode }) => {
   // npm run build:pages: statische Version für GitHub Pages – ohne Server und KI, Inhalte aus content/ als content.json.
-  // Relative Pfade (base './'), damit sie unter https://alexseiff.github.io/ap2_learning_app/ funktioniert (HashRouter).
+  // Relative Pfade (base './'), damit sie unter https://alexseiff.github.io/ap2_lernapp/ funktioniert (HashRouter).
   // .env.local wird hier gar nicht erst gelesen, der API-Schlüssel kann also nicht in den Build geraten.
   if (mode === 'pages') {
     const { contentJsonPlugin } = await import('./server/pagesPlugin');

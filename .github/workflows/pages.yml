@@ -1,5 +1,5 @@
 # Baut die statische Version (npm run build:pages) und veröffentlicht sie auf GitHub Pages:
-# https://alexseiff.github.io/ap2_learning_app/
+# https://alexseiff.github.io/ap2_lernapp/
 # Einmalig nötig: Repository → Settings → Pages → Source: „GitHub Actions“.
 
 name: GitHub Pages

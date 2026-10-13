@@ -28,7 +28,7 @@ Nicht gleichzeitig mit `npm run dev` starten – beide nutzen Port 5178.
 
 ## Online-Version (GitHub Pages)
 
-Unterwegs lernen ohne eigenen Rechner: **https://alexseiff.github.io/ap2_learning_app/**
+Unterwegs lernen ohne eigenen Rechner: **https://alexseiff.github.io/ap2_lernapp/**
 
 Das ist dieselbe App als statische Seite – ohne Server:
 
@@ -47,7 +47,7 @@ Die Lernblätter (die Dateien in `content/`) sind damit öffentlich.
 **Lizenz der Inhalte:** Die Lerninhalte in `content/` stehen unter
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de) – weitergeben und bearbeiten erlaubt, mit Namensnennung,
 nicht kommerziell und nur unter derselben Lizenz. Ausgenommen sind Inhalte Dritter (Zitate, verlinkte Quellen, Gesetzestexte).
-Der Programmcode fällt nicht darunter. Einzelheiten und vollständiger Lizenztext: [`LIZENZ-INHALTE.txt`](LIZENZ-INHALTE.txt).
+Der Programmcode steht unter der [MIT-Lizenz](LICENSE). Einzelheiten zur Inhaltslizenz und vollständiger Lizenztext: [`LIZENZ-INHALTE.txt`](LIZENZ-INHALTE.txt).
 
 **Datenschutz** (steht auch in der App unter *⚙️ Einstellungen*): kein Konto, kein Tracking, keine Cookies. Fortschritt und
 Einstellungen bleiben im Browser; von GitHub Pages werden nur die App und die Lerninhalte geladen, nichts von anderen Anbietern.

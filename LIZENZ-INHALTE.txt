@@ -11,7 +11,7 @@ unter gleichen Bedingungen 4.0 International (CC BY-NC-SA 4.0).
   Vollständiger Lizenztext: unten (englisches Original).
 
 Namensnennung bitte so:
-  „AP2 Lern-App“ von Alex (https://github.com/AlexSeiff/ap2_learning_app),
+  „AP2 Lern-App“ von Alex (https://github.com/AlexSeiff/ap2_lernapp),
   CC BY-NC-SA 4.0
 
 Ausgenommen sind Inhalte Dritter, z. B. Zitate, Titel und Links
@@ -19,7 +19,7 @@ verlinkter Quellen (content/AP2_Quellen.json) und Gesetzestexte –
 für sie gelten die Rechte ihrer Urheber.
 
 Der Programmcode der App (alles außerhalb von content/) fällt nicht
-unter diese Lizenz.
+unter diese Lizenz, sondern unter die MIT-Lizenz (Datei LICENSE).
 
 -----------------------------------------------------------------------
 

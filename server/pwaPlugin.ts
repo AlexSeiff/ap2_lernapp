@@ -6,7 +6,7 @@
 // Jede Datei hat im sw.js eine Revision (Hash). Ändert sich etwas – auch nur content.json –, ändert sich sw.js, der Browser
 // installiert den neuen Service Worker, und die App zeigt „Neue Version verfügbar – neu laden“ (registerType 'prompt',
 // Registrierung und Hinweis selbst gebaut in src/lib/pwa.ts + components/UpdateHinweis.tsx).
-// Alle Pfade relativ (base './'), damit es unter https://alexseiff.github.io/ap2_learning_app/ funktioniert.
+// Alle Pfade relativ (base './'), damit es unter https://alexseiff.github.io/ap2_lernapp/ funktioniert.
 
 import { VitePWA, type VitePWAOptions } from 'vite-plugin-pwa';
 

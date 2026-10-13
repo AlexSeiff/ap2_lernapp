@@ -4,7 +4,7 @@
 > (SQL editor, phases 1–4) and the original build prompt (`../Prompt_Lern_App.md`). Everything in them has been implemented;
 > this file describes **the app as it is** (state: all ROADMAP phases 0–8 done incl. 4.4/4.5, without 7.5 (decision Q3), October 2026).
 > `ROADMAP.md` was deleted after completion; comments like "ROADMAP 8.3" refer to it (`git show d21984e:ROADMAP.md`).
-> Content license (Q4, decided 2026-10-10): CC BY-NC-SA 4.0 for `content/` only, see `LIZENZ-INHALTE.txt`; the code is not covered. How to install and start the app is in `README.md` (German).
+> Content license (Q4, decided 2026-10-10): CC BY-NC-SA 4.0 for `content/` only, see `LIZENZ-INHALTE.txt`; the code (everything outside `content/`) is MIT, see `LICENSE`. How to install and start the app is in `README.md` (German).
 
 ---
 
@@ -44,7 +44,7 @@ One React UI, three ways to run it:
 | Service worker / PWA | no | no | yes (`server/pwaPlugin.ts`, § 5 "PWA") |
 
 - `src/lib/api.ts` picks the data source by `import.meta.env.MODE` (`pages` → static API).
-- Public URL: **https://alexseiff.github.io/ap2_learning_app/** (HashRouter, `base: './'`).
+- Public URL: **https://alexseiff.github.io/ap2_lernapp/** (HashRouter, `base: './'`).
 - Every push to `main` runs `.github/workflows/pages.yml`: `npm ci` → `npm test` → `npm run lint` → `npm run build:pages` → deploy.
 - The Pages version is **used by several people**. Each browser has its own progress; there is no shared state and no account.
 - `AP-2/` = the folder above the repo by default; `LERN_QUELLE` in `.env.local` overrides it (e.g. when the repo lives outside OneDrive);
@@ -837,7 +837,7 @@ applied in `main.tsx` before the first render), error boundary per route, own co
   (`server/pwaPlugin.ts`, `PWA_OPTIONS`). `npm run dev`, `npm start` and `npm run build` never produce or register a service worker
   (`dist/` of `npm run build` has no `sw.js` and no manifest; only an unused 6 kB `workbox-window` chunk is emitted there).
 - **Manifest** `manifest.webmanifest`: name "AP2 Lern-App", short name "AP2 Lernen", `id`/`start_url`/`scope` `./` (relative, works under
-  `/ap2_learning_app/` with the HashRouter), `display: standalone`, theme colour `#f2f2f7` (light grouped background). Icons in `public/icons/`: `icon-192.png`,
+  `/ap2_lernapp/` with the HashRouter), `display: standalone`, theme colour `#f2f2f7` (light grouped background). Icons in `public/icons/`: `icon-192.png`,
   `icon-512.png`, `icon-maskable-512.png` (icon at 80 % on a blue gradient, inside the maskable safe zone) and `apple-touch-icon.png` (180 px,
   linked in `index.html`). They were generated once from the icon of the former desktop build (512 × 512) with Windows System.Drawing
   (high-quality bicubic) and committed – no image library in the project. `tests/pwa.test.ts` checks that every icon exists with the declared size.
