@@ -141,6 +141,52 @@ function multisetDiff(user: SqlValue[][], expected: SqlValue[][], tol: number): 
   return { missing, extra: leftover.map((u) => u.row) };
 }
 
+/** Höchstens so viele vollständige Zuordnungen prüfen (bei wenigen Spalten weit mehr als genug). */
+const MAX_ZUORDNUNGEN = 2000;
+
+const project = (rows: SqlValue[][], cols: number[]) => rows.map((row) => cols.map((c) => row[c]));
+
+/**
+ * `spaltenFrei`: ordnet jeder erwarteten Spalte eine Spalte der Abfrage mit gleichem Inhalt zu (erst je Spalte als
+ * Multimenge, dann zeilenweise geprüft). Liefert die Spaltenindizes der Abfrage in der Reihenfolge der erwarteten Spalten.
+ * Passt keine Zuordnung, dann gleicher Name bzw. gleiche Position – damit die Meldung fehlende/überzählige Zeilen zeigt.
+ */
+function spaltenZuordnung(user: StatementResult, expected: StatementResult, tol: number): number[] {
+  const ersatz = expected.columns.map((name, j) => {
+    const gleich = user.columns.findIndex((c) => c.toLowerCase() === name.toLowerCase());
+    return gleich !== -1 ? gleich : j;
+  });
+  if (user.rows.length !== expected.rows.length) return ersatz;
+  const spalte = (rows: SqlValue[][], i: number) =>
+    rows
+      .map((r) => valueKey(r[i], tol))
+      .sort()
+      .join('|');
+  const userSpalten = user.columns.map((_, i) => spalte(user.rows, i));
+  const kandidaten = expected.columns.map((_, j) => {
+    const key = spalte(expected.rows, j);
+    return userSpalten.flatMap((k, i) => (k === key ? [i] : []));
+  });
+  const gewaehlt: number[] = [];
+  let versuche = 0;
+  const suche = (j: number): boolean => {
+    if (j === kandidaten.length) {
+      versuche++;
+      const { missing, extra } = multisetDiff(project(user.rows, gewaehlt), expected.rows, tol);
+      return missing.length === 0 && extra.length === 0;
+    }
+    for (const i of kandidaten[j]) {
+      if (versuche >= MAX_ZUORDNUNGEN) return false;
+      if (gewaehlt.includes(i)) continue;
+      gewaehlt.push(i);
+      if (suche(j + 1)) return true;
+      gewaehlt.pop();
+    }
+    return false;
+  };
+  return suche(0) ? gewaehlt : ersatz;
+}
+
 /**
  * Vergleicht das Ergebnis der Abfrage mit dem der Musterlösung.
  * `solutionSql` ist das SQL, das `expected` erzeugt hat (bei DML-Übungen die Prüfabfrage); es entscheidet bei
@@ -163,14 +209,25 @@ export function compareResults(
   if (user.columns.length === 0 && expected.columns.length > 0) {
     return fail('Deine Abfrage liefert keine Ergebnistabelle – fehlt ein SELECT?');
   }
-  if (user.columns.length !== expected.columns.length) {
+  if (opts.spaltenFrei) {
     const n = expected.columns.length;
-    return fail(`Deine Abfrage liefert ${plural(user.columns.length, 'Spalte', 'Spalten')}, erwartet ${n === 1 ? 'ist' : 'sind'} ${n}.`);
-  }
-  const names = opts.spaltennamen ?? [];
-  for (let i = 0; i < names.length && i < user.columns.length; i++) {
-    if (user.columns[i].toLowerCase() !== names[i].toLowerCase()) {
-      return fail(`Spalte ${i + 1} soll \`${names[i]}\` heißen – Alias mit AS vergeben.`);
+    if (user.columns.length < n) {
+      return fail(
+        `Deine Abfrage liefert ${plural(user.columns.length, 'Spalte', 'Spalten')}, erwartet ${n === 1 ? 'ist' : 'sind'} mindestens ${n}.`,
+      );
+    }
+    // Ab hier wie gewohnt, aber mit den zugeordneten Spalten in der Reihenfolge der Musterlösung.
+    user = { ...user, columns: expected.columns, rows: project(user.rows, spaltenZuordnung(user, expected, tol)) };
+  } else {
+    if (user.columns.length !== expected.columns.length) {
+      const n = expected.columns.length;
+      return fail(`Deine Abfrage liefert ${plural(user.columns.length, 'Spalte', 'Spalten')}, erwartet ${n === 1 ? 'ist' : 'sind'} ${n}.`);
+    }
+    const names = opts.spaltennamen ?? [];
+    for (let i = 0; i < names.length && i < user.columns.length; i++) {
+      if (user.columns[i].toLowerCase() !== names[i].toLowerCase()) {
+        return fail(`Spalte ${i + 1} soll \`${names[i]}\` heißen – Alias mit AS vergeben.`);
+      }
     }
   }
 

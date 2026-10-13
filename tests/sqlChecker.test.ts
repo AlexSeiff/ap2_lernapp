@@ -151,3 +151,61 @@ describe('lastResultSet', () => {
     expect(lastResultSet([])).toBeUndefined();
   });
 });
+
+describe('compareResults: spaltenFrei (verknüpfte Klausuraufgaben)', () => {
+  const FREI: CompareOptions = { reihenfolge: 'egal', spaltenFrei: true };
+  const expected = res(
+    ['bezeichnung', 'preis'],
+    [
+      ['Stuhl', 249],
+      ['Tisch', 399],
+    ],
+  );
+
+  it('erlaubt zusätzliche Spalten (SELECT *), andere Namen und eine andere Spaltenreihenfolge', () => {
+    const stern = res(
+      ['produkt_id', 'Preis', 'kategorie', 'BEZ'],
+      [
+        [10, 249, 'Möbel', 'Stuhl'],
+        [11, 399, 'Möbel', 'Tisch'],
+      ],
+    );
+    expect(compareResults(stern, expected, FREI, '').ok).toBe(true);
+  });
+
+  it('ordnet zeilenweise zu – gleiche Spaltenwerte in falscher Kombination sind falsch', () => {
+    const vertauscht = res(
+      ['bezeichnung', 'preis'],
+      [
+        ['Stuhl', 399],
+        ['Tisch', 249],
+      ],
+    );
+    const v = compareResults(vertauscht, expected, FREI, '');
+    expect(v.ok).toBe(false);
+    expect(v.missing).toHaveLength(2);
+  });
+
+  it('meldet zu wenige Spalten und fehlende Zeilen', () => {
+    expect(compareResults(res(['preis'], [[249], [399]]), expected, FREI, '').message).toBe(
+      'Deine Abfrage liefert 1 Spalte, erwartet sind mindestens 2.',
+    );
+    const v = compareResults(res(['bezeichnung', 'preis', 'x'], [['Stuhl', 249, 1]]), expected, FREI, '');
+    expect(v).toMatchObject({ ok: false, message: '1 Zeile fehlt.', missing: [['Tisch', 399]] });
+  });
+
+  it('prüft die Reihenfolge der Zeilen weiterhin, wenn die Musterlösung sortiert', () => {
+    const umgekehrt = res(
+      ['x', 'bezeichnung', 'preis'],
+      [
+        [2, 'Tisch', 399],
+        [1, 'Stuhl', 249],
+      ],
+    );
+    const AUTO: CompareOptions = { reihenfolge: 'auto', spaltenFrei: true };
+    expect(compareResults(umgekehrt, expected, AUTO, 'SELECT … ORDER BY preis').message).toBe(
+      'Zeilen stimmen, aber die Reihenfolge nicht.',
+    );
+    expect(compareResults(umgekehrt, expected, AUTO, 'SELECT …').ok).toBe(true);
+  });
+});

@@ -3,7 +3,7 @@
 
 import { z } from 'zod';
 import { topicFromSource } from './lernkarten';
-import type { ImportIssue, SqlDataset, SqlExercise } from './types';
+import type { Content, ImportIssue, SqlDataset, SqlExercise } from './types';
 
 export interface ParsedSqlUebungen {
   datasets: SqlDataset[];
@@ -47,6 +47,10 @@ const exerciseSchema = z.object({
   hinweise: z.array(z.string()).default([]),
   erklaerung: optText,
   quelle_aufgabe: optText,
+  aufgaben: z.array(text).default([]),
+  karten: z.array(text).default([]),
+  teilaufgabe: z.boolean().optional(),
+  spalten_frei: z.boolean().optional(),
 });
 
 /** Erste zod-Meldung als kurzer Text, z. B. „schwierigkeit: Invalid input". */
@@ -108,7 +112,7 @@ export function parseSqlUebungen(fileName: string, json: string, topics: Map<str
       issue(`Übung ${label(raw)} übersprungen (${describe(parsed.error)}).`);
       continue;
     }
-    const { quelle_aufgabe, ...u } = parsed.data;
+    const { quelle_aufgabe, aufgaben, karten, teilaufgabe, spalten_frei, ...u } = parsed.data;
     if (seen.has(u.id)) {
       issue(`Doppelte Übungs-ID ${u.id} übersprungen.`);
       continue;
@@ -119,12 +123,42 @@ export function parseSqlUebungen(fileName: string, json: string, topics: Map<str
     }
     seen.add(u.id);
     if (!u.hinweise.length) issue(`Übung ${u.id}: keine Hinweise.`);
+    if ((teilaufgabe || spalten_frei) && !aufgaben.length) issue(`Übung ${u.id}: „teilaufgabe“/„spalten_frei“ gelten nur mit „aufgaben“.`);
     result.exercises.push({
       ...u,
       topicId: topicFromSource(u.thema, u.titel, topics),
       leerErlaubt: u.leerErlaubt || undefined,
       quelleAufgabe: quelle_aufgabe,
+      ...(aufgaben.length ? { aufgaben } : {}),
+      ...(karten.length ? { karten } : {}),
+      ...(teilaufgabe ? { teilaufgabe } : {}),
+      ...(spalten_frei ? { spaltenFrei: true } : {}),
     });
   }
   return result;
+}
+
+/**
+ * Verknüpft SQL-Übungen mit Aufgaben aus den Lernblättern (`aufgaben` → Task.sqlUebung: dort wird im SQL-Editor geantwortet)
+ * und mit Karteikarten (`karten` → Flashcard.sqlUebungen: Link „Im SQL-Editor üben“). Unbekannte ids und Aufgaben, die
+ * mehreren Übungen zugeordnet sind, werden als ImportIssue gemeldet und nicht verknüpft. Ändert `content` direkt.
+ */
+export function verknuepfeSqlUebungen(content: Pick<Content, 'tasks' | 'flashcards' | 'sqlExercises'>, fileName: string): ImportIssue[] {
+  const issues: ImportIssue[] = [];
+  const cards = new Map(content.flashcards.map((c) => [c.id, c]));
+  for (const ex of content.sqlExercises) {
+    for (const taskId of ex.aufgaben ?? []) {
+      const task = content.tasks[taskId];
+      if (!task) issues.push({ file: fileName, message: `Übung ${ex.id}: unbekannte Aufgabe „${taskId}“ in „aufgaben“.` });
+      else if (task.sqlUebung)
+        issues.push({ file: fileName, message: `Übung ${ex.id}: Aufgabe ${taskId} ist schon mit ${task.sqlUebung} verknüpft.` });
+      else task.sqlUebung = ex.id;
+    }
+    for (const cardId of ex.karten ?? []) {
+      const card = cards.get(cardId);
+      if (!card) issues.push({ file: fileName, message: `Übung ${ex.id}: unbekannte Karte „${cardId}“ in „karten“.` });
+      else if (!card.sqlUebungen?.includes(ex.id)) card.sqlUebungen = [...(card.sqlUebungen ?? []), ex.id];
+    }
+  }
+  return issues;
 }

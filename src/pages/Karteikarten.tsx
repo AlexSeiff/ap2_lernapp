@@ -4,6 +4,7 @@ import type { CardType, Flashcard } from '../../shared/types';
 import { AntwortVergleich, EigeneAntwortFeld } from '../components/EigeneAntwort';
 import { LeichtOptionen } from '../components/LeichtOptionen';
 import { MarkierStern } from '../components/MarkierStern';
+import { SqlUebungLinks } from '../components/SqlUebungLinks';
 import { Markdown } from '../components/Markdown';
 import { useCardFilters, useCardSession } from '../hooks/useCardSession';
 import { leichtZahlen } from '../lib/leicht';
@@ -136,6 +137,7 @@ export function Karteikarten() {
             </div>
           )}
         </div>
+        {fertig && <SqlUebungLinks card={card} />}
         {fertig ? (
           <div className="actions">
             <button type="button" onClick={next} autoFocus>
@@ -222,6 +224,7 @@ export function Karteikarten() {
           )}
         </div>
         {!flipped && <EigeneAntwortFeld value={eigeneAntwort} onChange={setEigeneAntwort} onFertig={flip} />}
+        {flipped && <SqlUebungLinks card={card} />}
         {flipped && (
           <div className="rate-buttons">
             <button type="button" className="good" onClick={() => rate('gewusst')}>
@@ -602,6 +605,7 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
           <p className="hint">Klicken oder Leertaste zum Umdrehen.</p>
         )}
       </div>
+      {offen && <SqlUebungLinks card={card} />}
       <div className="actions blaettern-nav">
         <button type="button" className="secondary" disabled={i === 0} onClick={() => gehe(i - 1)}>
           ← Zurück

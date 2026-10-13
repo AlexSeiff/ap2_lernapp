@@ -6,7 +6,7 @@ import { parseLernkarten } from './lernkarten';
 import { readPrueferfrage } from './prueferfragen';
 import { parseDiagrammUebungen } from './diagrammUebungen';
 import { parseRechenUebungen, type RechenUebungPruefer } from './rechenUebungen';
-import { parseSqlUebungen } from './sqlUebungen';
+import { parseSqlUebungen, verknuepfeSqlUebungen } from './sqlUebungen';
 import { pruefeSvg, svgBloecke, svgIds } from './svgDiagramm';
 
 interface Line {
@@ -474,7 +474,7 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
     const parsed = parseSqlUebungen(f.name, f.text, topicTitles);
     content.sqlDatasets.push(...parsed.datasets);
     content.sqlExercises.push(...parsed.exercises);
-    content.issues.push(...parsed.issues);
+    content.issues.push(...parsed.issues, ...verknuepfeSqlUebungen({ ...content, sqlExercises: parsed.exercises }, f.name));
   }
 
   // Rechenübungen (Vorlagen mit Zufallszahlen oder feste Aufgaben aus den Lernblättern)

@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import type { Section, Task } from '../../shared/types';
 import { api } from '../lib/api';
 import { autoGrade, difficulty, formatPoints } from '../lib/grading';
 import { numberBlanks, solutionMarkdown } from '../lib/sheets';
+import { sqlUebungZuAufgabe } from '../lib/sqlAufgabe';
 import { useStore } from '../lib/store';
 import { decodeAnswer } from './AnswerInput';
 import { Markdown } from './Markdown';
 import { Icon } from './Icon';
+
+const SqlPruefung = lazy(() => import('./SqlPruefung'));
 
 export function TaskText({ task, showMeta }: { task: Task; showMeta?: boolean }) {
   const { content } = useStore();
@@ -48,14 +51,17 @@ interface GradeProps {
   answer: string | undefined;
   points: number | undefined;
   onPoints: (p: number) => void;
+  /** SQL-Aufgaben: nach der automatischen Prüfung einmal aufgerufen (Einzelaufgabe zählt auch für die SQL-Übung). */
+  onSqlGeprueft?: (ok: boolean, query: string) => void;
 }
 
 /**
  * Lösungsansicht mit Bewertung: automatisch (objektive Aufgaben), per Kriterien-Checkliste,
  * per Punkteeingabe oder per KI-Bewertung.
  */
-export function GradePanel({ task, answer, points, onPoints }: GradeProps) {
-  const { aiEnabled } = useStore();
+export function GradePanel({ task, answer, points, onPoints, onSqlGeprueft }: GradeProps) {
+  const { aiEnabled, content } = useStore();
+  const sql = sqlUebungZuAufgabe(content, task);
   const auto = decodeAnswer(task, answer);
   const autoResult = auto ? autoGrade(task, auto) : null;
   const criteria = task.solution?.criteria;
@@ -112,6 +118,19 @@ export function GradePanel({ task, answer, points, onPoints }: GradeProps) {
           </p>
         ) : (
           <>
+            {sql && (
+              <Suspense fallback={<p className="muted small">Abfrage wird mit der Musterlösung verglichen …</p>}>
+                <SqlPruefung
+                  task={task}
+                  ex={sql.ex}
+                  ds={sql.ds}
+                  answer={answer}
+                  points={points}
+                  onPoints={onPoints}
+                  onGeprueft={onSqlGeprueft}
+                />
+              </Suspense>
+            )}
             {criteria && (
               <div className="criteria">
                 <p className="hint">Hake jedes Kriterium ab, das deine Lösung erfüllt:</p>

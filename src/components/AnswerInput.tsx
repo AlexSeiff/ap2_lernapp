@@ -1,7 +1,11 @@
-import { useMemo } from 'react';
+import { lazy, Suspense, useMemo } from 'react';
 import type { Task } from '../../shared/types';
 import type { AutoAnswer } from '../lib/grading';
+import { sqlUebungZuAufgabe } from '../lib/sqlAufgabe';
 import { useStore } from '../lib/store';
+
+// Nur bei Aufgaben mit verknüpfter SQL-Übung: CodeMirror und sql.js kommen erst dann.
+const SqlAntwort = lazy(() => import('./SqlAntwort'));
 
 /** Antworten werden immer als String gespeichert; objektive Aufgaben als JSON. */
 export function decodeAnswer(task: Task, raw: string | undefined): AutoAnswer | null {
@@ -49,13 +53,24 @@ interface Props {
   value: string | undefined;
   onChange: (v: string) => void;
   disabled?: boolean;
+  /** SQL-Aufgaben: Abfrage auf dem Datensatz ausprobieren dürfen (Einzelaufgabe ja, Übungsklausur nein). */
+  sqlAusfuehren?: boolean;
 }
 
-export function AnswerInput({ task, value, onChange, disabled }: Props) {
+export function AnswerInput({ task, value, onChange, disabled, sqlAusfuehren = true }: Props) {
   const { content } = useStore();
   const auto = decodeAnswer(task, value);
   const order = useMemo(() => shuffledOrder(task.auto?.pairs?.length ?? 0, task.id), [task]);
   const set = (a: AutoAnswer) => onChange(JSON.stringify(a));
+  const sql = sqlUebungZuAufgabe(content, task);
+
+  if (sql) {
+    return (
+      <Suspense fallback={<p className="muted small">SQL-Editor lädt …</p>}>
+        <SqlAntwort ex={sql.ex} ds={sql.ds} value={value} onChange={onChange} disabled={disabled} ausfuehren={sqlAusfuehren} />
+      </Suspense>
+    );
+  }
 
   if (!auto) {
     const code = looksLikeCode(task, content.topics.find((t) => t.id === task.topicId)?.title);

@@ -55,7 +55,13 @@
         "Sortieren mit ORDER BY name ASC."
       ],
       "erklaerung": "Ergebnis: Fischer KG, Huber GmbH. WHERE filtert die Zeilen (Selektion), SELECT wählt die Spalten (Projektion).",
-      "quelle_aufgabe": "DD1 Übungsklausur B1"
+      "quelle_aufgabe": "DD1 Übungsklausur B1",
+      "aufgaben": [
+        "01-B1"
+      ],
+      "karten": [
+        "SQL-001"
+      ]
     },
     {
       "id": "SQL-MH-002",
@@ -80,7 +86,10 @@
         "Verknüpfe sie mit AND. Zahlen ohne Anführungszeichen."
       ],
       "erklaerung": "Ergebnis: Dockingstation, 129.00. Der Monitor (189 €) fällt durch die Preisbedingung raus.",
-      "quelle_aufgabe": "DD1 Übungsklausur B2"
+      "quelle_aufgabe": "DD1 Übungsklausur B2",
+      "aufgaben": [
+        "01-B2"
+      ]
     },
     {
       "id": "SQL-MH-003",
@@ -103,7 +112,14 @@
         "Muster gehen mit LIKE. % steht für beliebig viele Zeichen."
       ],
       "erklaerung": "Ergebnis: Schreibtisch Basic, Schreibtischlampe. 'Schreibtisch%' heißt: beginnt mit Schreibtisch, danach egal was.",
-      "quelle_aufgabe": "DD1 Übungsklausur B3"
+      "quelle_aufgabe": "DD1 Übungsklausur B3",
+      "aufgaben": [
+        "01-B3"
+      ],
+      "karten": [
+        "SQL-009"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-MH-004",
@@ -132,7 +148,14 @@
         "ort ist nicht aggregiert – also muss ort ins GROUP BY."
       ],
       "erklaerung": "Ergebnis: München 2, Hamburg 2, Köln 1.",
-      "quelle_aufgabe": "DD1 Übungsklausur B4"
+      "quelle_aufgabe": "DD1 Übungsklausur B4",
+      "aufgaben": [
+        "01-B4"
+      ],
+      "karten": [
+        "SQL-006",
+        "FB-group-by"
+      ]
     },
     {
       "id": "SQL-MH-005",
@@ -160,7 +183,10 @@
         "Den Spaltennamen vergibst du mit AS."
       ],
       "erklaerung": "Ergebnis: 201.18. Ohne Alias gibt es in der Prüfung 1 Punkt Abzug – er war ausdrücklich gefordert.",
-      "quelle_aufgabe": "DD1 Übungsklausur B5"
+      "quelle_aufgabe": "DD1 Übungsklausur B5",
+      "aufgaben": [
+        "01-B5"
+      ]
     },
     {
       "id": "SQL-MH-006",
@@ -185,7 +211,11 @@
         "Bedingungen auf Gruppen gehören in HAVING, nicht in WHERE."
       ],
       "erklaerung": "Ergebnis: 100 mit 2 Positionen, 101 mit 2 Positionen. Wer WHERE COUNT(*) > 1 schreibt, verliert in der Prüfung 4 Punkte.",
-      "quelle_aufgabe": "DD1 Übungsklausur B6"
+      "quelle_aufgabe": "DD1 Übungsklausur B6",
+      "aufgaben": [
+        "01-B6"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-MH-007",
@@ -209,7 +239,15 @@
         "Tabellen-Aliase (b, k) machen die Abfrage lesbar."
       ],
       "erklaerung": "6 Zeilen. LEFT JOIN wäre hier auch richtig – jede Bestellung hat einen Kunden.",
-      "quelle_aufgabe": "DD1 Übungsklausur B7"
+      "quelle_aufgabe": "DD1 Übungsklausur B7",
+      "aufgaben": [
+        "01-B7"
+      ],
+      "karten": [
+        "SQL-010",
+        "SQL-012",
+        "FB-inner-join"
+      ]
     },
     {
       "id": "SQL-MH-008",
@@ -240,7 +278,10 @@
         "GROUP BY k.name, danach ORDER BY umsatz DESC."
       ],
       "erklaerung": "Ergebnis: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70. Rechenweg Huber: Best. 100 = 2×249 + 2×189 = 876,00; Best. 102 = 4×129 = 516,00; Best. 105 = 2×39,90 = 79,80.",
-      "quelle_aufgabe": "DD1 Übungsklausur B8"
+      "quelle_aufgabe": "DD1 Übungsklausur B8",
+      "aufgaben": [
+        "01-B8"
+      ]
     },
     {
       "id": "SQL-MH-009",
@@ -265,7 +306,14 @@
         "Filtere auf b.bestell_id IS NULL."
       ],
       "erklaerung": "Ergebnis: Weber e.K., Braun GmbH. Genauso richtig: WHERE NOT EXISTS (SELECT 1 FROM bestellung b WHERE b.kunden_id = k.kunden_id) oder WHERE kunden_id NOT IN (SELECT kunden_id FROM bestellung) – NOT IN nur, solange die Unterabfrage keine NULL-Werte liefert.",
-      "quelle_aufgabe": "DD1 Übungsklausur B9"
+      "quelle_aufgabe": "DD1 Übungsklausur B9",
+      "aufgaben": [
+        "01-B9"
+      ],
+      "karten": [
+        "SQL-011",
+        "FB-left-join"
+      ]
     },
     {
       "id": "SQL-MH-010",
@@ -289,7 +337,14 @@
         "Berechne den Durchschnitt in einer Unterabfrage in Klammern."
       ],
       "erklaerung": "Ergebnis: Bürostuhl Comfort 249.00, Schreibtisch Basic 399.00 (Durchschnitt 201.18). Ein von Hand eingesetzter Wert gibt nur halbe Punkte – er stimmt nach der nächsten Preisänderung nicht mehr.",
-      "quelle_aufgabe": "DD1 Übungsklausur B10"
+      "quelle_aufgabe": "DD1 Übungsklausur B10",
+      "aufgaben": [
+        "01-B10"
+      ],
+      "karten": [
+        "SQL-013",
+        "FB-unterabfrage"
+      ]
     },
     {
       "id": "SQL-MH-011",
@@ -318,7 +373,16 @@
         "Schreib im HAVING COUNT(*) statt des Alias anzahl – SQLite würde den Alias zwar akzeptieren, in Standard-SQL (Prüfung) ist er dort noch nicht bekannt."
       ],
       "erklaerung": "Ergebnis: München 2, Hamburg 2. Die drei Fehler im Original: Aggregat in WHERE, Alias in WHERE, GROUP BY name statt ort.",
-      "quelle_aufgabe": "DD1 Übungsklausur A3"
+      "quelle_aufgabe": "DD1 Übungsklausur A3",
+      "aufgaben": [
+        "01-A3"
+      ],
+      "karten": [
+        "SQL-003",
+        "SQL-004",
+        "FB-having"
+      ],
+      "teilaufgabe": true
     },
     {
       "id": "SQL-MH-012",
@@ -373,7 +437,16 @@
         "Fremdschlüssel am Ende: FOREIGN KEY (bestell_id) REFERENCES bestellung(bestell_id)."
       ],
       "erklaerung": "Geprüft werden Spalten, Primärschlüssel, Pflichtfelder, Fremdschlüssel, Standardwert und CHECK – nicht die Datentypen. INT statt INTEGER oder TEXT statt VARCHAR ist auch in der Prüfung ok.",
-      "quelle_aufgabe": "DD1 Übungsklausur C2"
+      "quelle_aufgabe": "DD1 Übungsklausur C2",
+      "aufgaben": [
+        "01-C2"
+      ],
+      "karten": [
+        "SQL-016",
+        "SQL-017",
+        "FB-check",
+        "FB-default"
+      ]
     },
     {
       "id": "SQL-MH-014",
@@ -420,7 +493,10 @@
         "BETWEEN schließt beide Grenzen ein."
       ],
       "erklaerung": "Ergebnis: Monitor 27 Zoll 189.00, Dockingstation 129.00. Gleichwertig: preis >= 100 AND preis <= 200.",
-      "quelle_aufgabe": "DD1 Teil 1, 1.2 WHERE im Detail"
+      "quelle_aufgabe": "DD1 Teil 1, 1.2 WHERE im Detail",
+      "karten": [
+        "SQL-009"
+      ]
     },
     {
       "id": "SQL-MH-016",
@@ -472,7 +548,10 @@
         "In SQL schreibst du 1.19 mit Punkt. Den Namen gibst du mit AS."
       ],
       "erklaerung": "Zum Beispiel Bürostuhl Comfort: 249 × 1.19 = 296.31.",
-      "quelle_aufgabe": "DD1 Teil 1, 1.4 Berechnete Spalten und Aliase"
+      "quelle_aufgabe": "DD1 Teil 1, 1.4 Berechnete Spalten und Aliase",
+      "karten": [
+        "SQL-005"
+      ]
     },
     {
       "id": "SQL-MH-018",
@@ -562,7 +641,11 @@
         "Zähle eine Spalte der rechten Tabelle: COUNT(b.bestell_id)."
       ],
       "erklaerung": "Ergebnis: Huber 3, Schmidt 1, Fischer 2, Weber 0, Braun 0. Genau hier zeigt sich der Unterschied zwischen COUNT(*) und COUNT(spalte).",
-      "quelle_aufgabe": "DD1 Teil 2, 2.2 JOINs"
+      "quelle_aufgabe": "DD1 Teil 2, 2.2 JOINs",
+      "karten": [
+        "SQL-010",
+        "SQL-024"
+      ]
     },
     {
       "id": "SQL-MH-021",
@@ -720,7 +803,10 @@
         "Ohne WHERE änderst du alle Preise!"
       ],
       "erklaerung": "UPDATE ohne WHERE trifft die ganze Tabelle – ein beliebter Fehlersuche-Punkt in der Prüfung.",
-      "quelle_aufgabe": "DD1 Teil 2, 2.4 DML"
+      "quelle_aufgabe": "DD1 Teil 2, 2.4 DML",
+      "karten": [
+        "SQL-015"
+      ]
     },
     {
       "id": "SQL-MH-027",
@@ -743,7 +829,11 @@
         "Die Positionen stehen in bestellposition, nicht in bestellung."
       ],
       "erklaerung": "Danach sind noch 7 Positionen übrig. DELETE ohne WHERE würde alle löschen.",
-      "quelle_aufgabe": "DD1 Teil 2, 2.4 DML"
+      "quelle_aufgabe": "DD1 Teil 2, 2.4 DML",
+      "karten": [
+        "SQL-015",
+        "SQL-027"
+      ]
     },
     {
       "id": "SQL-MH-028",
@@ -793,7 +883,11 @@
         "Was im SELECT der Unterabfrage steht, ist egal – üblich ist SELECT 1."
       ],
       "erklaerung": "Ergebnis: Weber e.K., Braun GmbH. Anders als NOT IN bleibt NOT EXISTS auch dann korrekt, wenn bestellung.kunden_id NULL-Werte enthielte.",
-      "quelle_aufgabe": "DD1 Teil 3, 3.1 NULL-Fallen"
+      "quelle_aufgabe": "DD1 Teil 3, 3.1 NULL-Fallen",
+      "karten": [
+        "SQL-011",
+        "SQL-023"
+      ]
     },
     {
       "id": "SQL-MH-030",
@@ -854,7 +948,11 @@
         "COALESCE(u.umsatz, 0) macht aus NULL eine 0."
       ],
       "erklaerung": "Ergebnis: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70 · Weber e.K. 0 · Braun GmbH 0. Gleichwertig: alle vier Tabellen per LEFT JOIN verketten und COALESCE(SUM(bp.menge * p.preis), 0) je Kunde bilden.",
-      "quelle_aufgabe": "DD1 Teil 3, 3.8 CTE"
+      "quelle_aufgabe": "DD1 Teil 3, 3.8 CTE",
+      "karten": [
+        "FB-cte",
+        "FB-coalesce"
+      ]
     },
     {
       "id": "SQL-MH-032",
@@ -885,7 +983,290 @@
         "PARTITION BY bestell_id legt fest, über welche Zeilen summiert wird."
       ],
       "erklaerung": "Ergebnis: 8 Zeilen; die Positionen der Bestellungen 100 und 101 zeigen je menge_bestellung 4, Bestellung 102 4, 103 5, 104 1, 105 2. Alternative ohne Fensterfunktion: Join auf eine gruppierte Unterabfrage.",
-      "quelle_aufgabe": "DD1 Teil 3, 3.8 Fensterfunktionen"
+      "quelle_aufgabe": "DD1 Teil 3, 3.8 Fensterfunktionen",
+      "karten": [
+        "SQL-026",
+        "FB-fensterfunktion"
+      ]
+    },
+    {
+      "id": "SQL-MH-033",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "View für den Kundenumsatz",
+      "aufgabe": "Lege eine View v_kundenumsatz an, die je Kunde mit Bestellungen kunden_id, name und den Umsatz liefert (Spaltenname umsatz, Umsatz = menge × preis).",
+      "schwierigkeit": 2,
+      "tags": [
+        "view",
+        "ddl",
+        "join",
+        "group by"
+      ],
+      "loesung": "CREATE VIEW v_kundenumsatz AS\nSELECT k.kunden_id, k.name, SUM(bp.menge * p.preis) AS umsatz\nFROM kunde k\nJOIN bestellung b       ON k.kunden_id = b.kunden_id\nJOIN bestellposition bp ON b.bestell_id = bp.bestell_id\nJOIN produkt p          ON bp.produkt_id = p.produkt_id\nGROUP BY k.kunden_id, k.name;",
+      "vergleich": {
+        "reihenfolge": "egal",
+        "toleranz": 0.005
+      },
+      "pruefabfrage": "SELECT kunden_id, name, ROUND(umsatz, 2) AS umsatz,\n       (SELECT type FROM sqlite_master WHERE name = 'v_kundenumsatz') AS objekt\nFROM v_kundenumsatz;",
+      "hinweise": [
+        "CREATE VIEW v_kundenumsatz AS SELECT … – dahinter steht eine ganz normale Abfrage.",
+        "Die Abfrage ist dieselbe wie bei „Umsatz je Kunde“: vier Tabellen verknüpfen, GROUP BY k.kunden_id, k.name.",
+        "Spalten der View: kunden_id, name und SUM(bp.menge * p.preis) AS umsatz."
+      ],
+      "erklaerung": "Geprüft wird per SELECT auf die View: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70 – und dass es wirklich eine View ist, keine Tabelle. Eine View speichert nur die Abfrage und ist bei jedem Zugriff aktuell. In der Praxis bekäme die Rolle eines Analysten per GRANT SELECT ON v_kundenumsatz nur Zugriff auf die View, nicht auf die Basistabellen (SQLite kennt kein GRANT).",
+      "quelle_aufgabe": "DD1 Teil 3, 3.4 Views",
+      "karten": [
+        "SQL-028",
+        "TEC-014",
+        "FB-view"
+      ]
+    },
+    {
+      "id": "SQL-MH-034",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "Kunden ohne Bestellung mit EXCEPT",
+      "aufgabe": "Gib mit einer Mengenoperation die kunden_id aller Kunden aus, die noch nie bestellt haben – ohne JOIN und ohne Unterabfrage.",
+      "schwierigkeit": 2,
+      "tags": [
+        "mengenoperation",
+        "except"
+      ],
+      "loesung": "SELECT kunden_id FROM kunde\nEXCEPT\nSELECT kunden_id FROM bestellung;",
+      "vergleich": {
+        "reihenfolge": "egal",
+        "spaltennamen": [
+          "kunden_id"
+        ]
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Gesucht sind IDs, die in kunde vorkommen, in bestellung aber nicht.",
+        "EXCEPT liefert die Zeilen der ersten Abfrage, die in der zweiten fehlen (Oracle: MINUS).",
+        "Beide Abfragen brauchen gleich viele Spalten mit verträglichen Datentypen."
+      ],
+      "erklaerung": "Ergebnis: 4 und 5 (Weber e.K., Braun GmbH). EXCEPT entfernt wie UNION Duplikate. Typisch für Datenqualität: Schlüssel finden, die im Quellsystem vorhanden sind, im Zielsystem aber fehlen.",
+      "quelle_aufgabe": "DD1 Teil 3, 3.3 Mengenoperationen"
+    },
+    {
+      "id": "SQL-MH-035",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "Kontrollzahlen mit UNION ALL",
+      "aufgabe": "Erstelle eine Kontrollübersicht mit den Spalten tabelle und anzahl: je eine Zeile für kunde, produkt und bestellung mit der Zahl ihrer Datensätze – in einer einzigen Abfrage.",
+      "schwierigkeit": 2,
+      "tags": [
+        "mengenoperation",
+        "union all",
+        "datenqualität"
+      ],
+      "loesung": "SELECT 'kunde' AS tabelle, COUNT(*) AS anzahl FROM kunde\nUNION ALL\nSELECT 'produkt', COUNT(*) FROM produkt\nUNION ALL\nSELECT 'bestellung', COUNT(*) FROM bestellung;",
+      "vergleich": {
+        "reihenfolge": "egal",
+        "spaltennamen": [
+          "tabelle",
+          "anzahl"
+        ]
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Drei einzelne Abfragen mit COUNT(*) – und ein fester Text als erste Spalte: SELECT 'kunde' AS tabelle, …",
+        "Untereinanderhängen: UNION ALL zwischen die Abfragen.",
+        "Die Spaltennamen kommen aus der ersten Abfrage."
+      ],
+      "erklaerung": "Ergebnis: kunde 5 · produkt 5 · bestellung 6. UNION ALL behält alle Zeilen, UNION würde Duplikate entfernen – hier gibt es keine, UNION ALL ist aber schneller und drückt die Absicht aus. Solche Kontrollzahlen gehören ins Ladeprotokoll eines ETL-Laufs (gelesen, geladen, abgewiesen).",
+      "quelle_aufgabe": "DD1 Teil 3, 3.3 Mengenoperationen",
+      "karten": [
+        "SQL-025"
+      ]
+    },
+    {
+      "id": "SQL-MH-036",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "Bestellung in einer Transaktion",
+      "aufgabe": "Lege in einer Transaktion die Bestellung 106 von Kunde 4 vom 06.07.2026 an und dazu eine Position: Produkt 11, Menge 1. Beide Anweisungen sollen gemeinsam gelingen oder gar nicht.",
+      "schwierigkeit": 2,
+      "tags": [
+        "transaktion",
+        "dml",
+        "insert",
+        "acid"
+      ],
+      "loesung": "BEGIN TRANSACTION;\nINSERT INTO bestellung (bestell_id, kunden_id, bestelldatum) VALUES (106, 4, '2026-07-06');\nINSERT INTO bestellposition (bestell_id, produkt_id, menge) VALUES (106, 11, 1);\nCOMMIT;",
+      "vergleich": {
+        "reihenfolge": "auto"
+      },
+      "pruefabfrage": "SELECT b.bestell_id, b.kunden_id, b.bestelldatum, bp.produkt_id, bp.menge\nFROM bestellung b\nJOIN bestellposition bp ON b.bestell_id = bp.bestell_id\nWHERE b.bestell_id = 106;",
+      "hinweise": [
+        "Rahmen: BEGIN TRANSACTION; … COMMIT; (MySQL: START TRANSACTION).",
+        "Erst die Bestellung anlegen, dann die Position – der Fremdschlüssel verlangt diese Reihenfolge.",
+        "Datum im ISO-Format: '2026-07-06'."
+      ],
+      "erklaerung": "Geprüft wird der Zustand danach: Bestellung 106 mit genau einer Position (Produkt 11, Menge 1). Ob BEGIN und COMMIT dastehen, sieht die Prüfung nicht – in der Klausur gehören sie dazu: Im Autocommit-Modus bliebe bei einem Fehler in der zweiten Anweisung eine Bestellung ohne Position übrig (Atomarität). Bei einem Fehler: ROLLBACK statt COMMIT.",
+      "quelle_aufgabe": "DD1 Teil 3, 3.5 Transaktionen in der Praxis",
+      "karten": [
+        "SQL-018",
+        "FB-transaktion",
+        "FB-autocommit"
+      ]
+    },
+    {
+      "id": "SQL-MH-037",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "Index für den Kunden-Join",
+      "aufgabe": "Bestellungen werden sehr oft über kunden_id mit den Kunden verknüpft. Lege dafür einen Index auf bestellung (kunden_id) an.",
+      "schwierigkeit": 1,
+      "tags": [
+        "index",
+        "ddl",
+        "performance"
+      ],
+      "loesung": "CREATE INDEX idx_bestellung_kunde ON bestellung (kunden_id);",
+      "vergleich": {
+        "reihenfolge": "auto"
+      },
+      "pruefabfrage": "SELECT COUNT(*) AS indizes_auf_kunden_id\nFROM pragma_index_list('bestellung') il\nJOIN pragma_index_info(il.name) ii\nWHERE ii.name = 'kunden_id';",
+      "hinweise": [
+        "CREATE INDEX name ON tabelle (spalte);",
+        "Den Namen wählst du frei, üblich ist z. B. idx_bestellung_kunde."
+      ],
+      "erklaerung": "Geprüft wird, dass auf bestellung ein Index über kunden_id existiert – der Name ist egal. Fremdschlüsselspalten sind nicht in jedem System automatisch indiziert (PostgreSQL nicht, MySQL/InnoDB schon). Der Index beschleunigt Joins und Filter auf kunden_id, kostet aber Speicher und bremst INSERT, UPDATE und DELETE.",
+      "quelle_aufgabe": "DD1 Teil 3, 3.6 Indizes gezielt einsetzen",
+      "karten": [
+        "SQL-020",
+        "FB-index"
+      ]
+    },
+    {
+      "id": "SQL-MH-038",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "Spalte email ergänzen",
+      "aufgabe": "Die Kundentabelle soll künftig auch eine E-Mail-Adresse speichern. Ergänze die Spalte email (Text, bis 100 Zeichen) in der bestehenden Tabelle kunde – ohne die Tabelle neu anzulegen.",
+      "schwierigkeit": 1,
+      "tags": [
+        "ddl",
+        "alter table"
+      ],
+      "loesung": "ALTER TABLE kunde ADD COLUMN email VARCHAR(100);",
+      "vergleich": {
+        "reihenfolge": "auto"
+      },
+      "pruefabfrage": "SELECT (SELECT group_concat(name, ', ') FROM (SELECT name FROM pragma_table_info('kunde') ORDER BY cid)) AS spalten,\n       (SELECT COUNT(*) FROM kunde) AS kunden;",
+      "hinweise": [
+        "Struktur ändern = DDL: ALTER TABLE tabelle …",
+        "Neue Spalte: ALTER TABLE kunde ADD COLUMN email VARCHAR(100); – COLUMN ist in vielen Systemen optional."
+      ],
+      "erklaerung": "Geprüft werden die Spalten von kunde (email kommt ans Ende) und dass alle Kunden erhalten bleiben – DROP TABLE und neu anlegen würde die Daten löschen. Bestehende Zeilen haben in der neuen Spalte NULL. ALTER TABLE gehört wie CREATE und DROP zur DDL.",
+      "quelle_aufgabe": "DD1 Teil 3, 3.9 DELETE, TRUNCATE, DROP, ALTER",
+      "karten": [
+        "FB-ddl",
+        "SQL-014"
+      ]
+    },
+    {
+      "id": "SQL-MH-039",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "Preisrangliste je Kategorie",
+      "aufgabe": "Erstelle eine Preisrangliste je Kategorie: bezeichnung, kategorie, preis und rang – das teuerste Produkt einer Kategorie bekommt Rang 1.",
+      "schwierigkeit": 3,
+      "tags": [
+        "fensterfunktion",
+        "rank",
+        "partition by"
+      ],
+      "loesung": "SELECT bezeichnung, kategorie, preis,\n       RANK() OVER (PARTITION BY kategorie ORDER BY preis DESC) AS rang\nFROM produkt;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "bezeichnung",
+          "kategorie",
+          "preis",
+          "rang"
+        ]
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Ein Rang je Zeile, ohne die Zeilen zu verdichten → Fensterfunktion: RANK() OVER (…).",
+        "PARTITION BY kategorie startet die Zählung je Kategorie neu.",
+        "ORDER BY preis DESC im OVER-Teil: das teuerste zuerst."
+      ],
+      "erklaerung": "Ergebnis: Möbel – Schreibtisch Basic 1, Bürostuhl Comfort 2 · Elektronik – Monitor 27 Zoll 1, Dockingstation 2 · Zubehör – Schreibtischlampe 1. Ohne Gleichstand liefern RANK, DENSE_RANK und ROW_NUMBER dasselbe; bei gleichen Preisen: RANK 1, 2, 2, 4 · DENSE_RANK 1, 2, 2, 3 · ROW_NUMBER 1, 2, 3, 4.",
+      "quelle_aufgabe": "DD1 Teil 3, 3.8 Fensterfunktionen",
+      "karten": [
+        "SQL-026",
+        "FB-fensterfunktion"
+      ]
+    },
+    {
+      "id": "SQL-MH-040",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "Laufender Bestellzähler",
+      "aufgabe": "Gib alle Bestellungen (bestell_id, bestelldatum) chronologisch aus und dazu in der Spalte laufende_nr, die wievielte Bestellung es bis zu diesem Datum ist (1, 2, 3, …).",
+      "schwierigkeit": 3,
+      "tags": [
+        "fensterfunktion",
+        "laufende summe",
+        "over"
+      ],
+      "loesung": "SELECT bestell_id, bestelldatum,\n       COUNT(*) OVER (ORDER BY bestelldatum) AS laufende_nr\nFROM bestellung\nORDER BY bestelldatum;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "bestell_id",
+          "bestelldatum",
+          "laufende_nr"
+        ]
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Gezählt wird über alle bisherigen Zeilen – eine laufende Summe, also eine Fensterfunktion mit ORDER BY im OVER-Teil.",
+        "COUNT(*) OVER (ORDER BY bestelldatum) oder ROW_NUMBER() OVER (ORDER BY bestelldatum).",
+        "Für die Ausgabe am Ende noch ORDER BY bestelldatum."
+      ],
+      "erklaerung": "Ergebnis: 100 → 1, 101 → 2, 102 → 3, 103 → 4, 104 → 5, 105 → 6. Mit ORDER BY im OVER-Teil rechnet eine Aggregatfunktion kumuliert vom ersten bis zum aktuellen Datum – genauso entsteht ein laufender Umsatz mit SUM(…) OVER (ORDER BY …). Bei zwei Bestellungen am selben Tag zählt COUNT(*) beide gleich, ROW_NUMBER nummeriert fortlaufend.",
+      "quelle_aufgabe": "DD1 Teil 3, 3.8 Fensterfunktionen",
+      "karten": [
+        "FB-fensterfunktion"
+      ]
+    },
+    {
+      "id": "SQL-MH-041",
+      "datensatz": "moebelhaus",
+      "thema": "Deep Dive 1",
+      "titel": "Durchschnittsumsatz – auch Kunden ohne Bestellung",
+      "aufgabe": "Wie hoch ist der durchschnittliche Umsatz je Kunde, wenn Kunden ohne Bestellung mit 0 € mitzählen? Gib einen Wert aus (Spalte durchschnitt_umsatz, Umsatz = menge × preis).",
+      "schwierigkeit": 3,
+      "tags": [
+        "avg",
+        "coalesce",
+        "null",
+        "left join"
+      ],
+      "loesung": "SELECT AVG(COALESCE(u.umsatz, 0)) AS durchschnitt_umsatz\nFROM kunde k\nLEFT JOIN (\n  SELECT b.kunden_id, SUM(bp.menge * p.preis) AS umsatz\n  FROM bestellung b\n  JOIN bestellposition bp ON b.bestell_id = bp.bestell_id\n  JOIN produkt p ON bp.produkt_id = p.produkt_id\n  GROUP BY b.kunden_id\n) u ON k.kunden_id = u.kunden_id;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "durchschnitt_umsatz"
+        ],
+        "toleranz": 0.005
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Erst den Umsatz je Kunde bilden (Unterabfrage oder WITH), dann alle Kunden per LEFT JOIN dazunehmen.",
+        "Kunden ohne Bestellung haben dann NULL als Umsatz – AVG würde sie einfach weglassen.",
+        "AVG(COALESCE(u.umsatz, 0)) zählt sie als 0 mit."
+      ],
+      "erklaerung": "Ergebnis: 636.90 € (3.184,50 € / 5 Kunden). Ohne COALESCE ergäbe AVG 1.061,50 € – NULL-Werte fallen aus Zähler und Nenner heraus. Welche Zahl richtig ist, ist eine fachliche Frage: Durchschnitt je Kunde mit Bestellung oder je Kunde insgesamt.",
+      "quelle_aufgabe": "DD1 Teil 1, 1.5 Aggregatfunktionen und ihr NULL-Verhalten",
+      "karten": [
+        "SQL-029",
+        "FB-coalesce"
+      ]
     },
     {
       "id": "SQL-DF-001",
@@ -909,7 +1290,10 @@
         "Absteigend = DESC."
       ],
       "erklaerung": "Ergebnis: Hantelset 20kg (59.00), Yogamatte Pro (34.90).",
-      "quelle_aufgabe": "DataFit Übungsklausur B1"
+      "quelle_aufgabe": "DataFit Übungsklausur B1",
+      "aufgaben": [
+        "00-B1"
+      ]
     },
     {
       "id": "SQL-DF-002",
@@ -936,7 +1320,11 @@
         "Datum im ISO-Format: '2025-01-01'."
       ],
       "erklaerung": "Ergebnis: Clara Fischer, Emre Yilmaz.",
-      "quelle_aufgabe": "DataFit Übungsklausur B2"
+      "quelle_aufgabe": "DataFit Übungsklausur B2",
+      "aufgaben": [
+        "00-B2"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-003",
@@ -962,7 +1350,15 @@
         "Alternative: COUNT(*) mit WHERE email IS NOT NULL."
       ],
       "erklaerung": "Ergebnis: 4 – Clara Fischer hat keine E-Mail. COUNT(*) würde 5 liefern.",
-      "quelle_aufgabe": "DataFit Übungsklausur B3"
+      "quelle_aufgabe": "DataFit Übungsklausur B3",
+      "aufgaben": [
+        "00-B3"
+      ],
+      "karten": [
+        "SQL-008",
+        "FB-null"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-004",
@@ -986,7 +1382,11 @@
         "Eine der beiden Bedingungen reicht – also OR."
       ],
       "erklaerung": "Ergebnis: Laufschuh Speed, Hantelset 20kg, Laufjacke Wind.",
-      "quelle_aufgabe": "DataFit Übungsklausur B5"
+      "quelle_aufgabe": "DataFit Übungsklausur B5",
+      "aufgaben": [
+        "00-B5"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-005",
@@ -1011,7 +1411,11 @@
         "Neueste zuerst = ORDER BY … DESC."
       ],
       "erklaerung": "Ergebnis: 104, 103, 102.",
-      "quelle_aufgabe": "DataFit Übungsklausur B6"
+      "quelle_aufgabe": "DataFit Übungsklausur B6",
+      "aufgaben": [
+        "00-B6"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-006",
@@ -1038,7 +1442,11 @@
         "status muss ins GROUP BY."
       ],
       "erklaerung": "Ergebnis: geliefert 3, offen 2, storniert 1.",
-      "quelle_aufgabe": "DataFit Übungsklausur C1"
+      "quelle_aufgabe": "DataFit Übungsklausur C1",
+      "aufgaben": [
+        "00-C1"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-007",
@@ -1069,7 +1477,10 @@
         "Im HAVING die Summe ausschreiben, nicht den Alias."
       ],
       "erklaerung": "Ergebnis: 105 mit 159.79 €, 100 mit 114.99 €.",
-      "quelle_aufgabe": "DataFit Übungsklausur C2"
+      "quelle_aufgabe": "DataFit Übungsklausur C2",
+      "aufgaben": [
+        "00-C2"
+      ]
     },
     {
       "id": "SQL-DF-008",
@@ -1092,7 +1503,11 @@
         "Spaltenreihenfolge: nachname, bestell_id, bestelldatum."
       ],
       "erklaerung": "6 Zeilen – eine je Bestellung.",
-      "quelle_aufgabe": "DataFit Übungsklausur C3"
+      "quelle_aufgabe": "DataFit Übungsklausur C3",
+      "aufgaben": [
+        "00-C3"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-009",
@@ -1115,7 +1530,11 @@
         "LEFT JOIN + WHERE b.bestell_id IS NULL."
       ],
       "erklaerung": "Ergebnis: David Meyer. Gleichwertig: WHERE NOT EXISTS (SELECT 1 FROM bestellung b WHERE b.kunden_id = k.kunden_id). NOT IN (SELECT kunden_id FROM bestellung) klappt nur, solange bestellung.kunden_id keine NULL-Werte enthält – die Spalte ist hier nicht NOT NULL.",
-      "quelle_aufgabe": "DataFit Übungsklausur C4"
+      "quelle_aufgabe": "DataFit Übungsklausur C4",
+      "aufgaben": [
+        "00-C4"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-010",
@@ -1147,7 +1566,11 @@
         "Nimm einzelpreis aus bestellposition, nicht den aktuellen Produktpreis."
       ],
       "erklaerung": "Ergebnis: Schmidt 114.99 · Fischer 37.50 · Weber 34.90. Gruppieren über kunden_id und nachname fasst namensgleiche Kunden nicht zusammen.",
-      "quelle_aufgabe": "DataFit Übungsklausur C5"
+      "quelle_aufgabe": "DataFit Übungsklausur C5",
+      "aufgaben": [
+        "00-C5"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-011",
@@ -1171,7 +1594,11 @@
         "Setz ihn in Klammern hinter preis >."
       ],
       "erklaerung": "Ergebnis: Laufschuh Speed, Hantelset 20kg, Laufjacke Wind (Durchschnitt 54.27 €).",
-      "quelle_aufgabe": "DataFit Übungsklausur C6"
+      "quelle_aufgabe": "DataFit Übungsklausur C6",
+      "aufgaben": [
+        "00-C6"
+      ],
+      "spalten_frei": true
     },
     {
       "id": "SQL-DF-012",
@@ -1202,7 +1629,11 @@
         "Gruppiert wird nach ort, nicht nach nachname."
       ],
       "erklaerung": "Mit den Beispieldaten ist das Ergebnis leer (je Ort nur ein Kunde ab 2025). Eine leere Ergebnismenge ist kein Fehler.",
-      "quelle_aufgabe": "DataFit Übungsklausur C7"
+      "quelle_aufgabe": "DataFit Übungsklausur C7",
+      "aufgaben": [
+        "00-C7"
+      ],
+      "teilaufgabe": true
     },
     {
       "id": "SQL-DF-013",
@@ -1228,7 +1659,10 @@
         "FOREIGN KEY (bestell_id) REFERENCES bestellung(bestell_id)."
       ],
       "erklaerung": "Geprüft werden Spaltennamen, Primärschlüssel, Pflichtfelder, Fremdschlüssel und Standardwert. Datentypen dürfen abweichen.",
-      "quelle_aufgabe": "DataFit Übungsklausur C8"
+      "quelle_aufgabe": "DataFit Übungsklausur C8",
+      "aufgaben": [
+        "00-C8"
+      ]
     },
     {
       "id": "SQL-DF-014",
@@ -1328,6 +1762,37 @@
       "quelle_aufgabe": "DataFit Abschnitt 3.4 DML / 3.5 DDL"
     },
     {
+      "id": "SQL-DF-018",
+      "datensatz": "datafit",
+      "thema": "Deep Dive 1",
+      "titel": "Durchschnittspreis (DataFit)",
+      "aufgabe": "Ermittle den Durchschnittspreis aller Produkte. Die Ergebnisspalte soll durchschnittspreis heißen.",
+      "schwierigkeit": 1,
+      "tags": [
+        "aggregat",
+        "avg",
+        "alias"
+      ],
+      "loesung": "SELECT AVG(preis) AS durchschnittspreis FROM produkt;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "durchschnittspreis"
+        ],
+        "toleranz": 0.005
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Aggregatfunktion für den Mittelwert: AVG(spalte).",
+        "Den Spaltennamen vergibst du mit AS durchschnittspreis."
+      ],
+      "erklaerung": "Ergebnis: 54.268 (gerundet 54,27 €). In der Klausur entfällt 1 Punkt, wenn der geforderte Alias fehlt.",
+      "quelle_aufgabe": "DataFit Übungsklausur B4",
+      "aufgaben": [
+        "00-B4"
+      ]
+    },
+    {
       "id": "SQL-DQ-001",
       "datensatz": "kundenimport",
       "thema": "Deep Dive 9",
@@ -1357,7 +1822,11 @@
         "Mit 100.0 rechnen, sonst gibt es Ganzzahldivision."
       ],
       "erklaerung": "Ergebnis: 10, 3, 70.00 – wie in DD9 C1 (a). Datensätze 2, 7 und 10 haben keine E-Mail.",
-      "quelle_aufgabe": "DD9 Teil 2.1 / Übungsklausur C1 (a)"
+      "quelle_aufgabe": "DD9 Teil 2.1 / Übungsklausur C1 (a)",
+      "karten": [
+        "SQL-019",
+        "DQ-008"
+      ]
     },
     {
       "id": "SQL-DQ-002",
@@ -1385,7 +1854,10 @@
         "COUNT(spalte) ignoriert NULL."
       ],
       "erklaerung": "Ergebnis: 10 und 7. Genau das fragt DD1 A2 ab – nur mit anderen Zahlen.",
-      "quelle_aufgabe": "DD1 Teil 1, 1.5 / Übungsklausur A2"
+      "quelle_aufgabe": "DD1 Teil 1, 1.5 / Übungsklausur A2",
+      "karten": [
+        "SQL-007"
+      ]
     },
     {
       "id": "SQL-DQ-003",
@@ -1416,7 +1888,11 @@
         "Schließe NULL vorher mit WHERE email IS NOT NULL aus."
       ],
       "erklaerung": "Ergebnis: braun@braun.de 2, info@huber.de 2. Ohne den NULL-Filter kommt eine Zeile NULL 3 dazu – das ist keine Dublette.",
-      "quelle_aufgabe": "DD1 SQL für Datenqualitätsprüfungen (2) / DD9 Teil 2.3"
+      "quelle_aufgabe": "DD1 SQL für Datenqualitätsprüfungen (2) / DD9 Teil 2.3",
+      "karten": [
+        "SQL-019",
+        "DQ-019"
+      ]
     },
     {
       "id": "SQL-DQ-004",
@@ -1472,7 +1948,10 @@
         "a.nr < b.nr verhindert, dass jedes Paar doppelt oder mit sich selbst erscheint."
       ],
       "erklaerung": "Ergebnis: 5 Braun GmbH – 8 Braun G.m.b.H. Mehrfeldvergleich statt nur Namensvergleich: genau so beschreibt es DD9 D1.",
-      "quelle_aufgabe": "DD9 Übungsklausur D1"
+      "quelle_aufgabe": "DD9 Übungsklausur D1",
+      "karten": [
+        "DQ-012"
+      ]
     },
     {
       "id": "SQL-DQ-006",
@@ -1549,7 +2028,10 @@
         "Muster „Wertebereichsverstoß“: WHERE wert <= 0."
       ],
       "erklaerung": "Ergebnis: 4 Weber e.K. −450.00. Vorbeugen lässt sich das mit CHECK (umsatz >= 0).",
-      "quelle_aufgabe": "DD1 SQL für Datenqualitätsprüfungen (3) / DD9 B1"
+      "quelle_aufgabe": "DD1 SQL für Datenqualitätsprüfungen (3) / DD9 B1",
+      "karten": [
+        "SQL-019"
+      ]
     },
     {
       "id": "SQL-DQ-009",
@@ -1627,7 +2109,10 @@
         "Filtere auf k.kunden_id IS NULL."
       ],
       "erklaerung": "Ergebnis: 503 mit K-1099. Ein FOREIGN KEY auf kunde hätte diesen Datensatz verhindert.",
-      "quelle_aufgabe": "DD9 Teil 2.3 Tabellenübergreifende Analyse"
+      "quelle_aufgabe": "DD9 Teil 2.3 Tabellenübergreifende Analyse",
+      "karten": [
+        "SQL-017"
+      ]
     },
     {
       "id": "SQL-DQ-012",
@@ -1683,7 +2168,10 @@
         "Teile durch alle Datensätze und nimm mal 100.0."
       ],
       "erklaerung": "Ergebnis: 80.0 – 8 eindeutige Kunden bei 10 Datensätzen, wie in DD9 C1 (b).",
-      "quelle_aufgabe": "DD9 Übungsklausur C1 (b)"
+      "quelle_aufgabe": "DD9 Übungsklausur C1 (b)",
+      "karten": [
+        "DQ-008"
+      ]
     },
     {
       "id": "SQL-DQ-014",

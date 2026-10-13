@@ -527,6 +527,13 @@ button.history-item .mono { overflow: hidden; text-overflow: ellipsis; white-spa
 .verdict-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
 .own-result { margin-top: 10px; }
 .own-result > summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; }
+/* Aufgaben mit SQL-Antwort (Einzelaufgabe, Übungsklausur) und Links von Karteikarten in den SQL-Editor */
+.sql-antwort { margin: 10px 0; display: grid; gap: 8px; }
+.sql-antwort .sql-editor .cm-editor, .sql-antwort .sql-editor .cm-scroller { min-height: 110px; }
+.sql-antwort .actions { margin: 0; align-items: center; }
+.sql-antwort-code { margin: 0; white-space: pre-wrap; }
+.sql-pruefung { margin: 0 0 12px; }
+.sql-ueben { margin: 10px 0 0; }
 .hints { margin: 6px 0 0; padding-left: 22px; }
 .sql-result.diff .result-table tr.diff-missing td { background: var(--good-soft); }
 .sql-result.diff .result-table tr.diff-extra td { background: var(--low-soft); }

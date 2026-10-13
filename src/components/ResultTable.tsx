@@ -143,3 +143,54 @@ export function ExecOutput({ result, schema }: { result: ExecResult; schema?: Er
     </div>
   );
 }
+
+/** Höchstens so viele Zeilen je Seite in der Unterschiede-Tabelle. */
+const DIFF_MAX = 50;
+
+/** Unterschiede zur Musterlösung: fehlende Zeilen grün (sollten dabei sein), überzählige rot. */
+export function DiffTable({
+  columns,
+  missing,
+  extra,
+}: {
+  columns: string[];
+  missing: StatementResult['rows'];
+  extra: StatementResult['rows'];
+}) {
+  const rows = [
+    ...missing.slice(0, DIFF_MAX).map((row) => ({ row, kind: 'missing' as const })),
+    ...extra.slice(0, DIFF_MAX).map((row) => ({ row, kind: 'extra' as const })),
+  ];
+  const cut = missing.length > DIFF_MAX || extra.length > DIFF_MAX;
+  return (
+    <div className="sql-result diff">
+      <p className="small muted">
+        <span className="diff-key missing">fehlt</span> sollte in deinem Ergebnis stehen · <span className="diff-key extra">zu viel</span>{' '}
+        steht bei dir, gehört aber nicht dazu
+      </p>
+      <div className="result-scroll">
+        <table className="result-table">
+          <thead>
+            <tr>
+              <th />
+              {columns.map((c, i) => (
+                <th key={i}>{c}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ row, kind }, r) => (
+              <tr key={r} className={`diff-${kind}`}>
+                <td className="diff-mark">{kind === 'missing' ? '+ fehlt' : '− zu viel'}</td>
+                {row.map((v, c) => (
+                  <Cell key={c} value={v} />
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {cut && <p className="small muted">Nur die ersten {DIFF_MAX} Zeilen je Art.</p>}
+    </div>
+  );
+}

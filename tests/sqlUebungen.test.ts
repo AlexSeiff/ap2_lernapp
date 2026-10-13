@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { parseSqlUebungen } from '../shared/sqlUebungen';
+import { parseSqlUebungen, verknuepfeSqlUebungen } from '../shared/sqlUebungen';
+import type { Flashcard, Task } from '../shared/types';
 
 const topics = new Map([
   ['01', 'SQL'],
@@ -122,5 +123,40 @@ describe('parseSqlUebungen', () => {
     );
     expect(r.datasets[0].topicId).toBeUndefined();
     expect(r.exercises[0].topicId).toBeUndefined();
+  });
+});
+
+describe('verknuepfeSqlUebungen (Felder „aufgaben“ und „karten“)', () => {
+  const parse = (over: Record<string, unknown>) => parseSqlUebungen('AP2_SQL_Uebungen.json', file([exercise(over)]), topics);
+
+  it('liest aufgaben, karten, teilaufgabe und spalten_frei', () => {
+    const r = parse({ aufgaben: ['01-B1'], karten: ['SQL-011'], teilaufgabe: true, spalten_frei: true });
+    expect(r.issues).toEqual([]);
+    expect(r.exercises[0]).toMatchObject({ aufgaben: ['01-B1'], karten: ['SQL-011'], teilaufgabe: true, spaltenFrei: true });
+    const ohne = parse({});
+    expect(ohne.exercises[0]).not.toHaveProperty('aufgaben');
+    expect(ohne.exercises[0]).not.toHaveProperty('karten');
+    expect(ohne.exercises[0]).not.toHaveProperty('spaltenFrei');
+  });
+
+  it('meldet teilaufgabe/spalten_frei ohne aufgaben', () => {
+    expect(parse({ spalten_frei: true }).issues.map((i) => i.message)).toEqual([expect.stringMatching(/nur mit „aufgaben“/)]);
+  });
+
+  it('setzt Task.sqlUebung und Flashcard.sqlUebungen, unbekannte und doppelte ids werden gemeldet', () => {
+    const tasks: Record<string, Task> = {
+      '01-B1': { id: '01-B1', code: 'B1', topicId: '01', block: 'B', points: 5, markdown: '…', type: 'offen' },
+    };
+    const flashcards: Flashcard[] = [{ id: 'SQL-011', kind: 'lernkarte', question: '?' }];
+    const ex = (id: string, aufgaben: string[], karten: string[]) => ({ ...parse({ id, aufgaben, karten }).exercises[0] });
+    const sqlExercises = [ex('SQL-T-001', ['01-B1', '99-X'], ['SQL-011', 'NIX']), ex('SQL-T-002', ['01-B1'], ['SQL-011'])];
+    const issues = verknuepfeSqlUebungen({ tasks, flashcards, sqlExercises }, 'AP2_SQL_Uebungen.json').map((i) => i.message);
+    expect(tasks['01-B1'].sqlUebung).toBe('SQL-T-001');
+    expect(flashcards[0].sqlUebungen).toEqual(['SQL-T-001', 'SQL-T-002']);
+    expect(issues).toEqual([
+      'Übung SQL-T-001: unbekannte Aufgabe „99-X“ in „aufgaben“.',
+      'Übung SQL-T-001: unbekannte Karte „NIX“ in „karten“.',
+      'Übung SQL-T-002: Aufgabe 01-B1 ist schon mit SQL-T-001 verknüpft.',
+    ]);
   });
 });

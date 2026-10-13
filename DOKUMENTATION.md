@@ -190,9 +190,9 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
                "karten": [ { "id": "SQL-001", "frage": "…", "antwort": "…", "typ": "wissen", "schwierigkeit": 1, "tags": ["join"] } ] } ] }
 ```
 
-- Currently 25 decks and 539 cards (typ: wissen 259, falle 94, abgrenzung 80, anwendung 62, rechnung 44).
+- Currently 25 decks and 547 cards (typ: wissen 261, falle 95, abgrenzung 82, anwendung 62, rechnung 47).
 - **Term cards** `AP2_Fachbegriffe_Lernkarten.json` (same format, any `*Lernkarten*.json` is imported): 16 decks `fb01`–`fb16`, one per Deep Dive,
-  789 cards with `typ: "begriff"` – `frage` is just the term, `antwort` a one- or two-sentence explanation, ids `FB-<term-slug>` (stable,
+  802 cards with `typ: "begriff"` – `frage` is just the term, `antwort` a one- or two-sentence explanation, ids `FB-<term-slug>` (stable,
   independent of order). Terms already defined by a `wissen` card (ACID, KPI, PDCA …) are not repeated. In the app: Typ filter „Fachbegriff“
   (`/karteikarten?typ=begriff`), Leicht-Modus with automatic answers (`begriff` is in `LEICHT_TYPEN`), and the glossary uses them first.
 - `quelle` containing "Deep Dive N" maps the deck to a topic; decks without one (WiSo, project work) are reachable via the deck filter.
@@ -230,12 +230,23 @@ with a mock client – no API call in tests):**
     "loesung": "SELECT …",
     "vergleich": { "reihenfolge": "auto", "spaltennamen": ["name", "umsatz"], "toleranz": 0.005 },
     "pruefabfrage": null, "leerErlaubt": false,
-    "hinweise": ["…", "…"], "erklaerung": "…", "quelle_aufgabe": "DD1 Übungsklausur B8"
+    "hinweise": ["…", "…"], "erklaerung": "…", "quelle_aufgabe": "DD1 Übungsklausur B8",
+    "aufgaben": ["01-B8"], "karten": ["SQL-011"], "teilaufgabe": false, "spalten_frei": false
   } ]
 }
 ```
 
-Currently 3 datasets (`moebelhaus`, `datafit`, `kundenimport`) and 63 exercises.
+Currently 3 datasets (`moebelhaus`, `datafit`, `kundenimport`) and 73 exercises; 26 tasks and 46 cards are linked.
+
+- **Links** (optional, `shared/sqlUebungen.ts` → `verknuepfeSqlUebungen`, run in `buildContent`): `aufgaben` = task ids from the
+  Lernblätter that are answered **in the SQL editor** with this exercise (sets `Task.sqlUebung`; a task may belong to only one
+  exercise); `karten` = card ids whose back shows „Im SQL-Editor üben: …“ (`Flashcard.sqlUebungen`). Unknown ids or a task linked
+  twice → ImportIssue, link skipped. Tasks that ask to *predict* a result (DD1 A2/C1, DataFit W2) stay text tasks on purpose.
+- `teilaufgabe`: the exercise covers only part of the task (A3/C7: name and justify the errors, then correct) – no full points
+  automatically; reasons go into SQL comments (`-- Fehler 1: …`). `spalten_frei`: the task text does not prescribe columns
+  (`SELECT *`, `COUNT` without alias) – when grading the task, columns are matched by content (`CompareOptions.spaltenFrei`,
+  `src/sql/checker.ts`): names and column order don't count, extra columns are allowed, rows and their order still do. Both
+  only with `aufgaben` (else ImportIssue); the exercise page itself always compares strictly.
 
 ### 4.4 Rechenübungen `AP2_Rechen_Uebungen.json`
 
@@ -1015,6 +1026,15 @@ SQL exercises are deliberately **not** in `attempts`/`journal`. Checked exercise
 
 **Integration**: ```` ```sql ```` blocks in the Lernen pages/solutions get "🧮 Im SQL-Editor öffnen" (dataset derived from the source);
 hidden in task texts and exams (`source={false}`), so the editor doesn't reveal results.
+
+**Tasks answered in the SQL editor** (`Task.sqlUebung`, see § 4.3): `AnswerInput` renders `SqlAntwort` (lazy, CodeMirror) instead of
+the textarea; the answer stays a plain string (the query). Einzelaufgabe: „Ausprobieren“ on a fresh copy of the dataset; Übungsklausur
+(`sqlAusfuehren={false}`): no execution and no session database, like on paper. After „Abgeben“ `GradePanel` shows `SqlPruefung`
+(lazy): `pruefeAntwort` (`src/sql/pruefeUebung.ts`, shared with the exercise page's `checkQuery`) compares with the exercise's
+solution incl. variant and blocking dialect warnings. Correct and not `teilaufgabe` → full points pre-filled (only if no points yet);
+empty answer → 0; otherwise self-grading as usual. Einzelaufgabe also records the check for the exercise (`recordSqlCheck`), the exam
+does not. The exercise page links back („Auch als Klausuraufgabe“). Tests: `sqlAufgaben.smoke.test.ts` (real content: every linked
+task accepts its solution and typical exam answers, wrong ones fail), `sqlChecker.test.ts` (`spaltenFrei`), `sqlUebungen.test.ts` (links).
 
 ## 8. AI (local app only)
 

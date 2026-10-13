@@ -1,11 +1,10 @@
 // Einzelne SQL-Übung (/sql/uebung/:id): Ausprobieren, Prüfen (Ergebnisvergleich mit der Musterlösung),
 // Hinweise einzeln aufdecken, Lösung zeigen. Die letzte Abfrage wird im Fortschritt gespeichert.
 
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import type { SqlDataset, SqlExercise } from '../../shared/types';
 import { Markdown } from '../components/Markdown';
-import { Cell, ExecOutput, LintWarnings, ResultTable, SqlError, withCode } from '../components/ResultTable';
+import { DiffTable, ExecOutput, LintWarnings, ResultTable, SqlError, withCode } from '../components/ResultTable';
 import { BelegsatzPanel } from '../components/Belegsatz';
 import { SchemaBrowser } from '../components/SchemaBrowser';
 import { SqlEditor, type SqlEditorHandle } from '../components/SqlEditor';
@@ -15,70 +14,13 @@ import { useSqlSession } from '../hooks/useSqlSession';
 import { recordSolutionShown, recordSqlCheck, recordSqlHint, saveSqlQuery, SQL_QUERY_MAX, sqlStatus } from '../lib/sql';
 import { useStore } from '../lib/store';
 import { LEVEL_LABELS, stars, STATUS_LABELS } from '../lib/uebungLabels';
-import { compareResults, lastResultSet } from '../sql/checker';
-import { getSqlEngine } from '../sql/engine';
+import { checkQuery, type CheckOutcome, verdictMessage } from '../sql/pruefeUebung';
 import { hasBlockingWarning, lintSql } from '../sql/lint';
-import type { CompareVerdict, ExecResult, LintWarning, StatementResult } from '../sql/types';
+import type { ExecResult, LintWarning } from '../sql/types';
 import { Icon } from '../components/Icon';
 
 /** Verzögerung, bevor die Abfrage im Fortschritt gespeichert wird. */
 const SAVE_DELAY_MS = 800;
-/** Höchstens so viele Zeilen je Seite in der Unterschiede-Tabelle. */
-const DIFF_MAX = 50;
-
-const VARIANT_MESSAGE = 'Mit leicht geänderten Daten stimmt dein Ergebnis nicht – hast du Werte fest eingetippt?';
-
-type CheckOutcome =
-  | { kind: 'error'; error: string; user: ExecResult }
-  | { kind: 'data-error'; error: string }
-  | {
-      kind: 'verdict';
-      ok: boolean;
-      verdict: CompareVerdict;
-      /** Ergebnis stimmt, aber eine Dialekt-Warnung macht es in der Prüfung falsch. */
-      blocked: boolean;
-      variantFailed: boolean;
-      expectedColumns: string[];
-      userSet?: StatementResult;
-      ms: number;
-    };
-
-const EMPTY_SET: StatementResult = { sql: '', columns: [], rows: [], changes: 0 };
-
-/** Prüft eine Abfrage gegen die Musterlösung (je frische Datenbank), bei Datensätzen mit Variante zusätzlich darauf. */
-async function checkQuery(ex: SqlExercise, ds: SqlDataset, query: string): Promise<CheckOutcome> {
-  const engine = getSqlEngine();
-  const solutionSql = ex.pruefabfrage ?? ex.loesung;
-  const run = await engine.check(ds.setup, query, ex.loesung, ex.pruefabfrage);
-  if (!run.user.ok) return { kind: 'error', error: run.user.error, user: run.user };
-  const expected = run.solution.ok ? lastResultSet(run.solution.statements) : undefined;
-  if (!run.solution.ok || !expected) {
-    return { kind: 'data-error', error: run.solution.ok ? 'Die Musterlösung liefert keine Ergebnistabelle.' : run.solution.error };
-  }
-  const userSet = lastResultSet(run.user.statements);
-  const verdict = compareResults(userSet ?? EMPTY_SET, expected, ex.vergleich, solutionSql);
-  let variantFailed = false;
-  if (verdict.ok && ds.variante) {
-    // Gegen fest eingetippte Ergebnisse: dieselbe Prüfung auf leicht geänderten Daten.
-    const alt = await engine.check(`${ds.setup}\n${ds.variante}`, query, ex.loesung, ex.pruefabfrage);
-    const altExpected = alt.solution.ok ? lastResultSet(alt.solution.statements) : undefined;
-    if (altExpected) {
-      const altUser = alt.user.ok ? lastResultSet(alt.user.statements) : undefined;
-      variantFailed = !altUser || !compareResults(altUser, altExpected, ex.vergleich, solutionSql).ok;
-    }
-  }
-  return {
-    kind: 'verdict',
-    ok: verdict.ok && !variantFailed,
-    verdict,
-    blocked: false,
-    variantFailed,
-    expectedColumns: expected.columns,
-    userSet,
-    ms: run.user.ms,
-  };
-}
-
 export function SqlUebung() {
   const { id = '' } = useParams();
   // Neuer key je Übung: Editor, Hinweise und Ergebnis starten frisch.
@@ -221,13 +163,7 @@ function SqlUebungView({ id }: { id: string }) {
       );
     }
     const { verdict } = outcome;
-    const message = outcome.ok
-      ? verdict.message
-      : outcome.blocked
-        ? 'Noch nicht: Das Ergebnis stimmt, aber in der Prüfung wäre das ein Fehler (siehe Dialekt-Hinweis).'
-        : outcome.variantFailed
-          ? `Noch nicht: ${VARIANT_MESSAGE}`
-          : `Noch nicht: ${verdict.message}`;
+    const message = verdictMessage(outcome);
     const hasDiff = !outcome.ok && (verdict.missing.length > 0 || verdict.extra.length > 0);
     return (
       <div className={`card ${outcome.ok ? 'success' : 'verdict-fail'}`}>
@@ -275,6 +211,21 @@ function SqlUebungView({ id }: { id: string }) {
           {ex.quelleAufgabe && <span className="muted small">{ex.quelleAufgabe}</span>}
         </div>
         <Markdown source={false}>{ex.aufgabe}</Markdown>
+        {ex.aufgaben?.some((t) => content.tasks[t]) && (
+          <p className="hint">
+            Auch als Klausuraufgabe:{' '}
+            {ex.aufgaben
+              .filter((t) => content.tasks[t])
+              .map((t, i) => (
+                <Fragment key={t}>
+                  {i > 0 && ' · '}
+                  <Link to={`/aufgabe/${t}`}>
+                    {content.topics.find((x) => x.id === content.tasks[t].topicId)?.title ?? ''} {content.tasks[t].code}
+                  </Link>
+                </Fragment>
+              ))}
+          </p>
+        )}
         <p className="hint">
           Datensatz: {ds.titel}
           {state && state.attempts > 0 && ` · ${state.attempts} ${state.attempts === 1 ? 'Versuch' : 'Versuche'}`}
@@ -396,46 +347,6 @@ function SqlUebungView({ id }: { id: string }) {
           <p className="hint">Andere Schreibweisen sind genauso richtig, solange das Ergebnis stimmt – probier es mit „✓ Prüfen“ aus.</p>
         </section>
       )}
-    </div>
-  );
-}
-
-/** Unterschiede zur Musterlösung: fehlende Zeilen grün (sollten dabei sein), überzählige rot. */
-function DiffTable({ columns, missing, extra }: { columns: string[]; missing: StatementResult['rows']; extra: StatementResult['rows'] }) {
-  const rows = [
-    ...missing.slice(0, DIFF_MAX).map((row) => ({ row, kind: 'missing' as const })),
-    ...extra.slice(0, DIFF_MAX).map((row) => ({ row, kind: 'extra' as const })),
-  ];
-  const cut = missing.length > DIFF_MAX || extra.length > DIFF_MAX;
-  return (
-    <div className="sql-result diff">
-      <p className="small muted">
-        <span className="diff-key missing">fehlt</span> sollte in deinem Ergebnis stehen · <span className="diff-key extra">zu viel</span>{' '}
-        steht bei dir, gehört aber nicht dazu
-      </p>
-      <div className="result-scroll">
-        <table className="result-table">
-          <thead>
-            <tr>
-              <th />
-              {columns.map((c, i) => (
-                <th key={i}>{c}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(({ row, kind }, r) => (
-              <tr key={r} className={`diff-${kind}`}>
-                <td className="diff-mark">{kind === 'missing' ? '+ fehlt' : '− zu viel'}</td>
-                {row.map((v, c) => (
-                  <Cell key={c} value={v} />
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {cut && <p className="small muted">Nur die ersten {DIFF_MAX} Zeilen je Art.</p>}
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { Attachments, GradePanel, TaskText } from '../components/TaskParts';
 import { formatPoints } from '../lib/grading';
 import { sicherheitLabel } from '../lib/kalibrierung';
 import { isDue, recordAttempt, setzeFehlergrund } from '../lib/progress';
+import { recordSqlCheck } from '../lib/sql';
 import { useStore } from '../lib/store';
 
 export function Aufgabe() {
@@ -102,7 +103,13 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
           </div>
         ) : (
           <>
-            <GradePanel task={task} answer={answer} points={points} onPoints={setPoints} />
+            <GradePanel
+              task={task}
+              answer={answer}
+              points={points}
+              onPoints={setPoints}
+              onSqlGeprueft={task.sqlUebung ? (ok, q) => update((p) => recordSqlCheck(p, task.sqlUebung!, ok, q)) : undefined}
+            />
             {unterVoll && <FehlergrundWahl value={fehlergrund} onChange={waehleGrund} />}
             <div className="actions">
               {!saved ? (

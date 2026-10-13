@@ -330,7 +330,13 @@ export function Klausur() {
                 return (
                   <div key={id} className={`task-card ${submitted ? 'review' : ''}`}>
                     <TaskText task={task} />
-                    <AnswerInput task={task} value={run.answers[id]} onChange={(v) => setAnswer(id, v)} disabled={submitted} />
+                    <AnswerInput
+                      task={task}
+                      value={run.answers[id]}
+                      onChange={(v) => setAnswer(id, v)}
+                      disabled={submitted}
+                      sqlAusfuehren={false}
+                    />
                     {!submitted ? (
                       <SicherheitWahl value={run.sicherheit?.[id]} onChange={(s) => setSicherheit(id, s)} />
                     ) : (

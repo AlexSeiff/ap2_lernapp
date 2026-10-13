@@ -29,6 +29,11 @@ export type CompareOptions = {
   reihenfolge: 'auto' | 'streng' | 'egal';
   spaltennamen?: string[];
   toleranz?: number;
+  /**
+   * Spalten über ihren Inhalt zuordnen: Namen und Reihenfolge der Spalten zählen nicht, zusätzliche Spalten (z. B. SELECT *)
+   * sind erlaubt. Für Aufgaben, deren Text keine Spalten vorgibt (siehe SqlExercise.spaltenFrei).
+   */
+  spaltenFrei?: boolean;
 };
 
 export type CompareVerdict = {

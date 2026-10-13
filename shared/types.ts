@@ -45,6 +45,8 @@ export interface Flashcard {
   siehe?: string[];
   /** Nur Begriffskarten mit Begriffsseite: erste „Mehr:“-Angabe der Seite (z. B. „Deep Dive 1, 2.1“). */
   abschnitt?: string;
+  /** SQL-Übungen zum Üben im Editor (beim Laden aus deren Feld „karten“ ergänzt, shared/sqlUebungen.ts). */
+  sqlUebungen?: string[];
 }
 
 export interface Deck {
@@ -83,6 +85,11 @@ export interface Task {
   generated?: boolean;
   /** Nur für automatisch bewertbare (KI-generierte) Aufgaben. */
   auto?: AutoCheck;
+  /**
+   * SQL-Übung, mit der die Aufgabe im SQL-Editor beantwortet und nach der Abgabe automatisch geprüft wird
+   * (beim Laden aus dem Feld „aufgaben“ der Übung ergänzt, shared/sqlUebungen.ts).
+   */
+  sqlUebung?: string;
 }
 
 export interface AutoCheck {
@@ -150,6 +157,8 @@ export interface SqlCompareOptions {
   spaltennamen?: string[];
   /** Toleranz für Zahlen. */
   toleranz?: number;
+  /** Spalten über ihren Inhalt zuordnen (nur bei verknüpften Aufgaben gesetzt, siehe SqlExercise.spaltenFrei). */
+  spaltenFrei?: boolean;
 }
 
 /** SQL-Übung (aus AP2_SQL_Uebungen.json, Feld „uebungen"). Feldnamen wie in der Datei, nur camelCase. */
@@ -178,6 +187,17 @@ export interface SqlExercise {
   erklaerung?: string;
   /** Aufgabe auf dem Blatt, z. B. „DD1 Übungsklausur B8". */
   quelleAufgabe?: string;
+  /** Aufgaben (Task-ids wie „01-B8“), die im SQL-Editor mit dieser Übung beantwortet werden. */
+  aufgaben?: string[];
+  /** Karteikarten (ids), deren Rückseite auf diese Übung verweist. */
+  karten?: string[];
+  /** Die Übung deckt nur einen Teil der verknüpften Aufgabe ab (z. B. Fehler benennen und korrigieren) – keine volle Punktzahl automatisch. */
+  teilaufgabe?: boolean;
+  /**
+   * Nur beim Prüfen einer verknüpften Aufgabe: Ihr Text gibt die Spalten nicht vor – Spalten werden über ihren Inhalt
+   * zugeordnet, Namen und Spaltenreihenfolge zählen nicht, zusätzliche Spalten (z. B. SELECT *) sind erlaubt.
+   */
+  spaltenFrei?: boolean;
 }
 
 /**
