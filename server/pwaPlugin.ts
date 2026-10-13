@@ -34,8 +34,8 @@ export const PWA_OPTIONS = {
     ],
   },
   workbox: {
-    // Nur woff2 der KaTeX-Schriften: jeder aktuelle Browser nimmt woff2, woff/ttf blieben ungenutzt im Cache.
-    globPatterns: ['**/*.{html,js,css,json,wasm,woff2}'],
+    // Nur woff2 der KaTeX-Schriften: jeder aktuelle Browser nimmt woff2, woff/ttf blieben ungenutzt im Cache. gif: der Fisch unten links.
+    globPatterns: ['**/*.{html,js,css,json,wasm,woff2,gif}'],
     // Spielraum über der Workbox-Grenze von 2 MiB pro Datei (heute: content.json ~ 0,9 MB, sql-wasm.wasm ~ 0,7 MB, größter Chunk ~ 0,5 MB).
     maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
     // HashRouter: jede Navigation ist index.html; offline kommt sie aus dem Cache.
