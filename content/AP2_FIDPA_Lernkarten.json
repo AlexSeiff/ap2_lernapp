@@ -3,7 +3,7 @@
     "titel": "AP2 Lernkarten – Fachinformatiker/-in Daten- und Prozessanalyse",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-09-21",
-    "aktualisiert_am": "2026-10-06",
+    "aktualisiert_am": "2026-10-13",
     "version": "1.1",
     "sprache": "de",
     "anzahl_decks": 25,
@@ -12,8 +12,8 @@
       "abgrenzung": 82,
       "anwendung": 62,
       "falle": 95,
-      "rechnung": 46,
-      "wissen": 262
+      "rechnung": 47,
+      "wissen": 261
     },
     "karten_nach_status": {
       "behandelt": 533,
@@ -273,7 +273,7 @@
         {
           "id": "SQL-008",
           "frage": "Warum liefert WHERE telefon = NULL keine Zeilen?",
-          "antwort": "NULL bedeutet „unbekannt“; ein Vergleich mit = kann dagegen nicht wahr werden. Korrekt ist WHERE telefon IS NULL.",
+          "antwort": "NULL bedeutet „unbekannt“; jeder Vergleich mit NULL – auch NULL = NULL – ergibt UNKNOWN statt wahr, und WHERE übernimmt nur Zeilen mit wahr. Korrekt ist WHERE telefon IS NULL.",
           "typ": "falle",
           "schwierigkeit": 1,
           "tags": [
@@ -682,7 +682,7 @@
         {
           "id": "DM-017",
           "frage": "Wie wird KUNDE (0,n) — erteilt — (1,1) BESTELLUNG in Krähenfußnotation gezeichnet?",
-          "antwort": "KUNDE ||──o< BESTELLUNG. Krähenfuß liest wie Chen: Das Symbol bei BESTELLUNG (o< = null bis viele) sagt, wie viele Bestellungen ein Kunde hat; || bei KUNDE = genau ein Kunde je Bestellung. Gegenüber Min-Max stehen die Angaben also auf der anderen Seite. Inneres Zeichen = Maximum, äußeres = Minimum.",
+          "antwort": "KUNDE ||──o< BESTELLUNG. Krähenfuß liest wie Chen: Das Symbol bei BESTELLUNG (o< = null bis viele) sagt, wie viele Bestellungen ein Kunde hat; || bei KUNDE = genau ein Kunde je Bestellung. Gegenüber Min-Max stehen die Angaben also auf der anderen Seite. Je Linienende zwei Zeichen: das Zeichen direkt an der Entität = Maximum, das weiter außen = Minimum.",
           "typ": "falle",
           "schwierigkeit": 2,
           "tags": [
@@ -950,9 +950,9 @@
         },
         {
           "id": "ST1-021",
-          "frage": "Welche Faustregel gilt bei annähernder Normalverteilung für x̄ ± σ?",
-          "antwort": "Ca. 68 % der Werte liegen im Bereich x̄ ± 1σ, ca. 95 % im Bereich x̄ ± 2σ, ca. 99,7 % im Bereich x̄ ± 3σ.",
-          "typ": "wissen",
+          "frage": "Bearbeitungsdauer annähernd normalverteilt mit x̄ = 60 min und σ = 10 min. Wie viel Prozent der Aufträge dauern länger als 70 Minuten?",
+          "antwort": "Ca. 16 %: Im Bereich x̄ ± 1σ (50–70 min) liegen rund 68 %. Die übrigen 32 % verteilen sich symmetrisch auf beide Seiten, also je 16 % unter 50 und über 70 min. Entsprechend dauern nur ca. 2,5 % länger als 80 min (x̄ + 2σ).",
+          "typ": "rechnung",
           "schwierigkeit": 2,
           "tags": [
             "normalverteilung"
@@ -1240,7 +1240,7 @@
         {
           "id": "ST2-021",
           "frage": "Umsatz 120 → 180 T€ über 7 Monatsschritte. Durchschnittliche Wachstumsrate je Monat?",
-          "antwort": "Geometrisches Mittel: (180 / 120)^(1/7) − 1 = 1,5^(1/7) − 1 ≈ 5,96 % je Monat. Das arithmetische Mittel der sieben Monatsraten (6,61 %) wäre falsch: 120 · 1,0661^7 ≈ 187,8 statt 180.",
+          "antwort": "Geometrisches Mittel: (180 / 120)^(1/7) − 1 = 1,5^(1/7) − 1 ≈ 5,96 % je Monat. Das arithmetische Mittel der sieben einzelnen Monatsraten (im Beispiel des Lernblatts 6,61 %) wäre falsch: 120 · 1,0661^7 ≈ 187,8 statt 180.",
           "typ": "rechnung",
           "schwierigkeit": 2,
           "tags": [
@@ -2364,7 +2364,7 @@
         {
           "id": "MG-008",
           "frage": "Wie lauten die Formeln für Accuracy, Precision, Recall und Spezifität?",
-          "antwort": "Accuracy = (TP + TN) / Gesamt. Precision = TP / (TP + FP). Recall = TP / (TP + FN). Spezifität = TN / (TN + FP). Merkhilfe: Precision teilt durch die Spalte der positiven Vorhersagen, Recall durch die Zeile der tatsächlich Positiven.",
+          "antwort": "Accuracy = (TP + TN) / Gesamt. Precision = TP / (TP + FP). Recall = TP / (TP + FN). Spezifität = TN / (TN + FP). Merkhilfe (Zeilen = tatsächliche Klasse, Spalten = Vorhersage): Precision teilt durch die Spalte der positiven Vorhersagen, Recall durch die Zeile der tatsächlich Positiven.",
           "typ": "wissen",
           "schwierigkeit": 1,
           "tags": [
@@ -3915,7 +3915,7 @@
         {
           "id": "PM-009",
           "frage": "Welche Rollen, Artefakte und Events hat Scrum?",
-          "antwort": "Verantwortlichkeiten (früher Rollen): Product Owner, Scrum Master, Developers (bis 2017 Entwicklungsteam). Artefakte mit Commitment: Product Backlog → Produktziel, Sprint Backlog → Sprint-Ziel, Inkrement → Definition of Done. Events: Sprint (max. 1 Monat), Sprint Planning (max. 8 h), Daily Scrum (15 min), Sprint Review (max. 4 h), Retrospektive (max. 3 h).",
+          "antwort": "Verantwortlichkeiten (früher Rollen): Product Owner, Scrum Master, Developers (vor dem Scrum Guide 2020: Entwicklungsteam). Artefakte mit Commitment: Product Backlog → Produktziel, Sprint Backlog → Sprint-Ziel, Inkrement → Definition of Done. Events: Sprint (max. 1 Monat), Sprint Planning (max. 8 h), Daily Scrum (15 min), Sprint Review (max. 4 h), Retrospektive (max. 3 h).",
           "typ": "wissen",
           "schwierigkeit": 1,
           "tags": [
@@ -4546,7 +4546,7 @@
         },
         {
           "id": "QS-005",
-          "frage": "Rabatt ab 500 €, 10 % ab 2.000 €, negative Werte ungültig. Welche Grenzwerte testest du?",
+          "frage": "Kein Rabatt unter 500 €, 5 % ab 500 €, 10 % ab 2.000 €, negative Werte ungültig. Welche Grenzwerte testest du?",
           "antwort": "−0,01 und 0,00 (untere Grenze) · 499,99 und 500,00 · 1.999,99 und 2.000,00 – je Grenze der letzte Wert der einen und der erste Wert der nächsten Klasse. So fällt ein „> 500“ statt „>= 500“ im Code auf.",
           "typ": "anwendung",
           "schwierigkeit": 2,

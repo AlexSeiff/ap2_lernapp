@@ -3,7 +3,7 @@
     "titel": "AP2 Fachbegriffe – Begriffskarten zu allen Deep Dives",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-10-06",
-    "aktualisiert_am": "2026-10-06",
+    "aktualisiert_am": "2026-10-13",
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
@@ -4908,7 +4908,7 @@
         {
           "id": "FB-product-owner",
           "frage": "Product Owner",
-          "antwort": "Scrum-Rolle: verantwortet das Produkt und priorisiert das Product Backlog.",
+          "antwort": "Scrum-Verantwortlichkeit: verantwortet das Produkt, maximiert seinen Wert und ordnet das Product Backlog.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -5248,7 +5248,7 @@
         {
           "id": "FB-developers",
           "frage": "Developers",
-          "antwort": "Scrum-Verantwortlichkeit (bis 2017 „Entwicklungsteam“): selbstmanagende Mitglieder des Scrum Teams, die in jedem Sprint ein nutzbares Inkrement erstellen.",
+          "antwort": "Scrum-Verantwortlichkeit (vor dem Scrum Guide 2020 „Entwicklungsteam“): selbstmanagende Mitglieder des Scrum Teams, die in jedem Sprint ein nutzbares Inkrement erstellen.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -5728,7 +5728,7 @@
         {
           "id": "FB-tarifbindung",
           "frage": "Tarifbindung",
-          "antwort": "Ein Tarifvertrag bindet unmittelbar nur Mitglieder beider Tarifparteien (§ 3 TVG); Allgemeinverbindlicherklärung oder Bezugnahme im Arbeitsvertrag führen nur zu seiner Anwendung.",
+          "antwort": "Ein Tarifvertrag gilt unmittelbar und zwingend nur für Mitglieder beider Tarifparteien (§ 3 TVG). Für Nichtmitglieder gilt er nur nach einer Allgemeinverbindlicherklärung (§ 5 TVG) oder wenn der Arbeitsvertrag auf ihn verweist (Bezugnahmeklausel).",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
