@@ -44,10 +44,7 @@ Das ist dieselbe App als statische Seite – ohne Server:
 Der API-Schlüssel und die KI-Aufgaben aus `data/` kommen nie in die Online-Version.
 Die Lernblätter (die Dateien in `content/`) sind damit öffentlich.
 
-**Lizenz der Inhalte:** Die Lerninhalte in `content/` stehen unter
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de) – weitergeben und bearbeiten erlaubt, mit Namensnennung,
-nicht kommerziell und nur unter derselben Lizenz. Ausgenommen sind Inhalte Dritter (Zitate, verlinkte Quellen, Gesetzestexte).
-Der Programmcode steht unter der [MIT-Lizenz](LICENSE). Einzelheiten zur Inhaltslizenz und vollständiger Lizenztext: [`LIZENZ-INHALTE.txt`](LIZENZ-INHALTE.txt).
+**Lizenz:** Lerninhalte CC BY-NC-SA 4.0, Programmcode MIT – siehe [Lizenz](#lizenz).
 
 **Datenschutz** (steht auch in der App unter *⚙️ Einstellungen*): kein Konto, kein Tracking, keine Cookies. Fortschritt und
 Einstellungen bleiben im Browser; von GitHub Pages werden nur die App und die Lerninhalte geladen, nichts von anderen Anbietern.
@@ -83,7 +80,7 @@ Hinweis „Neu laden“ klicken (oder in den Entwicklertools *Application → Se
 |---|---|
 | **Navigation** | Kopfleiste mit vier Bereichen – **Lernen**, **Glossar**, **SQL-Editor**, **Einstellungen** –, darunter die Unterpunkte des Bereichs; das Logo führt zur Übersicht, die Lupe (`Strg K` / `⌘K`) öffnet die Suche. Auf dem Handy eine Tab-Bar unten wie in iOS-Apps. Aussehen im Apple-Stil, hell und dunkel (umschaltbar unter *Einstellungen → Design*) |
 | **Übersicht** | Beim ersten Besuch eine kurze Willkommensseite; danach Widgets wie auf dem iPhone: **Weiterlernen** („Heute lernen“ und die zuletzt gelesene Stelle), Countdown zu deinem Prüfungstermin (unter *Einstellungen* eintragen), Lernserie, **Fortschrittsringe je Prüfungsbereich** (Karten sicher, Übungen gelöst), fällige Wiederholungen, SQL-/Rechen-/Diagramm-Übungen, markierte Karten, **Begriff des Tages**, Übungsklausuren mit Verlauf, schwächste Themen; darunter Fortschritt und Klausur-Trend je Thema |
-| **Lernen** | Theorie aller 16 Deep Dives mit Inhaltsverzeichnis und abhakbarem Lernziel-Check, dazu **Deep Dive 17 „Glossar & Diagramme“**: jeder Diagrammtyp (BPMN, EPK, UML, ER, Star-Schema, PAP, Struktogramm, Netzplan, Gantt, Boxplot, ROC …) als gezeichnetes Beispiel und alle Fachbegriffe von A bis Z |
+| **Lernen** | Theorie aller 16 Deep Dives mit Inhaltsverzeichnis und abhakbarem Lernziel-Check, dazu **Deep Dive 17 „Glossar & Diagramme“**: jeder Diagrammtyp (BPMN, EPK, UML, ER, Star-Schema, PAP, Struktogramm, Netzplan, Gantt, Boxplot, ROC …) als gezeichnetes Beispiel und alle Fachbegriffe von A bis Z; Lernblätter, die du nicht mehr sehen willst, mit **„Ausblenden“** aus der Themenliste, „Weiterlesen“, „Schwächste Themen“ und „Heute lernen“ nehmen (zurückholen unter *Lernen → Ausgeblendet*; Karteikarten und Aufgaben bleiben) |
 | **Glossar & Begriffsseiten** | Alle 1.148 Fachbegriffe von A bis Z; zu 1.011 Begriffen eine eigene **Begriffsseite** mit Definition, Erklärung, Beispiel, Abgrenzung, Prüfungsfalle, Merksatz und oft einer Grafik – dazu „Siehe auch“, die passenden Karteikarten, Aufgaben, Rechen- und SQL-Übungen und die Stelle im Lernblatt zum Nachlesen. Die **Suche** führt immer zuerst zur Begriffsseite |
 | **Karteikarten** | 547 Lernkarten aus `AP2_FIDPA_Lernkarten.json` (25 Decks) und 802 **Begriffskarten** aus `AP2_Fachbegriffe_Lernkarten.json` (16 Decks, je Deep Dive; Vorderseite Fachbegriff, Rückseite kurze Erklärung; Filter Typ „Fachbegriff“) plus Prüfer- und Fachgespräch-Fragen aus den Lernblättern; Filter nach Deep Dive, Deck, Typ, Schwierigkeit; „Fallen wiederholen"; **Durchblättern** (Karten nur ansehen, ←/→ oder wischen, ohne Bewertung); Leitner-System (Tastatur: `Leertaste` umdrehen, `1`/`2`/`3` bewerten); **Markieren** mit dem Stern oder `M` (in der Runde, beim Durchblättern und auf der Begriffsseite), Filter „Nur markierte“ und Kachel „Markiert“ auf der Übersicht – ändert das Fach nicht; **Leicht-Modus** mit 4 Antworten zum Einstieg (Tasten `1`–`4`, richtig bringt eine Karte höchstens in Fach 2); die falschen Antworten sind bei Fachbegriffen die Begriffe, mit denen sie verwechselt werden (aus „Abgrenzung“ und „Siehe auch“), sonst ähnliche Karten zum selben Thema; Fachbegriffe kommen auch umgekehrt (Erklärung → Begriff) |
 | **Übungsklausur** | 90-Minuten-Timer, 100 Punkte, Anlagen einblendbar; Lösungen erst nach Abgabe; Ergebnis mit IHK-Note |
@@ -204,7 +201,7 @@ Mehrere Tabs: Jeder gespeicherte Stand trägt einen Revisionszähler. Hat ein an
 
 Technische Dokumentation (Aufbau, Datenmodell, Regeln für Änderungen): [`DOKUMENTATION.md`](DOKUMENTATION.md).
 Der Umsetzungsplan (`ROADMAP.md`, Phasen 0–8) ist erledigt und wurde gelöscht; Kommentare wie „ROADMAP 8.3“ beziehen sich darauf
-(nachlesen: `git show d21984e:ROADMAP.md`). Die Lizenz der Inhalte (Frage Q4) ist entschieden: CC BY-NC-SA 4.0 (siehe [Online-Version](#online-version-github-pages)).
+(nachlesen: `git show d21984e:ROADMAP.md`). Die Lizenz der Inhalte (Frage Q4) ist entschieden: CC BY-NC-SA 4.0 (siehe [Lizenz](#lizenz)).
 
 ```bash
 npm run dev           # Dev-Server mit lokaler API auf http://localhost:5178
@@ -272,3 +269,19 @@ lern-app/
 │                 Lösungen und Lernkarten für die Parser-Tests
 └─ data/          fortschritt.json, generierte-aufgaben.json, backups/ (nicht im Repository)
 ```
+
+## Lizenz
+
+| Teil | Lizenz | Datei |
+|---|---|---|
+| Programmcode (alles außerhalb von `content/`) | [MIT](https://opensource.org/license/mit) | [`LICENSE`](LICENSE) |
+| Lerninhalte in `content/` (Lernblätter, Lösungen, Lernkarten, Übungen, Begriffsseiten) und die daraus erzeugten Dateien der Online-Version | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de) | [`LIZENZ-INHALTE.txt`](LIZENZ-INHALTE.txt) |
+
+**Code (MIT):** frei verwenden, ändern und weitergeben, auch kommerziell – der Copyright-Hinweis und der Lizenztext müssen dabei bleiben.
+
+**Inhalte (CC BY-NC-SA 4.0):** weitergeben und bearbeiten erlaubt, mit Namensnennung, nicht kommerziell und nur unter derselben Lizenz.
+Namensnennung bitte so: „AP2 Lern-App“ von Alex (https://github.com/AlexSeiff/ap2_lernapp), CC BY-NC-SA 4.0.
+Ausgenommen sind Inhalte Dritter (Zitate, Titel und Links verlinkter Quellen, Gesetzestexte) – für sie gelten die Rechte ihrer Urheber.
+
+Verwendete Bibliotheken haben ihre eigenen Lizenzen (siehe `package.json` bzw. `node_modules/*/LICENSE`); die Icons stammen von
+[Lucide](https://lucide.dev) (ISC-Lizenz).
