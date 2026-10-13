@@ -8,3 +8,16 @@ export function withSettings(p: Progress, changes: Partial<Settings>): Progress 
   if (!settings.examDate) delete settings.examDate;
   return { ...p, settings };
 }
+
+/** Ist das Lernblatt ausgeblendet (Einstellungen → ausgeblendeteThemen)? */
+export const istAusgeblendet = (settings: Pick<Settings, 'ausgeblendeteThemen'>, topicId: string) =>
+  !!settings.ausgeblendeteThemen?.includes(topicId);
+
+/** Lernblatt aus- oder wieder einblenden; die Liste bleibt in Reihenfolge des Ausblendens, eine leere Liste fällt weg. */
+export function setzeAusgeblendet(p: Progress, topicId: string, aus: boolean): Progress {
+  const ohne = (p.settings.ausgeblendeteThemen ?? []).filter((id) => id !== topicId);
+  const liste = aus ? [...ohne, topicId] : ohne;
+  const settings: Settings = { ...p.settings, ausgeblendeteThemen: liste };
+  if (!liste.length) delete settings.ausgeblendeteThemen;
+  return { ...p, settings };
+}

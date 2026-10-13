@@ -8,6 +8,7 @@ import { useStelle } from '../hooks/useStelle';
 import { useStore } from '../lib/store';
 import { useThemaTexte } from '../lib/texte';
 import { cardPool } from '../lib/cards';
+import { istAusgeblendet, setzeAusgeblendet } from '../lib/settings';
 import { TheoryMarkdown } from '../components/TheoryMarkdown';
 import type { Topic } from '../../shared/types';
 import { Icon } from '../components/Icon';
@@ -16,7 +17,9 @@ import { Icon } from '../components/Icon';
 const topicLabel = (t: Pick<Topic, 'id' | 'number'>) => (t.id === '00' ? 'Zusatz' : `Deep Dive ${t.number}`);
 
 export function Themen() {
-  const { content, progress } = useStore();
+  const { content, progress, update } = useStore();
+  const sichtbar = content.topics.filter((t) => !istAusgeblendet(progress.settings, t.id));
+  const ausgeblendet = content.topics.filter((t) => istAusgeblendet(progress.settings, t.id));
   return (
     <div className="page">
       <h1>Lernen</h1>
@@ -25,7 +28,7 @@ export function Themen() {
         und Klausur.
       </p>
       <div className="grid">
-        {content.topics.map((t) => (
+        {sichtbar.map((t) => (
           <Link key={t.id} to={`/lernen/${t.id}`} className="tile">
             <span className="tile-num">{t.id === '00' ? '＋' : t.number}</span>
             <span className="tile-title">{t.title}</span>
@@ -35,6 +38,25 @@ export function Themen() {
           </Link>
         ))}
       </div>
+      {!!ausgeblendet.length && (
+        <details className="card ausgeblendet">
+          <summary>
+            <Icon name="eye-off" /> Ausgeblendet ({ausgeblendet.length})
+          </summary>
+          <ul className="plain">
+            {ausgeblendet.map((t) => (
+              <li key={t.id}>
+                <Link to={`/lernen/${t.id}`}>
+                  {topicLabel(t)} · {t.title}
+                </Link>{' '}
+                <button type="button" className="small secondary" onClick={() => update((p) => setzeAusgeblendet(p, t.id, false))}>
+                  <Icon name="eye" /> Einblenden
+                </button>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
     </div>
   );
 }
@@ -55,6 +77,7 @@ export function Thema() {
       </div>
     );
   const cards = cardPool(content.flashcards, progress.settings).filter((c) => c.topicId === topic.id).length;
+  const ausgeblendet = istAusgeblendet(progress.settings, topic.id);
 
   return (
     <div className="page with-toc">
@@ -108,7 +131,21 @@ export function Thema() {
               <Icon name="layers" /> {cards} Karteikarten
             </Link>
           )}
+          {!ausgeblendet && (
+            <button type="button" className="secondary" onClick={() => update((p) => setzeAusgeblendet(p, topic.id, true))}>
+              <Icon name="eye-off" /> Ausblenden
+            </button>
+          )}
         </div>
+        {ausgeblendet && (
+          <p className="card info" role="note">
+            <Icon name="eye-off" /> Dieses Lernblatt ist ausgeblendet: Es fehlt in der Themenliste, bei „Weiterlesen“ und in „Heute lernen“.
+            Karteikarten und Aufgaben bleiben.{' '}
+            <button type="button" className="small secondary" onClick={() => update((p) => setzeAusgeblendet(p, topic.id, false))}>
+              <Icon name="eye" /> Wieder einblenden
+            </button>
+          </p>
+        )}
         {fehler && <p className="card warn">{fehler}</p>}
         {!mitTexten && !fehler && <p className="loading">Lädt …</p>}
         {mitTexten?.sections.map((s) => (

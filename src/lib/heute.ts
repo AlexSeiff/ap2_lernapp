@@ -10,6 +10,7 @@ import { cardPool } from './cards';
 import { leichtAutomatischAn, leichtKartenGemerkt } from './leicht';
 import { isDue, localDate } from './progress';
 import { rechenStatus } from './rechnen';
+import { istAusgeblendet } from './settings';
 import { sqlStatus } from './sql';
 import { topicStats } from './stats';
 import type { IconName } from './icons';
@@ -128,7 +129,8 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
   const verplant = new Set(journalItems.map((it) => it.ids[0]));
 
   // 1. Schwächstes Thema und eine Aufgabe daraus.
-  const stats = topicStats(content, progress).filter((s) => s.topic.exam?.blocks.length);
+  // Ausgeblendete Lernblätter kommen nicht als schwächstes Thema in Frage; fällige Wiederholungen ihrer Aufgaben bleiben.
+  const stats = topicStats(content, progress).filter((s) => s.topic.exam?.blocks.length && !istAusgeblendet(progress.settings, s.topic.id));
   const mitDaten = stats.filter((s) => s.lastExam !== undefined || s.avgTaskPct !== undefined);
   const schwach = mitDaten.length
     ? mitDaten.reduce((a, b) => ((b.lastExam ?? b.avgTaskPct!) < (a.lastExam ?? a.avgTaskPct!) ? b : a))

@@ -14,6 +14,7 @@ import { diagrammSummary, diagrammUebungen } from '../lib/diagramme';
 import { istFertig } from '../lib/heuteSitzung';
 import { kalibrierung } from '../lib/kalibrierung';
 import { holeLeseStelle } from '../lib/leseStelle';
+import { istAusgeblendet } from '../lib/settings';
 import { markierteIds } from '../lib/markiert';
 import { localDate } from '../lib/progress';
 import { rechenSummary } from '../lib/rechnen';
@@ -43,7 +44,7 @@ function Uebersicht() {
   const stats = topicStats(content, progress);
   const trends = examTrends(content, progress);
   const weakest = stats
-    .filter((s) => s.avgTaskPct !== undefined || s.lastExam !== undefined)
+    .filter((s) => (s.avgTaskPct !== undefined || s.lastExam !== undefined) && !istAusgeblendet(progress.settings, s.topic.id))
     .sort((a, b) => (a.lastExam ?? a.avgTaskPct!) - (b.lastExam ?? b.avgTaskPct!))
     .slice(0, 3);
   const offeneJournal = Object.values(progress.journal).filter((j) => !j.resolvedAt).length;
@@ -190,11 +191,11 @@ function Uebersicht() {
 
 /** „Weiterlernen“: Einstieg in „Heute lernen“ (ROADMAP 8.1; läuft schon eine Runde, geht es dort weiter) und die letzte Lesestelle. */
 function Weiterlernen() {
-  const { content } = useStore();
+  const { content, progress } = useStore();
   const sitzung = useHeuteSitzung();
   const laeuft = sitzung && !istFertig(sitzung);
   const [stelle] = useState(holeLeseStelle);
-  const topic = stelle && content.topics.find((t) => t.id === stelle.topicId);
+  const topic = stelle && !istAusgeblendet(progress.settings, stelle.topicId) && content.topics.find((t) => t.id === stelle.topicId);
   const abschnitt = topic && topic.sections.find((s) => s.id === stelle.sectionId);
   return (
     <section className="widget widget-weiter">

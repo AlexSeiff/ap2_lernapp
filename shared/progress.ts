@@ -160,6 +160,11 @@ export type Settings = {
    * Optional wie lastBackupDownloadAt – jede Datei der Version 6 bleibt gültig, daher keine neue Version.
    */
   leichtAutomatisch?: boolean;
+  /**
+   * Ausgeblendete Lernblätter (Topic-Ids): fehlen in der Themenliste, bei „Weiterlesen“, „Schwächste Themen“ und in „Heute lernen“.
+   * Optional wie leichtAutomatisch – jede Datei der Version 8 bleibt gültig, daher keine neue Version.
+   */
+  ausgeblendeteThemen?: string[];
 };
 
 export const defaultSettings = (): Settings => ({ prueferfragen: true, fachgespraech: true, leichtModus: false, backupReminderDays: 7 });
@@ -380,7 +385,10 @@ export function isIsoDate(v: unknown): v is string {
 export function migrateSettings(v: unknown): Settings {
   const d = defaultSettings();
   if (!isObject(v)) return d;
-  const { examDate, lastBackupDownloadAt, leichtAutomatisch, ...rest } = v;
+  const { examDate, lastBackupDownloadAt, leichtAutomatisch, ausgeblendeteThemen, ...rest } = v;
+  const ausgeblendet = Array.isArray(ausgeblendeteThemen)
+    ? [...new Set(ausgeblendeteThemen.filter((id): id is string => typeof id === 'string' && !!id))]
+    : [];
   const bool = (x: unknown, fallback: boolean) => (typeof x === 'boolean' ? x : fallback);
   const days = v.backupReminderDays;
   return {
@@ -388,6 +396,7 @@ export function migrateSettings(v: unknown): Settings {
     ...opt('examDate', examDate, isIsoDate(examDate)),
     ...opt('lastBackupDownloadAt', lastBackupDownloadAt, isIsoDate(lastBackupDownloadAt)),
     ...opt('leichtAutomatisch', leichtAutomatisch, typeof leichtAutomatisch === 'boolean'),
+    ...opt('ausgeblendeteThemen', ausgeblendet, ausgeblendet.length > 0),
     prueferfragen: bool(v.prueferfragen, d.prueferfragen),
     fachgespraech: bool(v.fachgespraech, d.fachgespraech),
     leichtModus: bool(v.leichtModus, d.leichtModus),
@@ -542,6 +551,7 @@ export const SettingsSchema = z.looseObject({
   backupReminderDays: z.number().optional(),
   lastBackupDownloadAt: z.string().optional(),
   leichtAutomatisch: z.boolean().optional(),
+  ausgeblendeteThemen: z.array(z.string()).optional(),
 });
 
 export const ProgressSchema = z.looseObject({
