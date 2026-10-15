@@ -321,7 +321,7 @@ Erlaubt bleibt eine unterschiedliche Behandlung, wenn eine **wesentliche berufli
 
 # Übungsklausur WiSo I (100 Punkte, 60 Minuten)
 
-25 gebundene Aufgaben à 4 Punkte. Bei Auswahlaufgaben die Ziffer(n) der richtigen Antwort(en) notieren; bei Mehrfachauswahl zählt nur die vollständig richtige Lösung. Bearbeite die Klausur **am Ende des Themas** am Stück, ohne Unterlagen. Grundlage ist das Szenario oben.
+25 gebundene Aufgaben à 4 Punkte. Bei Auswahlaufgaben die Ziffer(n) der richtigen Antwort(en) notieren; bei Mehrfachauswahl zählt hier zur Selbstkontrolle nur die vollständig richtige Lösung (in der echten Prüfung wird bei Mehrfachauswahl, Reihenfolge und Zuordnung teilbewertet). Bearbeite die Klausur **am Ende des Themas** am Stück, ohne Unterlagen. Grundlage ist das Szenario oben.
 
 Die Aufgaben sind hier nach Themen in Blöcke gegliedert; in der PDF-Fassung sind sie von 1 bis 25 durchnummeriert (A1–A7 = Aufgaben 1–7, B1–B5 = 8–12, C1–C6 = 13–18, D1–D4 = 19–22, E1–E3 = 23–25).
 

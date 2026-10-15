@@ -32,6 +32,9 @@ describe('Echte Lernblätter in content/', () => {
       '14',
       '15',
       '16',
+      '18',
+      '19',
+      '20',
     ]);
     for (const t of sheets) {
       expect(t.solutionFile, t.file).toBe(t.file.replace('.md', '_Loesungen.md'));

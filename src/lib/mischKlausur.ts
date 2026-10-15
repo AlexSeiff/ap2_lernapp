@@ -51,7 +51,10 @@ export const UNTERBEREICHE: Unterbereich[] = [
     id: 'A1',
     bereich: 'prozess',
     titel: 'Geschäftsprozesse & Prozessmodellierung',
-    quellen: [{ topicId: '05', bloecke: ['A', 'B', 'C'] }],
+    quellen: [
+      { topicId: '05', bloecke: ['A', 'B', 'C'] },
+      { topicId: '18', bloecke: ['B'] },
+    ],
   },
   {
     id: 'A2',
@@ -60,6 +63,7 @@ export const UNTERBEREICHE: Unterbereich[] = [
     quellen: [
       { topicId: '12', bloecke: ['A', 'B', 'C', 'E'] },
       { topicId: '15', bloecke: ['D'] },
+      { topicId: '18', bloecke: ['A'] },
     ],
   },
   {
@@ -70,6 +74,7 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '12', bloecke: ['D'] },
       { topicId: '05', bloecke: ['D'] },
       { topicId: '16', bloecke: ['A', 'B', 'C'] },
+      { topicId: '18', bloecke: ['C', 'D'] },
     ],
   },
   {
@@ -85,13 +90,28 @@ export const UNTERBEREICHE: Unterbereich[] = [
     id: 'B1',
     bereich: 'qualitaet',
     titel: 'Daten identifizieren, klassifizieren, bereitstellen',
-    quellen: [{ topicId: '01' }, { topicId: '00' }, { topicId: '02' }, { topicId: '08' }, { topicId: '15', bloecke: ['A', 'B', 'C', 'E'] }],
+    quellen: [
+      { topicId: '01' },
+      { topicId: '00' },
+      { topicId: '02' },
+      { topicId: '08' },
+      { topicId: '15', bloecke: ['A', 'B', 'C', 'E'] },
+      { topicId: '19', bloecke: ['D'] },
+    ],
   },
   {
     id: 'B2',
     bereich: 'qualitaet',
     titel: 'Datenqualität prüfen und sicherstellen',
-    quellen: [{ topicId: '09' }, { topicId: '03' }, { topicId: '04' }, { topicId: '06' }, { topicId: '07' }, { topicId: '11' }],
+    quellen: [
+      { topicId: '09' },
+      { topicId: '03' },
+      { topicId: '04' },
+      { topicId: '06' },
+      { topicId: '07' },
+      { topicId: '11' },
+      { topicId: '19', bloecke: ['A', 'B', 'C'] },
+    ],
   },
   {
     id: 'B3',

@@ -350,7 +350,7 @@ Am **Gleichgewichtspreis** (14 €) wird die größtmögliche Menge umgesetzt. N
 
 # Übungsklausur WiSo II (100 Punkte, 60 Minuten)
 
-25 gebundene Aufgaben à 4 Punkte. Bei Mehrfachauswahl zählt nur die vollständig richtige Lösung. Bearbeite die Klausur **am Ende des Themas** am Stück.
+25 gebundene Aufgaben à 4 Punkte. Bei Mehrfachauswahl zählt hier zur Selbstkontrolle nur die vollständig richtige Lösung (in der echten Prüfung wird bei Mehrfachauswahl, Reihenfolge und Zuordnung teilbewertet). Bearbeite die Klausur **am Ende des Themas** am Stück.
 
 Die Aufgaben sind hier nach Themen in Blöcke gegliedert; in der PDF-Fassung sind sie von 1 bis 25 durchnummeriert (A1–A8 = Aufgaben 1–8, B1–B9 = 9–17, C1–C2 = 18–19, D1–D6 = 20–25).
 

@@ -786,7 +786,7 @@ applied in `main.tsx` before the first render), error boundary per route, own co
   dropped; FehlergrundKarte and KalibrierungKarte are grid items too (they render nothing without data). "Fortschritt je Thema" is a list
   (`.thema-fortschritt`) instead of a table: desktop aligned columns with a header row (`aria-hidden`, every value carries its own
   `.tf-label`, visually hidden there), phones show "Label Wert" chips that wrap under the title – no column is hidden any more.
-- **Pure logic** `src/lib/uebersicht.ts`: `PRUEFUNGSBEREICHE` (prozess: DD5, 12, 16; qualitaet: DD0–4, 6–11, 15; wiso: DD13, 14; DD17
+- **Pure logic** `src/lib/uebersicht.ts`: `PRUEFUNGSBEREICHE` (prozess: DD5, 12, 16, 18; qualitaet: DD0–4, 6–11, 15, 19; wiso: DD13, 14, 20 – DD18 to DD20 are the Altklausur-Training sheets modelled on the real Sommer-2026 exams, each with its own 100-point Übungsklausur; DD17
   nowhere – each Deep Dive counts once, to the area most of its exam blocks belong to in `UNTERBEREICHE`), `bereichFortschritt` (cards in box ≥ 3;
   exercises = tasks whose last attempt reached `SICHER_RICHTIG_AB` + solved SQL, Rechen and Diagramm exercises; diagram exercises count to
   Prozessanalyse), `faellig` (journal, cards incl. new, SQL/Rechen/Diagramm repetitions), `begriffDesTages` (term page fixed per day via

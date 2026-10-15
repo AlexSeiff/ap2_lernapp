@@ -6,23 +6,23 @@
     "aktualisiert_am": "2026-10-15",
     "version": "1.1",
     "sprache": "de",
-    "anzahl_decks": 25,
-    "anzahl_karten": 584,
+    "anzahl_decks": 28,
+    "anzahl_karten": 663,
     "karten_nach_typ": {
-      "abgrenzung": 98,
-      "anwendung": 67,
-      "falle": 102,
-      "rechnung": 50,
-      "wissen": 267
+      "abgrenzung": 111,
+      "anwendung": 83,
+      "falle": 116,
+      "rechnung": 57,
+      "wissen": 296
     },
     "karten_nach_status": {
-      "behandelt": 570,
+      "behandelt": 649,
       "offen": 14
     },
     "karten_nach_schwierigkeit": {
-      "1": 216,
-      "2": 332,
-      "3": 36
+      "1": 238,
+      "2": 385,
+      "3": 40
     },
     "felder": {
       "id": "Eindeutige Karten-ID aus Deck-Kürzel und laufender Nummer",
@@ -6395,6 +6395,907 @@
           "schwierigkeit": 2,
           "tags": [
             "green-it"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alp",
+      "titel": "Altklausur-Training Prozessanalyse",
+      "pruefungsbereich": "Durchführen einer Prozessanalyse",
+      "quelle": "Deep Dive 18",
+      "status": "behandelt",
+      "anzahl_karten": 24,
+      "karten": [
+        {
+          "id": "ALP-001",
+          "frage": "In der Prozessanalyse-Klausur sind vier Angaben gefordert, du nennst sechs. Was wird bewertet?",
+          "antwort": "Nur die ersten vier Angaben. Eine falsche Nennung unter den ersten vier kostet den Punkt und kann nicht durch eine fünfte ausgeglichen werden – genau so viele Angaben nennen, wie gefordert sind.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "klausur",
+            "bewertung"
+          ]
+        },
+        {
+          "id": "ALP-002",
+          "frage": "Was erwartet die Prüfung bei den Operatoren „nennen“, „beschreiben“ und „erläutern“?",
+          "antwort": "Nennen: knapp aufzählen. Beschreiben: Merkmal plus kurze Erklärung oder Wirkung. Erläutern: Aussage, Begründung und Beispiel aus dem Szenario. Die unterschiedliche Dimension wird bei der Bewertung berücksichtigt.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 1,
+          "tags": [
+            "klausur",
+            "operatoren"
+          ]
+        },
+        {
+          "id": "ALP-003",
+          "frage": "Nenne drei Maßnahmen, mit denen bei der Einführung eines neuen Systems die DSGVO eingehalten wird.",
+          "antwort": "TOM (technische und organisatorische Maßnahmen) erstellen, Verzeichnis von Verarbeitungstätigkeiten führen, Beschäftigte schulen, Löschkonzept mit Löschfristen, bei hohem Risiko Datenschutz-Folgenabschätzung, Datenschutzbeauftragten einbinden.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "dsgvo",
+            "datenschutz"
+          ]
+        },
+        {
+          "id": "ALP-004",
+          "frage": "Nenne drei technische Anforderungen an ein Zeiterfassungssystem mit Chipkarten-Terminals und begründe sie.",
+          "antwort": "Manipulationsschutz/Datenintegrität (Zeitstempel nicht nachträglich änderbar), Verfügbarkeit (Offline-Puffer bei Netzausfall), verschlüsselte Übertragung (Schutz personenbezogener Daten), Rollen- und Rechtekonzept, Schnittstelle zur Lohnabrechnung (keine Doppelerfassung).",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "anforderungen",
+            "systemeinfuehrung"
+          ]
+        },
+        {
+          "id": "ALP-005",
+          "frage": "Warum erhält „Schulung“ als Gegenmaßnahme gegen die Befürchtung „Leistungs- und Verhaltenskontrolle“ keinen Punkt?",
+          "antwort": "Die Gegenmaßnahme muss die genannte Befürchtung entkräften. Gegen Überwachungsangst wirken Betriebsvereinbarung mit Zweckbindung, Verzicht auf personenbezogene Leistungsauswertung und Transparenz; Schulung hilft gegen Überforderung durch neue Technik.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "akzeptanz",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "ALP-006",
+          "frage": "Was bedeuten UND, ODER und XOR als Konnektor vor einer EPK-Funktion?",
+          "antwort": "UND: Die Funktion läuft, wenn alle Ereignisse eingetreten sind. ODER: wenn mindestens ein Ereignis eingetreten ist. XOR: wenn genau ein Ereignis eingetreten ist.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "epk",
+            "konnektoren"
+          ]
+        },
+        {
+          "id": "ALP-007",
+          "frage": "Wie unterscheidet sich ODER-Split von XOR-Split nach einer Funktion?",
+          "antwort": "ODER: mindestens eines der folgenden Ereignisse tritt ein (auch mehrere möglich). XOR: genau eines tritt ein. UND: alle folgenden Ereignisse treten ein.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "epk",
+            "konnektoren"
+          ]
+        },
+        {
+          "id": "ALP-008",
+          "frage": "Was bedeutet in der eEPK ein Pfeil zwischen Funktion und Informationsobjekt – und wie ist die Richtung zu lesen?",
+          "antwort": "Der Informationsfluss zeigt, dass eine Funktion Daten liest oder schreibt. Pfeil zur Funktion = lesen, Pfeil zum Objekt = schreiben (z. B. Vorgang im System erfassen → Pfeil zum Objekt).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "epk",
+            "eepk"
+          ]
+        },
+        {
+          "id": "ALP-009",
+          "frage": "Wie gehst du vor, wenn du aus einem Fließtext eine eEPK zeichnen sollst?",
+          "antwort": "1. Text in Schritte zerlegen (Verb = Funktion, erreichter Zustand = Ereignis). 2. Auslöser = Startereignis. 3. Signalwörter markieren (parallel → UND, entweder/oder → XOR). 4. Zwischen Funktionen immer ein Ereignis. 5. Entscheidungen nur nach einer Funktion. 6. Verzweigungen mit gleichem Konnektor-Typ schließen. 7. Genannte Systeme/Dokumente als Objekte anhängen. 8. Schleifen über XOR-Join modellieren.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "epk",
+            "eepk",
+            "vorgehen"
+          ]
+        },
+        {
+          "id": "ALP-010",
+          "frage": "Wie wird eine eEPK-Aufgabe typischerweise bepunktet, und was folgt daraus?",
+          "antwort": "Je Ereignis, Funktion und Objekt 0,5 Punkte, je Konnektor 1,5 Punkte. Ein fehlender oder falscher Konnektor kostet dreimal so viel wie ein fehlendes Element – zuerst die Verzweigungen sauber modellieren.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "epk",
+            "bewertung"
+          ]
+        },
+        {
+          "id": "ALP-011",
+          "frage": "In der eEPK endet der parallele Zweig „Kunde informieren“ nach einem UND-Split mit seinem eigenen Ereignis. Brauchst du einen UND-Join?",
+          "antwort": "Nein. Ein Zweig, der in einem eigenen Endereignis endet, wird nicht zusammengeführt. Ein UND-Join würde nur gebraucht, wenn beide Zweige wieder zu einer gemeinsamen Funktion zusammenlaufen.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "epk",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "ALP-012",
+          "frage": "Nenne drei Nachteile eines papiergesteuerten Prozesses mit jeweils der Folge.",
+          "antwort": "Zeitaufwand durch manuelles Sammeln und Weitergeben → lange Durchlaufzeit. Fehleranfälligkeit durch Abtippen/Handschrift → Nacharbeit. Mangelnde Transparenz → Rückfragen und kein Überblick. Medienbrüche → Mehrfacherfassung. Schwierige Nachverfolgung/Archivierung.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "digitalisierung",
+            "nachteile"
+          ]
+        },
+        {
+          "id": "ALP-013",
+          "frage": "Wie leitest du aus einer Papier-Aktivität die digitale Aktivität ab?",
+          "antwort": "Vier Fragen: Was ersetzt das Hilfsmittel? Was entfällt (Sammeln, Transportieren)? Was entsteht neu (automatische Prüfung, Zeitstempel)? Wer sieht die Daten sofort? Die neue Aktivität muss sich aus den vorgegebenen Hilfsmitteln ergeben.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "digitalisierung",
+            "vorgehen"
+          ]
+        },
+        {
+          "id": "ALP-014",
+          "frage": "Warum bringt „Lieferschein digital abgeben“ als neue Aktivität kaum Punkte?",
+          "antwort": "Es ist nur eine Umbenennung. Gefragt sind Aktivitäten, die sich durch die Hilfsmittel inhaltlich verändern (z. B. App prüft den Lieferschein automatisch gegen Bestelldaten, Zeitstempel wird automatisch gesetzt).",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "digitalisierung",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "ALP-015",
+          "frage": "Das Ziel lautet: Die Zeit vom Rechnungseingang bis zur Buchung soll um 30 % sinken. Wie prüfst du es?",
+          "antwort": "Ist-Zeit des Papierprozesses mit großer Stichprobe messen (Durchschnitt), digitalen Prozess einführen, dieselbe Zeit mit ähnlicher Stichprobe messen (Durchschnitt), vergleichen: (Ist − Soll) ÷ Ist × 100 ≥ 30 %.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "zielueberpruefung",
+            "kennzahlen"
+          ]
+        },
+        {
+          "id": "ALP-016",
+          "frage": "Die Kosten stiegen von 1.000.000 € auf 3.100.000 €. Um wie viel Prozent?",
+          "antwort": "(3.100.000 − 1.000.000) ÷ 1.000.000 × 100 = +210 %. Bezugsgröße ist der Anfangswert.",
+          "typ": "rechnung",
+          "schwierigkeit": 1,
+          "tags": [
+            "rechnung",
+            "prozent"
+          ]
+        },
+        {
+          "id": "ALP-017",
+          "frage": "Kosten steigen von 1 auf 3 Mio. €. Warum ist „um 66 % gestiegen“ falsch?",
+          "antwort": "Der Anstieg wird auf den Anfangswert bezogen: (3 − 1) ÷ 1 × 100 = +200 %. 66 % wäre der Anteil des Anstiegs am Endwert; die Kosten sind auf 300 % des Anfangswerts angewachsen.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "rechnung",
+            "prozent",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "ALP-018",
+          "frage": "Nenne zwei Kriterien zur Aussagekraft einer Kostengrafik und die übliche Schlussfolgerung.",
+          "antwort": "Fehlende Kostenarten, fehlendes Mengengerüst, wirtschaftliche Entwicklung, Inflation, Digitalisierungsgrad, veränderte Prozesse, Fremdpersonal. Schlussfolgerung: Die Grafik ist nicht aussagekräftig und nicht als alleinige Entscheidungsgrundlage geeignet.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "kosten",
+            "grafik"
+          ]
+        },
+        {
+          "id": "ALP-019",
+          "frage": "Rechne: 8 Stunden pro Tag, 3 Mitarbeiter gleichzeitig, 2 Standorte, Montag bis Freitag, 52 Wochen. Wie viele Arbeitsstunden pro Jahr?",
+          "antwort": "8 × 3 × 2 = 48 Stunden pro Tag; 48 × 5 × 52 = 12.480 Stunden pro Jahr.",
+          "typ": "rechnung",
+          "schwierigkeit": 1,
+          "tags": [
+            "rechnung",
+            "personalkosten"
+          ]
+        },
+        {
+          "id": "ALP-020",
+          "frage": "12.480 Stunden pro Jahr, 10 % Abwesenheit, 30 Urlaubstage (48 Tagesstunden gesamt), Stundensatz 70 €. Personalkosten?",
+          "antwort": "Abwesenheit: 12.480 × 0,10 = 1.248 h. Urlaub: 48 × 30 = 1.440 h. Summe: 12.480 + 1.248 + 1.440 = 15.168 h. Kosten: 15.168 × 70 € = 1.061.760 €.",
+          "typ": "rechnung",
+          "schwierigkeit": 3,
+          "tags": [
+            "rechnung",
+            "personalkosten"
+          ]
+        },
+        {
+          "id": "ALP-021",
+          "frage": "Welche Bestandteile enthält ein kalkulatorischer Stundensatz neben dem Lohn?",
+          "antwort": "Arbeitgeberanteil zur Sozialversicherung, Sonderzahlungen (13. Gehalt, Urlaubs-/Weihnachtsgeld), Lohnfortzahlung, Arbeitskleidung/Schutzausrüstung, freiwillige Sozialleistungen, Arbeitsplatz- und Gemeinkosten, Aus- und Weiterbildung.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "kosten",
+            "stundensatz"
+          ]
+        },
+        {
+          "id": "ALP-022",
+          "frage": "Dein errechneter Personalkostenwert liegt über der Kurve der Kostengrafik. Was folgt?",
+          "antwort": "Die Gesamtsumme der Kurve ist unvollständig, da sie nicht einmal die Personalkosten enthält. Läge der Wert darunter, wären die Personalkosten enthalten; ob die Differenz die übrigen Kosten deckt, wäre ohne weitere Daten nicht beurteilbar.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "kosten",
+            "grafik"
+          ]
+        },
+        {
+          "id": "ALP-023",
+          "frage": "Mit welchem Wert rechnest du weiter, wenn du ein Zwischenergebnis rundest?",
+          "antwort": "Mit dem gerundeten Wert, so verlangen es die Bearbeitungshinweise. Taschenrechner: nicht programmierbar und netzunabhängig.",
+          "typ": "falle",
+          "schwierigkeit": 1,
+          "tags": [
+            "klausur",
+            "rechnung"
+          ]
+        },
+        {
+          "id": "ALP-024",
+          "frage": "Wie lautet der Punkte-Noten-Schlüssel der IHK-Abschlussprüfung?",
+          "antwort": "Note 1: 100–92, Note 2: unter 92–81, Note 3: unter 81–67, Note 4: unter 67–50, Note 5: unter 50–30, Note 6: unter 30–0 Punkte.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "klausur",
+            "noten"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adq",
+      "titel": "Altklausur-Training Datenqualität",
+      "pruefungsbereich": "Sicherstellen der Datenqualität",
+      "quelle": "Deep Dive 19",
+      "status": "behandelt",
+      "anzahl_karten": 23,
+      "karten": [
+        {
+          "id": "ADQ-001",
+          "frage": "Welches Diagramm zeigt die Verteilung mehrerer Gruppen auf mehrere Kategorien (z. B. Personengruppen auf Tore)?",
+          "antwort": "Ein gruppiertes (oder gestapeltes) Säulendiagramm. Kreisdiagramme je Kategorie sind eine Alternative. Liniendiagramme zeigen Entwicklungen über die Zeit.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "visualisierung",
+            "diagramm"
+          ]
+        },
+        {
+          "id": "ADQ-002",
+          "frage": "Was bringt bei einer Diagrammskizze Punkte – und was kostet sie?",
+          "antwort": "Punkte: korrekte Darstellung je Gruppe, beschriftete Achsen (mit Einheit), Legende. Ohne Achsentitel und Legende fehlen Punkte, auch bei richtigen Werten.",
+          "typ": "falle",
+          "schwierigkeit": 1,
+          "tags": [
+            "visualisierung",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "ADQ-003",
+          "frage": "Gruppe A: 100 Personen/Tag, 60 % an Tor 1. Gruppe B: 50 Personen/Tag, 20 % an Tor 1. Auslastung von Tor 1?",
+          "antwort": "Gesamt 150. Tor 1: 100 × 0,6 + 50 × 0,2 = 60 + 10 = 70 Personen; 70 ÷ 150 × 100 ≈ 46,7 %.",
+          "typ": "rechnung",
+          "schwierigkeit": 2,
+          "tags": [
+            "rechnung",
+            "auslastung"
+          ]
+        },
+        {
+          "id": "ADQ-004",
+          "frage": "Warum darfst du die Prozentwerte je Gruppe nicht direkt als Auslastung des Tors verwenden?",
+          "antwort": "Die Prozentwerte beziehen sich auf die Gruppe. Erst nach dem Aufsummieren je Tor wird durch die Gesamtzahl aller Personen geteilt; die Summe der Auslastungen muss 100 % ergeben.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "rechnung",
+            "auslastung",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "ADQ-005",
+          "frage": "Welche Schritte hat ein Workflow zur automatischen Kennzeichen-/Etikettenerkennung?",
+          "antwort": "Bildaufnahme → Vorverarbeitung (Helligkeit, Rauschen) → Lokalisierung der Region → Texterkennung (OCR) → Validierung (Format per RegEx, Abgleich mit Datenbank) → Entscheidung (freigeben oder nicht).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "bilderkennung",
+            "workflow"
+          ]
+        },
+        {
+          "id": "ADQ-006",
+          "frage": "Warum gehört in den Erkennungs-Workflow ein Validierungsschritt?",
+          "antwort": "OCR kann Zeichen falsch erkennen. Die Validierung prüft das Format (regulärer Ausdruck) und gleicht mit der Datenbank ab; erst dann ist eine Freigabe verlässlich.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "bilderkennung",
+            "validierung"
+          ]
+        },
+        {
+          "id": "ADQ-007",
+          "frage": "Nenne zwei Gründe, warum neuronale Netze für Kennzeichen- oder Etikettenerkennung geeignet sind.",
+          "antwort": "Vielfalt und Variabilität (Schriftarten, Verschmutzung, Perspektive, Licht) werden aus Beispielen gelernt, statt jede Ausnahme zu programmieren; das Netz ist lernfähig und mit neuen Daten anpassbar.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "neuronale-netze",
+            "bilderkennung"
+          ]
+        },
+        {
+          "id": "ADQ-008",
+          "frage": "Warum eignen sich CNNs besonders für die Erkennung von Schriftzeichen im Bild?",
+          "antwort": "Faltungsschichten erkennen lokale Muster wie Kanten und Ecken, aus denen Zeichen bestehen. Die räumliche Struktur der Pixel bleibt erhalten, sodass Zeichen auch verschoben oder leicht gedreht erkannt werden.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "cnn",
+            "bilderkennung"
+          ]
+        },
+        {
+          "id": "ADQ-009",
+          "frage": "Wie unterscheidet sich ein CNN von einem vollständig verbundenen Netz bei Bildern?",
+          "antwort": "Ein vollständig verbundenes Netz flacht das Bild zu einem Vektor ab und verliert die Nachbarschaft der Pixel. Ein CNN behält die 2D-Struktur und lernt mit Filtern lokale Muster bis zu komplexen Formen.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "cnn",
+            "neuronale-netze"
+          ]
+        },
+        {
+          "id": "ADQ-010",
+          "frage": "Ein Standardmodell zeichnet Bounding Boxes für Fahrzeug und Person, aber nicht für das Kennzeichen. Was ist vorhanden, was fehlt, wie ergänzt man es?",
+          "antwort": "Vorhanden: Objekte lokalisieren und klassifizieren, Bounding Boxes, Wahrscheinlichkeiten, Cropping möglich. Fehlend: Region des Kennzeichens. Ergänzen: mit gelabelten Kennzeichenbildern nachtrainieren (Fine-Tuning/Transfer Learning).",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "bilderkennung",
+            "standardmodell"
+          ]
+        },
+        {
+          "id": "ADQ-011",
+          "frage": "Welche Datenschutzmaßnahmen sind bei Kameras mit Kennzeichenerkennung nötig?",
+          "antwort": "Hinweisschilder, Datenminimierung (nur die Region des Kennzeichens), Anonymisierung von Personen, automatische Löschung nach kurzer Frist, Zweckbindung und Zugriffsbeschränkung.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "datenschutz",
+            "bilderkennung"
+          ]
+        },
+        {
+          "id": "ADQ-012",
+          "frage": "Zentrale oder dezentrale Speicherung einer Berechtigungsdatenbank – Vor- und Nachteile?",
+          "antwort": "Zentral: einheitlicher Bestand, Änderungen einmal pflegen, einfaches Backup; aber Netz- und Anbieterabhängigkeit. Dezentral: läuft bei Netzausfall, schneller Zugriff; aber hoher Aufwand bei Änderungen und schwieriges Backup.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "datenhaltung",
+            "zentral-dezentral"
+          ]
+        },
+        {
+          "id": "ADQ-013",
+          "frage": "Wie beurteilst du, ob eine Tabelle personenbezogene Daten enthält?",
+          "antwort": "Personenbezogen sind Daten mit Namen oder anderen Kennungen, die eine Person identifizieren. Tabellen nur mit Sach-IDs und Zeiten sind nicht personenbezogen (aber über Verknüpfung personenbeziehbar). Personaldaten mit Name und Stelle sind personenbezogen.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "datenschutz",
+            "personenbezug"
+          ]
+        },
+        {
+          "id": "ADQ-014",
+          "frage": "Welche Maßnahmen gelten für die Speicherung personenbezogener Daten?",
+          "antwort": "Verschlüsselung, Zugriffs- und Rechtekonzept, Protokollierung, Löschbarkeit beim Datenbankdesign (referenzielle Integrität), automatische Löschfristen.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "datenschutz",
+            "speicherung"
+          ]
+        },
+        {
+          "id": "ADQ-015",
+          "frage": "Aus den Attributen Von und Bis soll im ETL-Prozess eine Aufenthaltsdauer entstehen. Wie und mit welchem Datentyp?",
+          "antwort": "Dauer aus Bis − Von berechnen und als numerischen Wert (z. B. Minuten) speichern, Datentyp INTEGER. Zweck: Die Dauer ist die direkt auswertbare Analysegröße.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "etl",
+            "transformation"
+          ]
+        },
+        {
+          "id": "ADQ-016",
+          "frage": "Wochentag, Tag und Monat liegen getrennt vor. Wie transformierst du sie?",
+          "antwort": "Zu einem Datumsfeld zusammenfassen (Datentyp DATE), damit Sortierung, Filterung und zeitliche Auswertung einfach werden. Attribute ohne Aussagekraft (z. B. technische ID) entfernen.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "etl",
+            "transformation"
+          ]
+        },
+        {
+          "id": "ADQ-017",
+          "frage": "Wann ist die Zusammenführung von Zutritts- und Personaldaten arbeitsrechtlich zulässig?",
+          "antwort": "Nur bei konkretem, dokumentiertem Zweck, z. B. Verdacht auf eine Straftat oder Arbeitssicherheit (wer ist im Brandfall im Gebäude). Beschäftigtendaten unterliegen Zweckbindung und der Mitbestimmung des Betriebsrats (§ 87 Abs. 1 Nr. 6 BetrVG).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "datenschutz",
+            "beschaeftigtendaten"
+          ]
+        },
+        {
+          "id": "ADQ-018",
+          "frage": "Was ist eine Stückliste im Datenmodell?",
+          "antwort": "Eine Zwischentabelle, die die n:m-Beziehung zwischen Endprodukt und Bauteil auflöst und die Anzahl je Produkt speichert (PK aus beiden Fremdschlüsseln).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "sql",
+            "datenmodell",
+            "stueckliste"
+          ]
+        },
+        {
+          "id": "ADQ-019",
+          "frage": "Wie ermittelst du in SQL den Bauteilbedarf für ein Produktionsdatum?",
+          "antwort": "Bauteil mit Stückliste und Produktionsplan verknüpfen, nach Datum filtern, SUM(Stücklistenanzahl * geplante Menge) je Bauteil mit GROUP BY.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "sql",
+            "aggregation",
+            "stueckliste"
+          ]
+        },
+        {
+          "id": "ADQ-020",
+          "frage": "Warum ist SUM(a) * SUM(b) bei einer Bedarfsrechnung falsch?",
+          "antwort": "Die Multiplikation muss je Zeile erfolgen und dann summiert werden: SUM(a * b). SUM(a) * SUM(b) multipliziert die Summen und liefert ein falsches Ergebnis.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "sql",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "ADQ-021",
+          "frage": "Wie filterst du Gruppen mit Deckungsbeitrag über 50 EUR?",
+          "antwort": "Mit HAVING nach der Aggregation: HAVING Verkaufspreis − SUM(Anzahl * Einkaufspreis) > 50. WHERE kann Aggregate nicht filtern. Sortierung mit ORDER BY Deckungsbeitrag DESC.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "sql",
+            "having",
+            "deckungsbeitrag"
+          ]
+        },
+        {
+          "id": "ADQ-022",
+          "frage": "Verkaufspreis 480 €. Bauteile je Möbel: 1 × 120 €, 1 × 90 €, 2 × 25 €, 1 × 4 €. Deckungsbeitrag?",
+          "antwort": "Variable Kosten: 120 + 90 + 50 + 4 = 264 €. Deckungsbeitrag = 480 − 264 = 216 €.",
+          "typ": "rechnung",
+          "schwierigkeit": 1,
+          "tags": [
+            "rechnung",
+            "deckungsbeitrag"
+          ]
+        },
+        {
+          "id": "ADQ-023",
+          "frage": "Wie verschiebst du in SQL die Produktionstermine einer bestimmten Anlage um eine Woche?",
+          "antwort": "UPDATE produktionsplan SET Produktionsdatum = DATEADD(DAY, 7, Produktionsdatum) WHERE Produktionsdatum = '…' AND A_ID IN (SELECT A_ID FROM anlage WHERE Bezeichnung = '…'); alternativ Produktionsdatum + 7.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "sql",
+            "update",
+            "unterabfrage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "awi",
+      "titel": "Altklausur-Training WiSo",
+      "pruefungsbereich": "Wirtschafts- und Sozialkunde",
+      "quelle": "Deep Dive 20",
+      "status": "behandelt",
+      "anzahl_karten": 32,
+      "karten": [
+        {
+          "id": "AWI-001",
+          "frage": "Wie werden Aufgaben mit mehreren richtigen Antworten in der WiSo-Prüfung bewertet?",
+          "antwort": "Mehrfachauswahl, Reihenfolge und Zuordnung werden teilbewertet (richtig gesetzte Ziffern zählen anteilig); bei den übrigen Aufgaben zählt nur die vollständig richtige Antwort. Je Aufgabe sind es rund 3,33 Punkte.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "wiso",
+            "klausur"
+          ]
+        },
+        {
+          "id": "AWI-002",
+          "frage": "Was folgt aus einer unzulässigen Vereinbarung im Ausbildungsvertrag?",
+          "antwort": "Nur diese Vereinbarung ist nichtig, der übrige Vertrag bleibt gültig (Teilnichtigkeit). Zustimmung von Eltern, IHK oder Auszubildendem heilt sie nicht.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "ausbildung",
+            "nichtig"
+          ]
+        },
+        {
+          "id": "AWI-003",
+          "frage": "Bis wann muss der Ausbildungsvertrag bei Ausbildungsbeginn am 01.09. spätestens schriftlich niedergelegt sein?",
+          "antwort": "Vor Beginn der Ausbildung, also bis zum 31.08. – nicht erst am ersten Tag und nicht nach der Probezeit.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "ausbildung",
+            "vertrag"
+          ]
+        },
+        {
+          "id": "AWI-004",
+          "frage": "Was gilt, wenn der Auszubildende die Abschlussprüfung nicht besteht?",
+          "antwort": "Auf sein Verlangen verlängert sich das Ausbildungsverhältnis bis zur nächstmöglichen Wiederholungsprüfung, höchstens um ein Jahr (§ 21 Abs. 3 BBiG).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "ausbildung",
+            "pruefung"
+          ]
+        },
+        {
+          "id": "AWI-005",
+          "frage": "Bis wann muss die Ausbildungsvergütung gezahlt werden?",
+          "antwort": "Spätestens am letzten Arbeitstag des Monats – nicht „bis zum 15. des Folgemonats“. Die Vergütung muss mit jedem Ausbildungsjahr steigen.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "ausbildung",
+            "verguetung",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "AWI-006",
+          "frage": "Müssen volljährige Auszubildende ein Berichtsheft (Ausbildungsnachweis) führen?",
+          "antwort": "Ja. Die Nachweispflicht gilt für alle Auszubildenden unabhängig vom Alter.",
+          "typ": "falle",
+          "schwierigkeit": 1,
+          "tags": [
+            "ausbildung",
+            "berichtsheft",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "AWI-007",
+          "frage": "Bringe in die richtige Reihenfolge: Reha, Unfallanzeige, Erste Hilfe, Durchgangsarzt, Arbeit wieder aufnehmen.",
+          "antwort": "Erste Hilfe → unverzüglich zum Durchgangsarzt (Arbeitsunfähigkeit) → Unfallanzeige an die Berufsgenossenschaft → Reha → Arbeit wieder aufnehmen.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "arbeitsunfall",
+            "unfallversicherung"
+          ]
+        },
+        {
+          "id": "AWI-008",
+          "frage": "Wann und an wen meldet der Arbeitgeber einen Arbeitsunfall?",
+          "antwort": "An die Berufsgenossenschaft (Unfallversicherungsträger) per Unfallanzeige innerhalb von drei Tagen nach Kenntnis, wenn die Arbeitsunfähigkeit mehr als drei Tage beträgt.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "arbeitsunfall",
+            "unfallversicherung"
+          ]
+        },
+        {
+          "id": "AWI-009",
+          "frage": "Welche Versicherung zahlt Heilbehandlung und Reha nach einem Arbeitsunfall – und wer zahlt die Beiträge?",
+          "antwort": "Die gesetzliche Unfallversicherung (Berufsgenossenschaft). Die Beiträge zahlt allein der Arbeitgeber. Private Unfallversicherung und Betriebshaftpflicht sind nicht zuständig.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "unfallversicherung",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "AWI-010",
+          "frage": "Sozialgericht oder Arbeitsgericht – wer ist wann zuständig?",
+          "antwort": "Arbeitsgericht: Streit aus dem Arbeitsverhältnis (Kündigung, Lohn, Zeugnis). Sozialgericht: Streit mit Sozialversicherungsträgern (Bescheid der Berufsgenossenschaft, Krankenkasse) nach erfolglosem Widerspruch. Verwaltungsgericht: Streit mit Behörden.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 1,
+          "tags": [
+            "gerichte",
+            "sozialversicherung"
+          ]
+        },
+        {
+          "id": "AWI-011",
+          "frage": "Brutto 4.200 €, allgemeiner Beitragssatz 14,6 %, Zusatzbeitrag 2,4 %. Wie hoch ist der Arbeitnehmeranteil zur Krankenversicherung?",
+          "antwort": "(14,6 + 2,4) ÷ 2 = 8,5 %; 4.200 × 0,085 = 357,00 €. Der Zusatzbeitrag wird hälftig getragen; der Gesamtbeitrag (714 €) ist nicht gefragt.",
+          "typ": "rechnung",
+          "schwierigkeit": 2,
+          "tags": [
+            "gkv",
+            "rechnung",
+            "zusatzbeitrag"
+          ]
+        },
+        {
+          "id": "AWI-012",
+          "frage": "Wie lange dauern die Schutzfristen nach dem Mutterschutzgesetz?",
+          "antwort": "Sechs Wochen vor der Geburt (Arbeit nur mit ausdrücklicher, widerrufbarer Erklärung), acht Wochen nach der Geburt (zwölf Wochen bei Früh- und Mehrlingsgeburt oder Behinderung des Kindes) – dann besteht ein Beschäftigungsverbot.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "mutterschutz"
+          ]
+        },
+        {
+          "id": "AWI-013",
+          "frage": "Welchen Kündigungsschutz haben werdende Mütter?",
+          "antwort": "Besonderen Kündigungsschutz während der Schwangerschaft und bis zu vier Monate nach der Entbindung. Mit der Geburt endet das Arbeits- oder Ausbildungsverhältnis nicht.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "mutterschutz",
+            "kuendigungsschutz"
+          ]
+        },
+        {
+          "id": "AWI-014",
+          "frage": "Kollektives oder individuelles Arbeitsrecht – woran erkennst du es im Arbeitsvertrag?",
+          "antwort": "Kollektiv geregelt ist, was der Tarifvertrag festlegt (Entgeltgruppe, tarifliche Wochenarbeitszeit, Urlaub). Individuell: Beginn, Arbeitsort, Zulagen über Tarif, Homeoffice-Absprachen. Abweichungen sind nur zugunsten des Arbeitnehmers zulässig (Günstigkeitsprinzip).",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "tarif",
+            "arbeitsrecht"
+          ]
+        },
+        {
+          "id": "AWI-015",
+          "frage": "Bei welchen Angelegenheiten hat der Betriebsrat ein Mitbestimmungsrecht nach § 87 BetrVG?",
+          "antwort": "Beginn und Ende der täglichen Arbeitszeit, Urlaubsgrundsätze und Urlaubsplan, technische Einrichtungen zur Überwachung, Ordnung des Betriebs, Entlohnungsgrundsätze. Kein Mitbestimmungsrecht: Bau einer Halle, Anschaffung von Lagertechnik, Gründung einer Filiale (wirtschaftliche Unternehmerentscheidungen).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "betriebsrat",
+            "mitbestimmung"
+          ]
+        },
+        {
+          "id": "AWI-016",
+          "frage": "Welche Merkmale hat die GmbH?",
+          "antwort": "Kapitalgesellschaft (juristische Person), Mindest-Stammkapital 25.000 €, Haftung nur mit dem Gesellschaftsvermögen (Gesellschafter nur mit ihrer Einlage), Gesellschafter können zugleich Geschäftsführer sein, Entstehung mit Eintragung ins Handelsregister.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "gmbh",
+            "rechtsform"
+          ]
+        },
+        {
+          "id": "AWI-017",
+          "frage": "Gewinn 24.860 €, Eigenkapital 220.000 €. Wie hoch ist die Eigenkapitalrentabilität?",
+          "antwort": "24.860 ÷ 220.000 × 100 = 11,3 %. Formel: Gewinn ÷ Eigenkapital × 100.",
+          "typ": "rechnung",
+          "schwierigkeit": 1,
+          "tags": [
+            "rentabilitaet",
+            "rechnung"
+          ]
+        },
+        {
+          "id": "AWI-018",
+          "frage": "Wie unterscheiden sich Eigenkapitalrentabilität, Gesamtkapitalrentabilität und Umsatzrentabilität?",
+          "antwort": "Eigenkapital: Gewinn ÷ Eigenkapital. Gesamtkapital: (Gewinn + Fremdkapitalzinsen) ÷ Gesamtkapital. Umsatz: Gewinn ÷ Umsatz. Alle mit 100 multiplizieren.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "rentabilitaet"
+          ]
+        },
+        {
+          "id": "AWI-019",
+          "frage": "Welche Maßnahme steigert den Umsatz kurzfristig und unmittelbar?",
+          "antwort": "Eine befristete Werbe- oder Verkaufsaktion. Neubauten, Produktentwicklung und Schulungen wirken langfristig, Kostensenkungen erhöhen den Gewinn, nicht den Umsatz.",
+          "typ": "anwendung",
+          "schwierigkeit": 1,
+          "tags": [
+            "marketing",
+            "umsatz"
+          ]
+        },
+        {
+          "id": "AWI-020",
+          "frage": "Was ist der Europass?",
+          "antwort": "Ein kostenloser digitaler Dienst der EU, der Qualifikationen, Fähigkeiten und Kompetenzen bei Bewerbungen europaweit verständlich darstellt. Er ersetzt keine Zeugnisse, ist nicht verpflichtend und vermittelt keine Ausbildungsplätze.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "europass"
+          ]
+        },
+        {
+          "id": "AWI-021",
+          "frage": "Sicherheitsbeauftragter oder Fachkraft für Arbeitssicherheit – wer macht was?",
+          "antwort": "Der Arbeitgeber trägt die Verantwortung. Die Fachkraft für Arbeitssicherheit berät ihn. Der Sicherheitsbeauftragte (ab 20 Beschäftigten) unterstützt, achtet auf Schutzeinrichtungen und weist auf Gefahren hin – ohne eigene Verantwortung oder Weisungsrecht.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "arbeitsschutz",
+            "sicherheitsbeauftragter"
+          ]
+        },
+        {
+          "id": "AWI-022",
+          "frage": "Was ist im Brandfall sofort zu tun?",
+          "antwort": "Menschen retten und melden: Notruf 112 absetzen, gefährdete Personen warnen und in Sicherheit bringen, Fluchtwege nutzen (keine Aufzüge). Löschen nur ohne Eigengefährdung; Fenster nicht öffnen, Wertsachen zurücklassen.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "arbeitsschutz",
+            "brand"
+          ]
+        },
+        {
+          "id": "AWI-023",
+          "frage": "Welche Maßnahmen reduzieren Stress am Arbeitsplatz – und welche sind ungeeignet?",
+          "antwort": "Geeignet: ergonomische Arbeitsplätze, flexible Arbeitszeit, Entspannungs- und Gesundheitskurse, regelmäßige Teambesprechungen. Ungeeignet: dauerhafte Arbeitsverdichtung ohne Personal, ständige Erreichbarkeit, öffentliche Bloßstellung.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "gesundheit",
+            "stress"
+          ]
+        },
+        {
+          "id": "AWI-024",
+          "frage": "Ordne zu: ökologisches, ökonomisches und soziales Ziel – jeweils ein Beispiel.",
+          "antwort": "Ökologisch: Energieverbrauch senken, Emissionen und Abfall vermindern. Ökonomisch: Umsatz oder Gewinn steigern, Kosten senken. Sozial: Mitarbeiterzufriedenheit, Arbeitsplatzsicherheit, Weiterbildung. Beziehungen: Zielharmonie, Zielkonflikt, Zielneutralität.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "umwelt",
+            "ziele"
+          ]
+        },
+        {
+          "id": "AWI-025",
+          "frage": "Was sind Emissionen, und in welcher Reihenfolge werden sie behandelt?",
+          "antwort": "Abgabe von Stoffen oder Energie an die Umwelt: Abgase, Lärm, Strahlung, Erschütterungen, Wärme. Reihenfolge: vermeiden vor vermindern vor entsorgen.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "umwelt",
+            "emissionen"
+          ]
+        },
+        {
+          "id": "AWI-026",
+          "frage": "Was bedeutet das Umweltzeichen „Blauer Engel“?",
+          "antwort": "Kennzeichnung umweltfreundlicher Produkte nach festen Kriterien: schadstoffarm, ressourcenschonend und umweltschonend produziert. Es ist freiwillig, kein CE- oder Fair-Trade-Siegel.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "umwelt",
+            "umweltzeichen"
+          ]
+        },
+        {
+          "id": "AWI-027",
+          "frage": "Was ist betriebliche Arbeitsteilung, und was ist überbetriebliche?",
+          "antwort": "Betrieblich: Ein Arbeitsprozess wird im Betrieb in Teilschritte zerlegt, die verschiedene Mitarbeiter ausführen. Überbetrieblich: Schritte werden auf andere Unternehmen verteilt (Auslagerung, Zulieferketten).",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "arbeitsteilung"
+          ]
+        },
+        {
+          "id": "AWI-028",
+          "frage": "Ordne einem Logistikunternehmen den Sektor und die Betriebsart zu.",
+          "antwort": "Tertiärer Sektor (Dienstleistung) und erwerbswirtschaftlich (Gewinnerzielungsabsicht). Primär: Rohstoffgewinnung, sekundär: Industrie und Handwerk.",
+          "typ": "anwendung",
+          "schwierigkeit": 1,
+          "tags": [
+            "sektoren",
+            "betriebstypen"
+          ]
+        },
+        {
+          "id": "AWI-029",
+          "frage": "Welche Maßnahmen fördern die Globalisierung, welche hemmen sie?",
+          "antwort": "Fördern: Freihandelsabkommen, Zollabbau, freier Kapital- und Warenverkehr, Niederlassungen im Ausland. Hemmen: Zölle, Importquoten, Handelsbeschränkungen, Rückverlagerung der Produktion.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "globalisierung"
+          ]
+        },
+        {
+          "id": "AWI-030",
+          "frage": "Wie unterscheiden sich Fusion, Konzern, Kartell und Arbeitsgemeinschaft?",
+          "antwort": "Fusion: Unternehmen werden zu einem vereinigt. Konzern: rechtlich selbstständige Unternehmen unter einheitlicher Leitung. Kartell: Absprachen selbstständiger Wettbewerber (grundsätzlich verboten). Arbeitsgemeinschaft: vorübergehende Zusammenarbeit für ein Projekt.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "unternehmensverbindungen"
+          ]
+        },
+        {
+          "id": "AWI-031",
+          "frage": "Welche Maßnahme entspricht dem Sozialstaatsprinzip?",
+          "antwort": "Sozialstaatliche Leistungen und Ausgleich wie Kindergeld, Wohngeld, Sozialversicherung. Steuererleichterungen für Unternehmen oder Vermögende sind keine sozialstaatlichen Maßnahmen.",
+          "typ": "anwendung",
+          "schwierigkeit": 1,
+          "tags": [
+            "sozialstaat"
+          ]
+        },
+        {
+          "id": "AWI-032",
+          "frage": "Was kennzeichnet die soziale Marktwirtschaft?",
+          "antwort": "Preisbildung am Markt, Staat sichert den Wettbewerb und gleicht sozial aus (Schutz wirtschaftlich Schwächerer). Zentrale Planung und staatliche Produktionsmittel gehören zur Zentralverwaltungswirtschaft.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 1,
+          "tags": [
+            "wirtschaftsordnung"
           ]
         }
       ]

@@ -27,12 +27,12 @@ export interface Pruefungsbereich {
 /**
  * Prüfungsbereiche der AP2 und ihre Deep Dives. Jeder Deep Dive zählt genau einmal, und zwar zu dem Bereich, aus dem die meisten
  * seiner Klausurblöcke stammen (UNTERBEREICHE in mischKlausur.ts): DD12 und DD16 (A–C) zur Prozessanalyse, DD10 und DD15 zur
- * Datenqualität. WiSo ist ein eigener Prüfungsteil. DD17 (Glossar & Diagramme) ist Nachschlagematerial und zählt nirgends.
+ * Datenqualität. DD18 bis DD20 sind das Altklausur-Training (Prozessanalyse, Datenqualität, WiSo). WiSo ist ein eigener Prüfungsteil. DD17 (Glossar & Diagramme) ist Nachschlagematerial und zählt nirgends.
  */
 export const PRUEFUNGSBEREICHE: Pruefungsbereich[] = [
-  { id: 'prozess', titel: 'Prozessanalyse', themen: ['05', '12', '16'] },
-  { id: 'qualitaet', titel: 'Datenqualität', themen: ['00', '01', '02', '03', '04', '06', '07', '08', '09', '10', '11', '15'] },
-  { id: 'wiso', titel: 'WiSo', themen: ['13', '14'] },
+  { id: 'prozess', titel: 'Prozessanalyse', themen: ['05', '12', '16', '18'] },
+  { id: 'qualitaet', titel: 'Datenqualität', themen: ['00', '01', '02', '03', '04', '06', '07', '08', '09', '10', '11', '15', '19'] },
+  { id: 'wiso', titel: 'WiSo', themen: ['13', '14', '20'] },
 ];
 
 /** Diagramm-Übungen (EPK, BPMN, UML) haben kein Thema; sie gehören zur Prozessmodellierung. */
