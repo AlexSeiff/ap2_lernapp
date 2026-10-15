@@ -41,6 +41,96 @@ Eine Folge logisch zusammenhängender Aktivitäten, die aus einem definierten **
 
 Vor- und Nachteile kennen: Interviews liefern Kontext und Erfahrungswissen, geben aber die **subjektive** Sicht wieder und beschreiben oft den Soll- statt den tatsächlichen Ist-Zustand. Systemdaten sind objektiv und vollständig, erklären aber nicht das **Warum** hinter den Abweichungen. Deshalb kombiniert man beides.
 
+## 1.3 Prozessarten, Verantwortung und Daten – Ergänzungen
+
+**Alltags- oder Geschäftsprozess?** Ein Geschäftsprozess hat ein **betriebliches** Ziel, beteiligt **mehrere Rollen, Abteilungen oder Systeme**, folgt **festgelegten Regeln**, ist **zuverlässig wiederholbar** und **messbar** (Zeit, Kosten, Qualität). Ein Alltagsprozess (Kaffee kochen) ist persönlich, spontan und nicht gemessen.
+
+**Die drei Prozessarten – die Leitfrage entscheidet:**
+
+| Prozessart | Leitfrage | Beispiele |
+|---|---|---|
+| **Kernprozess** | Welche Leistung erwartet der **Kunde** von genau dieser Organisation? | Auftrag bearbeiten und liefern, IT-Lösung bereitstellen, Reparatur durchführen |
+| **Unterstützungsprozess** | Was braucht der Kernprozess, um zu funktionieren? | Personalwesen, interne IT, Buchhaltung, Einkauf, Facility Management |
+| **Management-/Führungsprozess** | Wie wird die Organisation geplant, gesteuert, kontrolliert? | Strategieplanung, Controlling, Qualitätsmanagement, Risikomanagement, Budgetplanung |
+
+⚠️ **Klausurfalle – die Einordnung hängt vom Zweck der Organisation ab:** Interner IT-Support eines Systemhauses = **Unterstützungsprozess**; derselbe Support als kostenpflichtige Leistung für externe Kunden = **Kernprozess**. Controlling bearbeitet keinen Kundenauftrag, sondern wertet Kennzahlen aus → **Managementprozess**. „Management-“ und „Führungsprozess“ meinen dasselbe.
+
+**Managementprozesse nach Ebene:** **strategisch** (langfristig: Geschäftsfelder, Digitalisierungsstrategie), **taktisch** (mittelfristig: Budgets, Personalbedarf, Qualitätsziele), **operativ steuernd** (kurzfristig: KPIs überwachen, Kapazitäten anpassen).
+
+| Auffällige Kennzahl | typische Reaktion des Managements |
+|---|---|
+| Durchlaufzeit zu hoch | Prozessanalyse und Optimierung |
+| Fehlerquote zu hoch | Ursachen untersuchen, Maßnahmen festlegen |
+| Kundenzufriedenheit sinkt | Servicequalität überprüfen |
+| Kosten je Vorgang hoch | Automatisierung oder Einsparung prüfen |
+
+**Warum reicht ein Organigramm nicht?** Es zeigt Struktur und Hierarchie (**Wer gehört wohin?**), aber nicht die Reihenfolge, in der Abteilungen an einem Auftrag arbeiten. Die Ablauforganisation fragt **Was? Wer? Wann? Womit?** (Tätigkeit, Person/Rolle, Reihenfolge, Informationen/Systeme). Ein Ablauf (z. B. Urlaubsantrag: Mitarbeiter → Vertretung → Führungskraft → HR → Team) folgt **nicht** der Hierarchie, sondern läuft quer durch die Organisation.
+
+**Schnittstellen:** Übergabe von Verantwortung **und** Information zwischen Personen, Rollen, Abteilungen, Systemen oder Prozessschritten – nicht nur zwischen Abteilungen. Viele Schwachstellen entstehen **zwischen** Beteiligten. Die übergebenen Daten müssen **vollständig, richtig, aktuell und eindeutig** sein, sonst scheitert der nächste Schritt (fehlende Angaben → Entscheidung verzögert; nicht dokumentierte Genehmigung → falsch erfasst).
+
+| Begriff | Bedeutung |
+|---|---|
+| **Abteilung / Organisationseinheit** | mehrere Stellen mit gemeinsamem Aufgabenbereich |
+| **Stelle** | kleinste organisatorische Einheit, der **dauerhaft** Aufgaben und Verantwortung zugeordnet sind |
+| **Rolle** | Funktion, die eine Person **in einem bestimmten Prozess** übernimmt |
+| **Tätigkeit** | konkrete Handlung innerhalb eines Prozesses |
+
+**Process Owner (Prozesseigner)** verantwortet Gestaltung, Leistungsfähigkeit und Weiterentwicklung des **gesamten End-to-End-Prozesses** – egal, wie viele Abteilungen beteiligt sind: gestalten, überwachen, Kennzahlen beobachten, Verbesserungen anstoßen. Er führt **nicht** alle Tätigkeiten selbst aus – Verantwortung ≠ Ausführung. Die **Fachbereiche** führen operativ durch, das **Prozess-/Qualitätsmanagement** dokumentiert, modelliert und misst.
+
+**Rolle der Personalabteilung (HR):** HR verantwortet **nicht** automatisch Geschäftsprozesse. Sie bildet die benötigten Tätigkeiten in **Stellen**, Aufgaben- und Anforderungsprofilen ab und unterstützt Besetzung und Personalentwicklung.
+
+| Stellenbeschreibung | Anforderungsprofil |
+|---|---|
+| beschreibt die **Stelle**: Aufgaben, Verantwortung, Einordnung, Befugnisse – *was die Stelle tun soll* | beschreibt die **Person**: Kenntnisse, Fähigkeiten, Qualifikationen – *was sie mitbringen muss* |
+
+**Welche Daten ein Prozess benötigt und erzeugt:**
+
+| Datenart | Kennzeichen | Beispiele |
+|---|---|---|
+| **Stammdaten** | über längere Zeit stabil, in vielen Vorgängen genutzt | Kunden-, Artikel-, Mitarbeiterdaten, Personalnummer |
+| **Bewegungs-/Auftragsdaten** | gehören zu **einem** konkreten Geschäftsvorgang | Auftrag, Rechnung, Bestellung, Buchung, Stückzahl, Preis, Termin |
+| **Prozessdaten** | entstehen **während des Ablaufs** und zeigen, wie er lief | Bearbeitungsstatus, Prüfergebnis, Zeitstempel, Freigabeentscheidung, Bearbeitungszeit, Fehler |
+
+Aus Prozessdaten entstehen die Kennzahlen (Durchlaufzeit, Fehlerquote, Kosten). Bei einer Analyse zählt: **Welche Daten braucht eine Tätigkeit, welche erzeugt oder verändert sie?**
+
+⚠️ **Typische Denkfehler:** „HR verantwortet alle Prozesse.“ (nein, personelle Unterstützung) · „Der Process Owner führt alles aus.“ (nein) · „Jede Information ist Stammdatum.“ (nein, vieles entsteht erst im Vorgang) · „Schnittstellen sind nur Abteilungsgrenzen.“ (nein, auch Rollen, Systeme, Prozessschritte).
+
+## 1.4 Von der Beobachtung zur Ursache – so analysierst du sauber
+
+Die häufigste Fehlerquelle in Analyseaufgaben: **Beobachtung, Symptom, Hypothese und Ursache werden vermischt.**
+
+| Begriff | Bedeutung | Beispiel |
+|---|---|---|
+| **Beobachtung** | festgestellt und dokumentiert | Viele Vorgänge enthalten Rückfragen. |
+| **Symptom** | sichtbare Auswirkung | Die Durchlaufzeit ist auffällig hoch. |
+| **Hypothese** | begründete Vermutung, noch nicht geprüft | Beim Start fehlen Informationen. |
+| **Ursache** | **bestätigter** Grund | Ein Pflichtfeld fehlt im Formular – nachweislich der Auslöser der Rückfragen. |
+
+„Die Kunden warten lange“ ist ein **Symptom**. „Die Mitarbeitenden sind zu langsam“ ist eine **unbelegte Ursachenbehauptung** und in der Analyse unzulässig. Eine hohe Durchlaufzeit zeigt **was** passiert, nicht **warum**.
+
+**Ist- und Soll-Prozess:** Der **Ist-Prozess** ist, wie der Prozess tatsächlich läuft (inklusive Wartezeiten, Umwegen, Rückfragen, Medienbrüchen, Workarounds). Der **Soll-Prozess** ist die Zielvorstellung oder verbindliche Vorgabe. **Der dokumentierte Prozess ist nicht automatisch der Ist-Prozess** (veraltete Vorgaben, unpassende Systeme, Workarounds).
+
+**Erste Analyse in fünf Schritten:** Prozessgrenze klären (Auslöser, Ende, Beteiligte) → Modell lesen (Tätigkeiten, Entscheidungen, Übergaben, Externe) → Auffälligkeiten sammeln (Verzögerungen, Rückfragen, Fehler, Mehrfacherfassung, unklare Verantwortung) → **Fakten und Vermutungen trennen** → Analysefragen formulieren.
+
+| Gute Analysefragen (neutral, konkret, prüfbar) | Schlechte Analysefragen (wertend, unterstellend) |
+|---|---|
+| „Wo entsteht der größte Anteil der Wartezeit?“ | „Warum arbeitet Team B so langsam?“ |
+| „Welche Informationen fehlen besonders häufig?“ | „Warum ist das System schlecht?“ |
+| „Wie oft wird ein Vorgang zurückgegeben?“ | „Warum machen Kunden ständig Fehler?“ |
+
+**Welche Quelle zeigt was?**
+
+| Frage | Quelle |
+|---|---|
+| Wie häufig tritt ein Statuswechsel auf? Wo liegen Zeiten? | Systemdaten, Logs |
+| Welche Regel ist offiziell vorgesehen? | Prozessmodell, Arbeitsanweisung, Dokumentation |
+| Wie wird der Schritt **tatsächlich** ausgeführt? | Beobachtung |
+| **Warum** wird ein Workaround genutzt? Welche Probleme erleben die Mitarbeitenden? | Prozessbeteiligte, Interview |
+| Wie gut werden Ziele erreicht? | Qualitäts- und SLA-Berichte |
+| Was stört die Kunden? | Beschwerden |
+
+**Bekannt, Annahme, Informationslücke:** *Bekannt* = durch Daten, Dokumente oder Beobachtung belegt. *Annahme* = plausibel, aber nicht geprüft. *Informationslücke* = fehlende, aber relevante Information. Eine gute Analyse **macht Lücken sichtbar, statt sie mit Vermutungen zu füllen** – „Das wissen wir noch nicht, dafür brauchen wir …“ ist ein richtiges Ergebnis. Vor einer Umsetzung fragst du: Was ist belegt? Was beruht auf Annahmen? Welche Information fehlt, und wer kann sie liefern?
+
 ---
 
 # Teil 2 – BPMN 2.0
@@ -168,6 +258,59 @@ Zusatzobjekte hängen immer an einer **Funktion**, nie an einem Ereignis.
 
 Üben: [Diagramm-Übungen EPK und eEPK](#/diagramme?typ=epk) – Elemente einsetzen und Abläufe ordnen.
 
+## 2.4 BPMN-Ergänzungen: Ereignisse, Task-Arten und Fehlerbilder
+
+**Fangend oder werfend?** Prüffrage: *Wartet der Prozess auf etwas?* → **catching** (fangend: Nachricht empfangen, Timer). *Löst er aktiv etwas aus?* → **throwing** (werfend: Nachricht senden). Timer sind typischerweise fangend. Ein Startereignis ist immer fangend (kein eingehender Fluss), ein Endereignis immer werfend (kein ausgehender Fluss).
+
+| Position | Typen (Einstieg) | Regel |
+|---|---|---|
+| **Start** | None, Message, Timer | kein eingehender Sequenzfluss |
+| **Intermediate** | Message (fangend/werfend), Timer | im Ablauf **oder** als Boundary Event am Rand einer Aktivität |
+| **End** | None, Message, Error, Terminate | kein ausgehender Sequenzfluss |
+
+**Intermediate-Timer oder Boundary-Timer?** Intermediate = der Prozess **wartet bewusst** eine Zeit, nichts anderes läuft („14 Tage warten“). Boundary = **Zeitüberwachung während** eine Aktivität läuft („Bearbeitung dauert länger als 4 Stunden → eskalieren“).
+
+**Boundary Events:** immer direkt an einer Aktivität (Task oder Teilprozess) angeheftet, haben genau einen eigenen Ausnahmepfad.
+
+| | Interrupting | Non-interrupting |
+|---|---|---|
+| Rand | durchgezogener Doppelring | **gestrichelter** Doppelring |
+| Wirkung | Task wird **abgebrochen**, der Boundary-Pfad übernimmt | Task **läuft weiter**, zusätzlich startet ein paralleler Pfad |
+| Typisch | stornieren, eskalieren statt weiterwarten | Teamleitung informieren, Erinnerung senden |
+
+⚠️ Das **Error-Boundary-Event** ist **immer unterbrechend** – eine nicht unterbrechende Variante gibt es nicht. Welche Ereignisarten an der Grenze möglich sind, hängt vom Typ ab (Timer, Nachricht, Fehler …).
+
+**Error-Endereignis oder Terminate-Endereignis?**
+
+| Error End Event | Terminate End Event |
+|---|---|
+| signalisiert einen **Fehler**, der an passender Stelle **gefangen und behandelt** werden kann (Error Boundary); beendet den Scope und wirft den Fehler | beendet den Scope **sofort und hart – inklusive noch laufender paralleler Aktivitäten**; kein Fehlerpfad |
+
+**Task-Arten (Typisieren nur, wenn dadurch Information entsteht):**
+
+| Task | Bedeutung | Beispiel |
+|---|---|---|
+| Task (allgemein) | Ausführungsart unwichtig | – |
+| **User Task** | Mensch arbeitet **mit IT-System** | Daten in der Fachanwendung prüfen |
+| **Manual Task** | Mensch **ohne** System | Gerät physisch etikettieren |
+| **Service Task** | System/Dienst **automatisiert** | PDF automatisch erzeugen |
+| **Send Task** | Nachricht senden, **wartet nicht** auf Antwort | Bestätigung automatisch versenden |
+| **Receive Task** | **wartet** auf Nachricht, läuft erst nach Eingang weiter | auf Freigabenachricht warten |
+| **Business Rule Task** | Geschäftsregel wird ausgewertet | Rabattregel auswerten |
+| Subprozess / Call Activity | Ablauf in Hierarchie / wiederverwendbarer Ablauf | – |
+
+**Black Box oder White Box?** **White Box:** Pool vollständig ausmodelliert. **Black Box:** interne Schritte nicht sichtbar – sinnvoll bei **externen Partnern** (Kunde, Lieferant), deren Abläufe man nicht kennt; es zählt nur die Schnittstelle (ein- und ausgehende Nachrichten).
+
+**Prüffrage für Flüsse:** Bleibe ich beim **selben Prozessbeteiligten**? → Sequenzfluss (auch über **Lane**-Grenzen). Wechsle ich zu einem **anderen**? → Nachrichtenfluss. Eine Abteilung ist nicht automatisch eine Lane und niemals grundsätzlich ein Pool – entscheidend ist der Modellkontext.
+
+**XOR-Gateway oder ereignisbasiertes Gateway?** XOR fragt „**Welche Bedingung ist wahr?**“, ereignisbasiert fragt „**Welches Ereignis tritt zuerst ein?**“. Die ausgehenden Pfade des ereignisbasierten Gateways beginnen mit **fangenden** Ereignissen oder Receive Tasks („Antwort trifft ein“ gegen „48 Stunden vergehen“ → eskalieren).
+
+**EPK oder BPMN?** BPMN ist nicht automatisch besser. EPK: kleiner Symbolvorrat, gut für einfache fachliche Modelle und schnelle Lesbarkeit; Ereignisse stehen zwischen jeder Funktion. BPMN: mehr Symbole, dafür präziser (Tasks nach Ausführungsart, Pools/Lanes direkt im Modell, Nachrichtenfluss geregelt, Tasks dürfen direkt aufeinander folgen) – Gefahr: überladene Modelle. **So einfach wie möglich, so detailliert wie nötig.**
+
+**Weitere Modellierungsregeln:** Task = **Verb + Objekt**. Gateways nur bei echter Logik. Split und Join bewusst unterscheiden. Gateway-Typ nach **Semantik**, nicht nach Symbol wählen. Ein Sequenzfluss überschreitet **nie** eine Poolgrenze.
+
+Üben: [Diagramm-Übungen BPMN](#/diagramme?typ=bpmn) – darunter Aufgaben mit Timer-, Nachrichten- und Fehler-Grenzereignissen.
+
 ---
 
 # Teil 3 – Prozesskennzahlen
@@ -215,6 +358,30 @@ Rechenschema, das du auswendig können solltest:
 
 Punkt 4 wird am häufigsten vergessen und ist regelmäßig eigenständig bepunktet.
 
+## 3.4 Kennzahlen richtig deuten
+
+Kennzahlen beantworten **„Was passiert?“** – nicht automatisch **„Warum?“**.
+
+| Kennzahl | Formel | Bemerkung |
+|---|---|---|
+| **Durchlaufzeit** | Bearbeitungszeit + Warte-/Liegezeit | Gesamtzeit von definiertem Start bis Ende |
+| **Fehlerquote** | fehlerhafte Vorgänge ÷ alle Vorgänge × 100 | |
+| **SLA-Einhaltung / Termintreue** | fristgerechte Vorgänge ÷ alle Vorgänge × 100 | |
+| **First-Time-Right** (= First Pass Yield) | beim 1. Durchlauf korrekt ÷ alle Vorgänge × 100 | Anteil **ohne** Nacharbeit |
+| **Nacharbeitsquote** | nachzubearbeitende Vorgänge ÷ alle Vorgänge × 100 | |
+| **Rückfragequote** | Vorgänge mit Rückfrage ÷ alle Vorgänge × 100 | zeigt unvollständige Informationen |
+| **Wiedereröffnungsquote** | wiedereröffnete Vorgänge ÷ alle Vorgänge × 100 | zeigt unzureichende Lösungen |
+
+**Rechenbeispiel:** 200 Vorgänge, 150 fristgerecht, 30 nachbearbeitet → SLA-Einhaltung 150 ÷ 200 = **75 %**; Nacharbeitsquote 30 ÷ 200 = **15 %**; First-Time-Right = 100 % − 15 % = **85 %**.
+
+**Vor der Interpretation prüfen:** Was genau wird gemessen (Definition)? Welche **Prozessgrenze**? Welcher **Zeitraum**? Gibt es einen **Sollwert** (SLA, Ziel)? Gibt es einen **Vergleich** (Zeitreihe, Team, vorher/nachher)?
+
+⚠️ **Durchschnittswerte täuschen:** Sehr gute und sehr schlechte Einzelfälle gleichen sich aus. Beispiel: 90 % SLA-Einhaltung insgesamt wirkt gut – aber wenn die **hohen Prioritäten (P1/P2)** die SLA deutlich öfter reißen als P3/P4, ist das eigentliche Problem versteckt. Deshalb nach **Kategorie, Priorität, Team** aufschlüsseln.
+
+**Welche Frage → welche Kennzahl?** Ist es schnell genug? → Durchlaufzeit. Wie viel wird tatsächlich gearbeitet? → Bearbeitungszeit. Werden Zusagen eingehalten? → SLA. Wird korrigiert? → Nacharbeitsquote, First-Time-Right. Fehlen Informationen? → Rückfragequote.
+
+**Hohe Durchlaufzeit** entsteht häufig durch **Wartezeit**, nicht durch lange Bearbeitung. Als Kennzahl ist sie ein **Symptom**, keine Ursache.
+
 ---
 
 # Teil 4 – Schwachstellenanalyse und Optimierung
@@ -242,6 +409,74 @@ Punkt 4 wird am häufigsten vergessen und ist regelmäßig eigenständig bepunkt
 **Die vier Grundstrategien (ESUA-Merkhilfe):** **E**liminieren (Schritt entfällt) → **S**tandardisieren → **U**mstellen/Parallelisieren → **A**utomatisieren. In dieser Reihenfolge prüfen: Einen überflüssigen Schritt zu automatisieren, ist die teuerste Lösung.
 
 **KVP und PDCA:** Plan (Maßnahme planen) → Do (umsetzen, ggf. im Pilotbereich) → Check (Wirkung anhand von Kennzahlen prüfen) → Act (standardisieren oder nachsteuern). Optimierung ist ein Kreislauf, kein einmaliges Projekt.
+
+## 4.3 Methoden der Schwachstellenanalyse richtig einsetzen
+
+**Pareto-Analyse** – priorisieren, nicht erklären:
+1. Problemkategorien festlegen (eindeutig, überschneidungsarm) → 2. Häufigkeiten erfassen → 3. **absteigend sortieren** → 4. Anteil = Häufigkeit ÷ Gesamt × 100 → 5. **kumulierte** Anteile bilden → Diagramm: Balken = Häufigkeit, Linie = kumulierter Anteil.
+
+| Problemfeld | Fälle | Anteil | kumuliert |
+|---|---|---|---|
+| fehlende/unvollständige Ticketinformationen | 35 | 35 % | 35 % |
+| lange Wartezeit auf Übernahme durch Second Level | 24 | 24 % | 59 % |
+| doppelte/mehrfache Datenerfassung | 16 | 16 % | 75 % |
+| unklare oder falsche Priorisierung | 11 | 11 % | 86 % |
+| Warten auf Rückmeldung des Kunden | 8 | 8 % | 94 % |
+| Sonstige Auffälligkeiten | 6 | 6 % | 100 % |
+
+Die ersten drei Felder erklären 75 %, die ersten vier 86 % → Kandidaten für die vertiefte Ursachenanalyse. Die 80/20-Regel ist ein **Prinzip, kein Naturgesetz** (real oft 70/30 oder 75/25). **Pareto kann:** Häufigkeiten sichtbar machen, Fokus schaffen, Prioritäten begründen. **Pareto kann nicht:** Ursachen beweisen, Risiken vollständig bewerten, die Lösung bestimmen. Ein seltenes Sicherheitsproblem kann wichtiger sein als ein häufiges Komfortproblem → ergänzend **FMEA**.
+
+**Ishikawa (Breite) und 5 Why (Tiefe):** Das Fischgrät-Diagramm sammelt Ursachen**hypothesen** nach Kategorien – in der Berufsschule oft: **Mensch** (Kenntnisse, Kommunikation, Belastung), **Methode/Prozess** (Regeln, Abläufe, Freigaben), **Technik/Systeme** (Software, Schnittstellen, Verfügbarkeit), **Daten/Information** (Vollständigkeit, Aktualität), **Organisation** (Rollen, Zuständigkeiten, Kapazitäten), **Rahmenbedingungen** (Verträge, Zeiten, externe Partner). Alternativ die klassischen 6M (siehe 4.1) – nutze die Kategorien, die in der Aufgabe oder im Unterricht vorgegeben sind. Das Diagramm **beweist nichts**. Vorgehen: Problem eingrenzen → Ursachen breit sammeln (Ishikawa) → wichtigen Ast wählen → **5 Why** → Hypothese prüfen.
+
+**5 Why – wann aufhören?** „Fünf“ ist nur ein Richtwert (drei können reichen). Sobald die Antwort **nur noch geraten** ist, stoppst du. Jede Aussage hat einen Status: **belegt** (durch Daten/Dokumente bestätigt), **plausibel** (nachvollziehbar, aber nicht bestätigt), **offen** (mit vorhandenen Informationen nicht prüfbar). „Wir wissen es noch nicht“ ist ein korrektes Ergebnis und führt zum Informationsbedarf (siehe 1.4).
+
+**FMEA-Begriffe sauber trennen:** *Fehlerart* (Was läuft im Schritt falsch?) · *Fehlerfolge* (Welche Wirkung?) · *Fehlerursache* (Warum kann er entstehen?). ⚠️ Typischer Fehler: **Ursache und Folge vertauschen** – „Kunde wartet länger“ ist eine **Folge**. Beispiel: B = 8, A = 4, E = 5 → RPZ = 160. Die Zahl ist nur im Zusammenhang mit der Skala und im **Vergleich** mit anderen Risiken sinnvoll und ersetzt keine fachliche Bewertung. **Pareto = Welche Problemarten treten häufig auf (rückblickend)? FMEA = Welche möglichen Fehler sind riskant (vorbeugend)?**
+
+## 4.4 Lean in Service- und IT-Prozessen
+
+**Wert aus Kundensicht:** nicht „Ticket bearbeitet“, sondern „Problem zuverlässig gelöst“. Die fünf Grundgedanken: Wert bestimmen → Wertstrom betrachten → Fluss verbessern → Bedarf steuert die Leistung (Pull) → kontinuierlich verbessern.
+
+| Art der Tätigkeit | Bedeutung | Beispiel |
+|---|---|---|
+| **Wertschöpfend** | trägt direkt zur Kundenleistung bei | Fehler technisch analysieren, Ticket bearbeiten |
+| **Notwendig, nicht direkt wertschöpfend** | kein direkter Kundennutzen, aber nötig (Gesetz, Sicherheit, Organisation) | gesetzliche Dokumentation, Fehlerkatalog pflegen |
+| **Verschwendung** | verbraucht Ressourcen ohne Beitrag | Daten zum dritten Mal abtippen, Wartezeiten |
+
+„Nicht wertschöpfend“ ist **nicht** gleich „unnötig“.
+
+**Verschwendung in IT-/Serviceprozessen:** Warten (Freigabe, Rückmeldung) · Fehler/Nacharbeit (fehlende Informationen) · Überbearbeitung (mehrfache Dokumentation, unnötige Prüfungen) · **unnötige Übergaben** (Vorgang wird hin- und hergeschoben) · Bestände/Warteschlangen (viele unbearbeitete Tickets) · Suche/unnötige Bewegung (Infos in mehreren Systemen) · ungenutztes Wissen.
+
+**Muda – Mura – Muri:** **Muda** = Verschwendung (unnötige Tätigkeiten, Fehler, Wartezeiten). **Mura** = **Unausgeglichenheit** (starke Schwankungen, ungleichmäßige Auslastung). **Muri** = **Überlastung** (Menschen oder Systeme dauerhaft überfordert). Sie hängen zusammen: ungleichmäßige Verteilung (Mura) → Überlastung (Muri) → Fehler und Nacharbeit (Muda).
+
+⚠️ **Optimierung ist nicht gleich Automatisierung:** Ein schlechter Prozess wird durch Software nicht gut – man würde Verschwendung automatisieren. Erst die Ursache verstehen. **Lean-Analyse:** Kundenergebnis bestimmen → Tätigkeiten einordnen → Wartezeiten/Übergaben suchen → Nacharbeit/Mehrfacherfassung suchen → **noch keine Lösung festlegen**.
+
+## 4.5 Verbesserungspotenziale entwickeln und priorisieren
+
+Kette: **Schwachstelle → Ursache → Risiko → Verbesserungsidee → erwartete Wirkung.** Ein Verbesserungspotenzial ist **keine fertige Lösung**.
+
+| schwach | besser |
+|---|---|
+| „Wir brauchen eine neue Software.“ | „Mehrfacherfassung verursacht nachweislich Fehler und Zusatzzeit; eine gemeinsame Datenquelle könnte das beheben; offen ist, welche Informationen tatsächlich gebraucht werden.“ |
+
+**Bewertungskriterien:** Problembezug (welche Schwachstelle?) · Nutzen · Aufwand · Risiko (neue Probleme?) · Kundennutzen · **Messbarkeit** (welche Kennzahl prüft die Wirkung?).
+
+**Nutzen-Aufwand-Matrix:**
+
+| | geringer Aufwand | hoher Aufwand |
+|---|---|---|
+| **hoher Nutzen** | früh umsetzen (**Quick Wins**) | strategisch prüfen, gut vorbereiten |
+| **geringer Nutzen** | optional bei freier Kapazität | meist zurückstellen |
+
+Die Matrix ersetzt keine fachliche Begründung – ein Sicherheitsrisiko oder eine gesetzliche Anforderung kann trotz hohen Aufwands **zwingend** sein.
+
+| Ziel | Kennzahl zur Erfolgsmessung |
+|---|---|
+| Wartezeit reduzieren | durchschnittliche Wartezeit |
+| Fehler reduzieren | Fehlerquote |
+| Nacharbeit vermeiden | Nacharbeitsquote / First-Time-Right |
+| Termintreue erhöhen | SLA-Einhaltung |
+
+**Roter Faden:** Prozess modellieren (BPMN) → Ist-Zustand analysieren (Beobachtung → Symptom → Hypothese → Ursache) → messen (Kennzahlen) → priorisieren (Pareto, FMEA) → Ursachen suchen (Ishikawa, 5 Why) → Verbesserungen ableiten (Lean, Kaizen, TQM, BPR; PDCA/DMAIC) → Lücken schließen (Interview). **Erst analysieren, dann Lösung – nie umgekehrt.**
 
 ---
 
@@ -322,6 +557,8 @@ Ein Event Log mit dem Feld *Resource* enthält **personenbezogene Daten** und er
 | Fehler / Nacharbeit | zweiter Technikertermin wegen falsch bestelltem Teil |
 
 Oft wird als achte Art **ungenutztes Wissen der Beschäftigten** ergänzt.
+
+**Muda – Mura – Muri:** Muda = Verschwendung, **Mura** = Unausgeglichenheit (schwankende Auslastung), **Muri** = Überlastung – Details in 4.4.
 
 - **Kaizen** (japanisch „Veränderung zum Besseren“) ist die Haltung hinter dem **KVP**: viele kleine Verbesserungen durch die Beschäftigten selbst, ständig statt einmalig.
 - Der **SDCA-Zyklus** (Standardize – Do – Check – Act) sichert das Erreichte: Erst wenn eine Verbesserung als Standard festgeschrieben ist, startet der nächste PDCA-Zyklus. Ohne Standard fällt der Prozess in alte Gewohnheiten zurück.
@@ -415,7 +652,7 @@ Zwei von sechs Artikeln (33 %) machen 76,7 % des Werts aus – auf sie konzentri
 
 ---
 
-## Die 8 häufigsten Fehler aus Prüfersicht
+## Die 12 häufigsten Fehler aus Prüfersicht
 
 1. Durchgezogener Sequenzfluss zwischen zwei Pools statt gestricheltem Nachrichtenfluss.
 2. XOR und AND verwechselt – parallele Schritte als Entscheidung modelliert.
@@ -425,6 +662,10 @@ Zwei von sechs Artikeln (33 %) machen 76,7 % des Werts aus – auf sie konzentri
 6. Bei der Optimierung nur die Bearbeitungszeit betrachtet, obwohl die Liegezeit 90 %+ ausmacht.
 7. Wirtschaftlichkeitsrechnung ohne Beurteilung und ohne qualitative Faktoren.
 8. Datenschutz und Betriebsrat bei Prozessdatenauswertungen nicht erwähnt.
+9. Symptom als Ursache angegeben („Mitarbeitende sind zu langsam“) statt mit Daten belegt.
+10. Kern-, Unterstützungs- und Managementprozess nach der Abteilung statt nach dem **Zweck der Organisation** eingeordnet.
+11. Boundary-Event nicht am Task angeheftet oder ohne eigenen Ausnahmepfad; unterbrechend und nicht unterbrechend verwechselt.
+12. Durchschnittswert interpretiert, ohne nach Priorität oder Kategorie aufzuschlüsseln.
 
 ---
 
@@ -529,6 +770,12 @@ Weitere Daten: 200 Aufträge im Betrachtungsmonat, davon 24 mit erforderlicher N
 - [ ] Ich führe eine ABC-Analyse durch und wende SWOT, Benchmarking, Wertschöpfungskette und BCG-Matrix an.
 - [ ] Ich erkläre das Token-Verhalten an XOR-, AND- und OR-Gateways (inklusive Deadlock-Falle) und nenne die Zusatzobjekte der eEPK.
 - [ ] Ich grenze einen Prozess mit SIPOC ab und berechne DPMO.
+- [ ] Ich ordne Prozesse nach dem Zweck der Organisation ein (Kern, Unterstützung, Management) und nenne die drei Ebenen von Managementprozessen.
+- [ ] Ich unterscheide Stelle, Rolle, Abteilung und Tätigkeit sowie Stellenbeschreibung und Anforderungsprofil und kenne die Aufgaben des Process Owners.
+- [ ] Ich ordne Daten als Stamm-, Bewegungs- oder Prozessdaten ein.
+- [ ] Ich trenne Beobachtung, Symptom, Hypothese und Ursache und formuliere neutrale Analysefragen.
+- [ ] Ich unterscheide interrupting und non-interrupting Boundary Events, Error und Terminate, Intermediate- und Boundary-Timer.
+- [ ] Ich unterscheide Muda, Mura und Muri und bewerte Verbesserungen mit der Nutzen-Aufwand-Matrix.
 
 ---
 

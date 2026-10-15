@@ -3,26 +3,26 @@
     "titel": "AP2 Lernkarten – Fachinformatiker/-in Daten- und Prozessanalyse",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-09-21",
-    "aktualisiert_am": "2026-10-13",
+    "aktualisiert_am": "2026-10-15",
     "version": "1.1",
     "sprache": "de",
     "anzahl_decks": 25,
-    "anzahl_karten": 539,
+    "anzahl_karten": 584,
     "karten_nach_typ": {
-      "abgrenzung": 82,
-      "anwendung": 62,
-      "falle": 93,
-      "rechnung": 46,
-      "wissen": 256
+      "abgrenzung": 98,
+      "anwendung": 67,
+      "falle": 102,
+      "rechnung": 50,
+      "wissen": 267
     },
     "karten_nach_status": {
-      "behandelt": 525,
+      "behandelt": 570,
       "offen": 14
     },
     "karten_nach_schwierigkeit": {
-      "1": 206,
-      "2": 298,
-      "3": 35
+      "1": 216,
+      "2": 332,
+      "3": 36
     },
     "felder": {
       "id": "Eindeutige Karten-ID aus Deck-Kürzel und laufender Nummer",
@@ -1180,7 +1180,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 5 + BPMN-Vertiefung",
       "status": "behandelt",
-      "anzahl_karten": 45,
+      "anzahl_karten": 90,
       "karten": [
         {
           "id": "PRZ-005",
@@ -1657,6 +1657,518 @@
           "tags": [
             "kennzahlen",
             "optimierung"
+          ]
+        },
+        {
+          "id": "PRZ-046",
+          "frage": "Wie ordnest du einen Prozess als Kern-, Unterstützungs- oder Managementprozess ein?",
+          "antwort": "Mit der Leitfrage: Welche Leistung erwartet der Kunde von genau dieser Organisation? → Kernprozess. Was braucht der Kernprozess, um zu funktionieren? → Unterstützungsprozess. Wie wird die Organisation geplant, gesteuert, kontrolliert? → Managementprozess (= Führungsprozess).",
+          "typ": "abgrenzung",
+          "schwierigkeit": 1,
+          "tags": [
+            "prozessarten"
+          ]
+        },
+        {
+          "id": "PRZ-047",
+          "frage": "Ein Systemhaus betreibt internen IT-Support und verkauft zusätzlich Support-Verträge. Wie ordnest du beides ein?",
+          "antwort": "Interner IT-Support = Unterstützungsprozess (er ermöglicht die Arbeit der Beschäftigten). Verkaufter Support für externe Kunden = Kernprozess (die Leistung, für die der Kunde zahlt). Entscheidend ist der Zweck der Organisation, nicht die Tätigkeit selbst.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "prozessarten",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "PRZ-048",
+          "frage": "Welche vier Merkmale hat ein Prozess?",
+          "antwort": "Auslöser, Aktivitäten in sinnvoller Reihenfolge, Beteiligte (Personen, Abteilungen, Systeme) und ein Ergebnis (Produkt, Information, Dienstleistung).",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "prozess",
+            "grundlagen"
+          ]
+        },
+        {
+          "id": "PRZ-049",
+          "frage": "Was unterscheidet einen Geschäftsprozess von einem Alltagsprozess?",
+          "antwort": "Betriebliches Ziel statt persönlichem, mehrere Rollen/Abteilungen/Systeme, festgelegte und standardisierte Regeln, zuverlässig wiederholbar und messbar über Zeit, Kosten und Qualität.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 1,
+          "tags": [
+            "prozess",
+            "grundlagen"
+          ]
+        },
+        {
+          "id": "PRZ-050",
+          "frage": "Nenne die drei Ebenen von Managementprozessen mit Zeithorizont und je ein Beispiel.",
+          "antwort": "Strategisch (langfristig, z. B. neue Geschäftsfelder), taktisch (mittelfristig, z. B. Budgets, Personalbedarf), operativ steuernd (kurzfristig, z. B. KPIs überwachen, Kapazitäten anpassen).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "prozessarten",
+            "managementprozess"
+          ]
+        },
+        {
+          "id": "PRZ-051",
+          "frage": "Ist Controlling ein Kern-, Unterstützungs- oder Managementprozess? Begründe.",
+          "antwort": "Managementprozess: Controlling bearbeitet keinen Kundenauftrag, sondern wertet Kennzahlen aus, erkennt Soll-Ist-Abweichungen und stellt Steuerungsinformationen bereit.",
+          "typ": "anwendung",
+          "schwierigkeit": 1,
+          "tags": [
+            "prozessarten",
+            "managementprozess"
+          ]
+        },
+        {
+          "id": "PRZ-052",
+          "frage": "Warum reicht ein Organigramm nicht, um einen Kundenauftrag zu verstehen, und welche vier Fragen stellt die Ablauforganisation?",
+          "antwort": "Das Organigramm zeigt Struktur und Hierarchie, nicht die Reihenfolge und das Zusammenwirken der Abteilungen. Die Ablauforganisation fragt: Was? (Tätigkeit) Wer? (Person/Rolle) Wann? (Reihenfolge) Womit? (Informationen/Systeme).",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "organisation",
+            "ablauforganisation"
+          ]
+        },
+        {
+          "id": "PRZ-053",
+          "frage": "Was ist eine Schnittstelle im Prozess, und warum ist sie kritisch?",
+          "antwort": "Übergabe von Verantwortung und Information zwischen Personen, Rollen, Abteilungen, Systemen oder Prozessschritten. Kritisch, weil viele Schwachstellen zwischen den Beteiligten entstehen: Die Daten müssen vollständig, richtig, aktuell und eindeutig sein, sonst scheitert der nächste Schritt.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "schnittstelle",
+            "organisation"
+          ]
+        },
+        {
+          "id": "PRZ-054",
+          "frage": "Wie unterscheiden sich Stelle, Rolle, Abteilung und Tätigkeit?",
+          "antwort": "Stelle: kleinste organisatorische Einheit mit dauerhaft zugeordneten Aufgaben und Verantwortung. Rolle: Funktion, die eine Person in einem bestimmten Prozess übernimmt. Abteilung: mehrere Stellen mit gemeinsamem Aufgabenbereich. Tätigkeit: konkrete Handlung im Prozess.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "organisation",
+            "stelle",
+            "rolle"
+          ]
+        },
+        {
+          "id": "PRZ-055",
+          "frage": "Welche Aufgaben hat der Process Owner, und was gehört nicht dazu?",
+          "antwort": "Er verantwortet den gesamten End-to-End-Prozess: gestalten, überwachen, Kennzahlen beobachten, Verbesserungen anstoßen. Er führt nicht alle Tätigkeiten selbst aus – Verantwortung ist nicht Ausführung, die operativen Aufgaben bleiben bei den Fachbereichen.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "process-owner",
+            "prozesseigner"
+          ]
+        },
+        {
+          "id": "PRZ-056",
+          "frage": "Stellenbeschreibung oder Anforderungsprofil – was beschreibt was?",
+          "antwort": "Die Stellenbeschreibung beschreibt die Stelle (Aufgaben, Verantwortung, Einordnung, Befugnisse). Das Anforderungsprofil beschreibt die Person (Kenntnisse, Fähigkeiten, Qualifikationen), die für die Stelle gebraucht wird.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "hr",
+            "stelle"
+          ]
+        },
+        {
+          "id": "PRZ-057",
+          "frage": "Stimmt die Aussage „Die Personalabteilung verantwortet alle Geschäftsprozesse“?",
+          "antwort": "Nein. HR ist nicht automatisch für Geschäftsprozesse verantwortlich, sondern bildet die Tätigkeiten in Stellen, Aufgaben- und Anforderungsprofilen ab und unterstützt Besetzung und Personalentwicklung. Für den Gesamtprozess ist der Process Owner zuständig.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "hr",
+            "process-owner",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "PRZ-058",
+          "frage": "Ordne zu: Personalnummer, Rechnung, Genehmigungsstatus. Stamm-, Bewegungs- oder Prozessdaten?",
+          "antwort": "Personalnummer = Stammdaten (stabil, in vielen Vorgängen genutzt). Rechnung = Bewegungs-/Auftragsdaten (gehört zu einem konkreten Geschäftsvorgang). Genehmigungsstatus = Prozessdaten (entsteht im Ablauf und zeigt, wie er lief).",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "daten",
+            "stammdaten",
+            "prozessdaten"
+          ]
+        },
+        {
+          "id": "PRZ-059",
+          "frage": "Wie hängen Beobachtung, Symptom, Hypothese und Ursache zusammen?",
+          "antwort": "Beobachtung: festgestellt und dokumentiert. Symptom: sichtbare Auswirkung. Hypothese: begründete, aber ungeprüfte Vermutung. Ursache: bestätigter Grund. Erst die Ursache ist belegt – alles davor darf nicht als Ursache verkauft werden.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "analyse",
+            "ursache",
+            "hypothese"
+          ]
+        },
+        {
+          "id": "PRZ-060",
+          "frage": "Warum ist „Die Mitarbeitenden arbeiten zu langsam“ als Analyseergebnis unzulässig?",
+          "antwort": "Es ist eine unbelegte Ursachenbehauptung und wertend. Beobachtbar ist nur das Symptom (z. B. hohe Durchlaufzeit); die Ursache (Wartezeit, fehlende Informationen, Übergaben …) muss durch Daten oder Erhebung belegt werden.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "analyse",
+            "symptom",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "PRZ-061",
+          "frage": "Was macht eine gute Analysefrage aus – und nenne ein Beispiel für eine schlechte?",
+          "antwort": "Neutral, konkret und mit Daten oder geeigneter Erhebung prüfbar, ohne Schuldzuweisung (z. B. „Wo entsteht der größte Anteil der Wartezeit?“). Schlecht: „Warum arbeitet Team B so langsam?“ – wertend und unterstellend.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "analyse",
+            "analysefrage"
+          ]
+        },
+        {
+          "id": "PRZ-062",
+          "frage": "Ist-Prozess oder dokumentierter Prozess – warum sind sie nicht dasselbe?",
+          "antwort": "Der Ist-Prozess ist, wie tatsächlich gearbeitet wird, inklusive Wartezeiten, Umwegen, Rückfragen, Medienbrüchen und Workarounds. Der dokumentierte Prozess kann veraltet sein oder von Systemen und Gewohnheiten abweichen. Der Soll-Prozess ist die Zielvorstellung.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "ist-prozess",
+            "soll-prozess"
+          ]
+        },
+        {
+          "id": "PRZ-063",
+          "frage": "Welche Quelle nutzt du für: (a) Statuswechsel zählen, (b) tatsächliche Ausführung, (c) Warum gibt es einen Workaround?",
+          "antwort": "(a) Systemdaten/Logs – zeigen Zeitpunkte, Mengen, Statuswechsel. (b) Beobachtung – zeigt die reale Ausführung. (c) Prozessbeteiligte/Interview – nur sie erklären das Warum. Daten zeigen das Was, Interviews das Warum.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "informationsquellen",
+            "interview"
+          ]
+        },
+        {
+          "id": "PRZ-064",
+          "frage": "Was bedeuten bekannt, Annahme und Informationslücke in einer Analyse?",
+          "antwort": "Bekannt: durch Daten, Dokumente, Beobachtung belegt. Annahme: plausibel, aber noch nicht geprüft. Informationslücke: fehlende, aber relevante Information. Eine gute Analyse macht Lücken sichtbar, statt sie mit Vermutungen zu füllen.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "analyse",
+            "informationsbedarf"
+          ]
+        },
+        {
+          "id": "PRZ-065",
+          "frage": "Wie unterscheiden sich fangende (catching) und werfende (throwing) Ereignisse?",
+          "antwort": "Fangend: Der Prozess wartet auf einen Auslöser (Nachricht empfangen, Timer). Werfend: Der Prozess löst aktiv etwas aus (Nachricht senden). Prüffrage: Wartet der Prozess auf etwas oder löst er etwas aus? Timer sind typischerweise fangend.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "ereignisse"
+          ]
+        },
+        {
+          "id": "PRZ-066",
+          "frage": "Intermediate-Timer oder Timer-Boundary-Event – wann welches?",
+          "antwort": "Intermediate-Timer: Der Prozess wartet bewusst eine Zeit, nichts anderes läuft („14 Tage warten“). Boundary-Timer: Zeitüberwachung, während eine Aktivität läuft („Bearbeitung dauert zu lange → eskalieren“).",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "timer",
+            "boundary-event"
+          ]
+        },
+        {
+          "id": "PRZ-067",
+          "frage": "Was ist ein Error-Boundary-Event, und gibt es eine nicht unterbrechende Variante?",
+          "antwort": "Es fängt einen Fehler, der in der Aktivität auftritt (z. B. von einem Error-Endereignis geworfen), und leitet in einen Fehlerpfad. Es ist immer unterbrechend – eine non-interrupting-Variante gibt es nicht.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "boundary-event",
+            "error"
+          ]
+        },
+        {
+          "id": "PRZ-068",
+          "frage": "Error-Endereignis oder Terminate-Endereignis?",
+          "antwort": "Error: signalisiert einen Fehler, der an passender Stelle gefangen und behandelt werden kann. Terminate: beendet den Scope sofort und hart, inklusive noch laufender paralleler Aktivitäten, ohne Fehlerpfad.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "ereignisse",
+            "error",
+            "terminate"
+          ]
+        },
+        {
+          "id": "PRZ-069",
+          "frage": "Wie unterscheiden sich Send Task und Receive Task?",
+          "antwort": "Send Task: sendet eine Nachricht und wartet nicht auf Antwort. Receive Task: wartet auf einen Nachrichteneingang und läuft erst danach weiter.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "tasks"
+          ]
+        },
+        {
+          "id": "PRZ-070",
+          "frage": "Wofür steht der Business Rule Task, und wann typisierst du Tasks überhaupt?",
+          "antwort": "Business Rule Task: Eine Geschäftsregel wird ausgewertet (z. B. Rabattregel). Tasks typisierst du nur, wenn dadurch Information entsteht – mehr Symbole ergeben nicht automatisch ein besseres Modell.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "tasks"
+          ]
+        },
+        {
+          "id": "PRZ-071",
+          "frage": "Was ist der Unterschied zwischen einem White-Box- und einem Black-Box-Pool, und wann ist Black Box sinnvoll?",
+          "antwort": "White Box: Pool vollständig ausmodelliert. Black Box: interne Schritte nicht sichtbar. Sinnvoll bei externen Partnern (Kunde, Lieferant), deren Abläufe man nicht kennt – es zählen nur Schnittstelle und Nachrichten.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "pool"
+          ]
+        },
+        {
+          "id": "PRZ-072",
+          "frage": "Zwei Lanes im selben Pool: Welcher Fluss verbindet sie, und woran entscheidest du das generell?",
+          "antwort": "Ein normaler Sequenzfluss – er darf Lane-Grenzen kreuzen. Prüffrage: Bleibe ich beim selben Prozessbeteiligten (Pool)? → Sequenzfluss. Wechsle ich zu einem anderen? → Nachrichtenfluss. Eine Abteilung ist nicht automatisch eine Lane, niemals grundsätzlich ein Pool.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "pool",
+            "lane",
+            "nachrichtenfluss"
+          ]
+        },
+        {
+          "id": "PRZ-073",
+          "frage": "XOR-Gateway oder ereignisbasiertes Gateway?",
+          "antwort": "XOR fragt: Welche Bedingung ist wahr? (Daten entscheiden.) Ereignisbasiert fragt: Welches Ereignis tritt zuerst ein? Die ausgehenden Pfade beginnen mit fangenden Ereignissen oder Receive Tasks, z. B. „Antwort trifft ein“ gegen „48 Stunden vergehen“.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "gateway"
+          ]
+        },
+        {
+          "id": "PRZ-074",
+          "frage": "200 Vorgänge, 150 fristgerecht, 30 nachbearbeitet. Wie hoch sind SLA-Einhaltung, Nacharbeitsquote und First-Time-Right?",
+          "antwort": "SLA-Einhaltung: 150 ÷ 200 × 100 = 75 %. Nacharbeitsquote: 30 ÷ 200 × 100 = 15 %. First-Time-Right: 100 % − 15 % = 85 % (Vorgänge ohne Nacharbeit).",
+          "typ": "rechnung",
+          "schwierigkeit": 1,
+          "tags": [
+            "kennzahlen",
+            "sla",
+            "first-time-right"
+          ]
+        },
+        {
+          "id": "PRZ-075",
+          "frage": "240 Vorgänge, davon 54 fehlerhaft. Wie hoch ist die Fehlerquote?",
+          "antwort": "54 ÷ 240 × 100 = 22,5 %.",
+          "typ": "rechnung",
+          "schwierigkeit": 1,
+          "tags": [
+            "kennzahlen",
+            "fehlerquote"
+          ]
+        },
+        {
+          "id": "PRZ-076",
+          "frage": "Die SLA-Einhaltung beträgt insgesamt 90 %. Warum kann das trügen?",
+          "antwort": "Durchschnittswerte verdecken Unterschiede: Hohe Prioritäten (P1/P2) können die SLA deutlich öfter reißen als niedrige, die zu 100 % eingehalten werden. Deshalb nach Priorität, Kategorie oder Team aufschlüsseln und mit Sollwert und Vergleich einordnen.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "kennzahlen",
+            "sla",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "PRZ-077",
+          "frage": "Warum ist eine hohe Durchlaufzeit nur ein Symptom und keine Ursache?",
+          "antwort": "Sie zeigt was passiert, nicht warum. Mögliche Ursachen – Wartezeit, fehlende Informationen, Übergaben, Nacharbeit – müssen durch Daten oder Erhebung belegt werden. Oft ist die Wartezeit der größere Anteil der Durchlaufzeit.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "kennzahlen",
+            "durchlaufzeit",
+            "symptom"
+          ]
+        },
+        {
+          "id": "PRZ-078",
+          "frage": "Pareto: Häufigkeiten 40 / 25 / 20 / 15. Wie lauten Anteile und kumulierte Anteile?",
+          "antwort": "Gesamt 100 → Anteile 40 %, 25 %, 20 %, 15 %; kumuliert 40 % → 65 % → 85 % → 100 %. Vorher absteigend sortieren.",
+          "typ": "rechnung",
+          "schwierigkeit": 1,
+          "tags": [
+            "pareto",
+            "rechnung"
+          ]
+        },
+        {
+          "id": "PRZ-079",
+          "frage": "Was kann die Pareto-Analyse nicht leisten, und was ergänzt sie?",
+          "antwort": "Sie beweist keine Ursachen, bewertet Risiken nicht vollständig und bestimmt keine Lösung. Ein seltenes, aber schweres Problem kann wichtiger sein als ein häufiges harmloses – dafür ergänzt die FMEA die Risikosicht (Bedeutung, Auftreten, Entdeckung).",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "pareto",
+            "fmea"
+          ]
+        },
+        {
+          "id": "PRZ-080",
+          "frage": "Ishikawa oder 5 Why – was leistet welches Werkzeug?",
+          "antwort": "Ishikawa sammelt Ursachenhypothesen in der Breite nach Kategorien, 5 Why vertieft einen ausgewählten Ast in der Tiefe. Beide liefern zunächst Hypothesen, keine Beweise. Ablauf: Problem eingrenzen → Ishikawa → Ast wählen → 5 Why → Hypothese prüfen.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "ishikawa",
+            "5-why"
+          ]
+        },
+        {
+          "id": "PRZ-081",
+          "frage": "Was bedeuten belegt, plausibel und offen, und wann beendest du ein 5 Why?",
+          "antwort": "Belegt: durch Daten/Dokumente bestätigt. Plausibel: nachvollziehbar, aber unbestätigt. Offen: mit vorhandenen Informationen nicht prüfbar. Aufhören, sobald die Antwort nur noch geraten wäre – „Wir wissen es noch nicht“ ist ein korrektes Ergebnis und führt zum Informationsbedarf.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "5-why",
+            "analyse"
+          ]
+        },
+        {
+          "id": "PRZ-082",
+          "frage": "Bei der FMEA: Warum ist „Kunde wartet länger“ keine Fehlerursache?",
+          "antwort": "Es ist eine Fehlerfolge. Fehlerart: Was läuft falsch? Fehlerfolge: Welche Wirkung? Fehlerursache: Warum kann es entstehen (z. B. Priorisierungsregel unklar)? Ursache und Folge zu vertauschen ist ein typischer Fehler.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "fmea",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "PRZ-083",
+          "frage": "Berechne die RPZ: B = 9, A = 3, E = 6.",
+          "antwort": "RPZ = B × A × E = 9 × 3 × 6 = 162. Hoher E-Wert bedeutet schlecht entdeckbar; die Zahl ist nur im Vergleich mit anderen Risiken und der Skala sinnvoll.",
+          "typ": "rechnung",
+          "schwierigkeit": 1,
+          "tags": [
+            "fmea",
+            "rpz",
+            "rechnung"
+          ]
+        },
+        {
+          "id": "PRZ-084",
+          "frage": "Wertschöpfend, notwendig aber nicht wertschöpfend, Verschwendung – wie ordnest du Tätigkeiten ein?",
+          "antwort": "Wertschöpfend: trägt direkt zur Kundenleistung bei (Fehler analysieren). Notwendig, nicht wertschöpfend: kein direkter Kundennutzen, aber nötig (gesetzliche Dokumentation). Verschwendung: verbraucht Ressourcen ohne Beitrag (Daten zum dritten Mal abtippen). „Nicht wertschöpfend“ heißt nicht „unnötig“.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "lean",
+            "wertschoepfung"
+          ]
+        },
+        {
+          "id": "PRZ-085",
+          "frage": "Was bedeuten Muda, Mura und Muri im Lean Management?",
+          "antwort": "Muda = Verschwendung (unnötige Tätigkeiten, Fehler, Wartezeiten). Mura = Unausgeglichenheit (schwankende Auslastung). Muri = Überlastung von Menschen oder Systemen. Zusammenhang: ungleichmäßige Verteilung → Überlastung → Fehler → Nacharbeit.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "lean",
+            "muda",
+            "mura",
+            "muri"
+          ]
+        },
+        {
+          "id": "PRZ-086",
+          "frage": "Warum sollte man einen langsamen Prozess nicht sofort automatisieren?",
+          "antwort": "Ein schlechter Prozess wird durch Software nicht gut – Verschwendung würde nur automatisiert. Erst Ursachen verstehen, dann entscheiden (Prüfreihenfolge: eliminieren, standardisieren, umstellen/parallelisieren, automatisieren).",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "lean",
+            "optimierung",
+            "klausurfalle"
+          ]
+        },
+        {
+          "id": "PRZ-087",
+          "frage": "Wie bewertest du Verbesserungsideen, und was zeigt die Nutzen-Aufwand-Matrix?",
+          "antwort": "Kriterien: Problembezug, Nutzen, Aufwand, Risiko, Kundennutzen, Messbarkeit. Matrix: hoher Nutzen + geringer Aufwand = Quick Win, früh umsetzen; hoher Nutzen + hoher Aufwand = strategisch prüfen; geringer Nutzen + geringer Aufwand = optional; geringer Nutzen + hoher Aufwand = meist zurückstellen.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "optimierung",
+            "nutzen-aufwand"
+          ]
+        },
+        {
+          "id": "PRZ-088",
+          "frage": "Wann ist hoher Aufwand trotz geringem Nutzen-Aufwand-Verhältnis gerechtfertigt?",
+          "antwort": "Wenn Risiko oder Pflicht überwiegen, z. B. ein Sicherheitsrisiko, eine gesetzliche Anforderung oder strategische Bedeutung. Die Matrix ersetzt keine fachliche Begründung.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "optimierung",
+            "nutzen-aufwand"
+          ]
+        },
+        {
+          "id": "PRZ-089",
+          "frage": "Ordne den Zielen eine Kennzahl zur Erfolgsmessung zu: Wartezeit senken, Fehler senken, Nacharbeit vermeiden, Termintreue erhöhen.",
+          "antwort": "Wartezeit → durchschnittliche Wartezeit. Fehler → Fehlerquote. Nacharbeit → Nacharbeitsquote bzw. First-Time-Right. Termintreue → SLA-Einhaltung.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "optimierung",
+            "kennzahlen"
+          ]
+        },
+        {
+          "id": "PRZ-090",
+          "frage": "Warum ist ein Interview manchmal besser als ein Logfile?",
+          "antwort": "Wenn es um das Warum geht (Gründe, Workarounds, Erfahrungen, informelle Abläufe): Logs zeigen nur das Was – Zeitpunkte, Mengen, Statuswechsel.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "interview",
+            "informationsquellen"
           ]
         }
       ]
