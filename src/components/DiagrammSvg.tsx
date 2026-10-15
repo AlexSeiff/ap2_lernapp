@@ -73,6 +73,23 @@ function Text({ x, y, w, text, klasse }: { x: number; y: number; w: number; text
   );
 }
 
+/** Beschriftung eines Ereignisses: unten (Standard) oder – wenn `lage` es verlangt – darüber bzw. daneben. */
+function EreignisText({ k, text }: { k: DiagrammKnoten; text: string }) {
+  const breite = Math.max(k.w, 110);
+  const zeilen = umbrechen(text, breite).length;
+  const cx = k.x + k.w / 2;
+  const cy = k.y + k.h / 2;
+  if (k.lage === 'links' || k.lage === 'rechts') {
+    // Neben dem Kreis, knapp unterhalb der Mittellinie: so bleibt der Rand eines Tasks, auf dem ein Grenzereignis sitzt, frei.
+    const seite = k.lage === 'links' ? -1 : 1;
+    const b = 110;
+    const z = umbrechen(text, b).length;
+    return <Text x={cx + seite * (k.w / 2 + 6 + b / 2)} y={cy + 4 + z * 7} w={b} text={text} />;
+  }
+  if (k.lage === 'oben') return <Text x={cx} y={k.y - 12 - (zeilen - 1) * 7} w={breite} text={text} />;
+  return <Text x={cx} y={k.y + k.h + 12 + (zeilen - 1) * 7} w={breite} text={text} />;
+}
+
 /** Eine Form im Rechteck (x, y, w, h). */
 function FormZeichnung({ form, k, text }: { form: Form; k: DiagrammKnoten; text?: string }): ReactNode {
   const { x, y, w, h } = k;
@@ -131,7 +148,7 @@ function FormZeichnung({ form, k, text }: { form: Form; k: DiagrammKnoten; text?
         <>
           <circle cx={cx} cy={cy} r={r} className={form === 'ende' ? 'dg-form dg-dick' : 'dg-form'} />
           {form === 'zwischen' && <circle cx={cx} cy={cy} r={r - 4} className="dg-linie" />}
-          {text && <Text x={cx} y={y + h + 12 + (umbrechen(text, Math.max(w, 110)).length - 1) * 7} w={Math.max(w, 110)} text={text} />}
+          {text && <EreignisText k={k} text={text} />}
         </>
       );
     case 'task':

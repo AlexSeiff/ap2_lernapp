@@ -1739,6 +1739,761 @@
    "varianten": []
   },
   {
+   "id": "DG-BPMN-005",
+   "typ": "bpmn",
+   "stufe": 1,
+   "titel": "BPMN: Zahlungsfrist mit Grenzereignis",
+   "szenario": "Im Möbelhaus wird eine Bestellung erst versendet, wenn die Vorkasse eingegangen ist. Die Buchhaltung **wartet auf den Zahlungseingang** (Task „Zahlungseingang abwarten“). Ist die Zahlung nach **14 Tagen** nicht da, wird das Warten **abgebrochen** und die Bestellung storniert.\n\nAm Rand des Tasks sitzt ein Grenzereignis. Setze es und die Folge-Elemente ein.",
+   "breite": 760,
+   "hoehe": 300,
+   "knoten": [
+    {
+     "id": "pool",
+     "x": 10,
+     "y": 10,
+     "w": 740,
+     "h": 280,
+     "form": "pool",
+     "text": "Möbelhaus – Buchhaltung"
+    },
+    {
+     "id": "st",
+     "x": 62,
+     "y": 82,
+     "w": 36,
+     "h": 36,
+     "form": "start",
+     "text": "Bestellung eingegangen"
+    },
+    {
+     "id": "t1",
+     "x": 140,
+     "y": 70,
+     "w": 140,
+     "h": 60,
+     "form": "task",
+     "text": "Zahlungseingang abwarten"
+    },
+    {
+     "id": "t2",
+     "x": 180,
+     "y": 190,
+     "w": 140,
+     "h": 50,
+     "slot": "s2"
+    },
+    {
+     "id": "t3",
+     "x": 380,
+     "y": 70,
+     "w": 140,
+     "h": 60,
+     "form": "task",
+     "text": "Ware versenden"
+    },
+    {
+     "id": "en1",
+     "x": 580,
+     "y": 82,
+     "w": 36,
+     "h": 36,
+     "form": "ende",
+     "text": "Bestellung versendet"
+    },
+    {
+     "id": "en2",
+     "x": 400,
+     "y": 197,
+     "w": 36,
+     "h": 36,
+     "slot": "s3"
+    },
+    {
+     "id": "b1",
+     "x": 232,
+     "y": 112,
+     "w": 36,
+     "h": 36,
+     "slot": "s1",
+     "lage": "rechts"
+    }
+   ],
+   "kanten": [
+    {
+     "von": "st",
+     "nach": "t1",
+     "art": "fluss"
+    },
+    {
+     "von": "t1",
+     "nach": "t3",
+     "art": "fluss"
+    },
+    {
+     "von": "t3",
+     "nach": "en1",
+     "art": "fluss"
+    },
+    {
+     "von": "b1",
+     "nach": "t2",
+     "art": "fluss"
+    },
+    {
+     "von": "t2",
+     "nach": "en2",
+     "art": "fluss"
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "zwischen",
+     "text": "Timer: 14 Tage (unterbrechend)"
+    },
+    {
+     "id": "p2",
+     "form": "task",
+     "text": "Bestellung stornieren"
+    },
+    {
+     "id": "p3",
+     "form": "ende",
+     "text": "Bestellung storniert"
+    },
+    {
+     "id": "d1",
+     "form": "zwischen",
+     "text": "Nachricht: Zahlung eingegangen"
+    },
+    {
+     "id": "d2",
+     "form": "start",
+     "text": "Timer: 14 Tage"
+    },
+    {
+     "id": "d3",
+     "form": "task",
+     "text": "Zahlung buchen"
+    },
+    {
+     "id": "d4",
+     "form": "gw-xor",
+     "text": "Zahlung da?"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2",
+    "s3": "p3"
+   },
+   "hinweise": [
+    "Ein Grenzereignis sitzt auf dem **Rand** einer Aktivität (Task) und reagiert, **während** diese läuft.",
+    "Hier geht es um Zeit: Nach 14 Tagen passiert etwas, ohne dass etwas eintrifft.",
+    "Die Bestellung wird gar nicht versendet – der Zweig endet in einem eigenen Endereignis."
+   ],
+   "erklaerung": "Ein **Timer-Grenzereignis** (Kreis mit doppeltem Rand, auf dem Task-Rand) löst nach Ablauf der Frist einen eigenen Ausnahmepfad aus. Es ist **unterbrechend** (durchgezogener Rand): Der Task „Zahlungseingang abwarten“ wird abgebrochen, der normale Pfad zu „Ware versenden“ wird nicht mehr verfolgt. Ein **Startereignis** darf nur am Anfang stehen, ein Gateway entscheidet nur bei Verzweigungen im Ablauf und kann keine Zeit überwachen. Der Ausnahmepfad braucht ein eigenes Endereignis.",
+   "quelle": "DD17 1.1",
+   "tags": [
+    "bpmn",
+    "grenzereignis",
+    "timer"
+   ],
+   "varianten": []
+  },
+  {
+   "id": "DG-BPMN-006",
+   "typ": "bpmn",
+   "stufe": 1,
+   "titel": "BPMN: Reparatur mit zwei Grenzereignissen",
+   "szenario": "Die Werkstatt führt eine Reparatur durch. Während der Reparatur kann Folgendes passieren:\n\n- Der Kunde **zieht den Auftrag zurück** (Nachricht). Die Reparatur wird dann **abgebrochen**.\n- Dauert die Reparatur **länger als 3 Tage**, wird der Kunde über die Verzögerung informiert – die Reparatur **läuft aber weiter**.\n\nSetze beide Grenzereignisse und die Tasks ein. Achte darauf, welches Ereignis die Aktivität unterbricht.",
+   "breite": 760,
+   "hoehe": 400,
+   "knoten": [
+    {
+     "id": "pool",
+     "x": 10,
+     "y": 10,
+     "w": 740,
+     "h": 380,
+     "form": "pool",
+     "text": "Möbelhaus – Werkstatt"
+    },
+    {
+     "id": "st",
+     "x": 62,
+     "y": 87,
+     "w": 36,
+     "h": 36,
+     "form": "start",
+     "text": "Auftrag angenommen"
+    },
+    {
+     "id": "t1",
+     "x": 150,
+     "y": 70,
+     "w": 170,
+     "h": 70,
+     "form": "task",
+     "text": "Reparatur durchführen"
+    },
+    {
+     "id": "t2",
+     "x": 100,
+     "y": 210,
+     "w": 140,
+     "h": 50,
+     "slot": "s3"
+    },
+    {
+     "id": "t3",
+     "x": 300,
+     "y": 210,
+     "w": 150,
+     "h": 50,
+     "slot": "s4"
+    },
+    {
+     "id": "t4",
+     "x": 420,
+     "y": 75,
+     "w": 140,
+     "h": 60,
+     "form": "task",
+     "text": "Gerät zurücksenden"
+    },
+    {
+     "id": "en",
+     "x": 620,
+     "y": 87,
+     "w": 36,
+     "h": 36,
+     "form": "ende",
+     "text": "Gerät zurückgesendet"
+    },
+    {
+     "id": "en_a",
+     "x": 152,
+     "y": 300,
+     "w": 36,
+     "h": 36,
+     "form": "ende",
+     "text": "Reparatur abgebrochen"
+    },
+    {
+     "id": "en_b",
+     "x": 500,
+     "y": 217,
+     "w": 36,
+     "h": 36,
+     "form": "ende",
+     "text": "Kunde informiert"
+    },
+    {
+     "id": "b1",
+     "x": 182,
+     "y": 122,
+     "w": 36,
+     "h": 36,
+     "slot": "s1",
+     "lage": "links"
+    },
+    {
+     "id": "b2",
+     "x": 262,
+     "y": 122,
+     "w": 36,
+     "h": 36,
+     "slot": "s2",
+     "lage": "rechts"
+    }
+   ],
+   "kanten": [
+    {
+     "von": "st",
+     "nach": "t1",
+     "art": "fluss"
+    },
+    {
+     "von": "t1",
+     "nach": "t4",
+     "art": "fluss"
+    },
+    {
+     "von": "t4",
+     "nach": "en",
+     "art": "fluss"
+    },
+    {
+     "von": "b1",
+     "nach": "t2",
+     "art": "fluss"
+    },
+    {
+     "von": "t2",
+     "nach": "en_a",
+     "art": "fluss"
+    },
+    {
+     "von": "b2",
+     "nach": "t3",
+     "art": "fluss",
+     "punkte": [
+      [
+       280,
+       235
+      ]
+     ]
+    },
+    {
+     "von": "t3",
+     "nach": "en_b",
+     "art": "fluss"
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "zwischen",
+     "text": "Nachricht: Rücktritt (unterbrechend)"
+    },
+    {
+     "id": "p2",
+     "form": "zwischen",
+     "text": "Timer: 3 Tage (nicht unterbrechend)"
+    },
+    {
+     "id": "p3",
+     "form": "task",
+     "text": "Reparatur abbrechen"
+    },
+    {
+     "id": "p4",
+     "form": "task",
+     "text": "Kunden über Verzögerung informieren"
+    },
+    {
+     "id": "d1",
+     "form": "zwischen",
+     "text": "Timer: 3 Tage (unterbrechend)"
+    },
+    {
+     "id": "d2",
+     "form": "zwischen",
+     "text": "Nachricht: Rücktritt (nicht unterbrechend)"
+    },
+    {
+     "id": "d3",
+     "form": "task",
+     "text": "Reparatur beenden"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2",
+    "s3": "p3",
+    "s4": "p4"
+   },
+   "hinweise": [
+    "Zwei Grenzereignisse am selben Task sind unabhängig voneinander: Jedes hat seinen eigenen Ausnahmepfad.",
+    "Wer die Aktivität **abbricht**, braucht ein unterbrechendes Ereignis; wer nur **zusätzlich** etwas auslöst, ein nicht unterbrechendes.",
+    "Ein nicht unterbrechendes Ereignis hat einen **gestrichelten** Doppelring, ein unterbrechendes einen durchgezogenen."
+   ],
+   "erklaerung": "Der Rücktritt des Kunden ist ein **Nachrichten-Grenzereignis, unterbrechend**: Die Reparatur wird abgebrochen und nur der Ausnahmepfad läuft weiter. Die Verzögerung ist ein **Timer-Grenzereignis, nicht unterbrechend** (gestrichelter Rand): Der Kunde wird informiert, **während die Reparatur weiterläuft** – danach geht es im normalen Pfad zu „Gerät zurücksenden“. Das nicht unterbrechende Ereignis erzeugt also einen **zusätzlichen, parallelen** Pfad, der in einem eigenen Endereignis endet.",
+   "quelle": "DD17 1.1",
+   "tags": [
+    "bpmn",
+    "grenzereignis",
+    "nachricht",
+    "timer",
+    "unterbrechend"
+   ],
+   "varianten": []
+  },
+  {
+   "id": "DG-BPMN-007",
+   "typ": "bpmn",
+   "stufe": 1,
+   "titel": "BPMN: Angebot einholen mit Eskalation",
+   "szenario": "Der Einkauf holt ein Angebot beim Stammlieferanten ein. Antwortet dieser **nicht innerhalb von 48 Stunden**, werden **Alternativlieferanten angefragt** und das Warten auf den Stammlieferanten endet. Anschließend wird in beiden Fällen entschieden: Ist das Angebot akzeptabel, wird bestellt, sonst wird die Beschaffung abgebrochen.\n\nVervollständige Grenzereignis, Folge-Task, Gateway und Endereignis.",
+   "breite": 760,
+   "hoehe": 300,
+   "knoten": [
+    {
+     "id": "pool",
+     "x": 10,
+     "y": 10,
+     "w": 740,
+     "h": 280,
+     "form": "pool",
+     "text": "Möbelhaus – Einkauf"
+    },
+    {
+     "id": "st",
+     "x": 62,
+     "y": 82,
+     "w": 36,
+     "h": 36,
+     "form": "start",
+     "text": "Bedarf gemeldet"
+    },
+    {
+     "id": "t1",
+     "x": 130,
+     "y": 70,
+     "w": 140,
+     "h": 60,
+     "form": "task",
+     "text": "Angebot einholen"
+    },
+    {
+     "id": "t2",
+     "x": 130,
+     "y": 190,
+     "w": 140,
+     "h": 50,
+     "slot": "s2"
+    },
+    {
+     "id": "g1",
+     "x": 350,
+     "y": 77,
+     "w": 46,
+     "h": 46,
+     "slot": "s3"
+    },
+    {
+     "id": "t3",
+     "x": 470,
+     "y": 70,
+     "w": 130,
+     "h": 60,
+     "form": "task",
+     "text": "Bestellung auslösen"
+    },
+    {
+     "id": "en1",
+     "x": 660,
+     "y": 82,
+     "w": 36,
+     "h": 36,
+     "form": "ende",
+     "text": "Bestellung ausgelöst"
+    },
+    {
+     "id": "en2",
+     "x": 355,
+     "y": 200,
+     "w": 36,
+     "h": 36,
+     "slot": "s4"
+    },
+    {
+     "id": "b1",
+     "x": 182,
+     "y": 112,
+     "w": 36,
+     "h": 36,
+     "slot": "s1",
+     "lage": "links"
+    }
+   ],
+   "kanten": [
+    {
+     "von": "st",
+     "nach": "t1",
+     "art": "fluss"
+    },
+    {
+     "von": "t1",
+     "nach": "g1",
+     "art": "fluss"
+    },
+    {
+     "von": "b1",
+     "nach": "t2",
+     "art": "fluss"
+    },
+    {
+     "von": "t2",
+     "nach": "g1",
+     "art": "fluss",
+     "punkte": [
+      [
+       330,
+       215
+      ],
+      [
+       330,
+       100
+      ]
+     ]
+    },
+    {
+     "von": "g1",
+     "nach": "t3",
+     "art": "fluss",
+     "text": "ja"
+    },
+    {
+     "von": "t3",
+     "nach": "en1",
+     "art": "fluss"
+    },
+    {
+     "von": "g1",
+     "nach": "en2",
+     "art": "fluss",
+     "text": "nein"
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "zwischen",
+     "text": "Timer: 48 Stunden (unterbrechend)"
+    },
+    {
+     "id": "p2",
+     "form": "task",
+     "text": "Alternativlieferanten anfragen"
+    },
+    {
+     "id": "p3",
+     "form": "gw-xor",
+     "text": "Angebot akzeptabel?"
+    },
+    {
+     "id": "p4",
+     "form": "ende",
+     "text": "Beschaffung abgebrochen"
+    },
+    {
+     "id": "d1",
+     "form": "zwischen",
+     "text": "Nachricht: Angebot erhalten"
+    },
+    {
+     "id": "d2",
+     "form": "gw-and",
+     "text": "parallel"
+    },
+    {
+     "id": "d3",
+     "form": "start",
+     "text": "Timer: 48 Stunden"
+    },
+    {
+     "id": "d4",
+     "form": "task",
+     "text": "Angebot ablehnen"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2",
+    "s3": "p3",
+    "s4": "p4"
+   },
+   "hinweise": [
+    "Das Warten auf den Stammlieferanten ist Teil des Tasks „Angebot einholen“ – die Frist wird deshalb mit einem **Grenzereignis** überwacht.",
+    "Beide Wege (Angebot da / Frist abgelaufen) laufen vor der Entscheidung wieder zusammen.",
+    "Nach der Entscheidung wird **genau ein** Weg gewählt: ja oder nein."
+   ],
+   "erklaerung": "Das **Timer-Grenzereignis (unterbrechend)** am Task „Angebot einholen“ leitet nach 48 Stunden in den Ausnahmepfad „Alternativlieferanten anfragen“ um. Beide Pfade münden in dasselbe **XOR-Gateway** „Angebot akzeptabel?“ – der Task wird entweder normal beendet oder durch die Frist abgebrochen, nie beides. Ein AND-Gateway würde dagegen auf beide Pfade warten und käme nie weiter (Deadlock). Der Nein-Zweig braucht ein eigenes Endereignis.",
+   "quelle": "DD17 1.1",
+   "tags": [
+    "bpmn",
+    "grenzereignis",
+    "timer",
+    "xor",
+    "eskalation"
+   ],
+   "varianten": []
+  },
+  {
+   "id": "DG-BPMN-008",
+   "typ": "bpmn",
+   "stufe": 2,
+   "titel": "BPMN ordnen: Rechnung mit Zahlungsfrist",
+   "szenario": "Das Möbelhaus verkauft auf Rechnung. Nach dem Versand der Rechnung wird auf den Zahlungseingang gewartet. Der Task „Auf Zahlungseingang warten“ hat ein **Timer-Grenzereignis (30 Tage)**: Bei Fristablauf wird ein Inkassounternehmen beauftragt. Geht die Zahlung ein, wird sie gebucht und anschließend die Ware freigegeben.\n\nBringe die vier Tasks im normalen Ablauf in die richtige Reihenfolge – das Grenzereignis ist schon eingezeichnet.",
+   "breite": 780,
+   "hoehe": 280,
+   "knoten": [
+    {
+     "id": "pool",
+     "x": 10,
+     "y": 10,
+     "w": 760,
+     "h": 260,
+     "form": "pool",
+     "text": "Möbelhaus – Buchhaltung"
+    },
+    {
+     "id": "st",
+     "x": 52,
+     "y": 82,
+     "w": 36,
+     "h": 36,
+     "form": "start",
+     "text": "Bestellung auf Rechnung"
+    },
+    {
+     "id": "t1",
+     "x": 115,
+     "y": 75,
+     "w": 120,
+     "h": 50,
+     "slot": "s1"
+    },
+    {
+     "id": "t2",
+     "x": 255,
+     "y": 75,
+     "w": 120,
+     "h": 50,
+     "slot": "s2"
+    },
+    {
+     "id": "t3",
+     "x": 395,
+     "y": 75,
+     "w": 120,
+     "h": 50,
+     "slot": "s3"
+    },
+    {
+     "id": "t4",
+     "x": 535,
+     "y": 75,
+     "w": 120,
+     "h": 50,
+     "slot": "s4"
+    },
+    {
+     "id": "en",
+     "x": 697,
+     "y": 82,
+     "w": 36,
+     "h": 36,
+     "form": "ende",
+     "text": "Vorgang erledigt"
+    },
+    {
+     "id": "ti",
+     "x": 255,
+     "y": 170,
+     "w": 120,
+     "h": 50,
+     "form": "task",
+     "text": "Inkasso beauftragen"
+    },
+    {
+     "id": "ei",
+     "x": 430,
+     "y": 177,
+     "w": 36,
+     "h": 36,
+     "form": "ende",
+     "text": "Forderung übergeben"
+    },
+    {
+     "id": "b",
+     "x": 297,
+     "y": 107,
+     "w": 36,
+     "h": 36,
+     "form": "zwischen",
+     "text": "Timer: 30 Tage",
+     "lage": "rechts"
+    }
+   ],
+   "kanten": [
+    {
+     "von": "st",
+     "nach": "t1",
+     "art": "fluss"
+    },
+    {
+     "von": "t1",
+     "nach": "t2",
+     "art": "fluss"
+    },
+    {
+     "von": "t2",
+     "nach": "t3",
+     "art": "fluss"
+    },
+    {
+     "von": "t3",
+     "nach": "t4",
+     "art": "fluss"
+    },
+    {
+     "von": "t4",
+     "nach": "en",
+     "art": "fluss"
+    },
+    {
+     "von": "b",
+     "nach": "ti",
+     "art": "fluss"
+    },
+    {
+     "von": "ti",
+     "nach": "ei",
+     "art": "fluss"
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "task",
+     "text": "Rechnung versenden"
+    },
+    {
+     "id": "p2",
+     "form": "task",
+     "text": "Auf Zahlungseingang warten"
+    },
+    {
+     "id": "p3",
+     "form": "task",
+     "text": "Zahlung buchen"
+    },
+    {
+     "id": "p4",
+     "form": "task",
+     "text": "Ware freigeben"
+    },
+    {
+     "id": "d1",
+     "form": "task",
+     "text": "Mahnbescheid beantragen"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2",
+    "s3": "p3",
+    "s4": "p4"
+   },
+   "hinweise": [
+    "Das Grenzereignis sitzt auf dem Task, der **wartet** – die Frist läuft, während auf die Zahlung gewartet wird.",
+    "Gebucht werden kann erst, wenn die Zahlung eingegangen ist.",
+    "Die Ware wird erst freigegeben, wenn die Zahlung verbucht ist."
+   ],
+   "erklaerung": "Die Reihenfolge folgt der Abhängigkeit: Ohne Rechnung kein Warten, ohne Zahlungseingang keine Buchung, ohne Buchung keine Freigabe. Das **Timer-Grenzereignis** gehört an den Task „Auf Zahlungseingang warten“ – nur dort ergibt „nach 30 Tagen“ Sinn. Bei Fristablauf wird dieser Task unterbrochen und der Ausnahmepfad („Inkasso beauftragen“) startet; der normale Pfad wird nicht weiterverfolgt.",
+   "quelle": "DD17 1.1",
+   "tags": [
+    "bpmn",
+    "grenzereignis",
+    "reihenfolge",
+    "timer"
+   ],
+   "varianten": []
+  },
+  {
    "id": "DG-AKT-001",
    "typ": "aktivitaet",
    "stufe": 1,

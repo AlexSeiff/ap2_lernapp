@@ -68,6 +68,8 @@ export interface DiagrammKnoten {
   text?: string;
   /** Slot-ID: Hier wird ein Element der Palette eingesetzt. */
   slot?: string;
+  /** BPMN-Ereignisse: Seite der Beschriftung (Standard unten), z. B. bei Grenzereignissen am Rand eines Tasks. */
+  lage?: 'oben' | 'unten' | 'links' | 'rechts';
 }
 
 export interface DiagrammKante {
@@ -137,6 +139,7 @@ const knotenSchema = z.object({
   h: z.number().positive(),
   text: optText,
   slot: optText,
+  lage: z.enum(['oben', 'unten', 'links', 'rechts']).optional(),
 });
 
 const kanteSchema = z.object({
