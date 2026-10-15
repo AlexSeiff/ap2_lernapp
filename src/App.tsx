@@ -6,7 +6,6 @@ import { Icon } from './components/Icon';
 import { Kopfleiste } from './components/Kopfleiste';
 import { HeuteLeiste } from './components/HeuteLeiste';
 import { MobileNav } from './components/MobileNav';
-import { Fisch } from './components/Fisch';
 import { UpdateHinweis } from './components/UpdateHinweis';
 import { IS_STATIC } from './lib/api';
 import type { NavBadge } from './lib/navigation';
@@ -276,7 +275,6 @@ function Layout() {
                   </Suspense>
                 </PageErrorBoundary>
               </main>
-              <Fisch />
               {IS_STATIC && <UpdateHinweis />}
               {sucheSteuerung.offen && (
                 <Suspense fallback={null}>

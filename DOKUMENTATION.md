@@ -767,9 +767,6 @@ only in `useCardSession` state and is cleared for the next card – **not persis
 
 **Other**: theme switch (system/light/dark) in **Einstellungen → Design** (`src/lib/theme.ts`, `hooks/useTheme.ts`; localStorage key `theme`,
 applied in `main.tsx` before the first render), error boundary per route, own confirm dialog (`useConfirm`), print CSS (no navigation).
-**Fish** (`components/Fisch.tsx`, `src/assets/fisch.gif`, 352 KB): small decorative GIF fixed at the bottom left (72 px, phones 56 px above the
-tab bar), `pointer-events: none`, `alt=""` + `aria-hidden`; light mode `mix-blend-mode: multiply` hides its white background, dark mode shows it as
-a rounded tile; hidden in print and with `prefers-reduced-motion`.
 
 ### Quellen und Lehrvideos (plan phase 8)
 
@@ -855,9 +852,9 @@ a rounded tile; hidden in print and with `prefers-reduced-motion`.
   `icon-512.png`, `icon-maskable-512.png` (icon at 80 % on a blue gradient, inside the maskable safe zone) and `apple-touch-icon.png` (180 px,
   linked in `index.html`). They were generated once from the icon of the former desktop build (512 × 512) with Windows System.Drawing
   (high-quality bicubic) and committed – no image library in the project. `tests/pwa.test.ts` checks that every icon exists with the declared size.
-- **Precache** (`globPatterns` `**/*.{html,js,css,json,wasm,woff2,gif}` + manifest + icons): index.html, all JS chunks including the lazy ones
+- **Precache** (`globPatterns` `**/*.{html,js,css,json,wasm,woff2}` + manifest + icons): index.html, all JS chunks including the lazy ones
   (SQL, Rechnen, KaTeX, CodeMirror, the lazy pages), CSS, `content.json`, `texte/*.json`, `sql-wasm.wasm`, the KaTeX **woff2** fonts (woff/ttf
-  are not cached; every current browser uses woff2), `begriffe.json`, the fish GIF. Today **98 entries, about 6.4 MB**. `maximumFileSizeToCacheInBytes` is
+  are not cached; every current browser uses woff2), `begriffe.json`. Today **98 entries, about 6.4 MB**. `maximumFileSizeToCacheInBytes` is
   8 MB (content.json ~1.3 MB, begriffe.json ~1.5 MB).
   Navigations fall back to the cached `index.html`, so the app starts offline after the first visit (SQL editor and formulas included).
 - **Updates** (`registerType: 'prompt'`, no `skipWaiting`/`clientsClaim`): every precached file has a revision hash in `sw.js`, so any change
