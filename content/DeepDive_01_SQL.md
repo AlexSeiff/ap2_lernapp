@@ -151,8 +151,8 @@ INNER JOIN kunde k ON b.kunden_id = k.kunden_id;
 | JOIN-Typ | Ergebnis |
 |---|---|
 | `INNER JOIN` | nur Zeilen mit Übereinstimmung in **beiden** Tabellen |
-| `LEFT JOIN` | **alle** Zeilen der linken Tabelle; ohne Treffer rechts → NULL |
-| `RIGHT JOIN` | spiegelbildlich zu LEFT |
+| `LEFT JOIN` | alle Treffer (wie INNER JOIN) **plus** alle übrigen Zeilen der linken Tabelle; bei diesen sind die Spalten der rechten Tabelle NULL |
+| `RIGHT JOIN` | spiegelbildlich zu LEFT: alle Treffer plus die übrigen Zeilen der rechten Tabelle |
 | `FULL OUTER JOIN` | alle Zeilen beider Seiten |
 
 An der Übungsdatenbank nachvollziehen: `bestellung INNER JOIN kunde` → 6 Zeilen (jede Bestellung hat einen Kunden). `kunde LEFT JOIN bestellung` → **8 Zeilen**: Huber 3×, Fischer 2×, Schmidt 1×, Weber und Braun je 1× mit NULL in den Bestellspalten – sie haben keine Bestellungen.

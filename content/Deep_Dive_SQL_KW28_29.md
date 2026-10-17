@@ -172,7 +172,7 @@ INNER JOIN kunde k ON b.kunden_id = k.kunden_id;
 | Join-Typ | Ergebnis |
 |---|---|
 | INNER JOIN | nur Zeilen mit Übereinstimmung in beiden Tabellen |
-| LEFT JOIN | alle Zeilen der linken Tabelle; rechts ohne Treffer → NULL |
+| LEFT JOIN | alle Treffer plus alle übrigen Zeilen der linken Tabelle; bei diesen sind die rechten Spalten NULL |
 | RIGHT JOIN | spiegelbildlich zu LEFT |
 | FULL OUTER JOIN | alle Zeilen beider Tabellen (nicht in jedem DBMS verfügbar) |
 

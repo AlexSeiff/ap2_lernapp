@@ -357,7 +357,7 @@
         {
           "id": "SQL-010",
           "frage": "Was liefern INNER JOIN und LEFT JOIN?",
-          "antwort": "INNER JOIN: nur Zeilen mit Übereinstimmung in beiden Tabellen. LEFT JOIN: alle Zeilen der linken Tabelle; fehlt rechts ein Treffer, werden die rechten Spalten mit NULL gefüllt.",
+          "antwort": "INNER JOIN: nur Zeilen mit Übereinstimmung in beiden Tabellen. LEFT JOIN: alle Treffer plus alle übrigen Zeilen der linken Tabelle; bei diesen sind die Spalten der rechten Tabelle NULL.",
           "typ": "abgrenzung",
           "schwierigkeit": 1,
           "tags": [
