@@ -193,3 +193,56 @@ DROP INDEX idx_bestellung_kunde;
 - `STRFTIME` liefert Text: `WHERE STRFTIME('%Y', bestelldatum) = '2026'` (mit Anführungszeichen).
 - Monatsrechnung läuft über: `DATE('2026-01-31', '+1 month')` ergibt in SQLite `'2026-03-03'`.
 - `LIKE` unterscheidet in SQLite Groß- und Kleinschreibung nicht (nur bei ASCII-Buchstaben).
+
+## 11. Der SQL-Auszug der IHK-Prüfung (Stand 2024-10-07) und seine Umsetzung in SQLite
+
+Der Anhang der AP2 enthält einen kurzen SQL-Auszug im Stil von MySQL. Was dort **nicht** steht, darfst du nutzen, kommt in der Prüfung aber nicht als Pflicht vor. Die Spalte „SQLite“ zeigt, wie du dasselbe im Editor der App rechnest.
+
+| Anhang (Beschreibung) | SQLite im Editor |
+|---|---|
+| `AVG`, `COUNT(spalte \| *)`, `SUM`, `MIN`, `MAX` | gleich |
+| `STDDEV(spalte)` – Standardabweichung vom arithmetischen Mittel | nicht eingebaut: `SQRT(AVG(x*x) - AVG(x)*AVG(x))` (Grundgesamtheit, ÷ n); Stichprobe (÷ n − 1): mit `SQRT(SUM((x - m)*(x - m)) / (COUNT(*) - 1))` und dem Mittelwert m aus einer Unterabfrage |
+| `VARIANCE(spalte)` | nicht eingebaut: ohne `SQRT` wie oben |
+| `CORR(spalte_1, spalte_2)` – Korrelation (1 = voll korreliert, 0 = kein Zusammenhang) | nicht eingebaut: `(AVG(x*y) - AVG(x)*AVG(y)) / (SQRT(AVG(x*x) - AVG(x)*AVG(x)) * SQRT(AVG(y*y) - AVG(y)*AVG(y)))` |
+| `LEFT(zeichenkette, anzahl)`, `RIGHT(zeichenkette, anzahl)` | `SUBSTR(s, 1, n)`, `SUBSTR(s, -n)` |
+| `NOW()` – aktuelles Datum mit Uhrzeit | `DATETIME('now')` |
+| `YEAR(d)`, `MONTH(d)`, `DAY(d)`, `HOUR(d)`, `MINUTE(d)` – als Zahl | `CAST(STRFTIME('%Y', d) AS INTEGER)`, `'%m'`, `'%d'`, `'%H'`, `'%M'` |
+| `WEEKDAY(d)` – Wochentag als Zahl, **Montag = 0** | `(CAST(STRFTIME('%w', d) AS INTEGER) + 6) % 7` (SQLite zählt Sonntag = 0) |
+| `DATEADD(Datumsteil, Intervall, Datum)` – addiert ein Intervall | `DATE(d, '+7 days')`, `DATE(d, '+2 months')`, `DATETIME(d, '+3 hours')` |
+| `DATEDIFF(Datumsteil, Anfangsdatum, Enddatum)` – **Enddatum minus Startdatum** in der genannten Einheit | Tage: `JULIANDAY(ende) - JULIANDAY(start)`; Monate und Jahre über `STRFTIME` rechnen |
+| Datumsteile: `DAY, MONTH, YEAR, HOUR, MINUTE` | als Text in `STRFTIME` bzw. `'+n days'` |
+| `DATE` im Format DD.MM.YYYY | SQLite speichert ISO `YYYY-MM-DD`; Anzeige in DD.MM.YYYY: `STRFTIME('%d.%m.%Y', d)` |
+| `UNION`, `AND`, `OR`, `NOT`, `IS NULL`, `LIKE` (`%`, `_`), `=`, `>`, `>=`, `<`, `<=`, `<>`, `+ - * /` | gleich |
+
+**Tabellen und Schlüssel im Anhang:**
+
+```sql
+CREATE TABLE Tabellenname (
+  Spaltenname DATENTYP,
+  …,
+  PRIMARY KEY (Spaltenname),
+  FOREIGN KEY (Spaltenname) REFERENCES Tabellenname (Primärschlüsselspaltenname)
+);
+ALTER TABLE Tabellenname ADD COLUMN    Spaltenname DATENTYP;   -- Spalte hinzufügen
+ALTER TABLE Tabellenname DROP COLUMN   Spaltenname;            -- Spalte entfernen
+ALTER TABLE Tabellenname MODIFY COLUMN Spaltenname DATENTYP;   -- Spalte verändern (MySQL; SQLite kann das nicht)
+ALTER TABLE Tabellenname ADD FOREIGN KEY (Spaltenname) REFERENCES Tabellenname2 (Spaltenname);
+DROP TABLE Tabellenname;
+```
+
+- Datentypen im Anhang: `CHARACTER`, `CHAR(anzahl)`, `VARCHAR(anzahl)` (Zeichenkette mit **höchstens** anzahl Zeichen), `DECIMAL` (Festkomma), `DOUBLE` (Gleitkomma), `INTEGER`, `DATE`.
+- Unterabfrage als Tabelle: `SELECT … FROM (SELECT … FROM … WHERE …) AS tbl WHERE …` – der Alias `tbl` ist Pflicht.
+- `WHERE EXISTS (unterabfrage)` prüft, ob die Unterabfrage mindestens eine Zeile liefert; `NOT EXISTS` negiert das. `WHERE … IN (unterabfrage)` / `NOT IN` prüfen die Zugehörigkeit zur Menge (Falle bei NULL, siehe 4).
+- `INSERT INTO Tabellenname [(spalte1, spalte2, …)] VALUES (wert1, wert2, …)` **oder** `INSERT INTO … SELECT … FROM … WHERE …`.
+- `HAVING` zeigt nur Gruppen, die die Bedingung erfüllen; `ORDER BY spalte1 [, spalte2] ASC | DESC` sortiert je Kriterium (ASC aufsteigend, DESC absteigend).
+
+**Rechte (nicht in SQLite; der Anhang gibt die MySQL-Form vor):**
+
+```sql
+CREATE USER Benutzer | Rolle IDENTIFIED BY 'Passwort';                    -- neuen Benutzer oder neue Rolle mit Passwort anlegen
+GRANT Recht | Rolle ON *.* | Datenbank.* | Datenbank.Objekt TO Benutzer | Rolle [WITH GRANT OPTION];
+REVOKE Rechte | Rollen ON *.* | Datenbank.* | Datenbank.Objekt FROM Benutzer | Rolle;
+```
+
+- `GRANT Recht ON …` weist ein **Recht auf ein Datenbankobjekt** zu, `GRANT Rolle TO Benutzer` weist eine **Rolle** zu; `REVOKE` entzieht beides wieder.
+- `WITH GRANT OPTION`: Der Empfänger darf das Recht **weitergeben**. `*.*` meint alle Datenbanken, `Datenbank.*` alle Objekte einer Datenbank, `Datenbank.Objekt` ein einzelnes (z. B. eine Tabelle).

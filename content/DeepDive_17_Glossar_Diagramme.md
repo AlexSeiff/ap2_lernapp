@@ -1,6 +1,6 @@
 # Deep Dive 17: Glossar & Diagramme
 
-Nachschlagewerk zu allen anderen Deep Dives: Teil 1 bis 6 zeigen jeden Diagrammtyp, der in der FIDPA-AP2 vorkommt, mit einem gezeichneten Beispiel, den Symbolen und den typischen Prüfungsfallen. Teil 7 listet alle Fachbegriffe der Lernblätter und Karteikarten von A bis Z – die Liste wird beim Laden aus dem Glossar erzeugt und ist deshalb immer aktuell.
+Nachschlagewerk zu allen anderen Deep Dives: Teil 1 bis 6 zeigen jeden Diagrammtyp, der in der FIDPA-AP2 vorkommt, mit einem gezeichneten Beispiel, den Symbolen und den typischen Prüfungsfallen. Teil 7 gleicht die App mit dem Anhang der Prüfung ab (Notationen, SQL-Auszug, Formeln, Präfixe). Teil 8 listet alle Fachbegriffe der Lernblätter und Karteikarten von A bis Z – die Liste wird beim Laden aus dem Glossar erzeugt und ist deshalb immer aktuell.
 
 Alle Beispiele spielen bei der **Möbelhaus Nordholz GmbH**, die Zahlen stammen aus den Deep Dives (Regression aus DD4, Boxplot aus DD3, Konfusionsmatrix aus DD7).
 
@@ -1635,7 +1635,139 @@ Je näher die Kurve an der linken oberen Ecke liegt, desto besser. Die Diagonale
 
 ---
 
-# Teil 7 – Fachbegriffe A–Z
+# Teil 7 – Der Anhang der Prüfung: Notationen, SQL-Auszug, Formeln
+
+In der AP2 liegt ein **Anhang** bei (Notationen, SQL-Syntax-Auszug mit Stand 2024-10-07, Formelübersicht, Präfixe). Du musst ihn nicht auswendig lernen – aber du musst **wissen, was drinsteht und was nicht**, und die Zeichen genau so verwenden wie dort. Dieser Teil gleicht die App mit dem Anhang ab (nach Fotos des Prüfungskatalogs und des Anhangs). Wo die Aufgabe eine andere Legende vorgibt, gilt die der Aufgabe.
+
+## 7.1 Prüfungskatalog: Gebiete und wo du sie hier lernst
+
+| Gebiet (AP2) | Zeit, Gewicht | Katalog-Tätigkeiten | Lernen in |
+|---|---|---|---|
+| **01 Durchführen einer Prozessanalyse** | 90 Min., 10 % | Prozess darstellen und Anforderungen abbilden (§ 29 Abs. 1 Nr. 1) · Analysewerkzeuge auswählen und anwenden (Nr. 2) · Maßnahmen zur Prozessoptimierung vorschlagen und rechtliche Auswirkungen auf betriebliche Abläufe einschätzen (Nr. 3) · Qualitäts- und Wirtschaftlichkeitskontrolle planen und durchführen (Nr. 4) | DD3, DD4, DD5, DD6, DD7, DD11, DD12, DD18 |
+| **02 Sicherstellen der Datenqualität** | 90 Min., 10 % | Daten identifizieren, klassifizieren, bereitstellen (§ 30 Abs. 1 Nr. 1) · Datenqualität prüfen und sicherstellen (Nr. 2) · Zugriff und Verfügbarkeit gewährleisten (Nr. 3) · Datenschutz und Datensicherheit anwendungsbezogen einhalten (Nr. 4) | DD1, DD2, DD8, DD9, DD10, DD15, DD16, DD19 |
+| **03 Wirtschafts- und Sozialkunde** | 60 Min., 10 % | Berufsbildung, Arbeits- und Tarifrecht · Aufbau und Organisation des Ausbildungsbetriebs · Sicherheit und Gesundheitsschutz · Umweltschutz · **Vernetztes Zusammenarbeiten unter Nutzung digitaler Medien** (§ 4 Abs. 7 Nr. 1 bis 5) | DD13, DD14 (Abschnitt 5.3), DD20 |
+
+Die Lernfelder dahinter: LF 10c (Werkzeuge des maschinellen Lernens einsetzen), LF 11c (Prozesse analysieren und gestalten), LF 12c (Kundenspezifische Prozess- und Datenanalyse durchführen), dazu LF 1 bis 9 aus dem ersten Ausbildungsteil.
+
+## 7.2 EPK nach dem Anhang
+
+| Symbol | Name | Bedeutung laut Anhang |
+|---|---|---|
+| Sechseck | **Ereignis** | eingetretener Zustand, der den weiteren Ablauf festlegt |
+| abgerundetes Rechteck | **Funktion** | betrieblicher Vorgang, der einen Eingangs- in einen Zielzustand umwandelt |
+| Ellipse mit Strich links | **Organisationseinheit** | Abteilung, der eine Funktion oder ein Ereignis zugeordnet ist |
+| Rechteck | **Objekt** | Informationsobjekt, Material, Ressource oder Produkt |
+| Pfeil | **Kontrollfluss** | gerichtete Verbindung zwischen Ereignissen, Funktionen und Konnektoren |
+| Doppelpfeil | **Informationsfluss** / **Material-/Ressourcenfluss** | Information wird von einem Informationsobjekt gelesen oder darauf geschrieben · Material oder Ressource wird in einer Funktion verbraucht |
+| Linie ohne Pfeil | **Zuordnung** | welche Organisationseinheit oder welche Objekte zu einer Funktion gehören |
+| Kreis mit ∧ | Konnektor **„Und“** | alle Ereignisse müssen eingetreten sein (Zusammenlauf) · nach der Funktion treten mehrere Ereignisse ein (Verzweigung) |
+| Kreis mit XOR | Konnektor **„Exklusives Oder“** | genau eines von mehreren |
+| Kreis mit ∨ | Konnektor **„Offenes Oder“** | mindestens eines von mehreren |
+
+Der Anhang zeigt die Symbole der **eEPK** (Organisationseinheit, Objekt, Flüsse). Der Wechsel Ereignis – Funktion und die Regel „kein Entscheiden nach einem Ereignis“ stehen **nicht** im Anhang – die musst du selbst anwenden (siehe 1.2).
+
+## 7.3 BPMN nach dem Anhang
+
+Der Anhang zeigt nur eine **Auswahl**: Task/Aufgabe (abgerundetes Rechteck), **Sequenzfluss** (durchgezogener Pfeil), **Nachrichtenfluss** (gestrichelter Pfeil), **Datenobjekt** (Blatt mit Eselsohr), die Gateways **XOR/Exklusiv** (Raute mit X), **OR/Inklusiv** (Raute mit Kreis) und **AND/Parallel** (Raute mit +), **Startevent** (dünner Kreis), **Intermediate Event** (Doppelkreis), **Endevent** (dicker Kreis), **Message Event** (Umschlag), **Timer Event** (Uhr), **Exception Event** (Blitz, steht für einen Fehler oder eine Ausnahme) und **Pool mit Lanes**.
+
+- Der Hinweis im Anhang: „Verschiedene Eventtypen können als **Start-, Intermediate- und Endevent** vorkommen.“ Ein Message Event kann also einen Prozess starten, im Ablauf auf eine Nachricht warten oder als Ende eine Nachricht senden; ein Exception Event kann einen Fehler auslösen oder abfangen.
+- Kein Symbol im Anhang für Unterprozess, Ereignis-Gateway, Textanmerkung oder Datenspeicher. Brauchst du sie, beschrifte sie und erkläre sie kurz.
+- Der Nachrichtenfluss gilt **zwischen Pools**, nicht innerhalb eines Pools (siehe 1.1).
+
+## 7.4 Netzplan nach dem Anhang (Knotenaufbau und Formeln)
+
+Der Anhang zeichnet den Knoten **anders** als das Beispiel in 5.1:
+
+| Position im Knoten | Inhalt |
+|---|---|
+| oben links / oben rechts (außen) | **FAZ** / **FEZ** |
+| Mitte oben | Vorgangs-ID (A, B, C …) und Beschreibung |
+| Mitte unten | **Dauer** · **GP** · **FP** |
+| unten links / unten rechts (außen) | **SAZ** / **SEZ** |
+
+Formeln des Anhangs: **GP = SAZ − FAZ** oder **GP = SEZ − FEZ** · **FP = FAZ des Nachfolgers − FEZ des Vorgangs**. Dauer in Arbeitstagen.
+
+**Beispiel aus dem Anhang:** A Planung 30 (kein Vorgänger) · B Netzwerk 40 (A) · C Hardware 15 (A) · D Software 30 (A) · E Installation 5 (C, D) · F Anschluss Computer 5 (B, E) · G Test und Übergabe 10 (F).
+
+- Vorwärts: A 0–30, B 30–70, C 30–45, D 30–60, E 60–65 (FAZ = größtes FEZ von C und D), F 70–75 (größtes FEZ von B und E), G 75–85. Projektdauer **85 Tage**.
+- Rückwärts: G 75–85, F 70–75, E 65–70 (SEZ = kleinster SAZ der Nachfolger), B 30–70, C 50–65, D 35–65, A 0–30.
+- Puffer: A, B, F, G haben GP **0** → kritischer Pfad **A – B – F – G**. D hat GP 5 und FP 0, C hat GP 20 und FP 15, E hat GP 5 und nach der Formel FP 5 (FAZ von F ist 70, FEZ von E ist 65). Rechne immer nach der Formel; abgedruckte Beispielzahlen nicht blind übernehmen.
+
+## 7.5 Netzwerkplan: Symbole des Anhangs
+
+| Symbol | Bedeutung laut Anhang |
+|---|---|
+| **Switch** | Koppelelement auf ISO/OSI-**Layer 2**; weitere Funktionen (z. B. Layer-3-Funktionen) können sich aus der Aufgabenstellung ergeben |
+| **Router** | Koppelelement auf **Layer 3**; weitere Funktionen (z. B. **NAT/PAT**) ergeben sich aus der Aufgabe |
+| **Firewall** | **Stateful-Inspection**-Firewall (bis **Layer 4**); weitere Funktionen (z. B. Next Generation Firewall) ergeben sich aus der Aufgabe |
+| **Kombigerät für SOHO** | Gerät mit unterschiedlichem Funktionsumfang (z. B. Switch, Router, Firewall, Accesspoint in einem) |
+| **Accesspoint** | WLAN-Zugangspunkt |
+| **Server** | Beispielsymbol, andere Symbole (ggf. mit Dienstsymbol) sind möglich |
+| **Ellipse mit Adresse** | (Teil-)Netzwerk (IPv4 und/oder IPv6), z. B. `192.0.2.0/24`: ein LAN, in dem beliebige weitere Geräte vorhanden sein können |
+
+- Der Anhang erlaubt ausdrücklich, **von den Symbolen abzuweichen** oder weitere sinnvolle Symbole (Drucker, Endgeräte) zu verwenden; für VPN, Client, Drucker gibt es bewusst keine Vorgabe – das Symbol ergibt sich aus der Aufgabe.
+- Ein Netzwerkplan zeigt **nur den relevanten Teil** des Netzes. Zeichne nicht alles, was du kennst, sondern was die Aufgabe braucht; beschrifte Netze mit Adresse und Präfix, Geräte mit Namen und Schnittstellen mit IP.
+- `192.0.2.0/24` gehört zu den **Dokumentationsadressen** (TEST-NET-1), die in Beispielen vorkommen und im echten Internet nicht geroutet werden.
+
+## 7.6 UML nach dem Anhang
+
+**Use-Case-Diagramm:** Akteure (Strichmännchen) mit **Generalisierung** (Pfeil mit leerer, geschlossener Spitze zum allgemeinen Akteur) · Anwendungsfall (Ellipse) · **«include»** (gestrichelter Pfeil vom Basis- zum **sekundären** Anwendungsfall, der immer mitläuft) · **«extend»** (gestrichelter Pfeil vom **sekundären** zum erweiterten Anwendungsfall, mit Notiz *Condition: {bedingung}* und *extension point*) · spezialisierter Anwendungsfall (durchgezogener Pfeil mit leerer Spitze).
+
+**Aktivitätsdiagramm:** **Startknoten** (gefüllter Kreis) · **Endknoten** (Kreis mit gefülltem Kern – beendet **alle** Aktivitäten) · **Ablaufende** (Kreis mit Kreuz – beendet **nur den aktuellen Fluss**) · Aktion (abgerundetes Rechteck) · **Schwimmbahnen** (Zuständige als Spalten) · Balken: **Teilung** (Splitting, ein Eingang, mehrere Ausgänge), **Synchronisation** (Und, mehrere Eingänge, ein Ausgang) oder beides in einem Balken · Raute: **Entscheidung** mit Bedingungen `[x<0]`, `[x>0]`, `[x=0]`, **Zusammenführung** (Oder) oder beides in einer Raute · Kreis mit Buchstaben (A … A): **Seitenwechsel**, damit der Fluss nicht quer über das Blatt laufen muss.
+
+**Klassendiagramm:** Klasse (Name · Attribute · Methoden) · **{abstract}** / kursiver Name · **«interface»** · Notiz mit gestricheltem Strich · Attribut: `Sichtbarkeit Name : Typ {Eigenschaften}` · Methode: `Sichtbarkeit Name(parameter1 : Typ, …) : Rückgabetyp {Eigenschaften}` · Sichtbarkeit **+ public, # protected, − private, ~ package** · Eigenschaften `{static, final, …}` · **Vererbung** (durchgezogen, leere Spitze zur Oberklasse) · **Assoziation** (Linie) mit **Multiplizität** (1, \*) · **gerichtete Assoziation** (offene Pfeilspitze) · **Aggregation** (leere Raute beim Ganzen) · **Komposition** (**gefüllte** Raute beim Ganzen, Teil ist existenzabhängig) · **Implementierung** (gestrichelt, leere Spitze, zur Schnittstelle).
+
+**Sequenzdiagramm:** Akteur und Objekte (`: Klasse1`) mit **Lebenslinie** (gestrichelt) und **Ausführungsbalken** · **synchrone Nachricht** (durchgezogen, gefüllte Spitze: der Sender wartet auf das Ende des Aufrufs, ein Rückgabewert ist möglich) · **Rückgabe** (gestrichelt) · **asynchrone Nachricht** (offene Spitze: keine Antwort erwartet) · **Selbstaufruf** · **create** (gestrichelter Pfeil auf das neue Objekt = Objekt-Konstruktion) · **Objekt-Destruktion** (Kreuz am Ende der Lebenslinie) · Rahmen **alt** (`[i>0]` / `[else]`), **opt** (`[Bedingung]`), **loop** (`[Bedingung]`) und **loop(10)** (feste Anzahl).
+
+**Zustandsdiagramm:** Zustand (abgerundet, unten optional `entry/aktion`, `do/aktion`, `exit/aktion`, `ereignis/aktion`) · Startpunkt und Endzustand · Übergang mit der Beschriftung **`operation[bedingung]/verhalten`**, wobei die Operation der Auslöser (Trigger) ist · **`after(Zeitdauer)`** als Zeitereignis.
+
+## 7.7 SQL-Auszug im Anhang
+
+Der Anhang listet SQL im Stil von **MySQL** (Stand 2024-10-07), die Übungsdatenbank der App läuft mit **SQLite**. Die vollständige Gegenüberstellung steht im [SQL-Belegsatz](#/material/sql-belegsatz), Abschnitt 11. Der Auszug führt **kein** `CASE`, **keine** Fensterfunktionen, **kein** `COALESCE` und **kein** `LIMIT` auf – lernen und nutzen darfst du sie trotzdem; sicher in der Prüfung kommt aber nur, was im Auszug steht.
+
+## 7.8 Formelübersicht: was drinsteht und was nicht
+
+| Größe | Formel im Anhang | Hinweis |
+|---|---|---|
+| Mittelwert | $\bar{x} = \frac{1}{n}\sum x_i$ | |
+| Median | n ungerade: $x_{(\frac{n+1}{2})}$ · n gerade: $\frac{1}{2}\left(x_{(\frac{n}{2})} + x_{(\frac{n}{2}+1)}\right)$ | Werte vorher **aufsteigend sortieren** |
+| Empirische Varianz | $s^2 = \frac{1}{n-1}\sum (x_i - \bar{x})^2$ | **Der Anhang teilt durch n − 1** (Stichprobe). Bei vollständiger Grundgesamtheit (σ²) wird durch n geteilt – die Konvention dazu **hinschreiben** |
+| Standardabweichung | $s = \sqrt{s^2}$ | |
+| Kovarianz | $s_{xy} = \frac{1}{n-1}\sum (x_i-\bar{x})(y_i-\bar{y})$ | positiv: gleichsinnig, negativ: gegensinnig |
+| Pearson-Korrelation | $r_{xy} = \frac{s_{xy}}{s_x s_y}$ | −1 bis +1 |
+| Erwartungswert | $E(X) = \sum x_i p_i$ | bei gleicher Wahrscheinlichkeit = Mittelwert |
+| Varianz (Zufallsvariable) | $Var(X) = E(X - E(X))^2$ | mit den Wahrscheinlichkeiten $p_i$ gewichtet, **ohne** n − 1 |
+| Kovarianz (Zufallsvariable) | $COV(X,Y)$ wie im Anhang | gemeint ist der Erwartungswert des **Produkts** der Abweichungen: $E\big[(X-E(X))(Y-E(Y))\big]$ |
+| Lineare Regression | $\hat{y} = \beta_0 + \beta_1 x$ · tatsächlich $y = \beta_0 + \beta_1 x + \epsilon$ · $RSS = \sum (y_i - \hat{y}_i)^2 \to \min$ | Methode der **kleinsten Quadrate**; $\beta_1 = s_{xy}/s_x^2$ und $\beta_0 = \bar{y} - \beta_1\bar{x}$ stehen **nicht** im Anhang – selbst wissen |
+
+**Algorithmen im Anhang:**
+
+- **ID3:** Gehören alle Beispiele zur selben Klasse → Blatt mit dieser Klasse; sonst Attribut A wählen, als Wurzel setzen, aus den Daten löschen, für jeden Attributwert eine Kante erzeugen und rekursiv den Teilbaum bauen. Auswahl nach dem höchsten **Informationsgewinn**: $Info(A) = \sum -p(a_i)\log_2 p(a_i)$, $Info(A,a_i) = \sum \frac{a_i}{A} Info(a_i)$ (gewichteter Mittelwert der Teilmengen), $Gewinn(A) = Info(A) - Info(A,a_i)$. Beachte die Schreibweise: $Info(A)$ ist hier die **Entropie der Klassenverteilung** vor dem Split, $Info(A,a_i)$ die gewichtete Entropie danach.
+- **Random Forest:** für B Bäume: **Bootstrapping** (N Datensätze **mit Zurücklegen** ziehen), **m Attribute zufällig** auswählen, Entscheidungsbaum bauen (z. B. ID3). Klassifikation: Datensatz in jeden Baum geben, die **Mehrheit** der Entscheidungen gewinnt.
+- **k-Nearest-Neighbor:** alle Trainingsbeispiele speichern; Ähnlichkeit des neuen Datensatzes zu allen berechnen, die **k ähnlichsten** wählen, die **häufigste Klasse** zuweisen. Abstand z. B. euklidisch: $dist_E(v,w) = \sqrt{\sum (v_i - w_i)^2}$.
+- **k-Means:** k Punkte zufällig als Schwerpunkte · Punkte dem nächsten Schwerpunkt zuordnen · Schwerpunkte als Mittelwert neu berechnen · wiederholen, bis sich nichts mehr ändert.
+- **Konfusionsmatrix:** Zeilen = tatsächliche Klasse, Spalten = vorhergesagte Klasse; TP und FN in der Zeile „Ja“, FP und TN in der Zeile „Nein“. **Accuracy** = (TP+TN)/(TP+TN+FP+FN) · **Precision** = TP/(TP+FP) · **Recall/Sensitivity** = TP/(TP+FN) · **Specificity** = TN/(TN+FP). **Nicht im Anhang:** F1-Score $= \frac{2 \cdot P \cdot R}{P + R}$, Fehlerrate = 1 − Accuracy, Bestimmtheitsmaß – selbst wissen.
+
+## 7.9 Präfixe: Datenmengen nur mit Binärpräfixen
+
+Der Anhang schreibt vor: **Dezimalpräfixe** (SI, Basis 10: kB, MB, GB …) gehören zu **physikalischen Größen** wie Strom, Leistung, Geschwindigkeit. **Datenmengen** werden mit **Binärpräfixen** (IEC, Basis 2) angegeben – „Angaben zu Datenmengen sind nur mit Binärpräfixen richtig“. Die Wahl zwischen Namen (Gibibyte) und Symbol (GiB) ist frei.
+
+| Binärpräfix | Wert | Dezimal (nicht normgerecht) | Abweichung |
+|---|---|---|---|
+| Kibibyte (KiB) | 2¹⁰ = 1.024 Byte | Kilobyte (kB) 10³ | 2,40 % |
+| Mebibyte (MiB) | 2²⁰ = 1.048.576 Byte | Megabyte (MB) 10⁶ | 4,86 % |
+| Gibibyte (GiB) | 2³⁰ = 1.073.741.824 Byte | Gigabyte (GB) 10⁹ | 7,37 % |
+| Tebibyte (TiB) | 2⁴⁰ = 1.099.511.627.776 Byte | Terabyte (TB) 10¹² | 9,95 % |
+| Pebibyte (PiB) | 2⁵⁰ | Petabyte (PB) 10¹⁵ | 12,6 % |
+| Exbibyte (EiB) | 2⁶⁰ | Exabyte (EB) 10¹⁸ | 15,3 % |
+| Zebibyte (ZiB) | 2⁷⁰ | Zettabyte (ZB) 10²¹ | 18,1 % |
+| Yobibyte (YiB) | 2⁸⁰ | Yottabyte (YB) 10²⁴ | 20,9 % |
+
+**Rechnen:** Je Sprung um den Faktor 1.024 (nicht 1.000). 1 TiB = 1.024 GiB = 1.048.576 MiB. Ein Datenträger mit „500 GB“ (Herstellerangabe, dezimal) fasst $500 \cdot 10^9 / 2^{30} \approx 465{,}7$ GiB. Antworte bei „Wie viel Speicher braucht …?“ also in **KiB, MiB, GiB, TiB** – schreibst du GB, verlierst du den Punkt. Bei **Übertragungsraten** (Mbit/s) und bei **Leistung** (Watt, kWh) bleibt es dagegen beim Dezimalpräfix.
+
+---
+
+# Teil 8 – Fachbegriffe A–Z
 
 Alle Fachbegriffe aus den Begriffskarten, den Wissenskarten und den fett gesetzten Begriffen der Lernblätter, jeweils mit Erklärung, wo es eine gibt (Begriffskarte vor Wissenskarte vor Lernblatt). Zum gezielten Suchen ist die Seite Glossar (Begriffe A–Z) mit Filterfeld praktischer; hier lässt sich die Liste am Stück lesen oder drucken. Begriffe mit eigener Begriffsseite sind verlinkt.
 
@@ -1661,4 +1793,7 @@ Alle Fachbegriffe aus den Begriffskarten, den Wissenskarten und den fett gesetzt
 - [ ] Ich stelle einen Algorithmus als Programmablaufplan und als Struktogramm dar.
 - [ ] Ich lese aus einem Netzplan Puffer und kritischen Pfad ab und grenze ihn vom Gantt-Diagramm ab.
 - [ ] Ich wähle für eine Aussage den passenden Diagrammtyp und begründe die Wahl.
+- [ ] Ich weiß, was im Anhang der Prüfung steht (Notationen, SQL-Auszug, Formeln, Präfixe) und was ich selbst wissen muss.
+- [ ] Ich rechne einen Netzplan mit dem Knotenaufbau und den Formeln des Anhangs (GP, FP).
+- [ ] Ich gebe Datenmengen in Binärpräfixen (KiB, MiB, GiB, TiB) an und rechne zwischen ihnen um.
 - [ ] Ich lese Boxplot, Histogramm, Pareto-Diagramm und ROC-Kurve und nenne ihre Kernaussage.

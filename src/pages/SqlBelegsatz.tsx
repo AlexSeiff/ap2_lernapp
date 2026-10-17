@@ -1,4 +1,4 @@
-// SQL-Belegsatz als Seite (/material/sql-belegsatz, Bereich Glossar): Nachschlagen und Drucken (2 Seiten A4, siehe @media print).
+// SQL-Belegsatz als Seite (/material/sql-belegsatz, Bereich Glossar): Nachschlagen und Drucken (etwa 3 Seiten A4, siehe @media print).
 
 import { Link } from 'react-router-dom';
 import { ohneTitel, useBelegsatz } from '../components/Belegsatz';
@@ -26,7 +26,7 @@ export function SqlBelegsatz() {
         </button>
       </div>
       <p className="hint nur-bildschirm">
-        Auch im <Link to="/sql">SQL-Editor</Link> über den Knopf „SQL-Belegsatz“. Gedruckt passt er auf zwei Seiten A4.
+        Auch im <Link to="/sql">SQL-Editor</Link> über den Knopf „SQL-Belegsatz“. Gedruckt passt er auf etwa drei Seiten A4.
       </p>
       <Markdown source={false} className="belegsatz">
         {ohneTitel(doc.markdown)}

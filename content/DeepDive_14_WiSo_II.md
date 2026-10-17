@@ -333,6 +333,36 @@ Am **Gleichgewichtspreis** (14 €) wird die größtmögliche Menge umgesetzt. N
 - **CSRD** (EU-Richtlinie zur Nachhaltigkeitsberichterstattung, Berichte nach den Standards ESRS): Durch die Omnibus-I-Richtlinie (EU) 2026/470 (in Kraft seit 18.03.2026) gilt die Pflicht nur noch für Unternehmen mit **mehr als 1.000 Beschäftigten und mehr als 450 Mio. € Umsatz**; die zweite Welle wurde vorher („Stop-the-Clock“) um zwei Jahre verschoben. Das deutsche Umsetzungsgesetz war 2026 noch im Bundestag – bis dahin gilt die alte Pflicht zur nichtfinanziellen Erklärung (§ 289b HGB) für große kapitalmarktorientierte Unternehmen.
 - **Lieferkettengesetz** (LkSG, seit 2024 ab 1.000 Beschäftigten): Sorgfaltspflichten für Menschenrechte und Umwelt in der Lieferkette – Risikomanagement, Risikoanalyse, Prävention, Abhilfe, Beschwerdeverfahren. Ein Regierungsentwurf (Kabinett 03.09.2025, Verabschiedung vor der Prüfung prüfen) soll die jährliche Berichtspflicht (rückwirkend) abschaffen und Bußgelder auf schwere Verstöße beschränken; das BAFA prüft Berichte schon seit 2025 nicht mehr. Abgelöst werden soll das LkSG durch die Umsetzung der EU-Lieferkettenrichtlinie **CSDDD** (nach Omnibus I nur noch ab 5.000 Beschäftigten und 1,5 Mrd. € Umsatz, anzuwenden ab Juli 2029).
 
+## 5.3 Vernetztes Zusammenarbeiten unter Nutzung digitaler Medien
+
+Der Prüfungskatalog nennt das als eigenes WiSo-Gebiet (§ 4 Absatz 7 Nummer 5). Gefragt wird selten Wissen zu einem bestimmten Produkt, sondern **die richtige Wahl des Mediums und der sichere, regelkonforme Umgang damit**.
+
+**Medien nach Zweck und Zeitbezug:**
+
+| Zeitbezug | Beispiele | Passt für |
+|---|---|---|
+| **synchron** (gleichzeitig) | Telefon, Videokonferenz, Chat im Gespräch | schnelle Klärung, Abstimmung, Besprechung, Konflikte |
+| **asynchron** (zeitversetzt) | E-Mail, Ticketsystem, Wiki, geteilte Dokumente, Kanban-Board | dokumentierte Aufgaben, Entscheidungen zum Nachlesen, Zusammenarbeit über Zeitzonen und Arbeitszeiten hinweg |
+
+**Typische Werkzeuge:** E-Mail und Messenger (Kommunikation) · Videokonferenz (Besprechung) · Cloud-Speicher und gemeinsame Dokumente (Dateien, gleichzeitiges Bearbeiten, **Versionsverwaltung**) · Ticket- und Aufgabensysteme, Kanban-Board (Aufgaben und Status) · Wiki oder Intranet (Wissen) · Versionsverwaltung wie Git (Code).
+
+**Regeln für die Zusammenarbeit:**
+- Ein Medium pro Zweck vereinbaren (Dringendes per Anruf, Aufgaben im Ticket, Entscheidungen schriftlich) – sonst gehen Informationen verloren.
+- **Netiquette:** sachlicher Ton, aussagekräftiger Betreff, Antwort an alle nur bei Bedarf, in Videokonferenzen Mikrofon aus und Tagesordnung vorab.
+- Dateien einheitlich benennen, Versionen kennzeichnen, Freigaben **nur an Berechtigte** und mit Ablaufdatum, Zugriffsrechte nach dem Prinzip der minimalen Rechte.
+- Ergebnisse festhalten (Protokoll, Aufgabenliste mit Verantwortlichem und Termin).
+
+**Datenschutz und Sicherheit (hier verbinden sich WiSo und Datenqualität):**
+- **Personenbezogene Daten** nur über vom Unternehmen freigegebene Dienste austauschen. Nutzt der Anbieter Daten im Auftrag, braucht es einen **Auftragsverarbeitungsvertrag** (Art. 28 DSGVO); bei Servern außerhalb der EU gelten zusätzliche Regeln für die Übermittlung in Drittländer.
+- **Schatten-IT** (private Messenger, private Cloud für Firmendaten) vermeiden – das Unternehmen verliert Kontrolle und Nachweisbarkeit.
+- Zugänge mit **Zwei-Faktor-Authentifizierung** sichern, Verbindungen verschlüsseln (z. B. VPN im Homeoffice), Bildschirm sperren, Links und Anhänge unbekannter Absender nicht öffnen (Phishing).
+- **Aufzeichnung** von Besprechungen nur mit Information und Einwilligung der Teilnehmenden; vertrauliche Inhalte nicht in geteilten Bildschirmen zeigen.
+- **Urheberrecht:** Fremde Inhalte (Bilder, Texte, Software) nur nutzen, wenn Lizenz oder Zustimmung vorliegt, und die Quelle nennen.
+
+**Mobiles Arbeiten:** Der Arbeitsschutz gilt auch im Homeoffice (Gefährdungsbeurteilung, Ergonomie), ebenso das Arbeitszeitgesetz mit seinen Ruhezeiten – Erreichbarkeit außerhalb der Arbeitszeit ist nicht selbstverständlich. Die Unfallversicherung gilt bei betrieblicher Tätigkeit (siehe 5.1).
+
+**Prüfungsmuster:** „Welches Medium eignet sich für …?“ (dringend/klärend → synchron; nachvollziehbar/dokumentiert → asynchron) und „Welche Maßnahme schützt vertrauliche Daten bei der Zusammenarbeit?“ (Berechtigungen, Verschlüsselung, 2FA, freigegebene Dienste).
+
 ---
 
 ## Die 8 häufigsten Fehler aus Prüfersicht

@@ -833,7 +833,7 @@ button.stern.nur-icon { padding: 4px 6px; flex: none; }
 .leicht-richtung .icon { color: var(--accent); }
 .fc-question.umgekehrt { font-size: 1.05rem; font-weight: 500; }
 
-/* SQL-Belegsatz (Umsetzungsplan Phase 6): Seite unter Glossar, Seitenpanel im SQL-Editor, Druck auf 2 Seiten A4 */
+/* SQL-Belegsatz (Umsetzungsplan Phase 6): Seite unter Glossar, Seitenpanel im SQL-Editor, Druck auf etwa 3 Seiten A4 */
 .belegsatz-titel { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
 .belegsatz h2 { font-size: 1.1rem; margin: 1.4em 0 0.4em; }
 .belegsatz pre { font-size: 0.85rem; }

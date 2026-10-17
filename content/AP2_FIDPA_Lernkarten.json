@@ -3,25 +3,25 @@
     "titel": "AP2 Lernkarten – Fachinformatiker/-in Daten- und Prozessanalyse",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-09-21",
-    "aktualisiert_am": "2026-10-15",
+    "aktualisiert_am": "2026-10-17",
     "version": "1.1",
     "sprache": "de",
     "anzahl_decks": 28,
-    "anzahl_karten": 663,
+    "anzahl_karten": 696,
     "karten_nach_typ": {
-      "abgrenzung": 111,
-      "anwendung": 83,
-      "falle": 116,
-      "rechnung": 57,
-      "wissen": 296
+      "abgrenzung": 118,
+      "anwendung": 84,
+      "falle": 120,
+      "rechnung": 59,
+      "wissen": 315
     },
     "karten_nach_status": {
-      "behandelt": 649,
+      "behandelt": 682,
       "offen": 14
     },
     "karten_nach_schwierigkeit": {
-      "1": 238,
-      "2": 385,
+      "1": 246,
+      "2": 410,
       "3": 40
     },
     "felder": {
@@ -109,7 +109,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 1",
       "status": "behandelt",
-      "anzahl_karten": 29,
+      "anzahl_karten": 32,
       "karten": [
         {
           "id": "SQL-012",
@@ -415,6 +415,39 @@
           "tags": [
             "null"
           ]
+        },
+        {
+          "id": "SQL-030",
+          "frage": "Was liefert DATEDIFF(Datumsteil, Anfangsdatum, Enddatum) im SQL-Auszug des IHK-Anhangs?",
+          "antwort": "Enddatum minus Startdatum, ausgedrückt in der unter Datumsteil genannten Einheit (DAY, MONTH, YEAR, HOUR, MINUTE). Reihenfolge der Argumente beachten: erst Anfangs-, dann Enddatum. In SQLite: JULIANDAY(ende) - JULIANDAY(start) für Tage.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "belegsatz",
+            "datum"
+          ]
+        },
+        {
+          "id": "SQL-031",
+          "frage": "Welche Funktionen für Datum und Uhrzeit nennt der Anhang und was ist bei WEEKDAY besonders?",
+          "antwort": "NOW(), YEAR, MONTH, DAY, HOUR, MINUTE, WEEKDAY, DATEADD(Datumsteil, Intervall, Datum) und DATEDIFF. WEEKDAY liefert den Wochentag als Zahl mit Montag = 0. Das Datumsformat im Anhang ist DD.MM.YYYY.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "belegsatz",
+            "datum"
+          ]
+        },
+        {
+          "id": "SQL-032",
+          "frage": "Welche statistischen Aggregatfunktionen stehen im SQL-Auszug des Anhangs?",
+          "antwort": "AVG, STDDEV (Standardabweichung), VARIANCE (Varianz) und CORR(Spalte_1, Spalte_2) für die Korrelation zweier Merkmale (1 = voll korreliert, 0 = kein Zusammenhang), dazu COUNT, SUM, MIN, MAX. Welche Varianz (÷ n oder ÷ n − 1) gemeint ist, hängt vom System ab – in der Prüfung die Variante nennen.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "belegsatz",
+            "statistik"
+          ]
         }
       ]
     },
@@ -655,7 +688,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 3",
       "status": "behandelt",
-      "anzahl_karten": 27,
+      "anzahl_karten": 28,
       "karten": [
         {
           "id": "ST1-006",
@@ -936,6 +969,17 @@
           "tags": [
             "normalverteilung"
           ]
+        },
+        {
+          "id": "ST1-028",
+          "frage": "Die Formelübersicht im Anhang teilt die empirische Varianz durch n − 1 – wann teilst du trotzdem durch n?",
+          "antwort": "Bei der vollständigen Grundgesamtheit (σ²) oder wenn Wahrscheinlichkeiten p_i gegeben sind (Erwartungswert, Var(X) = E(X − E(X))²). Immer dazuschreiben, welche Konvention du verwendest.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "formelsammlung",
+            "varianz"
+          ]
         }
       ]
     },
@@ -945,7 +989,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 4",
       "status": "behandelt",
-      "anzahl_karten": 22,
+      "anzahl_karten": 25,
       "karten": [
         {
           "id": "ST2-018",
@@ -1171,6 +1215,39 @@
             "korrelation",
             "signifikanz"
           ]
+        },
+        {
+          "id": "ST2-023",
+          "frage": "Wie berechnest du die Kovarianz zweier Merkmale und wie daraus den Pearson-Koeffizienten?",
+          "antwort": "s_xy = 1/(n−1) · Σ (x_i − x̄)(y_i − ȳ); r_xy = s_xy / (s_x · s_y). Positive Kovarianz: gleichsinnig, negative: gegensinnig; r liegt zwischen −1 und +1.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "formelsammlung",
+            "kovarianz"
+          ]
+        },
+        {
+          "id": "ST2-024",
+          "frage": "Was bedeutet RSS bei der linearen Regression und was wird minimiert?",
+          "antwort": "RSS (Residual Sum of Squares) = Σ (y_i − ŷ_i)², die Summe der quadrierten Abweichungen zwischen tatsächlichem und vorhergesagtem Wert. Die Methode der kleinsten Quadrate wählt β₀ und β₁ so, dass RSS minimal wird. Tatsächlicher Wert: y = β₀ + β₁x + ε.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "formelsammlung",
+            "regression"
+          ]
+        },
+        {
+          "id": "ST2-025",
+          "frage": "Wie bestimmst du Steigung und Achsenabschnitt der Regressionsgeraden aus Kovarianz und Mittelwerten?",
+          "antwort": "β₁ = s_xy / s_x² (Kovarianz geteilt durch Varianz von x), β₀ = ȳ − β₁ · x̄. Beide Formeln stehen nicht im Anhang. Die Gerade geht immer durch den Punkt (x̄ | ȳ).",
+          "typ": "rechnung",
+          "schwierigkeit": 2,
+          "tags": [
+            "formelsammlung",
+            "regression"
+          ]
         }
       ]
     },
@@ -1180,7 +1257,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 5 + BPMN-Vertiefung",
       "status": "behandelt",
-      "anzahl_karten": 90,
+      "anzahl_karten": 93,
       "karten": [
         {
           "id": "PRZ-005",
@@ -2170,6 +2247,39 @@
             "interview",
             "informationsquellen"
           ]
+        },
+        {
+          "id": "PRZ-091",
+          "frage": "Wie nennt der Anhang die drei EPK-Konnektoren und was bedeutet „Offenes Oder“?",
+          "antwort": "„Und“ (∧): alle Ereignisse bzw. alle Zweige. „Exklusives Oder“ (XOR): genau eines. „Offenes Oder“ (∨): mindestens eines von mehreren Ereignissen, eine Funktion wird also schon mit einem eingetretenen Ereignis ausgeführt.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "epk",
+            "konnektor"
+          ]
+        },
+        {
+          "id": "PRZ-092",
+          "frage": "Welche Symbole der eEPK nennt der Anhang neben Ereignis, Funktion und Konnektoren?",
+          "antwort": "Organisationseinheit (Ellipse mit Strich links), Objekt (Rechteck: Information, Material, Ressource, Produkt), Kontrollfluss (Pfeil), Informationsfluss bzw. Material-/Ressourcenfluss (Doppelpfeil) und Zuordnung (Linie zwischen Funktion und Organisationseinheit/Objekt).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "epk",
+            "eepk"
+          ]
+        },
+        {
+          "id": "PRZ-093",
+          "frage": "Welche BPMN-Eventtypen zeigt der Anhang und wie hängen sie mit Start, Intermediate und Ende zusammen?",
+          "antwort": "Message Event (Umschlag), Timer Event (Uhr) und Exception Event (Blitz). Jeder Typ kann als Start-, Intermediate- oder Endevent vorkommen. Start = dünner Kreis, Intermediate = Doppelkreis, Ende = dicker Kreis.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "bpmn",
+            "ereignisse"
+          ]
         }
       ]
     },
@@ -2179,7 +2289,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 6",
       "status": "behandelt",
-      "anzahl_karten": 50,
+      "anzahl_karten": 52,
       "karten": [
         {
           "id": "ML-020",
@@ -2705,6 +2815,28 @@
             "neuronales-netz",
             "perzeptron"
           ]
+        },
+        {
+          "id": "ML-051",
+          "frage": "Wie baut der Random-Forest-Algorithmus laut Anhang seine Bäume und wie klassifiziert er?",
+          "antwort": "Für jeden der B Bäume: N Datensätze mit Zurücklegen ziehen (Bootstrapping), m Attribute zufällig auswählen, Entscheidungsbaum bauen (z. B. ID3). Klassifikation: Datensatz in jeden Baum geben, die Klasse mit der Mehrheit der Entscheidungen gewinnt.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "random-forest",
+            "formelsammlung"
+          ]
+        },
+        {
+          "id": "ML-052",
+          "frage": "Wie hängen Info(A), Info(A, aᵢ) und Gewinn(A) im ID3-Teil des Anhangs zusammen?",
+          "antwort": "Info(A) = Σ −p(aᵢ)·log₂ p(aᵢ) ist die Entropie der Klassenverteilung. Info(A, aᵢ) = Σ (aᵢ/A)·Info(aᵢ) ist die gewichtete Entropie der Teilmengen nach dem Split. Gewinn(A) = Info(A) − Info(A, aᵢ). Es wird das Attribut mit dem höchsten Informationsgewinn gewählt.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "id3",
+            "formelsammlung"
+          ]
         }
       ]
     },
@@ -2714,7 +2846,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 7",
       "status": "behandelt",
-      "anzahl_karten": 23,
+      "anzahl_karten": 25,
       "karten": [
         {
           "id": "MG-012",
@@ -2953,6 +3085,28 @@
             "mae",
             "rmse"
           ]
+        },
+        {
+          "id": "MG-024",
+          "frage": "Welche vier Kennzahlen gibt der Anhang für die Konfusionsmatrix an – und welche nicht?",
+          "antwort": "Accuracy = (TP+TN)/(TP+TN+FP+FN), Precision = TP/(TP+FP), Recall/Sensitivity = TP/(TP+FN), Specificity = TN/(TN+FP). Nicht im Anhang: F1-Score = 2·P·R/(P+R) und die Fehlerrate (1 − Accuracy) – selbst wissen.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "konfusionsmatrix",
+            "formelsammlung"
+          ]
+        },
+        {
+          "id": "MG-025",
+          "frage": "Wie ist die Konfusionsmatrix im Anhang angeordnet?",
+          "antwort": "Zeilen = tatsächliche Klasse (Ja/Nein), Spalten = vorhergesagte Klasse (Ja/Nein). Zeile „Ja“: TP und FN, Zeile „Nein“: FP und TN. Bei anderer Anordnung in der Aufgabe erst die Achsen prüfen.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "konfusionsmatrix",
+            "formelsammlung"
+          ]
         }
       ]
     },
@@ -2962,7 +3116,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 8",
       "status": "behandelt",
-      "anzahl_karten": 23,
+      "anzahl_karten": 26,
       "karten": [
         {
           "id": "DWH-013",
@@ -3204,6 +3358,39 @@
           "tags": [
             "partitionierung",
             "performance"
+          ]
+        },
+        {
+          "id": "DWH-024",
+          "frage": "Wie gibst du Datenmengen laut Anhang richtig an: in GB oder in GiB?",
+          "antwort": "In Binärpräfixen (IEC): KiB, MiB, GiB, TiB mit je Faktor 1.024. Dezimalpräfixe (kB, MB, GB) gehören zu physikalischen Größen wie Strom, Leistung, Geschwindigkeit. „Angaben zu Datenmengen sind nur mit Binärpräfixen richtig.“",
+          "typ": "falle",
+          "schwierigkeit": 1,
+          "tags": [
+            "praefixe",
+            "binaer"
+          ]
+        },
+        {
+          "id": "DWH-025",
+          "frage": "Wie viele GiB fasst ein Datenträger mit 500 GB (Herstellerangabe, dezimal)?",
+          "antwort": "500 · 10⁹ Byte / 2³⁰ Byte pro GiB ≈ 465,7 GiB. Die Abweichung zwischen Dezimal- und Binärpräfix wächst mit der Stufe: 2,40 % (kB/KiB), 4,86 %, 7,37 %, 9,95 % (TB/TiB) bis 20,9 % (YB/YiB).",
+          "typ": "rechnung",
+          "schwierigkeit": 2,
+          "tags": [
+            "praefixe",
+            "binaer"
+          ]
+        },
+        {
+          "id": "DWH-026",
+          "frage": "Wie viele Byte hat 1 MiB, 1 GiB und 1 TiB?",
+          "antwort": "1 MiB = 2²⁰ = 1.048.576 Byte, 1 GiB = 2³⁰ = 1.073.741.824 Byte, 1 TiB = 2⁴⁰ = 1.099.511.627.776 Byte. Umrechnung: 1 TiB = 1.024 GiB = 1.048.576 MiB.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "praefixe",
+            "binaer"
           ]
         }
       ]
@@ -3674,7 +3861,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 10",
       "status": "behandelt",
-      "anzahl_karten": 25,
+      "anzahl_karten": 29,
       "karten": [
         {
           "id": "ITS-025",
@@ -3929,6 +4116,51 @@
           "tags": [
             "nis2",
             "meldepflicht"
+          ]
+        },
+        {
+          "id": "ITS-026",
+          "frage": "Was bewirkt WITH GRANT OPTION bei GRANT?",
+          "antwort": "Der Empfänger darf das erhaltene Recht selbst an andere Benutzer oder Rollen weitergeben. Beispiel: GRANT SELECT ON shop.* TO analyst WITH GRANT OPTION. REVOKE entzieht Recht oder Rolle wieder.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "belegsatz",
+            "rechte",
+            "dcl"
+          ]
+        },
+        {
+          "id": "ITS-027",
+          "frage": "Auf welcher OSI-Schicht arbeiten Switch, Router und Stateful-Inspection-Firewall laut Anhang?",
+          "antwort": "Switch: Layer 2. Router: Layer 3 (z. B. mit NAT/PAT). Stateful-Inspection-Firewall: bis Layer 4. Weitere Funktionen (Layer-3-Switch, Next Generation Firewall) ergeben sich aus der Aufgabenstellung.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "netzwerk",
+            "belegsatz"
+          ]
+        },
+        {
+          "id": "ITS-028",
+          "frage": "Was zeigt das Symbol „Kombigerät für SOHO“ im Netzwerkplan?",
+          "antwort": "Ein Gerät mit unterschiedlichem Funktionsumfang für Small Office/Home Office, z. B. Switch, Router, Firewall und Accesspoint in einem Gehäuse (typisch der DSL- oder Glasfaser-Router mit WLAN).",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "netzwerk",
+            "belegsatz"
+          ]
+        },
+        {
+          "id": "ITS-029",
+          "frage": "Was ist bei einem Netzwerkplan in der Prüfung zu beachten (Symbole, Umfang)?",
+          "antwort": "Von den Symbolen des Anhangs darf abgewichen werden, weitere Symbole (Drucker, Endgeräte) sind erlaubt; für VPN, Client, Drucker gibt es keine Vorgabe. Der Plan zeigt nur den relevanten Teil des Netzes. Netze erhalten eine Adresse mit Präfix, z. B. 192.0.2.0/24.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "netzwerk",
+            "belegsatz"
           ]
         }
       ]
@@ -4255,7 +4487,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 12",
       "status": "behandelt",
-      "anzahl_karten": 25,
+      "anzahl_karten": 26,
       "karten": [
         {
           "id": "PM-008",
@@ -4510,6 +4742,17 @@
           "tags": [
             "scrum"
           ]
+        },
+        {
+          "id": "PM-026",
+          "frage": "Wie ist ein Netzplan-Knoten im Anhang aufgebaut und wie sind GP und FP definiert?",
+          "antwort": "Oben links FAZ, oben rechts FEZ; Mitte Vorgangs-ID und Beschreibung; unten Dauer, GP, FP; unten links SAZ, unten rechts SEZ. GP = SAZ − FAZ (oder SEZ − FEZ), FP = FAZ des Nachfolgers − FEZ des Vorgangs.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "netzplan",
+            "belegsatz"
+          ]
         }
       ]
     },
@@ -4661,7 +4904,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 15",
       "status": "behandelt",
-      "anzahl_karten": 24,
+      "anzahl_karten": 32,
       "karten": [
         {
           "id": "TEC-019",
@@ -4916,6 +5159,94 @@
           "schwierigkeit": 2,
           "tags": [
             "kodierung"
+          ]
+        },
+        {
+          "id": "TEC-025",
+          "frage": "Was unterscheidet Endknoten und Ablaufende im Aktivitätsdiagramm?",
+          "antwort": "Endknoten (Kreis mit gefülltem Kern) beendet alle Aktivitäten der gesamten Aktivität. Ablaufende (Kreis mit Kreuz) beendet nur den aktuellen Fluss, parallele Flüsse laufen weiter.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "uml",
+            "aktivitaetsdiagramm"
+          ]
+        },
+        {
+          "id": "TEC-026",
+          "frage": "Wofür steht der Kreis mit einem Buchstaben (A … A) im Aktivitätsdiagramm?",
+          "antwort": "Für einen Seitenwechsel (Konnektor): Der Fluss endet in einem Kreis A und setzt in dem Kreis mit demselben Buchstaben fort. So muss kein Pfeil quer über das Blatt laufen.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "uml",
+            "aktivitaetsdiagramm"
+          ]
+        },
+        {
+          "id": "TEC-027",
+          "frage": "Wie unterscheiden sich Aggregation, Komposition und Implementierung im Klassendiagramm?",
+          "antwort": "Aggregation: leere Raute beim Ganzen, Teil kann allein existieren. Komposition: gefüllte Raute beim Ganzen, Teil ist existenzabhängig. Implementierung: gestrichelte Linie mit leerer Pfeilspitze von der Klasse zur Schnittstelle (<<interface>>). Vererbung: durchgezogene Linie mit leerer Spitze zur Oberklasse.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "uml",
+            "klassendiagramm"
+          ]
+        },
+        {
+          "id": "TEC-028",
+          "frage": "Wie wird die Sichtbarkeit von Attributen und Methoden in UML geschrieben?",
+          "antwort": "+ public, # protected, − private, ~ package. Attribut: Sichtbarkeit Name : Typ {Eigenschaften}. Methode: Sichtbarkeit Name(parameter1 : Typ, …) : Rückgabetyp {Eigenschaften}. Eigenschaften z. B. {static}, {final}.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "uml",
+            "klassendiagramm"
+          ]
+        },
+        {
+          "id": "TEC-029",
+          "frage": "Wie unterscheiden sich synchrone und asynchrone Nachricht im Sequenzdiagramm?",
+          "antwort": "Synchron (gefüllte Pfeilspitze): Der Sender wartet, bis der Aufruf beendet ist, ein Rückgabewert (gestrichelter Pfeil) ist möglich. Asynchron (offene Pfeilspitze): Der Sender erwartet keine Antwort und arbeitet weiter.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "uml",
+            "sequenzdiagramm"
+          ]
+        },
+        {
+          "id": "TEC-030",
+          "frage": "Welche Rahmen und Sonderzeichen kennt das Sequenzdiagramm im Anhang?",
+          "antwort": "alt mit [Bedingung] und [else] (Alternativen), opt [Bedingung] (optional), loop [Bedingung] und loop(10) (Schleife mit fester Anzahl); Selbstaufruf, create (Objekt-Konstruktion), Kreuz am Ende der Lebenslinie (Objekt-Destruktion).",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "uml",
+            "sequenzdiagramm"
+          ]
+        },
+        {
+          "id": "TEC-031",
+          "frage": "Wie wird ein Übergang im Zustandsdiagramm beschriftet und was sind entry, do, exit und after?",
+          "antwort": "Übergang: operation[bedingung]/verhalten – die Operation ist der Auslöser (Trigger). Im Zustand: entry/aktion beim Betreten, do/aktion solange der Zustand aktiv ist, exit/aktion beim Verlassen. after(Zeitdauer) ist ein Zeitereignis.",
+          "typ": "wissen",
+          "schwierigkeit": 2,
+          "tags": [
+            "uml",
+            "zustandsdiagramm"
+          ]
+        },
+        {
+          "id": "TEC-032",
+          "frage": "Wohin zeigen die Pfeile von «include» und «extend» im Anwendungsfalldiagramm?",
+          "antwort": "«include»: gestrichelt vom Basis-Anwendungsfall zum sekundären (immer mitlaufenden). «extend»: gestrichelt vom sekundären zum erweiterten Anwendungsfall, mit Bedingung {bedingung} und extension point – er läuft nur bei erfüllter Bedingung.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 2,
+          "tags": [
+            "uml",
+            "use-case"
           ]
         }
       ]
@@ -6313,7 +6644,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 14",
       "status": "behandelt",
-      "anzahl_karten": 8,
+      "anzahl_karten": 11,
       "karten": [
         {
           "id": "WS6-003",
@@ -6395,6 +6726,39 @@
           "schwierigkeit": 2,
           "tags": [
             "green-it"
+          ]
+        },
+        {
+          "id": "WS6-009",
+          "frage": "Wann wählst du synchrone, wann asynchrone Kommunikation bei der Zusammenarbeit?",
+          "antwort": "Synchron (Telefon, Videokonferenz): dringende Klärung, Abstimmung, Konflikte. Asynchron (E-Mail, Ticket, Wiki, geteilte Dokumente): nachvollziehbare, dokumentierte Aufgaben und Entscheidungen, Zusammenarbeit über Arbeitszeiten hinweg.",
+          "typ": "abgrenzung",
+          "schwierigkeit": 1,
+          "tags": [
+            "digitale-medien",
+            "zusammenarbeit"
+          ]
+        },
+        {
+          "id": "WS6-010",
+          "frage": "Welche Maßnahmen schützen vertrauliche Daten bei der Zusammenarbeit über digitale Medien?",
+          "antwort": "Nur vom Unternehmen freigegebene Dienste (keine Schatten-IT), Auftragsverarbeitungsvertrag bei Cloud-Anbietern, Berechtigungen nach minimalen Rechten, Zwei-Faktor-Authentifizierung, Verschlüsselung/VPN, Aufzeichnung nur mit Einwilligung, Vorsicht bei Links und Anhängen (Phishing).",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "digitale-medien",
+            "datenschutz"
+          ]
+        },
+        {
+          "id": "WS6-011",
+          "frage": "Welche Regeln gelten bei mobilem Arbeiten und Homeoffice weiter?",
+          "antwort": "Arbeitsschutz (Gefährdungsbeurteilung, Ergonomie), Arbeitszeitgesetz mit Ruhezeiten und Pausen, Datenschutz und IT-Sicherheit. Unfallversicherung besteht bei betrieblicher Tätigkeit auch zu Hause. Erreichbarkeit außerhalb der Arbeitszeit ist nicht selbstverständlich.",
+          "typ": "falle",
+          "schwierigkeit": 2,
+          "tags": [
+            "digitale-medien",
+            "homeoffice"
           ]
         }
       ]

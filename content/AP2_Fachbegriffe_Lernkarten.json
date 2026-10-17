@@ -3,11 +3,11 @@
     "titel": "AP2 Fachbegriffe – Begriffskarten zu allen Deep Dives",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-10-06",
-    "aktualisiert_am": "2026-10-13",
+    "aktualisiert_am": "2026-10-17",
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 802,
+    "anzahl_karten": 816,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -923,7 +923,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 4",
       "status": "behandelt",
-      "anzahl_karten": 17,
+      "anzahl_karten": 20,
       "karten": [
         {
           "id": "FB-streudiagramm",
@@ -1089,6 +1089,36 @@
           "id": "FB-geometrisches-mittel",
           "frage": "Geometrisches Mittel",
           "antwort": "n-te Wurzel aus dem Produkt von n Werten; für Wachstumsraten: (Endwert / Anfangswert)^(1/n) − 1. Richtig für durchschnittliche Wachstumsraten, weil jede Rate eine andere Basis hat.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-kovarianz",
+          "frage": "Kovarianz",
+          "antwort": "Maß für den gemeinsamen Verlauf zweier Merkmale: s_xy = 1/(n−1)·Σ(xᵢ−x̄)(yᵢ−ȳ). Positiv bei gleichsinnigem, negativ bei gegensinnigem Zusammenhang; durch Standardisierung entsteht der Pearson-Korrelationskoeffizient.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-rss-residual-sum-of-squares",
+          "frage": "RSS (Residual Sum of Squares)",
+          "antwort": "Summe der quadrierten Abweichungen zwischen tatsächlichen Werten und der Regressionsgeraden, Σ(yᵢ−ŷᵢ)²; die Methode der kleinsten Quadrate minimiert sie.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-methode-der-kleinsten-quadrate",
+          "frage": "Methode der kleinsten Quadrate",
+          "antwort": "Verfahren, das die Parameter der Regressionsgeraden so bestimmt, dass die Summe der quadrierten Abweichungen (RSS) minimal wird.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -1863,7 +1893,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 6",
       "status": "behandelt",
-      "anzahl_karten": 57,
+      "anzahl_karten": 58,
       "karten": [
         {
           "id": "FB-crisp-dm",
@@ -2429,6 +2459,16 @@
           "id": "FB-backpropagation",
           "frage": "Backpropagation",
           "antwort": "Trainingsverfahren für mehrschichtige Netze: Der Fehler an der Ausgabe wird Schicht für Schicht zurückgerechnet und jedes Gewicht per Gradientenabstieg ein Stück verbessert.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-bootstrapping",
+          "frage": "Bootstrapping",
+          "antwort": "Zufälliges Ziehen von N Datensätzen mit Zurücklegen aus den Trainingsdaten; beim Random Forest bekommt so jeder Baum eine etwas andere Trainingsmenge.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -5803,7 +5843,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 14",
       "status": "behandelt",
-      "anzahl_karten": 105,
+      "anzahl_karten": 108,
       "karten": [
         {
           "id": "FB-sozialversicherung",
@@ -6854,6 +6894,36 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-schatten-it",
+          "frage": "Schatten-IT",
+          "antwort": "Hard- und Software oder Cloud-Dienste, die Beschäftigte ohne Wissen und Freigabe der IT-Abteilung nutzen; Risiko für Datenschutz, Sicherheit und Nachvollziehbarkeit.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-synchrone-kommunikation",
+          "frage": "Synchrone Kommunikation",
+          "antwort": "Austausch zur gleichen Zeit (Telefon, Videokonferenz); geeignet für schnelle Klärung und Abstimmung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-asynchrone-kommunikation",
+          "frage": "Asynchrone Kommunikation",
+          "antwort": "Zeitversetzter Austausch (E-Mail, Ticket, Wiki, geteilte Dokumente); geeignet für dokumentierte Aufgaben und Entscheidungen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -6863,7 +6933,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 15",
       "status": "behandelt",
-      "anzahl_karten": 76,
+      "anzahl_karten": 83,
       "karten": [
         {
           "id": "FB-strukturierte-daten",
@@ -7619,6 +7689,76 @@
           "id": "FB-zustandsdiagramm",
           "frage": "Zustandsdiagramm",
           "antwort": "UML-Diagramm mit den Zuständen eines Objekts und den Übergängen dazwischen (Ereignis [Bedingung] / Aktion).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-binarprafix",
+          "frage": "Binärpräfix",
+          "antwort": "Vorsatz zur Angabe von Datenmengen zur Basis 2 nach IEC (Kibi, Mebi, Gibi, Tebi …, Faktor 1.024 je Stufe); im Gegensatz zum Dezimalpräfix (Kilo, Mega, Giga …, Faktor 1.000) für physikalische Größen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gibibyte-gib",
+          "frage": "Gibibyte (GiB)",
+          "antwort": "Binäre Einheit der Datenmenge: 2³⁰ Byte = 1.073.741.824 Byte = 1.024 MiB. Nicht dasselbe wie ein Gigabyte (10⁹ Byte).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-kombigerat-soho",
+          "frage": "Kombigerät (SOHO)",
+          "antwort": "Netzwerkgerät für kleine Büros und Heimnetze, das mehrere Funktionen wie Switch, Router, Firewall und Accesspoint in einem Gehäuse vereint.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-accesspoint",
+          "frage": "Accesspoint",
+          "antwort": "WLAN-Zugangspunkt: verbindet drahtlose Geräte mit dem kabelgebundenen Netz.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-stateful-inspection",
+          "frage": "Stateful Inspection",
+          "antwort": "Firewall-Technik, die den Zustand von Verbindungen (z. B. TCP-Sitzungen) mitführt und nur Pakete zulässt, die zu einer bekannten, erlaubten Verbindung gehören; arbeitet bis Schicht 4 des OSI-Modells.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-ablaufende",
+          "frage": "Ablaufende",
+          "antwort": "Knoten im UML-Aktivitätsdiagramm (Kreis mit Kreuz), der nur den aktuellen Fluss beendet; der Endknoten beendet dagegen alle Aktivitäten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-schwimmbahn",
+          "frage": "Schwimmbahn",
+          "antwort": "Spalte oder Zeile im UML-Aktivitätsdiagramm, die Aktionen einem Zuständigen (Person, Abteilung, System) zuordnet.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
