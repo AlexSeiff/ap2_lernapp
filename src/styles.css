@@ -1015,3 +1015,14 @@ a.kpi.w-innen:hover { transform: none; }
   .widget p a, .widget .plain li > a, .w-begriff a { display: inline-block; padding-block: 6px; }
   .tf-titel { display: flex; align-items: center; min-height: 40px; }
 }
+
+/* Karteikarten je Art: Begriff, Frage, Rechnung */
+.fc-label { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.fc-vorne.frage { border-left: 4px solid var(--accent); padding-left: 14px; }
+.fc-vorne.begriff { text-align: center; padding: 12px 0; }
+.fc-vorne.begriff .fc-label { justify-content: center; }
+.fc-term { font-size: 1.9rem; font-weight: 700; line-height: 1.25; }
+.fc-aufforderung { margin: 8px 0 0; color: var(--muted); font-size: 0.95rem; }
+.fc-vorne.rechnung { border-left: 4px solid var(--accent); padding-left: 14px; }
+.fc-hinten.rechnung { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; font-variant-numeric: tabular-nums; line-height: 1.7; }
+.fc-hinten.rechnung .katex-display { margin: 0.6em 0; overflow-x: auto; }

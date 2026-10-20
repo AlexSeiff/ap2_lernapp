@@ -1,6 +1,7 @@
 // Import der Lernkarten-Datei (z. B. AP2_FIDPA_Lernkarten.json) mit Decks, Kartentyp, Schwierigkeit, Tags und optionalem Block „mc“ (Leicht-Modus).
 
 import { z } from 'zod';
+import { pruefeSvg } from './svgDiagramm';
 import type { CardType, Deck, Flashcard, ImportIssue, KartenMc } from './types';
 
 const CARD_TYPES: CardType[] = ['wissen', 'abgrenzung', 'rechnung', 'anwendung', 'falle', 'begriff'];
@@ -13,6 +14,8 @@ interface RawCard {
   schwierigkeit?: unknown;
   tags?: unknown;
   mc?: unknown;
+  diagramm?: unknown;
+  rechenweg?: unknown;
 }
 
 interface RawDeck {
@@ -155,6 +158,14 @@ export function parseLernkarten(fileName: string, json: string, topics: Map<stri
       // Ein fehlerhafter mc-Block wird gemeldet, die Karte bleibt (ohne Leicht-Antworten) nutzbar.
       const mc = k.mc === undefined ? undefined : pruefeMc(k.mc);
       if (mc?.fehler) issues.push({ file: fileName, message: `Karte ${id}: Block „mc“ ignoriert (${mc.fehler}).` });
+      // Zeichnung (SVG, Positivliste wie in den Lernblättern): bei Verstoß gemeldet und weggelassen, die Karte bleibt nutzbar.
+      let diagramm = typeof k.diagramm === 'string' && k.diagramm.trim() ? k.diagramm.trim() : undefined;
+      const svgFehler = diagramm ? pruefeSvg(diagramm) : undefined;
+      if (svgFehler) {
+        issues.push({ file: fileName, message: `Karte ${id}: Feld „diagramm“ ignoriert (${svgFehler})` });
+        diagramm = undefined;
+      }
+      const rechenweg = typeof k.rechenweg === 'string' && k.rechenweg.trim() ? k.rechenweg.trim() : undefined;
       cards.push({
         id,
         topicId,
@@ -166,6 +177,8 @@ export function parseLernkarten(fileName: string, json: string, topics: Map<stri
         schwierigkeit: typeof k.schwierigkeit === 'number' ? k.schwierigkeit : undefined,
         tags: Array.isArray(k.tags) ? k.tags.map(String) : [],
         ...(mc?.mc ? { mc: mc.mc } : {}),
+        ...(diagramm ? { diagramm } : {}),
+        ...(rechenweg ? { rechenweg } : {}),
       });
     }
     if (typeof raw.anzahl_karten === 'number' && raw.anzahl_karten !== cards.length) {

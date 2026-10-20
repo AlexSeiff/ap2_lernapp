@@ -5,6 +5,7 @@ import { AntwortVergleich, EigeneAntwortFeld } from '../components/EigeneAntwort
 import { LeichtOptionen } from '../components/LeichtOptionen';
 import { MarkierStern } from '../components/MarkierStern';
 import { SqlUebungLinks } from '../components/SqlUebungLinks';
+import { KartenAntwort, KartenFrage } from '../components/KartenText';
 import { Markdown } from '../components/Markdown';
 import { useCardFilters, useCardSession } from '../hooks/useCardSession';
 import { leichtZahlen } from '../lib/leicht';
@@ -98,7 +99,7 @@ export function Karteikarten() {
               <Markdown className="fc-question umgekehrt">{runde.frage}</Markdown>
             </>
           ) : (
-            <Markdown className="fc-question">{card.question}</Markdown>
+            <KartenFrage card={card} />
           )}
           <LeichtOptionen
             optionen={runde.optionen}
@@ -124,7 +125,7 @@ export function Karteikarten() {
                 card.answer && (
                   <>
                     <h4>Ganze Antwort</h4>
-                    <Markdown>{card.answer}</Markdown>
+                    <KartenAntwort card={card} />
                   </>
                 )
               )}
@@ -188,7 +189,7 @@ export function Karteikarten() {
             {card.schwierigkeit && <span className="badge muted">{LEVEL_LABELS[card.schwierigkeit] ?? card.schwierigkeit}</span>}
             <span className="muted small">{card.id}</span>
           </div>
-          <Markdown className="fc-question">{card.question}</Markdown>
+          <KartenFrage card={card} />
           {card.typ === 'rechnung' && !flipped && (
             <p className="hint">
               <Icon name="pencil" /> Erst auf Papier rechnen, dann umdrehen.
@@ -200,7 +201,7 @@ export function Karteikarten() {
                 eigene={eigeneAntwort}
                 muster={
                   card.answer ? (
-                    <Markdown>{card.answer}</Markdown>
+                    <KartenAntwort card={card} />
                   ) : (
                     <p className="muted">
                       Keine Musterantwort im Lernblatt – beantworte die Frage laut und prüfe dich anhand des Theorieteils.
@@ -596,10 +597,10 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
           </span>
           {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
         </div>
-        <Markdown className="fc-question">{card.question}</Markdown>
+        <KartenFrage card={card} />
         {offen ? (
           <div className="fc-answer">
-            {card.answer ? <Markdown>{card.answer}</Markdown> : <p className="muted">Keine Musterantwort im Lernblatt.</p>}
+            {card.answer ? <KartenAntwort card={card} /> : <p className="muted">Keine Musterantwort im Lernblatt.</p>}
           </div>
         ) : (
           <p className="hint">Klicken oder Leertaste zum Umdrehen.</p>
