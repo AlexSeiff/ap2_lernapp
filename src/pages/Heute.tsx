@@ -54,7 +54,10 @@ export function Heute() {
           </button>
         </div>
         <Schritte items={sitzung.items} index={sitzung.index} erledigt={sitzung.erledigt} uebersprungen={sitzung.uebersprungen} />
-        <p className="hint">Oben auf jeder Seite führt dich „Weiter →“ zum nächsten Schritt.</p>
+        <p className="hint">
+          Sobald ein Schritt geschafft ist (Aufgabe gespeichert, Übung richtig, Karten bewertet), geht es von selbst weiter – oder oben mit
+          „Weiter →“.
+        </p>
       </div>
     );
   }

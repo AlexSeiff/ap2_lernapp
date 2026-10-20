@@ -9,6 +9,7 @@ import { Attachments, GradePanel, TaskText } from '../components/TaskParts';
 import { formatPoints } from '../lib/grading';
 import { sicherheitLabel } from '../lib/kalibrierung';
 import { isDue, recordAttempt, resetAufgabenAntworten, setzeFehlergrund } from '../lib/progress';
+import { meldeFertig } from '../lib/heuteSitzung';
 import { recordSqlCheck } from '../lib/sql';
 import { useStore } from '../lib/store';
 
@@ -64,6 +65,7 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
       }),
     );
     setSaved(date);
+    meldeFertig(task.id);
   };
 
   /** Fehlergrund wählen – auch nach dem Speichern, dann wird der gespeicherte Versuch angepasst (ROADMAP 8.7). */

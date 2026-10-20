@@ -103,3 +103,17 @@ export function abonniereSitzung(h: () => void): () => void {
   hoerer.add(h);
   return () => hoerer.delete(h);
 }
+
+// --- „Schritt geschafft“ (Aufgabe gespeichert, Übung richtig gelöst): die HeuteLeiste führt dann von selbst zum nächsten Schritt ---
+
+const fertigHoerer = new Set<(id: string) => void>();
+
+/** Die Seite meldet: Aufgabe/Übung mit dieser ID ist erledigt. Ohne laufende Runde oder passenden Schritt geschieht nichts. */
+export function meldeFertig(id: string): void {
+  for (const h of fertigHoerer) h(id);
+}
+
+export function abonniereFertig(h: (id: string) => void): () => void {
+  fertigHoerer.add(h);
+  return () => fertigHoerer.delete(h);
+}
