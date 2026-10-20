@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { BackupInfo } from '../../shared/api';
 import { mergeProgress } from '../../shared/mergeProgress';
 import { emptyProgress } from '../../shared/progress';
+import { resetAufgabenAntworten } from '../lib/progress';
 import { useBackupDownload } from '../hooks/useBackupDownload';
 import { useConfirm } from '../hooks/useConfirm';
 import { api, IS_STATIC } from '../lib/api';
@@ -290,6 +291,24 @@ export function Daten() {
               if (file) importBackup(file, importMode.current);
             }}
           />
+          <button
+            type="button"
+            className="ghost danger"
+            onClick={async () => {
+              const ok = await confirm({
+                title: 'Aufgaben-Antworten zurücksetzen?',
+                message:
+                  'Alle bisherigen Antworten zu Aufgaben und Klausuren (Versuche, Fehlerjournal) löschen? Karteikarten, Übungen und Einstellungen bleiben. „Heute lernen“ schlägt dann wieder alle Aufgaben vor.',
+                confirmLabel: 'Antworten löschen',
+                danger: true,
+              });
+              if (!ok) return;
+              replaceProgress(resetAufgabenAntworten(progress));
+              setMsg('Aufgaben-Antworten zurückgesetzt.');
+            }}
+          >
+            Aufgaben-Antworten zurücksetzen
+          </button>
           <button
             type="button"
             className="ghost danger"

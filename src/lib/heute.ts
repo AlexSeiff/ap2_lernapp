@@ -85,7 +85,7 @@ const themaVon = (topicId: string | undefined, fallback: string) => topicId ?? f
 /**
  * Plant die Tagesrunde:
  * 1. Eine Aufgabe aus dem schwächsten Thema (letzte Klausur, sonst Ø Aufgaben; ohne Daten: das Thema mit den wenigsten Versuchen) –
- *    bevorzugt eine noch nie bearbeitete, sonst die mit dem schlechtesten letzten Ergebnis.
+ *    nur eine noch nie bearbeitete; ist das Thema durch, das nächstschwächere.
  * 2. 1–2 Übungen: fällige SQL- und Rechenübungen (älteste zuerst, höchstens 2); ist keine fällig, eine ungelöste
  *    (bevorzugt aus dem schwächsten Thema).
  * 3. Fällige Fehlerjournal-Aufgaben (älteste zuerst) bis etwa zur Hälfte der Zeit, mindestens eine.
@@ -137,15 +137,20 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
     : stats.reduce<(typeof stats)[number] | undefined>((a, b) => (!a || b.attempts < a.attempts ? b : a), undefined);
   const schwaechstesThema = schwach?.topic.id;
   if (schwach) {
-    const letzte = new Map<string, number>();
-    for (const a of progress.attempts) letzte.set(a.taskId, a.max > 0 ? a.points / a.max : 0);
-    const kandidaten = Object.values(content.tasks).filter((t) => t.topicId === schwach.topic.id && !t.generated && !verplant.has(t.id));
-    const neu = kandidaten.filter((t) => !letzte.has(t.id));
-    const unvollstaendig = kandidaten.filter((t) => (letzte.get(t.id) ?? 1) < 1).sort((a, b) => letzte.get(a.id)! - letzte.get(b.id)!);
-    const wahl = neu.length
-      ? neu[Math.floor(zufall() * neu.length)]
-      : (unvollstaendig[0] ?? kandidaten[Math.floor(zufall() * kandidaten.length)]);
-    if (wahl) add(aufgabeItem('aufgabe', wahl));
+    // Bereits beantwortete Aufgaben kommen nicht mehr vor (zurücksetzbar auf der Aufgabenseite); ist das schwächste Thema
+    // durch, kommt das nächstschwächere an die Reihe.
+    const beantwortet = new Set(progress.attempts.map((a) => a.taskId));
+    const staerke = (s: (typeof stats)[number]) => s.lastExam ?? s.avgTaskPct ?? Infinity;
+    const reihenfolge = [schwach, ...stats.filter((s) => s !== schwach).sort((a, b) => staerke(a) - staerke(b))];
+    for (const s of reihenfolge) {
+      const neu = Object.values(content.tasks).filter(
+        (t) => t.topicId === s.topic.id && !t.generated && !verplant.has(t.id) && !beantwortet.has(t.id),
+      );
+      if (neu.length) {
+        add(aufgabeItem('aufgabe', neu[Math.floor(zufall() * neu.length)]));
+        break;
+      }
+    }
   }
 
   // 2. SQL- und Rechenübungen.

@@ -147,6 +147,20 @@ describe('planeHeute', () => {
     expect(r.items.find((i) => i.art === 'rechnen')?.ids).toEqual(['RE-1']);
   });
 
+  it('bereits beantwortete Aufgaben kommen nicht mehr; ist das schwächste Thema durch, das nächste', () => {
+    const p: Progress = {
+      ...emptyProgress(),
+      attempts: [
+        { taskId: '02-A1', date: '2026-09-20', points: 1, max: 5, mode: 'einzel' },
+        { taskId: '02-A2', date: '2026-09-20', points: 1, max: 10, mode: 'einzel' },
+        { taskId: '01-A1', date: '2026-09-20', points: 5, max: 5, mode: 'einzel' },
+      ],
+    };
+    const r = plan(p);
+    expect(r.schwaechstesThema).toBe('02');
+    expect(r.items.find((i) => i.art === 'aufgabe')?.ids).toEqual(['01-A2']);
+  });
+
   it('fällige Wiederholungen und Übungen kommen dran, Wiederholung mit ?modus=wiederholung', () => {
     const p: Progress = {
       ...emptyProgress(),

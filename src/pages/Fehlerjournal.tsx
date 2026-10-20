@@ -1,14 +1,20 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import type { JournalEntry } from '../../shared/progress';
 import { FehlergrundKarte } from '../components/FehlergrundKarte';
 import { FEHLERGRUND_INFO, letzterFehlergrund } from '../lib/fehlergruende';
 import { formatPoints } from '../lib/grading';
-import { isDue, localDate } from '../lib/progress';
+import { fuelleFehlerjournal, isDue, localDate } from '../lib/progress';
 import { useStore } from '../lib/store';
 import { Icon } from '../components/Icon';
 
 export function Fehlerjournal() {
-  const { content, progress } = useStore();
+  const { content, progress, update } = useStore();
+  // Aufgaben mit schlechtem letztem Ergebnis, die noch nicht im Journal stehen, werden hier aufgenommen.
+  useEffect(() => {
+    const next = fuelleFehlerjournal(progress, (id) => !!content.tasks[id]);
+    if (next !== progress) update((p) => fuelleFehlerjournal(p, (id) => !!content.tasks[id]));
+  }, [progress, content, update]);
   const entries = Object.values(progress.journal).filter((j) => content.tasks[j.taskId]);
   const open = entries.filter((j) => !j.resolvedAt).sort((a, b) => a.due.localeCompare(b.due));
   const due = open.filter((j) => isDue(j.due));

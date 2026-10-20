@@ -447,3 +447,22 @@ describe('migrateProgress', () => {
     expect(migrated.lernziele).toEqual(raw.lernziele ?? {});
   });
 });
+
+describe('fuelleFehlerjournal', () => {
+  it('nimmt Aufgaben mit schlechtem letztem Versuch auf, sofort fällig; sonst unverändert', async () => {
+    const { fuelleFehlerjournal } = await import('../src/lib/progress');
+    const { emptyProgress } = await import('../shared/progress');
+    const p = {
+      ...emptyProgress(),
+      attempts: [
+        { taskId: 'a', date: '2026-01-01', points: 1, max: 5, mode: 'einzel' as const },
+        { taskId: 'b', date: '2026-01-01', points: 1, max: 5, mode: 'einzel' as const },
+        { taskId: 'b', date: '2026-01-02', points: 5, max: 5, mode: 'einzel' as const },
+      ],
+    };
+    const r = fuelleFehlerjournal(p, () => true, '2026-02-01');
+    expect(Object.keys(r.journal)).toEqual(['a']);
+    expect(r.journal.a.due).toBe('2026-02-01');
+    expect(fuelleFehlerjournal(r, () => true, '2026-02-01')).toBe(r);
+  });
+});
