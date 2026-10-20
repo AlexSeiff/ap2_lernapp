@@ -1,5 +1,6 @@
 import type { Flashcard } from '../../shared/types';
 import { pruefeSvg } from '../../shared/svgDiagramm';
+import { begriffsFrage } from '../lib/begriffsFrage';
 import { Icon } from './Icon';
 import { Markdown } from './Markdown';
 
@@ -12,14 +13,13 @@ const istFrage = (c: Flashcard) => c.kind !== 'lernkarte' || !(c.typ === 'begrif
 export function KartenFrage({ card }: { card: Flashcard }) {
   if (istBegriff(card)) {
     return (
-      <div className="fc-vorne begriff">
+      <div className="fc-vorne frage">
         <p className="fc-label">
-          <Icon name="book-open" /> Begriff
+          <Icon name="circle-question-mark" /> Frage
         </p>
-        <Markdown math className="fc-question fc-term">
-          {card.question}
+        <Markdown math className="fc-question">
+          {begriffsFrage(card.question, card.answer)}
         </Markdown>
-        <p className="fc-aufforderung">Erkläre den Begriff in eigenen Worten.</p>
       </div>
     );
   }
