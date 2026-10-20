@@ -1,6 +1,7 @@
 import type { Flashcard } from '../../shared/types';
 import { pruefeSvg } from '../../shared/svgDiagramm';
-import { begriffsFrage } from '../lib/begriffsFrage';
+import { useStore } from '../lib/store';
+import { begriffsFrage, bereichAusDeck } from '../lib/begriffsFrage';
 import { Icon } from './Icon';
 import { Markdown } from './Markdown';
 
@@ -10,7 +11,18 @@ import { Markdown } from './Markdown';
 const istBegriff = (c: Flashcard) => c.typ === 'begriff';
 const istFrage = (c: Flashcard) => c.kind !== 'lernkarte' || !(c.typ === 'begriff' || c.typ === 'rechnung');
 
+/** Kontext der Frage: Thema bzw. Deck und Prüfungsbereich (z. B. „SQL · Sicherstellen der Datenqualität“). */
+function Kontext({ card }: { card: Flashcard }) {
+  const { content } = useStore();
+  const deck = content.decks.find((d) => d.id === card.deckId);
+  const thema = content.topics.find((t) => t.id === card.topicId)?.title;
+  const teile = [bereichAusDeck(deck?.title) ?? thema, deck?.area].filter((t, i, a): t is string => !!t && a.indexOf(t) === i);
+  if (!teile.length) return null;
+  return <p className="fc-kontext">Kontext: {teile.join(' · ')}</p>;
+}
+
 export function KartenFrage({ card }: { card: Flashcard }) {
+  const { content } = useStore();
   if (istBegriff(card)) {
     return (
       <div className="fc-vorne frage">
@@ -18,8 +30,9 @@ export function KartenFrage({ card }: { card: Flashcard }) {
           <Icon name="circle-question-mark" /> Frage
         </p>
         <Markdown math className="fc-question">
-          {begriffsFrage(card.question, card.answer)}
+          {begriffsFrage(card.question, card.answer, bereichAusDeck(content.decks.find((d) => d.id === card.deckId)?.title))}
         </Markdown>
+        <Kontext card={card} />
       </div>
     );
   }
@@ -32,6 +45,7 @@ export function KartenFrage({ card }: { card: Flashcard }) {
       <Markdown math className="fc-question">
         {card.question}
       </Markdown>
+      <Kontext card={card} />
     </div>
   );
 }

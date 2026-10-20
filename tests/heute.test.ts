@@ -118,7 +118,10 @@ describe('planeHeute', () => {
   it('neuer Stand: Aufgabe, eine ungelöste Übung, neue Karten; etwa HEUTE_MINUTEN', () => {
     const p = plan(emptyProgress());
     const arten = p.items.map((i) => i.art);
-    expect(arten.filter((a) => a === 'aufgabe')).toHaveLength(1);
+    // Zwei Aufgaben aus verschiedenen Themen.
+    const aufgaben = p.items.filter((i) => i.art === 'aufgabe');
+    expect(aufgaben).toHaveLength(2);
+    expect(new Set(aufgaben.map((i) => i.thema)).size).toBe(2);
     expect(arten.filter((a) => a === 'sql' || a === 'rechnen')).toHaveLength(1);
     expect(arten).toContain('karten');
     expect(arten).not.toContain('wiederholung');
@@ -159,6 +162,22 @@ describe('planeHeute', () => {
     const r = plan(p);
     expect(r.schwaechstesThema).toBe('02');
     expect(r.items.find((i) => i.art === 'aufgabe')?.ids).toEqual(['01-A2']);
+  });
+
+  it('zweite Aufgabe aus dem am längsten nicht geübten Thema, neue Karten aus mehreren Themen', () => {
+    const p: Progress = {
+      ...emptyProgress(),
+      attempts: [
+        { taskId: '01-A1', date: '2026-09-29', points: 1, max: 5, mode: 'einzel' },
+        { taskId: '02-A1', date: '2026-09-25', points: 3, max: 5, mode: 'einzel' },
+      ],
+    };
+    const r = plan(p);
+    const themen = r.items.filter((i) => i.art === 'aufgabe').map((i) => i.thema);
+    expect(themen[0]).toBe('01');
+    expect(themen[1]).toBe('03'); // nie geübt vor dem länger zurückliegenden Thema 02
+    const kartenThemen = new Set(r.items.filter((i) => i.art === 'karten').map((i) => i.thema));
+    expect(kartenThemen.size).toBeGreaterThan(1);
   });
 
   it('fällige Wiederholungen und Übungen kommen dran, Wiederholung mit ?modus=wiederholung', () => {

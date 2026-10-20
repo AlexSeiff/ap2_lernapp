@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { begriffsFrage } from '../src/lib/begriffsFrage';
+import { begriffsFrage, bereichAusDeck } from '../src/lib/begriffsFrage';
 
 describe('begriffsFrage', () => {
   it.each([
@@ -17,6 +17,12 @@ describe('begriffsFrage', () => {
     ['Sprint', 'Event fester Länge von höchstens einem Monat.', 'Was versteht man unter **Sprint**?'],
   ])('%s', (begriff, antwort, erwartet) => {
     expect(begriffsFrage(begriff, antwort)).toBe(erwartet);
+  });
+  it('Bereich als Kontext in der Frage', () => {
+    expect(begriffsFrage('Lift', 'Konfidenz / Support', 'CRISP-DM & Machine Learning')).toBe(
+      'Wie berechnet man **Lift** (CRISP-DM & Machine Learning), und was sagt es aus?',
+    );
+    expect(bereichAusDeck('Fachbegriffe – SQL')).toBe('SQL');
   });
   it('ohne Antwort die allgemeine Frage', () => {
     expect(begriffsFrage('Foo', undefined)).toBe('Was versteht man unter **Foo**?');

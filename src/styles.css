@@ -1026,3 +1026,4 @@ a.kpi.w-innen:hover { transform: none; }
 .fc-vorne.rechnung { border-left: 4px solid var(--accent); padding-left: 14px; }
 .fc-hinten.rechnung { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; font-variant-numeric: tabular-nums; line-height: 1.7; }
 .fc-hinten.rechnung .katex-display { margin: 0.6em 0; overflow-x: auto; }
+.fc-kontext { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
