@@ -4274,6 +4274,633 @@
     "transition"
    ],
    "varianten": []
+  },
+  {
+   "id": "DG-ER-001",
+   "typ": "er",
+   "stufe": 1,
+   "titel": "ER-Modell: Kunde erteilt Aufträge",
+   "szenario": "Ein **Kunde** erteilt mehrere **Aufträge**; jeder Auftrag gehört genau einem Kunden. Ein Kunde hat eine Kundennummer und einen Namen, ein Auftrag ein Datum.\n\nSetze die Entitäten und die Beziehung ein. Achte auf die Form: Entitäten sind Rechtecke, Beziehungen Rauten, Attribute Ellipsen.",
+   "breite": 640,
+   "hoehe": 250,
+   "knoten": [
+    {
+     "id": "e1",
+     "slot": "s1",
+     "x": 40,
+     "y": 95,
+     "w": 130,
+     "h": 54
+    },
+    {
+     "id": "r1",
+     "slot": "s2",
+     "x": 250,
+     "y": 85,
+     "w": 140,
+     "h": 74
+    },
+    {
+     "id": "e2",
+     "slot": "s3",
+     "x": 470,
+     "y": 95,
+     "w": 130,
+     "h": 54
+    },
+    {
+     "id": "a1",
+     "form": "attribut",
+     "text": "KNr",
+     "x": 40,
+     "y": 12,
+     "w": 90,
+     "h": 36
+    },
+    {
+     "id": "a3",
+     "form": "attribut",
+     "text": "Name",
+     "x": 60,
+     "y": 195,
+     "w": 90,
+     "h": 36
+    },
+    {
+     "id": "a2",
+     "form": "attribut",
+     "text": "Datum",
+     "x": 490,
+     "y": 12,
+     "w": 100,
+     "h": 36
+    }
+   ],
+   "kanten": [
+    {
+     "von": "e1",
+     "nach": "r1",
+     "art": "zuordnung",
+     "text": "1"
+    },
+    {
+     "von": "r1",
+     "nach": "e2",
+     "art": "zuordnung",
+     "text": "n"
+    },
+    {
+     "von": "a1",
+     "nach": "e1",
+     "art": "zuordnung"
+    },
+    {
+     "von": "a3",
+     "nach": "e1",
+     "art": "zuordnung"
+    },
+    {
+     "von": "a2",
+     "nach": "e2",
+     "art": "zuordnung"
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "entitaet",
+     "text": "KUNDE"
+    },
+    {
+     "id": "p2",
+     "form": "entitaet",
+     "text": "AUFTRAG"
+    },
+    {
+     "id": "p3",
+     "form": "beziehung",
+     "text": "erteilt"
+    },
+    {
+     "id": "d1",
+     "form": "attribut",
+     "text": "Rechnungsbetrag"
+    },
+    {
+     "id": "d2",
+     "form": "entitaet",
+     "text": "PRODUKT"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p3",
+    "s3": "p2"
+   },
+   "hinweise": [
+    "Kardinalität „1“ steht an der Seite des Kunden: Jeder Auftrag gehört genau einem Kunden.",
+    "Beziehungen sind Verben (erteilt), Entitäten Substantive."
+   ],
+   "erklaerung": "Eine **Entität** (Rechteck) steht für ein Objekt der realen Welt, die **Beziehung** (Raute) verbindet sie, die **Kardinalität** zeigt, wie viele Objekte beteiligt sind: **1:n** = ein Kunde, viele Aufträge. Attribute (Ellipsen) beschreiben die Entität.",
+   "quelle": "DD2",
+   "tags": [
+    "er-modell",
+    "entitaet",
+    "beziehung",
+    "kardinalitaet"
+   ],
+   "varianten": []
+  },
+  {
+   "id": "DG-ER-002",
+   "typ": "er",
+   "stufe": 1,
+   "titel": "ER-Modell: Aufträge enthalten Artikel (n:m)",
+   "szenario": "Ein **Auftrag** enthält mehrere **Artikel**, und ein Artikel kann in mehreren Aufträgen vorkommen. Die bestellte **Menge** gehört weder zum Auftrag noch zum Artikel allein, sondern zur Beziehung.\n\nSetze die Entitäten, die Beziehung und das Attribut ein.",
+   "breite": 640,
+   "hoehe": 250,
+   "knoten": [
+    {
+     "id": "e1",
+     "slot": "s1",
+     "x": 40,
+     "y": 95,
+     "w": 130,
+     "h": 54
+    },
+    {
+     "id": "r1",
+     "slot": "s2",
+     "x": 250,
+     "y": 85,
+     "w": 140,
+     "h": 74
+    },
+    {
+     "id": "e2",
+     "slot": "s3",
+     "x": 470,
+     "y": 95,
+     "w": 130,
+     "h": 54
+    },
+    {
+     "id": "a1",
+     "slot": "s4",
+     "x": 265,
+     "y": 190,
+     "w": 110,
+     "h": 40
+    }
+   ],
+   "kanten": [
+    {
+     "von": "e1",
+     "nach": "r1",
+     "art": "zuordnung",
+     "text": "n"
+    },
+    {
+     "von": "r1",
+     "nach": "e2",
+     "art": "zuordnung",
+     "text": "m"
+    },
+    {
+     "von": "a1",
+     "nach": "r1",
+     "art": "zuordnung"
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "entitaet",
+     "text": "AUFTRAG"
+    },
+    {
+     "id": "p2",
+     "form": "entitaet",
+     "text": "ARTIKEL"
+    },
+    {
+     "id": "p3",
+     "form": "beziehung",
+     "text": "enthält"
+    },
+    {
+     "id": "p4",
+     "form": "attribut",
+     "text": "Menge"
+    },
+    {
+     "id": "d1",
+     "form": "entitaet",
+     "text": "LIEFERANT"
+    },
+    {
+     "id": "d2",
+     "form": "beziehung",
+     "text": "liefert"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p3",
+    "s3": "p2",
+    "s4": "p4"
+   },
+   "varianten": [
+    {
+     "s1": "p2",
+     "s2": "p3",
+     "s3": "p1",
+     "s4": "p4"
+    }
+   ],
+   "hinweise": [
+    "Bei n:m ist die Reihenfolge der Entitäten egal.",
+    "Ein Attribut der Beziehung (Menge) hängt an der Raute, nicht an einer Entität."
+   ],
+   "erklaerung": "Eine **n:m-Beziehung** wird im Relationenmodell zu einer eigenen Tabelle (hier z. B. *Auftragsposition*) mit den Fremdschlüsseln beider Seiten – das Attribut **Menge** landet dort.",
+   "quelle": "DD2",
+   "tags": [
+    "er-modell",
+    "n:m",
+    "beziehung"
+   ]
+  },
+  {
+   "id": "DG-KL-001",
+   "typ": "klasse",
+   "stufe": 1,
+   "titel": "Klassendiagramm: Kunde und Reparaturauftrag",
+   "szenario": "Ein **Kunde** erteilt beliebig viele (auch keine) **Reparaturaufträge**; jeder Auftrag gehört zu genau einem Kunden.\n\nSetze die beiden Klassen ein. Die Multiplizität steht am jeweils **gegenüberliegenden** Ende der Linie.",
+   "breite": 640,
+   "hoehe": 200,
+   "knoten": [
+    {
+     "id": "k1",
+     "slot": "s1",
+     "x": 30,
+     "y": 40,
+     "w": 200,
+     "h": 110
+    },
+    {
+     "id": "k2",
+     "slot": "s2",
+     "x": 410,
+     "y": 40,
+     "w": 200,
+     "h": 110
+    },
+    {
+     "id": "m1",
+     "form": "text",
+     "text": "1",
+     "x": 232,
+     "y": 76,
+     "w": 30,
+     "h": 20
+    },
+    {
+     "id": "m2",
+     "form": "text",
+     "text": "0..*",
+     "x": 372,
+     "y": 76,
+     "w": 40,
+     "h": 20
+    }
+   ],
+   "kanten": [
+    {
+     "von": "k1",
+     "nach": "k2",
+     "art": "zuordnung",
+     "text": "erteilt",
+     "label": [
+      321,
+      112
+     ]
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "klasse",
+     "text": "Kunde|- kundenNr : int; - name : String|+ auftragErteilen()"
+    },
+    {
+     "id": "p2",
+     "form": "klasse",
+     "text": "Reparaturauftrag|- datum : Date; - status : String|+ abschliessen()"
+    },
+    {
+     "id": "d1",
+     "form": "klasse",
+     "text": "Techniker|- personalNr : int; - name : String|+ auftragBearbeiten()"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2"
+   },
+   "hinweise": [
+    "Die Klasse mit der Methode auftragErteilen() ist der Kunde.",
+    "„0..*“ steht bei der Klasse, von der es viele Objekte geben darf."
+   ],
+   "erklaerung": "Eine **Klasse** hat drei Fächer: Name, Attribute (`- name : Typ`), Methoden (`+ name()`). Die **Assoziation** zeigt, dass sich die Objekte kennen; die **Multiplizität** gibt an, wie viele Objekte beteiligt sind (`1`, `0..1`, `0..*`, `1..*`).",
+   "quelle": "DD15",
+   "tags": [
+    "uml",
+    "klassendiagramm",
+    "multiplizitaet"
+   ],
+   "varianten": []
+  },
+  {
+   "id": "DG-KL-002",
+   "typ": "klasse",
+   "stufe": 1,
+   "titel": "Klassendiagramm: Techniker bearbeitet Aufträge",
+   "szenario": "Ein **Techniker** bearbeitet mehrere **Reparaturaufträge**, ein Auftrag wird von genau einem Techniker bearbeitet. Aufträge werden von **Kunden** erteilt (ein Kunde, viele Aufträge).\n\nSetze die drei Klassen ein – der Auftrag steht in der Mitte.",
+   "breite": 700,
+   "hoehe": 260,
+   "knoten": [
+    {
+     "id": "k1",
+     "slot": "s1",
+     "x": 20,
+     "y": 20,
+     "w": 200,
+     "h": 110
+    },
+    {
+     "id": "k2",
+     "slot": "s2",
+     "x": 250,
+     "y": 140,
+     "w": 200,
+     "h": 110
+    },
+    {
+     "id": "k3",
+     "slot": "s3",
+     "x": 480,
+     "y": 20,
+     "w": 200,
+     "h": 110
+    },
+    {
+     "id": "m1",
+     "form": "text",
+     "text": "1",
+     "x": 130,
+     "y": 134,
+     "w": 24,
+     "h": 20
+    },
+    {
+     "id": "m2",
+     "form": "text",
+     "text": "0..*",
+     "x": 215,
+     "y": 165,
+     "w": 40,
+     "h": 20
+    },
+    {
+     "id": "m3",
+     "form": "text",
+     "text": "1",
+     "x": 546,
+     "y": 134,
+     "w": 24,
+     "h": 20
+    },
+    {
+     "id": "m4",
+     "form": "text",
+     "text": "0..*",
+     "x": 444,
+     "y": 165,
+     "w": 40,
+     "h": 20
+    }
+   ],
+   "kanten": [
+    {
+     "von": "k1",
+     "nach": "k2",
+     "art": "zuordnung",
+     "text": "erteilt",
+     "punkte": [
+      [
+       120,
+       195
+      ]
+     ],
+     "label": [
+      170,
+      205
+     ]
+    },
+    {
+     "von": "k3",
+     "nach": "k2",
+     "art": "zuordnung",
+     "text": "bearbeitet",
+     "punkte": [
+      [
+       580,
+       195
+      ]
+     ],
+     "label": [
+      528,
+      205
+     ]
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "klasse",
+     "text": "Kunde|- kundenNr : int; - name : String|+ auftragErteilen()"
+    },
+    {
+     "id": "p2",
+     "form": "klasse",
+     "text": "Reparaturauftrag|- datum : Date; - status : String|+ abschliessen()"
+    },
+    {
+     "id": "p3",
+     "form": "klasse",
+     "text": "Techniker|- personalNr : int; - name : String|+ auftragBearbeiten()"
+    },
+    {
+     "id": "d1",
+     "form": "klasse",
+     "text": "Lieferant|- name : String|+ liefern()"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2",
+    "s3": "p3"
+   },
+   "hinweise": [
+    "Der Auftrag ist die Klasse mit Attributen status und datum.",
+    "Zu Kunde und Techniker gehört jeweils „1“, am Auftrag „0..*“."
+   ],
+   "erklaerung": "Im Klassendiagramm stehen **Kardinalitäten am Ende der Linie bei der gegenüberliegenden Klasse**: Ein Kunde hat 0..* Aufträge, ein Auftrag genau einen Kunden. Beide Assoziationen laufen über die Klasse in der Mitte.",
+   "quelle": "DD15",
+   "tags": [
+    "uml",
+    "klassendiagramm",
+    "assoziation"
+   ],
+   "varianten": []
+  },
+  {
+   "id": "DG-UC-001",
+   "typ": "usecase",
+   "stufe": 1,
+   "titel": "Anwendungsfalldiagramm: Reparaturverwaltung",
+   "szenario": "In der Reparaturverwaltung **meldet** der **Kunde** eine Reparatur. Der **Techniker** **führt** die Reparatur **durch**. Beim Melden wird immer ein **Termin vereinbart**.\n\nSetze Akteure und Anwendungsfälle ein. Akteure stehen **außerhalb** der Systemgrenze.",
+   "breite": 700,
+   "hoehe": 300,
+   "knoten": [
+    {
+     "id": "sg",
+     "form": "systemgrenze",
+     "text": "Reparaturverwaltung",
+     "x": 150,
+     "y": 10,
+     "w": 400,
+     "h": 280
+    },
+    {
+     "id": "a1",
+     "slot": "s1",
+     "x": 55,
+     "y": 100,
+     "w": 30,
+     "h": 70
+    },
+    {
+     "id": "a2",
+     "slot": "s2",
+     "x": 605,
+     "y": 100,
+     "w": 30,
+     "h": 70
+    },
+    {
+     "id": "u1",
+     "slot": "s3",
+     "x": 190,
+     "y": 60,
+     "w": 170,
+     "h": 56
+    },
+    {
+     "id": "u2",
+     "slot": "s4",
+     "x": 350,
+     "y": 150,
+     "w": 170,
+     "h": 56
+    },
+    {
+     "id": "u3",
+     "slot": "s5",
+     "x": 190,
+     "y": 215,
+     "w": 170,
+     "h": 56
+    }
+   ],
+   "kanten": [
+    {
+     "von": "a1",
+     "nach": "u1",
+     "art": "zuordnung"
+    },
+    {
+     "von": "a2",
+     "nach": "u2",
+     "art": "zuordnung"
+    },
+    {
+     "von": "u1",
+     "nach": "u3",
+     "art": "antwort",
+     "text": "«include»",
+     "label": [
+      275,
+      166
+     ]
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "akteur",
+     "text": "Kunde"
+    },
+    {
+     "id": "p2",
+     "form": "akteur",
+     "text": "Techniker"
+    },
+    {
+     "id": "p3",
+     "form": "anwendungsfall",
+     "text": "Reparatur melden"
+    },
+    {
+     "id": "p4",
+     "form": "anwendungsfall",
+     "text": "Reparatur durchführen"
+    },
+    {
+     "id": "p5",
+     "form": "anwendungsfall",
+     "text": "Termin vereinbaren"
+    },
+    {
+     "id": "d1",
+     "form": "akteur",
+     "text": "Lieferant"
+    },
+    {
+     "id": "d2",
+     "form": "anwendungsfall",
+     "text": "Rechnung schreiben"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2",
+    "s3": "p3",
+    "s4": "p4",
+    "s5": "p5"
+   },
+   "hinweise": [
+    "Akteure sind Personen oder Systeme außerhalb des Systems – Strichmännchen.",
+    "«include»: Der Basisfall (Reparatur melden) enthält immer den Fall Termin vereinbaren; der Pfeil zeigt vom Basisfall zum eingebundenen Fall."
+   ],
+   "erklaerung": "Ein **Anwendungsfall** (Ellipse) beschreibt eine Funktion aus Sicht des Akteurs. Mit **«include»** bindet ein Fall einen anderen **immer** ein (gestrichelter Pfeil vom Basisfall zum eingebundenen), mit **«extend»** erweitert ein Fall einen anderen **nur unter einer Bedingung**.",
+   "quelle": "DD15",
+   "tags": [
+    "uml",
+    "anwendungsfalldiagramm",
+    "include"
+   ],
+   "varianten": []
   }
  ]
 }

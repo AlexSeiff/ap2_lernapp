@@ -50,6 +50,7 @@ export const BEREICHE: Bereich[] = [
       { to: '/diagramme', icon: 'workflow', label: 'Diagramm-Übungen', badge: 'diagramme' },
       { to: '/klausur', icon: 'timer', label: 'Übungsklausur' },
       { to: '/fehlerjournal', icon: 'notebook-pen', label: 'Fehlerjournal', badge: 'journal' },
+      { to: '/fachgespraech', icon: 'mic', label: 'Fachgespräch' },
     ],
   },
   {
@@ -102,7 +103,17 @@ export function passtZuZiel(to: string, pathname: string): boolean {
 
 /** Seiten unter /material, die zum Glossar gehören (Nachschlagen); alles andere unter /material gehört zu den Einstellungen. */
 const GLOSSAR_MATERIAL = ['/material/glossar', '/material/formeln', '/material/sql-belegsatz', '/material/operatoren'];
-const LERNEN = ['/heute', '/lernen', '/karteikarten', '/aufgaben', '/rechnen', '/diagramme', '/klausur', '/fehlerjournal'];
+const LERNEN = [
+  '/heute',
+  '/lernen',
+  '/karteikarten',
+  '/aufgaben',
+  '/rechnen',
+  '/diagramme',
+  '/klausur',
+  '/fehlerjournal',
+  '/fachgespraech',
+];
 const EINSTELLUNGEN = ['/material', '/einstellungen', '/daten', '/generator'];
 
 /** Zu welchem Bereich gehört der Pfad? Die Übersicht (`/`) und unbekannte Pfade gehören zu keinem. */

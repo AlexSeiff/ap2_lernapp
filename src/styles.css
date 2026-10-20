@@ -1027,3 +1027,20 @@ a.kpi.w-innen:hover { transform: none; }
 .fc-hinten.rechnung { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; font-variant-numeric: tabular-nums; line-height: 1.7; }
 .fc-hinten.rechnung .katex-display { margin: 0.6em 0; overflow-x: auto; }
 .fc-kontext { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
+
+/* Weniger Bewegung, wenn das Gerät es wünscht */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+.runden-balken { height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; margin: 4px 0 8px; }
+.runden-balken > div { height: 100%; background: var(--accent); transition: width 0.2s ease; }
+.wisch-hinweis { display: none; text-align: center; }
+@media (pointer: coarse) { .wisch-hinweis { display: block; } }
+
+.mehr-widgets { margin: 12px 0; }
+.mehr-widgets > summary { cursor: pointer; padding: 10px 14px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); color: var(--accent); font-weight: 500; list-style: none; }
+.mehr-widgets > summary::-webkit-details-marker { display: none; }
+.mehr-widgets[open] > summary { margin-bottom: 12px; }
+
+.lernplan { padding-left: 1.2em; } .lernplan > li { margin-bottom: 0.8em; }

@@ -36,8 +36,25 @@ export function Karteikarten() {
   const { content, progress, update } = useStore();
   const { settings } = progress;
   const { f, set, deck, alle, pool, leicht, leichtModus, markiert, auswahl, ausSuche, vonBegriff } = useCardFilters();
-  const { session, index, card, flipped, done, start, end, flip, rate, runde, waehle, next, eigeneAntwort, setEigeneAntwort } =
-    useCardSession();
+  const {
+    session,
+    index,
+    card,
+    flipped,
+    done,
+    start,
+    end,
+    flip,
+    rate,
+    runde,
+    waehle,
+    next,
+    eigeneAntwort,
+    setEigeneAntwort,
+    kannRueckgaengig,
+    rueckgaengig,
+  } = useCardSession();
+  const touch = useRef<{ x: number; y: number } | null>(null);
   const startRunde = (cards: Flashcard[]) => start(cards, leichtModus ? leicht : null);
   // Filter: auf dem Desktop offen, auf dem Handy zugeklappt (spart einen ganzen Bildschirm), mit aktiven Filtern immer offen.
   const [filterOffen, setFilterOffen] = useState(
@@ -75,6 +92,7 @@ export function Karteikarten() {
           </span>
           <MarkierStern cardId={card.id} taste />
         </div>
+        <RundenBalken index={index} gesamt={session.length} />
         <div className={`flashcard leicht ${card.typ === 'falle' ? 'trap' : ''}`}>
           <div className="fc-meta">
             <span>
@@ -166,8 +184,14 @@ export function Karteikarten() {
           <span>
             Karte {index + 1} / {session.length}
           </span>
+          {kannRueckgaengig && (
+            <button type="button" className="ghost" onClick={rueckgaengig} title="Letzte Bewertung zurücknehmen (Taste U)">
+              <Icon name="rotate-ccw" /> Rückgängig
+            </button>
+          )}
           <MarkierStern cardId={card.id} taste />
         </div>
+        <RundenBalken index={index} gesamt={session.length} />
         {/* Kein <button>: die Karte enthält Markdown mit Absätzen, Listen und Codeblöcken – das ist in einem Button ungültig. */}
         <div
           className={`flashcard ${flipped ? 'flipped' : ''} ${card.typ === 'falle' ? 'trap' : ''}`}
@@ -175,6 +199,16 @@ export function Karteikarten() {
           tabIndex={0}
           aria-expanded={flipped}
           onClick={flip}
+          onTouchStart={(e) => (touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
+          onTouchEnd={(e) => {
+            const t = touch.current;
+            touch.current = null;
+            if (!t || !flipped) return;
+            const dx = e.changedTouches[0].clientX - t.x;
+            const dy = e.changedTouches[0].clientY - t.y;
+            // Nach dem Umdrehen: nach rechts wischen = gewusst, nach links = nicht gewusst.
+            if (Math.abs(dx) > 90 && Math.abs(dy) < 60) rate(dx > 0 ? 'gewusst' : 'nicht');
+          }}
           onKeyDown={(e) => {
             if (e.key !== 'Enter' && e.key !== ' ') return;
             e.preventDefault();
@@ -224,6 +258,7 @@ export function Karteikarten() {
             <p className="hint">Antwort formulieren – im Kopf oder unten aufschreiben –, dann klicken oder Leertaste drücken.</p>
           )}
         </div>
+        {flipped && <p className="hint wisch-hinweis">Auf dem Handy: nach rechts wischen = gewusst, nach links = nicht gewusst.</p>}
         {!flipped && <EigeneAntwortFeld value={eigeneAntwort} onChange={setEigeneAntwort} onFertig={flip} />}
         {flipped && <SqlUebungLinks card={card} />}
         {flipped && (
@@ -621,6 +656,22 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
           </button>
         )}
       </div>
+    </div>
+  );
+}
+
+/** Fortschrittsbalken der Lernrunde (Karte x von y). */
+function RundenBalken({ index, gesamt }: { index: number; gesamt: number }) {
+  return (
+    <div
+      className="runden-balken"
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={gesamt}
+      aria-valuenow={index}
+      aria-label="Fortschritt der Runde"
+    >
+      <div style={{ width: `${Math.min(100, (index / Math.max(1, gesamt)) * 100)}%` }} />
     </div>
   );
 }

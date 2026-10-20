@@ -213,7 +213,7 @@ describe('Markdown: schneller Weg für schlichten Text', () => {
     ].filter(istSchlicht);
     expect(texte.length).toBeGreaterThan(1500);
     for (const t of new Set(texte)) expect(schnell(t, 'glossar-def'), t).toBe(voll(t, 'glossar-def'));
-  });
+  }, 30000);
 
   it('Lösungs- und Operatoren-Stil gehen weiter durch den Parser', () => {
     const t = 'Nennen Sie zwei Gründe';

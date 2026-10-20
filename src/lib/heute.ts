@@ -97,7 +97,7 @@ const themaVon = (topicId: string | undefined, fallback: string) => topicId ?? f
 
 /**
  * Plant die Tagesrunde:
- * 1. Eine Aufgabe aus dem schwächsten Thema und eine zweite aus dem am längsten nicht geübten Thema (letzte Klausur, sonst Ø Aufgaben; ohne Daten: das Thema mit den wenigsten Versuchen) –
+ * 1. Eine Aufgabe aus dem schwächsten Thema und eine zweite (nicht bei kurzer Runde) aus dem am längsten nicht geübten Thema (letzte Klausur, sonst Ø Aufgaben; ohne Daten: das Thema mit den wenigsten Versuchen) –
  *    nur eine noch nie bearbeitete; ist das Thema durch, das nächstschwächere.
  * 2. 1–2 Übungen: fällige SQL- und Rechenübungen (älteste zuerst, höchstens 2); ist keine fällig, eine ungelöste
  *    (bevorzugt aus dem schwächsten Thema).
@@ -171,7 +171,7 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
       const weitere = reihenfolge
         .filter((s) => s !== gewaehlt && offen(s).length)
         .sort((a, b) => (zuletzt.get(a.topic.id) ?? '').localeCompare(zuletzt.get(b.topic.id) ?? ''));
-      if (weitere.length) {
+      if (weitere.length && ziel >= HEUTE_MINUTEN) {
         const rest = offen(weitere[0]);
         add(aufgabeItem('aufgabe', rest[Math.floor(zufall() * rest.length)]));
       }

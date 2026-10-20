@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import type { Rating } from '../../shared/progress';
+import type { CardState, Rating } from '../../shared/progress';
 import type { Flashcard } from '../../shared/types';
 import { cardPool, filterCards, isKindEnabled, readCardFilter, withCardFilter, type CardFilter } from '../lib/cards';
 import { markierteIds } from '../lib/markiert';
@@ -67,7 +67,7 @@ export interface LeichtRunde {
  * Mit `leicht` (Leicht-Modus): 4 Antworten je Karte, Tasten 1–4 wählen, Enter/Leertaste → nächste Karte.
  */
 export function useCardSession() {
-  const { update } = useStore();
+  const { update, progress } = useStore();
   const [session, setSession] = useState<Flashcard[] | null>(null);
   const [leicht, setLeicht] = useState<Map<string, LeichtKarte> | null>(null);
   const [index, setIndex] = useState(0);
@@ -78,6 +78,14 @@ export function useCardSession() {
   /** Zufall der Runde: die Reihenfolge der Antworten hängt von ihm und der Position ab – stabil beim erneuten Rendern. */
   const [rundenSeed, setRundenSeed] = useState(1);
   const [done, setDone] = useState({ gewusst: 0, unsicher: 0, nicht: 0 });
+  /** Letzte Bewertung (Aufdecken-Modus) zum Rückgängigmachen: Karte, Stand davor und ob sie noch einmal hinten angehängt wurde. */
+  const [letzte, setLetzte] = useState<{
+    id: string;
+    rating: Rating;
+    vorher?: CardState;
+    tage: Record<string, number>;
+    angehaengt: boolean;
+  } | null>(null);
 
   const start = (cards: Flashcard[], leichtModus: Map<string, LeichtKarte> | null = null) => {
     setSession(shuffle(cards));
@@ -88,6 +96,7 @@ export function useCardSession() {
     setGewaehlt(null);
     setEigeneAntwort('');
     setDone({ gewusst: 0, unsicher: 0, nicht: 0 });
+    setLetzte(null);
   };
   const end = () => setSession(null);
   const flip = () => setFlipped((x) => !x);
@@ -116,14 +125,33 @@ export function useCardSession() {
   const rate = useCallback(
     (r: Rating) => {
       if (!card || !session) return;
+      setLetzte({ id: card.id, rating: r, vorher: progress.cards[card.id], tage: progress.cardReviewDays, angehaengt: r === 'nicht' });
       update((p) => rateCard(p, card.id, r));
       setDone((d) => ({ ...d, [r]: d[r] + 1 }));
       // „Nicht gewusst" kommt in dieser Runde noch einmal dran.
       if (r === 'nicht') setSession([...session, card]);
       next();
     },
-    [card, session, update, next],
+    [card, session, update, next, progress.cards, progress.cardReviewDays],
   );
+
+  /** Letzte Bewertung zurücknehmen: Kartenstand und Lerntage wie vorher, die Karte steht wieder umgedreht zum Neubewerten bereit. */
+  const rueckgaengig = useCallback(() => {
+    if (!letzte || !session || index === 0) return;
+    const { id, rating, vorher, tage, angehaengt } = letzte;
+    update((p) => {
+      const cards = { ...p.cards };
+      if (vorher) cards[id] = vorher;
+      else delete cards[id];
+      return { ...p, cards, cardReviewDays: tage };
+    });
+    setDone((d) => ({ ...d, [rating]: Math.max(0, d[rating] - 1) }));
+    if (angehaengt) setSession(session.slice(0, -1));
+    setIndex((i) => i - 1);
+    setFlipped(true);
+    setEigeneAntwort('');
+    setLetzte(null);
+  }, [letzte, session, index, update]);
 
   /** Leicht-Modus: Antwort `i` wählen – sofort bewertet (Fach höchstens 2), falsche Karten kommen in der Runde wieder. */
   const waehle = useCallback(
@@ -162,10 +190,28 @@ export function useCardSession() {
       } else if (flipped && e.key === '1') rate('gewusst');
       else if (flipped && e.key === '2') rate('unsicher');
       else if (flipped && e.key === '3') rate('nicht');
+      else if ((e.key === 'u' || e.key === 'U') && letzte) rueckgaengig();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [card, flipped, rate, optionen, gewaehlt, waehle, next]);
+  }, [card, flipped, rate, optionen, gewaehlt, waehle, next, letzte, rueckgaengig]);
 
-  return { session, index, card, flipped, done, start, end, flip, rate, runde, waehle, next, eigeneAntwort, setEigeneAntwort };
+  return {
+    session,
+    index,
+    card,
+    flipped,
+    done,
+    start,
+    end,
+    flip,
+    rate,
+    runde,
+    waehle,
+    next,
+    eigeneAntwort,
+    setEigeneAntwort,
+    kannRueckgaengig: !!letzte && !runde,
+    rueckgaengig,
+  };
 }

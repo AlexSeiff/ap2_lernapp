@@ -32,6 +32,14 @@ const FORM_NAMEN: Record<Form | KantenForm, string> = {
   lebenslinie: 'Lebenslinie',
   fragment: 'Kombiniertes Fragment',
   notiz: 'Notiz',
+  entitaet: 'Entität',
+  beziehung: 'Beziehung',
+  attribut: 'Attribut',
+  klasse: 'Klasse',
+  akteur: 'Akteur',
+  anwendungsfall: 'Anwendungsfall',
+  systemgrenze: 'Systemgrenze',
+  text: 'Beschriftung',
   sync: 'synchrone Nachricht',
   async: 'asynchrone Nachricht',
   antwort: 'Antwortnachricht',
@@ -251,6 +259,92 @@ function FormZeichnung({ form, k, text }: { form: Form; k: DiagrammKnoten; text?
         </>
       );
     }
+    case 'entitaet':
+      return (
+        <>
+          <rect x={x} y={y} width={w} height={h} className="dg-form" />
+          {beschriftung}
+        </>
+      );
+    case 'beziehung':
+      return (
+        <>
+          <polygon points={`${cx},${y} ${x + w},${cy} ${cx},${y + h} ${x},${cy}`} className="dg-akzent" />
+          {text && <Text x={cx} y={cy} w={w * 0.6} text={text} />}
+        </>
+      );
+    case 'attribut':
+      return (
+        <>
+          <ellipse cx={cx} cy={cy} rx={w / 2} ry={h / 2} className="dg-form" />
+          {text && <Text x={cx} y={cy} w={w - 16} text={text} />}
+        </>
+      );
+    case 'anwendungsfall':
+      return (
+        <>
+          <ellipse cx={cx} cy={cy} rx={w / 2} ry={h / 2} className="dg-akzent" />
+          {text && <Text x={cx} y={cy} w={w - 24} text={text} />}
+        </>
+      );
+    case 'klasse': {
+      // Text: „Name“ oder „Name|Attribute|Methoden“ (Abschnitte mit „;“ getrennt) – drei Fächer wie in UML.
+      const [name, attrs, meth] = (text ?? '').split('|');
+      const kopf = 26;
+      const zeilen = (t?: string) => (t ? t.split(';').map((z) => z.trim()) : []);
+      const a = zeilen(attrs);
+      const m = zeilen(meth);
+      const hatFaecher = attrs !== undefined;
+      const hoeheA = hatFaecher ? Math.max(20, a.length * 15 + 8) : 0;
+      return (
+        <>
+          <rect x={x} y={y} width={w} height={h} className="dg-form" />
+          <text x={cx} y={y + kopf / 2} textAnchor="middle" dominantBaseline="middle" className="dg-klein dg-fett">
+            {name}
+          </text>
+          {hatFaecher && (
+            <>
+              <line x1={x} y1={y + kopf} x2={x + w} y2={y + kopf} className="dg-linie" />
+              <line x1={x} y1={y + kopf + hoeheA} x2={x + w} y2={y + kopf + hoeheA} className="dg-linie" />
+              {a.map((z, i) => (
+                <text key={`a${i}`} x={x + 8} y={y + kopf + 14 + i * 15} className="dg-klein">
+                  {z}
+                </text>
+              ))}
+              {m.map((z, i) => (
+                <text key={`m${i}`} x={x + 8} y={y + kopf + hoeheA + 14 + i * 15} className="dg-klein">
+                  {z}
+                </text>
+              ))}
+            </>
+          )}
+        </>
+      );
+    }
+    case 'systemgrenze':
+      return (
+        <>
+          <rect x={x} y={y} width={w} height={h} className="dg-linie" />
+          {text && (
+            <text x={cx} y={y + 14} textAnchor="middle" dominantBaseline="middle" className="dg-klein dg-fett">
+              {text}
+            </text>
+          )}
+        </>
+      );
+    case 'text':
+      return text ? <Text x={cx} y={cy} w={w} text={text} /> : null;
+    case 'akteur':
+      return (
+        <>
+          <circle cx={cx} cy={y + 9} r={8} className="dg-form" />
+          <line x1={cx} y1={y + 17} x2={cx} y2={y + 38} className="dg-linie" />
+          <line x1={cx - 12} y1={y + 26} x2={cx + 12} y2={y + 26} className="dg-linie" />
+          <line x1={cx} y1={y + 38} x2={cx - 10} y2={y + 54} className="dg-linie" />
+          <line x1={cx} y1={y + 38} x2={cx + 10} y2={y + 54} className="dg-linie" />
+          {text && <Text x={cx} y={y + 66} w={Math.max(w, 90)} text={text} />}
+        </>
+      );
     case 'notiz':
       return (
         <>
@@ -480,9 +574,9 @@ export function DiagrammSvg({ uebung: u, eingesetzt, ergebnis, ziel, auswahl, on
           </marker>
         </defs>
         {/* Pools und Fragmente zuerst (Hintergrund), dann Kanten, dann alle anderen Knoten */}
-        {knotenZeichnung.filter((_, i) => ['pool', 'lane', 'fragment', 'lebenslinie'].includes(u.knoten[i].form ?? ''))}
+        {knotenZeichnung.filter((_, i) => ['pool', 'lane', 'fragment', 'lebenslinie', 'systemgrenze'].includes(u.knoten[i].form ?? ''))}
         {kantenZeichnung}
-        {knotenZeichnung.filter((_, i) => !['pool', 'lane', 'fragment', 'lebenslinie'].includes(u.knoten[i].form ?? ''))}
+        {knotenZeichnung.filter((_, i) => !['pool', 'lane', 'fragment', 'lebenslinie', 'systemgrenze'].includes(u.knoten[i].form ?? ''))}
       </svg>
       {slotKnoepfe.map((roh) => {
         // Kleine Lücken (Balken, Startknoten) bekommen eine größere Tippfläche.

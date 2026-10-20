@@ -7,7 +7,7 @@
     "version": "1.1",
     "sprache": "de",
     "anzahl_decks": 28,
-    "anzahl_karten": 696,
+    "anzahl_karten": 732,
     "karten_nach_typ": {
       "abgrenzung": 118,
       "anwendung": 84,
@@ -109,7 +109,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 1",
       "status": "behandelt",
-      "anzahl_karten": 32,
+      "anzahl_karten": 36,
       "karten": [
         {
           "id": "SQL-012",
@@ -449,6 +449,50 @@
             "belegsatz",
             "statistik"
           ]
+        },
+        {
+          "id": "SQL-033",
+          "frage": "Die Geschäftsführung will alle Kunden sehen, die noch nie einen Reparaturauftrag erteilt haben. Wie formulierst du das, und warum reicht ein INNER JOIN nicht?",
+          "antwort": "LEFT JOIN von kunde auf auftrag und anschließend WHERE auftrag.id IS NULL (alternativ NOT EXISTS). Ein INNER JOIN liefert nur Kunden mit mindestens einem Auftrag – die gesuchten Kunden fallen heraus.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "join",
+            "szenario"
+          ]
+        },
+        {
+          "id": "SQL-034",
+          "frage": "Der Umsatz soll je Monat angezeigt werden, aber nur für Monate mit mindestens 5 Aufträgen. Wohin gehört die Bedingung?",
+          "antwort": "In HAVING COUNT(*) >= 5 nach dem GROUP BY, denn sie betrifft das Aggregat. WHERE filtert vorher einzelne Zeilen (z. B. den Zeitraum) und darf keine Aggregatfunktion enthalten.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "having",
+            "szenario"
+          ]
+        },
+        {
+          "id": "SQL-035",
+          "frage": "Ein Bericht zeigt Kunden doppelt, weil ein Kunde mehrere Aufträge hat. Wie gehst du vor?",
+          "antwort": "Erst die Ursache klären: Der Join vervielfacht die Zeilen. Dann je nach Ziel GROUP BY kunde mit Aggregat, EXISTS statt Join oder – als letzte Wahl – SELECT DISTINCT. DISTINCT ohne Verständnis der Ursache versteckt Fehler nur.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "join",
+            "szenario"
+          ]
+        },
+        {
+          "id": "SQL-036",
+          "frage": "Gesucht sind alle Aufträge, deren Betrag über dem Durchschnitt aller Aufträge liegt. Wie schreibst du das?",
+          "antwort": "WHERE betrag > (SELECT AVG(betrag) FROM auftrag) – die Unterabfrage liefert genau einen Wert (skalare Unterabfrage). Ein Aggregat direkt in WHERE ist nicht erlaubt.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "unterabfrage",
+            "szenario"
+          ]
         }
       ]
     },
@@ -458,7 +502,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 2",
       "status": "behandelt",
-      "anzahl_karten": 21,
+      "anzahl_karten": 23,
       "karten": [
         {
           "id": "DM-007",
@@ -680,6 +724,28 @@
           "tags": [
             "normalisierung"
           ]
+        },
+        {
+          "id": "DM-022",
+          "frage": "Eine Tabelle Auftrag(AuftragNr, KundeName, KundeOrt, Artikel1, Artikel2) soll normalisiert werden. Welche Normalformen sind verletzt, und was tust du?",
+          "antwort": "1. NF: Artikel1/Artikel2 sind eine Wiederholungsgruppe → eigene Tabelle Auftragsposition. 3. NF: KundeOrt hängt über den Kunden vom Auftrag ab (transitive Abhängigkeit) → Tabelle Kunde auslagern; der Auftrag bekommt nur den Fremdschlüssel KundeNr.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "normalisierung",
+            "szenario"
+          ]
+        },
+        {
+          "id": "DM-023",
+          "frage": "Ein Auftrag enthält mehrere Artikel, ein Artikel steht in mehreren Aufträgen. Wie setzt du das im Relationenmodell um?",
+          "antwort": "Zwischentabelle Auftragsposition mit den Fremdschlüsseln AuftragNr und ArtikelNr, zusammen als Primärschlüssel. Attribute der Beziehung (Menge, Einzelpreis) gehören in diese Tabelle.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "n:m",
+            "szenario"
+          ]
         }
       ]
     },
@@ -689,7 +755,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 3",
       "status": "behandelt",
-      "anzahl_karten": 28,
+      "anzahl_karten": 30,
       "karten": [
         {
           "id": "ST1-006",
@@ -992,6 +1058,28 @@
             "formelsammlung",
             "varianz"
           ]
+        },
+        {
+          "id": "ST1-029",
+          "frage": "In einer Gehaltsliste verzerrt ein einzelnes Geschäftsführergehalt den Durchschnitt. Welches Lagemaß wählst du?",
+          "antwort": "Den Median: Er hängt nur von der Reihenfolge ab und ist robust gegen Ausreißer. Das arithmetische Mittel würde vom Ausreißer stark nach oben gezogen.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "lagemass",
+            "szenario"
+          ]
+        },
+        {
+          "id": "ST1-030",
+          "frage": "Die Retourenquote von Filiale A beträgt 3 %, die von Filiale B 5 %. Wie formulierst du den Unterschied korrekt?",
+          "antwort": "B liegt 2 Prozentpunkte höher – das sind relativ rund 67 % mehr Retouren (5 / 3 ≈ 1,67). „2 % schlechter“ vermischt Prozent und Prozentpunkte.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "prozent",
+            "szenario"
+          ]
         }
       ]
     },
@@ -1001,7 +1089,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 4",
       "status": "behandelt",
-      "anzahl_karten": 25,
+      "anzahl_karten": 26,
       "karten": [
         {
           "id": "ST2-018",
@@ -1266,6 +1354,17 @@
             "regression"
           ],
           "rechenweg": "$$\\beta_1 = \\dfrac{s_{xy}}{s_x^2} \\qquad \\beta_0 = \\bar{y} - \\beta_1 \\cdot \\bar{x}$$\n\nKovarianz geteilt durch Varianz von $x$. Beide Formeln stehen nicht im Anhang.\n\nDie Gerade geht immer durch den Punkt $(\\bar{x} \\mid \\bar{y})$."
+        },
+        {
+          "id": "ST2-026",
+          "frage": "Eisverkauf und Sonnenbrandfälle korrelieren mit r = 0,9. Darf man schließen, dass Eisessen Sonnenbrand verursacht?",
+          "antwort": "Nein: Korrelation ist keine Kausalität. Eine Störvariable (Sonne bzw. Temperatur) beeinflusst beide Größen. Ursachen brauchen Kausalitätsargumente oder ein Experiment.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "korrelation",
+            "szenario"
+          ]
         }
       ]
     },
@@ -1275,7 +1374,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 5 + BPMN-Vertiefung",
       "status": "behandelt",
-      "anzahl_karten": 93,
+      "anzahl_karten": 96,
       "karten": [
         {
           "id": "PRZ-005",
@@ -2322,6 +2421,40 @@
             "bpmn",
             "ereignisse"
           ]
+        },
+        {
+          "id": "PRZ-094",
+          "frage": "Beschreibung: „Die Bestellung wird geprüft. Ist der Artikel verfügbar, wird er reserviert, sonst nachbestellt. Danach wird die Rechnung erstellt.“ Welche Gateways modellierst du?",
+          "antwort": "Nach „Bestellung prüfen“ ein XOR-Split (verfügbar / nicht verfügbar) und vor „Rechnung erstellen“ ein XOR-Join. Es läuft immer nur ein Pfad – ein AND-Join würde auf den zweiten Pfad ewig warten (Deadlock).",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "bpmn",
+            "gateway",
+            "szenario"
+          ]
+        },
+        {
+          "id": "PRZ-095",
+          "frage": "Durchlaufzeit 30 Stunden, Bearbeitungszeit 1,5 Stunden. Wo setzt du an?",
+          "antwort": "Wertschöpfungsanteil = 1,5 / 30 = 5 %; 95 % sind Liege- und Transportzeit. Hebel sind Wartezeiten (Übergaben, Warteschlangen, Genehmigungsschleifen, Parallelisieren) – nicht die Bearbeitung selbst zu beschleunigen.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "durchlaufzeit",
+            "szenario"
+          ]
+        },
+        {
+          "id": "PRZ-096",
+          "frage": "FMEA: Fehler A hat B = 9, A = 2, E = 3; Fehler B hat B = 4, A = 7, E = 5. Welcher wird zuerst angegangen?",
+          "antwort": "RPZ A = 9 · 2 · 3 = 54, RPZ B = 4 · 7 · 5 = 140 → zuerst Fehler B. Fehler A mit hoher Bedeutung (9) bleibt trotzdem im Blick: Die RPZ ist nur eine Orientierung, kein Ersatz für die Risikobewertung.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "fmea",
+            "szenario"
+          ]
         }
       ]
     },
@@ -2331,7 +2464,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 6",
       "status": "behandelt",
-      "anzahl_karten": 52,
+      "anzahl_karten": 55,
       "karten": [
         {
           "id": "ML-020",
@@ -2884,6 +3017,39 @@
           "tags": [
             "id3",
             "formelsammlung"
+          ]
+        },
+        {
+          "id": "ML-053",
+          "frage": "Ein Modell zur Vorhersage von Reklamationen erreicht 95 % Accuracy, aber nur 5 % der Aufträge werden reklamiert. Ist das ein Erfolg?",
+          "antwort": "Nicht aussagekräftig: Ein Modell, das immer „keine Reklamation“ sagt, erreicht ebenfalls 95 %. Bei unausgeglichenen Klassen Recall, Precision, F1 und die Kosten der Fehlerarten betrachten.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "accuracy",
+            "szenario"
+          ]
+        },
+        {
+          "id": "ML-054",
+          "frage": "Das Modell erreicht im Training 99 %, im Test nur 70 %. Was ist die Diagnose, und was tust du?",
+          "antwort": "Overfitting: Das Modell hat die Trainingsdaten auswendig gelernt. Gegenmittel: einfacheres Modell, mehr Daten, Regularisierung bzw. Baum beschneiden, Kreuzvalidierung, weniger Merkmale.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "overfitting",
+            "szenario"
+          ]
+        },
+        {
+          "id": "ML-055",
+          "frage": "Der Fachbereich will wissen, warum Kunden abwandern. Entscheidungsbaum oder neuronales Netz?",
+          "antwort": "Entscheidungsbaum: Die Regeln sind lesbar und erklärbar (Wenn–Dann-Pfade). Ein neuronales Netz lohnt bei sehr großen, komplexen Daten, ist aber schwer erklärbar – bei Erklärbarkeitsanforderung klar im Nachteil.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "entscheidungsbaum",
+            "szenario"
           ]
         }
       ]
@@ -3455,7 +3621,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 9",
       "status": "behandelt",
-      "anzahl_karten": 21,
+      "anzahl_karten": 23,
       "karten": [
         {
           "id": "DQ-019",
@@ -3671,6 +3837,28 @@
           "tags": [
             "praevention"
           ]
+        },
+        {
+          "id": "DQ-022",
+          "frage": "In der Kundentabelle stehen PLZ 4711 zu „Hamburg“, ein Telefon ohne Vorwahl und zwei Datensätze „Müller, M.“ und „M. Mueller“ mit gleicher Adresse. Welche Qualitätsdimensionen sind betroffen?",
+          "antwort": "PLZ/Ort passen nicht zusammen → Korrektheit bzw. Konsistenz. Telefon unvollständig → Vollständigkeit. Zwei Schreibweisen desselben Kunden → Eindeutigkeit (Dublette).",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "dimensionen",
+            "szenario"
+          ]
+        },
+        {
+          "id": "DQ-023",
+          "frage": "In der Spalte „Alter“ fehlen 8 % der Werte. Wie gehst du damit um?",
+          "antwort": "Erst die Ursache klären (zufällig oder systematisch). Dann entscheiden: Zeilen entfernen (nur wenn wenige und zufällig), mit Median oder Modell auffüllen (Imputation) oder die Spalte nicht verwenden. Entscheidung begründen und dokumentieren.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "missing-values",
+            "szenario"
+          ]
         }
       ]
     },
@@ -3680,7 +3868,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 10",
       "status": "behandelt",
-      "anzahl_karten": 22,
+      "anzahl_karten": 24,
       "karten": [
         {
           "id": "DS-017",
@@ -3906,6 +4094,28 @@
           "schwierigkeit": 2,
           "tags": [
             "art-9"
+          ]
+        },
+        {
+          "id": "DS-023",
+          "frage": "Aus der Kundendatenbank soll ein E-Mail-Mailing verschickt werden. Was prüfst du vor dem Versand?",
+          "antwort": "Rechtsgrundlage: Für E-Mail-Werbung grundsätzlich eine Einwilligung (Opt-in); Ausnahme unter engen Bedingungen für Bestandskunden mit ähnlichen Produkten (§ 7 Abs. 3 UWG). Dazu Zweckbindung, Hinweis auf das Widerspruchsrecht und ein Abmeldelink.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "einwilligung",
+            "szenario"
+          ]
+        },
+        {
+          "id": "DS-024",
+          "frage": "Ein Firmenlaptop mit Kundendaten wurde gestohlen. Was ist zu tun?",
+          "antwort": "Sofort Datenschutzbeauftragten informieren und den Vorfall dokumentieren. Datenpanne nach Art. 33 DSGVO: Meldung an die Aufsichtsbehörde binnen 72 Stunden, wenn ein Risiko für die Betroffenen besteht; bei hohem Risiko auch Betroffene benachrichtigen (Art. 34). Eine Festplattenverschlüsselung hätte das Risiko gesenkt.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "datenpanne",
+            "szenario"
           ]
         }
       ]
@@ -4549,7 +4759,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 12",
       "status": "behandelt",
-      "anzahl_karten": 26,
+      "anzahl_karten": 28,
       "karten": [
         {
           "id": "PM-008",
@@ -4819,6 +5029,28 @@
             "belegsatz"
           ],
           "diagramm": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 220 120\" width=\"220\" height=\"120\" role=\"img\" aria-label=\"Netzplan-Knoten mit FAZ, FEZ, Dauer, GP, FP, SAZ, SEZ\">\n<rect x=\"20\" y=\"10\" width=\"180\" height=\"100\" class=\"dg-form\"/>\n<line x1=\"20\" y1=\"35\" x2=\"200\" y2=\"35\" class=\"dg-linie\"/>\n<line x1=\"20\" y1=\"60\" x2=\"200\" y2=\"60\" class=\"dg-linie\"/>\n<line x1=\"20\" y1=\"85\" x2=\"200\" y2=\"85\" class=\"dg-linie\"/>\n<line x1=\"110\" y1=\"10\" x2=\"110\" y2=\"35\" class=\"dg-linie\"/>\n<line x1=\"80\" y1=\"60\" x2=\"80\" y2=\"85\" class=\"dg-linie\"/>\n<line x1=\"140\" y1=\"60\" x2=\"140\" y2=\"85\" class=\"dg-linie\"/>\n<line x1=\"110\" y1=\"85\" x2=\"110\" y2=\"110\" class=\"dg-linie\"/>\n<text x=\"65\" y=\"22\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">FAZ</text>\n<text x=\"155\" y=\"22\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">FEZ</text>\n<text x=\"110\" y=\"47\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-fett dg-klein\">Vorgang-ID · Beschreibung</text>\n<text x=\"50\" y=\"73\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">Dauer</text>\n<text x=\"110\" y=\"73\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">GP</text>\n<text x=\"170\" y=\"73\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">FP</text>\n<text x=\"65\" y=\"98\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">SAZ</text>\n<text x=\"155\" y=\"98\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">SEZ</text>\n</svg>"
+        },
+        {
+          "id": "PM-027",
+          "frage": "Vorgang C verzögert sich um 3 Tage, sein Gesamtpuffer beträgt 2 Tage. Welche Folge hat das für das Projektende?",
+          "antwort": "Der Puffer von 2 Tagen wird aufgebraucht, das Projektende verschiebt sich um 3 − 2 = 1 Tag. Läge C auf dem kritischen Pfad (GP = 0), wären es 3 Tage.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "netzplan",
+            "szenario"
+          ]
+        },
+        {
+          "id": "PM-028",
+          "frage": "Ein Sprint-Eintrag ist am Sprintende nicht fertig. Was passiert damit in Scrum?",
+          "antwort": "Er erfüllt die Definition of Done nicht und zählt nicht als Inkrement. Er geht zurück ins Product Backlog und wird vom Product Owner neu priorisiert; der Sprint wird nicht verlängert.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "scrum",
+            "szenario"
+          ]
         }
       ]
     },
@@ -4828,7 +5060,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 5 und 12",
       "status": "behandelt",
-      "anzahl_karten": 13,
+      "anzahl_karten": 14,
       "karten": [
         {
           "id": "WI-003",
@@ -4966,6 +5198,17 @@
             "kostenvergleich"
           ],
           "rechenweg": "Kritische Menge, bei der beide Varianten gleich teuer sind:\n\n$$12.000 + 2x = 5x \\;\\Rightarrow\\; x = \\dfrac{12.000}{5 - 2} = 4.000 \\text{ Vorgänge pro Jahr}$$\n\nDarunter Buy, darüber Make – plus qualitative Kriterien (Know-how, Abhängigkeit)."
+        },
+        {
+          "id": "WI-014",
+          "frage": "Ein Projekt kostet 36.000 €, spart 1.500 € pro Monat und das System wird 4 Jahre genutzt. Lohnt es sich?",
+          "antwort": "Jahresersparnis 1.500 · 12 = 18.000 €. Amortisation 36.000 / 18.000 = 2 Jahre < 4 Jahre Nutzung. Gewinn über die Laufzeit 4 · 18.000 − 36.000 = 36.000 €, ROI = 100 %. Dazu qualitative Faktoren (Qualität, Zufriedenheit) nennen.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "amortisation",
+            "szenario"
+          ]
         }
       ]
     },
@@ -4975,7 +5218,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 15",
       "status": "behandelt",
-      "anzahl_karten": 32,
+      "anzahl_karten": 34,
       "karten": [
         {
           "id": "TEC-019",
@@ -5331,6 +5574,30 @@
             "use-case"
           ],
           "diagramm": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 440 170\" width=\"440\" height=\"170\" role=\"img\" aria-label=\"UML-Anwendungsfalldiagramm mit Akteuren, Systemgrenze und Anwendungsfällen\">\n<rect x=\"110\" y=\"8\" width=\"220\" height=\"150\" class=\"dg-form\"/>\n<text x=\"220\" y=\"22\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-fett dg-klein\">Reparaturverwaltung</text>\n<circle cx=\"50\" cy=\"60\" r=\"8\" class=\"dg-form\"/>\n<line x1=\"50\" y1=\"68\" x2=\"50\" y2=\"88\" class=\"dg-linie\"/>\n<line x1=\"38\" y1=\"76\" x2=\"62\" y2=\"76\" class=\"dg-linie\"/>\n<line x1=\"50\" y1=\"88\" x2=\"40\" y2=\"104\" class=\"dg-linie\"/>\n<line x1=\"50\" y1=\"88\" x2=\"60\" y2=\"104\" class=\"dg-linie\"/>\n<text x=\"50\" y=\"116\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">Kunde</text>\n<circle cx=\"390\" cy=\"60\" r=\"8\" class=\"dg-form\"/>\n<line x1=\"390\" y1=\"68\" x2=\"390\" y2=\"88\" class=\"dg-linie\"/>\n<line x1=\"378\" y1=\"76\" x2=\"402\" y2=\"76\" class=\"dg-linie\"/>\n<line x1=\"390\" y1=\"88\" x2=\"380\" y2=\"104\" class=\"dg-linie\"/>\n<line x1=\"390\" y1=\"88\" x2=\"400\" y2=\"104\" class=\"dg-linie\"/>\n<text x=\"390\" y=\"116\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">Techniker</text>\n<ellipse cx=\"220\" cy=\"66\" rx=\"70\" ry=\"18\" class=\"dg-akzent\"/>\n<text x=\"220\" y=\"66\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">Auftrag erfassen</text>\n<ellipse cx=\"220\" cy=\"128\" rx=\"70\" ry=\"18\" class=\"dg-akzent\"/>\n<text x=\"220\" y=\"128\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"dg-klein\">Termin vereinbaren</text>\n<line x1=\"62\" y1=\"78\" x2=\"152\" y2=\"70\" class=\"dg-linie\"/>\n<line x1=\"62\" y1=\"86\" x2=\"152\" y2=\"124\" class=\"dg-linie\"/>\n<line x1=\"328\" y1=\"70\" x2=\"378\" y2=\"78\" class=\"dg-linie\"/>\n<line x1=\"300\" y1=\"124\" x2=\"378\" y2=\"86\" class=\"dg-linie\"/>\n<line x1=\"220\" y1=\"84\" x2=\"220\" y2=\"110\" class=\"dg-linie dg-strich\"/>\n<text x=\"228\" y=\"97\" text-anchor=\"start\" dominant-baseline=\"middle\" class=\"dg-klein dg-leise\">«include»</text>\n</svg>"
+        },
+        {
+          "id": "TEC-033",
+          "frage": "Ein Client soll über eine REST-Schnittstelle einen neuen Auftrag anlegen. Welche Methode und welcher Statuscode passen?",
+          "antwort": "POST auf die Auftragsliste (z. B. /auftraege) mit dem Auftrag im Body. Bei Erfolg 201 Created (idealerweise mit Location-Header); bei ungültigen Daten 400.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "rest",
+            "http",
+            "szenario"
+          ]
+        },
+        {
+          "id": "TEC-034",
+          "frage": "Für eine Schnittstelle zum Webshop ist JSON üblich. Wann wählst du trotzdem XML?",
+          "antwort": "Wenn eine Schema-Validierung (XSD) und Namensräume gebraucht werden, bestehende Partner oder Normen XML vorschreiben oder gemischte Inhalte (Text mit Auszeichnung) vorkommen. JSON ist schlanker und bei Web-APIs der Standard.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "xml",
+            "json",
+            "szenario"
+          ]
         }
       ]
     },
@@ -5340,7 +5607,7 @@
       "pruefungsbereich": "Prozessanalyse und Datenqualität",
       "quelle": "Deep Dive 16",
       "status": "behandelt",
-      "anzahl_karten": 20,
+      "anzahl_karten": 22,
       "karten": [
         {
           "id": "QS-013",
@@ -5557,6 +5824,28 @@
           "tags": [
             "testarten"
           ]
+        },
+        {
+          "id": "QS-021",
+          "frage": "Ein Eingabefeld akzeptiert ganze Zahlen von 1 bis 100. Welche Testwerte wählst du nach der Grenzwertanalyse?",
+          "antwort": "0, 1, 2 sowie 99, 100, 101 – jeweils an und direkt neben den Grenzen. Dazu je ein Wert aus den Äquivalenzklassen: ungültig unten (< 1), gültig (1–100), ungültig oben (> 100).",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "testen",
+            "szenario"
+          ]
+        },
+        {
+          "id": "QS-022",
+          "frage": "Vollsicherung am Sonntag, danach täglich eine Sicherung; der Server fällt Mittwochfrüh aus. Wie viele Sicherungen brauchst du bei differenziell bzw. inkrementell?",
+          "antwort": "Differenziell: 2 (Vollsicherung + Differenz vom Dienstag). Inkrementell: 3 (Vollsicherung + Montag + Dienstag). Differenziell stellt schneller wieder her, braucht aber mehr Speicher je Sicherung.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "backup",
+            "szenario"
+          ]
         }
       ]
     },
@@ -5566,7 +5855,7 @@
       "pruefungsbereich": "Projektarbeit, Präsentation und Fachgespräch",
       "quelle": "Themenliste (noch nicht vertieft)",
       "status": "offen",
-      "anzahl_karten": 14,
+      "anzahl_karten": 22,
       "karten": [
         {
           "id": "PRJ-009",
@@ -5715,6 +6004,92 @@
             "dokumentation",
             "crisp-dm"
           ]
+        },
+        {
+          "id": "PRJ-015",
+          "frage": "Worin unterscheiden sich Projektdokumentation, Präsentation und Fachgespräch?",
+          "antwort": "Die Dokumentation belegt schriftlich Planung, Durchführung und Ergebnis. Die Präsentation stellt die Kernpunkte mündlich vor. Im Fachgespräch vertiefen die Prüfer anhand von Dokumentation und Präsentation (Entscheidungen, Alternativen, Transfer).",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "projektarbeit"
+          ]
+        },
+        {
+          "id": "PRJ-016",
+          "frage": "Was gehört in den Soll-Ist-Vergleich der Projektdokumentation?",
+          "antwort": "Ziele gegenüber den erreichten Ergebnissen (messbar), geplante gegenüber tatsächlichen Stunden je Phase, begründete Abweichungen und ein Fazit mit Lehren („Lessons Learned“). Ehrlich benannte Abweichungen wirken besser als geschönte Zahlen.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "projektarbeit",
+            "doku"
+          ]
+        },
+        {
+          "id": "PRJ-017",
+          "frage": "Wie formulierst du ein SMARTes Projektziel für ein Datenqualitätsprojekt?",
+          "antwort": "Spezifisch, messbar, akzeptiert, realistisch, terminiert – z. B. „Die Quote fehlerhafter Adressen in der Kundentabelle sinkt bis Projektende von 12 % auf unter 3 %.“ Nicht: „Die Datenqualität soll besser werden.“",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "projektarbeit",
+            "smart"
+          ]
+        },
+        {
+          "id": "PRJ-018",
+          "frage": "Welche Fragen zur Datenqualität erwartet der Prüfer im Fachgespräch?",
+          "antwort": "Herkunft der Daten, Vollständigkeit, Dubletten, Ausreißer, Umgang mit fehlenden Werten und wie du die Bereinigung dokumentiert und nachvollziehbar gemacht hast – mit Zahlen vorher/nachher.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachgespraech",
+            "datenqualitaet"
+          ]
+        },
+        {
+          "id": "PRJ-019",
+          "frage": "Wie erklärst du das Ergebnis deines Modells einem Laien im Prüfungsausschuss?",
+          "antwort": "Kernaussage in einem Satz, dann ein konkretes Beispiel, die Kennzahl in Alltagsworten („von 10 Warnungen stimmen 8“) und ehrlich die Grenzen. Fachwörter nur mit kurzer Erklärung.",
+          "typ": "anwendung",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachgespraech",
+            "praesentation"
+          ]
+        },
+        {
+          "id": "PRJ-020",
+          "frage": "Der Prüfer sagt: „Das Projekt wirkt recht klein.“ Wie reagierst du?",
+          "antwort": "Sachlich bleiben: Umfang und Tiefe mit dem vorgegebenen Zeitrahmen begründen, den eigenen Anteil und die getroffenen Entscheidungen betonen und zeigen, wie sich das Vorgehen auf größere Datenmengen übertragen ließe.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachgespraech"
+          ]
+        },
+        {
+          "id": "PRJ-021",
+          "frage": "Welche Transferfragen sind im Fachgespräch typisch?",
+          "antwort": "Was ändert sich bei der zehnfachen Datenmenge? Wie betreibst du die Lösung dauerhaft? Wie sicherst du Datenschutz und Zugriffe? Welche Alternative (Excel, SQL, Python, BI-Werkzeug) wäre möglich und warum nicht gewählt?",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachgespraech",
+            "transfer"
+          ]
+        },
+        {
+          "id": "PRJ-022",
+          "frage": "Wie übst du das Fachgespräch sinnvoll?",
+          "antwort": "Laut sprechen statt nur lesen, Fragen aus der eigenen Dokumentation ableiten, mit Partner oder Aufnahme üben, die Antwortzeit stoppen und Kernaussage → Begründung → Beispiel einhalten. Die App bietet dafür unter „Fachgespräch“ eine Simulation.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachgespraech",
+            "uebung"
+          ]
         }
       ]
     },
@@ -5724,7 +6099,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 13",
       "status": "behandelt",
-      "anzahl_karten": 26,
+      "anzahl_karten": 28,
       "karten": [
         {
           "id": "WS1-006",
@@ -5995,6 +6370,29 @@
           "schwierigkeit": 2,
           "tags": [
             "kschg"
+          ]
+        },
+        {
+          "id": "WS1-027",
+          "frage": "Ein 17-jähriger Azubi soll täglich 9 Stunden arbeiten. Ist das zulässig?",
+          "antwort": "Nein: Jugendliche dürfen grundsätzlich höchstens 8 Stunden täglich und 40 Stunden pro Woche arbeiten (JArbSchG). Bis 8,5 Stunden täglich sind nur zulässig, wenn an anderen Tagen derselben Woche verkürzt wird.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "jarbschg",
+            "szenario"
+          ]
+        },
+        {
+          "id": "WS1-028",
+          "frage": "Kann ein Ausbildungsverhältnis in der Probezeit und danach gekündigt werden?",
+          "antwort": "In der Probezeit von beiden Seiten jederzeit ohne Frist und ohne Grund (§ 22 BBiG, schriftlich). Danach nur aus wichtigem Grund; der Azubi kann zusätzlich mit 4 Wochen Frist kündigen, wenn er die Ausbildung aufgibt oder einen anderen Beruf ausbilden lassen will.",
+          "typ": "anwendung",
+          "schwierigkeit": 2,
+          "tags": [
+            "bbig",
+            "kuendigung",
+            "szenario"
           ]
         }
       ]

@@ -190,7 +190,7 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
                "karten": [ { "id": "SQL-001", "frage": "…", "antwort": "…", "typ": "wissen", "schwierigkeit": 1, "tags": ["join"] } ] } ] }
 ```
 
-- Currently 25 decks and 539 cards (typ: wissen 256, falle 93, abgrenzung 82, anwendung 62, rechnung 46).
+- Currently 28 decks and 696 cards (typ: wissen 256, falle 93, abgrenzung 82, anwendung 62, rechnung 46).
 - **Term cards** `AP2_Fachbegriffe_Lernkarten.json` (same format, any `*Lernkarten*.json` is imported): 16 decks `fb01`–`fb16`, one per Deep Dive,
   802 cards with `typ: "begriff"` – `frage` is just the term, `antwort` a one- or two-sentence explanation, ids `FB-<term-slug>` (stable,
   independent of order). Terms already defined by a `wissen` card (ACID, KPI, PDCA …) are not repeated. In the app: Typ filter „Fachbegriff“
