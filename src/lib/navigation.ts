@@ -50,6 +50,7 @@ export const BEREICHE: Bereich[] = [
       { to: '/diagramme', icon: 'workflow', label: 'Diagramm-Übungen', badge: 'diagramme' },
       { to: '/klausur', icon: 'timer', label: 'Übungsklausur' },
       { to: '/fehlerjournal', icon: 'notebook-pen', label: 'Fehlerjournal', badge: 'journal' },
+      { to: '/podcast', icon: 'headphones', label: 'Podcast' },
       { to: '/fachgespraech', icon: 'mic', label: 'Fachgespräch' },
     ],
   },
@@ -113,6 +114,7 @@ const LERNEN = [
   '/klausur',
   '/fehlerjournal',
   '/fachgespraech',
+  '/podcast',
 ];
 const EINSTELLUNGEN = ['/material', '/einstellungen', '/daten', '/generator'];
 

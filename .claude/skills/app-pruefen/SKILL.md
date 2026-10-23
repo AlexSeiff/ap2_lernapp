@@ -47,7 +47,7 @@ node .claude/skills/app-pruefen/scripts/screenshot.mjs --url "http://localhost:5
 ```
 
 Options: `--handy` (390 × 844, touch), `--dunkel`, `--wenig-bewegung` (prefers-reduced-motion), `--ganz` (full page), `--breite/--hoehe`,
-`--warten <ms>` after loading (default 800), `--danach <ms>` after every click/key (default 600; use 0 to catch frames of an animation). Actions: `--klick "<text or CSS>"` (exact button/link text first, then contains),
+`--warten <ms>` after loading (default 800), `--danach <ms>` after every click/key (default 600; use 0 to catch frames of an animation). Actions: `--klick "<text or CSS>"` (exact button/link text first, then contains; a real mouse click, so it counts as a user gesture – needed for speech output, fullscreen, clipboard),
 `--taste " " | Enter | Escape | ArrowRight | 1…`, `--pause <ms>`, `--js "<expression>"` (prints the result), `--bild <file.png>`.
 The script prints page exceptions and console errors at the end and exits with 1 on an exception – treat that as a finding.
 

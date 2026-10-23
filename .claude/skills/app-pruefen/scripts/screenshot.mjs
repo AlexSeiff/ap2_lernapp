@@ -62,7 +62,8 @@ function leseArgumente(argv) {
   }
   if (!opt.url) throw new Error('--url fehlt');
   if (opt.handy) Object.assign(opt, { breite: 390, hoehe: 844 });
-  if (!opt.aktionen.some((x) => x.art === 'bild')) opt.aktionen.push({ art: 'bild', wert: 'screenshot.png' });
+  // Ohne --bild in den Temp-Ordner – nie ins Arbeitsverzeichnis (sonst landen Bilder im Repo).
+  if (!opt.aktionen.some((x) => x.art === 'bild')) opt.aktionen.push({ art: 'bild', wert: join(tmpdir(), 'app-pruefen-screenshot.png') });
   return opt;
 }
 
@@ -167,8 +168,11 @@ const KLICK = (ziel) => {
     }
   }
   el.scrollIntoView({ block: 'center' });
-  el.click();
-  return { ok: true, was: `${el.tagName.toLowerCase()} „${el.textContent.replace(/\s+/g, ' ').trim().slice(0, 60)}“` };
+  // Nur die Mitte zurückgeben: Geklickt wird mit echten Mausereignissen (Input.dispatchMouseEvent) – ein el.click() aus JavaScript
+  // zählt für den Browser nicht als Nutzergeste (Sprachausgabe, Vollbild, Zwischenablage würden abgelehnt).
+  const r = el.getBoundingClientRect();
+  const name = el.textContent.replace(/\s+/g, ' ').trim().slice(0, 60) || el.getAttribute('aria-label') || '';
+  return { ok: true, x: r.left + r.width / 2, y: r.top + r.height / 2, was: `${el.tagName.toLowerCase()} „${name}“` };
 };
 
 async function main() {
@@ -233,6 +237,10 @@ async function main() {
         const r = await cdp.send('Runtime.evaluate', { expression: `(${KLICK})(${JSON.stringify(a.wert)})`, returnByValue: true });
         const v = r.result.value;
         if (!v?.ok) throw new Error(`Nichts zum Klicken gefunden: „${a.wert}“. Sichtbar: ${JSON.stringify(v?.texte ?? [])}`);
+        const maus = { x: v.x, y: v.y, button: 'left', clickCount: 1 };
+        await cdp.send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: v.x, y: v.y });
+        await cdp.send('Input.dispatchMouseEvent', { type: 'mousePressed', ...maus });
+        await cdp.send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...maus });
         console.log(`klick: ${v.was}`);
         await schlafe(opt.danach);
       } else if (a.art === 'taste') {

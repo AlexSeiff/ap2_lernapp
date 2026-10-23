@@ -608,6 +608,38 @@ larger Formelsammlung (linked). Where: SQL editor and SQL exercises (Belegsatz),
 (`anhangFuer` in `src/lib/anhang.ts`: Belegsatz for tasks with SQL, formulas for tasks with *berechnen*/*ermitteln*; an exam gets what
 any of its tasks needs). `tests/belegsatz.test.ts` checks the sections exist.
 
+### Lernplan im Kalender (October 2026)
+
+- **Lernzeiten** (`Settings.lernzeiten`, optional, no version bump; read tolerantly by `leseLernzeiten` in `shared/progress.ts`):
+  `{ werktags, wochenende }`, each `{ tage (Date.getDay, Mo–Fr resp. Sa/So), von 'HH:MM', minuten 5–600 }`. Missing = standard
+  (Mo–Fr 18:00 for 30 min, Sa 10:00 for 60 min, `STANDARD_LERNZEITEN` in `src/lib/lernzeiten.ts`). Set in Einstellungen → „Lernzeiten“
+  (`components/Lernzeiten.tsx`, weekday chips, start time, duration).
+- **Kalender** (`lernTermine` + `lernplanIcs`, pure, `tests/lernzeiten.test.ts`): one event per study day from today until the day before
+  the exam (without an exam date: 28 days), at the chosen local time (floating, no time zone). Title and description name the focus topics
+  of that week from the Lernplan (`planeLernplan`) and the cards per session (cards per day × 7 / study days per week); the last
+  `PUFFER_TAGE` are „Wiederholung & Übungsklausur“; the exam day is an all-day event. Reminder 10 minutes before (`VALARM`), fixed UIDs
+  per day (re-importing updates instead of duplicating in most calendars), lines folded to 75 bytes (RFC 5545). Button „Lernplan in den
+  Kalender (.ics)“ in Einstellungen and under the Lernplan on `/heute`. The older `kalenderIcs` (Daten & Import: due repetitions as
+  all-day events) stays.
+
+### Podcast (October 2026)
+
+`/podcast` (list) and `/podcast/:topicId` (player), lazy page `pages/Podcast.tsx`, sub-target „Podcast“ under Lernen, button on every
+Lernblatt with an episode.
+- **Episode** (`bauePodcast` in `src/lib/podcast.ts`, pure): a dialogue of Lea (asks) and Ben (explains), built only from the content –
+  Einstieg with the sheet's „Prüfungsrelevanz“, one chapter per „Teil“ with its intro and the term pages of that part (definition,
+  Erklärung, Beispiel, Prüfungsfalle, Merksatz; assigned by „Mehr: Deep Dive N, Teil/N.M“, else the `quellen` comment), „Weitere
+  Begriffe“, a quiz with the topic's Prüferfragen (5 s pause to think), Abschluss. No episode for WiSo (13, 14, 20), Altklausur-Training,
+  topics without parts or term pages; no Fachgespräch questions (`hatPodcastThema`).
+- **Speech text** (`sprechText`, `formelSprechen`): no code blocks, tables, SVG or markup; LaTeX and symbols in words („x quer“,
+  „geteilt durch“, „kleiner als“, „COUNT(Stern)“), abbreviations spelled out; `saetze` splits only at punctuation followed by space.
+  `tests/podcast.test.ts` checks every episode of `content/` for leftover markup or symbols.
+- **Playback** (`src/lib/sprachausgabe.ts`, `Vorleser`): the browser's Web Speech API – no audio files, works offline with local voices.
+  Sentence by sentence, every next step via `setTimeout` (no recursion); a failing sentence is retried once with a local voice, then
+  playback stops with a message (never skips silently). Voice proposal: online natural voices from Germany first, offline local ones; Lea
+  female, Ben male if the names allow it. Speed, voices and the position per episode are kept in `localStorage` (comfort, not progress);
+  Media Session handlers for headset buttons. Limitation: some phones stop speech when the screen locks.
+
 ### Deine Antwort (phase 8.2)
 
 In "🃏 Aufdecken" a textarea "✍️ Deine Antwort (optional)" sits **below** the card (outside the clickable `role=button` card, so typing never

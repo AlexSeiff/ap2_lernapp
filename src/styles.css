@@ -1118,6 +1118,35 @@ a.kpi.w-innen:hover { transform: none; }
 
 .lernplan { padding-left: 1.2em; } .lernplan > li { margin-bottom: 0.8em; }
 
+/* Podcast (pages/Podcast.tsx): Folgenliste, Player, Kapitel, Mitlesetext */
+.podcast-liste { list-style: none; padding: 0; display: grid; gap: 10px; }
+.podcast-folge { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; }
+.podcast-folge > .icon { width: 1.8em; height: 1.8em; color: var(--accent); }
+.podcast-nr { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+.podcast-folge .tile-title, .podcast-folge .tile-meta { display: block; }
+.podcast-player { position: sticky; top: calc(var(--kopf-gesamt) + 8px); z-index: 5; background: linear-gradient(135deg, var(--accent-soft), var(--surface) 70%); }
+.podcast-kapitel { margin: 0 0 6px; color: var(--muted); }
+.podcast-kapitel b { color: var(--text); }
+.podcast-knoepfe { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 10px 0 6px; }
+.podcast-knoepfe button.ghost .icon { width: 1.6em; height: 1.6em; }
+.podcast-haupt { width: 64px; height: 64px; border-radius: 50%; justify-content: center; padding: 0; }
+.podcast-haupt .icon { width: 1.7em; height: 1.7em; }
+.podcast-einstellungen { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 8px; }
+.podcast-einstellungen select { max-width: 220px; }
+.podcast-inhalt { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.podcast-inhalt button { min-height: 32px; padding: 4px 12px; font-size: 0.85rem; font-weight: 500; }
+.podcast-inhalt button.aktiv { background: var(--accent-fill); color: var(--accent-text); }
+.podcast-text { list-style: none; padding: 0; margin: 0; }
+.podcast-text h2 { font-size: 1.05rem; margin: 1.4em 0 0.4em; }
+.podcast-zeile { display: block; width: 100%; text-align: left; font: inherit; font-weight: 400; color: var(--text); background: transparent; border: 0; box-shadow: none; padding: 6px 10px; border-radius: 10px; line-height: 1.55; min-height: 0; }
+.podcast-zeile:hover:not(:disabled) { background: var(--fill); filter: none; }
+.podcast-text li.ben .podcast-zeile b { color: var(--accent); }
+.podcast-text li.lea .podcast-zeile b { color: var(--good); }
+.podcast-text li.aktuell .podcast-zeile { background: var(--accent-soft); }
+.podcast-text li.pause { padding: 2px 10px; }
+/* Auf dem Handy nicht festhalten – der Player bräuchte sonst den halben Bildschirm */
+@media (max-width: 599px) { .podcast-player { position: static; } }
+
 /* „Bewegung reduzieren“ im Betriebssystem und beim Drucken: keine Animationen und Übergänge */
 @media (prefers-reduced-motion: reduce), print {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }

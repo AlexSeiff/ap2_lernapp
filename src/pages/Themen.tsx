@@ -12,6 +12,7 @@ import { istAusgeblendet, setzeAusgeblendet } from '../lib/settings';
 import { TheoryMarkdown } from '../components/TheoryMarkdown';
 import type { Topic } from '../../shared/types';
 import { Icon } from '../components/Icon';
+import { hatPodcastThema } from '../lib/podcast';
 
 /** „Deep Dive 3“ oder „Zusatz“ für das ältere SQL-Blatt. */
 const topicLabel = (t: Pick<Topic, 'id' | 'number'>) => (t.id === '00' ? 'Zusatz' : `Deep Dive ${t.number}`);
@@ -129,6 +130,11 @@ export function Thema() {
           {cards > 0 && (
             <Link className="button secondary" to={`/karteikarten?thema=${topic.id}`}>
               <Icon name="layers" /> {cards} Karteikarten
+            </Link>
+          )}
+          {hatPodcastThema(topic) && (
+            <Link className="button secondary" to={`/podcast/${topic.id}`}>
+              <Icon name="headphones" /> Podcast
             </Link>
           )}
           {!ausgeblendet && (
