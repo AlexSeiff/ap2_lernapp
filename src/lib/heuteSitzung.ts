@@ -19,7 +19,7 @@ export interface HeuteSitzung {
 
 export const HEUTE_SPEICHER = 'ap2-heute';
 
-const ARTEN: HeuteArt[] = ['wiederholung', 'aufgabe', 'sql', 'rechnen', 'karten'];
+const ARTEN: HeuteArt[] = ['wiederholung', 'aufgabe', 'sql', 'rechnen', 'diagramm', 'karten'];
 
 /** Neue Runde; `vorher` (die letzte Runde von heute) gibt weiter, was heute schon dran war. */
 export function starteSitzung(items: HeuteItem[], datum: string, vorher?: HeuteSitzung): HeuteSitzung {

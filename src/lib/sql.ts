@@ -21,10 +21,11 @@ const truncateQuery = (query: string) => query.slice(0, SQL_QUERY_MAX);
  * Speichert eine Prüfung („✓ Prüfen“). Zählt als Versuch und als Lerntag.
  * Richtig ohne vorher gezeigte Lösung → gelöst (erstes Mal). Falsch → Wiederholung ab Stufe 1.
  * Richtig bei fälliger Wiederholung → nächste Stufe; richtig vor dem Fälligkeitstag ändert die Wiederholung nicht.
+ * Die geprüfte Abfrage wird nicht gespeichert (ein Entwurf fällt weg): Beim nächsten Mal beginnt die Übung leer.
  */
-export function recordSqlCheck(p: Progress, id: string, ok: boolean, query: string, today = localDate()): Progress {
-  const prev = p.sql[id] ?? emptyState();
-  let next: SqlState = { ...prev, attempts: prev.attempts + 1, lastCheckedAt: today, lastQuery: truncateQuery(query) };
+export function recordSqlCheck(p: Progress, id: string, ok: boolean, today = localDate()): Progress {
+  const { lastQuery: _entwurf, ...prev } = p.sql[id] ?? emptyState();
+  let next: SqlState = { ...prev, attempts: prev.attempts + 1, lastCheckedAt: today, zuletztRichtig: ok };
   if (ok && !next.solutionShown && !next.solvedAt) next = { ...next, solvedAt: today };
   next = nachPruefung(next, ok, today);
   return { ...withState(p, id, next), sqlDays: { ...p.sqlDays, [today]: (p.sqlDays[today] ?? 0) + 1 } };
@@ -36,10 +37,21 @@ export function recordSqlHint(p: Progress, id: string): Progress {
   return withState(p, id, { ...prev, hintsUsed: prev.hintsUsed + 1 });
 }
 
-/** Musterlösung angesehen: zählt danach als „mit Lösung“ und kommt morgen zur Wiederholung. */
+/** Musterlösung angesehen: zählt danach als „mit Lösung“ und nicht als richtig, kommt morgen zur Wiederholung – ohne den Entwurf. */
 export function recordSolutionShown(p: Progress, id: string, today = localDate()): Progress {
-  const prev = p.sql[id] ?? emptyState();
-  return withState(p, id, restartRepetition({ ...prev, solutionShown: true }, today));
+  const { lastQuery: _entwurf, ...prev } = p.sql[id] ?? emptyState();
+  return withState(p, id, restartRepetition({ ...prev, solutionShown: true, zuletztRichtig: false }, today));
+}
+
+/**
+ * Abfrage, mit der die Übung beim Öffnen startet: nur ein unfertiger Entwurf, nie eine schon geprüfte Antwort.
+ * Seit Prüfen und „Lösung zeigen“ den Entwurf löschen (erkennbar an `zuletztRichtig`), ist alles Gespeicherte ein neuer Entwurf;
+ * in älteren Ständen ist es nach einer Prüfung die geprüfte Abfrage – dann leer.
+ */
+export function sqlEntwurf(state: SqlState | undefined): string {
+  if (!state?.lastQuery) return '';
+  const nieGeprueft = state.lastCheckedAt === undefined && !state.solutionShown;
+  return nieGeprueft || state.zuletztRichtig !== undefined ? state.lastQuery : '';
 }
 
 /** Merkt sich die aktuelle Abfrage (Entwurf), gekürzt auf SQL_QUERY_MAX Zeichen. */

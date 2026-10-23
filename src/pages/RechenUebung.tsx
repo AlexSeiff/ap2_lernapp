@@ -5,6 +5,7 @@ import { lazy, type ReactNode, Suspense } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import type { RechenUebung as RechenUebungTyp } from '../../shared/types';
 import type { Beispiel } from '../rechnen/beispiel';
+import { AnhangPanel } from '../components/Belegsatz';
 import { LeichtOptionen } from '../components/LeichtOptionen';
 import { Markdown } from '../components/Markdown';
 import { useConfirm } from '../hooks/useConfirm';
@@ -107,6 +108,10 @@ function RechenUebungView({ u }: { u: RechenUebungTyp }) {
           <Icon name="pencil" /> Rechne auf Papier, trage nur Ergebnisse ein.
           {r.state && r.state.attempts > 0 && ` · ${r.state.attempts} ${r.state.attempts === 1 ? 'Versuch' : 'Versuche'}`}
         </p>
+      </div>
+
+      <div className="anhang-leiste no-print">
+        <AnhangPanel formeln />
       </div>
 
       {r.beispiel && <BeispielKarte b={r.beispiel} rechenweg={!!inst?.loesung.schritte.length} />}

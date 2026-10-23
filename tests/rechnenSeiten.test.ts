@@ -51,17 +51,21 @@ describe('Rechenübungen-Seiten', () => {
       expect(html, u.id).not.toContain('passt nicht zu ihrer Vorlage');
       expect(html, u.id).not.toMatch(/\{\{\s*[\w.-]+\s*\}\}/);
       expect(html, u.id).toContain('Rechne auf Papier, trage nur Ergebnisse ein.');
+      expect(html, u.id).toContain('Formelübersicht');
       expect((html.match(/<input /g) ?? []).length, u.id).toBeGreaterThanOrEqual(Math.max(1, u.eingaben.length));
       expect(html.includes('Neue Zahlen'), u.id).toBe(u.neueZahlen);
     }
   });
 
-  it('übernimmt gespeicherte Antworten und Zufallszahlen', () => {
+  it('beginnt nach einem Versuch leer (keine alten Antworten, keine alten Hinweise), übernimmt aber die Zufallszahlen', () => {
     const u = content.rechenUebungen.find((x) => x.id === 'RE-ST1-001')!;
-    progress = { ...emptyProgress(), rechnen: { [u.id]: { attempts: 1, hintsUsed: 1, antworten: { mittel: '70,00' } } } };
+    progress = {
+      ...emptyProgress(),
+      rechnen: { [u.id]: { attempts: 1, hintsUsed: 1, lastCheckedAt: '2026-10-01', zuletztRichtig: true } },
+    };
     let html = render(`/rechnen/${u.id}`);
-    expect(html).toContain('value="70,00"');
-    expect(html).toContain('Hinweise');
+    expect(html).not.toMatch(/<input[^>]*value="[^"]+"/);
+    expect(html).not.toContain('<b>Hinweise');
     expect(html).not.toContain('Originalzahlen');
     progress = { ...emptyProgress(), rechnen: { [u.id]: { attempts: 0, hintsUsed: 0, lastSeed: 42 } } };
     html = render(`/rechnen/${u.id}`);

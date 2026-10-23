@@ -2,10 +2,12 @@ import { useState } from 'react';
 import type { Fehlergrund, Sicherheit } from '../../shared/progress';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { AnswerInput } from '../components/AnswerInput';
+import { AnhangPanel } from '../components/Belegsatz';
 import { FehlergrundWahl } from '../components/FehlergrundWahl';
 import { Markdown } from '../components/Markdown';
 import { SicherheitWahl } from '../components/SicherheitWahl';
 import { Attachments, GradePanel, TaskText } from '../components/TaskParts';
+import { anhangFuer } from '../lib/anhang';
 import { formatPoints } from '../lib/grading';
 import { sicherheitLabel } from '../lib/kalibrierung';
 import { isDue, recordAttempt, setzeFehlergrund } from '../lib/progress';
@@ -48,6 +50,7 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
   );
 
   const unterVoll = points !== undefined && points < task.points;
+  const anhang = anhangFuer([task]);
 
   const save = () => {
     if (points === undefined) return;
@@ -85,6 +88,11 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
         </p>
       )}
       {topic?.exam && <Attachments items={topic.exam.attachments} />}
+      {(anhang.sql || anhang.formeln) && (
+        <div className="anhang-leiste no-print">
+          <AnhangPanel {...anhang} />
+        </div>
+      )}
       {block?.intro && <Markdown source={false}>{block.intro}</Markdown>}
 
       <div className="task-card">
@@ -108,7 +116,7 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
               answer={answer}
               points={points}
               onPoints={setPoints}
-              onSqlGeprueft={task.sqlUebung ? (ok, q) => update((p) => recordSqlCheck(p, task.sqlUebung!, ok, q)) : undefined}
+              onSqlGeprueft={task.sqlUebung ? (ok) => update((p) => recordSqlCheck(p, task.sqlUebung!, ok)) : undefined}
             />
             {unterVoll && <FehlergrundWahl value={fehlergrund} onChange={waehleGrund} />}
             <div className="actions">

@@ -864,6 +864,8 @@ button.stern.nur-icon { padding: 4px 6px; flex: none; }
 }
 .belegsatz-kopf { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 12px 0; background: var(--surface); border-bottom: 0.5px solid var(--border); }
 .belegsatz-kopf h2 { margin: 0; font-size: 1.1rem; flex: 1; }
+/* Anhang der Prüfung (SQL-Belegsatz, Formelübersicht) über Aufgaben, Klausur und Rechenübungen */
+.anhang-leiste { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
 @media print {
   .belegsatz-panel { display: none !important; }
   .belegsatz-seite .belegsatz-titel button, .belegsatz-seite .nur-bildschirm { display: none; }

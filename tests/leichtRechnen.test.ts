@@ -122,7 +122,7 @@ describe('Fortschritt im Leicht-Modus der Rechenübungen', () => {
   });
 
   it('falsch: Wiederholung ab morgen; gelöst bleibt gelöst', () => {
-    let p = recordRechenCheck(emptyProgress(), 'RE-1', true, {}, T);
+    let p = recordRechenCheck(emptyProgress(), 'RE-1', true, T);
     expect(p.rechnen['RE-1'].solvedAt).toBe(T);
     p = recordRechenLeicht(p, 'RE-1', false, T);
     expect(p.rechnen['RE-1']).toMatchObject({ attempts: 1, solvedAt: T, stage: 1, due: '2026-10-02' });
@@ -132,7 +132,7 @@ describe('Fortschritt im Leicht-Modus der Rechenübungen', () => {
   it('gelöst wird nur durch Eintippen', () => {
     let p = recordRechenLeicht(emptyProgress(), 'RE-1', true, T);
     expect(p.rechnen['RE-1'].solvedAt).toBeUndefined();
-    p = recordRechenCheck(p, 'RE-1', true, {}, T);
+    p = recordRechenCheck(p, 'RE-1', true, T);
     expect(p.rechnen['RE-1'].solvedAt).toBe(T);
   });
 });

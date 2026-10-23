@@ -15,7 +15,8 @@ vi.mock('../src/lib/store', () => ({
 }));
 
 const { SqlBelegsatz } = await import('../src/pages/SqlBelegsatz');
-const { BelegsatzPanel, ohneTitel } = await import('../src/components/Belegsatz');
+const { AnhangPanel, BelegsatzPanel, formelAbschnitte, ohneTitel } = await import('../src/components/Belegsatz');
+const { anhangFuer } = await import('../src/lib/anhang');
 
 const render = (el: React.ReactElement, path = '/material/sql-belegsatz') =>
   renderToString(
@@ -57,6 +58,35 @@ describe('SQL-Belegsatz', () => {
     expect(html).toContain('aria-expanded="false"');
     expect(html).toContain('SQL-Belegsatz');
     expect(html).not.toContain('<aside');
+  });
+
+  it('Formelübersicht: die Abschnitte 7.8, 7.4 und 7.9 aus Deep Dive 17 (Anhang der Prüfung)', () => {
+    const dd17 = content.topics.find((t) => t.id === '17')!;
+    expect(formelAbschnitte(dd17.sections).map((x) => x.title.slice(0, 3))).toEqual(['7.8', '7.4', '7.9']);
+  });
+
+  it('Anhang-Knöpfe: beide oder einzeln, zu Beginn geschlossen', () => {
+    const beide = render(createElement(AnhangPanel, { sql: true, formeln: true }), '/aufgabe/x');
+    expect(beide).toContain('SQL-Belegsatz');
+    expect(beide).toContain('Formelübersicht');
+    expect(beide).not.toContain('<aside');
+    const formeln = render(createElement(AnhangPanel, { formeln: true }), '/rechnen/x');
+    expect(formeln).toContain('Formelübersicht');
+    expect(formeln).not.toContain('SQL-Belegsatz');
+    expect(render(createElement(AnhangPanel, {}), '/x')).toBe('');
+  });
+
+  it('anhangFuer: Belegsatz zu SQL-Aufgaben, Formeln zu Rechenaufgaben', () => {
+    const sqlAufgaben = Object.values(content.tasks).filter((t) => t.sqlUebung);
+    expect(sqlAufgaben.length).toBeGreaterThan(0);
+    for (const t of sqlAufgaben) expect(anhangFuer([t]).sql, t.id).toBe(true);
+    const c1 = content.tasks['03-C1'];
+    expect(c1.markdown).toContain('*Berechnen*');
+    expect(anhangFuer([c1])).toEqual({ sql: false, formeln: true });
+    // Eine Klausur bekommt, was eine ihrer Aufgaben braucht.
+    expect(anhangFuer([c1, sqlAufgaben[0]])).toEqual({ sql: true, formeln: true });
+    const wiso = Object.values(content.tasks).filter((t) => t.topicId === '13' && !anhangFuer([t]).sql && !anhangFuer([t]).formeln);
+    expect(wiso.length).toBeGreaterThan(0);
   });
 
   it('Navigation: Unterziel im Bereich Glossar', () => {

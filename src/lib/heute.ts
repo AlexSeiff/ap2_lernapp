@@ -9,14 +9,14 @@ import { erzeugeZufall, seedAusText } from '../rechnen/zufall';
 import { cardPool } from './cards';
 import { leichtAutomatischAn, leichtKartenGemerkt } from './leicht';
 import { isDue, localDate } from './progress';
-import { rechenStatus } from './rechnen';
+import { diagrammUebungen } from './diagramme';
 import { istAusgeblendet } from './settings';
-import { sqlStatus } from './sql';
 import { topicStats } from './stats';
+import { letzterStand } from './wiederholung';
 import type { IconName } from './icons';
 import type { KernInhalt } from '../../shared/texte';
 
-export type HeuteArt = 'wiederholung' | 'aufgabe' | 'sql' | 'rechnen' | 'karten';
+export type HeuteArt = 'wiederholung' | 'aufgabe' | 'sql' | 'rechnen' | 'diagramm' | 'karten';
 
 export interface HeuteItem {
   /** Eindeutig innerhalb des Plans. */
@@ -44,6 +44,7 @@ export const HEUTE_ICONS: Record<HeuteArt, IconName> = {
   aufgabe: 'file-pen-line',
   sql: 'database',
   rechnen: 'calculator',
+  diagramm: 'workflow',
   karten: 'layers',
 };
 
@@ -87,10 +88,12 @@ const themaVon = (topicId: string | undefined, fallback: string) => topicId ?? f
 /**
  * Plant die Tagesrunde:
  * 1. Eine Aufgabe aus dem schwächsten Thema (letzte Klausur, sonst Ø Aufgaben; ohne Daten: das Thema mit den wenigsten Versuchen) –
- *    bevorzugt eine noch nie bearbeitete, sonst die mit dem schlechtesten letzten Ergebnis.
- * 2. 1–2 Übungen: fällige SQL- und Rechenübungen (älteste zuerst, höchstens 2); ist keine fällig, eine ungelöste
- *    (bevorzugt aus dem schwächsten Thema).
- * 3. Fällige Fehlerjournal-Aufgaben (älteste zuerst) bis etwa zur Hälfte der Zeit, mindestens eine.
+ *    bevorzugt eine noch nie bearbeitete, sonst die mit dem schlechtesten letzten Ergebnis unter voller Punktzahl. Zuletzt mit voller
+ *    Punktzahl gelöste Aufgaben kommen nicht.
+ * 2. 1–2 Übungen (SQL, Rechnen, Diagramm): zuletzt nicht richtig gelöste (falsch oder Lösung angesehen; am längsten her zuerst,
+ *    höchstens 2); gibt es keine, eine noch nie bearbeitete (bevorzugt aus dem schwächsten Thema). Zuletzt richtig gelöste nie.
+ * 3. Fällige Fehlerjournal-Aufgaben, deren letzter Versuch unter voller Punktzahl lag (älteste zuerst), bis etwa zur Hälfte der Zeit,
+ *    mindestens eine.
  * 4. Die übrige Zeit: fällige Karteikarten (am längsten fällig, niedrigstes Fach zuerst), sonst neue Karten. Es gelten die
  *    Einstellungen Prüferfragen/Fachgespräch; im Leicht-Modus nur Karten mit 4 Antworten. Je Thema Blöcke bis HEUTE_KARTEN_BLOCK.
  * 5. Alles nach Thema verschränkt (verschraenke).
@@ -123,7 +126,7 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
 
   // 3. Fehlerjournal (zuerst ausgewählt, damit die Zusatzaufgabe keine fällige Wiederholung doppelt nimmt).
   const journal = Object.values(progress.journal)
-    .filter((j) => !j.resolvedAt && isDue(j.due, today) && content.tasks[j.taskId] && !schonHeute.has(j.taskId))
+    .filter((j) => !j.resolvedAt && isDue(j.due, today) && j.lastPoints < j.max && content.tasks[j.taskId] && !schonHeute.has(j.taskId))
     .sort((a, b) => a.due.localeCompare(b.due) || a.addedAt.localeCompare(b.addedAt));
   const journalItems: HeuteItem[] = [];
   let journalMinuten = 0;
@@ -151,54 +154,54 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
     );
     const neu = kandidaten.filter((t) => !letzte.has(t.id));
     const unvollstaendig = kandidaten.filter((t) => (letzte.get(t.id) ?? 1) < 1).sort((a, b) => letzte.get(a.id)! - letzte.get(b.id)!);
-    const wahl = neu.length
-      ? neu[Math.floor(zufall() * neu.length)]
-      : (unvollstaendig[0] ?? kandidaten[Math.floor(zufall() * kandidaten.length)]);
+    const wahl = neu.length ? neu[Math.floor(zufall() * neu.length)] : unvollstaendig[0];
     if (wahl) add(aufgabeItem('aufgabe', wahl));
   }
 
-  // 2. SQL- und Rechenübungen.
-  type Uebung = { art: 'sql' | 'rechnen'; id: string; titel: string; topicId?: string; due: string };
-  const sqlUebungen: Uebung[] = content.sqlExercises.map((e) => ({
-    art: 'sql',
-    id: e.id,
-    titel: e.titel,
-    topicId: e.topicId,
-    due: progress.sql[e.id]?.due ?? '',
-  }));
-  const rechenUebungen: Uebung[] = content.rechenUebungen.map((u) => ({
-    art: 'rechnen',
-    id: u.id,
-    titel: u.titel,
-    topicId: u.topicId,
-    due: progress.rechnen[u.id]?.due ?? '',
-  }));
-  const frisch = (u: Uebung) => !schonHeute.has(u.id) && !heuteGeprueft(u.art === 'sql' ? progress.sql[u.id] : progress.rechnen[u.id]);
-  const faellig = [
-    ...sqlUebungen.filter((u) => sqlStatus(progress.sql[u.id], today) === 'faellig'),
-    ...rechenUebungen.filter((u) => rechenStatus(progress.rechnen[u.id], today) === 'faellig'),
-  ]
-    .filter(frisch)
-    .sort((a, b) => a.due.localeCompare(b.due) || a.id.localeCompare(b.id));
-  let uebungen = faellig.slice(0, 2);
+  // 2. SQL-, Rechen- und Diagramm-Übungen: nur neue und zuletzt nicht richtig gelöste.
+  type Uebung = {
+    art: 'sql' | 'rechnen' | 'diagramm';
+    id: string;
+    titel: string;
+    topicId?: string;
+    stand: Parameters<typeof letzterStand>[0];
+  };
+  const alleUebungen: Uebung[] = [
+    ...content.sqlExercises.map((e): Uebung => ({ art: 'sql', id: e.id, titel: e.titel, topicId: e.topicId, stand: progress.sql[e.id] })),
+    ...content.rechenUebungen.map((u): Uebung => ({
+      art: 'rechnen',
+      id: u.id,
+      titel: u.titel,
+      topicId: u.topicId,
+      stand: progress.rechnen[u.id],
+    })),
+    ...diagrammUebungen(content).map((u): Uebung => ({ art: 'diagramm', id: u.id, titel: u.titel, stand: progress.diagramme[u.id] })),
+  ].filter((u) => !schonHeute.has(u.id) && !heuteGeprueft(u.stand));
+  const seit = (u: Uebung) => u.stand?.due ?? u.stand?.lastCheckedAt ?? '';
+  const falsch = alleUebungen
+    .filter((u) => letzterStand(u.stand) === 'falsch')
+    .sort((a, b) => seit(a).localeCompare(seit(b)) || a.id.localeCompare(b.id));
+  let uebungen = falsch.slice(0, 2);
   if (!uebungen.length) {
-    const offen = [
-      ...rechenUebungen.filter((u) => !progress.rechnen[u.id]?.solvedAt),
-      ...sqlUebungen.filter((u) => !progress.sql[u.id]?.solvedAt),
-    ].filter(frisch);
-    const passend = offen.filter((u) => schwaechstesThema && u.topicId === schwaechstesThema);
-    const pool = passend.length ? passend : offen;
+    const neu = alleUebungen.filter((u) => letzterStand(u.stand) === 'neu');
+    const passend = neu.filter((u) => schwaechstesThema && u.topicId === schwaechstesThema);
+    const pool = passend.length ? passend : neu;
     if (pool.length) uebungen = [pool[Math.floor(zufall() * pool.length)]];
   }
+  const UEBUNG = {
+    sql: { name: 'SQL', minuten: HEUTE_ZEITEN.sql, link: (id: string) => `/sql/uebung/${id}` },
+    rechnen: { name: 'Rechnen', minuten: HEUTE_ZEITEN.rechnen, link: (id: string) => `/rechnen/${id}` },
+    diagramm: { name: 'Diagramm', minuten: HEUTE_ZEITEN.diagramm, link: (id: string) => `/diagramme/${id}` },
+  };
   for (const u of uebungen) {
     add({
       key: `${u.art}:${u.id}`,
       art: u.art,
       ids: [u.id],
       thema: themaVon(u.topicId, u.art),
-      titel: `${u.art === 'sql' ? 'SQL' : 'Rechnen'}: ${u.titel}`,
-      minuten: u.art === 'sql' ? HEUTE_ZEITEN.sql : HEUTE_ZEITEN.rechnen,
-      link: u.art === 'sql' ? `/sql/uebung/${u.id}` : `/rechnen/${u.id}`,
+      titel: `${UEBUNG[u.art].name}: ${u.titel}`,
+      minuten: UEBUNG[u.art].minuten,
+      link: UEBUNG[u.art].link(u.id),
     });
   }
 

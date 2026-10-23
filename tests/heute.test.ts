@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { HEUTE_KARTEN_BLOCK, HEUTE_MINUTEN } from '../shared/config';
 import { emptyProgress, type Progress } from '../shared/progress';
 import type { Content, Flashcard, RechenUebung, SqlExercise, Task, Topic } from '../shared/types';
+import type { DiagrammUebung } from '../shared/diagrammUebungen';
+import { letzterStand } from '../src/lib/wiederholung';
 import { CONTENT_DIR, loadContent } from '../server/loadContent';
 import { aufgabeMinuten, planeHeute, verschraenke } from '../src/lib/heute';
 import {
@@ -100,6 +102,8 @@ function makeContent(): Content {
     sqlDatasets: [],
     sqlExercises: [sql],
     rechenUebungen: [rechnen('RE-1', '02'), rechnen('RE-2', '03')],
+    // Der Planer braucht von einer Diagramm-Übung nur id und Titel.
+    diagrammUebungen: [{ id: 'DG-1', titel: 'Bestellprozess' } as DiagrammUebung],
     issues: [],
   };
 }
@@ -178,6 +182,68 @@ describe('planeHeute', () => {
     ).toEqual(['RE-2', 'SQL-1']);
     // Die Zusatzaufgabe ist keine der geplanten Wiederholungen.
     expect(r.items.find((i) => i.art === 'aufgabe')?.ids[0]).not.toBe('03-A1');
+  });
+
+  it('Übungen: nur zuletzt nicht richtig gelöste (auch Diagramme) – zuletzt richtige nie, auch wenn fällig', () => {
+    const p: Progress = {
+      ...emptyProgress(),
+      sql: { 'SQL-1': { attempts: 2, hintsUsed: 0, solvedAt: '2026-09-20', stage: 2, due: '2026-09-28', zuletztRichtig: true } },
+      rechnen: { 'RE-2': { attempts: 1, hintsUsed: 0, lastCheckedAt: '2026-09-29', stage: 1, due: '2026-09-30', zuletztRichtig: false } },
+      diagramme: { 'DG-1': { attempts: 1, hintsUsed: 0, solutionShown: true, stage: 1, due: '2026-09-29', zuletztRichtig: false } },
+    };
+    const uebungen = plan(p).items.filter((i) => ['sql', 'rechnen', 'diagramm'].includes(i.art));
+    expect(uebungen.map((i) => i.ids[0]).sort()).toEqual(['DG-1', 'RE-2']);
+    const dg = uebungen.find((i) => i.art === 'diagramm')!;
+    expect(dg.link).toBe('/diagramme/DG-1');
+    expect(dg.titel).toBe('Diagramm: Bestellprozess');
+  });
+
+  it('Übungen: ohne falsche eine neue; ist alles zuletzt richtig, gar keine', () => {
+    const richtig = { attempts: 1, hintsUsed: 0, solvedAt: '2026-09-20', lastCheckedAt: '2026-09-20', zuletztRichtig: true };
+    const neu = plan({ ...emptyProgress(), rechnen: { 'RE-2': richtig } }).items.filter((i) => i.art !== 'karten' && i.art !== 'aufgabe');
+    expect(neu).toHaveLength(1);
+    expect(neu[0].ids[0]).not.toBe('RE-2');
+    const alles: Progress = {
+      ...emptyProgress(),
+      sql: { 'SQL-1': richtig },
+      rechnen: { 'RE-1': richtig, 'RE-2': richtig },
+      diagramme: { 'DG-1': richtig },
+    };
+    expect(plan(alles).items.filter((i) => ['sql', 'rechnen', 'diagramm'].includes(i.art))).toEqual([]);
+  });
+
+  it('Fehlerjournal und Zusatzaufgabe: nichts, was zuletzt mit voller Punktzahl gelöst wurde', () => {
+    const p: Progress = {
+      ...emptyProgress(),
+      attempts: [
+        { taskId: '01-A1', date: '2026-09-20', points: 5, max: 5, mode: 'einzel' },
+        { taskId: '01-A2', date: '2026-09-20', points: 5, max: 5, mode: 'einzel' },
+      ],
+      journal: {
+        '03-A1': { taskId: '03-A1', addedAt: '2026-09-20', stage: 0, due: '2026-09-21', lastPoints: 1, max: 5 },
+        // Beim letzten Mal voll gelöst, Wiederholungsstufe 2 fällig – kommt trotzdem nicht.
+        '02-A1': { taskId: '02-A1', addedAt: '2026-09-10', stage: 1, due: '2026-09-25', lastPoints: 5, max: 5 },
+      },
+    };
+    const r = plan(p);
+    expect(r.items.filter((i) => i.art === 'wiederholung').map((i) => i.ids[0])).toEqual(['03-A1']);
+    // Schwächstes Thema 01: beide Aufgaben zuletzt voll gelöst → keine Zusatzaufgabe.
+    expect(r.schwaechstesThema).toBe('01');
+    expect(r.items.some((i) => i.art === 'aufgabe')).toBe(false);
+  });
+
+  it('letzterStand: neu, falsch, richtig – auch für ältere Stände ohne zuletztRichtig', () => {
+    expect(letzterStand(undefined)).toBe('neu');
+    expect(letzterStand({ attempts: 0 })).toBe('neu');
+    expect(letzterStand({ attempts: 1, zuletztRichtig: false })).toBe('falsch');
+    expect(letzterStand({ attempts: 0, zuletztRichtig: false })).toBe('falsch');
+    expect(letzterStand({ attempts: 3, solvedAt: 'x', stage: 1, due: 'y', zuletztRichtig: true })).toBe('richtig');
+    // ohne Feld: nie gelöst / nach dem Lösen wieder auf Stufe 1 → falsch; gelöst und weiter → richtig
+    expect(letzterStand({ attempts: 1, stage: 1, due: 'y' })).toBe('falsch');
+    expect(letzterStand({ attempts: 0, solutionShown: true, stage: 1, due: 'y' })).toBe('falsch');
+    expect(letzterStand({ attempts: 2, solvedAt: 'x', stage: 1, due: 'y' })).toBe('falsch');
+    expect(letzterStand({ attempts: 2, solvedAt: 'x', stage: 2, due: 'y' })).toBe('richtig');
+    expect(letzterStand({ attempts: 4, solvedAt: 'x' })).toBe('richtig');
   });
 
   it('höchstens 2 Übungen und Fehlerjournal bis etwa zur halben Zeit (mindestens eine)', () => {

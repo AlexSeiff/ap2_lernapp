@@ -15,6 +15,7 @@ import {
 } from '../shared/progress';
 import { recordAttempt } from '../src/lib/progress';
 import type { z } from 'zod';
+import { ohneAntworten } from './ohneAntworten';
 
 const withAttempts = (n: number) => {
   let p = emptyProgress();
@@ -245,7 +246,7 @@ describe('migrateProgress', () => {
   it('Version 6 (vor der Selbsteinschätzung): lädt bis auf die Version und leere neue Sammlungen unverändert, Versuche ohne sicherheit bleiben gültig', () => {
     const raw = fixture('fortschritt-v6-2026-10-01.json');
     const migrated = migrateProgress(raw);
-    expect(migrated).toEqual({ ...raw, version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} });
+    expect(migrated).toEqual(ohneAntworten({ ...raw, version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }));
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
     const r = checkProgressPut(migrated, raw);
     expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35, markiert: {} } });
@@ -312,7 +313,7 @@ describe('migrateProgress', () => {
     }
   });
 
-  it('übernimmt Rechenübungs-Stände tolerant: falsche Typen fallen weg, Antworten werden gekürzt, unbekannte Felder bleiben', () => {
+  it('übernimmt Rechenübungs-Stände tolerant: falsche Typen fallen weg, alte Antworten werden gelöscht, unbekannte Felder bleiben', () => {
     const migrated = migrateProgress({
       version: 6,
       attempts: [],
@@ -326,9 +327,10 @@ describe('migrateProgress', () => {
           due: '2026-10-03',
           lastSeed: 12345,
           antworten: { mittel: '70', median: 5, lang: 'x'.repeat(500) },
+          zuletztRichtig: true,
           extra: 1,
         },
-        'RE-ST1-002': { lastSeed: 1.5, antworten: 'nein', solutionShown: 'ja' },
+        'RE-ST1-002': { lastSeed: 1.5, antworten: 'nein', solutionShown: 'ja', zuletztRichtig: 'ja' },
         kaputt: 7,
       },
       rechnenDays: { '2026-09-30': 3, '2026-09-29': -2, x: 'y' },
@@ -341,7 +343,7 @@ describe('migrateProgress', () => {
       stage: 2,
       due: '2026-10-03',
       lastSeed: 12345,
-      antworten: { mittel: '70', lang: 'x'.repeat(200) },
+      zuletztRichtig: true,
       extra: 1,
     });
     expect(migrated.rechnen['RE-ST1-002']).toEqual({ attempts: 0, hintsUsed: 0 });
@@ -394,14 +396,32 @@ describe('migrateProgress', () => {
       version: 4,
       attempts: [],
       sql: {
-        'SQL-MH-001': { attempts: 2, hintsUsed: 1, solvedAt: '2026-09-27', lastQuery: 'SELECT 1', stage: 2, due: '2026-09-30', extra: 'x' },
-        'SQL-MH-002': { solutionShown: 'ja', stage: '1', due: 5 },
+        'SQL-MH-001': {
+          attempts: 2,
+          hintsUsed: 1,
+          solvedAt: '2026-09-27',
+          lastQuery: 'SELECT 1',
+          stage: 2,
+          due: '2026-09-30',
+          zuletztRichtig: true,
+          extra: 'x',
+        },
+        'SQL-MH-002': { solutionShown: 'ja', stage: '1', due: 5, zuletztRichtig: 1 },
         kaputt: 'nein',
       },
       sqlDays: { '2026-09-27': 3, '2026-09-28': -1, x: 'y' },
     });
     expect(migrated.sql).toEqual({
-      'SQL-MH-001': { attempts: 2, hintsUsed: 1, solvedAt: '2026-09-27', lastQuery: 'SELECT 1', stage: 2, due: '2026-09-30', extra: 'x' },
+      'SQL-MH-001': {
+        attempts: 2,
+        hintsUsed: 1,
+        solvedAt: '2026-09-27',
+        lastQuery: 'SELECT 1',
+        stage: 2,
+        due: '2026-09-30',
+        zuletztRichtig: true,
+        extra: 'x',
+      },
       'SQL-MH-002': { attempts: 0, hintsUsed: 0 },
     });
     expect(migrated.sqlDays).toEqual({ '2026-09-27': 3 });

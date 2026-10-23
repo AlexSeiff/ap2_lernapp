@@ -158,11 +158,11 @@ describe('mergeProgress', () => {
     expect(mergeProgress(b, a).sql.s1).toEqual(merged.sql.s1);
   });
 
-  it('Rechenübungen: der Stand mit dem neueren lastCheckedAt (samt Seed und Antworten), gelöst bleibt gelöst', () => {
+  it('Rechenübungen: der Stand mit dem neueren lastCheckedAt (samt Seed), gelöst bleibt gelöst', () => {
     const a: Progress = {
       ...emptyProgress(),
       rechnen: {
-        r1: { attempts: 2, hintsUsed: 0, solvedAt: '2026-09-20', lastCheckedAt: '2026-09-20', lastSeed: 7, antworten: { mittel: '70' } },
+        r1: { attempts: 2, hintsUsed: 0, solvedAt: '2026-09-20', lastCheckedAt: '2026-09-20', lastSeed: 7 },
         r3: { attempts: 1, hintsUsed: 0, lastCheckedAt: '2026-09-28' },
       },
     };

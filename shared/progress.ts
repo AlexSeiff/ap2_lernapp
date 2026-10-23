@@ -95,11 +95,19 @@ export type SqlState = {
   lastCheckedAt?: string;
   hintsUsed: number;
   solutionShown?: boolean;
-  /** Wird beim erneuten Öffnen der Übung wiederhergestellt (max. 4.000 Zeichen). */
+  /**
+   * Unfertiger Entwurf (max. 4.000 Zeichen), wird beim erneuten Öffnen wiederhergestellt. Prüfen und „Lösung zeigen“ löschen ihn:
+   * eine geprüfte Antwort kommt nicht zurück, die Wiederholung beginnt leer (lib/sql.ts, sqlEntwurf).
+   */
   lastQuery?: string;
   /** Wiederholungsstufe wie im Fehlerjournal: 1 → nach 1 Tag, 2 → nach 3 Tagen, 3 → nach 7 Tagen. */
   stage?: number;
   due?: string;
+  /**
+   * Ergebnis der letzten Prüfung: true = richtig, false = falsch oder Lösung angesehen (seit Oktober 2026; fehlt bei älteren Ständen).
+   * „Heute lernen“ nimmt nur Übungen, die noch nie oder zuletzt nicht richtig gelöst wurden.
+   */
+  zuletztRichtig?: boolean;
 };
 
 /** Stand einer Rechenübung (seit Version 6). Wiederholung wie bei den SQL-Übungen. */
@@ -116,8 +124,11 @@ export type RechenState = {
   due?: string;
   /** Seed der zuletzt gezeigten Zufallszahlen („🎲 Neue Zahlen“); fehlt = die festen Zahlen der Übung. */
   lastSeed?: number;
-  /** Zuletzt geprüfte Eingaben (Eingabe-ID → Text) zu diesen Zahlen, zum Wiederherstellen beim erneuten Öffnen. */
-  antworten?: Record<string, string>;
+  /**
+   * Ergebnis der letzten Prüfung: true = richtig, false = falsch oder Lösung angesehen (seit Oktober 2026; fehlt bei älteren Ständen).
+   * „Heute lernen“ nimmt nur Übungen, die noch nie oder zuletzt nicht richtig gelöst wurden.
+   */
+  zuletztRichtig?: boolean;
 };
 
 /** Stand einer Diagramm-Übung (seit Version 8, Umsetzungsplan Phase 7). Wiederholung wie bei den Rechenübungen. */
@@ -131,8 +142,11 @@ export type DiagrammState = {
   solutionShown?: boolean;
   stage?: number;
   due?: string;
-  /** Zuletzt geprüfte Belegung (Slot-ID → Paletten-ID), zum Wiederherstellen beim erneuten Öffnen. */
-  belegung?: Record<string, string>;
+  /**
+   * Ergebnis der letzten Prüfung: true = richtig, false = falsch oder Lösung angesehen (seit Oktober 2026; fehlt bei älteren Ständen).
+   * „Heute lernen“ nimmt nur Übungen, die noch nie oder zuletzt nicht richtig gelöst wurden.
+   */
+  zuletztRichtig?: boolean;
 };
 
 /**
@@ -313,7 +327,7 @@ function migrateJournalEntry(v: unknown, taskId: string): JournalEntry | undefin
 
 function migrateSqlState(v: unknown): SqlState | undefined {
   if (!isObject(v)) return undefined;
-  const { solvedAt, lastCheckedAt, solutionShown, lastQuery, stage, due, ...rest } = v;
+  const { solvedAt, lastCheckedAt, solutionShown, lastQuery, stage, due, zuletztRichtig, ...rest } = v;
   return {
     ...rest,
     ...opt('solvedAt', solvedAt, typeof solvedAt === 'string'),
@@ -322,18 +336,16 @@ function migrateSqlState(v: unknown): SqlState | undefined {
     ...opt('lastQuery', lastQuery, typeof lastQuery === 'string'),
     ...opt('stage', stage, typeof stage === 'number'),
     ...opt('due', due, typeof due === 'string'),
+    ...opt('zuletztRichtig', zuletztRichtig, typeof zuletztRichtig === 'boolean'),
     attempts: num(v.attempts),
     hintsUsed: num(v.hintsUsed),
   };
 }
 
-/** Zeichen je gespeicherter Antwort einer Rechenübung (mehr braucht keine Zahl). */
-const ANTWORT_MAX = 200;
-
+// Früher gespeicherte Antworten (Rechnen: antworten, Diagramm: belegung) fallen weg – eine Wiederholung beginnt leer.
 function migrateRechenState(v: unknown): RechenState | undefined {
   if (!isObject(v)) return undefined;
-  const { solvedAt, lastCheckedAt, solutionShown, stage, due, lastSeed, antworten, ...rest } = v;
-  const texte = filterRecord(antworten, (a) => (typeof a === 'string' ? a.slice(0, ANTWORT_MAX) : undefined));
+  const { solvedAt, lastCheckedAt, solutionShown, stage, due, lastSeed, antworten: _antworten, zuletztRichtig, ...rest } = v;
   return {
     ...rest,
     ...opt('solvedAt', solvedAt, typeof solvedAt === 'string'),
@@ -342,19 +354,15 @@ function migrateRechenState(v: unknown): RechenState | undefined {
     ...opt('stage', stage, typeof stage === 'number'),
     ...opt('due', due, typeof due === 'string'),
     ...opt('lastSeed', lastSeed, typeof lastSeed === 'number' && Number.isInteger(lastSeed)),
-    ...opt('antworten', texte, isObject(antworten)),
+    ...opt('zuletztRichtig', zuletztRichtig, typeof zuletztRichtig === 'boolean'),
     attempts: num(v.attempts),
     hintsUsed: num(v.hintsUsed),
   };
 }
 
-/** Zeichen je gespeicherter ID in einer Belegung (Slot- und Paletten-IDs sind kurz). */
-const BELEGUNG_MAX = 80;
-
 function migrateDiagrammState(v: unknown): DiagrammState | undefined {
   if (!isObject(v)) return undefined;
-  const { solvedAt, lastCheckedAt, solutionShown, stage, due, belegung, ...rest } = v;
-  const b = filterRecord(belegung, (x, k) => (typeof x === 'string' && k.length <= BELEGUNG_MAX ? x.slice(0, BELEGUNG_MAX) : undefined));
+  const { solvedAt, lastCheckedAt, solutionShown, stage, due, belegung: _belegung, zuletztRichtig, ...rest } = v;
   return {
     ...rest,
     ...opt('solvedAt', solvedAt, typeof solvedAt === 'string'),
@@ -362,7 +370,7 @@ function migrateDiagrammState(v: unknown): DiagrammState | undefined {
     ...opt('solutionShown', solutionShown, typeof solutionShown === 'boolean'),
     ...opt('stage', stage, typeof stage === 'number'),
     ...opt('due', due, typeof due === 'string'),
-    ...opt('belegung', b, isObject(belegung)),
+    ...opt('zuletztRichtig', zuletztRichtig, typeof zuletztRichtig === 'boolean'),
     attempts: num(v.attempts),
     hintsUsed: num(v.hintsUsed),
   };
@@ -518,6 +526,7 @@ export const SqlStateSchema = z.looseObject({
   lastQuery: z.string().optional(),
   stage: z.number().optional(),
   due: z.string().optional(),
+  zuletztRichtig: z.boolean().optional(),
 });
 
 export const RechenStateSchema = z.looseObject({
@@ -529,7 +538,7 @@ export const RechenStateSchema = z.looseObject({
   stage: z.number().optional(),
   due: z.string().optional(),
   lastSeed: z.number().int().optional(),
-  antworten: z.record(z.string(), z.string()).optional(),
+  zuletztRichtig: z.boolean().optional(),
 });
 
 export const DiagrammStateSchema = z.looseObject({
@@ -540,7 +549,7 @@ export const DiagrammStateSchema = z.looseObject({
   solutionShown: z.boolean().optional(),
   stage: z.number().optional(),
   due: z.string().optional(),
-  belegung: z.record(z.string(), z.string()).optional(),
+  zuletztRichtig: z.boolean().optional(),
 });
 
 export const SettingsSchema = z.looseObject({

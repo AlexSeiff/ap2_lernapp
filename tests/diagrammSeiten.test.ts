@@ -53,14 +53,13 @@ describe('Diagramm-Übungen', () => {
     expect(html).toMatch(/<button type="button" disabled="">.*Prüfen/);
   });
 
-  it('gespeicherte Belegung wird wiederhergestellt', () => {
+  it('beginnt nach einem Versuch leer – die alte Belegung kommt nicht zurück', () => {
     progress = {
       ...emptyProgress(),
-      diagramme: { 'DG-EPK-001': { attempts: 1, hintsUsed: 0, belegung: { s1: 'p1', s9: 'p1', s2: 'zz' } } },
+      diagramme: { 'DG-EPK-001': { attempts: 1, hintsUsed: 0, lastCheckedAt: '2026-10-01', zuletztRichtig: true } },
     };
     const html = render('/diagramme/DG-EPK-001');
-    expect(html).toContain('aria-label="Lücke 1: Funktion „Bestellung prüfen“"');
-    expect(html).toContain('aria-label="Lücke 2: leer"'); // unbekanntes Element verworfen
+    expect(html).toContain('aria-label="Lücke 1: leer"');
     progress = emptyProgress();
   });
 

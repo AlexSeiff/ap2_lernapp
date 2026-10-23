@@ -7,24 +7,19 @@ import { nachPruefung, restartRepetition } from './wiederholung';
 
 export type RechenStatus = 'offen' | 'geloest' | 'faellig' | 'mit-loesung';
 
-/** Höchstens so viele Zeichen je gespeicherter Antwort. */
-const ANTWORT_MAX = 200;
-
 const emptyState = (): RechenState => ({ attempts: 0, hintsUsed: 0 });
 
 const withState = (p: Progress, id: string, state: RechenState): Progress => ({ ...p, rechnen: { ...p.rechnen, [id]: state } });
-
-const kuerze = (antworten: Record<string, string>) =>
-  Object.fromEntries(Object.entries(antworten).map(([k, v]) => [k, v.slice(0, ANTWORT_MAX)]));
 
 /**
  * Speichert eine Prüfung („✓ Prüfen“). Zählt als Versuch und als Lerntag.
  * Alles richtig ohne vorher gezeigte Lösung → gelöst (erstes Mal). Falsch → Wiederholung ab Stufe 1.
  * Richtig bei fälliger Wiederholung → nächste Stufe; richtig vor dem Fälligkeitstag ändert die Wiederholung nicht.
+ * Die Eingaben werden nicht gespeichert: Beim nächsten Öffnen beginnt die Übung leer.
  */
-export function recordRechenCheck(p: Progress, id: string, ok: boolean, antworten: Record<string, string>, today = localDate()): Progress {
+export function recordRechenCheck(p: Progress, id: string, ok: boolean, today = localDate()): Progress {
   const prev = p.rechnen[id] ?? emptyState();
-  let next: RechenState = { ...prev, attempts: prev.attempts + 1, lastCheckedAt: today, antworten: kuerze(antworten) };
+  let next: RechenState = { ...prev, attempts: prev.attempts + 1, lastCheckedAt: today, zuletztRichtig: ok };
   if (ok && !next.solutionShown && !next.solvedAt) next = { ...next, solvedAt: today };
   next = nachPruefung(next, ok, today);
   return { ...withState(p, id, next), rechnenDays: { ...p.rechnenDays, [today]: (p.rechnenDays[today] ?? 0) + 1 } };
@@ -37,7 +32,9 @@ export function recordRechenCheck(p: Progress, id: string, ok: boolean, antworte
  */
 export function recordRechenLeicht(p: Progress, id: string, ok: boolean, today = localDate()): Progress {
   const prev = p.rechnen[id] ?? emptyState();
-  const next: RechenState = ok ? { ...prev, lastCheckedAt: today } : restartRepetition({ ...prev, lastCheckedAt: today }, today);
+  const next: RechenState = ok
+    ? { ...prev, lastCheckedAt: today }
+    : restartRepetition({ ...prev, lastCheckedAt: today, zuletztRichtig: false }, today);
   return { ...withState(p, id, next), rechnenDays: { ...p.rechnenDays, [today]: (p.rechnenDays[today] ?? 0) + 1 } };
 }
 
@@ -47,16 +44,16 @@ export function recordRechenHint(p: Progress, id: string): Progress {
   return withState(p, id, { ...prev, hintsUsed: prev.hintsUsed + 1 });
 }
 
-/** Lösung angesehen: zählt danach als „mit Lösung“ und kommt morgen zur Wiederholung. */
+/** Lösung angesehen: zählt danach als „mit Lösung“ und nicht als richtig, kommt morgen zur Wiederholung. */
 export function recordRechenLoesung(p: Progress, id: string, today = localDate()): Progress {
   const prev = p.rechnen[id] ?? emptyState();
-  return withState(p, id, restartRepetition({ ...prev, solutionShown: true }, today));
+  return withState(p, id, restartRepetition({ ...prev, solutionShown: true, zuletztRichtig: false }, today));
 }
 
-/** „🎲 Neue Zahlen“ oder „↩ Originalzahlen“ (seed undefined): merkt sich die Zahlen; alte Antworten passen nicht mehr. */
+/** „🎲 Neue Zahlen“ oder „↩ Originalzahlen“ (seed undefined): merkt sich die Zahlen. */
 export function setRechenSeed(p: Progress, id: string, seed: number | undefined): Progress {
   const prev = p.rechnen[id] ?? emptyState();
-  const { lastSeed: _seed, antworten: _antworten, ...rest } = prev;
+  const { lastSeed: _seed, ...rest } = prev;
   return withState(p, id, seed === undefined ? rest : { ...rest, lastSeed: seed });
 }
 

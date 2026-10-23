@@ -504,7 +504,8 @@ drops the mention.
   field is filled): ✓/✗ per field, explanation of a recognised Fehlerbild ("🔎 Du hast durch n geteilt …"), unit hints.
   "💡 Hinweis n/m" reveals hints one by one. "🎲 Neue Zahlen" (template exercises) draws a new seed, stored as `lastSeed`, so reopening shows the
   same numbers; "↩ Originalzahlen" goes back. "👁 Lösung zeigen" (after `useConfirm`) → table "Deine Eingabe | Richtig" + Rechenweg + `erklaerung`.
-  The last checked answers are restored when the page is opened again (`RechenState.antworten`).
+  Every visit starts empty like a new attempt (no previous inputs, no revealed hints) – checked answers are not stored at all (since October
+  2026; `migrateProgress` drops the old `antworten`). The page has „Σ Formelübersicht“ (exam appendix, see "Anhang der Prüfung" below).
 - Checking (`src/rechnen/checker.ts`, pure): German decimal comma or dot, thousands separators, spaces, typographic minus, optional unit
   (synonyms; a different unit only gives a hint). Tolerance from `runden` (half a unit of the last digit) or `toleranz`. Wrong values are compared
   with the template's Fehlerbilder (concrete wrong values, e.g. median of the unsorted list, ÷ n instead of ÷ (n − 1), Precision/Recall swapped,
@@ -570,11 +571,15 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
 
 - **Planner** `planeHeute(content, progress, { today, zufall, minuten })` in `src/lib/heute.ts` (pure, `tests/heute.test.ts`). Target
   `HEUTE_MINUTEN` = 20 min; estimates in `HEUTE_ZEITEN` (`shared/config.ts`): card 0.5 min (Leicht 0.33), task 0.9 min per point (min 3),
-  SQL 5, Rechnen 5. Steps:
-  1. **Fehlerjournal**: due open entries (oldest due first) until about half the time, at least one.
+  SQL 5, Rechnen 5, Diagramm 5. **Only things not yet done or last done wrong** – nothing whose last attempt was right (full points, or
+  `zuletztRichtig`), even if a spaced repetition is due (owner decision, October 2026). Steps:
+  1. **Fehlerjournal**: due open entries whose last attempt was below full points (oldest due first) until about half the time, at least one.
   2. **One task from the weakest topic** (lowest last exam, else Ø tasks; without any data the topic with the fewest attempts): a task never
-     attempted (random), else the one with the worst last result; never one of the planned repetitions, never AI tasks.
-  3. **1–2 exercises**: due SQL and Rechenübungen (oldest due first, at most 2); none due → one unsolved exercise, preferably of the weakest topic.
+     attempted (random), else the one with the worst last result below full points; none → no task. Never one of the planned repetitions,
+     never AI tasks.
+  3. **1–2 exercises** (SQL, Rechen, Diagramm): last result wrong or solution shown (`letzterStand` in `src/lib/wiederholung.ts`; oldest
+     first, at most 2); none → one never attempted exercise, preferably of the weakest topic.
+  Anything already done today (earlier rounds of the day via `HeuteSitzung.frueher`, tasks attempted and exercises checked today) is skipped.
   4. **Cards** with the remaining time (at least 5 if available): due cards (longest due, lowest box first), then new ones (≤ `NEW_PER_SESSION`).
      `cardPool` applies the Prüferfragen/Fachgespräch switches; in Leicht-Modus only cards with 4 answers. Grouped per topic (deck if no
      topic) into blocks of at most `HEUTE_KARTEN_BLOCK` = 8.
@@ -583,7 +588,7 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
 
   Randomness is seeded by the date (`textSeed(today)`), so the plan stays the same for a day unless progress changes.
 - **Flow**: every plan item has a `link` into the existing pages (`/aufgabe/:id?modus=wiederholung`, `/aufgabe/:id`, `/sql/uebung/:id`,
-  `/rechnen/:id`, `/karteikarten?karten=…`). "▶ Los geht's" stores the session and opens the first link; `components/HeuteLeiste.tsx` (above every
+  `/rechnen/:id`, `/diagramme/:id`, `/karteikarten?karten=…`). "▶ Los geht's" stores the session and opens the first link; `components/HeuteLeiste.tsx` (above every
   page while a session runs, not on `/heute`) shows "Schritt n/m: …" and **"Weiter →"** (last step: "Fertig ✓"), which marks the step done and
   opens the next one. `/heute` shows the list with ✓/⏭/▶, "⏭ Überspringen", "Runde beenden" and, when done, "🎉 Runde geschafft" + "Noch eine Runde".
   The pages themselves are unchanged – learning is recorded as usual. Karteikarten with `?karten=` show "▶ Heute lernen: n Karten" and a start
@@ -592,6 +597,15 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
   `localStorage` key **`ap2-heute`** (try/catch, read tolerantly with `leseSitzung`). Only valid on the same day and device – it is navigation
   state, not progress, so it is not part of `Progress` or the backup.
 - Entry points: Dashboard button (shows "fortsetzen (n/m)" while running), first sub-target of the area „Lernen“.
+
+### Anhang der Prüfung (October 2026)
+
+In the AP2 the appendix is always there, so the app offers it where it is needed: `AnhangPanel` (`components/Belegsatz.tsx`) shows the
+buttons „SQL-Belegsatz“ and/or „Σ Formelübersicht“ with a side panel (one open at a time, Esc closes). The formula overview renders
+Deep Dive 17, sections 7.8, 7.4 and 7.9 (`FORMEL_ABSCHNITTE`; texts loaded on first open) – exactly what the appendix contains, not the app's
+larger Formelsammlung (linked). Where: SQL editor and SQL exercises (Belegsatz), Rechenübungen (formulas), task page and exam
+(`anhangFuer` in `src/lib/anhang.ts`: Belegsatz for tasks with SQL, formulas for tasks with *berechnen*/*ermitteln*; an exam gets what
+any of its tasks needs). `tests/belegsatz.test.ts` checks the sections exist.
 
 ### Deine Antwort (phase 8.2)
 
@@ -884,14 +898,15 @@ type Progress = {
   journal: Record<string, JournalEntry>;   // error journal (stage, due, resolvedAt)
   lernziele: Record<string, boolean>;
   cardReviewDays: Record<string, number>;  // YYYY-MM-DD → count, for the streak (v3)
-  sql: Record<string, SqlState>;           // attempts, solvedAt, hintsUsed, solutionShown, lastQuery, stage, due (v4)
+  sql: Record<string, SqlState>;           // attempts, solvedAt, hintsUsed, solutionShown, lastQuery (unchecked draft only), stage, due,
+                                           // zuletztRichtig (v4; draft and zuletztRichtig: see below)
   sqlDays: Record<string, number>;         // for the streak (v4)
   rechnen: Record<string, RechenState>;    // Rechenübungen per exercise id (v6)
   rechnenDays: Record<string, number>;     // checked Rechenübungen per day, for the streak (v6)
   settings: Settings;                      // per-user settings, part of the backup (v5)
   markiert: Record<string, Markierung>;    // marked flashcards by card id (v7)
   diagramme: Record<string, DiagrammState>; // Diagramm-Übungen per exercise id (v8): attempts, solvedAt, lastCheckedAt, hintsUsed,
-                                           // solutionShown, stage, due, belegung (last checked slot → palette id, restored on reopen)
+                                           // solutionShown, stage, due, zuletztRichtig (an old belegung is dropped on load)
   diagrammDays: Record<string, number>;    // checked Diagramm-Übungen per day, for the streak (v8)
 };
 
@@ -914,8 +929,12 @@ type RechenState = {
   solutionShown?: boolean;
   stage?: number; due?: string;  // repetition like SQL (JOURNAL_INTERVALS 1/3/7 days, src/lib/wiederholung.ts)
   lastSeed?: number;             // seed of "🎲 Neue Zahlen"; missing = the exercise's fixed numbers
-  antworten?: Record<string, string>; // last checked inputs (max 200 chars each), restored on reopen; cleared when the numbers change
+  zuletztRichtig?: boolean;      // result of the last check: false also after "Lösung zeigen" (October 2026, optional, no version bump)
 };
+// SqlState and DiagrammState have the same zuletztRichtig. Checked answers are never stored: a repetition starts empty.
+// SQL keeps only an unchecked draft (lastQuery); "Prüfen" and "Lösung zeigen" delete it (`sqlEntwurf` decides what is restored;
+// in older states a lastQuery after a check is the checked query and is not restored). Old RechenState.antworten and
+// DiagrammState.belegung are removed by migrateProgress.
 
 type Settings = {
   examDate?: string;            // YYYY-MM-DD, own exam date for the countdown (unset = no countdown)

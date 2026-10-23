@@ -54,9 +54,8 @@ function DiagrammUebungView({ u }: { u: DiagrammUebungTyp }) {
   const state = progress.diagramme[u.id];
   const status = diagrammStatus(state);
   const slots = useMemo(() => slotsVon(u), [u]);
-  const gueltig = (b: Eingesetzt | undefined): Eingesetzt =>
-    Object.fromEntries(Object.entries(b ?? {}).filter(([s, e]) => slots.includes(s) && u.palette.some((p) => p.id === e)));
-  const [belegung, setBelegung] = useState<Eingesetzt>(() => gueltig(state?.belegung));
+  // Jeder Besuch beginnt leer – eine Wiederholung soll nicht die alte Lösung zeigen.
+  const [belegung, setBelegung] = useState<Eingesetzt>({});
   const [auswahl, setAuswahl] = useState<string | null>(null);
   const [ergebnis, setErgebnis] = useState<(DiagrammErgebnis & { regeln: string[] }) | null>(null);
   const [hinweise, setHinweise] = useState(0);
@@ -131,7 +130,7 @@ function DiagrammUebungView({ u }: { u: DiagrammUebungTyp }) {
   const pruefen = () => {
     const r = bewerteDiagramm(u, belegung);
     setErgebnis({ ...r, regeln: formregeln(u, belegung) });
-    update((p) => recordDiagrammCheck(p, u.id, r.ok, belegung));
+    update((p) => recordDiagrammCheck(p, u.id, r.ok));
   };
   const hinweis = () => {
     setHinweise((h) => h + 1);

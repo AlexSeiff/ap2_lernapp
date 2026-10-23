@@ -38,11 +38,12 @@ export function useRechenUebung(u: RechenUebung) {
   const [stateBeimOeffnen] = useState(state);
   const beispiel = useMemo(() => (inst ? baueBeispiel(u, inst, stateBeimOeffnen) : undefined), [u, inst, stateBeimOeffnen]);
 
-  const [antworten, setAntworten] = useState<Record<string, string>>(() => state?.antworten ?? {});
+  // Jeder Besuch ist ein neuer Versuch wie in der Prüfung: leere Felder, keine aufgedeckten Hinweise (gezählt wird trotzdem nur Neues).
+  const [antworten, setAntworten] = useState<Record<string, string>>({});
   const [ergebnis, setErgebnis] = useState<PruefErgebnis | null>(null);
   const [leer, setLeer] = useState(false);
   const hinweise = inst?.hinweise ?? u.hinweise;
-  const [hintsShown, setHintsShown] = useState(() => Math.min(state?.hintsUsed ?? 0, hinweise.length));
+  const [hintsShown, setHintsShown] = useState(0);
   const [loesungOffen, setLoesungOffen] = useState(false);
 
   // Leicht-Modus („🟢 Ergebnis auswählen“, gleiche Einstellung wie bei den Karteikarten): je Eingabe 4 Antworten.
@@ -109,7 +110,7 @@ export function useRechenUebung(u: RechenUebung) {
     }
     const r = pruefeAntworten(inst, eigene);
     setErgebnis(r);
-    update((p) => recordRechenCheck(p, id, r.ok, eigene));
+    update((p) => recordRechenCheck(p, id, r.ok));
   };
 
   /** Neue Zufallszahlen („🎲 Neue Zahlen“) oder zurück zu den festen Zahlen der Übung (`undefined`). */

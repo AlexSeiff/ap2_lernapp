@@ -5,8 +5,10 @@ import { FehlergrundWahl } from '../components/FehlergrundWahl';
 import { Markdown } from '../components/Markdown';
 import { SicherheitWahl } from '../components/SicherheitWahl';
 import { Attachments, GradePanel, TaskText } from '../components/TaskParts';
+import { AnhangPanel } from '../components/Belegsatz';
 import { useConfirm } from '../hooks/useConfirm';
 import { useExamRun } from '../hooks/useExamRun';
+import { anhangFuer } from '../lib/anhang';
 import { formatRemaining, timerAnnouncement } from '../lib/examTimer';
 import { formatPoints, ihkGrade, percent } from '../lib/grading';
 import { sicherheitLabel } from '../lib/kalibrierung';
@@ -222,6 +224,8 @@ export function Klausur() {
     );
   }
 
+  // Anhang der Prüfung wie in der AP2: SQL-Belegsatz und/oder Formelübersicht, je nachdem, was die Klausur verlangt.
+  const anhang = anhangFuer(tasks);
   return (
     <div className="page exam">
       <div className="exam-bar">
@@ -314,6 +318,11 @@ export function Klausur() {
       )}
 
       <Attachments items={exam.attachments} open={!submitted} />
+      {(anhang.sql || anhang.formeln) && (
+        <div className="anhang-leiste no-print">
+          <AnhangPanel {...anhang} />
+        </div>
+      )}
 
       {exam.blocks.map((b) => (
         <section key={b.letter} className="exam-block">

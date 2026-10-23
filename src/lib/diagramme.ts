@@ -16,12 +16,13 @@ const mit = (p: Progress, id: string, s: DiagrammState): Progress => ({ ...p, di
 export const diagrammUebungen = (content: Pick<Content, 'diagrammUebungen'>): DiagrammUebung[] => content.diagrammUebungen ?? [];
 
 /**
- * „Prüfen“: zählt als Versuch und Lerntag, merkt sich die Belegung. Fehlerfrei ohne vorher gezeigte Lösung → gelöst (erstes Mal).
+ * „Prüfen“: zählt als Versuch und Lerntag. Fehlerfrei ohne vorher gezeigte Lösung → gelöst (erstes Mal).
  * Fehler → Wiederholung ab Stufe 1; fehlerfrei bei fälliger Wiederholung → nächste Stufe.
+ * Die Belegung wird nicht gespeichert: Beim nächsten Öffnen beginnt die Übung leer.
  */
-export function recordDiagrammCheck(p: Progress, id: string, ok: boolean, belegung: Record<string, string>, today = localDate()): Progress {
+export function recordDiagrammCheck(p: Progress, id: string, ok: boolean, today = localDate()): Progress {
   const prev = p.diagramme[id] ?? leer();
-  let next: DiagrammState = { ...prev, attempts: prev.attempts + 1, lastCheckedAt: today, belegung: { ...belegung } };
+  let next: DiagrammState = { ...prev, attempts: prev.attempts + 1, lastCheckedAt: today, zuletztRichtig: ok };
   if (ok && !next.solutionShown && !next.solvedAt) next = { ...next, solvedAt: today };
   next = nachPruefung(next, ok, today);
   return { ...mit(p, id, next), diagrammDays: { ...p.diagrammDays, [today]: (p.diagrammDays[today] ?? 0) + 1 } };
@@ -33,10 +34,10 @@ export function recordDiagrammHint(p: Progress, id: string): Progress {
   return mit(p, id, { ...prev, hintsUsed: prev.hintsUsed + 1 });
 }
 
-/** Lösung angesehen: zählt danach als „mit Lösung“ und kommt morgen zur Wiederholung. */
+/** Lösung angesehen: zählt danach als „mit Lösung“ und nicht als richtig, kommt morgen zur Wiederholung. */
 export function recordDiagrammLoesung(p: Progress, id: string, today = localDate()): Progress {
   const prev = p.diagramme[id] ?? leer();
-  return mit(p, id, restartRepetition({ ...prev, solutionShown: true }, today));
+  return mit(p, id, restartRepetition({ ...prev, solutionShown: true, zuletztRichtig: false }, today));
 }
 
 /** Status für Liste und Filter; eine fällige Wiederholung hat Vorrang. */

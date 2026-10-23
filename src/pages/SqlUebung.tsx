@@ -1,5 +1,6 @@
 // Einzelne SQL-Übung (/sql/uebung/:id): Ausprobieren, Prüfen (Ergebnisvergleich mit der Musterlösung),
-// Hinweise einzeln aufdecken, Lösung zeigen. Die letzte Abfrage wird im Fortschritt gespeichert.
+// Hinweise einzeln aufdecken, Lösung zeigen. Ein unfertiger Entwurf wird im Fortschritt gespeichert; nach „Prüfen“ oder
+// „Lösung zeigen“ nicht mehr – beim nächsten Öffnen (Wiederholung, „Heute lernen“) beginnt die Übung leer.
 
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -11,7 +12,7 @@ import { SqlEditor, type SqlEditorHandle } from '../components/SqlEditor';
 import { SqlTabs } from '../components/SqlTabs';
 import { useConfirm } from '../hooks/useConfirm';
 import { useSqlSession } from '../hooks/useSqlSession';
-import { recordSolutionShown, recordSqlCheck, recordSqlHint, saveSqlQuery, SQL_QUERY_MAX, sqlStatus } from '../lib/sql';
+import { recordSolutionShown, recordSqlCheck, recordSqlHint, saveSqlQuery, SQL_QUERY_MAX, sqlEntwurf, sqlStatus } from '../lib/sql';
 import { useStore } from '../lib/store';
 import { LEVEL_LABELS, stars, STATUS_LABELS } from '../lib/uebungLabels';
 import { checkQuery, type CheckOutcome, verdictMessage } from '../sql/pruefeUebung';
@@ -34,8 +35,10 @@ function SqlUebungView({ id }: { id: string }) {
   const ds = ex && content.sqlDatasets.find((d) => d.id === ex.datensatz);
   const state = progress.sql[id];
 
-  const [query, setQuery] = useState(() => state?.lastQuery ?? '');
-  const [hintsShown, setHintsShown] = useState(() => Math.min(state?.hintsUsed ?? 0, ex?.hinweise.length ?? 0));
+  // Nur einen unfertigen Entwurf fortsetzen (samt seinen Hinweisen); eine geprüfte Antwort kommt nicht zurück.
+  const [entwurf] = useState(() => sqlEntwurf(state));
+  const [query, setQuery] = useState(entwurf);
+  const [hintsShown, setHintsShown] = useState(() => (entwurf ? Math.min(state?.hintsUsed ?? 0, ex?.hinweise.length ?? 0) : 0));
   const [tryResult, setTryResult] = useState<ExecResult | null>(null);
   const [warnings, setWarnings] = useState<LintWarning[]>([]);
   const [outcome, setOutcome] = useState<CheckOutcome | null>(null);
@@ -45,11 +48,14 @@ function SqlUebungView({ id }: { id: string }) {
   const editor = useRef<SqlEditorHandle>(null);
   const session = useSqlSession(ds?.setup);
 
-  // Abfrage verzögert im Fortschritt merken (und beim Verlassen der Seite sofort).
+  // Entwurf verzögert im Fortschritt merken (und beim Verlassen der Seite sofort). Die gerade geprüfte Abfrage ist kein Entwurf
+  // mehr; nach „Lösung zeigen“ wird gar nichts mehr gemerkt (sonst stünde beim nächsten Mal die abgeschriebene Lösung da).
   const pendingSave = useRef<string | null>(null);
+  const geprueft = useRef<string | null>(null);
+  const [ohneEntwurf, setOhneEntwurf] = useState(false);
   useEffect(() => {
     const saved = progress.sql[id]?.lastQuery ?? '';
-    if (query.slice(0, SQL_QUERY_MAX) === saved) {
+    if (ohneEntwurf || query === geprueft.current || query.slice(0, SQL_QUERY_MAX) === saved) {
       pendingSave.current = null;
       return;
     }
@@ -59,7 +65,7 @@ function SqlUebungView({ id }: { id: string }) {
       update((p) => saveSqlQuery(p, id, query));
     }, SAVE_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [query, id, progress.sql, update]);
+  }, [query, id, progress.sql, update, ohneEntwurf]);
   useEffect(
     () => () => {
       const q = pendingSave.current;
@@ -110,15 +116,17 @@ function SqlUebungView({ id }: { id: string }) {
         setOutcome(r);
         return;
       }
+      geprueft.current = query;
+      pendingSave.current = null;
       if (r.kind === 'error') {
         setOutcome(r);
-        update((p) => recordSqlCheck(p, id, false, query));
+        update((p) => recordSqlCheck(p, id, false));
         return;
       }
       const blocked = r.verdict.ok && hasBlockingWarning(lint);
       const ok = r.ok && !blocked;
       setOutcome({ ...r, ok, blocked });
-      update((p) => recordSqlCheck(p, id, ok, query));
+      update((p) => recordSqlCheck(p, id, ok));
     } finally {
       setBusy(null);
     }
@@ -138,6 +146,8 @@ function SqlUebungView({ id }: { id: string }) {
       confirmLabel: 'Lösung zeigen',
     });
     if (!ok) return;
+    pendingSave.current = null;
+    setOhneEntwurf(true);
     update((p) => recordSolutionShown(p, id));
     setSolutionOpen(true);
   };

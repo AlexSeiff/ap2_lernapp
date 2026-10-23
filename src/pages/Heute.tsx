@@ -13,6 +13,7 @@ const ART_TEXT: Record<HeuteItem['art'], string> = {
   aufgabe: 'schwächstes Thema',
   sql: 'SQL-Übung',
   rechnen: 'Rechenübung',
+  diagramm: 'Diagramm-Übung',
   karten: 'Karteikarten',
 };
 

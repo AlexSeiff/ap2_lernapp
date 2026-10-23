@@ -14,6 +14,7 @@ import { mergeProgress } from '../shared/mergeProgress';
 import { checkProgressPut, emptyProgress, migrateProgress, PROGRESS_VERSION, ProgressSchema } from '../shared/progress';
 import { diagrammStatus, diagrammSummary, recordDiagrammCheck, recordDiagrammLoesung } from '../src/lib/diagramme';
 import { einsetzen } from '../src/pages/DiagrammUebung';
+import { ohneAntworten } from './ohneAntworten';
 
 // Diagramm-Übungen (Umsetzungsplan Phase 7): Import mit Prüfung, Bewertung je Lücke mit Varianten, Formregeln, Fortschritt.
 
@@ -217,45 +218,41 @@ describe('Fortschritt (Version 8)', () => {
   it('Version 7 → 8: leere Diagramm-Übungen, Version 8 lädt unverändert', () => {
     expect(PROGRESS_VERSION).toBe(8);
     const v7 = fixture('fortschritt-v7-2026-10-09.json');
-    expect(migrateProgress(v7)).toEqual({ ...v7, version: 8, diagramme: {}, diagrammDays: {} });
+    expect(migrateProgress(v7)).toEqual(ohneAntworten({ ...v7, version: 8, diagramme: {}, diagrammDays: {} }));
     const v8 = fixture('fortschritt-v8-2026-10-09.json');
-    expect(migrateProgress(v8)).toEqual(v8);
+    expect(migrateProgress(v8)).toEqual(ohneAntworten(v8));
     expect(ProgressSchema.safeParse(v8).success).toBe(true);
     expect(checkProgressPut(migrateProgress(v8), v8)).toMatchObject({ ok: true, progress: { revision: 46 } });
   });
 
-  it('ungültige Einträge fallen weg, Belegung nur aus Texten', () => {
+  it('ungültige Einträge fallen weg, eine alte gespeicherte Belegung auch (Wiederholung beginnt leer)', () => {
     const m = migrateProgress({
       version: 8,
       attempts: [],
-      diagramme: { a: { attempts: 1, hintsUsed: 0, belegung: { s1: 'p1', s2: 3 } }, b: 'x' },
+      diagramme: { a: { attempts: 1, hintsUsed: 0, zuletztRichtig: false, belegung: { s1: 'p1', s2: 3 } }, b: 'x' },
     });
-    expect(m.diagramme).toEqual({ a: { attempts: 1, hintsUsed: 0, belegung: { s1: 'p1' } } });
+    expect(m.diagramme).toEqual({ a: { attempts: 1, hintsUsed: 0, zuletztRichtig: false } });
   });
 
   it('Prüfen, Lösung, Status, Wiederholung', () => {
-    let p = recordDiagrammCheck(emptyProgress(), 'U', false, { s1: 'p1' }, '2026-10-09');
-    expect(p.diagramme.U).toMatchObject({ attempts: 1, stage: 1, due: '2026-10-10', belegung: { s1: 'p1' } });
+    let p = recordDiagrammCheck(emptyProgress(), 'U', false, '2026-10-09');
+    expect(p.diagramme.U).toMatchObject({ attempts: 1, stage: 1, due: '2026-10-10', zuletztRichtig: false });
+    expect(p.diagramme.U).not.toHaveProperty('belegung');
     expect(p.diagrammDays).toEqual({ '2026-10-09': 1 });
     expect(diagrammStatus(p.diagramme.U, '2026-10-10')).toBe('faellig');
-    p = recordDiagrammCheck(p, 'U', true, { s1: 'p1' }, '2026-10-10');
-    expect(p.diagramme.U.solvedAt).toBe('2026-10-10');
+    p = recordDiagrammCheck(p, 'U', true, '2026-10-10');
+    expect(p.diagramme.U).toMatchObject({ solvedAt: '2026-10-10', zuletztRichtig: true });
     expect(diagrammSummary(p, ['U', 'V'], '2026-10-10')).toEqual({ solved: 1, total: 2, due: 0 });
     const l = recordDiagrammLoesung(emptyProgress(), 'V', '2026-10-09');
     expect(diagrammStatus(l.diagramme.V, '2026-10-09')).toBe('mit-loesung');
+    expect(l.diagramme.V.zuletztRichtig).toBe(false);
     // mit gezeigter Lösung zählt richtig nicht als gelöst
-    expect(recordDiagrammCheck(l, 'V', true, {}, '2026-10-09').diagramme.V.solvedAt).toBeUndefined();
+    expect(recordDiagrammCheck(l, 'V', true, '2026-10-09').diagramme.V.solvedAt).toBeUndefined();
   });
 
   it('Zusammenführen: neuere Prüfung gewinnt, gelöst bleibt gelöst, Lerntage als Maximum', () => {
-    const a = recordDiagrammCheck(emptyProgress(), 'U', true, { s1: 'p1' }, '2026-10-01');
-    const b = recordDiagrammCheck(
-      recordDiagrammCheck(emptyProgress(), 'U', false, { s1: 'd1' }, '2026-10-05'),
-      'U',
-      false,
-      {},
-      '2026-10-05',
-    );
+    const a = recordDiagrammCheck(emptyProgress(), 'U', true, '2026-10-01');
+    const b = recordDiagrammCheck(recordDiagrammCheck(emptyProgress(), 'U', false, '2026-10-05'), 'U', false, '2026-10-05');
     const m = mergeProgress(a, b);
     expect(m.diagramme.U).toMatchObject({ lastCheckedAt: '2026-10-05', solvedAt: '2026-10-01', attempts: 2 });
     expect(m.diagrammDays).toEqual({ '2026-10-01': 1, '2026-10-05': 2 });

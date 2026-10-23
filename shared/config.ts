@@ -36,6 +36,7 @@ export const HEUTE_ZEITEN = {
   aufgabeMin: 3,
   sql: 5,
   rechnen: 5,
+  diagramm: 5,
 } as const;
 
 /** Höchstens so viele Karten je Karten-Block der Tagesrunde (dazwischen kommen andere Themen). */
