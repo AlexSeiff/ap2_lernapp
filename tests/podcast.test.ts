@@ -58,6 +58,18 @@ describe('Text zum Vorlesen', () => {
     );
   });
 
+  it('Hervorhebungen im Wort, Abkürzungen, Einheiten und Kardinalitäten', () => {
+    expect(sprechText('**CR**oss-**I**ndustry **S**tandard **P**rocess for **D**ata **M**ining')).toBe(
+      'Cross-Industry Standard Process for Data Mining.',
+    );
+    expect(sprechText('SUM(a * b), KPIs und SQLite bleiben, bestellen()')).toBe('SUM(a mal b), KPIs und SQLite bleiben, bestellen.');
+    expect(sprechText('Art. 6 Abs. 1 lit. f DSGVO, Nr. 3')).toBe('Artikel 6 Absatz 1 Buchstabe f DSGVO, Nummer 3.');
+    expect(sprechText('4 TB, 30 h, 15 min, 200 ms, 120 T€, 2 Mio. Zeilen')).toBe(
+      '4 Terabyte, 30 Stunden, 15 Minuten, 200 Millisekunden, 120 Tausend Euro, 2 Millionen Zeilen.',
+    );
+    expect(sprechText('Beziehung 1:n, m:n und 1:1, Uhrzeit 18:30')).toBe('Beziehung 1 zu n, m zu n und 1 zu 1, Uhrzeit 18:30.');
+  });
+
   it('Sätze: Tausenderpunkte und Abkürzungen trennen nicht', () => {
     expect(saetze('Umsatz 20.000 €. Zweiter Satz, z. B. hier. Dritter!')).toEqual([
       'Umsatz 20.000 €.',

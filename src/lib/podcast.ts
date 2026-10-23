@@ -103,10 +103,15 @@ export function formelSprechen(tex: string): string {
 }
 
 /** Zeichen, die Sprachausgaben schlecht oder gar nicht lesen. */
-const ZEICHEN: [RegExp, string][] = [
+const ZEICHEN: [RegExp, string | ((treffer: string, ...gruppen: string[]) => string)][] = [
   // SQL und Vergleiche, bevor Markdown-Zeichen fallen („COUNT(*) > 5“)
   [/\(\*\)/g, '(Stern)'],
   [/\bSELECT \*/g, 'SELECT Stern'],
+  [/(\S)\s+\*\s+(\S)/g, '$1 mal $2'],
+  // Hervorhebungen ohne Lücke entfernen: „**CR**oss-**I**ndustry“ ist „Cross-Industry“, nicht „CR oss- I ndustry“ oder „CRoss“
+  [/\*\*([A-ZÄÖÜ])([A-ZÄÖÜ]*)\*\*([a-zäöüß])/g, (_: string, a: string, b: string, c: string) => `${a}${b.toLowerCase()}${c}`],
+  [/\*+/g, ''],
+  [/\(\)/g, ''],
   [/\s*<>\s*/g, ' ungleich '],
   [/\s*<=\s*/g, ' kleiner gleich '],
   [/\s*>=\s*/g, ' größer gleich '],
@@ -141,9 +146,35 @@ const ZEICHEN: [RegExp, string][] = [
   [/\bggf\./g, 'gegebenenfalls'],
   [/\bvs\./g, 'gegenüber'],
   [/\bca\./g, 'circa'],
+  [/\bi\.\s?d\.\s?R\./g, 'in der Regel'],
+  [/\b(?:usw|etc)\./g, 'und so weiter'],
+  [/\binkl\./g, 'inklusive'],
+  [/\bengl\./g, 'englisch'],
+  [/\bArt\.\s?(?=\d)/g, 'Artikel '],
+  [/\bAbs\.\s?(?=\d)/g, 'Absatz '],
+  [/\blit\.\s?(?=[a-z]\b)/g, 'Buchstabe '],
+  [/\bNr\.\s?(?=\d)/g, 'Nummer '],
+  [/\bMio\./g, 'Millionen'],
+  [/\bMrd\./g, 'Milliarden'],
+  [/\bStd\./g, 'Stunden'],
+  // Einheiten nach Zahlen
+  [/(\d)\s?T€/g, '$1 Tausend Euro'],
+  [/\(T€\)/g, '(in Tausend Euro)'],
+  [/(\d)\s?h\b/g, '$1 Stunden'],
+  [/(\d)\s?min\b\.?/g, '$1 Minuten'],
+  [/(\d)\s?ms\b/g, '$1 Millisekunden'],
+  [/(\d)\s?s\b/g, '$1 Sekunden'],
+  [/(\d)\s?KB\b/gi, '$1 Kilobyte'],
+  [/(\d)\s?MB\b/g, '$1 Megabyte'],
+  [/(\d)\s?GB\b/g, '$1 Gigabyte'],
+  [/(\d)\s?TB\b/g, '$1 Terabyte'],
+  [/(\d)\s?GiB\b/g, '$1 Gibibyte'],
+  [/(\d)\s?TiB\b/g, '$1 Tebibyte'],
+  // Kardinalitäten
+  [/\b([01nmc])\s?:\s?([1nmc])\b(?!\d)/g, '$1 zu $2'],
   [/\s+\/\s+/g, ' oder '],
   [/[„“"‚‘]/g, ''],
-  [/[*_~#<>|\\]/g, ' '],
+  [/[_~#<>|\\]/g, ' '],
 ];
 
 /** Markdown in vorlesbaren Text: ohne Codeblöcke, Tabellen, Bilder, SVG und Markup; Formeln in Worten. */
@@ -169,7 +200,7 @@ export function sprechText(md: string): string {
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/`([^`]+)`/g, '$1')
     .replace(/\\\$/g, ' Dollar ');
-  for (const [re, ersatz] of ZEICHEN) s = s.replace(re, ersatz);
+  for (const [re, ersatz] of ZEICHEN) s = typeof ersatz === 'string' ? s.replace(re, ersatz) : s.replace(re, ersatz);
   return s
     .replace(/\s+([.,;:!?])/g, '$1')
     .replace(/\.{2,}/g, '.')
