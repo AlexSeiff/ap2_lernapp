@@ -131,7 +131,10 @@ describe('planeHeute', () => {
   it('neuer Stand: Aufgabe, eine ungelöste Übung, neue Karten; etwa HEUTE_MINUTEN', () => {
     const p = plan(emptyProgress());
     const arten = p.items.map((i) => i.art);
-    expect(arten.filter((a) => a === 'aufgabe')).toHaveLength(1);
+    // Zwei Aufgaben aus verschiedenen Themen.
+    const aufgaben = p.items.filter((i) => i.art === 'aufgabe');
+    expect(aufgaben).toHaveLength(2);
+    expect(new Set(aufgaben.map((i) => i.thema)).size).toBe(2);
     expect(arten.filter((a) => a === 'sql' || a === 'rechnen')).toHaveLength(1);
     expect(arten).toContain('karten');
     expect(arten).not.toContain('wiederholung');
@@ -158,6 +161,36 @@ describe('planeHeute', () => {
     expect(aufgabe.link).toBe('/aufgabe/02-A2');
     // Ungelöste Übung bevorzugt aus dem schwächsten Thema.
     expect(r.items.find((i) => i.art === 'rechnen')?.ids).toEqual(['RE-1']);
+  });
+
+  it('bereits beantwortete Aufgaben kommen nicht mehr; ist das schwächste Thema durch, das nächste', () => {
+    const p: Progress = {
+      ...emptyProgress(),
+      attempts: [
+        { taskId: '02-A1', date: '2026-09-20', points: 1, max: 5, mode: 'einzel' },
+        { taskId: '02-A2', date: '2026-09-20', points: 1, max: 10, mode: 'einzel' },
+        { taskId: '01-A1', date: '2026-09-20', points: 5, max: 5, mode: 'einzel' },
+      ],
+    };
+    const r = plan(p);
+    expect(r.schwaechstesThema).toBe('02');
+    expect(r.items.find((i) => i.art === 'aufgabe')?.ids).toEqual(['01-A2']);
+  });
+
+  it('zweite Aufgabe aus dem am längsten nicht geübten Thema, neue Karten aus mehreren Themen', () => {
+    const p: Progress = {
+      ...emptyProgress(),
+      attempts: [
+        { taskId: '01-A1', date: '2026-09-29', points: 1, max: 5, mode: 'einzel' },
+        { taskId: '02-A1', date: '2026-09-25', points: 3, max: 5, mode: 'einzel' },
+      ],
+    };
+    const r = plan(p);
+    const themen = r.items.filter((i) => i.art === 'aufgabe').map((i) => i.thema);
+    expect(themen[0]).toBe('01');
+    expect(themen[1]).toBe('03'); // nie geübt vor dem länger zurückliegenden Thema 02
+    const kartenThemen = new Set(r.items.filter((i) => i.art === 'karten').map((i) => i.thema));
+    expect(kartenThemen.size).toBeGreaterThan(1);
   });
 
   it('fällige Wiederholungen und Übungen kommen dran, Wiederholung mit ?modus=wiederholung', () => {
@@ -227,9 +260,11 @@ describe('planeHeute', () => {
     };
     const r = plan(p);
     expect(r.items.filter((i) => i.art === 'wiederholung').map((i) => i.ids[0])).toEqual(['03-A1']);
-    // Schwächstes Thema 01: beide Aufgaben zuletzt voll gelöst → keine Zusatzaufgabe.
+    // Schwächstes Thema 01 ist durch (beide Aufgaben beantwortet) → die Zusatzaufgabe kommt aus einem anderen Thema.
     expect(r.schwaechstesThema).toBe('01');
-    expect(r.items.some((i) => i.art === 'aufgabe')).toBe(false);
+    const aufgaben = r.items.filter((i) => i.art === 'aufgabe').flatMap((i) => i.ids);
+    expect(aufgaben.length).toBeGreaterThan(0);
+    for (const id of aufgaben) expect(['01-A1', '01-A2', '03-A1']).not.toContain(id);
   });
 
   it('letzterStand: neu, falsch, richtig – auch für ältere Stände ohne zuletztRichtig', () => {
@@ -323,7 +358,10 @@ describe('planeHeute', () => {
       sql: { 'SQL-1': { attempts: 2, hintsUsed: 0, lastCheckedAt: TODAY, stage: 0, due: TODAY } },
     };
     const r = plan(p);
-    expect(r.items.find((i) => i.art === 'aufgabe')?.ids).toEqual(['01-A2']);
+    // Beantwortete Aufgaben kommen nicht als Zusatzaufgabe (falsche über das Fehlerjournal), die von heute schon gar nicht.
+    const aufgaben = r.items.filter((i) => i.art === 'aufgabe').flatMap((i) => i.ids);
+    expect(aufgaben).not.toContain('01-A1');
+    expect(aufgaben).not.toContain('01-A2');
     const uebungen = r.items.filter((i) => i.art === 'sql' || i.art === 'rechnen').flatMap((i) => i.ids);
     expect(uebungen).not.toContain('SQL-1');
     expect(uebungen).not.toContain('RE-2');

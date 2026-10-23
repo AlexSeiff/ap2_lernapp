@@ -5,7 +5,7 @@
 import { z } from 'zod';
 import type { ImportIssue } from './types';
 
-export const DIAGRAMM_TYPEN = ['epk', 'bpmn', 'aktivitaet', 'sequenz', 'zustand'] as const;
+export const DIAGRAMM_TYPEN = ['epk', 'bpmn', 'aktivitaet', 'sequenz', 'zustand', 'er', 'klasse', 'usecase'] as const;
 export type DiagrammTyp = (typeof DIAGRAMM_TYPEN)[number];
 
 export const DIAGRAMM_TYP_NAMEN: Record<DiagrammTyp, string> = {
@@ -14,6 +14,9 @@ export const DIAGRAMM_TYP_NAMEN: Record<DiagrammTyp, string> = {
   aktivitaet: 'Aktivitätsdiagramm',
   sequenz: 'Sequenzdiagramm',
   zustand: 'Zustandsdiagramm',
+  er: 'ER-Modell',
+  klasse: 'Klassendiagramm',
+  usecase: 'Anwendungsfalldiagramm',
 };
 
 /** Formen der Knoten (gezeichnet von src/components/DiagrammSvg.tsx). */
@@ -46,6 +49,15 @@ export const FORMEN = [
   'lebenslinie',
   'fragment',
   'notiz',
+  // ER-Modell, Klassen- und Anwendungsfalldiagramm
+  'entitaet',
+  'beziehung',
+  'attribut',
+  'klasse',
+  'akteur',
+  'anwendungsfall',
+  'systemgrenze',
+  'text',
 ] as const;
 export type Form = (typeof FORMEN)[number];
 

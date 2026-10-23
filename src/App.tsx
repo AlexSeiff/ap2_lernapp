@@ -26,6 +26,7 @@ const SEITEN = {
   druck: () => import('./pages/Druck'),
   einstellungen: () => import('./pages/Einstellungen'),
   fehlerjournal: () => import('./pages/Fehlerjournal'),
+  fachgespraech: () => import('./pages/Fachgespraech'),
   karteikarten: () => import('./pages/Karteikarten'),
   klausur: () => import('./pages/Klausur'),
   material: () => import('./pages/Material'),
@@ -36,6 +37,7 @@ const Aufgaben = lazy(() => SEITEN.aufgaben().then((m) => ({ default: m.Aufgaben
 const Daten = lazy(() => SEITEN.daten().then((m) => ({ default: m.Daten })));
 const Druck = lazy(() => SEITEN.druck().then((m) => ({ default: m.Druck })));
 const Einstellungen = lazy(() => SEITEN.einstellungen().then((m) => ({ default: m.Einstellungen })));
+const Fachgespraech = lazy(() => SEITEN.fachgespraech().then((m) => ({ default: m.Fachgespraech })));
 const Fehlerjournal = lazy(() => SEITEN.fehlerjournal().then((m) => ({ default: m.Fehlerjournal })));
 const Karteikarten = lazy(() => SEITEN.karteikarten().then((m) => ({ default: m.Karteikarten })));
 const Klausur = lazy(() => SEITEN.klausur().then((m) => ({ default: m.Klausur })));
@@ -252,6 +254,7 @@ function Layout() {
                       <Route path="/diagramme" element={<DiagrammUebungen />} />
                       <Route path="/diagramme/:id" element={<DiagrammUebung />} />
                       <Route path="/fehlerjournal" element={<Fehlerjournal />} />
+                      <Route path="/fachgespraech" element={<Fachgespraech />} />
                       <Route path="/generator" element={IS_STATIC ? <Navigate to="/" replace /> : <Generator />} />
                       <Route path="/material" element={<Material />} />
                       <Route path="/material/formeln" element={<Formelsammlung />} />

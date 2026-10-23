@@ -36,6 +36,10 @@ export interface Flashcard {
   tags?: string[];
   /** Geprüfter Block „mc“ aus der Datei (Leicht-Modus); fehlt er, kann der Leicht-Modus automatische Antworten nutzen. */
   mc?: KartenMc;
+  /** Zeichnung zur Rückseite als SVG (Positivliste, shared/svgDiagramm.ts); die Antwort bleibt reiner Text für Suche und Leicht-Modus. */
+  diagramm?: string;
+  /** Rechenweg als Markdown mit Formeln ($…$); ersetzt bei Rechenkarten die Antwort auf der Rückseite. */
+  rechenweg?: string;
   /**
    * Nur Begriffskarten mit Begriffsseite (beim Laden ergänzt, shared/verwandt.ts): ids der Begriffskarten, gegen die der Begriff im
    * Abschnitt „Abgrenzung“ abgegrenzt wird – die besten falschen Antworten im Leicht-Modus (Umsetzungsplan Phase 5).

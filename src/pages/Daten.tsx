@@ -2,11 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import type { BackupInfo } from '../../shared/api';
 import { mergeProgress } from '../../shared/mergeProgress';
 import { emptyProgress } from '../../shared/progress';
+import { localDate, resetAufgabenAntworten } from '../lib/progress';
 import { useBackupDownload } from '../hooks/useBackupDownload';
 import { useConfirm } from '../hooks/useConfirm';
 import { api, IS_STATIC } from '../lib/api';
-import { parseBackup } from '../lib/backup';
+import { backupFileName, parseBackup } from '../lib/backup';
+import { gemerkteDatei, schreibeSicherung, unterstuetzt } from '../lib/sicherungsDatei';
+import { cardPool } from '../lib/cards';
+import { ankiText, kalenderIcs, ladeHerunter } from '../lib/export';
 import { isStoragePersisted } from '../lib/persistentStorage';
+import { withSettings } from '../lib/settings';
 import { formatIsoDate } from '../lib/stats';
 import { useStore } from '../lib/store';
 import { Icon } from '../components/Icon';
@@ -18,6 +23,23 @@ export function Daten() {
   const [msg, setMsg] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   /** Was mit der gewählten Datei passiert: zusammenführen oder ersetzen. */
+  const dateiOk = unterstuetzt();
+  const [dateiName, setDateiName] = useState<string | undefined>();
+  useEffect(() => {
+    if (dateiOk) void gemerkteDatei().then(setDateiName);
+  }, [dateiOk]);
+  const sichereInDatei = async (neu: boolean) => {
+    try {
+      const heute = localDate();
+      const name = await schreibeSicherung(JSON.stringify(progress, null, 2), backupFileName(heute), neu);
+      if (!name) return;
+      setDateiName(name);
+      if (progress.settings.lastBackupDownloadAt !== heute) update((p) => withSettings(p, { lastBackupDownloadAt: heute }));
+      setMsg(`Gesichert in „${name}“ (${new Date().toLocaleTimeString('de-DE')}).`);
+    } catch (e) {
+      setMsg(`Sichern fehlgeschlagen: ${(e as Error).message}`);
+    }
+  };
   const importMode = useRef<'merge' | 'replace'>('merge');
   const [backups, setBackups] = useState<BackupInfo | null>(null);
   /** Pages: Ist der Browser-Speicher dauerhaft (navigator.storage.persisted)? undefined = unbekannt. */
@@ -279,6 +301,23 @@ export function Daten() {
           >
             <Icon name="upload" /> Sicherung einspielen (ersetzen)
           </button>
+          {dateiOk && (
+            <>
+              <button
+                type="button"
+                className="secondary"
+                title="Überschreibt eine einmal gewählte Datei (z. B. in OneDrive) – ohne neuen Download"
+                onClick={() => void sichereInDatei(false)}
+              >
+                <Icon name="save" /> {dateiName ? `In „${dateiName}“ sichern` : 'In feste Sicherungsdatei sichern'}
+              </button>
+              {dateiName && (
+                <button type="button" className="ghost" onClick={() => void sichereInDatei(true)}>
+                  Andere Datei wählen
+                </button>
+              )}
+            </>
+          )}
           <input
             ref={fileRef}
             type="file"
@@ -290,6 +329,24 @@ export function Daten() {
               if (file) importBackup(file, importMode.current);
             }}
           />
+          <button
+            type="button"
+            className="ghost danger"
+            onClick={async () => {
+              const ok = await confirm({
+                title: 'Aufgaben-Antworten zurücksetzen?',
+                message:
+                  'Alle bisherigen Antworten zu Aufgaben und Klausuren (Versuche, Fehlerjournal) löschen? Karteikarten, Übungen und Einstellungen bleiben. „Heute lernen“ schlägt dann wieder alle Aufgaben vor.',
+                confirmLabel: 'Antworten löschen',
+                danger: true,
+              });
+              if (!ok) return;
+              replaceProgress(resetAufgabenAntworten(progress));
+              setMsg('Aufgaben-Antworten zurückgesetzt.');
+            }}
+          >
+            Aufgaben-Antworten zurücksetzen
+          </button>
           <button
             type="button"
             className="ghost danger"
@@ -307,6 +364,31 @@ export function Daten() {
             }}
           >
             Fortschritt zurücksetzen
+          </button>
+        </div>
+      </section>
+
+      <section className="card">
+        <h2>Exportieren</h2>
+        <p className="muted">Karten für Anki und Wiederholungen für deinen Kalender – ändert nichts an deinem Fortschritt.</p>
+        <div className="actions">
+          <button
+            type="button"
+            className="secondary"
+            title="Textdatei mit Tabulatoren: in Anki unter Datei → Importieren"
+            onClick={() =>
+              ladeHerunter('ap2-karten-anki.txt', ankiText(cardPool(content.flashcards, progress.settings), content), 'text/plain')
+            }
+          >
+            <Icon name="download" /> Karten für Anki (.txt)
+          </button>
+          <button
+            type="button"
+            className="secondary"
+            title="Fällige Karten, Fehlerjournal und Übungen je Tag plus Prüfungstermin – zum Import in Kalender-Apps"
+            onClick={() => ladeHerunter('ap2-wiederholungen.ics', kalenderIcs(progress, localDate()), 'text/calendar')}
+          >
+            <Icon name="calendar" /> Wiederholungen als Kalender (.ics)
           </button>
         </div>
       </section>

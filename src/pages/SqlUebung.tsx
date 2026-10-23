@@ -12,6 +12,7 @@ import { SqlEditor, type SqlEditorHandle } from '../components/SqlEditor';
 import { SqlTabs } from '../components/SqlTabs';
 import { useConfirm } from '../hooks/useConfirm';
 import { useSqlSession } from '../hooks/useSqlSession';
+import { meldeFertig } from '../lib/heuteSitzung';
 import { recordSolutionShown, recordSqlCheck, recordSqlHint, saveSqlQuery, SQL_QUERY_MAX, sqlEntwurf, sqlStatus } from '../lib/sql';
 import { useStore } from '../lib/store';
 import { LEVEL_LABELS, stars, STATUS_LABELS } from '../lib/uebungLabels';
@@ -127,6 +128,7 @@ function SqlUebungView({ id }: { id: string }) {
       const ok = r.ok && !blocked;
       setOutcome({ ...r, ok, blocked });
       update((p) => recordSqlCheck(p, id, ok));
+      if (ok) meldeFertig(id);
     } finally {
       setBusy(null);
     }

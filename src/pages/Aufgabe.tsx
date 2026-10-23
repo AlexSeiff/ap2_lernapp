@@ -10,7 +10,8 @@ import { Attachments, GradePanel, TaskText } from '../components/TaskParts';
 import { anhangFuer } from '../lib/anhang';
 import { formatPoints } from '../lib/grading';
 import { sicherheitLabel } from '../lib/kalibrierung';
-import { isDue, recordAttempt, setzeFehlergrund } from '../lib/progress';
+import { isDue, recordAttempt, resetAufgabenAntworten, setzeFehlergrund } from '../lib/progress';
+import { meldeFertig } from '../lib/heuteSitzung';
 import { recordSqlCheck } from '../lib/sql';
 import { useStore } from '../lib/store';
 
@@ -23,7 +24,7 @@ export function Aufgabe() {
 function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const { content, progress, update } = useStore();
+  const { content, progress, update, replaceProgress } = useStore();
   const task = taskId ? content.tasks[taskId] : undefined;
   const repeat = params.get('modus') === 'wiederholung';
   const [answer, setAnswer] = useState('');
@@ -67,6 +68,7 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
       }),
     );
     setSaved(date);
+    meldeFertig(task.id);
   };
 
   /** Fehlergrund wählen – auch nach dem Speichern, dann wird der gespeicherte Versuch angepasst (ROADMAP 8.7). */
@@ -147,7 +149,17 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
           Bisherige Versuche:{' '}
           {history
             .map((h) => `${new Date(h.date).toLocaleDateString('de-DE')}: ${formatPoints(h.points)}/${formatPoints(h.max)} P`)
-            .join(' · ')}
+            .join(' · ')}{' '}
+          <button
+            type="button"
+            className="ghost danger"
+            onClick={() => {
+              replaceProgress(resetAufgabenAntworten(progress, [task.id]));
+              setSaved(undefined);
+            }}
+          >
+            Antworten zurücksetzen
+          </button>
         </p>
       )}
     </div>

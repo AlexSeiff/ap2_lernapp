@@ -5,6 +5,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { RechenUebung } from '../../shared/types';
 import { rechenAuswahl } from '../lib/leichtRechnen';
+import { meldeFertig } from '../lib/heuteSitzung';
 import { recordRechenCheck, recordRechenHint, recordRechenLeicht, recordRechenLoesung, setRechenSeed } from '../lib/rechnen';
 import { withSettings } from '../lib/settings';
 import { useStore } from '../lib/store';
@@ -70,6 +71,7 @@ export function useRechenUebung(u: RechenUebung) {
       if (auswahl.every((a) => neu[a.eingabe] !== undefined)) {
         const ok = auswahl.every((a) => a.optionen[neu[a.eingabe]].richtig);
         update((p) => recordRechenLeicht(p, id, ok));
+        if (ok) meldeFertig(id);
       }
     },
     [auswahl, wahl, update, id],
@@ -111,6 +113,7 @@ export function useRechenUebung(u: RechenUebung) {
     const r = pruefeAntworten(inst, eigene);
     setErgebnis(r);
     update((p) => recordRechenCheck(p, id, r.ok));
+    if (r.ok) meldeFertig(id);
   };
 
   /** Neue Zufallszahlen („🎲 Neue Zahlen“) oder zurück zu den festen Zahlen der Übung (`undefined`). */

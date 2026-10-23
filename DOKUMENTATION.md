@@ -190,7 +190,7 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
                "karten": [ { "id": "SQL-001", "frage": "…", "antwort": "…", "typ": "wissen", "schwierigkeit": 1, "tags": ["join"] } ] } ] }
 ```
 
-- Currently 25 decks and 539 cards (typ: wissen 256, falle 93, abgrenzung 82, anwendung 62, rechnung 46).
+- Currently 28 decks and 696 cards (typ: wissen 256, falle 93, abgrenzung 82, anwendung 62, rechnung 46).
 - **Term cards** `AP2_Fachbegriffe_Lernkarten.json` (same format, any `*Lernkarten*.json` is imported): 16 decks `fb01`–`fb16`, one per Deep Dive,
   802 cards with `typ: "begriff"` – `frage` is just the term, `antwort` a one- or two-sentence explanation, ids `FB-<term-slug>` (stable,
   independent of order). Terms already defined by a `wissen` card (ACID, KPI, PDCA …) are not repeated. In the app: Typ filter „Fachbegriff“
@@ -574,9 +574,10 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
   SQL 5, Rechnen 5, Diagramm 5. **Only things not yet done or last done wrong** – nothing whose last attempt was right (full points, or
   `zuletztRichtig`), even if a spaced repetition is due (owner decision, October 2026). Steps:
   1. **Fehlerjournal**: due open entries whose last attempt was below full points (oldest due first) until about half the time, at least one.
-  2. **One task from the weakest topic** (lowest last exam, else Ø tasks; without any data the topic with the fewest attempts): a task never
-     attempted (random), else the one with the worst last result below full points; none → no task. Never one of the planned repetitions,
-     never AI tasks.
+  2. **Tasks**: one never attempted task from the weakest topic (lowest last exam, else Ø tasks; without any data the topic with the fewest
+     attempts; if it has none left, the next weakest) and – not in a short round – a second one from the topic practised longest ago.
+     Answered tasks never come here (wrong ones come back via the Fehlerjournal; „Antworten zurücksetzen“ on the task page brings one
+     back). Never one of the planned repetitions, never AI tasks.
   3. **1–2 exercises** (SQL, Rechen, Diagramm): last result wrong or solution shown (`letzterStand` in `src/lib/wiederholung.ts`; oldest
      first, at most 2); none → one never attempted exercise, preferably of the weakest topic.
   Anything already done today (earlier rounds of the day via `HeuteSitzung.frueher`, tasks attempted and exercises checked today) is skipped.

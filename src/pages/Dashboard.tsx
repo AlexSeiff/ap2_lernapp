@@ -26,6 +26,9 @@ import { HEUTE_MINUTEN, SICHER_RICHTIG_AB } from '../../shared/config';
 import { Icon } from '../components/Icon';
 import type { IconName } from '../lib/icons';
 
+/** Merkt, ob „Mehr“ auf der Übersicht aufgeklappt ist (pro Gerät). */
+const MEHR_SPEICHER = 'ap2-uebersicht-mehr';
+
 const pct = (v?: number) => (v === undefined ? '–' : `${Math.round(v)} %`);
 const prozent = (a: Anteil) => `${Math.round(quote(a) * 100)} %`;
 
@@ -48,6 +51,13 @@ function Uebersicht() {
     .sort((a, b) => (a.lastExam ?? a.avgTaskPct!) - (b.lastExam ?? b.avgTaskPct!))
     .slice(0, 3);
   const offeneJournal = Object.values(progress.journal).filter((j) => !j.resolvedAt).length;
+  const [mehrOffen, setMehrOffen] = useState(() => {
+    try {
+      return localStorage.getItem(MEHR_SPEICHER) === '1';
+    } catch {
+      return false;
+    }
+  });
 
   return (
     <div className="page">
@@ -66,36 +76,53 @@ function Uebersicht() {
         <BereichRinge />
         <FaelligWidget today={today} />
         <UebungenWidget today={today} />
-        <MarkiertWidget />
-        <BegriffWidget today={today} />
-        <KlausurWidget />
-        {!!weakest.length && (
-          <section className="widget">
-            <h2>
-              <Icon name="trending-down" /> Schwächste Themen
-            </h2>
-            <ul className="plain">
-              {weakest.map((s) => (
-                <li key={s.topic.id}>
-                  <Link to={`/lernen/${s.topic.id}`}>{s.topic.title}</Link> – {pct(s.lastExam ?? s.avgTaskPct)}{' '}
-                  <Link className="small" to={`/aufgaben?thema=${s.topic.id}`}>
-                    Aufgaben üben
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            {offeneJournal > 0 && (
-              <p className="hint">
-                <Link to="/fehlerjournal">
-                  {offeneJournal} {offeneJournal === 1 ? 'Aufgabe' : 'Aufgaben'} im Fehlerjournal →
-                </Link>
-              </p>
-            )}
-          </section>
-        )}
-        <FehlergrundKarte />
-        <KalibrierungKarte />
       </div>
+      <details
+        className="mehr-widgets"
+        open={mehrOffen}
+        onToggle={(e) => {
+          const offen = e.currentTarget.open;
+          setMehrOffen(offen);
+          try {
+            localStorage.setItem(MEHR_SPEICHER, offen ? '1' : '0');
+          } catch {
+            /* ohne Speicher gilt die Wahl nur bis zum Neuladen */
+          }
+        }}
+      >
+        <summary>Mehr: Markiertes, Begriff des Tages, Klausuren, schwächste Themen</summary>
+        <div className="widgets">
+          <MarkiertWidget />
+          <BegriffWidget today={today} />
+          <KlausurWidget />
+          {!!weakest.length && (
+            <section className="widget">
+              <h2>
+                <Icon name="trending-down" /> Schwächste Themen
+              </h2>
+              <ul className="plain">
+                {weakest.map((s) => (
+                  <li key={s.topic.id}>
+                    <Link to={`/lernen/${s.topic.id}`}>{s.topic.title}</Link> – {pct(s.lastExam ?? s.avgTaskPct)}{' '}
+                    <Link className="small" to={`/aufgaben?thema=${s.topic.id}`}>
+                      Aufgaben üben
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              {offeneJournal > 0 && (
+                <p className="hint">
+                  <Link to="/fehlerjournal">
+                    {offeneJournal} {offeneJournal === 1 ? 'Aufgabe' : 'Aufgaben'} im Fehlerjournal →
+                  </Link>
+                </p>
+              )}
+            </section>
+          )}
+          <FehlergrundKarte />
+          <KalibrierungKarte />
+        </div>
+      </details>
 
       <section className="card">
         <h2>Fortschritt je Thema</h2>

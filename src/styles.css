@@ -361,8 +361,6 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 .rate-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .rate-buttons button { justify-content: center; padding: 12px; }
 .rate-buttons kbd { background: rgba(255, 255, 255, 0.25); border-color: transparent; color: inherit; }
-.runden-balken { height: 4px; margin-top: 8px; background: var(--fill); border-radius: 2px; overflow: hidden; }
-.runden-balken span { display: block; height: 100%; background: var(--accent); border-radius: inherit; transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
 /* Bewegung: neue Karte gleitet herein, Umdrehen kippt kurz, Antwort und Bewertung blenden auf (bei „Bewegung reduzieren“ aus, s. u.) */
 @keyframes karte-rein { from { opacity: 0; transform: translateX(32px) scale(0.98); } }
@@ -1036,6 +1034,30 @@ a.kpi.w-innen:hover { transform: none; }
   .widget p a, .widget .plain li > a, .w-begriff a { display: inline-block; padding-block: 6px; }
   .tf-titel { display: flex; align-items: center; min-height: 40px; }
 }
+
+/* Karteikarten je Art: Begriff, Frage, Rechnung */
+.fc-label { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.fc-vorne.frage { border-left: 4px solid var(--accent); padding-left: 14px; }
+.fc-vorne.begriff { text-align: center; padding: 12px 0; }
+.fc-vorne.begriff .fc-label { justify-content: center; }
+.fc-term { font-size: 1.9rem; font-weight: 700; line-height: 1.25; }
+.fc-aufforderung { margin: 8px 0 0; color: var(--muted); font-size: 0.95rem; }
+.fc-vorne.rechnung { border-left: 4px solid var(--accent); padding-left: 14px; }
+.fc-hinten.rechnung { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; font-variant-numeric: tabular-nums; line-height: 1.7; }
+.fc-hinten.rechnung .katex-display { margin: 0.6em 0; overflow-x: auto; }
+.fc-kontext { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
+
+.runden-balken { height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; margin: 4px 0 8px; }
+.runden-balken > div { height: 100%; background: var(--accent); transition: width 0.2s ease; }
+.wisch-hinweis { display: none; text-align: center; }
+@media (pointer: coarse) { .wisch-hinweis { display: block; } }
+
+.mehr-widgets { margin: 12px 0; }
+.mehr-widgets > summary { cursor: pointer; padding: 10px 14px; border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); color: var(--accent); font-weight: 500; list-style: none; }
+.mehr-widgets > summary::-webkit-details-marker { display: none; }
+.mehr-widgets[open] > summary { margin-bottom: 12px; }
+
+.lernplan { padding-left: 1.2em; } .lernplan > li { margin-bottom: 0.8em; }
 
 /* „Bewegung reduzieren“ im Betriebssystem und beim Drucken: keine Animationen und Übergänge */
 @media (prefers-reduced-motion: reduce), print {

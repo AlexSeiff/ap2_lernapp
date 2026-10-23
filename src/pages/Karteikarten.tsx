@@ -5,6 +5,7 @@ import { AntwortVergleich, EigeneAntwortFeld } from '../components/EigeneAntwort
 import { LeichtOptionen } from '../components/LeichtOptionen';
 import { MarkierStern } from '../components/MarkierStern';
 import { SqlUebungLinks } from '../components/SqlUebungLinks';
+import { KartenAntwort, KartenFrage } from '../components/KartenText';
 import { Markdown } from '../components/Markdown';
 import { useCardFilters, useCardSession } from '../hooks/useCardSession';
 import { leichtZahlen } from '../lib/leicht';
@@ -35,8 +36,25 @@ export function Karteikarten() {
   const { content, progress, update } = useStore();
   const { settings } = progress;
   const { f, set, deck, alle, pool, leicht, leichtModus, markiert, auswahl, ausSuche, vonBegriff } = useCardFilters();
-  const { session, index, card, flipped, done, start, end, flip, rate, runde, waehle, next, eigeneAntwort, setEigeneAntwort } =
-    useCardSession();
+  const {
+    session,
+    index,
+    card,
+    flipped,
+    done,
+    start,
+    end,
+    flip,
+    rate,
+    runde,
+    waehle,
+    next,
+    eigeneAntwort,
+    setEigeneAntwort,
+    kannRueckgaengig,
+    rueckgaengig,
+  } = useCardSession();
+  const touch = useRef<{ x: number; y: number } | null>(null);
   const startRunde = (cards: Flashcard[]) => start(cards, leichtModus ? leicht : null);
   // Filter: auf dem Desktop offen, auf dem Handy zugeklappt (spart einen ganzen Bildschirm), mit aktiven Filtern immer offen.
   const [filterOffen, setFilterOffen] = useState(
@@ -74,7 +92,7 @@ export function Karteikarten() {
           </span>
           <MarkierStern cardId={card.id} taste />
         </div>
-        <RundenBalken index={index} anzahl={session.length} />
+        <RundenBalken index={index} gesamt={session.length} />
         <KartenWechsel id={String(index)}>
           <div className={`flashcard leicht ${card.typ === 'falle' ? 'trap' : ''}`}>
             <div className="fc-meta">
@@ -100,7 +118,7 @@ export function Karteikarten() {
                 <Markdown className="fc-question umgekehrt">{runde.frage}</Markdown>
               </>
             ) : (
-              <Markdown className="fc-question">{card.question}</Markdown>
+              <KartenFrage card={card} />
             )}
             <LeichtOptionen
               optionen={runde.optionen}
@@ -126,7 +144,7 @@ export function Karteikarten() {
                   card.answer && (
                     <>
                       <h4>Ganze Antwort</h4>
-                      <Markdown>{card.answer}</Markdown>
+                      <KartenAntwort card={card} />
                     </>
                   )
                 )}
@@ -168,9 +186,14 @@ export function Karteikarten() {
           <span>
             Karte {index + 1} / {session.length}
           </span>
+          {kannRueckgaengig && (
+            <button type="button" className="ghost" onClick={rueckgaengig} title="Letzte Bewertung zurücknehmen (Taste U)">
+              <Icon name="rotate-ccw" /> Rückgängig
+            </button>
+          )}
           <MarkierStern cardId={card.id} taste />
         </div>
-        <RundenBalken index={index} anzahl={session.length} />
+        <RundenBalken index={index} gesamt={session.length} />
         {/* Kein <button>: die Karte enthält Markdown mit Absätzen, Listen und Codeblöcken – das ist in einem Button ungültig. */}
         <KartenWechsel id={String(index)}>
           <div
@@ -179,6 +202,16 @@ export function Karteikarten() {
             tabIndex={0}
             aria-expanded={flipped}
             onClick={flip}
+            onTouchStart={(e) => (touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
+            onTouchEnd={(e) => {
+              const t = touch.current;
+              touch.current = null;
+              if (!t || !flipped) return;
+              const dx = e.changedTouches[0].clientX - t.x;
+              const dy = e.changedTouches[0].clientY - t.y;
+              // Nach dem Umdrehen: nach rechts wischen = gewusst, nach links = nicht gewusst.
+              if (Math.abs(dx) > 90 && Math.abs(dy) < 60) rate(dx > 0 ? 'gewusst' : 'nicht');
+            }}
             onKeyDown={(e) => {
               if (e.key !== 'Enter' && e.key !== ' ') return;
               e.preventDefault();
@@ -193,7 +226,7 @@ export function Karteikarten() {
               {card.schwierigkeit && <span className="badge muted">{LEVEL_LABELS[card.schwierigkeit] ?? card.schwierigkeit}</span>}
               <span className="muted small">{card.id}</span>
             </div>
-            <Markdown className="fc-question">{card.question}</Markdown>
+            <KartenFrage card={card} />
             {card.typ === 'rechnung' && !flipped && (
               <p className="hint">
                 <Icon name="pencil" /> Erst auf Papier rechnen, dann umdrehen.
@@ -205,7 +238,7 @@ export function Karteikarten() {
                   eigene={eigeneAntwort}
                   muster={
                     card.answer ? (
-                      <Markdown>{card.answer}</Markdown>
+                      <KartenAntwort card={card} />
                     ) : (
                       <p className="muted">
                         Keine Musterantwort im Lernblatt – beantworte die Frage laut und prüfe dich anhand des Theorieteils.
@@ -229,6 +262,7 @@ export function Karteikarten() {
             )}
           </div>
         </KartenWechsel>
+        {flipped && <p className="hint wisch-hinweis">Auf dem Handy: nach rechts wischen = gewusst, nach links = nicht gewusst.</p>}
         {!flipped && <EigeneAntwortFeld value={eigeneAntwort} onChange={setEigeneAntwort} onFertig={flip} />}
         {flipped && <SqlUebungLinks card={card} />}
         {flipped && (
@@ -512,15 +546,6 @@ function KartenWechsel({ id, zurueck = false, children }: { id: string; zurueck?
   );
 }
 
-/** Fortschrittsbalken einer Kartenrunde (Karte `index` von `anzahl`, 0-basiert). */
-function RundenBalken({ index, anzahl }: { index: number; anzahl: number }) {
-  return (
-    <div className="runden-balken" aria-hidden="true">
-      <span style={{ width: `${(Math.min(index, anzahl) / Math.max(anzahl, 1)) * 100}%` }} />
-    </div>
-  );
-}
-
 /**
  * Durchblättern: alle Karten der Auswahl nacheinander ansehen, vor und zurück, ohne Bewertung (Lernstand bleibt unverändert).
  * Tastatur: ← → blättern, Leertaste/Enter umdrehen, Esc beenden. Auf dem Handy nach links/rechts wischen.
@@ -627,10 +652,10 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
             </span>
             {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
           </div>
-          <Markdown className="fc-question">{card.question}</Markdown>
+          <KartenFrage card={card} />
           {offen ? (
             <div className="fc-answer">
-              {card.answer ? <Markdown>{card.answer}</Markdown> : <p className="muted">Keine Musterantwort im Lernblatt.</p>}
+              {card.answer ? <KartenAntwort card={card} /> : <p className="muted">Keine Musterantwort im Lernblatt.</p>}
             </div>
           ) : (
             <p className="hint">Klicken oder Leertaste zum Umdrehen.</p>
@@ -652,6 +677,22 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
           </button>
         )}
       </div>
+    </div>
+  );
+}
+
+/** Fortschrittsbalken der Lernrunde (Karte x von y). */
+function RundenBalken({ index, gesamt }: { index: number; gesamt: number }) {
+  return (
+    <div
+      className="runden-balken"
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={gesamt}
+      aria-valuenow={index}
+      aria-label="Fortschritt der Runde"
+    >
+      <div style={{ width: `${Math.min(100, (index / Math.max(1, gesamt)) * 100)}%` }} />
     </div>
   );
 }

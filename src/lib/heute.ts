@@ -83,13 +83,26 @@ export interface PlanOptionen {
   ausschliessen?: Iterable<string>;
 }
 
+/** Reihum je Thema/Deck eine Karte, damit neue Karten nicht alle aus dem ersten Thema der Datei stammen. */
+function mischeNachThema(karten: Flashcard[]): Flashcard[] {
+  const gruppen = new Map<string, Flashcard[]>();
+  for (const c of karten) {
+    const k = c.topicId ?? c.deckId ?? '';
+    gruppen.set(k, [...(gruppen.get(k) ?? []), c]);
+  }
+  const listen = [...gruppen.values()];
+  const out: Flashcard[] = [];
+  for (let i = 0; out.length < karten.length; i++) for (const l of listen) if (i < l.length) out.push(l[i]);
+  return out;
+}
+
 const themaVon = (topicId: string | undefined, fallback: string) => topicId ?? fallback;
 
 /**
  * Plant die Tagesrunde:
- * 1. Eine Aufgabe aus dem schwächsten Thema (letzte Klausur, sonst Ø Aufgaben; ohne Daten: das Thema mit den wenigsten Versuchen) –
- *    bevorzugt eine noch nie bearbeitete, sonst die mit dem schlechtesten letzten Ergebnis unter voller Punktzahl. Zuletzt mit voller
- *    Punktzahl gelöste Aufgaben kommen nicht.
+ * 1. Eine Aufgabe aus dem schwächsten Thema und eine zweite (nicht bei kurzer Runde) aus dem am längsten nicht geübten Thema (letzte
+ *    Klausur, sonst Ø Aufgaben; ohne Daten: das Thema mit den wenigsten Versuchen) – nur eine noch nie bearbeitete; ist das Thema durch,
+ *    das nächstschwächere. Falsch beantwortete Aufgaben kommen über das Fehlerjournal (3.).
  * 2. 1–2 Übungen (SQL, Rechnen, Diagramm): zuletzt nicht richtig gelöste (falsch oder Lösung angesehen; am längsten her zuerst,
  *    höchstens 2); gibt es keine, eine noch nie bearbeitete (bevorzugt aus dem schwächsten Thema). Zuletzt richtig gelöste nie.
  * 3. Fällige Fehlerjournal-Aufgaben, deren letzter Versuch unter voller Punktzahl lag (älteste zuerst), bis etwa zur Hälfte der Zeit,
@@ -147,15 +160,34 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
     : stats.reduce<(typeof stats)[number] | undefined>((a, b) => (!a || b.attempts < a.attempts ? b : a), undefined);
   const schwaechstesThema = schwach?.topic.id;
   if (schwach) {
-    const letzte = new Map<string, number>();
-    for (const a of progress.attempts) letzte.set(a.taskId, a.max > 0 ? a.points / a.max : 0);
-    const kandidaten = Object.values(content.tasks).filter(
-      (t) => t.topicId === schwach.topic.id && !t.generated && !verplant.has(t.id) && !schonHeute.has(t.id),
-    );
-    const neu = kandidaten.filter((t) => !letzte.has(t.id));
-    const unvollstaendig = kandidaten.filter((t) => (letzte.get(t.id) ?? 1) < 1).sort((a, b) => letzte.get(a.id)! - letzte.get(b.id)!);
-    const wahl = neu.length ? neu[Math.floor(zufall() * neu.length)] : unvollstaendig[0];
-    if (wahl) add(aufgabeItem('aufgabe', wahl));
+    // Bereits beantwortete Aufgaben kommen nicht mehr vor (zurücksetzbar auf der Aufgabenseite); ist das schwächste Thema
+    // durch, kommt das nächstschwächere an die Reihe.
+    const beantwortet = new Set(progress.attempts.map((a) => a.taskId));
+    const staerke = (s: (typeof stats)[number]) => s.lastExam ?? s.avgTaskPct ?? Infinity;
+    const reihenfolge = [schwach, ...stats.filter((s) => s !== schwach).sort((a, b) => staerke(a) - staerke(b))];
+    const offen = (s: (typeof stats)[number]) =>
+      Object.values(content.tasks).filter(
+        (t) => t.topicId === s.topic.id && !t.generated && !verplant.has(t.id) && !beantwortet.has(t.id) && !schonHeute.has(t.id),
+      );
+    const gewaehlt = reihenfolge.find((s) => offen(s).length);
+    if (gewaehlt) {
+      const neu = offen(gewaehlt);
+      add(aufgabeItem('aufgabe', neu[Math.floor(zufall() * neu.length)]));
+      // Zweite Aufgabe aus einem anderen Thema – dem, das am längsten nicht geübt wurde (nie geübt zuerst) –, damit über die
+      // Tage alle Themen drankommen und nicht nur die schwächsten.
+      const zuletzt = new Map<string, string>();
+      for (const a of progress.attempts) {
+        const t = content.tasks[a.taskId];
+        if (t && a.date > (zuletzt.get(t.topicId) ?? '')) zuletzt.set(t.topicId, a.date);
+      }
+      const weitere = reihenfolge
+        .filter((s) => s !== gewaehlt && offen(s).length)
+        .sort((a, b) => (zuletzt.get(a.topic.id) ?? '').localeCompare(zuletzt.get(b.topic.id) ?? ''));
+      if (weitere.length && ziel >= HEUTE_MINUTEN) {
+        const rest = offen(weitere[0]);
+        add(aufgabeItem('aufgabe', rest[Math.floor(zufall() * rest.length)]));
+      }
+    }
   }
 
   // 2. SQL-, Rechen- und Diagramm-Übungen: nur neue und zuletzt nicht richtig gelöste.
@@ -220,7 +252,7 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
     .sort(
       (a, b) => progress.cards[a.id].due.localeCompare(progress.cards[b.id].due) || progress.cards[a.id].box - progress.cards[b.id].box,
     );
-  const neueKarten = pool.filter((c) => !progress.cards[c.id]);
+  const neueKarten = mischeNachThema(pool.filter((c) => !progress.cards[c.id]));
   const platz = Math.max(Math.floor((ziel - minuten) / proKarte), Math.min(5, faelligeKarten.length + neueKarten.length));
   const karten = [...faelligeKarten, ...neueKarten.slice(0, NEW_PER_SESSION)].slice(0, platz);
   const nachThema = new Map<string, Flashcard[]>();

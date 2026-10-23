@@ -43,6 +43,35 @@ export function recordAttempt(p: Progress, attempt: Attempt, today = localDate()
 }
 
 /**
+ * Nimmt Aufgaben, deren letzter Versuch unter voller Punktzahl blieb, ins Fehlerjournal auf, falls sie dort nicht offen stehen
+ * (z. B. ältere Versuche oder zurückgesetztes Journal). Sie sind sofort fällig. Ohne Änderung kommt dasselbe Objekt zurück.
+ */
+export function fuelleFehlerjournal(p: Progress, taskExists: (id: string) => boolean, today = localDate()): Progress {
+  const letzte = new Map<string, Attempt>();
+  for (const a of p.attempts) letzte.set(a.taskId, a);
+  let journal: Progress['journal'] | undefined;
+  for (const [taskId, a] of letzte) {
+    if (a.points >= a.max || !taskExists(taskId)) continue;
+    const entry = p.journal[taskId];
+    if (entry && !entry.resolvedAt) continue;
+    journal ??= { ...p.journal };
+    journal[taskId] = { taskId, addedAt: today, stage: 0, due: today, lastPoints: a.points, max: a.max };
+  }
+  return journal ? { ...p, journal } : p;
+}
+
+/** Setzt die Antworten (Versuche und Fehlerjournal) der angegebenen Aufgaben zurück; ohne Angabe: aller Aufgaben. */
+export function resetAufgabenAntworten(p: Progress, taskIds?: string[]): Progress {
+  if (!taskIds) return { ...p, attempts: [], journal: {}, exams: [], activeExam: undefined };
+  const ids = new Set(taskIds);
+  return {
+    ...p,
+    attempts: p.attempts.filter((a) => !ids.has(a.taskId)),
+    journal: Object.fromEntries(Object.entries(p.journal).filter(([id]) => !ids.has(id))),
+  };
+}
+
+/**
  * Überträgt eine bewertete Klausur in die Historie und alle Einzelergebnisse (mit Selbsteinschätzung und – unter voller
  * Punktzahl – Fehlergrund) ins Fehlerjournal.
  */
