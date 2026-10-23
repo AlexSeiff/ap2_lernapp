@@ -1,7 +1,7 @@
 :root {
-  --bg: #f2f2f7;
+  --bg: #f5f5f7;
   --surface: #ffffff;
-  --surface-2: #f2f2f7;
+  --surface-2: #f2f2f5;
   --fill: #e3e3e8;
   --fill-aktiv: #ffffff;
   --text: #1d1d1f;
@@ -20,11 +20,18 @@
   --low-soft: #ffe8ea;
   --stern: #f0a000;
   --code-bg: #f2f2f7;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 20px rgba(0, 0, 0, 0.04);
+  --shadow-schwebe: 0 0 0 0.5px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.05), 0 14px 32px rgba(0, 0, 0, 0.08);
   --shadow-hoch: 0 10px 40px rgba(0, 0, 0, 0.18);
-  --glas: rgba(255, 255, 255, 0.78);
-  --radius: 14px;
-  --radius-klein: 10px;
+  --glas: rgba(255, 255, 255, 0.72);
+  /* Karteikarten-Stapel: die Karten unter der obersten */
+  --stapel-1: #e9e9ee;
+  --stapel-2: #dfdfe5;
+  --feld-rand: #dcdce1;
+  --pfeil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%236e6e73' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --glanz: color-mix(in srgb, var(--accent) 8%, transparent);
+  --radius: 18px;
+  --radius-klein: 12px;
   color-scheme: light;
 }
 
@@ -51,9 +58,15 @@
     --low-soft: #3a1414;
     --stern: #ffc233;
     --code-bg: #2c2c2e;
-    --shadow: none;
+    --shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.07);
+    --shadow-schwebe: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 12px 30px rgba(0, 0, 0, 0.5);
     --shadow-hoch: 0 10px 40px rgba(0, 0, 0, 0.6);
-    --glas: rgba(28, 28, 30, 0.78);
+    --glas: rgba(22, 22, 24, 0.72);
+    --stapel-1: #151517;
+    --stapel-2: #101012;
+    --feld-rand: #3a3a3d;
+    --pfeil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2398989d' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    --glanz: color-mix(in srgb, var(--accent) 11%, transparent);
     color-scheme: dark;
   }
 }
@@ -79,16 +92,25 @@
   --low-soft: #3a1414;
   --stern: #ffc233;
   --code-bg: #2c2c2e;
-  --shadow: none;
+  --shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.07);
+  --shadow-schwebe: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 12px 30px rgba(0, 0, 0, 0.5);
   --shadow-hoch: 0 10px 40px rgba(0, 0, 0, 0.6);
-  --glas: rgba(28, 28, 30, 0.78);
+  --glas: rgba(22, 22, 24, 0.72);
+  --stapel-1: #151517;
+  --stapel-2: #101012;
+  --feld-rand: #3a3a3d;
+  --pfeil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2398989d' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --glanz: color-mix(in srgb, var(--accent) 11%, transparent);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
+/* clip statt hidden: keine eigene Scrollbox, sticky bleibt intakt – das Umblättern der Karten soll nicht seitlich scrollen lassen */
+body { overflow-x: clip; }
 body {
-  background: var(--bg);
+  /* Ein Hauch Akzentfarbe oben – wirkt ruhiger und moderner als eine glatte Fläche */
+  background: radial-gradient(1200px 560px at 50% -280px, var(--glanz), transparent 70%) no-repeat, var(--bg);
   color: var(--text);
   font: 16px/1.55 -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -108,8 +130,9 @@ pre { background: var(--code-bg); padding: 0.8em 1em; border-radius: var(--radiu
 pre code { background: none; padding: 0; }
 kbd { border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 0.35em; font-size: 0.8em; background: var(--surface); }
 h1, h2, h3 { letter-spacing: -0.015em; }
-h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.025em; margin: 0.2em 0 0.6em; }
-h2 { font-size: 1.3rem; font-weight: 650; margin: 1.4em 0 0.5em; }
+h1, h2 { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI Variable Display', 'Segoe UI', system-ui, Roboto, sans-serif; }
+h1 { font-size: 2.2rem; font-weight: 750; line-height: 1.15; letter-spacing: -0.03em; margin: 0.2em 0 0.6em; }
+h2 { font-size: 1.32rem; font-weight: 680; letter-spacing: -0.02em; margin: 1.4em 0 0.5em; }
 h3 { font-size: 1.08rem; font-weight: 650; margin: 1.2em 0 0.4em; }
 
 /* Layout: Kopfleiste oben (Umsetzungsplan Phase 2), darunter die Unterleiste des Bereichs; auf dem Handy zusätzlich die Tab-Bar unten */
@@ -171,8 +194,11 @@ button, .button {
   font: inherit; font-weight: 600; font-size: 0.95rem; letter-spacing: -0.01em;
   padding: 8px 16px; border-radius: var(--radius-klein); border: 1px solid transparent;
   background: var(--accent-fill); color: var(--accent-text); cursor: pointer;
-  transition: filter 0.15s, background-color 0.15s, transform 0.1s;
+  transition: filter 0.15s, background-color 0.15s, box-shadow 0.15s, transform 0.1s;
 }
+/* Hauptknöpfe (ohne eigene Klasse, .button, Bewertung) mit leichtem Relief; Sonderknöpfe (Suche, Stern, Auswahl …) bleiben flach */
+button:not([class]), .button:not(.secondary), button.good, button.mid, button.low { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.14); }
+button:not([class]), .button, button.secondary, button.good, button.mid, button.low { min-height: 38px; }
 .button:hover { text-decoration: none; filter: brightness(1.07); }
 button:hover:not(:disabled) { filter: brightness(1.07); }
 button:active:not(:disabled), .button:active { transform: scale(0.98); }
@@ -188,8 +214,11 @@ button.mid { background: var(--mid); border-color: var(--mid); color: #fff; }
 button.low { background: var(--low); border-color: var(--low); color: #fff; }
 input, select, textarea {
   font: inherit; color: var(--text); background: var(--surface);
-  border: 1px solid var(--border); border-radius: var(--radius-klein); padding: 7px 10px;
+  border: 1px solid var(--feld-rand); border-radius: var(--radius-klein); padding: 8px 12px;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
+select { appearance: none; -webkit-appearance: none; min-height: 38px; padding-right: 34px; background: var(--pfeil) no-repeat right 12px center / 11px 8px, var(--surface); cursor: pointer; }
+input:hover:not(:disabled):not([type='checkbox']):not([type='radio']):not([type='range']), select:hover, textarea:hover { border-color: color-mix(in srgb, var(--feld-rand) 60%, var(--muted)); }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
 input[type='checkbox'], input[type='radio'] { accent-color: var(--accent-fill); }
 input[type='range'] { accent-color: var(--accent-fill); }
@@ -203,14 +232,14 @@ input[type='range'] { accent-color: var(--accent-fill); }
 .card.success { background: var(--good-soft); border-color: transparent; }
 .error-text { white-space: pre-wrap; word-break: break-word; }
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 12px 0; }
-.kpi { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--card-border); border-radius: 18px; padding: 14px 18px; color: var(--text); box-shadow: var(--shadow); transition: transform 0.15s; }
-a.kpi:hover { text-decoration: none; transform: translateY(-1px); }
+.kpi { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 14px 18px; color: var(--text); box-shadow: var(--shadow); transition: transform 0.18s, box-shadow 0.18s; }
+a.kpi:hover { text-decoration: none; transform: translateY(-2px); box-shadow: var(--shadow-schwebe); }
 .kpi-value { font-size: 1.9rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .kpi-value .icon { color: var(--accent); }
 .kpi-label { color: var(--muted); font-size: 0.88rem; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-.tile { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius); color: var(--text); box-shadow: var(--shadow); transition: transform 0.15s; }
-.tile:hover { text-decoration: none; transform: translateY(-1px); }
+.tile { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius); color: var(--text); box-shadow: var(--shadow); transition: transform 0.18s, box-shadow 0.18s; }
+.tile:hover { text-decoration: none; transform: translateY(-2px); box-shadow: var(--shadow-schwebe); }
 .tile-title .icon { color: var(--accent); }
 .tile-num { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
 .tile-title { font-weight: 600; }
@@ -353,24 +382,42 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 
 /* Karteikarten */
 .session-head { display: flex; justify-content: space-between; align-items: center; color: var(--muted); }
-.flashcard { background: var(--surface); border: 1px solid var(--card-border); border-radius: 20px; padding: 28px 32px; min-height: 260px; cursor: pointer; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); margin: 12px 0; }
+/* Oberste Karte eines Stapels: zwei Karten schauen unten heraus – passend zum Umblättern */
+.flashcard {
+  background: var(--surface); border: 1px solid var(--card-border); border-radius: 22px; padding: 30px 34px; min-height: 280px; cursor: pointer;
+  box-shadow: var(--shadow), 0 9px 0 -4px var(--stapel-1), 0 18px 0 -9px var(--stapel-2); margin: 14px 0 30px;
+}
 .flashcard:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .fc-meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
-.fc-question { font-size: 1.2rem; font-weight: 600; }
-.fc-answer { margin-top: 20px; padding-top: 16px; border-top: 2px dashed var(--border); }
+.fc-question { font-size: 1.28rem; font-weight: 640; line-height: 1.42; letter-spacing: -0.012em; }
+.fc-answer { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
 .rate-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.rate-buttons button { justify-content: center; padding: 12px; }
+.rate-buttons button { justify-content: center; padding: 12px; min-height: 48px; border-radius: 14px; }
 .rate-buttons kbd { background: rgba(255, 255, 255, 0.25); border-color: transparent; color: inherit; }
 
 /* Bewegung: neue Karte gleitet herein, Umdrehen kippt kurz, Antwort und Bewertung blenden auf (bei „Bewegung reduzieren“ aus, s. u.) */
-@keyframes karte-rein { from { opacity: 0; transform: translateX(32px) scale(0.98); } }
-@keyframes karte-rein-zurueck { from { opacity: 0; transform: translateX(-32px) scale(0.98); } }
 @keyframes karte-umdrehen { 0% { transform: perspective(1400px) rotateX(0); } 45% { transform: perspective(1400px) rotateX(7deg) scale(0.985); } 100% { transform: none; } }
 @keyframes aufblenden { from { opacity: 0; transform: translateY(8px); } }
 @keyframes ploppen { 40% { transform: scale(1.025); } }
 @keyframes wackeln { 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
-.karte-wechsel { animation: karte-rein 0.32s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.karte-wechsel.zurueck { animation-name: karte-rein-zurueck; }
+/* Umblättern (components/KartenWechsel.tsx): Die alte Karte schlägt nach links um wie eine Buchseite, die neue liegt schon darunter.
+   Zurück: Die neue Karte schlägt von links her zu. Im Abbild laufen keine eigenen Animationen (sonst blendet die Antwort neu auf). */
+.karte-wechsel { position: relative; perspective: 1800px; }
+.blatt-ebene { position: absolute; top: 0; left: 0; right: 0; z-index: 2; pointer-events: none; }
+.blatt-ebene[data-art='darunter'] { z-index: 0; }
+.blatt-seite { position: relative; z-index: 1; }
+.blatt-abbild *:not(.flashcard) { animation: none !important; }
+.blatt-abbild .flashcard { box-shadow: var(--shadow); }
+.blatt-ebene[data-art='weg'] .blatt-abbild { transform-origin: left center; backface-visibility: hidden; animation: blatt-weg 0.62s cubic-bezier(0.45, 0.05, 0.3, 1) forwards; }
+.blatt-ebene[data-art='weg'] .blatt-abbild .flashcard { animation: blatt-schatten 0.62s ease-in forwards; }
+.blatt-ebene[data-art='darunter'] .blatt-abbild { animation: blatt-sinkt 0.55s ease-out forwards; }
+.blatt-seite.liegt-unten { animation: blatt-darunter 0.62s ease-out; }
+.blatt-seite.kommt-zurueck { transform-origin: left center; animation: blatt-zurueck 0.55s cubic-bezier(0.2, 0.7, 0.3, 1); }
+@keyframes blatt-weg { 0% { transform: rotateY(0); } 75% { opacity: 1; } 100% { transform: rotateY(-118deg); opacity: 0; } }
+@keyframes blatt-schatten { to { filter: brightness(0.84); box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.35); } }
+@keyframes blatt-darunter { from { transform: scale(0.965) translateY(6px); filter: brightness(0.94); } }
+@keyframes blatt-zurueck { from { transform: rotateY(-118deg); opacity: 0; } 25% { opacity: 1; } }
+@keyframes blatt-sinkt { to { transform: scale(0.965) translateY(6px); opacity: 0; } }
 .flashcard.flipped { animation: karte-umdrehen 0.36s ease-out; }
 .flashcard .fc-answer, .rate-buttons { animation: aufblenden 0.28s ease-out both; }
 .rate-buttons { animation-delay: 0.06s; }
@@ -378,8 +425,8 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 .leicht-option.falsch { animation: wackeln 0.38s ease-out; }
 
 /* Leicht-Modus: Moduswahl und 4 Antworten (Karteikarten und Rechenübungen) */
-.mode-switch { display: inline-flex; gap: 2px; padding: 2px; background: var(--fill); border-radius: 10px; margin: 4px 0 12px; }
-.mode-switch button { border: 0; border-radius: 8px; background: transparent; color: var(--text); font-weight: 500; padding: 6px 14px; }
+.mode-switch { display: inline-flex; gap: 2px; padding: 3px; background: var(--fill); border-radius: 12px; margin: 4px 0 12px; }
+.mode-switch button { border: 0; border-radius: 9px; min-height: 34px; background: transparent; color: var(--text); font-weight: 500; padding: 6px 14px; }
 .mode-switch button[aria-pressed='true'] { background: var(--fill-aktiv); color: var(--text); font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.04); }
 .mode-switch button:hover:not(:disabled) { filter: none; }
 .blaettern-optionen { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 8px; }
@@ -974,6 +1021,8 @@ svg.diagramm.form-symbol { margin: 0; padding: 0; border: 0; background: none; o
 .widget p:last-child { margin-bottom: 0; }
 .widget.kpi { justify-content: space-between; gap: 4px; min-height: 132px; }
 .w-titel { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+/* Einstieg der Übersicht: ein Hauch Akzent, damit der Weg zum Lernen sofort ins Auge fällt */
+.widget-weiter { background: linear-gradient(135deg, var(--accent-soft), var(--surface) 62%); }
 .widget-weiter .actions { margin: 4px 0 10px; }
 .weiterlesen { margin: 0; }
 .kpi.w-innen { background: none; border: 0; box-shadow: none; padding: 0; border-radius: 0; margin-bottom: 6px; }
@@ -1047,8 +1096,8 @@ a.kpi.w-innen:hover { transform: none; }
 .fc-hinten.rechnung .katex-display { margin: 0.6em 0; overflow-x: auto; }
 .fc-kontext { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
 
-.runden-balken { height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; margin: 4px 0 8px; }
-.runden-balken > div { height: 100%; background: var(--accent); transition: width 0.2s ease; }
+.runden-balken { height: 6px; border-radius: 999px; background: var(--fill); overflow: hidden; margin: 6px 0 8px; }
+.runden-balken > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent-fill), var(--accent)); transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .wisch-hinweis { display: none; text-align: center; }
 @media (pointer: coarse) { .wisch-hinweis { display: block; } }
 

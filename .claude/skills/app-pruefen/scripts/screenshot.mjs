@@ -12,6 +12,7 @@
 // --dunkel    = prefers-color-scheme: dark (die App folgt dem System, solange in den Einstellungen „System“ gilt)
 // --ganz      = ganze Seite statt nur des sichtbaren Bereichs
 // --wenig-bewegung = prefers-reduced-motion: reduce (Animationen müssen dann aus sein)
+// --danach    = Wartezeit nach jedem --klick/--taste in ms (Standard 600; 0 für Zwischenbilder einer Animation)
 // --klick     = erst als CSS-Selektor versucht, sonst das erste sichtbare Bedienelement, dessen Text den Wert enthält
 // --taste     = " ", Enter, Escape, ArrowLeft, ArrowRight, Tab, 1–9 oder ein einzelnes Zeichen
 // --js        = Ausdruck im Seitenkontext; das Ergebnis wird ausgegeben (z. B. document.title)
@@ -34,7 +35,7 @@ const BROWSER = [
 ].filter(Boolean);
 
 function leseArgumente(argv) {
-  const opt = { breite: 1280, hoehe: 900, handy: false, dunkel: false, ganz: false, warten: 800, aktionen: [] };
+  const opt = { breite: 1280, hoehe: 900, handy: false, dunkel: false, ganz: false, warten: 800, danach: 600, aktionen: [] };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const wert = () => {
@@ -50,6 +51,7 @@ function leseArgumente(argv) {
     else if (a === '--ganz') opt.ganz = true;
     else if (a === '--wenig-bewegung') opt.wenigBewegung = true;
     else if (a === '--warten') opt.warten = Number(wert());
+    else if (a === '--danach') opt.danach = Number(wert());
     else if (a === '--edge' || a === '--browser') opt.browser = wert();
     else if (a === '--klick') opt.aktionen.push({ art: 'klick', wert: wert() });
     else if (a === '--taste') opt.aktionen.push({ art: 'taste', wert: wert() });
@@ -232,14 +234,14 @@ async function main() {
         const v = r.result.value;
         if (!v?.ok) throw new Error(`Nichts zum Klicken gefunden: „${a.wert}“. Sichtbar: ${JSON.stringify(v?.texte ?? [])}`);
         console.log(`klick: ${v.was}`);
-        await schlafe(600);
+        await schlafe(opt.danach);
       } else if (a.art === 'taste') {
         const t = tastenInfo(a.wert);
         const basis = { key: t.key, code: t.code, windowsVirtualKeyCode: t.vk, nativeVirtualKeyCode: t.vk };
         await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', ...basis, ...(t.text ? { text: t.text } : {}) });
         await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', ...basis });
         console.log(`taste: ${JSON.stringify(a.wert)}`);
-        await schlafe(600);
+        await schlafe(opt.danach);
       } else if (a.art === 'js') {
         const r = await cdp.send('Runtime.evaluate', { expression: a.wert, returnByValue: true, awaitPromise: true });
         console.log(`js: ${JSON.stringify(r.result.value ?? r.result.description ?? null)}`);

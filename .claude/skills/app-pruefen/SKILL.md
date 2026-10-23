@@ -47,7 +47,7 @@ node .claude/skills/app-pruefen/scripts/screenshot.mjs --url "http://localhost:5
 ```
 
 Options: `--handy` (390 × 844, touch), `--dunkel`, `--wenig-bewegung` (prefers-reduced-motion), `--ganz` (full page), `--breite/--hoehe`,
-`--warten <ms>` after loading (default 800). Actions: `--klick "<text or CSS>"` (exact button/link text first, then contains),
+`--warten <ms>` after loading (default 800), `--danach <ms>` after every click/key (default 600; use 0 to catch frames of an animation). Actions: `--klick "<text or CSS>"` (exact button/link text first, then contains),
 `--taste " " | Enter | Escape | ArrowRight | 1…`, `--pause <ms>`, `--js "<expression>"` (prints the result), `--bild <file.png>`.
 The script prints page exceptions and console errors at the end and exits with 1 on an exception – treat that as a finding.
 
@@ -75,7 +75,7 @@ Pick what the change touches; for a visual change cover at least light + dark an
 
 - **Dark mode**: text and borders still visible, no white boxes, formulas (KaTeX) in the text colour.
 - **Phone (390 px)**: nothing wider than the screen, buttons don't wrap mid-word, the bottom tab bar doesn't cover content.
-- **Animations**: shoot the same step twice – `--pause 100 --bild mitte.png` (mid-animation: the element should be offset or faded)
+- **Animations**: with `--danach 0`, shoot the same step twice – `--pause 100 --bild mitte.png` (mid-animation: the element should be offset or faded)
   and `--pause 800 --bild ende.png` (settled). With `--wenig-bewegung` the mid shot must already look settled.
 - **Formulas/Markdown**: no raw `$`, `^`, `_`, `**` or red KaTeX errors in the rendered text.
 - **Console**: the script's error list should be empty (a Vite HMR notice is fine).

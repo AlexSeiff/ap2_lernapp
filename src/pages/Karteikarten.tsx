@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import type { CardType, Flashcard } from '../../shared/types';
 import { AntwortVergleich, EigeneAntwortFeld } from '../components/EigeneAntwort';
@@ -15,6 +15,7 @@ import { withSettings } from '../lib/settings';
 import { useStore } from '../lib/store';
 import { NEW_PER_SESSION } from '../../shared/config';
 import { Icon, type IconName } from '../components/Icon';
+import { KartenWechsel } from '../components/KartenWechsel';
 
 export const CARD_TYPE_LABELS: Record<CardType, string> = {
   wissen: 'Wissen',
@@ -530,18 +531,6 @@ export function Karteikarten() {
         Mit dem Stern oder <kbd>M</kbd> markierst du schwierige Karten; „Nur markierte“ im Filter holt sie zurück. Markieren ändert das Fach
         nicht.
       </p>
-    </div>
-  );
-}
-
-/**
- * Hülle, die bei jeder neuen Karte neu entsteht (`id` als key) und sie hereingleiten lässt – getrennt von .flashcard, damit das
- * Umdrehen (eigene Animation auf .flashcard) den Wechsel nicht noch einmal abspielt.
- */
-function KartenWechsel({ id, zurueck = false, children }: { id: string; zurueck?: boolean; children: ReactNode }) {
-  return (
-    <div key={id} className={`karte-wechsel ${zurueck ? 'zurueck' : ''}`}>
-      {children}
     </div>
   );
 }
