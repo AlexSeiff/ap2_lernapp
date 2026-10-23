@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
+import { type CSSProperties, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useHeuteSitzung } from '../hooks/useHeute';
 import { HEUTE_ICONS, planeHeute, type HeuteItem } from '../lib/heute';
-import { aktuellerSchritt, istFertig, setzeSitzung, starteSitzung, weiter } from '../lib/heuteSitzung';
+import { aktuellerSchritt, beende, istFertig, schonDran, setzeSitzung, starteSitzung, weiter } from '../lib/heuteSitzung';
 import { localDate } from '../lib/progress';
 import { useStore } from '../lib/store';
 import { HEUTE_MINUTEN } from '../../shared/config';
@@ -24,10 +24,15 @@ export function Heute() {
   const today = localDate();
   // Nur planen, wenn keine Runde läuft – sonst bliebe der Plan nicht stehen, während du lernst.
   const laeuft = sitzung && !istFertig(sitzung);
-  const plan = useMemo(() => (laeuft ? undefined : planeHeute(content, progress, { today })), [laeuft, content, progress, today]);
+  // Was frühere Runden von heute schon hatten, plant „Noch eine Runde“ nicht noch einmal.
+  const frueher = useMemo(() => (sitzung && !laeuft ? schonDran(sitzung) : undefined), [sitzung, laeuft]);
+  const plan = useMemo(
+    () => (laeuft ? undefined : planeHeute(content, progress, { today, ausschliessen: frueher })),
+    [laeuft, content, progress, today, frueher],
+  );
 
   const starte = (items: HeuteItem[]) => {
-    setzeSitzung(starteSitzung(items, today));
+    setzeSitzung(starteSitzung(items, today, sitzung));
     navigate(items[0].link);
   };
 
@@ -49,7 +54,7 @@ export function Heute() {
           <button type="button" className="secondary" onClick={() => setzeSitzung(weiter(sitzung, true))}>
             <Icon name="skip-forward" /> Überspringen
           </button>
-          <button type="button" className="ghost" onClick={() => setzeSitzung(undefined)}>
+          <button type="button" className="ghost" onClick={() => setzeSitzung(beende(sitzung))}>
             Runde beenden
           </button>
         </div>
@@ -59,7 +64,8 @@ export function Heute() {
     );
   }
 
-  const fertig = sitzung && istFertig(sitzung);
+  // Eine beendete Runde hat keine Schritte mehr – dann keine Erfolgsmeldung, nur der neue Plan.
+  const fertig = sitzung && istFertig(sitzung) && sitzung.items.length > 0;
   return (
     <div className="page narrow">
       <h1>
@@ -118,7 +124,7 @@ function Schritte({
               ? 'aktuell'
               : '';
         return (
-          <li key={it.key} className={status === 'aktuell' ? 'aktuell' : status ? 'erledigt' : ''}>
+          <li key={it.key} className={status === 'aktuell' ? 'aktuell' : status ? 'erledigt' : ''} style={{ '--i': i } as CSSProperties}>
             <span className="heute-status" aria-hidden="true">
               {status && <Icon name={status === 'erledigt' ? 'check' : status === 'übersprungen' ? 'skip-forward' : 'play'} />}
             </span>

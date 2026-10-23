@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import type { Components, ExtraProps, Options } from 'react-markdown';
 import { Link } from 'react-router-dom';
+import { rehypeHochTief } from '../lib/hochTief';
 import { rehypeLoesung, rehypeTabellen } from '../lib/loesungStil';
 import { rehypeOperatoren } from '../lib/operatorStil';
 import { OperatorTipp } from './OperatorTipp';
@@ -88,11 +89,14 @@ export interface MarkdownProps {
   operatoren?: boolean;
 }
 
-const tabellen: NonNullable<Options['rehypePlugins']> = [rehypeTabellen];
-const loesungPlugins: NonNullable<Options['rehypePlugins']> = [rehypeTabellen, rehypeLoesung];
-const operatorPlugins: NonNullable<Options['rehypePlugins']> = [rehypeTabellen, rehypeOperatoren];
+const tabellen: NonNullable<Options['rehypePlugins']> = [rehypeTabellen, rehypeHochTief];
+const loesungPlugins: NonNullable<Options['rehypePlugins']> = [rehypeTabellen, rehypeHochTief, rehypeLoesung];
+const operatorPlugins: NonNullable<Options['rehypePlugins']> = [rehypeTabellen, rehypeHochTief, rehypeOperatoren];
 
-/** rehype-Plugins zur Gestaltung: Tabellen immer, Lösungs-Gestaltung nur mit `loesung`, Operatoren nur mit `operatoren`. */
+/**
+ * rehype-Plugins zur Gestaltung: Tabellen und Hoch-/Tiefstellung („e^(−z)“, „x_i“) immer, Lösungs-Gestaltung nur mit `loesung`,
+ * Operatoren nur mit `operatoren`.
+ */
 export function stylePlugins(loesung?: boolean, operatoren?: boolean): NonNullable<Options['rehypePlugins']> {
   return loesung ? loesungPlugins : operatoren ? operatorPlugins : tabellen;
 }

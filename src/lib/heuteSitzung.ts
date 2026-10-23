@@ -13,14 +13,27 @@ export interface HeuteSitzung {
   erledigt: string[];
   /** Keys der übersprungenen Schritte. */
   uebersprungen: string[];
+  /** IDs aus früheren Runden von heute (erledigt, übersprungen oder beim Beenden offen) – planeHeute lässt sie weg. */
+  frueher: string[];
 }
 
 export const HEUTE_SPEICHER = 'ap2-heute';
 
 const ARTEN: HeuteArt[] = ['wiederholung', 'aufgabe', 'sql', 'rechnen', 'karten'];
 
-export function starteSitzung(items: HeuteItem[], datum: string): HeuteSitzung {
-  return { datum, items, index: 0, erledigt: [], uebersprungen: [] };
+/** Neue Runde; `vorher` (die letzte Runde von heute) gibt weiter, was heute schon dran war. */
+export function starteSitzung(items: HeuteItem[], datum: string, vorher?: HeuteSitzung): HeuteSitzung {
+  return { datum, items, index: 0, erledigt: [], uebersprungen: [], frueher: vorher ? schonDran(vorher) : [] };
+}
+
+/** Alle IDs, die heute schon dran waren: frühere Runden und die Schritte dieser Runde bis einschließlich des aktuellen. */
+export function schonDran(s: HeuteSitzung): string[] {
+  return [...new Set([...s.frueher, ...s.items.slice(0, s.index + 1).flatMap((it) => it.ids)])];
+}
+
+/** Runde abbrechen: Schritte fallen weg, das bisher Gelernte bleibt für die nächste Runde von heute vermerkt. */
+export function beende(s: HeuteSitzung): HeuteSitzung {
+  return { datum: s.datum, items: [], index: 0, erledigt: [], uebersprungen: [], frueher: schonDran(s) };
 }
 
 export const istFertig = (s: HeuteSitzung) => s.index >= s.items.length;
@@ -61,7 +74,14 @@ export function leseSitzung(raw: unknown): HeuteSitzung | undefined {
   if (!isObj(raw) || typeof raw.datum !== 'string' || !Array.isArray(raw.items)) return undefined;
   const items = raw.items.map(leseItem).filter((x): x is HeuteItem => x !== undefined);
   const index = typeof raw.index === 'number' && Number.isInteger(raw.index) ? Math.min(Math.max(raw.index, 0), items.length) : 0;
-  return { datum: raw.datum, items, index, erledigt: strings(raw.erledigt), uebersprungen: strings(raw.uebersprungen) };
+  return {
+    datum: raw.datum,
+    items,
+    index,
+    erledigt: strings(raw.erledigt),
+    uebersprungen: strings(raw.uebersprungen),
+    frueher: strings(raw.frueher),
+  };
 }
 
 // --- Speicher (localStorage, abgesichert) ---

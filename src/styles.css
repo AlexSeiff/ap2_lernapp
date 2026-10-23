@@ -150,7 +150,9 @@ h3 { font-size: 1.08rem; font-weight: 650; margin: 1.2em 0 0.4em; }
 .unterleiste .nav-badge { margin-left: 2px; }
 main { min-width: 0; padding: 0 env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px); }
 main:focus { outline: none; }
-.page { padding: 24px 24px 60px; max-width: 1150px; margin: 0 auto; }
+.page { padding: 24px 24px 60px; max-width: 1150px; margin: 0 auto; animation: seite-rein 0.22s ease-out; }
+/* Seitenwechsel: nur Deckkraft – ein transform würde fest positionierte Elemente in der Seite kurz verschieben. */
+@keyframes seite-rein { from { opacity: 0; } }
 .page.narrow { max-width: 860px; }
 .loading { color: var(--muted); }
 .lead { color: var(--muted); font-size: 1.05rem; margin-top: -0.4em; }
@@ -359,6 +361,23 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 .rate-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .rate-buttons button { justify-content: center; padding: 12px; }
 .rate-buttons kbd { background: rgba(255, 255, 255, 0.25); border-color: transparent; color: inherit; }
+.runden-balken { height: 4px; margin-top: 8px; background: var(--fill); border-radius: 2px; overflow: hidden; }
+.runden-balken span { display: block; height: 100%; background: var(--accent); border-radius: inherit; transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* Bewegung: neue Karte gleitet herein, Umdrehen kippt kurz, Antwort und Bewertung blenden auf (bei „Bewegung reduzieren“ aus, s. u.) */
+@keyframes karte-rein { from { opacity: 0; transform: translateX(32px) scale(0.98); } }
+@keyframes karte-rein-zurueck { from { opacity: 0; transform: translateX(-32px) scale(0.98); } }
+@keyframes karte-umdrehen { 0% { transform: perspective(1400px) rotateX(0); } 45% { transform: perspective(1400px) rotateX(7deg) scale(0.985); } 100% { transform: none; } }
+@keyframes aufblenden { from { opacity: 0; transform: translateY(8px); } }
+@keyframes ploppen { 40% { transform: scale(1.025); } }
+@keyframes wackeln { 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+.karte-wechsel { animation: karte-rein 0.32s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.karte-wechsel.zurueck { animation-name: karte-rein-zurueck; }
+.flashcard.flipped { animation: karte-umdrehen 0.36s ease-out; }
+.flashcard .fc-answer, .rate-buttons { animation: aufblenden 0.28s ease-out both; }
+.rate-buttons { animation-delay: 0.06s; }
+.leicht-option.richtig.gewaehlt { animation: ploppen 0.32s ease-out; }
+.leicht-option.falsch { animation: wackeln 0.38s ease-out; }
 
 /* Leicht-Modus: Moduswahl und 4 Antworten (Karteikarten und Rechenübungen) */
 .mode-switch { display: inline-flex; gap: 2px; padding: 2px; background: var(--fill); border-radius: 10px; margin: 4px 0 12px; }
@@ -666,7 +685,7 @@ tr.diff-extra .diff-mark, .diff-key.extra { color: var(--low); }
 /* „Heute lernen“ (ROADMAP 8.1) */
 .heute-leiste { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; background: var(--accent-soft); border-radius: var(--radius); padding: 8px 14px; margin-bottom: 12px; }
 .heute-liste { padding-left: 0; list-style: none; }
-.heute-liste li { display: flex; gap: 10px; align-items: baseline; padding: 6px 8px; border-radius: 8px; }
+.heute-liste li { display: flex; gap: 10px; align-items: baseline; padding: 6px 8px; border-radius: 8px; animation: aufblenden 0.3s ease-out both; animation-delay: calc(var(--i, 0) * 45ms); transition: background-color 0.25s; }
 .heute-liste li.aktuell { background: var(--accent-soft); font-weight: 600; }
 .heute-liste li.erledigt { color: var(--muted); }
 .heute-status { width: 1.4em; flex: none; text-align: center; }
@@ -1014,4 +1033,9 @@ a.kpi.w-innen:hover { transform: none; }
   /* Tippflächen: Links in Widgets und Thema-Titel höher */
   .widget p a, .widget .plain li > a, .w-begriff a { display: inline-block; padding-block: 6px; }
   .tf-titel { display: flex; align-items: center; min-height: 40px; }
+}
+
+/* „Bewegung reduzieren“ im Betriebssystem und beim Drucken: keine Animationen und Übergänge */
+@media (prefers-reduced-motion: reduce), print {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }

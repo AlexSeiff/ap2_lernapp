@@ -78,6 +78,8 @@ export interface PlanOptionen {
   /** Zufall für die Auswahl offener Übungen und Aufgaben; Standard: fest je Tag. */
   zufall?: () => number;
   minuten?: number;
+  /** Aufgaben-, Übungs- und Karten-IDs aus früheren Runden von heute – „Noch eine Runde“ bringt sie nicht noch einmal. */
+  ausschliessen?: Iterable<string>;
 }
 
 const themaVon = (topicId: string | undefined, fallback: string) => topicId ?? fallback;
@@ -92,12 +94,17 @@ const themaVon = (topicId: string | undefined, fallback: string) => topicId ?? f
  * 4. Die übrige Zeit: fällige Karteikarten (am längsten fällig, niedrigstes Fach zuerst), sonst neue Karten. Es gelten die
  *    Einstellungen Prüferfragen/Fachgespräch; im Leicht-Modus nur Karten mit 4 Antworten. Je Thema Blöcke bis HEUTE_KARTEN_BLOCK.
  * 5. Alles nach Thema verschränkt (verschraenke).
+ * Was heute schon dran war (`ausschliessen`, dazu heute bearbeitete Aufgaben und geprüfte Übungen), kommt nicht noch einmal.
  */
 export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOptionen = {}): HeutePlan {
   const today = opt.today ?? localDate();
   const zufall = opt.zufall ?? erzeugeZufall(seedAusText(today)).zahl;
   const ziel = opt.minuten ?? HEUTE_MINUTEN;
   const topicTitle = (id: string | undefined) => content.topics.find((t) => t.id === id)?.title;
+  // Heute schon dran: aus früheren Runden, heute bearbeitete Aufgaben, heute geprüfte SQL- und Rechenübungen.
+  const schonHeute = new Set(opt.ausschliessen);
+  for (const a of progress.attempts) if ((a.date.length === 10 ? a.date : localDate(new Date(a.date))) === today) schonHeute.add(a.taskId);
+  const heuteGeprueft = (s: { lastCheckedAt?: string } | undefined) => s?.lastCheckedAt?.slice(0, 10) === today;
   const items: HeuteItem[] = [];
   let minuten = 0;
   const add = (it: HeuteItem) => {
@@ -116,7 +123,7 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
 
   // 3. Fehlerjournal (zuerst ausgewählt, damit die Zusatzaufgabe keine fällige Wiederholung doppelt nimmt).
   const journal = Object.values(progress.journal)
-    .filter((j) => !j.resolvedAt && isDue(j.due, today) && content.tasks[j.taskId])
+    .filter((j) => !j.resolvedAt && isDue(j.due, today) && content.tasks[j.taskId] && !schonHeute.has(j.taskId))
     .sort((a, b) => a.due.localeCompare(b.due) || a.addedAt.localeCompare(b.addedAt));
   const journalItems: HeuteItem[] = [];
   let journalMinuten = 0;
@@ -139,7 +146,9 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
   if (schwach) {
     const letzte = new Map<string, number>();
     for (const a of progress.attempts) letzte.set(a.taskId, a.max > 0 ? a.points / a.max : 0);
-    const kandidaten = Object.values(content.tasks).filter((t) => t.topicId === schwach.topic.id && !t.generated && !verplant.has(t.id));
+    const kandidaten = Object.values(content.tasks).filter(
+      (t) => t.topicId === schwach.topic.id && !t.generated && !verplant.has(t.id) && !schonHeute.has(t.id),
+    );
     const neu = kandidaten.filter((t) => !letzte.has(t.id));
     const unvollstaendig = kandidaten.filter((t) => (letzte.get(t.id) ?? 1) < 1).sort((a, b) => letzte.get(a.id)! - letzte.get(b.id)!);
     const wahl = neu.length
@@ -164,16 +173,19 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
     topicId: u.topicId,
     due: progress.rechnen[u.id]?.due ?? '',
   }));
+  const frisch = (u: Uebung) => !schonHeute.has(u.id) && !heuteGeprueft(u.art === 'sql' ? progress.sql[u.id] : progress.rechnen[u.id]);
   const faellig = [
     ...sqlUebungen.filter((u) => sqlStatus(progress.sql[u.id], today) === 'faellig'),
     ...rechenUebungen.filter((u) => rechenStatus(progress.rechnen[u.id], today) === 'faellig'),
-  ].sort((a, b) => a.due.localeCompare(b.due) || a.id.localeCompare(b.id));
+  ]
+    .filter(frisch)
+    .sort((a, b) => a.due.localeCompare(b.due) || a.id.localeCompare(b.id));
   let uebungen = faellig.slice(0, 2);
   if (!uebungen.length) {
     const offen = [
       ...rechenUebungen.filter((u) => !progress.rechnen[u.id]?.solvedAt),
       ...sqlUebungen.filter((u) => !progress.sql[u.id]?.solvedAt),
-    ];
+    ].filter(frisch);
     const passend = offen.filter((u) => schwaechstesThema && u.topicId === schwaechstesThema);
     const pool = passend.length ? passend : offen;
     if (pool.length) uebungen = [pool[Math.floor(zufall() * pool.length)]];
@@ -194,7 +206,7 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
 
   // 4. Karteikarten mit der übrigen Zeit.
   const { settings } = progress;
-  let pool: Flashcard[] = cardPool(content.flashcards, settings);
+  let pool: Flashcard[] = cardPool(content.flashcards, settings).filter((c) => !schonHeute.has(c.id));
   if (settings.leichtModus) {
     const leicht = leichtKartenGemerkt(pool, { automatisch: leichtAutomatischAn(settings) });
     pool = pool.filter((c) => leicht.has(c.id));

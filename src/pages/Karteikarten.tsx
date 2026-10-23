@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import type { CardType, Flashcard } from '../../shared/types';
 import { AntwortVergleich, EigeneAntwortFeld } from '../components/EigeneAntwort';
@@ -74,69 +74,72 @@ export function Karteikarten() {
           </span>
           <MarkierStern cardId={card.id} taste />
         </div>
-        <div className={`flashcard leicht ${card.typ === 'falle' ? 'trap' : ''}`}>
-          <div className="fc-meta">
-            <span>
-              <Icon name={KIND_ICONS[card.kind]} /> {KIND_LABELS[card.kind]} · {cardDeck?.title ?? topic?.title}
-            </span>
-            {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
-            {runde.karte.art === 'automatisch' && (
-              <span
-                className="badge auto"
-                title="Die falschen Antworten stammen von verwandten Begriffen bzw. ähnlichen Karten – nicht von Hand geschrieben."
-              >
-                <Icon name="sparkles" /> automatisch
+        <RundenBalken index={index} anzahl={session.length} />
+        <KartenWechsel id={String(index)}>
+          <div className={`flashcard leicht ${card.typ === 'falle' ? 'trap' : ''}`}>
+            <div className="fc-meta">
+              <span>
+                <Icon name={KIND_ICONS[card.kind]} /> {KIND_LABELS[card.kind]} · {cardDeck?.title ?? topic?.title}
               </span>
-            )}
-            <span className="muted small">{card.id}</span>
-          </div>
-          {runde.frage ? (
-            <>
-              <p className="leicht-richtung">
-                <Icon name="rotate-ccw" /> Umgekehrt: Welcher Begriff ist gemeint?
-              </p>
-              <Markdown className="fc-question umgekehrt">{runde.frage}</Markdown>
-            </>
-          ) : (
-            <Markdown className="fc-question">{card.question}</Markdown>
-          )}
-          <LeichtOptionen
-            optionen={runde.optionen}
-            gewaehlt={runde.gewaehlt}
-            onWaehle={waehle}
-            tasten
-            label={runde.frage ? 'Begriffe' : 'Antworten'}
-          />
-          {fertig && (
-            <div className="fc-answer leicht-feedback" role="status">
-              <p className={`verdict ${richtig ? 'ok' : 'bad'}`}>
-                <Icon name={richtig ? 'circle-check' : 'circle-x'} />{' '}
-                {richtig
-                  ? `Richtig! Die Karte kommt höchstens in Fach ${LEICHT_MAX_BOX}.`
-                  : 'Leider falsch – die Karte kommt in dieser Runde noch einmal.'}
-              </p>
-              {runde.frage ? (
-                <>
-                  <h4>Gesucht war</h4>
-                  <Markdown>{`**${card.question}**`}</Markdown>
-                </>
-              ) : (
-                card.answer && (
-                  <>
-                    <h4>Ganze Antwort</h4>
-                    <Markdown>{card.answer}</Markdown>
-                  </>
-                )
+              {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
+              {runde.karte.art === 'automatisch' && (
+                <span
+                  className="badge auto"
+                  title="Die falschen Antworten stammen von verwandten Begriffen bzw. ähnlichen Karten – nicht von Hand geschrieben."
+                >
+                  <Icon name="sparkles" /> automatisch
+                </span>
               )}
-              {runde.karte.erklaerung && (
-                <>
-                  <h4>Warum die anderen falsch sind</h4>
-                  <Markdown>{runde.karte.erklaerung}</Markdown>
-                </>
-              )}
+              <span className="muted small">{card.id}</span>
             </div>
-          )}
-        </div>
+            {runde.frage ? (
+              <>
+                <p className="leicht-richtung">
+                  <Icon name="rotate-ccw" /> Umgekehrt: Welcher Begriff ist gemeint?
+                </p>
+                <Markdown className="fc-question umgekehrt">{runde.frage}</Markdown>
+              </>
+            ) : (
+              <Markdown className="fc-question">{card.question}</Markdown>
+            )}
+            <LeichtOptionen
+              optionen={runde.optionen}
+              gewaehlt={runde.gewaehlt}
+              onWaehle={waehle}
+              tasten
+              label={runde.frage ? 'Begriffe' : 'Antworten'}
+            />
+            {fertig && (
+              <div className="fc-answer leicht-feedback" role="status">
+                <p className={`verdict ${richtig ? 'ok' : 'bad'}`}>
+                  <Icon name={richtig ? 'circle-check' : 'circle-x'} />{' '}
+                  {richtig
+                    ? `Richtig! Die Karte kommt höchstens in Fach ${LEICHT_MAX_BOX}.`
+                    : 'Leider falsch – die Karte kommt in dieser Runde noch einmal.'}
+                </p>
+                {runde.frage ? (
+                  <>
+                    <h4>Gesucht war</h4>
+                    <Markdown>{`**${card.question}**`}</Markdown>
+                  </>
+                ) : (
+                  card.answer && (
+                    <>
+                      <h4>Ganze Antwort</h4>
+                      <Markdown>{card.answer}</Markdown>
+                    </>
+                  )
+                )}
+                {runde.karte.erklaerung && (
+                  <>
+                    <h4>Warum die anderen falsch sind</h4>
+                    <Markdown>{runde.karte.erklaerung}</Markdown>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </KartenWechsel>
         {fertig && <SqlUebungLinks card={card} />}
         {fertig ? (
           <div className="actions">
@@ -167,62 +170,65 @@ export function Karteikarten() {
           </span>
           <MarkierStern cardId={card.id} taste />
         </div>
+        <RundenBalken index={index} anzahl={session.length} />
         {/* Kein <button>: die Karte enthält Markdown mit Absätzen, Listen und Codeblöcken – das ist in einem Button ungültig. */}
-        <div
-          className={`flashcard ${flipped ? 'flipped' : ''} ${card.typ === 'falle' ? 'trap' : ''}`}
-          role="button"
-          tabIndex={0}
-          aria-expanded={flipped}
-          onClick={flip}
-          onKeyDown={(e) => {
-            if (e.key !== 'Enter' && e.key !== ' ') return;
-            e.preventDefault();
-            if (!e.repeat) flip();
-          }}
-        >
-          <div className="fc-meta">
-            <span>
-              <Icon name={KIND_ICONS[card.kind]} /> {KIND_LABELS[card.kind]} · {cardDeck?.title ?? topic?.title}
-            </span>
-            {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
-            {card.schwierigkeit && <span className="badge muted">{LEVEL_LABELS[card.schwierigkeit] ?? card.schwierigkeit}</span>}
-            <span className="muted small">{card.id}</span>
-          </div>
-          <Markdown className="fc-question">{card.question}</Markdown>
-          {card.typ === 'rechnung' && !flipped && (
-            <p className="hint">
-              <Icon name="pencil" /> Erst auf Papier rechnen, dann umdrehen.
-            </p>
-          )}
-          {flipped && (
-            <div className="fc-answer">
-              <AntwortVergleich
-                eigene={eigeneAntwort}
-                muster={
-                  card.answer ? (
-                    <Markdown>{card.answer}</Markdown>
-                  ) : (
-                    <p className="muted">
-                      Keine Musterantwort im Lernblatt – beantworte die Frage laut und prüfe dich anhand des Theorieteils.
-                    </p>
-                  )
-                }
-              />
-              {!!card.tags?.length && (
-                <div className="tags">
-                  {card.tags.map((t) => (
-                    <span key={t} className="tag">
-                      #{t}
-                    </span>
-                  ))}
-                </div>
-              )}
+        <KartenWechsel id={String(index)}>
+          <div
+            className={`flashcard ${flipped ? 'flipped' : ''} ${card.typ === 'falle' ? 'trap' : ''}`}
+            role="button"
+            tabIndex={0}
+            aria-expanded={flipped}
+            onClick={flip}
+            onKeyDown={(e) => {
+              if (e.key !== 'Enter' && e.key !== ' ') return;
+              e.preventDefault();
+              if (!e.repeat) flip();
+            }}
+          >
+            <div className="fc-meta">
+              <span>
+                <Icon name={KIND_ICONS[card.kind]} /> {KIND_LABELS[card.kind]} · {cardDeck?.title ?? topic?.title}
+              </span>
+              {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
+              {card.schwierigkeit && <span className="badge muted">{LEVEL_LABELS[card.schwierigkeit] ?? card.schwierigkeit}</span>}
+              <span className="muted small">{card.id}</span>
             </div>
-          )}
-          {!flipped && card.typ !== 'rechnung' && (
-            <p className="hint">Antwort formulieren – im Kopf oder unten aufschreiben –, dann klicken oder Leertaste drücken.</p>
-          )}
-        </div>
+            <Markdown className="fc-question">{card.question}</Markdown>
+            {card.typ === 'rechnung' && !flipped && (
+              <p className="hint">
+                <Icon name="pencil" /> Erst auf Papier rechnen, dann umdrehen.
+              </p>
+            )}
+            {flipped && (
+              <div className="fc-answer">
+                <AntwortVergleich
+                  eigene={eigeneAntwort}
+                  muster={
+                    card.answer ? (
+                      <Markdown>{card.answer}</Markdown>
+                    ) : (
+                      <p className="muted">
+                        Keine Musterantwort im Lernblatt – beantworte die Frage laut und prüfe dich anhand des Theorieteils.
+                      </p>
+                    )
+                  }
+                />
+                {!!card.tags?.length && (
+                  <div className="tags">
+                    {card.tags.map((t) => (
+                      <span key={t} className="tag">
+                        #{t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            {!flipped && card.typ !== 'rechnung' && (
+              <p className="hint">Antwort formulieren – im Kopf oder unten aufschreiben –, dann klicken oder Leertaste drücken.</p>
+            )}
+          </div>
+        </KartenWechsel>
         {!flipped && <EigeneAntwortFeld value={eigeneAntwort} onChange={setEigeneAntwort} onFertig={flip} />}
         {flipped && <SqlUebungLinks card={card} />}
         {flipped && (
@@ -495,6 +501,27 @@ export function Karteikarten() {
 }
 
 /**
+ * Hülle, die bei jeder neuen Karte neu entsteht (`id` als key) und sie hereingleiten lässt – getrennt von .flashcard, damit das
+ * Umdrehen (eigene Animation auf .flashcard) den Wechsel nicht noch einmal abspielt.
+ */
+function KartenWechsel({ id, zurueck = false, children }: { id: string; zurueck?: boolean; children: ReactNode }) {
+  return (
+    <div key={id} className={`karte-wechsel ${zurueck ? 'zurueck' : ''}`}>
+      {children}
+    </div>
+  );
+}
+
+/** Fortschrittsbalken einer Kartenrunde (Karte `index` von `anzahl`, 0-basiert). */
+function RundenBalken({ index, anzahl }: { index: number; anzahl: number }) {
+  return (
+    <div className="runden-balken" aria-hidden="true">
+      <span style={{ width: `${(Math.min(index, anzahl) / Math.max(anzahl, 1)) * 100}%` }} />
+    </div>
+  );
+}
+
+/**
  * Durchblättern: alle Karten der Auswahl nacheinander ansehen, vor und zurück, ohne Bewertung (Lernstand bleibt unverändert).
  * Tastatur: ← → blättern, Leertaste/Enter umdrehen, Esc beenden. Auf dem Handy nach links/rechts wischen.
  */
@@ -504,11 +531,14 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
   const [antwortZeigen, setAntwortZeigen] = useState(false);
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  // Richtung des letzten Blätterns: Die neue Karte kommt von rechts (weiter) oder von links (zurück).
+  const [zurueck, setZurueck] = useState(false);
   const reihe = useMemo(() => (gemischt ? shuffle(cards) : cards), [cards, gemischt]);
   const i = Math.min(index, reihe.length - 1);
   const card = reihe[i];
   const offen = antwortZeigen || flipped;
   const gehe = (neu: number) => {
+    setZurueck(neu < i);
     setIndex(Math.max(0, Math.min(reihe.length - 1, neu)));
     setFlipped(false);
   };
@@ -571,40 +601,42 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
           />
         )}
       </div>
-      <div
-        className={`flashcard ${offen ? 'flipped' : ''} ${card.typ === 'falle' ? 'trap' : ''}`}
-        role="button"
-        tabIndex={0}
-        aria-expanded={offen}
-        onClick={() => setFlipped((x) => !x)}
-        onKeyDown={(e) => {
-          if (e.key !== 'Enter' && e.key !== ' ') return;
-          e.preventDefault();
-          if (!e.repeat) setFlipped((x) => !x);
-        }}
-        onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
-        onTouchEnd={(e) => {
-          if (touchX.current === null) return;
-          const dx = e.changedTouches[0].clientX - touchX.current;
-          touchX.current = null;
-          if (Math.abs(dx) > 60) gehe(dx < 0 ? i + 1 : i - 1);
-        }}
-      >
-        <div className="fc-meta">
-          <span>
-            <Icon name={KIND_ICONS[card.kind]} /> {KIND_LABELS[card.kind]} · {cardDeck?.title ?? topic?.title}
-          </span>
-          {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
-        </div>
-        <Markdown className="fc-question">{card.question}</Markdown>
-        {offen ? (
-          <div className="fc-answer">
-            {card.answer ? <Markdown>{card.answer}</Markdown> : <p className="muted">Keine Musterantwort im Lernblatt.</p>}
+      <KartenWechsel id={`${gemischt}-${i}`} zurueck={zurueck}>
+        <div
+          className={`flashcard ${offen ? 'flipped' : ''} ${card.typ === 'falle' ? 'trap' : ''}`}
+          role="button"
+          tabIndex={0}
+          aria-expanded={offen}
+          onClick={() => setFlipped((x) => !x)}
+          onKeyDown={(e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            if (!e.repeat) setFlipped((x) => !x);
+          }}
+          onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+          onTouchEnd={(e) => {
+            if (touchX.current === null) return;
+            const dx = e.changedTouches[0].clientX - touchX.current;
+            touchX.current = null;
+            if (Math.abs(dx) > 60) gehe(dx < 0 ? i + 1 : i - 1);
+          }}
+        >
+          <div className="fc-meta">
+            <span>
+              <Icon name={KIND_ICONS[card.kind]} /> {KIND_LABELS[card.kind]} · {cardDeck?.title ?? topic?.title}
+            </span>
+            {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
           </div>
-        ) : (
-          <p className="hint">Klicken oder Leertaste zum Umdrehen.</p>
-        )}
-      </div>
+          <Markdown className="fc-question">{card.question}</Markdown>
+          {offen ? (
+            <div className="fc-answer">
+              {card.answer ? <Markdown>{card.answer}</Markdown> : <p className="muted">Keine Musterantwort im Lernblatt.</p>}
+            </div>
+          ) : (
+            <p className="hint">Klicken oder Leertaste zum Umdrehen.</p>
+          )}
+        </div>
+      </KartenWechsel>
       {offen && <SqlUebungLinks card={card} />}
       <div className="actions blaettern-nav">
         <button type="button" className="secondary" disabled={i === 0} onClick={() => gehe(i - 1)}>

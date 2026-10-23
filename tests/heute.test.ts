@@ -4,7 +4,16 @@ import { emptyProgress, type Progress } from '../shared/progress';
 import type { Content, Flashcard, RechenUebung, SqlExercise, Task, Topic } from '../shared/types';
 import { CONTENT_DIR, loadContent } from '../server/loadContent';
 import { aufgabeMinuten, planeHeute, verschraenke } from '../src/lib/heute';
-import { aktuellerSchritt, istFertig, leseSitzung, sitzungVonHeute, starteSitzung, weiter } from '../src/lib/heuteSitzung';
+import {
+  aktuellerSchritt,
+  beende,
+  istFertig,
+  leseSitzung,
+  schonDran,
+  sitzungVonHeute,
+  starteSitzung,
+  weiter,
+} from '../src/lib/heuteSitzung';
 
 // „Heute lernen“ (ROADMAP 8.1): Planer und Sitzung.
 
@@ -228,6 +237,32 @@ describe('planeHeute', () => {
     if (max <= Math.ceil(themen.length / 2)) for (let i = 1; i < themen.length; i++) expect(themen[i]).not.toBe(themen[i - 1]);
   });
 
+  it('„Noch eine Runde“: nichts aus früheren Runden von heute noch einmal', () => {
+    const erste = plan(emptyProgress());
+    const ids = erste.items.flatMap((i) => i.ids);
+    const zweite = plan(emptyProgress(), { ausschliessen: ids });
+    expect(zweite.items.length).toBeGreaterThan(0);
+    for (const id of zweite.items.flatMap((i) => i.ids)) expect(ids).not.toContain(id);
+  });
+
+  it('heute bearbeitete Aufgaben und geprüfte Übungen kommen nicht noch einmal', () => {
+    // 01-A1 heute mit halber Punktzahl: wäre sonst die schlechteste und damit die Zusatzaufgabe.
+    const p: Progress = {
+      ...emptyProgress(),
+      attempts: [
+        { taskId: '01-A1', date: `${TODAY}T08:00:00`, points: 1, max: 5, mode: 'einzel' },
+        { taskId: '01-A2', date: '2026-09-20', points: 4, max: 5, mode: 'einzel' },
+      ],
+      rechnen: { 'RE-2': { attempts: 1, hintsUsed: 0, lastCheckedAt: TODAY } },
+      sql: { 'SQL-1': { attempts: 2, hintsUsed: 0, lastCheckedAt: TODAY, stage: 0, due: TODAY } },
+    };
+    const r = plan(p);
+    expect(r.items.find((i) => i.art === 'aufgabe')?.ids).toEqual(['01-A2']);
+    const uebungen = r.items.filter((i) => i.art === 'sql' || i.art === 'rechnen').flatMap((i) => i.ids);
+    expect(uebungen).not.toContain('SQL-1');
+    expect(uebungen).not.toContain('RE-2');
+  });
+
   it('gleicher Tag → gleicher Plan (Tages-Seed)', () => {
     const a = planeHeute(content, emptyProgress(), { today: TODAY });
     const b = planeHeute(content, emptyProgress(), { today: TODAY });
@@ -256,6 +291,18 @@ describe('Heute-Sitzung', () => {
     while (!istFertig(s)) s = weiter(s);
     expect(weiter(s)).toBe(s);
     expect(aktuellerSchritt(s)).toBeUndefined();
+  });
+
+  it('merkt sich über Runden hinweg, was heute schon dran war – auch beim Beenden', () => {
+    const erste = weiter(weiter(starteSitzung(items, TODAY)));
+    // Beendet im dritten Schritt: die ersten drei zählen als schon dran.
+    const beendet = beende(erste);
+    expect(istFertig(beendet)).toBe(true);
+    expect(beendet.frueher).toEqual([...new Set(items.slice(0, 3).flatMap((i) => i.ids))]);
+    const zweite = starteSitzung(items.slice(3), TODAY, beendet);
+    let s = zweite;
+    while (!istFertig(s)) s = weiter(s);
+    expect(new Set(schonDran(s))).toEqual(new Set(items.flatMap((i) => i.ids)));
   });
 
   it('gilt nur am selben Tag', () => {

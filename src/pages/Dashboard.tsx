@@ -207,7 +207,7 @@ function Weiterlernen() {
           <Icon name="play" /> {laeuft ? `Heute lernen fortsetzen (${sitzung.index + 1}/${sitzung.items.length})` : 'Heute lernen'}
         </Link>
         <span className="muted">
-          {sitzung && !laeuft
+          {sitzung && !laeuft && sitzung.items.length > 0
             ? '✓ Heute schon eine Runde geschafft.'
             : `Gemischte Runde, etwa ${HEUTE_MINUTEN} Minuten – aus dem, was fällig ist.`}
         </span>

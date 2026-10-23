@@ -4,9 +4,9 @@
 
 /**
  * Würde Markdown (mit GFM) aus diesem Text etwas anderes als einen einzigen Absatz mit genau diesem Text machen? Ausgeschlossen sind
- * alle Zeichen für Hervorhebung, Code, Links, Bilder, HTML, Entities, Tabellen, Formeln, Durchstreichen und Escapes, GFM-Autolinks
+ * alle Zeichen für Hervorhebung, Code, Links, Bilder, HTML, Entities, Tabellen, Formeln, Hochstellung (^, lib/hochTief.ts), Durchstreichen und Escapes, GFM-Autolinks
  * (www., ://, @), Zeilenumbrüche, Zeilenanfänge von Listen, Zitaten, Überschriften und Setext-Linien sowie Leerraum am Rand.
  */
 export function istSchlicht(text: string): boolean {
-  return !/[\\*_`[\]<>!#~|$&@\n\r]|:\/\/|www\./i.test(text) && !/^(?:[-+>=]|\d+[.)])/.test(text) && text.trim() === text && text !== '';
+  return !/[\\*_^`[\]<>!#~|$&@\n\r]|:\/\/|www\./i.test(text) && !/^(?:[-+>=]|\d+[.)])/.test(text) && text.trim() === text && text !== '';
 }

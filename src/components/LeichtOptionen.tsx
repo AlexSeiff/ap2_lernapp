@@ -1,5 +1,7 @@
 // Leicht-Modus: Auswahlantworten als Knöpfe (Karteikarten und Rechenübungen). Nach der Wahl: richtige grün, gewählte falsche rot.
 
+import { HochTief } from './HochTief';
+
 export function LeichtOptionen(props: {
   optionen: { text: string; richtig: boolean }[];
   gewaehlt: number | null;
@@ -25,7 +27,7 @@ export function LeichtOptionen(props: {
           >
             {tasten && !fertig && <kbd>{i + 1}</kbd>}
             {fertig && (o.richtig ? '✓ ' : i === gewaehlt ? '✗ ' : '')}
-            {o.text}
+            <HochTief text={o.text} />
           </button>
         );
       })}
