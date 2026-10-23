@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { isIsoDate } from '../../shared/progress';
 import { Datenschutz } from '../components/Datenschutz';
+import { LernzeitenEinstellung } from '../components/Lernzeiten';
 import { IS_STATIC } from '../lib/api';
 import { leichtAutomatischAn } from '../lib/leicht';
 import { withSettings } from '../lib/settings';
@@ -74,6 +75,8 @@ export function Einstellungen() {
           </p>
         )}
       </section>
+
+      <LernzeitenEinstellung />
 
       <section className="card">
         <h2>

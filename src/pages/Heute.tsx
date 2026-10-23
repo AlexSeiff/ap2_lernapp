@@ -9,6 +9,8 @@ import { addDays, localDate } from '../lib/progress';
 import { formatIsoDate } from '../lib/stats';
 import { useStore } from '../lib/store';
 import { Icon } from '../components/Icon';
+import { KalenderKnopf, lernzeitenText } from '../components/Lernzeiten';
+import { lernzeitenVon } from '../lib/lernzeiten';
 
 const ART_TEXT: Record<HeuteItem['art'], string> = {
   wiederholung: 'Fehlerjournal',
@@ -181,6 +183,19 @@ function Schritte({
   );
 }
 
+/** Kalender-Export unter dem Lernplan: deine Lernzeiten und der Knopf für die .ics-Datei. */
+function LernplanKalender() {
+  const { progress } = useStore();
+  return (
+    <div className="actions">
+      <KalenderKnopf className="secondary" />
+      <span className="muted small">
+        {lernzeitenText(lernzeitenVon(progress.settings))} · <Link to="/einstellungen">Lernzeiten ändern</Link>
+      </span>
+    </div>
+  );
+}
+
 /** Lernplan bis zum Prüfungstermin (lib/lernplan.ts): Schwerpunktthemen je Woche und nötiges Kartentempo. */
 function LernplanKarte() {
   const { content, progress } = useStore();
@@ -195,6 +210,7 @@ function LernplanKarte() {
           Trage unter <Link to="/einstellungen">Einstellungen</Link> deinen Prüfungstermin ein – dann verteilt die App die Themen auf die
           Wochen bis dahin.
         </p>
+        <LernplanKalender />
       </section>
     );
   return (
@@ -229,6 +245,7 @@ function LernplanKarte() {
         Die letzten Tage vor der Prüfung bleiben für Wiederholung und Übungsklausuren frei. Schwächere und größere Themen bekommen mehr
         Wochen.
       </p>
+      <LernplanKalender />
     </section>
   );
 }

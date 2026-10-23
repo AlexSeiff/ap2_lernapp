@@ -29,7 +29,8 @@ export function ankiText(cards: Flashcard[], content: KernInhalt): string {
   return ['#separator:tab', '#html:true', '#tags column:3', ...zeilen].join('\n') + '\n';
 }
 
-const ics = (s: string) => s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+/** Text für iCalendar maskieren (Backslash, Semikolon, Komma, Zeilenumbruch). */
+export const ics = (s: string) => s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 const tagOhneStrich = (d: string) => d.replace(/-/g, '');
 const naechsterTag = (d: string) => {
   const [y, m, t] = d.split('-').map(Number);

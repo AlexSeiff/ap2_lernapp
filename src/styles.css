@@ -645,6 +645,16 @@ tr.diff-extra .diff-mark, .diff-key.extra { color: var(--low); }
 
 /* Einstellungen */
 .field { display: flex; flex-direction: column; gap: 3px; font-size: 0.85rem; color: var(--muted); }
+/* Lernzeiten (Einstellungen): je Gruppe Wochentage als Chips, Beginn und Dauer */
+.lernzeiten { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0; }
+.lernzeit { border: 0; margin: 0; padding: 14px 16px; border-radius: var(--radius-klein); background: var(--surface-2); min-width: 0; }
+.lernzeit legend { float: left; width: 100%; padding: 0; margin-bottom: 10px; font-weight: 650; }
+.lernzeit .actions { margin: 12px 0 0; }
+.wochentage { display: flex; flex-wrap: wrap; gap: 6px; clear: both; }
+.wochentag { position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 46px; height: 38px; padding: 0 12px; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow); font-weight: 600; cursor: pointer; user-select: none; transition: background-color 0.15s, color 0.15s; }
+.wochentag input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.wochentag:has(input:checked) { background: var(--accent-fill); color: var(--accent-text); box-shadow: none; }
+.wochentag:has(input:focus-visible) { outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 2px; }
 .field input, .field select { font-size: 1rem; color: var(--text); }
 .welcome { padding-left: 1.3em; }
 .welcome li { margin: 0.8em 0; }

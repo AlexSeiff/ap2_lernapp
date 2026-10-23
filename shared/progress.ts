@@ -153,6 +153,16 @@ export type DiagrammState = {
  * Persönliche Einstellungen (seit Version 5). Sie stehen im Fortschritt, damit sie mit der Sicherung umziehen.
  * Das Farbschema bleibt im localStorage (gilt nur für das Gerät).
  */
+/**
+ * Wann gelernt wird (Lernplan im Kalender, src/lib/lernzeiten.ts): Wochentage wie Date.getDay (0 = Sonntag … 6 = Samstag),
+ * Beginn als HH:MM (Ortszeit) und Dauer in Minuten.
+ */
+export type Lernzeit = { tage: number[]; von: string; minuten: number };
+
+/** Zulässige Tage je Gruppe: unter der Woche Mo–Fr, am Wochenende Sa und So. */
+export const WERKTAGE = [1, 2, 3, 4, 5];
+export const WOCHENENDTAGE = [6, 0];
+
 export type Settings = {
   /** Eigener Prüfungstermin (YYYY-MM-DD) für den Countdown; fehlt, solange keiner eingetragen ist. */
   examDate?: string;
@@ -179,6 +189,11 @@ export type Settings = {
    * Optional wie leichtAutomatisch – jede Datei der Version 8 bleibt gültig, daher keine neue Version.
    */
   ausgeblendeteThemen?: string[];
+  /**
+   * Lernzeiten unter der Woche und am Wochenende für den Lernplan im Kalender; fehlt = Standard (lib/lernzeiten.ts).
+   * Optional wie ausgeblendeteThemen – jede Datei der Version 8 bleibt gültig, daher keine neue Version.
+   */
+  lernzeiten?: { werktags: Lernzeit; wochenende: Lernzeit };
 };
 
 export const defaultSettings = (): Settings => ({ prueferfragen: true, fachgespraech: true, leichtModus: false, backupReminderDays: 7 });
@@ -390,10 +405,30 @@ export function isIsoDate(v: unknown): v is string {
 }
 
 /** Einstellungen tolerant übernehmen: falsche Typen → Standardwert, unbekannte Felder bleiben erhalten. */
+const UHRZEIT = /^([01]\d|2[0-3]):[0-5]\d$/;
+
+/** Eine Lernzeit tolerant lesen: Tage nur aus `erlaubt` (doppelte weg, sortiert), Uhrzeit HH:MM, 5–600 Minuten; sonst undefined. */
+function leseLernzeit(v: unknown, erlaubt: number[]): Lernzeit | undefined {
+  if (!isObject(v) || typeof v.von !== 'string' || !UHRZEIT.test(v.von)) return undefined;
+  const { minuten } = v;
+  if (typeof minuten !== 'number' || !Number.isInteger(minuten) || minuten < 5 || minuten > 600) return undefined;
+  const tage = Array.isArray(v.tage) ? v.tage.filter((t): t is number => typeof t === 'number' && erlaubt.includes(t)) : [];
+  return { tage: [...new Set(tage)].sort((a, b) => a - b), von: v.von, minuten };
+}
+
+/** Beide Gruppen gültig → übernehmen, sonst fehlen sie (dann gilt der Standard). */
+export function leseLernzeiten(v: unknown): Settings['lernzeiten'] {
+  if (!isObject(v)) return undefined;
+  const werktags = leseLernzeit(v.werktags, WERKTAGE);
+  const wochenende = leseLernzeit(v.wochenende, WOCHENENDTAGE);
+  return werktags && wochenende ? { werktags, wochenende } : undefined;
+}
+
 export function migrateSettings(v: unknown): Settings {
   const d = defaultSettings();
   if (!isObject(v)) return d;
-  const { examDate, lastBackupDownloadAt, leichtAutomatisch, ausgeblendeteThemen, ...rest } = v;
+  const { examDate, lastBackupDownloadAt, leichtAutomatisch, ausgeblendeteThemen, lernzeiten: lernzeitenRoh, ...rest } = v;
+  const lernzeiten = leseLernzeiten(lernzeitenRoh);
   const ausgeblendet = Array.isArray(ausgeblendeteThemen)
     ? [...new Set(ausgeblendeteThemen.filter((id): id is string => typeof id === 'string' && !!id))]
     : [];
@@ -405,6 +440,7 @@ export function migrateSettings(v: unknown): Settings {
     ...opt('lastBackupDownloadAt', lastBackupDownloadAt, isIsoDate(lastBackupDownloadAt)),
     ...opt('leichtAutomatisch', leichtAutomatisch, typeof leichtAutomatisch === 'boolean'),
     ...opt('ausgeblendeteThemen', ausgeblendet, ausgeblendet.length > 0),
+    ...opt('lernzeiten', lernzeiten, lernzeiten !== undefined),
     prueferfragen: bool(v.prueferfragen, d.prueferfragen),
     fachgespraech: bool(v.fachgespraech, d.fachgespraech),
     leichtModus: bool(v.leichtModus, d.leichtModus),
@@ -561,6 +597,12 @@ export const SettingsSchema = z.looseObject({
   lastBackupDownloadAt: z.string().optional(),
   leichtAutomatisch: z.boolean().optional(),
   ausgeblendeteThemen: z.array(z.string()).optional(),
+  lernzeiten: z
+    .looseObject({
+      werktags: z.looseObject({ tage: z.array(z.number()), von: z.string(), minuten: z.number() }),
+      wochenende: z.looseObject({ tage: z.array(z.number()), von: z.string(), minuten: z.number() }),
+    })
+    .optional(),
 });
 
 export const ProgressSchema = z.looseObject({
