@@ -3,26 +3,26 @@
     "titel": "AP2 Lernkarten – Fachinformatiker/-in Daten- und Prozessanalyse",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-09-21",
-    "aktualisiert_am": "2026-10-17",
+    "aktualisiert_am": "2026-10-24",
     "version": "1.1",
     "sprache": "de",
     "anzahl_decks": 28,
-    "anzahl_karten": 732,
+    "anzahl_karten": 734,
     "karten_nach_typ": {
-      "abgrenzung": 118,
-      "anwendung": 84,
+      "abgrenzung": 119,
+      "anwendung": 118,
       "falle": 120,
       "rechnung": 59,
-      "wissen": 315
+      "wissen": 318
     },
     "karten_nach_status": {
-      "behandelt": 682,
-      "offen": 14
+      "behandelt": 712,
+      "offen": 22
     },
     "karten_nach_schwierigkeit": {
-      "1": 246,
-      "2": 410,
-      "3": 40
+      "1": 249,
+      "2": 437,
+      "3": 48
     },
     "felder": {
       "id": "Eindeutige Karten-ID aus Deck-Kürzel und laufender Nummer",
@@ -56,7 +56,7 @@
       "pruefungsbereich": "Prüfungsorganisation",
       "quelle": "Themenliste",
       "status": "behandelt",
-      "anzahl_karten": 4,
+      "anzahl_karten": 5,
       "karten": [
         {
           "id": "ORG-011",
@@ -99,6 +99,16 @@
           "schwierigkeit": 1,
           "tags": [
             "operatoren"
+          ]
+        },
+        {
+          "id": "ORG-012",
+          "frage": "Welcher Taschenrechner ist in der schriftlichen Prüfung erlaubt?",
+          "antwort": "Ein nicht programmierbarer und netzunabhängiger Taschenrechner. Programmierbare Rechner könnten gespeicherte Formeln oder Texte enthalten; Handy und Smartwatch fallen schon wegen der Netzverbindung weg.",
+          "typ": "wissen",
+          "schwierigkeit": 1,
+          "tags": [
+            "hilfsmittel"
           ]
         }
       ]
@@ -4126,13 +4136,24 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 10",
       "status": "behandelt",
-      "anzahl_karten": 29,
+      "anzahl_karten": 30,
       "karten": [
         {
           "id": "ITS-025",
-          "frage": "Gilt das Maximumprinzip immer? Was sind Kumulations- und Verteilungseffekt?",
-          "antwort": "Nein. Kumulationseffekt: Viele Anwendungen mit normalem Schutzbedarf auf einem System summieren sich zu einem höheren Schutzbedarf. Verteilungseffekt: Der Schutzbedarf sinkt (meist bei Verfügbarkeit), wenn eine Anwendung redundant auf mehrere Systeme verteilt ist.",
+          "frage": "Gilt das Maximumprinzip bei der Schutzbedarfsfeststellung immer?",
+          "antwort": "Nein – es ist nur die Grundregel. Der Kumulationseffekt kann den Schutzbedarf eines Systems über das Maximum heben, der Verteilungseffekt ihn senken. Wer einfach den höchsten Wert der Anwendungen überträgt, übersieht beide.",
           "typ": "falle",
+          "schwierigkeit": 3,
+          "tags": [
+            "grundschutz",
+            "schutzbedarf"
+          ]
+        },
+        {
+          "id": "ITS-030",
+          "frage": "Was unterscheidet Kumulationseffekt und Verteilungseffekt bei der Schutzbedarfsfeststellung?",
+          "antwort": "Die Richtung: **Kumulationseffekt** – der Schutzbedarf steigt. Viele Anwendungen mit normalem Schutzbedarf auf einem System summieren sich, weil ein Ausfall alle zugleich trifft. **Verteilungseffekt** – der Schutzbedarf sinkt (meist bei Verfügbarkeit), wenn eine Anwendung redundant auf mehrere Systeme verteilt ist und ein einzelner Ausfall sie nicht stoppt.",
+          "typ": "abgrenzung",
           "schwierigkeit": 3,
           "tags": [
             "grundschutz",
@@ -7512,7 +7533,7 @@
         {
           "id": "ALP-023",
           "frage": "Mit welchem Wert rechnest du weiter, wenn du ein Zwischenergebnis rundest?",
-          "antwort": "Mit dem gerundeten Wert, so verlangen es die Bearbeitungshinweise. Taschenrechner: nicht programmierbar und netzunabhängig.",
+          "antwort": "Mit dem gerundeten Wert – so verlangen es die Bearbeitungshinweise. Rechnest du mit dem ungerundeten Wert aus dem Taschenrechner weiter, weicht dein Endergebnis von der Musterlösung ab.",
           "typ": "falle",
           "schwierigkeit": 1,
           "tags": [
@@ -8152,8 +8173,8 @@
         },
         {
           "id": "AWI-032",
-          "frage": "Was kennzeichnet die soziale Marktwirtschaft?",
-          "antwort": "Preisbildung am Markt, Staat sichert den Wettbewerb und gleicht sozial aus (Schutz wirtschaftlich Schwächerer). Zentrale Planung und staatliche Produktionsmittel gehören zur Zentralverwaltungswirtschaft.",
+          "frage": "Worin unterscheidet sich die soziale Marktwirtschaft von der Zentralverwaltungswirtschaft?",
+          "antwort": "Entscheidend ist, wer steuert – Markt oder Plan. **Soziale Marktwirtschaft:** Preise bilden sich am Markt, Produktionsmittel sind überwiegend privat; der Staat sichert den Wettbewerb und gleicht sozial aus (Schutz wirtschaftlich Schwächerer). **Zentralverwaltungswirtschaft:** Eine staatliche Planbehörde legt Produktion und Preise fest, die Produktionsmittel gehören dem Staat.",
           "typ": "abgrenzung",
           "schwierigkeit": 1,
           "tags": [

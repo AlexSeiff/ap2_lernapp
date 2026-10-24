@@ -48,12 +48,10 @@ Legende: ✅ in dieser Runde erledigt · 🔴 wichtig · 🟡 sinnvoll · ⚪ ni
 Insgesamt gut: Fragen sind fast immer als Frage formuliert, Antworten nennen das *Warum*, Längen passen (Median 207 Zeichen, keine
 über 460), Typen sind sinnvoll verteilt (wissen 317, falle 120, abgrenzung 118, anwendung 118, rechnung 59). Auffällig:
 
-- 🔴 **Doppelte Karte**: `WS5-002` und `AWI-032` fragen wortgleich „Was kennzeichnet die soziale Marktwirtschaft?“ mit leicht
-  anderer Antwort. Eine umformulieren (z. B. AWI-032 als Abgrenzung: „Worin unterscheidet sich die soziale Marktwirtschaft von der
-  Zentralverwaltungswirtschaft?“ – passt zu ihrem Typ `abgrenzung`).
-- 🟡 **Zwei Ideen auf einer Karte** (schwer ehrlich mit gewusst/unsicher zu bewerten):
-  - `ALP-023` Runden **und** Taschenrechner-Regeln → Taschenrechner-Satz streichen oder eigene Karte.
-  - `ITS-025` „Gilt das Maximumprinzip immer? Was sind Kumulations- und Verteilungseffekt?“ → zwei Karten.
+- ✅ **Doppelte Karte** (behoben): `AWI-032` fragt jetzt als Abgrenzung „Worin unterscheidet sich die soziale Marktwirtschaft von
+  der Zentralverwaltungswirtschaft?“; `WS5-002` bleibt die Wissenskarte.
+- ✅ **Zwei Ideen auf einer Karte** (behoben): `ALP-023` nur noch Runden, der Taschenrechner steht in der neuen Karte `ORG-012`;
+  `ITS-025` ist die Falle „Maximumprinzip gilt immer?“, Kumulations- vs. Verteilungseffekt steht in der neuen Karte `ITS-030`.
 - 🟡 **Lange Aufzählungen** (30 Karten mit ≥ 7 Elementen, z. B. `SQL-014`, `PRZ-035` sieben Verschwendungsarten, `WS1-005`,
   `ALP-021`): Wer 5 von 7 weiß – gewusst oder unsicher? Vorschlag: Frage auf das prüfungsübliche Maß zuschneiden
   („*Nenne* vier …“, wie im IHK-Operator), die Antwort darf alle nennen. Oder eine Merkhilfe ergänzen.
