@@ -76,11 +76,12 @@ describe('Prüfungsbereiche', () => {
 });
 
 describe('Fällig', () => {
-  it('ohne Fortschritt sind alle Karten fällig (neu), sonst nichts', () => {
+  it('ohne Fortschritt sind alle Karten neu und nichts fällig', () => {
     const f = faellig(content, emptyProgress(), '2026-10-10');
     expect(f).toEqual({
       journal: 0,
-      karten: cardPool(content.flashcards, emptyProgress().settings).length,
+      karten: 0,
+      kartenNeu: cardPool(content.flashcards, emptyProgress().settings).length,
       sql: 0,
       rechnen: 0,
       diagramme: 0,

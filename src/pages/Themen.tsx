@@ -13,6 +13,8 @@ import { TheoryMarkdown } from '../components/TheoryMarkdown';
 import type { Topic } from '../../shared/types';
 import { Icon } from '../components/Icon';
 import { hatPodcastThema } from '../lib/podcast';
+import { farbKlasse, themaFarbe } from '../lib/farben';
+import { kartenstand, STAENDE } from '../lib/kartenstand';
 
 /** „Deep Dive 3“ oder „Zusatz“ für das ältere SQL-Blatt. */
 const topicLabel = (t: Pick<Topic, 'id' | 'number'>) => (t.id === '00' ? 'Zusatz' : `Deep Dive ${t.number}`);
@@ -21,6 +23,7 @@ export function Themen() {
   const { content, progress, update } = useStore();
   const sichtbar = content.topics.filter((t) => !istAusgeblendet(progress.settings, t.id));
   const ausgeblendet = content.topics.filter((t) => istAusgeblendet(progress.settings, t.id));
+  const pool = useMemo(() => cardPool(content.flashcards, progress.settings), [content, progress.settings]);
   return (
     <div className="page">
       <h1>Lernen</h1>
@@ -29,15 +32,33 @@ export function Themen() {
         und Klausur.
       </p>
       <div className="grid">
-        {sichtbar.map((t) => (
-          <Link key={t.id} to={`/lernen/${t.id}`} className="tile">
-            <span className="tile-num">{t.id === '00' ? '＋' : t.number}</span>
-            <span className="tile-title">{t.title}</span>
-            <span className="tile-meta">
-              {topicLabel(t)} · {t.sections.length} Abschnitte
-            </span>
-          </Link>
-        ))}
+        {sichtbar.map((t) => {
+          const s = kartenstand(
+            pool.filter((c) => c.topicId === t.id),
+            progress,
+          );
+          return (
+            <Link key={t.id} to={`/lernen/${t.id}`} className={`tile thema-kachel ${farbKlasse(themaFarbe(t.id))}`}>
+              <span className="tile-num">{t.id === '00' ? '＋' : t.number}</span>
+              <span className="tile-title">{t.title}</span>
+              <span className="tile-meta">
+                {topicLabel(t)} · {t.sections.length} Abschnitte{s.gesamt > 0 && ` · ${s.gesamt} Karten`}
+              </span>
+              {s.gesamt > 0 && (
+                <span
+                  className="verteilung-balken schmal"
+                  role="img"
+                  aria-label={`Karten: ${s.gruppen.gewusst.length} gewusst, ${s.gruppen.unsicher.length} unsicher, ${s.gruppen.nicht.length} nicht gewusst, ${s.neu} neu`}
+                >
+                  {STAENDE.map(
+                    (st) => s.gruppen[st].length > 0 && <span key={st} className={`vb-${st}`} style={{ flexGrow: s.gruppen[st].length }} />,
+                  )}
+                  {s.neu > 0 && <span className="vb-neu" style={{ flexGrow: s.neu }} />}
+                </span>
+              )}
+            </Link>
+          );
+        })}
       </div>
       {!!ausgeblendet.length && (
         <details className="card ausgeblendet">

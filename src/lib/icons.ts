@@ -44,6 +44,12 @@ export const ICONS = {
     ['rect', { x: '3', y: '3', width: '18', height: '18', rx: '2' }],
     ['path', { d: 'M3 9h18' }],
   ],
+  'chart-column': [
+    ['path', { d: 'M3 3v16a2 2 0 0 0 2 2h16' }],
+    ['path', { d: 'M18 17V9' }],
+    ['path', { d: 'M13 17V5' }],
+    ['path', { d: 'M8 17v-3' }],
+  ],
   check: [['path', { d: 'M20 6 9 17l-5-5' }]],
   'chevron-right': [['path', { d: 'm9 18 6-6-6-6' }]],
   'circle-check': [

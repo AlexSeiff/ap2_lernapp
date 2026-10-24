@@ -1,5 +1,5 @@
 :root {
-  --bg: #f5f5f7;
+  --bg: #f4f5fa;
   --surface: #ffffff;
   --surface-2: #f2f2f5;
   --fill: #e3e3e8;
@@ -8,10 +8,24 @@
   --muted: #6e6e73;
   --border: #d8d8dd;
   --card-border: transparent;
-  --accent: #0066cc;
-  --accent-fill: #0071e3;
+  --accent: #4338ca;
+  --accent-fill: #4f46e5;
   --accent-text: #ffffff;
-  --accent-soft: #e8f1fd;
+  --accent-soft: #eceefe;
+  /* Farbpalette (lib/farben.ts): Text-/Linienfarbe, Füllung für weiße Schrift (≥ 4,5:1) und zarter Hintergrund */
+  --c-indigo: #4338ca; --c-indigo-fill: #4f46e5; --c-indigo-soft: #eceefe;
+  --c-violet: #6d28d9; --c-violet-fill: #7c3aed; --c-violet-soft: #f3edfe;
+  --c-pink: #be185d; --c-pink-fill: #db2777; --c-pink-soft: #fdebf3;
+  --c-red: #c8102e; --c-red-fill: #d70015; --c-red-soft: #ffe8ea;
+  --c-orange: #c2410c; --c-orange-fill: #c2410c; --c-orange-soft: #fff0e5;
+  --c-amber: #a35200; --c-amber-fill: #b45309; --c-amber-soft: #fff4dc;
+  --c-green: #15803d; --c-green-fill: #15803d; --c-green-soft: #e3f6e8;
+  --c-teal: #0f766e; --c-teal-fill: #0f766e; --c-teal-soft: #e0f5f2;
+  --c-sky: #0369a1; --c-sky-fill: #0369a1; --c-sky-soft: #e2f2fb;
+  --c-slate: #475569; --c-slate-fill: #475569; --c-slate-soft: #eef1f5;
+  /* kräftige Töne für Balken und Punkte (Grafik, kein Text) */
+  --v-gewusst: #22c55e; --v-unsicher: #f59e0b; --v-nicht: #f43f5e; --v-neu: #d5d7e2;
+  --held: linear-gradient(135deg, #4f46e5 0%, #7c3aed 55%, #db2777 100%);
   --good: #1d7f37;
   --good-soft: #e4f6e9;
   --mid: #a35200;
@@ -37,7 +51,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #000000;
+    --bg: #08080c;
     --surface: #1c1c1e;
     --surface-2: #2c2c2e;
     --fill: #2c2c2e;
@@ -46,10 +60,22 @@
     --muted: #98989d;
     --border: #38383a;
     --card-border: transparent;
-    --accent: #4da3ff;
-    --accent-fill: #0a6cd6;
+    --accent: #a5b4fc;
+    --accent-fill: #5850ec;
     --accent-text: #ffffff;
-    --accent-soft: #10263f;
+    --accent-soft: #1e1f4a;
+    --c-indigo: #a5b4fc; --c-indigo-fill: #5850ec; --c-indigo-soft: #1e1f4a;
+    --c-violet: #c4b5fd; --c-violet-fill: #7c3aed; --c-violet-soft: #2a1b4d;
+    --c-pink: #f9a8d4; --c-pink-fill: #c0266d; --c-pink-soft: #3d1430;
+    --c-red: #ff8a84; --c-red-fill: #d70015; --c-red-soft: #3a1414;
+    --c-orange: #fdba74; --c-orange-fill: #c2410c; --c-orange-soft: #3b2010;
+    --c-amber: #fcd34d; --c-amber-fill: #b45309; --c-amber-soft: #33260a;
+    --c-green: #6ee7a0; --c-green-fill: #15803d; --c-green-soft: #0f2e1a;
+    --c-teal: #5eead4; --c-teal-fill: #0f766e; --c-teal-soft: #0b2f2c;
+    --c-sky: #7dd3fc; --c-sky-fill: #0369a1; --c-sky-soft: #0b2738;
+    --c-slate: #cbd5e1; --c-slate-fill: #475569; --c-slate-soft: #1f2630;
+    --v-gewusst: #34d399; --v-unsicher: #fbbf24; --v-nicht: #fb7185; --v-neu: #3a3a42;
+    --held: linear-gradient(135deg, #4338ca 0%, #6d28d9 55%, #be185d 100%);
     --good: #4cd471;
     --good-soft: #0f2e18;
     --mid: #ffb340;
@@ -71,7 +97,7 @@
   }
 }
 :root[data-theme='dark'] {
-  --bg: #000000;
+  --bg: #08080c;
   --surface: #1c1c1e;
   --surface-2: #2c2c2e;
   --fill: #2c2c2e;
@@ -80,10 +106,22 @@
   --muted: #98989d;
   --border: #38383a;
   --card-border: transparent;
-  --accent: #4da3ff;
-  --accent-fill: #0a6cd6;
+  --accent: #a5b4fc;
+  --accent-fill: #5850ec;
   --accent-text: #ffffff;
-  --accent-soft: #10263f;
+  --accent-soft: #1e1f4a;
+  --c-indigo: #a5b4fc; --c-indigo-fill: #5850ec; --c-indigo-soft: #1e1f4a;
+  --c-violet: #c4b5fd; --c-violet-fill: #7c3aed; --c-violet-soft: #2a1b4d;
+  --c-pink: #f9a8d4; --c-pink-fill: #c0266d; --c-pink-soft: #3d1430;
+  --c-red: #ff8a84; --c-red-fill: #d70015; --c-red-soft: #3a1414;
+  --c-orange: #fdba74; --c-orange-fill: #c2410c; --c-orange-soft: #3b2010;
+  --c-amber: #fcd34d; --c-amber-fill: #b45309; --c-amber-soft: #33260a;
+  --c-green: #6ee7a0; --c-green-fill: #15803d; --c-green-soft: #0f2e1a;
+  --c-teal: #5eead4; --c-teal-fill: #0f766e; --c-teal-soft: #0b2f2c;
+  --c-sky: #7dd3fc; --c-sky-fill: #0369a1; --c-sky-soft: #0b2738;
+  --c-slate: #cbd5e1; --c-slate-fill: #475569; --c-slate-soft: #1f2630;
+  --v-gewusst: #34d399; --v-unsicher: #fbbf24; --v-nicht: #fb7185; --v-neu: #3a3a42;
+  --held: linear-gradient(135deg, #4338ca 0%, #6d28d9 55%, #be185d 100%);
   --good: #4cd471;
   --good-soft: #0f2e18;
   --mid: #ffb340;
@@ -109,8 +147,11 @@ html, body { margin: 0; }
 /* clip statt hidden: keine eigene Scrollbox, sticky bleibt intakt – das Umblättern der Karten soll nicht seitlich scrollen lassen */
 body { overflow-x: clip; }
 body {
-  /* Ein Hauch Akzentfarbe oben – wirkt ruhiger und moderner als eine glatte Fläche */
-  background: radial-gradient(1200px 560px at 50% -280px, var(--glanz), transparent 70%) no-repeat, var(--bg);
+  /* Farbschleier oben: Indigo links, Pink rechts – bunt, aber ruhig genug zum Lesen */
+  background:
+    radial-gradient(900px 520px at 8% -220px, color-mix(in srgb, var(--c-indigo-fill) 14%, transparent), transparent 70%) no-repeat,
+    radial-gradient(800px 480px at 96% -200px, color-mix(in srgb, var(--c-pink-fill) 10%, transparent), transparent 70%) no-repeat,
+    var(--bg);
   color: var(--text);
   font: 16px/1.55 -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -167,8 +208,8 @@ h3 { font-size: 1.08rem; font-weight: 650; margin: 1.2em 0 0.4em; }
 .unterleiste-innen::-webkit-scrollbar { display: none; }
 .unterleiste a { display: inline-flex; align-items: center; gap: 6px; flex: none; padding: 6px 14px; border-radius: 999px; background: var(--fill); color: var(--text); font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
 .unterleiste a:hover { text-decoration: none; filter: brightness(0.97); }
-.unterleiste a .icon { color: var(--muted); }
-.unterleiste a.active { background: var(--text); color: var(--bg); font-weight: 600; }
+.unterleiste a .icon { color: var(--accent); }
+.unterleiste a.active { background: var(--accent-fill); color: var(--accent-text); font-weight: 600; box-shadow: 0 2px 8px color-mix(in srgb, var(--accent-fill) 35%, transparent); }
 .unterleiste a.active .icon { color: inherit; }
 .unterleiste .nav-badge { margin-left: 2px; }
 main { min-width: 0; padding: 0 env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px); }
@@ -209,9 +250,10 @@ button.secondary, .button.secondary { background: var(--accent-soft); color: var
 button.ghost { background: transparent; color: var(--text); border-color: transparent; font-weight: 500; padding: 6px 10px; }
 button.ghost:hover { background: var(--fill); }
 button.danger, .danger { color: var(--low) !important; }
-button.good { background: var(--good); border-color: var(--good); color: #fff; }
-button.mid { background: var(--mid); border-color: var(--mid); color: #fff; }
-button.low { background: var(--low); border-color: var(--low); color: #fff; }
+/* Bewertung: feste Füllungen in hell und dunkel – das helle --good des Dunkelmodus hätte mit weißer Schrift nur 1,9:1 */
+button.good { background: linear-gradient(180deg, #1a9447, var(--c-green-fill)); border-color: transparent; color: #fff; }
+button.mid { background: linear-gradient(180deg, #c9620a, var(--c-amber-fill)); border-color: transparent; color: #fff; }
+button.low { background: linear-gradient(180deg, #e0263f, var(--c-red-fill)); border-color: transparent; color: #fff; }
 input, select, textarea {
   font: inherit; color: var(--text); background: var(--surface);
   border: 1px solid var(--feld-rand); border-radius: var(--radius-klein); padding: 8px 12px;
@@ -498,14 +540,15 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 
 /* Lernkarten */
 .fc-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.flashcard.trap { border-left: 5px solid var(--low); }
+/* Fallen erkennt man am roten Streifen oben (farbe-red, s. „Farben“) */
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 .tag { font-size: 0.78rem; color: var(--muted); background: var(--surface-2); border-radius: 999px; padding: 1px 8px; }
-.badge.typ-wissen { background: var(--accent-soft); color: var(--accent); }
-.badge.typ-abgrenzung { background: var(--mid-soft); color: var(--mid); }
-.badge.typ-rechnung { background: var(--good-soft); color: var(--good); }
-.badge.typ-anwendung { background: var(--surface-2); color: var(--text); }
-.badge.typ-falle { background: var(--low-soft); color: var(--low); }
+.badge.typ-wissen { background: var(--c-sky-soft); color: var(--c-sky); }
+.badge.typ-abgrenzung { background: var(--c-violet-soft); color: var(--c-violet); }
+.badge.typ-rechnung { background: var(--c-green-soft); color: var(--c-green); }
+.badge.typ-anwendung { background: var(--c-teal-soft); color: var(--c-teal); }
+.badge.typ-falle { background: var(--c-red-soft); color: var(--c-red); }
+.badge.typ-begriff { background: var(--c-indigo-soft); color: var(--c-indigo); }
 
 /* SQL-Editor */
 .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
@@ -1058,8 +1101,8 @@ a.kpi.w-innen:hover { transform: none; }
 .ring-wert { stroke-linecap: round; }
 .ring-karten .ring-spur { stroke: color-mix(in srgb, var(--accent-fill) 18%, transparent); }
 .ring-karten .ring-wert { stroke: var(--accent-fill); }
-.ring-uebungen .ring-spur { stroke: color-mix(in srgb, var(--good) 20%, transparent); }
-.ring-uebungen .ring-wert { stroke: var(--good); }
+.ring-uebungen .ring-spur { stroke: color-mix(in srgb, var(--c-teal-fill) 20%, transparent); }
+.ring-uebungen .ring-wert { stroke: var(--v-gewusst); }
 .ring.good .ring-wert { stroke: var(--good); }
 .ring.mid .ring-wert { stroke: var(--mid); }
 .ring.low .ring-wert { stroke: var(--low); }
@@ -1068,7 +1111,7 @@ a.kpi.w-innen:hover { transform: none; }
 .bereich-ringe .ringe { width: 100%; max-width: 96px; height: auto; margin-bottom: 4px; }
 .punkt { display: inline-block; width: 0.6em; height: 0.6em; border-radius: 50%; vertical-align: 0.05em; }
 .punkt.ring-karten { background: var(--accent-fill); }
-.punkt.ring-uebungen { background: var(--good); }
+.punkt.ring-uebungen { background: var(--v-gewusst); }
 .mini-ring { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 /* Fortschritt je Thema: Zeilen statt Tabelle, mobil Werte mit Beschriftung unter dem Titel */
 .thema-fortschritt { list-style: none; margin: 0; padding: 0; }
@@ -1244,6 +1287,148 @@ select.te-ziel { display: block; margin-top: 4px; min-height: 28px; padding: 2px
 @media print {
   .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe { display: none; }
 }
+
+/* Farben (lib/farben.ts): `farbe-<name>` setzt --f (Text/Linie), --f-fill (Fläche mit weißer Schrift) und --f-soft (zarter Grund) */
+.farbe-indigo { --f: var(--c-indigo); --f-fill: var(--c-indigo-fill); --f-soft: var(--c-indigo-soft); }
+.farbe-violet { --f: var(--c-violet); --f-fill: var(--c-violet-fill); --f-soft: var(--c-violet-soft); }
+.farbe-pink { --f: var(--c-pink); --f-fill: var(--c-pink-fill); --f-soft: var(--c-pink-soft); }
+.farbe-red { --f: var(--c-red); --f-fill: var(--c-red-fill); --f-soft: var(--c-red-soft); }
+.farbe-orange { --f: var(--c-orange); --f-fill: var(--c-orange-fill); --f-soft: var(--c-orange-soft); }
+.farbe-amber { --f: var(--c-amber); --f-fill: var(--c-amber-fill); --f-soft: var(--c-amber-soft); }
+.farbe-green { --f: var(--c-green); --f-fill: var(--c-green-fill); --f-soft: var(--c-green-soft); }
+.farbe-teal { --f: var(--c-teal); --f-fill: var(--c-teal-fill); --f-soft: var(--c-teal-soft); }
+.farbe-sky { --f: var(--c-sky); --f-fill: var(--c-sky-fill); --f-soft: var(--c-sky-soft); }
+.farbe-slate { --f: var(--c-slate); --f-fill: var(--c-slate-fill); --f-soft: var(--c-slate-soft); }
+.mid-text { color: var(--mid); }
+
+/* Bereichsfarben (App.tsx: .layout[data-bereich]): Lernen Indigo, Glossar Türkis, SQL Orange, Einstellungen Schiefer.
+   Die Kopfleiste zeigt jeden Bereich in seiner eigenen Farbe (Kopfleiste.tsx: .kopf-<bereich>). */
+.layout[data-bereich='glossar'], .kopf-bereiche a.kopf-glossar { --accent: var(--c-teal); --accent-fill: var(--c-teal-fill); --accent-soft: var(--c-teal-soft); }
+.layout[data-bereich='sql'], .kopf-bereiche a.kopf-sql { --accent: var(--c-orange); --accent-fill: var(--c-orange-fill); --accent-soft: var(--c-orange-soft); }
+.layout[data-bereich='einstellungen'], .kopf-bereiche a.kopf-einstellungen { --accent: var(--c-slate); --accent-fill: var(--c-slate-fill); --accent-soft: var(--c-slate-soft); }
+.kopf-bereiche a.kopf-lernen { --accent: var(--c-indigo); --accent-fill: var(--c-indigo-fill); --accent-soft: var(--c-indigo-soft); }
+.kopf-bereiche a.active { box-shadow: 0 2px 10px color-mix(in srgb, var(--accent-fill) 40%, transparent); }
+.kopf-logo .icon { color: var(--c-indigo-fill); }
+.kopf-logo-text { background: var(--held); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .kopf-logo-text { background: linear-gradient(90deg, #a5b4fc, #f9a8d4); -webkit-background-clip: text; background-clip: text; }
+}
+:root[data-theme='dark'] .kopf-logo-text { background: linear-gradient(90deg, #a5b4fc, #f9a8d4); -webkit-background-clip: text; background-clip: text; }
+/* Hauptknöpfe mit leichtem Glanz von oben */
+button:not([class]), .button:not(.secondary) { background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0)); }
+h1 .icon { color: var(--accent-fill); }
+
+/* Widgets: Icon im farbigen Quadrat wie in den iOS-Einstellungen */
+.widget h2 .icon, .widgets > .card h2 .icon {
+  box-sizing: content-box; width: 0.95em; height: 0.95em; padding: 5px; margin-right: 3px; border-radius: 8px; vertical-align: -0.38em;
+  background: var(--f-fill, var(--accent-fill)); color: #fff; stroke-width: 2.2;
+}
+.widget.kpi[class*='farbe-'] { background: linear-gradient(160deg, var(--f-soft), var(--surface) 72%); }
+.widget.kpi[class*='farbe-'] .kpi-value, .widget.kpi[class*='farbe-'] .kpi-value .icon { color: var(--f); }
+.widget.kpi[class*='farbe-'] .w-titel { color: var(--f); }
+.w-serie .kpi-value .icon { color: var(--c-orange-fill); }
+/* Einstieg: kräftiger Farbverlauf, weiße Schrift */
+.widget.widget-weiter { background: var(--held); color: #fff; box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--c-violet-fill) 60%, transparent); }
+.widget-weiter h2 .icon { background: rgba(255, 255, 255, 0.22); }
+.widget-weiter .muted { color: rgba(255, 255, 255, 0.88); }
+.widget-weiter a:not(.button) { color: #fff; text-decoration-color: rgba(255, 255, 255, 0.6); }
+.widget-weiter .button { background: #fff; color: var(--c-indigo-fill); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18); }
+.widget-weiter .button .icon { color: inherit; }
+.bereich-ringe b { line-height: 1.25; }
+@media (max-width: 599px) { .bereich-ringe b { font-size: 0.8rem; letter-spacing: -0.01em; } .bereich-ringe .small { font-size: 0.78rem; } }
+
+/* Kennzahlen mit Farbe (Karteikarten) */
+.kpi[class*='farbe-'] { background: linear-gradient(160deg, var(--f-soft), var(--surface) 75%); }
+.kpi[class*='farbe-'] .kpi-value { color: var(--f); }
+@media (max-width: 599px) {
+  .kpis.drei { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .kpis.drei .kpi { padding: 10px 12px; }
+  .kpis.drei .kpi-value { font-size: 1.2rem; }
+  .kpis.drei .kpi-label { font-size: 0.76rem; }
+}
+
+/* Themen-Kacheln: Farbe je Deep Dive, Nummer im farbigen Feld, Kartenbalken unten */
+/* Streifen als Hintergrundbild: gerade Kante, die Rundung der Kachel schneidet ihn sauber ab */
+.thema-kachel { gap: 4px; background: linear-gradient(var(--f-fill), var(--f-fill)) top / 100% 4px no-repeat, var(--surface); }
+.thema-kachel:hover { background: linear-gradient(var(--f-fill), var(--f-fill)) top / 100% 4px no-repeat, linear-gradient(170deg, var(--f-soft), var(--surface) 60%); }
+.thema-kachel .tile-num { display: inline-grid; place-items: center; width: 32px; height: 32px; margin: 2px 0 4px; border-radius: 10px; background: var(--f-soft); color: var(--f); font-size: 0.9rem; }
+.thema-kachel .verteilung-balken { margin-top: auto; }
+.thema-kachel .tile-meta { margin-bottom: 8px; }
+
+/* Karteikarten: Streifen oben und Etikett in der Farbe des Kartentyps */
+.flashcard[class*='farbe-'] { background: linear-gradient(var(--f-fill), var(--f-fill)) top / 100% 5px no-repeat, var(--surface); }
+.flashcard[class*='farbe-'] .fc-label { color: var(--f); }
+.flashcard[class*='farbe-'] .fc-vorne.frage, .flashcard[class*='farbe-'] .fc-vorne.rechnung { border-left-color: var(--f-fill); }
+.runden-balken > div { background: var(--held); }
+
+/* Kartenstand (pages/Kartenstand.tsx, components/KartenstandLeiste.tsx) */
+.stand-gewusst { --s: var(--c-green); --s-fill: var(--c-green-fill); --s-soft: var(--c-green-soft); --s-vivid: var(--v-gewusst); }
+.stand-unsicher { --s: var(--c-amber); --s-fill: var(--c-amber-fill); --s-soft: var(--c-amber-soft); --s-vivid: var(--v-unsicher); }
+.stand-nicht { --s: var(--c-red); --s-fill: var(--c-red-fill); --s-soft: var(--c-red-soft); --s-vivid: var(--v-nicht); }
+.verteilung-balken { display: flex; gap: 2px; height: 14px; border-radius: 999px; overflow: hidden; background: var(--v-neu); }
+.verteilung-balken.schmal { height: 7px; gap: 1px; }
+.verteilung-balken > span { display: block; min-width: 3px; transition: flex-grow 0.4s ease; }
+.vb-gewusst { background: var(--v-gewusst); }
+.vb-unsicher { background: var(--v-unsicher); }
+.vb-nicht { background: var(--v-nicht); }
+.vb-neu { background: var(--v-neu); }
+.verteilung { padding: 16px 20px; }
+.verteilung-legende { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; margin: 12px 0 0; padding: 0; font-size: 0.92rem; }
+.verteilung-legende .punkt { width: 0.75em; height: 0.75em; }
+.stand-kacheln { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+button.stand-kachel {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 0; padding: 14px 16px; text-align: left; white-space: normal;
+  background: linear-gradient(160deg, var(--s-soft), var(--surface) 78%); color: var(--text); border: 2px solid transparent; border-radius: var(--radius);
+  box-shadow: var(--shadow); font-weight: 500; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+button.stand-kachel:hover:not(:disabled) { filter: none; transform: translateY(-2px); box-shadow: var(--shadow-schwebe); }
+button.stand-kachel[aria-pressed='true'] { border-color: var(--s-vivid); box-shadow: 0 0 0 4px color-mix(in srgb, var(--s-vivid) 22%, transparent), var(--shadow-schwebe); }
+.stand-kachel-kopf { display: flex; align-items: center; gap: 6px; font-weight: 650; color: var(--s); }
+.stand-kachel-zahl { font-size: 2.2rem; font-weight: 750; line-height: 1.1; letter-spacing: -0.02em; color: var(--s); font-variant-numeric: tabular-nums; }
+.stand-kachel-fuss { font-size: 0.85rem; color: var(--muted); }
+.stand-filter { margin: 4px 0 6px; }
+.stand-aktionen .button:not(.secondary) { background-color: var(--s-fill); }
+.stand-aktionen .button.secondary { background: var(--s-soft); color: var(--s); }
+.stand-gruppe-titel { display: flex; align-items: center; gap: 8px; font-size: 1rem; color: var(--f); margin: 1.4em 0 0.4em; }
+.stand-gruppe-titel::before { content: ''; width: 10px; height: 10px; border-radius: 3px; background: var(--f-fill); flex: none; }
+.stand-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.stand-zeile { background: var(--surface); border-radius: 14px; padding: 10px 12px 10px 14px; box-shadow: var(--shadow); border-left: 4px solid var(--f-fill, var(--border)); }
+.stand-zeile-kopf { display: flex; align-items: flex-start; gap: 6px; }
+button.stand-frage {
+  flex: 1; min-width: 0; min-height: 0; display: flex; align-items: flex-start; gap: 8px; padding: 2px 0; text-align: left; white-space: normal;
+  background: none; color: var(--text); border: 0; font-weight: 600; line-height: 1.4; box-shadow: none;
+}
+button.stand-frage:hover:not(:disabled) { filter: none; color: var(--accent); }
+button.stand-frage .icon { margin-top: 0.15em; color: var(--muted); transition: transform 0.15s; }
+button.stand-frage[aria-expanded='true'] .icon { transform: rotate(90deg); }
+.stand-begriff { font-size: 1.05rem; }
+.stand-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 4px 0 0 1.75em; }
+.badge.fach { background: var(--fill); color: var(--text); }
+.stand-faellig { color: var(--c-orange); font-weight: 600; }
+.stand-antwort { margin: 10px 0 2px 1.75em; padding: 12px 14px; border-radius: 10px; background: var(--surface-2); animation: aufblenden 0.2s ease-out both; }
+.stand-antwort .fc-hinten.rechnung { background: var(--surface); }
+.stand-leiste { margin: 12px 0; }
+.stand-leiste ul { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 10px 0 0; padding: 0; }
+.stand-chip { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 999px; background: var(--s-soft); color: var(--s); font-size: 0.9rem; font-weight: 500; }
+.stand-chip:hover { text-decoration: none; filter: brightness(0.97); }
+.stand-chip.mehr { background: var(--fill); color: var(--text); }
+.stand-chip.mehr .icon { color: var(--accent); }
+.runde-ende { justify-content: space-between; }
+/* Kartenstand auf der Übersicht: drei Zahlen nebeneinander */
+.stand-zahlen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; list-style: none; margin: 12px 0 8px; padding: 0; }
+.stand-zahlen a { display: flex; flex-direction: column; padding: 10px 12px; border-radius: 14px; background: var(--s-soft); color: var(--s); transition: transform 0.15s; }
+.stand-zahlen a:hover { text-decoration: none; transform: translateY(-2px); }
+.stand-zahlen b { font-size: 1.7rem; line-height: 1.15; font-weight: 750; font-variant-numeric: tabular-nums; }
+.stand-zahlen span { font-size: 0.82rem; font-weight: 600; }
+@media (max-width: 599px) {
+  .stand-kacheln { gap: 8px; }
+  button.stand-kachel { padding: 10px; }
+  .stand-kachel-kopf { font-size: 0.8rem; gap: 4px; }
+  .stand-kachel-zahl { font-size: 1.6rem; }
+  .stand-kachel-fuss { font-size: 0.74rem; }
+  .stand-meta, .stand-antwort { margin-left: 0; }
+}
+@media print { .stand-kacheln, .stand-aktionen, .stand-filter { display: none; } }
 
 /* „Bewegung reduzieren“ im Betriebssystem und beim Drucken: keine Animationen und Übergänge */
 @media (prefers-reduced-motion: reduce), print {

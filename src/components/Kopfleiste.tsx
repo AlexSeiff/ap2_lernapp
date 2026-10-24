@@ -54,7 +54,7 @@ export function Kopfleiste({ onSuche, badges, saveText, saveState }: Props) {
                 <Link
                   key={b.id}
                   to={b.to}
-                  className={aktiv === b.id ? 'active' : ''}
+                  className={`kopf-${b.id}${aktiv === b.id ? ' active' : ''}`}
                   aria-current={aktiv === b.id ? 'page' : undefined}
                   title={b.label}
                 >

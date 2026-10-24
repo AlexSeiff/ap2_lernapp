@@ -12,6 +12,7 @@ import { formatPoints, ihkGrade } from '../lib/grading';
 import { cardPool } from '../lib/cards';
 import { diagrammSummary, diagrammUebungen } from '../lib/diagramme';
 import { istFertig } from '../lib/heuteSitzung';
+import { kartenstand, STAENDE, STAND_TEXT } from '../lib/kartenstand';
 import { kalibrierung } from '../lib/kalibrierung';
 import { holeLeseStelle } from '../lib/leseStelle';
 import { istAusgeblendet } from '../lib/settings';
@@ -74,6 +75,7 @@ function Uebersicht() {
         <Countdown />
         <Lernserie />
         <BereichRinge />
+        <KartenstandWidget />
         <FaelligWidget today={today} />
         <UebungenWidget today={today} />
       </div>
@@ -96,7 +98,7 @@ function Uebersicht() {
           <BegriffWidget today={today} />
           <KlausurWidget />
           {!!weakest.length && (
-            <section className="widget">
+            <section className="widget farbe-red">
               <h2>
                 <Icon name="trending-down" /> Schwächste Themen
               </h2>
@@ -225,7 +227,7 @@ function Weiterlernen() {
   const topic = stelle && !istAusgeblendet(progress.settings, stelle.topicId) && content.topics.find((t) => t.id === stelle.topicId);
   const abschnitt = topic && topic.sections.find((s) => s.id === stelle.sectionId);
   return (
-    <section className="widget widget-weiter">
+    <section className="widget widget-weiter farbe-indigo">
       <h2>
         <Icon name="play" /> Weiterlernen
       </h2>
@@ -263,7 +265,7 @@ function Countdown() {
   const days = daysUntilExam(examDate);
   if (days === undefined || !examDate)
     return (
-      <Link to="/einstellungen" className="widget w-klein kpi">
+      <Link to="/einstellungen" className="widget w-klein kpi farbe-orange">
         <span className="w-titel">Prüfung</span>
         <span className="kpi-value">
           <Icon name="calendar" />
@@ -272,7 +274,7 @@ function Countdown() {
       </Link>
     );
   return (
-    <Link to="/einstellungen" className="widget w-klein kpi" title="Prüfungstermin ändern">
+    <Link to="/einstellungen" className="widget w-klein kpi farbe-orange w-countdown" title="Prüfungstermin ändern">
       <span className="w-titel">Prüfung</span>
       <span className="kpi-value">{days > 0 ? days : days === 0 ? 'Heute!' : '–'}</span>
       <span className="kpi-label">
@@ -292,7 +294,10 @@ function Lernserie() {
   const { progress } = useStore();
   const streak = studyStreak(progress);
   return (
-    <div className="widget w-klein kpi" title="Tage in Folge mit Aufgaben, Klausuren, Karteikarten, SQL-, Rechen- oder Diagramm-Übungen">
+    <div
+      className="widget w-klein kpi farbe-pink w-serie"
+      title="Tage in Folge mit Aufgaben, Klausuren, Karteikarten, SQL-, Rechen- oder Diagramm-Übungen"
+    >
       <span className="w-titel">Lernserie</span>
       <span className="kpi-value">
         {streak.current > 0 && <Icon name="flame" />}
@@ -311,7 +316,7 @@ function BereichRinge() {
   const { content, progress } = useStore();
   const bereiche = bereichFortschritt(content, progress);
   return (
-    <section className="widget">
+    <section className="widget farbe-violet">
       <h2>
         <Icon name="target" /> Prüfungsbereiche
       </h2>
@@ -346,15 +351,21 @@ function BereichRinge() {
 function FaelligWidget({ today }: { today: string }) {
   const { content, progress } = useStore();
   const f = faellig(content, progress, today);
-  const zeilen: { to: string; icon: IconName; label: string; anzahl: number }[] = [
+  const zeilen: { to: string; icon: IconName; label: string; anzahl: number; zusatz?: string }[] = [
     { to: '/fehlerjournal', icon: 'notebook-pen', label: 'Wiederholungen fällig', anzahl: f.journal },
-    { to: '/karteikarten', icon: 'layers', label: 'Karteikarten fällig', anzahl: f.karten },
+    {
+      to: '/karteikarten',
+      icon: 'layers',
+      label: 'Karteikarten fällig',
+      anzahl: f.karten,
+      zusatz: f.kartenNeu ? `${f.kartenNeu} neu` : undefined,
+    },
     { to: '/sql/uebungen?status=faellig', icon: 'database', label: 'SQL-Wiederholungen', anzahl: f.sql },
     { to: '/rechnen?status=faellig', icon: 'calculator', label: 'Rechen-Wiederholungen', anzahl: f.rechnen },
     { to: '/diagramme?status=faellig', icon: 'workflow', label: 'Diagramm-Wiederholungen', anzahl: f.diagramme },
   ];
   return (
-    <section className="widget">
+    <section className="widget farbe-orange">
       <h2>
         <Icon name="clock" /> Fällig
       </h2>
@@ -363,7 +374,10 @@ function FaelligWidget({ today }: { today: string }) {
           <li key={z.to}>
             <Link to={z.to}>
               <Icon name={z.icon} />
-              <span className="w-zeile-text">{z.label}</span>
+              <span className="w-zeile-text">
+                {z.label}
+                {z.zusatz && <span className="muted small"> · {z.zusatz}</span>}
+              </span>
               <span className={`w-zahl${z.anzahl ? '' : ' muted'}`}>{z.anzahl}</span>
             </Link>
           </li>
@@ -407,7 +421,7 @@ function UebungenWidget({ today }: { today: string }) {
   ].filter((a) => a.s.total > 0);
   if (!arten.length) return null;
   return (
-    <section className="widget">
+    <section className="widget farbe-teal">
       <h2>
         <Icon name="file-pen-line" /> Übungen
       </h2>
@@ -440,13 +454,54 @@ function UebungenWidget({ today }: { today: string }) {
   );
 }
 
+/** Kartenstand: wie viele Karten zuletzt gewusst, unsicher oder nicht gewusst waren – mit Sprung auf die Seite. */
+function KartenstandWidget() {
+  const { content, progress } = useStore();
+  const pool = useMemo(() => cardPool(content.flashcards, progress.settings), [content, progress.settings]);
+  const stand = kartenstand(pool, progress);
+  return (
+    <section className="widget farbe-green">
+      <h2>
+        <Icon name="chart-column" /> Kartenstand
+      </h2>
+      {stand.gesamt > stand.neu ? (
+        <>
+          <div className="verteilung-balken" aria-hidden="true">
+            {STAENDE.map(
+              (s) => stand.gruppen[s].length > 0 && <span key={s} className={`vb-${s}`} style={{ flexGrow: stand.gruppen[s].length }} />,
+            )}
+            {stand.neu > 0 && <span className="vb-neu" style={{ flexGrow: stand.neu }} />}
+          </div>
+          <ul className="stand-zahlen">
+            {STAENDE.map((s) => (
+              <li key={s}>
+                <Link to={`/karteikarten/stand?stand=${s}`} className={`stand-${s}`}>
+                  <b>{stand.gruppen[s].length}</b>
+                  <span>{STAND_TEXT[s].kurz}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="hint">
+            {stand.neu} {stand.neu === 1 ? 'Karte' : 'Karten'} noch neu · <Link to="/karteikarten/stand">Zum Kartenstand →</Link>
+          </p>
+        </>
+      ) : (
+        <p className="hint">
+          Noch keine Karte bewertet. <Link to="/karteikarten">Zu den Karteikarten →</Link>
+        </p>
+      )}
+    </section>
+  );
+}
+
 /** Markierte Karten (Umsetzungsplan Phase 4): Anzahl, die ersten Fragen und Start. */
 function MarkiertWidget() {
   const { content, progress } = useStore();
   const markiert = markierteIds(progress);
   const karten = cardPool(content.flashcards, progress.settings).filter((c) => markiert.has(c.id));
   return (
-    <section className="widget">
+    <section className="widget farbe-amber">
       <h2>
         <Icon name="star" /> Markiert
       </h2>
@@ -480,7 +535,7 @@ function BegriffWidget({ today }: { today: string }) {
   const tag = useMemo(() => begriffDesTages(content, today), [content, today]);
   if (!tag) return null;
   return (
-    <section className="widget">
+    <section className="widget farbe-sky">
       <h2>
         <Icon name="lightbulb" /> Begriff des Tages
       </h2>
@@ -500,7 +555,7 @@ function KlausurWidget() {
   const { content, progress } = useStore();
   const { laeufe, schnitt } = klausurVerlauf(content, progress);
   return (
-    <section className="widget">
+    <section className="widget farbe-green">
       <h2>
         <Icon name="timer" /> Übungsklausuren
       </h2>

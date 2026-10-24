@@ -16,6 +16,8 @@ import { useStore } from '../lib/store';
 import { NEW_PER_SESSION } from '../../shared/config';
 import { Icon, type IconName } from '../components/Icon';
 import { KartenWechsel } from '../components/KartenWechsel';
+import { KartenstandLeiste } from '../components/KartenstandLeiste';
+import { farbKlasse, TYP_FARBE } from '../lib/farben';
 
 export const CARD_TYPE_LABELS: Record<CardType, string> = {
   wissen: 'Wissen',
@@ -25,6 +27,9 @@ export const CARD_TYPE_LABELS: Record<CardType, string> = {
   falle: 'Falle',
   begriff: 'Fachbegriff',
 };
+/** Farbe der Karte (Streifen oben, Etiketten): nach Kartentyp, Prüfer- und Fachgesprächsfragen eigene Farben. */
+const typKlasse = (c: Flashcard) =>
+  `${c.typ === 'falle' ? 'trap ' : ''}${farbKlasse(c.typ ? TYP_FARBE[c.typ] : c.kind === 'fachgespraech' ? 'pink' : c.kind === 'prueferfrage' ? 'violet' : 'indigo')}`;
 const LEVEL_LABELS: Record<number, string> = { 1: 'Basis', 2: 'Standard', 3: 'Transfer' };
 const KIND_ICONS: Record<Flashcard['kind'], IconName> = { lernkarte: 'layers', prueferfrage: 'circle-question-mark', fachgespraech: 'mic' };
 const KIND_LABELS: Record<Flashcard['kind'], string> = {
@@ -36,7 +41,7 @@ const KIND_LABELS: Record<Flashcard['kind'], string> = {
 export function Karteikarten() {
   const { content, progress, update } = useStore();
   const { settings } = progress;
-  const { f, set, deck, alle, pool, leicht, leichtModus, markiert, auswahl, ausSuche, vonBegriff } = useCardFilters();
+  const { f, set, deck, alle, pool, leicht, leichtModus, markiert, auswahl, ausSuche, vonBegriff, vonStand } = useCardFilters();
   const {
     session,
     index,
@@ -95,7 +100,7 @@ export function Karteikarten() {
         </div>
         <RundenBalken index={index} gesamt={session.length} />
         <KartenWechsel id={String(index)}>
-          <div className={`flashcard leicht ${card.typ === 'falle' ? 'trap' : ''}`}>
+          <div className={`flashcard leicht ${typKlasse(card)}`}>
             <div className="fc-meta">
               <span>
                 <Icon name={KIND_ICONS[card.kind]} /> {KIND_LABELS[card.kind]} · {cardDeck?.title ?? topic?.title}
@@ -198,7 +203,7 @@ export function Karteikarten() {
         {/* Kein <button>: die Karte enthält Markdown mit Absätzen, Listen und Codeblöcken – das ist in einem Button ungültig. */}
         <KartenWechsel id={String(index)}>
           <div
-            className={`flashcard ${flipped ? 'flipped' : ''} ${card.typ === 'falle' ? 'trap' : ''}`}
+            className={`flashcard ${flipped ? 'flipped' : ''} ${typKlasse(card)}`}
             role="button"
             tabIndex={0}
             aria-expanded={flipped}
@@ -297,19 +302,27 @@ export function Karteikarten() {
     <div className="page">
       <h1>Karteikarten</h1>
       {session && (
-        <div className="card success">
-          Runde beendet: ✓ {done.gewusst} gewusst · ~ {done.unsicher} unsicher · ✗ {done.nicht} nicht gewusst
+        <div className="card success actions runde-ende">
+          <span>
+            Runde beendet: <span className="ok">✓ {done.gewusst} gewusst</span> ·{' '}
+            <span className="mid-text">~ {done.unsicher} unsicher</span> · <span className="bad">✗ {done.nicht} nicht gewusst</span>
+          </span>
+          <Link to="/karteikarten/stand" className="small">
+            <Icon name="chart-column" /> Zum Kartenstand
+          </Link>
         </div>
       )}
       {auswahl && (
         <div className="card info actions">
           <span>
-            <Icon name={ausSuche ? 'search' : vonBegriff ? 'book-bookmark' : 'play'} />{' '}
+            <Icon name={ausSuche ? 'search' : vonBegriff ? 'book-bookmark' : vonStand ? 'chart-column' : 'play'} />{' '}
             {ausSuche
               ? `Aus der Suche: ${deck.length} ${deck.length === 1 ? 'Karte' : 'Karten'}.`
               : vonBegriff
                 ? `Zum Begriff: ${deck.length} ${deck.length === 1 ? 'Karte' : 'Karten'}.`
-                : `Heute lernen: ${deck.length} ${deck.length === 1 ? 'Karte' : 'Karten'} für diesen Schritt.`}
+                : vonStand
+                  ? `Aus dem Kartenstand: ${deck.length} ${deck.length === 1 ? 'Karte' : 'Karten'}.`
+                  : `Heute lernen: ${deck.length} ${deck.length === 1 ? 'Karte' : 'Karten'} für diesen Schritt.`}
           </span>
           {deck.length > 0 && (
             <button type="button" onClick={() => startRunde(deck)} autoFocus={!session}>
@@ -418,22 +431,23 @@ export function Karteikarten() {
           </label>
         </div>
       </details>
-      <div className="kpis">
-        <div className="kpi">
+      <div className="kpis drei">
+        <div className="kpi farbe-orange">
           <span className="kpi-value">{due.length}</span>
           <span className="kpi-label">fällig</span>
         </div>
-        <div className="kpi">
+        <div className="kpi farbe-sky">
           <span className="kpi-value">{fresh.length}</span>
           <span className="kpi-label">neu</span>
         </div>
-        <div className="kpi">
+        <div className="kpi farbe-green">
           <span className="kpi-value">
             {known(deck)}/{deck.length}
           </span>
           <span className="kpi-label">sicher (ab Fach 3)</span>
         </div>
       </div>
+      <KartenstandLeiste cards={alle} thema={f.thema} />
       <div className="actions">
         <button
           type="button"
@@ -617,7 +631,7 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
       </div>
       <KartenWechsel id={`${gemischt}-${i}`} zurueck={zurueck}>
         <div
-          className={`flashcard ${offen ? 'flipped' : ''} ${card.typ === 'falle' ? 'trap' : ''}`}
+          className={`flashcard ${offen ? 'flipped' : ''} ${typKlasse(card)}`}
           role="button"
           tabIndex={0}
           aria-expanded={offen}

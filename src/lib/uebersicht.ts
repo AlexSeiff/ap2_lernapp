@@ -83,21 +83,25 @@ export function bereichFortschritt(content: KernInhalt, progress: Progress): Ber
 
 export interface Faellig {
   journal: number;
+  /** Schon bewertete Karten, die heute wieder dran sind. */
   karten: number;
+  /** Noch nie bewertete Karten (früher in „karten“ mitgezählt – 1.500 „fällige“ Karten am ersten Tag schrecken eher ab). */
+  kartenNeu: number;
   sql: number;
   rechnen: number;
   diagramme: number;
 }
 
-/** Was heute fällig ist: Fehlerjournal, Karteikarten (auch neue), SQL-, Rechen- und Diagramm-Wiederholungen. */
+/** Was heute fällig ist: Fehlerjournal, Karteikarten (fällige und neue getrennt), SQL-, Rechen- und Diagramm-Wiederholungen. */
 export function faellig(content: KernInhalt, progress: Progress, today = localDate()): Faellig {
   const pool = cardPool(content.flashcards, progress.settings);
   return {
     journal: Object.values(progress.journal).filter((j) => !j.resolvedAt && isDue(j.due, today)).length,
     karten: pool.filter((c) => {
       const s = progress.cards[c.id];
-      return !s || isDue(s.due, today);
+      return !!s && isDue(s.due, today);
     }).length,
+    kartenNeu: pool.filter((c) => !progress.cards[c.id]).length,
     sql: sqlSummary(
       progress,
       content.sqlExercises.map((e) => e.id),

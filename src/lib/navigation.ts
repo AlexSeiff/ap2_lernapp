@@ -45,6 +45,7 @@ export const BEREICHE: Bereich[] = [
       { to: '/heute', icon: 'play', label: 'Heute lernen' },
       { to: '/lernen', icon: 'book-open', label: 'Themen' },
       { to: '/karteikarten', icon: 'layers', label: 'Karteikarten' },
+      { to: '/karteikarten/stand', icon: 'chart-column', label: 'Kartenstand' },
       { to: '/aufgaben', icon: 'file-pen-line', label: 'Einzelaufgaben' },
       { to: '/rechnen', icon: 'calculator', label: 'Rechenübungen', badge: 'rechnen' },
       { to: '/diagramme', icon: 'workflow', label: 'Diagramm-Übungen', badge: 'diagramme' },

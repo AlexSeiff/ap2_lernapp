@@ -8,7 +8,7 @@ import { HeuteLeiste } from './components/HeuteLeiste';
 import { MobileNav } from './components/MobileNav';
 import { UpdateHinweis } from './components/UpdateHinweis';
 import { IS_STATIC } from './lib/api';
-import type { NavBadge } from './lib/navigation';
+import { aktiverBereich, type NavBadge } from './lib/navigation';
 import { isDue } from './lib/progress';
 import { rechenSummary } from './lib/rechnen';
 import { diagrammSummary, diagrammUebungen } from './lib/diagramme';
@@ -29,6 +29,7 @@ const SEITEN = {
   fachgespraech: () => import('./pages/Fachgespraech'),
   podcast: () => import('./pages/Podcast'),
   karteikarten: () => import('./pages/Karteikarten'),
+  kartenstand: () => import('./pages/Kartenstand'),
   klausur: () => import('./pages/Klausur'),
   material: () => import('./pages/Material'),
   themen: () => import('./pages/Themen'),
@@ -43,6 +44,7 @@ const Podcasts = lazy(() => SEITEN.podcast().then((m) => ({ default: m.Podcasts 
 const Podcast = lazy(() => SEITEN.podcast().then((m) => ({ default: m.Podcast })));
 const Fehlerjournal = lazy(() => SEITEN.fehlerjournal().then((m) => ({ default: m.Fehlerjournal })));
 const Karteikarten = lazy(() => SEITEN.karteikarten().then((m) => ({ default: m.Karteikarten })));
+const Kartenstand = lazy(() => SEITEN.kartenstand().then((m) => ({ default: m.Kartenstand })));
 const Klausur = lazy(() => SEITEN.klausur().then((m) => ({ default: m.Klausur })));
 const KlausurAuswahl = lazy(() => SEITEN.klausur().then((m) => ({ default: m.KlausurAuswahl })));
 const Material = lazy(() => SEITEN.material().then((m) => ({ default: m.Material })));
@@ -217,6 +219,8 @@ export function App() {
 
 function Layout() {
   const sucheSteuerung = useSuche();
+  // Farbe des Bereichs (styles.css: .layout[data-bereich]) – Lernen, Glossar, SQL und Einstellungen haben je eine Akzentfarbe.
+  const { pathname } = useLocation();
   return (
     <>
       <Routes>
@@ -231,7 +235,7 @@ function Layout() {
         <Route
           path="*"
           element={
-            <div className="layout">
+            <div className="layout" data-bereich={aktiverBereich(pathname) ?? 'start'}>
               <SkipLink />
               <Nav onSuche={sucheSteuerung.oeffnen} />
               <main id="inhalt" tabIndex={-1}>
@@ -245,6 +249,7 @@ function Layout() {
                       <Route path="/lernen" element={<Themen />} />
                       <Route path="/lernen/:topicId" element={<Thema />} />
                       <Route path="/karteikarten" element={<Karteikarten />} />
+                      <Route path="/karteikarten/stand" element={<Kartenstand />} />
                       <Route path="/klausur" element={<KlausurAuswahl />} />
                       <Route path="/klausur/:topicId" element={<Klausur />} />
                       <Route path="/aufgaben" element={<Aufgaben />} />

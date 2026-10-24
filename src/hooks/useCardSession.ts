@@ -50,6 +50,7 @@ export function useCardFilters() {
     auswahl: auswahlParam !== null,
     ausSuche: params.get('von') === 'suche',
     vonBegriff: params.get('von') === 'begriff',
+    vonStand: params.get('von') === 'stand',
   };
 }
 
