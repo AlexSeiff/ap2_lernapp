@@ -60,7 +60,10 @@ export interface LernTermin {
 export function lernTermine(plan: Lernplan | undefined, lernzeiten: Lernzeiten, heute: string, examDate?: string): LernTermin[] {
   const tage = plan ? plan.tage : OHNE_TERMIN_TAGE;
   const proWoche = Math.max(1, sitzungenProWoche(lernzeiten));
-  const kartenProSitzung = plan ? Math.ceil((plan.kartenProTag * 7) / proWoche) : 0;
+  // Tagestempo des Lernplans auf die Lerntage der Woche umgelegt.
+  const jeSitzung = (proTag: number) => Math.ceil((proTag * 7) / proWoche);
+  const neueProSitzung = plan ? jeSitzung(plan.neueKartenProTag) : 0;
+  const kartenMinutenProSitzung = plan ? jeSitzung(plan.kartenMinutenProTag) : 0;
   const termine: LernTermin[] = [];
   for (let i = 0; i < tage; i++) {
     const datum = addDays(heute, i);
@@ -76,7 +79,12 @@ export function lernTermine(plan: Lernplan | undefined, lernzeiten: Lernzeiten, 
     } else if (woche?.themen.length) {
       titel = `AP2 lernen: ${woche.themen.map((t) => t.titel).join(', ')}`;
       zeilen.push(`Woche ${woche.nummer} – Schwerpunkte:`, ...woche.themen.map((t) => `• ${t.titel}`));
-      if (kartenProSitzung > 0) zeilen.push(`Ziel heute: etwa ${kartenProSitzung} Karten sicher machen.`);
+      if (kartenMinutenProSitzung > 0)
+        zeilen.push(
+          neueProSitzung > 0
+            ? `Karten heute: etwa ${neueProSitzung} neue plus die fälligen (≈ ${kartenMinutenProSitzung} min).`
+            : `Karten heute: die fälligen (≈ ${kartenMinutenProSitzung} min).`,
+        );
     } else {
       titel = 'AP2 lernen';
       zeilen.push('„Heute lernen“ stellt eine gemischte Runde aus dem zusammen, was fällig ist.');

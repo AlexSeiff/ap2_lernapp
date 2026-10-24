@@ -38,9 +38,12 @@ const L: Lernzeiten = {
 
 const plan = (tage: number): Lernplan => ({
   tage,
+  kartenGesamt: 125,
   kartenZiel: 100,
   kartenOffen: 70,
-  kartenProTag: 4,
+  neueKartenProTag: 4,
+  kartenMinutenProTag: 6,
+  begriffe: { gesamt: 0, sicher: 0 },
   wochen: [
     {
       nummer: 1,
@@ -94,8 +97,8 @@ describe('Lerntermine', () => {
     // 14 Tage ab Montag: Mo, Mi, Sa, Mo, Mi, Sa
     expect(t.map((x) => x.datum)).toEqual(['2026-10-26', '2026-10-28', '2026-10-31', '2026-11-02', '2026-11-04', '2026-11-07']);
     expect(t[0]).toMatchObject({ von: '18:30', minuten: 45, titel: 'AP2 lernen: SQL, Statistik I' });
-    // 4 Karten je Tag · 7 Tage / 3 Lerntage = 10 je Sitzung
-    expect(t[0].text).toContain('etwa 10 Karten');
+    // 4 neue Karten je Tag · 7 Tage / 3 Lerntage = 10 je Sitzung; 6 min · 7 / 3 = 14 min
+    expect(t[0].text).toContain('etwa 10 neue plus die fälligen (≈ 14 min)');
     expect(t[3].titel).toBe('AP2 lernen: Prozessanalyse');
     // die letzten 3 Tage vor der Prüfung (6.–8.11.): Samstag ist Endspurt
     expect(t[5].titel).toBe('AP2: Wiederholung & Übungsklausur');

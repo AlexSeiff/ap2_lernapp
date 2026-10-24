@@ -221,12 +221,32 @@ function LernplanKarte() {
         <Icon name="calendar" /> Lernplan – noch {plan.tage} {plan.tage === 1 ? 'Tag' : 'Tage'}
       </h2>
       {plan.kartenOffen > 0 ? (
-        <p>
-          Ziel: {plan.kartenZiel} Karten sicher (Fach 3+). Dir fehlen noch <b>{plan.kartenOffen}</b> – das sind etwa{' '}
-          <b>{plan.kartenProTag} Karten pro Tag</b>.
-        </p>
+        <>
+          <p>
+            Ziel: {plan.kartenZiel} von {plan.kartenGesamt} Prüfungskarten sicher (Fach 3+). Dir fehlen noch <b>{plan.kartenOffen}</b> –
+            dafür am Tag{' '}
+            {plan.neueKartenProTag > 0 ? (
+              <>
+                etwa <b>{plan.neueKartenProTag} neue Karten</b> plus die fälligen
+              </>
+            ) : (
+              'die fälligen Karten'
+            )}
+            , zusammen <b>≈ {plan.kartenMinutenProTag} min</b>.
+          </p>
+          <p className="muted small">
+            Die Tagesrunde enthält davon nur, was neben Aufgaben und Übungen in die gewählte Zeit passt – den Rest unter{' '}
+            <Link to="/karteikarten">Karteikarten</Link>.
+          </p>
+        </>
       ) : (
         <p>Kartenziel erreicht – jetzt Fehlerjournal, Aufgaben und Übungsklausuren.</p>
+      )}
+      {plan.begriffe.gesamt > 0 && (
+        <p className="muted small">
+          Begriffskarten ({plan.begriffe.gesamt}, davon {plan.begriffe.sicher} sicher) zählen nicht zum Ziel – zum Nachschlagen und
+          Wiederholen, wenn Zeit bleibt.
+        </p>
       )}
       <ol className="lernplan">
         {plan.wochen.map((w) => (

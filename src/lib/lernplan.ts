@@ -1,8 +1,10 @@
 // Lernplan bis zum Prüfungstermin: verteilt die Themen nach Schwäche und Umfang auf die Wochen und rechnet das nötige Tempo aus.
 // Rein (ohne React, ohne Speicher): gleicher Stand + gleicher Tag → gleicher Plan.
 
+import { CARD_INTERVALS, HEUTE_ZEITEN } from '../../shared/config';
 import type { Progress } from '../../shared/progress';
 import type { KernInhalt } from '../../shared/texte';
+import { cardPool } from './cards';
 import { istAusgeblendet } from './settings';
 import { daysUntilExam, topicStats } from './stats';
 
@@ -10,8 +12,10 @@ import { daysUntilExam, topicStats } from './stats';
 export const THEMEN_PRO_WOCHE = 3;
 /** Die letzten Tage vor der Prüfung sind für Wiederholung und Übungsklausuren reserviert. */
 export const PUFFER_TAGE = 3;
-/** Anteil der Karten, der bis zur Prüfung „sicher“ (Fach ≥ 3) sein soll. */
+/** Anteil der Prüfungskarten (ohne Begriffskarten), der bis zur Prüfung „sicher“ (Fach ≥ 3) sein soll. */
 export const ZIEL_KARTEN = 0.8;
+/** Grobe Annahme: nicht jede Antwort sitzt beim ersten Mal – so viel mehr Bewertungen als das Minimum bis Fach 3. */
+export const WIEDERHOLUNGS_FAKTOR = 1.5;
 
 export interface LernWoche {
   /** 1-basiert. */
@@ -24,10 +28,16 @@ export interface LernWoche {
 export interface Lernplan {
   tage: number;
   wochen: LernWoche[];
-  /** Karten, die bis zur Prüfung noch „sicher“ werden müssen, und das nötige Tempo je Tag. */
+  /** Prüfungskarten der geplanten Themen (ohne Begriffskarten), Ziel „sicher“ (Fach 3+) und was davon noch fehlt. */
+  kartenGesamt: number;
   kartenZiel: number;
   kartenOffen: number;
-  kartenProTag: number;
+  /** Nie gelernte Karten je Tag, damit jede vor dem Puffer noch Fach 3 erreichen kann (die angefangenen zählen schon mit). */
+  neueKartenProTag: number;
+  /** Geschätzte Minuten Karteikarten je Tag für das Ziel: neue Karten und ihre Wiederholungen. */
+  kartenMinutenProTag: number;
+  /** Begriffskarten zählen nicht zum Ziel – nur zur Info. */
+  begriffe: { gesamt: number; sicher: number };
 }
 
 const addTage = (datum: string, n: number) => {
@@ -106,9 +116,29 @@ export function planeLernplan(content: KernInhalt, progress: Progress, today: st
     w += 1;
   }
 
-  const gesamt = stats.reduce((a, s) => a + s.cardsTotal, 0);
-  const sicher = stats.reduce((a, s) => a + s.cardsKnown, 0);
-  const kartenZiel = Math.ceil(gesamt * ZIEL_KARTEN);
+  // Kartenziel nur über Prüfungskarten: die rund 800 Begriffskarten machten daraus „42 Karten pro Tag“, die keine Tagesrunde schafft.
+  const themen = new Set(stats.map((s) => s.topic.id));
+  const karten = cardPool(content.flashcards, progress.settings).filter((c) => c.topicId && themen.has(c.topicId));
+  const fach = (id: string) => progress.cards[id]?.box ?? 0;
+  const pruefung = karten.filter((c) => c.typ !== 'begriff');
+  const begriffe = karten.filter((c) => c.typ === 'begriff');
+  const sicher = pruefung.filter((c) => fach(c.id) >= 3).length;
+  const angefangen = pruefung.filter((c) => fach(c.id) > 0 && fach(c.id) < 3);
+  const kartenZiel = Math.ceil(pruefung.length * ZIEL_KARTEN);
   const kartenOffen = Math.max(0, kartenZiel - sicher);
-  return { tage, wochen, kartenZiel, kartenOffen, kartenProTag: Math.ceil(kartenOffen / nutzbar) };
+  const neuNoetig = Math.max(0, kartenOffen - angefangen.length);
+  // Neue Karte: „gewusst“ → Fach 2, nach CARD_INTERVALS[2] Tagen noch einmal „gewusst“ → Fach 3. Später begonnen schafft sie es nicht mehr.
+  const startTage = Math.max(1, nutzbar - CARD_INTERVALS[2]);
+  // Bewertungen bis Fach 3: neue Karten 2, angefangene 3 − Fach – mal WIEDERHOLUNGS_FAKTOR für die, die nicht gleich sitzen.
+  const bewertungen = (neuNoetig * 2 + angefangen.reduce((a, c) => a + 3 - fach(c.id), 0)) * WIEDERHOLUNGS_FAKTOR;
+  return {
+    tage,
+    wochen,
+    kartenGesamt: pruefung.length,
+    kartenZiel,
+    kartenOffen,
+    neueKartenProTag: Math.ceil(neuNoetig / startTage),
+    kartenMinutenProTag: kartenOffen ? Math.ceil((bewertungen * HEUTE_ZEITEN.karte) / nutzbar) : 0,
+    begriffe: { gesamt: begriffe.length, sicher: begriffe.filter((c) => fach(c.id) >= 3).length },
+  };
 }

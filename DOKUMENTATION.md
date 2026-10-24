@@ -585,7 +585,8 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
      Plans stay within the chosen duration + ~3 min (at least 5 cards; `tests/heute.test.ts` checks 10/20/40 min over 30 days of
      real content). Card blocks carry their exact minutes (5 cards = 2.5 min); the page rounds only for display.
   Anything already done today (earlier rounds of the day via `HeuteSitzung.frueher`, tasks attempted and exercises checked today) is skipped.
-  4. **Cards** with the remaining time (at least 5 if available): due cards (longest due, lowest box first), then new ones (≤ `NEW_PER_SESSION`).
+  4. **Cards** with the remaining time (at least 5 if available): due cards (longest due, lowest box first), then new ones (≤ `NEW_PER_SESSION`;
+     exam cards before Begriffskarten, matching the Lernplan's card target).
      `cardPool` applies the Prüferfragen/Fachgespräch switches; in Leicht-Modus only cards with 4 answers. Grouped per topic (deck if no
      topic) into blocks of at most `HEUTE_KARTEN_BLOCK` = 8.
   5. **Interleaving** (`verschraenke`): greedy, always the topic with the most remaining items that is not the previous one → never the same topic
@@ -614,13 +615,19 @@ any of its tasks needs). `tests/belegsatz.test.ts` checks the sections exist.
 
 ### Lernplan im Kalender (October 2026)
 
+- **Card target** (`planeLernplan`, `src/lib/lernplan.ts`, `tests/lernplan.test.ts`): only **exam cards** of the planned topics count
+  (`typ !== 'begriff'`); Begriffskarten are reported separately (`begriffe`) and are optional. Goal: `ZIEL_KARTEN` (80 %) in box 3+.
+  `neueKartenProTag` = (missing − cards already started) / (usable days − `CARD_INTERVALS[2]`), because a new card needs two „gewusst“
+  ratings `CARD_INTERVALS[2]` days apart to reach box 3. `kartenMinutenProTag` = ratings still needed (new: 2, started: 3 − box) ×
+  `WIEDERHOLUNGS_FAKTOR` × `HEUTE_ZEITEN.karte` / usable days. `/heute` shows both and points to Karteikarten for what the daily round
+  leaves out. Before: all cards incl. ~800 Begriffskarten counted, giving „42 Karten pro Tag“.
 - **Lernzeiten** (`Settings.lernzeiten`, optional, no version bump; read tolerantly by `leseLernzeiten` in `shared/progress.ts`):
   `{ werktags, wochenende }`, each `{ tage (Date.getDay, Mo–Fr resp. Sa/So), von 'HH:MM', minuten 5–600 }`. Missing = standard
   (Mo–Fr 18:00 for 30 min, Sa 10:00 for 60 min, `STANDARD_LERNZEITEN` in `src/lib/lernzeiten.ts`). Set in Einstellungen → „Lernzeiten“
   (`components/Lernzeiten.tsx`, weekday chips, start time, duration).
 - **Kalender** (`lernTermine` + `lernplanIcs`, pure, `tests/lernzeiten.test.ts`): one event per study day from today until the day before
   the exam (without an exam date: 28 days), at the chosen local time (floating, no time zone). Title and description name the focus topics
-  of that week from the Lernplan (`planeLernplan`) and the cards per session (cards per day × 7 / study days per week); the last
+  of that week from the Lernplan (`planeLernplan`) and the new cards and card minutes per session (per day × 7 / study days per week); the last
   `PUFFER_TAGE` are „Wiederholung & Übungsklausur“; the exam day is an all-day event. Reminder 10 minutes before (`VALARM`), fixed UIDs
   per day (re-importing updates instead of duplicating in most calendars), lines folded to 75 bytes (RFC 5545). Button „Lernplan in den
   Kalender (.ics)“ in Einstellungen and under the Lernplan on `/heute`. The older `kalenderIcs` (Daten & Import: due repetitions as

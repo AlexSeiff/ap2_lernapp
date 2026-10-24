@@ -30,9 +30,11 @@ Legende: ✅ in dieser Runde erledigt · 🔴 wichtig · 🟡 sinnvoll · ⚪ ni
   Zeit passen, sonst eine kleinere bzw. das nächste Thema; falsch gelöste Übungen haben Vorrang vor einer zweiten neuen Aufgabe;
   Kartenblöcke mit genauen Minuten. 20 min plant jetzt höchstens ~22,5 statt bis zu 42 min. Anzeige „neue Aufgabe“ statt
   fälschlich zweimal „schwächstes Thema“.
-- 🟡 **Lernplan-Ziel unrealistisch**: „1196 Karten fehlen – etwa 42 Karten pro Tag“, die Tagesrunde bringt aber nur ~5 Karten.
-  Entweder die Kartenmenge in „Heute lernen“ am Lernplan ausrichten oder das Ziel auf prüfungsrelevante Decks begrenzen
-  (Begriffskarten optional).
+- ✅ **Lernplan-Ziel unrealistisch** (behoben): „1196 Karten fehlen – etwa 42 Karten pro Tag“ zählte die 816 Begriffskarten mit.
+  Jetzt zählen nur Prüfungskarten (707 → Ziel 566); angezeigt werden neue Karten pro Tag (berücksichtigt, dass eine neue Karte
+  zwei Bewertungen im Abstand von 3 Tagen bis Fach 3 braucht und angefangene schon mitzählen) und die geschätzten Minuten
+  Karteikarten am Tag, mit Hinweis, dass die Tagesrunde nur einen Teil davon enthält. Begriffskarten stehen getrennt als optional.
+  „Heute lernen“ nimmt bei neuen Karten erst Prüfungskarten, dann Begriffskarten; der Kalender (.ics) zeigt dasselbe Tempo.
 - 🟡 **Prüferfragen/Fachgespräch ausgeschaltet** → ihre Bewertungen (aktuell 29 Karten) verschwinden aus allen Zahlen. Der
   Kartenstand weist jetzt darauf hin; die Übersicht und die Karteikarten-Seite sagen es noch nicht.
 - 🟡 **Leicht-Modus ohne einen einzigen geprüften `mc`-Block**: Beide Kartendateien haben 0 `mc`-Blöcke – alle falschen Antworten

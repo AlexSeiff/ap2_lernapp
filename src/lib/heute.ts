@@ -272,7 +272,12 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
     .sort(
       (a, b) => progress.cards[a.id].due.localeCompare(progress.cards[b.id].due) || progress.cards[a.id].box - progress.cards[b.id].box,
     );
-  const neueKarten = mischeNachThema(pool.filter((c) => !progress.cards[c.id]));
+  // Neue Karten: erst Prüfungskarten, Begriffskarten danach – wie das Kartenziel im Lernplan (lib/lernplan.ts).
+  const neu = pool.filter((c) => !progress.cards[c.id]);
+  const neueKarten = [
+    ...mischeNachThema(neu.filter((c) => c.typ !== 'begriff')),
+    ...mischeNachThema(neu.filter((c) => c.typ === 'begriff')),
+  ];
   const platz = Math.max(Math.floor((ziel - minuten) / proKarte), Math.min(5, faelligeKarten.length + neueKarten.length));
   const karten = [...faelligeKarten, ...neueKarten.slice(0, NEW_PER_SESSION)].slice(0, platz);
   const nachThema = new Map<string, Flashcard[]>();
