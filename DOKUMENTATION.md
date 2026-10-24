@@ -574,12 +574,16 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
   SQL 5, Rechnen 5, Diagramm 5. **Only things not yet done or last done wrong** – nothing whose last attempt was right (full points, or
   `zuletztRichtig`), even if a spaced repetition is due (owner decision, October 2026). Steps:
   1. **Fehlerjournal**: due open entries whose last attempt was below full points (oldest due first) until about half the time, at least one.
-  2. **Tasks**: one never attempted task from the weakest topic (lowest last exam, else Ø tasks; without any data the topic with the fewest
+  2. **1–2 exercises** (SQL, Rechen, Diagramm), chosen before the tasks so their time is reserved (repeating mistakes beats new
+     material): last result wrong or solution shown (`letzterStand` in `src/lib/wiederholung.ts`; oldest first, a second one only if
+     both fit next to the Fehlerjournal); none → one never attempted exercise, preferably of the weakest topic.
+  3. **Tasks**: one never attempted task from the weakest topic (lowest last exam, else Ø tasks; without any data the topic with the fewest
      attempts; if it has none left, the next weakest) and – not in a short round – a second one from the topic practised longest ago.
-     Answered tasks never come here (wrong ones come back via the Fehlerjournal; „Antworten zurücksetzen“ on the task page brings one
-     back). Never one of the planned repetitions, never AI tasks.
-  3. **1–2 exercises** (SQL, Rechen, Diagramm): last result wrong or solution shown (`letzterStand` in `src/lib/wiederholung.ts`; oldest
-     first, at most 2); none → one never attempted exercise, preferably of the weakest topic.
+     **Time budget**: only tasks whose estimate fits into what is left after Fehlerjournal and exercises; if none in a topic fits, the next
+     topic (before October 2026 a 25-P task made a 20-minute round take 40). Answered tasks never come here (wrong ones come back via the
+     Fehlerjournal; „Antworten zurücksetzen“ on the task page brings one back). Never one of the planned repetitions, never AI tasks.
+     Plans stay within the chosen duration + ~3 min (at least 5 cards; `tests/heute.test.ts` checks 10/20/40 min over 30 days of
+     real content). Card blocks carry their exact minutes (5 cards = 2.5 min); the page rounds only for display.
   Anything already done today (earlier rounds of the day via `HeuteSitzung.frueher`, tasks attempted and exercises checked today) is skipped.
   4. **Cards** with the remaining time (at least 5 if available): due cards (longest due, lowest box first), then new ones (≤ `NEW_PER_SESSION`).
      `cardPool` applies the Prüferfragen/Fachgespräch switches; in Leicht-Modus only cards with 4 answers. Grouped per topic (deck if no

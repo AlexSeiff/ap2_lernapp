@@ -101,8 +101,9 @@ const themaVon = (topicId: string | undefined, fallback: string) => topicId ?? f
 /**
  * Plant die Tagesrunde:
  * 1. Eine Aufgabe aus dem schwächsten Thema und eine zweite (nicht bei kurzer Runde) aus dem am längsten nicht geübten Thema (letzte
- *    Klausur, sonst Ø Aufgaben; ohne Daten: das Thema mit den wenigsten Versuchen) – nur eine noch nie bearbeitete; ist das Thema durch,
- *    das nächstschwächere. Falsch beantwortete Aufgaben kommen über das Fehlerjournal (3.).
+ *    Klausur, sonst Ø Aufgaben; ohne Daten: das Thema mit den wenigsten Versuchen) – nur eine noch nie bearbeitete, die neben dem
+ *    Fehlerjournal und einer Übung in die Dauer passt; ist das Thema durch oder passt keine, das nächste. Falsch beantwortete Aufgaben
+ *    kommen über das Fehlerjournal (3.).
  * 2. 1–2 Übungen (SQL, Rechnen, Diagramm): zuletzt nicht richtig gelöste (falsch oder Lösung angesehen; am längsten her zuerst,
  *    höchstens 2); gibt es keine, eine noch nie bearbeitete (bevorzugt aus dem schwächsten Thema). Zuletzt richtig gelöste nie.
  * 3. Fällige Fehlerjournal-Aufgaben, deren letzter Versuch unter voller Punktzahl lag (älteste zuerst), bis etwa zur Hälfte der Zeit,
@@ -151,46 +152,8 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
   }
   const verplant = new Set(journalItems.map((it) => it.ids[0]));
 
-  // 1. Schwächstes Thema und eine Aufgabe daraus.
-  // Ausgeblendete Lernblätter kommen nicht als schwächstes Thema in Frage; fällige Wiederholungen ihrer Aufgaben bleiben.
-  const stats = topicStats(content, progress).filter((s) => s.topic.exam?.blocks.length && !istAusgeblendet(progress.settings, s.topic.id));
-  const mitDaten = stats.filter((s) => s.lastExam !== undefined || s.avgTaskPct !== undefined);
-  const schwach = mitDaten.length
-    ? mitDaten.reduce((a, b) => ((b.lastExam ?? b.avgTaskPct!) < (a.lastExam ?? a.avgTaskPct!) ? b : a))
-    : stats.reduce<(typeof stats)[number] | undefined>((a, b) => (!a || b.attempts < a.attempts ? b : a), undefined);
-  const schwaechstesThema = schwach?.topic.id;
-  if (schwach) {
-    // Bereits beantwortete Aufgaben kommen nicht mehr vor (zurücksetzbar auf der Aufgabenseite); ist das schwächste Thema
-    // durch, kommt das nächstschwächere an die Reihe.
-    const beantwortet = new Set(progress.attempts.map((a) => a.taskId));
-    const staerke = (s: (typeof stats)[number]) => s.lastExam ?? s.avgTaskPct ?? Infinity;
-    const reihenfolge = [schwach, ...stats.filter((s) => s !== schwach).sort((a, b) => staerke(a) - staerke(b))];
-    const offen = (s: (typeof stats)[number]) =>
-      Object.values(content.tasks).filter(
-        (t) => t.topicId === s.topic.id && !t.generated && !verplant.has(t.id) && !beantwortet.has(t.id) && !schonHeute.has(t.id),
-      );
-    const gewaehlt = reihenfolge.find((s) => offen(s).length);
-    if (gewaehlt) {
-      const neu = offen(gewaehlt);
-      add(aufgabeItem('aufgabe', neu[Math.floor(zufall() * neu.length)]));
-      // Zweite Aufgabe aus einem anderen Thema – dem, das am längsten nicht geübt wurde (nie geübt zuerst) –, damit über die
-      // Tage alle Themen drankommen und nicht nur die schwächsten.
-      const zuletzt = new Map<string, string>();
-      for (const a of progress.attempts) {
-        const t = content.tasks[a.taskId];
-        if (t && a.date > (zuletzt.get(t.topicId) ?? '')) zuletzt.set(t.topicId, a.date);
-      }
-      const weitere = reihenfolge
-        .filter((s) => s !== gewaehlt && offen(s).length)
-        .sort((a, b) => (zuletzt.get(a.topic.id) ?? '').localeCompare(zuletzt.get(b.topic.id) ?? ''));
-      if (weitere.length && ziel >= HEUTE_MINUTEN) {
-        const rest = offen(weitere[0]);
-        add(aufgabeItem('aufgabe', rest[Math.floor(zufall() * rest.length)]));
-      }
-    }
-  }
-
-  // 2. SQL-, Rechen- und Diagramm-Übungen: nur neue und zuletzt nicht richtig gelöste.
+  // 2. (vorab) SQL-, Rechen- und Diagramm-Übungen: nur neue und zuletzt nicht richtig gelöste. Vor den Aufgaben ausgewählt, damit
+  // ihre Zeit reserviert ist – Fehler wiederholen geht vor neuem Stoff.
   type Uebung = {
     art: 'sql' | 'rechnen' | 'diagramm';
     id: string;
@@ -213,7 +176,64 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
   const falsch = alleUebungen
     .filter((u) => letzterStand(u.stand) === 'falsch')
     .sort((a, b) => seit(a).localeCompare(seit(b)) || a.id.localeCompare(b.id));
-  let uebungen = falsch.slice(0, 2);
+  // Eine Übung immer, eine zweite falsch gelöste nur, wenn neben dem Fehlerjournal Platz für beide ist.
+  const falschGeplant = falsch.slice(0, ziel - journalMinuten >= 2 * HEUTE_ZEITEN.sql ? 2 : 1);
+  const uebungMinuten = falschGeplant.length
+    ? falschGeplant.reduce((s, u) => s + HEUTE_ZEITEN[u.art], 0)
+    : alleUebungen.some((u) => letzterStand(u.stand) === 'neu')
+      ? HEUTE_ZEITEN.sql
+      : 0;
+
+  // 1. Schwächstes Thema und eine Aufgabe daraus.
+  // Ausgeblendete Lernblätter kommen nicht als schwächstes Thema in Frage; fällige Wiederholungen ihrer Aufgaben bleiben.
+  const stats = topicStats(content, progress).filter((s) => s.topic.exam?.blocks.length && !istAusgeblendet(progress.settings, s.topic.id));
+  const mitDaten = stats.filter((s) => s.lastExam !== undefined || s.avgTaskPct !== undefined);
+  const schwach = mitDaten.length
+    ? mitDaten.reduce((a, b) => ((b.lastExam ?? b.avgTaskPct!) < (a.lastExam ?? a.avgTaskPct!) ? b : a))
+    : stats.reduce<(typeof stats)[number] | undefined>((a, b) => (!a || b.attempts < a.attempts ? b : a), undefined);
+  const schwaechstesThema = schwach?.topic.id;
+  if (schwach) {
+    // Bereits beantwortete Aufgaben kommen nicht mehr vor (zurücksetzbar auf der Aufgabenseite); ist das schwächste Thema
+    // durch, kommt das nächstschwächere an die Reihe.
+    const beantwortet = new Set(progress.attempts.map((a) => a.taskId));
+    const staerke = (s: (typeof stats)[number]) => s.lastExam ?? s.avgTaskPct ?? Infinity;
+    const reihenfolge = [schwach, ...stats.filter((s) => s !== schwach).sort((a, b) => staerke(a) - staerke(b))];
+    // Zeitbudget: Aufgaben nur, wenn sie neben Fehlerjournal und Übungen in die gewählte Dauer passen. Ohne diese Grenze machte
+    // eine 25-P-Aufgabe (~23 min) aus einer 20-Minuten-Runde 40 Minuten. Passt im Thema keine, kommt das nächste dran.
+    const budget = () => ziel - journalMinuten - uebungMinuten - minuten;
+    const offen = (s: (typeof stats)[number]) =>
+      Object.values(content.tasks).filter(
+        (t) =>
+          t.topicId === s.topic.id &&
+          !t.generated &&
+          !verplant.has(t.id) &&
+          !beantwortet.has(t.id) &&
+          !schonHeute.has(t.id) &&
+          aufgabeMinuten(t.points) <= budget(),
+      );
+    const gewaehlt = reihenfolge.find((s) => offen(s).length);
+    if (gewaehlt) {
+      const neu = offen(gewaehlt);
+      add(aufgabeItem('aufgabe', neu[Math.floor(zufall() * neu.length)]));
+      // Zweite Aufgabe aus einem anderen Thema – dem, das am längsten nicht geübt wurde (nie geübt zuerst) –, damit über die
+      // Tage alle Themen drankommen und nicht nur die schwächsten.
+      const zuletzt = new Map<string, string>();
+      for (const a of progress.attempts) {
+        const t = content.tasks[a.taskId];
+        if (t && a.date > (zuletzt.get(t.topicId) ?? '')) zuletzt.set(t.topicId, a.date);
+      }
+      const weitere = reihenfolge
+        .filter((s) => s !== gewaehlt && offen(s).length)
+        .sort((a, b) => (zuletzt.get(a.topic.id) ?? '').localeCompare(zuletzt.get(b.topic.id) ?? ''));
+      if (weitere.length && ziel >= HEUTE_MINUTEN) {
+        const rest = offen(weitere[0]);
+        add(aufgabeItem('aufgabe', rest[Math.floor(zufall() * rest.length)]));
+      }
+    }
+  }
+
+  // 2. Übungen eintragen: die falsch gelösten von oben, sonst eine neue (bevorzugt aus dem schwächsten Thema).
+  let uebungen = falschGeplant;
   if (!uebungen.length) {
     const neu = alleUebungen.filter((u) => letzterStand(u.stand) === 'neu');
     const passend = neu.filter((u) => schwaechstesThema && u.topicId === schwaechstesThema);
@@ -271,7 +291,8 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
         ids: block.map((c) => c.id),
         thema,
         titel: `${block.length} ${block.length === 1 ? 'Karteikarte' : 'Karteikarten'} · ${name}`,
-        minuten: Math.max(1, Math.round(block.length * proKarte)),
+        // Genau, nicht je Block aufgerundet: 5 einzelne Karten aus 5 Themen sind 2,5 min, nicht 5. Gerundet wird erst in der Anzeige.
+        minuten: block.length * proKarte,
         link: `/karteikarten?karten=${block.map((c) => encodeURIComponent(c.id)).join(',')}`,
       });
     }

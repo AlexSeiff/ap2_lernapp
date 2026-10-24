@@ -378,7 +378,36 @@ describe('planeHeute', () => {
     const r = planeHeute(real, emptyProgress(), { today: TODAY });
     expect(r.items.length).toBeGreaterThan(2);
     for (const it of r.items) expect(it.link.startsWith('/')).toBe(true);
-    expect(r.minuten).toBeLessThanOrEqual(HEUTE_MINUTEN + 10);
+    expect(r.minuten).toBeLessThanOrEqual(HEUTE_MINUTEN + 3);
+  });
+
+  it('Aufgabe passt nicht in die Dauer → eine kleinere aus einem anderen Thema statt der großen', () => {
+    // Schwächstes Thema 02; offen ist dort nur 02-A2 (10 P ≈ 9 min) – zu groß für 10 Minuten neben einer Übung.
+    const p: Progress = { ...emptyProgress(), attempts: [{ taskId: '02-A1', date: '2026-09-20', points: 0, max: 5, mode: 'einzel' }] };
+    const kurz = plan(p, { minuten: 10 });
+    expect(kurz.schwaechstesThema).toBe('02');
+    const aufgaben = kurz.items.filter((i) => i.art === 'aufgabe');
+    expect(aufgaben.map((i) => i.ids[0])).not.toContain('02-A2');
+    expect(aufgaben.every((i) => i.minuten <= 5)).toBe(true);
+    expect(kurz.minuten).toBeLessThanOrEqual(10 + 3);
+    // Bei 20 Minuten passt sie wieder.
+    expect(plan(p).items.find((i) => i.art === 'aufgabe')?.ids).toEqual(['02-A2']);
+  });
+
+  it('hält die gewählte Dauer mit den echten Inhalten ein (10/20/40 min, 30 Tage)', () => {
+    const real = loadContent(CONTENT_DIR);
+    // Eine schwache SQL-Aufgabe und eine fällige Wiederholung – so wie nach den ersten Lerntagen.
+    const p: Progress = {
+      ...emptyProgress(),
+      attempts: [{ taskId: '01-B2', date: '2026-10-20', points: 1, max: 5, mode: 'einzel' }],
+      journal: { '01-B2': { taskId: '01-B2', addedAt: '2026-10-20', stage: 0, due: '2026-10-21', lastPoints: 1, max: 5 } },
+    };
+    for (const ziel of [10, 20, 40])
+      for (let d = 1; d <= 30; d++) {
+        const r = planeHeute(real, p, { today: `2026-11-${String(d).padStart(2, '0')}`, minuten: ziel });
+        // Spielraum: mindestens 5 Karten je Runde und gerundete Schätzungen.
+        expect(r.minuten, `${ziel} min am ${d}.11.`).toBeLessThanOrEqual(ziel + 3);
+      }
   });
 });
 

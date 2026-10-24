@@ -14,7 +14,8 @@ import { lernzeitenVon } from '../lib/lernzeiten';
 
 const ART_TEXT: Record<HeuteItem['art'], string> = {
   wiederholung: 'Fehlerjournal',
-  aufgabe: 'schwächstes Thema',
+  // Nicht „schwächstes Thema“: die zweite Aufgabe kommt aus dem am längsten nicht geübten Thema.
+  aufgabe: 'neue Aufgabe',
   sql: 'SQL-Übung',
   rechnen: 'Rechenübung',
   diagramm: 'Diagramm-Übung',
@@ -110,7 +111,8 @@ export function Heute() {
       </div>
       <p className="lead">
         Eine gemischte Runde von etwa {dauer} Minuten aus dem, was gerade dran ist: Fehlerjournal, fällige Karteikarten, eine SQL- oder
-        Rechenübung und eine Aufgabe aus deinem schwächsten Thema. Die Themen wechseln sich ab – das bleibt besser hängen.
+        Rechenübung und neue Aufgaben aus deinem schwächsten und dem am längsten nicht geübten Thema – so viele, wie in die Zeit passen. Die
+        Themen wechseln sich ab – das bleibt besser hängen.
       </p>
       {plan && plan.items.length > 0 ? (
         <>
@@ -173,7 +175,7 @@ function Schritte({
               <Icon name={HEUTE_ICONS[it.art]} /> {it.titel}
               <span className="muted small">
                 {' '}
-                · {ART_TEXT[it.art]} · ~{Math.round(it.minuten)} min
+                · {ART_TEXT[it.art]} · ~{Math.max(1, Math.round(it.minuten))} min
               </span>
             </span>
           </li>

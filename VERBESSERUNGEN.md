@@ -26,10 +26,10 @@ Legende: ✅ in dieser Runde erledigt · 🔴 wichtig · 🟡 sinnvoll · ⚪ ni
 
 ## 2. Logik & Bedienung
 
-- 🔴 **„Heute lernen“ hält die gewählte Dauer nicht ein.** Bei „20 min“ plant die Runde ~40 min: `planeHeute()` nimmt die Aufgabe
-  aus dem schwächsten Thema und eine zweite Aufgabe ohne Blick aufs Zeitbudget – eine 25-P-Aufgabe (z. B. DD2 C1) allein sind ~23 min.
-  Vorschlag: nur Aufgaben mit `aufgabeMinuten(points) ≤ verbleibende Zeit` wählen (sonst die kleinste offene des Themas), die zweite
-  Aufgabe nur, wenn noch Platz ist. Test in `tests/heute.test.ts`: Summe der Minuten ≤ Ziel × 1,2.
+- ✅ **„Heute lernen“ hält die gewählte Dauer ein** (behoben): Aufgaben nur, wenn sie neben Fehlerjournal und Übungen in die
+  Zeit passen, sonst eine kleinere bzw. das nächste Thema; falsch gelöste Übungen haben Vorrang vor einer zweiten neuen Aufgabe;
+  Kartenblöcke mit genauen Minuten. 20 min plant jetzt höchstens ~22,5 statt bis zu 42 min. Anzeige „neue Aufgabe“ statt
+  fälschlich zweimal „schwächstes Thema“.
 - 🟡 **Lernplan-Ziel unrealistisch**: „1196 Karten fehlen – etwa 42 Karten pro Tag“, die Tagesrunde bringt aber nur ~5 Karten.
   Entweder die Kartenmenge in „Heute lernen“ am Lernplan ausrichten oder das Ziel auf prüfungsrelevante Decks begrenzen
   (Begriffskarten optional).
