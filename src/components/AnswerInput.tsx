@@ -1,11 +1,14 @@
 import { lazy, Suspense, useMemo } from 'react';
 import type { Task } from '../../shared/types';
+import { editorFuer } from '../lib/editorAufgabe';
 import type { AutoAnswer } from '../lib/grading';
 import { sqlUebungZuAufgabe } from '../lib/sqlAufgabe';
 import { useStore } from '../lib/store';
 
 // Nur bei Aufgaben mit verknüpfter SQL-Übung: CodeMirror und sql.js kommen erst dann.
 const SqlAntwort = lazy(() => import('./SqlAntwort'));
+// Nur bei Modellierungsaufgaben (ERM, EPK, BPMN, Use-Case, Normalisierung, Relationenmodell): Diagramm- bzw. Tabellen-Editor.
+const EditorAntwort = lazy(() => import('./EditorAntwort'));
 
 /** Antworten werden immer als String gespeichert; objektive Aufgaben als JSON. */
 export function decodeAnswer(task: Task, raw: string | undefined): AutoAnswer | null {
@@ -53,7 +56,10 @@ interface Props {
   value: string | undefined;
   onChange: (v: string) => void;
   disabled?: boolean;
-  /** SQL-Aufgaben: Abfrage auf dem Datensatz ausprobieren dürfen (Einzelaufgabe ja, Übungsklausur nein). */
+  /**
+   * Hilfen während der Bearbeitung (Einzelaufgabe ja, Übungsklausur nein): SQL-Abfrage auf dem Datensatz ausprobieren,
+   * Formprüfung im Diagramm-Editor.
+   */
   sqlAusfuehren?: boolean;
 }
 
@@ -68,6 +74,15 @@ export function AnswerInput({ task, value, onChange, disabled, sqlAusfuehren = t
     return (
       <Suspense fallback={<p className="muted small">SQL-Editor lädt …</p>}>
         <SqlAntwort ex={sql.ex} ds={sql.ds} value={value} onChange={onChange} disabled={disabled} ausfuehren={sqlAusfuehren} />
+      </Suspense>
+    );
+  }
+
+  const editor = editorFuer(task);
+  if (editor) {
+    return (
+      <Suspense fallback={<p className="muted small">Editor lädt …</p>}>
+        <EditorAntwort task={task} art={editor} value={value} onChange={onChange} disabled={disabled} hilfen={sqlAusfuehren} />
       </Suspense>
     );
   }

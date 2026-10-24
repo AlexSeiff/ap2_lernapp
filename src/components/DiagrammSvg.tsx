@@ -99,7 +99,7 @@ function EreignisText({ k, text }: { k: DiagrammKnoten; text: string }) {
 }
 
 /** Eine Form im Rechteck (x, y, w, h). */
-function FormZeichnung({ form, k, text }: { form: Form; k: DiagrammKnoten; text?: string }): ReactNode {
+export function FormZeichnung({ form, k, text }: { form: Form; k: DiagrammKnoten; text?: string }): ReactNode {
   const { x, y, w, h } = k;
   const cx = x + w / 2;
   const cy = y + h / 2;

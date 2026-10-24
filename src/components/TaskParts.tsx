@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import type { Section, Task } from '../../shared/types';
 import { api } from '../lib/api';
+import { antwortAlsText, editorFuer } from '../lib/editorAufgabe';
 import { autoGrade, difficulty, formatPoints } from '../lib/grading';
 import { numberBlanks, solutionMarkdown } from '../lib/sheets';
 import { sqlUebungZuAufgabe } from '../lib/sqlAufgabe';
@@ -10,6 +11,7 @@ import { Markdown } from './Markdown';
 import { Icon } from './Icon';
 
 const SqlPruefung = lazy(() => import('./SqlPruefung'));
+const EditorPruefung = lazy(() => import('./EditorAntwort').then((m) => ({ default: m.EditorPruefung })));
 
 export function TaskText({ task, showMeta }: { task: Task; showMeta?: boolean }) {
   const { content } = useStore();
@@ -62,6 +64,7 @@ interface GradeProps {
 export function GradePanel({ task, answer, points, onPoints, onSqlGeprueft }: GradeProps) {
   const { aiEnabled, content } = useStore();
   const sql = sqlUebungZuAufgabe(content, task);
+  const editor = editorFuer(task);
   const auto = decodeAnswer(task, answer);
   const autoResult = auto ? autoGrade(task, auto) : null;
   const criteria = task.solution?.criteria;
@@ -84,7 +87,7 @@ export function GradePanel({ task, answer, points, onPoints, onSqlGeprueft }: Gr
   const runAi = async () => {
     setAi({ loading: true });
     try {
-      const r = await api.grade(task.id, answer ?? '');
+      const r = await api.grade(task.id, antwortAlsText(task, answer));
       setAi({ feedback: r.feedback, missing: r.missing });
       onPoints(r.points);
     } catch (e) {
@@ -129,6 +132,11 @@ export function GradePanel({ task, answer, points, onPoints, onSqlGeprueft }: Gr
                   onPoints={onPoints}
                   onGeprueft={onSqlGeprueft}
                 />
+              </Suspense>
+            )}
+            {editor && (
+              <Suspense fallback={null}>
+                <EditorPruefung task={task} art={editor} answer={answer} />
               </Suspense>
             )}
             {criteria && (

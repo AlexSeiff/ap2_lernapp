@@ -640,6 +640,45 @@ Lernblatt with an episode.
   female, Ben male if the names allow it. Speed, voices and the position per episode are kept in `localStorage` (comfort, not progress);
   Media Session handlers for headset buttons. Limitation: some phones stop speech when the screen locks.
 
+### Editor-Aufgaben: Modellieren ohne Vorlage (October 2026)
+
+Sheet tasks that ask for a model get an editor instead of the text field – on `/aufgabe/:id`, in the Übungsklausur and in mixed exams.
+Nothing is pre-filled: you build the whole solution yourself, submit, and grade yourself against the model solution as before.
+- **Detection** (`editorFuer` in `src/lib/editorAufgabe.ts`, pure): only `offen` tasks without SQL exercise, by the task text – Normalform /
+  „1.–3. NF“ + *überführen/normalisieren/bringen* → `normalform`; Relationenmodell/-schreibweise, Star-/Snowflake-Schema + *überführen/entwerfen/
+  erstellen/modellieren* → `relationen`; otherwise a create operator (*erstellen, modellieren, zeichnen, skizzieren, entwerfen*, „Setzen Sie … um“)
+  plus ER-Diagramm/ERM → `erm`, BPMN → `bpmn`, (e)EPK → `epk`, Use-Case-/Anwendungsfalldiagramm → `usecase`. Word boundaries are Unicode-aware
+  (`` would miss „*Überführen*“). Today: 02-B1 erm, 02-B2 relationen, 02-C1 normalform, 05-B1 bpmn, 08-C1 relationen, 15-E1 usecase, 18-B3 epk
+  (exact list tested; tasks that only *talk about* a diagram – 05-B2, 08-C3, 15-E2, 18-B2 – stay text tasks). Sheets are unchanged.
+- **Answer format**: still a string (`Attempt`/`ExamRun.answers` unchanged, no version bump): JSON `{ editor, knoten, kanten, notiz? }`
+  (diagram) or `{ editor, schritte: [{ titel, text, tabellen }], notiz? }` (tables), validated with zod on read (`leseEditorAntwort`); an empty
+  editor is stored as `''` (counts as „not answered“ in the exam); a plain text (e.g. an exam started before this change) is kept in `notiz`.
+  `antwortAlsText` describes the drawing for the AI grading.
+- **Diagram editor** (`components/DiagrammEditor.tsx`, logic in `src/lib/diagrammEditor.ts`): palette per notation (`NOTATIONEN`, shapes
+  drawn by `FormZeichnung` from `DiagrammSvg.tsx`, so it looks like the Diagramm-Übungen and DD17); tap a shape → it is inserted (inside a
+  selected pool/lane/system boundary; with „an Auswahl anhängen“ next to/below the selection and connected); drag to move (containers take
+  their content along), blue dot → drag (or „Verbinden mit …“ + tap) to connect, square → resize; edge type and label/cardinality in the
+  „Auswahl“ panel (ERM quick buttons (0,1) … m; the cardinality sits at the entity end); parallel edges (recursive relationship) are offset.
+  New edges get a sensible type (`standardKante`: BPMN across pools → Nachrichtenfluss, EPK org/info → Zuordnung, use case ↔ use case →
+  «include»). Undo/redo (Strg+Z/Y), arrow keys move, Entf deletes, zoom (phones start at 60 %), full screen. Pointer Events like the
+  Diagramm-Übungen; no HTML5 drag and drop.
+- **Formprüfung** (`pruefeDiagrammAntwort`): hints only, no points – missing labels/connections; EPK and BPMN reuse `formregeln` of the
+  Diagramm-Übungen plus: EPK branches only via connectors, org/info only by Zuordnung at functions; BPMN no sequence flow across pools, no message
+  flow inside one, start/end events, labelled XOR paths, elements outside every pool; ERM no entity–entity line, cardinality on every
+  entity–relationship edge, relationship with two entity ends, attribute at one element, key attribute; use case actors outside the boundary,
+  «include»/«extend» only between use cases. Shown on demand while working on a single task („Form prüfen“, not in the exam – like on paper)
+  and after submission next to the model solution. Tests build the model solutions of 02-B1 and 18-B3 and require zero hints.
+- **Table editor** (`components/TabellenEditor.tsx`, logic in `src/lib/tabellenEditor.ts`): one step per normal form (as many as the highest
+  NF in the task) with a text field for the dependencies; tables with PK/FK toggles, FK target, column actions (move left/right, move or copy to
+  another/new table, delete), optional data rows (duplicate a row to split a non-atomic value); „Ausgangstabelle … übernehmen“ (Markdown
+  tables of the exam attachments, `anlageTabellen`) and „Aus „1. NF“ übernehmen“. Live relation notation like the sheets (`relationText`:
+  bold = PK, ↑ = FK).
+- **Abgleich** after submission (`musterTabellen` + `gleicheAb`): reads the model solution's relations (`- name(**pk**, a, b↑)`, bold may span
+  several columns, „…“ = more columns allowed), tables with bold header cells (1. NF) and „Spalte | Art“ tables (star schema); split by
+  „**a)** … **b)**“ into one list per step if the counts match, else all to the last step. Each model table gets your most similar table (same
+  name first, else column overlap ≥ 0.3) and shows missing/extra columns, PK and unmarked FKs. Wording makes clear names may differ.
+- Lazy chunk `EditorAntwort` (~10 KB gzip), loaded only for such tasks. Tests: `tests/editorAufgaben.test.ts`.
+
 ### Deine Antwort (phase 8.2)
 
 In "🃏 Aufdecken" a textarea "✍️ Deine Antwort (optional)" sits **below** the card (outside the clickable `role=button` card, so typing never
@@ -1148,6 +1187,9 @@ npm run build && npm run build:pages
   Pages build emits core/texts/term pages and the preload; Lernblatt and Glossar show „Lädt …“ with the core and render normally with the full
   content; text request from the address; glossary/search index/Leicht caches; hyphen words equal to the old regex on all texts; Markdown fast
   path: detection and identical HTML for every plain text in `content/`).
+- Editor-Aufgaben: `editorAufgaben.test.ts` (detection on `content/` = exact list, string round trip and text fallback, geometry, form rules
+  incl. the model solutions of 02-B1/18-B3 without hints, model tables of 02-C1/02-B2/08-C1, comparison finds typical mistakes, editors render
+  without any answer content, submitted view, grading aids, task page loads the editor).
 - One commit per logical change; formatting-only changes in their own commit.
 
 ## 10. Rules for future changes (for AI agents)

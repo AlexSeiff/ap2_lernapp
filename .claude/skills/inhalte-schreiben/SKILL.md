@@ -45,6 +45,11 @@ exam papers or textbook passages.
 - Exam tasks start with an IHK **operator in italics**: `*Nennen* Sie …`, `*Erläutern* Sie …`, `*Berechnen* Sie …`. The operator
   decides the expected depth (nennen = list, erläutern = explain with reasons, beurteilen = judgement with justification). The full
   list with point weights is in `src/lib/operatoren.ts`; use those verbs so the operator tooltips and the trainer pick them up.
+- Modelling tasks (ERM, EPK/eEPK, BPMN, Use-Case-Diagramm, Relationenmodell/Star-Schema, Normalisierung) are answered in an **editor**,
+  detected from the task text (`editorFuer`, `src/lib/editorAufgabe.ts`): use a create operator (*Erstellen*, *Modellieren*, *Zeichnen*,
+  *Entwerfen*; *Überführen* for Relationenmodell/Normalform) and name the diagram type. Write the model solution of a relation schema as
+  `- name(**pk**, spalte, fk↑)` lines and split steps with `**a)** … **b)**` – the table comparison reads exactly that. Never put solution
+  elements into the task. Then update the expected list in `tests/editorAufgaben.test.ts`.
 - Points: block headings `## Block A – Titel (20 P)`, tasks `**A1 (15 P):**`; every Übungsklausur sums to **100 P** (tested).
 - Model solutions show points `*(3 P)*`, a scoring note `*(je Dimension 1 P Nennung, 1 P Erläuterung)*`, end with
   `*Prüferkommentar: …*` where useful (typical mistakes, what gets full points).
