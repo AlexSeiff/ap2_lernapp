@@ -45,7 +45,7 @@
 
 **B3 (4 P):** **(3)** – Seit 2020 gilt § 15 Abs. 2 Nr. 5 BBiG **für alle Azubis**: Am Arbeitstag unmittelbar vor der schriftlichen Abschlussprüfung besteht Freistellung, angerechnet mit der durchschnittlichen täglichen Ausbildungszeit.
 
-**B4 (4 P):** **27 Werktage** – Maßgeblich ist das **Alter zu Beginn des Kalenderjahres**. Am 01.01.2026 ist Jonas 16 Jahre alt, also „noch nicht 17“ → 27 Werktage. Häufiger Fehler: 25 Werktage, weil er im Laufe des Jahres 17 wird. Gefragt ist der Jahresanspruch; weil Jonas erst am 01.08.2026 beginnt, erwirbt er 2026 tatsächlich nur Teilurlaub (§ 5 BUrlG): $27 \cdot \frac{5}{12} = 11{,}25$ = **11 Werktage**.
+**B4 (4 P):** **27 Werktage** – Maßgeblich ist das **Alter zu Beginn des Kalenderjahres**. Am 01.01.2026 ist Jonas 16 Jahre alt, also „noch nicht 17“ → 27 Werktage. Häufiger Fehler: 25 Werktage, weil er im Laufe des Jahres 17 wird. Gefragt ist der Jahresanspruch; weil Jonas erst am 01.08.2026 beginnt, erwirbt er 2026 tatsächlich nur Teilurlaub (§ 5 BUrlG): $27 \cdot \frac{5}{12}$ = **11,25 Werktage**. Nicht auf 11 abrunden: § 5 Abs. 2 BUrlG kennt nur das Aufrunden ab einem halben Tag; der Viertel-Tag wird anteilig gewährt.
 
 **B5 (4 P):** **45 Minuten** – Nach dem **ArbZG** stehen Erwachsenen bei mehr als neun Stunden Arbeitszeit 45 Minuten Pause zu.
 

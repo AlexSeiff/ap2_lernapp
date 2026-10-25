@@ -110,7 +110,7 @@ Zusätzlich darf vor einem Berufsschulunterricht, der **vor 9 Uhr** beginnt, nic
 | Gesundheit | Erstuntersuchung vor Beginn, Nachuntersuchung nach einem Jahr |
 | Unterweisung | vor Beginn und mindestens **halbjährlich** |
 
-Stichtag für den Urlaub ist das **Alter zu Beginn des Kalenderjahres**. Jonas (geb. 15.03.2009) ist am 01.01.2026 16 Jahre alt, also „noch nicht 17“ → **27 Werktage** für 2026. Vorsicht bei der Frage nach dem *tatsächlichen* Urlaub im Eintrittsjahr: Da Jonas erst am 01.08.2026 beginnt, erwirbt er 2026 nach § 5 BUrlG nur Teilurlaub – 27 · 5/12 = 11,25 → 11 Werktage (unter einem halben Tag wird nicht aufgerundet).
+Stichtag für den Urlaub ist das **Alter zu Beginn des Kalenderjahres**. Jonas (geb. 15.03.2009) ist am 01.01.2026 16 Jahre alt, also „noch nicht 17“ → **27 Werktage** für 2026. Vorsicht bei der Frage nach dem *tatsächlichen* Urlaub im Eintrittsjahr: Da Jonas erst am 01.08.2026 beginnt, erwirbt er 2026 nach § 5 BUrlG nur Teilurlaub – 27 · 5/12 = **11,25 Werktage**. Aufgerundet wird nach § 5 Abs. 2 BUrlG erst ab einem halben Tag; abgerundet wird nie – der Viertel-Tag verfällt nicht, sondern wird anteilig gewährt.
 
 ## 2.2 Arbeitszeitgesetz (Erwachsene)
 
@@ -122,7 +122,7 @@ Stichtag für den Urlaub ist das **Alter zu Beginn des Kalenderjahres**. Jonas (
 ## 2.3 Bundesurlaubsgesetz
 
 - Mindesturlaub **24 Werktage** (Sechs-Tage-Woche) = **20 Arbeitstage** bei einer Fünf-Tage-Woche.
-- Voller Anspruch erst nach **sechs Monaten Wartezeit**. Davor: Teilurlaub von **1/12 je vollem Beschäftigungsmonat**. Beispiel Eintritt 01.08.: 5 volle Monate → $24 \cdot \frac{5}{12}$ = **10 Werktage** im ersten Kalenderjahr. Bruchteile ab einem halben Tag werden aufgerundet.
+- Voller Anspruch erst nach **sechs Monaten Wartezeit**. Davor: Teilurlaub von **1/12 je vollem Beschäftigungsmonat**. Beispiel Eintritt 01.08.: 5 volle Monate → $24 \cdot \frac{5}{12}$ = **10 Werktage** im ersten Kalenderjahr. Bruchteile ab einem halben Tag werden aufgerundet; kleinere Bruchteile werden nicht abgerundet, sondern anteilig gewährt.
 - Urlaub ist grundsätzlich im laufenden Jahr zu nehmen; Übertragung bis **31.03.** nur aus dringenden Gründen.
 
 ## 2.4 Weitere Schutzvorschriften

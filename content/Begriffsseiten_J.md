@@ -8,7 +8,7 @@ Jugendarbeitsschutzgesetz: schützt Beschäftigte unter 18 Jahren mit strengeren
 Für Jugendliche (15 bis unter 18) gilt: höchstens 8 Stunden täglich und 40 Stunden wöchentlich, Fünf-Tage-Woche; Pausen 30 Minuten bei mehr als 4,5 bis 6 Stunden, 60 Minuten bei mehr als 6 Stunden; mindestens 12 Stunden Freizeit zwischen zwei Arbeitstagen; Nachtruhe grundsätzlich von 20 bis 6 Uhr. Urlaub: mindestens 30 Werktage (zu Jahresbeginn noch nicht 16), 27 (noch nicht 17), 25 (noch nicht 18). Dazu Erstuntersuchung vor Beginn, Nachuntersuchung nach einem Jahr und Unterweisung mindestens halbjährlich. Kinder unter 15 dürfen grundsätzlich nicht beschäftigt werden.
 
 ### Beispiel
-Jonas (geb. 15.03.2009) ist am 01.01.2026 16 Jahre alt, also „noch nicht 17“ → 27 Werktage Jahresurlaub. Weil er erst am 01.08.2026 beginnt, erwirbt er 2026 nur Teilurlaub: $27 \cdot \frac{5}{12} = 11{,}25$ → 11 Werktage.
+Jonas (geb. 15.03.2009) ist am 01.01.2026 16 Jahre alt, also „noch nicht 17“ → 27 Werktage Jahresurlaub. Weil er erst am 01.08.2026 beginnt, erwirbt er 2026 nur Teilurlaub: $27 \cdot \frac{5}{12}$ = **11,25 Werktage**. Abgerundet wird nicht – der Viertel-Tag wird anteilig gewährt.
 
 ### Abgrenzung
 | Regel | JArbSchG | ArbZG (Erwachsene) |
