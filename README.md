@@ -15,9 +15,10 @@ npm install      # nur beim ersten Mal
 npm run dev      # öffnet http://localhost:5178
 ```
 
-Die Lernblätter liest die lokale App standardmäßig aus dem Ordner **oberhalb** des Repositorys (früher `AP-2/lern-app`).
-Liegt das Repository woanders (z. B. `C:\dev\ap2-lern-app` außerhalb von OneDrive – empfohlen, OneDrive verträgt sich schlecht
-mit `.git`), den Ordner in `.env.local` angeben: `LERN_QUELLE=C:\Users\…\AP-2`.
+Die lokale App verwendet die mitgelieferten Lernblätter und Lernkarten aus **`content/`**. Liegen im Ordner **oberhalb** des
+Repositorys bereits AP-2-Lernblätter oder Lernkarten (früher `AP-2/lern-app`), liest sie weiterhin diese als Live-Quelle.
+Eine eigene Quelle lässt sich in `.env.local` ausdrücklich festlegen: `LERN_QUELLE=C:\Users\…\AP-2`.
+Diese Einstellung hat Vorrang vor der automatischen Auswahl.
 
 Beenden: im Terminalfenster `Strg + C`.
 

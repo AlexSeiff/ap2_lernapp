@@ -12,6 +12,7 @@ import {
   sichtbareZiele,
 } from '../lib/navigation';
 import { Icon } from './Icon';
+import { Seitenleiste } from './Seitenleiste';
 
 type Props = {
   onSuche: () => void;
@@ -36,8 +37,10 @@ export function Kopfleiste({ onSuche, badges, saveText, saveState }: Props) {
   const { pathname } = useLocation();
   const aktiv = aktiverBereich(pathname);
   const problem = saveState === 'fehler' || saveState === 'konflikt';
+  const ziel = aktiv ? aktivesUnterziel(pathname, bereich(aktiv)) : undefined;
   return (
     <>
+      <Seitenleiste badges={badges} onSuche={onSuche} />
       <header className="kopf">
         <div className="kopf-innen">
           <Link to="/" className={`kopf-logo${pathname === '/' ? ' active' : ''}`} aria-current={pathname === '/' ? 'page' : undefined}>
@@ -47,6 +50,12 @@ export function Kopfleiste({ onSuche, badges, saveText, saveState }: Props) {
           <span className="kopf-titel" aria-hidden="true">
             {aktiv ? bereich(aktiv).label : 'AP2 Lern-App'}
           </span>
+          <div className="toolbar-kontext" aria-hidden="true">
+            <Icon name={aktiv ? bereich(aktiv).icon : 'house'} />
+            <span>{aktiv ? bereich(aktiv).label : 'Dein Lernraum'}</span>
+            <Icon name="chevron-right" />
+            <b>{ziel?.label ?? 'Übersicht'}</b>
+          </div>
           <nav className="kopf-bereiche" aria-label="Bereiche">
             {BEREICHE.map((b) => {
               const n = badgeSumme(sichtbareZiele(b, IS_STATIC), badges);

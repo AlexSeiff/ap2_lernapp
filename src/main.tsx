@@ -8,6 +8,7 @@ import { StoreProvider } from './lib/store';
 import { ladeTexteFuerAdresse } from './lib/texte';
 import { leseTheme, wendeThemeAn } from './lib/theme';
 import './styles.css';
+import './apple.css';
 
 // Farbschema vor dem ersten Zeichnen setzen (kein Aufblitzen im falschen Design).
 wendeThemeAn(leseTheme());

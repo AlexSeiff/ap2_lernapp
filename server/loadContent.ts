@@ -8,9 +8,10 @@ import type { BegriffsSeite, Content } from '../shared/types';
 import { baueGlossar, ueberschriftKern } from '../src/lib/glossar';
 import { ergaenzeGlossarThema } from '../src/lib/glossarThema';
 import { pruefeRechenUebung } from '../src/rechnen/pruefen';
+import { resolveContentSource } from './contentSource';
 
-/** Ordner mit den Lernblättern: standardmäßig der Ordner oberhalb der App (AP-2). Der Dev-Server liest live von hier. */
-export const SOURCE_DIR = resolve(process.env.LERN_QUELLE ?? join(import.meta.dirname, '..', '..'));
+/** Explizite Quelle, vorhandener AP-2-Ordner oder die mitgelieferten Inhalte im eigenständigen Checkout. */
+export const SOURCE_DIR = resolveContentSource(resolve(import.meta.dirname, '..'), process.env.LERN_QUELLE);
 
 /**
  * Kopie der Lernblätter im Repository (`npm run sync-content`). Daraus bauen `npm run build:pages` und die Tests –

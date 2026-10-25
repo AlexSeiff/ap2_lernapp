@@ -62,11 +62,8 @@ export function Karteikarten() {
   } = useCardSession();
   const touch = useRef<{ x: number; y: number } | null>(null);
   const startRunde = (cards: Flashcard[]) => start(cards, leichtModus ? leicht : null);
-  // Filter: auf dem Desktop offen, auf dem Handy zugeklappt (spart einen ganzen Bildschirm), mit aktiven Filtern immer offen.
-  const [filterOffen, setFilterOffen] = useState(
-    () =>
-      typeof window === 'undefined' || window.matchMedia?.('(min-width: 600px)').matches !== false || window.location.hash.includes('?'),
-  );
+  // Der Lernstart bleibt oben sichtbar; gezielt verlinkte Auswahlen zeigen ihre Filter sofort.
+  const [filterOffen, setFilterOffen] = useState(() => typeof window !== 'undefined' && window.location.hash.includes('?'));
   // ?blaettern=1: Durchblättern der gefilterten Karten (ohne Bewertung). `alle`, weil die Antwort ohnehin sichtbar ist.
   const [params, setParams] = useSearchParams();
   const blaettern = params.get('blaettern') === '1';
@@ -301,6 +298,23 @@ export function Karteikarten() {
   return (
     <div className="page">
       <h1>Karteikarten</h1>
+      {!auswahl && (
+        <section className="karten-start" aria-label="Lernrunde starten">
+          <div>
+            <p className="karten-start-titel">Bereit für deine nächste Runde?</p>
+            <p className="muted">
+              {due.length} fällig · {fresh.length} neu · {deck.length} Karten in deiner Auswahl
+            </p>
+          </div>
+          <button
+            type="button"
+            disabled={!due.length && !fresh.length}
+            onClick={() => startRunde([...due, ...fresh.slice(0, NEW_PER_SESSION)])}
+          >
+            <Icon name="play" /> Lernen starten ({due.length + Math.min(fresh.length, NEW_PER_SESSION)})
+          </button>
+        </section>
+      )}
       {session && (
         <div className="card success actions runde-ende">
           <span>
@@ -449,13 +463,6 @@ export function Karteikarten() {
       </div>
       <KartenstandLeiste cards={alle} thema={f.thema} />
       <div className="actions">
-        <button
-          type="button"
-          disabled={!due.length && !fresh.length}
-          onClick={() => startRunde([...due, ...fresh.slice(0, NEW_PER_SESSION)])}
-        >
-          Lernen starten ({due.length + Math.min(fresh.length, NEW_PER_SESSION)})
-        </button>
         <button type="button" className="secondary" disabled={!deck.length} onClick={() => startRunde(deck)}>
           Alle {deck.length} durchgehen
         </button>

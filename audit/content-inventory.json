@@ -1,0 +1,998 @@
+{
+  "summary": {
+    "snapshotDate": "2026-10-25",
+    "scope": "All checked-in content files inventoried; targeted factual review, not exhaustive verification.",
+    "files": 76,
+    "totalBytes": 3758822,
+    "jsonShapes": {
+      "AP2_Diagramm_Uebungen.json": {
+        "uebungen": {
+          "count": 30,
+          "firstItemKeys": [
+            "id",
+            "typ",
+            "stufe",
+            "titel",
+            "szenario",
+            "breite",
+            "hoehe",
+            "knoten",
+            "kanten",
+            "palette",
+            "loesung",
+            "hinweise",
+            "erklaerung",
+            "quelle",
+            "tags",
+            "varianten"
+          ]
+        }
+      },
+      "AP2_FIDPA_Lernkarten.json": {
+        "decks": {
+          "count": 28,
+          "firstItemKeys": ["id", "titel", "pruefungsbereich", "quelle", "status", "anzahl_karten", "karten"]
+        }
+      },
+      "AP2_Fachbegriffe_Lernkarten.json": {
+        "decks": {
+          "count": 16,
+          "firstItemKeys": ["id", "titel", "pruefungsbereich", "quelle", "status", "anzahl_karten", "karten"]
+        }
+      },
+      "AP2_Quellen.json": {
+        "quellen": {
+          "count": 393,
+          "firstItemKeys": ["ziel", "titel", "url", "anbieter", "art", "geprueft"]
+        }
+      },
+      "AP2_Rechen_Uebungen.json": {
+        "uebungen": {
+          "count": 109,
+          "firstItemKeys": [
+            "id",
+            "thema",
+            "titel",
+            "schwierigkeit",
+            "tags",
+            "vorlage",
+            "daten",
+            "aufgabe",
+            "eingaben",
+            "hinweise",
+            "quelleAufgabe"
+          ]
+        }
+      },
+      "AP2_SQL_Uebungen.json": {
+        "datensaetze": {
+          "count": 3,
+          "firstItemKeys": ["id", "titel", "quelle", "beschreibung", "setup", "variante"]
+        },
+        "uebungen": {
+          "count": 73,
+          "firstItemKeys": [
+            "id",
+            "datensatz",
+            "thema",
+            "titel",
+            "aufgabe",
+            "schwierigkeit",
+            "tags",
+            "loesung",
+            "vergleich",
+            "pruefabfrage",
+            "hinweise",
+            "erklaerung",
+            "quelle_aufgabe",
+            "aufgaben",
+            "karten"
+          ]
+        }
+      }
+    },
+    "sourceProviders": {
+      "Studyflix": 227,
+      "Wikipedia": 115,
+      "DSGVO-Text": 20,
+      "EU-Kommission": 2,
+      "BSI": 4,
+      "Gesetze im Internet": 25
+    },
+    "sourceTargets": 355,
+    "independentCalculations": {
+      "inclusiveQuartiles": {
+        "values": [2, 3, 3, 4, 5, 5, 5, 6, 8, 19],
+        "q1": 3.25,
+        "q3": 5.75,
+        "iqr": 2.5
+      },
+      "holidayEntitlementBeforeAnyLawfulRounding": 11.25,
+      "negativeFenceCounterexample": {
+        "q1": -10,
+        "q3": 0,
+        "fence": -25,
+        "value": -30,
+        "lowerOutlier": true
+      },
+      "confusionMatrixExample": {
+        "accuracy": 0.87,
+        "precision": 0.4,
+        "recall": 0.6,
+        "f1": 0.48,
+        "specificity": 0.9
+      },
+      "payrollExample": {
+        "socialContributions": 253.79999999999998,
+        "netBeforeTax": 946.1999999999999
+      }
+    }
+  },
+  "inventory": [
+    {
+      "file": "content/AP2_Diagramm_Uebungen.json",
+      "bytes": 94806,
+      "lines": 4907,
+      "sha256": "df4c42d31797c7eb6bf57c1fa0a5c63efed9a64bfb4b81d973a1cd65d04c82c4",
+      "semanticReview": "not-exhaustively-verified",
+      "arrays": {
+        "uebungen": 30
+      }
+    },
+    {
+      "file": "content/AP2_FIDPA_Lernkarten.json",
+      "bytes": 478507,
+      "lines": 8188,
+      "sha256": "b1d1f25a05affd2ee010bb58a52fe4d33e5703d77abc2dde6930b10cdea9177c",
+      "semanticReview": "not-exhaustively-verified",
+      "arrays": {
+        "decks": 28
+      },
+      "cards": 734,
+      "cardsWithMc": 0,
+      "duplicateCardIds": [],
+      "metadataCardCount": 734,
+      "metadataCountMatches": true,
+      "cardTypes": {
+        "falle": 120,
+        "wissen": 318,
+        "anwendung": 118,
+        "abgrenzung": 119,
+        "rechnung": 59
+      }
+    },
+    {
+      "file": "content/AP2_Fachbegriffe_Lernkarten.json",
+      "bytes": 366176,
+      "lines": 8385,
+      "sha256": "bb964fd5289557d2485f9c8f36cfe25df4db1c0d65cadffff85996a293232ce2",
+      "semanticReview": "not-exhaustively-verified",
+      "arrays": {
+        "decks": 16
+      },
+      "cards": 816,
+      "cardsWithMc": 0,
+      "duplicateCardIds": [],
+      "metadataCardCount": 816,
+      "metadataCountMatches": true,
+      "cardTypes": {
+        "begriff": 816
+      }
+    },
+    {
+      "file": "content/AP2_Quellen.json",
+      "bytes": 92417,
+      "lines": 3158,
+      "sha256": "78234cedffb7d9848b677aee7cd3e710122037793c98099ca922a8b03aba2ccc",
+      "semanticReview": "not-exhaustively-verified",
+      "arrays": {
+        "quellen": 393
+      }
+    },
+    {
+      "file": "content/AP2_Rechen_Uebungen.json",
+      "bytes": 103452,
+      "lines": 1849,
+      "sha256": "d73fa48280f4704e7199f767f0429a1a84eda00fde1f6e18125ad37fb54ec39f",
+      "semanticReview": "not-exhaustively-verified",
+      "arrays": {
+        "uebungen": 109
+      }
+    },
+    {
+      "file": "content/AP2_SQL_Belegsatz.md",
+      "bytes": 13367,
+      "lines": 249,
+      "sha256": "b928cef79fa0be3768aed6a3850cebf9d0bc35956c5431fa77244d01d974864d",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 12
+    },
+    {
+      "file": "content/AP2_SQL_Uebungen.json",
+      "bytes": 92964,
+      "lines": 2210,
+      "sha256": "62f8ddf0e6ed640567c59b90278a3085c78ee6b5ef5a886153974a5591953632",
+      "semanticReview": "not-exhaustively-verified",
+      "arrays": {
+        "datensaetze": 3,
+        "uebungen": 73
+      }
+    },
+    {
+      "file": "content/AP2_Themenliste_und_Beispielfragen.md",
+      "bytes": 14128,
+      "lines": 189,
+      "sha256": "b065a908241c25e09ed58556ad920408aeda7612c98ec0b4cd0e6ad8d718374a",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 15
+    },
+    {
+      "file": "content/Begriffsseiten_0-9.md",
+      "bytes": 7942,
+      "lines": 123,
+      "sha256": "68137df9efb2474319e8160e15cbd0fefa4d7c6b745d51d728fa0a21ffd257de",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 30
+    },
+    {
+      "file": "content/Begriffsseiten_A.md",
+      "bytes": 147673,
+      "lines": 2558,
+      "sha256": "92cbc259677d98abd05f76945656acbee648c7b813a053ad7020217d1c5c36a6",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 571
+    },
+    {
+      "file": "content/Begriffsseiten_B.md",
+      "bytes": 74995,
+      "lines": 1391,
+      "sha256": "427719505f5f8205899ca2b18e99407c870385b247cb5bbf974a7615acad3aa7",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 319
+    },
+    {
+      "file": "content/Begriffsseiten_C.md",
+      "bytes": 24231,
+      "lines": 493,
+      "sha256": "6031cb25664f2ee4ac2385bcf25cb18cee470b3e9a52eb0499b2066e78c853c0",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 109
+    },
+    {
+      "file": "content/Begriffsseiten_D.md",
+      "bytes": 105679,
+      "lines": 1863,
+      "sha256": "3afcb8224c9f14559e59ab74add7799c62eb9c0812ad16c4752a897caecd791e",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 418
+    },
+    {
+      "file": "content/Begriffsseiten_E.md",
+      "bytes": 74022,
+      "lines": 1265,
+      "sha256": "b5eeb493371a103f76f87d14f0f4030542eaaf8bd8f81c0a5e3845c50686ea12",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 259
+    },
+    {
+      "file": "content/Begriffsseiten_F.md",
+      "bytes": 49774,
+      "lines": 919,
+      "sha256": "32e533c45a5f45b0a382677dde7c7fbaf23b62c35307fb6b61da14430b0c442a",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 216
+    },
+    {
+      "file": "content/Begriffsseiten_G.md",
+      "bytes": 62744,
+      "lines": 1128,
+      "sha256": "a3a653aad14cb5f0371aedfdb9372c554e4c70a36373799757313242390b4126",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 244
+    },
+    {
+      "file": "content/Begriffsseiten_H.md",
+      "bytes": 25431,
+      "lines": 445,
+      "sha256": "37718dac4c19787b2e4d1b1f38f761d2d0e5878d4591d21cfb9a9afa20f8ccce",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 86
+    },
+    {
+      "file": "content/Begriffsseiten_I.md",
+      "bytes": 48461,
+      "lines": 861,
+      "sha256": "5f4cd93a5d6e12994cbd5ab5edf17dd5e8a5f31ffc5de296b5bff63007a59206",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 205
+    },
+    {
+      "file": "content/Begriffsseiten_J.md",
+      "bytes": 7707,
+      "lines": 133,
+      "sha256": "f0d0849d39b233cfeb94c71de1cfce495dd2fd7961ac6f26bd17cf700da83e8c",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 31
+    },
+    {
+      "file": "content/Begriffsseiten_K.md",
+      "bytes": 87642,
+      "lines": 1514,
+      "sha256": "af4ddecbc186d4eedd50d64e448c360908df3ba0309ba9c19d1537445ac6c5ff",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 349
+    },
+    {
+      "file": "content/Begriffsseiten_L.md",
+      "bytes": 48358,
+      "lines": 913,
+      "sha256": "e96e387d2f61d17004946091d0165e3963cf87ea653bf577f057a4f17a051607",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 200
+    },
+    {
+      "file": "content/Begriffsseiten_M.md",
+      "bytes": 78973,
+      "lines": 1550,
+      "sha256": "01c2c1413b5cfd375003a72dc12d7fbc89187ad376df7268206c318d60d03d20",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 335
+    },
+    {
+      "file": "content/Begriffsseiten_N.md",
+      "bytes": 44798,
+      "lines": 852,
+      "sha256": "3aaf5aa6055138b3de657ba845892a3af2dbac21df94036e5c620a0ee0ee62b5",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 177
+    },
+    {
+      "file": "content/Begriffsseiten_O.md",
+      "bytes": 31908,
+      "lines": 625,
+      "sha256": "54c1ea46724c4f253fc8b65536e667b4ecd3205f04f35c1d5eacf3901f2d37cb",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 125
+    },
+    {
+      "file": "content/Begriffsseiten_P.md",
+      "bytes": 91470,
+      "lines": 1713,
+      "sha256": "b66b4044d3a0fce3599dbee97a9db1719cdf79784a131e147c189d587b3f4d91",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 368
+    },
+    {
+      "file": "content/Begriffsseiten_Q.md",
+      "bytes": 8570,
+      "lines": 169,
+      "sha256": "71aa9625bb8571aff83b9b440008b31dc73fc8b9c1f70cfa94331b9bdf371090",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 36
+    },
+    {
+      "file": "content/Begriffsseiten_R.md",
+      "bytes": 69826,
+      "lines": 1339,
+      "sha256": "ae83735aabc9be9124495386660ef628ed1138e6e4a53d2c849c8f146d994797",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 300
+    },
+    {
+      "file": "content/Begriffsseiten_S.md",
+      "bytes": 159807,
+      "lines": 2910,
+      "sha256": "c0b7da92e0bdd324f6ecbfbfb3b34ff0eb945838a6de150ea8e346866832adfe",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 627
+    },
+    {
+      "file": "content/Begriffsseiten_T.md",
+      "bytes": 49626,
+      "lines": 902,
+      "sha256": "e7f9af7c08deb3ac1fc70467e921a410a3e366a130062156d0304e46897765a8",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 199
+    },
+    {
+      "file": "content/Begriffsseiten_U.md",
+      "bytes": 42720,
+      "lines": 729,
+      "sha256": "e9e20f03fa5501a261a38e6a3aafcae1fa0c0bdf94e5f476c2156aafc8b97280",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 166
+    },
+    {
+      "file": "content/Begriffsseiten_V.md",
+      "bytes": 66903,
+      "lines": 1208,
+      "sha256": "e0d41c3991594271bda68f2262e6dee3c8f58769648a1ae421cf719f96543662",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 263
+    },
+    {
+      "file": "content/Begriffsseiten_W.md",
+      "bytes": 41430,
+      "lines": 750,
+      "sha256": "0ff425cde7a274563f7b851a805bed91e76b5affe8f31a0d023368e9985ab720",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 168
+    },
+    {
+      "file": "content/Begriffsseiten_X.md",
+      "bytes": 8499,
+      "lines": 166,
+      "sha256": "8ae6362ee5fa5401ef436bb22306b0ea17689868d100c0181daf39a953f28074",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 30
+    },
+    {
+      "file": "content/Begriffsseiten_Y.md",
+      "bytes": 1234,
+      "lines": 36,
+      "sha256": "d620cabc8a277bd6fd8fff1607fe9df988bfd04994944c9e02fd1988b7d98e1d",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 7
+    },
+    {
+      "file": "content/Begriffsseiten_Z.md",
+      "bytes": 32117,
+      "lines": 580,
+      "sha256": "aa914fc343cfdf2550a41a5f94a5c42ed946e6ac059681e39f40a16088b310c1",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 121
+    },
+    {
+      "file": "content/DeepDive_01_SQL.md",
+      "bytes": 26348,
+      "lines": 479,
+      "sha256": "87cc4d655f3122cc218a6e63a8e16287271ee8367e5f0a537832d62a66cf46c8",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 35
+    },
+    {
+      "file": "content/DeepDive_01_SQL_Loesungen.md",
+      "bytes": 7158,
+      "lines": 177,
+      "sha256": "f4ad0d37db05d515909446a31604e3d8b16f69eb1700d617874ad24652de1405",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 6
+    },
+    {
+      "file": "content/DeepDive_02_Datenmodellierung.md",
+      "bytes": 21976,
+      "lines": 265,
+      "sha256": "bd9e63141612fa04bf1fc741b72b4d94f5b50fd2fc221bbd8e0a2a26e85e7638",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 27
+    },
+    {
+      "file": "content/DeepDive_02_Datenmodellierung_Loesungen.md",
+      "bytes": 10089,
+      "lines": 133,
+      "sha256": "5cfb864e3a22b38459bf753b3ecfdfe4546e3cc1135d959f9381c9ca7722a77d",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 7
+    },
+    {
+      "file": "content/DeepDive_03_Statistik_I.md",
+      "bytes": 27339,
+      "lines": 372,
+      "sha256": "984e9e2ec4055388feabfa3972c15bdf92b3cf240d63e4b477e2ffc6e85a48e7",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 32
+    },
+    {
+      "file": "content/DeepDive_03_Statistik_I_Loesungen.md",
+      "bytes": 11816,
+      "lines": 169,
+      "sha256": "f88cf1c320d0acefcba9d3110b7de0a748507f41618e345b212f841b35dbee11",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 9
+    },
+    {
+      "file": "content/DeepDive_04_Statistik_II.md",
+      "bytes": 20020,
+      "lines": 299,
+      "sha256": "bea1937a464dd00580293c4696e8d2d8538f81131609c944f427ce796b64d91a",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 26
+    },
+    {
+      "file": "content/DeepDive_04_Statistik_II_Loesungen.md",
+      "bytes": 12842,
+      "lines": 182,
+      "sha256": "2763f45a6aa340ac7975d080878998d115bc284b49304474f2afae07047de8b0",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_05_Prozessanalyse.md",
+      "bytes": 64668,
+      "lines": 785,
+      "sha256": "5018fce1eeb9c68ca5d8279fec5594de8fcc5aa74c0d08e58fb70cb32519bf18",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 49
+    },
+    {
+      "file": "content/DeepDive_05_Prozessanalyse_Loesungen.md",
+      "bytes": 12725,
+      "lines": 151,
+      "sha256": "70b5e989065b90d16161640fda08a76a43cba291a72a2b8ed287c4bc3c5e7b53",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_06_CRISPDM_ML.md",
+      "bytes": 58686,
+      "lines": 757,
+      "sha256": "ff4a565a13d409e306dd48bce212070cb4a9857fb45378293375bae413154ec9",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 51
+    },
+    {
+      "file": "content/DeepDive_06_CRISPDM_ML_Loesungen.md",
+      "bytes": 13515,
+      "lines": 161,
+      "sha256": "725953da9df892933da6fa188ae6445996fabc77c59baf5301dff10c22b7104d",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_07_Modellguete.md",
+      "bytes": 22441,
+      "lines": 330,
+      "sha256": "e2cc6ac1919e8829ce4fdf3b89d9f34ca7deaa497131cec2b8574593b1c2efc4",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 29
+    },
+    {
+      "file": "content/DeepDive_07_Modellguete_Loesungen.md",
+      "bytes": 10501,
+      "lines": 139,
+      "sha256": "7349a415a9f542bd3c8eb059ff3da024412f1951581571bfc33922dc67bd0426",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_08_DataWarehouse.md",
+      "bytes": 25486,
+      "lines": 341,
+      "sha256": "4f6e1fd7878d1298b4bc445eabf64e0480c0ff5e3fad2df0c295524c30d458d2",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 29
+    },
+    {
+      "file": "content/DeepDive_08_DataWarehouse_Loesungen.md",
+      "bytes": 11772,
+      "lines": 159,
+      "sha256": "5e72786f8a78eaab2696fdfe999d50a5e746eeb909878e28ef9c3c104abf5a13",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_09_Datenqualitaet.md",
+      "bytes": 23837,
+      "lines": 323,
+      "sha256": "6aa4d57799b1cff31693192125e733550d16d6c9f1ace5d290d04036c722bd29",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 28
+    },
+    {
+      "file": "content/DeepDive_09_Datenqualitaet_Loesungen.md",
+      "bytes": 14250,
+      "lines": 156,
+      "sha256": "8b815f8f87e06b51e6bc799f71b66027cd506d1e960da9551ac5d48838cd1371",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 9
+    },
+    {
+      "file": "content/DeepDive_10_Datenschutz_ITSicherheit.md",
+      "bytes": 34299,
+      "lines": 368,
+      "sha256": "b11f30adc318bc5fd1c1129fcc382f8f4ee0950789771b2bd3fd5f9900b78194",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 32
+    },
+    {
+      "file": "content/DeepDive_10_Datenschutz_ITSicherheit_Loesungen.md",
+      "bytes": 14965,
+      "lines": 162,
+      "sha256": "b7f4bba142dfe10214984fc46b4bce2c1cb30a20779619734368b4ac92e5ef6d",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_11_Visualisierung_Algorithmen.md",
+      "bytes": 27176,
+      "lines": 425,
+      "sha256": "dd50fc0d07acd1bf8a88dd7123d7cf78985f76e096cb6ef50217b6f333367bb2",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 26
+    },
+    {
+      "file": "content/DeepDive_11_Visualisierung_Algorithmen_Loesungen.md",
+      "bytes": 16696,
+      "lines": 193,
+      "sha256": "084e1e0e96a374372f7ef43f6a564a0aae08035d42b0ba8ce21b79676cd7abc3",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_12_Projektmanagement.md",
+      "bytes": 25509,
+      "lines": 307,
+      "sha256": "658a20cbe8a6bbb0565f4a6a84d6b6208e28ee37ca7fc5eae15ac96a95b34857",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 28
+    },
+    {
+      "file": "content/DeepDive_12_Projektmanagement_Loesungen.md",
+      "bytes": 15083,
+      "lines": 194,
+      "sha256": "c8feb84bf5f975d00e0f4e784da441b8309be87c49e4cbad351c6610791889b0",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 9
+    },
+    {
+      "file": "content/DeepDive_13_WiSo_I.md",
+      "bytes": 36511,
+      "lines": 486,
+      "sha256": "193079ccef78f30ebd4058cfdbfaa863e1ae27d26d4ef4197566ab9ff3d41694",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 42
+    },
+    {
+      "file": "content/DeepDive_13_WiSo_I_Loesungen.md",
+      "bytes": 8359,
+      "lines": 101,
+      "sha256": "4a7883a2f474e462579af3dab611533bd8d3e50b656f81f85e8d66335b7e14cb",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_14_WiSo_II.md",
+      "bytes": 43186,
+      "lines": 547,
+      "sha256": "de8846b91eca3843a16e56e0da41b939281c83b4583a2d7eddecdc738bda4017",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 40
+    },
+    {
+      "file": "content/DeepDive_14_WiSo_II_Loesungen.md",
+      "bytes": 8376,
+      "lines": 112,
+      "sha256": "08b4b60dbd38c10bcb41f605c3181d580fa6f7877c02aed798fa5f5c0c5c9855",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 7
+    },
+    {
+      "file": "content/DeepDive_15_Datenbereitstellung.md",
+      "bytes": 27825,
+      "lines": 396,
+      "sha256": "36e01775dbf3be2f7aefd4a0e3a2e651f4e17aac17081e44951ede3bf4ce07ba",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 35
+    },
+    {
+      "file": "content/DeepDive_15_Datenbereitstellung_Loesungen.md",
+      "bytes": 11854,
+      "lines": 191,
+      "sha256": "7c41539d0c05609ca0f9be986880939b88c60c48602194bf1ce08d7406f6445e",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_16_Qualitaetssicherung_Verfuegbarkeit.md",
+      "bytes": 30295,
+      "lines": 355,
+      "sha256": "4088e8587fbca22c29d43bb5ed7afad53877e89e13d62423bcef7ecf32265adb",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 34
+    },
+    {
+      "file": "content/DeepDive_16_Qualitaetssicherung_Verfuegbarkeit_Loesungen.md",
+      "bytes": 9939,
+      "lines": 151,
+      "sha256": "fd24d2330656d4d8daeac640baa1844b79ad58c6c2da13a56bbcebc6a0c73e11",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 8
+    },
+    {
+      "file": "content/DeepDive_17_Glossar_Diagramme.md",
+      "bytes": 145084,
+      "lines": 1800,
+      "sha256": "61574c4cb7bb73939106d4594ea15b346635eba3f4adac840d63363a4b106a20",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 54
+    },
+    {
+      "file": "content/DeepDive_18_Altklausur_Prozessanalyse.md",
+      "bytes": 27867,
+      "lines": 354,
+      "sha256": "e2131a32750b63f753aa21081f91cb4b71e7b64a7968ad2cdbf6850264882529",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 31
+    },
+    {
+      "file": "content/DeepDive_18_Altklausur_Prozessanalyse_Loesungen.md",
+      "bytes": 12820,
+      "lines": 185,
+      "sha256": "73128f59cd5c5fd99928c6df99135c7af2d111ec1b400652aed98da829a17da4",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 7
+    },
+    {
+      "file": "content/DeepDive_19_Altklausur_Datenqualitaet.md",
+      "bytes": 22561,
+      "lines": 373,
+      "sha256": "63c0f3ec1bcc348741bcd1485a67bbc17915b41f6ef22b937f94169bde037389",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 33
+    },
+    {
+      "file": "content/DeepDive_19_Altklausur_Datenqualitaet_Loesungen.md",
+      "bytes": 11203,
+      "lines": 203,
+      "sha256": "c69a149b51cdfe739d1dd908bab9238afd93d6d0fdc7d93bfbaa314f629ed9af",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 7
+    },
+    {
+      "file": "content/DeepDive_20_Altklausur_WiSo.md",
+      "bytes": 33104,
+      "lines": 470,
+      "sha256": "c691225b9ac748b1f27649682cc8c187e4ba812b4bb129582a29d5258d64c91f",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 37
+    },
+    {
+      "file": "content/DeepDive_20_Altklausur_WiSo_Loesungen.md",
+      "bytes": 9870,
+      "lines": 112,
+      "sha256": "d7a156bd3e262af89f4af73499389e49c6ab9c1156cc9bc74ad7d553467efc2a",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 7
+    },
+    {
+      "file": "content/Deep_Dive_SQL_KW28_29.md",
+      "bytes": 24108,
+      "lines": 508,
+      "sha256": "75459b23e1b7966f0756059489df6d901c0e28587859669467f4620761b9ee1d",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 22
+    },
+    {
+      "file": "content/Lernzettel_Kernthemen.md",
+      "bytes": 18306,
+      "lines": 208,
+      "sha256": "a8c3cdbc602e790f711cddbf83dc798980a4ae99bff13bfc84271ecefa06a9d3",
+      "semanticReview": "not-exhaustively-verified",
+      "sections": 12
+    }
+  ],
+  "occurrences": [
+    {
+      "finding": "V01",
+      "file": "content/AP2_FIDPA_Lernkarten.json",
+      "line": 861,
+      "text": "\"antwort\": \"Nicht unbedingt: Für Quartile gibt es mehrere Konventionen. Beispiel 2, 3, 3, 4, 5, 5, 5, 6, 8, 19: Lernzettel (n · p, aufrunden) Q1 = 3, Q3 = 6; Excel QUARTILE.INKL Q1 = 3,25, Q3 = 5,75; QUARTILE.EXKL Q1 = 3, Q3 = 6,5. Konvention nennen, durchgängig anwenden und prüfen, ob sich die Ausreißer-Aussage ändert.\","
+    },
+    {
+      "finding": "V01",
+      "file": "content/AP2_FIDPA_Lernkarten.json",
+      "line": 904,
+      "text": "\"antwort\": \"Konvention des Lernzettels (eine von mehreren): nicht ganzzahlig → aufrunden auf Position 8 und den Wert an Position 8 ablesen. Bei 2, 3, 3, 4, 5, 5, 5, 6, 8, 19 ist das der Wert 6 – nicht 8! Immer beides notieren („Position 8 → Wert 6“) und die verwendete Konvention dazuschreiben (Excel QUARTILE.INKL interpoliert z. B. zu 5,75).\","
+    },
+    {
+      "finding": "R01",
+      "file": "content/AP2_FIDPA_Lernkarten.json",
+      "line": 2981,
+      "text": "\"antwort\": \"In Kraft seit 1. August 2024, gestaffelt anwendbar: Verbote und Förderung der KI-Kompetenz ab 2. Februar 2025, Pflichten für KI-Modelle mit allgemeinem Verwendungszweck ab 2. August 2025, allgemeine Anwendbarkeit und Transparenzpflichten ab 2. August 2026. Hochrisiko-Systeme nach Anhang III (z. B. Personalauswahl) erst ab 2. Dezember 2027, in Produkten nach Anhang I ab 2. August 2028 – verschoben durch den Digital Omnibus (VO (EU) 2026/1744).\","
+    },
+    {
+      "finding": "R01",
+      "file": "content/AP2_FIDPA_Lernkarten.json",
+      "line": 4070,
+      "text": "\"antwort\": \"§ 26 Abs. 1 Satz 1 BDSG ist seit EuGH C-34/21 (2023, vom BAG 2025 bestätigt) nicht mehr als eigene Rechtsgrundlage anwendbar. Grundlage ist direkt die DSGVO: Art. 6 Abs. 1 lit. b (Arbeitsvertrag), lit. c (gesetzliche Pflichten), lit. f (berechtigtes Interesse) oder eine Betriebsvereinbarung nach Art. 88 DSGVO, die die DSGVO voll einhalten muss. Ein Beschäftigtendatengesetz ist noch nicht verabschiedet (Stand 2026).\","
+    },
+    {
+      "finding": "F04",
+      "file": "content/AP2_FIDPA_Lernkarten.json",
+      "line": 6584,
+      "text": "\"antwort\": \"Die Verdienstgrenze ist an den Mindestlohn gekoppelt (Mindestlohn · 130 / 3, aufgerundet) und liegt 2026 bei 603 € monatlich (Mindestlohn 13,90 €), ab 2027 bei 633 € (Mindestlohn 14,60 €). Für den Beschäftigten fallen grundsätzlich keine Steuern und Sozialabgaben an – außer zur Rentenversicherung (Eigenanteil 3,6 %), von der er sich befreien lassen kann. Der Arbeitgeber zahlt Pauschalabgaben.\","
+    },
+    {
+      "finding": "F09",
+      "file": "content/Begriffsseiten_B.md",
+      "line": 257,
+      "text": "Ein Kunde verlangt Löschung, seine Rechnung muss aber acht Jahre aufbewahrt werden: Die Daten werden gesperrt (Art. 18 DSGVO, § 35 Abs. 3 BDSG) und nach Fristablauf gelöscht."
+    },
+    {
+      "finding": "R01",
+      "file": "content/Begriffsseiten_B.md",
+      "line": 263,
+      "text": "§ 26 Abs. 1 Satz 1 BDSG noch als eigene Rechtsgrundlage für Beschäftigtendaten nennen – seit EuGH C-34/21 (2023) gilt direkt Art. 6 DSGVO."
+    },
+    {
+      "finding": "R01",
+      "file": "content/Begriffsseiten_B.md",
+      "line": 526,
+      "text": "Die frühere Generalklausel § 26 Abs. 1 Satz 1 BDSG darf nach dem EuGH-Urteil vom 30.03.2023 (C-34/21) nicht mehr als eigene Rechtsgrundlage dienen; das BAG hat das 2025 bestätigt. Rechtsgrundlage ist direkt die DSGVO: Art. 6 Abs. 1 lit. b (Arbeitsvertrag), lit. c (z. B. Lohnsteuer, Sozialversicherung), lit. f oder eine **Betriebsvereinbarung** nach Art. 88 DSGVO, die die DSGVO voll einhalten muss. Ein Beschäftigtendatengesetz ist nicht verabschiedet (Stand 2026). Die Einwilligung ist wegen des Abhängigkeitsverhältnisses nur eingeschränkt freiwillig."
+    },
+    {
+      "finding": "F06",
+      "file": "content/Begriffsseiten_B.md",
+      "line": 620,
+      "text": "Allgemein gilt $R^2 = 1 - \\frac{\\sum e^2}{S_{yy}}$ (unerklärte durch gesamte Streuung). Auf den Trainingsdaten liegt R² zwischen 0 und 1, auf Testdaten kann es negativ werden, wenn das Modell schlechter ist als der Mittelwert. Bei der einfachen linearen Regression gilt $R^2 = r^2$. Ein hohes R² beweist weder Kausalität noch Prognosefähigkeit außerhalb des beobachteten Bereichs."
+    },
+    {
+      "finding": "F01",
+      "file": "content/Begriffsseiten_J.md",
+      "line": 11,
+      "text": "Jonas (geb. 15.03.2009) ist am 01.01.2026 16 Jahre alt, also „noch nicht 17“ → 27 Werktage Jahresurlaub. Weil er erst am 01.08.2026 beginnt, erwirbt er 2026 nur Teilurlaub: $27 \\cdot \\frac{5}{12} = 11{,}25$ → 11 Werktage."
+    },
+    {
+      "finding": "R01",
+      "file": "content/Begriffsseiten_K.md",
+      "line": 443,
+      "text": "Risikostufen: **verboten** (z. B. Social Scoring, Emotionserkennung am Arbeitsplatz, manipulative Techniken), **hohes Risiko** (z. B. Personalauswahl, Kreditwürdigkeit – Risikomanagement, Datenqualität, Dokumentation, menschliche Aufsicht), **begrenztes Risiko** (Transparenz: KI-Interaktion und Deepfakes kenntlich machen), **minimales Risiko** (z. B. Spamfilter). Zeitplan (Stand 2026, nach dem Digital Omnibus, Verordnung (EU) 2026/1744): Verbote und KI-Kompetenzpflicht ab 2. Februar 2025, Pflichten für KI-Modelle mit allgemeinem Verwendungszweck ab 2. August 2025, allgemeine Anwendbarkeit und Transparenzpflichten ab 2. August 2026, Hochrisiko-Systeme nach Anhang III ab 2. Dezember 2027, nach Anhang I ab 2. August 2028. Bußgelder bis 35 Mio. € oder 7 % des weltweiten Jahresumsatzes."
+    },
+    {
+      "finding": "F04",
+      "file": "content/Begriffsseiten_M.md",
+      "line": 1117,
+      "text": "Die Grenze berechnet sich als Mindestlohn · 130 / 3, aufgerundet auf volle Euro. Für den Beschäftigten fallen keine Steuern und Sozialabgaben an – außer zur **Rentenversicherung** (Eigenanteil 3,6 %), von der er sich befreien lassen kann. Der Arbeitgeber zahlt Pauschalabgaben von rund 30 % (KV 13 %, RV 15 %, Pauschsteuer 2 %) plus Umlagen an die Minijob-Zentrale."
+    },
+    {
+      "finding": "V01",
+      "file": "content/Begriffsseiten_Q.md",
+      "line": 126,
+      "text": "Excel QUARTILE.INKL liefert 3,25 und 5,75 – eine andere Konvention, kein Fehler."
+    },
+    {
+      "finding": "F14",
+      "file": "content/Begriffsseiten_S.md",
+      "line": 255,
+      "text": "| Fremdschlüssel | verweist auf den Primärschlüssel einer anderen Tabelle |"
+    },
+    {
+      "finding": "F14",
+      "file": "content/DeepDive_02_Datenmodellierung.md",
+      "line": 34,
+      "text": "- **Fremdschlüssel**: Attribut, das auf den Primärschlüssel einer anderen (oder derselben) Tabelle verweist."
+    },
+    {
+      "finding": "V01",
+      "file": "content/DeepDive_03_Statistik_I.md",
+      "line": 119,
+      "text": "| Excel QUARTILE.INKL: Position 1 + (n − 1) · p, linear interpoliert | 3,25 | 5,75 | 2,5 |"
+    },
+    {
+      "finding": "F11",
+      "file": "content/DeepDive_06_CRISPDM_ML.md",
+      "line": 86,
+      "text": "**Die Entscheidungsfrage lautet immer: Habe ich Labels?** Existiert eine Spalte mit der bekannten richtigen Antwort (z. B. „Kunde hat gekündigt: ja/nein\"), ist es überwachtes Lernen. Fehlt sie, bleibt nur unüberwachtes Lernen."
+    },
+    {
+      "finding": "F10",
+      "file": "content/DeepDive_06_CRISPDM_ML.md",
+      "line": 103,
+      "text": "- **k-Nächste-Nachbarn (k-NN):** Ordnet einen neuen Fall der Mehrheitsklasse seiner k ähnlichsten Nachbarn zu. Benötigt zwingend skalierte Merkmale."
+    },
+    {
+      "finding": "R01",
+      "file": "content/DeepDive_06_CRISPDM_ML.md",
+      "line": 446,
+      "text": "- Rechtsgrundlage ist die Verordnung (EU) 2024/1689, in Kraft seit 1. August 2024 und gestaffelt anwendbar. Der Zeitplan wurde durch den „Digital Omnibus zur KI\" (Verordnung (EU) 2026/1744, in Kraft seit 27. Juli 2026) teilweise verschoben (Stand 2026):"
+    },
+    {
+      "finding": "R01",
+      "file": "content/DeepDive_06_CRISPDM_ML.md",
+      "line": 462,
+      "text": "> *KI in der Personalauswahl ist ein Hochrisiko-System nach Anhang III. Damit gelten Pflichten wie Risikomanagement, hohe Datenqualität ohne diskriminierende Verzerrungen, technische Dokumentation, Protokollierung und menschliche Aufsicht; diese Pflichten greifen nach der Verschiebung durch den Digital Omnibus ab dem 2. Dezember 2027 (Stand 2026). Unabhängig davon gilt schon heute Art. 22 DSGVO: Eine Absage darf nicht ausschließlich automatisiert erfolgen.*"
+    },
+    {
+      "finding": "F07",
+      "file": "content/DeepDive_07_Modellguete.md",
+      "line": 10,
+      "text": "Der Unterschied zwischen 85 und 95 Punkten liegt auch hier in der **Interpretation**: Welche Kennzahl ist im geschilderten Fall die richtige – und warum ist Accuracy fast nie die Antwort?"
+    },
+    {
+      "finding": "F08",
+      "file": "content/DeepDive_10_Datenschutz_ITSicherheit.md",
+      "line": 8,
+      "text": "Datenschutz und Datensicherheit sind ein eigener Abschnitt im Prüfungsbereich **„Sicherstellen der Datenqualität\"** und tauchen zusätzlich in der **Prozessanalyse** auf (rechtliche Auswirkungen von Prozessänderungen) sowie **im Fachgespräch** – dort praktisch garantiert, sobald dein Projekt personenbezogene Daten berührt."
+    },
+    {
+      "finding": "R01",
+      "file": "content/DeepDive_10_Datenschutz_ITSicherheit.md",
+      "line": 63,
+      "text": "**Beschäftigtendaten** (Stand 2026): Die frühere deutsche Generalklausel **§ 26 Abs. 1 Satz 1 BDSG** darf nach dem EuGH-Urteil vom 30.03.2023 (C-34/21) nicht mehr als eigenständige Rechtsgrundlage herangezogen werden; das BAG hat das 2025 bestätigt. Rechtsgrundlage ist seitdem direkt die DSGVO – vor allem Art. 6 Abs. 1 lit. b (Arbeitsvertrag), lit. c (z. B. Lohnsteuer, Sozialversicherung) und lit. f. **Betriebsvereinbarungen** bleiben als Rechtsgrundlage möglich (Art. 88 DSGVO), müssen aber die Anforderungen der DSGVO voll erfüllen (EuGH C-65/23, 2024). Ein eigenes Beschäftigtendatengesetz ist angekündigt, aber noch nicht verabschiedet."
+    },
+    {
+      "finding": "F09",
+      "file": "content/DeepDive_10_Datenschutz_ITSicherheit.md",
+      "line": 80,
+      "text": "⚠️ **Der Klassiker-Konflikt:** Ein Kunde verlangt Löschung – die Rechnung ist aber ein Buchungsbeleg und muss nach HGB und AO **acht Jahre** aufbewahrt werden (seit 01.01.2025 durch das Bürokratieentlastungsgesetz IV, vorher zehn Jahre; Bücher, Inventare und Jahresabschlüsse weiterhin zehn Jahre – Stand 2026). Auflösung: Die gesetzliche Aufbewahrungspflicht geht vor (Art. 17 Abs. 3 lit. b); die Daten werden **für die weitere Nutzung gesperrt** (eingeschränkte Verarbeitung nach Art. 18, in Deutschland ausdrücklich § 35 Abs. 3 BDSG) und nach Ablauf der Frist gelöscht. Werbedaten und die Newsletter-Anmeldung sind dagegen sofort zu löschen."
+    },
+    {
+      "finding": "R01",
+      "file": "content/DeepDive_10_Datenschutz_ITSicherheit.md",
+      "line": 99,
+      "text": "*Hinweis (Stand 2026):* Die EU-Kommission hat mit dem „Digital Omnibus“ Änderungen der DSGVO vorgeschlagen (u. a. Meldung nur noch bei hohem Risiko, Frist 96 Stunden). Sie sind noch nicht beschlossen – in der Prüfung gilt die **72-Stunden-Frist**."
+    },
+    {
+      "finding": "F09",
+      "file": "content/DeepDive_10_Datenschutz_ITSicherheit_Loesungen.md",
+      "line": 56,
+      "text": "Korrektes Vorgehen: Die aufbewahrungspflichtigen Daten werden für jede weitere Nutzung **gesperrt** (eingeschränkte Verarbeitung nach Art. 18 bzw. § 35 Abs. 3 BDSG) und ausschließlich zur Erfüllung der steuer- und handelsrechtlichen Pflichten vorgehalten; nach Fristablauf werden sie automatisch gelöscht. Der Kunde ist **innerhalb eines Monats** über den Umfang der Löschung und die Gründe für die Teilablehnung zu informieren. *(2 P)*"
+    },
+    {
+      "finding": "R01",
+      "file": "content/DeepDive_10_Datenschutz_ITSicherheit_Loesungen.md",
+      "line": 84,
+      "text": "- **DSGVO-Anforderungen:** Es bedarf einer Rechtsgrundlage (i. d. R. Betriebsvereinbarung nach Art. 88 DSGVO bzw. berechtigtes Interesse nach Art. 6 Abs. 1 lit. f nach Abwägung – eine Einwilligung von Beschäftigten gilt wegen des Abhängigkeitsverhältnisses als problematisch). Die frühere Generalklausel § 26 Abs. 1 Satz 1 BDSG ist seit dem EuGH-Urteil von 2023 (C-34/21) nicht mehr anwendbar; auch eine Betriebsvereinbarung muss die DSGVO-Anforderungen voll erfüllen. Zusätzlich gelten Zweckbindung, Datenminimierung und Transparenzpflicht; bei systematischer umfangreicher Überwachung ist eine **Datenschutz-Folgenabschätzung nach Art. 35** zu prüfen."
+    },
+    {
+      "finding": "F08",
+      "file": "content/DeepDive_13_WiSo_I.md",
+      "line": 10,
+      "text": "Für dein Ziel ist WiSo der Bereich, in dem **95+ Punkte am realistischsten** sind: Der Stoff ist klar abgegrenzt, die Antworten sind eindeutig, und es gibt keine Bewertungsspielräume. Punkte gehen fast ausschließlich durch **Flüchtigkeit** verloren – überlesene Verneinungen, falsch gezählte Antworten, verwechselte Fristen."
+    },
+    {
+      "finding": "F01",
+      "file": "content/DeepDive_13_WiSo_I.md",
+      "line": 113,
+      "text": "Stichtag für den Urlaub ist das **Alter zu Beginn des Kalenderjahres**. Jonas (geb. 15.03.2009) ist am 01.01.2026 16 Jahre alt, also „noch nicht 17“ → **27 Werktage** für 2026. Vorsicht bei der Frage nach dem *tatsächlichen* Urlaub im Eintrittsjahr: Da Jonas erst am 01.08.2026 beginnt, erwirbt er 2026 nach § 5 BUrlG nur Teilurlaub – 27 · 5/12 = 11,25 → 11 Werktage (unter einem halben Tag wird nicht aufgerundet)."
+    },
+    {
+      "finding": "R01",
+      "file": "content/DeepDive_13_WiSo_I.md",
+      "line": 120,
+      "text": "- Ein Gesetzentwurf (Juni 2026) will eine wöchentliche statt einer täglichen Höchstarbeitszeit einführen – noch nicht verabschiedet (Stand Oktober 2026, vor der Prüfung prüfen). In der Prüfung gilt das obige Recht."
+    },
+    {
+      "finding": "F01",
+      "file": "content/DeepDive_13_WiSo_I_Loesungen.md",
+      "line": 48,
+      "text": "**B4 (4 P):** **27 Werktage** – Maßgeblich ist das **Alter zu Beginn des Kalenderjahres**. Am 01.01.2026 ist Jonas 16 Jahre alt, also „noch nicht 17“ → 27 Werktage. Häufiger Fehler: 25 Werktage, weil er im Laufe des Jahres 17 wird. Gefragt ist der Jahresanspruch; weil Jonas erst am 01.08.2026 beginnt, erwirbt er 2026 tatsächlich nur Teilurlaub (§ 5 BUrlG): $27 \\cdot \\frac{5}{12} = 11{,}25$ = **11 Werktage**."
+    },
+    {
+      "finding": "F04",
+      "file": "content/DeepDive_14_WiSo_II.md",
+      "line": 50,
+      "text": "- **Minijob:** Verdienstgrenze an den Mindestlohn gekoppelt (Mindestlohn · 130 / 3, aufgerundet auf volle Euro) – 2026: **603 €** bei 13,90 € Mindestlohn; ab 2027: 633 € bei 14,60 € (Stand 2026). Für den Beschäftigten keine Steuern und Sozialabgaben außer zur Rentenversicherung (Eigenanteil 3,6 %, Befreiung möglich); der Arbeitgeber zahlt Pauschalabgaben (rund 30 %: KV 13 %, RV 15 %, Pauschsteuer 2 %)."
+    },
+    {
+      "finding": "F02",
+      "file": "content/DeepDive_14_WiSo_II.md",
+      "line": 80,
+      "text": "**Krankheit:** Der Arbeitgeber zahlt das Entgelt bis zu **6 Wochen** weiter (Anspruch nach 4 Wochen Beschäftigung, auch für Azubis). Danach zahlt die Krankenkasse **Krankengeld**: 70 % des Bruttos, höchstens 90 % des Nettos."
+    },
+    {
+      "finding": "F15",
+      "file": "content/DeepDive_15_Datenbereitstellung.md",
+      "line": 136,
+      "text": "| **Dateiaustausch** (CSV über SFTP) | einfach, robust | nicht aktuell, keine Validierung beim Empfänger |"
+    },
+    {
+      "finding": "F12",
+      "file": "content/DeepDive_15_Datenbereitstellung.md",
+      "line": 161,
+      "text": "**Sicher** (safe) heißt strenger: Die Methode verändert auf dem Server gar nichts – das gilt nur für lesende Methoden wie GET (und HEAD, OPTIONS). Jede sichere Methode ist idempotent, aber nicht umgekehrt (RFC 9110)."
+    },
+    {
+      "finding": "F13",
+      "file": "content/DeepDive_15_Datenbereitstellung.md",
+      "line": 168,
+      "text": "| **403** | **nicht berechtigt** – authentifiziert, aber kein Recht |"
+    },
+    {
+      "finding": "F06",
+      "file": "content/Lernzettel_Kernthemen.md",
+      "line": 76,
+      "text": "- Lineare Regression: ŷ = a + b·x (a = Achsenabschnitt, b = Steigung = Änderung von y je Einheit x). **Bestimmtheitsmaß R²** = Anteil der durch das Modell erklärten Streuung (0–1; bei einfacher linearer Regression R² = r²)."
+    }
+  ]
+}

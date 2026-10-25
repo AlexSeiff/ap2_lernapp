@@ -204,7 +204,7 @@ h3 { font-size: 1.08rem; font-weight: 650; margin: 1.2em 0 0.4em; }
 .save-state { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
 .save-state.fehler, .save-state.konflikt { color: var(--low); font-weight: 600; }
 .unterleiste { padding: 0 env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px); }
-.unterleiste-innen { display: flex; gap: 6px; max-width: var(--seite-max); margin: 0 auto; padding: 12px 24px 0; overflow-x: auto; scrollbar-width: none; }
+.unterleiste-innen { display: flex; flex-wrap: wrap; gap: 8px; max-width: var(--seite-max); margin: 0 auto; padding: 12px 24px; }
 .unterleiste-innen::-webkit-scrollbar { display: none; }
 .unterleiste a { display: inline-flex; align-items: center; gap: 6px; flex: none; padding: 6px 14px; border-radius: 999px; background: var(--fill); color: var(--text); font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
 .unterleiste a:hover { text-decoration: none; filter: brightness(0.97); }
@@ -218,6 +218,14 @@ main:focus { outline: none; }
 /* Seitenwechsel: nur Deckkraft – ein transform würde fest positionierte Elemente in der Seite kurz verschieben. */
 @keyframes seite-rein { from { opacity: 0; } }
 .page.narrow { max-width: 860px; }
+.karten-start { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px; margin: 0 0 24px; border-radius: var(--radius); background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); }
+.karten-start p { margin: 0; }
+.karten-start .karten-start-titel { margin-bottom: 6px; font-size: 1.2rem; font-weight: 650; }
+.karten-start button { flex-shrink: 0; min-height: 48px; }
+@media (max-width: 599px) {
+  .karten-start { align-items: stretch; flex-direction: column; padding: 20px; gap: 16px; }
+  .karten-start button { justify-content: center; }
+}
 .loading { color: var(--muted); }
 .lead { color: var(--muted); font-size: 1.05rem; margin-top: -0.4em; }
 .crumbs { color: var(--muted); font-size: 0.9rem; margin: 0; }
@@ -729,7 +737,7 @@ tr.diff-extra .diff-mark, .diff-key.extra { color: var(--low); }
   .kopf-logo .icon { width: 1.5em; height: 1.5em; }
   .kopf-rechts .suche-knopf { width: 40px; height: 40px; min-height: 40px; padding: 0; justify-content: center; border-radius: 50%; }
   .kopf-rechts .suche-knopf .icon { width: 1.25em; height: 1.25em; }
-  .unterleiste-innen { padding: 10px 12px 0; }
+  .unterleiste-innen { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; padding: 10px 12px; }
   .unterleiste a { padding: 7px 13px; min-height: 36px; }
   main { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
   .bottom-nav { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; }
@@ -909,7 +917,6 @@ h1 .icon, h2 .icon { color: var(--accent); }
 .filter-box > summary::-webkit-details-marker { display: none; }
 .filter-box > summary .icon { transition: transform 0.15s; }
 .filter-box[open] > summary .icon { transform: rotate(90deg); }
-@media (min-width: 600px) { .filter-box > summary { display: none; } }
 @media print { .bottom-nav, .kopf, .unterleiste { display: none !important; } }
 
 /* Begriffsseiten (/glossar/:id, Umsetzungsplan Phase 3) */

@@ -61,8 +61,17 @@ function Uebersicht() {
   });
 
   return (
-    <div className="page">
-      <h1>Übersicht</h1>
+    <div className="page dashboard-page">
+      <div className="dashboard-kopf">
+        <div>
+          <p className="seiten-auftakt">DEIN LERNRAUM</p>
+          <h1>Übersicht</h1>
+          <p className="dashboard-untertitel">Ein klarer Kopf. Ein nächster Schritt.</p>
+        </div>
+        <Link className="dashboard-bibliothek" to="/lernen">
+          <Icon name="book-open" /> Alle Themen <Icon name="chevron-right" />
+        </Link>
+      </div>
       <BackupBanner />
       {progress.settings.leichtModus && (
         <p className="card info" role="note">
@@ -231,6 +240,11 @@ function Weiterlernen() {
       <h2>
         <Icon name="play" /> Weiterlernen
       </h2>
+      <p className="weiter-headline">
+        Kleine Schritte.
+        <br />
+        Großes Wissen.
+      </p>
       <div className="actions heute-start">
         <Link className="button" to="/heute">
           <Icon name="play" /> {laeuft ? `Heute lernen fortsetzen (${sitzung.index + 1}/${sitzung.items.length})` : 'Heute lernen'}

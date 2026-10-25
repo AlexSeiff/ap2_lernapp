@@ -25,9 +25,13 @@ export function Welcome() {
   };
 
   return (
-    <div className="page narrow">
+    <div className="page narrow welcome-page">
+      <div className="welcome-symbol" aria-hidden="true">
+        <Icon name="graduation-cap" />
+      </div>
+      <p className="seiten-auftakt">DEIN LERNRAUM</p>
       <h1>Willkommen!</h1>
-      <p className="lead">Schön, dass du da bist. Drei Dinge vorab:</p>
+      <p className="lead">Alles für deine AP2. Ein Ort zum Verstehen, Üben und Weiterkommen.</p>
       <ol className="welcome">
         <li>
           <b>
