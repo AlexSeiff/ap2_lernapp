@@ -38,10 +38,7 @@ export function Dashboard() {
   return firstVisit ? <Welcome /> : <Uebersicht />;
 }
 
-/**
- * Übersicht im Stil von iOS-Widgets (Umsetzungsplan Phase 9): mobil zwei Spalten (kleine Widgets halb, alle anderen ganz breit),
- * ab 900 px vier Spalten (klein = 1, sonst 2). Darunter die Tabellen je Thema in voller Breite.
- */
+/** Persönliches Lernjournal: Tagesplan, Randnotizen und Fortschritt auf einer Notizbuchseite. */
 function Uebersicht() {
   const { content, progress } = useStore();
   const today = localDate();
@@ -61,12 +58,12 @@ function Uebersicht() {
   });
 
   return (
-    <div className="page dashboard-page">
+    <div className="page dashboard-page notebook-page">
       <div className="dashboard-kopf">
         <div>
-          <p className="seiten-auftakt">DEIN LERNRAUM</p>
+          <p className="seiten-auftakt">MEIN AP2-NOTIZBUCH</p>
           <h1>Übersicht</h1>
-          <p className="dashboard-untertitel">Ein klarer Kopf. Ein nächster Schritt.</p>
+          <p className="dashboard-untertitel">Dein Lernplan und dein Fortschritt auf einen Blick.</p>
         </div>
         <Link className="dashboard-bibliothek" to="/lernen">
           <Icon name="book-open" /> Alle Themen <Icon name="chevron-right" />
@@ -79,10 +76,14 @@ function Uebersicht() {
           höchstens bis Fach 2; Fach 3–5 erreichst du nur mit „Aufdecken“.
         </p>
       )}
-      <div className="widgets">
+      <div className="notebook-plan">
         <Weiterlernen />
-        <Countdown />
-        <Lernserie />
+        <div className="notebook-randnotizen" aria-label="Prüfungstermin und Lernserie">
+          <Countdown />
+          <Lernserie />
+        </div>
+      </div>
+      <div className="widgets notebook-sections">
         <BereichRinge />
         <KartenstandWidget />
         <FaelligWidget today={today} />

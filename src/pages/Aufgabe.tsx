@@ -78,11 +78,16 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
   };
 
   return (
-    <div className="page narrow">
+    <div className="page narrow notebook-page exercise-sheet">
+      <div className="notebook-running-head">
+        <span>AP2 · Übungsblatt</span>
+        <span>{formatPoints(task.points)} Punkte</span>
+      </div>
       <p className="crumbs">
         <Link to={repeat ? '/fehlerjournal' : `/aufgaben?thema=${task.topicId}`}>{repeat ? 'Fehlerjournal' : 'Einzelaufgaben'}</Link> /{' '}
         {topic?.title} {block && `/ Block ${block.letter} – ${block.title}`}
       </p>
+      <h1>Einzelaufgabe {task.code}</h1>
       {journal && !journal.resolvedAt && (
         <p className="card warn">
           Im Fehlerjournal · Stufe {journal.stage + 1}/3 · zuletzt {formatPoints(journal.lastPoints)}/{formatPoints(journal.max)} P · fällig{' '}

@@ -238,12 +238,24 @@ describe('Suche und Seiten', () => {
     expect(ueberschriftKern('Prüfungsrelevanz')).toBe('Prüfungsrelevanz');
   });
 
-  it('Seite mit Sprungleiste, Ankern und Fundstellen; Kachel unter Material', () => {
+  it('öffnet bei Suchtreffern und Buchstabenlinks die passende Buchseite', () => {
+    const ziel = glossar[50];
+    const html = render(`/glossar?stelle=g-${encodeURIComponent(ziel.id)}`);
+    expect(html).toContain(`id="g-${ziel.id}"`);
+    expect(html).not.toContain(`id="g-${glossar[0].id}"`);
+    const buchstabenHtml = render('/glossar?stelle=buchstabe-S');
+    expect(buchstabenHtml).toContain('id="buchstabe-S"');
+  });
+
+  it('Buch mit Register, begrenzter Doppelseite und Fundstellen; Kachel unter Material', () => {
     const html = render('/glossar');
     expect(html).toContain('Glossar');
     expect(html).toContain('aria-label="Buchstaben"');
-    expect(html).toContain('id="buchstabe-A"');
-    for (const e of glossar.slice(0, 20)) expect(html).toContain(`id="g-${e.id}"`);
+    expect(html).toContain('aria-label="Glossarseiten"');
+    expect(html).toContain('aria-label="Seite 1"');
+    expect(html).toContain('aria-label="Seite 2"');
+    for (const e of glossar.slice(0, 6)) expect(html).toContain(`id="g-${e.id}"`);
+    expect(html).not.toContain(`id="g-${glossar[6].id}"`);
     expect(html).toContain('/lernen/');
     expect(render('/material')).toContain('href="/glossar"');
   });

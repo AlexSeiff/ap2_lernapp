@@ -25,7 +25,7 @@ export function Welcome() {
   };
 
   return (
-    <div className="page narrow welcome-page">
+    <div className="page narrow welcome-page notebook-page">
       <div className="welcome-symbol" aria-hidden="true">
         <Icon name="graduation-cap" />
       </div>

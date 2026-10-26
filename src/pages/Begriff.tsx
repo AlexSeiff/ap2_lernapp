@@ -83,7 +83,11 @@ export function BegriffsSeiteAnsicht({ seite }: { seite: BegriffsSeite }) {
   const quellen = useQuellen(`begriff:${seite.id}`);
 
   return (
-    <article className="page narrow begriff-seite">
+    <article className="page narrow begriff-seite notebook-page concept-sheet">
+      <div className="notebook-running-head">
+        <span>AP2 · Nachschlagewerk</span>
+        <span>Register {buchstabe}</span>
+      </div>
       <p className="crumbs">
         <Link to="/glossar">Glossar</Link> / <Link to={`/glossar?stelle=buchstabe-${encodeURIComponent(buchstabe)}`}>{buchstabe}</Link>
       </p>

@@ -64,7 +64,11 @@ export function Aufgaben() {
   const topicTitle = (id: string) => content.topics.find((t) => t.id === id)?.title ?? id;
 
   return (
-    <div className="page">
+    <div className="page notebook-page exercises-index">
+      <div className="notebook-running-head">
+        <span>AP2 · Aufgabenregister</span>
+        <span>{tasks.length} Aufgaben</span>
+      </div>
       <h1>Einzelaufgaben</h1>
       <div className="filters">
         <label>

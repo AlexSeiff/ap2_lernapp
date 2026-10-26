@@ -25,7 +25,7 @@ export function Themen() {
   const ausgeblendet = content.topics.filter((t) => istAusgeblendet(progress.settings, t.id));
   const pool = useMemo(() => cardPool(content.flashcards, progress.settings), [content, progress.settings]);
   return (
-    <div className="page">
+    <div className="page themen-page">
       <h1>Lernen</h1>
       <p className="lead">
         Theorie aller Deep Dives – mit {progress.settings.prueferfragen ? 'Prüferfragen, ' : ''}Lernziel-Check und direktem Sprung in Übung
@@ -102,7 +102,7 @@ export function Thema() {
   const ausgeblendet = istAusgeblendet(progress.settings, topic.id);
 
   return (
-    <div className="page with-toc">
+    <div className="page with-toc learning-page">
       <aside className="toc">
         <b>Inhalt</b>
         {topic.sections.map((s) => (
@@ -131,7 +131,11 @@ export function Thema() {
           </a>
         )}
       </aside>
-      <article>
+      <article className="notebook-page learning-sheet">
+        <div className="notebook-running-head">
+          <span>AP2 · Lernzettel</span>
+          <span>{topicLabel(topic)}</span>
+        </div>
         <p className="crumbs">
           <Link to="/lernen">Lernen</Link> / {topicLabel(topic)}
         </p>

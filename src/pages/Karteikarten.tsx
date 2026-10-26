@@ -229,40 +229,44 @@ export function Karteikarten() {
               {card.schwierigkeit && <span className="badge muted">{LEVEL_LABELS[card.schwierigkeit] ?? card.schwierigkeit}</span>}
               <span className="muted small">{card.id}</span>
             </div>
-            <KartenFrage card={card} />
-            {card.typ === 'rechnung' && !flipped && (
-              <p className="hint">
-                <Icon name="pencil" /> Erst auf Papier rechnen, dann umdrehen.
-              </p>
-            )}
-            {flipped && (
-              <div className="fc-answer">
-                <AntwortVergleich
-                  eigene={eigeneAntwort}
-                  muster={
-                    card.answer ? (
-                      <KartenAntwort card={card} />
-                    ) : (
-                      <p className="muted">
-                        Keine Musterantwort im Lernblatt – beantworte die Frage laut und prüfe dich anhand des Theorieteils.
-                      </p>
-                    )
-                  }
-                />
-                {!!card.tags?.length && (
-                  <div className="tags">
-                    {card.tags.map((t) => (
-                      <span key={t} className="tag">
-                        #{t}
-                      </span>
-                    ))}
-                  </div>
+            <div className={`paper-turn ${flipped ? 'is-turned' : ''}`}>
+              <div className="paper-face paper-front" aria-hidden={flipped} inert={flipped}>
+                <KartenFrage card={card} />
+                {card.typ === 'rechnung' && (
+                  <p className="hint">
+                    <Icon name="pencil" /> Erst auf Papier rechnen, dann umdrehen.
+                  </p>
                 )}
+                <p className="hint">Leertaste oder klicken · Karte umdrehen ↻</p>
               </div>
-            )}
-            {!flipped && card.typ !== 'rechnung' && (
-              <p className="hint">Antwort formulieren – im Kopf oder unten aufschreiben –, dann klicken oder Leertaste drücken.</p>
-            )}
+              <div className="paper-face paper-back" aria-hidden={!flipped} inert={!flipped}>
+                <p className="fc-label">Rückseite · Lösung</p>
+
+                <div className="fc-answer">
+                  <AntwortVergleich
+                    eigene={eigeneAntwort}
+                    muster={
+                      card.answer ? (
+                        <KartenAntwort card={card} />
+                      ) : (
+                        <p className="muted">
+                          Keine Musterantwort im Lernblatt – beantworte die Frage laut und prüfe dich anhand des Theorieteils.
+                        </p>
+                      )
+                    }
+                  />
+                  {!!card.tags?.length && (
+                    <div className="tags">
+                      {card.tags.map((t) => (
+                        <span key={t} className="tag">
+                          #{t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </KartenWechsel>
         {flipped && <p className="hint wisch-hinweis">Auf dem Handy: nach rechts wischen = gewusst, nach links = nicht gewusst.</p>}
@@ -662,14 +666,18 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
             </span>
             {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}
           </div>
-          <KartenFrage card={card} />
-          {offen ? (
-            <div className="fc-answer">
-              {card.answer ? <KartenAntwort card={card} /> : <p className="muted">Keine Musterantwort im Lernblatt.</p>}
+          <div className={`paper-turn ${offen ? 'is-turned' : ''}`}>
+            <div className="paper-face paper-front" aria-hidden={offen} inert={offen}>
+              <KartenFrage card={card} />
+              <p className="hint">Klicken oder Leertaste zum Umdrehen ↻</p>
             </div>
-          ) : (
-            <p className="hint">Klicken oder Leertaste zum Umdrehen.</p>
-          )}
+            <div className="paper-face paper-back" aria-hidden={!offen} inert={!offen}>
+              <p className="fc-label">Rückseite · Lösung</p>
+              <div className="fc-answer">
+                {card.answer ? <KartenAntwort card={card} /> : <p className="muted">Keine Musterantwort im Lernblatt.</p>}
+              </div>
+            </div>
+          </div>
         </div>
       </KartenWechsel>
       {offen && <SqlUebungLinks card={card} />}

@@ -76,7 +76,7 @@ function RechenUebungView({ u }: { u: RechenUebungTyp }) {
   const listenFelder = inst?.eingaben.filter((e) => !imLayout.has(e.id)) ?? [];
 
   return (
-    <div className="page rechnen-page">
+    <div className="page rechnen-page paper-sheet">
       <p className="crumbs">
         <Link to="/rechnen">Rechenübungen</Link> / {u.thema}
       </p>

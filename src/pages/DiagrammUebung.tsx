@@ -151,7 +151,7 @@ function DiagrammUebungView({ u }: { u: DiagrammUebungTyp }) {
   const element = (id: string) => u.palette.find((p) => p.id === id);
 
   return (
-    <div className="page diagramm-page">
+    <div className="page diagramm-page paper-sheet">
       <p className="crumbs">
         <Link to="/diagramme">Diagramm-Übungen</Link> / {DIAGRAMM_TYP_NAMEN[u.typ]}
       </p>

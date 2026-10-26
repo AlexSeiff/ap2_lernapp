@@ -206,7 +206,7 @@ function SqlUebungView({ id }: { id: string }) {
   };
 
   return (
-    <div className="page sql-page">
+    <div className="page sql-page paper-sheet">
       <SqlTabs />
       <p className="crumbs">
         <Link to="/sql/uebungen">Übungen</Link> / {ex.thema}
