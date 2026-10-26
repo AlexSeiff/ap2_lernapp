@@ -190,36 +190,107 @@ Das **ereignisbasierte Gateway** (Raute mit Fünfeck im Doppelkreis) wartet auf 
 
 ## 2.2 Beispiel – Reparaturprozess Möbelhaus Nordholz
 
-```
-Pool: MÖBELHAUS NORDHOLZ
-┌──────────────────────────────────────────────────────────────────────┐
-│ Lane: Serviceannahme                                                 │
-│  (○)──▶[Auftrag erfassen]──▶[Kostenvoranschlag erstellen]──┐         │
-│   ▲                                                        │         │
-│   ┆       ┌────────────────────────────────────────────────┘         │
-│   ┆       ▼               abgelehnt                                  │
-│   ┆      ◇X─────────────────────────▶[Absage senden]──▶((●))         │
-│   ┆       │ angenommen                                               │
-├───┆───────┼──────────────────────────────────────────────────────────┤
-│   ┆       │                                   Lane: Werkstatt        │
-│   ┆       │     ┌──▶[Ersatzteil bestellen]──┐                        │
-│   ┆       └──▶◇+┤                           ├─▶◇+──▶[Reparatur       │
-│   ┆             └──▶[Techniker einplanen]───┘      durchführen]──┐   │
-├───┆──────────────────────────────────────────────────────────────┼───┤
-│   ┆                                         Lane: Buchhaltung    │   │
-│   ┆          ((●))◀──[Rechnung stellen]◀─────────────────────────┘   │
-│   ┆                         ┆                                        │
-└───┆─────────────────────────┆────────────────────────────────────────┘
-    ┆ Nachrichtenfluss        ┆ Nachrichtenfluss
-    ┆ (Reparaturmeldung)      ▼ (Rechnung)
-┌───┴──────────────────────────────────────────────────────────────────┐
-│ Pool: KUNDE (zugeklappt / Black Box)                                 │
-└──────────────────────────────────────────────────────────────────────┘
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 930 460" width="930" height="460" role="img" aria-label="BPMN-Kollaborationsdiagramm Reparaturprozess Möbelhaus Nordholz: Pool Kunde und Pool Möbelhaus mit den Lanes Serviceannahme, Werkstatt und Buchhaltung, XOR-Gateway nach der Kundenantwort, AND-Gateway für Ersatzteilbestellung und Technikereinplanung, Nachrichtenflüsse zum Kunden">
+<defs><marker id="dd5-pfeil" viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="10" refY="5.0" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5.0 L0,10 z" class="dg-voll"/></marker><marker id="dd5-offen" viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="10" refY="5.0" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5.0 L0,10" class="dg-linie"/></marker><marker id="dd5-kreis" viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="userSpaceOnUse"><circle cx="5" cy="5" r="4" class="dg-form"/></marker></defs>
+<rect x="10" y="10" width="910" height="46" class="dg-grau"/>
+<text x="465" y="33" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Kunde</text>
+<rect x="10" y="100" width="910" height="350" class="dg-form"/>
+<line x1="34" y1="100" x2="34" y2="450" class="dg-linie"/>
+<line x1="58" y1="100" x2="58" y2="450" class="dg-linie"/>
+<line x1="34" y1="210" x2="920" y2="210" class="dg-linie"/>
+<line x1="34" y1="350" x2="920" y2="350" class="dg-linie"/>
+<text x="22" y="275" text-anchor="middle" dominant-baseline="middle" class="dg-fett" transform="rotate(-90 22 275)">Möbelhaus Nordholz</text>
+<text x="46" y="155" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 46 155)">Serviceannahme</text>
+<text x="46" y="280" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 46 280)">Werkstatt</text>
+<text x="46" y="400" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 46 400)">Buchhaltung</text>
+<circle cx="96" cy="155" r="14" class="dg-form"/>
+<rect x="88" y="150" width="16" height="11" class="dg-form dg-duenn"/>
+<path d="M88,150 L96,156 L104,150" class="dg-linie dg-duenn"/>
+<text x="96" y="184" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Meldung</text>
+<text x="96" y="197" text-anchor="middle" dominant-baseline="middle" class="dg-klein">erhalten</text>
+<line x1="110" y1="155" x2="125" y2="155" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<rect x="125" y="130" width="90" height="50" rx="10" class="dg-form"/>
+<text x="170" y="147.5" text-anchor="middle" dominant-baseline="middle">Auftrag</text>
+<text x="170" y="162.5" text-anchor="middle" dominant-baseline="middle">erfassen</text>
+<line x1="215" y1="155" x2="235" y2="155" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<rect x="235" y="130" width="125" height="50" rx="10" class="dg-form"/>
+<text x="297.5" y="147.5" text-anchor="middle" dominant-baseline="middle">Kostenvoranschlag</text>
+<text x="297.5" y="162.5" text-anchor="middle" dominant-baseline="middle">erstellen</text>
+<line x1="360" y1="155" x2="383" y2="155" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<circle cx="397" cy="155" r="14" class="dg-form"/>
+<circle cx="397" cy="155" r="11" class="dg-form"/>
+<rect x="390" y="150" width="14" height="10" class="dg-form dg-duenn"/>
+<path d="M390,150 L397,155.5 L404,150" class="dg-linie dg-duenn"/>
+<text x="397" y="184" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Antwort</text>
+<text x="397" y="197" text-anchor="middle" dominant-baseline="middle" class="dg-klein">erhalten</text>
+<line x1="411" y1="155" x2="432" y2="155" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<polygon points="454,133 476,155 454,177 432,155" class="dg-form"/>
+<line x1="446" y1="147" x2="462" y2="163" class="dg-linie"/>
+<line x1="462" y1="147" x2="446" y2="163" class="dg-linie"/>
+<text x="454" y="121" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Annahme?</text>
+<line x1="476" y1="155" x2="540" y2="155" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<text x="508" y="145" text-anchor="middle" dominant-baseline="middle" class="dg-klein">abgelehnt</text>
+<rect x="540" y="130" width="100" height="50" rx="10" class="dg-form"/>
+<text x="590" y="147.5" text-anchor="middle" dominant-baseline="middle">Absage</text>
+<text x="590" y="162.5" text-anchor="middle" dominant-baseline="middle">senden</text>
+<line x1="640" y1="155" x2="665" y2="155" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<circle cx="679" cy="155" r="14" class="dg-form dg-dick"/>
+<text x="679" y="184" text-anchor="middle" dominant-baseline="middle" class="dg-klein">abgelehnt</text>
+<path d="M454,177 L454,280 L478,280" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<text x="461" y="194" text-anchor="start" dominant-baseline="middle" class="dg-klein">angenommen</text>
+<polygon points="500,258 522,280 500,302 478,280" class="dg-form"/>
+<line x1="492" y1="280" x2="508" y2="280" class="dg-linie dg-dick"/>
+<line x1="500" y1="272" x2="500" y2="288" class="dg-linie dg-dick"/>
+<path d="M500,258 L500,240 L535,240" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<path d="M500,302 L500,320 L535,320" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<rect x="535" y="220" width="120" height="40" rx="10" class="dg-form"/>
+<text x="595" y="233" text-anchor="middle" dominant-baseline="middle">Ersatzteil</text>
+<text x="595" y="248" text-anchor="middle" dominant-baseline="middle">bestellen</text>
+<rect x="535" y="300" width="120" height="40" rx="10" class="dg-form"/>
+<text x="595" y="313" text-anchor="middle" dominant-baseline="middle">Techniker</text>
+<text x="595" y="328" text-anchor="middle" dominant-baseline="middle">einplanen</text>
+<path d="M655,240 L700,240 L700,258" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<path d="M655,320 L700,320 L700,302" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<polygon points="700,258 722,280 700,302 678,280" class="dg-form"/>
+<line x1="692" y1="280" x2="708" y2="280" class="dg-linie dg-dick"/>
+<line x1="700" y1="272" x2="700" y2="288" class="dg-linie dg-dick"/>
+<line x1="722" y1="280" x2="745" y2="280" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<rect x="745" y="255" width="105" height="50" rx="10" class="dg-form"/>
+<text x="797.5" y="272.5" text-anchor="middle" dominant-baseline="middle">Reparatur</text>
+<text x="797.5" y="287.5" text-anchor="middle" dominant-baseline="middle">durchführen</text>
+<line x1="797.5" y1="305" x2="797.5" y2="375" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<rect x="745" y="375" width="105" height="50" rx="10" class="dg-form"/>
+<text x="797.5" y="392.5" text-anchor="middle" dominant-baseline="middle">Rechnung</text>
+<text x="797.5" y="407.5" text-anchor="middle" dominant-baseline="middle">stellen</text>
+<line x1="850" y1="400" x2="870" y2="400" class="dg-linie" marker-end="url(#dd5-pfeil)"/>
+<circle cx="884" cy="400" r="14" class="dg-form dg-dick"/>
+<rect x="876" y="395" width="16" height="11" class="dg-voll"/>
+<polygon points="877.5,396 890.5,396 884,401" class="dg-flaeche"/>
+<text x="884" y="429" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Rechnung</text>
+<text x="884" y="441" text-anchor="middle" dominant-baseline="middle" class="dg-klein">versandt</text>
+<line x1="96" y1="56" x2="96" y2="141" class="dg-linie dg-strich" marker-start="url(#dd5-kreis)" marker-end="url(#dd5-offen)"/>
+<text x="103" y="72" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-kursiv">Reparaturmeldung</text>
+<line x1="297.5" y1="130" x2="297.5" y2="56" class="dg-linie dg-strich" marker-start="url(#dd5-kreis)" marker-end="url(#dd5-offen)"/>
+<text x="290" y="90" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-kursiv">Kostenvoranschlag</text>
+<line x1="397" y1="56" x2="397" y2="141" class="dg-linie dg-strich" marker-start="url(#dd5-kreis)" marker-end="url(#dd5-offen)"/>
+<text x="404" y="78" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-kursiv">Annahme oder Ablehnung</text>
+<line x1="590" y1="130" x2="590" y2="56" class="dg-linie dg-strich" marker-start="url(#dd5-kreis)" marker-end="url(#dd5-offen)"/>
+<text x="597" y="90" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-kursiv">Absage</text>
+<line x1="884" y1="386" x2="884" y2="56" class="dg-linie dg-strich" marker-start="url(#dd5-kreis)" marker-end="url(#dd5-offen)"/>
+<text x="877" y="78" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-kursiv">Rechnung</text>
+</svg>
 ```
 
-Zu erkennen: ein **XOR** nach der Kostenvoranschlagsprüfung (genau ein Pfad), ein **AND** für Ersatzteilbestellung und Technikereinplanung (laufen parallel), drei Lanes für die beteiligten Rollen, ein separater Pool für den Kunden mit gestricheltem Nachrichtenfluss.
+Zu erkennen:
+- Ein **Nachrichten-Startereignis** (Umschlag im dünnen Kreis): Die Meldung des Kunden löst den Prozess aus.
+- Ein **Nachrichten-Zwischenereignis** (doppelter Rand): Hier wartet der Prozess auf die Antwort des Kunden zum Kostenvoranschlag.
+- Ein **XOR** mit beschrifteten Pfaden: Es wird genau einer durchlaufen.
+- Ein **AND**, das Ersatzteilbestellung und Technikereinplanung parallel startet, und ein zweites **AND**, das wartet, bis beides erledigt ist.
+- **Drei Lanes** für die beteiligten Rollen. Zwischen ihnen läuft ein normaler Sequenzfluss.
+- Ein separater, zugeklappter **Pool für den Kunden**. Er ist nur über **gestrichelte Nachrichtenflüsse** angebunden (Kreis am Anfang, offene Pfeilspitze).
 
-Legende: (○) Startereignis (hier ausgelöst durch die Nachricht des Kunden), ((●)) Endereignis, ◇X XOR-Gateway, ◇+ AND-Gateway (Aufspalten und Zusammenführen), ┆ Nachrichtenfluss. Aus Platzgründen fehlen die Nachrichtenflüsse für Kostenvoranschlag, Kundenantwort und Absage – in einer Prüfungslösung sollten sie eingezeichnet sein.
+Zwei Wege, eine Nachricht zu senden – beide sind korrekt: Die Absage verschickt der Sende-Task „Absage senden“, danach folgt ein einfaches Endereignis. Die Rechnung verschickt das **Nachrichten-Endereignis** (gefüllter Umschlag im dicken Kreis) direkt beim Abschluss.
 
 Üben: [Diagramm-Übungen BPMN](#/diagramme?typ=bpmn) – Elemente einsetzen und Abläufe ordnen.
 
