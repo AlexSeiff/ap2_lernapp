@@ -38,7 +38,7 @@ $r = \dfrac{S_{xy}}{\sqrt{S_{xx} \cdot S_{yy}}}$
 mit
 $S_{xy} = \sum (x - \bar{x})(y - \bar{y})$ · $S_{xx} = \sum (x - \bar{x})^2$ · $S_{yy} = \sum (y - \bar{y})^2$
 
-| |r| | Interpretation |
+| \|r\| | Interpretation |
 |---|---|
 | 0,0 – 0,2 | kein bis sehr schwacher Zusammenhang |
 | 0,2 – 0,5 | schwacher Zusammenhang |
@@ -232,7 +232,7 @@ Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Feh
 
 **A1 (6 P):** *Erläutern* Sie, welche vier Eigenschaften Sie einem Streudiagramm entnehmen, bevor Sie eine Kennzahl berechnen.
 
-**A2 (8 P):** *Berechnen* Sie den Korrelationskoeffizienten für **Anlage 1**. *Stellen* Sie den Rechenweg tabellarisch *dar* (S<sub>xy</sub>, S<sub>xx</sub>, S<sub>yy</sub>).
+**A2 (8 P):** *Berechnen* Sie den Korrelationskoeffizienten für **Anlage 1**. *Stellen* Sie den Rechenweg tabellarisch *dar* (S_xy, S_xx, S_yy).
 
 **A3 (6 P):** *Interpretieren* Sie Ihr Ergebnis nach Vorzeichen und Stärke und *formulieren* Sie eine Aussage, die für die Geschäftsführung verständlich ist.
 
@@ -256,7 +256,7 @@ Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Feh
 
 ## Block D – Modellgüte (16 P)
 
-**D1 (6 P):** Für Anlage 2 gilt S<sub>yy</sub> = 424. *Berechnen* Sie r und R².
+**D1 (6 P):** Für Anlage 2 gilt S_yy = 424. *Berechnen* Sie r und R².
 
 **D2 (6 P):** *Interpretieren* Sie R² in einem Satz und *nennen* Sie zwei Gründe, warum ein hohes R² allein keine verlässliche Prognose garantiert.
 
@@ -287,7 +287,7 @@ Monatsumsatz in T€: 120, 138, 126, 150, 144, 168, 156, 180
 ## Lernziel-Check (am Ende des Themas alles mit Ja beantworten)
 
 - [ ] Ich lese Richtung, Stärke, Form und Ausreißer aus einem Streudiagramm ab.
-- [ ] Ich berechne r über S<sub>xy</sub>, S<sub>xx</sub> und S<sub>yy</sub> sicher und tabellarisch.
+- [ ] Ich berechne r über S_xy, S_xx und S_yy sicher und tabellarisch.
 - [ ] Ich interpretiere r nach Vorzeichen und Stärke in Alltagssprache.
 - [ ] Ich kann die vier Erklärungen für eine Korrelation nennen und Scheinkorrelation erläutern.
 - [ ] Ich stelle die Regressionsgleichung auf und deute a und b inhaltlich korrekt.

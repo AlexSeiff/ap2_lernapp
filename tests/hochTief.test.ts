@@ -14,6 +14,16 @@ describe('teileHochTief', () => {
     expect(teileHochTief('e^z.')).toEqual([{ text: 'e' }, { text: 'z', art: 'sup' }, { text: '.' }]);
   });
 
+  it('Tiefstellung nach einem einzelnen Großbuchstaben nur mit kleingeschriebenem Index', () => {
+    expect(teileHochTief('S_xy und S_yy')).toEqual([
+      { text: 'S' },
+      { text: 'xy', art: 'sub' },
+      { text: ' und S' },
+      { text: 'yy', art: 'sub' },
+    ]);
+    for (const t of ['S_1', 'K_ID', 'AB_xy']) expect(teileHochTief(t)).toEqual([{ text: t }]);
+  });
+
   it('Tiefstellung nur nach einem einzelnen Kleinbuchstaben', () => {
     expect(teileHochTief('Σ (x_i − x̄)')).toEqual([{ text: 'Σ (x' }, { text: 'i', art: 'sub' }, { text: ' − x̄)' }]);
     expect(teileHochTief('s_xy / s_x²')).toEqual([

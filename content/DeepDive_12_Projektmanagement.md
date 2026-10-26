@@ -96,7 +96,7 @@ Der **Projektstrukturplan (PSP)** zerlegt das Projekt hierarchisch in Teilaufgab
 
 **Schätzverfahren:** Analogieschätzung (Vergleich mit ähnlichen Projekten) · Expertenschätzung · **Drei-Zeiten-Methode (PERT)**:
 
-$t_e = \dfrac{\text{optimistisch} + 4 \cdot \text{wahrscheinlich} + \text{pessimistisch}}{6}$
+$t_e = \dfrac{o + 4 \cdot m + p}{6}$ mit o = optimistischer, m = wahrscheinlichster und p = pessimistischer Wert
 
 Beispiel: o = 4, m = 7, p = 16 Tage → $t_e = \frac{4 + 4 \cdot 7 + 16}{6} = \frac{4 + 28 + 16}{6}$ = **8 Tage**. Der pessimistische Wert zieht den Erwartungswert nach oben – genau das ist gewollt, denn Aufwände werden systematisch unterschätzt.
 

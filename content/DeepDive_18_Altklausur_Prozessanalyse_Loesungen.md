@@ -28,8 +28,8 @@
 
 | Betroffener | Befürchtungen | Gegenmaßnahmen |
 |---|---|---|
-| Beschäftigte im Lager | – Leistungs- und Verhaltenskontrolle (Pausen, Wege werden ausgewertet) <br> – Fehler bei der Zeiterfassung führen zu Lohnkürzung | – Betriebsvereinbarung mit Zweckbindung: Daten dienen nur der Lohnabrechnung, keine personenbezogene Leistungsauswertung <br> – Korrekturverfahren: Beschäftigte können ihre Zeiten einsehen und Korrekturen beantragen |
-| Betriebsrat | – Das Mitbestimmungsrecht bei technischen Überwachungseinrichtungen (§ 87 Abs. 1 Nr. 6 BetrVG) wird übergangen <br> – unklarer Umfang der gespeicherten Daten | – Betriebsrat von Beginn an in Planung und Auswahl einbinden und Betriebsvereinbarung abschließen <br> – Transparente Dokumentation der gespeicherten Daten, Zugriffe und Löschfristen |
+| Beschäftigte im Lager | Leistungs- und Verhaltenskontrolle (Pausen, Wege werden ausgewertet) · Fehler bei der Zeiterfassung führen zu Lohnkürzung | Betriebsvereinbarung mit Zweckbindung: Daten dienen nur der Lohnabrechnung, keine personenbezogene Leistungsauswertung · Korrekturverfahren: Beschäftigte können ihre Zeiten einsehen und Korrekturen beantragen |
+| Betriebsrat | Das Mitbestimmungsrecht bei technischen Überwachungseinrichtungen (§ 87 Abs. 1 Nr. 6 BetrVG) wird übergangen · unklarer Umfang der gespeicherten Daten | Betriebsrat von Beginn an in Planung und Auswahl einbinden und Betriebsvereinbarung abschließen · Transparente Dokumentation der gespeicherten Daten, Zugriffe und Löschfristen |
 
 *Auch andere Antworten sind möglich. Prüferkommentar: Die Gegenmaßnahme muss die genannte Befürchtung entkräften – „Schulung“ gegen „Überwachungsangst“ erhält keine Punkte.*
 
@@ -115,9 +115,9 @@
 
 | Prozess 1: Eingangsrechnung papiergesteuert | Prozess 2: Eingangsrechnung digital unterstützt |
 |---|---|
-| **1. Rechnungseingang** – Post öffnen, sortieren, Eingangsdatum stempeln, in Mappe sammeln, in Fachabteilung bringen | – scannen die Rechnung mit dem Scanner ein <br> – lassen die Texterkennung (OCR) Rechnungsnummer, Betrag und Lieferant auslesen <br> – prüfen die automatisch erkannten Daten am Bildschirm und korrigieren sie bei Bedarf <br> – das System setzt Eingangsdatum und Zeitstempel automatisch und legt den Vorgang im Workflow ab |
-| **2. Sachliche Prüfung** – Rechnung mit Lieferschein vergleichen, Menge und Preis von Hand prüfen, unterschreiben, an Buchhaltung weitergeben | – rufen die Rechnung am Bildschirm auf <br> – das System gleicht Rechnung automatisch mit Bestellung und Wareneingang ab und markiert Abweichungen <br> – bestätigen die Prüfung digital oder erfassen eine Beanstandung im System <br> – die Buchhaltung sieht das Ergebnis sofort, kein Transport von Papier nötig |
-| **3. Freigabe und Buchung** – Freigabe durch Abteilungsleiter einholen, Daten von Hand ins Buchhaltungssystem übertragen, abheften | – bestätigen die Freigabe im System (digitale Freigabe/Signatur) <br> – das System übergibt die geprüften Rechnungsdaten automatisch über die Schnittstelle an das Buchhaltungssystem <br> – prüfen die Buchung auf Vollständigkeit und lösen Zahlung aus <br> – das Dokument wird revisionssicher im Dokumentenmanagementsystem archiviert |
+| **1. Rechnungseingang** – Post öffnen, sortieren, Eingangsdatum stempeln, in Mappe sammeln, in Fachabteilung bringen | scannen die Rechnung mit dem Scanner ein · lassen die Texterkennung (OCR) Rechnungsnummer, Betrag und Lieferant auslesen · prüfen die automatisch erkannten Daten am Bildschirm und korrigieren sie bei Bedarf · das System setzt Eingangsdatum und Zeitstempel automatisch und legt den Vorgang im Workflow ab |
+| **2. Sachliche Prüfung** – Rechnung mit Lieferschein vergleichen, Menge und Preis von Hand prüfen, unterschreiben, an Buchhaltung weitergeben | rufen die Rechnung am Bildschirm auf · das System gleicht Rechnung automatisch mit Bestellung und Wareneingang ab und markiert Abweichungen · bestätigen die Prüfung digital oder erfassen eine Beanstandung im System · die Buchhaltung sieht das Ergebnis sofort, kein Transport von Papier nötig |
+| **3. Freigabe und Buchung** – Freigabe durch Abteilungsleiter einholen, Daten von Hand ins Buchhaltungssystem übertragen, abheften | bestätigen die Freigabe im System (digitale Freigabe/Signatur) · das System übergibt die geprüften Rechnungsdaten automatisch über die Schnittstelle an das Buchhaltungssystem · prüfen die Buchung auf Vollständigkeit und lösen Zahlung aus · das Dokument wird revisionssicher im Dokumentenmanagementsystem archiviert |
 
 *Auch andere sinnvolle Aktivitäten sind möglich. Prüferkommentar: Die Aktivitäten müssen sich **aus den Hilfsmitteln** ergeben. „Rechnung digital abgeben“ als reine Umbenennung wird nicht gewertet.*
 

@@ -28,7 +28,7 @@ $\bar{x} = \frac{42}{6} = 7$ Stunden · $\bar{y} = \frac{42}{6} = 7$ %
 
 $r = \frac{S_{xy}}{\sqrt{S_{xx} \cdot S_{yy}}} = \frac{-30}{\sqrt{70 \cdot 13}} = \frac{-30}{\sqrt{910}} = \frac{-30}{30{,}17}$ = **−0,99**
 
-*Prüferkommentar: 2 P Mittelwerte, 3 P vollständige Abweichungstabelle, 2 P korrekte Summen S<sub>xy</sub>/S<sub>xx</sub>/S<sub>yy</sub>, 1 P Endergebnis. Kontrolle: Beide Abweichungsspalten müssen sich zu 0 summieren. Ein positives r ist hier ein Vorzeichenfehler und kostet zusätzlich die Interpretationspunkte in A3.*
+*Prüferkommentar: 2 P Mittelwerte, 3 P vollständige Abweichungstabelle, 2 P korrekte Summen $S_{xy}$/$S_{xx}$/$S_{yy}$, 1 P Endergebnis. Kontrolle: Beide Abweichungsspalten müssen sich zu 0 summieren. Ein positives r ist hier ein Vorzeichenfehler und kostet zusätzlich die Interpretationspunkte in A3.*
 
 **A3 (6 P):**
 Das Vorzeichen ist **negativ** – die Merkmale verlaufen gegenläufig: Mit steigender Schulungsstundenzahl sinkt die Fehlerquote. *(2 P)*
@@ -82,7 +82,7 @@ $a = \bar{y} - b \cdot \bar{x} = 44 - 6{,}4 \cdot 3 = 44 - 19{,}2$ = **24,8**
 
 **Regressionsgleichung:** $\hat{y} = 24{,}8 + 6{,}4 \cdot x$
 
-*Prüferkommentar: 2 P Mittelwerte, 4 P Abweichungstabelle, 2 P S<sub>xy</sub> und S<sub>xx</sub>, 2 P b, 2 P a. Wer a und b vertauscht (ŷ = 6,4 + 24,8x), verliert 4 P – Kontrolle: Setze x̄ ein, es muss ȳ herauskommen (24,8 + 6,4 · 3 = 44 ✓). Diese Probe kostet zehn Sekunden und rettet regelmäßig Punkte.*
+*Prüferkommentar: 2 P Mittelwerte, 4 P Abweichungstabelle, 2 P $S_{xy}$ und $S_{xx}$, 2 P b, 2 P a. Wer a und b vertauscht (ŷ = 6,4 + 24,8x), verliert 4 P – Kontrolle: Setze x̄ ein, es muss ȳ herauskommen (24,8 + 6,4 · 3 = 44 ✓). Diese Probe kostet zehn Sekunden und rettet regelmäßig Punkte.*
 
 **C2 (6 P):**
 **Steigung b = 6,4:** Steigt das Werbebudget um 1 T€, so steigt der Umsatz im Durchschnitt um 6,4 T€. Der positive Wert bestätigt den gleichläufigen Zusammenhang. *(3 P)*
@@ -119,7 +119,7 @@ Zu achten ist auf eine **zufällige, musterlose Streuung um null**: Positive und
 $r = \frac{S_{xy}}{\sqrt{S_{xx} \cdot S_{yy}}} = \frac{64}{\sqrt{10 \cdot 424}} = \frac{64}{\sqrt{4240}} = \frac{64}{65{,}12}$ = **0,98**
 $R^2 = r^2 = 0{,}9829^2 = 0{,}9660$ ≈ **0,97**
 
-*Mit dem ungerundeten r weiterrechnen: Wer das gerundete 0,98 quadriert, erhält 0,9604 ≈ 0,96. Kontrolle über die Residuen aus C4: R² = 1 − Σe² / S<sub>yy</sub> = 1 − 14,4 / 424 = 0,9660.*
+*Mit dem ungerundeten r weiterrechnen: Wer das gerundete 0,98 quadriert, erhält 0,9604 ≈ 0,96. Kontrolle über die Residuen aus C4: R² = 1 − Σe² / $S_{yy}$ = 1 − 14,4 / 424 = 0,9660.*
 
 *(3 P r, 3 P R². Der Rechenweg über R² = r² muss erkennbar sein.)*
 

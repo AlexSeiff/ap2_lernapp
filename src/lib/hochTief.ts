@@ -2,13 +2,13 @@
 // z. B. „e^(−z)“, „(180 / 120)^(1/7)“, „p_i“ oder „s_xy“. Ohne Hilfe stehen ^ und _ dann wörtlich im Text.
 // teileHochTief() zerlegt einen Text in Stücke, rehypeHochTief() setzt sie im fertigen HTML-Baum als <sup>/<sub>.
 // Code, Formeln (KaTeX) und Links bleiben unberührt; Bezeichner wie kunden_id oder M_ID auch (Tiefstellung nur nach einem
-// einzelnen Kleinbuchstaben, z. B. x_i).
+// einzelnen Kleinbuchstaben, z. B. x_i, oder nach einem einzelnen Großbuchstaben mit kleingeschriebenem Index, z. B. S_xy).
 
 import type { Element, ElementContent, Root } from 'hast';
 
 export type HochTiefTeil = { text: string; art?: 'sup' | 'sub' };
 
-const MUSTER = /\^\(([^()\s][^()]{0,15})\)|\^([−+-]?[\p{L}\p{N}]{1,3})|(?<![\p{L}\p{N}_.])(\p{Ll}\p{M}?)_([a-z0-9]{1,2})(?![\p{L}0-9_])/gu;
+const MUSTER = /\^\(([^()\s][^()]{0,15})\)|\^([−+-]?[\p{L}\p{N}]{1,3})|(?<![\p{L}\p{N}_.])(\p{Ll}\p{M}?|\p{Lu}(?=_[a-z]{1,2}(?![\p{L}0-9_])))_([a-z0-9]{1,2})(?![\p{L}0-9_])/gu;
 
 /** Text in normale, hoch- und tiefgestellte Stücke zerlegen; ohne Treffer genau ein Stück. */
 export function teileHochTief(text: string): HochTiefTeil[] {
