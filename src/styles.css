@@ -1316,6 +1316,13 @@ select.te-ziel { display: block; margin-top: 4px; min-height: 28px; padding: 2px
 .wt-abgleich td.wt-gleich { color: var(--good); }
 .wt-abgleich td.wt-abweichend, .wt-abgleich td.wt-fehlt { color: var(--low); background: var(--low-soft); }
 .wt-muster { display: block; font-size: 0.8rem; color: var(--muted); }
+/* Boxplot-Eingabe: fünf Kennwerte nebeneinander (auf dem Handy umbrechend), Ausreißer über die ganze Breite, darunter die Zeichnung. */
+.bp { display: grid; gap: 10px; }
+.bp-felder { display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5em, 1fr)); gap: 8px 12px; margin-top: 4px; }
+.bp-felder label { display: grid; gap: 3px; align-content: end; }
+.bp-felder input { width: 100%; font-variant-numeric: tabular-nums; }
+.bp-felder .bp-ausreisser { grid-column: 1 / -1; }
+.bp-zeichnung { margin: 0; }
 @media (max-width: 600px) {
   .te-tabelle input, .ed-text input, .ed-text select, select.te-aktion, select.te-ziel, .wt-tabelle input.wt-zelle { font-size: 16px; }
   .ed-scroll { max-height: 60vh; }

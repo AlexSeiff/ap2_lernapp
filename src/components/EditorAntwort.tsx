@@ -1,6 +1,6 @@
-// Antwort im Editor für Modellierungs- und Tabellenaufgaben (src/lib/editorAufgabe.ts): Diagramm-Editor, Tabellen-Editor bzw.
-// Wertetabelle, nach der Abgabe die Lösung ohne Bedienelemente. EditorPruefung steht beim Bewerten neben der Musterlösung: Formprüfung
-// (Diagramme) bzw. Abgleich mit den Tabellen der Musterlösung – Hilfen zur Selbstbewertung, die Punkte vergibst du selbst.
+// Antwort im Editor für Modellierungs- und Tabellenaufgaben (src/lib/editorAufgabe.ts): Diagramm-Editor, Tabellen-Editor,
+// Wertetabelle bzw. Boxplot, nach der Abgabe die Lösung ohne Bedienelemente. EditorPruefung steht beim Bewerten neben der Musterlösung:
+// Formprüfung (Diagramme) bzw. Abgleich mit Tabellen oder Boxplot der Musterlösung – Hilfen zur Selbstbewertung, die Punkte vergibst du selbst.
 // Lazy geladen (nur bei solchen Aufgaben).
 
 import { useMemo } from 'react';
@@ -9,7 +9,9 @@ import { pruefeDiagrammAntwort, type DiagrammAntwort } from '../lib/diagrammEdit
 import { EDITOR_NAMEN, istDiagrammArt, leseEditorAntwort, schreibeEditorAntwort, vorlageFuer, type EditorArt } from '../lib/editorAufgabe';
 import { abgleichOk, gleicheAb, musterFuerSchritt, musterTabellen, relationText, type TabellenAntwort } from '../lib/tabellenEditor';
 import { gleicheWerteAb, type WerteAntwort } from '../lib/werteTabelle';
+import type { BoxplotAntwort } from '../lib/boxplotAntwort';
 import { useStore } from '../lib/store';
+import { BoxplotAnsicht, BoxplotEditor, BoxplotPruefung } from './BoxplotEditor';
 import { DiagrammAnsicht, DiagrammEditor, Formhinweise } from './DiagrammEditor';
 import { Icon } from './Icon';
 import { TabellenAnsicht, TabellenEditor } from './TabellenEditor';
@@ -31,7 +33,6 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
   const diagramm = istDiagrammArt(art);
   const anlagen = content.topics.find((t) => t.id === task.topicId)?.exam?.attachments ?? [];
   const setze = (a: typeof wert) => onChange(schreibeEditorAntwort(a, task));
-  const werte = art === 'werte';
 
   if (disabled) {
     return (
@@ -39,8 +40,10 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
         <p className="muted small">
           <Icon name="pen-line" /> Deine Lösung
         </p>
-        {werte ? (
+        {art === 'werte' ? (
           <WerteAnsicht wert={wert as WerteAntwort} />
+        ) : art === 'boxplot' ? (
+          <BoxplotAnsicht wert={wert as BoxplotAntwort} />
         ) : diagramm ? (
           <DiagrammAnsicht wert={wert as DiagrammAntwort} />
         ) : (
@@ -51,21 +54,29 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
     );
   }
 
+  const nachAbgabe = 'Nach der Abgabe vergleichst du deine Lösung mit der Musterlösung und bewertest dich.';
   return (
     <div className="editor-antwort">
-      {werte ? (
-        <p className="ed-titel small">
-          <Icon name="pencil" /> Trag deine Lösung in die Tabelle ein – wie auf dem Prüfungsbogen. Nach der Abgabe vergleichst du sie mit
-          der Musterlösung und bewertest dich.
-        </p>
-      ) : (
-        <p className="ed-titel small">
-          <Icon name="workflow" /> <b>{EDITOR_NAMEN[art]}-Editor</b> – erstelle deine Lösung selbst. Nach der Abgabe vergleichst du sie mit
-          der Musterlösung und bewertest dich.
-        </p>
-      )}
-      {werte ? (
+      <p className="ed-titel small">
+        {art === 'werte' ? (
+          <>
+            <Icon name="pencil" /> Trag deine Lösung in die Tabelle ein – wie auf dem Prüfungsbogen. {nachAbgabe}
+          </>
+        ) : art === 'boxplot' ? (
+          <>
+            <Icon name="pencil" /> Rechne die Kennwerte selbst aus und trag sie ein – die App zeichnet daraus den Boxplot maßstäblich.{' '}
+            {nachAbgabe}
+          </>
+        ) : (
+          <>
+            <Icon name="workflow" /> <b>{EDITOR_NAMEN[art]}-Editor</b> – erstelle deine Lösung selbst. {nachAbgabe}
+          </>
+        )}
+      </p>
+      {art === 'werte' ? (
         <WerteEditor wert={wert as WerteAntwort} vorlage={vorlageFuer(task)} onChange={setze} />
+      ) : art === 'boxplot' ? (
+        <BoxplotEditor wert={wert as BoxplotAntwort} onChange={setze} hilfen={hilfen} />
       ) : diagramm ? (
         <DiagrammEditor wert={wert as DiagrammAntwort} onChange={setze} hilfen={hilfen} />
       ) : (
@@ -73,7 +84,11 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
       )}
       <label className="ed-notiz">
         <span className="small muted">
-          {werte ? 'Was nicht in die Tabelle gehört: Ergebnis, Rechenweg, Begründung' : 'Anmerkungen, Annahmen (optional)'}
+          {art === 'werte'
+            ? 'Was nicht in die Tabelle gehört: Ergebnis, Rechenweg, Begründung'
+            : art === 'boxplot'
+              ? 'Rechenweg: Quartile, Zäune, Begründung der Whisker-Enden (optional)'
+              : 'Anmerkungen, Annahmen (optional)'}
         </span>
         <textarea className="answer" rows={2} value={wert.notiz ?? ''} onChange={(e) => setze({ ...wert, notiz: e.target.value })} />
       </label>
@@ -85,6 +100,7 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
 export function EditorPruefung({ task, art, answer }: { task: Task; art: EditorArt; answer: string | undefined }) {
   const wert = useMemo(() => leseEditorAntwort(art, task, answer), [art, task, answer]);
   if (art === 'werte') return <WertePruefung task={task} wert={wert as WerteAntwort} />;
+  if (art === 'boxplot') return <BoxplotPruefung task={task} wert={wert as BoxplotAntwort} />;
   if (istDiagrammArt(art)) {
     const d = wert as DiagrammAntwort;
     if (!d.knoten.length) return null;

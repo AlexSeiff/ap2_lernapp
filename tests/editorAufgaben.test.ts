@@ -72,6 +72,7 @@ describe('Erkennung', () => {
       '08-C1': 'relationen',
       '15-E1': 'usecase',
       '18-B3': 'epk',
+      '03-E3': 'boxplot', // tests/boxplotAntwort.test.ts
       // Verlangte Tabellen (tests/werteTabelle.test.ts)
       ...Object.fromEntries(
         [
