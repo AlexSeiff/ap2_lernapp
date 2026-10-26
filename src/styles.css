@@ -606,6 +606,11 @@ button.history-item .mono { overflow: hidden; text-overflow: ellipsis; white-spa
 /* Diagramme aus ```svg-Blöcken (Deep Dive 17): Farben nur über Klassen, damit Hell/Dunkel/Druck stimmen. */
 .diagramm { margin: 1em 0; padding: 0.6em; overflow-x: auto; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
 .diagramm svg { display: block; max-width: 100%; height: auto; margin: 0 auto; font-family: inherit; }
+/* Handy: große Diagramme höchstens auf 85 % verkleinern (--dg-breite setzt SvgDiagramm), den Rest seitlich scrollen.
+   Breitere Bildschirme und der Druck verkleinern wie bisher auf die verfügbare Breite. */
+@media screen and (max-width: 760px) {
+  figure.diagramm > svg { min-width: calc(var(--dg-breite, 0) * 0.85px); }
+}
 .diagramm text { fill: currentColor; stroke: none; font-size: 13px; }
 .diagramm .dg-linie { fill: none; stroke: currentColor; stroke-width: 1.5; }
 .diagramm .dg-form { fill: var(--surface); stroke: currentColor; stroke-width: 1.5; }

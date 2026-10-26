@@ -8,6 +8,7 @@ import { OperatorTipp } from './OperatorTipp';
 import { datasetForSource, sqlEditorLink } from '../lib/sqlLinks';
 import { pruefeSvg } from '../../shared/svgDiagramm';
 import { Icon } from './Icon';
+import { SvgDiagramm } from './SvgDiagramm';
 
 // Gemeinsame Bausteine für <Markdown> und die Formel-Variante (MathMarkdown, eigener Chunk).
 
@@ -57,7 +58,7 @@ function makeComponents(source?: string | false): Components {
     // ```sql-Blöcke: Link in den SQL-Editor mit vorausgefüllter Abfrage und passendem Datensatz.
     pre: ({ node, children }) => {
       const svg = codeOfPre(node, 'svg');
-      if (svg !== undefined && !pruefeSvg(svg)) return <figure className="diagramm" dangerouslySetInnerHTML={{ __html: svg.trim() }} />;
+      if (svg !== undefined && !pruefeSvg(svg)) return <SvgDiagramm svg={svg} />;
       const sql = source === false ? undefined : codeOfPre(node, 'sql');
       if (!sql?.trim()) return <pre>{children}</pre>;
       return (

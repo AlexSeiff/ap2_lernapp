@@ -52,6 +52,12 @@ describe('Darstellung', () => {
     expect(boese).toContain('<pre><code class="language-svg">&lt;svg&gt;&lt;script&gt;');
   });
 
+  it('gibt die Breite ans CSS weiter (Mindestgröße auf dem Handy), ohne width-Attribut nicht', () => {
+    const breit = OK.replace('viewBox="0 0 10 10"', 'viewBox="0 0 760 400" width="760" height="400"');
+    expect(plain('```svg\n' + breit + '\n```')).toContain('<figure class="diagramm" style="--dg-breite:760"><svg');
+    expect(plain('```svg\n' + OK + '\n```')).not.toContain('--dg-breite');
+  });
+
   it('auch in der Formel-Variante (Lernen)', () => {
     expect(renderToStaticMarkup(createElement(MathMarkdown, { children: '```svg\n' + OK + '\n```' }))).toContain(
       '<figure class="diagramm">',

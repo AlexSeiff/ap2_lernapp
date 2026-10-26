@@ -4,6 +4,7 @@ import { useStore } from '../lib/store';
 import { begriffsFrage, bereichAusDeck } from '../lib/begriffsFrage';
 import { Icon } from './Icon';
 import { Markdown } from './Markdown';
+import { SvgDiagramm } from './SvgDiagramm';
 
 // Vorder- und Rückseite einer Karteikarte, je nach Art gestaltet: Fachbegriffe als Begriff mit Aufforderung, Fragen mit „Frage“-Etikett,
 // Rechnungen mit Formelsatz (KaTeX) und eigenem „Rechnung“-Kasten. Gilt in allen Kartenansichten (Lernen, Leicht, Blättern).
@@ -60,7 +61,7 @@ export function KartenAntwort({ card }: { card: Flashcard }) {
         </p>
       )}
       <Markdown math>{(rechnung && card.rechenweg) || card.answer || ''}</Markdown>
-      {card.diagramm && !pruefeSvg(card.diagramm) && <figure className="diagramm" dangerouslySetInnerHTML={{ __html: card.diagramm }} />}
+      {card.diagramm && !pruefeSvg(card.diagramm) && <SvgDiagramm svg={card.diagramm} />}
     </div>
   );
 }
