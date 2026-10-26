@@ -4,3 +4,5 @@ data
 .env.local
 tsconfig.tsbuildinfo
 *.defekt-*
+# Lokale Kopie der Projekt-Skills für Codex (Original: .claude/skills)
+.agents/
