@@ -89,16 +89,17 @@ export function tabellenAlsText(a: TabellenAntwort): string {
 
 // ---------- Markdown-Tabellen ----------
 
+/** Zellen einer Tabellenzeile; ein maskierter Strich (\|, z. B. Betrag |e|) trennt nicht und wird zum Zeichen. */
 const zellen = (zeile: string) =>
   zeile
     .trim()
     .replace(/^\|/, '')
-    .replace(/\|$/, '')
-    .split('|')
-    .map((z) => z.trim());
+    .replace(/(?<!\\)\|$/, '')
+    .split(/(?<!\\)\|/)
+    .map((z) => z.trim().replace(/\\\|/g, '|'));
 
 /** Alle Markdown-Tabellen eines Texts: Kopfzeile, Datenzeilen und die Zeile davor (für den Namen). */
-function markdownTabellen(md: string): { kopf: string[]; zeilen: string[][]; davor: string }[] {
+export function markdownTabellen(md: string): { kopf: string[]; zeilen: string[][]; davor: string }[] {
   const z = md.split(/\r?\n/);
   const tabellen: { kopf: string[]; zeilen: string[][]; davor: string }[] = [];
   for (let i = 0; i < z.length - 1; i++) {

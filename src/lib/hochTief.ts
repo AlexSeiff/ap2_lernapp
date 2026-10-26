@@ -8,7 +8,8 @@ import type { Element, ElementContent, Root } from 'hast';
 
 export type HochTiefTeil = { text: string; art?: 'sup' | 'sub' };
 
-const MUSTER = /\^\(([^()\s][^()]{0,15})\)|\^([−+-]?[\p{L}\p{N}]{1,3})|(?<![\p{L}\p{N}_.])(\p{Ll}\p{M}?|\p{Lu}(?=_[a-z]{1,2}(?![\p{L}0-9_])))_([a-z0-9]{1,2})(?![\p{L}0-9_])/gu;
+const MUSTER =
+  /\^\(([^()\s][^()]{0,15})\)|\^([−+-]?[\p{L}\p{N}]{1,3})|(?<![\p{L}\p{N}_.])(\p{Ll}\p{M}?|\p{Lu}(?=_[a-z]{1,2}(?![\p{L}0-9_])))_([a-z0-9]{1,2})(?![\p{L}0-9_])/gu;
 
 /** Text in normale, hoch- und tiefgestellte Stücke zerlegen; ohne Treffer genau ein Stück. */
 export function teileHochTief(text: string): HochTiefTeil[] {

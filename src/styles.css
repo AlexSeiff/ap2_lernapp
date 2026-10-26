@@ -1291,13 +1291,38 @@ select.te-ziel { display: block; margin-top: 4px; min-height: 28px; padding: 2px
 .te-abgleich table { width: 100%; font-size: 0.88rem; }
 .te-abgleich td { vertical-align: top; }
 .te-befund { margin: 0; padding-left: 1.1em; }
+/* Wertetabelle: aussehen wie eine Tabelle auf dem Blatt (Kopfzeile, waagerechte Linien), die Zellen sind randlose Eingabefelder. */
+.wt { display: grid; gap: 4px; }
+.wt .table-wrap { margin: 0.4em 0 0; }
+.wt-tabelle { min-width: 100%; }
+.wt-tabelle td:not(.wt-fest):not(.wt-aktion) { padding: 0; }
+.wt-tabelle td { vertical-align: middle; }
+.editor-antwort .wt-tabelle input.wt-zelle {
+  width: 100%; min-width: 5.5em; min-height: 0; margin: 0; padding: 8px 12px; border: 0; border-radius: 0;
+  background: transparent; box-shadow: none; font-variant-numeric: tabular-nums;
+}
+.wt-tabelle td:first-child input.wt-zelle { padding-left: 0; }
+.editor-antwort .wt-tabelle input.wt-zelle:focus { box-shadow: inset 0 -2px 0 var(--accent); }
+.editor-antwort .wt-tabelle input.wt-zelle:hover:not(:focus) { box-shadow: inset 0 -1px 0 var(--muted); }
+.wt-tabelle .wt-aktion { width: 1%; padding: 0 0 0 4px; white-space: nowrap; vertical-align: middle; }
+.wt-tabelle .wt-aktion button { min-height: 30px; padding: 2px 6px; color: var(--muted); }
+.wt-tabelle td.wt-kreuz { padding: 8px 12px; }
+.wt-tabelle td.wt-kreuz input { width: 20px; height: 20px; min-height: 0; margin: 0; }
+.wt-neu { justify-self: start; }
+/* Handy: Felder wachsen mit dem Inhalt (lange Begriffe bleiben lesbar), die Tabelle scrollt seitlich. */
 @media (max-width: 600px) {
-  .te-tabelle input, .ed-text input, .ed-text select, select.te-aktion, select.te-ziel { font-size: 16px; }
+  .editor-antwort .wt-tabelle input.wt-zelle { width: auto; field-sizing: content; min-width: 4.5em; }
+}
+.wt-abgleich td.wt-gleich { color: var(--good); }
+.wt-abgleich td.wt-abweichend, .wt-abgleich td.wt-fehlt { color: var(--low); background: var(--low-soft); }
+.wt-muster { display: block; font-size: 0.8rem; color: var(--muted); }
+@media (max-width: 600px) {
+  .te-tabelle input, .ed-text input, .ed-text select, select.te-aktion, select.te-ziel, .wt-tabelle input.wt-zelle { font-size: 16px; }
   .ed-scroll { max-height: 60vh; }
   .diagramm-editor.vollbild { padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); }
 }
 @media print {
-  .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe { display: none; }
+  .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe, .wt-neu, .wt-aktion { display: none; }
 }
 
 /* Farben (lib/farben.ts): `farbe-<name>` setzt --f (Text/Linie), --f-fill (Fläche mit weißer Schrift) und --f-soft (zarter Grund) */

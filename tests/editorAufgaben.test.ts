@@ -72,6 +72,26 @@ describe('Erkennung', () => {
       '08-C1': 'relationen',
       '15-E1': 'usecase',
       '18-B3': 'epk',
+      // Verlangte Tabellen (tests/werteTabelle.test.ts)
+      ...Object.fromEntries(
+        [
+          '01-C1',
+          '03-B1',
+          '03-D2',
+          '04-A2',
+          '04-C1',
+          '06-C2',
+          '07-E1',
+          '08-A1',
+          '08-D2',
+          '12-C1',
+          '12-D2',
+          '18-A3',
+          '18-D2',
+          '19-C1',
+          '19-C2',
+        ].map((id) => [id, 'werte']),
+      ),
     });
   });
 

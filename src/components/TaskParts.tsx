@@ -5,6 +5,7 @@ import { antwortAlsText, editorFuer } from '../lib/editorAufgabe';
 import { autoGrade, difficulty, formatPoints } from '../lib/grading';
 import { numberBlanks, solutionMarkdown } from '../lib/sheets';
 import { sqlUebungZuAufgabe } from '../lib/sqlAufgabe';
+import { ohneVorlageTabelle } from '../lib/werteTabelle';
 import { useStore } from '../lib/store';
 import { decodeAnswer } from './AnswerInput';
 import { Markdown } from './Markdown';
@@ -26,7 +27,11 @@ export function TaskText({ task, showMeta }: { task: Task; showMeta?: boolean })
         {task.generated && <span className="badge ai">KI</span>}
       </div>
       <Markdown source={false} operatoren>
-        {task.type === 'lueckentext' ? numberBlanks(task.markdown) : task.markdown}
+        {task.type === 'lueckentext'
+          ? numberBlanks(task.markdown)
+          : editorFuer(task) === 'werte'
+            ? ohneVorlageTabelle(task.markdown) // die Tabelle steht als Antworttabelle darunter
+            : task.markdown}
       </Markdown>
     </div>
   );
