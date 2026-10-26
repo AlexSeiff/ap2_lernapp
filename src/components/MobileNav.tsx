@@ -5,7 +5,7 @@ import { aktiverBereich, badgeSumme, BEREICHE, type NavBadge, sichtbareZiele } f
 import { Icon } from './Icon';
 
 /**
- * Tab-Bar unten für Handys (unter 600 px, Umsetzungsplan Phase 2): Übersicht und die vier Bereiche, wie in iOS-Apps mit dem Daumen
+ * Papierregister unten für Handys: Übersicht und die vier Bereiche, mit dem Daumen
  * erreichbar. Die Unterziele des Bereichs stehen oben in der Unterleiste (components/Kopfleiste.tsx). Per CSS ist sie nur auf dem Handy
  * sichtbar.
  */

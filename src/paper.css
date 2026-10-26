@@ -10,6 +10,8 @@
   --paper-ink: #55504a;
   --paper-ink-fill: #55504a;
   --paper-soft: #ebe6dc;
+  --notebook-blue: #3d647b; --notebook-blue-fill: #3d647b;
+  --notebook-clay: #a05e46; --notebook-clay-fill: #985840;
   --paper-line: #716a5d14;
   --paper-rule: #716a5d0c;
   --paper-margin: #a18a7250;
@@ -24,9 +26,9 @@
   --shell-selected: #d7d0c4;
   --shadow: 0 1px 2px #302a2010, 0 5px 14px #302a2008;
   --shadow-schwebe: 0 3px 5px #302a2014, 0 16px 30px #302a2010;
-  --paper-good: #526b58;
+  --paper-good: #237344;
   --paper-mid: #846331;
-  --paper-low: #985950;
+  --paper-low: #b33d3d;
   --radius: 5px;
   --radius-klein: 4px;
 }
@@ -34,46 +36,52 @@
   --bg: #1e1e1e; --surface: #2b2a29; --surface-2: #323130;
   --text: #eae6df; --muted: #b1aca5; --border: #4c4945; --card-border: #484540;
   --paper-ink: #d3c9b9; --paper-ink-fill: #625b51; --paper-soft: #3b3834;
+  --notebook-blue: #a1c2d5; --notebook-blue-fill: #3d647b;
+  --notebook-clay: #dfaa90; --notebook-clay-fill: #985840;
   --paper-line: #ddd3c415; --paper-rule: #ddd3c409; --paper-margin: #b09a7b45;
   --paper-cover: #514a40; --paper-binding: #66615a;
   --fill: #41403d; --fill-aktiv: #514d47;
   --stapel-1: #3b3936; --stapel-2: #48443e;
   --shell-sidebar: #242323; --shell-glass: #282727f5; --shell-selected: #3c3935;
   --shadow: 0 2px 8px #00000020; --shadow-schwebe: 0 10px 28px #00000030;
-  --paper-good: #a8b8a5; --paper-mid: #d1b78a; --paper-low: #d8a198;
+  --paper-good: #78cc93; --paper-mid: #d1b78a; --paper-low: #f08d87;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg: #1e1e1e; --surface: #2b2a29; --surface-2: #323130;
     --text: #eae6df; --muted: #b1aca5; --border: #4c4945; --card-border: #484540;
     --paper-ink: #d3c9b9; --paper-ink-fill: #625b51; --paper-soft: #3b3834;
+  --notebook-blue: #a1c2d5; --notebook-blue-fill: #3d647b;
+  --notebook-clay: #dfaa90; --notebook-clay-fill: #985840;
     --paper-line: #ddd3c415; --paper-rule: #ddd3c409; --paper-margin: #b09a7b45;
     --paper-cover: #514a40; --paper-binding: #66615a;
     --fill: #41403d; --fill-aktiv: #514d47;
     --stapel-1: #3b3936; --stapel-2: #48443e;
     --shell-sidebar: #242323; --shell-glass: #282727f5; --shell-selected: #3c3935;
     --shadow: 0 2px 8px #00000020; --shadow-schwebe: 0 10px 28px #00000030;
-    --paper-good: #a8b8a5; --paper-mid: #d1b78a; --paper-low: #d8a198;
+    --paper-good: #78cc93; --paper-mid: #d1b78a; --paper-low: #f08d87;
   }
 }
-/* Themen bekommen dieselbe Tinte; Farbe bleibt für bewertete Antworten und Hinweise. */
+/* Zwei Tintenfarben ergänzen neutrales Papier; Bewertungen behalten ihre Signalfarben. */
 :root, :root[data-theme='dark'], :root:not([data-theme='light']) {
-  --accent: var(--paper-ink); --accent-fill: var(--paper-ink-fill); --accent-soft: var(--paper-soft);
-  --shell-blue: var(--paper-ink); --shell-hero: var(--surface-2);
+  --accent: var(--notebook-blue); --accent-fill: var(--notebook-blue-fill); --accent-soft: var(--notebook-blue-soft);
+  --notebook-blue-soft: color-mix(in srgb, var(--notebook-blue) 10%, var(--surface));
+  --notebook-clay-soft: color-mix(in srgb, var(--notebook-clay) 10%, var(--surface));
+  --shell-blue: var(--notebook-blue); --shell-hero: var(--surface-2);
   --c-indigo: var(--paper-ink); --c-indigo-fill: var(--paper-ink-fill); --c-indigo-soft: var(--paper-soft);
   --c-violet: var(--paper-ink); --c-violet-fill: var(--paper-ink-fill); --c-violet-soft: var(--paper-soft);
   --c-pink: var(--paper-ink); --c-pink-fill: var(--paper-ink-fill); --c-pink-soft: var(--paper-soft);
   --c-sky: var(--paper-ink); --c-sky-fill: var(--paper-ink-fill); --c-sky-soft: var(--paper-soft);
   --c-teal: var(--paper-ink); --c-teal-fill: var(--paper-ink-fill); --c-teal-soft: var(--paper-soft);
   --c-slate: var(--paper-ink); --c-slate-fill: var(--paper-ink-fill); --c-slate-soft: var(--paper-soft);
-  --c-green: var(--paper-good); --c-green-fill: #526b58; --c-green-soft: color-mix(in srgb, var(--paper-good) 10%, var(--surface));
+  --c-green: var(--paper-good); --c-green-fill: #237344; --c-green-soft: color-mix(in srgb, var(--paper-good) 13%, var(--surface));
   --c-orange: var(--paper-mid); --c-orange-fill: #846331; --c-orange-soft: color-mix(in srgb, var(--paper-mid) 10%, var(--surface));
   --c-amber: var(--paper-mid); --c-amber-fill: #846331; --c-amber-soft: var(--c-orange-soft);
-  --c-red: var(--paper-low); --c-red-fill: #985950; --c-red-soft: color-mix(in srgb, var(--paper-low) 10%, var(--surface));
+  --c-red: var(--paper-low); --c-red-fill: #b33d3d; --c-red-soft: color-mix(in srgb, var(--paper-low) 12%, var(--surface));
   --good: var(--paper-good); --good-soft: var(--c-green-soft);
   --mid: var(--paper-mid); --mid-soft: var(--c-orange-soft);
   --low: var(--paper-low); --low-soft: var(--c-red-soft);
-  --v-gewusst: #829780; --v-unsicher: #b39a70; --v-nicht: #ba8b81; --v-neu: var(--fill);
+  --v-gewusst: var(--paper-good); --v-unsicher: #b39a70; --v-nicht: var(--paper-low); --v-neu: var(--fill);
   --held: linear-gradient(135deg, var(--paper-ink-fill), var(--paper-cover));
   --code-bg: var(--surface-2); --stern: var(--paper-mid);
 }
@@ -171,8 +179,8 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .paper-back .fc-answer { margin-top: 0; padding-top: 0; animation: none; }
 @media (prefers-reduced-motion: reduce) { .paper-turn { transition: none; } }
 /* Alle Lernbereiche verwenden die gemeinsame Tintenfarbe. */
-.layout[data-bereich] { --accent: var(--shell-blue); --accent-fill: var(--paper-ink-fill); --accent-soft: color-mix(in srgb, var(--shell-blue) 10%, var(--surface)); }
-.app-marke, .welcome-symbol { background: var(--paper-ink-fill); border-radius: 7px; box-shadow: var(--shadow); }
+.layout[data-bereich] { --accent: var(--shell-blue); --accent-fill: var(--notebook-blue-fill); --accent-soft: color-mix(in srgb, var(--shell-blue) 10%, var(--surface)); }
+.app-marke, .welcome-symbol { background: var(--notebook-blue-fill); border-radius: 7px; box-shadow: var(--shadow); }
 /* Gemeinsame Notizbuchseiten: Randlinie, Lochung, feine Lineatur und sichtbare Blattkante. */
 .notebook-page {
   position: relative;
@@ -210,7 +218,7 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .dashboard-page .widget h2, .dashboard-page .widgets > .card h2 { color: var(--text); font-size: 1.15rem; font-weight: 500; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 18px; }
 .dashboard-page .widget h2 .icon, .dashboard-page .widgets > .card h2 .icon { color: var(--muted); background: transparent; padding: 0; border-radius: 0; width: 20px; height: 20px; box-shadow: none; }
 .dashboard-page .weiter-headline { font-family: Georgia, 'Times New Roman', serif; font-weight: 500; font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; letter-spacing: -.03em; margin: 18px 0 22px; }
-.dashboard-page .widget-weiter .button { background: var(--paper-ink-fill); border-radius: 4px; }
+.dashboard-page .widget-weiter .button { background: var(--notebook-blue-fill); border-radius: 4px; }
 .notebook-randnotizen { display: flex; flex-direction: column; border-left: 1px solid var(--border); padding-left: 26px; }
 .dashboard-page .notebook-randnotizen .widget.kpi { background: transparent; color: var(--text); min-height: 0; flex: 1; padding: 16px 0; gap: 8px; border-bottom: 1px solid var(--border); }
 .dashboard-page .notebook-randnotizen .widget.kpi:last-child { border-bottom: 0; }
@@ -224,14 +232,14 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .dashboard-page .mehr-widgets > summary { padding: 16px 0; border: 0; border-bottom: 1px dashed var(--border); border-radius: 0; font-size: .85rem; }
 .dashboard-page > .card { border-top: 3px double var(--border); margin-top: 24px; }
 .dashboard-page > .card > h2 { margin-top: 4px; font-weight: 500; }
-.dashboard-page .ring-wert { stroke: var(--paper-ink); }
-.dashboard-page .ring-uebungen .ring-wert { stroke: var(--muted); }
+.dashboard-page .ring-wert { stroke: var(--notebook-blue); }
+.dashboard-page .ring-uebungen .ring-wert { stroke: var(--notebook-clay); }
 .dashboard-page .ring-spur { stroke: var(--fill); }
-.dashboard-page .punkt.ring-karten { background: var(--paper-ink); }
-.dashboard-page .punkt.ring-uebungen { background: var(--muted); }
-.dashboard-page .vb-gewusst { background: var(--paper-ink); }
+.dashboard-page .punkt.ring-karten { background: var(--notebook-blue); }
+.dashboard-page .punkt.ring-uebungen { background: var(--notebook-clay); }
+.dashboard-page .vb-gewusst { background: var(--v-gewusst); }
 .dashboard-page .vb-unsicher { background: var(--muted); }
-.dashboard-page .vb-nicht { background: repeating-linear-gradient(45deg, var(--muted) 0 2px, var(--surface) 2px 4px); }
+.dashboard-page .vb-nicht { background: var(--v-nicht); }
 .dashboard-page .stand-zahlen a { color: var(--text); }
 .dashboard-page .w-innen { background: transparent; border: 0; box-shadow: none; }
 .dashboard-page .thema-fortschritt li { grid-template-columns: minmax(120px, 1.8fr) repeat(5, minmax(0, 1fr)); font-size: .83rem; gap: 8px; padding-block: 14px; }
@@ -242,8 +250,22 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .themen-page .thema-kachel .tile-num { font-family: Georgia, 'Times New Roman', serif; font-size: 1.3rem; font-weight: 400; border-radius: 0; background: transparent; border-bottom: 1px solid var(--border); color: var(--text); width: auto; height: auto; padding-bottom: 10px; }
 .themen-page .thema-kachel .tile-title { color: var(--text); }
 .learning-page { align-items: start; }
-.learning-page .toc { border-left: 1px solid var(--border); padding: 14px 0 14px 16px; }
-.learning-page .toc > b { font-family: Georgia, 'Times New Roman', serif; font-weight: 500; font-size: 1.15rem; margin-bottom: 12px; }
+/* Inhaltsverzeichnis als separate, oben geheftete Registerkarte. */
+.learning-page .toc { padding: 0; gap: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 3px 12px 3px 3px; background: var(--surface); box-shadow: 2px 3px 0 -1px var(--surface-2), 2px 3px 0 var(--border), var(--shadow); }
+.toc-kopf { position: relative; flex-shrink: 0; padding: 22px 18px 16px; border-bottom: 1px solid var(--border); background: var(--notebook-blue-soft); }
+.toc-kopf::after { content: ''; position: absolute; right: 18px; top: -1px; width: 13px; height: 30px; background: var(--notebook-clay-fill); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); }
+.toc-ausgabe { display: block; color: var(--notebook-blue); font-size: .64rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; padding-right: 20px; }
+.toc-kopf h2 { margin: 5px 0 4px; font-size: 1.65rem; font-weight: 400; }
+.toc-hinweis { color: var(--muted); font-size: .72rem; }
+.toc-links { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--paper-binding) transparent; padding: 12px 10px 18px; gap: 3px; }
+.learning-page .toc a { position: relative; padding: 7px 9px; border-left: 2px solid transparent; border-radius: 0 4px 4px 0; color: var(--muted); font-size: .8rem; line-height: 1.5; text-decoration: none; transition: color .16s, background .16s, border-color .16s; overflow-wrap: anywhere; }
+.learning-page .toc .toc-l1 { margin: 13px 0 3px; padding: 8px 9px; border-left-color: var(--notebook-clay); background: var(--notebook-clay-soft); color: var(--text); font-size: .82rem; font-weight: 650; }
+.learning-page .toc .toc-l1:first-child { margin-top: 0; }
+.learning-page .toc .toc-l3 { margin-left: 10px; padding-left: 10px; border-left-color: var(--border); font-size: .76rem; }
+.learning-page .toc a:hover, .learning-page .toc a:focus-visible { color: var(--notebook-blue); background: var(--notebook-blue-soft); border-left-color: var(--notebook-blue); }
+.learning-page .toc a:focus-visible { outline: 2px solid var(--notebook-blue); outline-offset: -2px; }
+.learning-page .toc .toc-lernziele { margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 13px; color: var(--notebook-blue); font-weight: 600; }
+@media (min-width: 1100px) { .page.learning-page.with-toc { grid-template-columns: clamp(220px, 18vw, 250px) minmax(0, 1fr); gap: 26px; } }
 .learning-sheet { padding: 30px 34px 48px 62px; }
 .learning-sheet > h1 { font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.2; padding-bottom: 22px; border-bottom: 2px solid var(--border); }
 .learning-sheet > .actions { padding-bottom: 24px; margin-bottom: 22px; border-bottom: 1px solid var(--border); }
@@ -261,7 +283,7 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .layout .kopf-logo .icon, .lernraum-punkt { color: var(--paper-ink); }
 .lernraum-punkt { background: var(--muted); }
 .kopf-logo-text { background: none !important; color: var(--text); }
-.kopf-bereiche a, .bn-bar > a { --accent: var(--paper-ink); --accent-fill: var(--paper-ink-fill); --accent-soft: var(--paper-soft); }
+.kopf-bereiche a, .bn-bar > a { --accent: var(--notebook-blue); --accent-fill: var(--notebook-blue-fill); --accent-soft: var(--notebook-blue-soft); }
 .bn-bar { border-radius: 9px; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 .bn-bar > a, .seitenleiste-ziel { border-radius: 4px; }
 button.good { background: var(--c-green-fill); }
@@ -338,3 +360,100 @@ button.low { background: var(--c-red-fill); }
   .concept-sheet .begriff-text > p:first-child { padding-left: 12px; }
   .concept-sheet .begriff-kopf h1 { overflow-wrap: anywhere; }
 }
+/* Navigation als Register eines gebundenen Notizbuchs. */
+.register-titel { margin: 0 8px 14px; padding-bottom: 10px; border-bottom: 3px double var(--border); color: var(--muted); font-size: .65rem; text-transform: uppercase; letter-spacing: .14em; }
+.register-nummer { font-family: ui-monospace, monospace; font-size: .64rem; font-weight: 400; color: var(--muted); border: 1px solid var(--border); padding: 2px 5px; border-radius: 2px; }
+.seitenleiste-gruppe h2 { display: flex; align-items: center; gap: 9px; }
+.kopf { background: var(--surface-2); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.toolbar-kontext { font-family: Georgia, 'Times New Roman', serif; }
+.suche-knopf { border-radius: 3px; background: var(--surface); }
+.nav-badge { background: var(--paper-ink-fill); color: #fff; border-radius: 3px; box-shadow: none; }
+.unterleiste { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+.unterleiste-innen { gap: 5px; padding-bottom: 0; align-items: flex-end; }
+.unterleiste a, .kopf-bereiche a {
+  position: relative; background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  border-bottom: 0; border-radius: 4px 10px 0 0; box-shadow: none; padding: 10px 13px; min-height: 42px;
+}
+.unterleiste a:hover, .kopf-bereiche a:hover { background: var(--surface); filter: none; text-decoration: none; }
+.unterleiste a.active, .kopf-bereiche a.active { background: var(--surface); color: var(--text); border-top: 2px solid var(--notebook-blue); box-shadow: 0 -2px 5px #302a2008; }
+.kopf-bereiche { align-self: flex-end; }
+.kopf-bereiche a { font-size: .8rem; }
+@media screen and (min-width: 1100px) {
+  .seitenleiste {
+    padding: 28px 16px 14px 18px;
+    background: linear-gradient(90deg, transparent calc(100% - 7px), #00000009 calc(100% - 7px), transparent), var(--shell-sidebar);
+    border-right: 1px solid var(--paper-binding); backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  .seitenleiste-marke { padding-bottom: 20px; font-family: Georgia, 'Times New Roman', serif; font-weight: 500; }
+  .marke-untertitel { font-family: system-ui, sans-serif; font-size: .7rem; }
+  button.seitenleiste-suche { border-radius: 3px; background: var(--surface); margin-bottom: 22px; }
+  .seitenleiste-navigation { padding-right: 6px; }
+  .seitenleiste-gruppe { margin-top: 24px; }
+  .seitenleiste-gruppe h2 { margin: 0 8px 9px; font-size: .85rem; font-weight: 500; color: var(--text); letter-spacing: 0; }
+  .seitenleiste-ziel { position: relative; min-height: 38px; border: 1px solid transparent; padding: 7px 10px; border-radius: 3px 8px 8px 3px; font-size: .8rem; margin: 3px 0; transition: background .15s, border-color .15s; }
+  .seitenleiste-ziel > .icon { color: var(--muted); width: 16px; height: 16px; }
+  .seitenleiste-ziel.active { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-left: 3px solid var(--notebook-blue); padding-left: 8px; box-shadow: 1px 2px 0 var(--border); }
+  .seitenleiste-ziel.active::after { content: ''; height: 17px; width: 5px; background: var(--notebook-clay); margin-left: 3px; clip-path: polygon(0 0,100% 0,100% 100%,50% 80%,0 100%); }
+  .seitenleiste-ziel:hover { border-color: var(--border); background: var(--surface-2); }
+  .seitenleiste-zahl { border-radius: 2px; border: 1px solid var(--border); background: transparent; }
+  .seitenleiste-fuss { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 12px; }
+}
+@media screen and (max-width: 759px) {
+  .unterleiste-innen { padding: 10px 12px 0; gap: 5px; scrollbar-width: none; }
+  .unterleiste a { padding: 10px 12px; min-height: 44px; font-size: .78rem; }
+  .kopf-rechts .suche-knopf { border-radius: 4px; }
+  .bottom-nav { left: 6px; right: 6px; bottom: 0; }
+  .bn-bar { gap: 3px; align-items: stretch; padding: 9px 4px max(6px, env(safe-area-inset-bottom, 0px)); border-radius: 5px 5px 0 0; border-bottom: 0; background: var(--shell-sidebar); box-shadow: 0 -3px 14px #00000012; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .bn-bar > a { min-height: 55px; border: 1px solid var(--border); border-radius: 4px 9px 0 0; background: var(--surface-2); font-size: .6rem; padding: 6px 1px; gap: 4px; }
+  .bn-bar > a.active { position: relative; top: -5px; margin-bottom: -5px; background: var(--surface); color: var(--text); border-top: 2px solid var(--notebook-blue); box-shadow: 0 -2px 5px #00000008; }
+  .bn-bar > a .bn-icon { background: transparent; box-shadow: none; padding: 0; border-radius: 0; }
+  .bn-bar > a.active .bn-icon { background: transparent; color: var(--text); }
+  .bn-bar .icon { width: 20px; height: 20px; }
+}
+/* Beschriftete A–Z-Reiter und Seitenwahl für das Glossarbuch. */
+.glossar-register { background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 18px 20px 0; margin: 24px 0 18px; box-shadow: 2px 3px 0 -1px var(--surface-2), 2px 3px 0 var(--border); }
+.register-kopf { display: flex; justify-content: space-between; gap: 12px; font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.glossar-register .glossar-filter { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px; margin: 14px 0; }
+.glossar-register .glossar-filter > span { font-family: Georgia, 'Times New Roman', serif; color: var(--text); font-size: 1rem; }
+.glossar-register .glossar-filter input { width: 100%; max-width: none; min-width: 0; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; box-shadow: none; background: transparent; padding: 8px 2px; }
+.glossar-register .glossar-abc { display: grid; grid-template-columns: repeat(27, minmax(0, 1fr)); gap: 5px; padding: 8px 0 0; margin-bottom: -1px; }
+.glossar-register .glossar-abc button { position: relative; min-width: 0; min-height: 44px; border: 1px solid var(--border); border-bottom: 0; border-radius: 3px 8px 0 0; background: var(--surface-2); color: var(--text); padding: 8px 2px; font-family: Georgia, 'Times New Roman', serif; font-size: 1rem; font-weight: 400; box-shadow: none; }
+.glossar-register .glossar-abc button[aria-pressed='true'] { background: var(--notebook-blue-fill); color: #fffaf0; border-color: var(--notebook-blue-fill); border-top: 3px solid var(--notebook-clay); padding-top: 6px; }
+.glossar-register .glossar-abc button:hover:not(:disabled) { background: var(--paper-soft); color: var(--text); transform: translateY(-2px); filter: none; }
+.glossar-register .glossar-abc button:disabled { opacity: .35; }
+.book-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; margin: 22px 0 12px; }
+.book-range { font-family: Georgia, 'Times New Roman', serif; color: var(--muted); font-size: .9rem; flex: 1 1 220px; }
+.book-jump { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: .75rem; color: var(--muted); }
+.book-jump label { display: inline; margin: 0; font-size: inherit; }
+.book-jump input[type='number'] { width: 4.8rem; min-height: 38px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 2px; background: var(--surface); text-align: center; font-family: Georgia, 'Times New Roman', serif; font-size: 1rem; }
+.book-jump button { border-radius: 2px; min-height: 38px; }
+.book-navigation { padding: 16px 0; border-top: 1px solid var(--border); gap: 16px; }
+.book-navigation button { border-radius: 3px 8px 3px 3px; border: 1px solid var(--border); background: var(--surface); padding: 10px 18px; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; min-height: 44px; box-shadow: 1px 2px 0 var(--border); }
+.book-position { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--muted); font-family: Georgia, 'Times New Roman', serif; }
+@media (min-width: 760px) and (max-width: 1099px) {
+  .glossar-register .glossar-abc { grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 6px 4px; padding-bottom: 12px; }
+  .glossar-register .glossar-abc button { border-bottom: 1px solid var(--border); }
+}
+@media (max-width: 759px) {
+  .glossar-register { padding: 14px 12px 0; }
+  .glossar-register .glossar-filter { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .glossar-register .glossar-abc { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px 4px; padding-bottom: 12px; }
+  .glossar-register .glossar-abc button { border-bottom: 1px solid var(--border); }
+  .book-toolbar { gap: 10px; }
+  .book-range { flex-basis: 100%; font-size: .8rem; }
+  .book-jump { gap: 6px; font-size: .7rem; }
+  .book-jump input[type='number'] { width: 4rem; }
+  .book-jump button { padding: 8px; }
+  .book-navigation { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .book-position { grid-column: 1 / -1; grid-row: 1; font-size: .85rem; }
+  .book-navigation button { padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .seitenleiste-ziel { transition: none; } .glossar-register .glossar-abc button:hover:not(:disabled) { transform: none; } }
+@media print { .glossar-register, .book-toolbar { display: none; } }
+
+/* Kleine Tinten- und Rötelmarkierungen statt bunt gefärbter Papierflächen. */
+.notebook-running-head > span:first-child, .register-kopf > span:first-child { color: var(--notebook-clay); }
+.themen-page .tile-num { color: var(--notebook-blue); background: var(--notebook-blue-soft); }
+.themen-page .thema-kachel:nth-child(even) .tile-num { color: var(--notebook-clay); background: var(--notebook-clay-soft); }
+.seitenleiste-ziel.active .icon, .unterleiste a.active, .kopf-bereiche a.active, .bn-bar > a.active { color: var(--notebook-blue); }
+@media (prefers-reduced-motion: reduce) { .learning-page .toc a { transition: none; } }

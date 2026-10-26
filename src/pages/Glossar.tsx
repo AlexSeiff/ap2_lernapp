@@ -72,44 +72,75 @@ function GlossarSeite({ content, stelle }: { content: Content; stelle: string })
           <span className="muted small"> – Vorderseite Begriff, Rückseite Erklärung, mit Wiederholung wie alle Karteikarten.</span>
         </p>
       )}
-      <div className="glossar-filter">
-        <input
-          type="search"
-          placeholder="Begriff filtern …"
-          aria-label="Begriffe filtern"
-          value={filter}
-          onChange={(e) => {
-            setFilter(e.target.value);
-            setSeite(0);
-          }}
-        />
-        {f && (
-          <span className="muted small">
-            {sichtbar.length} von {eintraege.length}
+      <section className="glossar-register" aria-label="Glossarregister">
+        <div className="register-kopf">
+          <span>Register A–Z</span>
+          <span>{sichtbar.length} Begriffe</span>
+        </div>
+        <label className="glossar-filter">
+          <span>
+            <Icon name="search" /> Im Buch suchen
           </span>
-        )}
-      </div>
-      <nav className="glossar-abc" aria-label="Buchstaben">
-        {buchstaben.map(({ buchstabe, anzahl }) =>
-          anzahl ? (
+          <input
+            type="search"
+            placeholder="Begriff eingeben …"
+            aria-label="Begriffe filtern"
+            value={filter}
+            onChange={(e) => {
+              setFilter(e.target.value);
+              setSeite(0);
+            }}
+          />
+        </label>
+        <nav className="glossar-abc" aria-label="Buchstaben">
+          {buchstaben.map(({ buchstabe, anzahl }) => (
             <button
               type="button"
               key={buchstabe}
+              disabled={!anzahl}
+              title={`${buchstabe} · ${anzahl} Begriffe`}
               aria-pressed={aufgeschlagen.some((e) => e.buchstabe === buchstabe)}
               onClick={() => blaettere(Math.floor(sichtbar.findIndex((e) => e.buchstabe === buchstabe) / umfang))}
             >
               {buchstabe}
             </button>
-          ) : (
-            <span key={buchstabe} className="muted" aria-hidden="true">
-              {buchstabe}
-            </span>
-          ),
-        )}
-      </nav>
+          ))}
+        </nav>
+      </section>
       {!sichtbar.length && <p className="muted">Kein Begriff passt zu „{filter}“.</p>}
       {sichtbar.length > 0 && (
         <>
+          <div className="book-toolbar">
+            <span className="book-range">
+              {aufgeschlagen[0].begriff}
+              {aufgeschlagen.length > 1 && ` – ${aufgeschlagen[aufgeschlagen.length - 1].begriff}`}
+            </span>
+            <form
+              className="book-jump"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const ziel = Number(new FormData(e.currentTarget).get('seite'));
+                if (Number.isInteger(ziel) && ziel >= 1 && ziel <= anzahlSeiten) blaettere(ziel - 1);
+              }}
+            >
+              <label htmlFor="glossar-seitenwahl">Doppelseite</label>
+              <input
+                key={`${filter}-${aktuell}`}
+                id="glossar-seitenwahl"
+                name="seite"
+                type="number"
+                min={1}
+                max={anzahlSeiten}
+                step={1}
+                required
+                defaultValue={aktuell + 1}
+              />
+              <span>von {anzahlSeiten}</span>
+              <button type="submit" className="secondary small">
+                Aufschlagen
+              </button>
+            </form>
+          </div>
           <div className="book-cover">
             <KartenWechsel id={`${filter}-${aktuell}`} zurueck={zurueck}>
               <div className="book-spread">
@@ -139,8 +170,8 @@ function GlossarSeite({ content, stelle }: { content: Content; stelle: string })
             <button type="button" className="secondary" disabled={aktuell === 0} onClick={() => blaettere(aktuell - 1)}>
               ← Zurück
             </button>
-            <span role="status">
-              Doppelseite {aktuell + 1} von {anzahlSeiten}
+            <span role="status" className="book-position">
+              <Icon name="book-open" /> Doppelseite {aktuell + 1} von {anzahlSeiten}
             </span>
             <button type="button" className="secondary" disabled={aktuell === anzahlSeiten - 1} onClick={() => blaettere(aktuell + 1)}>
               Weiter →

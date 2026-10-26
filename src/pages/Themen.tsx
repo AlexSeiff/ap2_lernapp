@@ -103,33 +103,39 @@ export function Thema() {
 
   return (
     <div className="page with-toc learning-page">
-      <aside className="toc">
-        <b>Inhalt</b>
-        {topic.sections.map((s) => (
-          <a
-            key={s.id}
-            href={`#${s.id}`}
-            className={`toc-l${s.level}`}
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            {s.title}
-          </a>
-        ))}
-        {!!topic.lernziele.length && (
-          <a
-            href="#lernziele"
-            className="toc-l2"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('lernziele')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Lernziel-Check
-          </a>
-        )}
+      <aside className="toc" aria-label="Inhaltsverzeichnis">
+        <div className="toc-kopf">
+          <span className="toc-ausgabe">{topicLabel(topic)}</span>
+          <h2>Inhalt</h2>
+          <span className="toc-hinweis">Dein Weg durchs Lernblatt</span>
+        </div>
+        <nav className="toc-links" aria-label="Abschnitte im Lernblatt">
+          {topic.sections.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              className={`toc-l${s.level}`}
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              {s.title}
+            </a>
+          ))}
+          {!!topic.lernziele.length && (
+            <a
+              href="#lernziele"
+              className="toc-l2 toc-lernziele"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('lernziele')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Lernziel-Check
+            </a>
+          )}
+        </nav>
       </aside>
       <article className="notebook-page learning-sheet">
         <div className="notebook-running-head">

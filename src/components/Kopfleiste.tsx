@@ -94,7 +94,7 @@ export function Kopfleiste({ onSuche, badges, saveText, saveState }: Props) {
   );
 }
 
-/** Unterziele des aktiven Bereichs als Pillen-Reihe; auf dem Handy wischbar, das aktive Ziel wird in die Mitte gerollt. */
+/** Unterziele des aktiven Bereichs als Papierregister; auf dem Handy wischbar, das aktive Ziel wird in die Mitte gerollt. */
 function Unterleiste({ b, pathname, badges }: { b: Bereich; pathname: string; badges: Record<NavBadge, number> }) {
   const aktiv = aktivesUnterziel(pathname, b);
   const leiste = useRef<HTMLDivElement>(null);
