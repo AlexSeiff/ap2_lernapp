@@ -37,11 +37,36 @@ Der Ausgangspunkt: Operative Systeme und Auswertungssysteme haben **gegensätzli
 
 # Teil 2 – Architektur eines Data Warehouse
 
-```
-Quellsysteme      Staging Area       Core-DWH          Data Marts        Auswertung
-(OLTP, CSV,   →   (Rohdaten,     →   (integriert,  →   (fachbereichs- →  (BI-Tool,
- Fremdsysteme)     unverändert)       historisiert)     bezogen)          Bericht)
-       └────────────── ETL ──────────────┘
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 140" width="720" height="140" role="img" aria-label="Architektur eines Data Warehouse: Quellsysteme, Staging Area, Core-DWH, Data Marts und Auswertung; ETL reicht von den Quellsystemen bis ins Core-DWH">
+<defs><marker id="dd8a-pfeil" viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="10" refY="5.0" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5.0 L0,10 z" class="dg-voll"/></marker></defs>
+<rect x="10" y="18" width="132" height="72" rx="8" class="dg-form"/>
+<text x="76" y="38" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Quellsysteme</text>
+<text x="76" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-klein">OLTP, CSV,</text>
+<text x="76" y="75" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Fremdsysteme</text>
+<line x1="142" y1="54" x2="152" y2="54" class="dg-linie" marker-end="url(#dd8a-pfeil)"/>
+<rect x="152" y="18" width="132" height="72" rx="8" class="dg-form"/>
+<text x="218" y="38" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Staging Area</text>
+<text x="218" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Rohdaten,</text>
+<text x="218" y="75" text-anchor="middle" dominant-baseline="middle" class="dg-klein">unverändert</text>
+<line x1="284" y1="54" x2="294" y2="54" class="dg-linie" marker-end="url(#dd8a-pfeil)"/>
+<rect x="294" y="18" width="132" height="72" rx="8" class="dg-akzent"/>
+<text x="360" y="38" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Core-DWH</text>
+<text x="360" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-klein">integriert,</text>
+<text x="360" y="75" text-anchor="middle" dominant-baseline="middle" class="dg-klein">historisiert</text>
+<line x1="426" y1="54" x2="436" y2="54" class="dg-linie" marker-end="url(#dd8a-pfeil)"/>
+<rect x="436" y="18" width="132" height="72" rx="8" class="dg-form"/>
+<text x="502" y="38" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Data Marts</text>
+<text x="502" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-klein">fachbereichs-</text>
+<text x="502" y="75" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bezogen</text>
+<line x1="568" y1="54" x2="578" y2="54" class="dg-linie" marker-end="url(#dd8a-pfeil)"/>
+<rect x="578" y="18" width="132" height="72" rx="8" class="dg-form"/>
+<text x="644" y="38" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Auswertung</text>
+<text x="644" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-klein">BI-Tool,</text>
+<text x="644" y="75" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Bericht</text>
+<path d="M76,98 V110 H360 V98" class="dg-linie-akzent"/>
+<text x="218" y="126" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text">ETL: Extrahieren, Transformieren, Laden</text>
+</svg>
 ```
 
 - **Staging Area:** Zwischenspeicher für die unveränderten Rohdaten. Zweck: Quellsysteme werden schnell wieder entlastet, und bei Fehlern kann ohne erneuten Zugriff auf die Quelle nachgeladen werden.
@@ -120,34 +145,54 @@ Der ETL-Prozess ist der **wichtigste Ort für Qualitätssicherung** – hier pas
 
 Eine zentrale Faktentabelle, sternförmig umgeben von **denormalisierten** Dimensionstabellen.
 
-```
-        dim_zeit                    dim_produkt
-     ┌─────────────┐              ┌──────────────┐
-     │ zeit_id (PK)│              │ produkt_id PK│
-     │ datum       │              │ bezeichnung  │
-     │ monat       │              │ kategorie    │
-     │ quartal     │              │ warengruppe  │
-     │ jahr        │              │ lieferant    │
-     └──────┬──────┘              └──────┬───────┘
-            │                            │
-            └────────┐          ┌────────┘
-                 ┌───┴──────────┴───┐
-                 │  fakt_verkauf    │
-                 │ zeit_id      FK  │
-                 │ produkt_id   FK  │
-                 │ kunde_id     FK  │
-                 │ filial_id    FK  │
-                 │ menge            │
-                 │ umsatz           │
-                 └───┬──────────┬───┘
-            ┌────────┘          └────────┐
-     ┌──────┴──────┐              ┌──────┴───────┐
-     │ dim_kunde   │              │ dim_filiale  │
-     │ kunde_id PK │              │ filial_id PK │
-     │ name        │              │ filialname   │
-     │ ort, plz    │              │ stadt, region│
-     │ segment     │              │ land         │
-     └─────────────┘              └──────────────┘
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" width="680" height="330" role="img" aria-label="Star-Schema: Faktentabelle fakt_verkauf in der Mitte, verbunden mit den Dimensionen dim_zeit, dim_produkt, dim_kunde und dim_filiale">
+<line x1="190" y1="73" x2="250" y2="118" class="dg-linie"/>
+<line x1="490" y1="73" x2="430" y2="118" class="dg-linie"/>
+<line x1="190" y1="258" x2="250" y2="214" class="dg-linie"/>
+<line x1="490" y1="258" x2="430" y2="214" class="dg-linie"/>
+<rect x="250" y="98" width="180" height="134" class="dg-akzent"/>
+<line x1="250" y1="122" x2="430" y2="122" class="dg-linie"/>
+<text x="340" y="110" text-anchor="middle" dominant-baseline="middle" class="dg-fett">fakt_verkauf</text>
+<text x="258" y="134.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">zeit_id (FK)</text>
+<text x="258" y="151.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">produkt_id (FK)</text>
+<text x="258" y="168.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">kunde_id (FK)</text>
+<text x="258" y="185.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">filial_id (FK)</text>
+<text x="258" y="202.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">menge</text>
+<text x="258" y="219.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">umsatz</text>
+<rect x="20" y="15" width="170" height="117" class="dg-form"/>
+<line x1="20" y1="39" x2="190" y2="39" class="dg-linie"/>
+<text x="105" y="27" text-anchor="middle" dominant-baseline="middle" class="dg-fett">dim_zeit</text>
+<text x="28" y="51.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">zeit_id (PK)</text>
+<text x="28" y="68.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">datum</text>
+<text x="28" y="85.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">monat</text>
+<text x="28" y="102.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">quartal</text>
+<text x="28" y="119.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">jahr</text>
+<rect x="490" y="15" width="170" height="117" class="dg-form"/>
+<line x1="490" y1="39" x2="660" y2="39" class="dg-linie"/>
+<text x="575" y="27" text-anchor="middle" dominant-baseline="middle" class="dg-fett">dim_produkt</text>
+<text x="498" y="51.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">produkt_id (PK)</text>
+<text x="498" y="68.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">bezeichnung</text>
+<text x="498" y="85.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">kategorie</text>
+<text x="498" y="102.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">warengruppe</text>
+<text x="498" y="119.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">lieferant</text>
+<rect x="20" y="200" width="170" height="117" class="dg-form"/>
+<line x1="20" y1="224" x2="190" y2="224" class="dg-linie"/>
+<text x="105" y="212" text-anchor="middle" dominant-baseline="middle" class="dg-fett">dim_kunde</text>
+<text x="28" y="236.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">kunde_id (PK)</text>
+<text x="28" y="253.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">name</text>
+<text x="28" y="270.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">ort</text>
+<text x="28" y="287.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">plz</text>
+<text x="28" y="304.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">segment</text>
+<rect x="490" y="200" width="170" height="117" class="dg-form"/>
+<line x1="490" y1="224" x2="660" y2="224" class="dg-linie"/>
+<text x="575" y="212" text-anchor="middle" dominant-baseline="middle" class="dg-fett">dim_filiale</text>
+<text x="498" y="236.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">filial_id (PK)</text>
+<text x="498" y="253.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">filialname</text>
+<text x="498" y="270.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">stadt</text>
+<text x="498" y="287.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">region</text>
+<text x="498" y="304.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">land</text>
+</svg>
 ```
 
 **Eigenschaften:** wenige Joins, sehr schnelle Abfragen, für Fachanwender leicht verständlich. Preis dafür: **bewusste Redundanz** in den Dimensionen (die Warengruppe steht bei jedem Produkt erneut).

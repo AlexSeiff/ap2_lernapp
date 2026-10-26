@@ -164,14 +164,26 @@ Beispiel: Team A: x̄ = 50 min, σ = 5 min → VK = 10 %. Team B: x̄ = 100 min,
 
 ### 5.1 Aufbau
 
-```
-        Q1      Median   Q3
-         |         |      |
-  |------[=========|======]--------|      o
- unteres                      oberes   Ausreißer
- Whisker-Ende           Whisker-Ende
-(kleinster Wert          (größter Wert
- innerhalb der Zäune)     innerhalb der Zäune)
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 150" width="640" height="150" role="img" aria-label="Aufbau eines Boxplots: Box von Q1 bis Q3 mit Medianstrich, Whisker bis zum kleinsten und größten Wert innerhalb der Zäune, Ausreißer als einzelner Punkt">
+<line x1="60" y1="80" x2="170" y2="80" class="dg-linie"/>
+<line x1="380" y1="80" x2="520" y2="80" class="dg-linie"/>
+<line x1="60" y1="66" x2="60" y2="94" class="dg-linie"/>
+<line x1="520" y1="66" x2="520" y2="94" class="dg-linie"/>
+<rect x="170" y="60" width="210" height="40" class="dg-akzent"/>
+<line x1="290" y1="60" x2="290" y2="100" class="dg-linie dg-dick"/>
+<circle cx="600" cy="80" r="5" class="dg-form"/>
+<text x="170" y="50" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Q1</text>
+<text x="290" y="50" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Median</text>
+<text x="380" y="50" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Q3</text>
+<path d="M170,24 V18 H380 V24" class="dg-linie dg-duenn"/>
+<text x="275" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Box = IQR, mittlere 50 % der Daten</text>
+<text x="40" y="118" text-anchor="start" dominant-baseline="middle" class="dg-klein">unteres Whisker-Ende</text>
+<text x="40" y="133" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">(kleinster Wert innerhalb der Zäune)</text>
+<text x="540" y="118" text-anchor="end" dominant-baseline="middle" class="dg-klein">oberes Whisker-Ende</text>
+<text x="540" y="133" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">(größter Wert innerhalb der Zäune)</text>
+<text x="600" y="62" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Ausreißer</text>
+</svg>
 ```
 
 - **Box:** von Q1 bis Q3, enthält die mittleren 50 % der Daten; die Boxbreite ist der IQR.

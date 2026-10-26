@@ -32,15 +32,41 @@ c) Chen: KUNDE 1 ──erteilt── n AUFTRAG, also **1:n**. *(2 P – wer hier
 
 **B1 (13 P):** ER-Diagramm (textuelle Darstellung):
 
-```
-LIEFERANT (1,n) ──── liefert ──── (1,n) PRODUKT
-                    [einkaufspreis]
-
-MITARBEITER (0,n) ──── erfasst ──── (1,1) AUFTRAG
-
-MITARBEITER ──┐
-  als Vorgesetzter (0,n)  führt  als Geführter (0,1)
-MITARBEITER ──┘   (rekursive Beziehung)
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 340" width="660" height="340" role="img" aria-label="ER-Diagramm in Min-Max-Notation: LIEFERANT (1,n) liefert (1,n) PRODUKT mit Attribut einkaufspreis, MITARBEITER (0,n) erfasst (1,1) AUFTRAG und die rekursive Beziehung führt an MITARBEITER (0,n als Vorgesetzter, 0,1 als Geführter)">
+<rect x="130" y="20" width="150" height="40" class="dg-form"/>
+<text x="205" y="40" text-anchor="middle" dominant-baseline="middle" class="dg-fett">LIEFERANT</text>
+<line x1="280" y1="40" x2="345" y2="40" class="dg-linie"/>
+<polygon points="400,15 455,40 400,65 345,40" class="dg-form"/>
+<text x="400" y="40" text-anchor="middle" dominant-baseline="middle">liefert</text>
+<line x1="455" y1="40" x2="510" y2="40" class="dg-linie"/>
+<rect x="510" y="20" width="130" height="40" class="dg-form"/>
+<text x="575" y="40" text-anchor="middle" dominant-baseline="middle" class="dg-fett">PRODUKT</text>
+<text x="288" y="28" text-anchor="start" dominant-baseline="middle" class="dg-klein">(1,n)</text>
+<text x="502" y="28" text-anchor="end" dominant-baseline="middle" class="dg-klein">(1,n)</text>
+<line x1="400" y1="65" x2="400" y2="87" class="dg-linie"/>
+<ellipse cx="400" cy="105" rx="58" ry="18" class="dg-form"/>
+<text x="400" y="105" text-anchor="middle" dominant-baseline="middle" class="dg-klein">einkaufspreis</text>
+<rect x="130" y="170" width="150" height="40" class="dg-form"/>
+<text x="205" y="190" text-anchor="middle" dominant-baseline="middle" class="dg-fett">MITARBEITER</text>
+<line x1="280" y1="190" x2="345" y2="190" class="dg-linie"/>
+<polygon points="400,165 455,190 400,215 345,190" class="dg-form"/>
+<text x="400" y="190" text-anchor="middle" dominant-baseline="middle">erfasst</text>
+<line x1="455" y1="190" x2="510" y2="190" class="dg-linie"/>
+<rect x="510" y="170" width="130" height="40" class="dg-form"/>
+<text x="575" y="190" text-anchor="middle" dominant-baseline="middle" class="dg-fett">AUFTRAG</text>
+<text x="288" y="178" text-anchor="start" dominant-baseline="middle" class="dg-klein">(0,n)</text>
+<text x="502" y="178" text-anchor="end" dominant-baseline="middle" class="dg-klein">(1,1)</text>
+<line x1="165" y1="210" x2="180" y2="287.5" class="dg-linie"/>
+<line x1="245" y1="210" x2="230" y2="287.5" class="dg-linie"/>
+<polygon points="205,275 255,300 205,325 155,300" class="dg-form"/>
+<text x="205" y="300" text-anchor="middle" dominant-baseline="middle">führt</text>
+<text x="166" y="240" text-anchor="end" dominant-baseline="middle" class="dg-klein">(0,n)</text>
+<text x="166" y="254" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">als Vorgesetzter</text>
+<text x="250" y="240" text-anchor="start" dominant-baseline="middle" class="dg-klein">(0,1)</text>
+<text x="250" y="254" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">als Geführter</text>
+<text x="270" y="300" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">rekursive Beziehung</text>
+</svg>
 ```
 
 *Prüferkommentar: 2 P vier korrekte Entitäten · je 2 P für die drei Beziehungen (liefert, erfasst, führt – die rekursive wird am häufigsten vergessen!) · 1 P einkaufspreis als Beziehungsattribut an „liefert" · 4 P für die Kardinalitäten (je Beziehung ~1,3 P; „erfasst" muss die 0 bei MITARBEITER zeigen – neue Mitarbeiter ohne Auftrag).*

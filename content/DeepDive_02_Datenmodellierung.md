@@ -39,9 +39,30 @@ Schlüsselbegriffe, die in Begründungsaufgaben fallen:
 
 **Min-Max-Notation:** an jeder Entität steht (min, max) – *wie oft nimmt DIESE eine Ausprägung an der Beziehung teil?*
 
-```
-KUNDE (0,n) ──── erteilt ──── (1,1) BESTELLUNG (1,n) ──── enthält ──── (0,n) PRODUKT
-                                                          [menge]
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 730 130" width="730" height="130" role="img" aria-label="ER-Diagramm in Min-Max-Notation: KUNDE (0,n) erteilt (1,1) BESTELLUNG (1,n) enthält (0,n) PRODUKT, Beziehungsattribut menge an enthält">
+<rect x="10" y="20" width="110" height="40" class="dg-form"/>
+<text x="65" y="40" text-anchor="middle" dominant-baseline="middle" class="dg-fett">KUNDE</text>
+<line x1="120" y1="40" x2="155" y2="40" class="dg-linie"/>
+<polygon points="210,15 265,40 210,65 155,40" class="dg-form"/>
+<text x="210" y="40" text-anchor="middle" dominant-baseline="middle">erteilt</text>
+<line x1="265" y1="40" x2="300" y2="40" class="dg-linie"/>
+<rect x="300" y="20" width="130" height="40" class="dg-form"/>
+<text x="365" y="40" text-anchor="middle" dominant-baseline="middle" class="dg-fett">BESTELLUNG</text>
+<line x1="430" y1="40" x2="465" y2="40" class="dg-linie"/>
+<polygon points="520,15 575,40 520,65 465,40" class="dg-form"/>
+<text x="520" y="40" text-anchor="middle" dominant-baseline="middle">enthält</text>
+<line x1="575" y1="40" x2="610" y2="40" class="dg-linie"/>
+<rect x="610" y="20" width="110" height="40" class="dg-form"/>
+<text x="665" y="40" text-anchor="middle" dominant-baseline="middle" class="dg-fett">PRODUKT</text>
+<line x1="520" y1="65" x2="520" y2="87" class="dg-linie"/>
+<ellipse cx="520" cy="105" rx="42" ry="18" class="dg-form"/>
+<text x="520" y="105" text-anchor="middle" dominant-baseline="middle" class="dg-klein">menge</text>
+<text x="126" y="28" text-anchor="start" dominant-baseline="middle" class="dg-klein">(0,n)</text>
+<text x="294" y="28" text-anchor="end" dominant-baseline="middle" class="dg-klein">(1,1)</text>
+<text x="436" y="28" text-anchor="start" dominant-baseline="middle" class="dg-klein">(1,n)</text>
+<text x="604" y="28" text-anchor="end" dominant-baseline="middle" class="dg-klein">(0,n)</text>
+</svg>
 ```
 
 Gelesen: Ein Kunde erteilt 0 bis n Bestellungen (Neukunde ohne Bestellung möglich). Eine Bestellung gehört zu genau einem Kunden. Eine Bestellung enthält 1 bis n Produkte; ein Produkt kommt in 0 bis n Bestellungen vor.
@@ -50,8 +71,23 @@ Gelesen: Ein Kunde erteilt 0 bis n Bestellungen (Neukunde ohne Bestellung mögli
 
 **Krähenfußnotation (Martin):** Linienenden codieren die Kardinalität – Krähenfuß = „viele", Querstrich = „genau 1", Kreis = „0/optional". Wird in Prüfungen ebenfalls verwendet (auch als IE-Notation, z. B. in MySQL Workbench); die Leserichtung entspricht der **Chen-Logik, nicht Min-Max**: Das Symbol am Linienende bei BESTELLUNG sagt, wie viele Bestellungen *ein* Kunde haben kann. Je Linienende stehen zwei Zeichen – das Zeichen direkt an der Entität ist das Maximum, das weiter außen das Minimum.
 
-```
-KUNDE ||──────o< BESTELLUNG
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 80" width="660" height="80" role="img" aria-label="Krähenfuß-Notation: KUNDE mit Doppelstrich (genau eins), BESTELLUNG mit Kreis und Krähenfuß (null bis viele)">
+<rect x="40" y="12" width="130" height="44" class="dg-form"/>
+<text x="105" y="34" text-anchor="middle" dominant-baseline="middle" class="dg-fett">KUNDE</text>
+<rect x="470" y="12" width="150" height="44" class="dg-form"/>
+<text x="545" y="34" text-anchor="middle" dominant-baseline="middle" class="dg-fett">BESTELLUNG</text>
+<line x1="170" y1="34" x2="470" y2="34" class="dg-linie"/>
+<line x1="178" y1="24" x2="178" y2="44" class="dg-linie"/>
+<line x1="194" y1="24" x2="194" y2="44" class="dg-linie"/>
+<line x1="454" y1="34" x2="470" y2="23" class="dg-linie"/>
+<line x1="454" y1="34" x2="470" y2="34" class="dg-linie"/>
+<line x1="454" y1="34" x2="470" y2="45" class="dg-linie"/>
+<circle cx="444" cy="34" r="6" class="dg-form"/>
+<text x="320" y="22" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-kursiv">erteilt</text>
+<text x="186" y="64" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">|| genau eins</text>
+<text x="462" y="64" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">o&lt; null bis viele</text>
+</svg>
 ```
 
 Gelesen: Ein Kunde hat null bis viele Bestellungen (o< bei BESTELLUNG); eine Bestellung gehört zu genau einem Kunden (|| bei KUNDE). Gegenüber Min-Max stehen die Angaben also auf der jeweils anderen Seite – dieselbe Falle wie bei Chen.

@@ -125,28 +125,37 @@ Jeder Algorithmus lässt sich aus drei Bausteinen aufbauen:
 
 ## B2 – Struktogramm (Nassi-Shneiderman)
 
-```
-┌──────────────────────────────────┐
-│ Sequenz: Anweisung 1             │
-├──────────────────────────────────┤
-│ Anweisung 2                      │
-├──────────────────────────────────┤
-│         Bedingung?               │   Verzweigung
-│   ja    ╱          ╲    nein     │
-│  ┌──────────┬──────────┐         │
-│  │ Zweig A  │ Zweig B  │         │
-│  └──────────┴──────────┘         │
-├──────────────────────────────────┤
-│ SOLANGE Bedingung                │   kopfgesteuerte Schleife
-│ ┌──────────────────────────────┐ │
-│ │ Schleifenrumpf               │ │
-│ └──────────────────────────────┘ │
-├──────────────────────────────────┤
-│ ┌──────────────────────────────┐ │   fußgesteuerte Schleife
-│ │ Schleifenrumpf               │ │
-│ └──────────────────────────────┘ │
-│ WIEDERHOLE BIS Bedingung         │
-└──────────────────────────────────┘
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 330" width="580" height="330" role="img" aria-label="Struktogramm-Bausteine nach DIN 66261: Sequenz, Verzweigung mit ja und nein, kopfgesteuerte und fußgesteuerte Schleife">
+<rect x="20" y="20" width="380" height="290" class="dg-form"/>
+<text x="30" y="35" text-anchor="start" dominant-baseline="middle">Anweisung 1</text>
+<line x1="20" y1="50" x2="400" y2="50" class="dg-linie"/>
+<text x="30" y="65" text-anchor="start" dominant-baseline="middle">Anweisung 2</text>
+<line x1="20" y1="80" x2="400" y2="80" class="dg-linie"/>
+<text x="418" y="50" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Sequenz</text>
+<line x1="20" y1="80" x2="210" y2="120" class="dg-linie"/>
+<line x1="400" y1="80" x2="210" y2="120" class="dg-linie"/>
+<text x="210" y="92" text-anchor="middle" dominant-baseline="middle">Bedingung?</text>
+<text x="30" y="112" text-anchor="start" dominant-baseline="middle" class="dg-klein">ja</text>
+<text x="390" y="112" text-anchor="end" dominant-baseline="middle" class="dg-klein">nein</text>
+<line x1="20" y1="120" x2="400" y2="120" class="dg-linie"/>
+<line x1="210" y1="120" x2="210" y2="170" class="dg-linie"/>
+<text x="115" y="145" text-anchor="middle" dominant-baseline="middle">Zweig A</text>
+<text x="305" y="145" text-anchor="middle" dominant-baseline="middle">Zweig B</text>
+<line x1="20" y1="170" x2="400" y2="170" class="dg-linie"/>
+<text x="418" y="125" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Verzweigung</text>
+<text x="30" y="185" text-anchor="start" dominant-baseline="middle" class="dg-fett">SOLANGE Bedingung</text>
+<line x1="50" y1="200" x2="400" y2="200" class="dg-linie"/>
+<line x1="50" y1="200" x2="50" y2="240" class="dg-linie"/>
+<text x="60" y="220" text-anchor="start" dominant-baseline="middle">Schleifenrumpf</text>
+<line x1="20" y1="240" x2="400" y2="240" class="dg-linie"/>
+<text x="418" y="205" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">kopfgesteuerte Schleife</text>
+<line x1="50" y1="240" x2="50" y2="280" class="dg-linie"/>
+<text x="60" y="260" text-anchor="start" dominant-baseline="middle">Schleifenrumpf</text>
+<line x1="50" y1="280" x2="400" y2="280" class="dg-linie"/>
+<text x="30" y="295" text-anchor="start" dominant-baseline="middle" class="dg-fett">WIEDERHOLE BIS Bedingung</text>
+<text x="418" y="275" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">fußgesteuerte Schleife</text>
+</svg>
 ```
 
 **Merkmale:** Struktogramme sind in **DIN 66261** genormt, blockorientiert und erzwingen strukturierte Programmierung – beliebige Sprünge (GOTO) sind nicht darstellbar; vorgesehen ist allenfalls ein geregelter Aussprung (Abbruch) aus einem Block. Nachteil: Änderungen sind aufwendig, und tiefe Verschachtelungen werden sehr schmal.

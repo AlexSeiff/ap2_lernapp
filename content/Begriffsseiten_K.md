@@ -518,15 +518,16 @@ Baustein des UML-Klassendiagramms: Rechteck mit den drei Abschnitten Name, Attri
 Attribute und Methoden tragen eine **Sichtbarkeit**: + public, − private, # protected, ~ package. Schreibweise: `− bestand: Integer`, `+ berechneSumme(): Decimal`. Abstrakte Klassen (von denen es keine direkten Objekte gibt) stehen kursiv. Ein Objekt ist eine konkrete Ausprägung einer Klasse.
 
 ### Beispiel
-```
-┌──────────────────────────┐
-│ Reparaturauftrag         │
-├──────────────────────────┤
-│ − auftragsnr: Integer    │
-│ − status: String         │
-├──────────────────────────┤
-│ + abschliessen(): void   │
-└──────────────────────────┘
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 115" width="280" height="115" role="img" aria-label="UML-Klasse Reparaturauftrag mit den privaten Attributen auftragsnr und status und der öffentlichen Methode abschliessen">
+<rect x="20" y="12" width="240" height="91" class="dg-form"/>
+<line x1="20" y1="36" x2="260" y2="36" class="dg-linie"/>
+<text x="140" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Reparaturauftrag</text>
+<text x="28" y="48.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">− auftragsnr: Integer</text>
+<text x="28" y="65.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">− status: String</text>
+<text x="28" y="90.5" text-anchor="start" dominant-baseline="middle" class="dg-klein">+ abschliessen(): void</text>
+<line x1="20" y1="78" x2="260" y2="78" class="dg-linie"/>
+</svg>
 ```
 
 ### Abgrenzung

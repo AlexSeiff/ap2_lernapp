@@ -123,26 +123,37 @@ ENDE WENN
 
 **D3 (10 P):**
 
-```
-┌──────────────────────────────────────────────────────────────────────────┐
-│ fehlerzaehler ← 0                                                        │
-├──────────────────────────────────────────────────────────────────────────┤
-│ FÜR i VON 1 BIS n                                                        │
-│ ┌──────────────────────────────────────────────────────────────────────┐ │
-│ │                 E-Mail vorhanden?                                    │ │
-│ │          ja             ╱          ╲            nein                 │ │
-│ │ ┌────────────────────────────────────┬─────────────────────────────┐ │ │
-│ │ │          Format gültig?            │ fehlerzaehler ←             │ │ │
-│ │ │   ja       ╱          ╲     nein   │   fehlerzaehler + 1         │ │ │
-│ │ │ ┌────┬─────────────────────────┐   │ Datensatz protokollieren    │ │ │
-│ │ │ │ ∅  │ fehlerzaehler ←         │   │                             │ │ │
-│ │ │ │    │   fehlerzaehler + 1     │   │                             │ │ │
-│ │ │ └────┴─────────────────────────┘   │                             │ │ │
-│ │ └────────────────────────────────────┴─────────────────────────────┘ │ │
-│ └──────────────────────────────────────────────────────────────────────┘ │
-├──────────────────────────────────────────────────────────────────────────┤
-│ AUSGABE fehlerzaehler                                                    │
-└──────────────────────────────────────────────────────────────────────────┘
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" width="640" height="330" role="img" aria-label="Struktogramm: Zählschleife über alle Datensätze; ohne E-Mail wird der Fehlerzähler erhöht und der Datensatz protokolliert, bei ungültigem Format nur der Zähler erhöht">
+<rect x="20" y="20" width="600" height="290" class="dg-form"/>
+<text x="30" y="35" text-anchor="start" dominant-baseline="middle">fehlerzaehler ← 0</text>
+<line x1="20" y1="50" x2="620" y2="50" class="dg-linie"/>
+<text x="30" y="65" text-anchor="start" dominant-baseline="middle" class="dg-fett">FÜR i VON 1 BIS n</text>
+<line x1="50" y1="80" x2="620" y2="80" class="dg-linie"/>
+<line x1="50" y1="80" x2="50" y2="280" class="dg-linie"/>
+<line x1="50" y1="80" x2="420" y2="120" class="dg-linie"/>
+<line x1="620" y1="80" x2="420" y2="120" class="dg-linie"/>
+<text x="400" y="93" text-anchor="middle" dominant-baseline="middle">E-Mail vorhanden?</text>
+<text x="60" y="112" text-anchor="start" dominant-baseline="middle" class="dg-klein">ja</text>
+<text x="610" y="112" text-anchor="end" dominant-baseline="middle" class="dg-klein">nein</text>
+<line x1="50" y1="120" x2="620" y2="120" class="dg-linie"/>
+<line x1="420" y1="120" x2="420" y2="280" class="dg-linie"/>
+<text x="430" y="137" text-anchor="start" dominant-baseline="middle">fehlerzaehler ←</text>
+<text x="430" y="154" text-anchor="start" dominant-baseline="middle">  fehlerzaehler + 1</text>
+<line x1="420" y1="170" x2="620" y2="170" class="dg-linie"/>
+<text x="430" y="225" text-anchor="start" dominant-baseline="middle">Datensatz protokollieren</text>
+<line x1="50" y1="120" x2="110" y2="160" class="dg-linie"/>
+<line x1="420" y1="120" x2="110" y2="160" class="dg-linie"/>
+<text x="230" y="133" text-anchor="middle" dominant-baseline="middle">Format gültig?</text>
+<text x="56" y="153" text-anchor="start" dominant-baseline="middle" class="dg-klein">ja</text>
+<text x="412" y="153" text-anchor="end" dominant-baseline="middle" class="dg-klein">nein</text>
+<line x1="50" y1="160" x2="420" y2="160" class="dg-linie"/>
+<line x1="110" y1="160" x2="110" y2="280" class="dg-linie"/>
+<text x="80" y="220" text-anchor="middle" dominant-baseline="middle">∅</text>
+<text x="120" y="220" text-anchor="start" dominant-baseline="middle">fehlerzaehler ← fehlerzaehler + 1</text>
+<line x1="20" y1="280" x2="620" y2="280" class="dg-linie"/>
+<text x="30" y="295" text-anchor="start" dominant-baseline="middle">AUSGABE fehlerzaehler</text>
+</svg>
 ```
 
 Das Zeichen ∅ markiert einen leeren Zweig (keine Anweisung). Wer bei ungültigem Format zusätzlich protokolliert, wird nicht abgewertet – verlangt ist dort aber nur das Erhöhen des Zählers.

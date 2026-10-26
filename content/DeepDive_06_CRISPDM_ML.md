@@ -382,15 +382,47 @@ IG(Verpackung) = 0,971 − 0,951 = **0,020**
 
 **Der fertige Baum:**
 
-```
-Spediteur?
-├─ Eigenlieferung → Reklamation: nein
-├─ Nordtrans      → Lieferdauer?
-│                    ├─ lang → ja
-│                    └─ kurz → nein
-└─ Rheinlogistik  → Verpackung?
-                     ├─ Spezial  → ja
-                     └─ Standard → nein
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 265" width="680" height="265" role="img" aria-label="Entscheidungsbaum: Spediteur? Eigenlieferung → nein; Nordtrans → Lieferdauer? lang → ja, kurz → nein; Rheinlogistik → Verpackung? Spezial → ja, Standard → nein">
+<line x1="340" y1="47" x2="100" y2="104" class="dg-linie"/>
+<rect x="170.2" y="66.5" width="99.6" height="18" rx="4" class="dg-flaeche"/>
+<text x="220" y="75.5" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Eigenlieferung</text>
+<line x1="340" y1="47" x2="340" y2="103" class="dg-linie"/>
+<rect x="306.2" y="66" width="67.6" height="18" rx="4" class="dg-flaeche"/>
+<text x="340" y="75" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Nordtrans</text>
+<line x1="340" y1="47" x2="570" y2="103" class="dg-linie"/>
+<rect x="408.4" y="66" width="93.2" height="18" rx="4" class="dg-flaeche"/>
+<text x="455" y="75" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Rheinlogistik</text>
+<line x1="340" y1="137" x2="285" y2="194" class="dg-linie"/>
+<rect x="294.7" y="156.5" width="35.6" height="18" rx="4" class="dg-flaeche"/>
+<text x="312.5" y="165.5" text-anchor="middle" dominant-baseline="middle" class="dg-klein">lang</text>
+<line x1="340" y1="137" x2="395" y2="194" class="dg-linie"/>
+<rect x="349.7" y="156.5" width="35.6" height="18" rx="4" class="dg-flaeche"/>
+<text x="367.5" y="165.5" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kurz</text>
+<line x1="570" y1="137" x2="515" y2="194" class="dg-linie"/>
+<rect x="515.1" y="156.5" width="54.8" height="18" rx="4" class="dg-flaeche"/>
+<text x="542.5" y="165.5" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Spezial</text>
+<line x1="570" y1="137" x2="625" y2="194" class="dg-linie"/>
+<rect x="566.9" y="156.5" width="61.2" height="18" rx="4" class="dg-flaeche"/>
+<text x="597.5" y="165.5" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Standard</text>
+<rect x="280" y="13" width="120" height="34" rx="10" class="dg-akzent"/>
+<text x="340" y="30" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Spediteur?</text>
+<rect x="60" y="104" width="80" height="32" rx="16" class="dg-gut"/>
+<text x="100" y="120" text-anchor="middle" dominant-baseline="middle">nein</text>
+<rect x="280" y="103" width="120" height="34" rx="10" class="dg-akzent"/>
+<text x="340" y="120" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Lieferdauer?</text>
+<rect x="510" y="103" width="120" height="34" rx="10" class="dg-akzent"/>
+<text x="570" y="120" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Verpackung?</text>
+<rect x="245" y="194" width="80" height="32" rx="16" class="dg-rot"/>
+<text x="285" y="210" text-anchor="middle" dominant-baseline="middle">ja</text>
+<rect x="355" y="194" width="80" height="32" rx="16" class="dg-gut"/>
+<text x="395" y="210" text-anchor="middle" dominant-baseline="middle">nein</text>
+<rect x="475" y="194" width="80" height="32" rx="16" class="dg-rot"/>
+<text x="515" y="210" text-anchor="middle" dominant-baseline="middle">ja</text>
+<rect x="585" y="194" width="80" height="32" rx="16" class="dg-gut"/>
+<text x="625" y="210" text-anchor="middle" dominant-baseline="middle">nein</text>
+<text x="20" y="250" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Blätter: Reklamation ja / nein</text>
+</svg>
 ```
 
 **Was der Baum aussagt:** Er ist direkt als Regelwerk lesbar – „Lange Lieferungen mit Nordtrans werden reklamiert" – und liefert der Logistik einen konkreten Ansatzpunkt. Genau diese Erklärbarkeit ist das Argument für Entscheidungsbäume aus Teil 2.4. Aber Vorsicht: Zehn Aufträge sind viel zu wenig für belastbare Regeln; jedes Blatt beruht hier auf ein bis drei Fällen.

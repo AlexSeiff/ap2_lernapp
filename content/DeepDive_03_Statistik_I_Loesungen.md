@@ -122,12 +122,47 @@ Konvention: Position = n · p; bei nicht ganzzahligem Ergebnis wird aufgerundet 
 
 **E3 (6 P):**
 
-```
-Minuten  0    40   55   70        115        220
-              |     |    |
-   35 |-------[=====|====]--------| 90         o
-      └ unterer      Box           └ oberer    └ Ausreißer
-        Whisker                      Whisker
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" width="640" height="160" role="img" aria-label="Boxplot auf einer Minutenachse: unterer Whisker 35, Box von 40 bis 70 mit Median 55, oberer Whisker 90, oberer Zaun 115, Ausreißer 220">
+<line x1="40" y1="130" x2="568" y2="130" class="dg-linie"/>
+<line x1="40" y1="130" x2="40" y2="136" class="dg-linie"/>
+<line x1="84" y1="130" x2="84" y2="133" class="dg-linie"/>
+<line x1="128" y1="130" x2="128" y2="136" class="dg-linie"/>
+<line x1="172" y1="130" x2="172" y2="133" class="dg-linie"/>
+<line x1="216" y1="130" x2="216" y2="136" class="dg-linie"/>
+<line x1="260" y1="130" x2="260" y2="133" class="dg-linie"/>
+<line x1="304" y1="130" x2="304" y2="136" class="dg-linie"/>
+<line x1="348" y1="130" x2="348" y2="133" class="dg-linie"/>
+<line x1="392" y1="130" x2="392" y2="136" class="dg-linie"/>
+<line x1="436" y1="130" x2="436" y2="133" class="dg-linie"/>
+<line x1="480" y1="130" x2="480" y2="136" class="dg-linie"/>
+<line x1="524" y1="130" x2="524" y2="133" class="dg-linie"/>
+<line x1="568" y1="130" x2="568" y2="136" class="dg-linie"/>
+<text x="40" y="147" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0</text>
+<text x="128" y="147" text-anchor="middle" dominant-baseline="middle" class="dg-klein">40</text>
+<text x="216" y="147" text-anchor="middle" dominant-baseline="middle" class="dg-klein">80</text>
+<text x="304" y="147" text-anchor="middle" dominant-baseline="middle" class="dg-klein">120</text>
+<text x="392" y="147" text-anchor="middle" dominant-baseline="middle" class="dg-klein">160</text>
+<text x="480" y="147" text-anchor="middle" dominant-baseline="middle" class="dg-klein">200</text>
+<text x="568" y="147" text-anchor="middle" dominant-baseline="middle" class="dg-klein">240</text>
+<text x="576" y="130" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Minuten</text>
+<line x1="117" y1="70" x2="128" y2="70" class="dg-linie"/>
+<line x1="194" y1="70" x2="238" y2="70" class="dg-linie"/>
+<line x1="117" y1="58" x2="117" y2="82" class="dg-linie"/>
+<line x1="238" y1="58" x2="238" y2="82" class="dg-linie"/>
+<rect x="128" y="52" width="66" height="36" class="dg-akzent"/>
+<line x1="161" y1="52" x2="161" y2="88" class="dg-linie dg-dick"/>
+<circle cx="524" cy="70" r="5" class="dg-form"/>
+<line x1="293" y1="30" x2="293" y2="130" class="dg-linie dg-duenn dg-strich"/>
+<text x="299" y="36" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">oberer Zaun 115</text>
+<text x="128" y="42" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">40</text>
+<text x="161" y="42" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">55</text>
+<text x="194" y="42" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">70</text>
+<text x="117" y="96" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">35</text>
+<text x="238" y="96" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">90</text>
+<text x="524" y="90" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">220</text>
+<text x="524" y="54" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Ausreißer</text>
+</svg>
 ```
 
 Erforderliche Elemente: Box von 40 bis 70 *(1 P)*, Medianstrich bei 55 *(1 P)*, unterer Whisker bis 35 *(1 P)*, oberer Whisker bis **90** *(2 P)*, Ausreißer 220 als separater Punkt *(1 P)*.

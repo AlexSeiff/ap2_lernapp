@@ -147,19 +147,38 @@ Für (d) wird auch PUT akzeptiert, wenn der vollständige Auftrag übertragen wi
 
 **E1 (6 P):**
 
-```
-                 Systemgrenze: Reparaturportal
-         +--------------------------------------------------------------+
-         |                                                              |
-Kunde ---+--- (Reparatur beauftragen) ---<<include>>---> (Anmelden)     |
-         |              ^                                               |
-         |              | <<extend>>                                    |
-         |              |                                               |
-         |    (Expressservice wählen)                                   |
-         |                                                              |
-Service- +--- (Auftrag bearbeiten)                                      |
-mitarb.  |                                                              |
-         +--------------------------------------------------------------+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 300" width="660" height="300" role="img" aria-label="Use-Case-Diagramm Reparaturportal: Kunde mit Reparatur beauftragen (include Anmelden, erweitert durch Expressservice wählen), Servicemitarbeiter mit Auftrag bearbeiten">
+<defs><marker id="dd15u-offen" viewBox="0 0 10 10" markerWidth="10" markerHeight="10" refX="10" refY="5.0" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5.0 L0,10" class="dg-linie"/></marker></defs>
+<rect x="160" y="20" width="480" height="265" class="dg-form"/>
+<text x="170" y="38" text-anchor="start" dominant-baseline="middle" class="dg-fett">Reparaturportal</text>
+<circle cx="70" cy="60" r="9" class="dg-form"/>
+<line x1="70" y1="69" x2="70" y2="96" class="dg-linie"/>
+<line x1="55" y1="78" x2="85" y2="78" class="dg-linie"/>
+<line x1="70" y1="96" x2="58" y2="114" class="dg-linie"/>
+<line x1="70" y1="96" x2="82" y2="114" class="dg-linie"/>
+<text x="70" y="128" text-anchor="middle" dominant-baseline="middle">Kunde</text>
+<circle cx="70" cy="190" r="9" class="dg-form"/>
+<line x1="70" y1="199" x2="70" y2="226" class="dg-linie"/>
+<line x1="55" y1="208" x2="85" y2="208" class="dg-linie"/>
+<line x1="70" y1="226" x2="58" y2="244" class="dg-linie"/>
+<line x1="70" y1="226" x2="82" y2="244" class="dg-linie"/>
+<text x="70" y="258" text-anchor="middle" dominant-baseline="middle">Servicemitarbeiter</text>
+<ellipse cx="300" cy="90" rx="100" ry="24" class="dg-form"/>
+<text x="300" y="90" text-anchor="middle" dominant-baseline="middle">Reparatur beauftragen</text>
+<ellipse cx="540" cy="90" rx="70" ry="24" class="dg-form"/>
+<text x="540" y="90" text-anchor="middle" dominant-baseline="middle">Anmelden</text>
+<ellipse cx="300" cy="180" rx="100" ry="24" class="dg-form"/>
+<text x="300" y="180" text-anchor="middle" dominant-baseline="middle">Expressservice wählen</text>
+<ellipse cx="300" cy="250" rx="95" ry="22" class="dg-form"/>
+<text x="300" y="250" text-anchor="middle" dominant-baseline="middle">Auftrag bearbeiten</text>
+<line x1="85" y1="78" x2="200" y2="90" class="dg-linie"/>
+<line x1="85" y1="208" x2="205" y2="248" class="dg-linie"/>
+<line x1="400" y1="90" x2="470" y2="90" class="dg-linie dg-strich" marker-end="url(#dd15u-offen)"/>
+<text x="435" y="76" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-kursiv">«include»</text>
+<line x1="300" y1="156" x2="300" y2="114" class="dg-linie dg-strich" marker-end="url(#dd15u-offen)"/>
+<text x="310" y="135" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-kursiv">«extend»</text>
+</svg>
 ```
 
 Bewertung: Systemgrenze mit Anwendungsfällen innen und Akteuren außen (1 P) · beide Akteure mit Assoziationslinien (1 P) · alle vier Anwendungsfälle (1 P) · «include» mit Pfeil vom Basisfall „Reparatur beauftragen“ zu „Anmelden“ (1,5 P) · «extend» mit Pfeil vom erweiternden Fall „Expressservice wählen“ zum Basisfall (1,5 P).
