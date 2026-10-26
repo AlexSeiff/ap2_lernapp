@@ -1323,13 +1323,57 @@ select.te-ziel { display: block; margin-top: 4px; min-height: 28px; padding: 2px
 .bp-felder input { width: 100%; font-variant-numeric: tabular-nums; }
 .bp-felder .bp-ausreisser { grid-column: 1 / -1; }
 .bp-zeichnung { margin: 0; }
+/* Struktogramm-Baukasten: Nassi-Shneiderman-Kästen mit Linien in der Textfarbe (wie die Blatt-Diagramme), Felder randlos im Kasten. */
+.sg-arbeit { display: grid; gap: 8px; }
+.sg-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 2px 0; }
+/* Breiter als der Bildschirm, wenn die Verschachtelung es braucht – dann scrollt .sg-scroll, statt die Spalten zu stauchen. */
+.sg { --sg-linie: 1.5px solid currentColor; width: max-content; min-width: 100%; color: var(--text); background: var(--surface); border: var(--sg-linie); }
+.sg-folge { display: flex; flex-direction: column; min-width: 11em; }
+.sg-folge > .sg-b + .sg-b { border-top: var(--sg-linie); }
+/* Die Zeile „+ Baustein“ gehört nicht zum Struktogramm: gestrichelt und gedämpft abgesetzt. */
+.sg-folge > .sg-b + .sg-neu-zeile, .sg-folge > .sg-leer + .sg-neu-zeile { border-top: 1px dashed var(--border); }
+.sg-anweisung, .sg-kopf { display: flex; align-items: center; gap: 4px; padding: 2px 6px; min-height: 38px; }
+.sg-kopf .sg-text { font-weight: 600; }
+.sg-text { flex: 1 1 auto; min-width: 8em; font-variant-numeric: tabular-nums; field-sizing: content; }
+span.sg-text { padding: 6px 4px; overflow-wrap: anywhere; }
+.editor-antwort input.sg-text { width: 100%; min-height: 0; margin: 0; padding: 6px 4px; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.editor-antwort input.sg-text:focus { box-shadow: inset 0 -2px 0 var(--accent); }
+.sg-wenn-kopf { position: relative; display: flex; justify-content: center; padding: 4px 40px 24px; min-height: 66px; border-bottom: var(--sg-linie); }
+.sg-wenn-kopf .sg-text { position: relative; flex: 0 1 22em; text-align: center; }
+.sg-dreieck { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.sg-dreieck line { stroke: currentColor; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.sg-ja, .sg-nein { position: absolute; bottom: 4px; font-size: 0.78rem; color: var(--muted); }
+.sg-ja { left: 8px; }
+.sg-nein { right: 8px; }
+.sg-wenn-kopf .sg-aktionen { position: absolute; top: 2px; right: 2px; }
+.sg-zweige { display: grid; grid-template-columns: auto auto; }
+.sg-zweige > .sg-folge + .sg-folge { border-left: var(--sg-linie); }
+.sg-rumpf { margin-left: 1.8em; border-left: var(--sg-linie); }
+.sg-solange > .sg-rumpf { border-top: var(--sg-linie); }
+.sg-wiederhole > .sg-rumpf { border-bottom: var(--sg-linie); }
+.sg-leer { display: grid; place-items: center; min-height: 38px; color: var(--muted); }
+/* ↑ ↓ ✕ nehmen keinen Platz weg: mit Maus erst beim Darüberfahren bzw. Fokus, auf Touch-Geräten immer sichtbar im Kasten. */
+.sg-anweisung, .sg-kopf { position: relative; }
+.sg-aktionen { position: absolute; top: 3px; right: 3px; display: flex; gap: 1px; background: var(--surface); border-radius: 6px; opacity: 0; transition: opacity 0.12s; }
+.sg-aktionen button { min-height: 28px; padding: 1px 6px; color: var(--muted); }
+.sg-anweisung:hover > .sg-aktionen, .sg-anweisung:focus-within > .sg-aktionen, .sg-kopf:hover > .sg-aktionen, .sg-kopf:focus-within > .sg-aktionen,
+.sg-wenn-kopf:hover > .sg-aktionen, .sg-wenn-kopf:focus-within > .sg-aktionen { opacity: 1; }
+@media (hover: none) {
+  .sg-aktionen { position: static; opacity: 1; flex: none; }
+  .sg-wenn-kopf .sg-aktionen { position: absolute; }
+}
+.sg-neu-zeile { padding: 2px 4px; }
+/* Feste, schmale Breite – sonst bestimmt die längste Option die Mindestbreite jeder Spalte. */
+select.sg-neu { width: 8.5em; max-width: 100%; min-height: 28px; padding: 1px 26px 1px 6px; font-size: 0.8rem; color: var(--muted); background-color: transparent; border-color: transparent; }
+select.sg-neu:hover, select.sg-neu:focus { border-color: var(--border); }
+.sg-gliederung { margin: 6px 0; padding: 8px 10px; font-size: 0.85rem; white-space: pre-wrap; background: var(--surface); border-radius: 8px; }
 @media (max-width: 600px) {
-  .te-tabelle input, .ed-text input, .ed-text select, select.te-aktion, select.te-ziel, .wt-tabelle input.wt-zelle { font-size: 16px; }
+  .te-tabelle input, .ed-text input, .ed-text select, select.te-aktion, select.te-ziel, .wt-tabelle input.wt-zelle, input.sg-text, select.sg-neu { font-size: 16px; }
   .ed-scroll { max-height: 60vh; }
   .diagramm-editor.vollbild { padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); }
 }
 @media print {
-  .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe, .wt-neu, .wt-aktion { display: none; }
+  .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe, .wt-neu, .wt-aktion, .sg-aktionen, .sg-neu-zeile { display: none; }
 }
 
 /* Farben (lib/farben.ts): `farbe-<name>` setzt --f (Text/Linie), --f-fill (Fläche mit weißer Schrift) und --f-soft (zarter Grund) */

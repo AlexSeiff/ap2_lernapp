@@ -1,21 +1,40 @@
 // Antwort im Editor für Modellierungs- und Tabellenaufgaben (src/lib/editorAufgabe.ts): Diagramm-Editor, Tabellen-Editor,
-// Wertetabelle bzw. Boxplot, nach der Abgabe die Lösung ohne Bedienelemente. EditorPruefung steht beim Bewerten neben der Musterlösung:
-// Formprüfung (Diagramme) bzw. Abgleich mit Tabellen oder Boxplot der Musterlösung – Hilfen zur Selbstbewertung, die Punkte vergibst du selbst.
-// Lazy geladen (nur bei solchen Aufgaben).
+// Wertetabelle, Boxplot bzw. Struktogramm-Baukasten, nach der Abgabe die Lösung ohne Bedienelemente. EditorPruefung steht beim Bewerten
+// neben der Musterlösung: Formprüfung bzw. Abgleich mit Tabellen oder Boxplot der Musterlösung – Hilfen zur Selbstbewertung, die
+// Punkte vergibst du selbst. Lazy geladen (nur bei solchen Aufgaben).
 
-import { useMemo } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import type { Task } from '../../shared/types';
 import { pruefeDiagrammAntwort, type DiagrammAntwort } from '../lib/diagrammEditor';
 import { EDITOR_NAMEN, istDiagrammArt, leseEditorAntwort, schreibeEditorAntwort, vorlageFuer, type EditorArt } from '../lib/editorAufgabe';
 import { abgleichOk, gleicheAb, musterFuerSchritt, musterTabellen, relationText, type TabellenAntwort } from '../lib/tabellenEditor';
 import { gleicheWerteAb, type WerteAntwort } from '../lib/werteTabelle';
 import type { BoxplotAntwort } from '../lib/boxplotAntwort';
+import type { StruktogrammAntwort } from '../lib/struktogramm';
 import { useStore } from '../lib/store';
 import { BoxplotAnsicht, BoxplotEditor, BoxplotPruefung } from './BoxplotEditor';
 import { DiagrammAnsicht, DiagrammEditor, Formhinweise } from './DiagrammEditor';
 import { Icon } from './Icon';
+import { StruktogrammAnsicht, StruktogrammEditor, StruktogrammPruefung } from './StruktogrammEditor';
 import { TabellenAnsicht, TabellenEditor } from './TabellenEditor';
 import { WerteAnsicht, WerteEditor } from './WerteEditor';
+
+const NACH_ABGABE = 'Nach der Abgabe vergleichst du deine Lösung mit der Musterlösung und bewertest dich.';
+
+/** Einleitung über dem Editor; ohne Eintrag „<Name>-Editor – erstelle deine Lösung selbst“. */
+const EINLEITUNG: Partial<Record<EditorArt, string>> = {
+  werte: 'Trag deine Lösung in die Tabelle ein – wie auf dem Prüfungsbogen.',
+  boxplot: 'Rechne die Kennwerte selbst aus und trag sie ein – die App zeichnet daraus den Boxplot maßstäblich.',
+  struktogramm:
+    'Bau dein Struktogramm aus Bausteinen: „+ Baustein“ fügt am Ende einer Folge an, in Zweige und Schleifen genauso. Texte schreibst du direkt in die Kästen.',
+};
+
+/** Beschriftung des Felds unter dem Editor. */
+const NOTIZ: Partial<Record<EditorArt, string>> = {
+  werte: 'Was nicht in die Tabelle gehört: Ergebnis, Rechenweg, Begründung',
+  boxplot: 'Rechenweg: Quartile, Zäune, Begründung der Whisker-Enden (optional)',
+  struktogramm: 'Anmerkungen, z. B. Annahmen zu den Daten (optional)',
+};
 
 interface Props {
   task: Task;
@@ -35,61 +54,47 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
   const setze = (a: typeof wert) => onChange(schreibeEditorAntwort(a, task));
 
   if (disabled) {
+    const ansicht = (): ReactNode => {
+      if (art === 'werte') return <WerteAnsicht wert={wert as WerteAntwort} />;
+      if (art === 'boxplot') return <BoxplotAnsicht wert={wert as BoxplotAntwort} />;
+      if (art === 'struktogramm') return <StruktogrammAnsicht wert={wert as StruktogrammAntwort} />;
+      if (diagramm) return <DiagrammAnsicht wert={wert as DiagrammAntwort} />;
+      return <TabellenAnsicht wert={wert as TabellenAntwort} />;
+    };
     return (
       <div className="editor-antwort abgegeben">
         <p className="muted small">
           <Icon name="pen-line" /> Deine Lösung
         </p>
-        {art === 'werte' ? (
-          <WerteAnsicht wert={wert as WerteAntwort} />
-        ) : art === 'boxplot' ? (
-          <BoxplotAnsicht wert={wert as BoxplotAntwort} />
-        ) : diagramm ? (
-          <DiagrammAnsicht wert={wert as DiagrammAntwort} />
-        ) : (
-          <TabellenAnsicht wert={wert as TabellenAntwort} />
-        )}
+        {ansicht()}
         {diagramm && wert.notiz?.trim() && <p className="te-text">{wert.notiz}</p>}
       </div>
     );
   }
 
-  const nachAbgabe = 'Nach der Abgabe vergleichst du deine Lösung mit der Musterlösung und bewertest dich.';
+  const editor = (): ReactNode => {
+    if (art === 'werte') return <WerteEditor wert={wert as WerteAntwort} vorlage={vorlageFuer(task)} onChange={setze} />;
+    if (art === 'boxplot') return <BoxplotEditor wert={wert as BoxplotAntwort} onChange={setze} hilfen={hilfen} />;
+    if (art === 'struktogramm') return <StruktogrammEditor wert={wert as StruktogrammAntwort} onChange={setze} hilfen={hilfen} />;
+    if (diagramm) return <DiagrammEditor wert={wert as DiagrammAntwort} onChange={setze} hilfen={hilfen} />;
+    return <TabellenEditor wert={wert as TabellenAntwort} onChange={setze} anlagen={anlagen} />;
+  };
   return (
     <div className="editor-antwort">
       <p className="ed-titel small">
-        {art === 'werte' ? (
+        {EINLEITUNG[art] ? (
           <>
-            <Icon name="pencil" /> Trag deine Lösung in die Tabelle ein – wie auf dem Prüfungsbogen. {nachAbgabe}
-          </>
-        ) : art === 'boxplot' ? (
-          <>
-            <Icon name="pencil" /> Rechne die Kennwerte selbst aus und trag sie ein – die App zeichnet daraus den Boxplot maßstäblich.{' '}
-            {nachAbgabe}
+            <Icon name="pencil" /> {EINLEITUNG[art]} {NACH_ABGABE}
           </>
         ) : (
           <>
-            <Icon name="workflow" /> <b>{EDITOR_NAMEN[art]}-Editor</b> – erstelle deine Lösung selbst. {nachAbgabe}
+            <Icon name="workflow" /> <b>{EDITOR_NAMEN[art]}-Editor</b> – erstelle deine Lösung selbst. {NACH_ABGABE}
           </>
         )}
       </p>
-      {art === 'werte' ? (
-        <WerteEditor wert={wert as WerteAntwort} vorlage={vorlageFuer(task)} onChange={setze} />
-      ) : art === 'boxplot' ? (
-        <BoxplotEditor wert={wert as BoxplotAntwort} onChange={setze} hilfen={hilfen} />
-      ) : diagramm ? (
-        <DiagrammEditor wert={wert as DiagrammAntwort} onChange={setze} hilfen={hilfen} />
-      ) : (
-        <TabellenEditor wert={wert as TabellenAntwort} onChange={setze} anlagen={anlagen} />
-      )}
+      {editor()}
       <label className="ed-notiz">
-        <span className="small muted">
-          {art === 'werte'
-            ? 'Was nicht in die Tabelle gehört: Ergebnis, Rechenweg, Begründung'
-            : art === 'boxplot'
-              ? 'Rechenweg: Quartile, Zäune, Begründung der Whisker-Enden (optional)'
-              : 'Anmerkungen, Annahmen (optional)'}
-        </span>
+        <span className="small muted">{NOTIZ[art] ?? 'Anmerkungen, Annahmen (optional)'}</span>
         <textarea className="answer" rows={2} value={wert.notiz ?? ''} onChange={(e) => setze({ ...wert, notiz: e.target.value })} />
       </label>
     </div>
@@ -101,6 +106,7 @@ export function EditorPruefung({ task, art, answer }: { task: Task; art: EditorA
   const wert = useMemo(() => leseEditorAntwort(art, task, answer), [art, task, answer]);
   if (art === 'werte') return <WertePruefung task={task} wert={wert as WerteAntwort} />;
   if (art === 'boxplot') return <BoxplotPruefung task={task} wert={wert as BoxplotAntwort} />;
+  if (art === 'struktogramm') return <StruktogrammPruefung wert={wert as StruktogrammAntwort} />;
   if (istDiagrammArt(art)) {
     const d = wert as DiagrammAntwort;
     if (!d.knoten.length) return null;

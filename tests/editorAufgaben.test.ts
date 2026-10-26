@@ -73,6 +73,7 @@ describe('Erkennung', () => {
       '15-E1': 'usecase',
       '18-B3': 'epk',
       '03-E3': 'boxplot', // tests/boxplotAntwort.test.ts
+      '11-D3': 'struktogramm', // tests/struktogramm.test.ts
       // Verlangte Tabellen (tests/werteTabelle.test.ts)
       ...Object.fromEntries(
         [

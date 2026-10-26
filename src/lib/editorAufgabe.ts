@@ -1,6 +1,6 @@
 // Modellierungsaufgaben im Editor statt im Textfeld: ERM, EPK, BPMN und Use-Case im Diagramm-Editor, Normalisierung und
 // Relationenmodell/Star-Schema im Tabellen-Editor, ausdrücklich verlangte Tabellen (Häufigkeitstabelle, Rechenweg „tabellarisch“)
-// als Wertetabelle, ein zu skizzierender Boxplot als Kennwert-Eingabe mit Zeichnung. Erkannt wird am Aufgabentext (Operator + Diagrammtyp bzw. Tabelle + Lösungstabelle), die Blätter bleiben,
+// als Wertetabelle, ein zu skizzierender Boxplot als Kennwert-Eingabe mit Zeichnung, ein Struktogramm im Baukasten. Erkannt wird am Aufgabentext (Operator + Diagrammtyp bzw. Tabelle + Lösungstabelle), die Blätter bleiben,
 // wie sie sind. Die Antwort bleibt ein String (JSON), so ändern sich Fortschritt, Klausur und Sicherungen nicht. Rein, ohne React.
 
 import { z } from 'zod';
@@ -17,9 +17,21 @@ import {
 import { istTabellenLeer, leereTabellenAntwort, tabellenAlsText, type TabellenAntwort, type TabellenArt } from './tabellenEditor';
 import { istWerteLeer, leereWerteAntwort, passeAn, werteAlsText, werteVorlage, type WerteAntwort, type WerteVorlage } from './werteTabelle';
 import { boxplotAlsText, istBoxplotLeer, KENNWERTE, leereBoxplotAntwort, type BoxplotAntwort } from './boxplotAntwort';
+import {
+  istStruktogrammLeer,
+  leereStruktogrammAntwort,
+  struktogrammAlsText,
+  type Baustein,
+  type StruktogrammAntwort,
+} from './struktogramm';
 
-export type EditorArt = DiagrammNotation | TabellenArt | 'werte' | 'boxplot';
-export type EditorAntwort = DiagrammAntwort | TabellenAntwort | WerteAntwort | BoxplotAntwort;
+/** Antwortformate mit eigenem Modell (weder Diagramm-Editor noch Tabellenschema). */
+const EIGENE_ARTEN = ['werte', 'boxplot', 'struktogramm'] as const;
+type EigeneArt = (typeof EIGENE_ARTEN)[number];
+const istEigeneArt = (art: EditorArt): art is EigeneArt => (EIGENE_ARTEN as readonly string[]).includes(art);
+
+export type EditorArt = DiagrammNotation | TabellenArt | EigeneArt;
+export type EditorAntwort = DiagrammAntwort | TabellenAntwort | WerteAntwort | BoxplotAntwort | StruktogrammAntwort;
 /** Was die Erkennung braucht: Aufgabentext, Typ und – für die Wertetabelle – die Musterlösung. */
 type AufgabeFuerEditor = Pick<Task, 'markdown' | 'type' | 'sqlUebung'> & Partial<Pick<Task, 'solution'>>;
 type AufgabeFuerVorlage = Pick<Task, 'markdown'> & Partial<Pick<Task, 'solution'>>;
@@ -33,12 +45,13 @@ export const EDITOR_NAMEN: Record<EditorArt, string> = {
   normalform: 'Normalisierung',
   werte: 'Tabellen',
   boxplot: 'Boxplot',
+  struktogramm: 'Struktogramm',
 };
 
 export const istDiagrammArt = (art: EditorArt): art is DiagrammNotation =>
-  art !== 'relationen' && art !== 'normalform' && art !== 'werte' && art !== 'boxplot';
-/** Diagramm, Tabellenschema, Wertetabelle oder Boxplot – eine gespeicherte Antwort wechselt die Art nur innerhalb ihrer Familie. */
-const familie = (art: EditorArt) => (art === 'werte' || art === 'boxplot' ? art : istDiagrammArt(art) ? 'diagramm' : 'schema');
+  art !== 'relationen' && art !== 'normalform' && !istEigeneArt(art);
+/** Diagramm, Tabellenschema oder ein eigenes Format – eine gespeicherte Antwort wechselt die Art nur innerhalb ihrer Familie. */
+const familie = (art: EditorArt) => (istEigeneArt(art) ? art : istDiagrammArt(art) ? 'diagramm' : 'schema');
 
 /** Eines der Wörter als ganzes Wort – auch mit Umlaut am Rand („Überführen“; \b kennt nur ASCII-Buchstaben). */
 const wort = (...woerter: string[]) => new RegExp(`(?<!\\p{L})(?:${woerter.join('|')})(?!\\p{L})`, 'iu');
@@ -63,6 +76,7 @@ export function editorFuer(task: AufgabeFuerEditor): EditorArt | undefined {
     if (/\be?EPK\b|Prozesskette/.test(t)) return 'epk';
     if (/Use-Case-Diagramm|Anwendungsfalldiagramm/i.test(t)) return 'usecase';
     if (/Boxplot/i.test(t)) return 'boxplot';
+    if (/Struktogramm|Nassi-Shneiderman/i.test(t)) return 'struktogramm';
   }
   return werteVorlage(task) ? 'werte' : undefined;
 }
@@ -79,6 +93,7 @@ export function normalformSchritte(markdown: string): number {
 export function leereEditorAntwort(art: EditorArt, task: AufgabeFuerVorlage): EditorAntwort {
   if (art === 'werte') return leereWerteAntwort(vorlageFuer(task));
   if (art === 'boxplot') return leereBoxplotAntwort();
+  if (art === 'struktogramm') return leereStruktogrammAntwort();
   if (istDiagrammArt(art)) return leereDiagrammAntwort(art);
   return leereTabellenAntwort(art, art === 'normalform' ? normalformSchritte(task.markdown) : 1);
 }
@@ -122,6 +137,18 @@ const BoxplotSchema = z.object({
   ausreisser: z.string(),
   notiz: z.string().optional(),
 });
+const BausteinSchema: z.ZodType<Baustein> = z.lazy(() =>
+  z.union([
+    z.object({ id: z.string(), art: z.literal('anweisung'), text: z.string() }),
+    z.object({ id: z.string(), art: z.literal('wenn'), text: z.string(), ja: z.array(BausteinSchema), nein: z.array(BausteinSchema) }),
+    z.object({ id: z.string(), art: z.enum(['solange', 'wiederhole']), text: z.string(), rumpf: z.array(BausteinSchema) }),
+  ]),
+);
+const StruktogrammSchema = z.object({
+  editor: z.literal('struktogramm'),
+  bausteine: z.array(BausteinSchema),
+  notiz: z.string().optional(),
+});
 const TabellenSchema = z.object({
   editor: z.enum(['relationen', 'normalform']),
   schritte: z.array(z.object({ titel: z.string(), text: z.string(), tabellen: z.array(TabelleSchema) })).min(1),
@@ -142,7 +169,9 @@ function parse(raw: string): EditorAntwort | undefined {
     const w = WerteSchema.safeParse(json);
     if (w.success) return w.data;
     const b = BoxplotSchema.safeParse(json);
-    return b.success ? b.data : undefined;
+    if (b.success) return b.data;
+    const s = StruktogrammSchema.safeParse(json);
+    return s.success ? s.data : undefined;
   } catch {
     return undefined;
   }
@@ -158,7 +187,7 @@ export function leseEditorAntwort(art: EditorArt, task: AufgabeFuerVorlage, raw:
   const a = parse(raw);
   if (a && familie(art) === familie(a.editor)) {
     if (art === 'werte') return passeAn(vorlageFuer(task), a as WerteAntwort);
-    if (art === 'boxplot') return a;
+    if (art === 'boxplot' || art === 'struktogramm') return a;
     if (!istDiagrammArt(art) && a.editor !== art) return { ...(a as TabellenAntwort), editor: art };
     return istDiagrammArt(art) ? { ...(a as DiagrammAntwort), editor: art } : a;
   }
@@ -175,15 +204,18 @@ export function schreibeEditorAntwort(a: EditorAntwort, task?: AufgabeFuerVorlag
       ? istWerteLeer(task ? vorlageFuer(task) : { kopf: a.kopf, zeilen: [] }, a)
       : a.editor === 'boxplot'
         ? istBoxplotLeer(a)
-        : istDiagrammArt(a.editor)
-          ? istLeer(a as DiagrammAntwort)
-          : istTabellenLeer(a as TabellenAntwort);
+        : a.editor === 'struktogramm'
+          ? istStruktogrammLeer(a)
+          : istDiagrammArt(a.editor)
+            ? istLeer(a as DiagrammAntwort)
+            : istTabellenLeer(a as TabellenAntwort);
   return leer ? '' : JSON.stringify(a);
 }
 
 export function editorAlsText(a: EditorAntwort): string {
   if (a.editor === 'werte') return werteAlsText(a);
   if (a.editor === 'boxplot') return boxplotAlsText(a);
+  if (a.editor === 'struktogramm') return struktogrammAlsText(a);
   return istDiagrammArt(a.editor) ? diagrammAlsText(a as DiagrammAntwort) : tabellenAlsText(a as TabellenAntwort);
 }
 
