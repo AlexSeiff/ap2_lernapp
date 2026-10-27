@@ -18,10 +18,14 @@ export function Aufgaben() {
     status: params.get('status') ?? 'alle',
     suche: params.get('suche') ?? '',
   };
-  const set = (key: string, value: string) => {
+  // Mehrere Filter in einem Schritt: zwei setParams-Aufrufe nacheinander gingen beide von denselben alten Parametern aus,
+  // der zweite überschrieb dann den ersten (Themenwechsel setzt den Block zurück).
+  const set = (werte: Record<string, string>) => {
     const next = new URLSearchParams(params);
-    if (value === 'alle' || !value) next.delete(key);
-    else next.set(key, value);
+    for (const [key, value] of Object.entries(werte)) {
+      if (value === 'alle' || !value) next.delete(key);
+      else next.set(key, value);
+    }
     setParams(next, { replace: true });
   };
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -73,13 +77,7 @@ export function Aufgaben() {
       <div className="filters">
         <label>
           Thema
-          <select
-            value={f.thema}
-            onChange={(e) => {
-              set('thema', e.target.value);
-              set('block', 'alle');
-            }}
-          >
+          <select value={f.thema} onChange={(e) => set({ thema: e.target.value, block: 'alle' })}>
             <option value="alle">Alle Themen</option>
             {content.topics.map((t) => (
               <option key={t.id} value={t.id}>
@@ -90,7 +88,7 @@ export function Aufgaben() {
         </label>
         <label>
           Block
-          <select value={f.block} onChange={(e) => set('block', e.target.value)}>
+          <select value={f.block} onChange={(e) => set({ block: e.target.value })}>
             <option value="alle">Alle</option>
             {blocks.map((b) => (
               <option key={b} value={b}>
@@ -101,7 +99,7 @@ export function Aufgaben() {
         </label>
         <label>
           Schwierigkeit
-          <select value={f.stufe} onChange={(e) => set('stufe', e.target.value)}>
+          <select value={f.stufe} onChange={(e) => set({ stufe: e.target.value })}>
             <option value="alle">Alle</option>
             <option value="leicht">leicht (≤ 5 P)</option>
             <option value="mittel">mittel (6–10 P)</option>
@@ -111,7 +109,7 @@ export function Aufgaben() {
         {!IS_STATIC && (
           <label>
             Quelle
-            <select value={f.quelle} onChange={(e) => set('quelle', e.target.value)}>
+            <select value={f.quelle} onChange={(e) => set({ quelle: e.target.value })}>
               <option value="alle">Alle</option>
               <option value="blatt">Lernblatt</option>
               <option value="ki">KI-generiert</option>
@@ -120,7 +118,7 @@ export function Aufgaben() {
         )}
         <label>
           Status
-          <select value={f.status} onChange={(e) => set('status', e.target.value)}>
+          <select value={f.status} onChange={(e) => set({ status: e.target.value })}>
             <option value="alle">Alle</option>
             <option value="neu">noch nicht bearbeitet</option>
             <option value="fehler">zuletzt nicht voll</option>
@@ -129,7 +127,7 @@ export function Aufgaben() {
         </label>
         <label>
           Suche
-          <input type="search" value={f.suche} placeholder="z. B. HAVING" onChange={(e) => set('suche', e.target.value)} />
+          <input type="search" value={f.suche} placeholder="z. B. HAVING" onChange={(e) => set({ suche: e.target.value })} />
         </label>
       </div>
 
