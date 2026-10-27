@@ -113,12 +113,14 @@ button, .button, input, select, textarea { border-radius: 5px; }
   border: 1px solid var(--border);
   border-top: 1px solid var(--border);
   border-radius: 5px;
-  background: linear-gradient(transparent 55px, var(--paper-margin) 55px 57px, transparent 57px), repeating-linear-gradient(transparent 0 31px, var(--paper-line) 31px 32px), var(--surface);
+  background: var(--surface);
   padding: 20px 32px 32px;
   min-height: 330px;
   box-shadow: 0 5px 16px #342a181c, 0 9px 0 -3px var(--stapel-1), 0 10px 0 -3px var(--border), 0 17px 0 -6px var(--stapel-2), 0 18px 0 -6px var(--border);
 }
-.flashcard .fc-meta { min-height: 38px; margin-bottom: 20px; }
+/* Linien folgen dem Inhalt statt hinter Text mit variabler Zeilenhöhe zu liegen. */
+.flashcard .fc-meta { min-height: 38px; padding-bottom: 14px; margin-bottom: 22px; border-bottom: 2px solid var(--paper-margin); }
+.flashcard::after { content: ''; display: block; height: 64px; margin-top: 24px; background: repeating-linear-gradient(transparent 0 31px, var(--paper-line) 31px 32px); pointer-events: none; }
 .flashcard .fc-vorne { background: transparent; border: 0; padding-left: 0; }
 .flashcard .fc-question { font-size: 1.5rem; line-height: 1.55; }
 .flashcard .fc-answer { border-top: 0; }
@@ -174,8 +176,8 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .paper-turn { display: grid; transform-style: preserve-3d; transition: transform .65s cubic-bezier(.2,.65,.3,1); }
 .paper-turn.is-turned { transform: rotateY(180deg); }
 .paper-face { grid-area: 1 / 1; min-width: 0; backface-visibility: hidden; background: var(--surface); }
-.paper-front { background: transparent; }
-.paper-back { transform: rotateY(180deg); background: repeating-linear-gradient(transparent 0 31px, var(--paper-line) 31px 32px), var(--surface); }
+.paper-front { background: var(--surface); }
+.paper-back { transform: rotateY(180deg); background: var(--surface); }
 .paper-back .fc-answer { margin-top: 0; padding-top: 0; animation: none; }
 @media (prefers-reduced-motion: reduce) { .paper-turn { transition: none; } }
 /* Alle Lernbereiche verwenden die gemeinsame Tintenfarbe. */
@@ -457,3 +459,14 @@ button.low { background: var(--c-red-fill); }
 .themen-page .thema-kachel:nth-child(even) .tile-num { color: var(--notebook-clay); background: var(--notebook-clay-soft); }
 .seitenleiste-ziel.active .icon, .unterleiste a.active, .kopf-bereiche a.active, .bn-bar > a.active { color: var(--notebook-blue); }
 @media (prefers-reduced-motion: reduce) { .learning-page .toc a { transition: none; } }
+
+/* Kapitel lassen sich wie Registerabschnitte unabhängig auf- und zuklappen. */
+.seitenleiste-gruppe h2 { margin-left: 0; margin-right: 0; }
+button.seitenleiste-schalter { display: flex; align-items: center; gap: 9px; width: 100%; min-height: 42px; padding: 7px 8px; border: 1px solid transparent; border-radius: 3px 8px 8px 3px; background: transparent; color: var(--text); font: inherit; text-align: left; box-shadow: none; }
+button.seitenleiste-schalter > span:nth-child(2) { flex: 1; }
+button.seitenleiste-schalter:hover { background: var(--surface); border-color: var(--border); filter: none; transform: none; }
+button.seitenleiste-schalter:focus-visible { outline: 2px solid var(--notebook-blue); outline-offset: 2px; }
+button.seitenleiste-schalter.bereich-aktiv { color: var(--notebook-blue); }
+.seitenleiste-pfeil { width: 15px; height: 15px; flex-shrink: 0; color: var(--muted); transition: transform .18s ease; }
+.seitenleiste-schalter[aria-expanded='true'] .seitenleiste-pfeil { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) { .seitenleiste-pfeil { transition: none; } }

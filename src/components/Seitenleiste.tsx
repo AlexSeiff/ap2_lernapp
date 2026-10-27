@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IS_STATIC } from '../lib/api';
-import { aktiverBereich, aktivesUnterziel, BEREICHE, sichtbareZiele, type NavBadge } from '../lib/navigation';
+import { aktiverBereich, aktivesUnterziel, BEREICHE, sichtbareZiele, type BereichId, type NavBadge } from '../lib/navigation';
 import { Icon } from './Icon';
 
 /** Alle Lernwerkzeuge an einem Ort; Routen und gespeicherte Lernstände bleiben unverändert. */
@@ -9,9 +9,13 @@ export function Seitenleiste({ badges, onSuche }: { badges: Record<NavBadge, num
   const { pathname } = useLocation();
   const aktiv = aktiverBereich(pathname);
   const register = useRef<HTMLElement>(null);
+  const [eingeklappt, setEingeklappt] = useState<Partial<Record<BereichId, boolean>>>({});
   useEffect(() => {
     const box = register.current;
-    const ziel = box?.querySelector<HTMLElement>('[aria-current="page"]');
+    const link = box?.querySelector<HTMLElement>('[aria-current="page"]');
+    const ziel = link?.closest('[hidden]')
+      ? link.closest('.seitenleiste-gruppe')?.querySelector<HTMLElement>('.seitenleiste-schalter')
+      : link;
     if (!box || !ziel || !box.clientHeight) return;
     const rahmen = box.getBoundingClientRect();
     const zeile = ziel.getBoundingClientRect();
@@ -44,30 +48,42 @@ export function Seitenleiste({ badges, onSuche }: { badges: Record<NavBadge, num
         </Link>
         {BEREICHE.map((b, index) => {
           const ziel = aktiv === b.id ? aktivesUnterziel(pathname, b) : undefined;
+          const offen = !eingeklappt[b.id];
           return (
             <section className={`seitenleiste-gruppe gruppe-${b.id}`} key={b.id}>
               <h2>
-                <span className="register-nummer" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                {b.label}
-              </h2>
-              {sichtbareZiele(b, IS_STATIC).map((z) => (
-                <Link
-                  key={z.to}
-                  to={z.to}
-                  className={`seitenleiste-ziel${ziel === z ? ' active' : ''}`}
-                  aria-current={ziel === z ? 'page' : undefined}
+                <button
+                  type="button"
+                  className={`seitenleiste-schalter${aktiv === b.id ? ' bereich-aktiv' : ''}`}
+                  aria-expanded={offen}
+                  aria-controls={`seitenleiste-ziele-${b.id}`}
+                  onClick={() => setEingeklappt((vorher) => ({ ...vorher, [b.id]: !vorher[b.id] }))}
                 >
-                  <Icon name={z.icon} />
-                  <span>{z.label}</span>
-                  {z.badge && badges[z.badge] > 0 && (
-                    <span className="seitenleiste-zahl" aria-label={`${badges[z.badge]} fällig`}>
-                      {badges[z.badge]}
-                    </span>
-                  )}
-                </Link>
-              ))}
+                  <span className="register-nummer" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span>{b.label}</span>
+                  <Icon name="chevron-right" className="seitenleiste-pfeil" />
+                </button>
+              </h2>
+              <div id={`seitenleiste-ziele-${b.id}`} hidden={!offen}>
+                {sichtbareZiele(b, IS_STATIC).map((z) => (
+                  <Link
+                    key={z.to}
+                    to={z.to}
+                    className={`seitenleiste-ziel${ziel === z ? ' active' : ''}`}
+                    aria-current={ziel === z ? 'page' : undefined}
+                  >
+                    <Icon name={z.icon} />
+                    <span>{z.label}</span>
+                    {z.badge && badges[z.badge] > 0 && (
+                      <span className="seitenleiste-zahl" aria-label={`${badges[z.badge]} fällig`}>
+                        {badges[z.badge]}
+                      </span>
+                    )}
+                  </Link>
+                ))}
+              </div>
             </section>
           );
         })}
