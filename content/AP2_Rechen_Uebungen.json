@@ -294,7 +294,7 @@
         "normalverteilung",
         "z-wert"
       ],
-      "aufgabe": "Reparaturzeiten sind normalverteilt mit Mittelwert 60 min und Standardabweichung 10 min.\n\nIn welchem Bereich liegen rund 95 % der Reparaturen? Welcher Anteil dauert länger als die obere Grenze? Welchen z-Wert hat ein Auftrag mit 95 min?",
+      "aufgabe": "Reparaturzeiten sind normalverteilt mit Mittelwert 60 min und Standardabweichung 10 min.\n\nIn welchem Bereich liegen rund 95 % der Reparaturen? Welcher Anteil dauert länger als die obere Grenze? Welchen z-Wert hat ein Auftrag mit 95 min?\n\n> **Formeln:**\n> - Bereich mit rund 95 % der Werte = μ ± 2 · σ\n> - z = (x − μ) / σ",
       "eingaben": [
         {
           "id": "untere",
@@ -339,7 +339,7 @@
         "wahrscheinlichkeit",
         "erwartungswert"
       ],
-      "aufgabe": "Je Garantievertrag tritt mit 5 % Wahrscheinlichkeit ein großer Schaden (400 €) ein, mit 10 % ein kleiner Schaden (150 €) und mit 85 % kein Schaden.\n\nWie hoch sind die erwarteten Kosten je Vertrag?",
+      "aufgabe": "Je Garantievertrag tritt mit 5 % Wahrscheinlichkeit ein großer Schaden (400 €) ein, mit 10 % ein kleiner Schaden (150 €) und mit 85 % kein Schaden.\n\nWie hoch sind die erwarteten Kosten je Vertrag?\n\n> **Formel:** Erwartungswert E(X) = Σ x_i · p_i",
       "eingaben": [
         {
           "id": "erwartungswert",
@@ -1477,7 +1477,7 @@
       "titel": "Arbeitszeit mit Berufsschultag",
       "schwierigkeit": 1,
       "tags": ["wiso", "jugendarbeitsschutz"],
-      "aufgabe": "Ein 17-jähriger Auszubildender hat eine regelmäßige Wochenarbeitszeit von 40 Stunden. Einmal pro Woche hat er einen Berufsschultag mit mehr als fünf Unterrichtsstunden à 45 Minuten.\n\nWie viele Stunden darf er in dieser Woche höchstens noch im Betrieb beschäftigt werden?",
+      "aufgabe": "Ein 17-jähriger Auszubildender hat eine regelmäßige Wochenarbeitszeit von 40 Stunden. Einmal pro Woche hat er einen Berufsschultag mit mehr als fünf Unterrichtsstunden à 45 Minuten.\n\nWie viele Stunden darf er in dieser Woche höchstens noch im Betrieb beschäftigt werden?\n\n> **Formel:** Stunden im Betrieb = Wochenarbeitszeit − angerechneter Berufsschultag (= Wochenarbeitszeit / 5)",
       "eingaben": [{ "id": "stunden", "label": "Stunden im Betrieb", "einheit": "Stunden", "loesung": 32 }],
       "hinweise": ["Ein solcher Berufsschultag wird mit der durchschnittlichen täglichen Arbeitszeit angerechnet (§ 9 Abs. 2 JArbSchG) – hier 40 / 5 = 8 Stunden.", "40 − 8 = ?"],
       "erklaerung": "Nach dem JArbSchG wird ein Berufsschultag mit mehr als fünf Unterrichtsstunden (à 45 Minuten) einmal pro Woche mit der **durchschnittlichen täglichen Arbeitszeit** angerechnet (§ 9 Abs. 2 Nr. 1, seit 2020; bei 40 Stunden an 5 Tagen = 8 Stunden); an diesem Tag ist keine Beschäftigung im Betrieb mehr zulässig. $40 - 8 = 32$ Stunden.",
@@ -1504,7 +1504,7 @@
       "titel": "Teilurlaub im ersten Jahr",
       "schwierigkeit": 1,
       "tags": ["wiso", "urlaub"],
-      "aufgabe": "Eine neue Mitarbeiterin tritt am 01.08. ein und arbeitet in einer Sechs-Tage-Woche. Es gilt nur der gesetzliche Mindesturlaub von 24 Werktagen.\n\nWie viele Werktage Urlaub stehen ihr im ersten Kalenderjahr zu?",
+      "aufgabe": "Eine neue Mitarbeiterin tritt am 01.08. ein und arbeitet in einer Sechs-Tage-Woche. Es gilt nur der gesetzliche Mindesturlaub von 24 Werktagen.\n\nWie viele Werktage Urlaub stehen ihr im ersten Kalenderjahr zu?\n\n> **Formel:** Teilurlaub = Jahresurlaub · volle Beschäftigungsmonate / 12",
       "eingaben": [{ "id": "teilurlaub", "label": "Teilurlaub im ersten Jahr", "einheit": "Werktage", "loesung": 10 }],
       "hinweise": [
         "Vor Ablauf der sechsmonatigen Wartezeit gibt es Teilurlaub: 1/12 je **vollem** Beschäftigungsmonat.",
@@ -1538,7 +1538,7 @@
       "titel": "Reallohn",
       "schwierigkeit": 2,
       "tags": ["wiso", "inflation", "prozent"],
-      "aufgabe": "Der Nominallohn steigt um 4 %, die Inflationsrate beträgt 2,5 %.\n\nUm wie viel Prozent steigt der Reallohn (die Kaufkraft) genau? Runde auf zwei Nachkommastellen.",
+      "aufgabe": "Der Nominallohn steigt um 4 %, die Inflationsrate beträgt 2,5 %.\n\nUm wie viel Prozent steigt der Reallohn (die Kaufkraft) genau? Runde auf zwei Nachkommastellen.\n\n> **Formel:** Reallohnänderung = (1 + Nominallohnsteigerung) / (1 + Inflationsrate) − 1",
       "eingaben": [{ "id": "reallohn", "label": "Veränderung des Reallohns", "einheit": "%", "runden": 2, "loesung": 1.46 }],
       "hinweise": ["Rechne mit Wachstumsfaktoren: 1,04 für den Lohn, 1,025 für die Preise.", "Reallohnänderung = 1,04 / 1,025 − 1."],
       "erklaerung": "Exakt: 1,04 / 1,025 − 1 = 0,0146 → **+1,46 %**. Die Näherung „Nominal minus Inflation“ ergibt rund 1,5 % – für eine schnelle Einschätzung in Ordnung, gefragt war aber der genaue Wert.",

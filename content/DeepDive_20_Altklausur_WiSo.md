@@ -304,6 +304,8 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 
 **B4 (4 P):** Frau Dietrich ist seit 2024 bei der Möbelhaus Nordholz GmbH angestellt. Ihr Bruttogehalt beträgt 3.600,00 EUR. Der allgemeine Beitragssatz zur gesetzlichen Krankenversicherung beträgt 14,6 %. Ihre Krankenkasse erhebt einen Zusatzbeitrag von 2,9 %. Berechnen Sie den **Beitrag, den Frau Dietrich** zur gesetzlichen Krankenversicherung trägt. *(Ergebnis in EUR eintragen)*
 
+> **Formel:** Arbeitnehmeranteil KV = Bruttogehalt · (allgemeiner Beitragssatz + Zusatzbeitrag) / 2
+
 **B5 (3 P):** Frau Dietrich ist schwanger und hat den Arbeitgeber informiert; der errechnete Geburtstermin ist der 12.11.2026. Welche Aussage zum Arbeitsverhältnis von Frau Dietrich trifft zu? *(Ziffer eintragen)*
 - (1) Das Arbeitsverhältnis endet mit der Geburt des Kindes.
 - (2) Sie genießt besonderen Kündigungsschutz während der Schwangerschaft und bis vier Monate nach der Entbindung.
@@ -350,6 +352,8 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (5) Die GmbH entsteht ohne Eintragung in das Handelsregister.
 
 **C5 (4 P):** Das Möbelhaus erzielte im letzten Geschäftsjahr einen Gewinn von 31.500,00 EUR. Das Eigenkapital betrug 252.000,00 EUR. Berechnen Sie die **Eigenkapitalrentabilität**. *(Ergebnis in Prozent eintragen)*
+
+> **Formel:** Eigenkapitalrentabilität = Gewinn / Eigenkapital · 100 %
 
 **C6 (3 P):** Die Geschäftsleitung will den Umsatz im nächsten Quartal kurzfristig und unmittelbar steigern. Welche Einzelmaßnahme ist dafür geeignet? *(Ziffer eintragen)*
 - (1) Der Neubau einer größeren Ausstellungsfläche

@@ -274,7 +274,15 @@ Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Tas
 
 **C1 (12 P):** *Berechnen* Sie für die Anlage: (a) Vollständigkeitsgrad des Feldes E-Mail, (b) Eindeutigkeitsgrad der Kunden, (c) Gültigkeitsgrad des Feldes PLZ, (d) Anteil plausibler Geburtsdaten. *Geben* Sie jeweils den Rechenweg an.
 
+> **Formeln:**
+> - Vollständigkeitsgrad = gefüllte Felder / alle Felder · 100 %
+> - Eindeutigkeitsgrad = eindeutige Kunden / alle Datensätze · 100 %
+> - Gültigkeitsgrad = gültige Werte / alle Werte · 100 %
+> - Anteil plausibler Werte = plausible Werte / alle Werte · 100 %
+
 **C2 (4 P):** Für sechs Pflichtfelder mit insgesamt 60 Zellen sind drei Zellen leer. *Berechnen* Sie den Vollständigkeitsgrad des Datenbestands und *erläutern* Sie, warum dieser Wert deutlich günstiger aussieht als das Ergebnis aus C1 (a).
+
+> **Formel:** Vollständigkeitsgrad = gefüllte Zellen / alle Pflichtzellen · 100 %
 
 **C3 (4 P):** *Formulieren* Sie für das Feld E-Mail eine vollständige Datenqualitätskennzahl mit Zielwert, Messintervall und Verantwortlichkeit.
 

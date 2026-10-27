@@ -321,7 +321,13 @@ Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlie
 
 **B1 (9 P):** *Erstellen* Sie eine vollständige Häufigkeitstabelle mit absoluter, relativer (in %) und kumulierter relativer Häufigkeit, absteigend sortiert.
 
+> **Formeln:**
+> - relative Häufigkeit h_i = n_i / n · 100 %
+> - kumulierte relative Häufigkeit = Summe der relativen Häufigkeiten bis einschließlich dieser Zeile
+
 **B2 (5 P):** *Ermitteln* Sie, wie viele Fehlerarten nötig sind, um mindestens 80 % aller Reklamationen abzudecken, und *benennen* Sie das zugrunde liegende Prinzip.
+
+> **Formel:** kumulierter Anteil = Reklamationen der häufigsten Fehlerarten zusammen / alle Reklamationen · 100 %
 
 **B3 (4 P):** *Begründen* Sie, warum für dieses Merkmal weder Mittelwert noch Median berechnet werden können, und *geben* Sie das zulässige Lagemaß *an*.
 
@@ -329,23 +335,48 @@ Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlie
 
 **C1 (10 P):** *Berechnen* Sie für die Anlage arithmetisches Mittel, Median und Modus. *Notieren* Sie die sortierte Reihe.
 
+> **Formeln:**
+> - arithmetisches Mittel x̄ = Σ x_i / n
+> - Median: n ungerade → Wert an Position (n + 1) / 2; n gerade → Mittel der Werte an Position n / 2 und n / 2 + 1
+> - Modus = der am häufigsten vorkommende Wert
+
 **C2 (6 P):** *Vergleichen* Sie Mittelwert und Median. *Erläutern* Sie, was die Differenz über die Verteilung aussagt und welches Lagemaß Sie der Geschäftsführung berichten würden.
 
 **C3 (4 P):** Die Werkstatt meldet für den Folgemonat: 4 Aufträge à 45 Minuten, 6 Aufträge à 70 Minuten. *Berechnen* Sie die durchschnittliche Bearbeitungsdauer.
+
+> **Formel:** gewichtetes Mittel x̄ = Σ (n_i · x_i) / Σ n_i
 
 ## Block D – Streuungsmaße (18 P)
 
 **D1 (4 P):** *Berechnen* Sie die Spannweite der Anlage und *beurteilen* Sie deren Aussagekraft in diesem Fall.
 
+> **Formel:** Spannweite = größter Wert − kleinster Wert
+
 **D2 (10 P):** Für fünf Aufträge einer anderen Filiale wurden folgende Durchlaufzeiten (in Tagen) erfasst: 2, 4, 5, 6, 8. *Berechnen* Sie Varianz und Standardabweichung der **Grundgesamtheit**. *Stellen* Sie den Rechenweg tabellarisch *dar*.
+
+> **Formeln:**
+> - Mittelwert x̄ = Σ x_i / n
+> - Varianz der Grundgesamtheit σ² = Σ (x_i − x̄)² / n
+> - Standardabweichung σ = √σ²
 
 **D3 (4 P):** Filiale Nord: x̄ = 50 min, σ = 5 min. Filiale Süd: x̄ = 100 min, σ = 8 min. *Berechnen* Sie jeweils den Variationskoeffizienten und *beurteilen* Sie, welche Filiale gleichmäßiger arbeitet.
 
+> **Formel:** Variationskoeffizient VK = σ / x̄ · 100 %
+
 ## Block E – Boxplot und Ausreißer (20 P)
 
-**E1 (8 P):** *Bestimmen* Sie für die Anlage Q1, Q3 und den Interquartilsabstand. *Geben* Sie die verwendete Berechnungskonvention *an*.
+**E1 (8 P):** *Bestimmen* Sie für die Anlage Q1, Q3 und den Interquartilsabstand nach der angegebenen Konvention.
+
+> **Formeln:**
+> - Position = n · p (p = 0,25 für Q1, p = 0,75 für Q3); nicht ganzzahlig → aufrunden und den Wert an dieser Position nehmen; ganzzahlig → Mittel aus diesem und dem nächsten Wert
+> - Interquartilsabstand IQR = Q3 − Q1
 
 **E2 (6 P):** *Prüfen* Sie mit der 1,5-IQR-Regel auf Ausreißer. *Geben* Sie beide Zäune und alle identifizierten Ausreißer *an*.
+
+> **Formeln:**
+> - unterer Zaun = Q1 − 1,5 · IQR
+> - oberer Zaun = Q3 + 1,5 · IQR
+> - Ausreißer = alle Werte unterhalb des unteren oder oberhalb des oberen Zauns
 
 **E3 (6 P):** *Skizzieren* Sie den Boxplot maßstäblich und *beschriften* Sie Box, Median, beide Whisker und Ausreißer. Achten Sie darauf, wo der obere Whisker endet.
 

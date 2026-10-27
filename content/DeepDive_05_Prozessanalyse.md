@@ -789,17 +789,36 @@ Weitere Daten: 200 Aufträge im Betrachtungsmonat, davon 24 mit erforderlicher N
 
 **C1 (8 P):** *Berechnen* Sie aus **Anlage 2** die Gesamtbearbeitungszeit, die Gesamtliegezeit und die Durchlaufzeit je Auftrag.
 
+> **Formeln:**
+> - Gesamtbearbeitungszeit = Summe aller Bearbeitungszeiten
+> - Gesamtliegezeit = Summe aller Liegezeiten
+> - Durchlaufzeit = Gesamtbearbeitungszeit + Gesamtliegezeit
+
 **C2 (6 P):** *Berechnen* Sie den Wertschöpfungsanteil (Bearbeitungszeit an der Durchlaufzeit) und *beurteilen* Sie das Ergebnis. *Leiten* Sie daraus ab, wo der wirksamste Ansatzpunkt für eine Optimierung liegt.
+
+> **Formel:** Wertschöpfungsanteil = Bearbeitungszeit / Durchlaufzeit · 100 %
 
 **C3 (6 P):** *Berechnen* Sie Fehlerquote und First Pass Yield für den Betrachtungsmonat.
 
+> **Formeln:**
+> - Fehlerquote = fehlerhafte Aufträge / alle Aufträge · 100 %
+> - First Pass Yield = (alle Aufträge − fehlerhafte Aufträge) / alle Aufträge · 100 %
+
 **C4 (6 P):** Jede Nacharbeit kostet zusätzlich 0,75 h Werkstattzeit. *Berechnen* Sie die monatlichen Nacharbeitskosten insgesamt sowie den daraus resultierenden Zuschlag je Auftrag.
+
+> **Formeln:**
+> - Nacharbeitskosten = Anzahl Nacharbeiten · Zeit je Nacharbeit · Kostensatz
+> - Zuschlag je Auftrag = Nacharbeitskosten / Anzahl aller Aufträge
 
 ## Block D – Optimierung und Wirtschaftlichkeit (18 P)
 
 **D1 (6 P):** *Nennen* Sie drei konkrete Maßnahmen zur Verkürzung der Durchlaufzeit im beschriebenen Prozess und *ordnen* Sie jede einer der vier Grundstrategien (Eliminieren, Standardisieren, Umstellen/Parallelisieren, Automatisieren) zu.
 
 **D2 (8 P):** Ein digitales Auftragssystem kostet einmalig 18.000 €. Es spart je Auftrag 5 Minuten Bearbeitungszeit. Der Betrieb wickelt 2.400 Aufträge im Jahr ab, der Kostensatz beträgt 60 €/h. *Berechnen* Sie die jährliche Einsparung und die Amortisationszeit. *Beurteilen* Sie die Investition bei einer geplanten Nutzungsdauer von fünf Jahren.
+
+> **Formeln:**
+> - jährliche Einsparung = Aufträge pro Jahr · Zeitersparnis je Auftrag (in h) · Kostensatz
+> - Amortisationszeit = Investition / jährliche Einsparung
 
 **D3 (4 P):** *Nennen* Sie zwei qualitative Faktoren, die in dieser Rechnung nicht erfasst sind, aber in die Entscheidung einfließen sollten.
 

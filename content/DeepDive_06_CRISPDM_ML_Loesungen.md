@@ -106,7 +106,7 @@ Gemeinsames Vorkommen von S und B: T1, T2, T3, T4 = 4 Transaktionen
 - **Konfidenz(S → B):** $\frac{\text{Support}(S \text{ und } B)}{\text{Support}(S)} = \frac{0{,}40}{0{,}50}$ = **80,00 %** *(3 P)*
 - **Lift(S → B):** $\frac{\text{Konfidenz}}{\text{Support}(B)} = \frac{0{,}80}{0{,}60}$ = **1,33** *(2 P)*
 
-*Prüferkommentar: Je 1 P der Teilpunkte entfällt auf die geforderte Formelangabe. Häufigster Fehler: Die Konfidenz wird durch die Gesamtzahl statt durch den Support des Bedingungsteils geteilt.*
+*Prüferkommentar: Je 1 P der Teilpunkte entfällt auf den Ansatz (richtige Werte in die Formel eingesetzt). Häufigster Fehler: Die Konfidenz wird durch die Gesamtzahl statt durch den Support des Bedingungsteils geteilt.*
 
 **D3 (4 P):**
 Ein Lift von 1,33 liegt über 1: Schreibtisch und Bürostuhl werden **33 % häufiger gemeinsam gekauft, als bei statistischer Unabhängigkeit zu erwarten wäre**. Es besteht also ein echter positiver Zusammenhang und nicht nur eine hohe Konfidenz, die aus der allgemeinen Beliebtheit des Bürostuhls resultiert. *(2 P)*

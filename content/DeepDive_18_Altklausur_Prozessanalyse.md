@@ -316,6 +316,8 @@ Die Geschäftsleitung beauftragt Sie, die Kosten der Kundenhotline zu analysiere
 
 **D1 (2 P):** Formulieren Sie eine **quantitative Aussage** zum Kostenverlauf.
 
+> **Formel:** prozentuale Veränderung = (Endwert − Anfangswert) / Anfangswert · 100 %
+
 **D2 (8 P):** Nennen Sie **zwei Kriterien** zur Aussagekraft der Grafik, beschreiben Sie diese und ziehen Sie eine Schlussfolgerung. Tragen Sie Ihre Antworten in die Tabelle ein.
 
 | Kriterium | Beschreibung |
@@ -330,7 +332,13 @@ Schlussfolgerung: …
 
 **D3a (2 P):** Berechnen Sie die Anzahl der Arbeitsstunden, die für den Betrieb der Hotline für ein Jahr anfallen.
 
+> **Formel:** Jahresstunden = Öffnungsstunden pro Tag · Mitarbeiter je Standort · Standorte · Arbeitstage pro Woche · 52 Wochen
+
 **D3b (5 P):** Da Mitarbeiter aufgrund von Fortbildungen und Krankheit gefehlt haben, waren Vertretungen einzusetzen. Der zusätzliche Stundenbedarf ergibt sich aus einer Abwesenheitsquote von **12 %**, bezogen auf die in D3a berechneten Stunden pro Jahr. Außerdem sind **30 Urlaubstage** zu berücksichtigen (Tagesstunden der gesamten Besetzung). Ermitteln Sie aufgrund eines kalkulatorischen Stundensatzes von **58,00 EUR** die Personalkosten der beiden Hotline-Standorte.
+
+> **Formeln:**
+> - Gesamtstunden = Jahresstunden + Jahresstunden · Abwesenheitsquote + Tagesstunden der gesamten Besetzung · Urlaubstage
+> - Personalkosten = Gesamtstunden · Stundensatz
 
 **D3c (4 P):** Tragen Sie Ihren errechneten Wert in die Kostenübersicht (2025) ein und leiten Sie aus der Lage des Wertes zur Kurve ein Urteil über die Datengrundlage der Kurve ab.
 

@@ -106,7 +106,7 @@ Beurteilung: Filiale Süd streut **absolut** stärker (8 min > 5 min), **relativ
 ## Block E – Boxplot und Ausreißer (20 P)
 
 **E1 (8 P):**
-Konvention: Position = n · p; bei nicht ganzzahligem Ergebnis wird aufgerundet und der Wert an dieser Position genommen, bei ganzzahligem Ergebnis das Mittel aus diesem und dem nächsten Wert. *(2 P – die Angabe der Konvention war ausdrücklich gefordert)*
+Konvention: Position = n · p; bei nicht ganzzahligem Ergebnis wird aufgerundet und der Wert an dieser Position genommen, bei ganzzahligem Ergebnis das Mittel aus diesem und dem nächsten Wert. *(2 P – Positionen n · p korrekt bestimmt und gerundet)*
 - Q1: $n \cdot p = 11 \cdot 0{,}25 = 2{,}75$ → aufrunden auf Position 3 → **Q1 = 40** *(2 P)*
 - Q3: $n \cdot p = 11 \cdot 0{,}75 = 8{,}25$ → aufrunden auf Position 9 → **Q3 = 70** *(2 P)*
 - $\text{IQR} = Q_3 - Q_1 = 70 - 40$ = **30 Minuten** *(2 P)*

@@ -20,6 +20,7 @@ import { Icon } from '../components/Icon';
 
 // KaTeX erst laden, wenn jemand die Lösung ansieht.
 const Rechenweg = lazy(() => import('../components/Rechenweg').then((m) => ({ default: m.Rechenweg })));
+const AufgabenFormeln = lazy(() => import('../components/AufgabenFormeln').then((m) => ({ default: m.AufgabenFormeln })));
 
 export function RechenUebung() {
   const { id = '' } = useParams();
@@ -103,6 +104,11 @@ function RechenUebungView({ u }: { u: RechenUebungTyp }) {
           </>
         ) : (
           <Markdown source={false}>{u.aufgabe}</Markdown>
+        )}
+        {u.vorlage && (
+          <Suspense fallback={null}>
+            <AufgabenFormeln vorlage={u.vorlage} />
+          </Suspense>
         )}
         <p className="hint">
           <Icon name="pencil" /> Rechne auf Papier, trage nur Ergebnisse ein.

@@ -234,6 +234,12 @@ Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Feh
 
 **A2 (8 P):** *Berechnen* Sie den Korrelationskoeffizienten für **Anlage 1**. *Stellen* Sie den Rechenweg tabellarisch *dar* (S_xy, S_xx, S_yy).
 
+> **Formeln:**
+> - S_xy = Σ (x_i − x̄) · (y_i − ȳ)
+> - S_xx = Σ (x_i − x̄)²
+> - S_yy = Σ (y_i − ȳ)²
+> - Korrelationskoeffizient r = S_xy / √(S_xx · S_yy)
+
 **A3 (6 P):** *Interpretieren* Sie Ihr Ergebnis nach Vorzeichen und Stärke und *formulieren* Sie eine Aussage, die für die Geschäftsführung verständlich ist.
 
 ## Block B – Korrelation und Kausalität (22 P)
@@ -248,15 +254,29 @@ Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Feh
 
 **C1 (12 P):** *Ermitteln* Sie für **Anlage 2** die Regressionsgleichung ŷ = a + b · x. *Stellen* Sie den Rechenweg tabellarisch *dar*.
 
+> **Formeln:**
+> - S_xy = Σ (x_i − x̄) · (y_i − ȳ)
+> - S_xx = Σ (x_i − x̄)²
+> - Steigung b = S_xy / S_xx
+> - Achsenabschnitt a = ȳ − b · x̄
+
 **C2 (6 P):** *Interpretieren* Sie die Steigung b und den Achsenabschnitt a jeweils inhaltlich.
 
 **C3 (6 P):** *Berechnen* Sie den prognostizierten Umsatz für ein Werbebudget von 6 T€ sowie für 20 T€. *Beurteilen* Sie beide Prognosen hinsichtlich ihrer Zulässigkeit.
 
+> **Formel:** Prognose ŷ = a + b · x (a und b aus C1)
+
 **C4 (6 P):** *Berechnen* Sie die Residuen für die Monate 1 bis 5 und *erläutern* Sie, worauf Sie bei deren Verteilung achten.
+
+> **Formel:** Residuum e_i = y_i − ŷ_i (beobachteter minus prognostizierter Wert)
 
 ## Block D – Modellgüte (16 P)
 
 **D1 (6 P):** Für Anlage 2 gilt S_yy = 424. *Berechnen* Sie r und R².
+
+> **Formeln:**
+> - r = S_xy / √(S_xx · S_yy)
+> - Bestimmtheitsmaß R² = r²
 
 **D2 (6 P):** *Interpretieren* Sie R² in einem Satz und *nennen* Sie zwei Gründe, warum ein hohes R² allein keine verlässliche Prognose garantiert.
 
@@ -268,7 +288,11 @@ Monatsumsatz in T€: 120, 138, 126, 150, 144, 168, 156, 180
 
 **E1 (6 P):** *Berechnen* Sie den gleitenden 3-Perioden-Durchschnitt für die ersten vier möglichen Werte und *erläutern* Sie den Zweck der Glättung.
 
+> **Formel:** gleitender 3-Perioden-Durchschnitt = Summe von drei aufeinanderfolgenden Werten / 3; das Fenster rückt je Wert um eine Periode weiter
+
 **E2 (3 P):** *Berechnen* Sie die prozentuale Veränderung von Monat 1 zu Monat 2 sowie die Gesamtveränderung von Monat 1 zu Monat 8.
+
+> **Formel:** prozentuale Veränderung = (neuer Wert − alter Wert) / alter Wert · 100 %
 
 **E3 (3 P):** Die Reklamationsquote steigt von 4 % auf 6 %. Ein Bericht meldet „+2 %", ein anderer „+50 %". *Erläutern* Sie, welche Angabe korrekt ist und wie beide Formulierungen fachlich richtig lauten.
 

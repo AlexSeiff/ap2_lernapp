@@ -41,7 +41,7 @@ Positive Klasse ist **„Reklamation"** – das seltene, fachlich interessierend
 
 *(3 P für die vier korrekten Zuordnungen)*
 
-**B2 (20 P):** *(je 4 P: 1 P Formel, 2 P Rechenweg, 1 P Ergebnis)*
+**B2 (20 P):** *(je 4 P: 1 P Ansatz, 2 P Rechenweg, 1 P Ergebnis)*
 
 - **Accuracy** = $\frac{TP + TN}{n} = \frac{90 + 840}{1.000} = \frac{930}{1.000}$ = **93,00 %**
 - **Precision** = $\frac{TP}{TP + FP} = \frac{90}{90 + 60} = \frac{90}{150}$ = **60,00 %**

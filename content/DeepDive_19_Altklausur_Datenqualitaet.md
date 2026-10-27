@@ -237,6 +237,10 @@ Aktuell werden alle Anlieferer an den Rampen persönlich kontrolliert. Im Rahmen
 
 **A2 (6 P):** Die Kontrolle soll in Zukunft automatisiert erfolgen. Berechnen Sie, wie viele Personen **durchschnittlich pro Tag** durch jede Rampe gehen und wie hoch die **anteilige Auslastung der Rampen in Prozent** ist.
 
+> **Formeln:**
+> - Personen je Rampe = Σ (Personen der Gruppe · Anteil dieser Gruppe an der Rampe)
+> - Auslastung = Personen der Rampe / Personen gesamt · 100 %
+
 **A3 (6 P):** Beschreiben Sie je Rampe **eine statistische Erkenntnis**, die für die Planung des neuen Zufahrtssystems relevant ist.
 
 ## Block B – Automatisierte Etikettenerkennung (28 P)

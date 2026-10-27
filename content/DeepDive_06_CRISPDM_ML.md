@@ -727,6 +727,10 @@ Startzentren: **Z1(4|4)** und **Z2(6|6)**, k = 2
 
 **C2 (10 P):** *Führen* Sie die erste Iteration *durch*: *Berechnen* Sie die Abstände aller Punkte zu beiden Zentren, *ordnen* Sie die Punkte zu und *bestimmen* Sie die neuen Clusterzentren. *Stellen* Sie den Rechenweg tabellarisch *dar*.
 
+> **Formeln:**
+> - euklidischer Abstand d = √((x₁ − x₂)² + (y₁ − y₂)²)
+> - neues Zentrum = (Mittel der x-Werte | Mittel der y-Werte) aller zugeordneten Punkte
+
 **C3 (4 P):** *Prüfen* Sie, ob sich die Zuordnung in einer zweiten Iteration ändert, und *begründen* Sie Ihr Ergebnis.
 
 **C4 (4 P):** Statt des Bestellwerts in Hundert Euro soll der Jahresumsatz in Euro (Wertebereich 200 bis 45.000) als zweites Merkmal verwendet werden. *Erläutern* Sie, welches Problem entsteht und wie Sie es lösen.
@@ -741,7 +745,14 @@ Zehn Warenkörbe (S = Schreibtisch, B = Bürostuhl, M = Monitor, L = Lampe):
 
 **D1 (4 P):** *Berechnen* Sie den Support der Einzelartikel S, B, M und L.
 
-**D2 (8 P):** *Berechnen* Sie für die Regel **S → B** Support, Konfidenz und Lift. *Geben* Sie die Formeln *an*.
+> **Formel:** Support(X) = Transaktionen mit X / alle Transaktionen
+
+**D2 (8 P):** *Berechnen* Sie für die Regel **S → B** Support, Konfidenz und Lift.
+
+> **Formeln:**
+> - Support(X → Y) = Transaktionen mit X und Y / alle Transaktionen
+> - Konfidenz(X → Y) = Support(X und Y) / Support(X)
+> - Lift(X → Y) = Konfidenz(X → Y) / Support(Y)
 
 **D3 (4 P):** *Interpretieren* Sie den Lift-Wert und *leiten* Sie eine Handlungsempfehlung *ab*.
 

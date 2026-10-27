@@ -330,9 +330,17 @@ Das Unternehmen sichert sonntags vollständig (800 GB) und montags bis samstags 
 
 **E1 (6 P):** *Berechnen* Sie für beide Verfahren – inkrementell und differenziell – das gesamte Sicherungsvolumen bis einschließlich Mittwoch sowie die Anzahl der zur Wiederherstellung benötigten Medien bei einem Ausfall am Donnerstagmorgen.
 
+> **Formeln:**
+> - inkrementell: Volumen = Vollsicherung + Summe der täglichen Änderungen; Medien = Vollsicherung + alle inkrementellen Sicherungen seitdem
+> - differenziell: Volumen = Vollsicherung + Summe der Änderungen seit der Vollsicherung je Sicherungstag; Medien = Vollsicherung + letzte differenzielle Sicherung
+
 **E2 (3 P):** *Beurteilen* Sie, welches Verfahren Sie empfehlen, wenn eine schnelle Wiederherstellung im Vordergrund steht.
 
 **E3 (3 P):** Die Sicherung läuft täglich um 23:00 Uhr. Der Ausfall tritt um 14:00 Uhr ein. *Bestimmen* Sie den maximalen Datenverlust und *beurteilen* Sie, ob eine RPO-Vorgabe von vier Stunden eingehalten wird. *Nennen* Sie gegebenenfalls eine Maßnahme.
+
+> **Formeln:**
+> - maximaler Datenverlust = Zeitpunkt des Ausfalls − Zeitpunkt der letzten Sicherung
+> - RPO eingehalten, wenn maximaler Datenverlust ≤ RPO
 
 ---
 

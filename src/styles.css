@@ -693,6 +693,12 @@ tr.diff-extra .diff-mark, .diff-key.extra { color: var(--low); }
 .re-meldungen { margin: 0; padding-left: 20px; }
 .re-meldungen .re-meldung { display: inline; }
 .re-hinweis p { margin: 0; }
+.aufgaben-formeln { margin: 10px 0; padding: 8px 12px; border-left: 3px solid var(--card-border); background: var(--surface); }
+.aufgaben-formeln > p { margin: 0 0 4px; }
+.aufgaben-formeln ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.aufgaben-formeln li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; min-width: 0; }
+.aufgaben-formeln li > .small { flex: 0 0 13em; color: var(--muted); }
+.aufgaben-formeln .rw-tex { overflow-x: auto; max-width: 100%; }
 .re-zelle { display: inline-flex; align-items: center; gap: 4px; }
 .re-zelle input { width: 5.5em; padding: 3px 6px; font-variant-numeric: tabular-nums; }
 .re-layout .result-table th[scope='row'] { text-align: left; white-space: nowrap; }

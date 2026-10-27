@@ -271,9 +271,20 @@ Getestet wurden 1.000 Aufträge, davon 100 tatsächlich reklamiert.
 
 **B1 (4 P):** *Benennen* Sie die vier Felder der Anlage mit den Fachbegriffen TP, FP, FN und TN. *Geben* Sie an, welche Klasse als positiv gilt.
 
-**B2 (20 P):** *Berechnen* Sie Accuracy, Precision, Recall, F1-Maß und Spezifität. *Geben* Sie jeweils die Formel an.
+**B2 (20 P):** *Berechnen* Sie Accuracy, Precision, Recall, F1-Maß und Spezifität.
+
+> **Formeln:**
+> - Accuracy = (TP + TN) / n
+> - Precision = TP / (TP + FP)
+> - Recall = TP / (TP + FN)
+> - F1 = 2 · Precision · Recall / (Precision + Recall)
+> - Spezifität = TN / (TN + FP)
 
 **B3 (6 P):** Ein triviales Modell sagt für **jeden** Auftrag „keine Reklamation" voraus. *Berechnen* Sie dessen Accuracy und Recall und *vergleichen* Sie mit dem Modell aus der Anlage.
+
+> **Formeln:**
+> - Accuracy = (TP + TN) / n
+> - Recall = TP / (TP + FN)
 
 ## Block C – Interpretation und Auswahl (22 P)
 
@@ -289,6 +300,8 @@ Ein übersehener Reklamationsfall kostet durchschnittlich 120 €, eine unnötig
 
 **D1 (6 P):** *Berechnen* Sie die Fehlerkosten des Modells aus der Anlage sowie die des trivialen Modells aus B3.
 
+> **Formel:** Fehlerkosten = FN · Kosten je FN + FP · Kosten je FP
+
 **D2 (6 P):** *Beurteilen* Sie auf dieser Grundlage, ob der Einsatz des Modells zu empfehlen ist, und *nennen* Sie zwei Faktoren, die in dieser Rechnung nicht enthalten sind.
 
 ## Block E – Regressionsgüte (12 P)
@@ -298,6 +311,10 @@ Ein übersehener Reklamationsfall kostet durchschnittlich 120 €, eine unnötig
 | ŷ (prognostiziert) | 90 | 126 | 84 | 132 | 108 |
 
 **E1 (8 P):** *Berechnen* Sie MAE und RMSE. *Stellen* Sie den Rechenweg tabellarisch dar.
+
+> **Formeln:**
+> - MAE = Σ |y_i − ŷ_i| / n
+> - RMSE = √(Σ (y_i − ŷ_i)² / n)
 
 **E2 (4 P):** *Erläutern* Sie, warum der RMSE hier größer ist als der MAE und in welcher Situation Sie welches Maß bevorzugen.
 

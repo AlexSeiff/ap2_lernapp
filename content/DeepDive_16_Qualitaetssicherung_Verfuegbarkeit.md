@@ -312,12 +312,24 @@ c) *Begründen* Sie, warum die Grenzwertanalyse zusätzlich zu den Äquivalenzkl
 a) *Berechnen* Sie die erlaubte Ausfallzeit. (2 P)
 b) *Berechnen* Sie die tatsächliche Verfügbarkeit und *beurteilen* Sie, ob das SLA eingehalten wurde. (4 P)
 
+> **Formeln:**
+> - erlaubte Ausfallzeit = Betriebszeit · (1 − zugesicherte Verfügbarkeit)
+> - Verfügbarkeit V = (Betriebszeit − Ausfallzeit) / Betriebszeit · 100 %
+
 **D2 (6 P):** Für den Datenbankserver gibt der Hersteller eine MTBF von 1.990 Stunden und eine MTTR von 10 Stunden an. *Berechnen* Sie die Verfügbarkeit und die zu erwartende Ausfallzeit pro Jahr bei Betrieb rund um die Uhr.
+
+> **Formeln:**
+> - Verfügbarkeit V = MTBF / (MTBF + MTTR)
+> - Ausfallzeit pro Jahr = 8.760 h · (1 − V)
 
 **D3 (10 P):** Das Reporting benötigt einen Webserver (99 %), einen Anwendungsserver (99,5 %) und eine Datenbank (98 %) – fällt eine Komponente aus, ist das Reporting nicht erreichbar.
 a) *Berechnen* Sie die Gesamtverfügbarkeit. (4 P)
 b) Die Datenbank wird durch einen zweiten, gleichwertigen Server gespiegelt. *Berechnen* Sie die neue Gesamtverfügbarkeit. (4 P)
 c) *Begründen* Sie, warum gerade die Datenbank redundant ausgelegt wurde. (2 P)
+
+> **Formeln:**
+> - Reihenschaltung (alle müssen laufen): V = V₁ · V₂ · V₃
+> - Parallelschaltung (zwei gleiche Server): V = 1 − (1 − V₁) · (1 − V₂)
 
 ## Block E – SLA und Redundanz (12 P)
 

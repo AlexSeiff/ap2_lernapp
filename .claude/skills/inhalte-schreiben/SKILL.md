@@ -45,6 +45,12 @@ exam papers or textbook passages.
 - Exam tasks start with an IHK **operator in italics**: `*Nennen* Sie …`, `*Erläutern* Sie …`, `*Berechnen* Sie …`. The operator
   decides the expected depth (nennen = list, erläutern = explain with reasons, beurteilen = judgement with justification). The full
   list with point weights is in `src/lib/operatoren.ts`; use those verbs so the operator tooltips and the trainer pick them up.
+- **Calculation tasks always state the formula they need** (owner's rule). In an exam task, add a quote block in plain-text
+  notation right after the task text (after its a)/b) lines): `> **Formel:** VK = σ / x̄ · 100 %`, or for several
+  `> **Formeln:**` + `> - …` lines. Give the general formula, never the numbers or the result; don't ask the student to
+  „*Geben* Sie die Formel *an*“ (and drop such points from the solution). Rechenübungen with a `vorlage` show their formulas
+  automatically from `src/rechnen/formeln.ts` (`AufgabenFormeln`) – a new vorlage needs its entries there. Without a `vorlage`, end
+  the `aufgabe` text with the same `> **Formel:** …` block. Pure legal rules (Ruhepausen, JArbSchG-Urlaub …) are not formulas.
 - Modelling tasks (ERM, EPK/eEPK, BPMN, Use-Case-Diagramm, Relationenmodell/Star-Schema, Normalisierung) are answered in an **editor**,
   detected from the task text (`editorFuer`, `src/lib/editorAufgabe.ts`): use a create operator (*Erstellen*, *Modellieren*, *Zeichnen*,
   *Entwerfen*; *Überführen* for Relationenmodell/Normalform) and name the diagram type. Write the model solution of a relation schema as
