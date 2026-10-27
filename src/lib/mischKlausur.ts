@@ -43,7 +43,7 @@ export interface Unterbereich {
 }
 
 /**
- * Unterbereiche der Themenliste und die Blöcke der Übungsklausuren, die sie prüfen. WiSo (DD13/14) fehlt bewusst:
+ * Unterbereiche der Themenliste und die Blöcke der Übungsklausuren, die sie prüfen. WiSo (DD13/14, Altklausur-Training DD20, DD25, DD26) fehlt bewusst:
  * das ist ein eigener 60-Minuten-Teil mit gebundenen Aufgaben.
  */
 export const UNTERBEREICHE: Unterbereich[] = [
@@ -54,6 +54,8 @@ export const UNTERBEREICHE: Unterbereich[] = [
     quellen: [
       { topicId: '05', bloecke: ['A', 'B', 'C'] },
       { topicId: '18', bloecke: ['B'] },
+      { topicId: '21', bloecke: ['A', 'B'] },
+      { topicId: '22', bloecke: ['B', 'C'] },
     ],
   },
   {
@@ -64,6 +66,8 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '12', bloecke: ['A', 'B', 'C', 'E'] },
       { topicId: '15', bloecke: ['D'] },
       { topicId: '18', bloecke: ['A'] },
+      { topicId: '21', bloecke: ['C'] },
+      { topicId: '22', bloecke: ['A'] },
     ],
   },
   {
@@ -75,6 +79,8 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '05', bloecke: ['D'] },
       { topicId: '16', bloecke: ['A', 'B', 'C'] },
       { topicId: '18', bloecke: ['C', 'D'] },
+      { topicId: '21', bloecke: ['D'] },
+      { topicId: '22', bloecke: ['D'] },
     ],
   },
   {
@@ -97,6 +103,7 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '08' },
       { topicId: '15', bloecke: ['A', 'B', 'C', 'E'] },
       { topicId: '19', bloecke: ['D'] },
+      { topicId: '24', bloecke: ['B', 'C'] },
     ],
   },
   {
@@ -111,6 +118,8 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '07' },
       { topicId: '11' },
       { topicId: '19', bloecke: ['A', 'B', 'C'] },
+      { topicId: '23', bloecke: ['A', 'B'] },
+      { topicId: '24', bloecke: ['A'] },
     ],
   },
   {
@@ -120,9 +129,19 @@ export const UNTERBEREICHE: Unterbereich[] = [
     quellen: [
       { topicId: '10', bloecke: ['D', 'E'] },
       { topicId: '16', bloecke: ['D', 'E'] },
+      { topicId: '23', bloecke: ['C'] },
     ],
   },
-  { id: 'B4', bereich: 'qualitaet', titel: 'Datenschutz & Datensicherheit', quellen: [{ topicId: '10', bloecke: ['A', 'B', 'C'] }] },
+  {
+    id: 'B4',
+    bereich: 'qualitaet',
+    titel: 'Datenschutz & Datensicherheit',
+    quellen: [
+      { topicId: '10', bloecke: ['A', 'B', 'C'] },
+      { topicId: '23', bloecke: ['D'] },
+      { topicId: '24', bloecke: ['D'] },
+    ],
+  },
 ];
 
 /** Checklistenpunkte je Unterbereich in der Themenliste (Stand Oktober 2026), falls die Datei fehlt. */

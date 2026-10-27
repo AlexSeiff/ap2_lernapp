@@ -72,6 +72,7 @@ describe('Erkennung', () => {
       '08-C1': 'relationen',
       '15-E1': 'usecase',
       '18-B3': 'epk',
+      '21-B3': 'epk',
       '03-E3': 'boxplot', // tests/boxplotAntwort.test.ts
       '11-D3': 'struktogramm', // tests/struktogramm.test.ts
       // Verlangte Tabellen (tests/werteTabelle.test.ts)
@@ -92,13 +93,34 @@ describe('Erkennung', () => {
           '18-D2',
           '19-C1',
           '19-C2',
+          '21-B1',
+          '21-B2',
+          '21-C2',
+          '21-D3',
+          '22-A1',
+          '22-B2',
+          '22-C1',
+          '22-C7',
+          '22-D1',
+          '22-D3',
+          '23-A5',
+          '23-B1',
+          '23-C1',
+          '23-C3',
+          '23-D1',
+          '24-C1',
+          '24-C2',
+          '24-C3',
+          '24-C4',
+          '24-D3',
         ].map((id) => [id, 'werte']),
       ),
     });
   });
 
   it('Textaufgaben über Diagramme bleiben Textaufgaben', () => {
-    for (const id of ['05-B2', '08-C3', '15-E2', '18-B2', '02-B3', '02-D1']) expect(editorFuer(task(id)), id).toBeUndefined();
+    for (const id of ['05-B2', '08-C3', '15-E2', '18-B2', '02-B3', '02-D1', '21-A1', '22-B1'])
+      expect(editorFuer(task(id)), id).toBeUndefined();
     expect(editorFuer({ markdown: '*Erstellen* Sie ein ER-Diagramm.', type: 'mc' })).toBeUndefined();
     expect(editorFuer({ markdown: '*Erstellen* Sie ein ER-Diagramm.', type: 'offen', sqlUebung: 'SQL-1' })).toBeUndefined();
   });

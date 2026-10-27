@@ -30,7 +30,7 @@ describe('Prüfungsbereiche', () => {
       if (t.id === '17') expect(alle).not.toContain(t.id);
       else expect(alle, t.id).toContain(t.id);
     }
-    expect(PRUEFUNGSBEREICHE.find((b) => b.id === 'wiso')!.themen).toEqual(['13', '14', '20']);
+    expect(PRUEFUNGSBEREICHE.find((b) => b.id === 'wiso')!.themen).toEqual(['13', '14', '20', '25', '26']);
   });
 
   it('passt zu den Unterbereichen der gemischten Klausur', () => {
