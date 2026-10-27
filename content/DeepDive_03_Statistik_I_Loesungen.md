@@ -10,10 +10,19 @@
 ## Block A – Skalenniveaus (12 P)
 
 **A1 (8 P):**
-- (a) Kundennummer → **nominal**. Begründung: Die Zahl dient nur der Unterscheidung; eine Rangfolge oder Differenz ist ohne Bedeutung.
-- (b) Kundenzufriedenheit → **ordinal**. Begründung: Es besteht eine klare Rangfolge, die Abstände zwischen den Stufen sind aber nicht nachweislich gleich groß.
-- (c) Reparaturdauer → **verhältnisskaliert (metrisch)**, da ein absoluter Nullpunkt existiert und Verhältnisse sinnvoll sind (60 min sind doppelt so lang wie 30 min).
-- (d) Kalenderjahr → **intervallskaliert**, da die Abstände gleich groß sind, das Jahr 0 aber willkürlich gesetzt ist.
+
+| Merkmal | Skalenniveau |
+|---|---|
+| (a) Kundennummer | nominal |
+| (b) Kundenzufriedenheit (1 = sehr zufrieden bis 5 = unzufrieden) | ordinal |
+| (c) Reparaturdauer in Minuten | verhältnisskaliert (metrisch) |
+| (d) Kalenderjahr der Auftragserteilung | intervallskaliert (metrisch) |
+
+Begründungen (zwei genügen):
+- (a) Die Kundennummer dient nur der Unterscheidung; Rangfolge oder Differenz sind ohne Bedeutung.
+- (b) Es gibt eine klare Rangfolge, die Abstände zwischen den Stufen sind aber nicht nachweislich gleich groß.
+- (c) Es gibt einen absoluten Nullpunkt, Verhältnisse sind sinnvoll (60 min sind doppelt so lang wie 30 min).
+- (d) Die Abstände sind gleich groß, das Jahr 0 ist aber willkürlich gesetzt.
 
 *Prüferkommentar: Je 1 P pro korrekte Zuordnung (4 P), je 2 P für die beiden geforderten Begründungen. „Metrisch" statt „verhältnisskaliert" bei (c) wird voll anerkannt; bei (d) ist „metrisch" ebenfalls vertretbar, die Unterscheidung Intervall/Verhältnis zeigt jedoch das tiefere Verständnis.*
 
@@ -183,10 +192,12 @@ Fachlich korrektes Vorgehen: *(je 1 P, max. 4 P)*
 
 *Prüferkommentar: Eine reine Ablehnung ohne Alternativvorgehen gibt max. 3 P. Wer erkennt, dass der Ausreißer selbst ein Optimierungshinweis ist, zeigt DPA-Niveau.*
 
-**F2 (5 P):**
-Mögliche Ursachen und Maßnahmen *(je 1 P Ursache, 1 P Maßnahme; 1 P für den Bezug zur Datenqualität)*:
-- **Platzhalter- bzw. Default-Wert:** Das System schreibt 0, wenn kein Wert erfasst wurde – die Dauer ist in Wahrheit unbekannt, nicht null. Maßnahme: Feld als Pflichtfeld definieren, Default entfernen, fehlende Werte als NULL statt 0 speichern, damit sie in Auswertungen nicht als echte Nullen mitgerechnet werden.
-- **Prozessbedingter Erfassungsfehler:** Techniker schließen den Auftrag ohne Zeiterfassung ab, oder Start- und Endzeitstempel sind identisch. Maßnahme: Plausibilitätsprüfung bei der Eingabe (CHECK-Constraint `dauer > 0`), automatische Zeiterfassung statt manueller Eingabe, Schulung.
+**F2 (5 P):** *(je 1 P Ursache, 1 P Maßnahme; 1 P für den Bezug zur Datenqualität)*
+
+| Ursache | Maßnahme |
+|---|---|
+| Platzhalter- bzw. Default-Wert: Das System schreibt 0, wenn kein Wert erfasst wurde – die Dauer ist unbekannt, nicht null. | Pflichtfeld ohne Default, fehlende Werte als NULL statt 0 speichern, damit sie nicht als echte Nullen mitgerechnet werden |
+| Erfassungsfehler im Prozess: Techniker schließen den Auftrag ohne Zeiterfassung ab, oder Start- und Endzeit sind identisch. | Plausibilitätsprüfung bei der Eingabe (CHECK `dauer > 0`), automatische Zeiterfassung, Schulung |
 
 Bezug: Betroffen sind die Dimensionen **Vollständigkeit** (fehlende Werte getarnt als 0) und **Korrektheit**; unentdeckt senken 14 Nullwerte den berechneten Mittelwert systematisch.
 

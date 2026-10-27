@@ -27,11 +27,13 @@ Maßnahmen für Gehaltsdaten *(je 1 P, zwei genügen)*: Zugriff strikt nach **Ne
 
 **B1 (8 P):**
 
-| Problem | Lösung | P |
-|---|---|---|
-| **Trennzeichen im Feldinhalt:** „Schmidt; Söhne AG“ enthält das Semikolon. Die Zeile ist korrekt in Anführungszeichen gesetzt – ein naiver Import, der nur am Semikolon trennt, verschiebt aber alle folgenden Spalten. | Parser mit Trennzeichen und Anführungszeichen konfigurieren (RFC-4180-konform), Spaltenzahl je Zeile prüfen | 3 |
-| **Gemischte Zahlenformate:** „1.250,00“ und „890,50“ sind deutsch, „2100.00“ englisch formatiert. Je nach Einstellung wird 1.250,00 zu 1,25 oder 2100.00 zu 210000. | Format je Quelle festlegen und vor dem Import vereinheitlichen; Plausibilitätsprüfung auf Wertebereiche | 3 |
-| **Zeichenkodierung:** München, Köln und Söhne enthalten Umlaute, die Kodierung ist unbekannt. | Kodierung (UTF-8) in der Liefervereinbarung festlegen und beim Import angeben | 2 |
+*(Trennzeichen 3 P, Zahlenformat 3 P, Kodierung 2 P)*
+
+| Problem | Lösung |
+|---|---|
+| **Trennzeichen im Feldinhalt:** „Schmidt; Söhne AG“ enthält das Semikolon. Die Zeile ist korrekt in Anführungszeichen gesetzt – ein naiver Import, der nur am Semikolon trennt, verschiebt aber alle folgenden Spalten. | Parser mit Trennzeichen und Anführungszeichen konfigurieren (RFC-4180-konform), Spaltenzahl je Zeile prüfen |
+| **Gemischte Zahlenformate:** „1.250,00“ und „890,50“ sind deutsch, „2100.00“ englisch formatiert. Je nach Einstellung wird 1.250,00 zu 1,25 oder 2100.00 zu 210000. | Format je Quelle festlegen und vor dem Import vereinheitlichen; Plausibilitätsprüfung auf Wertebereiche |
+| **Zeichenkodierung:** München, Köln und Söhne enthalten Umlaute, die Kodierung ist unbekannt. | Kodierung (UTF-8) in der Liefervereinbarung festlegen und beim Import angeben |
 
 Auch akzeptiert: Umsatz liegt als Text vor und muss in DECIMAL konvertiert werden.
 
@@ -95,13 +97,13 @@ b) Die Datei ist in **UTF-8 gespeichert, wird aber als Latin-1** bzw. Windows-12
 
 **C1 (10 P):** *(je Zeile 2 P)*
 
-| Operation | Methode | URI | Erfolg |
+| Operation | Methode | URI | Statuscode bei Erfolg |
 |---|---|---|---|
-| (a) alle offenen Aufträge | GET | `/reparaturauftraege?status=offen` | 200 OK |
-| (b) ein Auftrag | GET | `/reparaturauftraege/{auftrag_nr}` | 200 OK (404, falls nicht vorhanden) |
-| (c) neuer Auftrag | POST | `/reparaturauftraege` | 201 Created, Location-Header mit der neuen URI |
-| (d) Status ändern | PATCH | `/reparaturauftraege/{auftrag_nr}` mit `{"status": "erledigt"}` | 200 OK |
-| (e) Auftrag löschen | DELETE | `/reparaturauftraege/{auftrag_nr}` | 204 No Content |
+| (a) alle offenen Aufträge abrufen | GET | `/reparaturauftraege?status=offen` | 200 OK |
+| (b) einen Auftrag anhand der Nummer abrufen | GET | `/reparaturauftraege/{auftrag_nr}` | 200 OK (404, falls nicht vorhanden) |
+| (c) einen neuen Auftrag anlegen | POST | `/reparaturauftraege` | 201 Created, Location-Header mit der neuen URI |
+| (d) den Status eines Auftrags ändern | PATCH | `/reparaturauftraege/{auftrag_nr}` mit `{"status": "erledigt"}` | 200 OK |
+| (e) einen Auftrag löschen | DELETE | `/reparaturauftraege/{auftrag_nr}` | 204 No Content |
 
 Für (d) wird auch PUT akzeptiert, wenn der vollständige Auftrag übertragen wird. Kein Punkt für Verben in der URI wie `/getAuftrag` oder `/deleteAuftrag`.
 
@@ -126,9 +128,9 @@ Für (d) wird auch PUT akzeptiert, wenn der vollständige Auftrag übertragen wi
 
 | Szenario | Datenbanktyp | Begründung |
 |---|---|---|
-| (a) Produktkatalog mit wechselnden Attributen | dokumentenorientiert | flexibles Schema: ein Sofa hat einen Bezugsstoff, ein Monitor eine Auflösung – ohne Dutzende leerer Spalten |
-| (b) Warenkörbe über Sitzungs-ID | Key-Value | einfacher, extrem schneller Zugriff über einen Schlüssel |
-| (c) Empfehlungen über mehrere Stufen | Graph | Beziehungen sind das Kernobjekt; Pfadabfragen über mehrere Ebenen wären relational teure Joins |
+| (a) Produktkatalog, bei dem jede Kategorie andere Attribute hat | dokumentenorientiert | flexibles Schema: ein Sofa hat einen Bezugsstoff, ein Monitor eine Auflösung – ohne Dutzende leerer Spalten |
+| (b) Warenkörbe des Onlineshops mit Zugriff über die Sitzungs-ID | Key-Value | einfacher, extrem schneller Zugriff über einen Schlüssel |
+| (c) Empfehlungen „Kunden, die X kauften, kauften auch Y“ über mehrere Stufen | Graph | Beziehungen sind das Kernobjekt; Pfadabfragen über mehrere Ebenen wären relational teure Joins |
 | (d) Finanzbuchhaltung | relational | ACID-Transaktionen und strenge Konsistenz sind zwingend |
 
 **D2 (8 P):**

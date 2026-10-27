@@ -345,33 +345,60 @@ fakultaet(4) = 4 · fakultaet(3) = 4 · 3 · fakultaet(2) = 4 · 3 · 2 · fakul
 
 # Übungsklausur Visualisierung & Algorithmen (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Lineal.
+Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Lineal. Halte dich an die geforderte Anzahl der Nennungen.
+
+## Ausgangssituation
+
+Die **Möbelhaus Nordholz GmbH** baut ein Berichtswesen für Geschäftsführung und Filialleitungen auf: Monatsberichte, ein Dashboard für den Reparaturservice und automatische Prüfungen der Kundendaten. Sie arbeiten in der IT-Abteilung und sind für Visualisierung und die Prüfalgorithmen zuständig.
 
 ## Block A – Diagrammwahl (20 P)
 
-**A1 (12 P):** *Ordnen* Sie den folgenden sechs Auswertungswünschen jeweils einen geeigneten Diagrammtyp zu und *begründen* Sie die Wahl kurz:
-(a) Monatsumsatz der letzten 24 Monate · (b) Umsatzvergleich der acht Filialen · (c) Verteilung der Reparaturdauern · (d) Zusammenhang zwischen Werbebudget und Umsatz · (e) Anteil der vier Produktkategorien am Gesamtumsatz · (f) Umsatz je Filiale und Monat in einer Übersicht
+Für den neuen Monatsbericht liegen mehrere Auswertungswünsche vor. Ein Kollege hat bereits einen ersten Entwurf erstellt.
 
-**A2 (8 P):** Ein Kollege stellt den Umsatz der acht Filialen als Kreisdiagramm mit 3D-Effekt dar, alphabetisch sortiert. *Benennen* Sie drei Mängel und *schlagen* Sie eine bessere Darstellung mit Begründung *vor*.
+**A1 (12 P):** *Ordnen* Sie den folgenden **sechs** Auswertungswünschen jeweils einen geeigneten Diagrammtyp *zu* und *begründen* Sie die Wahl kurz. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| | Auswertung | Diagrammtyp | Begründung |
+|---|---|---|---|
+| a | Monatsumsatz der letzten 24 Monate | | |
+| b | Umsatzvergleich der acht Filialen | | |
+| c | Verteilung der Reparaturdauern | | |
+| d | Zusammenhang zwischen Werbebudget und Umsatz | | |
+| e | Anteil der vier Produktkategorien am Gesamtumsatz | | |
+| f | Umsatz je Filiale und Monat in einer Übersicht | | |
+
+**A2 (8 P):** Ein Kollege stellt den Umsatz der acht Filialen als Kreisdiagramm mit 3D-Effekt dar, alphabetisch sortiert. *Benennen* Sie **drei** Mängel und *schlagen* Sie eine bessere Darstellung mit Begründung *vor*.
 
 ## Block B – Diagramme beurteilen (22 P)
+
+Im Jahresbericht des Vertriebs fällt Ihnen eine Grafik auf, die nicht zu den Zahlen passt.
 
 **B1 (12 P):** Ein Bericht zeigt ein Säulendiagramm der Jahresumsätze 4,80 / 4,95 / 5,10 Mio. €. Die y-Achse beginnt bei 4,70 Mio. €. Die Überschrift lautet „Umsatz explodiert".
 a) *Berechnen* Sie das tatsächliche Gesamtwachstum in Prozent. (4 P)
 b) *Erläutern* Sie, welchen Eindruck die gewählte Achse erzeugt und warum. (4 P)
 c) *Beurteilen* Sie die Überschrift und *formulieren* Sie eine sachlich korrekte Alternative. (4 P)
 
-**B2 (6 P):** *Nennen* Sie drei weitere Techniken, mit denen Diagramme irreführend gestaltet werden können, und *erläutern* Sie je die Wirkung.
+**B2 (6 P):** *Nennen* Sie **drei** weitere Techniken, mit denen Diagramme irreführend gestaltet werden können, und *erläutern* Sie je die Wirkung.
 
-**B3 (4 P):** *Erläutern* Sie, warum Informationen in Diagrammen nicht ausschließlich über Farbe codiert werden sollten, und *nennen* Sie zwei Alternativen.
+**B3 (4 P):** *Erläutern* Sie, warum Informationen in Diagrammen nicht ausschließlich über Farbe codiert werden sollten, und *nennen* Sie **zwei** Alternativen.
 
 ## Block C – Dashboard konzipieren (14 P)
 
-**C1 (8 P):** *Entwerfen* Sie ein Dashboard für die Geschäftsführung zur Überwachung des Reparaturservice. *Nennen* Sie vier Kennzahlen mit jeweils passender Darstellungsform und *begründen* Sie Ihre Auswahl.
+Die Geschäftsführung möchte den Reparaturservice täglich auf einen Blick überwachen.
 
-**C2 (6 P):** *Nennen* Sie drei Gestaltungsgrundsätze für Dashboards und *erläutern* Sie, warum jede Kennzahl einen Vergleichsmaßstab benötigt.
+**C1 (8 P):** *Entwerfen* Sie ein Dashboard für die Geschäftsführung zur Überwachung des Reparaturservice. *Nennen* Sie **vier** Kennzahlen mit jeweils passender Darstellungsform und *begründen* Sie Ihre Auswahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Kennzahl | Darstellung | Begründung |
+|---|---|---|
+| | | |
+| | | |
+| | | |
+| | | |
+
+**C2 (6 P):** *Nennen* Sie **drei** Gestaltungsgrundsätze für Dashboards und *erläutern* Sie, warum jede Kennzahl einen Vergleichsmaßstab benötigt.
 
 ## Block D – Algorithmen entwickeln (28 P)
+
+Die Kundendaten und die Reparaturdauern sollen vor jeder Auswertung automatisch geprüft werden.
 
 **D1 (6 P):** *Erläutern* Sie den Unterschied zwischen kopf- und fußgesteuerter Schleife. *Geben* Sie für jede einen passenden Anwendungsfall an.
 

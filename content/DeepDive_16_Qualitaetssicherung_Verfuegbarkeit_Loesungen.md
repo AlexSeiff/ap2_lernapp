@@ -18,10 +18,10 @@ Maßnahmen *(je 1 P)*:
 
 | Fall | Teststufe | Begründung |
 |---|---|---|
-| (a) | **Abnahmetest** | Der Auftraggeber prüft gegen das Lastenheft, ob das Ergebnis für den Einsatz geeignet ist |
-| (b) | **Komponententest** | Eine einzelne Funktion wird isoliert vom Entwickler geprüft |
-| (c) | **Integrationstest** | Geprüft wird das Zusammenspiel zweier Systeme über die Schnittstelle Shop → Data Warehouse |
-| (d) | **Systemtest** | Das Gesamtsystem wird vom Testteam in der Testumgebung gegen das Pflichtenheft geprüft |
+| (a) Die Fachabteilung prüft anhand des Lastenhefts, ob der Monatsbericht ihren Anforderungen genügt. | **Abnahmetest** | Der Auftraggeber prüft gegen das Lastenheft, ob das Ergebnis für den Einsatz geeignet ist |
+| (b) Ein Entwickler prüft die SQL-Funktion zur Berechnung der Versandkosten. | **Komponententest** | Eine einzelne Funktion wird isoliert vom Entwickler geprüft |
+| (c) Es wird geprüft, ob die ETL-Strecke die Daten aus dem Shopsystem vollständig übernimmt. | **Integrationstest** | Geprüft wird das Zusammenspiel zweier Systeme über die Schnittstelle Shop → Data Warehouse |
+| (d) Das Testteam prüft das gesamte Reporting in der Testumgebung gegen das Pflichtenheft. | **Systemtest** | Das Gesamtsystem wird vom Testteam in der Testumgebung gegen das Pflichtenheft geprüft |
 
 **A3 (4 P):**
 - **Fehlhandlung:** Der Entwickler verwechselt beim Schreiben des Skripts Netto- und Bruttobetrag. *(1 P)*
@@ -82,9 +82,12 @@ Er eignet sich für eine Automatisierung, weil dieselben Testfälle mit feststeh
 | Tatsächliches Ergebnis / Status | bei der Durchführung eintragen; bestanden nur, wenn Anzahl und Summe exakt übereinstimmen |
 
 **C2 (6 P):** *(je Prüfung mit aufgedecktem Fehler 2 P)*
-- **Dublettenprüfung** auf die Bestellnummer im Ziel – deckt doppelt geladene Datensätze auf, etwa nach einem wiederholten Ladelauf.
-- **Prüfung auf NULL-Werte** in Pflichtfeldern (Kunde, Datum, Betrag) – deckt fehlerhafte Zuordnungen oder abgeschnittene Datensätze auf.
-- **Plausibilitätsprüfung** der Werte (keine negativen Mengen, Bestelldatum nicht in der Zukunft, Versandkosten im erwarteten Bereich) – deckt Umrechnungs- und Formatfehler auf.
+
+| Prüfung | aufgedeckter Fehler |
+|---|---|
+| Dublettenprüfung auf die Bestellnummer im Ziel | doppelt geladene Datensätze, etwa nach einem wiederholten Ladelauf |
+| Prüfung auf NULL-Werte in Pflichtfeldern (Kunde, Datum, Betrag) | fehlerhafte Zuordnungen oder abgeschnittene Datensätze |
+| Plausibilitätsprüfung (keine negativen Mengen, Bestelldatum nicht in der Zukunft, Versandkosten im erwarteten Bereich) | Umrechnungs- und Formatfehler |
 
 Ebenfalls anerkannt: Referenzprüfung (jede Bestellung hat einen existierenden Kunden), Abgleich mit einer von Hand nachgerechneten Stichprobe, Prüfung der Ladeprotokolle auf abgewiesene Datensätze.
 

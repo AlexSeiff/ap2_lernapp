@@ -696,28 +696,40 @@ Solche Gewichte findet man in der Praxis nicht von Hand. Mehrschichtige Netze we
 
 Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Runde auf zwei Nachkommastellen.
 
-## Ausgangslage
+## Ausgangssituation
 
-Die Möbelhaus Nordholz GmbH möchte Reklamationen reduzieren. Vorliegende Daten: 18.000 Aufträge der letzten drei Jahre mit Produktkategorie, Liefergebiet, Spediteur, Lieferdauer, Auftragswert sowie dem Feld „Reklamation: ja/nein".
+Die **Möbelhaus Nordholz GmbH** möchte Reklamationen reduzieren: Jede siebte Lieferung von Polstermöbeln wird inzwischen beanstandet. Vorliegende Daten: 18.000 Aufträge der letzten drei Jahre mit Produktkategorie, Liefergebiet, Spediteur, Lieferdauer, Auftragswert sowie dem Feld „Reklamation: ja/nein". Sie arbeiten in der IT-Abteilung und leiten das Data-Mining-Projekt fachlich.
 
 ## Block A – CRISP-DM (22 P)
 
+Zum Projektstart soll ein Vorgehensplan nach CRISP-DM entstehen. Ein Kollege hat bereits eine Aufwandsschätzung vorgelegt.
+
 **A1 (12 P):** *Nennen* Sie die sechs Phasen von CRISP-DM in der richtigen Reihenfolge und *beschreiben* Sie für jede Phase in einem Satz, was im geschilderten Reklamationsprojekt konkret zu tun wäre.
 
-**A2 (6 P):** *Erläutern* Sie, warum CRISP-DM als iterativer Kreislauf dargestellt wird, und *nennen* Sie zwei typische Rücksprünge mit Auslöser.
+**A2 (6 P):** *Erläutern* Sie, warum CRISP-DM als iterativer Kreislauf dargestellt wird, und *nennen* Sie **zwei** typische Rücksprünge mit Auslöser.
 
 **A3 (4 P):** Ein Kollege plant für das Projekt: 5 % Zieldefinition, 10 % Datenaufbereitung, 70 % Modellierung, 15 % Auswertung. *Beurteilen* Sie diese Aufwandsverteilung.
 
 ## Block B – Lernarten und Verfahrenswahl (20 P)
 
-**B1 (8 P):** *Ordnen* Sie den folgenden vier Fragestellungen jeweils Lernart und Verfahrenstyp zu:
-(a) Wird dieser Auftrag reklamiert? (b) Welche Kundengruppen lassen sich in unseren Daten unterscheiden? (c) Wie hoch wird der Umsatz im nächsten Quartal sein? (d) Welche Produkte werden häufig gemeinsam gekauft?
+Verschiedene Abteilungen melden Fragen an die Daten an. Sie sollen jeweils das passende Verfahren auswählen und dem Fachbereich eine Empfehlung geben.
+
+**B1 (8 P):** *Ordnen* Sie den folgenden **vier** Fragestellungen jeweils Lernart und Verfahrenstyp *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Fragestellung | Lernart | Verfahrenstyp |
+|---|---|---|
+| (a) Wird dieser Auftrag reklamiert? | | |
+| (b) Welche Kundengruppen lassen sich in unseren Daten unterscheiden? | | |
+| (c) Wie hoch wird der Umsatz im nächsten Quartal sein? | | |
+| (d) Welche Produkte werden häufig gemeinsam gekauft? | | |
 
 **B2 (6 P):** *Erläutern* Sie den Unterschied zwischen Klassifikation und Regression und *begründen* Sie, welcher Typ für die Reklamationsvorhersage geeignet ist.
 
-**B3 (6 P):** Zur Auswahl stehen ein Entscheidungsbaum und ein neuronales Netz. *Begründen* Sie anhand von drei Kriterien, welches Verfahren Sie dem Fachbereich empfehlen.
+**B3 (6 P):** Zur Auswahl stehen ein Entscheidungsbaum und ein neuronales Netz. *Begründen* Sie anhand von **drei** Kriterien, welches Verfahren Sie dem Fachbereich empfehlen.
 
 ## Block C – Clustering (22 P)
+
+Das Marketing möchte Kundengruppen für gezielte Angebote bilden und hat dafür einen kleinen Testdatensatz bereitgestellt.
 
 Sechs Kunden mit den Merkmalen x = Bestellungen pro Jahr, y = durchschnittlicher Bestellwert (in 100 €):
 **P1(2|2) · P2(3|1) · P3(1|3) · P4(7|8) · P5(8|7) · P6(9|9)**
@@ -736,6 +748,8 @@ Startzentren: **Z1(4|4)** und **Z2(6|6)**, k = 2
 **C4 (4 P):** Statt des Bestellwerts in Hundert Euro soll der Jahresumsatz in Euro (Wertebereich 200 bis 45.000) als zweites Merkmal verwendet werden. *Erläutern* Sie, welches Problem entsteht und wie Sie es lösen.
 
 ## Block D – Assoziationsanalyse (20 P)
+
+Für die Ausstellung „Homeoffice“ soll geprüft werden, welche Artikel zusammen gekauft werden.
 
 Zehn Warenkörbe (S = Schreibtisch, B = Bürostuhl, M = Monitor, L = Lampe):
 
@@ -760,11 +774,18 @@ Zehn Warenkörbe (S = Schreibtisch, B = Bürostuhl, M = Monitor, L = Lampe):
 
 ## Block E – Datenvorbereitung und Recht (16 P)
 
+Vor dem Training des Reklamationsmodells müssen die Daten vorbereitet werden. Die Geschäftsführung hat außerdem schon Pläne für den Einsatz des Modells.
+
 **E1 (6 P):** Das Merkmal „Spediteur" liegt als Text vor (Nordtrans, Rheinlogistik, Eigenlieferung). *Erläutern* Sie, warum eine Umwandlung erforderlich ist, und *beschreiben* Sie das One-Hot-Encoding an diesem Beispiel.
 
 **E2 (5 P):** Ein Kollege nimmt das Feld „Reklamationsdatum" als Merkmal in das Modell auf. Das Modell erreicht daraufhin eine Trefferquote von 99,8 %. *Erläutern* Sie, welcher Fehler vorliegt und warum das Modell im Betrieb versagen wird.
 
-**E3 (5 P):** Die Geschäftsführung möchte Aufträge mit hohem Reklamationsrisiko **automatisch** ablehnen. *Nennen* Sie zwei rechtliche Anforderungen und je eine Maßnahme zu deren Umsetzung.
+**E3 (5 P):** Die Geschäftsführung möchte Aufträge mit hohem Reklamationsrisiko **automatisch** ablehnen. *Nennen* Sie **zwei** rechtliche Anforderungen und je eine Maßnahme zu deren Umsetzung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| rechtliche Anforderung | Maßnahme zur Umsetzung |
+|---|---|
+| | |
+| | |
 
 ---
 

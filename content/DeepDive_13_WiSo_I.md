@@ -325,55 +325,55 @@ Erlaubt bleibt eine unterschiedliche Behandlung, wenn eine **wesentliche berufli
 
 Die Aufgaben sind hier nach Themen in Blöcke gegliedert; in der PDF-Fassung sind sie von 1 bis 25 durchnummeriert (A1–A7 = Aufgaben 1–7, B1–B5 = 8–12, C1–C6 = 13–18, D1–D4 = 19–22, E1–E3 = 23–25).
 
-## Ausgangslage
+## Ausgangssituation
 
 Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorhanden, Mitglied im Arbeitgeberverband (tarifgebunden). Auszubildende: **Jonas Brandt** (geb. 15.03.2009, Ausbildungsbeginn 01.08.2026) und **Lea Sommer** (24 Jahre, 3. Ausbildungsjahr, Vertragsende 31.01.2027). **Herr Kaya** ist seit sechs Jahren im Möbelhaus beschäftigt.
 
 ## Block A – Berufsausbildung (28 P)
 
-**A1 (4 P):** Welche Aussage zum dualen Ausbildungssystem ist richtig?
+**A1 (4 P):** Welche Aussage zum dualen Ausbildungssystem ist richtig? *(Ziffer eintragen)*
 - (1) Die Berufsschule überwacht die betriebliche Ausbildung.
 - (2) Der Rahmenlehrplan regelt die betriebliche Ausbildung.
 - (3) Die Ausbildungsordnung wird von der IHK erlassen.
 - (4) Die IHK überwacht die Ausbildung, führt das Verzeichnis der Ausbildungsverhältnisse und nimmt die Prüfungen ab.
 - (5) Mit Beginn der Ausbildung entfällt die Berufsschulpflicht.
 
-**A2 (4 P):** Welche **zwei** Vereinbarungen in Jonas' Ausbildungsvertrag sind nichtig?
+**A2 (4 P):** Welche **zwei** Vereinbarungen in Jonas' Ausbildungsvertrag sind nichtig? *(Ziffern eintragen)*
 - (1) Verpflichtung, nach der Ausbildung drei Jahre im Betrieb zu bleiben
 - (2) Probezeit von drei Monaten
 - (3) Tägliche Ausbildungszeit von 8 Stunden
 - (4) Vertragsstrafe von 2.000 € bei vorzeitigem Abbruch
 - (5) Urlaub von 30 Werktagen
 
-**A3 (4 P):** Jonas möchte nach sechs Wochen Ausbildung kündigen. Welche Aussage ist richtig?
+**A3 (4 P):** Jonas möchte nach sechs Wochen Ausbildung kündigen. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Er muss eine Frist von vier Wochen einhalten.
 - (2) Er muss einen wichtigen Grund angeben.
 - (3) Eine mündliche Kündigung genügt.
 - (4) Die Kündigung bedarf der Zustimmung der IHK.
 - (5) Er kann jederzeit ohne Frist kündigen, muss dies aber schriftlich tun.
 
-**A4 (4 P):** Nach der Probezeit will der Betrieb Jonas wegen schwacher Berufsschulnoten kündigen. Welche Aussage ist richtig?
+**A4 (4 P):** Nach der Probezeit will der Betrieb Jonas wegen schwacher Berufsschulnoten kündigen. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Die Kündigung ist mit vier Wochen Frist möglich.
 - (2) Die Kündigung ist mit zwei Wochen Frist möglich.
 - (3) Möglich ist nur eine fristlose Kündigung aus wichtigem Grund; schwache Noten sind in der Regel kein solcher Grund.
 - (4) Der Betrieb kann jederzeit ohne Grund kündigen.
 - (5) Die Kündigung ist wirksam, sobald der Betriebsrat zustimmt.
 
-**A5 (4 P):** Lea besteht am 20.01.2027 ihr Fachgespräch; das Ergebnis wird ihr noch am selben Tag bekanntgegeben. Laut Vertrag endet die Ausbildung am 31.01.2027. Wann endet das Ausbildungsverhältnis?
+**A5 (4 P):** Lea besteht am 20.01.2027 ihr Fachgespräch; das Ergebnis wird ihr noch am selben Tag bekanntgegeben. Laut Vertrag endet die Ausbildung am 31.01.2027. Wann endet das Ausbildungsverhältnis? *(Ziffer eintragen)*
 - (1) am 20.01.2027
 - (2) am 31.01.2027
 - (3) mit Zugang des Prüfungszeugnisses
 - (4) am 28.02.2027
 - (5) mit Ablauf der Probezeit des Anschlussvertrags
 
-**A6 (4 P):** Lea arbeitet am 21.01.2027 ohne weitere Vereinbarung im Betrieb weiter. Welche Rechtsfolge tritt ein?
+**A6 (4 P):** Lea arbeitet am 21.01.2027 ohne weitere Vereinbarung im Betrieb weiter. Welche Rechtsfolge tritt ein? *(Ziffer eintragen)*
 - (1) befristetes Arbeitsverhältnis für sechs Monate
 - (2) Verlängerung des Ausbildungsverhältnisses
 - (3) Probearbeitsverhältnis von drei Monaten
 - (4) unbefristetes Arbeitsverhältnis
 - (5) kein Rechtsverhältnis, bis ein Vertrag unterschrieben ist
 
-**A7 (4 P):** Was enthält ein qualifiziertes Ausbildungszeugnis zusätzlich zum einfachen?
+**A7 (4 P):** Was enthält ein qualifiziertes Ausbildungszeugnis zusätzlich zum einfachen? *(Ziffer eintragen)*
 - (1) Art, Dauer und Ziel der Ausbildung
 - (2) die Zahl der Krankheitstage
 - (3) die Noten der Berufsschule
@@ -386,7 +386,7 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 
 **B2 (4 P):** Jonas hat montags Berufsschule mit sechs Unterrichtsstunden à 45 Minuten; weitere Berufsschultage hat er in dieser Woche nicht. Wie viele Stunden darf er an den übrigen Tagen dieser Woche höchstens im Betrieb beschäftigt werden? *(Ergebnis eintragen)*
 
-**B3 (4 P):** Welche Aussage zum Arbeitstag vor der schriftlichen Abschlussprüfung ist richtig?
+**B3 (4 P):** Welche Aussage zum Arbeitstag vor der schriftlichen Abschlussprüfung ist richtig? *(Ziffer eintragen)*
 - (1) Nur minderjährige Auszubildende sind freizustellen.
 - (2) Eine Freistellung besteht nur, wenn der Tarifvertrag sie vorsieht.
 - (3) Alle Auszubildenden sind freizustellen; der Tag wird mit der durchschnittlichen täglichen Ausbildungszeit angerechnet.
@@ -399,55 +399,55 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 
 ## Block C – Arbeitsvertrag und Kündigung (24 P)
 
-**C1 (4 P):** Herr Kaya ist seit sechs Jahren im Möbelhaus beschäftigt. Er kündigt selbst; die Kündigung geht am 10.03.2026 zu. Abweichende tarifliche oder vertragliche Regelungen gibt es nicht. Wann endet das Arbeitsverhältnis frühestens?
+**C1 (4 P):** Herr Kaya ist seit sechs Jahren im Möbelhaus beschäftigt. Er kündigt selbst; die Kündigung geht am 10.03.2026 zu. Abweichende tarifliche oder vertragliche Regelungen gibt es nicht. Wann endet das Arbeitsverhältnis frühestens? *(Ziffer eintragen)*
 (1) 07.04.2026 · (2) 15.04.2026 · (3) 30.04.2026 · (4) 31.05.2026 · (5) 30.06.2026
 
-**C2 (4 P):** Wie C1, jedoch kündigt der **Arbeitgeber**. Wann endet das Arbeitsverhältnis frühestens?
+**C2 (4 P):** Wie C1, jedoch kündigt der **Arbeitgeber**. Wann endet das Arbeitsverhältnis frühestens? *(Ziffer eintragen)*
 (1) 07.04.2026 · (2) 15.04.2026 · (3) 30.04.2026 · (4) 31.05.2026 · (5) 30.06.2026
 
-**C3 (4 P):** Welche Kündigung wahrt die gesetzliche Schriftform?
+**C3 (4 P):** Welche Kündigung wahrt die gesetzliche Schriftform? *(Ziffer eintragen)*
 - (1) eigenhändig unterschriebenes Schreiben, per Boten übergeben
 - (2) E-Mail mit eingescannter Unterschrift als PDF
 - (3) Nachricht per Messenger
 - (4) mündliche Kündigung vor zwei Zeugen
 - (5) Kündigung per Fax
 
-**C4 (4 P):** Welche **zwei** Voraussetzungen müssen für den allgemeinen Kündigungsschutz nach dem KSchG erfüllt sein?
+**C4 (4 P):** Welche **zwei** Voraussetzungen müssen für den allgemeinen Kündigungsschutz nach dem KSchG erfüllt sein? *(Ziffern eintragen)*
 - (1) Mitgliedschaft in einer Gewerkschaft
 - (2) mehr als zehn Arbeitnehmer im Betrieb
 - (3) Existenz eines Betriebsrats
 - (4) unbefristeter Vertrag seit mindestens zwei Jahren
 - (5) Arbeitsverhältnis länger als sechs Monate
 
-**C5 (4 P):** Welche Kriterien sind bei der Sozialauswahl einer betriebsbedingten Kündigung zu berücksichtigen?
+**C5 (4 P):** Welche Kriterien sind bei der Sozialauswahl einer betriebsbedingten Kündigung zu berücksichtigen? *(Ziffer eintragen)*
 - (1) Leistung, Krankheitstage, Lebensalter, Qualifikation
 - (2) Gehalt, Wohnort, Qualifikation, Familienstand
 - (3) Betriebszugehörigkeit, Leistung, Gewerkschaftszugehörigkeit, Alter
 - (4) Dauer der Betriebszugehörigkeit, Lebensalter, Unterhaltspflichten, Schwerbehinderung
 - (5) Unterhaltspflichten, Beliebtheit im Team, Gehalt, Schwerbehinderung
 
-**C6 (4 P):** Innerhalb welcher Frist muss eine Kündigungsschutzklage erhoben werden?
+**C6 (4 P):** Innerhalb welcher Frist muss eine Kündigungsschutzklage erhoben werden? *(Ziffer eintragen)*
 (1) eine Woche · (2) zwei Wochen · (3) drei Wochen · (4) vier Wochen · (5) ein Monat
 
 ## Block D – Betriebliche Mitbestimmung (16 P)
 
 **D1 (4 P):** Aus wie vielen Mitgliedern besteht der Betriebsrat des Möbelhauses mit 140 wahlberechtigten Beschäftigten? *(Ergebnis eintragen)*
 
-**D2 (4 P):** Welche Maßnahme unterliegt der Mitbestimmung des Betriebsrats nach § 87 BetrVG?
+**D2 (4 P):** Welche Maßnahme unterliegt der Mitbestimmung des Betriebsrats nach § 87 BetrVG? *(Ziffer eintragen)*
 - (1) Kauf eines neuen Lieferwagens
 - (2) Festlegung der Verkaufspreise
 - (3) Einführung eines Systems, das Bearbeitungszeiten je Mitarbeiter auswertet
 - (4) Auswahl des Steuerberaters
 - (5) Entscheidung über die Produktpalette
 
-**D3 (4 P):** Der Arbeitgeber kündigt einem Mitarbeiter, ohne den Betriebsrat vorher anzuhören. Welche Folge hat das?
+**D3 (4 P):** Der Arbeitgeber kündigt einem Mitarbeiter, ohne den Betriebsrat vorher anzuhören. Welche Folge hat das? *(Ziffer eintragen)*
 - (1) Die Kündigung ist wirksam.
 - (2) Die Kündigung ist wirksam, der Arbeitgeber zahlt ein Bußgeld.
 - (3) Die Kündigung ist schwebend unwirksam bis zur nachträglichen Zustimmung.
 - (4) Die Kündigung ist nur bei Auszubildenden unwirksam.
 - (5) Die Kündigung ist unwirksam.
 
-**D4 (4 P):** Welche Aussage zur Jugend- und Auszubildendenvertretung ist richtig?
+**D4 (4 P):** Welche Aussage zur Jugend- und Auszubildendenvertretung ist richtig? *(Ziffer eintragen)*
 - (1) Wählbar sind Beschäftigte, die das 25. Lebensjahr noch nicht vollendet haben.
 - (2) Sie kann auch ohne Betriebsrat gewählt werden.
 - (3) Ihre Amtszeit beträgt vier Jahre.
@@ -456,7 +456,7 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 
 ## Block E – Tarifrecht und Arbeitskampf (12 P)
 
-**E1 (4 P):** Für wen gilt ein Tarifvertrag unmittelbar?
+**E1 (4 P):** Für wen gilt ein Tarifvertrag unmittelbar? *(Ziffer eintragen)*
 - (1) automatisch für alle Beschäftigten in Deutschland
 - (2) nur für Betriebsratsmitglieder
 - (3) nur für Beschäftigte in Betrieben mit mehr als 500 Mitarbeitern

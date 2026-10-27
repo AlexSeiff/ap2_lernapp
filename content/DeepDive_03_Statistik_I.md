@@ -305,19 +305,32 @@ Genau genommen umfasst ± 2 σ 95,45 %; exakt 95 % liegen im Bereich ± 1,96 σ.
 
 Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner, ohne Unterlagen. Runde auf zwei Nachkommastellen. **Schreibe alle Rechenwege auf** – Teilpunkte gibt es nur für Nachvollziehbares.
 
+## Ausgangssituation
+
+Die Werkstatt der **Möbelhaus Nordholz GmbH** soll schneller und gleichmäßiger arbeiten. Die Geschäftsführung bittet Sie als Mitarbeiter der IT-Abteilung, die Reparatur- und Reklamationsdaten statistisch aufzubereiten und die Ergebnisse verständlich zu berichten.
+
 ## Anlage – Bearbeitungsdauer von 11 Reparaturaufträgen (in Minuten)
 
 `60, 40, 220, 45, 35, 90, 55, 40, 70, 50, 65`
 
 ## Block A – Skalenniveaus (12 P)
 
-**A1 (8 P):** *Ordnen* Sie den folgenden Merkmalen je das Skalenniveau zu und *begründen* Sie zwei Ihrer Zuordnungen: (a) Kundennummer, (b) Kundenzufriedenheit (1 = sehr zufrieden bis 5 = unzufrieden), (c) Reparaturdauer in Minuten, (d) Kalenderjahr der Auftragserteilung.
+Bevor Sie rechnen, prüfen Sie, welche Kennzahlen für die Merkmale der Auftragsdatenbank überhaupt zulässig sind.
+
+**A1 (8 P):** *Ordnen* Sie den folgenden Merkmalen je das Skalenniveau *zu* und *tragen* Sie es in die Tabelle *ein*. *Begründen* Sie **zwei** Ihrer Zuordnungen unter der Tabelle.
+
+| Merkmal | Skalenniveau |
+|---|---|
+| (a) Kundennummer | |
+| (b) Kundenzufriedenheit (1 = sehr zufrieden bis 5 = unzufrieden) | |
+| (c) Reparaturdauer in Minuten | |
+| (d) Kalenderjahr der Auftragserteilung | |
 
 **A2 (4 P):** Ein Kollege berechnet den arithmetischen Mittelwert der Postleitzahlen aller Kunden, um „den durchschnittlichen Standort" zu bestimmen. *Beurteilen* Sie das Vorgehen und *nennen* Sie eine fachlich korrekte Alternative.
 
 ## Block B – Häufigkeitsverteilung (18 P)
 
-Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlieferung 9, Materialfehler 6, Sonstiges 2.
+Der Kundenservice hat die Reklamationen des letzten Quartals nach Fehlerart ausgezählt. Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlieferung 9, Materialfehler 6, Sonstiges 2.
 
 **B1 (9 P):** *Erstellen* Sie eine vollständige Häufigkeitstabelle mit absoluter, relativer (in %) und kumulierter relativer Häufigkeit, absteigend sortiert.
 
@@ -333,6 +346,8 @@ Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlie
 
 ## Block C – Lagemaße (20 P)
 
+Die Geschäftsführung möchte wissen, wie lange eine Reparatur „typischerweise“ dauert. Grundlage ist die **Anlage**.
+
 **C1 (10 P):** *Berechnen* Sie für die Anlage arithmetisches Mittel, Median und Modus. *Notieren* Sie die sortierte Reihe.
 
 > **Formeln:**
@@ -347,6 +362,8 @@ Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlie
 > **Formel:** gewichtetes Mittel x̄ = Σ (n_i · x_i) / Σ n_i
 
 ## Block D – Streuungsmaße (18 P)
+
+Neben dem Durchschnitt interessiert die Geschäftsführung, wie gleichmäßig die Werkstätten arbeiten.
 
 **D1 (4 P):** *Berechnen* Sie die Spannweite der Anlage und *beurteilen* Sie deren Aussagekraft in diesem Fall.
 
@@ -365,6 +382,8 @@ Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlie
 
 ## Block E – Boxplot und Ausreißer (20 P)
 
+Für den Bericht soll die Verteilung der Reparaturdauern aus der **Anlage** als Boxplot dargestellt werden.
+
 **E1 (8 P):** *Bestimmen* Sie für die Anlage Q1, Q3 und den Interquartilsabstand nach der angegebenen Konvention.
 
 > **Formeln:**
@@ -382,9 +401,16 @@ Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlie
 
 ## Block F – Beurteilung (12 P)
 
+Bei der Aufbereitung der Daten fallen Ihnen Auffälligkeiten auf, über die Sie entscheiden müssen.
+
 **F1 (7 P):** Der Wert 220 Minuten stammt aus einem Auftrag, bei dem ein Ersatzteil erst beschafft werden musste. Ein Kollege schlägt vor, den Datensatz vor der Auswertung zu löschen, „damit die Statistik nicht verzerrt wird". *Beurteilen* Sie den Vorschlag und *entwickeln* Sie ein fachlich korrektes Vorgehen in drei Schritten.
 
-**F2 (5 P):** In der Spalte „Reparaturdauer" fallen 14 Datensätze mit dem exakten Wert 0 auf. *Nennen* Sie zwei mögliche Ursachen und je eine Maßnahme, mit der Sie die Ursache klären bzw. künftig verhindern.
+**F2 (5 P):** In der Spalte „Reparaturdauer" fallen 14 Datensätze mit dem exakten Wert 0 auf. *Nennen* Sie **zwei** mögliche Ursachen und je eine Maßnahme, mit der Sie die Ursache klären bzw. künftig verhindern. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Ursache | Maßnahme |
+|---|---|
+| | |
+| | |
 
 ---
 

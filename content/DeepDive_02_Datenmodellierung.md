@@ -226,7 +226,11 @@ Im **operativen System (OLTP)** wird bis zur 3. NF normalisiert: Konsistenz und 
 
 # Übungsklausur Datenmodellierung (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, ohne Unterlagen. Lösungen erst danach öffnen.
+Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, ohne Unterlagen. Lösungen erst danach öffnen. Halte dich an die geforderte Anzahl der Nennungen.
+
+## Ausgangssituation
+
+Der Reparaturservice der **Möbelhaus Nordholz GmbH** verwaltet seine Aufträge bisher in einer einzigen Exporttabelle (**Anlage 1**). Weil Kundenadressen dort mehrfach und teils widersprüchlich stehen, soll eine normalisierte Datenbank entstehen, die später auch Lieferanten und Mitarbeiter abbildet. Sie übernehmen in der IT-Abteilung die Datenmodellierung.
 
 ## Anlage 1 – Export „auftrags_export" (Reparaturservice des Möbelhauses)
 
@@ -238,7 +242,9 @@ Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, ohne Un
 
 ## Block A – Abhängigkeiten und Anomalien (22 P)
 
-**A1 (9 P):** *Nennen* Sie die drei Anomalien unnormalisierter Datenbestände und *erläutern* Sie jede an einem konkreten Beispiel aus Anlage 1.
+Der Serviceleiter fragt, warum die Exporttabelle überhaupt Probleme macht.
+
+**A1 (9 P):** *Nennen* Sie die **drei** Anomalien unnormalisierter Datenbestände und *erläutern* Sie jede an einem konkreten Beispiel aus Anlage 1.
 
 **A2 (6 P):** *Definieren* Sie funktionale, partielle und transitive Abhängigkeit und *geben* Sie je ein Beispiel aus Anlage 1 *an*.
 
@@ -259,6 +265,8 @@ Szenario: Das Möbelhaus erweitert sein System. **Lieferanten** (lieferanten_id,
 
 ## Block C – Normalisierung (34 P)
 
+Bevor das neue Modell umgesetzt wird, soll die Exporttabelle aus **Anlage 1** sauber normalisiert werden.
+
 **C1 (25 P):** *Überführen* Sie Anlage 1 schrittweise in die 3. Normalform:
 a) 1. NF mit Angabe des neuen Primärschlüssels (6 P)
 b) 2. NF – *benennen* Sie zunächst alle partiellen Abhängigkeiten, dann das Tabellenschema (9 P)
@@ -268,7 +276,9 @@ c) 3. NF – *benennen* Sie die transitiven Abhängigkeiten und *geben* Sie das 
 
 ## Block D – Modelle beurteilen (16 P)
 
-**D1 (10 P):** Gegeben ist folgender Entwurf: bestellung(**bestell_id**, kunden_id↑, produkt_id, bezeichnung, preis, menge). *Benennen* Sie zwei Modellierungsschwächen und *skizzieren* Sie für jede die Verbesserung.
+Ein Werkstudent hat für den Onlineshop einen ersten Tabellenentwurf geliefert, den Sie prüfen sollen.
+
+**D1 (10 P):** Gegeben ist folgender Entwurf: bestellung(**bestell_id**, kunden_id↑, produkt_id, bezeichnung, preis, menge). *Benennen* Sie **zwei** Modellierungsschwächen und *skizzieren* Sie für jede die Verbesserung.
 
 **D2 (6 P):** *Bestimmen* Sie für die drei Situationen jeweils die Kardinalität in Min-Max- **und** Chen-Notation:
 a) Jeder Mitarbeiter nutzt höchstens einen Firmenwagen; jeder Firmenwagen ist genau einem Mitarbeiter zugeordnet.

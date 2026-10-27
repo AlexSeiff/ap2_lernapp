@@ -153,11 +153,13 @@ Drei nicht berücksichtigte Positionen *(je 0,67 P)*: jährliche **Lizenz- und W
 
 **E1 (6 P):** *(je Risiko 1 P RPZ, 1 P Strategie)*
 
-| Risiko | RPZ | Strategie |
+| Risiko | Risikowert | Strategie |
 |---|---|---|
-| (a) Ausfall des externen Dienstleisters | 2 · 5 = **10** | **Übertragen/Vermindern** – vertragliche Regelung mit Service-Level und Vertragsstrafe, Zweitanbieter als Rückfalloption |
-| (b) Schlechte Datenqualität der Quellsysteme | 4 · 4 = **16** | **Vermindern** – frühzeitiges Data Profiling in der Analysephase, Pufferzeit für Bereinigung einplanen, Qualitätsregeln im ETL |
-| (c) Fachbereich hat keine Zeit für Abstimmungen | 3 · 3 = **9** | **Vermindern** – feste Termine früh verbindlich vereinbaren, Verfügbarkeit durch die Leitung zusichern lassen, kurze getaktete Abstimmungen |
+| (a) Der externe Dienstleister fällt aus (W = 2, S = 5) | 10 | **Übertragen/Vermindern** – vertragliche Regelung mit Service-Level und Vertragsstrafe, Zweitanbieter als Rückfalloption |
+| (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | 16 | **Vermindern** – frühzeitiges Data Profiling in der Analysephase, Pufferzeit für Bereinigung einplanen, Qualitätsregeln im ETL |
+| (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | 9 | **Vermindern** – feste Termine früh verbindlich vereinbaren, Verfügbarkeit durch die Leitung zusichern lassen, kurze getaktete Abstimmungen |
+
+Rechnung: (a) $2 \cdot 5$ = **10** · (b) $4 \cdot 4$ = **16** · (c) $3 \cdot 3$ = **9**
 
 Risiko (b) hat mit 16 die höchste Priorität und ist zuerst zu behandeln – was in einem Datenprojekt auch der Erfahrung entspricht.
 

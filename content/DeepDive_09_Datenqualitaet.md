@@ -241,7 +241,11 @@ Für die Prüfung genügt der Kern: ein **führendes System** je Stammdatenart, 
 
 # Übungsklausur Datenqualität (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner.
+Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Alle Aufgaben beziehen sich auf die Ausgangssituation und die Anlage; halte dich an die geforderte Anzahl der Nennungen.
+
+## Ausgangssituation
+
+Die **Möbelhaus Nordholz GmbH** führt die Kundendaten aus Onlineshop, Filialkassen und Objektgeschäft in einem neuen **CRM-System** zusammen. Beim ersten Newsletter nach einer Testmigration kamen fast ein Drittel der E-Mails als unzustellbar zurück, und der Vertrieb meldet doppelte Kunden mit doppelt gezählten Umsätzen. Sie arbeiten im Team Datenmanagement der IT-Abteilung und sollen die Datenqualität vor der endgültigen Migration sicherstellen.
 
 ## Anlage – Auszug aus der Kundentabelle (10 Datensätze)
 
@@ -260,17 +264,31 @@ Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Tas
 
 ## Block A – Dimensionen (20 P)
 
-**A1 (15 P):** *Nennen* Sie fünf Dimensionen der Datenqualität. *Erläutern* Sie je Dimension kurz die Bedeutung und *nennen* Sie je eine Maßnahme zur Sicherstellung.
+Die Geschäftsleitung will eine **Datenqualitätsrichtlinie** für das CRM verabschieden. Sie sollen dafür die Grundlagen liefern.
+
+**A1 (15 P):** *Nennen* Sie **fünf** Dimensionen der Datenqualität. *Erläutern* Sie je Dimension kurz die Bedeutung und *nennen* Sie je eine Maßnahme zur Sicherstellung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Dimension | Bedeutung | Maßnahme zur Sicherstellung |
+|---|---|---|
+| | | |
+| | | |
+| | | |
+| | | |
+| | | |
 
 **A2 (5 P):** *Erläutern* Sie den Unterschied zwischen **Gültigkeit** und **Korrektheit** und *belegen* Sie ihn mit einem Beispiel aus der Anlage.
 
 ## Block B – Probleme identifizieren (24 P)
+
+Aus dem Altsystem liegt ein Auszug von zehn Datensätzen vor (**Anlage**). Er soll stellvertretend für den Gesamtbestand von rund 48.000 Kunden untersucht werden.
 
 **B1 (18 P):** *Analysieren* Sie die Anlage. *Benennen* Sie **sechs** Datenqualitätsprobleme. *Geben* Sie jeweils die betroffene Datensatznummer, die verletzte Dimension und die Konsequenz für eine Auswertung an.
 
 **B2 (6 P):** Datensatz 3 und 7 enthalten das Geburtsdatum 01.01.1900. *Erläutern* Sie, welche Ursache typischerweise dahintersteckt und warum dieser Wert gefährlicher ist als ein leeres Feld.
 
 ## Block C – Kennzahlen berechnen (20 P)
+
+Für den Bericht an die Geschäftsleitung soll die Datenqualität vor und nach der Bereinigung **messbar** gemacht werden.
 
 **C1 (12 P):** *Berechnen* Sie für die Anlage: (a) Vollständigkeitsgrad des Feldes E-Mail, (b) Eindeutigkeitsgrad der Kunden, (c) Gültigkeitsgrad des Feldes PLZ, (d) Anteil plausibler Geburtsdaten. *Geben* Sie jeweils den Rechenweg an.
 
@@ -288,15 +306,33 @@ Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Tas
 
 ## Block D – Bereinigen (18 P)
 
+Vor der Übernahme ins CRM werden die Daten bereinigt. Parallel liefert die Logistik einen Auftragsbestand mit Lieferdauern für eine Auswertung der Speditionen.
+
 **D1 (8 P):** *Beschreiben* Sie das Vorgehen zur Erkennung und Behandlung der Dubletten in der Anlage. *Gehen* Sie auf exakte und unscharfe Dubletten getrennt *ein* und *erläutern* Sie den Begriff **Golden Record**.
 
-**D2 (6 P):** In einem anderen Datenbestand fehlen 12 % der Lieferdauern. *Nennen* Sie drei Strategien im Umgang mit fehlenden Werten und *bewerten* Sie je einen Vor- und Nachteil.
+**D2 (6 P):** Im Bestand der Logistik fehlen 12 % der Lieferdauern. *Nennen* Sie **drei** Strategien im Umgang mit fehlenden Werten und *bewerten* Sie je einen Vor- und einen Nachteil. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Strategie | Vorteil | Nachteil |
+|---|---|---|
+| | | |
+| | | |
+| | | |
 
 **D3 (4 P):** Bei der Prüfung fällt auf, dass die fehlenden Lieferdauern **ausschließlich** Aufträge eines bestimmten Spediteurs betreffen. *Beurteilen* Sie, ob ein Ersetzen durch den Mittelwert hier vertretbar ist.
 
 ## Block E – Prävention und Verantwortung (18 P)
 
-**E1 (10 P):** *Nennen* Sie fünf technische Maßnahmen, mit denen die in der Anlage gefundenen Fehler künftig verhindert werden. *Ordnen* Sie jeder Maßnahme das konkrete Problem aus der Anlage zu.
+Damit die Fehler nach der Migration nicht wiederkehren, sollen technische Prüfungen im CRM und klare Zuständigkeiten festgelegt werden.
+
+**E1 (10 P):** *Nennen* Sie **fünf** technische Maßnahmen, mit denen die in der Anlage gefundenen Fehler künftig verhindert werden. *Ordnen* Sie jeder Maßnahme das konkrete Problem aus der Anlage *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Maßnahme | Verhindert |
+|---|---|
+| | |
+| | |
+| | |
+| | |
+| | |
 
 **E2 (4 P):** *Erläutern* Sie die Rollen **Data Owner** und **Data Steward** und *grenzen* Sie sie voneinander ab.
 

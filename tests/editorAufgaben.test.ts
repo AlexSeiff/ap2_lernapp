@@ -79,16 +79,42 @@ describe('Erkennung', () => {
       ...Object.fromEntries(
         [
           '01-C1',
+          '03-A1',
           '03-B1',
           '03-D2',
+          '03-F2',
           '04-A2',
           '04-C1',
+          '05-A2',
+          '05-D1',
+          '05-E2',
+          '06-B1',
           '06-C2',
+          '06-E3',
+          '07-A2',
           '07-E1',
           '08-A1',
+          '08-C3',
           '08-D2',
+          '08-E1',
+          '08-E2',
+          '09-A1',
+          '09-D2',
+          '09-E1',
+          '10-A3',
+          '10-D1',
+          '11-A1',
+          '11-C1',
+          '12-B1',
           '12-C1',
           '12-D2',
+          '12-E1',
+          '15-B1',
+          '15-C1',
+          '15-D1',
+          '16-A2',
+          '16-B1',
+          '16-C2',
           '18-A3',
           '18-D2',
           '19-C1',
@@ -119,8 +145,7 @@ describe('Erkennung', () => {
   });
 
   it('Textaufgaben über Diagramme bleiben Textaufgaben', () => {
-    for (const id of ['05-B2', '08-C3', '15-E2', '18-B2', '02-B3', '02-D1', '21-A1', '22-B1'])
-      expect(editorFuer(task(id)), id).toBeUndefined();
+    for (const id of ['05-B2', '15-E2', '18-B2', '02-B3', '02-D1', '21-A1', '22-B1']) expect(editorFuer(task(id)), id).toBeUndefined();
     expect(editorFuer({ markdown: '*Erstellen* Sie ein ER-Diagramm.', type: 'mc' })).toBeUndefined();
     expect(editorFuer({ markdown: '*Erstellen* Sie ein ER-Diagramm.', type: 'offen', sqlUebung: 'SQL-1' })).toBeUndefined();
   });

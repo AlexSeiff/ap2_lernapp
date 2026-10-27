@@ -392,17 +392,17 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 ## Block A – Sozialversicherung und Entgelt (32 P)
 
-**A1 (4 P):** Wer ist Träger der gesetzlichen Unfallversicherung für das Möbelhaus?
+**A1 (4 P):** Wer ist Träger der gesetzlichen Unfallversicherung für das Möbelhaus? *(Ziffer eintragen)*
 - (1) die Krankenkasse
 - (2) die Deutsche Rentenversicherung
 - (3) die Berufsgenossenschaft
 - (4) die Bundesagentur für Arbeit
 - (5) das Gewerbeaufsichtsamt
 
-**A2 (4 P):** Welcher Zweig der Sozialversicherung wird ausschließlich vom Arbeitgeber finanziert?
+**A2 (4 P):** Welcher Zweig der Sozialversicherung wird ausschließlich vom Arbeitgeber finanziert? *(Ziffer eintragen)*
 (1) Krankenversicherung · (2) Pflegeversicherung · (3) Rentenversicherung · (4) Arbeitslosenversicherung · (5) Unfallversicherung
 
-**A3 (4 P):** Ein Auszubildender des Möbelhauses erhält eine Vergütung von 310 € im Monat. Wer trägt die Sozialversicherungsbeiträge?
+**A3 (4 P):** Ein Auszubildender des Möbelhauses erhält eine Vergütung von 310 € im Monat. Wer trägt die Sozialversicherungsbeiträge? *(Ziffer eintragen)*
 - (1) Arbeitgeber und Auszubildender je zur Hälfte
 - (2) der Arbeitgeber allein
 - (3) der Auszubildende allein
@@ -423,14 +423,14 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 > **Formel:** höchste Stundenzahl = Minijob-Grenze / Stundenlohn, auf volle Stunden abgerundet
 
-**A7 (4 P):** Lea ist zehn Wochen arbeitsunfähig erkrankt. Welche Aussage ist richtig?
+**A7 (4 P):** Lea ist zehn Wochen arbeitsunfähig erkrankt. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Das Möbelhaus zahlt die Vergütung zehn Wochen voll weiter.
 - (2) Die Krankenkasse zahlt ab dem ersten Tag Krankengeld.
 - (3) Das Möbelhaus zahlt sechs Wochen, danach entfällt jede Zahlung.
 - (4) Das Möbelhaus zahlt sechs Wochen weiter, danach zahlt die Krankenkasse Krankengeld.
 - (5) Die Rentenversicherung zahlt ab der dritten Woche Übergangsgeld.
 
-**A8 (4 P):** Welcher Unfall ist über die gesetzliche Unfallversicherung versichert?
+**A8 (4 P):** Welcher Unfall ist über die gesetzliche Unfallversicherung versichert? *(Ziffer eintragen)*
 - (1) Herr Kaya bringt auf dem Weg zur Arbeit seine Tochter in die Kita und stürzt vor dem Kita-Eingang.
 - (2) Jonas unterbricht den Heimweg für einen Einkauf und rutscht im Supermarkt aus.
 - (3) Lea geht in der Mittagspause privat zum Friseur und verletzt sich dort.
@@ -439,55 +439,55 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 ## Block B – Rechtsgeschäfte und Verträge (36 P)
 
-**B1 (4 P):** Welche **zwei** Rechtsgeschäfte sind sofort wirksam?
+**B1 (4 P):** Welche **zwei** Rechtsgeschäfte sind sofort wirksam? *(Ziffern eintragen)*
 - (1) Ein 6-Jähriger kauft von seinem Taschengeld ein Comicheft.
 - (2) Ein 16-Jähriger kauft ohne Zustimmung der Eltern ein Smartphone auf Raten.
 - (3) Ein 15-Jähriger kauft Kopfhörer für 40 € von seinem Taschengeld.
 - (4) Ein 17-Jähriger schließt ohne Zustimmung einen Mobilfunkvertrag über 24 Monate ab.
 - (5) Ein 16-Jähriger nimmt ein Geldgeschenk seiner Tante an.
 
-**B2 (4 P):** Im Schaufenster steht ein Sofa mit dem Preisschild 899 €. Ein Kunde will es zu diesem Preis kaufen, der Verkäufer lehnt ab. Welche Aussage ist richtig?
+**B2 (4 P):** Im Schaufenster steht ein Sofa mit dem Preisschild 899 €. Ein Kunde will es zu diesem Preis kaufen, der Verkäufer lehnt ab. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Der Kunde hat einen Anspruch auf das Sofa, da ein verbindliches Angebot vorlag.
 - (2) Die Auslage ist nur eine Aufforderung zur Abgabe eines Angebots; der Verkäufer darf ablehnen.
 - (3) Der Vertrag ist bereits mit Betreten des Ladens zustande gekommen.
 - (4) Der Verkäufer muss ein gleichwertiges Sofa zum selben Preis anbieten.
 - (5) Der Vertrag ist schwebend unwirksam.
 
-**B3 (4 P):** Ein Gebrauchtwagenhändler verschweigt dem Möbelhaus beim Verkauf eines Lieferwagens bewusst einen Unfallschaden. Der Kaufvertrag ist …
+**B3 (4 P):** Ein Gebrauchtwagenhändler verschweigt dem Möbelhaus beim Verkauf eines Lieferwagens bewusst einen Unfallschaden. Der Kaufvertrag ist … *(Ziffer eintragen)*
 - (1) von Anfang an nichtig.
 - (2) schwebend unwirksam.
 - (3) wirksam und nicht angreifbar.
 - (4) wegen arglistiger Täuschung anfechtbar.
 - (5) nur bei Verbrauchern unwirksam.
 
-**B4 (4 P):** Das Möbelhaus beauftragt einen Dienstleister, eine lauffähige Auswertungssoftware mit festgelegten Funktionen zu erstellen. Welcher Vertragstyp liegt vor?
+**B4 (4 P):** Das Möbelhaus beauftragt einen Dienstleister, eine lauffähige Auswertungssoftware mit festgelegten Funktionen zu erstellen. Welcher Vertragstyp liegt vor? *(Ziffer eintragen)*
 (1) Kaufvertrag · (2) Dienstvertrag · (3) Mietvertrag · (4) Leihvertrag · (5) Werkvertrag
 
-**B5 (4 P):** Welches Rechtsgeschäft bedarf der notariellen Beurkundung?
+**B5 (4 P):** Welches Rechtsgeschäft bedarf der notariellen Beurkundung? *(Ziffer eintragen)*
 - (1) Gesellschaftsvertrag zur Gründung einer GmbH
 - (2) Kündigung eines Arbeitsvertrags
 - (3) Kauf eines Firmenwagens
 - (4) Abschluss eines Ausbildungsvertrags
 - (5) Erteilung einer Handlungsvollmacht
 
-**B6 (4 P):** Ein gelieferter Bürostuhl ist defekt. Welches Recht muss das Möbelhaus gegenüber dem Lieferanten zunächst geltend machen?
+**B6 (4 P):** Ein gelieferter Bürostuhl ist defekt. Welches Recht muss das Möbelhaus gegenüber dem Lieferanten zunächst geltend machen? *(Ziffer eintragen)*
 - (1) Rücktritt vom Vertrag
 - (2) Minderung des Kaufpreises
 - (3) Nacherfüllung
 - (4) Schadensersatz statt der Leistung
 - (5) Anfechtung des Kaufvertrags
 
-**B7 (4 P):** Eine Privatkundin reklamiert acht Monate nach dem Kauf einen Defekt an ihrem Sofa. Welche Aussage ist richtig?
+**B7 (4 P):** Eine Privatkundin reklamiert acht Monate nach dem Kauf einen Defekt an ihrem Sofa. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Die Kundin muss beweisen, dass der Mangel schon bei Übergabe vorlag.
 - (2) Es wird vermutet, dass der Mangel bereits bei Übergabe vorlag; das Möbelhaus muss das Gegenteil beweisen.
 - (3) Die Gewährleistung ist nach sechs Monaten abgelaufen.
 - (4) Nur der Hersteller haftet, und zwar über die Garantie.
 - (5) Ansprüche bestehen nur, wenn eine schriftliche Garantie vorliegt.
 
-**B8 (4 P):** Eine Forderung des Möbelhauses wird am 12.04.2026 fällig. Wann verjährt sie nach der regelmäßigen Verjährungsfrist?
+**B8 (4 P):** Eine Forderung des Möbelhauses wird am 12.04.2026 fällig. Wann verjährt sie nach der regelmäßigen Verjährungsfrist? *(Ziffer eintragen)*
 (1) 12.04.2028 · (2) 31.12.2028 · (3) 12.04.2029 · (4) 31.12.2029 · (5) 31.12.2031
 
-**B9 (4 P):** Ein Privatkunde bestellt im Onlineshop des Möbelhauses einen Schreibtisch und wurde ordnungsgemäß belehrt. Welches Widerrufsrecht hat er?
+**B9 (4 P):** Ein Privatkunde bestellt im Onlineshop des Möbelhauses einen Schreibtisch und wurde ordnungsgemäß belehrt. Welches Widerrufsrecht hat er? *(Ziffer eintragen)*
 - (1) 14 Tage ab Erhalt der Ware, ohne Angabe von Gründen
 - (2) 7 Tage ab Bestellung
 - (3) 30 Tage ab Rechnungsdatum
@@ -496,14 +496,14 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 ## Block C – Unternehmen und Rechtsformen (8 P)
 
-**C1 (4 P):** Welche **zwei** Geschäfte darf eine Prokuristin des Möbelhauses ohne besondere Befugnis abschließen?
+**C1 (4 P):** Welche **zwei** Geschäfte darf eine Prokuristin des Möbelhauses ohne besondere Befugnis abschließen? *(Ziffern eintragen)*
 - (1) einen Bankkredit aufnehmen
 - (2) das Betriebsgrundstück verkaufen
 - (3) den Jahresabschluss unterschreiben
 - (4) ein Grundstück für ein neues Lager kaufen
 - (5) einem weiteren Mitarbeiter Prokura erteilen
 
-**C2 (4 P):** Welche **zwei** Aussagen zu Rechtsformen sind richtig?
+**C2 (4 P):** Welche **zwei** Aussagen zu Rechtsformen sind richtig? *(Ziffern eintragen)*
 - (1) In der OHG haftet jeder Gesellschafter nur bis zur Höhe seiner Einlage.
 - (2) Der Kommanditist einer KG haftet nur bis zur Höhe seiner Einlage.
 - (3) Eine AG benötigt ein Grundkapital von mindestens 25.000 €.
@@ -512,7 +512,7 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 ## Block D – Wirtschaft, Umwelt und Arbeitsschutz (24 P)
 
-**D1 (4 P):** Welche Maßnahme hat nach der Abfallhierarchie des Kreislaufwirtschaftsgesetzes die höchste Priorität?
+**D1 (4 P):** Welche Maßnahme hat nach der Abfallhierarchie des Kreislaufwirtschaftsgesetzes die höchste Priorität? *(Ziffer eintragen)*
 (1) Recycling · (2) energetische Verwertung · (3) Vermeidung · (4) Beseitigung · (5) Vorbereitung zur Wiederverwendung
 
 **D2 (4 P):** Auf einem Markt gilt: Preis 10 € – Nachfrage 900, Angebot 300 · 12 € – 800 / 500 · 14 € – 650 / 650 · 16 € – 500 / 800 · 18 € – 350 / 950. Wie hoch ist der Gleichgewichtspreis in Euro? *(Ergebnis eintragen)*
@@ -523,14 +523,14 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 > **Formel:** Inflationsrate = (neuer Indexwert − alter Indexwert) / alter Indexwert · 100 %
 
-**D4 (4 P):** Welches Ziel gehört **nicht** zum magischen Viereck des Stabilitätsgesetzes?
+**D4 (4 P):** Welches Ziel gehört **nicht** zum magischen Viereck des Stabilitätsgesetzes? *(Ziffer eintragen)*
 - (1) stabiles Preisniveau
 - (2) hoher Beschäftigungsstand
 - (3) außenwirtschaftliches Gleichgewicht
 - (4) stetiges und angemessenes Wirtschaftswachstum
 - (5) ausgeglichener Staatshaushalt
 
-**D5 (4 P):** Die Europäische Zentralbank erhöht den Leitzins. Welche Wirkung ist beabsichtigt?
+**D5 (4 P):** Die Europäische Zentralbank erhöht den Leitzins. Welche Wirkung ist beabsichtigt? *(Ziffer eintragen)*
 - (1) Kredite werden billiger, die Investitionen steigen.
 - (2) Kredite werden teurer, Nachfrage und Preisauftrieb werden gedämpft.
 - (3) Die Arbeitslosigkeit sinkt unmittelbar.

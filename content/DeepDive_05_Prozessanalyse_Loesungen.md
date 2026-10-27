@@ -16,12 +16,16 @@ Zuordnung: Der Reparaturservice ist ein **Kernprozess** – er erbringt eine vom
 
 *Prüferkommentar: Je 1,5 P pro Definition, 1,5 P für die begründete Zuordnung. Ohne Begründung nur 0,5 P für die Zuordnung.*
 
-**A2 (8 P):**
-Vier Methoden *(je 1 P, max. 4 P)*: Interview mit Prozessbeteiligten · Workshop · Beobachtung am Arbeitsplatz · Dokumentenanalyse · Fragebogen · Auswertung von Systemdaten/Logfiles.
+**A2 (8 P):** Vier Methoden *(je 1 P, max. 4 P)*: Interview mit Prozessbeteiligten · Workshop · Beobachtung am Arbeitsplatz · Dokumentenanalyse · Fragebogen · Auswertung von Systemdaten/Logfiles.
 
-Vor- und Nachteile für zwei Methoden *(je 2 P)*:
-- **Interview:** Vorteil – liefert Erfahrungswissen, Hintergründe und Ausnahmefälle, die in keinem System stehen; Rückfragen sind möglich. Nachteil – subjektiv; Befragte schildern häufig den Soll- statt den gelebten Ist-Prozess, und es kostet viel Zeit.
-- **Auswertung von Systemdaten:** Vorteil – objektiv, vollständig, ohne Beeinflussung durch die Befragten, auch große Fallzahlen auswertbar. Nachteil – erklärt nicht das *Warum* hinter Abweichungen; Schritte außerhalb des Systems (Telefonate, Papier) bleiben unsichtbar; Datenqualität muss geprüft werden.
+Vor- und Nachteile für zwei Methoden *(je Zeile 2 P)*:
+
+| Methode | Vorteil | Nachteil |
+|---|---|---|
+| Interview mit den Mitarbeitern der Werkstatt | liefert Erfahrungswissen, Hintergründe und Ausnahmefälle (fehlende Teile, Rückfragen); Rückfragen sind möglich | subjektiv – Befragte schildern oft den Soll- statt den gelebten Ist-Prozess; zeitaufwendig, Skepsis der Werkstatt |
+| Auswertung der Systemdaten des Auftragssystems | objektiv, vollständig, ohne Beeinflussung, auch für alle 200 Aufträge eines Monats | erklärt nicht das Warum; Schritte außerhalb des Systems (Telefon, Papier) bleiben unsichtbar; Datenqualität muss geprüft werden |
+
+*Prüferkommentar: Ein Vorteil ohne Bezug zum Reparaturservice („liefert viele Informationen“) bringt nur den halben Punkt.*
 
 ---
 
@@ -87,11 +91,15 @@ Ansatzpunkt: Die Optimierung muss bei den **Liegezeiten** ansetzen – insbesond
 
 ## Block D – Optimierung und Wirtschaftlichkeit (18 P)
 
-**D1 (6 P):** *(je 2 P: 1 P Maßnahme, 1 P korrekte Zuordnung)* Beispiele:
-- **Automatisieren:** Kostenvoranschlag automatisch aus hinterlegten Standardpositionen erzeugen und digital versenden; automatische Erinnerung an den Kunden nach 24 h ohne Rückmeldung – greift direkt die 16 h Liegezeit an.
-- **Umstellen/Parallelisieren:** Technikereinplanung bereits vorläufig parallel zur Kundenentscheidung starten, statt sie erst nach der Zusage zu beginnen.
-- **Eliminieren:** Bei Kleinaufträgen unterhalb einer Wertgrenze auf den Kostenvoranschlag ganz verzichten (Sofortfreigabe) – der Schritt entfällt samt zugehöriger Liegezeit.
-- **Standardisieren:** Einheitliche Checkliste und Pflichtfelder bei der Auftragserfassung, um Rückfragen und Nacharbeit zu vermeiden.
+**D1 (6 P):** *(je Zeile 2 P: 1 P Maßnahme, 1 P korrekte Zuordnung)*
+
+| Maßnahme | Grundstrategie |
+|---|---|
+| Kostenvoranschlag automatisch aus Standardpositionen erzeugen und digital versenden; Erinnerung an den Kunden nach 24 h ohne Rückmeldung – greift die 16 h Liegezeit an | Automatisieren |
+| Technikereinplanung vorläufig schon parallel zur Kundenentscheidung starten statt erst nach der Zusage | Umstellen/Parallelisieren |
+| Bei Kleinaufträgen unter einer Wertgrenze auf den Kostenvoranschlag verzichten (Sofortfreigabe) – Schritt und Liegezeit entfallen | Eliminieren |
+
+Ebenfalls richtig: **Standardisieren** – einheitliche Checkliste und Pflichtfelder bei der Auftragserfassung, damit Rückfragen und Nacharbeit entfallen.
 
 *Prüferkommentar: Maßnahmen, die auf die Bearbeitungszeit statt auf die Liegezeit zielen, erhalten nur den halben Punkt – sie widersprechen dem Ergebnis aus C2.*
 
@@ -120,14 +128,15 @@ Beurteilung: Die Investition amortisiert sich nach 1,5 Jahren und damit deutlich
 - **Activity:** Bezeichnung des ausgeführten Prozessschritts – bildet die Knoten des rekonstruierten Prozessmodells.
 - **Timestamp:** Zeitpunkt des Ereignisses – legt die Reihenfolge fest und ermöglicht die Berechnung von Durchlauf- und Wartezeiten.
 
-**E2 (6 P):**
-**Datenqualitätsproblem 1:** Bei Case 5002, Schritt „Kostenvoranschlag erstellen", fehlt die **Uhrzeit** im Zeitstempel (nur Datum). *(1 P)* Konsequenz: Die Reihenfolge innerhalb des 2. März ist nicht eindeutig rekonstruierbar, und die Wartezeit bis zum nächsten Schritt lässt sich nicht berechnen – die Durchlaufzeitanalyse für diesen Fall wird ungenau oder muss den Fall ausschließen. *(1 P)*
+**E2 (6 P):** *(je Zeile 2 P: 1 P Befund, 1 P Konsequenz)*
 
-**Datenqualitätsproblem 2:** Der Prozessschritt **„Ersatzteil bestellen" und „Techniker einplanen" fehlen vollständig** im Log, obwohl sie laut Prozessbeschreibung Teil des Ablaufs sind. *(1 P)* Konsequenz: Diese Schritte werden offenbar außerhalb des Systems abgewickelt (Telefon, Papier); das aus dem Log rekonstruierte Modell wäre unvollständig und würde die Wartezeit vor der Reparatur fälschlich als eine einzige Liegezeit ausweisen. *(1 P)*
+| Befund (Case, Aktivität) | Art | Konsequenz für die Auswertung |
+|---|---|---|
+| Case 5002, „Kostenvoranschlag erstellen“: Zeitstempel ohne Uhrzeit | Datenqualitätsproblem | Reihenfolge am 2. März nicht eindeutig, Wartezeit bis zum nächsten Schritt nicht berechenbar – Durchlaufzeitanalyse ungenau oder Fall ausschließen |
+| „Ersatzteil bestellen“ und „Techniker einplanen“ fehlen in allen Cases | Datenqualitätsproblem | Schritte laufen außerhalb des Systems (Telefon, Papier); das rekonstruierte Modell ist unvollständig und weist die Wartezeit vor der Reparatur als eine einzige Liegezeit aus |
+| Case 5002, „Reparatur durchführen“ zweimal (04.03. und 05.03.) | Prozessauffälligkeit | Nacharbeitsschleife (Rework) – verlängert die Durchlaufzeit und verursacht die Nacharbeitskosten aus C4; Process Mining macht sie sichtbar, in Interviews bleibt sie meist unerwähnt |
 
 *Ebenfalls anerkannt: fehlende Endereignisse, keine Trennung von Start- und Endzeitpunkt je Aktivität.*
-
-**Prozessauffälligkeit:** Bei Case 5002 erscheint **„Reparatur durchführen" zweimal** (04.03. und 05.03.) – eine **Nacharbeitsschleife (Rework)**. *(1 P)* Konsequenz: Der Fall benötigte einen zweiten Werkstattdurchlauf; solche Schleifen verlängern die Durchlaufzeit erheblich und verursachen die in C4 berechneten Nacharbeitskosten. Genau diese Wiederholungen macht Process Mining sichtbar, während sie in Interviews meist unerwähnt bleiben. *(1 P)*
 
 **E3 (4 P):**
 Rechtliche Anforderungen: *(2 P)*

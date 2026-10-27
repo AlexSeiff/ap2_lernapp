@@ -127,17 +127,22 @@ Nur so lassen sich Fakten der jeweils **zum Zeitpunkt gültigen** Version zuordn
 ## Block E – Big Data und OLAP-Operationen (12 P)
 
 **E1 (5 P):** *(je 1 P)*
-- **Volume:** Millionen Kassenbons und Klickdaten des Onlineshops über mehrere Jahre.
-- **Velocity:** laufend eingehende Bestands- und Kassendaten der acht Filialen, teils in Echtzeit.
-- **Variety:** strukturierte Verkaufsdaten, Bewertungstexte, Produktbilder, Sensordaten aus dem Lager.
-- **Veracity:** Verlässlichkeit der Daten – etwa Kundenbewertungen unklarer Herkunft oder fehlerhafte Sensorwerte.
-- **Value:** der konkrete Nutzen, z. B. eine belastbare Sortimentsentscheidung – ohne Wertschöpfung bleibt der Aufwand Selbstzweck.
+
+| V | Beispiel aus dem Möbelhaus |
+|---|---|
+| Volume | Millionen Kassenbons und Klickdaten des Onlineshops über mehrere Jahre |
+| Velocity | laufend eingehende Bestands- und Kassendaten der acht Filialen, teils in Echtzeit |
+| Variety | strukturierte Verkaufsdaten, Bewertungstexte, Produktbilder, Sensordaten aus dem Lager |
+| Veracity | Verlässlichkeit, etwa bei Kundenbewertungen unklarer Herkunft oder fehlerhaften Sensorwerten |
+| Value | konkreter Nutzen, z. B. eine belastbare Sortimentsentscheidung – ohne Wertschöpfung bleibt der Aufwand Selbstzweck |
 
 **E2 (4 P):** *(je 1 P)*
-- (a) Jahresergebnis nach Quartalen → **Drill-down**
-- (b) Nur Region Nord → **Slice**
-- (c) Kategorien in Zeilen, Monate in Spalten → **Pivot (Rotate)**
-- (d) Filialumsätze zu Regionsumsätzen zusammenfassen → **Roll-up**
+| Auswertungswunsch | OLAP-Operation |
+|---|---|
+| (a) „Zeig mir das Jahresergebnis aufgeschlüsselt nach Quartalen." | Drill-down |
+| (b) „Nur die Filialen der Region Nord." | Slice |
+| (c) „Kategorien in die Zeilen, Monate in die Spalten." | Pivot (Rotate) |
+| (d) „Fasse die Filialumsätze zu Regionsumsätzen zusammen." | Roll-up |
 
 *Prüferkommentar zu (b): Slice, weil genau eine Dimension (Filiale/Ort, Hierarchieebene Region) auf einen einzigen Wert festgelegt wird. Dice wäre es erst, wenn zusätzlich eine weitere Dimension eingeschränkt würde (z. B. Region Nord und 1. Halbjahr).*
 

@@ -9,11 +9,13 @@
 
 **A1 (15 P):** *(je Dimension 1 P Nennung, 1 P Erläuterung, 1 P Maßnahme)*
 
-1. **Vollständigkeit** – Alle für den Zweck erforderlichen Werte sind vorhanden. Maßnahme: Pflichtfelder (NOT NULL) bei der Erfassung, regelmäßige Messung des Füllgrades.
-2. **Korrektheit** – Die Werte stimmen mit der Realität überein. Maßnahme: Abgleich mit Referenzquellen (z. B. Adressvalidierung), Stichprobenkontrolle, Vier-Augen-Prinzip.
-3. **Konsistenz** – Die Werte widersprechen sich weder innerhalb eines Datensatzes noch zwischen Systemen. Maßnahme: feldübergreifende Plausibilitätsregeln, Normalisierung, ein führendes System je Stammdatenart.
-4. **Eindeutigkeit** – Jede Realweltentität existiert genau einmal. Maßnahme: UNIQUE-Constraint auf Schlüsselfeldern, Dublettenprüfung bereits bei der Neuanlage.
-5. **Gültigkeit** – Die Werte entsprechen den vorgegebenen Formaten und Wertebereichen. Maßnahme: Format- und Wertebereichsprüfung (CHECK), Auswahllisten statt Freitext.
+| Dimension | Bedeutung | Maßnahme zur Sicherstellung |
+|---|---|---|
+| Vollständigkeit | Alle für den Zweck erforderlichen Werte sind vorhanden. | Pflichtfelder (NOT NULL) bei der Erfassung, regelmäßige Messung des Füllgrades |
+| Korrektheit | Die Werte stimmen mit der Realität überein. | Abgleich mit Referenzquellen (Adressvalidierung), Stichproben, Vier-Augen-Prinzip |
+| Konsistenz | Die Werte widersprechen sich weder im Datensatz noch zwischen Systemen. | feldübergreifende Plausibilitätsregeln, ein führendes System je Stammdatenart |
+| Eindeutigkeit | Jeder Kunde existiert genau einmal. | UNIQUE-Constraint auf Schlüsselfeldern, Dublettenprüfung bei der Neuanlage |
+| Gültigkeit | Die Werte entsprechen Format und Wertebereich. | Format- und Wertebereichsprüfung (CHECK), Auswahllisten statt Freitext |
 
 *Ebenfalls anerkannt: Aktualität, Genauigkeit, Relevanz. Reine Aufzählung ohne Erläuterung und Maßnahme: max. 5 von 15 P.*
 
@@ -95,9 +97,12 @@ Erläuterung: Die Kennzahl bezieht sich auf **alle Zellen über sechs Felder**, 
 **Golden Record:** der führende, bereinigte Datensatz je Realweltentität, der aus den Dubletten zusammengeführt wird. Dabei wird je Feld festgelegt, welche Quelle Vorrang hat (etwa der zuletzt gepflegte oder der vollständigste Wert); die übrigen Datensätze werden deaktiviert und ihre Beziehungen – Bestellungen, Belege – auf den Golden Record umgehängt. *(2 P)*
 
 **D2 (6 P):** *(je Strategie 2 P: 1 P Vorteil, 1 P Nachteil)*
-- **Datensätze löschen:** Vorteil – einfach, keine erfundenen Werte im Bestand. Nachteil – Informationsverlust; sind die Lücken nicht zufällig verteilt, entsteht eine systematische Verzerrung.
-- **Mittelwert oder Median einsetzen:** Vorteil – die Fallzahl bleibt erhalten, alle Datensätze bleiben auswertbar. Nachteil – die künstlichen Werte verringern die Streuung und täuschen eine Genauigkeit vor, die nicht vorhanden ist; der Median ist dabei robuster als der Mittelwert.
-- **Fachlich nachrecherchieren:** Vorteil – liefert die tatsächlich korrekten Werte und behebt die Ursache. Nachteil – hoher Aufwand, bei großen Datenmengen nicht praktikabel.
+
+| Strategie | Vorteil | Nachteil |
+|---|---|---|
+| Datensätze löschen | einfach, keine erfundenen Werte im Bestand | Informationsverlust; sind die Lücken nicht zufällig verteilt, entsteht eine systematische Verzerrung |
+| Mittelwert oder Median einsetzen | Fallzahl bleibt erhalten, alle Datensätze bleiben auswertbar | künstliche Werte verringern die Streuung und täuschen Genauigkeit vor; der Median ist robuster als der Mittelwert |
+| Fachlich nachrecherchieren (Spedition, Lieferscheine) | liefert die tatsächlichen Werte und behebt die Ursache | hoher Aufwand, bei großen Datenmengen kaum praktikabel |
 
 *Ebenfalls anerkannt: eigene Kategorie „unbekannt" (bei kategorialen Feldern); Kennzeichnung imputierter Werte in einer Zusatzspalte.*
 

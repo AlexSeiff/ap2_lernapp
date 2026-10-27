@@ -314,19 +314,23 @@ Nutzen: Abfragen mit Filter auf das Partitionskriterium lesen nur die betroffene
 
 Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich.
 
-## Ausgangslage
+## Ausgangssituation
 
-Die Möbelhaus Nordholz GmbH betreibt acht Filialen und führt rund 500 Artikel. Die Geschäftsführung möchte Umsätze nach Zeitraum, Artikel, Kunde und Filiale auswerten und Vorjahresvergleiche über drei Jahre ziehen. Die Daten liegen in der operativen Datenbank sowie in einem separaten CRM-System.
+Die **Möbelhaus Nordholz GmbH** betreibt acht Filialen und führt rund 500 Artikel. Die Geschäftsführung möchte Umsätze nach Zeitraum, Artikel, Kunde und Filiale auswerten und Vorjahresvergleiche über drei Jahre ziehen. Die Daten liegen in der operativen Datenbank sowie in einem separaten CRM-System. Sie sollen als Mitarbeiter der IT-Abteilung ein **Data Warehouse** konzipieren.
 
 ## Block A – OLTP und OLAP (18 P)
 
+In der ersten Projektbesprechung fragt die Geschäftsführung, warum überhaupt ein eigenes System nötig ist.
+
 **A1 (10 P):** *Grenzen* Sie OLTP- und OLAP-Systeme anhand von **fünf** Kriterien *ab*. *Stellen* Sie die Antwort tabellarisch dar.
 
-**A2 (8 P):** Ein Kollege schlägt vor, die Auswertungen direkt auf der operativen Datenbank durchzuführen: „Die Daten sind doch schon da." *Beurteilen* Sie den Vorschlag und *nennen* Sie drei fachliche Gründe, die dagegen sprechen.
+**A2 (8 P):** Ein Kollege schlägt vor, die Auswertungen direkt auf der operativen Datenbank durchzuführen: „Die Daten sind doch schon da." *Beurteilen* Sie den Vorschlag und *nennen* Sie **drei** fachliche Gründe, die dagegen sprechen.
 
 ## Block B – Architektur und ETL (24 P)
 
-**B1 (8 P):** *Beschreiben* Sie die drei Phasen des ETL-Prozesses und *nennen* Sie für die Transformationsphase vier typische Aufgaben.
+Die Daten aus operativer Datenbank und CRM sollen jede Nacht ins Data Warehouse geladen werden. Im ersten Testlauf gibt es abgewiesene Datensätze.
+
+**B1 (8 P):** *Beschreiben* Sie die drei Phasen des ETL-Prozesses und *nennen* Sie für die Transformationsphase **vier** typische Aufgaben.
 
 **B2 (6 P):** *Erläutern* Sie den Zweck einer Staging Area und den Unterschied zwischen Voll- und Deltaextraktion.
 
@@ -336,13 +340,24 @@ Die Möbelhaus Nordholz GmbH betreibt acht Filialen und führt rund 500 Artikel.
 
 ## Block C – Sternschema entwerfen (30 P)
 
+Für die Umsatzauswertung aus der Ausgangssituation soll das logische Datenmodell des Data Warehouse entstehen.
+
 **C1 (16 P):** *Entwerfen* Sie ein Star-Schema für die beschriebene Umsatzauswertung. *Benennen* Sie die Faktentabelle mit mindestens zwei Kennzahlen sowie vier Dimensionstabellen mit je mindestens drei Attributen. *Kennzeichnen* Sie Primär- und Fremdschlüssel.
 
 **C2 (6 P):** *Erläutern* Sie den Begriff **Granularität** und *legen* Sie für Ihr Schema eine geeignete Granularität *fest*. *Begründen* Sie Ihre Wahl.
 
-**C3 (8 P):** *Vergleichen* Sie Star- und Snowflake-Schema anhand von vier Kriterien und *sprechen* Sie eine begründete Empfehlung für dieses Projekt *aus*.
+**C3 (8 P):** *Vergleichen* Sie Star- und Snowflake-Schema anhand von **vier** Kriterien und *tragen* Sie den Vergleich in die Tabelle *ein*. *Sprechen* Sie unter der Tabelle eine begründete Empfehlung für dieses Projekt *aus*.
+
+| Kriterium | Star | Snowflake |
+|---|---|---|
+| | | |
+| | | |
+| | | |
+| | | |
 
 ## Block D – Historisierung (16 P)
+
+Kundenstammdaten ändern sich – trotzdem sollen Umsätze der Vergangenheit dem damals richtigen Ort zugeordnet bleiben.
 
 **D1 (6 P):** Kundin „Huber GmbH" (K-1001) zieht am 15.05.2026 von München nach Hamburg. *Erläutern* Sie, welches Problem entsteht, wenn die Adresse in der Dimensionstabelle einfach überschrieben wird.
 
@@ -352,10 +367,26 @@ Die Möbelhaus Nordholz GmbH betreibt acht Filialen und führt rund 500 Artikel.
 
 ## Block E – Big Data und OLAP-Operationen (12 P)
 
-**E1 (5 P):** *Nennen* Sie die fünf V von Big Data und *ordnen* Sie jedem ein Beispiel aus dem Möbelhaus zu.
+Die Geschäftsführung will künftig auch Daten aus Onlineshop und Lager auswerten und stellt erste Auswertungswünsche.
 
-**E2 (4 P):** *Ordnen* Sie den folgenden Auswertungswünschen die passende OLAP-Operation zu:
-(a) „Zeig mir das Jahresergebnis aufgeschlüsselt nach Quartalen." (b) „Nur die Filialen der Region Nord." (c) „Kategorien in die Zeilen, Monate in die Spalten." (d) „Fasse die Filialumsätze zu Regionsumsätzen zusammen."
+**E1 (5 P):** *Nennen* Sie die **fünf** V von Big Data und *ordnen* Sie jedem ein Beispiel aus dem Möbelhaus *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| V | Beispiel aus dem Möbelhaus |
+|---|---|
+| | |
+| | |
+| | |
+| | |
+| | |
+
+**E2 (4 P):** *Ordnen* Sie den folgenden Auswertungswünschen die passende OLAP-Operation *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Auswertungswunsch | OLAP-Operation |
+|---|---|
+| (a) „Zeig mir das Jahresergebnis aufgeschlüsselt nach Quartalen." | |
+| (b) „Nur die Filialen der Region Nord." | |
+| (c) „Kategorien in die Zeilen, Monate in die Spalten." | |
+| (d) „Fasse die Filialumsätze zu Regionsumsätzen zusammen." | |
 
 **E3 (3 P):** *Erläutern* Sie den Unterschied zwischen Batch- und Streamverarbeitung und *nennen* Sie je einen passenden Anwendungsfall.
 

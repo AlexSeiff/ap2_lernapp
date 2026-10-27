@@ -299,19 +299,31 @@ Startknoten (gefüllter Kreis), Aktionen (abgerundete Rechtecke), Entscheidungen
 
 Bearbeite die Klausur **vor einer Altklausur zum Bereich „Datenqualität“** am Stück, handschriftlich.
 
-## Ausgangslage
+## Ausgangssituation
 
-Die Möbelhaus Nordholz GmbH stellt ihre Reparaturdaten künftig über eine Schnittstelle für Filialen und Partner bereit.
+Die **Möbelhaus Nordholz GmbH** stellt ihre Reparatur- und Bestelldaten künftig über eine **Schnittstelle** für die Filialen, einen Online-Marktplatz und Partnerwerkstätten bereit. Bisher tauschen die Standorte CSV-Dateien per E-Mail aus; dabei gehen regelmäßig Umlaute und Beträge kaputt. Sie arbeiten in der IT-Abteilung und sind für die Datenbereitstellung zuständig.
 
 ## Block A – Daten klassifizieren (12 P)
 
+Bevor Daten an Partner gehen, soll jede Datenquelle nach Struktur und Schutzbedarf eingestuft werden.
+
 **A1 (6 P):** *Ordnen* Sie die folgenden Daten jeweils dem Strukturierungsgrad *zu* und *nennen* Sie eine Konsequenz für die Auswertung: (a) Kundentabelle der Datenbank, (b) JSON-Export der Bestellungen, (c) Fotos von Reklamationsschäden, (d) Freitext-Bewertungen aus dem Onlineshop.
 
-**A2 (6 P):** *Ordnen* Sie jeweils eine Schutzklasse *zu* und *nennen* Sie für die höchste Klasse zwei Schutzmaßnahmen: (a) Produktkatalog mit Preisen, (b) interne Telefonliste, (c) Kundenadressen mit Jahresumsätzen, (d) Gehaltsdaten der Beschäftigten.
+**A2 (6 P):** *Ordnen* Sie jeweils eine Schutzklasse *zu* und *nennen* Sie für die höchste Klasse **zwei** Schutzmaßnahmen: (a) Produktkatalog mit Preisen, (b) interne Telefonliste, (c) Kundenadressen mit Jahresumsätzen, (d) Gehaltsdaten der Beschäftigten.
 
 ## Block B – Formate und Kodierung (30 P)
 
-**B1 (8 P):** Eine Filiale liefert folgende Datei. *Nennen* Sie drei Probleme beim Import und je eine Lösung.
+Die ersten Lieferungen der Filialen kommen an – und machen Probleme beim Import.
+
+**B1 (8 P):** Eine Filiale liefert die unten stehende Datei. *Nennen* Sie **drei** Probleme beim Import und je eine Lösung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Problem | Lösung |
+|---|---|
+| | |
+| | |
+| | |
+
+Gelieferte Datei:
 
 ```
 kunden_id;name;ort;umsatz
@@ -322,7 +334,7 @@ kunden_id;name;ort;umsatz
 
 **B2 (8 P):** *Erstellen* Sie ein JSON-Dokument für Bestellung 101 vom 03.02.2026 der Fischer KG (Kunden-ID 3, Köln) mit den Positionen Schreibtisch Basic (Produkt 11, 1 Stück, 399,00 €) und Schreibtischlampe (Produkt 14, 3 Stück, 39,90 €). Die Bestellung ist noch nicht bezahlt.
 
-**B3 (8 P):** Das folgende JSON wird von der Schnittstelle abgelehnt. *Benennen* Sie fünf Fehler und *geben* Sie die korrigierte Fassung *an*.
+**B3 (8 P):** Das folgende JSON wird von der Schnittstelle abgelehnt. *Benennen* Sie **fünf** Fehler und *geben* Sie die korrigierte Fassung *an*.
 
 ```
 {
@@ -344,9 +356,19 @@ b) Im Import erscheint „MÃ¼nchen“ statt „München“ und „KÃ¶ln“ s
 
 ## Block C – REST-Schnittstelle (26 P)
 
-**C1 (10 P):** *Entwerfen* Sie die Schnittstelle für Reparaturaufträge. *Geben* Sie für die folgenden Operationen jeweils HTTP-Methode, URI und Statuscode bei Erfolg *an*: (a) alle offenen Aufträge abrufen, (b) einen Auftrag anhand der Nummer abrufen, (c) einen neuen Auftrag anlegen, (d) den Status eines Auftrags ändern, (e) einen Auftrag löschen.
+Statt E-Mail-Dateien soll eine REST-Schnittstelle die Reparaturaufträge bereitstellen. Eine Filiale testet bereits einen ersten Zugang.
 
-**C2 (6 P):** Eine Filiale ruft die Daten so ab: `GET http://api.nordholz.de/reparaturauftraege?apikey=8f3a91c2&status=offen` – *Benennen* Sie zwei Sicherheitsmängel und *geben* Sie jeweils die Korrektur *an*.
+**C1 (10 P):** *Entwerfen* Sie die Schnittstelle für Reparaturaufträge. *Tragen* Sie für die folgenden Operationen jeweils HTTP-Methode, URI und Statuscode bei Erfolg in die Tabelle *ein*.
+
+| Operation | Methode | URI | Statuscode bei Erfolg |
+|---|---|---|---|
+| (a) alle offenen Aufträge abrufen | | | |
+| (b) einen Auftrag anhand der Nummer abrufen | | | |
+| (c) einen neuen Auftrag anlegen | | | |
+| (d) den Status eines Auftrags ändern | | | |
+| (e) einen Auftrag löschen | | | |
+
+**C2 (6 P):** Eine Filiale ruft die Daten so ab: `GET http://api.nordholz.de/reparaturauftraege?apikey=8f3a91c2&status=offen` – *Benennen* Sie **zwei** Sicherheitsmängel und *geben* Sie jeweils die Korrektur *an*.
 
 **C3 (6 P):** *Erläutern* Sie die Statuscodes 401, 403 und 429 an je einem Beispiel aus dem Szenario.
 
@@ -354,13 +376,24 @@ b) Im Import erscheint „MÃ¼nchen“ statt „München“ und „KÃ¶ln“ s
 
 ## Block D – NoSQL und Transaktionen (20 P)
 
-**D1 (8 P):** *Wählen* Sie jeweils einen Datenbanktyp und *begründen* Sie: (a) Produktkatalog, bei dem jede Kategorie andere Attribute hat, (b) Warenkörbe des Onlineshops mit Zugriff über die Sitzungs-ID, (c) Empfehlungen „Kunden, die X kauften, kauften auch Y“ über mehrere Stufen, (d) Finanzbuchhaltung.
+Für den Online-Marktplatz prüft die IT, ob neben der relationalen Datenbank weitere Datenbanktypen sinnvoll sind. Im Lager ist zudem ein Bestandsfehler aufgefallen.
 
-**D2 (8 P):** Zwei Disponenten lesen gleichzeitig den Lagerbestand 10 eines Artikels, verkaufen je 3 Stück und speichern jeweils 7. *Benennen* Sie das Problem, *geben* Sie den korrekten Endbestand *an* und *beschreiben* Sie zwei Lösungen.
+**D1 (8 P):** *Wählen* Sie für jeden Einsatzfall einen Datenbanktyp und *begründen* Sie Ihre Wahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Szenario | Datenbanktyp | Begründung |
+|---|---|---|
+| (a) Produktkatalog, bei dem jede Kategorie andere Attribute hat | | |
+| (b) Warenkörbe des Onlineshops mit Zugriff über die Sitzungs-ID | | |
+| (c) Empfehlungen „Kunden, die X kauften, kauften auch Y“ über mehrere Stufen | | |
+| (d) Finanzbuchhaltung | | |
+
+**D2 (8 P):** Zwei Disponenten lesen gleichzeitig den Lagerbestand 10 eines Artikels, verkaufen je 3 Stück und speichern jeweils 7. *Benennen* Sie das Problem, *geben* Sie den korrekten Endbestand *an* und *beschreiben* Sie **zwei** Lösungen.
 
 **D3 (4 P):** *Erläutern* Sie, welche Folge der Verzicht auf ein festes Schema für die Datenqualität hat und wie Sie gegensteuern.
 
 ## Block E – UML (12 P)
+
+Für das Kundenportal und das Datenmodell der Schnittstelle sollen die Anforderungen in UML festgehalten werden.
 
 **E1 (6 P):** Kunden können im Portal eine Reparatur beauftragen; dafür müssen sie immer angemeldet sein. Optional können sie beim Beauftragen einen Expressservice wählen. Servicemitarbeiter bearbeiten die Aufträge. *Erstellen* Sie das Use-Case-Diagramm mit korrekter «include»- und «extend»-Beziehung.
 

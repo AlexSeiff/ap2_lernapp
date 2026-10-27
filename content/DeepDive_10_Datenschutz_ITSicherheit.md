@@ -284,23 +284,34 @@ Die EU-Richtlinie **NIS2** ist in Deutschland mit dem **NIS2-Umsetzungsgesetz** 
 
 # Übungsklausur Datenschutz & IT-Sicherheit (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich.
+Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich. Halte dich an die geforderte Anzahl der Nennungen.
 
-## Ausgangslage
+## Ausgangssituation
 
-Die Möbelhaus Nordholz GmbH (140 Beschäftigte) führt ein neues Analysesystem ein. Es wertet Kundendaten, Bestellhistorien und Reklamationen aus. Die Auswertung erfolgt in der Cloud eines externen Dienstleisters. Zusätzlich sollen Bearbeitungszeiten je Mitarbeiter ausgewertet werden.
+Die **Möbelhaus Nordholz GmbH** (140 Beschäftigte) führt ein neues **Analysesystem** ein. Es wertet Kundendaten, Bestellhistorien und Reklamationen aus; die Auswertung läuft in der Cloud eines externen Dienstleisters. Zusätzlich möchte die Geschäftsleitung Bearbeitungszeiten je Mitarbeiter auswerten. Sie arbeiten in der IT-Abteilung und unterstützen den Datenschutzbeauftragten bei der Einführung.
 
 ## Block A – Grundlagen und Grundsätze (24 P)
 
+Der Datenschutzbeauftragte bittet Sie, für das Verzeichnis der Verarbeitungstätigkeiten zu klären, welche Daten betroffen sind und auf welcher Grundlage sie verarbeitet werden.
+
 **A1 (6 P):** *Definieren* Sie „personenbezogene Daten" und *entscheiden* Sie begründet für je zwei Beispiele: Kundennummer, Firmenname „Huber GmbH", IP-Adresse, Durchschnittsumsatz aller Kunden.
 
-**A2 (10 P):** *Nennen* Sie fünf Grundsätze nach Art. 5 DSGVO und *erläutern* Sie jeden in einem Satz.
+**A2 (10 P):** *Nennen* Sie **fünf** Grundsätze nach Art. 5 DSGVO und *erläutern* Sie jeden in einem Satz.
 
-**A3 (8 P):** *Nennen* Sie vier Rechtsgrundlagen nach Art. 6 DSGVO und *ordnen* Sie jeder eine passende Verarbeitung aus der Ausgangslage oder dem Möbelhausbetrieb zu.
+**A3 (8 P):** *Nennen* Sie **vier** Rechtsgrundlagen nach Art. 6 DSGVO und *ordnen* Sie jeder eine passende Verarbeitung aus der Ausgangssituation oder dem Möbelhausbetrieb *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Rechtsgrundlage | passende Verarbeitung im Möbelhaus |
+|---|---|
+| | |
+| | |
+| | |
+| | |
 
 ## Block B – Betroffenenrechte und Pflichten (26 P)
 
-**B1 (8 P):** *Nennen* Sie vier Betroffenenrechte mit Artikel und *erläutern* Sie deren Inhalt.
+Nach dem Start des Systems gehen die ersten Anfragen von Kunden ein, und der Cloud-Vertrag soll unterschrieben werden. Kurz darauf passiert eine Panne.
+
+**B1 (8 P):** *Nennen* Sie **vier** Betroffenenrechte mit Artikel und *erläutern* Sie deren Inhalt.
 
 **B2 (8 P):** Ein Kunde verlangt die vollständige Löschung aller seiner Daten. Er hat vor drei Jahren eine Küche gekauft und ist für den Newsletter angemeldet. *Beurteilen* Sie den Anspruch differenziert und *beschreiben* Sie das korrekte Vorgehen.
 
@@ -310,17 +321,29 @@ Die Möbelhaus Nordholz GmbH (140 Beschäftigte) führt ein neues Analysesystem 
 
 ## Block C – Anonymisierung und Mitarbeiterauswertung (16 P)
 
-**C1 (6 P):** *Grenzen* Sie Anonymisierung und Pseudonymisierung *ab*. *Geben* Sie an, welche Variante weiterhin der DSGVO unterliegt, und *begründen* Sie.
+Für Auswertungen sollen die Daten so wenig personenbezogen wie möglich sein. Der Datenschutzbeauftragte verweist dazu auf die englische Fassung der DSGVO, Art. 4 Nr. 5:
 
-**C2 (10 P):** Die Bearbeitungszeiten sollen je Mitarbeiter ausgewertet werden. *Erläutern* Sie zwei rechtliche Anforderungen (mit Rechtsgrundlage) und *nennen* Sie drei Maßnahmen, mit denen die Auswertung dennoch zulässig durchgeführt werden kann.
+> *"'pseudonymisation' means the processing of personal data in such a manner that the personal data can no longer be attributed to a specific data subject without the use of additional information, provided that such additional information is kept separately and is subject to technical and organisational measures to ensure that the personal data are not attributed to an identified or identifiable natural person."*
+
+**C1 (6 P):** *Grenzen* Sie anhand des Auszugs Anonymisierung und Pseudonymisierung *ab*. *Geben* Sie an, welche Variante weiterhin der DSGVO unterliegt, und *begründen* Sie.
+
+**C2 (10 P):** Die Bearbeitungszeiten sollen je Mitarbeiter ausgewertet werden. *Erläutern* Sie **zwei** rechtliche Anforderungen (mit Rechtsgrundlage) und *nennen* Sie **drei** Maßnahmen, mit denen die Auswertung dennoch zulässig durchgeführt werden kann.
 
 ## Block D – IT-Sicherheit (22 P)
 
-**D1 (6 P):** *Nennen* Sie die drei klassischen Schutzziele und *ordnen* Sie jedem eine konkrete Maßnahme für das Analysesystem zu.
+Das Analysesystem soll vor dem Produktivstart abgesichert werden. Der Dienstleister fragt nach Ihrem Sicherheits- und Berechtigungskonzept.
+
+**D1 (6 P):** *Nennen* Sie die **drei** klassischen Schutzziele und *ordnen* Sie jedem eine konkrete Maßnahme für das Analysesystem *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Schutzziel | Maßnahme für das Analysesystem |
+|---|---|
+| | |
+| | |
+| | |
 
 **D2 (6 P):** *Grenzen* Sie symmetrische und asymmetrische Verschlüsselung *ab* und *erläutern* Sie, warum in der Praxis hybride Verfahren eingesetzt werden. *Erklären* Sie zusätzlich, warum Hashing keine Verschlüsselung ist.
 
-**D3 (6 P):** *Beschreiben* Sie ein rollenbasiertes Berechtigungskonzept für das Analysesystem mit drei Rollen und *erläutern* Sie die Prinzipien „Least Privilege" und „Need-to-know".
+**D3 (6 P):** *Beschreiben* Sie ein rollenbasiertes Berechtigungskonzept für das Analysesystem mit **drei** Rollen und *erläutern* Sie die Prinzipien „Least Privilege" und „Need-to-know".
 
 **D4 (4 P):** Eine Auswertung soll Kundendaten über ein Eingabefeld filtern. *Erläutern* Sie die Gefahr einer SQL-Injection und die wirksamste Gegenmaßnahme.
 

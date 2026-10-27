@@ -246,7 +246,11 @@ Typische **Baseline-Modelle**:
 
 # Übungsklausur Modellgüte (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Runde auf zwei Nachkommastellen.
+Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Runde auf zwei Nachkommastellen. Halte dich an die geforderte Anzahl der Nennungen.
+
+## Ausgangssituation
+
+Die **Möbelhaus Nordholz GmbH** hat ein Modell trainiert, das vor der Auslieferung vorhersagt, ob ein Auftrag reklamiert wird. Riskante Aufträge sollen vor dem Versand zusätzlich geprüft werden. Bevor das Modell eingesetzt wird, sollen Sie als Mitarbeiter der IT-Abteilung seine Güte bewerten und der Geschäftsleitung eine Empfehlung geben.
 
 ## Anlage – Testergebnis des Reklamationsmodells
 
@@ -259,15 +263,25 @@ Getestet wurden 1.000 Aufträge, davon 100 tatsächlich reklamiert.
 
 ## Block A – Aufteilung und Anpassung (24 P)
 
+Die Entwickler zeigen sehr gute Trainingsergebnisse. Die Geschäftsleitung fragt, ob man diesen Werten trauen kann.
+
 **A1 (6 P):** *Erläutern* Sie, warum Daten vor dem Training in Trainings- und Testdaten aufgeteilt werden, und *nennen* Sie eine typische Aufteilung.
 
-**A2 (8 P):** *Erklären* Sie Overfitting und Underfitting. *Geben* Sie für jeden Fall an, woran Sie ihn an den Gütewerten erkennen, und *nennen* Sie je zwei Gegenmaßnahmen.
+**A2 (8 P):** *Erklären* Sie Overfitting und Underfitting. *Geben* Sie für jeden Fall *an*, woran Sie ihn an den Gütewerten erkennen, und *nennen* Sie je **zwei** Gegenmaßnahmen. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
-**A3 (6 P):** *Beschreiben* Sie die 5-fache Kreuzvalidierung und *nennen* Sie zwei Vorteile gegenüber einem einfachen Split.
+| | Overfitting | Underfitting |
+|---|---|---|
+| Erklärung | | |
+| erkennbar an den Gütewerten | | |
+| zwei Gegenmaßnahmen | | |
+
+**A3 (6 P):** *Beschreiben* Sie die 5-fache Kreuzvalidierung und *nennen* Sie **zwei** Vorteile gegenüber einem einfachen Split.
 
 **A4 (4 P):** Ein Kollege sortiert die Daten nach Auftragsdatum und nimmt die ersten 80 % als Trainingsdaten. *Beurteilen* Sie das Vorgehen für zwei Fälle: (a) Vorhersage des Reklamationsrisikos je Auftrag, (b) Prognose des Monatsumsatzes.
 
 ## Block B – Konfusionsmatrix berechnen (30 P)
+
+Grundlage ist das Testergebnis aus der **Anlage**.
 
 **B1 (4 P):** *Benennen* Sie die vier Felder der Anlage mit den Fachbegriffen TP, FP, FN und TN. *Geben* Sie an, welche Klasse als positiv gilt.
 
@@ -288,6 +302,8 @@ Getestet wurden 1.000 Aufträge, davon 100 tatsächlich reklamiert.
 
 ## Block C – Interpretation und Auswahl (22 P)
 
+Die Geschäftsleitung versteht die Kennzahlen nicht und fragt, welche Zahl für ihren Zweck – die Vorabprüfung riskanter Aufträge – wirklich zählt.
+
 **C1 (8 P):** *Erläutern* Sie den Unterschied zwischen Precision und Recall in eigenen Worten und *geben* Sie für die Anlage an, welche der beiden Kennzahlen hier höher ist und warum.
 
 **C2 (8 P):** Das Modell soll steuern, welche Aufträge vor der Auslieferung zusätzlich geprüft werden. *Begründen* Sie, welche Kennzahl in diesem Anwendungsfall die wichtigste ist. *Erläutern* Sie die Folgen eines FN und eines FP jeweils konkret.
@@ -302,7 +318,7 @@ Ein übersehener Reklamationsfall kostet durchschnittlich 120 €, eine unnötig
 
 > **Formel:** Fehlerkosten = FN · Kosten je FN + FP · Kosten je FP
 
-**D2 (6 P):** *Beurteilen* Sie auf dieser Grundlage, ob der Einsatz des Modells zu empfehlen ist, und *nennen* Sie zwei Faktoren, die in dieser Rechnung nicht enthalten sind.
+**D2 (6 P):** *Beurteilen* Sie auf dieser Grundlage, ob der Einsatz des Modells zu empfehlen ist, und *nennen* Sie **zwei** Faktoren, die in dieser Rechnung nicht enthalten sind.
 
 ## Block E – Regressionsgüte (12 P)
 

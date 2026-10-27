@@ -11,12 +11,12 @@
 
 | | Auswertung | Diagrammtyp | Begründung |
 |---|---|---|---|
-| a | Monatsumsatz über 24 Monate | **Liniendiagramm** | zeigt eine Entwicklung über die Zeit; die Verbindung der Punkte macht Trend und Saison sichtbar |
+| a | Monatsumsatz der letzten 24 Monate | **Liniendiagramm** | zeigt eine Entwicklung über die Zeit; die Verbindung der Punkte macht Trend und Saison sichtbar |
 | b | Umsatzvergleich der acht Filialen | **Balken-/Säulendiagramm**, absteigend sortiert | Kategorienvergleich; Balkenlängen sind exakt vergleichbar |
 | c | Verteilung der Reparaturdauern | **Histogramm** (alternativ Boxplot) | zeigt die Form der Verteilung, Häufungen und Ausreißer |
-| d | Werbebudget und Umsatz | **Streudiagramm** | stellt den Zusammenhang zweier metrischer Merkmale dar |
-| e | Anteil von vier Produktkategorien | **Kreisdiagramm** oder gestapelter Balken | Anteile am Ganzen; bei nur vier Kategorien vertretbar |
-| f | Umsatz je Filiale und Monat | **Heatmap** | zwei Dimensionen gleichzeitig; Muster und Ausreißer sofort erkennbar |
+| d | Zusammenhang zwischen Werbebudget und Umsatz | **Streudiagramm** | stellt den Zusammenhang zweier metrischer Merkmale dar |
+| e | Anteil der vier Produktkategorien am Gesamtumsatz | **Kreisdiagramm** oder gestapelter Balken | Anteile am Ganzen; bei nur vier Kategorien vertretbar |
+| f | Umsatz je Filiale und Monat in einer Übersicht | **Heatmap** | zwei Dimensionen gleichzeitig; Muster und Ausreißer sofort erkennbar |
 
 *Prüferkommentar: Bei (e) ist das Kreisdiagramm hier ausnahmsweise zulässig, weil nur vier Kategorien vorliegen – wer stattdessen den gestapelten Balken wählt und das begründet, erhält ebenfalls volle Punkte. Bei (b) ist das Liniendiagramm falsch: Filialen sind kategorial, eine Verbindungslinie suggeriert einen Verlauf, den es nicht gibt.*
 

@@ -210,29 +210,42 @@ Beispiel: Eigenentwicklung 12.000 € Fixkosten pro Jahr plus 2 € je Vorgang, 
 
 # Übungsklausur Projektmanagement & Wirtschaftlichkeit (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner und Lineal.
+Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner und Lineal. Halte dich an die geforderte Anzahl der Nennungen.
 
-## Ausgangslage
+## Ausgangssituation
 
-Die Möbelhaus Nordholz GmbH plant ein Projekt zur Einführung eines Reporting-Systems.
+Die **Möbelhaus Nordholz GmbH** erstellt ihre Umsatz- und Lagerberichte bisher monatlich von Hand aus Excel-Exporten; jede Auswertung kostet das Controlling rund drei Arbeitstage, und Zahlen aus Filialen und Onlineshop passen oft nicht zusammen. Die Geschäftsleitung beauftragt deshalb ein Projekt zur Einführung eines **Reporting-Systems** mit automatisierter ETL-Strecke und Dashboards. Sie gehören als Mitarbeiter der IT-Abteilung zum Projektteam.
 
 ## Block A – Grundlagen (20 P)
 
-**A1 (6 P):** *Nennen* Sie vier Merkmale eines Projekts und *begründen* Sie, warum die monatliche Umsatzauswertung kein Projekt ist.
+Für den Projektauftrag sollen Ziele und Anforderungen festgehalten werden. Der Leiter des Controllings hat bereits eine Wunschliste geschickt; ein Kollege bezweifelt, dass das Vorhaben überhaupt ein Projekt ist.
+
+**A1 (6 P):** *Nennen* Sie **vier** Merkmale eines Projekts und *begründen* Sie, warum die monatliche Umsatzauswertung kein Projekt ist.
 
 **A2 (6 P):** *Grenzen* Sie Lastenheft und Pflichtenheft *ab*: Wer erstellt jeweils was, wann und mit welchem Inhalt?
 
-**A3 (4 P):** *Erläutern* Sie den Unterschied zwischen funktionalen und nicht-funktionalen Anforderungen und *geben* Sie für das Reporting-System je zwei Beispiele.
+**A3 (4 P):** *Erläutern* Sie den Unterschied zwischen funktionalen und nicht-funktionalen Anforderungen und *geben* Sie für das Reporting-System je **zwei** Beispiele.
 
 **A4 (4 P):** *Formulieren* Sie ein SMART-Ziel für das Projekt und *weisen* Sie alle fünf Kriterien in Ihrer Formulierung *nach*.
 
 ## Block B – Vorgehensmodelle (14 P)
 
-**B1 (8 P):** *Vergleichen* Sie Wasserfallmodell und Scrum anhand von vier Kriterien.
+Die Projektleiterin lässt das Team entscheiden, nach welchem Vorgehensmodell gearbeitet wird. Der Fachbereich kann seine Anforderungen noch nicht vollständig beschreiben, der Starttermin zum Geschäftsjahresbeginn steht aber fest.
 
-**B2 (6 P):** *Nennen* Sie die drei Scrum-Rollen mit je einer Hauptaufgabe. *Begründen* Sie anschließend, welches Vorgehensmodell Sie für dieses Projekt empfehlen, wenn die Anforderungen des Fachbereichs noch unklar sind, der Endtermin aber feststeht.
+**B1 (8 P):** *Vergleichen* Sie Wasserfallmodell und Scrum anhand von **vier** Kriterien. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Kriterium | Wasserfall | Scrum |
+|---|---|---|
+| | | |
+| | | |
+| | | |
+| | | |
+
+**B2 (6 P):** *Nennen* Sie die **drei** Scrum-Rollen mit je einer Hauptaufgabe. *Begründen* Sie anschließend, welches Vorgehensmodell Sie für dieses Projekt empfehlen, wenn die Anforderungen des Fachbereichs noch unklar sind, der Endtermin aber feststeht.
 
 ## Block C – Netzplan (28 P)
+
+Für die Terminplanung hat die Projektleiterin folgende Vorgangsliste erstellt:
 
 | Vorgang | Beschreibung | Dauer (Tage) | Vorgänger |
 |---|---|---|---|
@@ -266,6 +279,8 @@ Die Möbelhaus Nordholz GmbH plant ein Projekt zur Einführung eines Reporting-S
 
 ## Block D – Wirtschaftlichkeit (26 P)
 
+Vor der Freigabe des Budgets verlangt die Geschäftsleitung eine Wirtschaftlichkeitsbetrachtung und einen begründeten Anbietervergleich.
+
 **D1 (8 P):** Das Reporting-System kostet einmalig 45.000 €. Es spart jährlich 18.000 € an manuellem Auswertungsaufwand. Die geplante Nutzungsdauer beträgt fünf Jahre.
 a) *Berechnen* Sie die Amortisationszeit. (3 P)
 b) *Berechnen* Sie den ROI über die gesamte Nutzungsdauer. (3 P)
@@ -287,16 +302,23 @@ b) *Beurteilen* Sie das Ergebnis kritisch. (4 P)
 
 > **Formel:** Break-even-Menge = Fixkosten / (Verkaufspreis − variable Stückkosten)
 
-**D4 (4 P):** *Erläutern* Sie den Begriff **TCO** und *nennen* Sie drei Kostenpositionen, die in D1 nicht berücksichtigt wurden.
+**D4 (4 P):** *Erläutern* Sie den Begriff **TCO** und *nennen* Sie **drei** Kostenpositionen, die in D1 nicht berücksichtigt wurden.
 
 ## Block E – Risiken und Steuerung (12 P)
 
-**E1 (6 P):** *Bewerten* Sie die folgenden Risiken mit einer Risikoprioritätszahl (Skala 1–5) und *ordnen* Sie jedem eine der vier Risikostrategien zu:
-(a) Der externe Dienstleister fällt aus (W = 2, S = 5) · (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) · (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3)
+In der Umsetzungsphase zeichnen sich erste Risiken ab, und der Fachbereich meldet laufend neue Wünsche an die Dashboards.
+
+**E1 (6 P):** *Bewerten* Sie die folgenden Risiken mit einem Risikowert (Eintrittswahrscheinlichkeit W und Schadensausmaß S auf einer Skala 1–5) und *ordnen* Sie jedem Risiko eine der vier Risikostrategien *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Risiko | Risikowert | Strategie |
+|---|---|---|
+| (a) Der externe Dienstleister fällt aus (W = 2, S = 5) | | |
+| (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | | |
+| (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | | |
 
 > **Formel:** Risikowert = Eintrittswahrscheinlichkeit W · Schadensausmaß S
 
-**E2 (3 P):** *Erläutern* Sie den Begriff **Scope Creep** und *nennen* Sie zwei Maßnahmen dagegen.
+**E2 (3 P):** *Erläutern* Sie den Begriff **Scope Creep** und *nennen* Sie **zwei** Maßnahmen dagegen.
 
 **E3 (3 P):** *Erläutern* Sie, was ein Soll-Ist-Vergleich am Projektende umfassen muss und warum er für Ihre Projektdokumentation unverzichtbar ist.
 

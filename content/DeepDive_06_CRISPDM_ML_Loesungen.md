@@ -40,9 +40,9 @@ Konsequenz: Der Plan unterschätzt den Aufwand für Datenbeschaffung, Bereinigun
 | Fragestellung | Lernart | Verfahrenstyp |
 |---|---|---|
 | (a) Wird dieser Auftrag reklamiert? | überwacht | **Klassifikation** (Zielvariable ja/nein) |
-| (b) Welche Kundengruppen gibt es? | unüberwacht | **Clustering** (z. B. k-Means) |
-| (c) Wie hoch wird der Umsatz? | überwacht | **Regression** (stetige Zielgröße) |
-| (d) Was wird gemeinsam gekauft? | unüberwacht | **Assoziationsanalyse** |
+| (b) Welche Kundengruppen lassen sich in unseren Daten unterscheiden? | unüberwacht | **Clustering** (z. B. k-Means) |
+| (c) Wie hoch wird der Umsatz im nächsten Quartal sein? | überwacht | **Regression** (stetige Zielgröße) |
+| (d) Welche Produkte werden häufig gemeinsam gekauft? | unüberwacht | **Assoziationsanalyse** |
 
 **B2 (6 P):**
 Beide gehören zum überwachten Lernen; der Unterschied liegt im **Typ der Zielvariablen**: Die Klassifikation sagt eine **Kategorie** (diskret) vorher, die Regression einen **stetigen Zahlenwert**. *(3 P)*
@@ -140,8 +140,11 @@ Es liegt **Data Leakage** (Informationsdurchsickern) vor: Das Feld „Reklamatio
 Folge: Das Modell erreicht im Test nahezu perfekte Werte, hat aber nichts Verwertbares gelernt. Im Betrieb versagt es vollständig, weil das Reklamationsdatum zum Zeitpunkt der Vorhersage – bei Auftragseingang – naturgemäß noch nicht existiert. Prüfregel für jedes Merkmal: **War diese Information zum Entscheidungszeitpunkt bereits bekannt?** *(2 P)*
 
 **E3 (5 P):** *(je Anforderung 1,5 P, je Maßnahme 1 P)*
-- **Art. 22 DSGVO – Verbot ausschließlich automatisierter Entscheidungen** mit rechtlicher Wirkung oder erheblicher Beeinträchtigung. Eine automatische Auftragsablehnung fällt darunter. Maßnahme: menschliche Prüfinstanz vorschalten – das Modell gibt lediglich einen Risikohinweis, die Entscheidung trifft ein Mitarbeiter; zusätzlich Widerspruchsmöglichkeit einräumen.
-- **Transparenz- und Informationspflicht / Nachvollziehbarkeit:** Betroffene müssen über die automatisierte Verarbeitung und die involvierte Logik informiert werden und eine Begründung erhalten können (Art. 13 Abs. 2 lit. f, Art. 15 Abs. 1 lit. h DSGVO). Maßnahme: erklärbares Verfahren wie einen Entscheidungsbaum einsetzen, Entscheidungslogik und verwendete Merkmale dokumentieren.
+
+| rechtliche Anforderung | Maßnahme zur Umsetzung |
+|---|---|
+| Art. 22 DSGVO: Verbot ausschließlich automatisierter Entscheidungen mit rechtlicher Wirkung oder erheblicher Beeinträchtigung – eine automatische Auftragsablehnung fällt darunter | menschliche Prüfinstanz vorschalten: das Modell gibt nur einen Risikohinweis, ein Mitarbeiter entscheidet; Widerspruchsmöglichkeit einräumen |
+| Transparenz und Information: Betroffene sind über die automatisierte Verarbeitung und die involvierte Logik zu informieren (Art. 13 Abs. 2 Buchst. f, Art. 15 Abs. 1 Buchst. h DSGVO) | erklärbares Verfahren (Entscheidungsbaum) einsetzen, Entscheidungslogik und Merkmale dokumentieren |
 
 *Ebenfalls anerkannt: Zweckbindung und Datenminimierung (nur fachlich erforderliche Merkmale verwenden); Prüfung auf Diskriminierung/Bias, etwa wenn das Liefergebiet als Stellvertretermerkmal für soziale Merkmale wirkt.*
 

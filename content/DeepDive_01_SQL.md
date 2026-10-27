@@ -404,7 +404,13 @@ Beide Positionen der Bestellung 100 zeigen menge_bestellung = 4; mit GROUP BY g�
 
 Bearbeite die Klausur **nach Teil 2** am Stück, handschriftlich, ohne Unterlagen – nur mit den Tabellen der Möbelhaus Nordholz GmbH von oben. Lösungen erst danach öffnen. Faustregel: 1 Punkt ≈ 1 Minute.
 
+## Ausgangssituation
+
+Die **Möbelhaus Nordholz GmbH** speichert Kunden, Produkte und Bestellungen ihres Onlineshops in einer relationalen Datenbank (Tabellen siehe oben). Vertrieb und Controlling wollen künftig selbst Auswertungen anfordern; Sie sind in der IT-Abteilung für die SQL-Abfragen zuständig.
+
 ## Block A – Wissen und Fehleranalyse (19 P)
+
+Ein Kollege aus dem Controlling lernt gerade SQL und bittet Sie um Hilfe bei seinen ersten Abfragen.
 
 **A1 (6 P):** *Erläutern* Sie den Unterschied zwischen WHERE und HAVING. Gehen Sie dabei auf die logische Verarbeitungsreihenfolge ein.
 
@@ -419,6 +425,8 @@ GROUP BY name;
 ```
 
 ## Block B – Abfragen entwickeln (66 P)
+
+Der Vertrieb schickt die folgenden Auswertungswünsche. *Formulieren* Sie für jeden Wunsch ein SQL-Statement, das genau die angegebenen Spalten liefert.
 
 **B1 (5 P):** Alle Kunden (name, ort) aus München, alphabetisch aufsteigend nach Name sortiert.
 
@@ -441,6 +449,8 @@ GROUP BY name;
 **B10 (8 P):** Alle Produkte (bezeichnung, preis), die teurer sind als der Durchschnittspreis aller Produkte.
 
 ## Block C – Interpretieren und Erstellen (15 P)
+
+Für die Retourenabwicklung soll die Datenbank erweitert werden. Vorher prüfen Sie eine bestehende Abfrage.
 
 **C1 (7 P):** *Geben* Sie die vollständige Ergebnistabelle der folgenden Abfrage *an* (Spaltenüberschriften, Werte, Reihenfolge):
 ```sql

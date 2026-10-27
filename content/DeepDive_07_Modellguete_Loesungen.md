@@ -14,8 +14,12 @@ Ein Modell, das an denselben Daten gemessen wird, aus denen es gelernt hat, bewe
 Typische Aufteilung: 70–80 % Trainingsdaten, 20–30 % Testdaten, zufällig gezogen. *(2 P)*
 
 **A2 (8 P):** *(je Fall 1 P Erklärung, 1 P Erkennungsmerkmal, 2 P Gegenmaßnahmen)*
-- **Overfitting:** Das Modell passt sich zu stark an die Trainingsdaten an und lernt auch deren zufälliges Rauschen. Erkennbar an einer **großen Lücke** zwischen sehr guter Trainings- und deutlich schlechterer Testgüte. Gegenmaßnahmen: Modellkomplexität verringern (z. B. Baumtiefe begrenzen, Pruning), mehr Trainingsdaten, Regularisierung, Kreuzvalidierung, frühzeitiger Trainingsabbruch.
-- **Underfitting:** Das Modell ist zu einfach und erfasst nicht einmal das Grundmuster. Erkennbar daran, dass **Trainings- und Testgüte beide niedrig** sind. Gegenmaßnahmen: komplexeres Verfahren wählen, aussagekräftigere Merkmale bilden, länger trainieren.
+
+| | Overfitting | Underfitting |
+|---|---|---|
+| Erklärung | Das Modell passt sich zu stark an die Trainingsdaten an und lernt auch deren zufälliges Rauschen. | Das Modell ist zu einfach und erfasst nicht einmal das Grundmuster. |
+| erkennbar an den Gütewerten | große Lücke: sehr gute Trainingsgüte, deutlich schlechtere Testgüte | Trainings- und Testgüte sind beide niedrig |
+| zwei Gegenmaßnahmen | Modellkomplexität verringern (Baumtiefe begrenzen, Pruning), mehr Trainingsdaten, Regularisierung, Kreuzvalidierung, früher Trainingsabbruch | komplexeres Verfahren wählen, aussagekräftigere Merkmale bilden, länger trainieren |
 
 **A3 (6 P):**
 Bei der 5-fachen Kreuzvalidierung werden die Daten in fünf gleich große Teile zerlegt. In fünf Durchläufen dient jeweils ein Teil als Testmenge und die übrigen vier als Trainingsmenge; die fünf Gütewerte werden anschließend gemittelt. *(4 P)*

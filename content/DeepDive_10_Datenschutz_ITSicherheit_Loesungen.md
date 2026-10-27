@@ -28,10 +28,13 @@ Beurteilung *(je 1 P, zwei genügen für die volle Punktzahl; hier alle vier)*:
 7. **Rechenschaftspflicht** – Der Verantwortliche muss die Einhaltung aller Grundsätze nachweisen können.
 
 **A3 (8 P):** *(je 1 P Rechtsgrundlage, 1 P passende Zuordnung)*
-- **Vertragserfüllung:** Speicherung von Name und Lieferadresse zur Auslieferung der bestellten Küche.
-- **Rechtliche Verpflichtung:** Aufbewahrung der Rechnungsdaten über acht Jahre nach HGB und Abgabenordnung (Buchungsbelege, seit 2025; Bücher und Jahresabschlüsse zehn Jahre).
-- **Einwilligung:** Versand des Newsletters an Kunden, die sich dafür angemeldet haben.
-- **Berechtigtes Interesse:** Auswertung von Reklamationsdaten zur Qualitätsverbesserung – nach Abwägung gegen die Interessen der Betroffenen, gegebenenfalls in aggregierter Form.
+
+| Rechtsgrundlage | passende Verarbeitung im Möbelhaus |
+|---|---|
+| Vertragserfüllung (Buchst. b) | Name und Lieferadresse speichern, um die bestellte Küche auszuliefern |
+| Rechtliche Verpflichtung (Buchst. c) | Rechnungsdaten aufbewahren nach HGB und Abgabenordnung (Buchungsbelege acht Jahre seit 2025, Bücher und Jahresabschlüsse zehn Jahre) |
+| Einwilligung (Buchst. a) | Newsletter an Kunden, die sich dafür angemeldet haben |
+| Berechtigtes Interesse (Buchst. f) | Reklamationsdaten zur Qualitätsverbesserung auswerten – nach Abwägung, gegebenenfalls aggregiert |
 
 *Ebenfalls anerkannt: lebenswichtige Interessen, öffentliche Aufgabe (mit passendem Beispiel).*
 
@@ -95,9 +98,12 @@ Maßnahmen *(je 1,67 P, drei genügen)*:
 ## Block D – IT-Sicherheit (22 P)
 
 **D1 (6 P):** *(je 1 P Ziel, 1 P Maßnahme)*
-- **Vertraulichkeit:** Verschlüsselung der Kundendaten bei Übertragung (TLS) und Speicherung sowie ein Rollenkonzept, das den Zugriff auf den erforderlichen Kreis beschränkt.
-- **Integrität:** Protokollierung aller Änderungen, Prüfsummen beim Datentransfer zwischen Quellsystem und Analysesystem, Schreibrechte nur für definierte Prozesse.
-- **Verfügbarkeit:** regelmäßige Datensicherung nach der 3-2-1-Regel, redundante Auslegung und getestete Wiederherstellungsverfahren.
+
+| Schutzziel | Maßnahme für das Analysesystem |
+|---|---|
+| Vertraulichkeit | Verschlüsselung bei Übertragung (TLS) und Speicherung, Rollenkonzept mit Zugriff nur für den erforderlichen Kreis |
+| Integrität | Protokollierung aller Änderungen, Prüfsummen beim Transfer vom Quellsystem, Schreibrechte nur für definierte Prozesse |
+| Verfügbarkeit | Datensicherung nach der 3-2-1-Regel, redundante Auslegung, getestete Wiederherstellung |
 
 **D2 (6 P):**
 **Symmetrisch:** ein einziger Schlüssel für Ver- und Entschlüsselung (z. B. AES). Sehr schnell, auch bei großen Datenmengen; Problem ist der sichere Austausch des Schlüssels. *(1,5 P)*
