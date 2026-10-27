@@ -137,6 +137,46 @@ Situationsbeschreibung (Möbelhaus Nordholz …).
 - Punkte passend zum Operator und zur verlangten Menge („*Nennen* Sie **sechs** …“ → 6 oder 12 P je nach Begründung).
 - Anlagen (`## Anlage …`) sind Material zur Aufgabe: Tabellen, Auszüge, Diagramme – keine Lösungshinweise.
 
+### 3a. Prüfungsformat der echten AP2 (Standard für jede Übungsklausur)
+
+Abgeleitet aus sechs Original-Klausuren (ZPA, 2022/23: zweimal Prozessanalyse, zweimal Datenqualität, zweimal WiSo). Die Originale
+sind urheberrechtlich geschützt – **nie wörtlich übernehmen**, nur Aufbau, Aufgabentypen und Niveau nachbauen (eigene Texte, eigene Zahlen,
+Szenario Möbelhaus Nordholz). So sehen die Aufgaben dort aus:
+
+**Fachteile (Prozessanalyse, Datenqualität und alle Fach-Deep-Dives): 90 Minuten, 100 Punkte**
+- Ein **Kasten „Ausgangssituation“** für alle Aufgaben (Unternehmen, Vorhaben). Dann **vier Aufgaben à 20–30 P**; in der App ist jede
+  Original-Aufgabe ein Block. Jeder Block beginnt mit einer **Handlungssituation** (Block-Intro, 2–6 Sätze, konkret: wer, was, welche
+  Zahlen, welches Problem) – erst danach die Teilaufgaben. Teilaufgaben greifen die Situation auf („… wenden Sie diese auf die Situation an“,
+  „Beziehen Sie sich dabei auf Teilaufgabe b)“).
+- **Punkte je Teilaufgabe meist 2–6 P**; groß nur Modellierung (eEPK, Aktivitätsdiagramm 13–21 P), Programmieren/Pseudocode (15–20 P),
+  Rechnen mit Tabelle (8–13 P), Diagrammvorlage füllen (10–12 P). Faustregel: *Nennen* 1 P je Angabe, *Beschreiben*/*Erläutern* 2 P je Punkt.
+- **Menge immer ausdrücklich**: „*Nennen* Sie **drei** …“, „*Beschreiben* Sie je **zwei** Vor- und Nachteile …“. Es zählen nur so viele
+  Angaben, wie verlangt sind.
+- **Vorstrukturierte Antworttabellen** statt Freitext, wo das Original sie hat – Kopfzeile plus leere Zeilen, manchmal eine vorgegebene
+  Beispielzeile: `Risiko | Auswirkung | Ursache`, `Stakeholder | Befürchtung | Gegenmaßnahme`, `Prozessproblem | Auswirkung |
+  Verbesserungsvorschlag`, `Kriterium | SQL | NoSQL`, `Sachverhalt | zulässig/nicht zulässig | Begründung`, Vor-/Nachteil-Matrix,
+  SWOT-Vierfeld, Kennzahl | Nutzen. In der App: im Text „*Tragen* Sie … in die Tabelle ein“ und die Musterlösung beginnt mit der gefüllten
+  Tabelle → Antworttabelle (`werteTabelle.ts`). Die Vorlagentabelle ist die **erste** Tabelle der Aufgabe; Material gehört davor ins
+  Block-Intro oder in eine Anlage. Leere Zellen bleiben leer (kein `___`). Danach `tests/editorAufgaben.test.ts` ergänzen.
+- **Material in der Aufgabe**: Gesetzesauszüge (DSGVO-Artikel, BetrVG, JArbSchG, Tarifvertrag), **englische Fachtexte** (GDPR-Artikel im
+  Originalwortlaut sind amtliche Texte und dürfen zitiert werden; sonstige englische Texte selbst schreiben) mit deutschen Fragen dazu,
+  Klassendiagramme, Datenbankschemata mit Felderklärungen, Diagrammgerüste (Ishikawa mit den 5M und einer vorgegebenen Ursache,
+  Lebenslinien eines Sequenzdiagramms, Schwimmbahnen, Entscheidungsbaum-Gerüst) – als Text oder Tabelle beschrieben.
+- **Formeln** stehen in der Aufgabe (`> **Formel:** …`), wie im Original die Entropieformel.
+- Operatoren wie im Original: *Nennen*, *Beschreiben*, *Erläutern*, *Erklären*, *Begründen*, *Ermitteln*, *Berechnen*, *Erstellen*,
+  *Stellen* Sie … *dar*, *Vervollständigen*, *Ergänzen*, *Analysieren*, *Leiten* Sie … *ab*, *Identifizieren*, *Entscheiden*, *Prüfen*,
+  *Formulieren* (SQL), *Programmieren*. Fallen in der App kursiv, im Original nicht.
+- Typische Fallen im Original: Angabe passt nicht ins Schema (Feld „Wuchsform“ ohne Spalte), Daten mit Ungereimtheit (Alter 21 in Gruppe G2),
+  Zusammenhänge über mehrere Teilaufgaben.
+
+**WiSo: 60 Minuten, 30 Aufgaben, 100 Punkte** (Original 3,33 P je Aufgabe; in der App 3 bzw. 4 P, Summe 100)
+- Kasten „Ausgangssituation“ (ein Unternehmen, wiederkehrende Personen), je Aufgabe 1–3 Sätze Situation, dann die Frage und
+  *(Ziffer eintragen)*. Fünf Antworten; sechs, wenn „**zwei** zutreffende“ verlangt sind. Negativfragen fett: **nicht**, **auf keinen Fall**.
+- Weitere Formen: Zuordnung (a–e → Ziffern 1–3), Reihenfolge (1, 2, 3 …), Rechnen mit Ergebnisfeld (Prozent, Anzahl, Uhrzeit hh:mm,
+  Urlaubstage, Auftragsnummer), Gesetzes- oder Tarifauszug zum Anwenden (BetrVG § 9 Staffel, JArbSchG § 14/§ 19), Statistik-Tabelle zum
+  Auswerten, Sicherheitszeichen beschrieben (Form, Farbe, Bild). Teilbewertung im Original nur bei Zuordnung, Reihenfolge und „zwei“.
+- Eine kurze „Situation zu Aufgabe x und y“ darf zwei Aufgaben verbinden.
+
 ---
 
 ## 4. Lösungsdatei (`DeepDive_NN_Thema_Loesungen.md`)
