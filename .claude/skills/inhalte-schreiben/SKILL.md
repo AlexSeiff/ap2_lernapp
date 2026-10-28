@@ -48,7 +48,8 @@ exam papers or textbook passages.
 - **Every Übungsklausur follows the real AP2 format** (owner's decision): Ausgangssituation box, blocks = original „Aufgaben“ with a
   Handlungssituation intro, explicit quantities, small point steps, pre-structured answer tables, legal/English source texts. Details and the
   WiSo variant: `references/formate.md` § 3a. Never copy original exam text (© ZPA) – rebuild type and level in the Nordholz scenario. When
-  reworking an existing exam keep every task code and the 100 P.
+  reworking an existing exam keep every task code and the 100 P – renumbering needs a new id map and progress version (as in
+  `shared/aufgabenUmzug.ts`, Oktober 2026), so ask the owner first.
 - **Calculation tasks always state the formula they need** (owner's rule). In an exam task, add a quote block in plain-text
   notation right after the task text (after its a)/b) lines): `> **Formel:** VK = σ / x̄ · 100 %`, or for several
   `> **Formeln:**` + `> - …` lines. Give the general formula, never the numbers or the result, and only the formula – no explanation,

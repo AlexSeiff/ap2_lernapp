@@ -16,6 +16,7 @@ import {
 import { recordAttempt } from '../src/lib/progress';
 import type { z } from 'zod';
 import { ohneAntworten } from './ohneAntworten';
+import { umgezogen } from './umgezogen';
 
 const withAttempts = (n: number) => {
   let p = emptyProgress();
@@ -85,7 +86,7 @@ describe('checkProgressPut', () => {
     const stored = JSON.parse(readFileSync(join(import.meta.dirname, 'fixtures', 'fortschritt-v1-2026-09-22.json'), 'utf8'));
     const r = checkProgressPut(migrateProgress(stored), stored);
     expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 1 } });
-    if (r.ok) expect(r.progress.attempts).toEqual(stored.attempts);
+    if (r.ok) expect(r.progress.attempts).toEqual(umgezogen(stored).attempts);
   });
 
   it('zählt die Revision hoch und lehnt einen veralteten Tab mit 409 ab', () => {
@@ -132,7 +133,7 @@ describe('migrateProgress', () => {
     // Einzige Änderungen: aktuelle Version, Revisionszähler 0 (Version 2), leere Karteikarten-Lerntage (Version 3),
     // leere SQL-Übungen (Version 4), Standard-Einstellungen (Version 5), leere Rechenübungen (Version 6) und keine Markierungen (Version 7).
     expect(migrated).toEqual({
-      ...raw,
+      ...umgezogen(raw),
       version: PROGRESS_VERSION,
       revision: 0,
       cardReviewDays: {},
@@ -157,7 +158,8 @@ describe('migrateProgress', () => {
     const migrated = migrateProgress(raw);
     expect(migrated.version).toBe(PROGRESS_VERSION);
     // Alle Einträge bleiben erhalten, fehlende Felder werden ergänzt, unbekannte bleiben stehen.
-    expect(migrated.attempts.map((a) => a.taskId)).toEqual(['01-A1', '02-B2', '03-C1']);
+    // 03-C1 ist seit Version 9 03-B1 (shared/aufgabenUmzug.ts).
+    expect(migrated.attempts.map((a) => a.taskId)).toEqual(['01-A1', '02-B2', '03-B1']);
     expect(migrated.attempts[1]).toEqual({ taskId: '02-B2', date: '', points: 4, max: 4, mode: 'einzel' });
     expect(migrated.attempts[2]).toMatchObject({ mode: 'wiederholung', notiz: 'alt' });
     expect(migrated.exams[0]).toEqual({ ...raw.exams[0], answers: {} });
@@ -182,7 +184,7 @@ describe('migrateProgress', () => {
     const raw = fixture('fortschritt-v3-2026-09-28.json');
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual({
-      ...raw,
+      ...umgezogen(raw),
       version: PROGRESS_VERSION,
       sql: {},
       sqlDays: {},
@@ -202,7 +204,7 @@ describe('migrateProgress', () => {
     const raw = fixture('fortschritt-v4-2026-09-30.json');
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual({
-      ...raw,
+      ...umgezogen(raw),
       version: PROGRESS_VERSION,
       settings: defaultSettings(),
       rechnen: {},
@@ -225,7 +227,7 @@ describe('migrateProgress', () => {
     const raw = fixture('fortschritt-v5-2026-09-30.json');
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual({
-      ...raw,
+      ...umgezogen(raw),
       version: PROGRESS_VERSION,
       rechnen: {},
       rechnenDays: {},
@@ -239,14 +241,14 @@ describe('migrateProgress', () => {
     // Erstes Speichern nach dem Update: Revision passt, nichts geht verloren.
     const r = checkProgressPut(migrated, raw);
     expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 22, rechnen: {}, rechnenDays: {} } });
-    if (r.ok) expect(r.progress.attempts).toEqual(raw.attempts);
+    if (r.ok) expect(r.progress.attempts).toEqual(umgezogen(raw).attempts);
     expect(migrateProgress(migrated)).toEqual(migrated);
   });
 
   it('Version 6 (vor der Selbsteinschätzung): lädt bis auf die Version und leere neue Sammlungen unverändert, Versuche ohne sicherheit bleiben gültig', () => {
     const raw = fixture('fortschritt-v6-2026-10-01.json');
     const migrated = migrateProgress(raw);
-    expect(migrated).toEqual(ohneAntworten({ ...raw, version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }));
+    expect(migrated).toEqual(ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }));
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
     const r = checkProgressPut(migrated, raw);
     expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35, markiert: {} } });
@@ -263,7 +265,8 @@ describe('migrateProgress', () => {
     expect(migrated.attempts.map((a) => a.sicherheit)).toEqual([3, undefined, undefined]);
     expect('sicherheit' in migrated.attempts[1]).toBe(false);
     expect(migrated.activeExam?.sicherheit).toEqual({ '04-A1': 2 });
-    expect(migrated.exams[0].sicherheit).toEqual({ '03-C2': 1 });
+    // 03-C2 ist seit Version 9 03-B2 (shared/aufgabenUmzug.ts).
+    expect(migrated.exams[0].sicherheit).toEqual({ '03-B2': 1 });
     expect(ProgressSchema.safeParse(migrated).success).toBe(true);
     expect(checkProgressPut(migrated, raw).ok).toBe(true);
     expect(migrateProgress(migrated)).toEqual(migrated);
@@ -283,7 +286,7 @@ describe('migrateProgress', () => {
     expect(migrated.attempts.map((a) => a.fehlergrund)).toEqual(['operator', undefined, undefined]);
     expect('fehlergrund' in migrated.attempts[1]).toBe(false);
     expect(migrated.activeExam?.fehlergrund).toEqual({ '04-A1': 'zeit' });
-    expect(migrated.exams[0].fehlergrund).toEqual({ '03-C2': 'formel' });
+    expect(migrated.exams[0].fehlergrund).toEqual({ '03-B2': 'formel' });
     expect(ProgressSchema.safeParse(migrated).success).toBe(true);
     expect(checkProgressPut(migrated, raw).ok).toBe(true);
     expect(migrateProgress(migrated)).toEqual(migrated);
@@ -460,10 +463,11 @@ describe('migrateProgress', () => {
     if (!existsSync(file)) return;
     const raw = JSON.parse(readFileSync(file, 'utf8'));
     const migrated = migrateProgress(raw);
-    expect(migrated.attempts).toEqual(raw.attempts);
-    expect(migrated.exams).toEqual(raw.exams ?? []);
+    const erwartet = (raw.version ?? 1) >= 9 ? raw : umgezogen(raw);
+    expect(migrated.attempts).toEqual(erwartet.attempts);
+    expect(migrated.exams).toEqual(erwartet.exams ?? []);
     expect(migrated.cards).toEqual(raw.cards ?? {});
-    expect(migrated.journal).toEqual(raw.journal ?? {});
+    expect(migrated.journal).toEqual(erwartet.journal ?? {});
     expect(migrated.lernziele).toEqual(raw.lernziele ?? {});
   });
 });

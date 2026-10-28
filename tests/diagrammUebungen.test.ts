@@ -15,6 +15,7 @@ import { checkProgressPut, emptyProgress, migrateProgress, PROGRESS_VERSION, Pro
 import { diagrammStatus, diagrammSummary, recordDiagrammCheck, recordDiagrammLoesung } from '../src/lib/diagramme';
 import { einsetzen } from '../src/pages/DiagrammUebung';
 import { ohneAntworten } from './ohneAntworten';
+import { umgezogen } from './umgezogen';
 
 // Diagramm-Übungen (Umsetzungsplan Phase 7): Import mit Prüfung, Bewertung je Lücke mit Varianten, Formregeln, Fortschritt.
 
@@ -215,12 +216,12 @@ describe('Echte Übungen (AP2_Diagramm_Uebungen.json)', () => {
 describe('Fortschritt (Version 8)', () => {
   const fixture = (name: string) => JSON.parse(readFileSync(join(import.meta.dirname, 'fixtures', name), 'utf8'));
 
-  it('Version 7 → 8: leere Diagramm-Übungen, Version 8 lädt unverändert', () => {
-    expect(PROGRESS_VERSION).toBe(8);
+  it('Version 7 → 8: leere Diagramm-Übungen, Version 8 lädt bis auf umgezogene Aufgaben (Version 9) unverändert', () => {
+    expect(PROGRESS_VERSION).toBe(9);
     const v7 = fixture('fortschritt-v7-2026-10-09.json');
-    expect(migrateProgress(v7)).toEqual(ohneAntworten({ ...v7, version: 8, diagramme: {}, diagrammDays: {} }));
+    expect(migrateProgress(v7)).toEqual(ohneAntworten({ ...umgezogen(v7), version: 9, diagramme: {}, diagrammDays: {} }));
     const v8 = fixture('fortschritt-v8-2026-10-09.json');
-    expect(migrateProgress(v8)).toEqual(ohneAntworten(v8));
+    expect(migrateProgress(v8)).toEqual(ohneAntworten({ ...umgezogen(v8), version: 9 }));
     expect(ProgressSchema.safeParse(v8).success).toBe(true);
     expect(checkProgressPut(migrateProgress(v8), v8)).toMatchObject({ ok: true, progress: { revision: 46 } });
   });

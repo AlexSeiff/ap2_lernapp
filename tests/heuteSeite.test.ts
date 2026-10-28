@@ -10,7 +10,7 @@ import { localDate } from '../src/lib/progress';
 // Rauchtest „Heute lernen“ (ROADMAP 8.1): Seite, Knopf auf der Übersicht, Karten-Auswahl per ?karten=.
 
 const content = loadContent(CONTENT_DIR);
-const progress: Progress = { ...emptyProgress(), attempts: [{ taskId: '03-C1', date: '2026-09-20', points: 2, max: 10, mode: 'einzel' }] };
+const progress: Progress = { ...emptyProgress(), attempts: [{ taskId: '03-B1', date: '2026-09-20', points: 2, max: 10, mode: 'einzel' }] };
 
 vi.mock('../src/lib/store', () => ({
   useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),

@@ -45,11 +45,11 @@ describe('Klausuraufgaben im SQL-Editor', () => {
   it('alle Abfrage-Aufgaben aus DD1 und DataFit sind verknüpft, ohne Importhinweise', () => {
     expect(content.issues).toEqual([]);
     const ids = verknuepft.map((t) => t.id);
-    for (const code of ['A3', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'C2']) expect(ids).toContain(`01-${code}`);
+    for (const code of ['A3', 'B1', 'B2', 'B3', 'B4', 'B5', 'C1', 'C2', 'C3', 'D1', 'D2', 'D3']) expect(ids).toContain(`01-${code}`);
     for (const code of ['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8'])
       expect(ids).toContain(`00-${code}`);
     // Ergebnis vorhersagen ohne Ausführen: bleibt eine Textaufgabe.
-    expect(content.tasks['01-C1'].sqlUebung).toBeUndefined();
+    expect(content.tasks['01-A4'].sqlUebung).toBeUndefined();
   });
 
   it.each(verknuepft.map((t) => [t.id, t.sqlUebung!] as const))('%s: die Musterlösung der Übung (%s) besteht', (taskId) => {
@@ -59,7 +59,7 @@ describe('Klausuraufgaben im SQL-Editor', () => {
 
   it.each([
     ['01-B3', "SELECT * FROM produkt WHERE bezeichnung LIKE 'Schreibtisch%';"],
-    ['01-B6', 'SELECT bestell_id, COUNT(*) FROM bestellposition GROUP BY bestell_id HAVING COUNT(*) > 1;'],
+    ['01-C1', 'SELECT bestell_id, COUNT(*) FROM bestellposition GROUP BY bestell_id HAVING COUNT(*) > 1;'],
     [
       '01-A3',
       '-- Fehler 1: Alias im WHERE, Fehler 2: GROUP BY name, Fehler 3: Bedingung gehört ins HAVING\nSELECT ort, COUNT(*) AS anzahl\nFROM kunde\nGROUP BY ort\nHAVING COUNT(*) > 1;',
@@ -85,7 +85,7 @@ describe('Klausuraufgaben im SQL-Editor', () => {
     ['00-C6', 'SELECT * FROM produkt WHERE preis > 60;'],
     ['01-B4', 'SELECT ort, COUNT(*) FROM kunde GROUP BY ort;'],
     [
-      '01-B8',
+      '01-C3',
       'SELECT k.name, SUM(bp.menge * p.preis) AS umsatz FROM kunde k JOIN bestellung b ON k.kunden_id = b.kunden_id JOIN bestellposition bp ON b.bestell_id = bp.bestell_id JOIN produkt p ON bp.produkt_id = p.produkt_id GROUP BY k.name;',
     ],
   ])('%s: falsche Antwort fällt durch', (taskId, query) => {

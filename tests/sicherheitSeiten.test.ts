@@ -34,7 +34,7 @@ function render(path: string): string {
 describe('Selbsteinschätzung in den Seiten', () => {
   it('Einzelaufgabe fragt vor dem Abgeben', () => {
     progress = emptyProgress();
-    expect(render('/aufgabe/03-C1')).toContain('Wie sicher bist du?');
+    expect(render('/aufgabe/03-B1')).toContain('Wie sicher bist du?');
   });
 
   it('laufende Klausur: je Aufgabe eine Frage, gewählte Stufe gedrückt', () => {
@@ -63,8 +63,8 @@ describe('Selbsteinschätzung in den Seiten', () => {
     progress = {
       ...emptyProgress(),
       attempts: [
-        { taskId: '03-C1', date: '2026-09-29', points: 10, max: 10, mode: 'einzel', sicherheit: 3 },
-        { taskId: '03-C2', date: '2026-09-29', points: 1, max: 6, mode: 'einzel', sicherheit: 3 },
+        { taskId: '03-B1', date: '2026-09-29', points: 10, max: 10, mode: 'einzel', sicherheit: 3 },
+        { taskId: '03-B2', date: '2026-09-29', points: 1, max: 6, mode: 'einzel', sicherheit: 3 },
       ],
     };
     const html = render('/');

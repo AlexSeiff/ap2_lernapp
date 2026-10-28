@@ -162,7 +162,7 @@ describe('Echte Musterlösungen in content/', () => {
   const render = (id: string) => loesung(solutionMarkdown(content.tasks[id]));
 
   it('DD3 C1 und DD7 B2: Ergebnisse im Kasten, Punkte als Abzeichen, Prüferkommentar im Kasten', () => {
-    const c1 = render('03-C1');
+    const c1 = render('03-B1');
     expect(ergebnisse(c1)).toEqual(['70,00 Minuten', '55 Minuten', '40 Minuten']);
     expect(c1.match(/class="punkte rechts"/g)).toHaveLength(4);
     expect(c1).toContain('<div class="pk-label">Prüferkommentar</div><p>Wer nicht sortiert');
@@ -170,7 +170,7 @@ describe('Echte Musterlösungen in content/', () => {
   });
 
   it('DD3 E2: Zäune ohne Einheit bleiben normaler Fettdruck', () => {
-    expect(ergebnisse(render('03-E2'))).toEqual([]);
+    expect(ergebnisse(render('03-D2'))).toEqual([]);
   });
 
   it('jede kurze Punkteangabe *(… P)* wird umgewandelt', () => {

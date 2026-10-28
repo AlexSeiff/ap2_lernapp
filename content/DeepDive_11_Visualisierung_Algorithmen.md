@@ -345,15 +345,17 @@ fakultaet(4) = 4 · fakultaet(3) = 4 · 3 · fakultaet(2) = 4 · 3 · 2 · fakul
 
 # Übungsklausur Visualisierung & Algorithmen (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Lineal. Halte dich an die geforderte Anzahl der Nennungen.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Lineal. Halte dich an die geforderte Anzahl der Nennungen.
 
 ## Ausgangssituation
 
 Die **Möbelhaus Nordholz GmbH** baut ein Berichtswesen für Geschäftsführung und Filialleitungen auf: Monatsberichte, ein Dashboard für den Reparaturservice und automatische Prüfungen der Kundendaten. Sie arbeiten in der IT-Abteilung und sind für Visualisierung und die Prüfalgorithmen zuständig.
 
-## Block A – Diagrammwahl (20 P)
+## Block A – Diagrammwahl und Gestaltung (26 P)
 
 Für den neuen Monatsbericht liegen mehrere Auswertungswünsche vor. Ein Kollege hat bereits einen ersten Entwurf erstellt.
+
+Aus dem Bericht soll später auch ein Dashboard für die Geschäftsführung entstehen.
 
 **A1 (12 P):** *Ordnen* Sie den folgenden **sechs** Auswertungswünschen jeweils einen geeigneten Diagrammtyp *zu* und *begründen* Sie die Wahl kurz. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
@@ -368,9 +370,13 @@ Für den neuen Monatsbericht liegen mehrere Auswertungswünsche vor. Ein Kollege
 
 **A2 (8 P):** Ein Kollege stellt den Umsatz der acht Filialen als Kreisdiagramm mit 3D-Effekt dar, alphabetisch sortiert. *Benennen* Sie **drei** Mängel und *schlagen* Sie eine bessere Darstellung mit Begründung *vor*.
 
-## Block B – Diagramme beurteilen (22 P)
+**A3 (6 P):** *Nennen* Sie **drei** Gestaltungsgrundsätze für Dashboards und *erläutern* Sie, warum jede Kennzahl einen Vergleichsmaßstab benötigt.
+
+## Block B – Diagramme beurteilen und Dashboard entwerfen (30 P)
 
 Im Jahresbericht des Vertriebs fällt Ihnen eine Grafik auf, die nicht zu den Zahlen passt.
+
+Die Geschäftsführung möchte den Reparaturservice täglich auf einen Blick überwachen.
 
 **B1 (12 P):** Ein Bericht zeigt ein Säulendiagramm der Jahresumsätze 4,80 / 4,95 / 5,10 Mio. €. Die y-Achse beginnt bei 4,70 Mio. €. Die Überschrift lautet „Umsatz explodiert".
 a) *Berechnen* Sie das tatsächliche Gesamtwachstum in Prozent. (4 P)
@@ -381,11 +387,7 @@ c) *Beurteilen* Sie die Überschrift und *formulieren* Sie eine sachlich korrekt
 
 **B3 (4 P):** *Erläutern* Sie, warum Informationen in Diagrammen nicht ausschließlich über Farbe codiert werden sollten, und *nennen* Sie **zwei** Alternativen.
 
-## Block C – Dashboard konzipieren (14 P)
-
-Die Geschäftsführung möchte den Reparaturservice täglich auf einen Blick überwachen.
-
-**C1 (8 P):** *Entwerfen* Sie ein Dashboard für die Geschäftsführung zur Überwachung des Reparaturservice. *Nennen* Sie **vier** Kennzahlen mit jeweils passender Darstellungsform und *begründen* Sie Ihre Auswahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**B4 (8 P):** *Entwerfen* Sie ein Dashboard für die Geschäftsführung zur Überwachung des Reparaturservice. *Nennen* Sie **vier** Kennzahlen mit jeweils passender Darstellungsform und *begründen* Sie Ihre Auswahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Kennzahl | Darstellung | Begründung |
 |---|---|---|
@@ -394,19 +396,9 @@ Die Geschäftsführung möchte den Reparaturservice täglich auf einen Blick üb
 | | | |
 | | | |
 
-**C2 (6 P):** *Nennen* Sie **drei** Gestaltungsgrundsätze für Dashboards und *erläutern* Sie, warum jede Kennzahl einen Vergleichsmaßstab benötigt.
+## Block C – Schleifen und Fehlersuche (22 P)
 
-## Block D – Algorithmen entwickeln (28 P)
-
-Die Kundendaten und die Reparaturdauern sollen vor jeder Auswertung automatisch geprüft werden.
-
-**D1 (6 P):** *Erläutern* Sie den Unterschied zwischen kopf- und fußgesteuerter Schleife. *Geben* Sie für jede einen passenden Anwendungsfall an.
-
-**D2 (12 P):** *Entwickeln* Sie einen Algorithmus in **Pseudocode**, der eine Liste von Reparaturdauern prüft. Der Algorithmus soll: alle Werte zählen, ungültige Werte (kleiner oder gleich 0 sowie fehlende Werte) separat zählen und nicht in die Berechnung einbeziehen, aus den gültigen Werten den Mittelwert berechnen und Anzahl gültiger Werte, Anzahl ungültiger Werte sowie den Mittelwert ausgeben. *Berücksichtigen* Sie den Fall, dass kein gültiger Wert vorhanden ist.
-
-**D3 (10 P):** *Zeichnen* Sie ein **Struktogramm** für folgenden Ablauf: Für jeden Kundendatensatz wird geprüft, ob eine E-Mail-Adresse vorhanden ist. Fehlt sie, wird ein Fehlerzähler erhöht und der Datensatz protokolliert. Ist sie vorhanden, wird zusätzlich das Format geprüft; bei ungültigem Format wird ebenfalls der Fehlerzähler erhöht. Am Ende wird der Fehlerzähler ausgegeben.
-
-## Block E – Fehlersuche (16 P)
+Ein Kollege hat bereits einen ersten Algorithmus geschrieben, den Sie prüfen sollen.
 
 Der folgende Pseudocode soll den höchsten Auftragswert einer Liste mit n Einträgen finden und die Anzahl der Aufträge über 1.000 € zählen. Er enthält **vier Fehler**.
 
@@ -429,9 +421,19 @@ ENDE FÜR
 AUSGABE max, anzahl
 ```
 
-**E1 (12 P):** *Benennen* Sie die vier Fehler, *erläutern* Sie jeweils die Auswirkung und *geben* Sie die Korrektur an.
+**C1 (6 P):** *Erläutern* Sie den Unterschied zwischen kopf- und fußgesteuerter Schleife. *Geben* Sie für jede einen passenden Anwendungsfall an.
 
-**E2 (4 P):** *Erläutern* Sie, warum die Initialisierung `max ← 0` auch dann problematisch bleibt, wenn alle übrigen Fehler behoben sind.
+**C2 (12 P):** *Benennen* Sie die vier Fehler, *erläutern* Sie jeweils die Auswirkung und *geben* Sie die Korrektur an.
+
+**C3 (4 P):** *Erläutern* Sie, warum die Initialisierung `max ← 0` auch dann problematisch bleibt, wenn alle übrigen Fehler behoben sind.
+
+## Block D – Algorithmen entwickeln (22 P)
+
+Die Kundendaten und die Reparaturdauern sollen vor jeder Auswertung automatisch geprüft werden.
+
+**D1 (12 P):** *Entwickeln* Sie einen Algorithmus in **Pseudocode**, der eine Liste von Reparaturdauern prüft. Der Algorithmus soll: alle Werte zählen, ungültige Werte (kleiner oder gleich 0 sowie fehlende Werte) separat zählen und nicht in die Berechnung einbeziehen, aus den gültigen Werten den Mittelwert berechnen und Anzahl gültiger Werte, Anzahl ungültiger Werte sowie den Mittelwert ausgeben. *Berücksichtigen* Sie den Fall, dass kein gültiger Wert vorhanden ist.
+
+**D2 (10 P):** *Zeichnen* Sie ein **Struktogramm** für folgenden Ablauf: Für jeden Kundendatensatz wird geprüft, ob eine E-Mail-Adresse vorhanden ist. Fehlt sie, wird ein Fehlerzähler erhöht und der Datensatz protokolliert. Ist sie vorhanden, wird zusätzlich das Format geprüft; bei ungültigem Format wird ebenfalls der Fehlerzähler erhöht. Am Ende wird der Fehlerzähler ausgegeben.
 
 ---
 

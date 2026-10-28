@@ -103,8 +103,8 @@ describe(`content/${FILE}`, () => {
     db.close();
   });
 
-  it('B8 „Umsatz je Kunde" liefert die Zahlen aus der Musterlösung', () => {
-    const b8 = exercises.find((u) => u.quelleAufgabe === 'DD1 Übungsklausur B8')!;
+  it('C3 „Umsatz je Kunde" liefert die Zahlen aus der Musterlösung', () => {
+    const b8 = exercises.find((u) => u.quelleAufgabe === 'DD1 Übungsklausur C3')!;
     const db = fresh(byId.get(b8.datensatz)!);
     const r = lastResult(db, b8.loesung);
     db.close();

@@ -103,47 +103,47 @@ describe('Erkennung', () => {
       '02-C1': 'normalform',
       '05-B1': 'bpmn',
       '08-C1': 'relationen',
-      '15-E1': 'usecase',
+      '15-A3': 'usecase',
       '18-B3': 'epk',
       '21-B3': 'epk',
       '21-A1': 'aktivitaet',
       '22-B1': 'aktivitaet',
-      '03-E3': 'boxplot', // tests/boxplotAntwort.test.ts
-      '11-D3': 'struktogramm', // tests/struktogramm.test.ts
+      '03-D3': 'boxplot', // tests/boxplotAntwort.test.ts
+      '11-D2': 'struktogramm', // tests/struktogramm.test.ts
       // Verlangte Tabellen (tests/werteTabelle.test.ts)
       ...Object.fromEntries(
         [
-          '01-C1',
+          '01-A4',
           '03-A1',
-          '03-B1',
-          '03-D2',
-          '03-F2',
+          '03-A3',
+          '03-C2',
+          '03-C4',
           '04-A2',
           '04-C1',
           '05-A2',
           '05-D1',
-          '05-E2',
+          '05-D4',
           '06-B1',
           '06-C2',
-          '06-E3',
+          '06-B5',
           '07-A2',
-          '07-E1',
+          '07-D3',
           '08-A1',
           '08-C3',
           '08-D2',
-          '08-E1',
-          '08-E2',
+          '08-A3',
+          '08-D4',
           '09-A1',
+          '09-C4',
           '09-D2',
-          '09-E1',
           '10-A3',
-          '10-D1',
+          '10-C3',
           '11-A1',
-          '11-C1',
+          '11-B4',
           '12-B1',
           '12-C1',
           '12-D2',
-          '12-E1',
+          '12-B3',
           '15-B1',
           '15-C1',
           '15-D1',
@@ -180,7 +180,7 @@ describe('Erkennung', () => {
   });
 
   it('Textaufgaben über Diagramme bleiben Textaufgaben', () => {
-    for (const id of ['05-B2', '15-E2', '18-B2', '02-B3', '02-D1']) expect(editorFuer(task(id)), id).toBeUndefined();
+    for (const id of ['05-B2', '15-A4', '18-B2', '02-B3', '02-D2']) expect(editorFuer(task(id)), id).toBeUndefined();
     expect(editorFuer({ markdown: '*Erstellen* Sie ein ER-Diagramm.', type: 'mc' })).toBeUndefined();
     expect(editorFuer({ markdown: '*Erstellen* Sie ein ER-Diagramm.', type: 'offen', sqlUebung: 'SQL-1' })).toBeUndefined();
   });
@@ -614,7 +614,7 @@ describe('Seiten', () => {
       '02-B1': ['Entität', 'Beziehung', 'Attribut'],
       '05-B1': ['Pool', 'Lane', 'XOR-Gateway', 'Startereignis'],
       '18-B3': ['Ereignis', 'Funktion', 'XOR-Konnektor', 'Informationsobjekt'],
-      '15-E1': ['Akteur', 'Anwendungsfall', 'Systemgrenze'],
+      '15-A3': ['Akteur', 'Anwendungsfall', 'Systemgrenze'],
       '21-A1': ['Aktivitätsdiagramm-Editor', 'Schwimmbahn', 'Startknoten', 'Gabelung/Vereinigung', 'Ablaufende', 'Endknoten'],
       '22-B1': ['Aktivitätsdiagramm-Editor', 'Aufrufaktion', 'Entscheidung/Merge'],
       '02-C1': ['1. NF', '2. NF', '3. NF', 'Ausgangstabelle „auftrags_export“ übernehmen'],

@@ -9,6 +9,7 @@ import { parseBackup } from '../src/lib/backup';
 import { istMarkiert, markierteIds, setzeMarkierung, wechsleMarkierung } from '../src/lib/markiert';
 import { rateCard } from '../src/lib/progress';
 import { ohneAntworten } from './ohneAntworten';
+import { umgezogen } from './umgezogen';
 
 const roh = (name: string) => readFileSync(join(import.meta.dirname, 'fixtures', name), 'utf8');
 const T1 = '2026-10-08T10:00:00.000Z';
@@ -48,14 +49,14 @@ describe('Markierungen – Format Version 7', () => {
     const raw = JSON.parse(roh('fortschritt-v6-2026-10-01.json'));
     const migrated = migrateProgress(raw);
     expect(PROGRESS_VERSION).toBeGreaterThanOrEqual(7);
-    expect(migrated).toEqual(ohneAntworten({ ...raw, version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }));
+    expect(migrated).toEqual(ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }));
     expect(checkProgressPut(migrated, raw)).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35 } });
   });
 
   it('Version 7 lädt unverändert, auch entmarkierte Einträge und markierte Karten ohne Lernstand', () => {
     const raw = JSON.parse(roh('fortschritt-v7-2026-10-09.json'));
     const migrated = migrateProgress(raw);
-    expect(migrated).toEqual(ohneAntworten({ ...raw, version: PROGRESS_VERSION, diagramme: {}, diagrammDays: {} }));
+    expect(migrated).toEqual(ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, diagramme: {}, diagrammDays: {} }));
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
     expect([...markierteIds(migrated)].sort()).toEqual(['01-pf1', 'FB-normalisierung']);
     expect(migrated.cards['FB-normalisierung']).toBeUndefined();

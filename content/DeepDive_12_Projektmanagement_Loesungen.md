@@ -13,7 +13,6 @@ Vier Projektmerkmale *(je 1 P)*: **Einmaligkeit** · **zeitliche Befristung** mi
 Begründung *(2 P)*: Die monatliche Umsatzauswertung ist eine **wiederkehrende Routineaufgabe**. Ihr fehlen Einmaligkeit und Neuartigkeit – sie läuft nach einem festen, bereits etablierten Ablauf ab und hat kein definiertes Projektende. Ein Projekt wäre dagegen die **erstmalige Einführung** einer automatisierten Umsatzauswertung.
 
 **A2 (6 P):**
-
 | | Lastenheft | Pflichtenheft |
 |---|---|---|
 | **Wer** | Auftraggeber (Fachbereich/Möbelhaus) | Auftragnehmer (Dienstleister/IT) |
@@ -42,7 +41,7 @@ Nachweis *(je 0,8 P)*:
 
 ---
 
-## Block B – Vorgehensmodelle (14 P)
+## Block B – Vorgehensmodell und Projektsteuerung (26 P)
 
 **B1 (8 P):** *(je Kriterium 2 P)*
 
@@ -67,12 +66,34 @@ Empfehlung *(3 P)*: Ein **hybrides Vorgehen**. Der feste Endtermin verlangt eine
 
 *Prüferkommentar: Auch eine begründete Entscheidung für rein agiles oder rein klassisches Vorgehen erhält volle Punkte – bewertet wird die Argumentation, nicht die Präferenz. Wer den Zielkonflikt zwischen festem Termin und unklaren Anforderungen gar nicht benennt, erhält maximal 1 P.*
 
+**B3 (6 P):** *(je Risiko 1 P RPZ, 1 P Strategie)*
+
+| Risiko | Risikowert | Strategie |
+|---|---|---|
+| (a) Der externe Dienstleister fällt aus (W = 2, S = 5) | 10 | **Übertragen/Vermindern** – vertragliche Regelung mit Service-Level und Vertragsstrafe, Zweitanbieter als Rückfalloption |
+| (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | 16 | **Vermindern** – frühzeitiges Data Profiling in der Analysephase, Pufferzeit für Bereinigung einplanen, Qualitätsregeln im ETL |
+| (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | 9 | **Vermindern** – feste Termine früh verbindlich vereinbaren, Verfügbarkeit durch die Leitung zusichern lassen, kurze getaktete Abstimmungen |
+
+Rechnung: (a) $2 \cdot 5$ = **10** · (b) $4 \cdot 4$ = **16** · (c) $3 \cdot 3$ = **9**
+
+Risiko (b) hat mit 16 die höchste Priorität und ist zuerst zu behandeln – was in einem Datenprojekt auch der Erfahrung entspricht.
+
+*Prüferkommentar: Gerechnet wird hier der zweifaktorielle Risikowert W · S (Maximum 25). Nicht mit der RPZ der FMEA verwechseln, die zusätzlich die Entdeckungswahrscheinlichkeit enthält.*
+
+**B4 (3 P):**
+**Scope Creep** bezeichnet das schleichende, unkontrollierte Anwachsen des Projektumfangs durch fortlaufend hinzukommende Wünsche, die ohne formale Bewertung übernommen werden. Zeit- und Kostenrahmen bleiben dabei unverändert – der Termin wird zwangsläufig gerissen. *(1,5 P)*
+Zwei Maßnahmen *(je 0,75 P)*: **verbindliche Scope-Definition** im Pflichtenheft mit ausdrücklicher Abgrenzung, was **nicht** Bestandteil ist · **formales Änderungsmanagement**: Jeder Änderungswunsch wird schriftlich erfasst, hinsichtlich Auswirkung auf Zeit, Kosten und Qualität bewertet und vom Auftraggeber entschieden · Priorisierung über ein Backlog mit der Regel, dass Neues nur gegen Bestehendes eingetauscht wird.
+
+**B5 (3 P):**
+Der Soll-Ist-Vergleich stellt am Projektende die **geplanten den tatsächlich erreichten Werten** gegenüber – und zwar in allen drei Dimensionen des magischen Dreiecks: **Termine** (geplante gegen tatsächliche Dauer), **Kosten/Aufwand** (geschätzte gegen tatsächliche Stunden und Ausgaben) und **Leistung/Qualität** (Zielerreichung gemessen an den SMART-Zielen und Abnahmekriterien). Abweichungen werden dabei nicht nur benannt, sondern **begründet**. *(2 P)*
+
+Für die Projektdokumentation ist er unverzichtbar, weil er der einzige objektive Nachweis der Zielerreichung ist. Der Prüfungsausschuss bewertet nicht, ob alles nach Plan lief, sondern ob du Abweichungen **erkennst, erklärst und daraus Schlüsse ziehst** – ein ehrlich analysiertes verfehltes Teilziel bringt mehr Punkte als eine unbelegte Erfolgsmeldung. *(1 P)*
+
 ---
 
 ## Block C – Netzplan (28 P)
 
 **C1 (16 P):**
-
 Vorwärtsrechnung (FAZ = **größtes** FEZ der Vorgänger), Rückwärtsrechnung (SEZ = **kleinstes** SAZ der Nachfolger):
 
 | Vorgang | Dauer | FAZ | FEZ | SAZ | SEZ | GP | FP |
@@ -146,33 +167,6 @@ Break-even-Menge: $\frac{\text{Fixkosten}}{\text{Deckungsbeitrag je Stück}} = \
 **TCO (Total Cost of Ownership)** umfasst alle Kosten über den gesamten Lebenszyklus einer Lösung – nicht nur die Anschaffung, sondern auch Einführung, Betrieb, Wartung, Schulung, Anpassungen und die spätere Ablösung. *(2 P)*
 
 Drei nicht berücksichtigte Positionen *(je 0,67 P)*: jährliche **Lizenz- und Wartungskosten** · **Schulungsaufwand** für die Anwender · **internes Personal** für Betrieb und Support · **Infrastrukturkosten** (Server, Cloud) · **Anpassungen** bei Änderungen der Quellsysteme · **Migrations- und Ablösekosten** am Ende der Laufzeit.
-
----
-
-## Block E – Risiken und Steuerung (12 P)
-
-**E1 (6 P):** *(je Risiko 1 P RPZ, 1 P Strategie)*
-
-| Risiko | Risikowert | Strategie |
-|---|---|---|
-| (a) Der externe Dienstleister fällt aus (W = 2, S = 5) | 10 | **Übertragen/Vermindern** – vertragliche Regelung mit Service-Level und Vertragsstrafe, Zweitanbieter als Rückfalloption |
-| (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | 16 | **Vermindern** – frühzeitiges Data Profiling in der Analysephase, Pufferzeit für Bereinigung einplanen, Qualitätsregeln im ETL |
-| (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | 9 | **Vermindern** – feste Termine früh verbindlich vereinbaren, Verfügbarkeit durch die Leitung zusichern lassen, kurze getaktete Abstimmungen |
-
-Rechnung: (a) $2 \cdot 5$ = **10** · (b) $4 \cdot 4$ = **16** · (c) $3 \cdot 3$ = **9**
-
-Risiko (b) hat mit 16 die höchste Priorität und ist zuerst zu behandeln – was in einem Datenprojekt auch der Erfahrung entspricht.
-
-*Prüferkommentar: Gerechnet wird hier der zweifaktorielle Risikowert W · S (Maximum 25). Nicht mit der RPZ der FMEA verwechseln, die zusätzlich die Entdeckungswahrscheinlichkeit enthält.*
-
-**E2 (3 P):**
-**Scope Creep** bezeichnet das schleichende, unkontrollierte Anwachsen des Projektumfangs durch fortlaufend hinzukommende Wünsche, die ohne formale Bewertung übernommen werden. Zeit- und Kostenrahmen bleiben dabei unverändert – der Termin wird zwangsläufig gerissen. *(1,5 P)*
-Zwei Maßnahmen *(je 0,75 P)*: **verbindliche Scope-Definition** im Pflichtenheft mit ausdrücklicher Abgrenzung, was **nicht** Bestandteil ist · **formales Änderungsmanagement**: Jeder Änderungswunsch wird schriftlich erfasst, hinsichtlich Auswirkung auf Zeit, Kosten und Qualität bewertet und vom Auftraggeber entschieden · Priorisierung über ein Backlog mit der Regel, dass Neues nur gegen Bestehendes eingetauscht wird.
-
-**E3 (3 P):**
-Der Soll-Ist-Vergleich stellt am Projektende die **geplanten den tatsächlich erreichten Werten** gegenüber – und zwar in allen drei Dimensionen des magischen Dreiecks: **Termine** (geplante gegen tatsächliche Dauer), **Kosten/Aufwand** (geschätzte gegen tatsächliche Stunden und Ausgaben) und **Leistung/Qualität** (Zielerreichung gemessen an den SMART-Zielen und Abnahmekriterien). Abweichungen werden dabei nicht nur benannt, sondern **begründet**. *(2 P)*
-
-Für die Projektdokumentation ist er unverzichtbar, weil er der einzige objektive Nachweis der Zielerreichung ist. Der Prüfungsausschuss bewertet nicht, ob alles nach Plan lief, sondern ob du Abweichungen **erkennst, erklärst und daraus Schlüsse ziehst** – ein ehrlich analysiertes verfehltes Teilziel bringt mehr Punkte als eine unbelegte Erfolgsmeldung. *(1 P)*
 
 ---
 

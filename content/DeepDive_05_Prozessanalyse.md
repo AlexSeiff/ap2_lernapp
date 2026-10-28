@@ -742,44 +742,17 @@ Zwei von sechs Artikeln (33 %) machen 76,7 % des Werts aus – auf sie konzentri
 
 # Übungsklausur Prozessanalyse (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Lineal für die Diagramme. Alle Aufgaben beziehen sich auf die Ausgangssituation und die Anlagen; halte dich an die geforderte Anzahl der Nennungen.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Lineal für die Diagramme. Alle Aufgaben beziehen sich auf die Ausgangssituation und die Anlagen; halte dich an die geforderte Anzahl der Nennungen.
 
 ## Ausgangssituation
 
 Die **Möbelhaus Nordholz GmbH** repariert in ihrer Werkstatt Möbel mit Elektrik – Relaxsessel, Boxspringbetten mit Motor, höhenverstellbare Schreibtische. Kunden beschweren sich zunehmend, dass eine Reparatur mehr als einen Tag dauert, obwohl die eigentliche Arbeit nur Minuten braucht. Die Geschäftsleitung lässt den Reparaturservice analysieren und plant ein **digitales Auftragssystem**. Sie arbeiten in der IT-Abteilung und gehören zum Analyseteam.
 
-## Anlage 1 – Prozessbeschreibung Reparaturservice
-
-Ein Kunde meldet telefonisch einen Reparaturbedarf. Die Serviceannahme erfasst den Auftrag im System und erstellt einen Kostenvoranschlag, der dem Kunden zugesendet wird. Lehnt der Kunde ab, erhält er eine Absage und der Vorgang endet. Nimmt er an, werden **gleichzeitig** das benötigte Ersatzteil bestellt und ein Techniker eingeplant. Sobald beides erledigt ist, führt die Werkstatt die Reparatur durch. Anschließend stellt die Buchhaltung die Rechnung und sendet sie an den Kunden.
-
-## Anlage 2 – Zeitaufnahme (Mittelwerte je Auftrag)
-
-| Schritt | Bearbeitungszeit | anschließende Liegezeit |
-|---|---|---|
-| Auftrag erfassen | 0,25 h | 3,5 h |
-| Kostenvoranschlag/Disposition | 0,25 h | 16,0 h |
-| Reparatur durchführen | 0,75 h | 9,0 h |
-| Rechnung stellen | 0,25 h | – |
-
-Weitere Daten: 200 Aufträge im Betrachtungsmonat, davon 24 mit erforderlicher Nacharbeit. Kostensatz Werkstatt: 60 €/h.
-
-## Anlage 3 – Auszug aus dem Event Log
-
-| Case ID | Activity | Timestamp | Resource |
-|---|---|---|---|
-| 5001 | Auftrag erfassen | 02.03. 08:15 | Kley |
-| 5001 | Kostenvoranschlag erstellen | 02.03. 11:40 | Kley |
-| 5001 | Reparatur durchführen | 03.03. 09:20 | Yilmaz |
-| 5001 | Rechnung stellen | 03.03. 15:00 | Sander |
-| 5002 | Auftrag erfassen | 02.03. 09:05 | Kley |
-| 5002 | Kostenvoranschlag erstellen | 02.03. | Kley |
-| 5002 | Reparatur durchführen | 04.03. 10:10 | Petrow |
-| 5002 | Reparatur durchführen | 05.03. 08:45 | Petrow |
-| 5002 | Rechnung stellen | 05.03. 16:30 | Sander |
-
-## Block A – Grundlagen (14 P)
+## Block A – Prozessarten und Ist-Aufnahme (20 P)
 
 Zum Start der Analyse fragt der Serviceleiter, welche Bedeutung der Reparaturservice im Unternehmen hat und wie Sie den heutigen Ablauf erheben wollen. Die Mitarbeiter der Werkstatt sind skeptisch und wollen „nicht ausgefragt werden“.
+
+Außerdem soll geprüft werden, ob sich der Ablauf künftig auch aus den Daten des Auftragssystems erheben lässt.
 
 **A1 (6 P):** *Grenzen* Sie Kern-, Unterstützungs- und Führungsprozess *ab* und *ordnen* Sie den Reparaturservice begründet zu.
 
@@ -790,9 +763,15 @@ Zum Start der Analyse fragt der Serviceleiter, welche Bedeutung der Reparaturser
 | | | |
 | | | |
 
+**A3 (6 P):** *Nennen* Sie die **drei** Pflichtfelder eines Event Logs und *erläutern* Sie deren jeweilige Funktion.
+
 ## Block B – Modellierung (26 P)
 
 Für das Lastenheft des Auftragssystems soll der Ablauf aus **Anlage 1** modelliert werden. Ein Kollege hat außerdem schon eine EPK des Annahmeprozesses begonnen, die Sie prüfen sollen.
+
+**Anlage 1 – Prozessbeschreibung Reparaturservice**
+
+Ein Kunde meldet telefonisch einen Reparaturbedarf. Die Serviceannahme erfasst den Auftrag im System und erstellt einen Kostenvoranschlag, der dem Kunden zugesendet wird. Lehnt der Kunde ab, erhält er eine Absage und der Vorgang endet. Nimmt er an, werden **gleichzeitig** das benötigte Ersatzteil bestellt und ein Techniker eingeplant. Sobald beides erledigt ist, führt die Werkstatt die Reparatur durch. Anschließend stellt die Buchhaltung die Rechnung und sendet sie an den Kunden.
 
 **B1 (18 P):** *Modellieren* Sie den Prozess aus **Anlage 1** als BPMN-2.0-Diagramm. Verwenden Sie mindestens: einen Pool für das Möbelhaus mit drei Lanes, einen Pool für den Kunden, Start- und Endereignisse, ein XOR-Gateway mit beschrifteten Pfaden, ein AND-Gateway sowie mindestens einen Nachrichtenfluss.
 
@@ -801,6 +780,17 @@ Für das Lastenheft des Auftragssystems soll der Ablauf aus **Anlage 1** modelli
 ## Block C – Kennzahlen (26 P)
 
 Die Zeitaufnahme aus **Anlage 2** liegt vor. Die Geschäftsleitung will wissen, wo die Zeit verloren geht und was die Nacharbeit kostet.
+
+**Anlage 2 – Zeitaufnahme (Mittelwerte je Auftrag)**
+
+| Schritt | Bearbeitungszeit | anschließende Liegezeit |
+|---|---|---|
+| Auftrag erfassen | 0,25 h | 3,5 h |
+| Kostenvoranschlag/Disposition | 0,25 h | 16,0 h |
+| Reparatur durchführen | 0,75 h | 9,0 h |
+| Rechnung stellen | 0,25 h | – |
+
+Weitere Daten: 200 Aufträge im Betrachtungsmonat, davon 24 mit erforderlicher Nacharbeit. Kostensatz Werkstatt: 60 €/h.
 
 **C1 (8 P):** *Berechnen* Sie aus **Anlage 2** die Gesamtbearbeitungszeit, die Gesamtliegezeit und die Durchlaufzeit je Auftrag.
 
@@ -825,9 +815,25 @@ Die Zeitaufnahme aus **Anlage 2** liegt vor. Die Geschäftsleitung will wissen, 
 > - Nacharbeitskosten = Anzahl Nacharbeiten · Zeit je Nacharbeit · Kostensatz
 > - Zuschlag je Auftrag = Nacharbeitskosten / Anzahl aller Aufträge
 
-## Block D – Optimierung und Wirtschaftlichkeit (18 P)
+## Block D – Optimierung, Wirtschaftlichkeit und Process Mining (28 P)
 
 Auf Grundlage der Kennzahlen soll das Analyseteam Verbesserungen vorschlagen. Der Einkauf hat für das digitale Auftragssystem bereits ein Angebot eingeholt.
+
+Damit die Durchlaufzeiten künftig laufend überwacht werden, soll **Process Mining** eingesetzt werden. Ein erster Export aus dem Auftragssystem liegt als **Anlage 3** vor. Die Geschäftsführung möchte die Ergebnisse auch je Mitarbeiter sehen.
+
+**Anlage 3 – Auszug aus dem Event Log**
+
+| Case ID | Activity | Timestamp | Resource |
+|---|---|---|---|
+| 5001 | Auftrag erfassen | 02.03. 08:15 | Kley |
+| 5001 | Kostenvoranschlag erstellen | 02.03. 11:40 | Kley |
+| 5001 | Reparatur durchführen | 03.03. 09:20 | Yilmaz |
+| 5001 | Rechnung stellen | 03.03. 15:00 | Sander |
+| 5002 | Auftrag erfassen | 02.03. 09:05 | Kley |
+| 5002 | Kostenvoranschlag erstellen | 02.03. | Kley |
+| 5002 | Reparatur durchführen | 04.03. 10:10 | Petrow |
+| 5002 | Reparatur durchführen | 05.03. 08:45 | Petrow |
+| 5002 | Rechnung stellen | 05.03. 16:30 | Sander |
 
 **D1 (6 P):** *Nennen* Sie **drei** konkrete Maßnahmen zur Verkürzung der Durchlaufzeit im beschriebenen Prozess und *ordnen* Sie jede einer der vier Grundstrategien (Eliminieren, Standardisieren, Umstellen/Parallelisieren, Automatisieren) *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
@@ -845,13 +851,7 @@ Auf Grundlage der Kennzahlen soll das Analyseteam Verbesserungen vorschlagen. De
 
 **D3 (4 P):** *Nennen* Sie **zwei** qualitative Faktoren, die in dieser Rechnung nicht erfasst sind, aber in die Entscheidung einfließen sollten.
 
-## Block E – Process Mining und Recht (16 P)
-
-Damit die Durchlaufzeiten künftig laufend überwacht werden, soll **Process Mining** eingesetzt werden. Ein erster Export aus dem Auftragssystem liegt als **Anlage 3** vor. Die Geschäftsführung möchte die Ergebnisse auch je Mitarbeiter sehen.
-
-**E1 (6 P):** *Nennen* Sie die **drei** Pflichtfelder eines Event Logs und *erläutern* Sie deren jeweilige Funktion.
-
-**E2 (6 P):** *Analysieren* Sie **Anlage 3**: *Benennen* Sie **zwei** Datenqualitätsprobleme und **eine** Prozessauffälligkeit (Case und Aktivität) und *beschreiben* Sie jeweils die Konsequenz für die Auswertung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**D4 (6 P):** *Analysieren* Sie **Anlage 3**: *Benennen* Sie **zwei** Datenqualitätsprobleme und **eine** Prozessauffälligkeit (Case und Aktivität) und *beschreiben* Sie jeweils die Konsequenz für die Auswertung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Befund (Case, Aktivität) | Art | Konsequenz für die Auswertung |
 |---|---|---|
@@ -859,7 +859,7 @@ Damit die Durchlaufzeiten künftig laufend überwacht werden, soll **Process Min
 | | Datenqualitätsproblem | |
 | | Prozessauffälligkeit | |
 
-**E3 (4 P):** Die Geschäftsführung möchte die Auswertung je Mitarbeiter aufschlüsseln. *Erläutern* Sie die rechtlichen Anforderungen und *nennen* Sie **zwei** Maßnahmen, mit denen die Analyse dennoch möglich wird.
+**D5 (4 P):** Die Geschäftsführung möchte die Auswertung je Mitarbeiter aufschlüsseln. *Erläutern* Sie die rechtlichen Anforderungen und *nennen* Sie **zwei** Maßnahmen, mit denen die Analyse dennoch möglich wird.
 
 ---
 

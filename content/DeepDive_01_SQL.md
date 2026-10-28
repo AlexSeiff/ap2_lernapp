@@ -402,15 +402,17 @@ Beide Positionen der Bestellung 100 zeigen menge_bestellung = 4; mit GROUP BY g�
 
 # Übungsklausur SQL (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **nach Teil 2** am Stück, handschriftlich, ohne Unterlagen – nur mit den Tabellen der Möbelhaus Nordholz GmbH von oben. Lösungen erst danach öffnen. Faustregel: 1 Punkt ≈ 1 Minute.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **nach Teil 2** am Stück, handschriftlich, ohne Unterlagen – nur mit den Tabellen der Möbelhaus Nordholz GmbH von oben. Lösungen erst danach öffnen. Faustregel: 1 Punkt ≈ 1 Minute.
 
 ## Ausgangssituation
 
 Die **Möbelhaus Nordholz GmbH** speichert Kunden, Produkte und Bestellungen ihres Onlineshops in einer relationalen Datenbank (Tabellen siehe oben). Vertrieb und Controlling wollen künftig selbst Auswertungen anfordern; Sie sind in der IT-Abteilung für die SQL-Abfragen zuständig.
 
-## Block A – Wissen und Fehleranalyse (19 P)
+## Block A – Wissen und Fehleranalyse (26 P)
 
 Ein Kollege aus dem Controlling lernt gerade SQL und bittet Sie um Hilfe bei seinen ersten Abfragen.
+
+Außerdem soll er eine bestehende Abfrage nachvollziehen.
 
 **A1 (6 P):** *Erläutern* Sie den Unterschied zwischen WHERE und HAVING. Gehen Sie dabei auf die logische Verarbeitungsreihenfolge ein.
 
@@ -424,7 +426,15 @@ WHERE anzahl > 1
 GROUP BY name;
 ```
 
-## Block B – Abfragen entwickeln (66 P)
+**A4 (7 P):** *Geben* Sie die vollständige Ergebnistabelle der folgenden Abfrage *an* (Spaltenüberschriften, Werte, Reihenfolge):
+```sql
+SELECT kategorie, MIN(preis) AS guenstigster
+FROM produkt
+GROUP BY kategorie
+ORDER BY guenstigster DESC;
+```
+
+## Block B – Abfragen auf einer Tabelle (24 P)
 
 Der Vertrieb schickt die folgenden Auswertungswünsche. *Formulieren* Sie für jeden Wunsch ein SQL-Statement, das genau die angegebenen Spalten liefert.
 
@@ -438,29 +448,27 @@ Der Vertrieb schickt die folgenden Auswertungswünsche. *Formulieren* Sie für j
 
 **B5 (4 P):** Der Durchschnittspreis aller Produkte mit dem Spaltennamen `durchschnittspreis`.
 
-**B6 (7 P):** Alle Bestellungen (bestell_id) mit der Anzahl ihrer Positionen – aber nur Bestellungen mit **mehr als einer** Position.
+## Block C – Gruppieren und Verknüpfen (26 P)
 
-**B7 (7 P):** Für jede Bestellung: bestell_id, bestelldatum und der Name des Kunden.
+Weitere Auswertungswünsche des Vertriebs brauchen Gruppen und mehrere Tabellen. *Formulieren* Sie für jeden Wunsch ein SQL-Statement, das genau die angegebenen Spalten liefert.
 
-**B8 (12 P):** Der Gesamtumsatz je Kunde (name, umsatz) über alle Bestellungen, absteigend nach Umsatz sortiert. (Hinweis: Umsatz = menge × preis; vier Tabellen erforderlich.)
+**C1 (7 P):** Alle Bestellungen (bestell_id) mit der Anzahl ihrer Positionen – aber nur Bestellungen mit **mehr als einer** Position.
 
-**B9 (8 P):** Alle Kunden (name), die **noch nie** bestellt haben.
+**C2 (7 P):** Für jede Bestellung: bestell_id, bestelldatum und der Name des Kunden.
 
-**B10 (8 P):** Alle Produkte (bezeichnung, preis), die teurer sind als der Durchschnittspreis aller Produkte.
+**C3 (12 P):** Der Gesamtumsatz je Kunde (name, umsatz) über alle Bestellungen, absteigend nach Umsatz sortiert. (Hinweis: Umsatz = menge × preis; vier Tabellen erforderlich.)
 
-## Block C – Interpretieren und Erstellen (15 P)
+## Block D – Unterabfragen und Tabellen anlegen (24 P)
 
-Für die Retourenabwicklung soll die Datenbank erweitert werden. Vorher prüfen Sie eine bestehende Abfrage.
+Zwei Auswertungen des Vertriebs lassen sich nur mit Unterabfragen oder Mengenvergleichen lösen. *Formulieren* Sie für jeden Wunsch ein SQL-Statement, das genau die angegebenen Spalten liefert.
 
-**C1 (7 P):** *Geben* Sie die vollständige Ergebnistabelle der folgenden Abfrage *an* (Spaltenüberschriften, Werte, Reihenfolge):
-```sql
-SELECT kategorie, MIN(preis) AS guenstigster
-FROM produkt
-GROUP BY kategorie
-ORDER BY guenstigster DESC;
-```
+Für die Retourenabwicklung soll die Datenbank außerdem erweitert werden.
 
-**C2 (8 P):** *Erstellen* Sie die Tabelle `retoure` per SQL mit folgenden Anforderungen: `retoure_id` als Primärschlüssel; `bestell_id` als Pflichtfeld und Fremdschlüssel auf *bestellung*; `grund` als Pflicht-Textfeld; `erstattung` als Dezimalzahl, die nicht negativ sein darf; `datum` mit dem aktuellen Datum als Standardwert.
+**D1 (8 P):** Alle Kunden (name), die **noch nie** bestellt haben.
+
+**D2 (8 P):** Alle Produkte (bezeichnung, preis), die teurer sind als der Durchschnittspreis aller Produkte.
+
+**D3 (8 P):** *Erstellen* Sie die Tabelle `retoure` per SQL mit folgenden Anforderungen: `retoure_id` als Primärschlüssel; `bestell_id` als Pflichtfeld und Fremdschlüssel auf *bestellung*; `grund` als Pflicht-Textfeld; `erstattung` als Dezimalzahl, die nicht negativ sein darf; `datum` mit dem aktuellen Datum als Standardwert.
 
 ---
 

@@ -73,7 +73,7 @@ Es liegt eine **Verletzung des Schutzes personenbezogener Daten** vor. Pflichten
 
 ---
 
-## Block C – Anonymisierung und Mitarbeiterauswertung (16 P)
+## Block C – Anonymisierung, Mitarbeiterauswertung und Schutzziele (22 P)
 
 **C1 (6 P):**
 **Anonymisierung:** Der Personenbezug wird dauerhaft und unumkehrbar entfernt; ein Rückschluss auf Einzelpersonen ist auch mit Zusatzwissen nicht mehr möglich. *(2 P)*
@@ -93,11 +93,7 @@ Maßnahmen *(je 1,67 P, drei genügen)*:
 - **Transparenz:** vorherige Information der Beschäftigten über Art und Zweck der Auswertung.
 - **Zugriffsbeschränkung** über ein Rollenkonzept, sodass nur ein eng begrenzter Kreis Detaildaten sieht.
 
----
-
-## Block D – IT-Sicherheit (22 P)
-
-**D1 (6 P):** *(je 1 P Ziel, 1 P Maßnahme)*
+**C3 (6 P):** *(je 1 P Ziel, 1 P Maßnahme)*
 
 | Schutzziel | Maßnahme für das Analysesystem |
 |---|---|
@@ -105,13 +101,17 @@ Maßnahmen *(je 1,67 P, drei genügen)*:
 | Integrität | Protokollierung aller Änderungen, Prüfsummen beim Transfer vom Quellsystem, Schreibrechte nur für definierte Prozesse |
 | Verfügbarkeit | Datensicherung nach der 3-2-1-Regel, redundante Auslegung, getestete Wiederherstellung |
 
-**D2 (6 P):**
+---
+
+## Block D – IT-Sicherheit und Datensicherung (28 P)
+
+**D1 (6 P):**
 **Symmetrisch:** ein einziger Schlüssel für Ver- und Entschlüsselung (z. B. AES). Sehr schnell, auch bei großen Datenmengen; Problem ist der sichere Austausch des Schlüssels. *(1,5 P)*
 **Asymmetrisch:** Schlüsselpaar aus öffentlichem und privatem Schlüssel (z. B. RSA). Der öffentliche Schlüssel darf frei verteilt werden, wodurch das Austauschproblem entfällt; dafür deutlich langsamer. *(1,5 P)*
 **Hybrid:** Der Sitzungsschlüssel wird asymmetrisch sicher übertragen, die eigentlichen Daten anschließend symmetrisch verschlüsselt. So werden die Sicherheit des Schlüsselaustauschs und die Geschwindigkeit der symmetrischen Verfahren kombiniert – Standard bei TLS/HTTPS. *(1,5 P)*
 **Hashing:** eine **Einwegfunktion**, die einen Wert fester Länge erzeugt. Es gibt keinen Schlüssel und keinen Rückweg zum Ursprungswert – Hashing dient der Integritätsprüfung und der Passwortspeicherung, nicht der vertraulichen Übertragung. *(1,5 P)*
 
-**D3 (6 P):**
+**D2 (6 P):**
 Rollenkonzept *(3 P)*:
 | Rolle | Rechte |
 |---|---|
@@ -123,19 +123,14 @@ Rechte werden der Rolle zugewiesen, nicht der Einzelperson – bei einem Wechsel
 
 **Least Privilege:** Jede Rolle erhält nur die Rechte, die zur Aufgabenerfüllung zwingend nötig sind; im Zweifel weniger. **Need-to-know:** Der Zugriff beschränkt sich auf die fachlich tatsächlich benötigten Daten – die Filialleitung sieht nur die eigene Filiale, nicht den Gesamtbestand. *(2 P)*
 
-**D4 (4 P):**
+**D3 (4 P):**
 Gefahr: Werden Eingaben ungeprüft in eine SQL-Anweisung eingefügt, kann ein Angreifer eigenen SQL-Code einschleusen. Damit lassen sich Filter aushebeln, fremde Datensätze auslesen, Daten verändern oder ganze Tabellen löschen – das gefährdet Vertraulichkeit, Integrität und Verfügbarkeit zugleich. *(2 P)*
 
 Wirksamste Gegenmaßnahme: **parametrisierte Abfragen (Prepared Statements)**. Dabei werden Anweisungsstruktur und Daten strikt getrennt, sodass Eingaben grundsätzlich als Wert und nie als Befehl interpretiert werden. Flankierend: Eingabevalidierung, minimale Datenbankrechte der Anwendung und Fehlermeldungen ohne technische Details. *(2 P)*
 
 *Prüferkommentar: „Anführungszeichen herausfiltern" oder „Eingaben escapen" gilt als unvollständig (max. 1 P) – solche Filter lassen sich umgehen. Der Begriff Prepared Statement ist die erwartete Antwort.*
 
----
-
-## Block E – Datensicherung (12 P)
-
-**E1 (6 P):**
-
+**D4 (6 P):**
 **Inkrementell** (jeweils Änderungen seit der letzten Sicherung): *(3 P)*
 - Volumen: $800\ \text{GB (So)} + 40 + 40 + 40\ \text{GB (Mo–Mi)}$ = **920 GB**
 - Wiederherstellung: Vollsicherung **und alle** inkrementellen Sicherungen → **4 Medien**
@@ -144,12 +139,12 @@ Wirksamste Gegenmaßnahme: **parametrisierte Abfragen (Prepared Statements)**. D
 - Volumen: $800\ \text{GB} + 40\ \text{(Mo)} + 80\ \text{(Di)} + 120\ \text{(Mi)}$ = **1.040 GB**
 - Wiederherstellung: Vollsicherung + **letzte** differenzielle Sicherung → **2 Medien**
 
-**E2 (3 P):**
+**D5 (3 P):**
 Empfehlung: **differenzielle Sicherung**. Für die Wiederherstellung werden nur zwei Medien benötigt statt vier; das verkürzt die Rücksicherungszeit deutlich und senkt das Risiko, dass ein einzelnes fehlerhaftes Medium die gesamte Kette unbrauchbar macht. Der höhere Speicherbedarf (1.040 statt 920 GB) und die längere tägliche Sicherungsdauer werden dafür in Kauf genommen.
 
 *Prüferkommentar: Die Begründung muss den Zielkonflikt benennen – schnelle Wiederherstellung gegen höheren Sicherungsaufwand. Die bloße Nennung des Verfahrens gibt 1 P.*
 
-**E3 (3 P):**
+**D6 (3 P):**
 Letzte Sicherung 23:00 Uhr am Vortag, Ausfall 14:00 Uhr → **maximaler Datenverlust: 15 Stunden**. *(1,5 P)*
 Die RPO-Vorgabe von vier Stunden wird damit **deutlich verfehlt**. *(0,5 P)*
 Maßnahme: häufigere Sicherung im Vier-Stunden-Takt, ergänzend kontinuierliche Sicherung der Transaktionsprotokolle der Datenbank oder Spiegelung auf ein Zweitsystem. *(1 P)*

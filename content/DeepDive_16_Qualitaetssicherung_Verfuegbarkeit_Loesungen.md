@@ -68,7 +68,7 @@ Er eignet sich für eine Automatisierung, weil dieselben Testfälle mit feststeh
 
 ---
 
-## Block C – Testkonzept und Abnahme (20 P)
+## Block C – Testkonzept, Abnahme und SLA (26 P)
 
 **C1 (6 P):** *(je Bestandteil 1 P)*
 
@@ -100,9 +100,14 @@ Rechtsfolgen *(je 2 P, zwei genügen)*:
 - Die **Beweislast kehrt sich um**: Nach der Abnahme muss der Auftraggeber nachweisen, dass ein Mangel vorliegt.
 - Die **Gefahr geht über** (§ 644 BGB): Das Risiko des zufälligen Untergangs oder der zufälligen Verschlechterung trägt ab jetzt der Auftraggeber.
 
+**C4 (6 P):**
+Inhalte *(je 1 P, vier genügen)*: Leistungsbeschreibung · Servicezeit und zugesicherte Verfügbarkeit · Reaktions- und Wiederherstellungszeiten nach Priorität · Messverfahren und Reporting · Eskalationswege und Ansprechpartner · Vertragsstrafen bei Nichteinhaltung · Wartungsfenster.
+
+Abgrenzung *(2 P)*: Die **Reaktionszeit** ist die Zeit von der Störungsmeldung bis zum Beginn der Bearbeitung. Die **Wiederherstellungszeit** ist die Zeit, bis der Dienst wieder nutzbar ist. Eine kurze Reaktionszeit allein sagt nichts darüber, wann das Reporting wieder läuft.
+
 ---
 
-## Block D – Verfügbarkeit (22 P)
+## Block D – Verfügbarkeit und Redundanz (28 P)
 
 **D1 (6 P):**
 Betriebszeit im Monat: $30 \cdot 24 = 720\ \text{h}$
@@ -126,16 +131,7 @@ c) Die Datenbank hat mit 98 % die **geringste Verfügbarkeit** und ist damit die
 
 *Prüferkommentar: Häufigster Fehler in b) ist 0,98 · 0,98 – damit sinkt die Verfügbarkeit, obwohl ein zweiter Server hinzukommt. Bei der Parallelschaltung werden die Ausfallwahrscheinlichkeiten multipliziert, nicht die Verfügbarkeiten.*
 
----
-
-## Block E – SLA und Redundanz (12 P)
-
-**E1 (6 P):**
-Inhalte *(je 1 P, vier genügen)*: Leistungsbeschreibung · Servicezeit und zugesicherte Verfügbarkeit · Reaktions- und Wiederherstellungszeiten nach Priorität · Messverfahren und Reporting · Eskalationswege und Ansprechpartner · Vertragsstrafen bei Nichteinhaltung · Wartungsfenster.
-
-Abgrenzung *(2 P)*: Die **Reaktionszeit** ist die Zeit von der Störungsmeldung bis zum Beginn der Bearbeitung. Die **Wiederherstellungszeit** ist die Zeit, bis der Dienst wieder nutzbar ist. Eine kurze Reaktionszeit allein sagt nichts darüber, wann das Reporting wieder läuft.
-
-**E2 (6 P):**
+**D4 (6 P):**
 Ein **Single Point of Failure** ist eine Komponente, deren Ausfall allein das gesamte System lahmlegt – im Szenario etwa der einzelne Datenbankserver: Fällt er aus, ist das Dashboard nicht erreichbar, obwohl Web- und Anwendungsserver laufen. *(2 P)*
 
 Maßnahmen *(je 1 P)*: Datenbank spiegeln bzw. als Cluster betreiben · mehrere Webserver hinter einem Load Balancer · USV und Notstrom · redundante Netzanbindung · zweites Rechenzentrum (Georedundanz).

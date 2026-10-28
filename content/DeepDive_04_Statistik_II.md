@@ -210,20 +210,11 @@ Die lineare Regression ist damit das einfachste **überwachte Lernverfahren** �
 
 # Übungsklausur Statistik II (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Runde auf zwei Nachkommastellen und **schreibe alle Zwischenschritte auf**.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Runde auf zwei Nachkommastellen und **schreibe alle Zwischenschritte auf**.
 
 ## Ausgangssituation
 
 Die Geschäftsführung der **Möbelhaus Nordholz GmbH** will Budgets künftig datenbasiert verteilen: Lohnt sich mehr Schulung für die Montageteams, und wie stark hängt der Umsatz vom Werbebudget ab? Sie werten dafür als Mitarbeiter der IT-Abteilung die Daten in den Anlagen aus und bereiten die Ergebnisse für die Geschäftsführung auf.
-
-## Anlage 1 – Schulungsstunden und Fehlerquote
-
-Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Fehlerquote in % (y).
-
-| Team | A | B | C | D | E | F |
-|---|---|---|---|---|---|---|
-| x (Stunden) | 2 | 4 | 6 | 8 | 10 | 12 |
-| y (Fehlerquote %) | 9,0 | 8,5 | 7,5 | 6,5 | 5,5 | 5,0 |
 
 ## Anlage 2 – Werbebudget und Umsatz (T€)
 
@@ -235,6 +226,15 @@ Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Feh
 ## Block A – Zusammenhänge beschreiben (20 P)
 
 Zuerst soll geklärt werden, ob Schulungsstunden und Fehlerquote der Montageteams (**Anlage 1**) zusammenhängen.
+
+**Anlage 1 – Schulungsstunden und Fehlerquote**
+
+Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Fehlerquote in % (y).
+
+| Team | A | B | C | D | E | F |
+|---|---|---|---|---|---|---|
+| x (Stunden) | 2 | 4 | 6 | 8 | 10 | 12 |
+| y (Fehlerquote %) | 9,0 | 8,5 | 7,5 | 6,5 | 5,5 | 5,0 |
 
 **A1 (6 P):** *Erläutern* Sie, welche **vier** Eigenschaften Sie einem Streudiagramm entnehmen, bevor Sie eine Kennzahl berechnen.
 
@@ -287,9 +287,11 @@ Für die Budgetplanung des nächsten Jahres soll der Umsatz aus dem Werbebudget 
 
 > **Formel:** Residuum e_i = y_i − ŷ_i
 
-## Block D – Modellgüte (16 P)
+## Block D – Modellgüte und Zeitreihen (28 P)
 
 Bevor die Prognose in die Planung eingeht, wollen Sie wissen, wie gut die Gerade die Daten beschreibt.
+
+Das Controlling legt die Umsätze der letzten acht Monate vor. Monatsumsatz in T€: 120, 138, 126, 150, 144, 168, 156, 180
 
 **D1 (6 P):** Für Anlage 2 gilt S_yy = 424. *Berechnen* Sie r und R².
 
@@ -305,19 +307,15 @@ Bevor die Prognose in die Planung eingeht, wollen Sie wissen, wie gut die Gerade
 
 **D3 (4 P):** Ein Kollege ergänzt einen sechsten Monat mit x = 5, y = 15 (fehlerhaft erfasst, tatsächlich 55). *Erläutern* Sie ohne Rechnung, wie sich dieser eine Wert auf r, R² und die Regressionsgerade auswirkt.
 
-## Block E – Zeitreihen (12 P)
-
-Das Controlling legt die Umsätze der letzten acht Monate vor. Monatsumsatz in T€: 120, 138, 126, 150, 144, 168, 156, 180
-
-**E1 (6 P):** *Berechnen* Sie den gleitenden 3-Perioden-Durchschnitt für die ersten vier möglichen Werte und *erläutern* Sie den Zweck der Glättung.
+**D4 (6 P):** *Berechnen* Sie den gleitenden 3-Perioden-Durchschnitt für die ersten vier möglichen Werte und *erläutern* Sie den Zweck der Glättung.
 
 > **Formel:** gleitender 3-Perioden-Durchschnitt = (x_t + x_(t+1) + x_(t+2)) / 3
 
-**E2 (3 P):** *Berechnen* Sie die prozentuale Veränderung von Monat 1 zu Monat 2 sowie die Gesamtveränderung von Monat 1 zu Monat 8.
+**D5 (3 P):** *Berechnen* Sie die prozentuale Veränderung von Monat 1 zu Monat 2 sowie die Gesamtveränderung von Monat 1 zu Monat 8.
 
 > **Formel:** prozentuale Veränderung = (neuer Wert − alter Wert) / alter Wert · 100 %
 
-**E3 (3 P):** Die Reklamationsquote steigt von 4 % auf 6 %. Ein Bericht meldet „+2 %", ein anderer „+50 %". *Erläutern* Sie, welche Angabe korrekt ist und wie beide Formulierungen fachlich richtig lauten.
+**D6 (3 P):** Die Reklamationsquote steigt von 4 % auf 6 %. Ein Bericht meldet „+2 %", ein anderer „+50 %". *Erläutern* Sie, welche Angabe korrekt ist und wie beide Formulierungen fachlich richtig lauten.
 
 ---
 

@@ -246,7 +246,7 @@ Typische **Baseline-Modelle**:
 
 # Übungsklausur Modellgüte (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Runde auf zwei Nachkommastellen. Halte dich an die geforderte Anzahl der Nennungen.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Runde auf zwei Nachkommastellen. Halte dich an die geforderte Anzahl der Nennungen.
 
 ## Ausgangssituation
 
@@ -310,9 +310,13 @@ Die Geschäftsleitung versteht die Kennzahlen nicht und fragt, welche Zahl für 
 
 **C3 (6 P):** Die Entscheidungsschwelle wird gesenkt, sodass das Modell mehr Aufträge als riskant einstuft. *Erläutern* Sie, wie sich Precision und Recall dadurch verändern und warum.
 
-## Block D – Wirtschaftliche Bewertung (12 P)
+## Block D – Wirtschaftliche Bewertung und Regressionsgüte (24 P)
 
 Ein übersehener Reklamationsfall kostet durchschnittlich 120 €, eine unnötige Vorabprüfung 15 €.
+
+| y (tatsächlich) | 100 | 120 | 90 | 130 | 110 |
+|---|---|---|---|---|---|
+| ŷ (prognostiziert) | 90 | 126 | 84 | 132 | 108 |
 
 **D1 (6 P):** *Berechnen* Sie die Fehlerkosten des Modells aus der Anlage sowie die des trivialen Modells aus B3.
 
@@ -322,19 +326,13 @@ Ein übersehener Reklamationsfall kostet durchschnittlich 120 €, eine unnötig
 
 > **Formel:** Fehlerkosten = FN · Kosten je FN + FP · Kosten je FP
 
-## Block E – Regressionsgüte (12 P)
-
-| y (tatsächlich) | 100 | 120 | 90 | 130 | 110 |
-|---|---|---|---|---|---|
-| ŷ (prognostiziert) | 90 | 126 | 84 | 132 | 108 |
-
-**E1 (8 P):** *Berechnen* Sie MAE und RMSE. *Stellen* Sie den Rechenweg tabellarisch dar.
+**D3 (8 P):** *Berechnen* Sie MAE und RMSE. *Stellen* Sie den Rechenweg tabellarisch dar.
 
 > **Formeln:**
 > - MAE = Σ |y_i − ŷ_i| / n
 > - RMSE = √(Σ (y_i − ŷ_i)² / n)
 
-**E2 (4 P):** *Erläutern* Sie, warum der RMSE hier größer ist als der MAE und in welcher Situation Sie welches Maß bevorzugen.
+**D4 (4 P):** *Erläutern* Sie, warum der RMSE hier größer ist als der MAE und in welcher Situation Sie welches Maß bevorzugen.
 
 > **Formeln:**
 > - MAE = Σ |y_i − ŷ_i| / n

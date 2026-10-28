@@ -5,7 +5,7 @@
 
 ---
 
-## Block A
+## Block A – Wissen und Fehleranalyse (26 P)
 
 **A1 (6 P):**
 WHERE filtert einzelne Zeilen und wird **vor** der Gruppierung ausgewertet – deshalb darf es keine Aggregatfunktionen enthalten. HAVING filtert die durch GROUP BY gebildeten Gruppen und wird **nach** der Aggregation ausgewertet – Bedingungen wie `COUNT(*) > 1` gehören daher in HAVING. Logische Reihenfolge: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY.
@@ -33,9 +33,20 @@ HAVING COUNT(*) > 1;
 
 Dialekt-Hinweis: Fehler 2 und 3 gelten nach Standard-SQL. MySQL und SQLite dulden einen Alias in HAVING, SQLite führt sogar `GROUP BY name` mit ausgegebenem `ort` ohne Fehlermeldung aus. Dass eine Abfrage im Übungstool läuft, macht sie in der Prüfung nicht richtig.
 
+**A4 (7 P):**
+| kategorie | guenstigster |
+|---|---|
+| Möbel | 249.00 |
+| Elektronik | 129.00 |
+| Zubehör | 39.90 |
+
+Begründung: MIN je Kategorie (Möbel: min(249, 399) = 249; Elektronik: min(189, 129) = 129; Zubehör: 39.90), anschließend absteigend nach `guenstigster` sortiert.
+
+*Prüferkommentar: 3 P für korrekte MIN-Werte, 2 P für die richtige Sortierreihenfolge, 2 P für vollständige Spaltenüberschriften. Häufigster Fehler: Sortierung nach Kategorie-Alphabet statt nach dem Aggregatwert.*
+
 ---
 
-## Block B
+## Block B – Abfragen auf einer Tabelle (24 P)
 
 **B1 (5 P):**
 ```sql
@@ -77,7 +88,11 @@ FROM produkt;
 ```
 Ergebnis: 201.18. *(1 P Abzug ohne Alias – er war ausdrücklich gefordert.)*
 
-**B6 (7 P):**
+---
+
+## Block C – Gruppieren und Verknüpfen (26 P)
+
+**C1 (7 P):**
 ```sql
 SELECT bestell_id, COUNT(*) AS positionen
 FROM bestellposition
@@ -86,7 +101,7 @@ HAVING COUNT(*) > 1;
 ```
 Ergebnis: 100 (2 Positionen), 101 (2 Positionen). *(3 P GROUP BY, 4 P HAVING – wer WHERE schreibt, verliert diese 4 P.)*
 
-**B7 (7 P):**
+**C2 (7 P):**
 ```sql
 SELECT b.bestell_id, b.bestelldatum, k.name
 FROM bestellung b
@@ -94,7 +109,7 @@ INNER JOIN kunde k ON b.kunden_id = k.kunden_id;
 ```
 6 Ergebniszeilen. *(3 P JOIN-Syntax, 3 P korrekte ON-Bedingung, 1 P Spaltenauswahl. LEFT JOIN wäre hier ebenfalls voll bepunktet – jede Bestellung hat einen Kunden.)*
 
-**B8 (12 P):**
+**C3 (12 P):**
 ```sql
 SELECT k.name, SUM(bp.menge * p.preis) AS umsatz
 FROM kunde k
@@ -109,7 +124,11 @@ Rechenweg Huber: Best. 100 = 2×249 + 2×189 = 876,00; Best. 102 = 4×129 = 516,
 
 *Prüferkommentar: 6 P für die drei korrekten Join-Bedingungen (je 2), 3 P für SUM(menge × preis), 2 P GROUP BY, 1 P ORDER BY … DESC. Diese Aufgabengröße ist typisch für den letzten Handlungsschritt einer echten Klausur.*
 
-**B9 (8 P):**
+---
+
+## Block D – Unterabfragen und Tabellen anlegen (24 P)
+
+**D1 (8 P):**
 ```sql
 SELECT k.name
 FROM kunde k
@@ -126,7 +145,7 @@ WHERE kunden_id NOT IN (SELECT kunden_id FROM bestellung);
 
 Vorsicht bei NOT IN: Die Variante funktioniert hier nur, weil `bestellung.kunden_id` keine NULL-Werte enthält. Enthielte die Unterabfrage einen NULL-Wert, lieferte NOT IN gar keine Zeile. Robust ist auch `WHERE NOT EXISTS (SELECT 1 FROM bestellung b WHERE b.kunden_id = k.kunden_id)` (→ Lernzettel 3.1).
 
-**B10 (8 P):**
+**D2 (8 P):**
 ```sql
 SELECT bezeichnung, preis
 FROM produkt
@@ -134,23 +153,7 @@ WHERE preis > (SELECT AVG(preis) FROM produkt);
 ```
 Ergebnis: Bürostuhl Comfort 249.00, Schreibtisch Basic 399.00 (Durchschnitt: 201.18). *(4 P Unterabfrage, 4 P Vergleich. Ein von Hand eingesetzter Zahlenwert statt der Unterabfrage gibt max. 4 P – die Abfrage wäre bei Datenänderung falsch.)*
 
----
-
-## Block C
-
-**C1 (7 P):**
-
-| kategorie | guenstigster |
-|---|---|
-| Möbel | 249.00 |
-| Elektronik | 129.00 |
-| Zubehör | 39.90 |
-
-Begründung: MIN je Kategorie (Möbel: min(249, 399) = 249; Elektronik: min(189, 129) = 129; Zubehör: 39.90), anschließend absteigend nach `guenstigster` sortiert.
-
-*Prüferkommentar: 3 P für korrekte MIN-Werte, 2 P für die richtige Sortierreihenfolge, 2 P für vollständige Spaltenüberschriften. Häufigster Fehler: Sortierung nach Kategorie-Alphabet statt nach dem Aggregatwert.*
-
-**C2 (8 P):**
+**D3 (8 P):**
 ```sql
 CREATE TABLE retoure (
   retoure_id  INTEGER PRIMARY KEY,

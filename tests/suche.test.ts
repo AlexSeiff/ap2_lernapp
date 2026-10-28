@@ -67,7 +67,7 @@ describe('Index', () => {
     const treffer = suche(index, 'Informationsdurchsickern');
     expect(treffer.some((t) => t.eintrag.art === 'aufgabe')).toBe(false);
     const l = treffer.find((t) => t.eintrag.art === 'loesung')!;
-    expect(l.eintrag.link).toBe('/aufgabe/06-E2');
+    expect(l.eintrag.link).toBe('/aufgabe/06-B4');
     expect(l.eintrag.kontext).toBe('Musterlösung · Deep Dive 6 · CRISP-DM & Machine Learning');
     expect(l.ausschnitt).toContain('Informationsdurchsickern');
   });

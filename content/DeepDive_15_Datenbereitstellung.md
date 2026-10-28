@@ -297,19 +297,25 @@ Startknoten (gefüllter Kreis), Aktionen (abgerundete Rechtecke), Entscheidungen
 
 # Übungsklausur Datenbereitstellung (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **vor einer Altklausur zum Bereich „Datenqualität“** am Stück, handschriftlich.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **vor einer Altklausur zum Bereich „Datenqualität“** am Stück, handschriftlich.
 
 ## Ausgangssituation
 
 Die **Möbelhaus Nordholz GmbH** stellt ihre Reparatur- und Bestelldaten künftig über eine **Schnittstelle** für die Filialen, einen Online-Marktplatz und Partnerwerkstätten bereit. Bisher tauschen die Standorte CSV-Dateien per E-Mail aus; dabei gehen regelmäßig Umlaute und Beträge kaputt. Sie arbeiten in der IT-Abteilung und sind für die Datenbereitstellung zuständig.
 
-## Block A – Daten klassifizieren (12 P)
+## Block A – Daten klassifizieren und Anforderungen modellieren (24 P)
 
 Bevor Daten an Partner gehen, soll jede Datenquelle nach Struktur und Schutzbedarf eingestuft werden.
+
+Für das Kundenportal und das Datenmodell der Schnittstelle sollen die Anforderungen in UML festgehalten werden.
 
 **A1 (6 P):** *Ordnen* Sie die folgenden Daten jeweils dem Strukturierungsgrad *zu* und *nennen* Sie eine Konsequenz für die Auswertung: (a) Kundentabelle der Datenbank, (b) JSON-Export der Bestellungen, (c) Fotos von Reklamationsschäden, (d) Freitext-Bewertungen aus dem Onlineshop.
 
 **A2 (6 P):** *Ordnen* Sie jeweils eine Schutzklasse *zu* und *nennen* Sie für die höchste Klasse **zwei** Schutzmaßnahmen: (a) Produktkatalog mit Preisen, (b) interne Telefonliste, (c) Kundenadressen mit Jahresumsätzen, (d) Gehaltsdaten der Beschäftigten.
+
+**A3 (6 P):** Kunden können im Portal eine Reparatur beauftragen; dafür müssen sie immer angemeldet sein. Optional können sie beim Beauftragen einen Expressservice wählen. Servicemitarbeiter bearbeiten die Aufträge. *Erstellen* Sie das Use-Case-Diagramm mit korrekter «include»- und «extend»-Beziehung.
+
+**A4 (6 P):** Ein Klassendiagramm zeigt: `Kunde 1 ——— 0..* Reparaturauftrag` und `Reparaturauftrag 0..* ——— 1..* Leistung`. *Übertragen* Sie beide Beziehungen in Min-Max- und Chen-Notation und *geben* Sie *an*, welche zusätzliche Tabelle im Relationenmodell entsteht.
 
 ## Block B – Formate und Kodierung (30 P)
 
@@ -390,14 +396,6 @@ Für den Online-Marktplatz prüft die IT, ob neben der relationalen Datenbank we
 **D2 (8 P):** Zwei Disponenten lesen gleichzeitig den Lagerbestand 10 eines Artikels, verkaufen je 3 Stück und speichern jeweils 7. *Benennen* Sie das Problem, *geben* Sie den korrekten Endbestand *an* und *beschreiben* Sie **zwei** Lösungen.
 
 **D3 (4 P):** *Erläutern* Sie, welche Folge der Verzicht auf ein festes Schema für die Datenqualität hat und wie Sie gegensteuern.
-
-## Block E – UML (12 P)
-
-Für das Kundenportal und das Datenmodell der Schnittstelle sollen die Anforderungen in UML festgehalten werden.
-
-**E1 (6 P):** Kunden können im Portal eine Reparatur beauftragen; dafür müssen sie immer angemeldet sein. Optional können sie beim Beauftragen einen Expressservice wählen. Servicemitarbeiter bearbeiten die Aufträge. *Erstellen* Sie das Use-Case-Diagramm mit korrekter «include»- und «extend»-Beziehung.
-
-**E2 (6 P):** Ein Klassendiagramm zeigt: `Kunde 1 ——— 0..* Reparaturauftrag` und `Reparaturauftrag 0..* ——— 1..* Leistung`. *Übertragen* Sie beide Beziehungen in Min-Max- und Chen-Notation und *geben* Sie *an*, welche zusätzliche Tabelle im Relationenmodell entsteht.
 
 ---
 

@@ -5,7 +5,7 @@
 
 ---
 
-## Block A – OLTP und OLAP (18 P)
+## Block A – OLTP, OLAP und Big Data (26 P)
 
 **A1 (10 P):** *(je Kriterium 2 P – fünf genügen)*
 
@@ -26,6 +26,20 @@ Der Vorschlag ist **abzulehnen**. *(2 P)* Drei Gründe *(je 2 P)*:
 3. **Verteilte Quellen:** Die Daten liegen zusätzlich im CRM-System. Ohne Integration und Vereinheitlichung von Schlüsseln, Formaten und Bezeichnungen lassen sich beide Bestände nicht gemeinsam auswerten.
 
 *Ebenfalls anerkannt: ungeeignetes Datenmodell (Normalisierung erzwingt viele Joins), fehlende Aggregationen, unklare Berechtigungssteuerung für Auswertende.*
+
+**A3 (5 P):** *(je 1 P)*
+
+| V | Beispiel aus dem Möbelhaus |
+|---|---|
+| Volume | Millionen Kassenbons und Klickdaten des Onlineshops über mehrere Jahre |
+| Velocity | laufend eingehende Bestands- und Kassendaten der acht Filialen, teils in Echtzeit |
+| Variety | strukturierte Verkaufsdaten, Bewertungstexte, Produktbilder, Sensordaten aus dem Lager |
+| Veracity | Verlässlichkeit, etwa bei Kundenbewertungen unklarer Herkunft oder fehlerhaften Sensorwerten |
+| Value | konkreter Nutzen, z. B. eine belastbare Sortimentsentscheidung – ohne Wertschöpfung bleibt der Aufwand Selbstzweck |
+
+**A4 (3 P):**
+**Batchverarbeitung** sammelt Daten und verarbeitet sie gebündelt in festen Intervallen – etwa der nächtliche DWH-Ladelauf für die Umsatzberichte. Sie ist einfach, robust und ressourcenschonend, liefert aber keine aktuellen Werte. *(1,5 P)*
+**Streamverarbeitung** verarbeitet Daten fortlaufend bei ihrem Entstehen – etwa eine sofortige Bestandswarnung bei Unterschreiten des Meldebestands oder Betrugserkennung im Zahlungsverkehr. Sie ist technisch aufwendiger, ermöglicht aber Reaktionen nahezu in Echtzeit. *(1,5 P)*
 
 ---
 
@@ -56,7 +70,6 @@ Besseres Vorgehen *(3 P)*: Die fehlerhaften Sätze werden in einen **Quarantäne
 ## Block C – Sternschema entwerfen (30 P)
 
 **C1 (16 P):**
-
 **Faktentabelle fakt_verkauf**
 | Spalte | Art |
 |---|---|
@@ -101,14 +114,13 @@ Empfehlung: **Star-Schema.** Bei 500 Artikeln und acht Filialen sind die Dimensi
 
 ---
 
-## Block D – Historisierung (16 P)
+## Block D – Historisierung und OLAP-Operationen (20 P)
 
 **D1 (6 P):**
 Wird die Adresse überschrieben, gilt für **alle** Fakten – auch für die vor dem Umzug entstandenen – rückwirkend der Ort Hamburg. *(3 P)*
 Folgen: Vergangene Umsätze werden fälschlich der Region Nord statt Süd zugeordnet; der geforderte Dreijahresvergleich nach Regionen wird verfälscht. Zudem verändern sich bereits berichtete Zahlen nachträglich, sodass ein heute erstellter Bericht nicht mehr mit dem Bericht des Vorjahres übereinstimmt – die Nachvollziehbarkeit geht verloren. *(3 P)*
 
 **D2 (6 P):**
-
 | kunde_sk | kunde_id | name | ort | gültig_von | gültig_bis | aktuell |
 |---|---|---|---|---|---|---|
 | 1 | K-1001 | Huber GmbH | München | 01.01.2024 | 14.05.2026 | nein |
@@ -122,21 +134,7 @@ Vorgehen: Der bestehende Satz wird **nicht** verändert, sondern durch Setzen vo
 Bei Typ-2-Historisierung kommt der fachliche Schlüssel K-1001 mehrfach vor und identifiziert eine Zeile daher nicht mehr eindeutig – er kann kein Primärschlüssel mehr sein. Der **Surrogatschlüssel** ist ein künstlicher, im DWH vergebener Schlüssel, der jede Version eindeutig identifiziert. *(2 P)*
 Nur so lassen sich Fakten der jeweils **zum Zeitpunkt gültigen** Version zuordnen: Verkäufe vor dem Umzug verweisen auf kunde_sk = 1 und bleiben damit korrekt München zugeordnet. Zusätzlich macht der Surrogatschlüssel das DWH unabhängig von Schlüsselformaten und Nummernkreisen der verschiedenen Quellsysteme. *(2 P)*
 
----
-
-## Block E – Big Data und OLAP-Operationen (12 P)
-
-**E1 (5 P):** *(je 1 P)*
-
-| V | Beispiel aus dem Möbelhaus |
-|---|---|
-| Volume | Millionen Kassenbons und Klickdaten des Onlineshops über mehrere Jahre |
-| Velocity | laufend eingehende Bestands- und Kassendaten der acht Filialen, teils in Echtzeit |
-| Variety | strukturierte Verkaufsdaten, Bewertungstexte, Produktbilder, Sensordaten aus dem Lager |
-| Veracity | Verlässlichkeit, etwa bei Kundenbewertungen unklarer Herkunft oder fehlerhaften Sensorwerten |
-| Value | konkreter Nutzen, z. B. eine belastbare Sortimentsentscheidung – ohne Wertschöpfung bleibt der Aufwand Selbstzweck |
-
-**E2 (4 P):** *(je 1 P)*
+**D4 (4 P):** *(je 1 P)*
 | Auswertungswunsch | OLAP-Operation |
 |---|---|
 | (a) „Zeig mir das Jahresergebnis aufgeschlüsselt nach Quartalen." | Drill-down |
@@ -145,10 +143,6 @@ Nur so lassen sich Fakten der jeweils **zum Zeitpunkt gültigen** Version zuordn
 | (d) „Fasse die Filialumsätze zu Regionsumsätzen zusammen." | Roll-up |
 
 *Prüferkommentar zu (b): Slice, weil genau eine Dimension (Filiale/Ort, Hierarchieebene Region) auf einen einzigen Wert festgelegt wird. Dice wäre es erst, wenn zusätzlich eine weitere Dimension eingeschränkt würde (z. B. Region Nord und 1. Halbjahr).*
-
-**E3 (3 P):**
-**Batchverarbeitung** sammelt Daten und verarbeitet sie gebündelt in festen Intervallen – etwa der nächtliche DWH-Ladelauf für die Umsatzberichte. Sie ist einfach, robust und ressourcenschonend, liefert aber keine aktuellen Werte. *(1,5 P)*
-**Streamverarbeitung** verarbeitet Daten fortlaufend bei ihrem Entstehen – etwa eine sofortige Bestandswarnung bei Unterschreiten des Meldebestands oder Betrugserkennung im Zahlungsverkehr. Sie ist technisch aufwendiger, ermöglicht aber Reaktionen nahezu in Echtzeit. *(1,5 P)*
 
 ---
 

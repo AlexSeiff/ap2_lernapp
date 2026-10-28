@@ -208,7 +208,7 @@ describe('Übersichtsseite', () => {
   });
 
   it('Fortschritt je Thema: jedes Thema mit allen Werten', () => {
-    progress = { ...emptyProgress(), attempts: [{ taskId: '03-C1', date: '2026-10-01', points: 5, max: 10, mode: 'einzel' }] };
+    progress = { ...emptyProgress(), attempts: [{ taskId: '03-B1', date: '2026-10-01', points: 5, max: 10, mode: 'einzel' }] };
     const html = render();
     for (const t of content.topics) expect(html).toContain(`href="/lernen/${t.id}"`);
     expect(html).toContain('aria-label="Ø Aufgaben: 50 %"');

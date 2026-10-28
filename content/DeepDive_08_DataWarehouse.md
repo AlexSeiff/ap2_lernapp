@@ -312,19 +312,33 @@ Nutzen: Abfragen mit Filter auf das Partitionskriterium lesen nur die betroffene
 
 # Übungsklausur Data Warehouse & Big Data (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich.
 
 ## Ausgangssituation
 
 Die **Möbelhaus Nordholz GmbH** betreibt acht Filialen und führt rund 500 Artikel. Die Geschäftsführung möchte Umsätze nach Zeitraum, Artikel, Kunde und Filiale auswerten und Vorjahresvergleiche über drei Jahre ziehen. Die Daten liegen in der operativen Datenbank sowie in einem separaten CRM-System. Sie sollen als Mitarbeiter der IT-Abteilung ein **Data Warehouse** konzipieren.
 
-## Block A – OLTP und OLAP (18 P)
+## Block A – OLTP, OLAP und Big Data (26 P)
 
 In der ersten Projektbesprechung fragt die Geschäftsführung, warum überhaupt ein eigenes System nötig ist.
+
+Außerdem will sie künftig auch Daten aus Onlineshop und Lager auswerten.
 
 **A1 (10 P):** *Grenzen* Sie OLTP- und OLAP-Systeme anhand von **fünf** Kriterien *ab*. *Stellen* Sie die Antwort tabellarisch dar.
 
 **A2 (8 P):** Ein Kollege schlägt vor, die Auswertungen direkt auf der operativen Datenbank durchzuführen: „Die Daten sind doch schon da." *Beurteilen* Sie den Vorschlag und *nennen* Sie **drei** fachliche Gründe, die dagegen sprechen.
+
+**A3 (5 P):** *Nennen* Sie die **fünf** V von Big Data und *ordnen* Sie jedem ein Beispiel aus dem Möbelhaus *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| V | Beispiel aus dem Möbelhaus |
+|---|---|
+| | |
+| | |
+| | |
+| | |
+| | |
+
+**A4 (3 P):** *Erläutern* Sie den Unterschied zwischen Batch- und Streamverarbeitung und *nennen* Sie je einen passenden Anwendungsfall.
 
 ## Block B – Architektur und ETL (24 P)
 
@@ -355,9 +369,11 @@ Für die Umsatzauswertung aus der Ausgangssituation soll das logische Datenmodel
 | | | |
 | | | |
 
-## Block D – Historisierung (16 P)
+## Block D – Historisierung und OLAP-Operationen (20 P)
 
 Kundenstammdaten ändern sich – trotzdem sollen Umsätze der Vergangenheit dem damals richtigen Ort zugeordnet bleiben.
+
+Außerdem stellt die Geschäftsführung erste Auswertungswünsche.
 
 **D1 (6 P):** Kundin „Huber GmbH" (K-1001) zieht am 15.05.2026 von München nach Hamburg. *Erläutern* Sie, welches Problem entsteht, wenn die Adresse in der Dimensionstabelle einfach überschrieben wird.
 
@@ -365,21 +381,7 @@ Kundenstammdaten ändern sich – trotzdem sollen Umsätze der Vergangenheit dem
 
 **D3 (4 P):** *Erläutern* Sie, warum bei SCD Typ 2 ein Surrogatschlüssel erforderlich ist.
 
-## Block E – Big Data und OLAP-Operationen (12 P)
-
-Die Geschäftsführung will künftig auch Daten aus Onlineshop und Lager auswerten und stellt erste Auswertungswünsche.
-
-**E1 (5 P):** *Nennen* Sie die **fünf** V von Big Data und *ordnen* Sie jedem ein Beispiel aus dem Möbelhaus *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
-
-| V | Beispiel aus dem Möbelhaus |
-|---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
-
-**E2 (4 P):** *Ordnen* Sie den folgenden Auswertungswünschen die passende OLAP-Operation *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**D4 (4 P):** *Ordnen* Sie den folgenden Auswertungswünschen die passende OLAP-Operation *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Auswertungswunsch | OLAP-Operation |
 |---|---|
@@ -387,8 +389,6 @@ Die Geschäftsführung will künftig auch Daten aus Onlineshop und Lager auswert
 | (b) „Nur die Filialen der Region Nord." | |
 | (c) „Kategorien in die Zeilen, Monate in die Spalten." | |
 | (d) „Fasse die Filialumsätze zu Regionsumsätzen zusammen." | |
-
-**E3 (3 P):** *Erläutern* Sie den Unterschied zwischen Batch- und Streamverarbeitung und *nennen* Sie je einen passenden Anwendungsfall.
 
 ---
 

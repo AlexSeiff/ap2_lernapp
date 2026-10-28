@@ -211,9 +211,9 @@
         "Bedingungen auf Gruppen gehören in HAVING, nicht in WHERE."
       ],
       "erklaerung": "Ergebnis: 100 mit 2 Positionen, 101 mit 2 Positionen. Wer WHERE COUNT(*) > 1 schreibt, verliert in der Prüfung 4 Punkte.",
-      "quelle_aufgabe": "DD1 Übungsklausur B6",
+      "quelle_aufgabe": "DD1 Übungsklausur C1",
       "aufgaben": [
-        "01-B6"
+        "01-C1"
       ],
       "spalten_frei": true
     },
@@ -239,9 +239,9 @@
         "Tabellen-Aliase (b, k) machen die Abfrage lesbar."
       ],
       "erklaerung": "6 Zeilen. LEFT JOIN wäre hier auch richtig – jede Bestellung hat einen Kunden.",
-      "quelle_aufgabe": "DD1 Übungsklausur B7",
+      "quelle_aufgabe": "DD1 Übungsklausur C2",
       "aufgaben": [
-        "01-B7"
+        "01-C2"
       ],
       "karten": [
         "SQL-010",
@@ -278,9 +278,9 @@
         "GROUP BY k.name, danach ORDER BY umsatz DESC."
       ],
       "erklaerung": "Ergebnis: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70. Rechenweg Huber: Best. 100 = 2×249 + 2×189 = 876,00; Best. 102 = 4×129 = 516,00; Best. 105 = 2×39,90 = 79,80.",
-      "quelle_aufgabe": "DD1 Übungsklausur B8",
+      "quelle_aufgabe": "DD1 Übungsklausur C3",
       "aufgaben": [
-        "01-B8"
+        "01-C3"
       ]
     },
     {
@@ -306,9 +306,9 @@
         "Filtere auf b.bestell_id IS NULL."
       ],
       "erklaerung": "Ergebnis: Weber e.K., Braun GmbH. Genauso richtig: WHERE NOT EXISTS (SELECT 1 FROM bestellung b WHERE b.kunden_id = k.kunden_id) oder WHERE kunden_id NOT IN (SELECT kunden_id FROM bestellung) – NOT IN nur, solange die Unterabfrage keine NULL-Werte liefert.",
-      "quelle_aufgabe": "DD1 Übungsklausur B9",
+      "quelle_aufgabe": "DD1 Übungsklausur D1",
       "aufgaben": [
-        "01-B9"
+        "01-D1"
       ],
       "karten": [
         "SQL-011",
@@ -337,9 +337,9 @@
         "Berechne den Durchschnitt in einer Unterabfrage in Klammern."
       ],
       "erklaerung": "Ergebnis: Bürostuhl Comfort 249.00, Schreibtisch Basic 399.00 (Durchschnitt 201.18). Ein von Hand eingesetzter Wert gibt nur halbe Punkte – er stimmt nach der nächsten Preisänderung nicht mehr.",
-      "quelle_aufgabe": "DD1 Übungsklausur B10",
+      "quelle_aufgabe": "DD1 Übungsklausur D2",
       "aufgaben": [
-        "01-B10"
+        "01-D2"
       ],
       "karten": [
         "SQL-013",
@@ -411,7 +411,7 @@
         "Sortiert wird nach dem Aggregat, nicht nach der Kategorie."
       ],
       "erklaerung": "Ergebnis: Möbel 249.00, Elektronik 129.00, Zubehör 39.90. Häufigster Fehler: nach Kategorie-Alphabet sortiert.",
-      "quelle_aufgabe": "DD1 Übungsklausur C1"
+      "quelle_aufgabe": "DD1 Übungsklausur A4"
     },
     {
       "id": "SQL-MH-013",
@@ -437,9 +437,9 @@
         "Fremdschlüssel am Ende: FOREIGN KEY (bestell_id) REFERENCES bestellung(bestell_id)."
       ],
       "erklaerung": "Geprüft werden Spalten, Primärschlüssel, Pflichtfelder, Fremdschlüssel, Standardwert und CHECK – nicht die Datentypen. INT statt INTEGER oder TEXT statt VARCHAR ist auch in der Prüfung ok.",
-      "quelle_aufgabe": "DD1 Übungsklausur C2",
+      "quelle_aufgabe": "DD1 Übungsklausur D3",
       "aufgaben": [
-        "01-C2"
+        "01-D3"
       ],
       "karten": [
         "SQL-016",

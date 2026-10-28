@@ -210,7 +210,7 @@ Beispiel: Eigenentwicklung 12.000 € Fixkosten pro Jahr plus 2 € je Vorgang, 
 
 # Übungsklausur Projektmanagement & Wirtschaftlichkeit (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner und Lineal. Halte dich an die geforderte Anzahl der Nennungen.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner und Lineal. Halte dich an die geforderte Anzahl der Nennungen.
 
 ## Ausgangssituation
 
@@ -228,9 +228,11 @@ Für den Projektauftrag sollen Ziele und Anforderungen festgehalten werden. Der 
 
 **A4 (4 P):** *Formulieren* Sie ein SMART-Ziel für das Projekt und *weisen* Sie alle fünf Kriterien in Ihrer Formulierung *nach*.
 
-## Block B – Vorgehensmodelle (14 P)
+## Block B – Vorgehensmodell und Projektsteuerung (26 P)
 
 Die Projektleiterin lässt das Team entscheiden, nach welchem Vorgehensmodell gearbeitet wird. Der Fachbereich kann seine Anforderungen noch nicht vollständig beschreiben, der Starttermin zum Geschäftsjahresbeginn steht aber fest.
+
+In der Umsetzungsphase zeichnen sich erste Risiken ab, und der Fachbereich meldet laufend neue Wünsche an die Dashboards.
 
 **B1 (8 P):** *Vergleichen* Sie Wasserfallmodell und Scrum anhand von **vier** Kriterien. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
@@ -242,6 +244,20 @@ Die Projektleiterin lässt das Team entscheiden, nach welchem Vorgehensmodell ge
 | | | |
 
 **B2 (6 P):** *Nennen* Sie die **drei** Scrum-Rollen mit je einer Hauptaufgabe. *Begründen* Sie anschließend, welches Vorgehensmodell Sie für dieses Projekt empfehlen, wenn die Anforderungen des Fachbereichs noch unklar sind, der Endtermin aber feststeht.
+
+**B3 (6 P):** *Bewerten* Sie die folgenden Risiken mit einem Risikowert (Eintrittswahrscheinlichkeit W und Schadensausmaß S auf einer Skala 1–5) und *ordnen* Sie jedem Risiko eine der vier Risikostrategien *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Risiko | Risikowert | Strategie |
+|---|---|---|
+| (a) Der externe Dienstleister fällt aus (W = 2, S = 5) | | |
+| (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | | |
+| (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | | |
+
+> **Formel:** Risikowert = Eintrittswahrscheinlichkeit W · Schadensausmaß S
+
+**B4 (3 P):** *Erläutern* Sie den Begriff **Scope Creep** und *nennen* Sie **zwei** Maßnahmen dagegen.
+
+**B5 (3 P):** *Erläutern* Sie, was ein Soll-Ist-Vergleich am Projektende umfassen muss und warum er für Ihre Projektdokumentation unverzichtbar ist.
 
 ## Block C – Netzplan (28 P)
 
@@ -305,24 +321,6 @@ b) *Beurteilen* Sie das Ergebnis kritisch. (4 P)
 > **Formel:** Break-even-Menge = Fixkosten / (Verkaufspreis − variable Stückkosten)
 
 **D4 (4 P):** *Erläutern* Sie den Begriff **TCO** und *nennen* Sie **drei** Kostenpositionen, die in D1 nicht berücksichtigt wurden.
-
-## Block E – Risiken und Steuerung (12 P)
-
-In der Umsetzungsphase zeichnen sich erste Risiken ab, und der Fachbereich meldet laufend neue Wünsche an die Dashboards.
-
-**E1 (6 P):** *Bewerten* Sie die folgenden Risiken mit einem Risikowert (Eintrittswahrscheinlichkeit W und Schadensausmaß S auf einer Skala 1–5) und *ordnen* Sie jedem Risiko eine der vier Risikostrategien *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
-
-| Risiko | Risikowert | Strategie |
-|---|---|---|
-| (a) Der externe Dienstleister fällt aus (W = 2, S = 5) | | |
-| (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | | |
-| (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | | |
-
-> **Formel:** Risikowert = Eintrittswahrscheinlichkeit W · Schadensausmaß S
-
-**E2 (3 P):** *Erläutern* Sie den Begriff **Scope Creep** und *nennen* Sie **zwei** Maßnahmen dagegen.
-
-**E3 (3 P):** *Erläutern* Sie, was ein Soll-Ist-Vergleich am Projektende umfassen muss und warum er für Ihre Projektdokumentation unverzichtbar ist.
 
 ---
 

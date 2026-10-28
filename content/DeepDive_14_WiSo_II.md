@@ -380,9 +380,9 @@ Der Prüfungskatalog nennt das als eigenes WiSo-Gebiet (§ 4 Absatz 7 Nummer 5).
 
 # Übungsklausur WiSo II (100 Punkte, 60 Minuten)
 
-25 gebundene Aufgaben à 4 Punkte. Bei Mehrfachauswahl zählt hier zur Selbstkontrolle nur die vollständig richtige Lösung (in der echten Prüfung wird bei Mehrfachauswahl, Reihenfolge und Zuordnung teilbewertet). Bearbeite die Klausur **am Ende des Themas** am Stück.
+30 Aufgaben, je 3 oder 4 Punkte (4 Punkte bei zwei Antworten, Zuordnung, Reihenfolge und Rechenergebnis). Bei Mehrfachauswahl zählt hier zur Selbstkontrolle nur die vollständig richtige Lösung (in der echten Prüfung wird bei Mehrfachauswahl, Reihenfolge und Zuordnung teilbewertet). Bearbeite die Klausur **am Ende des Themas** am Stück.
 
-Die Aufgaben sind hier nach Themen in Blöcke gegliedert; in der PDF-Fassung sind sie von 1 bis 25 durchnummeriert (A1–A8 = Aufgaben 1–8, B1–B9 = 9–17, C1–C2 = 18–19, D1–D6 = 20–25).
+Die Aufgaben sind hier nach Themen in Blöcke gegliedert; in der PDF-Fassung sind sie von 1 bis 30 durchnummeriert (A1–A6 = Aufgaben 1–6, B1–B6 = 7–12, C1–C6 = 13–18, D1–D6 = 19–24, E1–E6 = 25–30).
 
 ## Beitragssätze für diese Klausur (Annahme)
 
@@ -390,19 +390,19 @@ KV 14,6 % + Zusatzbeitrag 2,9 % · PV 3,6 % (Zuschlag für Kinderlose ab 23: 0,6
 
 Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderlos, 3. Ausbildungsjahr), **Herr Kaya** (Mitarbeiter im Lager, ein Kind).
 
-## Block A – Sozialversicherung und Entgelt (32 P)
+## Block A – Sozialversicherung und Entgelt (20 P)
 
-**A1 (4 P):** Wer ist Träger der gesetzlichen Unfallversicherung für das Möbelhaus? *(Ziffer eintragen)*
+**A1 (3 P):** Wer ist Träger der gesetzlichen Unfallversicherung für das Möbelhaus? *(Ziffer eintragen)*
 - (1) die Krankenkasse
 - (2) die Deutsche Rentenversicherung
 - (3) die Berufsgenossenschaft
 - (4) die Bundesagentur für Arbeit
 - (5) das Gewerbeaufsichtsamt
 
-**A2 (4 P):** Welcher Zweig der Sozialversicherung wird ausschließlich vom Arbeitgeber finanziert? *(Ziffer eintragen)*
+**A2 (3 P):** Welcher Zweig der Sozialversicherung wird ausschließlich vom Arbeitgeber finanziert? *(Ziffer eintragen)*
 (1) Krankenversicherung · (2) Pflegeversicherung · (3) Rentenversicherung · (4) Arbeitslosenversicherung · (5) Unfallversicherung
 
-**A3 (4 P):** Ein Auszubildender des Möbelhauses erhält eine Vergütung von 310 € im Monat. Wer trägt die Sozialversicherungsbeiträge? *(Ziffer eintragen)*
+**A3 (3 P):** Ein Auszubildender des Möbelhauses erhält eine Vergütung von 310 € im Monat. Wer trägt die Sozialversicherungsbeiträge? *(Ziffer eintragen)*
 - (1) Arbeitgeber und Auszubildender je zur Hälfte
 - (2) der Arbeitgeber allein
 - (3) der Auszubildende allein
@@ -419,25 +419,11 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 > - Nettoentgelt = Bruttoentgelt − SV-Arbeitnehmeranteil − Lohnsteuer − Kirchensteuer
 > - Kirchensteuer = Lohnsteuer · Kirchensteuersatz
 
-**A6 (4 P):** Die Minijob-Grenze beträgt 603 € im Monat, der Mindestlohn 13,90 €. Wie viele volle Stunden darf eine Aushilfe zum Mindestlohn höchstens im Monat arbeiten, ohne die Grenze zu überschreiten? *(Ergebnis eintragen)*
+**A6 (3 P):** Die Minijob-Grenze beträgt 603 € im Monat, der Mindestlohn 13,90 €. Wie viele volle Stunden darf eine Aushilfe zum Mindestlohn höchstens im Monat arbeiten, ohne die Grenze zu überschreiten? *(Ergebnis eintragen)*
 
 > **Formel:** höchste Stundenzahl = Minijob-Grenze / Stundenlohn
 
-**A7 (4 P):** Lea ist zehn Wochen arbeitsunfähig erkrankt. Welche Aussage ist richtig? *(Ziffer eintragen)*
-- (1) Das Möbelhaus zahlt die Vergütung zehn Wochen voll weiter.
-- (2) Die Krankenkasse zahlt ab dem ersten Tag Krankengeld.
-- (3) Das Möbelhaus zahlt sechs Wochen, danach entfällt jede Zahlung.
-- (4) Das Möbelhaus zahlt sechs Wochen weiter, danach zahlt die Krankenkasse Krankengeld.
-- (5) Die Rentenversicherung zahlt ab der dritten Woche Übergangsgeld.
-
-**A8 (4 P):** Welcher Unfall ist über die gesetzliche Unfallversicherung versichert? *(Ziffer eintragen)*
-- (1) Herr Kaya bringt auf dem Weg zur Arbeit seine Tochter in die Kita und stürzt vor dem Kita-Eingang.
-- (2) Jonas unterbricht den Heimweg für einen Einkauf und rutscht im Supermarkt aus.
-- (3) Lea geht in der Mittagspause privat zum Friseur und verletzt sich dort.
-- (4) Herr Kaya verletzt sich am Wochenende beim Fußball.
-- (5) Lea stürzt vor Arbeitsbeginn beim Frühstück in ihrer Küche.
-
-## Block B – Rechtsgeschäfte und Verträge (36 P)
+## Block B – Rechtsgeschäfte und Vertragsarten (20 P)
 
 **B1 (4 P):** Welche **zwei** Rechtsgeschäfte sind sofort wirksam? *(Ziffern eintragen)*
 - (1) Ein 6-Jähriger kauft von seinem Taschengeld ein Comicheft.
@@ -446,99 +432,152 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 - (4) Ein 17-Jähriger schließt ohne Zustimmung einen Mobilfunkvertrag über 24 Monate ab.
 - (5) Ein 16-Jähriger nimmt ein Geldgeschenk seiner Tante an.
 
-**B2 (4 P):** Im Schaufenster steht ein Sofa mit dem Preisschild 899 €. Ein Kunde will es zu diesem Preis kaufen, der Verkäufer lehnt ab. Welche Aussage ist richtig? *(Ziffer eintragen)*
+**B2 (3 P):** Im Schaufenster steht ein Sofa mit dem Preisschild 899 €. Ein Kunde will es zu diesem Preis kaufen, der Verkäufer lehnt ab. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Der Kunde hat einen Anspruch auf das Sofa, da ein verbindliches Angebot vorlag.
 - (2) Die Auslage ist nur eine Aufforderung zur Abgabe eines Angebots; der Verkäufer darf ablehnen.
 - (3) Der Vertrag ist bereits mit Betreten des Ladens zustande gekommen.
 - (4) Der Verkäufer muss ein gleichwertiges Sofa zum selben Preis anbieten.
 - (5) Der Vertrag ist schwebend unwirksam.
 
-**B3 (4 P):** Ein Gebrauchtwagenhändler verschweigt dem Möbelhaus beim Verkauf eines Lieferwagens bewusst einen Unfallschaden. Der Kaufvertrag ist … *(Ziffer eintragen)*
+**B3 (3 P):** Ein Gebrauchtwagenhändler verschweigt dem Möbelhaus beim Verkauf eines Lieferwagens bewusst einen Unfallschaden. Der Kaufvertrag ist … *(Ziffer eintragen)*
 - (1) von Anfang an nichtig.
 - (2) schwebend unwirksam.
 - (3) wirksam und nicht angreifbar.
 - (4) wegen arglistiger Täuschung anfechtbar.
 - (5) nur bei Verbrauchern unwirksam.
 
-**B4 (4 P):** Das Möbelhaus beauftragt einen Dienstleister, eine lauffähige Auswertungssoftware mit festgelegten Funktionen zu erstellen. Welcher Vertragstyp liegt vor? *(Ziffer eintragen)*
+**B4 (3 P):** Das Möbelhaus beauftragt einen Dienstleister, eine lauffähige Auswertungssoftware mit festgelegten Funktionen zu erstellen. Welcher Vertragstyp liegt vor? *(Ziffer eintragen)*
 (1) Kaufvertrag · (2) Dienstvertrag · (3) Mietvertrag · (4) Leihvertrag · (5) Werkvertrag
 
-**B5 (4 P):** Welches Rechtsgeschäft bedarf der notariellen Beurkundung? *(Ziffer eintragen)*
+**B5 (3 P):** Welches Rechtsgeschäft bedarf der notariellen Beurkundung? *(Ziffer eintragen)*
 - (1) Gesellschaftsvertrag zur Gründung einer GmbH
 - (2) Kündigung eines Arbeitsvertrags
 - (3) Kauf eines Firmenwagens
 - (4) Abschluss eines Ausbildungsvertrags
 - (5) Erteilung einer Handlungsvollmacht
 
-**B6 (4 P):** Ein gelieferter Bürostuhl ist defekt. Welches Recht muss das Möbelhaus gegenüber dem Lieferanten zunächst geltend machen? *(Ziffer eintragen)*
+**B6 (4 P):** Ordnen Sie den Vorgängen im Möbelhaus den jeweiligen Vertragstyp zu. *(Ziffern eintragen: a … d)*
+- a) Das Möbelhaus überlässt einem Kunden für einen Tag einen Transporter gegen 49 €.
+- b) Ein IT-Dienstleister betreut stundenweise die Telefon-Hotline; geschuldet ist die Tätigkeit, nicht ein bestimmter Erfolg.
+- c) Ein Handwerker repariert den defekten Lastenaufzug.
+- d) Ein Nachbarbetrieb überlässt dem Möbelhaus für eine Woche kostenlos einen Hubwagen.
+
+(1) Kaufvertrag · (2) Mietvertrag · (3) Leihvertrag · (4) Dienstvertrag · (5) Werkvertrag
+
+## Block C – Kaufvertrag, Vollmachten und Rechtsformen (20 P)
+
+**C1 (3 P):** Ein gelieferter Bürostuhl ist defekt. Welches Recht muss das Möbelhaus gegenüber dem Lieferanten zunächst geltend machen? *(Ziffer eintragen)*
 - (1) Rücktritt vom Vertrag
 - (2) Minderung des Kaufpreises
 - (3) Nacherfüllung
 - (4) Schadensersatz statt der Leistung
 - (5) Anfechtung des Kaufvertrags
 
-**B7 (4 P):** Eine Privatkundin reklamiert acht Monate nach dem Kauf einen Defekt an ihrem Sofa. Welche Aussage ist richtig? *(Ziffer eintragen)*
+**C2 (3 P):** Eine Privatkundin reklamiert acht Monate nach dem Kauf einen Defekt an ihrem Sofa. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Die Kundin muss beweisen, dass der Mangel schon bei Übergabe vorlag.
 - (2) Es wird vermutet, dass der Mangel bereits bei Übergabe vorlag; das Möbelhaus muss das Gegenteil beweisen.
 - (3) Die Gewährleistung ist nach sechs Monaten abgelaufen.
 - (4) Nur der Hersteller haftet, und zwar über die Garantie.
 - (5) Ansprüche bestehen nur, wenn eine schriftliche Garantie vorliegt.
 
-**B8 (4 P):** Eine Forderung des Möbelhauses wird am 12.04.2026 fällig. Wann verjährt sie nach der regelmäßigen Verjährungsfrist? *(Ziffer eintragen)*
+**C3 (3 P):** Eine Forderung des Möbelhauses wird am 12.04.2026 fällig. Wann verjährt sie nach der regelmäßigen Verjährungsfrist? *(Ziffer eintragen)*
 (1) 12.04.2028 · (2) 31.12.2028 · (3) 12.04.2029 · (4) 31.12.2029 · (5) 31.12.2031
 
-**B9 (4 P):** Ein Privatkunde bestellt im Onlineshop des Möbelhauses einen Schreibtisch und wurde ordnungsgemäß belehrt. Welches Widerrufsrecht hat er? *(Ziffer eintragen)*
+**C4 (3 P):** Ein Privatkunde bestellt im Onlineshop des Möbelhauses einen Schreibtisch und wurde ordnungsgemäß belehrt. Welches Widerrufsrecht hat er? *(Ziffer eintragen)*
 - (1) 14 Tage ab Erhalt der Ware, ohne Angabe von Gründen
 - (2) 7 Tage ab Bestellung
 - (3) 30 Tage ab Rechnungsdatum
 - (4) keines – Online-Käufe sind endgültig
 - (5) nur bei mangelhafter Ware
 
-## Block C – Unternehmen und Rechtsformen (8 P)
-
-**C1 (4 P):** Welche **zwei** Geschäfte darf eine Prokuristin des Möbelhauses ohne besondere Befugnis abschließen? *(Ziffern eintragen)*
+**C5 (4 P):** Welche **zwei** Geschäfte darf eine Prokuristin des Möbelhauses ohne besondere Befugnis abschließen? *(Ziffern eintragen)*
 - (1) einen Bankkredit aufnehmen
 - (2) das Betriebsgrundstück verkaufen
 - (3) den Jahresabschluss unterschreiben
 - (4) ein Grundstück für ein neues Lager kaufen
 - (5) einem weiteren Mitarbeiter Prokura erteilen
 
-**C2 (4 P):** Welche **zwei** Aussagen zu Rechtsformen sind richtig? *(Ziffern eintragen)*
+**C6 (4 P):** Welche **zwei** Aussagen zu Rechtsformen sind richtig? *(Ziffern eintragen)*
 - (1) In der OHG haftet jeder Gesellschafter nur bis zur Höhe seiner Einlage.
 - (2) Der Kommanditist einer KG haftet nur bis zur Höhe seiner Einlage.
 - (3) Eine AG benötigt ein Grundkapital von mindestens 25.000 €.
 - (4) Eine GmbH entsteht bereits mit Unterzeichnung des Gesellschaftsvertrags.
 - (5) Das Mindeststammkapital einer GmbH beträgt 25.000 €.
 
-## Block D – Wirtschaft, Umwelt und Arbeitsschutz (24 P)
+## Block D – Markt und Wirtschaftspolitik (20 P)
 
-**D1 (4 P):** Welche Maßnahme hat nach der Abfallhierarchie des Kreislaufwirtschaftsgesetzes die höchste Priorität? *(Ziffer eintragen)*
-(1) Recycling · (2) energetische Verwertung · (3) Vermeidung · (4) Beseitigung · (5) Vorbereitung zur Wiederverwendung
-
-**D2 (4 P):** Auf einem Markt gilt: Preis 10 € – Nachfrage 900, Angebot 300 · 12 € – 800 / 500 · 14 € – 650 / 650 · 16 € – 500 / 800 · 18 € – 350 / 950. Wie hoch ist der Gleichgewichtspreis in Euro? *(Ergebnis eintragen)*
+**D1 (4 P):** Auf einem Markt gilt: Preis 10 € – Nachfrage 900, Angebot 300 · 12 € – 800 / 500 · 14 € – 650 / 650 · 16 € – 500 / 800 · 18 € – 350 / 950. Wie hoch ist der Gleichgewichtspreis in Euro? *(Ergebnis eintragen)*
 
 > **Formel:** Gleichgewichtspreis: angebotene Menge = nachgefragte Menge
 
-**D3 (4 P):** Der Verbraucherpreisindex steigt von 120,0 auf 123,0. Wie hoch ist die Inflationsrate in Prozent (zwei Nachkommastellen)? *(Ergebnis eintragen)*
+**D2 (4 P):** Der Verbraucherpreisindex steigt von 120,0 auf 123,0. Wie hoch ist die Inflationsrate in Prozent (zwei Nachkommastellen)? *(Ergebnis eintragen)*
 
 > **Formel:** Inflationsrate = (neuer Indexwert − alter Indexwert) / alter Indexwert · 100 %
 
-**D4 (4 P):** Welches Ziel gehört **nicht** zum magischen Viereck des Stabilitätsgesetzes? *(Ziffer eintragen)*
+**D3 (3 P):** Welches Ziel gehört **nicht** zum magischen Viereck des Stabilitätsgesetzes? *(Ziffer eintragen)*
 - (1) stabiles Preisniveau
 - (2) hoher Beschäftigungsstand
 - (3) außenwirtschaftliches Gleichgewicht
 - (4) stetiges und angemessenes Wirtschaftswachstum
 - (5) ausgeglichener Staatshaushalt
 
-**D5 (4 P):** Die Europäische Zentralbank erhöht den Leitzins. Welche Wirkung ist beabsichtigt? *(Ziffer eintragen)*
+**D4 (3 P):** Die Europäische Zentralbank erhöht den Leitzins. Welche Wirkung ist beabsichtigt? *(Ziffer eintragen)*
 - (1) Kredite werden billiger, die Investitionen steigen.
 - (2) Kredite werden teurer, Nachfrage und Preisauftrieb werden gedämpft.
 - (3) Die Arbeitslosigkeit sinkt unmittelbar.
 - (4) Die Inflationsrate steigt.
 - (5) Der Staat erzielt höhere Steuereinnahmen.
 
-**D6 (4 P):** Bringen Sie das Verhalten im Brandfall in die richtige Reihenfolge:
+**D5 (3 P):** Die Auftragseingänge im Möbelhandel steigen seit drei Monaten deutlich, die Arbeitslosenquote ist noch hoch. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
+- (1) Die Auftragseingänge sind ein Frühindikator; sie kündigen einen Aufschwung an.
+- (2) Die Arbeitslosenquote ist ein Frühindikator; sie zeigt den kommenden Abschwung.
+- (3) Die Wirtschaft befindet sich in der Hochkonjunktur, weil die Arbeitslosenquote hoch ist.
+- (4) Steigende Auftragseingänge sind ein typisches Zeichen eines Abschwungs.
+- (5) Konjunkturindikatoren erlauben keine Aussage über die künftige Entwicklung.
+
+**D6 (3 P):** Der Staat legt für Mietwohnungen einen Höchstpreis fest, der unter dem Gleichgewichtspreis liegt. Welche Folge ist zu erwarten? *(Ziffer eintragen)*
+- (1) ein Angebotsüberhang
+- (2) ein Nachfrageüberhang
+- (3) Der Preis steigt auf den Gleichgewichtspreis.
+- (4) Angebot und Nachfrage bleiben unverändert.
+- (5) Die Vermieter bieten mehr Wohnungen an.
+
+## Block E – Arbeitsschutz, Umwelt und digitale Zusammenarbeit (20 P)
+
+**E1 (3 P):** Lea ist zehn Wochen arbeitsunfähig erkrankt. Welche Aussage ist richtig? *(Ziffer eintragen)*
+- (1) Das Möbelhaus zahlt die Vergütung zehn Wochen voll weiter.
+- (2) Die Krankenkasse zahlt ab dem ersten Tag Krankengeld.
+- (3) Das Möbelhaus zahlt sechs Wochen, danach entfällt jede Zahlung.
+- (4) Das Möbelhaus zahlt sechs Wochen weiter, danach zahlt die Krankenkasse Krankengeld.
+- (5) Die Rentenversicherung zahlt ab der dritten Woche Übergangsgeld.
+
+**E2 (3 P):** Welcher Unfall ist über die gesetzliche Unfallversicherung versichert? *(Ziffer eintragen)*
+- (1) Herr Kaya bringt auf dem Weg zur Arbeit seine Tochter in die Kita und stürzt vor dem Kita-Eingang.
+- (2) Jonas unterbricht den Heimweg für einen Einkauf und rutscht im Supermarkt aus.
+- (3) Lea geht in der Mittagspause privat zum Friseur und verletzt sich dort.
+- (4) Herr Kaya verletzt sich am Wochenende beim Fußball.
+- (5) Lea stürzt vor Arbeitsbeginn beim Frühstück in ihrer Küche.
+
+**E3 (3 P):** Welche Maßnahme hat nach der Abfallhierarchie des Kreislaufwirtschaftsgesetzes die höchste Priorität? *(Ziffer eintragen)*
+(1) Recycling · (2) energetische Verwertung · (3) Vermeidung · (4) Beseitigung · (5) Vorbereitung zur Wiederverwendung
+
+**E4 (4 P):** Bringen Sie das Verhalten im Brandfall in die richtige Reihenfolge:
 a) Löschversuch unternehmen · b) Brand melden · c) Ruhe bewahren · d) in Sicherheit bringen
+
+**E5 (3 P):** Im Lager wird zum Reinigen ein lösemittelhaltiges Mittel verwendet. Welche Maßnahme ist nach dem STOP-Prinzip **zuerst** zu prüfen? *(Ziffer eintragen)*
+- (1) Schutzhandschuhe und Atemschutz ausgeben
+- (2) das Mittel durch ein lösemittelfreies ersetzen
+- (3) eine Absauganlage installieren
+- (4) die Arbeitszeit mit dem Mittel begrenzen
+- (5) die Beschäftigten jährlich unterweisen
+
+**E6 (4 P):** Das Projektteam arbeitet teils im Homeoffice mit einem externen Dienstleister an Kundendaten. Welche **zwei** Maßnahmen schützen die vertraulichen Daten bei dieser Zusammenarbeit? *(Ziffern eintragen)*
+- (1) Dateien über den privaten Messenger austauschen, weil das schneller geht
+- (2) die Zugänge mit Zwei-Faktor-Authentifizierung sichern
+- (3) Freigaben nur an Berechtigte und mit Ablaufdatum erteilen
+- (4) Besprechungen aufzeichnen, ohne die Teilnehmenden zu informieren
+- (5) Kundenlisten in der Videokonferenz für alle sichtbar teilen
+- (6) ein gemeinsames Passwort für alle Teammitglieder verwenden
 
 ---
 

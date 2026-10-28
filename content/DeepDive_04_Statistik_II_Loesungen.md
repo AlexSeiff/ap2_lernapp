@@ -113,7 +113,7 @@ Zu achten ist auf eine **zufällige, musterlose Streuung um null**: Positive und
 
 ---
 
-## Block D – Modellgüte (16 P)
+## Block D – Modellgüte und Zeitreihen (28 P)
 
 **D1 (6 P):**
 $r = \frac{S_{xy}}{\sqrt{S_{xx} \cdot S_{yy}}} = \frac{64}{\sqrt{10 \cdot 424}} = \frac{64}{\sqrt{4240}} = \frac{64}{65{,}12}$ = **0,98**
@@ -141,11 +141,7 @@ Der Wert 15 statt 55 liegt weit unter dem Trend und wirkt als **Ausreißer mit s
 
 *Prüferkommentar: Der letzte Gedanke – Residuenanalyse als Werkzeug zum Aufspüren von Datenfehlern – verbindet Statistik mit Datenqualität und ist im Fachgespräch Gold wert.*
 
----
-
-## Block E – Zeitreihen (12 P)
-
-**E1 (6 P):**
+**D4 (6 P):**
 - $\frac{120 + 138 + 126}{3} = \frac{384}{3}$ = **128,00**
 - $\frac{138 + 126 + 150}{3} = \frac{414}{3}$ = **138,00**
 - $\frac{126 + 150 + 144}{3} = \frac{420}{3}$ = **140,00**
@@ -155,11 +151,11 @@ Der Wert 15 statt 55 liegt weit unter dem Trend und wirkt als **Ausreißer mit s
 
 Zweck: Kurzfristige, zufällige Schwankungen werden geglättet, sodass der **längerfristige Trend** sichtbar wird – hier ein deutlicher Aufwärtstrend, der in der ungeglätteten Zackenreihe schwer erkennbar ist. Nachteil: Am Anfang und Ende der Reihe entfallen Werte, und aktuelle Ausschläge werden abgeschwächt. *(2 P)*
 
-**E2 (3 P):**
+**D5 (3 P):**
 - Monat 1 → 2: $\frac{138 - 120}{120} = 0{,}15$ = **+15,00 %** *(1,5 P)*
 - Monat 1 → 8: $\frac{180 - 120}{120} = 0{,}50$ = **+50,00 %** *(1,5 P)*
 
-**E3 (3 P):**
+**D6 (3 P):**
 Beide Angaben beschreiben dieselbe Veränderung, sind aber unterschiedlich bezogen. Korrekt formuliert:
 - „Die Reklamationsquote ist um **2 Prozentpunkte** gestiegen." (absolute Differenz der Prozentwerte)
 - „Die Reklamationsquote ist um **50 Prozent** gestiegen." (relative Veränderung: $\frac{2}{4} = 0{,}5$)

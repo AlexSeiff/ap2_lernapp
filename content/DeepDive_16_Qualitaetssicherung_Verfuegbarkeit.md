@@ -271,7 +271,7 @@ Beispiel mit vier Platten zu je 4 TB: RAID 0 → 16 TB, RAID 5 → 12 TB, RAID 6
 
 # Übungsklausur Qualitätssicherung, Testen & Verfügbarkeit (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur am Stück, handschriftlich, mit Taschenrechner. Runde Prozentwerte auf drei, alles andere auf zwei Nachkommastellen.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur am Stück, handschriftlich, mit Taschenrechner. Runde Prozentwerte auf drei, alles andere auf zwei Nachkommastellen.
 
 ## Ausgangssituation
 
@@ -315,9 +315,11 @@ c) *Begründen* Sie, warum die Grenzwertanalyse zusätzlich zu den Äquivalenzkl
 
 **B3 (6 P):** Nach einer Änderung an der Umsatzberechnung meldet die Buchhaltung, dass die Versandkosten nicht mehr stimmen. *Erläutern* Sie, welche Testart den Fehler verhindert hätte, und *begründen* Sie, warum sie sich für eine Automatisierung eignet.
 
-## Block C – Testkonzept und Abnahme (20 P)
+## Block C – Testkonzept, Abnahme und SLA (26 P)
 
 Vor dem Produktivstart muss die ETL-Strecke nachweislich korrekt laden, und die Geschäftsleitung soll das Reporting formell abnehmen.
+
+Außerdem wird der Vertrag mit dem Rechenzentrum neu verhandelt; Sie sollen die Anforderungen aus IT-Sicht formulieren.
 
 **C1 (6 P):** *Formulieren* Sie einen vollständigen Testfall, der prüft, ob die ETL-Strecke die Bestellungen eines Monats vollständig und mit korrekten Beträgen lädt.
 
@@ -331,7 +333,9 @@ Vor dem Produktivstart muss die ETL-Strecke nachweislich korrekt laden, und die 
 
 **C3 (8 P):** *Beschreiben* Sie **vier** Inhalte eines Abnahmeprotokolls und *erläutern* Sie **zwei** Rechtsfolgen der Abnahme.
 
-## Block D – Verfügbarkeit (22 P)
+**C4 (6 P):** *Nennen* Sie **vier** Inhalte eines SLA und *grenzen* Sie Reaktionszeit und Wiederherstellungszeit *ab*.
+
+## Block D – Verfügbarkeit und Redundanz (28 P)
 
 Im ersten Betriebsmonat beschwert sich die Geschäftsleitung über Ausfälle des Dashboards. Sie sollen prüfen, ob der Rechenzentrumsbetreiber seine Zusagen einhält und wo die Schwachstelle liegt.
 
@@ -358,13 +362,7 @@ c) *Begründen* Sie, warum gerade die Datenbank redundant ausgelegt wurde. (2 P)
 > - Reihenschaltung: V = V₁ · V₂ · V₃
 > - Parallelschaltung: V = 1 − (1 − V₁) · (1 − V₂)
 
-## Block E – SLA und Redundanz (12 P)
-
-Der Vertrag mit dem Rechenzentrum wird neu verhandelt. Sie sollen die Anforderungen aus IT-Sicht formulieren.
-
-**E1 (6 P):** *Nennen* Sie **vier** Inhalte eines SLA und *grenzen* Sie Reaktionszeit und Wiederherstellungszeit *ab*.
-
-**E2 (6 P):** *Erläutern* Sie den Begriff Single Point of Failure an einem Beispiel aus dem Szenario und *nennen* Sie **zwei** Maßnahmen zur Erhöhung der Verfügbarkeit. *Begründen* Sie, warum diese Maßnahmen keine Datensicherung ersetzen.
+**D4 (6 P):** *Erläutern* Sie den Begriff Single Point of Failure an einem Beispiel aus dem Szenario und *nennen* Sie **zwei** Maßnahmen zur Erhöhung der Verfügbarkeit. *Begründen* Sie, warum diese Maßnahmen keine Datensicherung ersetzen.
 
 ---
 

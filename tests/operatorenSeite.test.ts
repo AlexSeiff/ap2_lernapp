@@ -46,7 +46,7 @@ describe('Operatoren-Trainer – Seiten', () => {
   });
 
   it('Einzelaufgabe: Operatoren markiert, Musterlösung nicht betroffen', () => {
-    const html = render('/aufgabe/03-C2');
+    const html = render('/aufgabe/03-B2');
     expect(html).toMatch(/<span class="operator"[^>]*>Vergleichen<span role="tooltip"/);
     expect(html).toMatch(/<span class="operator"[^>]*>Erläutern<span role="tooltip"/);
   });

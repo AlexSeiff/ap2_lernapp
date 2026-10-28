@@ -16,7 +16,7 @@ import {
 } from '../src/lib/boxplotAntwort';
 import { antwortAlsText, editorFuer, leseEditorAntwort, schreibeEditorAntwort } from '../src/lib/editorAufgabe';
 
-// Boxplot als Antwort (03-E3 „Skizzieren Sie den Boxplot maßstäblich“): Kennwerte eintragen, die App zeichnet.
+// Boxplot als Antwort (03-D3 „Skizzieren Sie den Boxplot maßstäblich“): Kennwerte eintragen, die App zeichnet.
 
 const content = loadContent(CONTENT_DIR);
 const task = (id: string) => content.tasks[id];
@@ -39,12 +39,12 @@ const richtig = antwort('35', '40', '55', '70', '90', '220');
 
 describe('Erkennung und Musterlösung', () => {
   it('Boxplot skizzieren → Boxplot-Eingabe, Boxplot erklären → Textfeld', () => {
-    expect(editorFuer(task('03-E3'))).toBe('boxplot');
+    expect(editorFuer(task('03-D3'))).toBe('boxplot');
     expect(editorFuer({ markdown: '*Erläutern* Sie, was ein Boxplot zeigt.', type: 'offen' })).toBeUndefined();
   });
 
-  it('Kennwerte aus den erforderlichen Elementen der Lösung 03-E3', () => {
-    expect(musterBoxplot(task('03-E3'))).toEqual({ min: 35, q1: 40, median: 55, q3: 70, max: 90, ausreisser: [220] });
+  it('Kennwerte aus den erforderlichen Elementen der Lösung 03-D3', () => {
+    expect(musterBoxplot(task('03-D3'))).toEqual({ min: 35, q1: 40, median: 55, q3: 70, max: 90, ausreisser: [220] });
     expect(musterBoxplot({ solution: { markdown: 'Keine Angaben.' } })).toBeUndefined();
   });
 });
@@ -68,9 +68,9 @@ describe('Eingabe und Formprüfung', () => {
 
   it('leer bleibt leer, Inhalt übersteht den Weg über den String, Text für die KI', () => {
     expect(schreibeEditorAntwort(leereBoxplotAntwort())).toBe('');
-    expect(leseEditorAntwort('boxplot', task('03-E3'), schreibeEditorAntwort(richtig))).toEqual(richtig);
-    expect(leseEditorAntwort('boxplot', task('03-E3'), 'Box von 40 bis 70').notiz).toBe('Box von 40 bis 70');
-    expect(antwortAlsText(task('03-E3'), JSON.stringify(richtig))).toBe(
+    expect(leseEditorAntwort('boxplot', task('03-D3'), schreibeEditorAntwort(richtig))).toEqual(richtig);
+    expect(leseEditorAntwort('boxplot', task('03-D3'), 'Box von 40 bis 70').notiz).toBe('Box von 40 bis 70');
+    expect(antwortAlsText(task('03-D3'), JSON.stringify(richtig))).toBe(
       'Boxplot – unteres Whisker-Ende: 35 · Q1 (Box links): 40 · Median: 55 · Q3 (Box rechts): 70 · oberes Whisker-Ende: 90 · Ausreißer: 220',
     );
   });
@@ -85,15 +85,15 @@ describe('Eingabe und Formprüfung', () => {
 
 describe('Abgleich und Darstellung', () => {
   it('richtiger Boxplot passt überall, Whisker bis zum Zaun fällt auf', () => {
-    expect(gleicheBoxplotAb(task('03-E3'), richtig)!.zeilen.every((z) => z.ok)).toBe(true);
-    const zaun = gleicheBoxplotAb(task('03-E3'), antwort('35', '40', '55', '70', '115', '220'))!;
+    expect(gleicheBoxplotAb(task('03-D3'), richtig)!.zeilen.every((z) => z.ok)).toBe(true);
+    const zaun = gleicheBoxplotAb(task('03-D3'), antwort('35', '40', '55', '70', '115', '220'))!;
     expect(zaun.zeilen.filter((z) => !z.ok).map((z) => z.name)).toEqual(['oberes Whisker-Ende']);
-    const ohne = gleicheBoxplotAb(task('03-E3'), antwort('35', '40', '55', '70', '220'))!;
+    const ohne = gleicheBoxplotAb(task('03-D3'), antwort('35', '40', '55', '70', '220'))!;
     expect(ohne.zeilen.find((z) => z.name === 'Ausreißer')).toMatchObject({ dein: 'keine', muster: '220', ok: false });
   });
 
   const editor = (value?: string, disabled = false) =>
-    html(createElement(EditorAntwort, { task: task('03-E3'), art: 'boxplot', value, onChange: () => {}, disabled, hilfen: true }));
+    html(createElement(EditorAntwort, { task: task('03-D3'), art: 'boxplot', value, onChange: () => {}, disabled, hilfen: true }));
 
   it('leer: Felder und Hinweis, keine Werte der Lösung', () => {
     const h = editor();
@@ -115,7 +115,7 @@ describe('Abgleich und Darstellung', () => {
   it('beim Bewerten: beide Boxplots und die Werte im Vergleich', () => {
     const p = html(
       createElement(EditorPruefung, {
-        task: task('03-E3'),
+        task: task('03-D3'),
         art: 'boxplot',
         answer: JSON.stringify(antwort('35', '40', '55', '70', '115', '220')),
       }),

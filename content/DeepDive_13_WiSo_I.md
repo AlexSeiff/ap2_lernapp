@@ -321,17 +321,17 @@ Erlaubt bleibt eine unterschiedliche Behandlung, wenn eine **wesentliche berufli
 
 # Übungsklausur WiSo I (100 Punkte, 60 Minuten)
 
-25 gebundene Aufgaben à 4 Punkte. Bei Auswahlaufgaben die Ziffer(n) der richtigen Antwort(en) notieren; bei Mehrfachauswahl zählt hier zur Selbstkontrolle nur die vollständig richtige Lösung (in der echten Prüfung wird bei Mehrfachauswahl, Reihenfolge und Zuordnung teilbewertet). Bearbeite die Klausur **am Ende des Themas** am Stück, ohne Unterlagen. Grundlage ist das Szenario oben.
+30 Aufgaben, je 3 oder 4 Punkte (4 Punkte bei zwei Antworten, Zuordnung, Reihenfolge und Rechenergebnis). Bei Auswahlaufgaben die Ziffer(n) der richtigen Antwort(en) notieren; bei Mehrfachauswahl zählt hier zur Selbstkontrolle nur die vollständig richtige Lösung (in der echten Prüfung wird bei Mehrfachauswahl, Reihenfolge und Zuordnung teilbewertet). Bearbeite die Klausur **am Ende des Themas** am Stück, ohne Unterlagen. Grundlage ist das Szenario oben.
 
-Die Aufgaben sind hier nach Themen in Blöcke gegliedert; in der PDF-Fassung sind sie von 1 bis 25 durchnummeriert (A1–A7 = Aufgaben 1–7, B1–B5 = 8–12, C1–C6 = 13–18, D1–D4 = 19–22, E1–E3 = 23–25).
+Die Aufgaben sind hier nach Themen in Blöcke gegliedert; in der PDF-Fassung sind sie von 1 bis 30 durchnummeriert (A1–A6 = Aufgaben 1–6, B1–B6 = 7–12, C1–C6 = 13–18, D1–D6 = 19–24, E1–E6 = 25–30).
 
 ## Ausgangssituation
 
 Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorhanden, Mitglied im Arbeitgeberverband (tarifgebunden). Auszubildende: **Jonas Brandt** (geb. 15.03.2009, Ausbildungsbeginn 01.08.2026) und **Lea Sommer** (24 Jahre, 3. Ausbildungsjahr, Vertragsende 31.01.2027). **Herr Kaya** ist seit sechs Jahren im Möbelhaus beschäftigt.
 
-## Block A – Berufsausbildung (28 P)
+## Block A – Berufsausbildung (20 P)
 
-**A1 (4 P):** Welche Aussage zum dualen Ausbildungssystem ist richtig? *(Ziffer eintragen)*
+**A1 (3 P):** Welche Aussage zum dualen Ausbildungssystem ist richtig? *(Ziffer eintragen)*
 - (1) Die Berufsschule überwacht die betriebliche Ausbildung.
 - (2) Der Rahmenlehrplan regelt die betriebliche Ausbildung.
 - (3) Die Ausbildungsordnung wird von der IHK erlassen.
@@ -345,14 +345,14 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 - (4) Vertragsstrafe von 2.000 € bei vorzeitigem Abbruch
 - (5) Urlaub von 30 Werktagen
 
-**A3 (4 P):** Jonas möchte nach sechs Wochen Ausbildung kündigen. Welche Aussage ist richtig? *(Ziffer eintragen)*
+**A3 (3 P):** Jonas möchte nach sechs Wochen Ausbildung kündigen. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Er muss eine Frist von vier Wochen einhalten.
 - (2) Er muss einen wichtigen Grund angeben.
 - (3) Eine mündliche Kündigung genügt.
 - (4) Die Kündigung bedarf der Zustimmung der IHK.
 - (5) Er kann jederzeit ohne Frist kündigen, muss dies aber schriftlich tun.
 
-**A4 (4 P):** Nach der Probezeit will der Betrieb Jonas wegen schwacher Berufsschulnoten kündigen. Welche Aussage ist richtig? *(Ziffer eintragen)*
+**A4 (3 P):** Nach der Probezeit will der Betrieb Jonas wegen schwacher Berufsschulnoten kündigen. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Die Kündigung ist mit vier Wochen Frist möglich.
 - (2) Die Kündigung ist mit zwei Wochen Frist möglich.
 - (3) Möglich ist nur eine fristlose Kündigung aus wichtigem Grund; schwache Noten sind in der Regel kein solcher Grund.
@@ -366,46 +366,46 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 - (4) am 28.02.2027
 - (5) mit Ablauf der Probezeit des Anschlussvertrags
 
-**A6 (4 P):** Lea arbeitet am 21.01.2027 ohne weitere Vereinbarung im Betrieb weiter. Welche Rechtsfolge tritt ein? *(Ziffer eintragen)*
+**A6 (3 P):** Lea arbeitet am 21.01.2027 ohne weitere Vereinbarung im Betrieb weiter. Welche Rechtsfolge tritt ein? *(Ziffer eintragen)*
 - (1) befristetes Arbeitsverhältnis für sechs Monate
 - (2) Verlängerung des Ausbildungsverhältnisses
 - (3) Probearbeitsverhältnis von drei Monaten
 - (4) unbefristetes Arbeitsverhältnis
 - (5) kein Rechtsverhältnis, bis ein Vertrag unterschrieben ist
 
-**A7 (4 P):** Was enthält ein qualifiziertes Ausbildungszeugnis zusätzlich zum einfachen? *(Ziffer eintragen)*
+## Block B – Zeugnis, Schutzgesetze und Freistellung (20 P)
+
+**B1 (3 P):** Was enthält ein qualifiziertes Ausbildungszeugnis zusätzlich zum einfachen? *(Ziffer eintragen)*
 - (1) Art, Dauer und Ziel der Ausbildung
 - (2) die Zahl der Krankheitstage
 - (3) die Noten der Berufsschule
 - (4) den Grund der Beendigung
 - (5) Angaben zu Verhalten und Leistung
 
-## Block B – Schutzgesetze und Freistellung (20 P)
+**B2 (4 P):** Jonas arbeitet an einem Tag 7 Stunden (reine Arbeitszeit). Wie viele Minuten Ruhepause stehen ihm mindestens zu? *(Ergebnis eintragen)*
 
-**B1 (4 P):** Jonas arbeitet an einem Tag 7 Stunden (reine Arbeitszeit). Wie viele Minuten Ruhepause stehen ihm mindestens zu? *(Ergebnis eintragen)*
+**B3 (4 P):** Jonas hat montags Berufsschule mit sechs Unterrichtsstunden à 45 Minuten; weitere Berufsschultage hat er in dieser Woche nicht. Wie viele Stunden darf er an den übrigen Tagen dieser Woche höchstens im Betrieb beschäftigt werden? *(Ergebnis eintragen)*
 
-**B2 (4 P):** Jonas hat montags Berufsschule mit sechs Unterrichtsstunden à 45 Minuten; weitere Berufsschultage hat er in dieser Woche nicht. Wie viele Stunden darf er an den übrigen Tagen dieser Woche höchstens im Betrieb beschäftigt werden? *(Ergebnis eintragen)*
-
-**B3 (4 P):** Welche Aussage zum Arbeitstag vor der schriftlichen Abschlussprüfung ist richtig? *(Ziffer eintragen)*
+**B4 (3 P):** Welche Aussage zum Arbeitstag vor der schriftlichen Abschlussprüfung ist richtig? *(Ziffer eintragen)*
 - (1) Nur minderjährige Auszubildende sind freizustellen.
 - (2) Eine Freistellung besteht nur, wenn der Tarifvertrag sie vorsieht.
 - (3) Alle Auszubildenden sind freizustellen; der Tag wird mit der durchschnittlichen täglichen Ausbildungszeit angerechnet.
 - (4) Der Tag ist als Urlaub zu beantragen.
 - (5) Es besteht kein Anspruch auf Freistellung.
 
-**B4 (4 P):** Jonas ist am 15.03.2009 geboren. Wie viele Werktage beträgt sein gesetzlicher Jahresurlaub für 2026 nach dem JArbSchG? *(Ergebnis eintragen)*
+**B5 (3 P):** Jonas ist am 15.03.2009 geboren. Wie viele Werktage beträgt sein gesetzlicher Jahresurlaub für 2026 nach dem JArbSchG? *(Ergebnis eintragen)*
 
-**B5 (4 P):** Lea arbeitet an einem Tag 9,5 Stunden. Wie viele Minuten Ruhepause stehen ihr nach dem Arbeitszeitgesetz mindestens zu? *(Ergebnis eintragen)*
+**B6 (3 P):** Lea arbeitet an einem Tag 9,5 Stunden. Wie viele Minuten Ruhepause stehen ihr nach dem Arbeitszeitgesetz mindestens zu? *(Ergebnis eintragen)*
 
-## Block C – Arbeitsvertrag und Kündigung (24 P)
+## Block C – Arbeitsvertrag und Kündigung (20 P)
 
-**C1 (4 P):** Herr Kaya ist seit sechs Jahren im Möbelhaus beschäftigt. Er kündigt selbst; die Kündigung geht am 10.03.2026 zu. Abweichende tarifliche oder vertragliche Regelungen gibt es nicht. Wann endet das Arbeitsverhältnis frühestens? *(Ziffer eintragen)*
+**C1 (3 P):** Herr Kaya ist seit sechs Jahren im Möbelhaus beschäftigt. Er kündigt selbst; die Kündigung geht am 10.03.2026 zu. Abweichende tarifliche oder vertragliche Regelungen gibt es nicht. Wann endet das Arbeitsverhältnis frühestens? *(Ziffer eintragen)*
 (1) 07.04.2026 · (2) 15.04.2026 · (3) 30.04.2026 · (4) 31.05.2026 · (5) 30.06.2026
 
 **C2 (4 P):** Wie C1, jedoch kündigt der **Arbeitgeber**. Wann endet das Arbeitsverhältnis frühestens? *(Ziffer eintragen)*
 (1) 07.04.2026 · (2) 15.04.2026 · (3) 30.04.2026 · (4) 31.05.2026 · (5) 30.06.2026
 
-**C3 (4 P):** Welche Kündigung wahrt die gesetzliche Schriftform? *(Ziffer eintragen)*
+**C3 (3 P):** Welche Kündigung wahrt die gesetzliche Schriftform? *(Ziffer eintragen)*
 - (1) eigenhändig unterschriebenes Schreiben, per Boten übergeben
 - (2) E-Mail mit eingescannter Unterschrift als PDF
 - (3) Nachricht per Messenger
@@ -419,44 +419,59 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 - (4) unbefristeter Vertrag seit mindestens zwei Jahren
 - (5) Arbeitsverhältnis länger als sechs Monate
 
-**C5 (4 P):** Welche Kriterien sind bei der Sozialauswahl einer betriebsbedingten Kündigung zu berücksichtigen? *(Ziffer eintragen)*
+**C5 (3 P):** Welche Kriterien sind bei der Sozialauswahl einer betriebsbedingten Kündigung zu berücksichtigen? *(Ziffer eintragen)*
 - (1) Leistung, Krankheitstage, Lebensalter, Qualifikation
 - (2) Gehalt, Wohnort, Qualifikation, Familienstand
 - (3) Betriebszugehörigkeit, Leistung, Gewerkschaftszugehörigkeit, Alter
 - (4) Dauer der Betriebszugehörigkeit, Lebensalter, Unterhaltspflichten, Schwerbehinderung
 - (5) Unterhaltspflichten, Beliebtheit im Team, Gehalt, Schwerbehinderung
 
-**C6 (4 P):** Innerhalb welcher Frist muss eine Kündigungsschutzklage erhoben werden? *(Ziffer eintragen)*
+**C6 (3 P):** Innerhalb welcher Frist muss eine Kündigungsschutzklage erhoben werden? *(Ziffer eintragen)*
 (1) eine Woche · (2) zwei Wochen · (3) drei Wochen · (4) vier Wochen · (5) ein Monat
 
-## Block D – Betriebliche Mitbestimmung (16 P)
+## Block D – Betriebliche Mitbestimmung (20 P)
 
 **D1 (4 P):** Aus wie vielen Mitgliedern besteht der Betriebsrat des Möbelhauses mit 140 wahlberechtigten Beschäftigten? *(Ergebnis eintragen)*
 
-**D2 (4 P):** Welche Maßnahme unterliegt der Mitbestimmung des Betriebsrats nach § 87 BetrVG? *(Ziffer eintragen)*
+**D2 (3 P):** Welche Maßnahme unterliegt der Mitbestimmung des Betriebsrats nach § 87 BetrVG? *(Ziffer eintragen)*
 - (1) Kauf eines neuen Lieferwagens
 - (2) Festlegung der Verkaufspreise
 - (3) Einführung eines Systems, das Bearbeitungszeiten je Mitarbeiter auswertet
 - (4) Auswahl des Steuerberaters
 - (5) Entscheidung über die Produktpalette
 
-**D3 (4 P):** Der Arbeitgeber kündigt einem Mitarbeiter, ohne den Betriebsrat vorher anzuhören. Welche Folge hat das? *(Ziffer eintragen)*
+**D3 (3 P):** Der Arbeitgeber kündigt einem Mitarbeiter, ohne den Betriebsrat vorher anzuhören. Welche Folge hat das? *(Ziffer eintragen)*
 - (1) Die Kündigung ist wirksam.
 - (2) Die Kündigung ist wirksam, der Arbeitgeber zahlt ein Bußgeld.
 - (3) Die Kündigung ist schwebend unwirksam bis zur nachträglichen Zustimmung.
 - (4) Die Kündigung ist nur bei Auszubildenden unwirksam.
 - (5) Die Kündigung ist unwirksam.
 
-**D4 (4 P):** Welche Aussage zur Jugend- und Auszubildendenvertretung ist richtig? *(Ziffer eintragen)*
+**D4 (3 P):** Welche Aussage zur Jugend- und Auszubildendenvertretung ist richtig? *(Ziffer eintragen)*
 - (1) Wählbar sind Beschäftigte, die das 25. Lebensjahr noch nicht vollendet haben.
 - (2) Sie kann auch ohne Betriebsrat gewählt werden.
 - (3) Ihre Amtszeit beträgt vier Jahre.
 - (4) Sie schließt Betriebsvereinbarungen direkt mit dem Arbeitgeber.
 - (5) Sie wird ab drei jugendlichen Beschäftigten gewählt.
 
-## Block E – Tarifrecht und Arbeitskampf (12 P)
+**D5 (3 P):** Möbelhaus und Betriebsrat wollen die Arbeitszeiten im Kundendienst einheitlich regeln und schließen dazu eine Betriebsvereinbarung. Welche Aussage zur Betriebsvereinbarung ist zutreffend? *(Ziffer eintragen)*
+- (1) Sie gilt nur für Beschäftigte, die sie einzeln unterschrieben haben.
+- (2) Sie gilt unmittelbar für alle Beschäftigten des Betriebs.
+- (3) Sie darf auch die Löhne regeln, wenn diese üblicherweise im Tarifvertrag geregelt werden.
+- (4) Sie wird zwischen Gewerkschaft und Arbeitgeberverband geschlossen.
+- (5) Sie kann mündlich vereinbart werden.
 
-**E1 (4 P):** Für wen gilt ein Tarifvertrag unmittelbar? *(Ziffer eintragen)*
+**D6 (4 P):** Durch die Übernahme zweier Filialen wird das Möbelhaus auf über 600 Beschäftigte wachsen. Welche **zwei** Aussagen zur Mitbestimmung im Aufsichtsrat sind zutreffend? *(Ziffern eintragen)*
+- (1) Bei mehr als 500 Beschäftigten besteht der Aufsichtsrat zu einem Drittel aus Arbeitnehmervertretern.
+- (2) Bei mehr als 2.000 Beschäftigten ist der Aufsichtsrat paritätisch besetzt; bei Stimmengleichheit entscheidet der Vorsitzende.
+- (3) Bei mehr als 100 Beschäftigten stellen die Arbeitnehmer die Hälfte des Aufsichtsrats.
+- (4) Der Betriebsrat übernimmt die Aufgaben des Aufsichtsrats.
+- (5) Die Arbeitnehmervertreter im Aufsichtsrat werden von der IHK bestimmt.
+- (6) Die Mitbestimmung im Aufsichtsrat gilt nur für Aktiengesellschaften.
+
+## Block E – Tarifrecht, Arbeitskampf und Gleichbehandlung (20 P)
+
+**E1 (3 P):** Für wen gilt ein Tarifvertrag unmittelbar? *(Ziffer eintragen)*
 - (1) automatisch für alle Beschäftigten in Deutschland
 - (2) nur für Betriebsratsmitglieder
 - (3) nur für Beschäftigte in Betrieben mit mehr als 500 Mitarbeitern
@@ -466,7 +481,29 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 **E2 (4 P):** Bringen Sie die Schritte eines Arbeitskampfs in die richtige Reihenfolge:
 a) Urabstimmung über den Streik · b) Tarifverhandlungen · c) Streik · d) Scheitern der Verhandlungen · e) Urabstimmung über das Verhandlungsergebnis · f) Schlichtung bzw. neue Verhandlungen
 
-**E3 (4 P):** Herr Kaya ist Gewerkschaftsmitglied. Das Gesetz sieht 24 Werktage Urlaub vor, der Tarifvertrag 30 Tage, sein Arbeitsvertrag 28 Tage. Wie viele Urlaubstage stehen ihm zu? *(Ergebnis eintragen)*
+**E3 (3 P):** Herr Kaya ist Gewerkschaftsmitglied. Das Gesetz sieht 24 Werktage Urlaub vor, der Tarifvertrag 30 Tage, sein Arbeitsvertrag 28 Tage. Wie viele Urlaubstage stehen ihm zu? *(Ergebnis eintragen)*
+
+**E4 (3 P):** Während der Laufzeit des Entgelttarifvertrags ruft die Gewerkschaft die Beschäftigten des Möbelhauses zu einem Streik für höhere Löhne auf. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
+- (1) Der Streik ist zulässig, weil das Streikrecht im Grundgesetz garantiert ist.
+- (2) Der Streik ist unzulässig, weil während der Laufzeit für die geregelten Punkte die Friedenspflicht gilt.
+- (3) Der Streik ist zulässig, wenn der Betriebsrat zustimmt.
+- (4) Der Streik ist nur für Beschäftigte unzulässig, die nicht in der Gewerkschaft sind.
+- (5) Der Streik ist zulässig, weil die Arbeitsagentur den Streikenden Arbeitslosengeld zahlt.
+
+**E5 (3 P):** Das Möbelhaus sucht einen Datenanalysten. Welche Formulierung in der Stellenanzeige ist nach dem Allgemeinen Gleichbehandlungsgesetz zulässig? *(Ziffer eintragen)*
+- (1) „Wir suchen eine junge, dynamische Datenanalystin.“
+- (2) „Datenanalyst (m/w/d) mit abgeschlossener Ausbildung als Fachinformatiker für Daten- und Prozessanalyse“
+- (3) „Bewerber bis 30 Jahre werden bevorzugt.“
+- (4) „Muttersprachler (m/w/d) gesucht“
+- (5) „Bitte geben Sie im Lebenslauf Ihre Religionszugehörigkeit an.“
+
+**E6 (4 P):** Eine Bewerberin wurde wegen ihres Alters nicht eingestellt und beruft sich auf das AGG. Welche **zwei** Aussagen sind zutreffend? *(Ziffern eintragen)*
+- (1) Sie hat einen Anspruch darauf, eingestellt zu werden.
+- (2) Sie muss ihren Anspruch innerhalb von zwei Monaten schriftlich geltend machen.
+- (3) Wäre sie auch bei benachteiligungsfreier Auswahl nicht eingestellt worden, beträgt die Entschädigung höchstens drei Monatsgehälter.
+- (4) Das AGG schützt nur Beschäftigte, nicht Bewerber.
+- (5) Sie muss die Benachteiligung lückenlos beweisen; Indizien genügen nicht.
+- (6) Ansprüche bestehen nur in Betrieben mit mehr als zehn Beschäftigten.
 
 ---
 

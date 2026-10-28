@@ -23,7 +23,7 @@
         "n = {{n}}: Ist n ungerade, steht der Median an Position (n + 1) / 2.",
         "Der Modus ist der Wert, der am häufigsten vorkommt."
       ],
-      "quelleAufgabe": "DD3 Übungsklausur C1"
+      "quelleAufgabe": "DD3 Übungsklausur B1"
     },
     {
       "id": "RE-ST1-002",
@@ -35,7 +35,7 @@
       "daten": { "gruppen": [{ "anzahl": 4, "wert": 45 }, { "anzahl": 6, "wert": 70 }], "einheit": "min" },
       "aufgabe": "Die Werkstatt meldet für den Folgemonat: {{anzahl1}} Aufträge à {{wert1}} Minuten und {{anzahl2}} Aufträge à {{wert2}} Minuten.\n\nBerechne die durchschnittliche Bearbeitungsdauer.",
       "eingaben": ["mittel"],
-      "quelleAufgabe": "DD3 Übungsklausur C3"
+      "quelleAufgabe": "DD3 Übungsklausur B3"
     },
     {
       "id": "RE-ST1-003",
@@ -47,7 +47,7 @@
       "daten": { "werte": [60, 40, 220, 45, 35, 90, 55, 40, 70, 50, 65], "einheit": "min" },
       "aufgabe": "Bearbeitungsdauer von {{n}} Reparaturaufträgen (in Minuten): {{werte}}.\n\nBestimme Q1, Q3 und den Interquartilsabstand (Konvention des Lernblatts: Position = n · p; nicht ganzzahlig → aufrunden, ganzzahlig → Mittel mit dem nächsten Wert). Prüfe dann mit der 1,5-IQR-Regel auf Ausreißer und gib an, wo der obere Whisker endet.",
       "eingaben": ["q1", "q3", "iqr", "zaunUnten", "zaunOben", "ausreisser", "whiskerOben"],
-      "quelleAufgabe": "DD3 Übungsklausur E1–E3"
+      "quelleAufgabe": "DD3 Übungsklausur D1–D3"
     },
     {
       "id": "RE-ST1-004",
@@ -59,7 +59,7 @@
       "daten": { "werte": [2, 4, 5, 6, 8], "art": "grundgesamtheit", "einheit": "Tage" },
       "aufgabe": "Durchlaufzeiten von {{n}} Aufträgen (in Tagen): {{werte}}.\n\nBerechne Varianz und Standardabweichung **{{artLang}}**.",
       "eingaben": ["mittel", "saq", "varianz", "stdabw"],
-      "quelleAufgabe": "DD3 Übungsklausur D2"
+      "quelleAufgabe": "DD3 Übungsklausur C2"
     },
     {
       "id": "RE-ST1-005",
@@ -76,7 +76,7 @@
         "einheit": "min"
       },
       "aufgabe": "{{name1}}: x̄ = {{mittel1}} min, σ = {{stdabw1}} min. {{name2}}: x̄ = {{mittel2}} min, σ = {{stdabw2}} min.\n\nBerechne jeweils den Variationskoeffizienten und gib an, welche Filiale gleichmäßiger arbeitet.",
-      "quelleAufgabe": "DD3 Übungsklausur D3"
+      "quelleAufgabe": "DD3 Übungsklausur C3"
     },
     {
       "id": "RE-ST1-006",
@@ -95,7 +95,7 @@
         ]
       },
       "aufgabe": "Von {{n}} Reklamationen entfallen: {{kategorien}}.\n\nErstelle die Häufigkeitstabelle **absteigend sortiert** mit relativer und kumulierter relativer Häufigkeit (in %, eine Nachkommastelle). Wie viele Fehlerarten braucht man mindestens, um {{schwelle}} % der Reklamationen abzudecken?",
-      "quelleAufgabe": "DD3 Übungsklausur B1/B2"
+      "quelleAufgabe": "DD3 Übungsklausur A3/A4"
     },
     {
       "id": "RE-ST1-007",
@@ -109,7 +109,7 @@
       "eingaben": ["minimum", "maximum", "spannweite"],
       "hinweise": ["Suche den kleinsten und den größten Wert – am sichersten in der sortierten Reihe.", "Spannweite R = Maximum − Minimum."],
       "erklaerung": "Die Spannweite hängt nur von den beiden Extremwerten ab. Ein einziger Ausreißer (in der Originalaufgabe 220 min) bestimmt sie allein und sagt nichts über die Streuung der übrigen Aufträge. Aussagekräftiger sind IQR oder Standardabweichung.",
-      "quelleAufgabe": "DD3 Übungsklausur D1"
+      "quelleAufgabe": "DD3 Übungsklausur C1"
     },
     {
       "id": "RE-ST1-008",
@@ -388,7 +388,7 @@
       "vorlage": "gleitender-durchschnitt",
       "daten": { "werte": [120, 138, 126, 150, 144, 168, 156, 180], "k": 3, "anzahl": 4, "einheit": "T€" },
       "aufgabe": "Monatsumsatz in T€: {{werte}}.\n\nBerechne den gleitenden {{k}}-Perioden-Durchschnitt für die ersten {{anzahl}} möglichen Werte.",
-      "quelleAufgabe": "DD4 Übungsklausur E1"
+      "quelleAufgabe": "DD4 Übungsklausur D4"
     },
     {
       "id": "RE-ST2-004",
@@ -400,7 +400,7 @@
       "daten": { "alt": 120, "neu": 138, "einheit": "T€" },
       "aufgabe": "Der Monatsumsatz steigt von {{alt}} T€ auf {{neu}} T€.\n\nBerechne die absolute und die prozentuale Veränderung.",
       "eingaben": ["differenz", "prozent"],
-      "quelleAufgabe": "DD4 Übungsklausur E2"
+      "quelleAufgabe": "DD4 Übungsklausur D5"
     },
     {
       "id": "RE-ST2-005",
@@ -450,7 +450,7 @@
       "eingaben": ["prozent"],
       "hinweise": ["Veränderung = (neu − alt) / alt · 100 %.", "Basis ist der Ausgangswert von Monat 1 – nicht die Summe der Monatsraten."],
       "erklaerung": "Die Raten der einzelnen Monate darf man nicht addieren oder mitteln, weil sich jede auf eine andere Basis bezieht. Für die durchschnittliche Wachstumsrate über mehrere Perioden ist das geometrische Mittel richtig.",
-      "quelleAufgabe": "DD4 Übungsklausur E2"
+      "quelleAufgabe": "DD4 Übungsklausur D5"
     },
     {
       "id": "RE-ST2-008",
@@ -464,7 +464,7 @@
       "eingaben": ["differenz", "prozent"],
       "hinweise": ["Die Differenz zweier Prozentwerte sind **Prozentpunkte**.", "Relativ: (neu − alt) / alt · 100 %."],
       "erklaerung": "Beide Angaben beschreiben dieselbe Veränderung: „um 2 Prozentpunkte gestiegen“ (absolut) und „um 50 Prozent gestiegen“ (relativ). Falsch ist „+2 %“ – das verwechselt Prozentpunkte mit Prozent.",
-      "quelleAufgabe": "DD4 Übungsklausur E3"
+      "quelleAufgabe": "DD4 Übungsklausur D6"
     },
     {
       "id": "RE-ST2-009",
@@ -549,7 +549,7 @@
       "vorlage": "regressionsguete",
       "daten": { "y": [100, 120, 90, 130, 110], "yDach": [90, 126, 84, 132, 108], "einheit": "T€" },
       "aufgabe": "Tatsächliche Werte y und Prognosen ŷ (in T€) stehen in der Tabelle.\n\nBerechne MAE und RMSE.",
-      "quelleAufgabe": "DD7 Übungsklausur E1"
+      "quelleAufgabe": "DD7 Übungsklausur D3"
     },
     {
       "id": "RE-MG-004",
@@ -1281,7 +1281,7 @@
       },
       "aufgabe": "Bewerte die Risiken aus der Tabelle (Eintrittswahrscheinlichkeit W und Schadensausmaß S, Skala 1–5) mit einer Risikozahl.",
       "eingaben": ["rpz1", "rpz2", "rpz3", "hoechstes"],
-      "quelleAufgabe": "DD12 Übungsklausur E1"
+      "quelleAufgabe": "DD12 Übungsklausur B3"
     },
     {
       "id": "RE-PM-006",
@@ -1456,7 +1456,7 @@
       },
       "aufgabe": "Angebot und Nachfrage auf einem Markt stehen in der Tabelle.\n\nWie hoch ist der Gleichgewichtspreis?",
       "eingaben": ["preis"],
-      "quelleAufgabe": "DD14 Übungsklausur D2"
+      "quelleAufgabe": "DD14 Übungsklausur D1"
     },
     {
       "id": "RE-WI-005",
@@ -1469,7 +1469,7 @@
       "aufgabe": "Der Verbraucherpreisindex steigt von {{alt}} auf {{neu}}.\n\nWie hoch ist die Inflationsrate in Prozent (zwei Nachkommastellen)?",
       "eingaben": [{ "id": "prozent", "label": "Inflationsrate" }],
       "hinweise": ["Inflationsrate = (VPI neu − VPI alt) / VPI alt · 100 %.", "Die Differenz der Indexpunkte allein ist nicht die Inflationsrate."],
-      "quelleAufgabe": "DD14 Übungsklausur D3"
+      "quelleAufgabe": "DD14 Übungsklausur D2"
     },
     {
       "id": "RE-WI-006",
@@ -1481,7 +1481,7 @@
       "eingaben": [{ "id": "stunden", "label": "Stunden im Betrieb", "einheit": "Stunden", "loesung": 32 }],
       "hinweise": ["Ein solcher Berufsschultag wird mit der durchschnittlichen täglichen Arbeitszeit angerechnet (§ 9 Abs. 2 JArbSchG) – hier 40 / 5 = 8 Stunden.", "40 − 8 = ?"],
       "erklaerung": "Nach dem JArbSchG wird ein Berufsschultag mit mehr als fünf Unterrichtsstunden (à 45 Minuten) einmal pro Woche mit der **durchschnittlichen täglichen Arbeitszeit** angerechnet (§ 9 Abs. 2 Nr. 1, seit 2020; bei 40 Stunden an 5 Tagen = 8 Stunden); an diesem Tag ist keine Beschäftigung im Betrieb mehr zulässig. $40 - 8 = 32$ Stunden.",
-      "quelleAufgabe": "DD13 Übungsklausur B2"
+      "quelleAufgabe": "DD13 Übungsklausur B3"
     },
     {
       "id": "RE-WI-007",
@@ -1496,7 +1496,7 @@
         "JArbSchG: noch nicht 16 → 30, noch nicht 17 → 27, noch nicht 18 → 25 Werktage."
       ],
       "erklaerung": "Am 01.01.2026 ist Jonas 16 Jahre alt, also „noch nicht 17“ → **27 Werktage**. Häufiger Fehler: 25 Werktage, weil er im Laufe des Jahres 17 wird.",
-      "quelleAufgabe": "DD13 Übungsklausur B4"
+      "quelleAufgabe": "DD13 Übungsklausur B5"
     },
     {
       "id": "RE-WI-008",
@@ -1593,7 +1593,7 @@
       "vorlage": "datensicherung",
       "daten": { "voll": 800, "aenderung": 40, "tage": 3, "einheit": "GB" },
       "aufgabe": "Sonntags wird vollständig gesichert ({{voll}} {{einheit}}), an den Folgetagen täglich; das tägliche Änderungsvolumen beträgt {{aenderung}} {{einheit}}. Der Ausfall tritt nach {{tage}} täglichen Sicherungen ein.\n\nBerechne für beide Verfahren das gesamte Sicherungsvolumen und die Anzahl der für die Wiederherstellung benötigten Medien.",
-      "quelleAufgabe": "DD10 Übungsklausur E1"
+      "quelleAufgabe": "DD10 Übungsklausur D4"
     },
     {
       "id": "RE-IT-002",
@@ -1604,7 +1604,7 @@
       "vorlage": "rpo",
       "daten": { "sicherungUm": 23, "ausfallUm": 14, "rpo": 4 },
       "aufgabe": "Die Sicherung läuft täglich um {{sicherungUm}} Uhr. Der Ausfall tritt am nächsten Tag um {{ausfallUm}} Uhr ein. Vorgabe: RPO {{rpo}} Stunden.\n\nBestimme den maximalen Datenverlust und ob die RPO eingehalten wird.",
-      "quelleAufgabe": "DD10 Übungsklausur E3"
+      "quelleAufgabe": "DD10 Übungsklausur D6"
     },
     {
       "id": "RE-IT-003",

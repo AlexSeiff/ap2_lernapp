@@ -241,7 +241,7 @@ Für die Prüfung genügt der Kern: ein **führendes System** je Stammdatenart, 
 
 # Übungsklausur Datenqualität (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Alle Aufgaben beziehen sich auf die Ausgangssituation und die Anlage; halte dich an die geforderte Anzahl der Nennungen.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner. Alle Aufgaben beziehen sich auf die Ausgangssituation und die Anlage; halte dich an die geforderte Anzahl der Nennungen.
 
 ## Ausgangssituation
 
@@ -286,9 +286,11 @@ Aus dem Altsystem liegt ein Auszug von zehn Datensätzen vor (**Anlage**). Er so
 
 **B2 (6 P):** Datensatz 3 und 7 enthalten das Geburtsdatum 01.01.1900. *Erläutern* Sie, welche Ursache typischerweise dahintersteckt und warum dieser Wert gefährlicher ist als ein leeres Feld.
 
-## Block C – Kennzahlen berechnen (20 P)
+## Block C – Kennzahlen und fehlende Werte (30 P)
 
 Für den Bericht an die Geschäftsleitung soll die Datenqualität vor und nach der Bereinigung **messbar** gemacht werden.
+
+Parallel liefert die Logistik einen Auftragsbestand mit Lieferdauern für eine Auswertung der Speditionen.
 
 **C1 (12 P):** *Berechnen* Sie für die Anlage: (a) Vollständigkeitsgrad des Feldes E-Mail, (b) Eindeutigkeitsgrad der Kunden, (c) Gültigkeitsgrad des Feldes PLZ, (d) Anteil plausibler Geburtsdaten. *Geben* Sie jeweils den Rechenweg an.
 
@@ -304,13 +306,7 @@ Für den Bericht an die Geschäftsleitung soll die Datenqualität vor und nach d
 
 **C3 (4 P):** *Formulieren* Sie für das Feld E-Mail eine vollständige Datenqualitätskennzahl mit Zielwert, Messintervall und Verantwortlichkeit.
 
-## Block D – Bereinigen (18 P)
-
-Vor der Übernahme ins CRM werden die Daten bereinigt. Parallel liefert die Logistik einen Auftragsbestand mit Lieferdauern für eine Auswertung der Speditionen.
-
-**D1 (8 P):** *Beschreiben* Sie das Vorgehen zur Erkennung und Behandlung der Dubletten in der Anlage. *Gehen* Sie auf exakte und unscharfe Dubletten getrennt *ein* und *erläutern* Sie den Begriff **Golden Record**.
-
-**D2 (6 P):** Im Bestand der Logistik fehlen 12 % der Lieferdauern. *Nennen* Sie **drei** Strategien im Umgang mit fehlenden Werten und *bewerten* Sie je einen Vor- und einen Nachteil. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C4 (6 P):** Im Bestand der Logistik fehlen 12 % der Lieferdauern. *Nennen* Sie **drei** Strategien im Umgang mit fehlenden Werten und *bewerten* Sie je einen Vor- und einen Nachteil. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Strategie | Vorteil | Nachteil |
 |---|---|---|
@@ -318,13 +314,17 @@ Vor der Übernahme ins CRM werden die Daten bereinigt. Parallel liefert die Logi
 | | | |
 | | | |
 
-**D3 (4 P):** Bei der Prüfung fällt auf, dass die fehlenden Lieferdauern **ausschließlich** Aufträge eines bestimmten Spediteurs betreffen. *Beurteilen* Sie, ob ein Ersetzen durch den Mittelwert hier vertretbar ist.
+**C5 (4 P):** Bei der Prüfung fällt auf, dass die fehlenden Lieferdauern **ausschließlich** Aufträge eines bestimmten Spediteurs betreffen. *Beurteilen* Sie, ob ein Ersetzen durch den Mittelwert hier vertretbar ist.
 
-## Block E – Prävention und Verantwortung (18 P)
+## Block D – Bereinigen und vorbeugen (26 P)
+
+Vor der Übernahme ins CRM werden die Daten bereinigt.
 
 Damit die Fehler nach der Migration nicht wiederkehren, sollen technische Prüfungen im CRM und klare Zuständigkeiten festgelegt werden.
 
-**E1 (10 P):** *Nennen* Sie **fünf** technische Maßnahmen, mit denen die in der Anlage gefundenen Fehler künftig verhindert werden. *Ordnen* Sie jeder Maßnahme das konkrete Problem aus der Anlage *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**D1 (8 P):** *Beschreiben* Sie das Vorgehen zur Erkennung und Behandlung der Dubletten in der Anlage. *Gehen* Sie auf exakte und unscharfe Dubletten getrennt *ein* und *erläutern* Sie den Begriff **Golden Record**.
+
+**D2 (10 P):** *Nennen* Sie **fünf** technische Maßnahmen, mit denen die in der Anlage gefundenen Fehler künftig verhindert werden. *Ordnen* Sie jeder Maßnahme das konkrete Problem aus der Anlage *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Maßnahme | Verhindert |
 |---|---|
@@ -334,9 +334,9 @@ Damit die Fehler nach der Migration nicht wiederkehren, sollen technische Prüfu
 | | |
 | | |
 
-**E2 (4 P):** *Erläutern* Sie die Rollen **Data Owner** und **Data Steward** und *grenzen* Sie sie voneinander ab.
+**D3 (4 P):** *Erläutern* Sie die Rollen **Data Owner** und **Data Steward** und *grenzen* Sie sie voneinander ab.
 
-**E3 (4 P):** Die Geschäftsführung fragt, warum in Prävention investiert werden soll, „wo man die Daten doch einmal im Jahr bereinigen kann". *Argumentieren* Sie mit der 1-10-100-Regel.
+**D4 (4 P):** Die Geschäftsführung fragt, warum in Prävention investiert werden soll, „wo man die Daten doch einmal im Jahr bereinigen kann". *Argumentieren* Sie mit der 1-10-100-Regel.
 
 ---
 

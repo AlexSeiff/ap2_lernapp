@@ -29,16 +29,16 @@ const ausMuster = (id: string): WerteAntwort => {
 
 describe('Erkennung und Vorlage', () => {
   it('nur wenn die Aufgabe eine Tabelle verlangt und die Lösung eine hat', () => {
-    expect(editorFuer(task('03-B1'))).toBe('werte');
+    expect(editorFuer(task('03-A3'))).toBe('werte');
     // Tabelle nur erwähnt („zusätzliche Tabelle“, „Kundentabelle“) → Textfeld.
-    expect(editorFuer(task('15-E2'))).toBeUndefined();
+    expect(editorFuer(task('15-A4'))).toBeUndefined();
     expect(editorFuer(task('15-A1'))).toBeUndefined();
     // Ohne Musterlösung keine Vorlage, also kein Editor.
     expect(editorFuer({ markdown: '*Stellen* Sie das Ergebnis tabellarisch dar.', type: 'offen' })).toBeUndefined();
   });
 
   it('Kopfzeile aus der Musterlösung, Zellen leer – keine Werte vorab', () => {
-    const v = werteVorlage(task('03-B1'))!;
+    const v = werteVorlage(task('03-A3'))!;
     expect(v.kopf).toEqual(['Grund', 'h', 'f in %', 'kumuliert %']);
     expect(v.zeilen).toHaveLength(6);
     expect(v.zeilen.flat().every((z) => z === '')).toBe(true);
@@ -84,12 +84,12 @@ describe('Lesen, Schreiben, Text', () => {
   it('vorgegebene Zellen kommen aus der Aufgabe, ein alter Text geht nicht verloren', () => {
     const geaendert = JSON.stringify({ editor: 'werte', kopf: ['x'], zeilen: [['überschrieben', 'X', '']] });
     expect((leseEditorAntwort('werte', t, geaendert) as WerteAntwort).zeilen[0]).toEqual(['Berechtigungsdatenbank', 'X', '']);
-    expect(leseEditorAntwort('werte', task('03-B1'), 'Transportschaden 18 …').notiz).toBe('Transportschaden 18 …');
+    expect(leseEditorAntwort('werte', task('03-A3'), 'Transportschaden 18 …').notiz).toBe('Transportschaden 18 …');
   });
 
   it('für die KI-Bewertung als Markdown-Tabelle', () => {
-    const a = ausMuster('03-B1');
-    const text = antwortAlsText(task('03-B1'), JSON.stringify(a));
+    const a = ausMuster('03-A3');
+    const text = antwortAlsText(task('03-A3'), JSON.stringify(a));
     expect(text.split('\n')[0]).toBe('| Grund | h | f in % | kumuliert % |');
     expect(text).toContain('| Transportschaden | 18 | 36,0 | 36,0 |');
   });
@@ -110,7 +110,7 @@ describe('Abgleich', () => {
   });
 
   it('jede Lösungstabelle mit Zahlen passt zu sich selbst', () => {
-    for (const id of ['01-C1', '03-B1', '03-D2', '04-A2', '04-C1', '06-C2', '07-E1', '12-C1', '12-D2']) {
+    for (const id of ['01-A4', '03-A3', '03-C2', '04-A2', '04-C1', '06-C2', '07-D3', '12-C1', '12-D2']) {
       const a = gleicheWerteAb(task(id), ausMuster(id))!;
       expect(a, id).toBeDefined();
       expect(a.gleich, id).toBe(a.vergleichbar);
@@ -118,13 +118,13 @@ describe('Abgleich', () => {
     }
   });
 
-  it('03-B1: andere Rundung zählt, falsche Sortierung fällt auf', () => {
-    const a = ausMuster('03-B1');
+  it('03-A3: andere Rundung zählt, falsche Sortierung fällt auf', () => {
+    const a = ausMuster('03-A3');
     a.zeilen[0][2] = '36';
-    expect(gleicheWerteAb(task('03-B1'), a)!.gleich).toBe(gleicheWerteAb(task('03-B1'), ausMuster('03-B1'))!.gleich);
-    const unsortiert = ausMuster('03-B1');
+    expect(gleicheWerteAb(task('03-A3'), a)!.gleich).toBe(gleicheWerteAb(task('03-A3'), ausMuster('03-A3'))!.gleich);
+    const unsortiert = ausMuster('03-A3');
     [unsortiert.zeilen[0], unsortiert.zeilen[1]] = [unsortiert.zeilen[1], unsortiert.zeilen[0]];
-    const b = gleicheWerteAb(task('03-B1'), unsortiert)!;
+    const b = gleicheWerteAb(task('03-A3'), unsortiert)!;
     expect(b.zeilen[0].befund).toContain('abweichend');
     expect(b.gleich).toBeLessThan(b.vergleichbar);
   });
@@ -143,7 +143,7 @@ describe('Darstellung', () => {
     html(createElement(EditorAntwort, { task: task(id), art: 'werte', value, onChange: () => {}, disabled, hilfen: true }));
 
   it('Tabelle mit Eingabefeldern, ohne Werte der Musterlösung', () => {
-    const h = editor('03-B1');
+    const h = editor('03-A3');
     expect(h).toContain('Trag deine Lösung in die Tabelle ein');
     expect(h).toContain('<th scope="col">kumuliert %</th>');
     expect(h.match(/class="wt-zelle"/g)).toHaveLength(24);
@@ -160,13 +160,13 @@ describe('Darstellung', () => {
   });
 
   it('nach der Abgabe ohne Eingabe, beim Bewerten der Abgleich', () => {
-    const a = ausMuster('03-B1');
+    const a = ausMuster('03-A3');
     a.zeilen[1][2] = '29,0';
-    const h = editor('03-B1', JSON.stringify(a), true);
+    const h = editor('03-A3', JSON.stringify(a), true);
     expect(h).toContain('Deine Lösung');
     expect(h).toContain('<td>Transportschaden</td>');
     expect(h).not.toContain('wt-zelle');
-    const p = html(createElement(EditorPruefung, { task: task('03-B1'), art: 'werte', answer: JSON.stringify(a) }));
+    const p = html(createElement(EditorPruefung, { task: task('03-A3'), art: 'werte', answer: JSON.stringify(a) }));
     expect(p).toContain('Abgleich mit der Tabelle der Musterlösung');
     expect(p).toContain('Muster: 30,0');
     expect(p).toMatch(/<b>\d+ von \d+<\/b>/);

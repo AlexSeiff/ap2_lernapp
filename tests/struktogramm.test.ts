@@ -18,7 +18,7 @@ import {
   type StruktogrammAntwort,
 } from '../src/lib/struktogramm';
 
-// Struktogramm-Baukasten (11-D3 „Zeichnen Sie ein Struktogramm“): Bausteine als Baum, Formprüfung, Gliederung, Darstellung.
+// Struktogramm-Baukasten (11-D2 „Zeichnen Sie ein Struktogramm“): Bausteine als Baum, Formprüfung, Gliederung, Darstellung.
 
 const content = loadContent(CONTENT_DIR);
 const task = (id: string) => content.tasks[id];
@@ -34,7 +34,7 @@ const html = (el: ReturnType<typeof createElement>) =>
 
 const anw = (id: string, text: string): Baustein => ({ id, art: 'anweisung', text });
 
-/** Die Musterlösung von 11-D3 als Bausteine. */
+/** Die Musterlösung von 11-D2 als Bausteine. */
 const muster: StruktogrammAntwort = {
   editor: 'struktogramm',
   bausteine: [
@@ -59,7 +59,7 @@ const muster: StruktogrammAntwort = {
 
 describe('Erkennung', () => {
   it('Struktogramm zeichnen → Baukasten, Struktogramm-Fragen und Pseudocode → Textfeld', () => {
-    expect(editorFuer(task('11-D3'))).toBe('struktogramm');
+    expect(editorFuer(task('11-D2'))).toBe('struktogramm');
     expect(editorFuer({ markdown: '*Nennen* Sie zwei Vorteile eines Struktogramms.', type: 'offen' })).toBeUndefined();
     expect(editorFuer({ markdown: '*Ergänzen* Sie den Pseudocode.', type: 'offen' })).toBeUndefined();
   });
@@ -85,8 +85,8 @@ describe('Bausteine bearbeiten', () => {
 
   it('leer bleibt leer, Inhalt übersteht den Weg über den String, alter Text landet in den Anmerkungen', () => {
     expect(schreibeEditorAntwort(leereStruktogrammAntwort())).toBe('');
-    expect(leseEditorAntwort('struktogramm', task('11-D3'), schreibeEditorAntwort(muster))).toEqual(muster);
-    expect(leseEditorAntwort('struktogramm', task('11-D3'), 'FÜR jeden Datensatz …').notiz).toBe('FÜR jeden Datensatz …');
+    expect(leseEditorAntwort('struktogramm', task('11-D2'), schreibeEditorAntwort(muster))).toEqual(muster);
+    expect(leseEditorAntwort('struktogramm', task('11-D2'), 'FÜR jeden Datensatz …').notiz).toBe('FÜR jeden Datensatz …');
   });
 });
 
@@ -112,7 +112,7 @@ describe('Formprüfung und Gliederung', () => {
   });
 
   it('Gliederung als Pseudocode für die KI-Bewertung', () => {
-    expect(antwortAlsText(task('11-D3'), JSON.stringify(muster))).toBe(
+    expect(antwortAlsText(task('11-D2'), JSON.stringify(muster))).toBe(
       [
         'Struktogramm:',
         'fehlerzaehler ← 0',
@@ -140,7 +140,7 @@ describe('Formprüfung und Gliederung', () => {
 
 describe('Darstellung', () => {
   const editor = (value?: string, disabled = false) =>
-    html(createElement(EditorAntwort, { task: task('11-D3'), art: 'struktogramm', value, onChange: () => {}, disabled, hilfen: true }));
+    html(createElement(EditorAntwort, { task: task('11-D2'), art: 'struktogramm', value, onChange: () => {}, disabled, hilfen: true }));
 
   it('leer: Baukasten mit „+ Baustein“, keine Inhalte der Lösung', () => {
     const h = editor();
@@ -163,7 +163,7 @@ describe('Darstellung', () => {
     const h = editor(JSON.stringify(muster), true);
     expect(h).toContain('<span class="sg-text">Format gültig?</span>');
     expect(h).not.toMatch(/<input|<select|sg-aktionen/);
-    const p = html(createElement(EditorPruefung, { task: task('11-D3'), art: 'struktogramm', answer: JSON.stringify(muster) }));
+    const p = html(createElement(EditorPruefung, { task: task('11-D2'), art: 'struktogramm', answer: JSON.stringify(muster) }));
     expect(p).toContain('Gliederung deines Struktogramms');
     expect(p).toContain('WENN Format gültig?');
   });

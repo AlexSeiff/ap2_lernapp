@@ -5,7 +5,7 @@
 
 ---
 
-## Block A – Diagrammwahl (20 P)
+## Block A – Diagrammwahl und Gestaltung (26 P)
 
 **A1 (12 P):** *(je 1 P Diagrammtyp, 1 P Begründung)*
 
@@ -28,12 +28,21 @@ Drei Mängel *(je 2 P)*:
 
 Besserer Vorschlag *(2 P)*: Ein **waagerechtes Balkendiagramm, absteigend nach Umsatz sortiert**, mit Nullpunkt und direkter Wertbeschriftung an den Balken. Begründung: Balkenlängen sind exakt vergleichbar, die Rangfolge ist unmittelbar ablesbar, und lange Filialnamen lassen sich ohne Drehung darstellen.
 
+**A3 (6 P):**
+Drei Gestaltungsgrundsätze *(je 1 P)*:
+1. **Zielgruppengerechte Verdichtung:** Für die Geschäftsführung wenige aggregierte Kennzahlen, keine Detailtabellen; Details erst auf Nachfrage (Drill-down).
+2. **Wichtigstes zuerst:** Die zentrale Kennzahl links oben, entsprechend der üblichen Leserichtung.
+3. **Einheitliche Skalen und Farbcodierung** über alle Diagramme hinweg, damit nebeneinanderstehende Darstellungen vergleichbar bleiben.
+4. **Aktualitätsangabe:** Stand der Daten sichtbar machen.
+5. **Begrenzung auf fünf bis sieben Kennzahlen** je Sicht.
+
+Vergleichsmaßstab *(3 P)*: Eine Zahl allein ist keine Information – „Durchlaufzeit 30 Stunden" lässt sich ohne Bezug nicht bewerten. Erst ein Vergleich mit dem **Vormonat, dem Vorjahr oder dem Zielwert** zeigt, ob der Wert gut oder schlecht ist und ob sich etwas verändert hat. Ohne Bezugsgröße entsteht kein Handlungsimpuls, und das Dashboard bleibt folgenlos.
+
 ---
 
-## Block B – Diagramme beurteilen (22 P)
+## Block B – Diagramme beurteilen und Dashboard entwerfen (30 P)
 
 **B1 (12 P):**
-
 **a) (4 P):** Gesamtwachstum: $\frac{5{,}10 - 4{,}80}{4{,}80} \cdot 100 = \frac{0{,}30}{4{,}80} \cdot 100$ = **6,25 %**
 Zwischenschritte: 4,80 → 4,95 entspricht +3,13 %, 4,95 → 5,10 entspricht +3,03 %.
 
@@ -55,11 +64,7 @@ Zwischenschritte: 4,80 → 4,95 entspricht +3,13 %, 4,95 → 5,10 entspricht +3,
 Rund 8 % der Männer und etwa 0,5 % der Frauen haben eine Farbfehlsichtigkeit, überwiegend im Rot-Grün-Bereich. Wird eine Information ausschließlich über Farbe codiert – etwa rote gegen grüne Balken für „unter" und „über Plan" –, ist die Aussage für diese Personen nicht erfassbar. Zusätzlich gehen Farben in Schwarz-Weiß-Ausdrucken verloren. *(2 P)*
 Alternativen *(je 1 P, zwei genügen)*: zusätzliche **Beschriftung** direkt am Element; unterschiedliche **Formen oder Muster** (Schraffuren, Symbole); Verwendung von **Helligkeitsunterschieden** statt reiner Farbtonunterschiede; Anordnung und Sortierung als zusätzlicher Informationsträger.
 
----
-
-## Block C – Dashboard konzipieren (14 P)
-
-**C1 (8 P):** *(je Kennzahl 2 P: 1 P Kennzahl mit Darstellung, 1 P Begründung)* Beispiel:
+**B4 (8 P):** *(je Kennzahl 2 P: 1 P Kennzahl mit Darstellung, 1 P Begründung)* Beispiel:
 
 | Kennzahl | Darstellung | Begründung |
 |---|---|---|
@@ -70,26 +75,43 @@ Alternativen *(je 1 P, zwei genügen)*: zusätzliche **Beschriftung** direkt am 
 
 *Ebenfalls anerkannt: Termintreue, Nacharbeitskosten, Auslastung der Werkstatt, Top-5-Reklamationsgründe als Pareto-Diagramm.*
 
-**C2 (6 P):**
-Drei Gestaltungsgrundsätze *(je 1 P)*:
-1. **Zielgruppengerechte Verdichtung:** Für die Geschäftsführung wenige aggregierte Kennzahlen, keine Detailtabellen; Details erst auf Nachfrage (Drill-down).
-2. **Wichtigstes zuerst:** Die zentrale Kennzahl links oben, entsprechend der üblichen Leserichtung.
-3. **Einheitliche Skalen und Farbcodierung** über alle Diagramme hinweg, damit nebeneinanderstehende Darstellungen vergleichbar bleiben.
-4. **Aktualitätsangabe:** Stand der Daten sichtbar machen.
-5. **Begrenzung auf fünf bis sieben Kennzahlen** je Sicht.
-
-Vergleichsmaßstab *(3 P)*: Eine Zahl allein ist keine Information – „Durchlaufzeit 30 Stunden" lässt sich ohne Bezug nicht bewerten. Erst ein Vergleich mit dem **Vormonat, dem Vorjahr oder dem Zielwert** zeigt, ob der Wert gut oder schlecht ist und ob sich etwas verändert hat. Ohne Bezugsgröße entsteht kein Handlungsimpuls, und das Dashboard bleibt folgenlos.
-
 ---
 
-## Block D – Algorithmen entwickeln (28 P)
+## Block C – Schleifen und Fehlersuche (22 P)
 
-**D1 (6 P):**
+**C1 (6 P):**
 **Kopfgesteuerte Schleife (SOLANGE):** Die Bedingung wird **vor** jedem Durchlauf geprüft. Ist sie von Anfang an nicht erfüllt, wird der Rumpf **nullmal** ausgeführt. Anwendungsfall: Eine Datei zeilenweise einlesen – ist die Datei leer, darf gar nichts verarbeitet werden. *(3 P)*
 **Fußgesteuerte Schleife (WIEDERHOLE BIS):** Die Bedingung wird **nach** jedem Durchlauf geprüft, der Rumpf läuft daher **mindestens einmal**. Anwendungsfall: Eine Benutzereingabe anfordern und wiederholen, bis sie gültig ist – einmal gefragt werden muss in jedem Fall. *(3 P)*
 
-**D2 (12 P):**
+**C2 (12 P):** *(je Fehler 3 P: 1 P Benennung, 1 P Auswirkung, 1 P Korrektur)*
 
+**Fehler 1 – Schleifengrenze `BIS n-1` (Off-by-one)**
+Auswirkung: Der letzte Auftrag der Liste wird nie geprüft. Ist ausgerechnet er der höchste, wird ein falsches Maximum ausgegeben; die Zählung ist ebenfalls um bis zu eins zu niedrig.
+Korrektur: `FÜR i VON 1 BIS n`
+
+**Fehler 2 – `anzahl ← 0` steht innerhalb der Schleife**
+Auswirkung: Der Zähler wird bei jedem Durchlauf zurückgesetzt. Am Ende steht dort höchstens 1 – nämlich nur dann, wenn der **letzte** geprüfte Auftrag über 1.000 € lag.
+Korrektur: Die Initialisierung vor die Schleife verschieben, zu `max ← …`.
+
+**Fehler 3 – Bedingung `> 1000 UND < 500`**
+Auswirkung: Die Bedingung ist logisch unerfüllbar – kein Wert kann gleichzeitig über 1.000 und unter 500 liegen. Der Zähler bleibt immer 0.
+Korrektur: `WENN auftrag[i] > 1000 DANN` (die zweite Teilbedingung entfällt ersatzlos).
+
+**Fehler 4 – `max ← 0` als Initialisierung**
+Auswirkung: Enthält die Liste ausschließlich negative Werte (z. B. Stornierungen oder Gutschriften), bleibt das Maximum fälschlich bei 0 – einem Wert, der gar nicht in den Daten vorkommt.
+Korrektur: `max ← auftrag[1]` und die Schleife weiterhin von 1 bis n laufen lassen. Achtung: Würde die Schleife hier erst bei `i = 2` beginnen, fehlte der erste Auftrag in der Zählung der Aufträge über 1.000 € – der Vergleich des ersten Elements mit sich selbst schadet dagegen nicht.
+
+*Ebenfalls als Fehler anerkannt: fehlende Behandlung einer leeren Liste (n = 0); fehlende Angabe der Ausgabe im Algorithmuskopf (`AUSGABE: max, anzahl`).*
+
+**C3 (4 P):**
+Die Initialisierung `max ← 0` setzt stillschweigend voraus, dass mindestens ein Wert nicht negativ ist. Trifft das nicht zu – etwa wenn eine Auswertung nur Gutschriften, Stornobuchungen oder Korrekturbeträge enthält –, gibt der Algorithmus 0 als Maximum aus, obwohl dieser Wert in den Daten überhaupt nicht vorkommt. *(2 P)*
+Der Fehler ist besonders tückisch, weil er **keinen Programmabbruch auslöst**: Das Ergebnis ist plausibel aussehend und trotzdem falsch. Robuster ist die Initialisierung mit dem ersten Listenelement, weil sie unabhängig vom Wertebereich funktioniert – vorausgesetzt, die Liste ist nicht leer, was zusätzlich zu prüfen ist. *(2 P)*
+
+---
+
+## Block D – Algorithmen entwickeln (22 P)
+
+**D1 (12 P):**
 ```
 ALGORITHMUS Reparaturdauern_pruefen
 EINGABE: dauer[1..n]
@@ -121,8 +143,7 @@ ENDE WENN
 
 **Die drei häufigsten Fehler:** Die Summe wird durch `n` statt durch `anzahl_gueltig` geteilt – dann verfälschen die ungültigen Sätze den Mittelwert. Die Prüfung auf fehlende Werte fehlt, sodass leere Felder als 0 einfließen. Und die Nullprüfung vor der Division fehlt, was bei einer Liste ohne gültige Werte zum Abbruch führt.
 
-**D3 (10 P):**
-
+**D2 (10 P):**
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" width="640" height="330" role="img" aria-label="Struktogramm: Zählschleife über alle Datensätze; ohne E-Mail wird der Fehlerzähler erhöht und der Datensatz protokolliert, bei ungültigem Format nur der Zähler erhöht">
 <rect x="20" y="20" width="600" height="290" class="dg-form"/>
@@ -161,34 +182,6 @@ Das Zeichen ∅ markiert einen leeren Zweig (keine Anweisung). Wer bei ungültig
 *Punktevergabe: 2 P Initialisierung des Zählers **vor** der Schleife · 2 P Schleife über alle Datensätze · 3 P äußere Verzweigung (E-Mail vorhanden ja/nein) · 2 P **verschachtelte** innere Verzweigung zur Formatprüfung im Ja-Zweig · 1 P Ausgabe nach der Schleife.*
 
 *Prüferkommentar: Der häufigste Fehler ist eine Formatprüfung auf gleicher Ebene statt verschachtelt – dann wird das Format auch bei fehlender Adresse geprüft, was fachlich unsinnig ist und den Fehler doppelt zählt. Der zweithäufigste: Der Zähler steht innerhalb der Schleife und wird bei jedem Datensatz zurückgesetzt.*
-
----
-
-## Block E – Fehlersuche (16 P)
-
-**E1 (12 P):** *(je Fehler 3 P: 1 P Benennung, 1 P Auswirkung, 1 P Korrektur)*
-
-**Fehler 1 – Schleifengrenze `BIS n-1` (Off-by-one)**
-Auswirkung: Der letzte Auftrag der Liste wird nie geprüft. Ist ausgerechnet er der höchste, wird ein falsches Maximum ausgegeben; die Zählung ist ebenfalls um bis zu eins zu niedrig.
-Korrektur: `FÜR i VON 1 BIS n`
-
-**Fehler 2 – `anzahl ← 0` steht innerhalb der Schleife**
-Auswirkung: Der Zähler wird bei jedem Durchlauf zurückgesetzt. Am Ende steht dort höchstens 1 – nämlich nur dann, wenn der **letzte** geprüfte Auftrag über 1.000 € lag.
-Korrektur: Die Initialisierung vor die Schleife verschieben, zu `max ← …`.
-
-**Fehler 3 – Bedingung `> 1000 UND < 500`**
-Auswirkung: Die Bedingung ist logisch unerfüllbar – kein Wert kann gleichzeitig über 1.000 und unter 500 liegen. Der Zähler bleibt immer 0.
-Korrektur: `WENN auftrag[i] > 1000 DANN` (die zweite Teilbedingung entfällt ersatzlos).
-
-**Fehler 4 – `max ← 0` als Initialisierung**
-Auswirkung: Enthält die Liste ausschließlich negative Werte (z. B. Stornierungen oder Gutschriften), bleibt das Maximum fälschlich bei 0 – einem Wert, der gar nicht in den Daten vorkommt.
-Korrektur: `max ← auftrag[1]` und die Schleife weiterhin von 1 bis n laufen lassen. Achtung: Würde die Schleife hier erst bei `i = 2` beginnen, fehlte der erste Auftrag in der Zählung der Aufträge über 1.000 € – der Vergleich des ersten Elements mit sich selbst schadet dagegen nicht.
-
-*Ebenfalls als Fehler anerkannt: fehlende Behandlung einer leeren Liste (n = 0); fehlende Angabe der Ausgabe im Algorithmuskopf (`AUSGABE: max, anzahl`).*
-
-**E2 (4 P):**
-Die Initialisierung `max ← 0` setzt stillschweigend voraus, dass mindestens ein Wert nicht negativ ist. Trifft das nicht zu – etwa wenn eine Auswertung nur Gutschriften, Stornobuchungen oder Korrekturbeträge enthält –, gibt der Algorithmus 0 als Maximum aus, obwohl dieser Wert in den Daten überhaupt nicht vorkommt. *(2 P)*
-Der Fehler ist besonders tückisch, weil er **keinen Programmabbruch auslöst**: Das Ergebnis ist plausibel aussehend und trotzdem falsch. Robuster ist die Initialisierung mit dem ersten Listenelement, weil sie unabhängig vom Wertebereich funktioniert – vorausgesetzt, die Liste ist nicht leer, was zusätzlich zu prüfen ist. *(2 P)*
 
 ---
 

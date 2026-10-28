@@ -5,7 +5,7 @@
 
 ---
 
-## Block A – CRISP-DM (22 P)
+## Block A – CRISP-DM und Datenaufbereitung (28 P)
 
 **A1 (12 P):** *(je Phase 1 P Bezeichnung + 1 P Projektbezug)*
 
@@ -31,9 +31,22 @@ Zwei typische Rücksprünge *(je 2 P)*:
 Die Verteilung ist **unrealistisch**. Erfahrungsgemäß entfallen 60–80 % des Aufwands auf Data Understanding und Data Preparation, nicht auf die Modellierung – die eigentliche Modellbildung ist mit heutigen Werkzeugen vergleichsweise schnell erledigt. *(2 P)*
 Konsequenz: Der Plan unterschätzt den Aufwand für Datenbeschaffung, Bereinigung und Qualitätsprüfung erheblich und führt absehbar zu Terminverzug oder zu einem auf schlechter Datenbasis trainierten Modell. Realistischer wären etwa 10 % Zieldefinition, 60 % Datenverständnis und -aufbereitung, 15 % Modellierung, 15 % Auswertung und Übergabe. *(2 P)*
 
+**A4 (6 P):**
+Erforderlich ist die Umwandlung, weil Analyseverfahren mit **Zahlen** rechnen und Textwerte nicht verarbeiten können. Eine einfache Durchnummerierung (Nordtrans = 1, Rheinlogistik = 2, Eigenlieferung = 3) wäre falsch, da sie eine Rangfolge und Abstände suggeriert, die fachlich nicht bestehen – das Merkmal ist **nominal** skaliert. *(3 P)*
+
+**One-Hot-Encoding:** Aus der einen Spalte „Spediteur" werden drei binäre Spalten:
+
+| Spediteur | ist_Nordtrans | ist_Rheinlogistik | ist_Eigenlieferung |
+|---|---|---|---|
+| Nordtrans | 1 | 0 | 0 |
+| Rheinlogistik | 0 | 1 | 0 |
+| Eigenlieferung | 0 | 0 | 1 |
+
+Je Datensatz steht genau eine Spalte auf 1, alle übrigen auf 0. *(3 P)*
+
 ---
 
-## Block B – Lernarten und Verfahrenswahl (20 P)
+## Block B – Verfahrenswahl, Bewertung und Einsatz (30 P)
 
 **B1 (8 P):** *(je 2 P: 1 P Lernart, 1 P Verfahrenstyp)*
 
@@ -55,6 +68,19 @@ Für die Reklamationsvorhersage ist die **Klassifikation** geeignet, da die Ziel
 
 *Ebenfalls anerkannt: rechtliche Nachvollziehbarkeit bei automatisierten Entscheidungen; keine Skalierung der Merkmale erforderlich. Die Empfehlung „neuronales Netz" kann volle Punktzahl erhalten, wenn sie mit drei nachvollziehbaren Kriterien begründet wird – bewertet wird die Argumentation, nicht die Vorliebe.*
 
+**B4 (5 P):**
+Es liegt **Data Leakage** (Informationsdurchsickern) vor: Das Feld „Reklamationsdatum" ist nur dann gefüllt, wenn tatsächlich reklamiert wurde – es enthält damit die Antwort, die das Modell vorhersagen soll. *(3 P)*
+Folge: Das Modell erreicht im Test nahezu perfekte Werte, hat aber nichts Verwertbares gelernt. Im Betrieb versagt es vollständig, weil das Reklamationsdatum zum Zeitpunkt der Vorhersage – bei Auftragseingang – naturgemäß noch nicht existiert. Prüfregel für jedes Merkmal: **War diese Information zum Entscheidungszeitpunkt bereits bekannt?** *(2 P)*
+
+**B5 (5 P):** *(je Anforderung 1,5 P, je Maßnahme 1 P)*
+
+| rechtliche Anforderung | Maßnahme zur Umsetzung |
+|---|---|
+| Art. 22 DSGVO: Verbot ausschließlich automatisierter Entscheidungen mit rechtlicher Wirkung oder erheblicher Beeinträchtigung – eine automatische Auftragsablehnung fällt darunter | menschliche Prüfinstanz vorschalten: das Modell gibt nur einen Risikohinweis, ein Mitarbeiter entscheidet; Widerspruchsmöglichkeit einräumen |
+| Transparenz und Information: Betroffene sind über die automatisierte Verarbeitung und die involvierte Logik zu informieren (Art. 13 Abs. 2 Buchst. f, Art. 15 Abs. 1 Buchst. h DSGVO) | erklärbares Verfahren (Entscheidungsbaum) einsetzen, Entscheidungslogik und Merkmale dokumentieren |
+
+*Ebenfalls anerkannt: Zweckbindung und Datenminimierung (nur fachlich erforderliche Merkmale verwenden); Prüfung auf Diskriminierung/Bias, etwa wenn das Liefergebiet als Stellvertretermerkmal für soziale Merkmale wirkt.*
+
 ---
 
 ## Block C – Clustering (22 P)
@@ -66,7 +92,6 @@ Für die Reklamationsvorhersage ist die **Klassifikation** geeignet, da die Ziel
 4. Schritte 2 und 3 wiederholen, bis sich die Zuordnung nicht mehr ändert.
 
 **C2 (10 P):**
-
 | Punkt | Abstand zu Z1(4\|4) | Abstand zu Z2(6\|6) | Cluster |
 |---|---|---|---|
 | P1(2\|2) | √((2−4)²+(2−4)²) = √8 = 2,83 | √32 = 5,66 | **Z1** |
@@ -117,36 +142,6 @@ Ein Lift unter 1 bedeutet einen **negativen Zusammenhang**: Lampe und Monitor we
 Konsequenz: Eine gemeinsame Platzierung oder ein Bundle-Angebot dieser beiden Artikel ist **nicht zu empfehlen**; die Werbefläche sollte für Kombinationen mit einem Lift über 1 genutzt werden. Zusätzlich ist der niedrige Support von 10 % zu beachten – die Regel beruht nur auf einer einzigen Transaktion und ist damit statistisch wenig belastbar. *(2 P)*
 
 *Prüferkommentar: Der Hinweis auf den geringen Support ist der Zusatzgedanke, der die volle Punktzahl sichert. Regeln mit sehr niedrigem Support sind unabhängig vom Lift mit Vorsicht zu behandeln.*
-
----
-
-## Block E – Datenvorbereitung und Recht (16 P)
-
-**E1 (6 P):**
-Erforderlich ist die Umwandlung, weil Analyseverfahren mit **Zahlen** rechnen und Textwerte nicht verarbeiten können. Eine einfache Durchnummerierung (Nordtrans = 1, Rheinlogistik = 2, Eigenlieferung = 3) wäre falsch, da sie eine Rangfolge und Abstände suggeriert, die fachlich nicht bestehen – das Merkmal ist **nominal** skaliert. *(3 P)*
-
-**One-Hot-Encoding:** Aus der einen Spalte „Spediteur" werden drei binäre Spalten:
-
-| Spediteur | ist_Nordtrans | ist_Rheinlogistik | ist_Eigenlieferung |
-|---|---|---|---|
-| Nordtrans | 1 | 0 | 0 |
-| Rheinlogistik | 0 | 1 | 0 |
-| Eigenlieferung | 0 | 0 | 1 |
-
-Je Datensatz steht genau eine Spalte auf 1, alle übrigen auf 0. *(3 P)*
-
-**E2 (5 P):**
-Es liegt **Data Leakage** (Informationsdurchsickern) vor: Das Feld „Reklamationsdatum" ist nur dann gefüllt, wenn tatsächlich reklamiert wurde – es enthält damit die Antwort, die das Modell vorhersagen soll. *(3 P)*
-Folge: Das Modell erreicht im Test nahezu perfekte Werte, hat aber nichts Verwertbares gelernt. Im Betrieb versagt es vollständig, weil das Reklamationsdatum zum Zeitpunkt der Vorhersage – bei Auftragseingang – naturgemäß noch nicht existiert. Prüfregel für jedes Merkmal: **War diese Information zum Entscheidungszeitpunkt bereits bekannt?** *(2 P)*
-
-**E3 (5 P):** *(je Anforderung 1,5 P, je Maßnahme 1 P)*
-
-| rechtliche Anforderung | Maßnahme zur Umsetzung |
-|---|---|
-| Art. 22 DSGVO: Verbot ausschließlich automatisierter Entscheidungen mit rechtlicher Wirkung oder erheblicher Beeinträchtigung – eine automatische Auftragsablehnung fällt darunter | menschliche Prüfinstanz vorschalten: das Modell gibt nur einen Risikohinweis, ein Mitarbeiter entscheidet; Widerspruchsmöglichkeit einräumen |
-| Transparenz und Information: Betroffene sind über die automatisierte Verarbeitung und die involvierte Logik zu informieren (Art. 13 Abs. 2 Buchst. f, Art. 15 Abs. 1 Buchst. h DSGVO) | erklärbares Verfahren (Entscheidungsbaum) einsetzen, Entscheidungslogik und Merkmale dokumentieren |
-
-*Ebenfalls anerkannt: Zweckbindung und Datenminimierung (nur fachlich erforderliche Merkmale verwenden); Prüfung auf Diskriminierung/Bias, etwa wenn das Liefergebiet als Stellvertretermerkmal für soziale Merkmale wirkt.*
 
 ---
 

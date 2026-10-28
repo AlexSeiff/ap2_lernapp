@@ -80,16 +80,16 @@ describe('Auswertung', () => {
 
 describe('Speichern', () => {
   const date = '2026-10-01T10:00:00.000Z';
-  const p = recordAttempt(emptyProgress(), versuch('03-C1', date, 2), '2026-10-01');
+  const p = recordAttempt(emptyProgress(), versuch('03-B1', date, 2), '2026-10-01');
 
   it('setzeFehlergrund setzt und entfernt den Grund am passenden Versuch', () => {
-    const mit = setzeFehlergrund(p, '03-C1', date, 'rechenfehler');
+    const mit = setzeFehlergrund(p, '03-B1', date, 'rechenfehler');
     expect(mit.attempts[0].fehlergrund).toBe('rechenfehler');
-    const ohne = setzeFehlergrund(mit, '03-C1', date, undefined);
+    const ohne = setzeFehlergrund(mit, '03-B1', date, undefined);
     expect('fehlergrund' in ohne.attempts[0]).toBe(false);
-    expect(setzeFehlergrund(p, '03-C1', 'anderes Datum', 'zeit')).toBe(p);
-    const voll = recordAttempt(emptyProgress(), versuch('03-C1', date, 6), '2026-10-01');
-    expect(setzeFehlergrund(voll, '03-C1', date, 'zeit')).toBe(voll);
+    expect(setzeFehlergrund(p, '03-B1', 'anderes Datum', 'zeit')).toBe(p);
+    const voll = recordAttempt(emptyProgress(), versuch('03-B1', date, 6), '2026-10-01');
+    expect(setzeFehlergrund(voll, '03-B1', date, 'zeit')).toBe(voll);
   });
 
   it('finishExam übernimmt den Grund nur unter voller Punktzahl', () => {
@@ -143,8 +143,8 @@ describe('Seiten', () => {
   it('Fehlerjournal und Übersicht zeigen den häufigsten Grund, das Journal den Grund je Eintrag', () => {
     const d = (n: number) => `2026-09-2${n}T10:00:00.000Z`;
     progress = [
-      versuch('03-C1', d(1), 2, { fehlergrund: 'operator' }),
-      versuch('03-C2', d(2), 1, { fehlergrund: 'operator' }),
+      versuch('03-B1', d(1), 2, { fehlergrund: 'operator' }),
+      versuch('03-B2', d(2), 1, { fehlergrund: 'operator' }),
       versuch('04-A1', d(3), 0, { fehlergrund: 'formel' }),
     ].reduce((p, a) => recordAttempt(p, a, a.date.slice(0, 10)), emptyProgress());
     const journal = render('/fehlerjournal');

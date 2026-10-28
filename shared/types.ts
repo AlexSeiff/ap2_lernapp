@@ -191,7 +191,7 @@ export interface SqlExercise {
   erklaerung?: string;
   /** Aufgabe auf dem Blatt, z. B. „DD1 Übungsklausur B8". */
   quelleAufgabe?: string;
-  /** Aufgaben (Task-ids wie „01-B8“), die im SQL-Editor mit dieser Übung beantwortet werden. */
+  /** Aufgaben (Task-ids wie „01-C3“), die im SQL-Editor mit dieser Übung beantwortet werden. */
   aufgaben?: string[];
   /** Karteikarten (ids), deren Rückseite auf diese Übung verweist. */
   karten?: string[];

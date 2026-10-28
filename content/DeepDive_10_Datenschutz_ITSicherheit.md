@@ -284,7 +284,7 @@ Die EU-Richtlinie **NIS2** ist in Deutschland mit dem **NIS2-Umsetzungsgesetz** 
 
 # Übungsklausur Datenschutz & IT-Sicherheit (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich. Halte dich an die geforderte Anzahl der Nennungen.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich. Halte dich an die geforderte Anzahl der Nennungen.
 
 ## Ausgangssituation
 
@@ -319,21 +319,19 @@ Nach dem Start des Systems gehen die ersten Anfragen von Kunden ein, und der Clo
 
 **B4 (4 P):** Durch eine Fehlkonfiguration waren 8.000 Kundendatensätze zwei Tage lang im Internet abrufbar. *Beschreiben* Sie die Pflichten des Unternehmens mit Fristen.
 
-## Block C – Anonymisierung und Mitarbeiterauswertung (16 P)
+## Block C – Anonymisierung, Mitarbeiterauswertung und Schutzziele (22 P)
 
 Für Auswertungen sollen die Daten so wenig personenbezogen wie möglich sein. Der Datenschutzbeauftragte verweist dazu auf die englische Fassung der DSGVO, Art. 4 Nr. 5:
 
 > *"'pseudonymisation' means the processing of personal data in such a manner that the personal data can no longer be attributed to a specific data subject without the use of additional information, provided that such additional information is kept separately and is subject to technical and organisational measures to ensure that the personal data are not attributed to an identified or identifiable natural person."*
 
+Zusätzlich sollen die Schutzziele für das Analysesystem festgelegt werden.
+
 **C1 (6 P):** *Grenzen* Sie anhand des Auszugs Anonymisierung und Pseudonymisierung *ab*. *Geben* Sie an, welche Variante weiterhin der DSGVO unterliegt, und *begründen* Sie.
 
 **C2 (10 P):** Die Bearbeitungszeiten sollen je Mitarbeiter ausgewertet werden. *Erläutern* Sie **zwei** rechtliche Anforderungen (mit Rechtsgrundlage) und *nennen* Sie **drei** Maßnahmen, mit denen die Auswertung dennoch zulässig durchgeführt werden kann.
 
-## Block D – IT-Sicherheit (22 P)
-
-Das Analysesystem soll vor dem Produktivstart abgesichert werden. Der Dienstleister fragt nach Ihrem Sicherheits- und Berechtigungskonzept.
-
-**D1 (6 P):** *Nennen* Sie die **drei** klassischen Schutzziele und *ordnen* Sie jedem eine konkrete Maßnahme für das Analysesystem *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C3 (6 P):** *Nennen* Sie die **drei** klassischen Schutzziele und *ordnen* Sie jedem eine konkrete Maßnahme für das Analysesystem *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Schutzziel | Maßnahme für das Analysesystem |
 |---|---|
@@ -341,25 +339,27 @@ Das Analysesystem soll vor dem Produktivstart abgesichert werden. Der Dienstleis
 | | |
 | | |
 
-**D2 (6 P):** *Grenzen* Sie symmetrische und asymmetrische Verschlüsselung *ab* und *erläutern* Sie, warum in der Praxis hybride Verfahren eingesetzt werden. *Erklären* Sie zusätzlich, warum Hashing keine Verschlüsselung ist.
+## Block D – IT-Sicherheit und Datensicherung (28 P)
 
-**D3 (6 P):** *Beschreiben* Sie ein rollenbasiertes Berechtigungskonzept für das Analysesystem mit **drei** Rollen und *erläutern* Sie die Prinzipien „Least Privilege" und „Need-to-know".
-
-**D4 (4 P):** Eine Auswertung soll Kundendaten über ein Eingabefeld filtern. *Erläutern* Sie die Gefahr einer SQL-Injection und die wirksamste Gegenmaßnahme.
-
-## Block E – Datensicherung (12 P)
+Das Analysesystem soll vor dem Produktivstart abgesichert werden. Der Dienstleister fragt nach Ihrem Sicherheits- und Berechtigungskonzept.
 
 Das Unternehmen sichert sonntags vollständig (800 GB) und montags bis samstags täglich. Das tägliche Änderungsvolumen beträgt 40 GB.
 
-**E1 (6 P):** *Berechnen* Sie für beide Verfahren – inkrementell und differenziell – das gesamte Sicherungsvolumen bis einschließlich Mittwoch sowie die Anzahl der zur Wiederherstellung benötigten Medien bei einem Ausfall am Donnerstagmorgen.
+**D1 (6 P):** *Grenzen* Sie symmetrische und asymmetrische Verschlüsselung *ab* und *erläutern* Sie, warum in der Praxis hybride Verfahren eingesetzt werden. *Erklären* Sie zusätzlich, warum Hashing keine Verschlüsselung ist.
+
+**D2 (6 P):** *Beschreiben* Sie ein rollenbasiertes Berechtigungskonzept für das Analysesystem mit **drei** Rollen und *erläutern* Sie die Prinzipien „Least Privilege" und „Need-to-know".
+
+**D3 (4 P):** Eine Auswertung soll Kundendaten über ein Eingabefeld filtern. *Erläutern* Sie die Gefahr einer SQL-Injection und die wirksamste Gegenmaßnahme.
+
+**D4 (6 P):** *Berechnen* Sie für beide Verfahren – inkrementell und differenziell – das gesamte Sicherungsvolumen bis einschließlich Mittwoch sowie die Anzahl der zur Wiederherstellung benötigten Medien bei einem Ausfall am Donnerstagmorgen.
 
 > **Formeln:**
 > - inkrementell: Volumen = Vollsicherung + Summe der täglichen Änderungen; Medien = Vollsicherung + alle inkrementellen Sicherungen seitdem
 > - differenziell: Volumen = Vollsicherung + Summe der Änderungen seit der Vollsicherung je Sicherungstag; Medien = Vollsicherung + letzte differenzielle Sicherung
 
-**E2 (3 P):** *Beurteilen* Sie, welches Verfahren Sie empfehlen, wenn eine schnelle Wiederherstellung im Vordergrund steht.
+**D5 (3 P):** *Beurteilen* Sie, welches Verfahren Sie empfehlen, wenn eine schnelle Wiederherstellung im Vordergrund steht.
 
-**E3 (3 P):** Die Sicherung läuft täglich um 23:00 Uhr. Der Ausfall tritt um 14:00 Uhr ein. *Bestimmen* Sie den maximalen Datenverlust und *beurteilen* Sie, ob eine RPO-Vorgabe von vier Stunden eingehalten wird. *Nennen* Sie gegebenenfalls eine Maßnahme.
+**D6 (3 P):** Die Sicherung läuft täglich um 23:00 Uhr. Der Ausfall tritt um 14:00 Uhr ein. *Bestimmen* Sie den maximalen Datenverlust und *beurteilen* Sie, ob eine RPO-Vorgabe von vier Stunden eingehalten wird. *Nennen* Sie gegebenenfalls eine Maßnahme.
 
 > **Formeln:**
 > - maximaler Datenverlust = Zeitpunkt des Ausfalls − Zeitpunkt der letzten Sicherung

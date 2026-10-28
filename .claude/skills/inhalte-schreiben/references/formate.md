@@ -145,7 +145,9 @@ Szenario Möbelhaus Nordholz). So sehen die Aufgaben dort aus:
 
 **Fachteile (Prozessanalyse, Datenqualität und alle Fach-Deep-Dives): 90 Minuten, 100 Punkte**
 - Ein **Kasten „Ausgangssituation“** für alle Aufgaben (Unternehmen, Vorhaben). Dann **vier Aufgaben à 20–30 P**; in der App ist jede
-  Original-Aufgabe ein Block. Jeder Block beginnt mit einer **Handlungssituation** (Block-Intro, 2–6 Sätze, konkret: wer, was, welche
+  Original-Aufgabe ein Block. Die Klausur beginnt mit „Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen.“ Material, das
+  nur eine Aufgabe braucht, steht in deren Block-Intro (fett überschrieben, `**Anlage 1 – …**`, keine `##`-Überschrift); nur Material für
+  mehrere Aufgaben bleibt eine Anlage `## Anlage …` vorne. Jeder Block beginnt mit einer **Handlungssituation** (Block-Intro, 2–6 Sätze, konkret: wer, was, welche
   Zahlen, welches Problem) – erst danach die Teilaufgaben. Teilaufgaben greifen die Situation auf („… wenden Sie diese auf die Situation an“,
   „Beziehen Sie sich dabei auf Teilaufgabe b)“).
 - **Punkte je Teilaufgabe meist 2–6 P**; groß nur Modellierung (eEPK, Aktivitätsdiagramm 13–21 P), Programmieren/Pseudocode (15–20 P),

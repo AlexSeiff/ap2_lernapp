@@ -972,11 +972,11 @@ applied in `main.tsx` before the first render), error boundary per route, own co
 
 ## 6. Progress (persisted data)
 
-Defined in `shared/progress.ts`, **`PROGRESS_VERSION = 8`**.
+Defined in `shared/progress.ts`, **`PROGRESS_VERSION = 9`**.
 
 ```ts
 type Progress = {
-  version: 8;
+  version: 9;                              // 9: task ids of the rebuilt Übungsklausuren moved (no new field)
   revision: number;                        // bumped on every save; stale tab → 409 (v2)
   attempts: Attempt[];                     // task attempts (taskId, points, max, date, mode, sicherheit?)
   exams: ExamRun[]; activeExam?: ExamRun;
@@ -1037,7 +1037,7 @@ type Settings = {
 **Safety rules (all implemented, keep them):**
 - `checkProgressPut` validates with zod, rejects a strong drop in `attempts` unless `reset: true` (reset button, backup restore),
   and rejects a stale `revision` with 409. Same rules on the server and in `staticApi.ts`.
-- `migrateProgress(raw)` runs versioned `MIGRATIONS` (1→2 revision, 2→3 cardReviewDays, 3→4 sql/sqlDays, 4→5 settings, 5→6 rechnen/rechnenDays, 6→7 markiert, 7→8 diagramme/diagrammDays) and fills missing fields.
+- `migrateProgress(raw)` runs versioned `MIGRATIONS` (1→2 revision, 2→3 cardReviewDays, 3→4 sql/sqlDays, 4→5 settings, 5→6 rechnen/rechnenDays, 6→7 markiert, 7→8 diagramme/diagrammDays, 8→9 task ids moved) and fills missing fields.
   `migrateSettings` fills defaults, drops an invalid `examDate`/`lastBackupDownloadAt` and keeps unknown fields.
   `lastBackupDownloadAt` was added without a version bump: it is optional, `SettingsSchema` is a loose object with all fields optional
   and `migrateSettings` already kept unknown fields, so every v5 file (old or new) is valid and nothing needs converting.
@@ -1062,6 +1062,12 @@ type Settings = {
   Not in `Progress`: the "Heute lernen" session (`localStorage` `ap2-heute`, per day and device, § 5), the last reading position
   (`localStorage` `ap2-lesestelle`, § 5 „Übersicht“) and the "Deine Antwort" text (not stored).
   Backup files are read with `parseBackup` (`src/lib/backup.ts`, used by Daten & Import and the welcome screen).
+  **Version 9 (October 2026): task ids moved.** The Übungsklausuren 01–16 were rebuilt in the format of the Altklausuren (subject exams: four
+  Aufgaben of 20–30 P; WiSo: 30 tasks in five blocks of 20 P), which gave 84 tasks a new code. `shared/aufgabenUmzug.ts` (`AUFGABEN_UMZUG_V9`,
+  old id → new id, never edit afterwards) and `zieheAufgabenUm` rename them in attempts, journal (key and `taskId`) and exam runs (answers,
+  scores, sicherheit, fehlergrund) – all at once, so no id moves twice. Three new WiSo tasks reuse freed codes (14-B6, 14-D5, 14-D6); their old
+  state moved with the shifted task. Tests: `tests/aufgabenUmzug.test.ts`; old fixtures are compared via `tests/umgezogen.ts`. Renumbering tasks
+  again needs a new map and a new version.
   **Every schema change:** bump `PROGRESS_VERSION`, add a migration step, extend `tests/progress.test.ts` (fixtures in `tests/fixtures/`, one per version).
 - Settings are changed only through `withSettings` (`src/lib/settings.ts`). "Fortschritt zurücksetzen" keeps the settings. The theme stays in `localStorage` (per device).
 - Local app: atomic writes with retry, daily backup `data/backups/fortschritt-YYYY-MM-DD.json` (last 14 kept), broken file → `*.defekt-<ts>`.

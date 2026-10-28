@@ -303,7 +303,7 @@ Genau genommen umfasst ± 2 σ 95,45 %; exakt 95 % liegen im Bereich ± 1,96 σ.
 
 # Übungsklausur Statistik I (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner, ohne Unterlagen. Runde auf zwei Nachkommastellen. **Schreibe alle Rechenwege auf** – Teilpunkte gibt es nur für Nachvollziehbares.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, mit Taschenrechner, ohne Unterlagen. Runde auf zwei Nachkommastellen. **Schreibe alle Rechenwege auf** – Teilpunkte gibt es nur für Nachvollziehbares.
 
 ## Ausgangssituation
 
@@ -313,9 +313,11 @@ Die Werkstatt der **Möbelhaus Nordholz GmbH** soll schneller und gleichmäßige
 
 `60, 40, 220, 45, 35, 90, 55, 40, 70, 50, 65`
 
-## Block A – Skalenniveaus (12 P)
+## Block A – Skalenniveaus und Häufigkeiten (30 P)
 
 Bevor Sie rechnen, prüfen Sie, welche Kennzahlen für die Merkmale der Auftragsdatenbank überhaupt zulässig sind.
+
+Der Kundenservice hat die Reklamationen des letzten Quartals nach Fehlerart ausgezählt. Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlieferung 9, Materialfehler 6, Sonstiges 2.
 
 **A1 (8 P):** *Ordnen* Sie den folgenden Merkmalen je das Skalenniveau *zu* und *tragen* Sie es in die Tabelle *ein*. *Begründen* Sie **zwei** Ihrer Zuordnungen unter der Tabelle.
 
@@ -328,97 +330,91 @@ Bevor Sie rechnen, prüfen Sie, welche Kennzahlen für die Merkmale der Auftrags
 
 **A2 (4 P):** Ein Kollege berechnet den arithmetischen Mittelwert der Postleitzahlen aller Kunden, um „den durchschnittlichen Standort" zu bestimmen. *Beurteilen* Sie das Vorgehen und *nennen* Sie eine fachlich korrekte Alternative.
 
-## Block B – Häufigkeitsverteilung (18 P)
-
-Der Kundenservice hat die Reklamationen des letzten Quartals nach Fehlerart ausgezählt. Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlieferung 9, Materialfehler 6, Sonstiges 2.
-
-**B1 (9 P):** *Erstellen* Sie eine vollständige Häufigkeitstabelle mit absoluter, relativer (in %) und kumulierter relativer Häufigkeit, absteigend sortiert.
+**A3 (9 P):** *Erstellen* Sie eine vollständige Häufigkeitstabelle mit absoluter, relativer (in %) und kumulierter relativer Häufigkeit, absteigend sortiert.
 
 > **Formeln:**
 > - relative Häufigkeit h_i = n_i / n · 100 %
 > - kumulierte relative Häufigkeit H_k = h_1 + h_2 + … + h_k
 
-**B2 (5 P):** *Ermitteln* Sie, wie viele Fehlerarten nötig sind, um mindestens 80 % aller Reklamationen abzudecken, und *benennen* Sie das zugrunde liegende Prinzip.
+**A4 (5 P):** *Ermitteln* Sie, wie viele Fehlerarten nötig sind, um mindestens 80 % aller Reklamationen abzudecken, und *benennen* Sie das zugrunde liegende Prinzip.
 
 > **Formel:** kumulierter Anteil = Reklamationen der häufigsten Fehlerarten zusammen / alle Reklamationen · 100 %
 
-**B3 (4 P):** *Begründen* Sie, warum für dieses Merkmal weder Mittelwert noch Median berechnet werden können, und *geben* Sie das zulässige Lagemaß *an*.
+**A5 (4 P):** *Begründen* Sie, warum für dieses Merkmal weder Mittelwert noch Median berechnet werden können, und *geben* Sie das zulässige Lagemaß *an*.
 
-## Block C – Lagemaße (20 P)
+## Block B – Lagemaße (20 P)
 
 Die Geschäftsführung möchte wissen, wie lange eine Reparatur „typischerweise“ dauert. Grundlage ist die **Anlage**.
 
-**C1 (10 P):** *Berechnen* Sie für die Anlage arithmetisches Mittel, Median und Modus. *Notieren* Sie die sortierte Reihe.
+**B1 (10 P):** *Berechnen* Sie für die Anlage arithmetisches Mittel, Median und Modus. *Notieren* Sie die sortierte Reihe.
 
 > **Formeln:**
 > - arithmetisches Mittel x̄ = Σ x_i / n
 > - Median: n ungerade → Wert an Position (n + 1) / 2; n gerade → Mittel der Werte an Position n / 2 und n / 2 + 1
 
-**C2 (6 P):** *Vergleichen* Sie Mittelwert und Median. *Erläutern* Sie, was die Differenz über die Verteilung aussagt und welches Lagemaß Sie der Geschäftsführung berichten würden.
+**B2 (6 P):** *Vergleichen* Sie Mittelwert und Median. *Erläutern* Sie, was die Differenz über die Verteilung aussagt und welches Lagemaß Sie der Geschäftsführung berichten würden.
 
 > **Formeln:**
 > - arithmetisches Mittel x̄ = Σ x_i / n
 > - Median: n ungerade → Wert an Position (n + 1) / 2; n gerade → Mittel der Werte an Position n / 2 und n / 2 + 1
 
-**C3 (4 P):** Die Werkstatt meldet für den Folgemonat: 4 Aufträge à 45 Minuten, 6 Aufträge à 70 Minuten. *Berechnen* Sie die durchschnittliche Bearbeitungsdauer.
+**B3 (4 P):** Die Werkstatt meldet für den Folgemonat: 4 Aufträge à 45 Minuten, 6 Aufträge à 70 Minuten. *Berechnen* Sie die durchschnittliche Bearbeitungsdauer.
 
 > **Formel:** gewichtetes Mittel x̄ = Σ (n_i · x_i) / Σ n_i
 
-## Block D – Streuungsmaße (18 P)
+## Block C – Streuungsmaße und Datenprüfung (23 P)
 
 Neben dem Durchschnitt interessiert die Geschäftsführung, wie gleichmäßig die Werkstätten arbeiten.
 
-**D1 (4 P):** *Berechnen* Sie die Spannweite der Anlage und *beurteilen* Sie deren Aussagekraft in diesem Fall.
+Beim Aufbereiten der Daten fällt Ihnen außerdem eine Auffälligkeit auf.
+
+**C1 (4 P):** *Berechnen* Sie die Spannweite der Anlage und *beurteilen* Sie deren Aussagekraft in diesem Fall.
 
 > **Formel:** Spannweite = größter Wert − kleinster Wert
 
-**D2 (10 P):** Für fünf Aufträge einer anderen Filiale wurden folgende Durchlaufzeiten (in Tagen) erfasst: 2, 4, 5, 6, 8. *Berechnen* Sie Varianz und Standardabweichung der **Grundgesamtheit**. *Stellen* Sie den Rechenweg tabellarisch *dar*.
+**C2 (10 P):** Für fünf Aufträge einer anderen Filiale wurden folgende Durchlaufzeiten (in Tagen) erfasst: 2, 4, 5, 6, 8. *Berechnen* Sie Varianz und Standardabweichung der **Grundgesamtheit**. *Stellen* Sie den Rechenweg tabellarisch *dar*.
 
 > **Formeln:**
 > - Mittelwert x̄ = Σ x_i / n
 > - Varianz der Grundgesamtheit σ² = Σ (x_i − x̄)² / n
 > - Standardabweichung σ = √σ²
 
-**D3 (4 P):** Filiale Nord: x̄ = 50 min, σ = 5 min. Filiale Süd: x̄ = 100 min, σ = 8 min. *Berechnen* Sie jeweils den Variationskoeffizienten und *beurteilen* Sie, welche Filiale gleichmäßiger arbeitet.
+**C3 (4 P):** Filiale Nord: x̄ = 50 min, σ = 5 min. Filiale Süd: x̄ = 100 min, σ = 8 min. *Berechnen* Sie jeweils den Variationskoeffizienten und *beurteilen* Sie, welche Filiale gleichmäßiger arbeitet.
 
 > **Formel:** Variationskoeffizient VK = σ / x̄ · 100 %
 
-## Block E – Boxplot und Ausreißer (20 P)
+**C4 (5 P):** In der Spalte „Reparaturdauer" fallen 14 Datensätze mit dem exakten Wert 0 auf. *Nennen* Sie **zwei** mögliche Ursachen und je eine Maßnahme, mit der Sie die Ursache klären bzw. künftig verhindern. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+
+| Ursache | Maßnahme |
+|---|---|
+| | |
+| | |
+
+## Block D – Boxplot und Ausreißer (27 P)
 
 Für den Bericht soll die Verteilung der Reparaturdauern aus der **Anlage** als Boxplot dargestellt werden.
 
-**E1 (8 P):** *Bestimmen* Sie für die Anlage Q1, Q3 und den Interquartilsabstand nach der angegebenen Konvention.
+**D1 (8 P):** *Bestimmen* Sie für die Anlage Q1, Q3 und den Interquartilsabstand nach der angegebenen Konvention.
 
 > **Formeln:**
 > - Position = n · p (p = 0,25 für Q1, p = 0,75 für Q3); nicht ganzzahlig → aufrunden und den Wert an dieser Position nehmen; ganzzahlig → Mittel aus diesem und dem nächsten Wert
 > - Interquartilsabstand IQR = Q3 − Q1
 
-**E2 (6 P):** *Prüfen* Sie mit der 1,5-IQR-Regel auf Ausreißer. *Geben* Sie beide Zäune und alle identifizierten Ausreißer *an*.
+**D2 (6 P):** *Prüfen* Sie mit der 1,5-IQR-Regel auf Ausreißer. *Geben* Sie beide Zäune und alle identifizierten Ausreißer *an*.
 
 > **Formeln:**
 > - unterer Zaun = Q1 − 1,5 · IQR
 > - oberer Zaun = Q3 + 1,5 · IQR
 > - Ausreißer: x_i < unterer Zaun oder x_i > oberer Zaun
 
-**E3 (6 P):** *Skizzieren* Sie den Boxplot maßstäblich und *beschriften* Sie Box, Median, beide Whisker und Ausreißer. Achten Sie darauf, wo der obere Whisker endet.
+**D3 (6 P):** *Skizzieren* Sie den Boxplot maßstäblich und *beschriften* Sie Box, Median, beide Whisker und Ausreißer. Achten Sie darauf, wo der obere Whisker endet.
 
 > **Formeln:**
 > - IQR = Q3 − Q1
 > - unterer Zaun = Q1 − 1,5 · IQR
 > - oberer Zaun = Q3 + 1,5 · IQR
 
-## Block F – Beurteilung (12 P)
-
-Bei der Aufbereitung der Daten fallen Ihnen Auffälligkeiten auf, über die Sie entscheiden müssen.
-
-**F1 (7 P):** Der Wert 220 Minuten stammt aus einem Auftrag, bei dem ein Ersatzteil erst beschafft werden musste. Ein Kollege schlägt vor, den Datensatz vor der Auswertung zu löschen, „damit die Statistik nicht verzerrt wird". *Beurteilen* Sie den Vorschlag und *entwickeln* Sie ein fachlich korrektes Vorgehen in drei Schritten.
-
-**F2 (5 P):** In der Spalte „Reparaturdauer" fallen 14 Datensätze mit dem exakten Wert 0 auf. *Nennen* Sie **zwei** mögliche Ursachen und je eine Maßnahme, mit der Sie die Ursache klären bzw. künftig verhindern. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
-
-| Ursache | Maßnahme |
-|---|---|
-| | |
-| | |
+**D4 (7 P):** Der Wert 220 Minuten stammt aus einem Auftrag, bei dem ein Ersatzteil erst beschafft werden musste. Ein Kollege schlägt vor, den Datensatz vor der Auswertung zu löschen, „damit die Statistik nicht verzerrt wird". *Beurteilen* Sie den Vorschlag und *entwickeln* Sie ein fachlich korrektes Vorgehen in drei Schritten.
 
 ---
 

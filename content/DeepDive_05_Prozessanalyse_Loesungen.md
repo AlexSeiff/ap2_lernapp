@@ -5,7 +5,7 @@
 
 ---
 
-## Block A – Grundlagen (14 P)
+## Block A – Prozessarten und Ist-Aufnahme (20 P)
 
 **A1 (6 P):**
 - **Kernprozess:** unmittelbar wertschöpfend, erzeugt direkten Kundennutzen, ist auf den externen Kunden gerichtet.
@@ -26,6 +26,11 @@ Vor- und Nachteile für zwei Methoden *(je Zeile 2 P)*:
 | Auswertung der Systemdaten des Auftragssystems | objektiv, vollständig, ohne Beeinflussung, auch für alle 200 Aufträge eines Monats | erklärt nicht das Warum; Schritte außerhalb des Systems (Telefon, Papier) bleiben unsichtbar; Datenqualität muss geprüft werden |
 
 *Prüferkommentar: Ein Vorteil ohne Bezug zum Reparaturservice („liefert viele Informationen“) bringt nur den halben Punkt.*
+
+**A3 (6 P):** *(je 2 P)*
+- **Case ID:** Eindeutige Vorgangskennung, die alle Ereignisse eines Falls zusammenfasst – ohne sie lassen sich Ereignisse keinem Prozessdurchlauf zuordnen.
+- **Activity:** Bezeichnung des ausgeführten Prozessschritts – bildet die Knoten des rekonstruierten Prozessmodells.
+- **Timestamp:** Zeitpunkt des Ereignisses – legt die Reihenfolge fest und ermöglicht die Berechnung von Durchlauf- und Wartezeiten.
 
 ---
 
@@ -89,7 +94,7 @@ Ansatzpunkt: Die Optimierung muss bei den **Liegezeiten** ansetzen – insbesond
 
 ---
 
-## Block D – Optimierung und Wirtschaftlichkeit (18 P)
+## Block D – Optimierung, Wirtschaftlichkeit und Process Mining (28 P)
 
 **D1 (6 P):** *(je Zeile 2 P: 1 P Maßnahme, 1 P korrekte Zuordnung)*
 
@@ -119,16 +124,7 @@ Beurteilung: Die Investition amortisiert sich nach 1,5 Jahren und damit deutlich
 - **Mitarbeiterakzeptanz und Einführungsaufwand:** Produktivitätsverlust in der Umstellungsphase, Schulungsbedarf, mögliche Widerstände.
 - **Skalierbarkeit:** Bei wachsendem Auftragsvolumen steigt der Nutzen überproportional; die Datenbasis wird zugleich für weitere Auswertungen nutzbar.
 
----
-
-## Block E – Process Mining und Recht (16 P)
-
-**E1 (6 P):** *(je 2 P)*
-- **Case ID:** Eindeutige Vorgangskennung, die alle Ereignisse eines Falls zusammenfasst – ohne sie lassen sich Ereignisse keinem Prozessdurchlauf zuordnen.
-- **Activity:** Bezeichnung des ausgeführten Prozessschritts – bildet die Knoten des rekonstruierten Prozessmodells.
-- **Timestamp:** Zeitpunkt des Ereignisses – legt die Reihenfolge fest und ermöglicht die Berechnung von Durchlauf- und Wartezeiten.
-
-**E2 (6 P):** *(je Zeile 2 P: 1 P Befund, 1 P Konsequenz)*
+**D4 (6 P):** *(je Zeile 2 P: 1 P Befund, 1 P Konsequenz)*
 
 | Befund (Case, Aktivität) | Art | Konsequenz für die Auswertung |
 |---|---|---|
@@ -138,7 +134,7 @@ Beurteilung: Die Investition amortisiert sich nach 1,5 Jahren und damit deutlich
 
 *Ebenfalls anerkannt: fehlende Endereignisse, keine Trennung von Start- und Endzeitpunkt je Aktivität.*
 
-**E3 (4 P):**
+**D5 (4 P):**
 Rechtliche Anforderungen: *(2 P)*
 Das Feld *Resource* macht die Auswertung **personenbezogen**. Ein System, das zur Überwachung von Verhalten oder Leistung der Beschäftigten **geeignet** ist, unterliegt der Mitbestimmung des Betriebsrats nach **§ 87 Abs. 1 Nr. 6 BetrVG** – die technische Eignung genügt, eine Überwachungsabsicht ist nicht erforderlich. Zusätzlich gelten die Vorgaben der **DSGVO**: Rechtsgrundlage, Zweckbindung, Datenminimierung, Information der Betroffenen; bei umfangreicher systematischer Auswertung ist eine Datenschutz-Folgenabschätzung nach Art. 35 zu prüfen.
 

@@ -5,7 +5,7 @@
 
 ---
 
-## Block A
+## Block A – Abhängigkeiten und Anomalien (22 P)
 
 **A1 (9 P):**
 - **Änderungsanomalie:** Steigt der Stundensatz von Techniker Yilmaz, muss er in den Zeilen 5001 *und* 5003 geändert werden. Wird eine Zeile vergessen, enthält der Bestand zwei verschiedene Stundensätze → Inkonsistenz.
@@ -28,7 +28,7 @@ c) Chen: KUNDE 1 ──erteilt── n AUFTRAG, also **1:n**. *(2 P – wer hier
 
 ---
 
-## Block B
+## Block B – Modellieren (28 P)
 
 **B1 (13 P):** ER-Diagramm (textuelle Darstellung):
 
@@ -85,10 +85,9 @@ Das relationale Modell kann Beziehungen nur über Fremdschlüssel abbilden, und 
 
 ---
 
-## Block C
+## Block C – Normalisierung (25 P)
 
 **C1 (25 P):**
-
 **a) 1. NF (6 P):** Die Spalte *leistungen* wird atomisiert – eine Zeile je Auftrag **und** Leistung; die Angaben werden in die Spalten leistungs_id, bezeichnung, dauer_h zerlegt. Neuer zusammengesetzter Primärschlüssel: (**auftrag_nr, leistungs_id**).
 
 | **auftrag_nr** | **leistungs_id** | datum | kunden_id | kundenname | techniker_id | technikername | stundensatz | bezeichnung | dauer_h |
@@ -125,20 +124,20 @@ Endschema:
 
 *(4 P beide transitiven Ketten benannt · 6 P Endschema mit allen PK/FK. Häufigster Fehler: stundensatz bleibt im Auftrag „hängen" – er gehört zum Techniker.)*
 
-**C2 (9 P):**
+---
+
+## Block D – Modelle beurteilen (25 P)
+
+**D1 (9 P):**
 **Nachteile:** Redundante Speicherung des Kundennamens erzeugt eine Änderungsanomalie – bei Umfirmierung müssen alle Aufträge angepasst werden; wird eine Zeile vergessen, ist der Bestand inkonsistent (Datenqualitätsdimension Konsistenz verletzt). Zusätzlich steigt der Speicher- und Pflegeaufwand. *(3 P)*
 **Vorteil:** Auswertungen kommen ohne Join auf die Kundentabelle aus – schnellere, einfachere Lesezugriffe. *(2 P)*
 **Empfehlung:** Im operativen System (OLTP) bei der 3. NF bleiben – Konsistenz hat Vorrang, die Join-Kosten sind vernachlässigbar. Für das Berichtswesen ist kontrollierte Denormalisierung dagegen legitim und üblich: eine Auswertungssicht (View) oder ein Data Mart im Star-Schema, der regelmäßig per ETL befüllt wird. So bleibt die führende Datenhaltung sauber, und die Analyse wird trotzdem schnell. *(4 P – die Differenzierung OLTP vs. Reporting ist der Kern; ein pauschales „Nein, verstößt gegen 3. NF" bekommt max. 5 von 9.)*
 
----
-
-## Block D
-
-**D1 (10 P):**
+**D2 (10 P):**
 - **Schwäche 1:** Die m:n-Beziehung zwischen Bestellung und Produkt ist nicht aufgelöst – produkt_id liegt direkt in der Bestellung. Eine Bestellung kann so nur **ein** Produkt enthalten (bzw. bestell_id müsste mehrfach vorkommen und wäre kein Primärschlüssel mehr). *(2 P)* **Verbesserung:** Beziehungstabelle bestellposition(**bestell_id↑, produkt_id↑**, menge) einführen; produkt_id, menge aus der Bestellung entfernen. *(3 P)*
 - **Schwäche 2:** bezeichnung und preis sind transitiv von produkt_id abhängig – Verstoß gegen die 3. NF, redundante Produktdaten in jeder Bestellung, Änderungsanomalie bei Preisänderungen. *(2 P)* **Verbesserung:** Produktstammdaten ausschließlich in der Tabelle produkt führen und referenzieren. Zusatzpunkt-würdig: Wer ergänzt, dass ein *Verkaufspreis zum Bestellzeitpunkt* als bewusste Historisierung in der Bestellposition sinnvoll sein kann, zeigt Verständnis über die Regel hinaus. *(3 P)*
 
-**D2 (6 P):**
+**D3 (6 P):**
 a) MITARBEITER (0,1) ── nutzt ── (1,1) FIRMENWAGEN · Chen: **1:1** *(2 P)*
 b) ABTEILUNG (1,n) ── beschäftigt ── (1,1) MITARBEITER · Chen: **1:n** *(2 P)*
 c) PRODUKT (0,n) ── lagert in ── (0,n) LAGER · Chen: **m:n** *(2 P)*

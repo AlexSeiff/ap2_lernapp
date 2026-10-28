@@ -108,7 +108,7 @@ describe('SQL-Belegsatz', () => {
     const sqlAufgaben = Object.values(content.tasks).filter((t) => t.sqlUebung);
     expect(sqlAufgaben.length).toBeGreaterThan(0);
     for (const t of sqlAufgaben) expect(anhangFuer([t]).sql, t.id).toBe(true);
-    const c1 = content.tasks['03-C1'];
+    const c1 = content.tasks['03-B1'];
     expect(c1.markdown).toContain('*Berechnen*');
     expect(anhangFuer([c1])).toEqual({ sql: false, formeln: true });
     // Deutungsaufgabe zu einem Rechenergebnis: kein Rechen-Operator, aber ein Formelblock.

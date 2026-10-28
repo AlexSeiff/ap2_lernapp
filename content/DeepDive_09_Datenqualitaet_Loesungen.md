@@ -50,7 +50,7 @@ Gefährlicher als ein leeres Feld ist er, weil er **wie ein echter Wert aussieht
 
 ---
 
-## Block C – Kennzahlen berechnen (20 P)
+## Block C – Kennzahlen und fehlende Werte (30 P)
 
 **C1 (12 P):** *(je Teilaufgabe 3 P: 1 P Ansatz, 1 P Rechnung, 1 P Ergebnis)*
 
@@ -81,9 +81,24 @@ Erläuterung: Die Kennzahl bezieht sich auf **alle Zellen über sechs Felder**, 
 > **Messintervall:** monatlich, automatisiert im Rahmen des ETL-Laufs
 > **Verantwortlich:** Data Steward Kundenstammdaten (Nachpflege), Data Owner Vertriebsleitung (Regeln und Freigaben)
 
+**C4 (6 P):** *(je Strategie 2 P: 1 P Vorteil, 1 P Nachteil)*
+
+| Strategie | Vorteil | Nachteil |
+|---|---|---|
+| Datensätze löschen | einfach, keine erfundenen Werte im Bestand | Informationsverlust; sind die Lücken nicht zufällig verteilt, entsteht eine systematische Verzerrung |
+| Mittelwert oder Median einsetzen | Fallzahl bleibt erhalten, alle Datensätze bleiben auswertbar | künstliche Werte verringern die Streuung und täuschen Genauigkeit vor; der Median ist robuster als der Mittelwert |
+| Fachlich nachrecherchieren (Spedition, Lieferscheine) | liefert die tatsächlichen Werte und behebt die Ursache | hoher Aufwand, bei großen Datenmengen kaum praktikabel |
+
+*Ebenfalls anerkannt: eigene Kategorie „unbekannt" (bei kategorialen Feldern); Kennzeichnung imputierter Werte in einer Zusatzspalte.*
+
+**C5 (4 P):**
+Ein Ersetzen durch den Mittelwert ist hier **nicht vertretbar**. Die Lücken sind **nicht zufällig** verteilt, sondern systematisch an einen Spediteur gebunden. Der Mittelwert stammt jedoch überwiegend aus den Daten der anderen Spediteure und bildet die Lieferdauer dieses einen Anbieters nicht ab. Fachbegriff: Hängt das Fehlen nur am (bekannten) Spediteur, liegt **MAR** vor; fehlen gerade die langen Lieferungen, liegt **MNAR** vor – in beiden Fällen nicht MCAR, ein Gesamtmittelwert verzerrt. Ein Gruppenmittelwert scheidet ebenfalls aus, weil für diesen Spediteur gar keine Werte vorliegen. *(2 P)*
+
+Folge: Weicht der betroffene Spediteur tatsächlich vom Durchschnitt ab – was angesichts der fehlenden Meldung plausibel ist –, wird ausgerechnet der auffällige Fall systematisch geschönt und der Zusammenhang zwischen Spediteur und Lieferdauer verschwindet aus der Analyse. Richtig ist, die **Ursache zu klären** (fehlt die Schnittstelle, wird nicht gemeldet, wird anders erfasst?), die Lücke bis dahin als „unbekannt" zu kennzeichnen und die Auswertung mit und ohne diese Fälle zu rechnen und transparent zu berichten. *(2 P)*
+
 ---
 
-## Block D – Bereinigen (18 P)
+## Block D – Bereinigen und vorbeugen (26 P)
 
 **D1 (8 P):**
 **Exakte Dubletten** (Datensatz 1 und 6): Alle fachlichen Feldwerte stimmen überein – nur der technische Schlüssel `kunden_id` (K-1001 / K-1006) unterscheidet sich und darf deshalb nicht in den Vergleich einfließen. Erkennung über eine Gruppierung nach den relevanten Feldern mit `HAVING COUNT(*) > 1` oder über einen UNIQUE-Vergleich. *(2 P)*
@@ -96,26 +111,7 @@ Erläuterung: Die Kennzahl bezieht sich auf **alle Zellen über sechs Felder**, 
 
 **Golden Record:** der führende, bereinigte Datensatz je Realweltentität, der aus den Dubletten zusammengeführt wird. Dabei wird je Feld festgelegt, welche Quelle Vorrang hat (etwa der zuletzt gepflegte oder der vollständigste Wert); die übrigen Datensätze werden deaktiviert und ihre Beziehungen – Bestellungen, Belege – auf den Golden Record umgehängt. *(2 P)*
 
-**D2 (6 P):** *(je Strategie 2 P: 1 P Vorteil, 1 P Nachteil)*
-
-| Strategie | Vorteil | Nachteil |
-|---|---|---|
-| Datensätze löschen | einfach, keine erfundenen Werte im Bestand | Informationsverlust; sind die Lücken nicht zufällig verteilt, entsteht eine systematische Verzerrung |
-| Mittelwert oder Median einsetzen | Fallzahl bleibt erhalten, alle Datensätze bleiben auswertbar | künstliche Werte verringern die Streuung und täuschen Genauigkeit vor; der Median ist robuster als der Mittelwert |
-| Fachlich nachrecherchieren (Spedition, Lieferscheine) | liefert die tatsächlichen Werte und behebt die Ursache | hoher Aufwand, bei großen Datenmengen kaum praktikabel |
-
-*Ebenfalls anerkannt: eigene Kategorie „unbekannt" (bei kategorialen Feldern); Kennzeichnung imputierter Werte in einer Zusatzspalte.*
-
-**D3 (4 P):**
-Ein Ersetzen durch den Mittelwert ist hier **nicht vertretbar**. Die Lücken sind **nicht zufällig** verteilt, sondern systematisch an einen Spediteur gebunden. Der Mittelwert stammt jedoch überwiegend aus den Daten der anderen Spediteure und bildet die Lieferdauer dieses einen Anbieters nicht ab. Fachbegriff: Hängt das Fehlen nur am (bekannten) Spediteur, liegt **MAR** vor; fehlen gerade die langen Lieferungen, liegt **MNAR** vor – in beiden Fällen nicht MCAR, ein Gesamtmittelwert verzerrt. Ein Gruppenmittelwert scheidet ebenfalls aus, weil für diesen Spediteur gar keine Werte vorliegen. *(2 P)*
-
-Folge: Weicht der betroffene Spediteur tatsächlich vom Durchschnitt ab – was angesichts der fehlenden Meldung plausibel ist –, wird ausgerechnet der auffällige Fall systematisch geschönt und der Zusammenhang zwischen Spediteur und Lieferdauer verschwindet aus der Analyse. Richtig ist, die **Ursache zu klären** (fehlt die Schnittstelle, wird nicht gemeldet, wird anders erfasst?), die Lücke bis dahin als „unbekannt" zu kennzeichnen und die Auswertung mit und ohne diese Fälle zu rechnen und transparent zu berichten. *(2 P)*
-
----
-
-## Block E – Prävention und Verantwortung (18 P)
-
-**E1 (10 P):** *(je Maßnahme 2 P: 1 P Maßnahme, 1 P Zuordnung zum Problem)*
+**D2 (10 P):** *(je Maßnahme 2 P: 1 P Maßnahme, 1 P Zuordnung zum Problem)*
 
 | Maßnahme | Verhindert |
 |---|---|
@@ -128,13 +124,13 @@ Folge: Weicht der betroffene Spediteur tatsächlich vom Durchschnitt ab – was 
 
 *Ebenfalls anerkannt: Auswahllisten statt Freitext bei Rechtsformen; Default-Werte entfernen und stattdessen NULL zulassen; automatische Übernahme aus einem führenden System statt Mehrfacherfassung.*
 
-**E2 (4 P):**
+**D3 (4 P):**
 - **Data Owner:** trägt die **fachliche Verantwortung** für einen Datenbereich. Er legt fest, welche Qualitätsregeln und Zielwerte gelten, entscheidet über Zugriffsrechte und Freigaben und verantwortet die Datenqualität gegenüber der Geschäftsführung. Die Rolle ist im Fachbereich angesiedelt, typischerweise auf Leitungsebene. *(2 P)*
 - **Data Steward:** setzt die Vorgaben **operativ** um – pflegt und bereinigt die Daten, überwacht die Kennzahlen, bearbeitet Fälle aus der Quarantäne und meldet wiederkehrende Probleme an den Data Owner. *(2 P)*
 
 Abgrenzung in einem Satz: Der Owner **entscheidet und verantwortet**, der Steward **führt aus und überwacht**.
 
-**E3 (4 P):**
+**D4 (4 P):**
 Argumentation mit der **1-10-100-Regel**: Einen Fehler bereits bei der Erfassung zu vermeiden kostet etwa 1 Einheit, ihn später zu korrigieren rund 10, und ihn unentdeckt zu lassen rund 100 – etwa durch Fehlentscheidungen, Fehllieferungen, unzustellbare Post oder Imageschaden. *(2 P)*
 
 Übertragen auf den Fall: Eine jährliche Bereinigung setzt erst auf der 10er-Stufe an und wiederholt sich jedes Jahr, weil die Ursache bestehen bleibt. Ein Pflichtfeld oder eine Formatprüfung kostet einmalig wenig Entwicklungsaufwand und verhindert den Fehler dauerhaft bereits an der Quelle. Zwischen zwei Bereinigungsläufen arbeitet das Unternehmen zudem bis zu zwölf Monate lang mit fehlerhaften Daten – die daraus resultierenden Fehlentscheidungen fallen in die 100er-Kategorie und übersteigen die Präventionskosten um ein Vielfaches. *(2 P)*

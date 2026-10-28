@@ -150,7 +150,7 @@ describe('Suche führt zu Begriffsseiten (E1)', () => {
   });
 
   it('kein Begriff passt: Rückfall auf die übrigen Treffer', () => {
-    const r = sucheBegriffe(index, '06-E2');
+    const r = sucheBegriffe(index, '06-B4');
     expect(r.rueckfall || r.treffer.length === 0).toBe(true);
   });
 });

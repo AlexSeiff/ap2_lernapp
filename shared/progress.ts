@@ -5,6 +5,7 @@
 // Ein Typtest in tests/progress.test.ts stellt sicher, dass jeder `Progress` das Schema erfüllt.
 
 import { z } from 'zod';
+import { AUFGABEN_UMZUG_V9 } from './aufgabenUmzug';
 
 export type Mode = 'klausur' | 'einzel' | 'wiederholung';
 export type Rating = 'gewusst' | 'unsicher' | 'nicht';
@@ -236,7 +237,7 @@ export type Progress = {
 };
 
 /** Aktuelle Formatversion von data/fortschritt.json. Bei jeder Formatänderung erhöhen und in MIGRATIONS nachziehen. */
-export const PROGRESS_VERSION = 8;
+export const PROGRESS_VERSION = 9;
 
 export const emptyProgress = (): Progress => ({
   version: PROGRESS_VERSION,
@@ -451,6 +452,42 @@ export function migrateSettings(v: unknown): Settings {
 /** Zähler je Tag: nur nicht-negative Zahlen übernehmen. */
 const dayCount = (v: unknown) => (typeof v === 'number' && v >= 0 ? v : undefined);
 
+/** Benennt die Schlüssel eines rohen Objekts nach `umzug` um (alle gleichzeitig); andere Werte bleiben unverändert. */
+function benenneSchluesselUm(v: unknown, umzug: Readonly<Record<string, string>>): unknown {
+  if (!isObject(v)) return v;
+  return Object.fromEntries(Object.entries(v).map(([k, x]) => [umzug[k] ?? k, x]));
+}
+
+/**
+ * Schreibt Aufgaben-IDs in den rohen Daten um: Versuche, Fehlerjournal (Schlüssel und taskId) und Klausurläufe (Antworten, Punkte,
+ * Sicherheit, Fehlergrund je Aufgabe). Alles gleichzeitig, damit keine ID zweimal umzieht.
+ */
+export function zieheAufgabenUm(raw: Raw, umzug: Readonly<Record<string, string>>): Raw {
+  const id = (t: unknown) => (typeof t === 'string' ? (umzug[t] ?? t) : t);
+  const lauf = (e: unknown) =>
+    isObject(e)
+      ? {
+          ...e,
+          ...(e.answers !== undefined ? { answers: benenneSchluesselUm(e.answers, umzug) } : {}),
+          ...(e.scores !== undefined ? { scores: benenneSchluesselUm(e.scores, umzug) } : {}),
+          ...(e.sicherheit !== undefined ? { sicherheit: benenneSchluesselUm(e.sicherheit, umzug) } : {}),
+          ...(e.fehlergrund !== undefined ? { fehlergrund: benenneSchluesselUm(e.fehlergrund, umzug) } : {}),
+        }
+      : e;
+  const journal = isObject(raw.journal)
+    ? Object.fromEntries(
+        Object.entries(raw.journal).map(([k, e]) => [umzug[k] ?? k, isObject(e) && 'taskId' in e ? { ...e, taskId: id(e.taskId) } : e]),
+      )
+    : raw.journal;
+  return {
+    ...raw,
+    ...(Array.isArray(raw.attempts) ? { attempts: raw.attempts.map((a) => (isObject(a) ? { ...a, taskId: id(a.taskId) } : a)) } : {}),
+    ...(raw.journal !== undefined ? { journal } : {}),
+    ...(Array.isArray(raw.exams) ? { exams: raw.exams.map(lauf) } : {}),
+    ...(raw.activeExam !== undefined ? { activeExam: lauf(raw.activeExam) } : {}),
+  };
+}
+
 /**
  * Schritte von Version n auf n+1, angewendet auf die rohen Daten vor dem Auffüllen.
  * Version 1 ist das erste Format (Dateien ohne `version` gelten als Version 1).
@@ -470,6 +507,8 @@ const MIGRATIONS: Record<number, (raw: Raw) => Raw> = {
   6: (raw) => ({ ...raw, version: 7 }),
   // 7 → 8: Diagramm-Übungen (diagramme) und ihre Lerntage (diagrammDays); starten leer, aufgefüllt wird unten in migrateProgress.
   7: (raw) => ({ ...raw, version: 8 }),
+  // 8 → 9: Übungsklausuren im Format der Altklausuren – Aufgaben mit neuem Code ziehen um (shared/aufgabenUmzug.ts).
+  8: (raw) => ({ ...zieheAufgabenUm(raw, AUFGABEN_UMZUG_V9), version: 9 }),
 };
 
 /**

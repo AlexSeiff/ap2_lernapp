@@ -226,7 +226,7 @@ Im **operativen System (OLTP)** wird bis zur 3. NF normalisiert: Konsistenz und 
 
 # Übungsklausur Datenmodellierung (100 Punkte, 90 Minuten)
 
-Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, ohne Unterlagen. Lösungen erst danach öffnen. Halte dich an die geforderte Anzahl der Nennungen.
+Vier Aufgaben, die sich auf die folgende Ausgangssituation beziehen. Bearbeite die Klausur **am Ende des Themas** am Stück, handschriftlich, ohne Unterlagen. Lösungen erst danach öffnen. Halte dich an die geforderte Anzahl der Nennungen.
 
 ## Ausgangssituation
 
@@ -263,7 +263,7 @@ Szenario: Das Möbelhaus erweitert sein System. **Lieferanten** (lieferanten_id,
 
 **B3 (6 P):** *Begründen* Sie, warum die Beziehung „liefert" eine eigene Tabelle benötigt, welchen Primärschlüssel diese erhält und warum der Einkaufspreis genau dort gespeichert wird.
 
-## Block C – Normalisierung (34 P)
+## Block C – Normalisierung (25 P)
 
 Bevor das neue Modell umgesetzt wird, soll die Exporttabelle aus **Anlage 1** sauber normalisiert werden.
 
@@ -272,15 +272,17 @@ a) 1. NF mit Angabe des neuen Primärschlüssels (6 P)
 b) 2. NF – *benennen* Sie zunächst alle partiellen Abhängigkeiten, dann das Tabellenschema (9 P)
 c) 3. NF – *benennen* Sie die transitiven Abhängigkeiten und *geben* Sie das Endschema mit allen Primär- und Fremdschlüsseln *an* (10 P)
 
-**C2 (9 P):** Ein Kollege schlägt vor, den Kundennamen zusätzlich in der Auftragstabelle zu speichern, „damit die Auswertungen schneller laufen". *Beurteilen* Sie den Vorschlag. Gehen Sie auf Vor- und Nachteile ein und *geben* Sie eine differenzierte Empfehlung für das operative System einerseits und das Berichtswesen andererseits.
+## Block D – Modelle beurteilen (25 P)
 
-## Block D – Modelle beurteilen (16 P)
+Aus dem Team kommen zwei Vorschläge zum Datenmodell, die Sie fachlich prüfen sollen.
 
 Ein Werkstudent hat für den Onlineshop einen ersten Tabellenentwurf geliefert, den Sie prüfen sollen.
 
-**D1 (10 P):** Gegeben ist folgender Entwurf: bestellung(**bestell_id**, kunden_id↑, produkt_id, bezeichnung, preis, menge). *Benennen* Sie **zwei** Modellierungsschwächen und *skizzieren* Sie für jede die Verbesserung.
+**D1 (9 P):** Ein Kollege schlägt vor, den Kundennamen zusätzlich in der Auftragstabelle zu speichern, „damit die Auswertungen schneller laufen". *Beurteilen* Sie den Vorschlag. Gehen Sie auf Vor- und Nachteile ein und *geben* Sie eine differenzierte Empfehlung für das operative System einerseits und das Berichtswesen andererseits.
 
-**D2 (6 P):** *Bestimmen* Sie für die drei Situationen jeweils die Kardinalität in Min-Max- **und** Chen-Notation:
+**D2 (10 P):** Gegeben ist folgender Entwurf: bestellung(**bestell_id**, kunden_id↑, produkt_id, bezeichnung, preis, menge). *Benennen* Sie **zwei** Modellierungsschwächen und *skizzieren* Sie für jede die Verbesserung.
+
+**D3 (6 P):** *Bestimmen* Sie für die drei Situationen jeweils die Kardinalität in Min-Max- **und** Chen-Notation:
 a) Jeder Mitarbeiter nutzt höchstens einen Firmenwagen; jeder Firmenwagen ist genau einem Mitarbeiter zugeordnet.
 b) Eine Abteilung beschäftigt mindestens einen Mitarbeiter; jeder Mitarbeiter gehört genau einer Abteilung an.
 c) Ein Produkt lagert in mehreren Lagern, ein Lager führt viele Produkte; beides kann auch noch keinem zugeordnet sein.

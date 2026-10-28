@@ -1,7 +1,7 @@
 # Musterlösungen Übungsklausur Modellgüte (Deep Dive 7)
 ## Mit Prüferkommentaren zur Punktevergabe
 
-**Selbstbewertung:** Die Rechenblöcke B und E sind reine Punktelieferanten – hier darf nichts fehlen. Die Blöcke C und D entscheiden über die 1. 92+ P = sehr gut.
+**Selbstbewertung:** Die Rechenaufgaben in Block B und D3/D4 sind reine Punktelieferanten – hier darf nichts fehlen. Block C und D1/D2 entscheiden über die 1. 92+ P = sehr gut.
 
 **Anlagenwerte:** TP = 90 · FN = 10 · FP = 60 · TN = 840 · n = 1.000
 
@@ -88,7 +88,7 @@ Es handelt sich um eine Abwägung: Beide Kennzahlen lassen sich in der Regel nur
 
 ---
 
-## Block D – Wirtschaftliche Bewertung (12 P)
+## Block D – Wirtschaftliche Bewertung und Regressionsgüte (24 P)
 
 **D1 (6 P):**
 - **Modell:** 10 FN · 120 € = 1.200 € · 60 FP · 15 € = 900 € → **Fehlerkosten gesamt 2.100 €** *(3 P)*
@@ -103,12 +103,7 @@ Nicht enthaltene Faktoren *(je 1,5 P, zwei genügen)*:
 - **Nicht bezifferte Effekte:** Imageschaden und Kundenabwanderung durch Reklamationen sind mit 120 € vermutlich zu niedrig angesetzt; umgekehrt können Fehlalarme die Akzeptanz beim Personal senken.
 - **Übertragbarkeit:** Die Werte stammen aus einem Testzeitraum; im Betrieb kann die Güte durch Model Drift sinken.
 
----
-
-## Block E – Regressionsgüte (12 P)
-
-**E1 (8 P):**
-
+**D3 (8 P):**
 | y | ŷ | e = y − ŷ | \|e\| | e² |
 |---|---|---|---|---|
 | 100 | 90 | +10 | 10 | 100 |
@@ -124,7 +119,7 @@ Nicht enthaltene Faktoren *(je 1,5 P, zwei genügen)*:
 
 *Prüferkommentar: Häufigster Fehler ist die Verwendung der vorzeichenbehafteten Fehler beim MAE – die Summe der Residuen liegt hier bei +10 −6 +6 −2 +2 = +10 und wäre als Gütemaß unbrauchbar, weil sich positive und negative Abweichungen aufheben. Deshalb wird der **Betrag** gebildet.*
 
-**E2 (4 P):**
+**D4 (4 P):**
 Der RMSE ist größer, weil die Fehler vor der Mittelung **quadriert** werden. Dadurch gehen große Abweichungen überproportional stark ein – hier vor allem der Fehler von +10, der quadriert 100 beiträgt, während er beim MAE nur mit 10 zählt. Ein RMSE deutlich über dem MAE zeigt daher ungleichmäßig verteilte Fehler mit einzelnen Ausreißern an. *(2 P)*
 
 Anwendung: Den **MAE** bevorzugt man, wenn alle Abweichungen gleich schwer wiegen und ein robustes, gut kommunizierbares Maß gewünscht ist. Den **RMSE** wählt man, wenn große Einzelfehler besonders schädlich sind und stärker bestraft werden sollen – etwa bei Kapazitätsplanungen, wo eine einzelne große Fehlprognose gravierender ist als viele kleine. *(2 P)*
@@ -136,7 +131,7 @@ Anwendung: Den **MAE** bevorzugt man, wenn alle Abweichungen gleich schwer wiege
 | Punkte | Note | Konsequenz |
 |---|---|---|
 | 92–100 | sehr gut | Formeln als Karteikarte pflegen, alle zwei Wochen eine Matrix rechnen |
-| 81–91 | gut | Prüfe getrennt: Rechenblöcke B/E (42 P) gegen Argumentationsblöcke C/D (34 P) |
+| 81–91 | gut | Prüfe getrennt: Rechenaufgaben B1–B3, D3, D4 (42 P) gegen Argumentationsaufgaben C1–C3, D1, D2 (34 P) |
 | < 81 | | Teil 2 wiederholen, Klausur nach einer Woche neu schreiben |
 
 **Der eine Satz, der diesen Themenblock zusammenfasst:** Eine Kennzahl ohne Vergleichsmaßstab und ohne Kostenbezug ist keine Bewertung, sondern nur eine Zahl. Wer im Fachgespräch Accuracy, Baseline und Fehlerkosten in einem Atemzug nennt, hat den Punkt verstanden, auf den es ankommt.

@@ -63,7 +63,7 @@ export const UNTERBEREICHE: Unterbereich[] = [
     bereich: 'prozess',
     titel: 'Anforderungen & Projektmanagement',
     quellen: [
-      { topicId: '12', bloecke: ['A', 'B', 'C', 'E'] },
+      { topicId: '12', bloecke: ['A', 'B', 'C'] },
       { topicId: '15', bloecke: ['D'] },
       { topicId: '18', bloecke: ['A'] },
       { topicId: '21', bloecke: ['C'] },
@@ -88,7 +88,6 @@ export const UNTERBEREICHE: Unterbereich[] = [
     bereich: 'prozess',
     titel: 'Rechtliche Auswirkungen von Prozessänderungen',
     quellen: [
-      { topicId: '05', bloecke: ['E'] },
       { topicId: '10', bloecke: ['C'] },
     ],
   },
@@ -101,7 +100,7 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '00' },
       { topicId: '02' },
       { topicId: '08' },
-      { topicId: '15', bloecke: ['A', 'B', 'C', 'E'] },
+      { topicId: '15', bloecke: ['A', 'B', 'C'] },
       { topicId: '19', bloecke: ['D'] },
       { topicId: '24', bloecke: ['B', 'C'] },
     ],
@@ -127,8 +126,8 @@ export const UNTERBEREICHE: Unterbereich[] = [
     bereich: 'qualitaet',
     titel: 'Zugriff und Verfügbarkeit gewährleisten',
     quellen: [
-      { topicId: '10', bloecke: ['D', 'E'] },
-      { topicId: '16', bloecke: ['D', 'E'] },
+      { topicId: '10', bloecke: ['D'] },
+      { topicId: '16', bloecke: ['D'] },
       { topicId: '23', bloecke: ['C'] },
     ],
   },
