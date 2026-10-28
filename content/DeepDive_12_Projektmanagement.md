@@ -277,6 +277,8 @@ Für die Terminplanung hat die Projektleiterin folgende Vorgangsliste erstellt:
 
 **C4 (2 P):** Vorgang C verzögert sich um zwei Tage. *Beurteilen* Sie die Auswirkung auf den Projekttermin.
 
+> **Formel:** Gesamtpuffer GP = SAZ − FAZ (= SEZ − FEZ)
+
 ## Block D – Wirtschaftlichkeit (26 P)
 
 Vor der Freigabe des Budgets verlangt die Geschäftsleitung eine Wirtschaftlichkeitsbetrachtung und einen begründeten Anbietervergleich.

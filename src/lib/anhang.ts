@@ -10,6 +10,9 @@ const SQL = /```sql|\bSQL\b|\b(?:SELECT|JOIN|GROUP BY|INSERT INTO|UPDATE|DELETE 
 /** Operatoren, die eine Rechnung verlangen. */
 const RECHNEN = new Set(['berechnen', 'ermitteln']);
 
+/** Formelblock unter der Aufgabe – auch Deutungsaufgaben, die auf einem Rechenergebnis aufbauen („Interpretieren Sie r …“). */
+const FORMELBLOCK = /^> \*\*Formeln?:\*\*/m;
+
 export interface AnhangTeile {
   sql: boolean;
   formeln: boolean;
@@ -18,6 +21,8 @@ export interface AnhangTeile {
 /** Anhang für eine Aufgabe oder eine ganze Klausur (dann reicht eine passende Aufgabe). */
 export function anhangFuer(tasks: Task[]): AnhangTeile {
   const sql = tasks.some((t) => !!t.sqlUebung || SQL.test(t.markdown));
-  const formeln = tasks.some((t) => t.type === 'rechnen' || findeOperatoren(t.markdown).some((o) => RECHNEN.has(o.operatorId)));
+  const formeln = tasks.some(
+    (t) => t.type === 'rechnen' || FORMELBLOCK.test(t.markdown) || findeOperatoren(t.markdown).some((o) => RECHNEN.has(o.operatorId)),
+  );
   return { sql, formeln };
 }

@@ -83,6 +83,10 @@ describe('SQL-Belegsatz', () => {
     const c1 = content.tasks['03-C1'];
     expect(c1.markdown).toContain('*Berechnen*');
     expect(anhangFuer([c1])).toEqual({ sql: false, formeln: true });
+    // Deutungsaufgabe zu einem Rechenergebnis: kein Rechen-Operator, aber ein Formelblock.
+    const a3 = content.tasks['04-A3'];
+    expect(a3.markdown).toContain('*Interpretieren*');
+    expect(anhangFuer([a3]).formeln).toBe(true);
     // Eine Klausur bekommt, was eine ihrer Aufgaben braucht.
     expect(anhangFuer([c1, sqlAufgaben[0]])).toEqual({ sql: true, formeln: true });
     const wiso = Object.values(content.tasks).filter((t) => t.topicId === '13' && !anhangFuer([t]).sql && !anhangFuer([t]).formeln);

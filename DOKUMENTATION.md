@@ -610,7 +610,7 @@ In the AP2 the appendix is always there, so the app offers it where it is needed
 buttons „SQL-Belegsatz“ and/or „Σ Formelübersicht“ with a side panel (one open at a time, Esc closes). The formula overview renders
 Deep Dive 17, sections 7.8, 7.4 and 7.9 (`FORMEL_ABSCHNITTE`; texts loaded on first open) – exactly what the appendix contains, not the app's
 larger Formelsammlung (linked). Where: SQL editor and SQL exercises (Belegsatz), Rechenübungen (formulas), task page and exam
-(`anhangFuer` in `src/lib/anhang.ts`: Belegsatz for tasks with SQL, formulas for tasks with *berechnen*/*ermitteln*; an exam gets what
+(`anhangFuer` in `src/lib/anhang.ts`: Belegsatz for tasks with SQL, formulas for tasks with *berechnen*/*ermitteln* or a `> **Formel:**` block; an exam gets what
 any of its tasks needs). `tests/belegsatz.test.ts` checks the sections exist.
 
 ### Lernplan im Kalender (October 2026)

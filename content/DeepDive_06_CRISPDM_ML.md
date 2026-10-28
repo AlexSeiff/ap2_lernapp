@@ -745,6 +745,10 @@ Startzentren: **Z1(4|4)** und **Z2(6|6)**, k = 2
 
 **C3 (4 P):** *Prüfen* Sie, ob sich die Zuordnung in einer zweiten Iteration ändert, und *begründen* Sie Ihr Ergebnis.
 
+> **Formeln:**
+> - euklidischer Abstand d = √((x₁ − x₂)² + (y₁ − y₂)²)
+> - neues Zentrum = (Mittel der x-Werte | Mittel der y-Werte) aller zugeordneten Punkte
+
 **C4 (4 P):** Statt des Bestellwerts in Hundert Euro soll der Jahresumsatz in Euro (Wertebereich 200 bis 45.000) als zweites Merkmal verwendet werden. *Erläutern* Sie, welches Problem entsteht und wie Sie es lösen.
 
 ## Block D – Assoziationsanalyse (20 P)
@@ -769,6 +773,8 @@ Zehn Warenkörbe (S = Schreibtisch, B = Bürostuhl, M = Monitor, L = Lampe):
 > - Lift(X → Y) = Konfidenz(X → Y) / Support(Y)
 
 **D3 (4 P):** *Interpretieren* Sie den Lift-Wert und *leiten* Sie eine Handlungsempfehlung *ab*.
+
+> **Formel:** Lift(X → Y) = Konfidenz(X → Y) / Support(Y)
 
 **D4 (4 P):** Für die Regel **L → M** ergeben sich Support 10 %, Konfidenz 25 % und Lift 0,50. *Erläutern* Sie, was ein Lift unter 1 fachlich bedeutet und welche Konsequenz sich für die Produktplatzierung ergibt.
 

@@ -52,7 +52,9 @@ exam papers or textbook passages.
 - **Calculation tasks always state the formula they need** (owner's rule). In an exam task, add a quote block in plain-text
   notation right after the task text (after its a)/b) lines): `> **Formel:** VK = σ / x̄ · 100 %`, or for several
   `> **Formeln:**` + `> - …` lines. Give the general formula, never the numbers or the result; don't ask the student to
-  „*Geben* Sie die Formel *an*“ (and drop such points from the solution). Rechenübungen with a `vorlage` show their formulas
+  „*Geben* Sie die Formel *an*“ (and drop such points from the solution). A task that interprets or judges a computed value
+  (*Interpretieren* Sie r / R² / den Lift …, *Beurteilen* Sie auf Grundlage der Fehlerkosten …) repeats the formula of that value –
+  in the single-task view the preceding task isn't visible. Rechenübungen with a `vorlage` show their formulas
   automatically from `src/rechnen/formeln.ts` (`AufgabenFormeln`) – a new vorlage needs its entries there. Without a `vorlage`, end
   the `aufgabe` text with the same `> **Formel:** …` block. Pure legal rules (Ruhepausen, JArbSchG-Urlaub …) are not formulas.
 - Modelling tasks (ERM, EPK/eEPK, BPMN, Use-Case-Diagramm, Relationenmodell/Star-Schema, Normalisierung) are answered in an **editor**,

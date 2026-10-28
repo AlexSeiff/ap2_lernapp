@@ -357,6 +357,10 @@ Die Geschäftsführung möchte wissen, wie lange eine Reparatur „typischerweis
 
 **C2 (6 P):** *Vergleichen* Sie Mittelwert und Median. *Erläutern* Sie, was die Differenz über die Verteilung aussagt und welches Lagemaß Sie der Geschäftsführung berichten würden.
 
+> **Formeln:**
+> - arithmetisches Mittel x̄ = Σ x_i / n
+> - Median: n ungerade → Wert an Position (n + 1) / 2; n gerade → Mittel der Werte an Position n / 2 und n / 2 + 1
+
 **C3 (4 P):** Die Werkstatt meldet für den Folgemonat: 4 Aufträge à 45 Minuten, 6 Aufträge à 70 Minuten. *Berechnen* Sie die durchschnittliche Bearbeitungsdauer.
 
 > **Formel:** gewichtetes Mittel x̄ = Σ (n_i · x_i) / Σ n_i
@@ -398,6 +402,11 @@ Für den Bericht soll die Verteilung der Reparaturdauern aus der **Anlage** als 
 > - Ausreißer = alle Werte unterhalb des unteren oder oberhalb des oberen Zauns
 
 **E3 (6 P):** *Skizzieren* Sie den Boxplot maßstäblich und *beschriften* Sie Box, Median, beide Whisker und Ausreißer. Achten Sie darauf, wo der obere Whisker endet.
+
+> **Formeln:**
+> - IQR = Q3 − Q1
+> - unterer Zaun = Q1 − 1,5 · IQR
+> - oberer Zaun = Q3 + 1,5 · IQR
 
 ## Block F – Beurteilung (12 P)
 

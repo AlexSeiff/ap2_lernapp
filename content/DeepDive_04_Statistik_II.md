@@ -248,6 +248,8 @@ Zuerst soll geklärt werden, ob Schulungsstunden und Fehlerquote der Montageteam
 
 **A3 (6 P):** *Interpretieren* Sie Ihr Ergebnis nach Vorzeichen und Stärke und *formulieren* Sie eine Aussage, die für die Geschäftsführung verständlich ist.
 
+> **Formel:** Korrelationskoeffizient r = S_xy / √(S_xx · S_yy), mit −1 ≤ r ≤ 1
+
 ## Block B – Korrelation und Kausalität (22 P)
 
 Die Geschäftsführung zieht aus Ihren Ergebnissen erste Schlüsse – Sie sollen sie fachlich prüfen.
@@ -272,6 +274,11 @@ Für die Budgetplanung des nächsten Jahres soll der Umsatz aus dem Werbebudget 
 
 **C2 (6 P):** *Interpretieren* Sie die Steigung b und den Achsenabschnitt a jeweils inhaltlich.
 
+> **Formeln:**
+> - Regressionsgerade ŷ = a + b · x
+> - Steigung b = S_xy / S_xx
+> - Achsenabschnitt a = ȳ − b · x̄
+
 **C3 (6 P):** *Berechnen* Sie den prognostizierten Umsatz für ein Werbebudget von 6 T€ sowie für 20 T€. *Beurteilen* Sie beide Prognosen hinsichtlich ihrer Zulässigkeit.
 
 > **Formel:** Prognose ŷ = a + b · x (a und b aus C1)
@@ -291,6 +298,10 @@ Bevor die Prognose in die Planung eingeht, wollen Sie wissen, wie gut die Gerade
 > - Bestimmtheitsmaß R² = r²
 
 **D2 (6 P):** *Interpretieren* Sie R² in einem Satz und *nennen* Sie **zwei** Gründe, warum ein hohes R² allein keine verlässliche Prognose garantiert.
+
+> **Formeln:**
+> - Bestimmtheitsmaß R² = r²
+> - R² = 1 − Σ (y_i − ŷ_i)² / S_yy, mit 0 ≤ R² ≤ 1
 
 **D3 (4 P):** Ein Kollege ergänzt einen sechsten Monat mit x = 5, y = 15 (fehlerhaft erfasst, tatsächlich 55). *Erläutern* Sie ohne Rechnung, wie sich dieser eine Wert auf r, R² und die Regressionsgerade auswirkt.
 

@@ -262,6 +262,8 @@ Nordholz Objekt bietet zwei SLAs an: **SLA Premium** (Reaktionszeit vier Stunden
 
 **D2 (4 P):** *Beschreiben* Sie das Ergebnis der Nachkalkulation mit Blick auf die Preisgestaltung der beiden SLAs.
 
+> **Formel:** Gewinnzuschlag = Gewinn/Stunde / Ø Personalkosten/Stunde · 100 %
+
 **D3 (6 P):** Die Geschäftsleitung möchte zur Überprüfung der Wirtschaftlichkeit einen monatlichen Statusbericht. Neben dem Gewinn interessiert sie sich für die **Attraktivität** der SLAs. *Nennen* Sie **zwei** Inhalte des Berichts und *begründen* Sie Ihre Wahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Inhalt | Begründung |

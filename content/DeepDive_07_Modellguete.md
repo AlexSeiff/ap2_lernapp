@@ -320,6 +320,8 @@ Ein übersehener Reklamationsfall kostet durchschnittlich 120 €, eine unnötig
 
 **D2 (6 P):** *Beurteilen* Sie auf dieser Grundlage, ob der Einsatz des Modells zu empfehlen ist, und *nennen* Sie **zwei** Faktoren, die in dieser Rechnung nicht enthalten sind.
 
+> **Formel:** Fehlerkosten = FN · Kosten je FN + FP · Kosten je FP
+
 ## Block E – Regressionsgüte (12 P)
 
 | y (tatsächlich) | 100 | 120 | 90 | 130 | 110 |
@@ -333,6 +335,10 @@ Ein übersehener Reklamationsfall kostet durchschnittlich 120 €, eine unnötig
 > - RMSE = √(Σ (y_i − ŷ_i)² / n)
 
 **E2 (4 P):** *Erläutern* Sie, warum der RMSE hier größer ist als der MAE und in welcher Situation Sie welches Maß bevorzugen.
+
+> **Formeln:**
+> - MAE = Σ |y_i − ŷ_i| / n
+> - RMSE = √(Σ (y_i − ŷ_i)² / n)
 
 ---
 
