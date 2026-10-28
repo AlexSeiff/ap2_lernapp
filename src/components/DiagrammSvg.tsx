@@ -28,6 +28,9 @@ const FORM_NAMEN: Record<Form | KantenForm, string> = {
   gabel: 'Gabelung/Vereinigung',
   startpunkt: 'Startknoten',
   endpunkt: 'Endknoten',
+  ablaufende: 'Ablaufende',
+  aufruf: 'Aufrufaktion',
+  schwimmbahn: 'Schwimmbahn',
   zustand: 'Zustand',
   lebenslinie: 'Lebenslinie',
   fragment: 'Kombiniertes Fragment',
@@ -201,6 +204,18 @@ export function FormZeichnung({ form, k, text }: { form: Form; k: DiagrammKnoten
         </>
       );
     }
+    case 'aufruf': {
+      // Aufrufaktion: Aktion mit dem Gabelsymbol (Harke) rechts unten – ruft eine eigene Aktivität auf.
+      const hx = x + w - 16;
+      const hy = y + h - 17;
+      return (
+        <>
+          <rect x={x} y={y} width={w} height={h} rx={16} className="dg-form" />
+          <path d={`M${hx},${hy} v6 M${hx - 6},${hy + 12} v-6 h12 v6 M${hx},${hy + 6} v6`} className="dg-linie" />
+          {text && <Text x={cx} y={cy} w={w - 48} text={text} />}
+        </>
+      );
+    }
     case 'gabel':
       return <rect x={x} y={y} width={w} height={h} className="dg-voll" />;
     case 'startpunkt':
@@ -212,6 +227,30 @@ export function FormZeichnung({ form, k, text }: { form: Form; k: DiagrammKnoten
           <circle cx={cx} cy={cy} r={r * 0.55} className="dg-voll" />
         </>
       );
+    case 'ablaufende': {
+      const d = r * 0.7;
+      return (
+        <>
+          <circle cx={cx} cy={cy} r={r} className="dg-form" />
+          <path d={`M${cx - d},${cy - d} L${cx + d},${cy + d} M${cx + d},${cy - d} L${cx - d},${cy + d}`} className="dg-linie" />
+        </>
+      );
+    }
+    case 'schwimmbahn': {
+      // Senkrechte Bahn mit dem Namen im Kopf – die Aktionen darunter gehören zu dieser Rolle.
+      const kopf = Math.min(32, h / 3);
+      return (
+        <>
+          <rect x={x} y={y} width={w} height={h} className="dg-linie" />
+          <line x1={x} y1={y + kopf} x2={x + w} y2={y + kopf} className="dg-linie" />
+          {text && (
+            <text x={cx} y={y + kopf / 2} textAnchor="middle" dominantBaseline="middle" className="dg-klein dg-fett">
+              {text}
+            </text>
+          )}
+        </>
+      );
+    }
     case 'pool':
     case 'lane':
       return (
@@ -405,6 +444,9 @@ export function kantenMitte(punkte: Punkt[]): Punkt {
 /** Größe des Kanten-Slots. */
 export const KANTEN_SLOT = { w: 170, h: 30 };
 
+/** Formen, die hinter Kanten und anderen Knoten liegen. */
+const HINTERGRUND = ['pool', 'lane', 'fragment', 'lebenslinie', 'systemgrenze', 'schwimmbahn'];
+
 export interface DiagrammSvgProps {
   uebung: DiagrammUebung;
   eingesetzt: Eingesetzt;
@@ -574,9 +616,9 @@ export function DiagrammSvg({ uebung: u, eingesetzt, ergebnis, ziel, auswahl, on
           </marker>
         </defs>
         {/* Pools und Fragmente zuerst (Hintergrund), dann Kanten, dann alle anderen Knoten */}
-        {knotenZeichnung.filter((_, i) => ['pool', 'lane', 'fragment', 'lebenslinie', 'systemgrenze'].includes(u.knoten[i].form ?? ''))}
+        {knotenZeichnung.filter((_, i) => HINTERGRUND.includes(u.knoten[i].form ?? ''))}
         {kantenZeichnung}
-        {knotenZeichnung.filter((_, i) => !['pool', 'lane', 'fragment', 'lebenslinie', 'systemgrenze'].includes(u.knoten[i].form ?? ''))}
+        {knotenZeichnung.filter((_, i) => !HINTERGRUND.includes(u.knoten[i].form ?? ''))}
       </svg>
       {slotKnoepfe.map((roh) => {
         // Kleine Lücken (Balken, Startknoten) bekommen eine größere Tippfläche.
@@ -613,19 +655,26 @@ export function DiagrammSvg({ uebung: u, eingesetzt, ergebnis, ziel, auswahl, on
 export function FormSymbol({ form }: { form: Form | KantenForm }) {
   const k: DiagrammKnoten = { id: 'sym', x: 2, y: 4, w: 36, h: 20 };
   const kreis: DiagrammKnoten = { id: 'sym', x: 10, y: 4, w: 20, h: 20 };
+  const balken: DiagrammKnoten = { id: 'sym', x: 2, y: 11, w: 36, h: 6 };
+  const rund = [
+    'xor',
+    'and',
+    'or',
+    'start',
+    'zwischen',
+    'ende',
+    'startpunkt',
+    'endpunkt',
+    'ablaufende',
+    'gw-xor',
+    'gw-and',
+    'gw-or',
+    'entscheidung',
+  ];
   const inhalt = istKantenForm(form) ? (
     <line x1={2} y1={14} x2={36} y2={14} className={`dg-linie${form === 'antwort' ? ' dg-strich' : ''}`} />
   ) : (
-    <FormZeichnung
-      form={form}
-      k={
-        ['xor', 'and', 'or', 'start', 'zwischen', 'ende', 'startpunkt', 'endpunkt', 'gw-xor', 'gw-and', 'gw-or', 'entscheidung'].includes(
-          form,
-        )
-          ? kreis
-          : k
-      }
-    />
+    <FormZeichnung form={form} k={form === 'gabel' ? balken : rund.includes(form) ? kreis : k} />
   );
   return (
     <svg viewBox="0 0 40 28" className="diagramm form-symbol" aria-hidden="true" focusable="false">

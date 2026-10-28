@@ -7,6 +7,7 @@ import { emptyProgress } from '../shared/progress';
 import type { Form } from '../shared/diagrammUebungen';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import {
+  balkenPunkt,
   diagrammAlsText,
   kantenLinien,
   pruefeDiagrammAntwort,
@@ -29,7 +30,7 @@ import {
   type TabellenAntwort,
 } from '../src/lib/tabellenEditor';
 
-// Modellierungsaufgaben im Editor (ERM, EPK, BPMN, Use-Case, Normalisierung, Relationenmodell).
+// Modellierungsaufgaben im Editor (ERM, EPK, BPMN, Use-Case, Aktivitätsdiagramm, Normalisierung, Relationenmodell).
 
 const content = loadContent(CONTENT_DIR);
 const task = (id: string) => content.tasks[id];
@@ -57,6 +58,38 @@ function diagramm(
   };
 }
 
+/** Musterlösung von 21-A1 (Warenausgabe): zwei Schwimmbahnen, zwei Entscheidungen, Zusammenführung, Fork/Join, ⊗ und ◉. */
+const warenausgabe = (): DiagrammAntwort =>
+  diagramm(
+    'aktivitaet',
+    [
+      ['bk', 'schwimmbahn', 'Kunde', 0, 0, 300, 900],
+      ['bm', 'schwimmbahn', 'Mitarbeiter Warenausgabe', 300, 0, 340, 900],
+      ['s', 'startpunkt', '', 135, 50, 30, 30],
+      ['a1', 'aktion', 'Abholschein vorlegen', 70, 110, 160, 56],
+      ['a2', 'aktion', 'Auftragsnummer scannen und Zahlung prüfen', 390, 110, 160, 56],
+      ['d1', 'entscheidung', '', 448, 200, 44, 44],
+      ['a3', 'aktion', 'Kunden zur Kasse schicken', 470, 260, 160, 56],
+      ['fe', 'ablaufende', '', 535, 330, 30, 30],
+      ['d2', 'entscheidung', '', 400, 300, 44, 44],
+      ['a4', 'aktion', 'Vollmacht und Ausweis zeigen', 70, 380, 160, 56],
+      ['a5', 'aktion', 'Vollmacht und Ausweis prüfen', 340, 380, 160, 56],
+      ['m', 'entscheidung', '', 448, 470, 44, 44],
+      ['f', 'gabel', '', 340, 550, 240, 10],
+      ['a6', 'aktion', 'Ware im Lager anfordern', 480, 600, 140, 56],
+      ['a7', 'aktion', 'Lieferschein drucken', 320, 600, 140, 56],
+      ['a8', 'aktion', 'Lieferschein unterschreiben', 70, 680, 160, 56],
+      ['j', 'gabel', '', 340, 770, 240, 10],
+      ['a9', 'aktion', 'Ware übergeben', 390, 800, 160, 56],
+      ['e', 'endpunkt', '', 455, 865, 30, 30],
+    ],
+    [
+      ['s', 'a1'], ['a1', 'a2'], ['a2', 'd1'], ['d1', 'a3', 'fluss', 'nicht bezahlt'], ['a3', 'fe'], ['d1', 'd2', 'fluss', '[bezahlt]'],
+      ['d2', 'a4', 'fluss', 'Abholung durch Dritte'], ['a4', 'a5'], ['a5', 'm'], ['d2', 'm', 'fluss', 'Käufer selbst'], ['m', 'f'],
+      ['f', 'a6'], ['f', 'a7'], ['a7', 'a8'], ['a6', 'j'], ['a8', 'j'], ['j', 'a9'], ['a9', 'e'],
+    ], // prettier-ignore
+  );
+
 describe('Erkennung', () => {
   it('genau die Modellierungsaufgaben der Blätter bekommen einen Editor', () => {
     const mitEditor = Object.fromEntries(
@@ -73,6 +106,8 @@ describe('Erkennung', () => {
       '15-E1': 'usecase',
       '18-B3': 'epk',
       '21-B3': 'epk',
+      '21-A1': 'aktivitaet',
+      '22-B1': 'aktivitaet',
       '03-E3': 'boxplot', // tests/boxplotAntwort.test.ts
       '11-D3': 'struktogramm', // tests/struktogramm.test.ts
       // Verlangte Tabellen (tests/werteTabelle.test.ts)
@@ -145,7 +180,7 @@ describe('Erkennung', () => {
   });
 
   it('Textaufgaben über Diagramme bleiben Textaufgaben', () => {
-    for (const id of ['05-B2', '15-E2', '18-B2', '02-B3', '02-D1', '21-A1', '22-B1']) expect(editorFuer(task(id)), id).toBeUndefined();
+    for (const id of ['05-B2', '15-E2', '18-B2', '02-B3', '02-D1']) expect(editorFuer(task(id)), id).toBeUndefined();
     expect(editorFuer({ markdown: '*Erstellen* Sie ein ER-Diagramm.', type: 'mc' })).toBeUndefined();
     expect(editorFuer({ markdown: '*Erstellen* Sie ein ER-Diagramm.', type: 'offen', sqlUebung: 'SQL-1' })).toBeUndefined();
   });
@@ -164,6 +199,14 @@ describe('Antwort lesen und schreiben', () => {
     expect(schreibeEditorAntwort(leseEditorAntwort('erm', t, undefined))).toBe('');
     const a = diagramm('erm', [['k1', 'entitaet', 'KUNDE']], []);
     expect(leseEditorAntwort('erm', t, schreibeEditorAntwort(a))).toEqual(a);
+  });
+
+  it('Aktivitätsdiagramm mit den neuen Formen übersteht den Weg über den String', () => {
+    const a = warenausgabe();
+    expect(leseEditorAntwort('aktivitaet', task('21-A1'), schreibeEditorAntwort(a))).toEqual(a);
+    // Eine Zeichnung aus einem anderen Diagramm-Editor bleibt erhalten (dieselbe Familie).
+    const alt = diagramm('epk', [['k1', 'funktion', 'Ware übergeben']], []);
+    expect((leseEditorAntwort('aktivitaet', task('21-A1'), JSON.stringify(alt)) as DiagrammAntwort).knoten).toEqual(alt.knoten);
   });
 
   it('ein alter Text geht nicht verloren, kaputte Kanten fallen weg', () => {
@@ -227,6 +270,35 @@ describe('Geometrie', () => {
     );
     const l = kantenLinien(a.knoten, a.kanten);
     expect(l.get('v1')![0][1]).not.toBe(l.get('v2')![0][1]);
+  });
+
+  it('Aktivitätsdiagramm: Kanten verlassen den Balken senkrecht über bzw. unter dem Partner', () => {
+    const a = diagramm(
+      'aktivitaet',
+      [
+        ['f', 'gabel', '', 100, 100, 200, 10],
+        ['p', 'aktion', 'Ware anfordern', 100, 200, 100, 50],
+        ['q', 'aktion', 'Lieferschein drucken', 220, 200, 100, 50],
+        ['r', 'aktion', 'weit links', -300, 0, 100, 50],
+      ],
+      [
+        ['f', 'p'],
+        ['f', 'q'],
+        ['r', 'f'],
+      ],
+    );
+    const l = kantenLinien(a.knoten, a.kanten);
+    expect(l.get('v1')).toEqual([
+      [150, 110],
+      [150, 200],
+    ]);
+    expect(l.get('v2')).toEqual([
+      [270, 110],
+      [270, 200],
+    ]);
+    // Liegt der Partner neben dem Balken, endet die Kante an dessen Ende (nicht in der Mitte).
+    expect(l.get('v3')![1]).toEqual([104, 100]);
+    expect(balkenPunkt({ form: 'gabel', x: 0, y: 0, w: 10, h: 200 }, [100, 50])).toEqual([10, 50]);
   });
 
   it('BPMN: zwischen zwei Pools wird die neue Verbindung ein Nachrichtenfluss', () => {
@@ -389,6 +461,51 @@ describe('Formprüfung', () => {
     expect(m).toMatch(/Es fehlt ein Endereignis/);
   });
 
+  it('Aktivitätsdiagramm: Musterlösung von 21-A1 ohne Hinweise', () => {
+    expect(pruefeDiagrammAntwort(warenausgabe())).toEqual([]);
+  });
+
+  it('Aktivitätsdiagramm: typische Punktverluste der Altklausur werden gemeldet', () => {
+    const a = diagramm(
+      'aktivitaet',
+      [
+        ['b', 'schwimmbahn', 'Kunde', 0, 0, 300, 600],
+        ['a', 'aktion', 'Abholschein vorlegen', 70, 60, 160, 56],
+        ['d', 'entscheidung', '', 128, 160, 44, 44],
+        ['x', 'aktion', 'Kunden zur Kasse schicken', 400, 160, 160, 56],
+        ['f', 'gabel', '', 60, 260, 180, 10],
+        ['p', 'aktion', 'Ware anfordern', 20, 300, 120, 56],
+        ['q', 'aktion', 'Lieferschein drucken', 160, 300, 120, 56],
+        ['u', 'aktion', 'Ware übergeben', 70, 400, 160, 56],
+        ['e', 'endpunkt', '', 135, 500, 30, 30],
+      ],
+      [
+        ['a', 'd'], ['d', 'x', 'fluss', 'nicht bezahlt'], ['d', 'f'], ['f', 'p'], ['f', 'q'], ['p', 'u'], ['q', 'u'], ['u', 'e'], ['e', 'x'],
+      ], // prettier-ignore
+    );
+    const m = pruefeDiagrammAntwort(a).join(' ');
+    expect(m).toMatch(/Es fehlt ein Startknoten/);
+    expect(m).toMatch(/jede Kante aus einer Entscheidung mit ihrer Bedingung/);
+    expect(m).toMatch(/fehlt die Vereinigung \(Join\)/);
+    expect(m).toMatch(/Aktion „Ware übergeben“ hat mehrere eingehende Kanten/);
+    expect(m).toMatch(/Endknoten hat eine ausgehende Kante/);
+    expect(m).toMatch(/Außerhalb jeder Schwimmbahn: Aktion „Kunden zur Kasse schicken“/);
+  });
+
+  it('Aktivitätsdiagramm als Text: Bahnen, Aktionen, Bedingungen in eckigen Klammern, Fork und Join', () => {
+    const text = antwortAlsText(task('21-A1'), JSON.stringify(warenausgabe()));
+    expect(text).toMatch(/^UML-Aktivitätsdiagramm \(im Editor gezeichnet\)/);
+    expect(text).toContain('- Schwimmbahn „Mitarbeiter Warenausgabe“');
+    expect(text).toContain('- Aktion „Abholschein vorlegen“ – in Schwimmbahn „Kunde“');
+    expect(text).toContain('- Entscheidung 1 → Aktion „Kunden zur Kasse schicken“ [nicht bezahlt]');
+    expect(text).toContain('- Entscheidung 1 → Entscheidung 2 [bezahlt]');
+    expect(text).toContain('- Entscheidung 2 → Zusammenführung [Käufer selbst]');
+    expect(text).toContain('- Aktion „Kunden zur Kasse schicken“ → Ablaufende');
+    expect(text).toContain('- Zusammenführung → Gabelung (Fork)');
+    expect(text).toContain('- Vereinigung (Join) → Aktion „Ware übergeben“');
+    expect(text).toContain('- Aktion „Ware übergeben“ → Endknoten');
+  });
+
   it('Use-Case: Akteur in der Systemgrenze, «include» an einem Akteur', () => {
     const a = diagramm(
       'usecase',
@@ -498,6 +615,8 @@ describe('Seiten', () => {
       '05-B1': ['Pool', 'Lane', 'XOR-Gateway', 'Startereignis'],
       '18-B3': ['Ereignis', 'Funktion', 'XOR-Konnektor', 'Informationsobjekt'],
       '15-E1': ['Akteur', 'Anwendungsfall', 'Systemgrenze'],
+      '21-A1': ['Aktivitätsdiagramm-Editor', 'Schwimmbahn', 'Startknoten', 'Gabelung/Vereinigung', 'Ablaufende', 'Endknoten'],
+      '22-B1': ['Aktivitätsdiagramm-Editor', 'Aufrufaktion', 'Entscheidung/Merge'],
       '02-C1': ['1. NF', '2. NF', '3. NF', 'Ausgangstabelle „auftrags_export“ übernehmen'],
       '02-B2': ['+ Tabelle'],
       '08-C1': ['+ Tabelle'],
@@ -507,7 +626,7 @@ describe('Seiten', () => {
       for (const t of texte) expect(h, `${id}: ${t}`).toContain(t);
       expect(h, id).not.toContain('Musterlösung</h4>');
       // Keine Antworten vorab: weder Begriffe der Musterlösung noch fertige Tabellen.
-      expect(h, id).not.toMatch(/LIEFERANT|Reklamationssystem|kundenname|dim_zeit/);
+      expect(h, id).not.toMatch(/LIEFERANT|Reklamationssystem|kundenname|dim_zeit|Lieferschein|Zentrallager/);
     }
   });
 

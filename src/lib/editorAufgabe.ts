@@ -1,4 +1,4 @@
-// Modellierungsaufgaben im Editor statt im Textfeld: ERM, EPK, BPMN und Use-Case im Diagramm-Editor, Normalisierung und
+// Modellierungsaufgaben im Editor statt im Textfeld: ERM, EPK, BPMN, Use-Case und Aktivitätsdiagramm im Diagramm-Editor, Normalisierung und
 // Relationenmodell/Star-Schema im Tabellen-Editor, ausdrücklich verlangte Tabellen (Häufigkeitstabelle, Rechenweg „tabellarisch“)
 // als Wertetabelle, ein zu skizzierender Boxplot als Kennwert-Eingabe mit Zeichnung, ein Struktogramm im Baukasten. Erkannt wird am Aufgabentext (Operator + Diagrammtyp bzw. Tabelle + Lösungstabelle), die Blätter bleiben,
 // wie sie sind. Die Antwort bleibt ein String (JSON), so ändern sich Fortschritt, Klausur und Sicherungen nicht. Rein, ohne React.
@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { FORMEN } from '../../shared/diagrammUebungen';
 import type { Task } from '../../shared/types';
 import {
+  DIAGRAMM_NOTATIONEN,
   diagrammAlsText,
   EDITOR_KANTEN,
   istLeer,
@@ -41,6 +42,7 @@ export const EDITOR_NAMEN: Record<EditorArt, string> = {
   epk: 'EPK',
   bpmn: 'BPMN-Diagramm',
   usecase: 'Use-Case-Diagramm',
+  aktivitaet: 'Aktivitätsdiagramm',
   relationen: 'Tabellenschema',
   normalform: 'Normalisierung',
   werte: 'Tabellen',
@@ -75,6 +77,7 @@ export function editorFuer(task: AufgabeFuerEditor): EditorArt | undefined {
     if (/BPMN/.test(t)) return 'bpmn';
     if (/\be?EPK\b|Prozesskette/.test(t)) return 'epk';
     if (/Use-Case-Diagramm|Anwendungsfalldiagramm/i.test(t)) return 'usecase';
+    if (/Aktivitätsdiagramm/i.test(t)) return 'aktivitaet';
     if (/Boxplot/i.test(t)) return 'boxplot';
     if (/Struktogramm|Nassi-Shneiderman/i.test(t)) return 'struktogramm';
   }
@@ -118,7 +121,7 @@ const KanteSchema = z.object({
   text: z.string().optional(),
 });
 const DiagrammSchema = z.object({
-  editor: z.enum(['erm', 'epk', 'bpmn', 'usecase']),
+  editor: z.enum(DIAGRAMM_NOTATIONEN),
   knoten: z.array(KnotenSchema),
   kanten: z.array(KanteSchema),
   notiz: z.string().optional(),

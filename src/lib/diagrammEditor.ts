@@ -1,10 +1,10 @@
-// Freier Diagramm-Editor für Modellierungsaufgaben (ERM, EPK, BPMN, Use-Case): Modell, Notationen (Palette, Standardgrößen,
-// Kantenarten), Geometrie und Formprüfung. Anders als die Diagramm-Übungen gibt es kein Gerüst – man zeichnet alles selbst und
-// vergleicht danach mit der Musterlösung. Die Formprüfung sind Hinweise zur Selbstbewertung, keine Punkte. Rein, ohne React.
+// Freier Diagramm-Editor für Modellierungsaufgaben (ERM, EPK, BPMN, Use-Case, UML-Aktivitätsdiagramm): Modell, Notationen (Palette,
+// Standardgrößen, Kantenarten), Geometrie und Formprüfung. Anders als die Diagramm-Übungen gibt es kein Gerüst – man zeichnet alles
+// selbst und vergleicht danach mit der Musterlösung. Die Formprüfung sind Hinweise zur Selbstbewertung, keine Punkte. Rein, ohne React.
 
 import { formregeln, type DiagrammUebung, type Form } from '../../shared/diagrammUebungen';
 
-export const DIAGRAMM_NOTATIONEN = ['erm', 'epk', 'bpmn', 'usecase'] as const;
+export const DIAGRAMM_NOTATIONEN = ['erm', 'epk', 'bpmn', 'usecase', 'aktivitaet'] as const;
 export type DiagrammNotation = (typeof DIAGRAMM_NOTATIONEN)[number];
 
 export const EDITOR_KANTEN = ['fluss', 'nachricht', 'zuordnung', 'linie', 'include', 'extend'] as const;
@@ -103,6 +103,22 @@ export const NOTATIONEN: Record<DiagrammNotation, NotationsInfo> = {
     kanten: ['linie', 'include', 'extend'],
     tipp: 'Akteure stehen außerhalb der Systemgrenze. «include» zeigt vom Basisfall auf den eingebundenen Fall, «extend» von der Erweiterung auf den Basisfall.',
   },
+  aktivitaet: {
+    name: 'UML-Aktivitätsdiagramm',
+    formen: [
+      { form: 'schwimmbahn', w: 300, h: 640, text: 'Schwimmbahn' },
+      { form: 'startpunkt', w: 30, h: 30, text: '' },
+      { form: 'aktion', w: 160, h: 56, text: 'Aktion' },
+      { form: 'entscheidung', w: 44, h: 44, text: '' },
+      { form: 'gabel', w: 160, h: 10, text: '' },
+      { form: 'aufruf', w: 170, h: 56, text: 'Aktivität aufrufen' },
+      { form: 'endpunkt', w: 30, h: 30, text: '' },
+      { form: 'ablaufende', w: 30, h: 30, text: '' },
+      { form: 'text', w: 140, h: 30, text: 'Notiz' },
+    ],
+    kanten: ['fluss'],
+    tipp: 'Schwimmbahnen legst du nebeneinander an, die Aktionen hinein. An die Kanten aus einer Entscheidung schreibst du die Bedingung – die eckigen Klammern setzt der Editor. Der Balken ist Gabelung (Fork) oder Vereinigung (Join).',
+  },
 };
 
 export const KANTEN_NAMEN: Record<EditorKantenArt, string> = {
@@ -115,11 +131,17 @@ export const KANTEN_NAMEN: Record<EditorKantenArt, string> = {
 };
 
 /** Behälter liegen hinter den anderen Formen; zieht man sie, wandert ihr Inhalt mit. */
-export const BEHAELTER: readonly Form[] = ['pool', 'lane', 'systemgrenze'];
+export const BEHAELTER: readonly Form[] = ['pool', 'lane', 'systemgrenze', 'schwimmbahn'];
 export const istBehaelter = (f: Form) => BEHAELTER.includes(f);
 
+/** Knoten des Aktivitätsdiagramms, die nie beschriftet werden (die Form sagt alles) – ohne Textfeld im Editor. */
+export const NIE_TEXT: readonly Form[] = ['startpunkt', 'endpunkt', 'ablaufende', 'entscheidung', 'gabel'];
+
 /** Formen, die keinen Text brauchen (Konnektoren, Gateways, Ereignisse in BPMN dürfen ohne Namen sein). */
-const OHNE_TEXT: readonly Form[] = ['xor', 'and', 'or', 'gw-and', 'gw-or', 'gw-xor', 'start', 'zwischen', 'ende'];
+export const OHNE_TEXT: readonly Form[] = ['xor', 'and', 'or', 'gw-and', 'gw-or', 'gw-xor', 'start', 'zwischen', 'ende', ...NIE_TEXT];
+
+/** Bedingung an einer Kante des Aktivitätsdiagramms: immer in eckigen Klammern, auch wenn man sie ohne tippt. */
+export const waechter = (text: string) => (text.trim() && !text.trim().startsWith('[') ? `[${text.trim()}]` : text.trim());
 
 export function leereDiagrammAntwort(editor: DiagrammNotation): DiagrammAntwort {
   return { editor, knoten: [], kanten: [] };
@@ -148,8 +170,31 @@ export const mitte = (k: Box): Punkt => [k.x + k.w / 2, k.y + k.h / 2];
 const enthaelt = (aussen: Box, p: Punkt) =>
   p[0] >= aussen.x && p[0] <= aussen.x + aussen.w && p[1] >= aussen.y && p[1] <= aussen.y + aussen.h;
 
-const RUND: readonly Form[] = ['attribut', 'anwendungsfall', 'org', 'xor', 'and', 'or', 'start', 'zwischen', 'ende'];
-const RAUTE: readonly Form[] = ['beziehung', 'gw-xor', 'gw-and', 'gw-or'];
+const RUND: readonly Form[] = [
+  'attribut',
+  'anwendungsfall',
+  'org',
+  'xor',
+  'and',
+  'or',
+  'start',
+  'zwischen',
+  'ende',
+  'startpunkt',
+  'endpunkt',
+  'ablaufende',
+];
+const RAUTE: readonly Form[] = ['beziehung', 'gw-xor', 'gw-and', 'gw-or', 'entscheidung'];
+
+/**
+ * Anschluss an einen Balken (Gabelung/Vereinigung): genau über bzw. unter dem Partner, soweit der Balken reicht – so laufen die
+ * parallelen Stränge senkrecht aus dem Balken heraus statt fächerförmig aus seiner Mitte.
+ */
+export function balkenPunkt(k: Box, p: Punkt): Punkt {
+  const klemme = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+  if (k.w >= k.h) return [klemme(p[0], k.x + 4, k.x + k.w - 4), p[1] < k.y + k.h / 2 ? k.y : k.y + k.h];
+  return [p[0] < k.x + k.w / 2 ? k.x : k.x + k.w, klemme(p[1], k.y + 4, k.y + k.h - 4)];
+}
 
 /** Punkt auf dem Rand der Form in Richtung p (von der Mitte aus) – Rechteck, Ellipse oder Raute. */
 export function randPunkt(k: Box, p: Punkt): Punkt {
@@ -191,10 +236,13 @@ export function kantenLinien(knoten: EditorKnoten[], kanten: EditorKante[]): Map
       const versatz = (i - (gruppe.length - 1) / 2) * 18 * richtung;
       const nx = (-(by - ay) / laenge) * versatz;
       const ny = ((bx - ax) / laenge) * versatz;
-      const zielA: Punkt = [bx + nx, by + ny];
-      const zielB: Punkt = [ax + nx, ay + ny];
-      const pa = randPunkt({ ...a, x: a.x + nx, y: a.y + ny }, zielA);
-      const pb = randPunkt({ ...b, x: b.x + nx, y: b.y + ny }, zielB);
+      const va = { ...a, x: a.x + nx, y: a.y + ny };
+      const vb = { ...b, x: b.x + nx, y: b.y + ny };
+      // Ein Balken hat keinen Mittelpunkt als Ziel, sondern den Punkt über bzw. unter dem Partner.
+      const ankerA = a.form === 'gabel' ? balkenPunkt(va, mitte(vb)) : undefined;
+      const ankerB = b.form === 'gabel' ? balkenPunkt(vb, mitte(va)) : undefined;
+      const pa = ankerA ?? randPunkt(va, ankerB ?? [bx + nx, by + ny]);
+      const pb = ankerB ?? randPunkt(vb, ankerA ?? [ax + nx, ay + ny]);
       linien.set(e.id, [pa, pb]);
     });
   }
@@ -260,6 +308,8 @@ export function standardKante(a: DiagrammAntwort, von: EditorKnoten, nach: Edito
     }
     case 'usecase':
       return von.form === 'anwendungsfall' && nach.form === 'anwendungsfall' ? 'include' : 'linie';
+    case 'aktivitaet':
+      return 'fluss';
   }
 }
 
@@ -288,34 +338,62 @@ const FORM_KURZ: Partial<Record<Form, string>> = {
   systemgrenze: 'Systemgrenze',
   akteur: 'Akteur',
   anwendungsfall: 'Anwendungsfall',
+  schwimmbahn: 'Schwimmbahn',
+  startpunkt: 'Startknoten',
+  aktion: 'Aktion',
+  aufruf: 'Aufrufaktion',
+  entscheidung: 'Entscheidung',
+  gabel: 'Fork/Join-Balken',
+  endpunkt: 'Endknoten',
+  ablaufende: 'Ablaufende',
   text: 'Notiz',
 };
 export const formKurz = (f: Form) => FORM_KURZ[f] ?? f;
 
-/** Bezeichnung eines Knotens im Text: „Entität „KUNDE““ bzw. „XOR-Konnektor 2“, wenn er keinen Text hat. */
-export function knotenName(k: EditorKnoten, knoten: EditorKnoten[]): string {
-  if (k.text.trim()) return `${formKurz(k.form)} „${k.text.trim()}“${k.schluessel ? ' (Schlüssel)' : ''}`;
-  const gleiche = knoten.filter((x) => x.form === k.form);
-  return gleiche.length > 1 ? `${formKurz(k.form)} ${gleiche.indexOf(k) + 1}` : formKurz(k.form);
+/**
+ * Raute und Balken im Aktivitätsdiagramm nach ihrer Rolle: Entscheidung oder Zusammenführung, Gabelung oder Vereinigung –
+ * abgelesen an den Kanten (mehrere hinein, eine hinaus = zusammenführen).
+ */
+function rolle(k: EditorKnoten, kanten?: EditorKante[]): string | undefined {
+  if (!kanten || (k.form !== 'entscheidung' && k.form !== 'gabel')) return undefined;
+  const raus = kanten.filter((e) => e.von === k.id).length;
+  const rein = kanten.filter((e) => e.nach === k.id).length;
+  const zusammen = rein > 1 && raus <= 1;
+  if (k.form === 'entscheidung') return zusammen ? 'Zusammenführung' : 'Entscheidung';
+  return zusammen ? 'Vereinigung (Join)' : raus > 1 ? 'Gabelung (Fork)' : undefined;
 }
 
-/** Das Diagramm als Text: Elemente (mit Pool/Lane bzw. Systemgrenze) und Verbindungen. */
+/**
+ * Bezeichnung eines Knotens im Text: „Entität „KUNDE““ bzw. „XOR-Konnektor 2“, wenn er keinen Text hat. Mit den Kanten heißen
+ * Raute und Balken des Aktivitätsdiagramms nach ihrer Rolle („Zusammenführung 1“, „Gabelung (Fork)“).
+ */
+export function knotenName(k: EditorKnoten, knoten: EditorKnoten[], kanten?: EditorKante[]): string {
+  const kurz = rolle(k, kanten) ?? formKurz(k.form);
+  if (k.text.trim() && !NIE_TEXT.includes(k.form)) return `${kurz} „${k.text.trim()}“${k.schluessel ? ' (Schlüssel)' : ''}`;
+  const gleiche = knoten.filter((x) => x.form === k.form && rolle(x, kanten) === rolle(k, kanten));
+  return gleiche.length > 1 ? `${kurz} ${gleiche.indexOf(k) + 1}` : kurz;
+}
+
+/** Das Diagramm als Text: Elemente (mit Pool/Lane, Schwimmbahn bzw. Systemgrenze) und Verbindungen. */
 export function diagrammAlsText(a: DiagrammAntwort): string {
+  const aktivitaet = a.editor === 'aktivitaet';
+  const benenne = (k: EditorKnoten) => knotenName(k, a.knoten, a.kanten);
   const name = (id: string) => {
     const k = a.knoten.find((x) => x.id === id);
-    return k ? knotenName(k, a.knoten) : '?';
+    return k ? benenne(k) : '?';
   };
   const zeilen = [`${NOTATIONEN[a.editor].name} (im Editor gezeichnet)`, '', 'Elemente:'];
   for (const k of a.knoten) {
     const lage = istBehaelter(k.form) ? undefined : behaelterVon(k, a.knoten);
-    zeilen.push(`- ${knotenName(k, a.knoten)}${lage ? ` – in ${knotenName(lage, a.knoten)}` : ''}`);
+    zeilen.push(`- ${benenne(k)}${lage ? ` – in ${benenne(lage)}` : ''}`);
   }
   if (a.kanten.length) {
     zeilen.push('', 'Verbindungen:');
     for (const e of a.kanten) {
       const pfeil = e.art === 'linie' || e.art === 'zuordnung' ? '—' : '→';
       const art = e.art === 'linie' || e.art === 'fluss' ? '' : ` [${KANTEN_NAMEN[e.art]}]`;
-      zeilen.push(`- ${name(e.von)} ${pfeil} ${name(e.nach)}${art}${e.text?.trim() ? ` (${e.text.trim()})` : ''}`);
+      const text = e.text?.trim() ? (aktivitaet ? ` ${waechter(e.text)}` : ` (${e.text.trim()})`) : '';
+      zeilen.push(`- ${name(e.von)} ${pfeil} ${name(e.nach)}${art}${text}`);
     }
   }
   if (a.notiz?.trim()) zeilen.push('', 'Anmerkungen:', a.notiz.trim());
@@ -352,7 +430,7 @@ export function pruefeDiagrammAntwort(a: DiagrammAntwort): string[] {
   const meldungen: string[] = [];
   if (!a.knoten.length) return meldungen;
   const nachId = new Map(a.knoten.map((k) => [k.id, k]));
-  const name = (k: EditorKnoten) => knotenName(k, a.knoten);
+  const name = (k: EditorKnoten) => knotenName(k, a.knoten, a.kanten);
   const kantenVon = (id: string) => a.kanten.filter((e) => e.von === id || e.nach === id);
   const andere = (e: EditorKante, id: string) => nachId.get(e.von === id ? e.nach : e.von)!;
 
@@ -361,7 +439,7 @@ export function pruefeDiagrammAntwort(a: DiagrammAntwort): string[] {
   const lose = a.knoten.filter((k) => !istBehaelter(k.form) && k.form !== 'text' && !kantenVon(k.id).length);
   if (lose.length && a.knoten.length > 1) meldungen.push(`Ohne Verbindung: ${lose.map(name).join(', ')}.`);
 
-  if (a.editor === 'epk' || a.editor === 'bpmn') meldungen.push(...formregeln(alsUebung(a), {}));
+  if (a.editor === 'epk' || a.editor === 'bpmn' || a.editor === 'aktivitaet') meldungen.push(...formregeln(alsUebung(a), {}));
 
   if (a.editor === 'epk') {
     for (const k of a.knoten) {
@@ -450,6 +528,45 @@ export function pruefeDiagrammAntwort(a: DiagrammAntwort): string[] {
         meldungen.push('Zwei Anwendungsfälle verbindest du mit «include» oder «extend», nicht mit einer einfachen Linie.');
       if (e.art === 'linie' && formen.every((f) => f === 'akteur'))
         meldungen.push('Akteure sind über Anwendungsfälle verbunden, nicht direkt.');
+    }
+  }
+
+  if (a.editor === 'aktivitaet') {
+    const raus = (id: string) => a.kanten.filter((e) => e.von === id);
+    const rein = (id: string) => a.kanten.filter((e) => e.nach === id);
+    const ablauf = a.knoten.filter((k) => !istBehaelter(k.form) && k.form !== 'text');
+    if (ablauf.length && !a.knoten.some((k) => k.form === 'startpunkt')) meldungen.push('Es fehlt ein Startknoten.');
+    if (ablauf.length && !a.knoten.some((k) => k.form === 'endpunkt' || k.form === 'ablaufende'))
+      meldungen.push('Es fehlt ein Endknoten (◉) bzw. ein Ablaufende (⊗).');
+    for (const k of ablauf) {
+      if (k.form === 'startpunkt' && rein(k.id).length) meldungen.push('Ein Startknoten hat keine eingehende Kante.');
+      if ((k.form === 'endpunkt' || k.form === 'ablaufende') && raus(k.id).length)
+        meldungen.push(`${name(k)} hat eine ausgehende Kante – dort endet der Ablauf.`);
+      if (k.form === 'aktion' || k.form === 'aufruf') {
+        // Mehrere Kanten an einer Aktion bedeuten in UML implizit Fork bzw. Join – in der Prüfung ein Fehler.
+        if (raus(k.id).length > 1)
+          meldungen.push(`${name(k)} hat mehrere ausgehende Kanten – verzweige über eine Entscheidung (Raute) oder einen Fork-Balken.`);
+        if (rein(k.id).length > 1)
+          meldungen.push(`${name(k)} hat mehrere eingehende Kanten – führe die Zweige vorher mit einer Raute (Zusammenführung) zusammen.`);
+      }
+      if (k.form === 'entscheidung') {
+        const wege = raus(k.id);
+        if (wege.length > 1 && wege.some((e) => !e.text?.trim()))
+          meldungen.push('Beschrifte jede Kante aus einer Entscheidung mit ihrer Bedingung, z. B. [bezahlt] / [nicht bezahlt].');
+        if (rein(k.id).length > 1 && wege.length > 1)
+          meldungen.push(`${name(k)} führt zusammen und entscheidet zugleich – nimm dafür zwei Rauten.`);
+      }
+      if (k.form === 'gabel' && rein(k.id).length > 1 && raus(k.id).length > 1)
+        meldungen.push(
+          'Ein Balken ist entweder Gabelung (eine Kante hinein, mehrere hinaus) oder Vereinigung (mehrere hinein, eine hinaus).',
+        );
+    }
+    const balken = a.knoten.filter((k) => k.form === 'gabel');
+    if (balken.some((k) => raus(k.id).length > 1) && !balken.some((k) => rein(k.id).length > 1))
+      meldungen.push('Zur Gabelung (Fork) fehlt die Vereinigung (Join), die auf alle parallelen Stränge wartet.');
+    if (a.knoten.some((k) => k.form === 'schwimmbahn')) {
+      const draussen = ablauf.filter((k) => !behaelterVon(k, a.knoten, 'schwimmbahn'));
+      if (draussen.length) meldungen.push(`Außerhalb jeder Schwimmbahn: ${draussen.map(name).join(', ')}.`);
     }
   }
   return [...new Set(meldungen)];

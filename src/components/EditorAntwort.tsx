@@ -116,7 +116,8 @@ export function EditorPruefung({ task, art, answer }: { task: Task; art: EditorA
         <Formhinweise meldungen={pruefeDiagrammAntwort(d)} />
         <p className="hint">
           Die Formprüfung ersetzt nicht den Vergleich: Geh die Musterlösung Element für Element durch (Beschriftungen, Verbindungen
-          {art === 'erm' ? ', Kardinalitäten' : ''}) und vergib dann deine Punkte.
+          {art === 'erm' ? ', Kardinalitäten' : art === 'aktivitaet' ? ', Bedingungen, Schwimmbahn jeder Aktion' : ''}) und vergib dann
+          deine Punkte.
         </p>
       </div>
     );
