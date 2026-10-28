@@ -201,7 +201,7 @@ Auszug aus dem Betriebsverfassungsgesetz:
 
 Wie viele Betriebsratsmitglieder sind zu wählen? *(Ergebnis eintragen)*
 
-> **Formel:** Wahlberechtigte = Arbeitnehmer ab 16 Jahren + Leiharbeitnehmer mit mehr als drei Monaten Einsatz; die Zahl der Mitglieder steht in der Staffel des § 9
+> **Formel:** Wahlberechtigte = Arbeitnehmer ab 16 Jahren + Leiharbeitnehmer mit mehr als drei Monaten Einsatz
 
 **C2 (3 P):** Bei welcher Angelegenheit hat der Betriebsrat ein **Mitbestimmungsrecht**? *(Ziffer eintragen)*
 - (1) Bau einer neuen Ausstellungshalle

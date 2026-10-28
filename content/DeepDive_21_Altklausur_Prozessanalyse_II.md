@@ -253,7 +253,7 @@ Für die Abhol-Software liegen zwei Angebote vor. Benötigt werden **acht Lizenz
 
 > **Formeln:**
 > - kumulierte Kosten nach t Jahren = jährliche Kosten · t
-> - kumulierte Einsparung nach t Jahren = jährliche Einsparung · (t − 1), weil die Einsparung erst im zweiten Jahr beginnt
+> - kumulierte Einsparung nach t Jahren = jährliche Einsparung · (t − 1)
 > - Break-even-Point: kumulierte Kosten = kumulierte Einsparung
 
 **D3 (13 P):** Sie sollen eine Empfehlung für einen Anbieter aussprechen. *Führen* Sie einen Angebotsvergleich über die gesamte Nutzungsdauer *durch*, *tragen* Sie die Beträge in die Tabelle *ein* und *ermitteln* Sie den Differenzbetrag. *Geben* Sie eine Empfehlung *ab*.

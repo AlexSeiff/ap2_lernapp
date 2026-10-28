@@ -421,7 +421,7 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 **A6 (4 P):** Die Minijob-Grenze beträgt 603 € im Monat, der Mindestlohn 13,90 €. Wie viele volle Stunden darf eine Aushilfe zum Mindestlohn höchstens im Monat arbeiten, ohne die Grenze zu überschreiten? *(Ergebnis eintragen)*
 
-> **Formel:** höchste Stundenzahl = Minijob-Grenze / Stundenlohn, auf volle Stunden abgerundet
+> **Formel:** höchste Stundenzahl = Minijob-Grenze / Stundenlohn
 
 **A7 (4 P):** Lea ist zehn Wochen arbeitsunfähig erkrankt. Welche Aussage ist richtig? *(Ziffer eintragen)*
 - (1) Das Möbelhaus zahlt die Vergütung zehn Wochen voll weiter.
@@ -517,7 +517,7 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 **D2 (4 P):** Auf einem Markt gilt: Preis 10 € – Nachfrage 900, Angebot 300 · 12 € – 800 / 500 · 14 € – 650 / 650 · 16 € – 500 / 800 · 18 € – 350 / 950. Wie hoch ist der Gleichgewichtspreis in Euro? *(Ergebnis eintragen)*
 
-> **Formel:** Gleichgewichtspreis = der Preis, bei dem angebotene Menge = nachgefragte Menge
+> **Formel:** Gleichgewichtspreis: angebotene Menge = nachgefragte Menge
 
 **D3 (4 P):** Der Verbraucherpreisindex steigt von 120,0 auf 123,0. Wie hoch ist die Inflationsrate in Prozent (zwei Nachkommastellen)? *(Ergebnis eintragen)*
 

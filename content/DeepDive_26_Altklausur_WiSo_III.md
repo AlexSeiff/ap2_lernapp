@@ -134,7 +134,7 @@ Zu welcher Uhrzeit darf Ben am Mittwoch frühestens mit der Arbeit beginnen? *(U
 
 Auf wie viele **Arbeitstage** Urlaub hat Lina 2026 Anspruch? *(Ergebnis eintragen)*
 
-> **Formel:** Arbeitstage = Werktage · 5 / 6; es gilt der günstigere Anspruch aus Gesetz und Tarifvertrag
+> **Formel:** Arbeitstage = Werktage · 5 / 6
 
 **A6 (3 P):** Ben fragt, wozu er den Ausbildungsnachweis (das „Berichtsheft“) führen muss. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
 - (1) Der Ausbildungsnachweis ist freiwillig.

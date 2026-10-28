@@ -15,7 +15,9 @@ vi.mock('../src/lib/store', () => ({
 }));
 
 const { SqlBelegsatz } = await import('../src/pages/SqlBelegsatz');
-const { AnhangPanel, BelegsatzPanel, formelAbschnitte, ohneTitel } = await import('../src/components/Belegsatz');
+const { AnhangPanel, BelegsatzPanel, ohneTitel } = await import('../src/components/Belegsatz');
+const { FormelUebersicht, SqlAuszug } = await import('../src/components/PruefungsAnhang');
+const { FORMEL_GRUPPEN, SQL_GRUPPEN } = await import('../src/lib/pruefungsanhang');
 const { anhangFuer } = await import('../src/lib/anhang');
 
 const render = (el: React.ReactElement, path = '/material/sql-belegsatz') =>
@@ -60,9 +62,35 @@ describe('SQL-Belegsatz', () => {
     expect(html).not.toContain('<aside');
   });
 
-  it('Formelübersicht: die Abschnitte 7.8, 7.4 und 7.9 aus Deep Dive 17 (Anhang der Prüfung)', () => {
-    const dd17 = content.topics.find((t) => t.id === '17')!;
-    expect(formelAbschnitte(dd17.sections).map((x) => x.title.slice(0, 3))).toEqual(['7.8', '7.4', '7.9']);
+  it('Anhang nachgebaut wie im Belegsatz: Formelübersicht und SQL-Auszug in der Reihenfolge der Prüfung', () => {
+    const formeln = FORMEL_GRUPPEN.flatMap((g) => g.zeilen.map((z) => z.name));
+    expect(formeln.slice(0, 6)).toEqual([
+      'Mittelwert',
+      'Median bzw. Zentralwert',
+      'Empirische Varianz',
+      'Standardabweichung',
+      'Kovarianz',
+      'Pearson-Korrelationskoeffizient',
+    ]);
+    expect(SQL_GRUPPEN.map((g) => g.titel)).toEqual([
+      'Tabelle',
+      'Schlüssel',
+      'Datentypen',
+      'Befehle, Klauseln, Attribute',
+      'Datenmanipulation',
+      'Berechtigungen kontrollieren',
+      'Aggregatfunktionen',
+      'Funktionen',
+      'Datumsteil',
+      'Operatoren',
+    ]);
+    const f = render(createElement(FormelUebersicht), '/aufgabe/x');
+    expect(f).toContain('class="katex');
+    expect(f).not.toContain('katex-error');
+    expect(f).toContain('Netzplan');
+    const sql = render(createElement(SqlAuszug), '/sql');
+    expect(sql).toContain('<b>CREATE</b> <b>TABLE</b>');
+    expect(sql).toContain('Stand 2024-10-07');
   });
 
   it('Anhang-Knöpfe: beide oder einzeln, zu Beginn geschlossen', () => {

@@ -982,6 +982,28 @@ button.stern.nur-icon { padding: 4px 6px; flex: none; }
 .belegsatz-kopf h2 { margin: 0; font-size: 1.1rem; flex: 1; }
 /* Anhang der Prüfung (SQL-Belegsatz, Formelübersicht) über Aufgaben, Klausur und Rechenübungen */
 .anhang-leiste { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+/* Nachbau des Belegsatzes: Tabellen mit Rahmen, graue Gruppenzeilen, Formeln zentriert, Syntax in Schreibmaschinenschrift */
+.anhang-tabelle { width: 100%; margin: 0.6em 0; }
+.anhang-tabelle th, .anhang-tabelle td { border: 1px solid var(--border); padding: 6px 8px; color: var(--text); font-size: 0.88rem; }
+.anhang-tabelle th:first-child, .anhang-tabelle td:first-child { padding-left: 8px; }
+.anhang-tabelle tbody th { font-weight: 500; }
+.anhang-gruppe th { background: var(--surface-2); font-style: italic; font-weight: 600; }
+.anhang-formel { position: relative; text-align: center; overflow-x: auto; }
+.anhang-formel p { margin: 0 0 4px; text-align: left; }
+.anhang-formel .katex-display { margin: 0.2em 0; }
+.anhang-sql td:first-child { width: 60%; }
+@media (max-width: 600px) {
+  .anhang-formeln th, .anhang-formeln td { display: block; width: auto; }
+  .anhang-formeln tbody th[scope="row"] { border-bottom: none; padding-bottom: 0; }
+  .anhang-formeln td { border-top: none; }
+}
+.anhang-syntax { display: block; white-space: pre-wrap; background: none; padding: 0; font-size: 0.8rem; }
+.anhang-syntax b { font-weight: 700; }
+.anhang-knoten { display: inline-block; margin: 0.4em 0; font-size: 0.85rem; }
+.anhang-knoten table { min-width: 0; }
+.anhang-knoten td { border: 1px solid var(--text); padding: 4px 10px; text-align: center; }
+.anhang-knoten td:first-child { padding-left: 10px; }
+.anhang-knoten-ecken { display: flex; justify-content: space-between; font-weight: 600; }
 @media print {
   .belegsatz-panel { display: none !important; }
   .belegsatz-seite .belegsatz-titel button, .belegsatz-seite .nur-bildschirm { display: none; }

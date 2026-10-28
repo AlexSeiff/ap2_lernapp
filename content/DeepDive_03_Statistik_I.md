@@ -336,7 +336,7 @@ Der Kundenservice hat die Reklamationen des letzten Quartals nach Fehlerart ausg
 
 > **Formeln:**
 > - relative Häufigkeit h_i = n_i / n · 100 %
-> - kumulierte relative Häufigkeit = Summe der relativen Häufigkeiten bis einschließlich dieser Zeile
+> - kumulierte relative Häufigkeit H_k = h_1 + h_2 + … + h_k
 
 **B2 (5 P):** *Ermitteln* Sie, wie viele Fehlerarten nötig sind, um mindestens 80 % aller Reklamationen abzudecken, und *benennen* Sie das zugrunde liegende Prinzip.
 
@@ -353,7 +353,6 @@ Die Geschäftsführung möchte wissen, wie lange eine Reparatur „typischerweis
 > **Formeln:**
 > - arithmetisches Mittel x̄ = Σ x_i / n
 > - Median: n ungerade → Wert an Position (n + 1) / 2; n gerade → Mittel der Werte an Position n / 2 und n / 2 + 1
-> - Modus = der am häufigsten vorkommende Wert
 
 **C2 (6 P):** *Vergleichen* Sie Mittelwert und Median. *Erläutern* Sie, was die Differenz über die Verteilung aussagt und welches Lagemaß Sie der Geschäftsführung berichten würden.
 
@@ -399,7 +398,7 @@ Für den Bericht soll die Verteilung der Reparaturdauern aus der **Anlage** als 
 > **Formeln:**
 > - unterer Zaun = Q1 − 1,5 · IQR
 > - oberer Zaun = Q3 + 1,5 · IQR
-> - Ausreißer = alle Werte unterhalb des unteren oder oberhalb des oberen Zauns
+> - Ausreißer: x_i < unterer Zaun oder x_i > oberer Zaun
 
 **E3 (6 P):** *Skizzieren* Sie den Boxplot maßstäblich und *beschriften* Sie Box, Median, beide Whisker und Ausreißer. Achten Sie darauf, wo der obere Whisker endet.
 

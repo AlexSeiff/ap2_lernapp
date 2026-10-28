@@ -267,7 +267,7 @@ Für die Terminplanung hat die Projektleiterin folgende Vorgangsliste erstellt:
 
 > **Formeln:**
 > - Projektdauer = größtes FEZ
-> - kritischer Pfad = alle Vorgänge mit Gesamtpuffer GP = SAZ − FAZ = 0
+> - kritischer Pfad: GP = SAZ − FAZ = 0
 
 **C3 (6 P):** *Berechnen* Sie für die Vorgänge B und E jeweils Gesamtpuffer und freien Puffer. *Erläutern* Sie den Unterschied beider Puffergrößen am Vorgang B.
 

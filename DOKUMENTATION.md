@@ -607,11 +607,14 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
 ### Anhang der Prüfung (October 2026)
 
 In the AP2 the appendix is always there, so the app offers it where it is needed: `AnhangPanel` (`components/Belegsatz.tsx`) shows the
-buttons „SQL-Belegsatz“ and/or „Σ Formelübersicht“ with a side panel (one open at a time, Esc closes). The formula overview renders
-Deep Dive 17, sections 7.8, 7.4 and 7.9 (`FORMEL_ABSCHNITTE`; texts loaded on first open) – exactly what the appendix contains, not the app's
-larger Formelsammlung (linked). Where: SQL editor and SQL exercises (Belegsatz), Rechenübungen (formulas), task page and exam
+buttons „SQL-Belegsatz“ and/or „Σ Formelübersicht“ with a side panel (one open at a time, Esc closes). The panel shows a rebuild of the
+real appendix (`components/PruefungsAnhang.tsx`, data in `src/lib/pruefungsanhang.ts`, lazy because of KaTeX): the Formelübersicht as a
+two-column table with grey group rows (statistics, random variables, regression, ID3, kNN, confusion matrix), the Netzplan node and legend,
+the prefixes, and the SQL-Syntax-Auszug (Stand 2024-10-07) as Syntax | Beschreibung grouped like the appendix. Only formulas and syntax,
+descriptions in our own words, no tips – those stay in Deep Dive 17 (Teil 7), the Formelsammlung and the detailed SQL-Belegsatz (both
+linked from the panel). Where: SQL editor and SQL exercises (Belegsatz), Rechenübungen (formulas), task page and exam
 (`anhangFuer` in `src/lib/anhang.ts`: Belegsatz for tasks with SQL, formulas for tasks with *berechnen*/*ermitteln* or a `> **Formel:**` block; an exam gets what
-any of its tasks needs). `tests/belegsatz.test.ts` checks the sections exist.
+any of its tasks needs). `tests/belegsatz.test.ts` checks order and rendering of the rebuilt appendix.
 
 ### Lernplan im Kalender (October 2026)
 

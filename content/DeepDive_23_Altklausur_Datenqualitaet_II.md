@@ -249,7 +249,7 @@ Hinweise:
 
 **B3 (2 P):** Die Tabelle `verguetung` enthält das Feld `stundenlohn`. Nach der Übernahme erhalten alle Beschäftigten eine Lohnerhöhung. *Formulieren* Sie eine SQL-Anweisung, die den Stundenlohn aller Beschäftigten um 3 % erhöht.
 
-> **Formel:** neuer Stundenlohn = alter Stundenlohn · (1 + 3 / 100) = alter Stundenlohn · 1,03
+> **Formel:** neuer Stundenlohn = alter Stundenlohn · (1 + Erhöhung in % / 100)
 
 ## Block C – Zugriffsrechte und Datenbanksysteme (25 P)
 

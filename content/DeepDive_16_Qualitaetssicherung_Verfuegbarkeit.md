@@ -355,8 +355,8 @@ b) Die Datenbank wird durch einen zweiten, gleichwertigen Server gespiegelt. *Be
 c) *Begründen* Sie, warum gerade die Datenbank redundant ausgelegt wurde. (2 P)
 
 > **Formeln:**
-> - Reihenschaltung (alle müssen laufen): V = V₁ · V₂ · V₃
-> - Parallelschaltung (zwei gleiche Server): V = 1 − (1 − V₁) · (1 − V₂)
+> - Reihenschaltung: V = V₁ · V₂ · V₃
+> - Parallelschaltung: V = 1 − (1 − V₁) · (1 − V₂)
 
 ## Block E – SLA und Redundanz (12 P)
 

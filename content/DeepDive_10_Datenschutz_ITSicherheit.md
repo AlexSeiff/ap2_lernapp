@@ -363,7 +363,7 @@ Das Unternehmen sichert sonntags vollständig (800 GB) und montags bis samstags 
 
 > **Formeln:**
 > - maximaler Datenverlust = Zeitpunkt des Ausfalls − Zeitpunkt der letzten Sicherung
-> - RPO eingehalten, wenn maximaler Datenverlust ≤ RPO
+> - maximaler Datenverlust ≤ RPO
 
 ---
 

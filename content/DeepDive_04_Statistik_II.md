@@ -248,7 +248,7 @@ Zuerst soll geklärt werden, ob Schulungsstunden und Fehlerquote der Montageteam
 
 **A3 (6 P):** *Interpretieren* Sie Ihr Ergebnis nach Vorzeichen und Stärke und *formulieren* Sie eine Aussage, die für die Geschäftsführung verständlich ist.
 
-> **Formel:** Korrelationskoeffizient r = S_xy / √(S_xx · S_yy), mit −1 ≤ r ≤ 1
+> **Formel:** Korrelationskoeffizient r = S_xy / √(S_xx · S_yy)
 
 ## Block B – Korrelation und Kausalität (22 P)
 
@@ -281,11 +281,11 @@ Für die Budgetplanung des nächsten Jahres soll der Umsatz aus dem Werbebudget 
 
 **C3 (6 P):** *Berechnen* Sie den prognostizierten Umsatz für ein Werbebudget von 6 T€ sowie für 20 T€. *Beurteilen* Sie beide Prognosen hinsichtlich ihrer Zulässigkeit.
 
-> **Formel:** Prognose ŷ = a + b · x (a und b aus C1)
+> **Formel:** Prognose ŷ = a + b · x
 
 **C4 (6 P):** *Berechnen* Sie die Residuen für die Monate 1 bis 5 und *erläutern* Sie, worauf Sie bei deren Verteilung achten.
 
-> **Formel:** Residuum e_i = y_i − ŷ_i (beobachteter minus prognostizierter Wert)
+> **Formel:** Residuum e_i = y_i − ŷ_i
 
 ## Block D – Modellgüte (16 P)
 
@@ -301,7 +301,7 @@ Bevor die Prognose in die Planung eingeht, wollen Sie wissen, wie gut die Gerade
 
 > **Formeln:**
 > - Bestimmtheitsmaß R² = r²
-> - R² = 1 − Σ (y_i − ŷ_i)² / S_yy, mit 0 ≤ R² ≤ 1
+> - R² = 1 − Σ (y_i − ŷ_i)² / S_yy
 
 **D3 (4 P):** Ein Kollege ergänzt einen sechsten Monat mit x = 5, y = 15 (fehlerhaft erfasst, tatsächlich 55). *Erläutern* Sie ohne Rechnung, wie sich dieser eine Wert auf r, R² und die Regressionsgerade auswirkt.
 
@@ -311,7 +311,7 @@ Das Controlling legt die Umsätze der letzten acht Monate vor. Monatsumsatz in T
 
 **E1 (6 P):** *Berechnen* Sie den gleitenden 3-Perioden-Durchschnitt für die ersten vier möglichen Werte und *erläutern* Sie den Zweck der Glättung.
 
-> **Formel:** gleitender 3-Perioden-Durchschnitt = Summe von drei aufeinanderfolgenden Werten / 3; das Fenster rückt je Wert um eine Periode weiter
+> **Formel:** gleitender 3-Perioden-Durchschnitt = (x_t + x_(t+1) + x_(t+2)) / 3
 
 **E2 (3 P):** *Berechnen* Sie die prozentuale Veränderung von Monat 1 zu Monat 2 sowie die Gesamtveränderung von Monat 1 zu Monat 8.
 
