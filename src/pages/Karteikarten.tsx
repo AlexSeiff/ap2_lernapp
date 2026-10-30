@@ -8,6 +8,7 @@ import { SqlUebungLinks } from '../components/SqlUebungLinks';
 import { KartenAntwort, KartenFrage } from '../components/KartenText';
 import { Markdown } from '../components/Markdown';
 import { useCardFilters, useCardSession } from '../hooks/useCardSession';
+import { rundenKarten } from '../lib/cards';
 import { leichtZahlen } from '../lib/leicht';
 import { shuffle } from '../lib/shuffle';
 import { isDue, LEICHT_MAX_BOX } from '../lib/progress';
@@ -78,6 +79,7 @@ export function Karteikarten() {
 
   const due = deck.filter((c) => progress.cards[c.id] && isDue(progress.cards[c.id].due));
   const fresh = deck.filter((c) => !progress.cards[c.id]);
+  const naechsteRunde = rundenKarten(due, fresh, NEW_PER_SESSION);
 
   if (session && card && runde) {
     const topic = content.topics.find((t) => t.id === card.topicId);
@@ -309,13 +311,12 @@ export function Karteikarten() {
             <p className="muted">
               {due.length} fällig · {fresh.length} neu · {deck.length} Karten in deiner Auswahl
             </p>
+            {!!due.length && !!fresh.length && (
+              <p className="muted small">Fällige Wiederholungen kommen dran, sobald du jede Karte der Auswahl einmal gesehen hast.</p>
+            )}
           </div>
-          <button
-            type="button"
-            disabled={!due.length && !fresh.length}
-            onClick={() => startRunde([...due, ...fresh.slice(0, NEW_PER_SESSION)])}
-          >
-            <Icon name="play" /> Lernen starten ({due.length + Math.min(fresh.length, NEW_PER_SESSION)})
+          <button type="button" disabled={!naechsteRunde.length} onClick={() => startRunde(naechsteRunde)}>
+            <Icon name="play" /> Lernen starten ({naechsteRunde.length})
           </button>
         </section>
       )}

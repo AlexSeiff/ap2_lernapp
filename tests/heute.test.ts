@@ -294,9 +294,21 @@ describe('planeHeute', () => {
     expect(minuten).toBeGreaterThan(0);
   });
 
+  it('Karten: neue, solange es noch nie gesehene gibt – fällige erst danach', () => {
+    const faellig = Object.fromEntries(Array.from({ length: 12 }, (_, i) => [`K2-${i}`, { box: 1, due: `2026-09-${10 + i}`, reviews: 1 }]));
+    const ids = (p: Progress) => plan(p).items.flatMap((i) => (i.art === 'karten' ? i.ids : []));
+    const mitNeuen = ids({ ...emptyProgress(), cards: faellig });
+    expect(mitNeuen.length).toBeGreaterThan(0);
+    expect(mitNeuen.some((id) => id.startsWith('K2-'))).toBe(false);
+    // Alle übrigen Karten einmal gesehen (nicht fällig) → jetzt kommen die fälligen.
+    const gesehen = Object.fromEntries(content.flashcards.map((c) => [c.id, { box: 3, due: '2026-12-01', reviews: 1 }]));
+    expect(ids({ ...emptyProgress(), cards: { ...gesehen, ...faellig } }).every((id) => id.startsWith('K2-'))).toBe(true);
+  });
+
   it('Karten: fällige zuerst (am längsten fällig), Blöcke je Thema, Link mit ?karten=', () => {
-    const cards = Object.fromEntries(Array.from({ length: 12 }, (_, i) => [`K2-${i}`, { box: 2, due: `2026-09-${10 + i}`, reviews: 1 }]));
-    const r = plan({ ...emptyProgress(), cards });
+    const gesehen = Object.fromEntries(content.flashcards.map((c) => [c.id, { box: 3, due: '2026-12-01', reviews: 1 }]));
+    const faellig = Object.fromEntries(Array.from({ length: 12 }, (_, i) => [`K2-${i}`, { box: 2, due: `2026-09-${10 + i}`, reviews: 1 }]));
+    const r = plan({ ...emptyProgress(), cards: { ...gesehen, ...faellig } });
     const kartenItems = r.items.filter((i) => i.art === 'karten');
     for (const k of kartenItems) {
       expect(k.ids.length).toBeLessThanOrEqual(HEUTE_KARTEN_BLOCK);

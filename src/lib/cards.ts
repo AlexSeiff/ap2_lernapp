@@ -58,3 +58,12 @@ export function isKindEnabled(kind: string, s: CardKindSettings): boolean {
 export function cardPool<T extends Pick<Flashcard, 'kind'>>(cards: T[], s: CardKindSettings): T[] {
   return cards.filter((c) => isKindEnabled(c.kind, s));
 }
+
+/**
+ * Karten einer Lernrunde: Solange die Auswahl noch nie gesehene Karten hat, nur neue (höchstens `maxNeu`) – fällige
+ * Wiederholungen erst, wenn jede Karte einmal dran war. Sonst füllen nicht gewusste Karten die Runden und der übrige Stoff kommt
+ * nie. „Nicht gewusst“ kommt in der laufenden Runde trotzdem noch einmal (useCardSession).
+ */
+export function rundenKarten<T>(faellig: T[], neu: T[], maxNeu: number): T[] {
+  return neu.length ? neu.slice(0, maxNeu) : faellig;
+}

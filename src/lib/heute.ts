@@ -6,7 +6,7 @@ import { HEUTE_KARTEN_BLOCK, HEUTE_MINUTEN, HEUTE_ZEITEN, NEW_PER_SESSION } from
 import type { Progress } from '../../shared/progress';
 import type { Flashcard, Task } from '../../shared/types';
 import { erzeugeZufall, seedAusText } from '../rechnen/zufall';
-import { cardPool } from './cards';
+import { cardPool, rundenKarten } from './cards';
 import { leichtAutomatischAn, leichtKartenGemerkt } from './leicht';
 import { isDue, localDate } from './progress';
 import { diagrammUebungen } from './diagramme';
@@ -108,7 +108,8 @@ const themaVon = (topicId: string | undefined, fallback: string) => topicId ?? f
  *    höchstens 2); gibt es keine, eine noch nie bearbeitete (bevorzugt aus dem schwächsten Thema). Zuletzt richtig gelöste nie.
  * 3. Fällige Fehlerjournal-Aufgaben, deren letzter Versuch unter voller Punktzahl lag (älteste zuerst), bis etwa zur Hälfte der Zeit,
  *    mindestens eine.
- * 4. Die übrige Zeit: fällige Karteikarten (am längsten fällig, niedrigstes Fach zuerst), sonst neue Karten. Es gelten die
+ * 4. Die übrige Zeit: neue Karteikarten, solange es noch nie gesehene gibt; erst danach fällige (am längsten fällig, niedrigstes
+ *    Fach zuerst, siehe rundenKarten). Es gelten die
  *    Einstellungen Prüferfragen/Fachgespräch; im Leicht-Modus nur Karten mit 4 Antworten. Je Thema Blöcke bis HEUTE_KARTEN_BLOCK.
  * 5. Alles nach Thema verschränkt (verschraenke).
  * Was heute schon dran war (`ausschliessen`, dazu heute bearbeitete Aufgaben und geprüfte Übungen), kommt nicht noch einmal.
@@ -278,8 +279,9 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
     ...mischeNachThema(neu.filter((c) => c.typ !== 'begriff')),
     ...mischeNachThema(neu.filter((c) => c.typ === 'begriff')),
   ];
-  const platz = Math.max(Math.floor((ziel - minuten) / proKarte), Math.min(5, faelligeKarten.length + neueKarten.length));
-  const karten = [...faelligeKarten, ...neueKarten.slice(0, NEW_PER_SESSION)].slice(0, platz);
+  const kandidaten = rundenKarten(faelligeKarten, neueKarten, NEW_PER_SESSION);
+  const platz = Math.max(Math.floor((ziel - minuten) / proKarte), Math.min(5, kandidaten.length));
+  const karten = kandidaten.slice(0, platz);
   const nachThema = new Map<string, Flashcard[]>();
   for (const c of karten) {
     const thema = themaVon(c.topicId, c.deckId ? `deck:${c.deckId}` : 'karten');
