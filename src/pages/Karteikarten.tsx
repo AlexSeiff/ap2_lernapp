@@ -138,7 +138,7 @@ export function Karteikarten() {
                   <Icon name={richtig ? 'circle-check' : 'circle-x'} />{' '}
                   {richtig
                     ? `Richtig! Die Karte kommt höchstens in Fach ${LEICHT_MAX_BOX}.`
-                    : 'Leider falsch – die Karte kommt in dieser Runde noch einmal.'}
+                    : 'Leider falsch – die Karte kommt in der nächsten Runde wieder.'}
                 </p>
                 {runde.frage ? (
                   <>

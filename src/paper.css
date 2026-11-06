@@ -187,11 +187,14 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .notebook-page {
   position: relative;
   min-width: 0;
+  --notebook-gutter: 43px;
+  --notebook-grid: color-mix(in srgb, var(--notebook-blue) 9%, transparent);
   border: 1px solid var(--border);
   border-radius: 3px 7px 7px 3px;
   background:
-    linear-gradient(90deg, transparent 43px, var(--paper-margin) 43px 44px, transparent 44px),
-    repeating-linear-gradient(transparent 0 31px, var(--paper-rule) 31px 32px),
+    linear-gradient(90deg, var(--surface) var(--notebook-gutter), var(--paper-margin) var(--notebook-gutter) calc(var(--notebook-gutter) + 1px), transparent 0),
+    repeating-linear-gradient(90deg, transparent 0 23px, var(--notebook-grid) 23px 24px),
+    repeating-linear-gradient(transparent 0 23px, var(--notebook-grid) 23px 24px),
     var(--surface);
   box-shadow: 3px 4px 0 -1px var(--surface-2), 3px 4px 0 0 var(--border), 0 12px 32px #201c1510;
   padding: 36px 38px 48px 68px;
@@ -201,7 +204,9 @@ button, .button, input, select, textarea { border-radius: 5px; }
   background: radial-gradient(circle at 7px 9px, var(--bg) 4px, var(--paper-binding) 4.5px, transparent 5.5px) 0 0 / 15px 88px repeat-y;
   pointer-events: none;
 }
-.page.notebook-page { width: calc(100% - 48px); margin: 28px auto 60px; }
+.page.notebook-page { width: calc(100% - 64px); margin: 32px auto 60px; min-height: calc(100svh - var(--kopf-gesamt) - 92px); }
+/* Eigenständiger Formatierungskontext hält den oberen Blattrand unter der Kopfleiste. */
+.layout > main { display: flow-root; }
 .notebook-running-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 26px; color: var(--muted); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 .notebook-page [class*='farbe-'], .themen-page [class*='farbe-'] { --f: var(--paper-ink); --f-fill: var(--paper-ink-fill); --f-soft: var(--paper-soft); }
 /* Lernjournal: ein zusammenhängendes Blatt statt farbiger Dashboard-Kacheln. */
@@ -297,7 +302,7 @@ button.low { background: var(--c-red-fill); }
 }
 @media (max-width: 759px) {
   .page.notebook-page { width: calc(100% - 24px); margin: 18px auto 30px; padding: 26px 18px 32px 36px; }
-  .notebook-page { background: linear-gradient(90deg, transparent 23px, var(--paper-margin) 23px 24px, transparent 24px), repeating-linear-gradient(transparent 0 31px, var(--paper-rule) 31px 32px), var(--surface); }
+  .notebook-page { --notebook-gutter: 23px; }
   .notebook-page::before { left: 5px; width: 12px; background-size: 12px 96px; }
   .dashboard-page .dashboard-kopf { align-items: flex-start; gap: 14px; padding-bottom: 22px; }
   .dashboard-page .dashboard-untertitel { font-size: .95rem; }

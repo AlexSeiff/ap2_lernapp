@@ -62,7 +62,7 @@ export function cardPool<T extends Pick<Flashcard, 'kind'>>(cards: T[], s: CardK
 /**
  * Karten einer Lernrunde: Solange die Auswahl noch nie gesehene Karten hat, nur neue (höchstens `maxNeu`) – fällige
  * Wiederholungen erst, wenn jede Karte einmal dran war. Sonst füllen nicht gewusste Karten die Runden und der übrige Stoff kommt
- * nie. „Nicht gewusst“ kommt in der laufenden Runde trotzdem noch einmal (useCardSession).
+ * nie. „Nicht gewusst“ wird nicht an die laufende Runde angehängt, sondern ist danach gleich wieder fällig.
  */
 export function rundenKarten<T>(faellig: T[], neu: T[], maxNeu: number): T[] {
   return neu.length ? neu.slice(0, maxNeu) : faellig;

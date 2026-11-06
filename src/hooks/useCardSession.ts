@@ -79,13 +79,12 @@ export function useCardSession() {
   /** Zufall der Runde: die Reihenfolge der Antworten hängt von ihm und der Position ab – stabil beim erneuten Rendern. */
   const [rundenSeed, setRundenSeed] = useState(1);
   const [done, setDone] = useState({ gewusst: 0, unsicher: 0, nicht: 0 });
-  /** Letzte Bewertung (Aufdecken-Modus) zum Rückgängigmachen: Karte, Stand davor und ob sie noch einmal hinten angehängt wurde. */
+  /** Letzte Bewertung (Aufdecken-Modus) zum Rückgängigmachen: Karte und Stand davor. */
   const [letzte, setLetzte] = useState<{
     id: string;
     rating: Rating;
     vorher?: CardState;
     tage: Record<string, number>;
-    angehaengt: boolean;
   } | null>(null);
 
   const start = (cards: Flashcard[], leichtModus: Map<string, LeichtKarte> | null = null) => {
@@ -126,11 +125,10 @@ export function useCardSession() {
   const rate = useCallback(
     (r: Rating) => {
       if (!card || !session) return;
-      setLetzte({ id: card.id, rating: r, vorher: progress.cards[card.id], tage: progress.cardReviewDays, angehaengt: r === 'nicht' });
+      setLetzte({ id: card.id, rating: r, vorher: progress.cards[card.id], tage: progress.cardReviewDays });
       update((p) => rateCard(p, card.id, r));
       setDone((d) => ({ ...d, [r]: d[r] + 1 }));
-      // „Nicht gewusst" kommt in dieser Runde noch einmal dran.
-      if (r === 'nicht') setSession([...session, card]);
+      // „Nicht gewusst“ wird nicht hinten angehängt: Fach 1 und gleich wieder fällig – sie kommt in der nächsten Runde.
       next();
     },
     [card, session, update, next, progress.cards, progress.cardReviewDays],
@@ -139,7 +137,7 @@ export function useCardSession() {
   /** Letzte Bewertung zurücknehmen: Kartenstand und Lerntage wie vorher, die Karte steht wieder umgedreht zum Neubewerten bereit. */
   const rueckgaengig = useCallback(() => {
     if (!letzte || !session || index === 0) return;
-    const { id, rating, vorher, tage, angehaengt } = letzte;
+    const { id, rating, vorher, tage } = letzte;
     update((p) => {
       const cards = { ...p.cards };
       if (vorher) cards[id] = vorher;
@@ -147,14 +145,13 @@ export function useCardSession() {
       return { ...p, cards, cardReviewDays: tage };
     });
     setDone((d) => ({ ...d, [rating]: Math.max(0, d[rating] - 1) }));
-    if (angehaengt) setSession(session.slice(0, -1));
     setIndex((i) => i - 1);
     setFlipped(true);
     setEigeneAntwort('');
     setLetzte(null);
   }, [letzte, session, index, update]);
 
-  /** Leicht-Modus: Antwort `i` wählen – sofort bewertet (Fach höchstens 2), falsche Karten kommen in der Runde wieder. */
+  /** Leicht-Modus: Antwort `i` wählen – sofort bewertet (Fach höchstens 2), falsche Karten kommen in der nächsten Runde wieder. */
   const waehle = useCallback(
     (i: number) => {
       if (!card || !session || !optionen || gewaehlt !== null || !optionen[i]) return;
@@ -162,7 +159,6 @@ export function useCardSession() {
       setGewaehlt(i);
       update((p) => rateCardLeicht(p, card.id, richtig));
       setDone((d) => (richtig ? { ...d, gewusst: d.gewusst + 1 } : { ...d, nicht: d.nicht + 1 }));
-      if (!richtig) setSession([...session, card]);
     },
     [card, session, optionen, gewaehlt, update],
   );
