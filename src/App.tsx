@@ -5,7 +5,6 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { Icon } from './components/Icon';
 import { Kopfleiste } from './components/Kopfleiste';
 import { HeuteLeiste } from './components/HeuteLeiste';
-import { MobileNav } from './components/MobileNav';
 import { UpdateHinweis } from './components/UpdateHinweis';
 import { IS_STATIC } from './lib/api';
 import { aktiverBereich, type NavBadge } from './lib/navigation';
@@ -161,7 +160,6 @@ function Nav({ onSuche }: { onSuche: () => void }) {
   return (
     <>
       <Kopfleiste onSuche={onSuche} badges={badges} saveText={SAVE_TEXT[saveState] ?? SAVE_TEXT.fehler} saveState={saveState} />
-      <MobileNav badges={badges} />
     </>
   );
 }

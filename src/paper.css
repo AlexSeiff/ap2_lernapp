@@ -475,3 +475,47 @@ button.seitenleiste-schalter.bereich-aktiv { color: var(--notebook-blue); }
 .seitenleiste-pfeil { width: 15px; height: 15px; flex-shrink: 0; color: var(--muted); transition: transform .18s ease; }
 .seitenleiste-schalter[aria-expanded='true'] .seitenleiste-pfeil { transform: rotate(90deg); }
 @media (prefers-reduced-motion: reduce) { .seitenleiste-pfeil { transition: none; } }
+
+/* Das Inhaltsverzeichnis liegt als Lesezeichen am oberen Buchrand. */
+@media screen {
+  :root { --kopf-hoehe: 68px; --kopf-gesamt: calc(var(--kopf-hoehe) + env(safe-area-inset-top, 0px)); }
+  .layout > main, .layout > .kopf { margin-left: 0; }
+  .kopf { background: var(--surface-2); border-bottom: 1px solid var(--paper-binding); }
+  .kopf-innen { display: flex; max-width: 1250px; height: var(--kopf-hoehe); gap: 22px; padding: 0 28px; }
+  .kopf-logo { display: flex; font-family: Georgia, 'Times New Roman', serif; font-weight: 600; letter-spacing: -.02em; }
+  .kopf-logo-text { position: static; width: auto; height: auto; padding: 0; margin: 0; overflow: visible; clip: auto; white-space: nowrap; }
+  .kopf-titel, .toolbar-kontext { display: none; }
+  .kopf-bereiche { display: flex; align-self: stretch; align-items: flex-end; gap: 5px; min-width: 0; margin: 0 auto 0 0; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
+  .kopf-bereiche a { flex: none; gap: 7px; min-height: 45px; padding: 11px 13px; border: 1px solid var(--border); border-bottom: 0; border-radius: 5px 9px 0 0; background: color-mix(in srgb, var(--paper-binding) 16%, var(--surface-2)); color: var(--text); box-shadow: none; font-size: .8rem; }
+  .kopf-bereiche a::before { content: ''; align-self: flex-start; flex: none; width: 7px; height: 15px; margin-top: 1px; background: var(--notebook-blue-fill); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%); }
+  .kopf-bereiche a:nth-child(even)::before { background: var(--notebook-clay-fill); }
+  .kopf-bereiche a:hover { background: var(--surface); }
+  .kopf-bereiche a.active { min-height: 50px; background: var(--surface); color: var(--notebook-blue); border-top: 2px solid var(--notebook-blue); box-shadow: 0 -3px 8px #302a200a; }
+  .kopf-bereiche a .icon { color: inherit; width: 16px; height: 16px; }
+  .kopf-bereiche .kopf-label { position: static; width: auto; height: auto; padding: 0; margin: 0; overflow: visible; clip: auto; white-space: nowrap; }
+  .kopf-rechts { margin-left: auto; }
+  .unterleiste { display: block; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .unterleiste-innen { flex-wrap: nowrap; overflow-x: auto; gap: 5px; padding: 11px 28px 0; scrollbar-width: thin; }
+  .unterleiste a { min-height: 40px; padding: 9px 13px; background: var(--surface-2); }
+  .unterleiste a.active { background: var(--surface); }
+  main { padding-bottom: 0; }
+}
+@media screen and (max-width: 900px) {
+  .kopf-innen { gap: 12px; padding-inline: 16px; }
+  .kopf-bereiche a { padding-inline: 10px; }
+  .kopf-rechts .kopf-label { display: none; }
+}
+@media screen and (max-width: 759px) {
+  :root { --kopf-hoehe: 104px; --kopf-gesamt: calc(var(--kopf-hoehe) + env(safe-area-inset-top, 0px)); }
+  .kopf-innen { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 52px 52px; gap: 0 10px; height: var(--kopf-hoehe); padding: 0 12px; }
+  .kopf-logo { grid-column: 1; grid-row: 1; }
+  .kopf-logo-text { display: inline; }
+  .kopf-rechts { grid-column: 2; grid-row: 1; }
+  .kopf-bereiche { grid-column: 1 / -1; grid-row: 2; width: 100%; margin: 0; }
+  .kopf-bereiche a { min-height: 44px; padding: 10px 11px; }
+  .kopf-bereiche a.active { min-height: 49px; }
+  .kopf-rechts .suche-knopf { border-radius: 4px; }
+  .unterleiste-innen { padding: 9px 12px 0; }
+  .unterleiste a { min-height: 42px; }
+  .toast { bottom: max(12px, env(safe-area-inset-bottom, 0px)); }
+}

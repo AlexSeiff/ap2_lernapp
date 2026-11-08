@@ -12,7 +12,6 @@ import {
   sichtbareZiele,
 } from '../lib/navigation';
 import { Icon } from './Icon';
-import { Seitenleiste } from './Seitenleiste';
 
 type Props = {
   onSuche: () => void;
@@ -30,17 +29,22 @@ function suchKuerzel(): string {
 }
 
 /**
- * Kopfleiste (Umsetzungsplan Phase 2): Logo → Übersicht, die vier Bereiche, Suche und Speicherstatus; darunter die Unterleiste des
- * aktiven Bereichs. Unter 600 px blendet CSS die Bereiche aus (die stehen dann in der Tab-Bar unten) und zeigt den Bereichstitel.
+ * Notizbuchregister mit Übersicht und Bereichen; darunter die Ziele des aktiven Bereichs.
  */
 export function Kopfleiste({ onSuche, badges, saveText, saveState }: Props) {
   const { pathname } = useLocation();
   const aktiv = aktiverBereich(pathname);
   const problem = saveState === 'fehler' || saveState === 'konflikt';
   const ziel = aktiv ? aktivesUnterziel(pathname, bereich(aktiv)) : undefined;
+  const register = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const box = register.current;
+    const el = box?.querySelector<HTMLElement>('a.active');
+    if (!box || !el || box.scrollWidth <= box.clientWidth) return;
+    box.scrollLeft += el.getBoundingClientRect().left - box.getBoundingClientRect().left - (box.clientWidth - el.clientWidth) / 2;
+  }, [aktiv, pathname]);
   return (
     <>
-      <Seitenleiste badges={badges} onSuche={onSuche} />
       <header className="kopf">
         <div className="kopf-innen">
           <Link to="/" className={`kopf-logo${pathname === '/' ? ' active' : ''}`} aria-current={pathname === '/' ? 'page' : undefined}>
@@ -56,7 +60,11 @@ export function Kopfleiste({ onSuche, badges, saveText, saveState }: Props) {
             <Icon name="chevron-right" />
             <b>{ziel?.label ?? 'Übersicht'}</b>
           </div>
-          <nav className="kopf-bereiche" aria-label="Bereiche">
+          <nav ref={register} className="kopf-bereiche" aria-label="Bereiche">
+            <Link to="/" className={`kopf-start${pathname === '/' ? ' active' : ''}`} aria-current={pathname === '/' ? 'page' : undefined}>
+              <Icon name="house" />
+              <span className="kopf-label">Übersicht</span>
+            </Link>
             {BEREICHE.map((b) => {
               const n = badgeSumme(sichtbareZiele(b, IS_STATIC), badges);
               return (
@@ -102,7 +110,7 @@ function Unterleiste({ b, pathname, badges }: { b: Bereich; pathname: string; ba
     const box = leiste.current;
     const el = box?.querySelector<HTMLElement>('a.active');
     if (!box || !el || box.scrollWidth <= box.clientWidth) return;
-    box.scrollLeft = el.offsetLeft - box.clientWidth / 2 + el.clientWidth / 2;
+    box.scrollLeft += el.getBoundingClientRect().left - box.getBoundingClientRect().left - (box.clientWidth - el.clientWidth) / 2;
   }, [aktiv]);
   return (
     <nav className="unterleiste" aria-label={b.label}>

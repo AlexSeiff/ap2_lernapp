@@ -108,7 +108,7 @@ describe('Komponenten', () => {
     expect(html).not.toContain('bn-panel');
   });
 
-  it('Kopfleiste: Logo, vier Bereiche, Suche, Speicherstatus und die Unterleiste des aktiven Bereichs', () => {
+  it('Kopfleiste: Übersicht, vier Bereiche, Suche, Speicherstatus und die Unterleiste des aktiven Bereichs', () => {
     const html = ohneTrenner(
       renderToString(
         createElement(
@@ -119,6 +119,7 @@ describe('Komponenten', () => {
       ),
     );
     expect(html).toContain('AP2 Lern-App');
+    expect(html).toMatch(/class="kopf-start" href="\/"/);
     for (const l of ['Lernen', 'Glossar', 'SQL-Editor', 'Einstellungen']) expect(html).toContain(`<span class="kopf-label">${l}</span>`);
     expect(html).toContain('<span class="kopf-label">Suchen</span>');
     expect(html).toContain('Gespeichert');
@@ -139,6 +140,7 @@ describe('Komponenten', () => {
       ),
     );
     expect(html).not.toContain('unterleiste');
+    expect(html).toMatch(/class="kopf-start active" aria-current="page" href="\/"/);
     expect(html).toContain('<span class="">Speichern fehlgeschlagen</span>');
   });
 });
