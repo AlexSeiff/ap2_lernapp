@@ -7,16 +7,16 @@ name: GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Immer nur ein Deployment; ein laufendes wird nicht abgebrochen, damit keine halbe Version online geht.
 concurrency:
-  group: pages
+  group: pages-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -32,17 +32,23 @@ jobs:
       - run: npm test
       - run: npm run lint
       - run: npm run build:pages
-      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
           path: dist
 
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
