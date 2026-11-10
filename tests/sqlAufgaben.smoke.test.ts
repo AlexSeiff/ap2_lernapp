@@ -30,13 +30,14 @@ function ergebnis(setup: string, query: string, pruefabfrage?: string): Statemen
   }
 }
 
-/** Wie die App nach der Abgabe prüft (ohne Worker und ohne Variante). */
-function pruefe(taskId: string, query: string) {
+/** Wie die App nach der Abgabe prüft, auf frischen Grund- oder Variantendaten. */
+function pruefe(taskId: string, query: string, variante = false) {
   const sql = sqlUebungZuAufgabe(content, content.tasks[taskId]);
   if (!sql) throw new Error(`${taskId} ist nicht mit einer SQL-Übung verknüpft`);
   const { ex, ds } = sql;
-  const expected = ergebnis(ds.setup, ex.loesung, ex.pruefabfrage);
-  return compareResults(ergebnis(ds.setup, query, ex.pruefabfrage), expected, vergleichFuerAufgabe(ex), ex.pruefabfrage ?? ex.loesung);
+  const setup = variante ? `${ds.setup}\n${ds.variante}` : ds.setup;
+  const expected = ergebnis(setup, ex.loesung, ex.pruefabfrage);
+  return compareResults(ergebnis(setup, query, ex.pruefabfrage), expected, vergleichFuerAufgabe(ex), ex.pruefabfrage ?? ex.loesung);
 }
 
 const verknuepft = Object.values(content.tasks).filter((t) => t.sqlUebung);
@@ -52,9 +53,16 @@ describe('Klausuraufgaben im SQL-Editor', () => {
     expect(content.tasks['01-A4'].sqlUebung).toBeUndefined();
   });
 
-  it.each(verknuepft.map((t) => [t.id, t.sqlUebung!] as const))('%s: die Musterlösung der Übung (%s) besteht', (taskId) => {
-    const { ex } = sqlUebungZuAufgabe(content, content.tasks[taskId])!;
-    expect(pruefe(taskId, ex.loesung).ok).toBe(true);
+  it.each(verknuepft)('$id: jede SQL-Musterlösung im Lernblatt besteht die Prüfung der zugehörigen Übung', (task) => {
+    const { ds } = sqlUebungZuAufgabe(content, task)!;
+    const bloecke = [...(task.solution?.markdown ?? '').matchAll(/^`{3}sql[ \t]*\n([\s\S]*?)^`{3}[ \t]*$/gim)];
+    expect(bloecke.length, 'SQL-Block in der angezeigten Musterlösung').toBeGreaterThan(0);
+    for (const [, sql] of bloecke) {
+      for (const variante of ds.variante ? [false, true] : [false]) {
+        const ergebnis = pruefe(task.id, sql, variante);
+        expect(ergebnis.ok, `${variante ? 'Variante' : 'Grunddaten'}: ${ergebnis.message}`).toBe(true);
+      }
+    }
   });
 
   it.each([
