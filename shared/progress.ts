@@ -519,7 +519,9 @@ const MIGRATIONS: Record<number, (raw: Raw) => Raw> = {
 export function migrateProgress(raw: unknown): Progress {
   if (!isObject(raw)) return emptyProgress();
   let data: Raw = raw;
-  for (let v = num(data.version, 1); v < PROGRESS_VERSION; v++) data = MIGRATIONS[v]?.(data) ?? data;
+  const version = num(data.version, 1);
+  const start = Number.isSafeInteger(version) && version >= 1 ? version : 1;
+  for (let v = start; v < PROGRESS_VERSION; v++) data = MIGRATIONS[v]?.(data) ?? data;
 
   const { activeExam, ...rest } = data;
   const exam = migrateExam(activeExam, 'aktiv');
