@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { defineRoute, HttpError, matchRoute, parseBody, type Route } from '../server/router';
+import { pruefeHerkunft, defineRoute, HttpError, matchRoute, parseBody, type Route } from '../server/router';
 import { GenerateRequestSchema, GradeRequestSchema } from '../shared/api';
 
 const handler = () => null;
@@ -91,4 +91,16 @@ describe('Request-Schemas', () => {
       expect(error(() => parseBody(GradeRequestSchema, body)).message).toBe('Ungültige Anfrage – Die Anfrage muss ein JSON-Objekt sein.');
     }
   });
+});
+
+it('schützt schreibende lokale Routen vor fremden Browser-Ursprüngen', () => {
+  const host = 'localhost:5178';
+  for (const methode of ['POST', 'PUT', 'DELETE']) {
+    for (const origin of ['http://example.invalid', 'http://localhost:9000', 'https://localhost:5178', 'null']) {
+      expect(() => pruefeHerkunft(methode, origin, host, false)).toThrow(expect.objectContaining({ status: 403 }));
+    }
+    expect(() => pruefeHerkunft(methode, 'http://localhost:5178', host, false)).not.toThrow();
+    expect(() => pruefeHerkunft(methode, 'https://localhost:5178', host, true)).not.toThrow();
+    expect(() => pruefeHerkunft(methode, undefined, host, false)).not.toThrow();
+  }
 });

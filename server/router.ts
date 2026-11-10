@@ -55,6 +55,12 @@ export function matchRoute(routes: readonly Route[], method: string, pathname: s
   return undefined;
 }
 
+/** Browser senden bei schreibenden, ursprungsübergreifenden Requests den Origin-Header. */
+export function pruefeHerkunft(method: string | undefined, origin: string | undefined, host: string | undefined, https: boolean) {
+  if (method === 'GET' || origin === undefined) return;
+  if (origin !== `${https ? 'https' : 'http'}://${host}`) throw new HttpError(403, 'Diese Anfrage stammt von einer anderen Website.');
+}
+
 export async function readBody(req: IncomingMessage): Promise<unknown> {
   const chunks: Buffer[] = [];
   for await (const chunk of req) chunks.push(chunk as Buffer);

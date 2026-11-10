@@ -2,6 +2,7 @@
 // So startet die gesamte App mit einem einzigen `npm run dev` – oder gebaut mit `npm start` (vite preview).
 
 import { watch } from 'node:fs';
+import { TLSSocket } from 'node:tls';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { join } from 'node:path';
 import type { Plugin } from 'vite';
@@ -12,7 +13,7 @@ import type { Content } from '../shared/types';
 import { aiEnabled, generateTasks, gradeAnswer, MODEL } from './ai';
 import { createContentCache, withGenerated } from './contentCache';
 import { isContentSource, ladeInhalt, SOURCE_DIR } from './loadContent';
-import { defineRoute, HttpError, matchRoute, parseBody, readBody, send, type Route } from './router';
+import { defineRoute, HttpError, matchRoute, parseBody, pruefeHerkunft, readBody, send, type Route } from './router';
 import { backupInfo, readGenerated, readProgress, writeGenerated, writeProgress } from './store';
 
 // Mit Kern (ohne Abschnittstexte) und Texten je Thema, wie content.json und texte/<id>.json in der Pages-Version (shared/texte.ts).
@@ -111,6 +112,7 @@ async function apiMiddleware(req: IncomingMessage, res: ServerResponse, next: ()
   try {
     const match = matchRoute(routes, req.method ?? 'GET', url.pathname);
     if (!match) return send(res, 404, { error: `Unbekannte Route ${req.method} ${url.pathname}` } satisfies ErrorResponse);
+    pruefeHerkunft(req.method, req.headers.origin, req.headers.host, req.socket instanceof TLSSocket && req.socket.encrypted);
     send(res, 200, await match.route.handler({ req, params: match.params }));
   } catch (err) {
     const status = err instanceof HttpError ? err.status : 500;
