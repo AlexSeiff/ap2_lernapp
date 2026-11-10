@@ -36,7 +36,9 @@ r misst Stärke und Richtung eines **linearen** Zusammenhangs und liegt immer zw
 $r = \dfrac{S_{xy}}{\sqrt{S_{xx} \cdot S_{yy}}}$
 
 mit
-$S_{xy} = \sum (x - \bar{x})(y - \bar{y})$ · $S_{xx} = \sum (x - \bar{x})^2$ · $S_{yy} = \sum (y - \bar{y})^2$
+- $S_{xy} = \sum (x - \bar{x})(y - \bar{y})$
+- $S_{xx} = \sum (x - \bar{x})^2$
+- $S_{yy} = \sum (y - \bar{y})^2$
 
 | \|r\| | Interpretation |
 |---|---|
@@ -94,7 +96,8 @@ $\hat{y} = a + b \cdot x$
 
 **Berechnung:**
 
-$b = \dfrac{S_{xy}}{S_{xx}}$ · $a = \bar{y} - b \cdot \bar{x}$
+- $b = \dfrac{S_{xy}}{S_{xx}}$
+- $a = \bar{y} - b \cdot \bar{x}$
 
 Die Gerade wird nach der **Methode der kleinsten Quadrate** bestimmt: Die Summe der quadrierten senkrechten (in y-Richtung gemessenen, nicht rechtwinklig zur Geraden) Abstände zwischen Beobachtungen und Gerade wird minimiert. Diese Abstände heißen **Residuen** ($e = y - \hat{y}$).
 
@@ -111,9 +114,11 @@ Werbebudget x (in T€) und Umsatz y (in T€) über fünf Monate:
 | 5 | 5 | 56 | 2 | 12 | 24 | 4 |
 | **Σ** | **15** | **220** | 0 | 0 | **64** | **10** |
 
-$\bar{x} = \frac{15}{5} = 3$ · $\bar{y} = \frac{220}{5} = 44$
+- $\bar{x} = \frac{15}{5} = 3$
+- $\bar{y} = \frac{220}{5} = 44$
 
-$b = \frac{64}{10}$ = **6,4** · $a = 44 - 6{,}4 \cdot 3 = 44 - 19{,}2$ = **24,8**
+- $b = \frac{64}{10}$ = **6,4**
+- $a = 44 - 6{,}4 \cdot 3 = 44 - 19{,}2$ = **24,8**
 
 **Regressionsgleichung:** $\hat{y} = 24{,}8 + 6{,}4 \cdot x$
 
@@ -157,9 +162,11 @@ Glättet kurzfristige Schwankungen und macht den Trend sichtbar. Beim **3-Period
 
 Beispiel (Monatsumsatz in T€): 120, 138, 126, 150, 144, 168, 156, 180
 
-Erster Wert: $\frac{120 + 138 + 126}{3}$ = **128,0** · zweiter: $\frac{138 + 126 + 150}{3}$ = **138,0** · dritter: $\frac{126 + 150 + 144}{3}$ = **140,0** …
+- Erster Wert: $\frac{120 + 138 + 126}{3}$ = **128,0**
+- Zweiter: $\frac{138 + 126 + 150}{3}$ = **138,0**
+- Dritter: $\frac{126 + 150 + 144}{3}$ = **140,0** …
 
-Geglättete Reihe: 128,0 · 138,0 · 140,0 · 154,0 · 156,0 · 168,0
+Geglättete Reihe: 128,0; 138,0; 140,0; 154,0; 156,0; 168,0
 
 Der zackige Verlauf verschwindet, der steigende Trend wird klar erkennbar. **Preis der Glättung:** Am Anfang und Ende der Reihe fehlen Werte (bei 3 Perioden je einer), und aktuelle Ausschläge werden abgeschwächt – für Frühwarnzwecke ist das ein Nachteil.
 

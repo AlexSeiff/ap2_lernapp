@@ -100,7 +100,7 @@ FROM bestellposition;
 ```
 
 - `COALESCE(a, b, …)` erster Wert ungleich NULL · `NULLIF(a, b)` NULL, wenn gleich · SQLite: `IFNULL(a, b)`, `IIF(bed, ja, nein)`.
-- `ROW_NUMBER()` 1, 2, 3, 4 · `RANK()` 1, 2, 2, 4 · `DENSE_RANK()` 1, 2, 2, 3. Fensterfunktionen verdichten nicht – jede Zeile bleibt.
+- `ROW_NUMBER()` 1, 2, 3, 4; `RANK()` 1, 2, 2, 4; `DENSE_RANK()` 1, 2, 2, 3. Fensterfunktionen verdichten nicht – jede Zeile bleibt.
 
 ## 6. Daten ändern (DML)
 

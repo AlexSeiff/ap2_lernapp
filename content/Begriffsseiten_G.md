@@ -662,7 +662,7 @@ Monatsumsatz (T€): 120, 138, 126, 150, 144, 168, 156, 180
 - $\frac{138 + 126 + 150}{3} = 138{,}0$
 - $\frac{126 + 150 + 144}{3} = 140{,}0$
 
-Geglättet: 128 · 138 · 140 · 154 · 156 · 168 – der steigende Trend ist klar.
+Geglättet: 128, 138, 140, 154, 156, 168 – der steigende Trend ist klar.
 
 ### Abgrenzung
 Die Regression legt eine Trendgerade durch alle Punkte; der gleitende Durchschnitt glättet lokal und macht keine Prognose über die Reihe hinaus.
@@ -945,7 +945,7 @@ Typische Fehler sind `<` statt `<=` oder um eins verschobene Zähler. Die Grenzw
 
 ### Beispiel
 Rabattregel: unter 500 € kein Rabatt, 500 € bis unter 2.000 € 5 %, ab 2.000 € 10 %, negative Werte ungültig.
-Grenzwerte: −0,01 € · 0,00 € · 499,99 € · 500,00 € · 1.999,99 € · 2.000,00 €.
+Grenzwerte: −0,01 €; 0,00 €; 499,99 €; 500,00 €; 1.999,99 €; 2.000,00 €.
 Mit 5 Repräsentanten ergeben sich 11 Testfälle. Bei 500,00 € fällt auf, wenn der Code `> 500` statt `>= 500` prüft.
 
 ### Abgrenzung

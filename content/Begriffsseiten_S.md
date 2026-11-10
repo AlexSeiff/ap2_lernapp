@@ -69,7 +69,7 @@ Säulen eignen sich für den Vergleich von Kategorien (Umsatz je Filiale) und f�
 ```
 
 ### Beispiel
-Umsätze des Möbelhauses: 4,80 · 4,95 · 5,10 Mio. €. Mit Nullpunkt sind die Säulen fast gleich hoch (+6,25 %). Beginnt die Achse bei 4,70 Mio. €, stehen die sichtbaren Höhen im Verhältnis 1 : 2,5 : 4 – das Bild lügt.
+Umsätze des Möbelhauses: 4,80; 4,95; 5,10 Mio. €. Mit Nullpunkt sind die Säulen fast gleich hoch (+6,25 %). Beginnt die Achse bei 4,70 Mio. €, stehen die sichtbaren Höhen im Verhältnis 1 : 2,5 : 4 – das Bild lügt.
 
 ### Abgrenzung
 Das **Balkendiagramm** zeigt dieselbe Information waagerecht und ist bei langen Kategorienamen oder vielen Kategorien besser. Das **Liniendiagramm** passt zu längeren Zeitreihen; bei kategorialen Daten wäre die Verbindungslinie sachlich falsch.
@@ -598,10 +598,10 @@ Sortieren durch Auswählen: Im unsortierten Rest wird jeweils das kleinste Eleme
 Die Liste besteht aus einem sortierten Teil vorn und einem unsortierten Rest. In jedem Durchlauf wird der ganze Rest nach dem Minimum durchsucht – auch wenn die Liste schon sortiert ist. Daher braucht Selection Sort stets $\frac{n \cdot (n - 1)}{2}$ Vergleiche, aber höchstens n − 1 Vertauschungen. Das Verfahren ist **nicht stabil**, weil der Tausch über große Abstände gleiche Schlüssel überholen kann.
 
 ### Beispiel
-Lieferzeiten 5 · 3 · 8 · 1:
-1. Minimum 1 → mit 5 tauschen: 1 · 3 · 8 · 5
-2. Minimum im Rest 3 → bleibt: 1 · 3 · 8 · 5
-3. Minimum im Rest 5 → mit 8 tauschen: 1 · 3 · 5 · 8
+Lieferzeiten 5, 3, 8, 1:
+1. Minimum 1 → mit 5 tauschen: 1, 3, 8, 5
+2. Minimum im Rest 3 → bleibt: 1, 3, 8, 5
+3. Minimum im Rest 5 → mit 8 tauschen: 1, 3, 5, 8
 
 Insgesamt 3 + 2 + 1 = 6 Vergleiche, 2 Vertauschungen.
 

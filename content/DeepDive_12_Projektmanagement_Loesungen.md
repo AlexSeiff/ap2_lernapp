@@ -74,7 +74,9 @@ Empfehlung *(3 P)*: Ein **hybrides Vorgehen**. Der feste Endtermin verlangt eine
 | (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | 16 | **Vermindern** – frühzeitiges Data Profiling in der Analysephase, Pufferzeit für Bereinigung einplanen, Qualitätsregeln im ETL |
 | (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | 9 | **Vermindern** – feste Termine früh verbindlich vereinbaren, Verfügbarkeit durch die Leitung zusichern lassen, kurze getaktete Abstimmungen |
 
-Rechnung: (a) $2 \cdot 5$ = **10** · (b) $4 \cdot 4$ = **16** · (c) $3 \cdot 3$ = **9**
+- Rechnung: (a) $2 \cdot 5$ = **10**
+- (b) $4 \cdot 4$ = **16**
+- (c) $3 \cdot 3$ = **9**
 
 Risiko (b) hat mit 16 die höchste Priorität und ist zuerst zu behandeln – was in einem Datenprojekt auch der Erfahrung entspricht.
 

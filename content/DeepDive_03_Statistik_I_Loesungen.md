@@ -92,7 +92,8 @@ $\bar{x} = \frac{2 + 4 + 5 + 6 + 8}{5} = \frac{25}{5} = 5$ Tage
 | 8 | 3 | 9 |
 | **Σ 25** | **Σ 0** | **Σ 20** |
 
-Varianz: $\sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n} = \frac{20}{5}$ = **4 (Tage²)** · Standardabweichung: $\sigma = \sqrt{\sigma^2} = \sqrt{4}$ = **2,00 Tage**
+- Varianz: $\sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n} = \frac{20}{5}$ = **4 (Tage²)**
+- Standardabweichung: $\sigma = \sqrt{\sigma^2} = \sqrt{4}$ = **2,00 Tage**
 
 *Prüferkommentar: 2 P Mittelwert, 3 P vollständige Abweichungstabelle, 2 P Summe der Abweichungsquadrate, 2 P Varianz, 1 P Standardabweichung. Wer mit n − 1 rechnet (s² = 5, s = 2,24), verfehlt die Aufgabenstellung – ausdrücklich verlangt war die Grundgesamtheit (÷ n). Mittelwert, Tabelle und Summe der Abweichungsquadrate bleiben bepunktet (max. 7 P), Varianz und Standardabweichung nicht. Kontrolle: Σ(x − x̄) muss 0 ergeben.*
 

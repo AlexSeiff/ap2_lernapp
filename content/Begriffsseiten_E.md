@@ -638,7 +638,7 @@ $p_i$ ist der Anteil der Klasse i; ein Summand mit $p_i = 0$ zählt als 0. Bei m
 ### Beispiel
 10 Aufträge der Möbelhaus Nordholz GmbH, 4 mit und 6 ohne Reklamation:
 $H = -0{,}4 \cdot \log_2 0{,}4 - 0{,}6 \cdot \log_2 0{,}6 = 0{,}529 + 0{,}442 = 0{,}971$.
-Merkwerte bei zwei Klassen: 1 : 1 → 1,000 · 1 : 2 → 0,918 · 1 : 3 → 0,811 · 1 : 4 → 0,722 · rein → 0.
+Merkwerte bei zwei Klassen: 1 : 1 → 1,000, 1 : 2 → 0,918, 1 : 3 → 0,811, 1 : 4 → 0,722, rein → 0.
 
 ### Abgrenzung
 Die **Entropie** beschreibt eine Menge, der **Informationsgewinn** eine Aufteilung. Der **Gini-Index** ist ein alternatives Unreinheitsmaß (z. B. in CART-Bäumen).

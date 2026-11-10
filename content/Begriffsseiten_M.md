@@ -783,7 +783,7 @@ Sortierverfahren nach dem Prinzip „Teile und herrsche“: Liste halbieren, die
 Die Liste wird so lange geteilt, bis nur noch Einzelelemente übrig sind; beim Zusammenführen vergleicht man jeweils die vordersten Elemente beider Teillisten. Der Aufwand ist **immer O(n log n)** – auch im schlechtesten Fall. Merge Sort ist **stabil**, braucht aber zusätzlichen Speicher in der Größe der Liste.
 
 ### Beispiel
-5 · 3 · 8 · 1 → teilen: [5 · 3] [8 · 1] → sortieren: [3 · 5] [1 · 8] → mischen: 1 · 3 · 5 · 8.
+5, 3, 8, 1 → teilen: [5, 3] [8, 1] → sortieren: [3, 5] [1, 8] → mischen: 1, 3, 5, 8.
 Bei n = 1.000 braucht Merge Sort rund $1.000 \cdot \log_2 1.000 \approx 10.000$ Vergleiche, Bubble Sort im schlechtesten Fall rund 500.000.
 
 ### Abgrenzung
@@ -1397,7 +1397,9 @@ $\text{MSE} = \frac{\sum (y - \hat{y})^2}{n}$. Durch das Quadrieren zählen gro�
 
 ### Beispiel
 Fehler +10, −6, +6, −2, +2 → Quadrate 100, 36, 36, 4, 4, Summe 180.
-$\text{MSE} = \frac{180}{5} = 36{,}00$ T€² · $\text{RMSE} = \sqrt{36} = 6{,}00$ T€ · MAE $= 5{,}20$ T€.
+- $\text{MSE} = \frac{180}{5} = 36{,}00$ T€²
+- $\text{RMSE} = \sqrt{36} = 6{,}00$ T€
+- MAE $= 5{,}20$ T€.
 
 ### Abgrenzung
 | Maß | Einheit | große Fehler |
@@ -1425,7 +1427,9 @@ Aus Betriebsdaten: $\text{MTBF} = \frac{\text{gesamte Laufzeit}}{\text{Anzahl Au
 
 ### Beispiel
 Ein Datenbankserver läuft 2026 insgesamt 8.760 h, fällt 4-mal aus, Reparaturzeit zusammen 40 h.
-Laufzeit $= 8.760 - 40 = 8.720$ h · $\text{MTBF} = \frac{8.720}{4} = 2.180$ h · $\text{MTTR} = \frac{40}{4} = 10$ h
+- Laufzeit $= 8.760 - 40 = 8.720$ h
+- $\text{MTBF} = \frac{8.720}{4} = 2.180$ h
+- $\text{MTTR} = \frac{40}{4} = 10$ h
 $V = \frac{2.180}{2.180 + 10} \approx 99{,}54\ \%$.
 
 ### Abgrenzung

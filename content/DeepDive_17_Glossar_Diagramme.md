@@ -204,7 +204,7 @@ Regeln: Die EPK beginnt und endet mit einem Ereignis; Ereignis und Funktion wech
 <text x="485" y="130" text-anchor="middle" dominant-baseline="middle" class="dg-klein">120 min</text>
 <text x="610" y="185" text-anchor="middle" dominant-baseline="middle" class="dg-klein">15 min</text>
 <text x="40" y="212" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">oben: Liegezeit (keine Wertschöpfung) · unten: Bearbeitungszeit (wertschöpfend)</text>
-<text x="40" y="236" text-anchor="start" dominant-baseline="middle" class="dg-fett">Durchlaufzeit = 50 + 360 = 410 min · Wertschöpfungsanteil = 50 / 410 = 12,2 %</text>
+<text x="40" y="236" text-anchor="start" dominant-baseline="middle" class="dg-fett">Durchlaufzeit = 50 + 360 = 410 min, Wertschöpfungsanteil = 50 / 410 = 12,2 %</text>
 </svg>
 ```
 
@@ -1331,7 +1331,7 @@ Nur für wenige Teile (Faustregel: höchstens fünf) und nur, wenn die Anteile z
 <line x1="393.3" y1="86.6" x2="393.3" y2="83.1" class="dg-linie dg-strich dg-duenn"/>
 <circle cx="393.3" cy="86.6" r="5" class="dg-voll"/>
 <text x="429.3" y="52.2" text-anchor="end" dominant-baseline="middle" class="dg-fett dg-akzent-text">ŷ = 24,8 + 6,4 · x</text>
-<text x="70" y="35" text-anchor="start" dominant-baseline="middle" class="dg-klein">r = 0,98 · R² = 0,97</text>
+<text x="70" y="35" text-anchor="start" dominant-baseline="middle" class="dg-klein">r = 0,98, R² = 0,97</text>
 <text x="260" y="279" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Werbebudget x (T€) · gestrichelt: Residuen e = y − ŷ (senkrechte Abstände)</text>
 </svg>
 ```
@@ -1420,7 +1420,7 @@ Abgrenzung zum Säulendiagramm: Beim Histogramm liegt eine stetige Skala auf der
 <text x="308.3" y="28" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Zaun 115</text>
 <text x="553.3" y="50" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Ausreißer 220</text>
 <text x="115.7" y="70" text-anchor="end" dominant-baseline="middle" class="dg-klein">Min 35</text>
-<text x="40" y="170" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">IQR = 70 − 40 = 30 · oberer Zaun = 70 + 1,5 · 30 = 115 → 220 liegt darüber und ist ein Ausreißer</text>
+<text x="40" y="170" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">IQR = 70 − 40 = 30, oberer Zaun = 70 + 1,5 · 30 = 115 → 220 liegt darüber und ist ein Ausreißer</text>
 </svg>
 ```
 
@@ -1685,7 +1685,7 @@ Der Anhang zeichnet den Knoten **anders** als das Beispiel in 5.1:
 | Mitte unten | **Dauer** · **GP** · **FP** |
 | unten links / unten rechts (außen) | **SAZ** / **SEZ** |
 
-Formeln des Anhangs: **GP = SAZ − FAZ** oder **GP = SEZ − FEZ** · **FP = FAZ des Nachfolgers − FEZ des Vorgangs**. Dauer in Arbeitstagen.
+Formeln des Anhangs: **GP = SAZ − FAZ** oder **GP = SEZ − FEZ**, **FP = FAZ des Nachfolgers − FEZ des Vorgangs**. Dauer in Arbeitstagen.
 
 **Beispiel aus dem Anhang:** A Planung 30 (kein Vorgänger) · B Netzwerk 40 (A) · C Hardware 15 (A) · D Software 30 (A) · E Installation 5 (C, D) · F Anschluss Computer 5 (B, E) · G Test und Übergabe 10 (F).
 
@@ -1730,7 +1730,7 @@ Der Anhang listet SQL im Stil von **MySQL** (Stand 2024-10-07), die Übungsdaten
 | Größe | Formel im Anhang | Hinweis |
 |---|---|---|
 | Mittelwert | $\bar{x} = \frac{1}{n}\sum x_i$ | |
-| Median | n ungerade: $x_{(\frac{n+1}{2})}$ · n gerade: $\frac{1}{2}\left(x_{(\frac{n}{2})} + x_{(\frac{n}{2}+1)}\right)$ | Werte vorher **aufsteigend sortieren** |
+| Median | n ungerade: $x_{(\frac{n+1}{2})}$, n gerade: $\frac{1}{2}\left(x_{(\frac{n}{2})} + x_{(\frac{n}{2}+1)}\right)$ | Werte vorher **aufsteigend sortieren** |
 | Empirische Varianz | $s^2 = \frac{1}{n-1}\sum (x_i - \bar{x})^2$ | **Der Anhang teilt durch n − 1** (Stichprobe). Bei vollständiger Grundgesamtheit (σ²) wird durch n geteilt – die Konvention dazu **hinschreiben** |
 | Standardabweichung | $s = \sqrt{s^2}$ | |
 | Kovarianz | $s_{xy} = \frac{1}{n-1}\sum (x_i-\bar{x})(y_i-\bar{y})$ | positiv: gleichsinnig, negativ: gegensinnig |
@@ -1738,7 +1738,7 @@ Der Anhang listet SQL im Stil von **MySQL** (Stand 2024-10-07), die Übungsdaten
 | Erwartungswert | $E(X) = \sum x_i p_i$ | bei gleicher Wahrscheinlichkeit = Mittelwert |
 | Varianz (Zufallsvariable) | $Var(X) = E(X - E(X))^2$ | mit den Wahrscheinlichkeiten $p_i$ gewichtet, **ohne** n − 1 |
 | Kovarianz (Zufallsvariable) | $COV(X,Y)$ wie im Anhang | gemeint ist der Erwartungswert des **Produkts** der Abweichungen: $E\big[(X-E(X))(Y-E(Y))\big]$ |
-| Lineare Regression | $\hat{y} = \beta_0 + \beta_1 x$ · tatsächlich $y = \beta_0 + \beta_1 x + \epsilon$ · $RSS = \sum (y_i - \hat{y}_i)^2 \to \min$ | Methode der **kleinsten Quadrate**; $\beta_1 = s_{xy}/s_x^2$ und $\beta_0 = \bar{y} - \beta_1\bar{x}$ stehen **nicht** im Anhang – selbst wissen |
+| Lineare Regression | $\hat{y} = \beta_0 + \beta_1 x$, tatsächlich $y = \beta_0 + \beta_1 x + \epsilon$, $RSS = \sum (y_i - \hat{y}_i)^2 \to \min$ | Methode der **kleinsten Quadrate**; $\beta_1 = s_{xy}/s_x^2$ und $\beta_0 = \bar{y} - \beta_1\bar{x}$ stehen **nicht** im Anhang – selbst wissen |
 
 **Algorithmen im Anhang:**
 
@@ -1746,7 +1746,7 @@ Der Anhang listet SQL im Stil von **MySQL** (Stand 2024-10-07), die Übungsdaten
 - **Random Forest:** für B Bäume: **Bootstrapping** (N Datensätze **mit Zurücklegen** ziehen), **m Attribute zufällig** auswählen, Entscheidungsbaum bauen (z. B. ID3). Klassifikation: Datensatz in jeden Baum geben, die **Mehrheit** der Entscheidungen gewinnt.
 - **k-Nearest-Neighbor:** alle Trainingsbeispiele speichern; Ähnlichkeit des neuen Datensatzes zu allen berechnen, die **k ähnlichsten** wählen, die **häufigste Klasse** zuweisen. Abstand z. B. euklidisch: $dist_E(v,w) = \sqrt{\sum (v_i - w_i)^2}$.
 - **k-Means:** k Punkte zufällig als Schwerpunkte · Punkte dem nächsten Schwerpunkt zuordnen · Schwerpunkte als Mittelwert neu berechnen · wiederholen, bis sich nichts mehr ändert.
-- **Konfusionsmatrix:** Zeilen = tatsächliche Klasse, Spalten = vorhergesagte Klasse; TP und FN in der Zeile „Ja“, FP und TN in der Zeile „Nein“. **Accuracy** = (TP+TN)/(TP+TN+FP+FN) · **Precision** = TP/(TP+FP) · **Recall/Sensitivity** = TP/(TP+FN) · **Specificity** = TN/(TN+FP). **Nicht im Anhang:** F1-Score $= \frac{2 \cdot P \cdot R}{P + R}$, Fehlerrate = 1 − Accuracy, Bestimmtheitsmaß – selbst wissen.
+- **Konfusionsmatrix:** Zeilen = tatsächliche Klasse, Spalten = vorhergesagte Klasse; TP und FN in der Zeile „Ja“, FP und TN in der Zeile „Nein“. **Accuracy** = (TP+TN)/(TP+TN+FP+FN), **Precision** = TP/(TP+FP), **Recall/Sensitivity** = TP/(TP+FN), **Specificity** = TN/(TN+FP). **Nicht im Anhang:** F1-Score $= \frac{2 \cdot P \cdot R}{P + R}$, Fehlerrate = 1 − Accuracy, Bestimmtheitsmaß – selbst wissen.
 
 ## 7.9 Präfixe: Datenmengen nur mit Binärpräfixen
 

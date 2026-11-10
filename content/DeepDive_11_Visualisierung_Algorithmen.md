@@ -61,9 +61,9 @@ Das ist der prüfungsrelevanteste Teil. Die häufigsten Techniken:
 | **Auswahl des Zeitausschnitts** | Ein günstig gewählter Startpunkt macht aus einem Rückgang einen Anstieg |
 | **Prozent statt Prozentpunkte** | → Deep Dive 4 |
 
-**Durchgerechnetes Beispiel:** Umsätze 4,80 · 4,95 · 5,10 Mio. € in drei Jahren.
+**Durchgerechnetes Beispiel:** Umsätze 4,80; 4,95; 5,10 Mio. € in drei Jahren.
 Tatsächliches Wachstum: +3,13 %, dann +3,03 %, insgesamt **+6,25 %** – ein flacher, leicht steigender Verlauf.
-Beginnt die y-Achse jedoch bei 4,70 Mio. €, betragen die sichtbaren Balkenhöhen 0,10 · 0,25 · 0,40. Das Verhältnis **1 : 2,5 : 4** suggeriert eine Vervierfachung. Die Zahlen stimmen, das Bild lügt.
+Beginnt die y-Achse jedoch bei 4,70 Mio. €, betragen die sichtbaren Balkenhöhen 0,10; 0,25; 0,40. Das Verhältnis **1 : 2,5 : 4** suggeriert eine Vervierfachung. Die Zahlen stimmen, das Bild lügt.
 
 **Prüfungsformulierung:** „Die y-Achse beginnt nicht bei null. Dadurch erscheinen die Unterschiede erheblich größer, als sie sind – der tatsächliche Zuwachs beträgt lediglich 6,25 %. Für Balkendiagramme ist ein Nullpunkt zwingend, da die Balkenlänge den Wert codiert."
 
@@ -271,13 +271,13 @@ WIEDERHOLE
 BIS getauscht = FALSCH ODER ende = 0
 ```
 
-Durchgespielt mit den Lieferzeiten 5 · 3 · 8 · 1 (Tage):
+Durchgespielt mit den Lieferzeiten 5, 3, 8, 1 (Tage):
 
 | Durchlauf | Vergleiche | Liste danach |
 |---|---|---|
-| 1 | 5/3 tauschen, 5/8 bleibt, 8/1 tauschen | 3 · 5 · 1 · 8 |
-| 2 | 3/5 bleibt, 5/1 tauschen | 3 · 1 · 5 · 8 |
-| 3 | 3/1 tauschen | 1 · 3 · 5 · 8 |
+| 1 | 5/3 tauschen, 5/8 bleibt, 8/1 tauschen | 3, 5, 1, 8 |
+| 2 | 3/5 bleibt, 5/1 tauschen | 3, 1, 5, 8 |
+| 3 | 3/1 tauschen | 1, 3, 5, 8 |
 
 Nach jedem Durchlauf steht das größte noch unsortierte Element („die größte Blase“) am Ende. Insgesamt 3 + 2 + 1 = 6 Vergleiche und 4 Vertauschungen; allgemein braucht Bubble Sort im schlechtesten Fall n · (n − 1) / 2 Vergleiche. Eine bereits sortierte Liste ist nach einem einzigen Durchlauf ohne Tausch erledigt.
 
@@ -305,7 +305,7 @@ ENDE SOLANGE
 AUSGABE position
 ```
 
-Durchgespielt mit der sortierten Liste 12 · 19 · 23 · 31 · 42 · 57 · 64 · 78, gesucht 57:
+Durchgespielt mit der sortierten Liste 12, 19, 23, 31, 42, 57, 64, 78, gesucht 57:
 
 | Schritt | links | rechts | mitte | liste[mitte] | Entscheidung |
 |---|---|---|---|---|---|

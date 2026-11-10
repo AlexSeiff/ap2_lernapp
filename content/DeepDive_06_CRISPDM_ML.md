@@ -129,7 +129,7 @@ Beides ist überwachtes Lernen – der Unterschied liegt in der **Zielvariablen*
 ## 3.2 Durchgerechnetes Beispiel
 
 Sechs Kunden, Merkmale: x = Bestellungen pro Jahr, y = durchschnittlicher Bestellwert (in 100 €).
-P1(2,2) · P2(3,1) · P3(1,3) · P4(7,8) · P5(8,7) · P6(9,9)
+P1(2,2); P2(3,1); P3(1,3); P4(7,8); P5(8,7); P6(9,9)
 Startzentren: Z1 = (4,4), Z2 = (6,6), k = 2
 
 **Iteration 1 – Zuordnung:**
@@ -195,7 +195,7 @@ Zehn Warenkörbe der Möbelhaus Nordholz GmbH (S = Schreibtisch, B = Bürostuhl,
 |---|---|---|---|---|---|---|---|---|---|
 | S,B,M | S,B | S,B | S,B,L | S,M | B,M | M,L | B,M | L | L |
 
-Einzelhäufigkeiten: S = 5 · B = 6 · M = 5 · L = 4 · (S und B) = 4 · (M und L) = 1
+Einzelhäufigkeiten: S = 5, B = 6, M = 5, L = 4, (S und B) = 4, (M und L) = 1
 
 **Regel S → B:**
 - Support: $\frac{4}{10}$ = **40 %**
@@ -364,15 +364,15 @@ $H(S) = -\frac{4}{10} \log_2 \frac{4}{10} - \frac{6}{10} \log_2 \frac{6}{10}$ = 
 
 **Schritt 2 – Informationsgewinn je Merkmal:**
 
-*Spediteur:* Nordtrans 3 ja / 1 nein → H = 0,811 · Rheinlogistik 1 ja / 2 nein → H = 0,918 · Eigenlieferung 0 ja / 3 nein → H = 0 (rein)
+*Spediteur:* Nordtrans 3 ja / 1 nein → H = 0,811, Rheinlogistik 1 ja / 2 nein → H = 0,918, Eigenlieferung 0 ja / 3 nein → H = 0 (rein)
 Rest-Entropie: $\frac{4}{10} \cdot 0{,}811 + \frac{3}{10} \cdot 0{,}918 + \frac{3}{10} \cdot 0$ = **0,600**
 IG(Spediteur) = 0,971 − 0,600 = **0,371**
 
-*Lieferdauer:* lang 3 ja / 2 nein → H = 0,971 · kurz 1 ja / 4 nein → H = 0,722
+*Lieferdauer:* lang 3 ja / 2 nein → H = 0,971, kurz 1 ja / 4 nein → H = 0,722
 Rest-Entropie: $\frac{5}{10} \cdot 0{,}971 + \frac{5}{10} \cdot 0{,}722$ = **0,846**
 IG(Lieferdauer) = 0,971 − 0,846 = **0,125**
 
-*Verpackung:* Standard 2 ja / 4 nein → H = 0,918 · Spezial 2 ja / 2 nein → H = 1
+*Verpackung:* Standard 2 ja / 4 nein → H = 0,918, Spezial 2 ja / 2 nein → H = 1
 Rest-Entropie: $\frac{6}{10} \cdot 0{,}918 + \frac{4}{10} \cdot 1$ = **0,951**
 IG(Verpackung) = 0,971 − 0,951 = **0,020**
 
@@ -747,7 +747,7 @@ Für das Reklamationsmodell liegen erste Testergebnisse vor; die Geschäftsführ
 Das Marketing möchte Kundengruppen für gezielte Angebote bilden und hat dafür einen kleinen Testdatensatz bereitgestellt.
 
 Sechs Kunden mit den Merkmalen x = Bestellungen pro Jahr, y = durchschnittlicher Bestellwert (in 100 €):
-**P1(2|2) · P2(3|1) · P3(1|3) · P4(7|8) · P5(8|7) · P6(9|9)**
+**P1(2|2); P2(3|1); P3(1|3); P4(7|8); P5(8|7); P6(9|9)**
 Startzentren: **Z1(4|4)** und **Z2(6|6)**, k = 2
 
 **C1 (4 P):** *Beschreiben* Sie die vier Schritte des k-Means-Algorithmus.

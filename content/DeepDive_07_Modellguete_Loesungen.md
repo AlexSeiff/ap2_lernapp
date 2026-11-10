@@ -3,7 +3,7 @@
 
 **Selbstbewertung:** Die Rechenaufgaben in Block B und D3/D4 sind reine Punktelieferanten – hier darf nichts fehlen. Block C und D1/D2 entscheiden über die 1. 92+ P = sehr gut.
 
-**Anlagenwerte:** TP = 90 · FN = 10 · FP = 60 · TN = 840 · n = 1.000
+**Anlagenwerte:** TP = 90, FN = 10, FP = 60, TN = 840, n = 1.000
 
 ---
 
@@ -91,7 +91,7 @@ Es handelt sich um eine Abwägung: Beide Kennzahlen lassen sich in der Regel nur
 ## Block D – Wirtschaftliche Bewertung und Regressionsgüte (24 P)
 
 **D1 (6 P):**
-- **Modell:** 10 FN · 120 € = 1.200 € · 60 FP · 15 € = 900 € → **Fehlerkosten gesamt 2.100 €** *(3 P)*
+- **Modell:** 10 FN · 120 € = 1.200 €. 60 FP · 15 € = 900 € → **Fehlerkosten gesamt 2.100 €** *(3 P)*
 - **Triviales Modell:** 100 FN · 120 € = **12.000 €** (keine FP, da nie ein Alarm ausgelöst wird) *(3 P)*
 
 **D2 (6 P):**

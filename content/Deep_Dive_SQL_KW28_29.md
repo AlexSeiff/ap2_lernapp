@@ -399,7 +399,7 @@ WHERE b.status = 'geliefert'
 GROUP BY k.kunden_id, k.nachname
 ORDER BY umsatz DESC;
 ```
-→ Schmidt 114,99 € · Fischer 37,50 € · Weber 34,90 €. Sauber ist die Gruppierung über kunden_id *und* nachname – so werden namensgleiche Kunden nicht fälschlich zusammengefasst. *(3 P Join-Kette, 2 P Statusfilter im WHERE, 2 P Umsatzformel, 2 P GROUP BY, 1 P Sortierung.)*
+→ Schmidt 114,99 €; Fischer 37,50 €; Weber 34,90 €. Sauber ist die Gruppierung über kunden_id *und* nachname – so werden namensgleiche Kunden nicht fälschlich zusammengefasst. *(3 P Join-Kette, 2 P Statusfilter im WHERE, 2 P Umsatzformel, 2 P GROUP BY, 1 P Sortierung.)*
 
 **C6:**
 ```sql

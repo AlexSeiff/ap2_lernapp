@@ -392,8 +392,8 @@ Sortieren durch Einfügen: Jedes Element wird an die richtige Stelle im bereits 
 Der Algorithmus nimmt nacheinander das nächste unsortierte Element und schiebt es nach links, bis links davon kein größeres mehr steht. Aufwand: O(n²) im mittleren und schlechtesten Fall, O(n) bei fast sortierten Daten, weil dann kaum verschoben werden muss. Das Verfahren ist **stabil** (gleiche Schlüssel behalten ihre Reihenfolge) und braucht keinen Zusatzspeicher.
 
 ### Beispiel
-Lieferzeiten 5 · 3 · 8 · 1:
-3 einfügen → 3 · 5 · 8 · 1 (1 Vergleich) · 8 einfügen → bleibt (1 Vergleich) · 1 einfügen → 1 · 3 · 5 · 8 (3 Vergleiche). Zusammen 5 Vergleiche.
+Lieferzeiten 5, 3, 8, 1:
+3 einfügen → 3, 5, 8, 1 (1 Vergleich); 8 einfügen → bleibt (1 Vergleich); 1 einfügen → 1, 3, 5, 8 (3 Vergleiche). Zusammen 5 Vergleiche.
 
 ### Abgrenzung
 **Selection Sort** sucht das kleinste Element im unsortierten Rest (immer O(n²), nicht stabil); **Bubble Sort** tauscht Nachbarn; **Merge Sort** schafft immer O(n log n), braucht aber Zusatzspeicher.

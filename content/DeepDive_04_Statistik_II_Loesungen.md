@@ -14,7 +14,8 @@
 4. **Ausreißer:** einzelne weit abseits liegende Punkte, die Korrelation und Regressionsgerade stark verzerren können.
 
 **A2 (8 P):**
-$\bar{x} = \frac{42}{6} = 7$ Stunden · $\bar{y} = \frac{42}{6} = 7$ %
+- $\bar{x} = \frac{42}{6} = 7$ Stunden
+- $\bar{y} = \frac{42}{6} = 7$ %
 
 | x | y | x − x̄ | y − ȳ | (x−x̄)(y−ȳ) | (x−x̄)² | (y−ȳ)² |
 |---|---|---|---|---|---|---|
@@ -66,7 +67,8 @@ Mögliche Drittvariable: die **Unternehmensgröße bzw. das Auftragsvolumen** �
 ## Block C – Lineare Regression (30 P)
 
 **C1 (12 P):**
-$\bar{x} = \frac{15}{5} = 3$ · $\bar{y} = \frac{220}{5} = 44$
+- $\bar{x} = \frac{15}{5} = 3$
+- $\bar{y} = \frac{220}{5} = 44$
 
 | x | y | x − x̄ | y − ȳ | (x−x̄)(y−ȳ) | (x−x̄)² |
 |---|---|---|---|---|---|

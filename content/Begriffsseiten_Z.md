@@ -121,7 +121,7 @@ Folge von Werten eines Merkmals in zeitlicher Reihenfolge, z. B. Monatsumsätze;
 Der **Trend** ist die langfristige Richtung, die **Saison** eine regelmäßig wiederkehrende Schwankung (Weihnachtsgeschäft), der **Zyklus** eine mehrjährige Konjunkturbewegung, der **Zufall** der Rest. Werkzeuge: gleitender Durchschnitt zum Glätten, Wachstumsraten (über mehrere Perioden mit dem geometrischen Mittel) und das Liniendiagramm mit der Zeit auf der x-Achse.
 
 ### Beispiel
-Monatsumsatz in T€: 120, 138, 126, 150, 144, 168, 156, 180. Gleitender 3-Perioden-Durchschnitt: $\frac{120 + 138 + 126}{3} = 128{,}0$, dann 138,0 · 140,0 · 154,0 · 156,0 · 168,0 – der steigende Trend wird sichtbar. Gesamtwachstum: $\frac{180 - 120}{120} = +50\ \%$.
+Monatsumsatz in T€: 120, 138, 126, 150, 144, 168, 156, 180. Gleitender 3-Perioden-Durchschnitt: $\frac{120 + 138 + 126}{3} = 128{,}0$, dann 138,0, 140,0, 154,0, 156,0, 168,0 – der steigende Trend wird sichtbar. Gesamtwachstum: $\frac{180 - 120}{120} = +50\ \%$.
 
 ### Abgrenzung
 Querschnittsdaten: viele Objekte zu einem Zeitpunkt (Umsatz je Filiale im Mai). Zeitreihe: ein Objekt über viele Zeitpunkte.

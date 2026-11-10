@@ -1410,7 +1410,7 @@
       "tags": ["wiso", "sozialversicherung"],
       "vorlage": "sozialversicherung",
       "daten": { "brutto": 1200, "zusatzbeitrag": 2.9, "kinderlos": true },
-      "aufgabe": "Bruttovergütung {{brutto}} €, Zusatzbeitrag der Krankenkasse {{zusatzbeitrag}} %, {{kinderlos}}. Beitragssätze: KV 14,6 % + Zusatzbeitrag · PV 3,6 % (Zuschlag für Kinderlose ab 23: 0,6 %, trägt der AN allein) · RV 18,6 % · ALV 2,6 %.\n\nWie hoch ist der Arbeitnehmeranteil zur Sozialversicherung?",
+      "aufgabe": "Bruttovergütung {{brutto}} €, Zusatzbeitrag der Krankenkasse {{zusatzbeitrag}} %, {{kinderlos}}. Beitragssätze: KV 14,6 % + Zusatzbeitrag; PV 3,6 % (Zuschlag für Kinderlose ab 23: 0,6 %, trägt der AN allein); RV 18,6 %; ALV 2,6 %.\n\nWie hoch ist der Arbeitnehmeranteil zur Sozialversicherung?",
       "eingaben": ["sv"],
       "quelleAufgabe": "DD14 Übungsklausur A4"
     },
@@ -1551,7 +1551,7 @@
       "schwierigkeit": 2,
       "tags": ["wiso", "sozialversicherung"],
       "vorlage": "sozialversicherung",
-      "aufgabe": "Bruttoentgelt {{brutto}} € ({{kinderlos}}), Zusatzbeitrag der Krankenkasse {{zusatzbeitrag}} %. Beitragssätze: KV 14,6 % + Zusatzbeitrag · PV 3,6 % (Zuschlag für Kinderlose ab 23: 0,6 %, trägt der AN allein) · RV 18,6 % · ALV 2,6 %.\n\nBerechne die Arbeitnehmeranteile zu KV, PV, RV und ALV sowie den gesamten SV-Anteil.",
+      "aufgabe": "Bruttoentgelt {{brutto}} € ({{kinderlos}}), Zusatzbeitrag der Krankenkasse {{zusatzbeitrag}} %. Beitragssätze: KV 14,6 % + Zusatzbeitrag; PV 3,6 % (Zuschlag für Kinderlose ab 23: 0,6 %, trägt der AN allein); RV 18,6 %; ALV 2,6 %.\n\nBerechne die Arbeitnehmeranteile zu KV, PV, RV und ALV sowie den gesamten SV-Anteil.",
       "eingaben": ["kv", "pv", "rv", "alv", "sv"],
       "hinweise": [
         "Arbeitnehmer und Arbeitgeber teilen sich die Beiträge – auch den Zusatzbeitrag.",

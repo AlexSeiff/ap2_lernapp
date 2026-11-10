@@ -134,7 +134,7 @@
         {
           "id": "SQL-026",
           "frage": "Wie unterscheidet sich eine Fensterfunktion (OVER/PARTITION BY) von GROUP BY?",
-          "antwort": "GROUP BY verdichtet jede Gruppe zu einer Zeile. Eine Fensterfunktion rechnet je Gruppe, behält aber alle Einzelzeilen. Ranglisten: ROW_NUMBER 1, 2, 3, 4 · RANK 1, 2, 2, 4 · DENSE_RANK 1, 2, 2, 3.",
+          "antwort": "GROUP BY verdichtet jede Gruppe zu einer Zeile. Eine Fensterfunktion rechnet je Gruppe, behält aber alle Einzelzeilen. Ranglisten: ROW_NUMBER 1, 2, 3, 4; RANK 1, 2, 2, 4; DENSE_RANK 1, 2, 2, 3.",
           "typ": "abgrenzung",
           "schwierigkeit": 2,
           "tags": [
@@ -990,7 +990,7 @@
           "tags": [
             "variationskoeffizient"
           ],
-          "rechenweg": "$$VK = \\dfrac{\\sigma}{\\bar{x}}$$\n\nNord: $\\dfrac{5}{50} = 10\\,\\%$  ·  Süd: $\\dfrac{8}{100} = 8\\,\\%$\n\nSüd streut absolut stärker, relativ aber weniger und arbeitet damit gleichmäßiger."
+          "rechenweg": "$$VK = \\dfrac{\\sigma}{\\bar{x}}$$\n\nNord: $\\dfrac{5}{50} = 10\\,\\%$\n\nSüd: $\\dfrac{8}{100} = 8\\,\\%$\n\nSüd streut absolut stärker, relativ aber weniger und arbeitet damit gleichmäßiger."
         },
         {
           "id": "ST1-010",
@@ -2602,7 +2602,7 @@
             "id3",
             "entropie"
           ],
-          "rechenweg": "$$H = -0{,}4 \\cdot \\log_2 0{,}4 - 0{,}6 \\cdot \\log_2 0{,}6$$\n\n$$= 0{,}4 \\cdot 1{,}322 + 0{,}6 \\cdot 0{,}737 = 0{,}529 + 0{,}442 = 0{,}971$$\n\nMerkwerte für zwei Klassen: 1 : 1 → 1 · 1 : 2 → 0,918 · 1 : 3 → 0,811 · 1 : 4 → 0,722 · 2 : 3 → 0,971"
+          "rechenweg": "$$H = -0{,}4 \\cdot \\log_2 0{,}4 - 0{,}6 \\cdot \\log_2 0{,}6$$\n\n$$= 0{,}4 \\cdot 1{,}322 + 0{,}6 \\cdot 0{,}737 = 0{,}529 + 0{,}442 = 0{,}971$$\n\nMerkwerte für zwei Klassen: 1 : 1 → 1, 1 : 2 → 0,918, 1 : 3 → 0,811, 1 : 4 → 0,722, 2 : 3 → 0,971"
         },
         {
           "id": "ML-004",
@@ -2803,7 +2803,7 @@
           "tags": [
             "assoziation"
           ],
-          "rechenweg": "**S → B:** Support $40\\,\\%$ · Konfidenz $\\dfrac{0{,}40}{0{,}50} = 80\\,\\%$ · Lift $\\dfrac{0{,}80}{0{,}60} = 1{,}33$\n\n**B → S:** Support $40\\,\\%$ · Konfidenz $\\dfrac{0{,}40}{0{,}60} = 66{,}7\\,\\%$ · Lift $1{,}33$\n\nDie Konfidenz ist richtungsabhängig, der Lift symmetrisch."
+          "rechenweg": "**S → B:** Support $40\\,\\%$, Konfidenz $\\dfrac{0{,}40}{0{,}50} = 80\\,\\%$, Lift $\\dfrac{0{,}80}{0{,}60} = 1{,}33$\n\n**B → S:** Support $40\\,\\%$, Konfidenz $\\dfrac{0{,}40}{0{,}60} = 66{,}7\\,\\%$, Lift $1{,}33$\n\nDie Konfidenz ist richtungsabhängig, der Lift symmetrisch."
         },
         {
           "id": "ML-050",
@@ -3241,7 +3241,7 @@
         {
           "id": "MG-011",
           "frage": "TP = 90, FN = 10, FP = 60, TN = 840. Berechne Accuracy, Precision, Recall, F1 und Spezifität.",
-          "antwort": "Accuracy 930/1.000 = 93 % · Precision 90/150 = 60 % · Recall 90/100 = 90 % · F1 = 2 · 0,54 / 1,5 = 72 % · Spezifität 840/900 = 93,33 %.",
+          "antwort": "Accuracy 930/1.000 = 93 %\nPrecision 90/150 = 60 %\nRecall 90/100 = 90 %\nF1 = 2 · 0,54 / 1,5 = 72 %\nSpezifität 840/900 = 93,33 %.",
           "typ": "rechnung",
           "schwierigkeit": 2,
           "tags": [
@@ -4693,8 +4693,8 @@
         },
         {
           "id": "ALG-014",
-          "frage": "Sortiere 5 · 3 · 8 · 1 mit Bubble Sort. Wie sieht die Liste nach jedem Durchlauf aus?",
-          "antwort": "Durchlauf 1: 3 · 5 · 1 · 8. Durchlauf 2: 3 · 1 · 5 · 8. Durchlauf 3: 1 · 3 · 5 · 8. Insgesamt 6 Vergleiche (3 + 2 + 1) und 4 Vertauschungen; nach jedem Durchlauf steht das größte unsortierte Element am Ende.",
+          "frage": "Sortiere 5, 3, 8, 1 mit Bubble Sort. Wie sieht die Liste nach jedem Durchlauf aus?",
+          "antwort": "Durchlauf 1: 3, 5, 1, 8. Durchlauf 2: 3, 1, 5, 8. Durchlauf 3: 1, 3, 5, 8. Insgesamt 6 Vergleiche (3 + 2 + 1) und 4 Vertauschungen; nach jedem Durchlauf steht das größte unsortierte Element am Ende.",
           "typ": "anwendung",
           "schwierigkeit": 2,
           "tags": [
@@ -4853,7 +4853,7 @@
           "tags": [
             "netzplan"
           ],
-          "rechenweg": "**Vorwärts:** A $0\\text{–}5$ · B $5\\text{–}9$ · C $5\\text{–}11$ · D $11\\text{–}19$ · E $9\\text{–}12$ · F $19\\text{–}23$ · G $23\\text{–}25$\n\nProjektdauer: **25 Tage**, kritischer Pfad **A → C → D → F → G**.\n\nB: $GP = 2$, $FP = 0$ (eine Verzögerung schiebt E) · E: $GP = 7$, $FP = 7$\n\nVerzögert sich C um 2 Tage, endet das Projekt an Tag 27."
+          "rechenweg": "**Vorwärts:** A $0\\text{–}5$, B $5\\text{–}9$, C $5\\text{–}11$, D $11\\text{–}19$, E $9\\text{–}12$, F $19\\text{–}23$, G $23\\text{–}25$\n\nProjektdauer: **25 Tage**, kritischer Pfad **A → C → D → F → G**.\n\nB: $GP = 2$, $FP = 0$ (eine Verzögerung schiebt E), E: $GP = 7$, $FP = 7$\n\nVerzögert sich C um 2 Tage, endet das Projekt an Tag 27."
         },
         {
           "id": "PM-013",
@@ -5676,7 +5676,7 @@
         {
           "id": "QS-005",
           "frage": "Kein Rabatt unter 500 €, 5 % ab 500 €, 10 % ab 2.000 €, negative Werte ungültig. Welche Grenzwerte testest du?",
-          "antwort": "−0,01 und 0,00 (untere Grenze) · 499,99 und 500,00 · 1.999,99 und 2.000,00 – je Grenze der letzte Wert der einen und der erste Wert der nächsten Klasse. So fällt ein „> 500“ statt „>= 500“ im Code auf.",
+          "antwort": "−0,01 und 0,00 (untere Grenze); 499,99 und 500,00; 1.999,99 und 2.000,00 – je Grenze der letzte Wert der einen und der erste Wert der nächsten Klasse. So fällt ein „> 500“ statt „>= 500“ im Code auf.",
           "typ": "anwendung",
           "schwierigkeit": 2,
           "tags": [
@@ -5735,7 +5735,7 @@
             "verfügbarkeit",
             "sla"
           ],
-          "rechenweg": "$$8.760\\text{ h} \\cdot (1 - 0{,}999) = 8{,}76\\text{ h}$$\n\nMerkreihe: $99\\,\\% \\to 87{,}6\\text{ h}$ · $99{,}9\\,\\% \\to 8{,}76\\text{ h}$ · $99{,}99\\,\\% \\to 52{,}56\\text{ min}$ · $99{,}999\\,\\% \\to 5{,}26\\text{ min}$"
+          "rechenweg": "$$8.760\\text{ h} \\cdot (1 - 0{,}999) = 8{,}76\\text{ h}$$\n\nMerkreihe: $99\\,\\% \\to 87{,}6\\text{ h}$, $99{,}9\\,\\% \\to 8{,}76\\text{ h}$, $99{,}99\\,\\% \\to 52{,}56\\text{ min}$, $99{,}999\\,\\% \\to 5{,}26\\text{ min}$"
         },
         {
           "id": "QS-014",
