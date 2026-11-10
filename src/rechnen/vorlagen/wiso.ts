@@ -260,7 +260,7 @@ export const gleichgewicht = vorlage({
     };
   },
   platzhalter: (d) => ({
-    tabelle: d.zeilen.map((r) => `${fz(r.preis)} € – Nachfrage ${fz(r.nachfrage)}, Angebot ${fz(r.angebot)}`).join(' · '),
+    tabelle: d.zeilen.map((r) => `${fz(r.preis)} € – Nachfrage ${fz(r.nachfrage)}, Angebot ${fz(r.angebot)}`).join(', '),
   }),
   tabelle: (d) => ({
     kopf: ['Preis (€)', 'Nachfrage', 'Angebot'],

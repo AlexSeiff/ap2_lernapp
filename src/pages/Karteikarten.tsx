@@ -548,9 +548,9 @@ export function Karteikarten() {
       )}
 
       <p className="hint">
-        Leitner-System mit 5 Fächern: „Gewusst" schiebt die Karte ein Fach weiter (Abstände 1 · 3 · 7 · 14 · 30 Tage), „Nicht gewusst"
-        zurück in Fach 1. Tastatur: <kbd>Leertaste</kbd> umdrehen, <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> bewerten. Im Leicht-Modus wählst
-        du mit <kbd>1</kbd>–<kbd>4</kbd>; richtig bringt die Karte höchstens in Fach {LEICHT_MAX_BOX}, falsch zurück in Fach 1.{' '}
+        Leitner-System mit 5 Fächern: „Gewusst" schiebt die Karte ein Fach weiter (Abstände 1, 3, 7, 14, 30 Tage), „Nicht gewusst" zurück in
+        Fach 1. Tastatur: <kbd>Leertaste</kbd> umdrehen, <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> bewerten. Im Leicht-Modus wählst du mit{' '}
+        <kbd>1</kbd>–<kbd>4</kbd>; richtig bringt die Karte höchstens in Fach {LEICHT_MAX_BOX}, falsch zurück in Fach 1.{' '}
         <Icon name="book-open" />
         Durchblättern zeigt die Karten nur an (<kbd>←</kbd> <kbd>→</kbd> blättern, auf dem Handy wischen) und ändert den Lernstand nicht.{' '}
         <Icon name="star" />

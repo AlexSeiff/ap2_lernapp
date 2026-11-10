@@ -198,6 +198,7 @@ Das ist die verbreitete Variante nach Tukey. Manche Darstellungen ziehen die Whi
 
 - Unterer Zaun $= Q_1 - 1{,}5 \cdot \text{IQR}$
 - Oberer Zaun $= Q_3 + 1{,}5 \cdot \text{IQR}$
+
 Werte außerhalb gelten als Ausreißerverdacht. Ein Wert genau auf dem Zaun ist noch kein Ausreißer. Werte jenseits von 3 · IQR (statt 1,5 · IQR) werden häufig als extreme Ausreißer bezeichnet.
 
 Beispiel Lieferzeiten: Q1 = 3, Q3 = 6, IQR = 3 → unterer Zaun $= 3 - 4{,}5 = -1{,}5$, oberer Zaun $= 6 + 4{,}5$ = **10,5**. Der Wert **19** liegt darüber → Ausreißer. Der obere Whisker endet beim größten Wert innerhalb der Grenze, also bei 8.

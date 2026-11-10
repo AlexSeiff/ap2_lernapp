@@ -201,7 +201,7 @@ export const systemverfuegbarkeit = vorlage({
   platzhalter: (d) => ({
     komponenten: d.komponenten
       .map((k) => `${k.name} (${fz(k.v)} %${(k.anzahl ?? 1) > 1 ? `, ${k.anzahl}-fach redundant` : ''})`)
-      .join(' · '),
+      .join(', '),
     anzahl: String(d.komponenten.length),
   }),
   tabelle: (d) => ({

@@ -372,7 +372,7 @@ export const fmea = vorlage({
     }
   },
   platzhalter: (d) => ({
-    fehler: d.fehler.map((f) => `${f.name} (A = ${fz(f.a)}, B = ${fz(f.b)}, E = ${fz(f.e)})`).join(' · '),
+    fehler: d.fehler.map((f) => `${f.name} (A = ${fz(f.a)}, B = ${fz(f.b)}, E = ${fz(f.e)})`).join(', '),
     schwelle: d.schwelle === undefined ? '–' : fz(d.schwelle),
     anzahl: String(d.fehler.length),
   }),

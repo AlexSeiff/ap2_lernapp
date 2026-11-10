@@ -447,7 +447,7 @@ export const risiko = vorlage({
       if (rpz.filter((x) => x === Math.max(...rpz)).length === 1 || versuch > 100) return { risiken };
     }
   },
-  platzhalter: (d) => ({ risiken: d.risiken.map((r) => `${r.name} (W = ${fz(r.w)}, S = ${fz(r.s)})`).join(' · ') }),
+  platzhalter: (d) => ({ risiken: d.risiken.map((r) => `${r.name} (W = ${fz(r.w)}, S = ${fz(r.s)})`).join(', ') }),
   tabelle: (d) => ({ kopf: ['Risiko', 'W', 'S'], zeilen: d.risiken.map((r) => [r.name, fz(r.w), fz(r.s)]) }),
   loese(d) {
     const b = new LoesungsBau();

@@ -56,7 +56,7 @@ export const neuron = vorlage({
   schema: neuronSchema,
   hinweise: [
     'z = w₁ · x₁ + w₂ · x₂ + … + b – den Bias nicht vergessen.',
-    'Stufe: y = 1 ab z ≥ 0 · Sigmoid: σ(z) = 1 / (1 + e^(−z)) · ReLU: y = max(0, z).',
+    'Stufe: y = 1 ab z ≥ 0. Sigmoid: σ(z) = 1 / (1 + e^(−z)). ReLU: y = max(0, z).',
   ],
   erzeuge(zf, params, vorbild) {
     const n = intParam(params, 'n', vorbild?.x.length ?? 3, 1, 5);
@@ -168,7 +168,7 @@ export const perzeptron = vorlage({
     eta: fz(d.eta),
     n: String(d.x.length),
   }),
-  tabelle: (d) => ({ ...datenTabelle(d.x, d.w, d.b), titel: `Sollwert t = ${d.t} · Lernrate η = ${fz(d.eta)}` }),
+  tabelle: (d) => ({ ...datenTabelle(d.x, d.w, d.b), titel: `Sollwert t = ${d.t}, Lernrate η = ${fz(d.eta)}` }),
   loese(d) {
     const b = new LoesungsBau();
     const s = b.wert('z', summe(d.x, d.w, d.b), { label: 'Gewichtete Summe z', runden: 2, zusatz: true });
