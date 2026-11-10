@@ -1,8 +1,8 @@
 // Import der Lernkarten-Datei (z. B. AP2_FIDPA_Lernkarten.json) mit Decks, Kartentyp, Schwierigkeit, Tags und optionalem Block „mc“ (Leicht-Modus).
 
 import { z } from 'zod';
-import { pruefeSvg } from './svgDiagramm';
-import type { CardType, Deck, Flashcard, ImportIssue, KartenMc } from './types';
+import { pruefeSvg } from './svgDiagramm.ts';
+import type { CardType, Deck, Flashcard, ImportIssue, KartenMc } from './types.ts';
 
 const CARD_TYPES: CardType[] = ['wissen', 'abgrenzung', 'rechnung', 'anwendung', 'falle', 'begriff'];
 

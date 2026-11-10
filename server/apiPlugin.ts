@@ -6,15 +6,15 @@ import { TLSSocket } from 'node:tls';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { join } from 'node:path';
 import type { Plugin } from 'vite';
-import { GenerateRequestSchema, GradeRequestSchema, type ErrorResponse } from '../shared/api';
-import { checkProgressPut } from '../shared/progress';
-import { teileInhalt } from '../shared/texte';
-import type { Content } from '../shared/types';
-import { aiEnabled, generateTasks, gradeAnswer, MODEL } from './ai';
-import { createContentCache, withGenerated } from './contentCache';
-import { isContentSource, ladeInhalt, SOURCE_DIR } from './loadContent';
-import { defineRoute, HttpError, matchRoute, parseBody, pruefeHerkunft, readBody, send, type Route } from './router';
-import { backupInfo, readGenerated, readProgress, writeGenerated, writeProgress } from './store';
+import { GenerateRequestSchema, GradeRequestSchema, type ErrorResponse } from '../shared/api.ts';
+import { checkProgressPut } from '../shared/progress.ts';
+import { teileInhalt } from '../shared/texte.ts';
+import type { Content } from '../shared/types.ts';
+import { aiEnabled, generateTasks, gradeAnswer, MODEL } from './ai.ts';
+import { createContentCache, withGenerated } from './contentCache.ts';
+import { isContentSource, ladeInhalt, SOURCE_DIR } from './loadContent.ts';
+import { defineRoute, HttpError, matchRoute, parseBody, pruefeHerkunft, readBody, send, type Route } from './router.ts';
+import { backupInfo, readGenerated, readProgress, writeGenerated, writeProgress } from './store.ts';
 
 // Mit Kern (ohne Abschnittstexte) und Texten je Thema, wie content.json und texte/<id>.json in der Pages-Version (shared/texte.ts).
 const contentCache = createContentCache(() => {

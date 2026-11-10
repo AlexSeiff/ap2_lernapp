@@ -3,9 +3,9 @@
 // Achtung: wird in den Browser gebündelt – hier nichts aus server/ oder dem Claude-SDK importieren.
 
 import { z } from 'zod';
-import type { Progress } from './progress';
-import type { KernInhalt, ThemaTexte } from './texte';
-import { TASK_TYPES, type BegriffsSeite, type Task } from './types';
+import type { Progress } from './progress.ts';
+import type { KernInhalt, ThemaTexte } from './texte.ts';
+import { TASK_TYPES, type BegriffsSeite, type Task } from './types.ts';
 
 // ── Request-Schemas ─────────────────────────────────────────────────────────
 // Fehlermeldungen auf Deutsch, weil sie direkt in der Oberfläche landen.

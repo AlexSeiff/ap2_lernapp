@@ -3,14 +3,14 @@
 
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { z } from 'zod';
-import type { ApiResponses } from '../shared/api';
+import type { ApiResponses } from '../shared/api.ts';
 
 export class HttpError extends Error {
-  constructor(
-    public status: number,
-    message: string,
-  ) {
+  status: number;
+
+  constructor(status: number, message: string) {
     super(message);
+    this.status = status;
   }
 }
 

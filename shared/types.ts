@@ -1,7 +1,7 @@
 // Datenmodell der Lern-App – wird von Server, Client und Tests gemeinsam genutzt.
 
-import type { DiagrammUebung } from './diagrammUebungen';
-import type { Quelle } from './quellen';
+import type { DiagrammUebung } from './diagrammUebungen.ts';
+import type { Quelle } from './quellen.ts';
 
 export interface Section {
   id: string;

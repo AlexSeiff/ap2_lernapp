@@ -1,7 +1,7 @@
 // Zwischenspeicher für die geparsten Lernblätter: Lesen + Parsen aller Markdown-Dateien kostet bei jedem Request Zeit.
 // Der Datei-Watcher im apiPlugin leert den Cache, sobald sich ein Lernblatt ändert.
 
-import type { Content, Task } from '../shared/types';
+import type { Content, Task } from '../shared/types.ts';
 
 export interface ContentCache<T = Content> {
   /** Geparste Inhalte; beim ersten Aufruf (bzw. nach invalidate) wird `load` ausgeführt. Nicht verändern! */

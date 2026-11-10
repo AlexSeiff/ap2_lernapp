@@ -2,8 +2,8 @@
 // die Begriffe aus „Abgrenzung“ (Tabellenköpfe, erste Spalte, Fettgedrucktes) und aus „Siehe auch“. Ergebnis landet beim Laden des Inhalts
 // an den Begriffskarten (Flashcard.abgrenzung, .siehe, .abschnitt), damit der Leicht-Modus ohne die nachgeladenen Seiten auskommt.
 
-import { namensSchluessel } from './begriffsseiten';
-import type { BegriffsSeite, Flashcard } from './types';
+import { namensSchluessel } from './begriffsseiten.ts';
+import type { BegriffsSeite, Flashcard } from './types.ts';
 
 /** Text ohne Fett- und Code-Markierung, ohne Links. */
 const klar = (s: string) =>

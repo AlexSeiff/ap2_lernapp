@@ -1,14 +1,14 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
-import { namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../shared/begriffsseiten';
-import { buildContent } from '../shared/parser';
-import { parseQuellen, pruefeQuellenZiele } from '../shared/quellen';
-import { ergaenzeVerwandte } from '../shared/verwandt';
-import type { BegriffsSeite, Content } from '../shared/types';
-import { baueGlossar, ueberschriftKern } from '../src/lib/glossar';
-import { ergaenzeGlossarThema } from '../src/lib/glossarThema';
-import { pruefeRechenUebung } from '../src/rechnen/pruefen';
-import { resolveContentSource } from './contentSource';
+import { namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../shared/begriffsseiten.ts';
+import { buildContent } from '../shared/parser.ts';
+import { parseQuellen, pruefeQuellenZiele } from '../shared/quellen.ts';
+import { ergaenzeVerwandte } from '../shared/verwandt.ts';
+import type { BegriffsSeite, Content } from '../shared/types.ts';
+import { baueGlossar, ueberschriftKern } from '../src/lib/glossar.ts';
+import { ergaenzeGlossarThema } from '../src/lib/glossarThema.ts';
+import { pruefeRechenUebung } from '../src/rechnen/pruefen.ts';
+import { resolveContentSource } from './contentSource.ts';
 
 /** Explizite Quelle, vorhandener AP-2-Ordner oder die mitgelieferten Inhalte im eigenständigen Checkout. */
 export const SOURCE_DIR = resolveContentSource(resolve(import.meta.dirname, '..'), process.env.LERN_QUELLE);

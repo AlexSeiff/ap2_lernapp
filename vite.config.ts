@@ -1,15 +1,15 @@
 /// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
-import { DEV_PORT } from './shared/config';
+import { DEV_PORT } from './shared/config.ts';
 
 export default defineConfig(async ({ mode }) => {
   // npm run build:pages: statische Version für GitHub Pages – ohne Server und KI, Inhalte aus content/ als content.json.
   // Relative Pfade (base './'), damit sie unter https://alexseiff.github.io/ap2_lernapp/ funktioniert (HashRouter).
   // .env.local wird hier gar nicht erst gelesen, der API-Schlüssel kann also nicht in den Build geraten.
   if (mode === 'pages') {
-    const { contentJsonPlugin } = await import('./server/pagesPlugin');
-    const { pwaPlugin } = await import('./server/pwaPlugin');
+    const { contentJsonPlugin } = await import('./server/pagesPlugin.ts');
+    const { pwaPlugin } = await import('./server/pwaPlugin.ts');
     return { base: './', plugins: [react(), contentJsonPlugin(), pwaPlugin()] };
   }
 
@@ -19,7 +19,7 @@ export default defineConfig(async ({ mode }) => {
   for (const key of ['ANTHROPIC_API_KEY', 'ANTHROPIC_MODEL', 'LERN_QUELLE']) {
     if (env[key] && !process.env[key]) process.env[key] = env[key];
   }
-  const { apiPlugin } = await import('./server/apiPlugin');
+  const { apiPlugin } = await import('./server/apiPlugin.ts');
   return {
     plugins: [react(), apiPlugin()],
     server: { port: DEV_PORT },

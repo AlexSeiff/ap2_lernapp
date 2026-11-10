@@ -3,8 +3,8 @@
 // KI-Aufgaben aus data/ kommen bewusst nicht hinein (data/ ist privat).
 
 import type { Plugin } from 'vite';
-import { teileInhalt } from '../shared/texte';
-import { CONTENT_DIR, ladeInhalt } from './loadContent';
+import { teileInhalt } from '../shared/texte.ts';
+import { CONTENT_DIR, ladeInhalt } from './loadContent.ts';
 
 export function contentJsonPlugin(): Plugin {
   return {

@@ -5,7 +5,7 @@
 // Ein Typtest in tests/progress.test.ts stellt sicher, dass jeder `Progress` das Schema erfüllt.
 
 import { z } from 'zod';
-import { AUFGABEN_UMZUG_V9 } from './aufgabenUmzug';
+import { AUFGABEN_UMZUG_V9 } from './aufgabenUmzug.ts';
 
 export type Mode = 'klausur' | 'einzel' | 'wiederholung';
 export type Rating = 'gewusst' | 'unsicher' | 'nicht';

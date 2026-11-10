@@ -2,9 +2,9 @@
 // und ID3 (Entropie, Informationsgewinn je Merkmal, Wurzel des Entscheidungsbaums).
 
 import { z } from 'zod';
-import { fz, intParam, L, LoesungsBau, lz, lzk, tx, vorlage } from '../hilfen';
-import { F } from '../formeln';
-import type { Zufall } from '../zufall';
+import { fz, intParam, L, LoesungsBau, lz, lzk, tx, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
+import type { Zufall } from '../zufall.ts';
 
 // ---------- k-NN ----------
 

@@ -1,10 +1,10 @@
 // Eine Rechenübung mit konkreten Zahlen: Daten (fest oder aus einem Seed erzeugt), Lösung der Vorlage,
 // aufgelöste Eingaben (Label, Einheit, Rundung, erwarteter Wert) und der Aufgabentext mit ersetzten Platzhaltern.
 
-import type { RechenEingabe, RechenUebung, RechenWert } from '../../shared/types';
-import type { Loesung, Tabelle, Vergleich } from './typen';
-import { findeVorlage } from './vorlagen/index';
-import { seedAusText } from './zufall';
+import type { RechenEingabe, RechenUebung, RechenWert } from '../../shared/types.ts';
+import type { Loesung, Tabelle, Vergleich } from './typen.ts';
+import { findeVorlage } from './vorlagen/index.ts';
+import { seedAusText } from './zufall.ts';
 
 export interface AufgeloesteEingabe {
   id: string;

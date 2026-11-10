@@ -2,9 +2,9 @@
 // der Perzeptron-Lernregel (Fehler, neue Gewichte, neuer Bias).
 
 import { z } from 'zod';
-import { fz, intParam, L, LoesungsBau, lz, lzk, textParam, vorlage } from '../hilfen';
-import { F } from '../formeln';
-import type { Zufall } from '../zufall';
+import { fz, intParam, L, LoesungsBau, lz, lzk, textParam, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
+import type { Zufall } from '../zufall.ts';
 
 const zahl = z.number().finite();
 const AKTIVIERUNGEN = ['stufe', 'sigmoid', 'relu'] as const;

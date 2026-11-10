@@ -4,8 +4,8 @@
 // Die Zeilen enthalten keinen Fettdruck: baueGlossar() liest Begriffe nur aus fetten Stellen, die eingesetzte Liste verändert das
 // Glossar also nicht (sonst würde jeder Begriff zusätzlich auf diese Liste verweisen).
 
-import type { Content, Section } from '../../shared/types';
-import { baueGlossar, glossarBuchstaben, type GlossarEintrag } from './glossar';
+import type { Content, Section } from '../../shared/types.ts';
+import { baueGlossar, glossarBuchstaben, type GlossarEintrag } from './glossar.ts';
 
 export const GLOSSAR_PLATZHALTER = '<!-- glossar-a-z -->';
 

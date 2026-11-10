@@ -1,7 +1,7 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import type { BackupInfo } from '../shared/api';
-import type { Task } from '../shared/types';
+import type { BackupInfo } from '../shared/api.ts';
+import type { Task } from '../shared/types.ts';
 
 export const DATA_DIR = join(import.meta.dirname, '..', 'data');
 /** Anzahl der aufbewahrten Tagessicherungen in data/backups/. */

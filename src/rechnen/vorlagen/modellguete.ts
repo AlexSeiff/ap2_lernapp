@@ -2,8 +2,8 @@
 // Fehlerkosten; Regressionsgüte mit MAE, MSE, RMSE und R².
 
 import { z } from 'zod';
-import { fz, fzListe, intParam, L, LoesungsBau, lz, lzk, mittel, summe, vorlage } from '../hilfen';
-import { F } from '../formeln';
+import { fz, fzListe, intParam, L, LoesungsBau, lz, lzk, mittel, summe, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
 
 const anzahl = z.number().int().nonnegative();
 const kmSchema = z

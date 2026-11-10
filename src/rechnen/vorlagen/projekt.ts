@@ -2,9 +2,9 @@
 // Nutzwertanalyse, Break-even-Menge, Risikoprioritätszahl und Drei-Zeiten-Schätzung (PERT).
 
 import { z } from 'zod';
-import { fz, intParam, L, LoesungsBau, lz, summe, tx, vorlage } from '../hilfen';
-import { F } from '../formeln';
-import type { EingabeLayout } from '../typen';
+import { fz, intParam, L, LoesungsBau, lz, summe, tx, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
+import type { EingabeLayout } from '../typen.ts';
 
 // ---------- Netzplan ----------
 

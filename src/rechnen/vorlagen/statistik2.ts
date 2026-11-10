@@ -2,10 +2,10 @@
 // gleitender Durchschnitt, prozentuale Veränderung (auch Inflationsrate und Prozent vs. Prozentpunkte).
 
 import { z } from 'zod';
-import { fz, fzListe, intParam, L, LoesungsBau, lz, lzk, lzSumme, mittel, runde, summe, textParam, vorlage } from '../hilfen';
-import { F } from '../formeln';
-import type { Params, Tabelle } from '../typen';
-import type { Zufall } from '../zufall';
+import { fz, fzListe, intParam, L, LoesungsBau, lz, lzk, lzSumme, mittel, runde, summe, textParam, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
+import type { Params, Tabelle } from '../typen.ts';
+import type { Zufall } from '../zufall.ts';
 
 const zahl = z.number().finite();
 

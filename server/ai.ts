@@ -4,9 +4,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod';
 import { z } from 'zod';
-import type { GradeResult } from '../shared/api';
-import { TASK_TYPES, type Content, type Task, type TaskType } from '../shared/types';
-import { HttpError } from './router';
+import type { GradeResult } from '../shared/api.ts';
+import { TASK_TYPES, type Content, type Task, type TaskType } from '../shared/types.ts';
+import { HttpError } from './router.ts';
 
 export const MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-5';
 

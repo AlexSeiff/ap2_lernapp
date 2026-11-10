@@ -2,7 +2,7 @@
 // und ein geprüfter Link. Import mit Prüfung; Ziele, die es nicht gibt, meldet ladeInhalt() als ImportIssue. Rein, ohne React.
 
 import { z } from 'zod';
-import type { ImportIssue } from './types';
+import type { ImportIssue } from './types.ts';
 
 export const QUELLEN_ARTEN = ['artikel', 'video'] as const;
 export type QuellenArt = (typeof QUELLEN_ARTEN)[number];

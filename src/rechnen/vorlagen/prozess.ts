@@ -2,8 +2,8 @@
 // Fehlerquote, First Pass Yield, Nacharbeitskosten, Amortisation und ROI.
 
 import { z } from 'zod';
-import { fz, intParam, L, LoesungsBau, lz, lzSumme, summe, vorlage } from '../hilfen';
-import { F } from '../formeln';
+import { fz, intParam, L, LoesungsBau, lz, lzSumme, summe, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
 
 const nichtNeg = z.number().finite().nonnegative();
 

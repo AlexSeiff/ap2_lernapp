@@ -3,7 +3,7 @@
 // deshalb nur den Kern (Abschnitte ohne Text); die Texte liegen je Thema in texte/<id>.json bzw. /api/texte/<id> und werden nachgeladen.
 // Rein, ohne Dateizugriff; getestet in tests/texte.test.ts.
 
-import type { Content, Section, Topic } from './types';
+import type { Content, Section, Topic } from './types.ts';
 
 /** Abschnitt ohne Text – so steht er im Kern. */
 export type SectionKopf = Omit<Section, 'markdown'>;
