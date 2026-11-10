@@ -41,12 +41,20 @@ export function SucheDialog({ onClose }: { onClose: () => void }) {
   const [aktiv, setAktiv] = useState(0);
   const [alle, setAlle] = useState(false);
   const { treffer, weitere, rueckfall } = useMemo(() => sucheBegriffe(index, anfrage, alle), [index, anfrage, alle]);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const id = useId();
 
   useEffect(() => {
+    const dialog = dialogRef.current;
+    const ausloeser = document.activeElement;
+    dialog?.showModal();
     inputRef.current?.focus();
+    return () => {
+      dialog?.close();
+      if (ausloeser instanceof HTMLElement && ausloeser.isConnected) ausloeser.focus();
+    };
   }, []);
 
   // Der aktive Treffer bleibt beim Blättern mit den Pfeiltasten sichtbar.
@@ -73,16 +81,22 @@ export function SucheDialog({ onClose }: { onClose: () => void }) {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       oeffne(aktiv);
-    } else if (e.key === 'Escape') {
-      e.preventDefault();
-      onClose();
     }
   };
 
   const listId = `${id}-liste`;
   return (
-    <div className="suche-overlay" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="suche-dialog" role="dialog" aria-modal="true" aria-label="Suche">
+    <dialog
+      ref={dialogRef}
+      className="suche-overlay"
+      aria-label="Suche"
+      onCancel={(e) => {
+        e.preventDefault();
+        onClose();
+      }}
+      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div className="suche-dialog">
         <div className="suche-kopf">
           <span aria-hidden="true">
             <Icon name="search" />
@@ -165,6 +179,6 @@ export function SucheDialog({ onClose }: { onClose: () => void }) {
           )}
         </p>
       </div>
-    </div>
+    </dialog>
   );
 }

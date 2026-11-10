@@ -126,7 +126,7 @@ describe('Dialog und Ziele', () => {
   it('Dialog: Eingabe als Combobox mit Trefferliste, Hinweis vor dem Tippen', () => {
     progress = emptyProgress();
     const html = render('/', createElement(SucheDialog, { onClose: () => {} }));
-    expect(html).toContain('role="dialog"');
+    expect(html).toMatch(/<dialog\b[^>]*aria-label="Suche"/);
     expect(html).toContain('role="combobox"');
     expect(html).toContain('role="listbox"');
     expect(html).toContain('Umlaute egal');
