@@ -69,6 +69,10 @@ const ATTRIBUTE = new Set([
   'font-style',
 ]);
 
+// SVG-Paint und Marker können externe Ressourcen laden. Nur einfache Farben und lokale Fragmente zulassen.
+const FARBE = /^(?:[a-z]+|#[0-9a-f]{3,4}|#[0-9a-f]{6}|#[0-9a-f]{8}|(?:rgb|hsl)a?\([\d.,% +/−-]+\))$/i;
+const FRAGMENT = /^url\(\s*#[\w-]+\s*\)$/i;
+
 const TAG = /<(\/?)([A-Za-z][\w:-]*)((?:\s+[\w:-]+\s*=\s*(?:"[^"]*"|'[^']*'))*)\s*(\/?)>/g;
 const ATTR = /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
 
@@ -83,6 +87,9 @@ export function pruefeSvg(svg: string): string | undefined {
       const attr = a[1];
       const wert = a[2] ?? a[3] ?? '';
       if (!ATTRIBUTE.has(attr)) return `Attribut „${attr}“ an <${name}> ist in Diagrammen nicht erlaubt.`;
+      if ((attr === 'fill' || attr === 'stroke') && !FARBE.test(wert) && !FRAGMENT.test(wert))
+        return `Unerlaubte Farbe oder externer Verweis in „${attr}“.`;
+      if (attr.startsWith('marker-') && wert !== 'none' && !FRAGMENT.test(wert)) return `Nur lokale Marker sind in „${attr}“ erlaubt.`;
       // Verweise nur auf Marker im selben SVG: url(#id)
       for (const u of wert.matchAll(/url\(([^)]*)\)/g)) {
         if (!/^#[\w-]+$/.test(u[1].trim())) return `Nur lokale Verweise url(#id) sind erlaubt, nicht url(${u[1]}).`;
