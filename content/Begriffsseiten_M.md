@@ -1430,6 +1430,7 @@ Ein Datenbankserver läuft 2026 insgesamt 8.760 h, fällt 4-mal aus, Reparaturze
 - Laufzeit $= 8.760 - 40 = 8.720$ h
 - $\text{MTBF} = \frac{8.720}{4} = 2.180$ h
 - $\text{MTTR} = \frac{40}{4} = 10$ h
+
 $V = \frac{2.180}{2.180 + 10} \approx 99{,}54\ \%$.
 
 ### Abgrenzung

@@ -41,6 +41,7 @@ Lieferzeiten in Tagen: 2, 3, 3, 4, 5, 5, 5, 6, 8, 19.
 - $\bar{x} = \frac{60}{10} = 6{,}0$ Tage
 - Median $= \frac{5 + 5}{2} = 5{,}0$ Tage
 - Modus = 5 Tage.
+
 Mittel > Median: Der Ausreißer 19 zieht nach oben, die Verteilung ist rechtsschief.
 
 ### Abgrenzung
@@ -605,6 +606,7 @@ $\text{Lift} = \frac{\text{Konfidenz}(A \to B)}{\text{Support}(B)}$. Lift > 1: p
 - Konfidenz(Sofa → Kissen) $= \frac{60}{100} = 0{,}6$
 - Support(Kissen) $= \frac{200}{1000} = 0{,}2$
 - Lift $= \frac{0{,}6}{0{,}2} = 3$.
+
 Wer ein Sofa kauft, nimmt dreimal so häufig Kissen mit wie der Durchschnittskunde.
 
 ### Abgrenzung

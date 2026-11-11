@@ -548,6 +548,7 @@ b ist die Steigung: Um so viel ändert sich ŷ, wenn x um eine Einheit steigt �
 Werbebudget x und Umsatz y (je T€) über fünf Monate: $\bar{x} = 3$, $\bar{y} = 44$, $S_{xy} = 64$, $S_{xx} = 10$.
 - $b = \frac{64}{10} = 6{,}4$
 - $a = 44 - 6{,}4 \cdot 3 = 24{,}8$
+
 Regressionsgleichung: $\hat{y} = 24{,}8 + 6{,}4 \cdot x$. Je 1.000 € mehr Werbung steigt der Umsatz im Mittel um 6.400 €. Prognose für x = 6: $24{,}8 + 6{,}4 \cdot 6 = 63{,}2$ T€ (leichte Extrapolation).
 
 ### Abgrenzung
