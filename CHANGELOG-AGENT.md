@@ -75,7 +75,7 @@ W05 und W14 hatten zunächst je einen roten Bestandstest. Der erste erwartete da
 - Die Pages-Vorschau lief mit einer isolierten Kopie unter `/ap2_lernapp/`. 139 Cache-Einträge im Scope, drei Icons mit HTTP 200. Bei künstlich veröffentlichter neuer Inhaltsrevision erst der alte Text, nach Klick der neue, drei Versuche erhalten. Offline-Neuladen, neues Lernblatt und SQL-Schema erfolgreich, 93 Antworten aus dem Service Worker. Fehlerproben für 404, WASM und Speicherquote ergaben die in AUDIT.md genannten Meldungen. Altsicherung V8 → echter JSON-Download V9 → erneuter Import funktionierte. Die eigenen Server wurden beendet.
 - `npx vite` und `npx vite preview --mode pages --port 4174 --strictPort` lieferten beim getrennten Start in der frischen Kopie auf Port 5178 bzw. 4174 je HTTP 200 für die Startseite. Beide Ports waren nach dem Beenden frei.
 
-Browser-Nachweise liegen außerhalb des Repositorys. Der Ordner enthält unter anderem `zaun-desktop-hell.png`, `zaun-desktop-dunkel.png`, `zaun-handy-hell.png`, `zaun-handy-dunkel.png`, die vier Suchdialogansichten sowie die Tastaturprobe. [Lokaler Nachweisordner](<C:/Users/alexa/.codex/visualizations/2026/11/10/01a1c6a3-a7e1-7b71-88b8-8c619ba16519/browser-nachweise>)
+Browser-Nachweise liegen außerhalb des Repositorys. Der Ordner enthält unter anderem `zaun-desktop-hell.png`, `zaun-desktop-dunkel.png`, `zaun-handy-hell.png`, `zaun-handy-dunkel.png`, die vier Suchdialogansichten sowie die Tastaturprobe.
 
 ## Ergänzende Nachprüfung am 11. November
 
