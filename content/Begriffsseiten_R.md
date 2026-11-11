@@ -1315,7 +1315,7 @@ Ausgangspunkt ist die Projektdauer aus der Vorwärtsrechnung: Der letzte Vorgang
 
 ### Beispiel
 A (3 Tage) → B (4) und C (2), B und C → D (1). Vorwärts ergibt sich eine Projektdauer von 8 Tagen.
-Rückwärts: D: SEZ 8, SAZ 7, B: SEZ 7, SAZ 3, C: SEZ 7, SAZ 5, A: SEZ = min(3; 5) = 3, SAZ 0.
+Rückwärts: D: SEZ 8, SAZ 7; B: SEZ 7, SAZ 3; C: SEZ 7, SAZ 5; A: SEZ = min(3; 5) = 3, SAZ 0.
 C hat FAZ 3 und SAZ 5 → Gesamtpuffer 2 Tage; A–B–D ist der kritische Pfad (Puffer 0).
 
 ### Abgrenzung
