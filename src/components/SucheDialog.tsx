@@ -81,6 +81,10 @@ export function SucheDialog({ onClose }: { onClose: () => void }) {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       oeffne(aktiv);
+    } else if (e.key === 'Escape') {
+      // type="search" leert das Feld beim ersten Escape; die Suche soll sofort schließen.
+      e.preventDefault();
+      onClose();
     }
   };
 
