@@ -4,31 +4,35 @@ Mit dieser App übst du für die IHK-Abschlussprüfung Teil 2 im Ausbildungsberu
 
 ## Starten
 
-Lokal getestet mit Node.js 24.21 und npm 11.19. Im Projektordner installieren und den Entwicklungsserver starten.
+Die App ist rein statisch: kein Server, kein Konto, keine KI. Lokal getestet mit Node.js 24.21 und npm 11.19. Im Projektordner installieren und den Entwicklungsserver starten.
 
 ```sh
 npm ci
-npx vite
+npm run dev
 ```
 
-Öffne <http://localhost:5178>. Zum Beenden drücke Strg+C. Der lokale Server speichert Lernfortschritt in `data/fortschritt.json` und legt Tagessicherungen in `data/backups/` an. Für einen neuen Checkout kommen die Inhalte aus `content/`. Ein explizites `LERN_QUELLE` hat Vorrang. Ältere Installationen können die Lernblätter im übergeordneten Ordner verwenden.
+Öffne <http://localhost:5178>. Zum Beenden drücke Strg+C. Die Inhalte kommen aus `content/`; änderst du dort ein Lernblatt, lädt die Seite neu. Lernstand und Einstellungen bleiben im Browser dieses Geräts.
 
-Für optionale lokale KI-Aufgaben und -Bewertungen kannst du deinen eigenen `ANTHROPIC_API_KEY` und optional `ANTHROPIC_MODEL` in einer privaten `.env.local` setzen. Starte den Server anschließend neu. Für die regulären Lernfunktionen genügt die Installation oben. Bei einer KI-Bewertung gehen Aufgabe, Musterlösung und deine eingereichte Antwort an Anthropic. Das lokale Werkzeug für Auswahlantworten ist in der technischen Dokumentation beschrieben. [KI-Funktionen](DOKUMENTATION.md#8-ai-local-app-only)
+So prüfst du den gebauten Stand mit Service Worker und Offline-Betrieb:
+
+```sh
+npm run build
+npm run preview
+```
+
+Der Build bricht ab, wenn der Importbericht Hinweise hat (fehlendes Pflichtfeld, doppelte ID, toter Verweis). `npm run import-report` zeigt sie.
 
 ## Online-Version (GitHub Pages)
 
-Die statische PWA verwendet einen HashRouter und relative Assetpfade. Lernstand und Einstellungen bleiben im Browser dieses Geräts. Unter **Daten & Import** kannst du eine JSON-Sicherung herunterladen und später einspielen oder mit einem anderen Lernstand zusammenführen. Automatische Tagessicherungen liegen im Browser in IndexedDB. Wenn du die Websitedaten löschst, brauchst du für die Wiederherstellung die heruntergeladene Datei.
+Die statische PWA verwendet einen HashRouter und relative Assetpfade. Unter **Daten & Import** kannst du eine JSON-Sicherung herunterladen und später einspielen oder mit einem anderen Lernstand zusammenführen. Automatische Tagessicherungen liegen im Browser in IndexedDB. Wenn du die Websitedaten löschst, brauchst du für die Wiederherstellung die heruntergeladene Datei.
 
-Nach dem ersten vollständigen Download kannst du offline lernen, auch mit SQL und Formeln. Eine neue Version meldet sich mit **Neu laden**. Schließe eine laufende Klausurbearbeitung vorher ab. Die Online-Version enthält die öffentlichen Lerninhalte. KI und lokale Fortschrittsdateien gehören zum lokalen Server.
-
-```sh
-npm run build:pages
-npx vite preview --mode pages --port 4174 --strictPort
-```
-
-Die Vorschau läuft auf <http://localhost:4174>. In einem frischen Browserprofil kannst du dort Speichern, Zurücksetzen und Wiederherstellen ausprobieren. Der lokale Produktionsbuild für den Betrieb mit Server entsteht mit `npm run build`.
+Nach dem ersten vollständigen Download kannst du offline lernen, auch mit SQL und Formeln. Eine neue Version meldet sich mit **Neu laden**. Schließe eine laufende Klausurbearbeitung vorher ab.
 
 GitHub prüft Pull Requests gegen `main`. Erst nach erfolgreichem Build auf `main` wird das Pages-Artefakt veröffentlicht. Im Repository muss unter **Settings → Pages → Build and deployment** die Quelle **GitHub Actions** gewählt sein. [Workflow](.github/workflows/pages.yml)
+
+### Umzug aus der früheren lokalen App
+
+Bis November 2026 gab es eine lokale Betriebsart mit eigenem Server, die den Lernstand in `data/fortschritt.json` ablegte. Diese Datei ist eine gültige Sicherung: unter **Daten & Import** mit **Sicherung einspielen** oder **zusammenführen** in den Browser übernehmen.
 
 ## Funktionen
 
@@ -46,7 +50,6 @@ GitHub prüft Pull Requests gegen `main`. Erst nach erfolgreichem Build auf `mai
 | **Heute lernen & Lernplan** | Tagesrunde mit wählbarer Dauer (10 / 20 / 40 min): Aufgaben aus verschiedenen Themen (noch nicht beantwortete), Fehlerjournal, Übungen und Karten; geht nach jedem geschafften Schritt von selbst weiter. Der **Lernplan** verteilt die Themen bis zu deinem Prüfungstermin auf Wochen und zeigt das nötige Kartentempo |
 | **Fachgespräch üben** | Zufällige Prüfer- und Fachgesprächsfragen mit Zeitfenster, optionaler Sprachaufnahme (bleibt im Browser) und Selbsteinschätzung |
 | **Export & Sicherung** | Karten für Anki (.txt), fällige Wiederholungen als Kalender (.ics), Sicherung in eine feste Datei (Chromium-Browser) – unter *Daten* |
-| **KI-Aufgaben** | Neue IHK-Aufgaben (MC, Lückentext, Zuordnung, Rechnen, offen) mit Musterlösung – nur mit API-Schlüssel |
 | **Material** | Lernzettel Kernthemen, Themenliste |
 | **Diagramm-Übungen** | 30 Übungen zu EPK/eEPK, BPMN, Aktivitäts-, Sequenz-, Zustands-, ER-, Klassen- und Anwendungsfalldiagramm: Elemente in ein Diagramm-Gerüst ziehen oder antippen (Lücken füllen, Abläufe ordnen), Prüfen je Lücke mit Hinweisen zu Formregeln (z. B. kein XOR nach einem Ereignis); Wiederholung wie bei den Rechenübungen, verlinkt aus den Begriffsseiten und den Lernblättern |
 | **Weiterlesen und Videos** | Geprüfte Links zu fast jedem Lernblatt-Abschnitt und zu vielen Begriffsseiten: Studyflix-Artikel und -Videos, Wikipedia, Gesetzestexte (BBiG, JArbSchG, BetrVG, DSGVO …), BSI. Öffnen in neuem Tab; ein YouTube-Video würde erst nach Klick geladen (Zwei-Klick-Lösung über youtube-nocookie.com). Links neu prüfen: `npm run quellen-pruefen` |
@@ -54,7 +57,7 @@ GitHub prüft Pull Requests gegen `main`. Erst nach erfolgreichem Build auf `mai
 | **SQL-Belegsatz** | Kompakte SQL-Syntax im Stil des IHK-Belegsatzes (SELECT in Ausführungsreihenfolge, JOINs, Aggregate, Unterabfragen, DML, DDL, Constraints, Datentypen, Views, Indizes, Datums- und Textfunktionen mit SQLite-Hinweisen) – unter Glossar, im SQL-Editor als Seitenpanel, druckbar auf etwa drei Seiten A4; Abschnitt 11 stellt den SQL-Auszug des IHK-Anhangs (MySQL-Stil) der SQLite-Umsetzung gegenüber |
 | **Klausur drucken** | Jede Übungsklausur und die gemischte Probeklausur als Aufgabenblatt mit Deckblatt (Name, Datum, Zeit, Hilfsmittel, Punkte je Block), jeder Block auf neuer Seite, Seitenzahlen; Lösungsblatt mit Bewertungsbogen. „Drucken“ auf der Klausurauswahl mischt eine neue Probeklausur |
 | **Einstellungen** | Design (System/Hell/Dunkel); eigener Prüfungstermin; Leicht-Modus mit oder ohne automatische Antworten; persönliche Einstellungen – sie stehen im Fortschritt und ziehen mit jeder Sicherung um |
-| **Daten & Import** | Importbericht, Neu-Import, Fortschritt sichern/wiederherstellen/zurücksetzen |
+| **Daten & Import** | Importbericht, Fortschritt sichern/wiederherstellen/zurücksetzen |
 
 ### Getrennte Aufgaben- und Lösungsblätter (PDF)
 
@@ -68,9 +71,8 @@ Beide gibt es zusätzlich als Markdown-Download.
 
 ### Bewertung
 
-- **Automatisch** bei Multiple Choice, Lückentext, Zuordnung und Rechenaufgaben (KI-generierte Aufgaben).
+- **Automatisch** bei SQL-Aufgaben im Editor, Rechen- und Diagramm-Übungen.
 - **Selbstbewertung** bei offenen Aufgaben: Musterlösung + Prüferkommentar; enthält die Lösung eine Punktetabelle, werden daraus abhakbare Kriterien.
-- **KI-Bewertung** (optional): Claude vergibt Punkte nach Musterlösung und gibt kurzes Feedback – die Punkte sind ein Vorschlag, den du anpassen kannst.
 - Noten nach IHK-Schlüssel: 100–92 = 1 · 91–81 = 2 · 80–67 = 3 · 66–50 = 4 · 49–30 = 5 · 29–0 = 6.
 
 ## Lernkarten-Datei
@@ -98,11 +100,12 @@ Jede Datei `*Lernkarten*.json` im gewählten Quellordner wird importiert (aktuel
 | `content/` | Öffentliche Markdown-Lernblätter, Musterlösungen, Karten und Übungen als JSON |
 | `shared/` | Inhaltsparser, Prüfregeln, Datenmodelle und Migration des Fortschritts |
 | `src/` | React-Oberfläche, Rechenvorlagen und SQL-Editor mit SQLite/WASM |
-| `server/` | Lokale API, Dateispeicher, Importbericht und Erzeugung der statischen Pages-Dateien |
+| `build/` | Lernblätter lesen und als JSON-Dateien neben die App legen, Service Worker |
+| `tools/` | Importbericht und Quellenprüfung |
 | `tests/` | Vitest-Suite mit echten Lerninhalten und alten Sicherungsformaten |
-| `dist/` | Erzeugte App, im Pages-Modus mit Inhaltsdateien, Manifest und Service Worker |
+| `dist/` | Erzeugte App mit Inhaltsdateien, Manifest und Service Worker |
 
-Der Einstieg für eine neue Aufgabe erklärt IDs, Musterlösungen, Formelnotation, lokale Prüfung und Pull Requests. [Beitragsleitfaden](CONTRIBUTING.md) · [Technische Dokumentation](DOKUMENTATION.md)
+Der Einstieg für eine neue Aufgabe erklärt IDs, Musterlösungen, Formelnotation, lokale Prüfung und Pull Requests. [Beitragsleitfaden](CONTRIBUTING.md) · [Technische Dokumentation](DOKUMENTATION.md) · [Audit- und Reviewberichte](docs/)
 
 ## Lizenz
 

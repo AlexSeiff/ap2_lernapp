@@ -13,9 +13,8 @@ Exact formats with examples: **`references/formate.md`** – read the section fo
 
 ## 1. Where to edit
 
-`.env.local` → `LERN_QUELLE` decides the source folder:
-- `LERN_QUELLE` points at `content/` (the case on this machine) → edit `content/` directly. **Don't** run `npm run sync-content`.
-- otherwise the sources live in `AP-2/` (folder above the repo) → edit there, then `npm run sync-content` copies to `content/`.
+Edit the files in `content/` directly – it is the only source (dev server, build, tests). There is no sync step and no folder
+outside the repository any more.
 
 `content/` is committed and public (Pages build, tests). Content license CC BY-NC-SA – only write your own text, no copied
 exam papers or textbook passages.
@@ -30,7 +29,7 @@ exam papers or textbook passages.
   „CTE (Common Table Expression)“ → `FB-cte`).
 - After adding/removing cards the deck's `anzahl_karten` and the `meta` counters must match (the importer reports a mismatch):
   `node .claude/skills/inhalte-schreiben/scripts/karten.mjs zaehlen <datei> --schreiben` fixes them and sets `aktualisiert_am`.
-- The card files are exactly `JSON.stringify(data, null, 2)` + newline (the `mc-uebernehmen` tool depends on it; Prettier ignores
+- The card files are exactly `JSON.stringify(data, null, 2)` + newline (keeps diffs small; Prettier ignores
   `content/`). Small edits with Edit are fine – keep 2-space indentation and `\n` inside strings; for many cards write a short Node
   script that parses, changes and writes back in that format.
 - Facts with a date (Beitragssätze, Minijob-Grenze, Mindestlohn …) say „Stand 2026“ – check them, they change yearly.

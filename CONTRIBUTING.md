@@ -2,7 +2,7 @@
 
 ## Eine Aufgabe hinzufügen
 
-1. Arbeite auf einem eigenen Branch und suche in `content/` das Lernblatt und die zugehörige Datei `_Loesungen.md`. Bei einem eigenständigen Checkout ist `content/` die Quelle für Build und Tests. Bei abweichender lokaler Quelle kläre deren Synchronisation vor der Bearbeitung.
+1. Arbeite auf einem eigenen Branch und suche in `content/` das Lernblatt und die zugehörige Datei `_Loesungen.md`. `content/` ist die einzige Quelle für Entwicklungsserver, Build und Tests.
 2. Behalte bestehende IDs und Aufgabencodes bei. An ihnen hängen Lernstand, Klausurverlauf und Fehlerjournal. Für einen neuen Eintrag wähle einen freien Code im passenden Block.
 3. Beginne die Klausuraufgabe mit einem kursiven IHK-Operator in der Sie-Form, etwa `*Berechnen* Sie …`. Stelle den erforderlichen Datensatz bereit. Bei Rechnungen und der Deutung eines berechneten Werts folgt im Aufgabentext die allgemeine Formel als Blockquote. Zeige unabhängige Gleichungen jeweils in einer eigenen Zeile. Der Mittelpunkt in einer Rechnung bezeichnet eine Multiplikation.
 4. Ergänze die Lösung unter demselben Code und mit derselben Punktzahl. Zeige Rechenweg, Ergebnis, Einheit und Teilpunkte. Prüfe Blocksumme und Klausursumme von 100 Punkten. Für SQL die angezeigte Musterlösung auf dem bezeichneten Beispieldatensatz einschließlich Varianten ausführen.
@@ -33,10 +33,9 @@ npm run typecheck
 npm run lint
 npm run format:check
 npm run build
-npm run build:pages
 ```
 
-Der Importbericht soll mit **Hinweise (0)** enden. Wenn du Quellen änderst, führe zusätzlich `npm run quellen-pruefen` mit Internetzugang aus. Eine HTTP-Antwort belegt die Erreichbarkeit. Prüfe die Aussage selbst anhand der genannten Fundstelle. Für Darstellungsänderungen kontrolliere die betreffende Seite in der Pages-Vorschau auf Desktop und Handy, hell und dunkel. Die Befehle und Beispiele für Edge stehen in der [Browserprüfung](.claude/skills/app-pruefen/SKILL.md).
+Der Importbericht soll mit **Hinweise (0)** enden; mit Hinweisen bricht `npm run build` ab. Wenn du Quellen änderst, führe zusätzlich `npm run quellen-pruefen` mit Internetzugang aus. Eine HTTP-Antwort belegt die Erreichbarkeit. Prüfe die Aussage selbst anhand der genannten Fundstelle. Für Darstellungsänderungen kontrolliere die betreffende Seite in der Pages-Vorschau auf Desktop und Handy, hell und dunkel. Die Befehle und Beispiele für Edge stehen in der [Browserprüfung](.claude/skills/app-pruefen/SKILL.md).
 
 ## Pull Request
 

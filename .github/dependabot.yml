@@ -1,0 +1,19 @@
+# Wöchentliche Vorschläge für Abhängigkeiten. Jeder Vorschlag läuft durch denselben Workflow wie ein Pull Request.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      entwicklung:
+        dependency-type: development
+        update-types: [minor, patch]
+      laufzeit:
+        dependency-type: production
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
