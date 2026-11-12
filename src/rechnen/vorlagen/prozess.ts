@@ -2,8 +2,8 @@
 // Fehlerquote, First Pass Yield, Nacharbeitskosten, Amortisation und ROI.
 
 import { z } from 'zod';
-import { fz, intParam, L, LoesungsBau, lz, lzSumme, summe, vorlage } from '../hilfen';
-import { F } from '../formeln';
+import { fz, intParam, L, LoesungsBau, lz, lzSumme, summe, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
 
 const nichtNeg = z.number().finite().nonnegative();
 
@@ -372,7 +372,7 @@ export const fmea = vorlage({
     }
   },
   platzhalter: (d) => ({
-    fehler: d.fehler.map((f) => `${f.name} (A = ${fz(f.a)}, B = ${fz(f.b)}, E = ${fz(f.e)})`).join(' · '),
+    fehler: d.fehler.map((f) => `${f.name} (A = ${fz(f.a)}, B = ${fz(f.b)}, E = ${fz(f.e)})`).join(', '),
     schwelle: d.schwelle === undefined ? '–' : fz(d.schwelle),
     anzahl: String(d.fehler.length),
   }),

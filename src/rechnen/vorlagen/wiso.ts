@@ -3,8 +3,8 @@
 // Die Inflationsrate rechnet die Vorlage „prozent-veraenderung“ (VPI alt → neu).
 
 import { z } from 'zod';
-import { fz, intParam, L, LoesungsBau, lz, runde, summe, vorlage, zahlParam } from '../hilfen';
-import { F } from '../formeln';
+import { fz, intParam, L, LoesungsBau, lz, runde, summe, vorlage, zahlParam } from '../hilfen.ts';
+import { F } from '../formeln.ts';
 
 const SAETZE = { kv: 14.6, pv: 3.6, rv: 18.6, alv: 2.6, kinderlosZuschlag: 0.6, geringverdiener: 325 };
 
@@ -260,7 +260,7 @@ export const gleichgewicht = vorlage({
     };
   },
   platzhalter: (d) => ({
-    tabelle: d.zeilen.map((r) => `${fz(r.preis)} € – Nachfrage ${fz(r.nachfrage)}, Angebot ${fz(r.angebot)}`).join(' · '),
+    tabelle: d.zeilen.map((r) => `${fz(r.preis)} € – Nachfrage ${fz(r.nachfrage)}, Angebot ${fz(r.angebot)}`).join(', '),
   }),
   tabelle: (d) => ({
     kopf: ['Preis (€)', 'Nachfrage', 'Angebot'],

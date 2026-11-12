@@ -135,7 +135,8 @@ Nachteile der Fremdvergabe:
 
 **D2 (5 P):** *(2 P Rechnung, 2 P Grafik mit beschrifteten Achsen und Geraden, 1 P Antwortsatz)*
 
-Kumulierte Kosten: $K(t) = 9.000 \cdot t$ · kumulierte Einsparung: $E(t) = 15.000 \cdot (t - 1)$
+- Kumulierte Kosten: $K(t) = 9.000 \cdot t$
+- Kumulierte Einsparung: $E(t) = 15.000 \cdot (t - 1)$
 
 $9.000 \cdot t = 15.000 \cdot (t - 1) \Rightarrow 6.000 \cdot t = 15.000 \Rightarrow t = \frac{15.000}{6.000}$ = **2,5 Jahre**
 
@@ -160,8 +161,8 @@ Antwortsatz: **Nach zweieinhalb Jahren** sind die kumulierten Einsparungen so ho
 | Summe | 64.100 | 60.840 |
 
 Rechenwege:
-- A: Zusatzlizenzen $(8 - 4) \cdot 600 \cdot 8 = 19.200$ € · Scanner $8 \cdot 250 = 2.000$ € · Updates $7 \cdot 1.200 = 8.400$ € (ab Jahr 2) · Support $40 \cdot 8 \cdot 80 = 25.600$ €
-- B: Zusatzlizenzen $(8 - 6) \cdot 1.500 = 3.000$ € · Hardwarepaket 2.400 € (enthält Drucker) plus $2 \cdot 220 = 440$ € für zwei weitere Scanner = 2.840 €
+- A: Zusatzlizenzen $(8 - 4) \cdot 600 \cdot 8 = 19.200$ €, Scanner $8 \cdot 250 = 2.000$ €, Updates $7 \cdot 1.200 = 8.400$ € (ab Jahr 2), Support $40 \cdot 8 \cdot 80 = 25.600$ €
+- B: Zusatzlizenzen $(8 - 6) \cdot 1.500 = 3.000$ €, Hardwarepaket 2.400 € (enthält Drucker) plus $2 \cdot 220 = 440$ € für zwei weitere Scanner = 2.840 €
 
 Differenzbetrag: $64.100 - 60.840$ = **3.260 €** zugunsten von Angebot B.
 

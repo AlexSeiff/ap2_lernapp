@@ -12,8 +12,6 @@ export type NavZiel = {
   icon: IconName;
   label: string;
   badge?: NavBadge;
-  /** Nur in der lokalen App (KI). */
-  nurLokal?: boolean;
   /** Nur genau dieser Pfad (z. B. `/sql`, nicht `/sql/uebungen`). */
   genau?: boolean;
 };
@@ -90,7 +88,6 @@ export const BEREICHE: Bereich[] = [
       { to: '/einstellungen', icon: 'settings', label: 'Einstellungen' },
       { to: '/material', icon: 'library', label: 'Material' },
       { to: '/daten', icon: 'save', label: 'Daten & Import' },
-      { to: '/generator', icon: 'sparkles', label: 'KI-Aufgaben', nurLokal: true },
     ],
   },
 ];
@@ -117,7 +114,7 @@ const LERNEN = [
   '/fachgespraech',
   '/podcast',
 ];
-const EINSTELLUNGEN = ['/material', '/einstellungen', '/daten', '/generator'];
+const EINSTELLUNGEN = ['/material', '/einstellungen', '/daten'];
 
 /** Zu welchem Bereich gehört der Pfad? Die Übersicht (`/`) und unbekannte Pfade gehören zu keinem. */
 export function aktiverBereich(pathname: string): BereichId | undefined {
@@ -130,9 +127,6 @@ export function aktiverBereich(pathname: string): BereichId | undefined {
 }
 
 export const bereich = (id: BereichId): Bereich => BEREICHE.find((b) => b.id === id)!;
-
-/** Unterziele eines Bereichs, ohne die nur lokalen in der Pages-Version. */
-export const sichtbareZiele = (b: Bereich, statisch: boolean): NavZiel[] => b.unter.filter((z) => !(z.nurLokal && statisch));
 
 /** Das hervorgehobene Unterziel: das mit dem längsten passenden Pfad (`/lernen/17` gehört nicht zu „Themen“). */
 export function aktivesUnterziel(pathname: string, b: Bereich): NavZiel | undefined {

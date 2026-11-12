@@ -142,7 +142,8 @@ Beispiel Durchlaufzeiten (Tage): 2, 4, 5, 6, 8 → $\bar{x} = \frac{25}{5} = 5$
 | 8 | 3 | 9 |
 | | **Σ = 0** | **Σ = 20** |
 
-Varianz (Grundgesamtheit, ÷ n): $\sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n} = \frac{20}{5}$ = **4 Tage²** · Standardabweichung: $\sigma = \sqrt{4}$ = **2 Tage**
+- Varianz (Grundgesamtheit, ÷ n): $\sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n} = \frac{20}{5}$ = **4 Tage²**
+- Standardabweichung: $\sigma = \sqrt{4}$ = **2 Tage**
 
 **Kontrolle:** Die Summe der einfachen Abweichungen ist immer 0 – deshalb wird überhaupt quadriert. Nutze das als Rechenprobe!
 
@@ -195,10 +196,12 @@ Das ist die verbreitete Variante nach Tukey. Manche Darstellungen ziehen die Whi
 
 ### 5.2 Die 1,5-IQR-Regel
 
-Unterer Zaun $= Q_1 - 1{,}5 \cdot \text{IQR}$ · Oberer Zaun $= Q_3 + 1{,}5 \cdot \text{IQR}$
+- Unterer Zaun $= Q_1 - 1{,}5 \cdot \text{IQR}$
+- Oberer Zaun $= Q_3 + 1{,}5 \cdot \text{IQR}$
+
 Werte außerhalb gelten als Ausreißerverdacht. Ein Wert genau auf dem Zaun ist noch kein Ausreißer. Werte jenseits von 3 · IQR (statt 1,5 · IQR) werden häufig als extreme Ausreißer bezeichnet.
 
-Beispiel Lieferzeiten: Q1 = 3, Q3 = 6, IQR = 3 → unterer Zaun $= 3 - 4{,}5 = -1{,}5$ · oberer Zaun $= 6 + 4{,}5$ = **10,5**. Der Wert **19** liegt darüber → Ausreißer. Der obere Whisker endet beim größten Wert innerhalb der Grenze, also bei 8.
+Beispiel Lieferzeiten: Q1 = 3, Q3 = 6, IQR = 3 → unterer Zaun $= 3 - 4{,}5 = -1{,}5$, oberer Zaun $= 6 + 4{,}5$ = **10,5**. Der Wert **19** liegt darüber → Ausreißer. Der obere Whisker endet beim größten Wert innerhalb der Grenze, also bei 8.
 
 ### 5.3 Umgang mit Ausreißern – die DPA-Kernkompetenz
 

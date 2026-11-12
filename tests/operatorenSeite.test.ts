@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { OPERATOREN } from '../src/lib/operatoren';
 
@@ -13,7 +13,8 @@ const content = loadContent(CONTENT_DIR);
 const progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '' }),
+  useStore: () => ({ content, progress, update: () => {} }),
+  useStartStore: () => ({ content, progress, update: () => {} }),
 }));
 
 const { Operatoren } = await import('../src/pages/Operatoren');

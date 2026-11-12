@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress, type Progress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { cardPool } from '../src/lib/cards';
 import { leseLeseStelle, obersterAbschnitt } from '../src/lib/leseStelle';
 import { UNTERBEREICHE } from '../src/lib/mischKlausur';
@@ -16,7 +16,8 @@ const content = loadContent(CONTENT_DIR);
 let progress: Progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 
 const { Dashboard } = await import('../src/pages/Dashboard');
@@ -56,7 +57,7 @@ describe('Prüfungsbereiche', () => {
     const karte2 = pool.find((c) => c.topicId === '05' && c.id !== karte3.id)!;
     const sql = content.sqlExercises.find((e) => e.topicId === '01')!;
     const diagramm = content.diagrammUebungen![0];
-    const [a1, a2] = Object.values(content.tasks).filter((t) => t.topicId === '01' && !t.generated);
+    const [a1, a2] = Object.values(content.tasks).filter((t) => t.topicId === '01');
     const p: Progress = {
       ...emptyProgress(),
       cards: { [karte3.id]: { box: 3, due: '2099-01-01', reviews: 3 }, [karte2.id]: { box: 2, due: '2099-01-01', reviews: 2 } },

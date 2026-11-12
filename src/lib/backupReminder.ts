@@ -1,4 +1,4 @@
-// Erinnerung an eine heruntergeladene Sicherung (Pages-Version, Banner auf der Übersicht): rein, damit testbar.
+// Erinnerung an eine heruntergeladene Sicherung (Banner auf der Übersicht): rein, damit testbar.
 
 import type { Progress } from '../../shared/progress';
 import { localDate } from './progress';

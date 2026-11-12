@@ -11,10 +11,10 @@
 // - Doppelte (gleich nach normalisiere, ohne Klammerzusatz) werden zusammengelegt: Definition der Karte vor der des Lernblatts,
 //   alle Fundstellen bleiben (höchstens GLOSSAR_MAX_QUELLEN). Reihenfolge: Begriffskarte, Wissenskarte, Lernblatt.
 
-import { stripPrueferfragen } from '../../shared/prueferfragen';
-import type { Content, Topic } from '../../shared/types';
-import type { KernInhalt } from '../../shared/texte';
-import { normalisiere } from './normalisiere';
+import { stripPrueferfragen } from '../../shared/prueferfragen.ts';
+import type { Content, Topic } from '../../shared/types.ts';
+import type { KernInhalt } from '../../shared/texte.ts';
+import { normalisiere } from './normalisiere.ts';
 
 export interface GlossarQuelle {
   titel: string;

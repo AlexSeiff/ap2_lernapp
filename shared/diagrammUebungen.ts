@@ -3,7 +3,7 @@
 // Bewertung je Slot mit Lösungsvarianten und die Formregeln (EPK, BPMN, Aktivitätsdiagramm). Rein, ohne React.
 
 import { z } from 'zod';
-import type { ImportIssue } from './types';
+import type { ImportIssue } from './types.ts';
 
 export const DIAGRAMM_TYPEN = ['epk', 'bpmn', 'aktivitaet', 'sequenz', 'zustand', 'er', 'klasse', 'usecase'] as const;
 export type DiagrammTyp = (typeof DIAGRAMM_TYPEN)[number];

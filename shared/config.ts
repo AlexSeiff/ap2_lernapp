@@ -1,4 +1,4 @@
-// Zentrale Einstellungen der Lern-App. Nur Werte, keine Logik – wird von Client, Server und vite.config.ts importiert.
+// Zentrale Einstellungen der Lern-App. Nur Werte, keine Logik – wird von App, Build und vite.config.ts importiert.
 
 // Der Prüfungstermin ist eine persönliche Einstellung (Progress.settings.examDate), kein fester Wert.
 
@@ -17,7 +17,7 @@ export const CARD_INTERVALS = [0, 1, 3, 7, 14, 30];
 /** Wartezeit in ms, bevor Änderungen am Fortschritt gespeichert werden (sammelt schnelle Folgeänderungen). */
 export const SAVE_DELAY_MS = 400;
 
-/** Port des Dev-Servers – `Lern-App starten.cmd` öffnet http://localhost:5178. */
+/** Port des Entwicklungsservers und der Vorschau (http://localhost:5178). */
 export const DEV_PORT = 5178;
 
 /** „Heute lernen“ (ROADMAP 8.1): Ziel-Dauer der gemischten Tagesrunde in Minuten. */

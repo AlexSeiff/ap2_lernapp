@@ -160,10 +160,15 @@ const KLICK = (ziel) => {
   }
   if (!el) {
     const kandidaten = [...document.querySelectorAll('button, a, [role="button"], label, summary, [role="tab"], option')].filter(sichtbar);
-    el = kandidaten.find((k) => k.textContent.replace(/\s+/g, ' ').trim() === ziel) ??
-      kandidaten.find((k) => k.textContent.replace(/\s+/g, ' ').includes(ziel)) ?? null;
+    el =
+      kandidaten.find((k) => k.textContent.replace(/\s+/g, ' ').trim() === ziel) ??
+      kandidaten.find((k) => k.textContent.replace(/\s+/g, ' ').includes(ziel)) ??
+      null;
     if (!el) {
-      const texte = kandidaten.map((k) => k.textContent.replace(/\s+/g, ' ').trim()).filter(Boolean).slice(0, 40);
+      const texte = kandidaten
+        .map((k) => k.textContent.replace(/\s+/g, ' ').trim())
+        .filter(Boolean)
+        .slice(0, 40);
       return { ok: false, texte };
     }
   }

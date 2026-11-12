@@ -61,7 +61,7 @@ Manipulationstechnik: Eine y-Achse, die bei Balken- oder Säulendiagrammen nicht
 Bei Balken und Säulen codiert die Länge den Wert. Wird die Achse abgeschnitten, zeigt die sichtbare Länge nur noch den Überschuss über dem Startwert – die Verhältnisse stimmen nicht mehr. Bei Liniendiagrammen ist ein Ausschnitt vertretbar, muss aber erkennbar gekennzeichnet sein (z. B. Achsenbruch).
 
 ### Beispiel
-Umsätze 4,80 · 4,95 · 5,10 Mio. €, Wachstum insgesamt 6,25 %. Beginnt die Achse bei 4,70 Mio. €, sind die Säulen 0,10 · 0,25 · 0,40 hoch – das Verhältnis 1 : 2,5 : 4 suggeriert eine Vervierfachung. Lügenfaktor: $\frac{3{,}00}{0{,}0625} = 48$.
+Umsätze 4,80; 4,95; 5,10 Mio. €, Wachstum insgesamt 6,25 %. Beginnt die Achse bei 4,70 Mio. €, sind die Säulen 0,10; 0,25; 0,40 hoch – das Verhältnis 1 : 2,5 : 4 suggeriert eine Vervierfachung. Lügenfaktor: $\frac{3{,}00}{0{,}0625} = 48$.
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 180" width="420" height="180" role="img" aria-label="Gleiche Umsätze mit Achse ab null und mit abgeschnittener Achse">
@@ -1465,7 +1465,7 @@ Rabattregel: unter 500 € kein Rabatt, 500 € bis unter 2.000 € 5 %, ab 2.00
 | ÄK4 | ab 2.000 € | 3.500 € | 10 % |
 | ÄK5 | keine Zahl (ungültig) | „abc“ | Fehlermeldung |
 
-Mit den sechs Grenzwerten (−0,01 · 0,00 · 499,99 · 500,00 · 1.999,99 · 2.000,00 €) ergeben sich 11 Testfälle.
+Mit den sechs Grenzwerten (−0,01; 0,00; 499,99; 500,00; 1.999,99; 2.000,00 €) ergeben sich 11 Testfälle.
 
 ### Abgrenzung
 **Grenzwertanalyse** testet die Ränder der Klassen; die Äquivalenzklasse liefert je Bereich einen beliebigen Vertreter. White-Box-Kriterien wie die Anweisungsüberdeckung richten sich nach dem Code.

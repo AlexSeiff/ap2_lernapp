@@ -770,7 +770,7 @@ Kompakte Beschreibung einer Verteilung durch Minimum, Q1, Median, Q3 und Maximum
 Die fünf Werte zeigen Lage (Median), Streuung (IQR = Q3 − Q1, Spannweite) und Schiefe (Lage des Medians zwischen Q1 und Q3). Weil sie auf Rangpositionen beruhen, sind Median und Quartile robust gegen Ausreißer. Im Boxplot nach Tukey enden die Whisker allerdings am letzten Wert innerhalb der 1,5-IQR-Zäune; Minimum und Maximum stehen dann nur, wenn es keine Ausreißer gibt.
 
 ### Beispiel
-Lieferzeiten 2, 3, 3, 4, 5, 5, 5, 6, 8, 19 Tage: Minimum 2 · Q1 3 · Median 5 · Q3 6 · Maximum 19. Oberer Zaun 6 + 1,5 · 3 = 10,5 → 19 ist ein Ausreißer, der Whisker endet bei 8.
+Lieferzeiten 2, 3, 3, 4, 5, 5, 5, 6, 8, 19 Tage: Minimum 2, Q1 3, Median 5, Q3 6, Maximum 19. Oberer Zaun 6 + 1,5 · 3 = 10,5 → 19 ist ein Ausreißer, der Whisker endet bei 8.
 
 ### Prüfungsfalle
 Bei den Quartilen Position und Wert verwechseln („Position 8 → Wert 6“) und die verwendete Quartilskonvention nicht angeben.

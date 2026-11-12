@@ -11,28 +11,27 @@ the screenshots with the Read tool, and report what you actually saw.
 
 ## 1. Which server
 
+The app is static: no server-side progress. Progress lives in the `localStorage` of the browser that opens the page, and every
+screenshot run uses a fresh browser profile – a test run can never touch the owner's real learning progress.
+
 | Need | Server | Why |
 |---|---|---|
-| Look at pages, read-only clicking (browsing cards, opening sections, switching filters) | **dev**, port 5178 | live content, hot reload |
-| Anything that **saves progress** (rating cards, „Heute lernen“ steps, submitting tasks/exams, Rechen-/SQL-„Prüfen“, settings such as the Leicht switch, marking a card) | **Pages preview**, port 4174 | progress lives in the headless browser's empty `localStorage`, thrown away after the run |
-| PWA, offline, loading, paths | Pages preview | that is what users get |
-
-The dev server writes progress to `data/fortschritt.json` – the owner's **real learning progress**. Never rate cards or
-submit anything against port 5178; a test run would push cards into the wrong Leitner box and fill the Fehlerjournal.
+| Look at pages, click through cards, rate, submit, change settings | **dev**, port 5178 | live content from `content/`, hot reload |
+| PWA, offline, update prompt, loading, paths | **preview** of the build, port 4174 | the dev server has no service worker; the build is what users get |
 
 **Dev server**
 ```bash
 curl -s -o /dev/null -w "%{http_code}" http://localhost:5178/   # 200 → already running (often the user's own) – reuse it, don't kill it
 npx vite                                                        # otherwise start it with run_in_background (not `npm run dev`: that opens a browser window for the user)
 ```
-Content comes from `LERN_QUELLE` in `.env.local` (on this machine `content/`). Code and content changes reload by themselves.
+Content comes from `content/`. Code and content changes reload by themselves.
 
-**Pages preview**
+**Preview of the build**
 ```bash
-npm run build:pages                                                  # rebuild after every change you want to see
-npx vite preview --mode pages --port 4174 --strictPort               # run_in_background; stop it when you're done
+npm run build                                   # rebuild after every change you want to see; fails on import issues
+npx vite preview --port 4174 --strictPort       # run_in_background; stop it when you're done
 ```
-Every screenshot run uses a fresh browser profile, so the preview always starts with the welcome screen: begin with
+Every screenshot run uses a fresh browser profile, so the app always starts with the welcome screen: begin with
 `--klick "Los geht's"`.
 
 ## 2. Taking screenshots
@@ -84,5 +83,5 @@ Pick what the change touches; for a visual change cover at least light + dark an
 
 Tell the user what you checked and what you saw – name the screenshots by their full path so they can open them, and say plainly
 if something looked wrong or couldn't be checked (e.g. a state that needs real progress). Stop servers you started
-(`npx vite preview` for Pages); leave a dev server the user was already running alone. On Windows:
+(`npx vite preview`); leave a dev server the user was already running alone. On Windows:
 `netstat -ano | grep ":4174 "` gives the PID (last column; the state is localized, e.g. „ABHÖREN“), then `taskkill //PID <pid> //F //T`.

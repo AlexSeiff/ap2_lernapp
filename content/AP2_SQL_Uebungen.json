@@ -277,7 +277,7 @@
         "Umsatz = menge × preis, summiert je Kunde.",
         "GROUP BY k.name, danach ORDER BY umsatz DESC."
       ],
-      "erklaerung": "Ergebnis: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70. Rechenweg Huber: Best. 100 = 2×249 + 2×189 = 876,00; Best. 102 = 4×129 = 516,00; Best. 105 = 2×39,90 = 79,80.",
+      "erklaerung": "Ergebnis: Huber GmbH 1471.80; Schmidt AG 945.00; Fischer KG 767.70. Rechenweg Huber: Best. 100 = 2×249 + 2×189 = 876,00; Best. 102 = 4×129 = 516,00; Best. 105 = 2×39,90 = 79,80.",
       "quelle_aufgabe": "DD1 Übungsklausur C3",
       "aufgaben": [
         "01-C3"
@@ -947,7 +947,7 @@
         "Dann kunde LEFT JOIN auf dieses Zwischenergebnis – so bleiben alle Kunden erhalten.",
         "COALESCE(u.umsatz, 0) macht aus NULL eine 0."
       ],
-      "erklaerung": "Ergebnis: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70 · Weber e.K. 0 · Braun GmbH 0. Gleichwertig: alle vier Tabellen per LEFT JOIN verketten und COALESCE(SUM(bp.menge * p.preis), 0) je Kunde bilden.",
+      "erklaerung": "Ergebnis: Huber GmbH 1471.80; Schmidt AG 945.00; Fischer KG 767.70; Weber e.K. 0; Braun GmbH 0. Gleichwertig: alle vier Tabellen per LEFT JOIN verketten und COALESCE(SUM(bp.menge * p.preis), 0) je Kunde bilden.",
       "quelle_aufgabe": "DD1 Teil 3, 3.8 CTE",
       "karten": [
         "FB-cte",
@@ -1013,7 +1013,7 @@
         "Die Abfrage ist dieselbe wie bei „Umsatz je Kunde“: vier Tabellen verknüpfen, GROUP BY k.kunden_id, k.name.",
         "Spalten der View: kunden_id, name und SUM(bp.menge * p.preis) AS umsatz."
       ],
-      "erklaerung": "Geprüft wird per SELECT auf die View: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70 – und dass es wirklich eine View ist, keine Tabelle. Eine View speichert nur die Abfrage und ist bei jedem Zugriff aktuell. In der Praxis bekäme die Rolle eines Analysten per GRANT SELECT ON v_kundenumsatz nur Zugriff auf die View, nicht auf die Basistabellen (SQLite kennt kein GRANT).",
+      "erklaerung": "Geprüft wird per SELECT auf die View: Huber GmbH 1471.80; Schmidt AG 945.00; Fischer KG 767.70 – und dass es wirklich eine View ist, keine Tabelle. Eine View speichert nur die Abfrage und ist bei jedem Zugriff aktuell. In der Praxis bekäme die Rolle eines Analysten per GRANT SELECT ON v_kundenumsatz nur Zugriff auf die View, nicht auf die Basistabellen (SQLite kennt kein GRANT).",
       "quelle_aufgabe": "DD1 Teil 3, 3.4 Views",
       "karten": [
         "SQL-028",
@@ -1074,7 +1074,7 @@
         "Untereinanderhängen: UNION ALL zwischen die Abfragen.",
         "Die Spaltennamen kommen aus der ersten Abfrage."
       ],
-      "erklaerung": "Ergebnis: kunde 5 · produkt 5 · bestellung 6. UNION ALL behält alle Zeilen, UNION würde Duplikate entfernen – hier gibt es keine, UNION ALL ist aber schneller und drückt die Absicht aus. Solche Kontrollzahlen gehören ins Ladeprotokoll eines ETL-Laufs (gelesen, geladen, abgewiesen).",
+      "erklaerung": "Ergebnis: kunde 5; produkt 5; bestellung 6. UNION ALL behält alle Zeilen, UNION würde Duplikate entfernen – hier gibt es keine, UNION ALL ist aber schneller und drückt die Absicht aus. Solche Kontrollzahlen gehören ins Ladeprotokoll eines ETL-Laufs (gelesen, geladen, abgewiesen).",
       "quelle_aufgabe": "DD1 Teil 3, 3.3 Mengenoperationen",
       "karten": [
         "SQL-025"
@@ -1194,7 +1194,7 @@
         "PARTITION BY kategorie startet die Zählung je Kategorie neu.",
         "ORDER BY preis DESC im OVER-Teil: das teuerste zuerst."
       ],
-      "erklaerung": "Ergebnis: Möbel – Schreibtisch Basic 1, Bürostuhl Comfort 2 · Elektronik – Monitor 27 Zoll 1, Dockingstation 2 · Zubehör – Schreibtischlampe 1. Ohne Gleichstand liefern RANK, DENSE_RANK und ROW_NUMBER dasselbe; bei gleichen Preisen: RANK 1, 2, 2, 4 · DENSE_RANK 1, 2, 2, 3 · ROW_NUMBER 1, 2, 3, 4.",
+      "erklaerung": "Ergebnis: Möbel – Schreibtisch Basic 1, Bürostuhl Comfort 2; Elektronik – Monitor 27 Zoll 1, Dockingstation 2; Zubehör – Schreibtischlampe 1. Ohne Gleichstand liefern RANK, DENSE_RANK und ROW_NUMBER dasselbe; bei gleichen Preisen: RANK 1, 2, 2, 4; DENSE_RANK 1, 2, 2, 3; ROW_NUMBER 1, 2, 3, 4.",
       "quelle_aufgabe": "DD1 Teil 3, 3.8 Fensterfunktionen",
       "karten": [
         "SQL-026",
@@ -1565,7 +1565,7 @@
         "Der Status filtert einzelne Zeilen – also WHERE, vor dem GROUP BY.",
         "Nimm einzelpreis aus bestellposition, nicht den aktuellen Produktpreis."
       ],
-      "erklaerung": "Ergebnis: Schmidt 114.99 · Fischer 37.50 · Weber 34.90. Gruppieren über kunden_id und nachname fasst namensgleiche Kunden nicht zusammen.",
+      "erklaerung": "Ergebnis: Schmidt 114.99; Fischer 37.50; Weber 34.90. Gruppieren über kunden_id und nachname fasst namensgleiche Kunden nicht zusammen.",
       "quelle_aufgabe": "DataFit Übungsklausur C5",
       "aufgaben": [
         "00-C5"

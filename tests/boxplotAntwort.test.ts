@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { emptyProgress } from '../shared/progress';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import {
@@ -22,7 +22,8 @@ const content = loadContent(CONTENT_DIR);
 const task = (id: string) => content.tasks[id];
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
 }));
 
 const { default: EditorAntwort, EditorPruefung } = await import('../src/components/EditorAntwort');
@@ -71,7 +72,7 @@ describe('Eingabe und Formprüfung', () => {
     expect(leseEditorAntwort('boxplot', task('03-D3'), schreibeEditorAntwort(richtig))).toEqual(richtig);
     expect(leseEditorAntwort('boxplot', task('03-D3'), 'Box von 40 bis 70').notiz).toBe('Box von 40 bis 70');
     expect(antwortAlsText(task('03-D3'), JSON.stringify(richtig))).toBe(
-      'Boxplot – unteres Whisker-Ende: 35 · Q1 (Box links): 40 · Median: 55 · Q3 (Box rechts): 70 · oberes Whisker-Ende: 90 · Ausreißer: 220',
+      'Boxplot – unteres Whisker-Ende: 35, Q1 (Box links): 40, Median: 55, Q3 (Box rechts): 70, oberes Whisker-Ende: 90, Ausreißer: 220',
     );
   });
 

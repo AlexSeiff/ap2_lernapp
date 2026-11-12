@@ -3,8 +3,8 @@
 // Funktion `pruefe` (src/rechnen/pruefen.ts) – shared/ kennt die Rechenvorlagen selbst nicht.
 
 import { z } from 'zod';
-import { topicFromSource } from './lernkarten';
-import type { ImportIssue, RechenEingabe, RechenUebung } from './types';
+import { topicFromSource } from './lernkarten.ts';
+import type { ImportIssue, RechenEingabe, RechenUebung } from './types.ts';
 
 export interface ParsedRechenUebungen {
   exercises: RechenUebung[];

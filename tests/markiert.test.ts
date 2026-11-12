@@ -49,7 +49,9 @@ describe('Markierungen – Format Version 7', () => {
     const raw = JSON.parse(roh('fortschritt-v6-2026-10-01.json'));
     const migrated = migrateProgress(raw);
     expect(PROGRESS_VERSION).toBeGreaterThanOrEqual(7);
-    expect(migrated).toEqual(ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }));
+    expect(migrated).toEqual(
+      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }),
+    );
     expect(checkProgressPut(migrated, raw)).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35 } });
   });
 

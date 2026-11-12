@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress, migrateSettings, ProgressSchema, type Progress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import type { Lernplan } from '../src/lib/lernplan';
 import {
   falte,
@@ -23,7 +23,8 @@ import {
 const content = loadContent(CONTENT_DIR);
 let progress: Progress = emptyProgress();
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 const { Einstellungen } = await import('../src/pages/Einstellungen');
 const { Heute } = await import('../src/pages/Heute');

@@ -5,14 +5,15 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress } from '../shared/progress';
 import { parseQuellen, pruefeQuellenZiele, quellenNachZiel, type Quelle } from '../shared/quellen';
-import { CONTENT_DIR, ladeInhalt, isContentFile } from '../server/loadContent';
+import { CONTENT_DIR, ladeInhalt, isContentFile } from '../build/inhalt';
 
 // Quellen und Lehrvideos (Umsetzungsplan Phase 8): Import, Ziele, Anzeige auf Begriffsseiten und Lernblättern, Zwei-Klick-Video.
 
 const { content, seiten } = ladeInhalt(CONTENT_DIR);
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
 }));
 
 const { Thema } = await import('../src/pages/Themen');

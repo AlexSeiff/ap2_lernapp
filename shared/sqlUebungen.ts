@@ -2,8 +2,8 @@
 // Tolerant wie der Lernkarten-Import: Fehlerhafte Einträge werden übersprungen und als ImportIssue gemeldet.
 
 import { z } from 'zod';
-import { topicFromSource } from './lernkarten';
-import type { Content, ImportIssue, SqlDataset, SqlExercise } from './types';
+import { topicFromSource } from './lernkarten.ts';
+import type { Content, ImportIssue, SqlDataset, SqlExercise } from './types.ts';
 
 export interface ParsedSqlUebungen {
   datasets: SqlDataset[];

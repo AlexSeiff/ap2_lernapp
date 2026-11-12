@@ -1,4 +1,4 @@
-// Automatische Tagessicherungen der Pages-Version im IndexedDB des Browsers – wie data/backups/ in der lokalen App:
+// Automatische Tagessicherungen im IndexedDB des Browsers:
 // Vor dem ersten Speichern eines Tages wird der bisher gespeicherte Stand (also der Stand vom Tagesbeginn) gesichert,
 // höchstens eine Sicherung pro Tag, die letzten BROWSER_BACKUP_KEEP Tage bleiben.
 // Die Rotation ist rein (planBackup), der Speicher austauschbar (BackupStorage), damit alles ohne Browser testbar ist.

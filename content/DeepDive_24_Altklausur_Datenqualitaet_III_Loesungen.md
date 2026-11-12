@@ -29,7 +29,9 @@ Gleichwertig: getrennte Schwellen je Merkmal (z. B. Magnet = mindestens doppelte
 
 **A5 (6 P):** *(Anteile 2 P, Rechenweg 3 P, Ergebnis 1 P)*
 
-Anteile: $\frac{96}{2.400} = 0{,}04$ · $\frac{528}{2.400} = 0{,}22$ · $\frac{1.776}{2.400} = 0{,}74$
+- Anteile: $\frac{96}{2.400} = 0{,}04$
+- $\frac{528}{2.400} = 0{,}22$
+- $\frac{1.776}{2.400} = 0{,}74$
 
 - Publikumsmagnet: $0{,}04 \cdot \log_2 \frac{1}{0{,}04} = 0{,}04 \cdot 4{,}6439 = 0{,}1858$
 - Durchschnitt: $0{,}22 \cdot \log_2 \frac{1}{0{,}22} = 0{,}22 \cdot 2{,}1844 = 0{,}4806$

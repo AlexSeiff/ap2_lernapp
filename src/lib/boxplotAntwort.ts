@@ -145,7 +145,7 @@ export function gleicheBoxplotAb(task: Pick<Task, 'solution'>, a: BoxplotAntwort
 export function boxplotAlsText(a: BoxplotAntwort): string {
   const teile = KENNWERTE.map((k) => `${KENNWERT_NAMEN[k]}: ${a.werte[k].trim() || '–'}`);
   teile.push(`Ausreißer: ${a.ausreisser.trim() || 'keine'}`);
-  const text = `Boxplot – ${teile.join(' · ')}`;
+  const text = `Boxplot – ${teile.join(', ')}`;
   return a.notiz?.trim() ? `${text}\n\n${a.notiz.trim()}` : text;
 }
 

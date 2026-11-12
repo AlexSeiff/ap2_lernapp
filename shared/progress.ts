@@ -1,11 +1,11 @@
-// Gespeicherter Lernfortschritt (data/fortschritt.json): Typen, zod-Schema und Prüfung von PUT /api/progress.
+// Gespeicherter Lernfortschritt (localStorage, Sicherungsdatei): Typen, zod-Schema und Prüfung vor dem Speichern.
 // Liegt in shared/, weil Client (lib/progress.ts, store.tsx) und Server (apiPlugin.ts) dasselbe Format nutzen.
 // Die Typen beschreiben, was die App schreibt. Das Schema ist bewusst toleranter (unbekannte Felder bleiben erhalten,
 // `mode` als beliebiger String, `null` statt NaN), damit ältere oder neuere Dateien nicht abgewiesen werden.
 // Ein Typtest in tests/progress.test.ts stellt sicher, dass jeder `Progress` das Schema erfüllt.
 
 import { z } from 'zod';
-import { AUFGABEN_UMZUG_V9 } from './aufgabenUmzug';
+import { AUFGABEN_UMZUG_V9 } from './aufgabenUmzug.ts';
 
 export type Mode = 'klausur' | 'einzel' | 'wiederholung';
 export type Rating = 'gewusst' | 'unsicher' | 'nicht';
@@ -519,7 +519,9 @@ const MIGRATIONS: Record<number, (raw: Raw) => Raw> = {
 export function migrateProgress(raw: unknown): Progress {
   if (!isObject(raw)) return emptyProgress();
   let data: Raw = raw;
-  for (let v = num(data.version, 1); v < PROGRESS_VERSION; v++) data = MIGRATIONS[v]?.(data) ?? data;
+  const version = num(data.version, 1);
+  const start = Number.isSafeInteger(version) && version >= 1 ? version : 1;
+  for (let v = start; v < PROGRESS_VERSION; v++) data = MIGRATIONS[v]?.(data) ?? data;
 
   const { activeExam, ...rest } = data;
   const exam = migrateExam(activeExam, 'aktiv');
@@ -667,7 +669,7 @@ export const ProgressSchema = z.looseObject({
 
 export type ProgressData = z.infer<typeof ProgressSchema>;
 
-/** Body von PUT /api/progress: der Fortschritt plus optional `reset: true` für bewusstes Zurücksetzen/Einspielen. */
+/** Zu speichernder Stand: der Fortschritt plus optional `reset: true` für bewusstes Zurücksetzen/Einspielen. */
 export const ProgressPutSchema = ProgressSchema.extend({ reset: z.boolean().optional() });
 
 /**

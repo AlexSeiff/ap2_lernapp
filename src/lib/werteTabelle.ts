@@ -84,7 +84,7 @@ export function istWerteLeer(v: WerteVorlage, a: WerteAntwort): boolean {
   return !a.notiz?.trim() && a.zeilen.every((r, zi) => r.every((z, si) => istVorgegeben(v, zi, si) || !z.trim()));
 }
 
-/** Als Markdown-Tabelle (KI-Bewertung, Übersicht). */
+/** Als Markdown-Tabelle (Übersicht). */
 export function werteAlsText(a: WerteAntwort): string {
   const zeile = (r: string[]) => `| ${r.map((z) => z.replace(/\|/g, '\\|').trim() || ' ').join(' | ')} |`;
   const teile = [zeile(a.kopf), `|${a.kopf.map(() => '---').join('|')}|`, ...a.zeilen.filter((r) => r.some((z) => z.trim())).map(zeile)];

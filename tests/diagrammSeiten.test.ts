@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress, type Progress } from '../shared/progress';
-import { CONTENT_DIR, ladeInhalt } from '../server/loadContent';
+import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { aktiverBereich, aktivesUnterziel, bereich } from '../src/lib/navigation';
 
@@ -13,7 +13,8 @@ const { content, seiten } = ladeInhalt(CONTENT_DIR);
 let progress: Progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 
 const { DiagrammUebungen } = await import('../src/pages/DiagrammUebungen');

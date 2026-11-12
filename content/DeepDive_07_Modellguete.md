@@ -141,7 +141,9 @@ Bei stetiger Zielgröße (→ Deep Dive 4) gelten andere Maße:
 | 110 | 108 | +2 | 2 | 4 |
 | | | | **Σ 26** | **Σ 180** |
 
-$\text{MAE} = \frac{26}{5}$ = **5,20 T€** · $\text{MSE} = \frac{180}{5}$ = **36,00** · $\text{RMSE} = \sqrt{36}$ = **6,00 T€**
+- $\text{MAE} = \frac{26}{5}$ = **5,20 T€**
+- $\text{MSE} = \frac{180}{5}$ = **36,00**
+- $\text{RMSE} = \sqrt{36}$ = **6,00 T€**
 
 **Interpretation:** Der RMSE (6,00) liegt über dem MAE (5,20) – ein Hinweis darauf, dass einzelne größere Abweichungen (hier +10) vorliegen. Je weiter RMSE und MAE auseinanderliegen, desto ungleichmäßiger sind die Fehler verteilt. Gleich groß sind beide nur, wenn alle Fehlerbeträge identisch sind – kleiner als der MAE kann der RMSE nie werden.
 

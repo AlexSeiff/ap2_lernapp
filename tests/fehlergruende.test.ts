@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress, FEHLERGRUENDE, type Attempt, type ExamRun, type Progress } from '../shared/progress';
 import type { Task } from '../shared/types';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { FEHLERGRUND_INFO, fehlerStatistik, letzterFehlergrund } from '../src/lib/fehlergruende';
 import { finishExam, recordAttempt, setzeFehlergrund } from '../src/lib/progress';
@@ -15,7 +15,8 @@ const content = loadContent(CONTENT_DIR);
 let progress: Progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 
 const { Klausur } = await import('../src/pages/Klausur');

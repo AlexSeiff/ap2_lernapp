@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useHeuteSitzung } from '../hooks/useHeute';
 import { HEUTE_ICONS } from '../lib/heute';
 import { abonniereFertig, aktuellerSchritt, holeSitzung, istFertig, setzeSitzung, weiter } from '../lib/heuteSitzung';
-import { useStore } from '../lib/store';
+import { useStartStore } from '../lib/store';
 import { Icon } from './Icon';
 
 /** So lange zeigt die Leiste „geschafft“, bevor sie von selbst zum nächsten Schritt führt (Zeit, das Ergebnis zu sehen). */
@@ -16,7 +16,7 @@ const AUTO_WEITER_MS = 1800;
  */
 export function HeuteLeiste() {
   const sitzung = useHeuteSitzung();
-  const { progress } = useStore();
+  const { progress } = useStartStore();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [geschafft, setGeschafft] = useState<string | undefined>(); // Schlüssel des Schritts, der gerade als geschafft gilt

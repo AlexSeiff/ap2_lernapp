@@ -146,10 +146,10 @@ Sortierverfahren nach dem Prinzip „Teile und herrsche“: Ein Pivotelement tei
 Im Mittel braucht Quicksort O(n log n) Vergleiche und ist in der Praxis sehr schnell, weil es ohne großen Zusatzspeicher an Ort und Stelle sortiert. Im schlechtesten Fall – wenn das Pivot immer das kleinste oder größte Element ist, z. B. das erste Element einer bereits sortierten Liste – fällt es auf O(n²) zurück. Quicksort ist nicht stabil.
 
 ### Beispiel
-Liste 5 · 3 · 8 · 1 · 6, Pivot = erstes Element 5:
-- kleiner: 3 · 1 → Pivot 3 → 1 · 3
-- größer: 8 · 6 → Pivot 8 → 6 · 8
-- Ergebnis: 1 · 3 · 5 · 6 · 8
+Liste 5, 3, 8, 1, 6, Pivot = erstes Element 5:
+- kleiner: 3, 1 → Pivot 3 → 1, 3
+- größer: 8, 6 → Pivot 8 → 6, 8
+- Ergebnis: 1, 3, 5, 6, 8
 
 ### Abgrenzung
 | Verfahren | Mittel | schlechtester Fall | stabil | Zusatzspeicher |

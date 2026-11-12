@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress, type Progress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { planeHeute } from '../src/lib/heute';
 import { localDate } from '../src/lib/progress';
 
@@ -13,7 +13,8 @@ const content = loadContent(CONTENT_DIR);
 const progress: Progress = { ...emptyProgress(), attempts: [{ taskId: '03-B1', date: '2026-09-20', points: 2, max: 10, mode: 'einzel' }] };
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 
 const { Heute } = await import('../src/pages/Heute');

@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { defaultSettings, emptyProgress } from '../shared/progress';
 import { splitPrueferfragen, stripPrueferfragen } from '../shared/prueferfragen';
-import { loadContent } from '../server/loadContent';
+import { loadContent } from '../build/inhalt';
 import { cardPool, isKindEnabled } from '../src/lib/cards';
 import { rateCard } from '../src/lib/progress';
 import { topicStats } from '../src/lib/stats';

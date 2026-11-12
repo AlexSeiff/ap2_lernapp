@@ -1,70 +1,31 @@
-import type { ApiResponses, GenerateRequest, GradeRequest, SaveProgressRequest } from '../../shared/api';
-import type { TaskType } from '../../shared/types';
+import type { BackupInfo, SaveProgressRequest } from '../../shared/api';
+import type { Details, StartInhalt, ThemaTexte } from '../../shared/texte';
+import type { BegriffsSeite } from '../../shared/types';
 import { ApiError } from './apiError';
 import { createStaticApi } from './staticApi';
 
 export { ApiError };
-export { AI_UNAVAILABLE } from './staticApi';
 
-/**
- * Statische Version für GitHub Pages (`npm run build:pages` = `vite build --mode pages`)?
- * Dann gibt es keinen Server: Inhalte aus content.json, Fortschritt im localStorage, keine KI.
- * Vite ersetzt MODE beim Build durch einen festen Wert – der nicht benutzte Zweig fällt aus dem Bundle.
- */
-export const IS_STATIC = import.meta.env.MODE === 'pages';
-
-/** Woher die App Inhalte und Fortschritt bekommt: lokaler Server (/api/…) oder Browser (staticApi.ts). */
+/** Woher die App Inhalte und Fortschritt bekommt: JSON-Dateien neben der App und der Speicher des Browsers (staticApi.ts). */
 export interface DataSource {
-  content(): Promise<ApiResponses['GET /api/content']>;
+  /** Start: Inhalt ohne Abschnittstexte und ohne die Texte der Karten und Aufgaben (shared/texte.ts). */
+  content(): Promise<StartInhalt>;
+  /** Texte der Karten und Aufgaben – nachgeladen, sobald eine andere Seite als die Übersicht sie braucht (lib/details.tsx). */
+  details(): Promise<Details>;
   /** Begriffsseiten mit Text – getrennt geladen, erst wenn sie gebraucht werden (lib/begriffe.ts). */
-  begriffe(): Promise<ApiResponses['GET /api/begriffe']>;
+  begriffe(): Promise<BegriffsSeite[]>;
   /** Abschnittstexte eines Themas – getrennt vom Kern, nachgeladen (lib/texte.ts). */
-  texte(topicId: string): Promise<ApiResponses['GET /api/texte/:id']>;
-  progress(): Promise<ApiResponses['GET /api/progress']>;
-  saveProgress(p: SaveProgressRequest): Promise<ApiResponses['PUT /api/progress']>;
-  /** Letztes Speichern beim Schließen des Tabs – muss das Entladen der Seite überleben. */
+  texte(topicId: string): Promise<ThemaTexte>;
+  /** Rohdaten des gespeicherten Fortschritts (oder null) – der Store migriert sie mit migrateProgress(). */
+  progress(): Promise<unknown>;
+  saveProgress(p: SaveProgressRequest): Promise<{ ok: true; revision: number }>;
+  /** Letztes Speichern beim Schließen des Tabs. */
   saveProgressOnUnload(p: SaveProgressRequest): void;
-  backups(): Promise<ApiResponses['GET /api/progress/backups']>;
-  /** JSON-Text einer Tagessicherung im Browser (nur Pages; die lokale App hat ihre Sicherungen als Dateien in data/backups/). */
+  backups(): Promise<BackupInfo>;
+  /** JSON-Text einer Tagessicherung im Browser. */
   readBackup(date: string): Promise<string>;
-  aiStatus(): Promise<ApiResponses['GET /api/ai/status']>;
-  generate(topicId: string, count: number, types: TaskType[]): Promise<ApiResponses['POST /api/ai/generate']>;
-  grade(taskId: string, answer: string): Promise<ApiResponses['POST /api/ai/grade']>;
-  deleteGenerated(id: string): Promise<ApiResponses['DELETE /api/generated/:id']>;
-  /** Meldet, wenn ein anderer Tab gespeichert hat; liefert die Abmelde-Funktion. Mit Server merkt das erst der 409 beim Speichern. */
+  /** Meldet, wenn ein anderer Tab gespeichert hat; liefert die Abmelde-Funktion. */
   watchOtherTabs(onChange: () => void): () => void;
 }
 
-async function request<T>(method: string, url: string, body?: unknown): Promise<T> {
-  const res = await fetch(url, {
-    method,
-    headers: body !== undefined ? { 'Content-Type': 'application/json' } : undefined,
-    body: body !== undefined ? JSON.stringify(body) : undefined,
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new ApiError(res.status, data.error ?? `Fehler ${res.status}`);
-  return data as T;
-}
-
-// Antworttypen je Route: shared/api.ts (ApiResponses) – dieselben Typen nutzt der Server.
-const serverApi: DataSource = {
-  content: () => request('GET', '/api/content'),
-  begriffe: () => request('GET', '/api/begriffe'),
-  texte: (topicId) => request('GET', `/api/texte/${encodeURIComponent(topicId)}`),
-  progress: () => request('GET', '/api/progress'),
-  saveProgress: (p) => request('PUT', '/api/progress', p),
-  // keepalive überlebt das Entladen der Seite.
-  saveProgressOnUnload: (p) => {
-    fetch('/api/progress', { method: 'PUT', body: JSON.stringify(p), keepalive: true, headers: { 'Content-Type': 'application/json' } });
-  },
-  backups: () => request('GET', '/api/progress/backups'),
-  readBackup: () =>
-    Promise.reject(new ApiError(501, 'In der lokalen App liegen die Sicherungen in lern-app/data/backups/ – dort „Sicherung einspielen“.')),
-  aiStatus: () => request('GET', '/api/ai/status'),
-  generate: (topicId, count, types) => request('POST', '/api/ai/generate', { topicId, count, types } satisfies GenerateRequest),
-  grade: (taskId, answer) => request('POST', '/api/ai/grade', { taskId, answer } satisfies GradeRequest),
-  deleteGenerated: (id) => request('DELETE', `/api/generated/${encodeURIComponent(id)}`),
-  watchOtherTabs: () => () => {},
-};
-
-export const api: DataSource = IS_STATIC ? createStaticApi() : serverApi;
+export const api: DataSource = createStaticApi();

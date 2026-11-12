@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { F, FORMELN, formelnDerVorlage, formelnNachThema, THEMA_NAMEN, uebungenLink } from '../src/rechnen/formeln';
 import { VORLAGEN } from '../src/rechnen/vorlagen/index';
 
@@ -13,7 +13,8 @@ import { VORLAGEN } from '../src/rechnen/vorlagen/index';
 const content = loadContent(CONTENT_DIR);
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '' }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {} }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {} }),
 }));
 
 const { Formelsammlung } = await import('../src/pages/Formelsammlung');

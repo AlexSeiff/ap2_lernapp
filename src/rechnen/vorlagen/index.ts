@@ -1,18 +1,18 @@
 // Alle Rechenvorlagen nach ID. Neue Vorlage: Datei in diesem Ordner, hier eintragen, in DOKUMENTATION § 4.4 beschreiben.
 
-import type { Vorlage } from '../typen';
-import { assoziation, kmeans } from './crispdm';
-import { qualitaetsgrad } from './datenqualitaet';
-import { id3, knn } from './klassifikation';
-import { konfusionsmatrix, regressionsguete } from './modellguete';
-import { neuron, perzeptron } from './neuronal';
-import { breakEven, netzplan, nutzwert, pert, risiko } from './projekt';
-import { amortisation, durchlaufzeit, fehlerquote, fmea } from './prozess';
-import { datensicherung, rpo } from './sicherung';
-import { gewichtetesMittel, haeufigkeiten, lagemasse, quartile, varianz, variationskoeffizient } from './statistik1';
-import { mtbf, systemverfuegbarkeit, verfuegbarkeit } from './verfuegbarkeit';
-import { gleitenderDurchschnitt, korrelation, prozentVeraenderung, regression } from './statistik2';
-import { gleichgewicht, minijob, sozialversicherung } from './wiso';
+import type { Vorlage } from '../typen.ts';
+import { assoziation, kmeans } from './crispdm.ts';
+import { qualitaetsgrad } from './datenqualitaet.ts';
+import { id3, knn } from './klassifikation.ts';
+import { konfusionsmatrix, regressionsguete } from './modellguete.ts';
+import { neuron, perzeptron } from './neuronal.ts';
+import { breakEven, netzplan, nutzwert, pert, risiko } from './projekt.ts';
+import { amortisation, durchlaufzeit, fehlerquote, fmea } from './prozess.ts';
+import { datensicherung, rpo } from './sicherung.ts';
+import { gewichtetesMittel, haeufigkeiten, lagemasse, quartile, varianz, variationskoeffizient } from './statistik1.ts';
+import { mtbf, systemverfuegbarkeit, verfuegbarkeit } from './verfuegbarkeit.ts';
+import { gleitenderDurchschnitt, korrelation, prozentVeraenderung, regression } from './statistik2.ts';
+import { gleichgewicht, minijob, sozialversicherung } from './wiso.ts';
 
 const alle = [
   lagemasse,

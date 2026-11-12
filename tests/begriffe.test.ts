@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { mehrZiel, namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../shared/begriffsseiten';
 import { emptyProgress } from '../shared/progress';
-import { CONTENT_DIR, ladeInhalt } from '../server/loadContent';
+import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 
 // Begriffsseiten (Umsetzungsplan Phase 3): Parser, Prüfung, Verweise, Übungen zum Begriff, Suche und Seite.
 
@@ -12,7 +12,8 @@ const { content, seiten } = ladeInhalt(CONTENT_DIR);
 const progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '' }),
+  useStore: () => ({ content, progress, update: () => {} }),
+  useStartStore: () => ({ content, progress, update: () => {} }),
 }));
 
 const { begriffsWoerter, seitenFinder, uebungenZuBegriff, verweisAufloeser } = await import('../src/lib/begriffe');

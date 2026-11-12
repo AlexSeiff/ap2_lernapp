@@ -5,7 +5,7 @@ import { emptyProgress } from '../../shared/progress';
 import { localDate, resetAufgabenAntworten } from '../lib/progress';
 import { useBackupDownload } from '../hooks/useBackupDownload';
 import { useConfirm } from '../hooks/useConfirm';
-import { api, IS_STATIC } from '../lib/api';
+import { api } from '../lib/api';
 import { backupFileName, parseBackup } from '../lib/backup';
 import { gemerkteDatei, schreibeSicherung, unterstuetzt } from '../lib/sicherungsDatei';
 import { cardPool } from '../lib/cards';
@@ -17,7 +17,7 @@ import { useStore } from '../lib/store';
 import { Icon } from '../components/Icon';
 
 export function Daten() {
-  const { content, progress, reload, update, replaceProgress, aiEnabled, aiModel } = useStore();
+  const { content, progress, update, replaceProgress } = useStore();
   const confirm = useConfirm();
   const downloadBackup = useBackupDownload();
   const [msg, setMsg] = useState<string | null>(null);
@@ -46,17 +46,12 @@ export function Daten() {
   const [persisted, setPersisted] = useState<boolean | undefined | null>(null);
 
   useEffect(() => {
-    // Tagessicherungen: lokal in data/backups/, online im IndexedDB des Browsers.
+    // Tagessicherungen liegen im IndexedDB des Browsers.
     api.backups().then(setBackups, () => setBackups(null));
-    if (IS_STATIC) isStoragePersisted().then(setPersisted);
+    isStoragePersisted().then(setPersisted);
   }, []);
 
   const tasks = Object.values(content.tasks);
-
-  const reimport = async () => {
-    await reload();
-    setMsg(`Neu importiert: ${new Date().toLocaleTimeString('de-DE')}`);
-  };
 
   const importBackup = async (file: File, mode: 'merge' | 'replace') => {
     try {
@@ -126,24 +121,11 @@ export function Daten() {
       <section className="card">
         <h2>Importbericht</h2>
         <p>
-          Stand: {new Date(content.importedAt).toLocaleString('de-DE')} · {content.topics.length} Themen ·{' '}
-          {tasks.filter((t) => !t.generated).length} Aufgaben aus Lernblättern ({tasks.filter((t) => !t.generated && t.solution).length} mit
-          Musterlösung) · {!IS_STATIC && <>{tasks.filter((t) => t.generated).length} KI-Aufgaben · </>}
-          {content.flashcards.length} Karteikarten · {content.sqlExercises.length} SQL-Übungen · {content.rechenUebungen.length}{' '}
-          Rechenübungen · {content.materials.length} Materialien
+          Stand: {new Date(content.importedAt).toLocaleString('de-DE')} · {content.topics.length} Themen · {tasks.length} Aufgaben aus
+          Lernblättern ({tasks.filter((t) => t.solution).length} mit Musterlösung) · {content.flashcards.length} Karteikarten ·{' '}
+          {content.sqlExercises.length} SQL-Übungen · {content.rechenUebungen.length} Rechenübungen · {content.materials.length} Materialien
         </p>
-        {IS_STATIC ? (
-          <p className="hint">
-            Online-Version: Die Lernblätter sind beim Veröffentlichen eingebaut. Änderungen erscheinen nach dem nächsten Push.
-          </p>
-        ) : (
-          <>
-            <button type="button" onClick={reimport}>
-              <Icon name="rotate-cw" /> Lernblätter neu importieren
-            </button>
-            <p className="hint">Änderungen an den .md-Dateien werden auch automatisch erkannt – die Seite lädt dann neu.</p>
-          </>
-        )}
+        <p className="hint">Die Lernblätter sind beim Veröffentlichen eingebaut. Änderungen erscheinen nach dem nächsten Push.</p>
         {content.issues.length ? (
           <>
             <h3>Hinweise ({content.issues.length})</h3>
@@ -172,7 +154,7 @@ export function Daten() {
             </thead>
             <tbody>
               {content.topics.map((t) => {
-                const tt = tasks.filter((x) => x.topicId === t.id && !x.generated);
+                const tt = tasks.filter((x) => x.topicId === t.id);
                 return (
                   <tr key={t.id}>
                     <td>{t.id}</td>
@@ -198,16 +180,10 @@ export function Daten() {
       <section className="card">
         <h2>Fortschritt</h2>
         <p>
-          {IS_STATIC ? (
-            <>Gespeichert in diesem Browser (localStorage) – nur auf diesem Gerät.</>
-          ) : (
-            <>
-              Gespeichert in <code>lern-app/data/fortschritt.json</code> – nur auf diesem Rechner.
-            </>
-          )}{' '}
-          {progress.attempts.length} Versuche, {progress.exams.length} Klausuren, {Object.keys(progress.cards).length} gelernte Karten.
+          Gespeichert in diesem Browser (localStorage) – nur auf diesem Gerät. {progress.attempts.length} Versuche, {progress.exams.length}{' '}
+          Klausuren, {Object.keys(progress.cards).length} gelernte Karten.
         </p>
-        {IS_STATIC && persisted !== null && (
+        {persisted !== null && (
           <p className="hint">
             <Icon name="hard-drive" /> Speicher dauerhaft:{' '}
             {persisted === true ? (
@@ -223,63 +199,41 @@ export function Daten() {
             )}
           </p>
         )}
-        {IS_STATIC && (
-          <>
-            <p className="hint">
-              <Icon name="archive" /> Automatische Tagessicherung im Browser (IndexedDB): beim ersten Speichern eines Tages wird der Stand
-              vom Tagesbeginn gesichert, die letzten 7 Tage bleiben. Sie liegt im selben Browser – gegen „Browserdaten löschen“ hilft nur
-              eine heruntergeladene Sicherung. Umziehen aus der lokalen App oder zwischen Handy und PC: dort „Sicherung herunterladen“, hier
-              „Sicherung zusammenführen“ (beide Stände bleiben) oder „einspielen“ (ersetzt).
-            </p>
-            {backups?.items?.length ? (
-              <div className="table-wrap">
-                <table className="stats">
-                  <thead>
-                    <tr>
-                      <th>Tagessicherung</th>
-                      <th>Versuche</th>
-                      <th>Karten</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {backups.items.map((b) => (
-                      <tr key={b.date}>
-                        <td>{formatIsoDate(b.date)}</td>
-                        <td>{b.attempts}</td>
-                        <td>{b.cards}</td>
-                        <td>
-                          <button type="button" className="secondary small" onClick={() => restoreBrowserBackup(b.date)}>
-                            <Icon name="undo-2" /> Wiederherstellen
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <p className="hint">
-                Noch keine Tagessicherung in diesem Browser – die erste entsteht beim ersten Speichern an einem neuen Tag.
-              </p>
-            )}
-          </>
-        )}
-        {backups && !IS_STATIC && (
-          <p className="hint">
-            {backups.newest ? (
-              <>
-                <Icon name="archive" /> Automatische Tagessicherung: zuletzt vom{' '}
-                {new Date(`${backups.newest}T00:00:00`).toLocaleDateString('de-DE')} ({backups.count} in <code>lern-app/data/backups/</code>
-                , die letzten 14 Tage werden aufbewahrt).
-              </>
-            ) : (
-              <>
-                <Icon name="archive" /> Noch keine automatische Tagessicherung – sie entsteht beim ersten Speichern eines Tages in{' '}
-                <code>lern-app/data/backups/</code>.
-              </>
-            )}
-          </p>
+        <p className="hint">
+          <Icon name="archive" /> Automatische Tagessicherung im Browser (IndexedDB): beim ersten Speichern eines Tages wird der Stand vom
+          Tagesbeginn gesichert, die letzten 7 Tage bleiben. Sie liegt im selben Browser – gegen „Browserdaten löschen“ hilft nur eine
+          heruntergeladene Sicherung. Umziehen zwischen Handy und PC: dort „Sicherung herunterladen“, hier „Sicherung zusammenführen“ (beide
+          Stände bleiben) oder „einspielen“ (ersetzt).
+        </p>
+        {backups?.items?.length ? (
+          <div className="table-wrap">
+            <table className="stats">
+              <thead>
+                <tr>
+                  <th>Tagessicherung</th>
+                  <th>Versuche</th>
+                  <th>Karten</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {backups.items.map((b) => (
+                  <tr key={b.date}>
+                    <td>{formatIsoDate(b.date)}</td>
+                    <td>{b.attempts}</td>
+                    <td>{b.cards}</td>
+                    <td>
+                      <button type="button" className="secondary small" onClick={() => restoreBrowserBackup(b.date)}>
+                        <Icon name="undo-2" /> Wiederherstellen
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="hint">Noch keine Tagessicherung in diesem Browser – die erste entsteht beim ersten Speichern an einem neuen Tag.</p>
         )}
         <div className="actions">
           <button type="button" className="secondary" onClick={downloadBackup}>
@@ -392,21 +346,6 @@ export function Daten() {
           </button>
         </div>
       </section>
-
-      {!IS_STATIC && (
-        <section className="card">
-          <h2>KI</h2>
-          <p>
-            {aiEnabled ? (
-              <>
-                ✓ Aktiv mit Modell <code>{aiModel}</code>.
-              </>
-            ) : (
-              'Deaktiviert – kein ANTHROPIC_API_KEY gesetzt (siehe README).'
-            )}
-          </p>
-        </section>
-      )}
     </div>
   );
 }

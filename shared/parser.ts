@@ -1,13 +1,13 @@
 // Parser für die Markdown-Lernblätter (DeepDive_NN_*.md) und ihre Lösungsdateien (*_Loesungen.md).
 // Reine Funktionen ohne Dateisystemzugriff, damit Server und Tests sie gleichermaßen nutzen können.
 
-import type { Content, Exam, ExamBlock, Flashcard, ImportIssue, MaterialDoc, Section, Solution, Task, Topic } from './types';
-import { parseLernkarten } from './lernkarten';
-import { readPrueferfrage } from './prueferfragen';
-import { parseDiagrammUebungen } from './diagrammUebungen';
-import { parseRechenUebungen, type RechenUebungPruefer } from './rechenUebungen';
-import { parseSqlUebungen, verknuepfeSqlUebungen } from './sqlUebungen';
-import { pruefeSvg, svgBloecke, svgIds } from './svgDiagramm';
+import type { Content, Exam, ExamBlock, Flashcard, ImportIssue, MaterialDoc, Section, Solution, Task, Topic } from './types.ts';
+import { parseLernkarten } from './lernkarten.ts';
+import { readPrueferfrage } from './prueferfragen.ts';
+import { parseDiagrammUebungen } from './diagrammUebungen.ts';
+import { parseRechenUebungen, type RechenUebungPruefer } from './rechenUebungen.ts';
+import { parseSqlUebungen, verknuepfeSqlUebungen } from './sqlUebungen.ts';
+import { pruefeSvg, svgBloecke, svgIds } from './svgDiagramm.ts';
 
 interface Line {
   text: string;
@@ -403,7 +403,7 @@ export interface SourceFile {
 }
 
 export interface BuildOptions {
-  /** Prüft Rechenübungen gegen ihre Vorlage (server/loadContent.ts übergibt src/rechnen/pruefen.ts). */
+  /** Prüft Rechenübungen gegen ihre Vorlage (build/inhalt.ts übergibt src/rechnen/pruefen.ts). */
   pruefeRechenUebung?: RechenUebungPruefer;
 }
 

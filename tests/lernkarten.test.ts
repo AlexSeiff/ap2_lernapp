@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { answerToMarkdown, parseLernkarten, pruefeMc, topicFromSource } from '../shared/lernkarten';
-import { loadContent } from '../server/loadContent';
+import { loadContent } from '../build/inhalt';
 
 // Fixture im Format von AP2_FIDPA_Lernkarten.json (3 Decks, 7 Karten) – die echte Datei prüft inhalte.smoke.test.ts grob.
 const FIXTURES = join(import.meta.dirname, 'fixtures', 'inhalt');
@@ -80,6 +80,21 @@ describe('Hilfsfunktionen', () => {
     expect(md).toBe('```sql\nSELECT a\nFROM t\n```\n\nAlternative: ohne JOIN');
     expect(answerToMarkdown('Zeile 1\nZeile 2')).toBe('Zeile 1  \nZeile 2');
     expect(answerToMarkdown('einzeilig')).toBe('einzeilig');
+  });
+
+  it('meldet ungültige Strukturen und fehlende Rückseiten und importiert gültige Nachbarn', () => {
+    expect(parseLernkarten('x.json', 'null', topics).issues[0].message).toContain('decks');
+    const karte = { id: 'A-1', frage: 'Frage' };
+    const karten = [null, karte, { ...karte, antwort: '  ' }, { ...karte, antwort: ' Antwort ' }];
+    const r = parseLernkarten('x.json', JSON.stringify({ decks: [null, { id: 'd', karten }] }), topics);
+    expect(r.issues.map((i) => i.message)).toEqual([
+      expect.stringContaining('Deck ohne ID'),
+      expect.stringContaining('Karte 1 übersprungen: Objekt erwartet'),
+      expect.stringContaining('Karte 2 übersprungen: Feld „antwort“'),
+      expect.stringContaining('Karte 3 übersprungen: Feld „antwort“'),
+    ]);
+    expect(r.cards).toHaveLength(1);
+    expect(r.cards[0]).toMatchObject({ id: 'A-1', answer: 'Antwort' });
   });
 
   it('meldet kaputte Dateien und doppelte IDs statt abzustürzen', () => {

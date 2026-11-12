@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import initSqlJs, { type Database, type SqlJsStatic } from 'sql.js';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { CONTENT_DIR } from '../server/loadContent';
+import { CONTENT_DIR } from '../build/inhalt';
 import { lintSql } from '../src/sql/lint';
 import { parseSqlUebungen } from '../shared/sqlUebungen';
 import type { SqlDataset } from '../shared/types';

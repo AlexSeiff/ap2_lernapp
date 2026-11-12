@@ -1,7 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
-import { IS_STATIC } from '../lib/api';
 import type { IconName } from '../lib/icons';
-import { aktiverBereich, badgeSumme, BEREICHE, type NavBadge, sichtbareZiele } from '../lib/navigation';
+import { aktiverBereich, badgeSumme, BEREICHE, type NavBadge } from '../lib/navigation';
 import { Icon } from './Icon';
 
 /**
@@ -26,7 +25,7 @@ export function MobileNav({ badges }: { badges: Record<NavBadge, number> }) {
     <nav className="bottom-nav" aria-label="Navigation">
       <div className="bn-bar">
         {tab('/', pathname === '/', 'house', 'Übersicht')}
-        {BEREICHE.map((b) => tab(b.to, aktiv === b.id, b.icon, b.kurz, badgeSumme(sichtbareZiele(b, IS_STATIC), badges)))}
+        {BEREICHE.map((b) => tab(b.to, aktiv === b.id, b.icon, b.kurz, badgeSumme(b.unter, badges)))}
       </div>
     </nav>
   );

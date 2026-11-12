@@ -1,5 +1,5 @@
-// Service Worker der Pages-Version (Roadmap 7.1): registrieren und melden, wenn eine neue Version wartet.
-// Wird nur in der Pages-Version geladen (main.tsx, IS_STATIC); die lokale App registriert nie einen Service Worker.
+// Service Worker (Roadmap 7.1): registrieren und melden, wenn eine neue Version wartet.
+// Wird nur im gebauten Stand registriert (main.tsx); der Entwicklungsserver hat keinen Service Worker.
 // Der neue Service Worker übernimmt erst, wenn du „Neu laden“ klickst – mitten in einer Klausur lädt nichts von selbst neu.
 
 type Listener = () => void;

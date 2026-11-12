@@ -114,7 +114,7 @@ export function uebungenZuBegriff(b: Pick<BegriffKurz, 'begriff' | 'auch'>, cont
   return {
     karten: [...eigene, ...inFrage, ...inAntwort],
     ...(eigene.length ? { begriffskarte: eigene[0] } : {}),
-    aufgaben: Object.values(content.tasks).filter((t) => !t.generated && enthaelt(normalisiere(t.markdown), woerter)),
+    aufgaben: Object.values(content.tasks).filter((t) => enthaelt(normalisiere(t.markdown), woerter)),
     rechnen: content.rechenUebungen.filter((u) => enthaelt(normalisiere(`${u.titel} ${u.aufgabe}`), woerter)),
     sql: content.sqlExercises.filter((u) => enthaelt(normalisiere(`${u.titel} ${u.aufgabe}`), woerter)),
     diagramme: (content.diagrammUebungen ?? []).filter((u) => {

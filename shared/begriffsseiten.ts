@@ -1,7 +1,7 @@
-// Begriffsseiten (Umsetzungsplan Phase 3): eine ausführliche Seite je Glossarbegriff aus AP-2/Begriffsseiten_<Buchstabe>.md.
+// Begriffsseiten (Umsetzungsplan Phase 3): eine ausführliche Seite je Glossarbegriff aus content/Begriffsseiten_<Buchstabe>.md.
 // Rein, ohne Node/React – Server (Import, Prüfung) und Client (Verweise auflösen) nutzen es gemeinsam.
 //
-// Format einer Seite (siehe AP-2/Prompt_Glossar_Begriffsseiten.md):
+// Format einer Seite:
 //   ## <Begriff>
 //   <!-- id: <glossar-id> · quellen: <Fundstellen> · stand: <JJJJ-MM> -->
 //   Definition (erster Absatz) …
@@ -11,8 +11,8 @@
 //   Mehr: Deep Dive 5, 6.5 · Deep Dive 11, A3
 // Am Ende jeder Datei „## Ausgelassen“ mit Begriffen ohne Seite – wird übersprungen.
 
-import type { KernInhalt } from './texte';
-import type { BegriffsSeite, ImportIssue } from './types';
+import type { KernInhalt } from './texte.ts';
+import type { BegriffsSeite, ImportIssue } from './types.ts';
 
 const ID_KOMMENTAR = /^<!--\s*id:\s*([^·]+?)\s*(?:·\s*quellen:\s*([^·]*?)\s*)?(?:·\s*stand:\s*([^·]*?)\s*)?-->\s*$/;
 

@@ -2,9 +2,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { ConfirmProvider } from './components/ConfirmDialog';
-import { IS_STATIC } from './lib/api';
 import { registriereServiceWorker } from './lib/pwa';
 import { StoreProvider } from './lib/store';
+import { ladeDetailsFuerAdresse } from './lib/details';
 import { ladeTexteFuerAdresse } from './lib/texte';
 import { leseTheme, wendeThemeAn } from './lib/theme';
 import './styles.css';
@@ -15,6 +15,7 @@ import './paper.css';
 wendeThemeAn(leseTheme());
 // Direkt geöffnetes Lernblatt: seinen Text gleich mit dem Inhalt laden (lib/texte.ts).
 ladeTexteFuerAdresse(window.location.hash);
+ladeDetailsFuerAdresse(window.location.hash);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -26,8 +27,9 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 );
 
-// Pages-Version: Service Worker für offline und Updates (Roadmap 7.1). Erst nach dem Laden, damit er den Start nicht bremst.
-if (IS_STATIC) {
+// Service Worker für offline und Updates (Roadmap 7.1), nur im gebauten Stand – der Entwicklungsserver hat kein sw.js.
+// Erst nach dem Laden, damit er den Start nicht bremst.
+if (import.meta.env.PROD) {
   window.addEventListener('load', () => {
     void registriereServiceWorker();
   });

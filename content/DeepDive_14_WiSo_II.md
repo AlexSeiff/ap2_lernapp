@@ -386,7 +386,7 @@ Die Aufgaben sind hier nach Themen in Blöcke gegliedert; in der PDF-Fassung sin
 
 ## Beitragssätze für diese Klausur (Annahme)
 
-KV 14,6 % + Zusatzbeitrag 2,9 % · PV 3,6 % (Zuschlag für Kinderlose ab 23: 0,6 %, trägt der AN allein) · RV 18,6 % · ALV 2,6 %.
+KV 14,6 % + Zusatzbeitrag 2,9 %; PV 3,6 % (Zuschlag für Kinderlose ab 23: 0,6 %, trägt der AN allein); RV 18,6 %; ALV 2,6 %.
 
 Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderlos, 3. Ausbildungsjahr), **Herr Kaya** (Mitarbeiter im Lager, ein Kind).
 
@@ -506,7 +506,7 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 ## Block D – Markt und Wirtschaftspolitik (20 P)
 
-**D1 (4 P):** Auf einem Markt gilt: Preis 10 € – Nachfrage 900, Angebot 300 · 12 € – 800 / 500 · 14 € – 650 / 650 · 16 € – 500 / 800 · 18 € – 350 / 950. Wie hoch ist der Gleichgewichtspreis in Euro? *(Ergebnis eintragen)*
+**D1 (4 P):** Auf einem Markt gilt: Preis 10 € – Nachfrage 900, Angebot 300; 12 € – 800 / 500; 14 € – 650 / 650; 16 € – 500 / 800; 18 € – 350 / 950. Wie hoch ist der Gleichgewichtspreis in Euro? *(Ergebnis eintragen)*
 
 > **Formel:** Gleichgewichtspreis: angebotene Menge = nachgefragte Menge
 

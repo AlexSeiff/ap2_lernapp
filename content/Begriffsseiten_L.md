@@ -38,7 +38,10 @@ Welches Lagemaß zulässig ist, hängt vom **Skalenniveau** ab: Der Modus geht i
 
 ### Beispiel
 Lieferzeiten in Tagen: 2, 3, 3, 4, 5, 5, 5, 6, 8, 19.
-$\bar{x} = \frac{60}{10} = 6{,}0$ Tage · Median $= \frac{5 + 5}{2} = 5{,}0$ Tage · Modus = 5 Tage.
+- $\bar{x} = \frac{60}{10} = 6{,}0$ Tage
+- Median $= \frac{5 + 5}{2} = 5{,}0$ Tage
+- Modus = 5 Tage.
+
 Mittel > Median: Der Ausreißer 19 zieht nach oben, die Verteilung ist rechtsschief.
 
 ### Abgrenzung
@@ -600,7 +603,10 @@ $\text{Lift} = \frac{\text{Konfidenz}(A \to B)}{\text{Support}(B)}$. Lift > 1: p
 
 ### Beispiel
 1.000 Kassenbons, 100 mit Sofa, 200 mit Kissen, 60 mit beidem.
-Konfidenz(Sofa → Kissen) $= \frac{60}{100} = 0{,}6$ · Support(Kissen) $= \frac{200}{1000} = 0{,}2$ · Lift $= \frac{0{,}6}{0{,}2} = 3$.
+- Konfidenz(Sofa → Kissen) $= \frac{60}{100} = 0{,}6$
+- Support(Kissen) $= \frac{200}{1000} = 0{,}2$
+- Lift $= \frac{0{,}6}{0{,}2} = 3$.
+
 Wer ein Sofa kauft, nimmt dreimal so häufig Kissen mit wie der Durchschnittskunde.
 
 ### Abgrenzung
@@ -651,7 +657,7 @@ Suchverfahren, das die Elemente einer Liste nacheinander von vorn prüft, bis de
 Die lineare (sequenzielle) Suche funktioniert auch bei **unsortierten** Listen und ist einfach zu programmieren. Der Aufwand wächst linear mit der Anzahl n: bester Fall O(1) (Treffer an erster Stelle), mittlerer und schlechtester Fall O(n). Für einmalige Suchen in kleinen oder unsortierten Daten ist sie die richtige Wahl.
 
 ### Beispiel
-Gesucht 57 in 12 · 19 · 23 · 31 · 42 · 57 · 64 · 78: Treffer nach 6 Vergleichen. Bei 1.000.000 Datensätzen sind es im schlechtesten Fall 1.000.000 Vergleiche – die binäre Suche braucht höchstens 20.
+Gesucht 57 in 12, 19, 23, 31, 42, 57, 64, 78: Treffer nach 6 Vergleichen. Bei 1.000.000 Datensätzen sind es im schlechtesten Fall 1.000.000 Vergleiche – die binäre Suche braucht höchstens 20.
 
 ### Abgrenzung
 | | Lineare Suche | Binäre Suche |

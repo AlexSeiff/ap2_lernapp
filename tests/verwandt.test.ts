@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CONTENT_DIR, ladeInhalt } from '../server/loadContent';
+import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 import type { BegriffsSeite, Flashcard } from '../shared/types';
 import { abgrenzungsNamen, ergaenzeVerwandte } from '../shared/verwandt';
 

@@ -1,4 +1,4 @@
-// Speichert den Fortschritt verzögert (Debounce) per PUT /api/progress – ohne React, damit es testbar bleibt.
+// Speichert den Fortschritt verzögert (Debounce) über die Datenquelle (lib/api.ts) – ohne React, damit es testbar bleibt.
 // Es läuft immer höchstens ein Speichern gleichzeitig, sonst könnten Antworten in falscher Reihenfolge ankommen.
 // Jeder PUT trägt die Revision, auf der dieser Tab aufbaut. Antwortet der Server mit 409 (ein anderer Tab hat
 // inzwischen gespeichert), speichert dieser Tab bis zum Neuladen gar nicht mehr, statt fremden Fortschritt zu überschreiben.
@@ -93,7 +93,7 @@ export function createProgressSaver({ send, onState, delay = SAVE_DELAY_MS }: Sa
       clearTimeout(timer);
       timer = setTimeout(fire, delay);
     },
-    /** Ein anderer Tab hat gespeichert (storage-Ereignis in der Pages-Version) – wie ein 409 behandeln. */
+    /** Ein anderer Tab hat gespeichert (storage-Ereignis) – wie ein 409 behandeln. */
     markConflict() {
       if (!conflict) stop();
     },

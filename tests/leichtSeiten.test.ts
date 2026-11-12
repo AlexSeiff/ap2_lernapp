@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress, type Progress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { leichtKarten } from '../src/lib/leicht';
 
@@ -13,7 +13,8 @@ const content = loadContent(CONTENT_DIR);
 let progress: Progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '' }),
+  useStore: () => ({ content, progress, update: () => {} }),
+  useStartStore: () => ({ content, progress, update: () => {} }),
 }));
 
 const { Karteikarten } = await import('../src/pages/Karteikarten');

@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { defaultSettings, emptyProgress, type Progress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { OPERATOREN } from '../src/lib/operatoren';
 import { ausschnitt, baueSuchIndex, bewerte, klartext, normalisiere, suche, SUCH_ART, type SuchArt } from '../src/lib/suche';
@@ -15,7 +15,8 @@ const content = loadContent(CONTENT_DIR);
 let progress: Progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 
 const { SucheDialog } = await import('../src/components/SucheDialog');
@@ -126,7 +127,7 @@ describe('Dialog und Ziele', () => {
   it('Dialog: Eingabe als Combobox mit Trefferliste, Hinweis vor dem Tippen', () => {
     progress = emptyProgress();
     const html = render('/', createElement(SucheDialog, { onClose: () => {} }));
-    expect(html).toContain('role="dialog"');
+    expect(html).toMatch(/<dialog\b[^>]*aria-label="Suche"/);
     expect(html).toContain('role="combobox"');
     expect(html).toContain('role="listbox"');
     expect(html).toContain('Umlaute egal');

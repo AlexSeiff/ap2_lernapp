@@ -546,7 +546,9 @@ b ist die Steigung: Um so viel ändert sich ŷ, wenn x um eine Einheit steigt �
 
 ### Beispiel
 Werbebudget x und Umsatz y (je T€) über fünf Monate: $\bar{x} = 3$, $\bar{y} = 44$, $S_{xy} = 64$, $S_{xx} = 10$.
-$b = \frac{64}{10} = 6{,}4$ · $a = 44 - 6{,}4 \cdot 3 = 24{,}8$
+- $b = \frac{64}{10} = 6{,}4$
+- $a = 44 - 6{,}4 \cdot 3 = 24{,}8$
+
 Regressionsgleichung: $\hat{y} = 24{,}8 + 6{,}4 \cdot x$. Je 1.000 € mehr Werbung steigt der Umsatz im Mittel um 6.400 €. Prognose für x = 6: $24{,}8 + 6{,}4 \cdot 6 = 63{,}2$ T€ (leichte Extrapolation).
 
 ### Abgrenzung
@@ -1313,7 +1315,7 @@ Ausgangspunkt ist die Projektdauer aus der Vorwärtsrechnung: Der letzte Vorgang
 
 ### Beispiel
 A (3 Tage) → B (4) und C (2), B und C → D (1). Vorwärts ergibt sich eine Projektdauer von 8 Tagen.
-Rückwärts: D: SEZ 8, SAZ 7 · B: SEZ 7, SAZ 3 · C: SEZ 7, SAZ 5 · A: SEZ = min(3; 5) = 3, SAZ 0.
+Rückwärts: D: SEZ 8, SAZ 7; B: SEZ 7, SAZ 3; C: SEZ 7, SAZ 5; A: SEZ = min(3; 5) = 3, SAZ 0.
 C hat FAZ 3 und SAZ 5 → Gesamtpuffer 2 Tage; A–B–D ist der kritische Pfad (Puffer 0).
 
 ### Abgrenzung

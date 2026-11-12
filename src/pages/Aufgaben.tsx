@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { IS_STATIC } from '../lib/api';
 import { difficulty, formatPoints, percent } from '../lib/grading';
 import { useStore } from '../lib/store';
 import { Icon } from '../components/Icon';
@@ -13,8 +12,6 @@ export function Aufgaben() {
     thema: params.get('thema') ?? 'alle',
     block: params.get('block') ?? 'alle',
     stufe: params.get('stufe') ?? 'alle',
-    // Pages hat keine KI-Aufgaben (Roadmap 7.4): dort gibt es den Filter nicht.
-    quelle: IS_STATIC ? 'alle' : (params.get('quelle') ?? 'alle'),
     status: params.get('status') ?? 'alle',
     suche: params.get('suche') ?? '',
   };
@@ -47,8 +44,6 @@ export function Aufgaben() {
     if (f.thema !== 'alle' && t.topicId !== f.thema) return false;
     if (f.block !== 'alle' && t.block !== f.block) return false;
     if (f.stufe !== 'alle' && difficulty(t.points) !== f.stufe) return false;
-    if (f.quelle === 'blatt' && t.generated) return false;
-    if (f.quelle === 'ki' && !t.generated) return false;
     const s = lastScore.get(t.id);
     if (f.status === 'neu' && s !== undefined) return false;
     if (f.status === 'fehler' && (s === undefined || s >= 100)) return false;
@@ -92,7 +87,7 @@ export function Aufgaben() {
             <option value="alle">Alle</option>
             {blocks.map((b) => (
               <option key={b} value={b}>
-                {b === 'KI' ? 'KI-generiert' : `Block ${b}`}
+                Block {b}
               </option>
             ))}
           </select>
@@ -106,16 +101,6 @@ export function Aufgaben() {
             <option value="schwer">schwer (&gt; 10 P)</option>
           </select>
         </label>
-        {!IS_STATIC && (
-          <label>
-            Quelle
-            <select value={f.quelle} onChange={(e) => set({ quelle: e.target.value })}>
-              <option value="alle">Alle</option>
-              <option value="blatt">Lernblatt</option>
-              <option value="ki">KI-generiert</option>
-            </select>
-          </label>
-        )}
         <label>
           Status
           <select value={f.status} onChange={(e) => set({ status: e.target.value })}>
@@ -176,7 +161,6 @@ export function Aufgaben() {
               </Link>
               <span className="muted small">{topicTitle(t.topicId)}</span>
               <span className="badge">{formatPoints(t.points)} P</span>
-              {t.generated && <span className="badge ai">KI</span>}
               <span className={`status ${s === undefined ? '' : s >= 100 ? 'good' : s >= 50 ? 'mid' : 'low'}`}>
                 {s === undefined ? '–' : `${Math.round(s)} %`}
               </span>

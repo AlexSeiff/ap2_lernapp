@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { defaultSettings, emptyProgress } from '../shared/progress';
 import type { Content } from '../shared/types';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import {
   baueGlossar,
@@ -25,7 +25,8 @@ const content = loadContent(CONTENT_DIR);
 const progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '' }),
+  useStore: () => ({ content, progress, update: () => {} }),
+  useStartStore: () => ({ content, progress, update: () => {} }),
 }));
 
 const { Glossar } = await import('../src/pages/Glossar');

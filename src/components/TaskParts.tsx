@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import type { Section, Task } from '../../shared/types';
-import { api } from '../lib/api';
-import { antwortAlsText, editorFuer } from '../lib/editorAufgabe';
+import { editorFuer } from '../lib/editorAufgabe';
 import { autoGrade, difficulty, formatPoints } from '../lib/grading';
 import { numberBlanks, solutionMarkdown } from '../lib/sheets';
 import { sqlUebungZuAufgabe } from '../lib/sqlAufgabe';
@@ -24,7 +23,6 @@ export function TaskText({ task, showMeta }: { task: Task; showMeta?: boolean })
         <span className="badge">{formatPoints(task.points)} P</span>
         {showMeta && topic && <span className="badge muted">{topic.title}</span>}
         {showMeta && <span className={`badge diff-${difficulty(task.points)}`}>{difficulty(task.points)}</span>}
-        {task.generated && <span className="badge ai">KI</span>}
       </div>
       <Markdown source={false} operatoren>
         {task.type === 'lueckentext'
@@ -64,17 +62,16 @@ interface GradeProps {
 
 /**
  * Lösungsansicht mit Bewertung: automatisch (objektive Aufgaben), per Kriterien-Checkliste,
- * per Punkteeingabe oder per KI-Bewertung.
+ * oder per Punkteeingabe.
  */
 export function GradePanel({ task, answer, points, onPoints, onSqlGeprueft }: GradeProps) {
-  const { aiEnabled, content } = useStore();
+  const { content } = useStore();
   const sql = sqlUebungZuAufgabe(content, task);
   const editor = editorFuer(task);
   const auto = decodeAnswer(task, answer);
   const autoResult = auto ? autoGrade(task, auto) : null;
   const criteria = task.solution?.criteria;
   const [checked, setChecked] = useState<boolean[]>(() => criteria?.map(() => false) ?? []);
-  const [ai, setAi] = useState<{ loading?: boolean; error?: string; feedback?: string; missing?: string[] }>({});
 
   // Automatische Bewertung sofort übernehmen.
   useEffect(() => {
@@ -87,17 +84,6 @@ export function GradePanel({ task, answer, points, onPoints, onSqlGeprueft }: Gr
     setChecked(next);
     const sum = criteria!.reduce((s, c, j) => s + (next[j] ? c.points : 0), 0);
     onPoints(Math.min(task.points, sum));
-  };
-
-  const runAi = async () => {
-    setAi({ loading: true });
-    try {
-      const r = await api.grade(task.id, antwortAlsText(task, answer));
-      setAi({ feedback: r.feedback, missing: r.missing });
-      onPoints(r.points);
-    } catch (e) {
-      setAi({ error: (e as Error).message });
-    }
   };
 
   return (
@@ -178,32 +164,7 @@ export function GradePanel({ task, answer, points, onPoints, onSqlGeprueft }: Gr
                 onChange={(e) => onPoints(Math.min(task.points, Math.max(0, Number(e.target.value))))}
               />
               <span>/ {formatPoints(task.points)} P</span>
-              {aiEnabled && (
-                <button type="button" className="secondary" onClick={runAi} disabled={ai.loading}>
-                  {ai.loading ? (
-                    'KI bewertet …'
-                  ) : (
-                    <>
-                      <Icon name="sparkles" /> KI-Bewertung
-                    </>
-                  )}
-                </button>
-              )}
             </div>
-            {ai.error && <p className="error">{ai.error}</p>}
-            {ai.feedback && (
-              <div className="ai-feedback">
-                <b>KI-Feedback:</b> {ai.feedback}
-                {!!ai.missing?.length && (
-                  <ul>
-                    {ai.missing.map((m, i) => (
-                      <li key={i}>{m}</li>
-                    ))}
-                  </ul>
-                )}
-                <p className="hint">Die KI-Punkte sind ein Vorschlag – du kannst sie oben anpassen.</p>
-              </div>
-            )}
           </>
         )}
       </div>

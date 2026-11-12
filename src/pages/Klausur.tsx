@@ -100,7 +100,7 @@ export function KlausurAuswahl() {
 export function Klausur() {
   const { topicId } = useParams();
   const navigate = useNavigate();
-  const { content, aiEnabled } = useStore();
+  const { content } = useStore();
   const neueMisch = useNeueMischKlausur();
   const {
     quelle,
@@ -312,8 +312,7 @@ export function Klausur() {
       {submitted && (
         <div className="card info">
           <b>Lösungsblatt freigeschaltet.</b> Vergleiche jede Antwort mit der Musterlösung und vergib Punkte wie ein Prüfer – Kriterien
-          abhaken{aiEnabled ? ', Punkte eintragen oder die KI-Bewertung nutzen.' : ' oder Punkte eintragen.'}{' '}
-          <Link to={`/druck?art=loesungen&thema=${quelle.id}`}>Lösungsblatt drucken</Link>
+          abhaken oder Punkte eintragen. <Link to={`/druck?art=loesungen&thema=${quelle.id}`}>Lösungsblatt drucken</Link>
         </div>
       )}
 

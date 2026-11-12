@@ -1,7 +1,7 @@
 // Datenmodell der Lern-App – wird von Server, Client und Tests gemeinsam genutzt.
 
-import type { DiagrammUebung } from './diagrammUebungen';
-import type { Quelle } from './quellen';
+import type { DiagrammUebung } from './diagrammUebungen.ts';
+import type { Quelle } from './quellen.ts';
 
 export interface Section {
   id: string;
@@ -86,8 +86,7 @@ export interface Task {
   markdown: string;
   solution?: Solution;
   type: TaskType;
-  generated?: boolean;
-  /** Nur für automatisch bewertbare (KI-generierte) Aufgaben. */
+  /** Nur für automatisch bewertbare Aufgaben. */
   auto?: AutoCheck;
   /**
    * SQL-Übung, mit der die Aufgabe im SQL-Editor beantwortet und nach der Abgabe automatisch geprüft wird
@@ -261,7 +260,7 @@ export interface ImportIssue {
   message: string;
 }
 
-/** Begriffsseite (AP-2/Begriffsseiten_<Buchstabe>.md, Umsetzungsplan Phase 3): ausführliche Seite zu einem Glossarbegriff. */
+/** Begriffsseite (content/Begriffsseiten_<Buchstabe>.md, Umsetzungsplan Phase 3): ausführliche Seite zu einem Glossarbegriff. */
 export interface BegriffsSeite {
   /** = id des Glossareintrags (src/lib/glossar.ts). */
   id: string;

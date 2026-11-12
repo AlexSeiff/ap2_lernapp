@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { pruefeDiagramme } from '../shared/parser';
 import { pruefeSvg, svgBloecke, svgIds } from '../shared/svgDiagramm';
 import { defaultSettings } from '../shared/progress';
@@ -30,6 +30,9 @@ describe('pruefeSvg', () => {
     ['Link', '<svg><a href="https://x.de"><text>x</text></a></svg>'],
     ['Bild', '<svg><image href="x.png"/></svg>'],
     ['externer Verweis', '<svg><line marker-end="url(https://x.de/m.svg#a)"/></svg>'],
+    ['URL in Großbuchstaben', '<svg><rect fill="URL(https://example.invalid/x)"/></svg>'],
+    ['URL als Zeichenreferenz', '<svg><rect stroke="u&#114;l(https://example.invalid/x)"/></svg>'],
+    ['URL mit CSS-Escape', String.raw`<svg><line marker-end="u\72l(https://example.invalid/x)"/></svg>`],
     ['Stil-Attribut', '<svg><rect style="fill:red"/></svg>'],
     ['Kommentar', '<svg><!-- x --><rect/></svg>'],
     ['kein SVG', '<div></div>'],

@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress, type Progress } from '../shared/progress';
-import { CONTENT_DIR, ladeInhalt } from '../server/loadContent';
+import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 
 // Karten markieren (Umsetzungsplan Phase 4): Stern in der Runde und beim Durchblättern, Filter „Nur markierte“,
 // Kachel auf der Übersicht, Stern auf der Begriffsseite.
@@ -22,7 +22,8 @@ const progress: Progress = {
 };
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 
 const { Karteikarten } = await import('../src/pages/Karteikarten');

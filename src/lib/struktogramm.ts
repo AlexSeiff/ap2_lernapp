@@ -145,7 +145,7 @@ export function pruefeStruktogramm(a: StruktogrammAntwort): string[] {
   return [...new Set(m)];
 }
 
-/** Gliederung als Pseudocode (KI-Bewertung, Übersicht beim Bewerten). Leere Zweige als ∅. */
+/** Gliederung als Pseudocode (Übersicht beim Bewerten). Leere Zweige als ∅. */
 export function struktogrammAlsText(a: StruktogrammAntwort): string {
   const zeilen: string[] = [];
   const einr = (t: number) => '  '.repeat(t);

@@ -2,8 +2,8 @@
 // MTBF und MTTR sowie die Gesamtverfügbarkeit einer Reihenschaltung, deren Stufen redundant (parallel) ausgelegt sein können.
 
 import { z } from 'zod';
-import { fz, L, LoesungsBau, lz, mittel, tx, vorlage } from '../hilfen';
-import { F } from '../formeln';
+import { fz, L, LoesungsBau, lz, mittel, tx, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
 
 const prozent = z.number().finite().gt(0).lt(100);
 const STUNDEN_JAHR = 8760;
@@ -201,7 +201,7 @@ export const systemverfuegbarkeit = vorlage({
   platzhalter: (d) => ({
     komponenten: d.komponenten
       .map((k) => `${k.name} (${fz(k.v)} %${(k.anzahl ?? 1) > 1 ? `, ${k.anzahl}-fach redundant` : ''})`)
-      .join(' · '),
+      .join(', '),
     anzahl: String(d.komponenten.length),
   }),
   tabelle: (d) => ({

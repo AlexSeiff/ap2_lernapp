@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 
-// Grober Rauchtest gegen die echten Lernblätter (Kopie in content/, npm run sync-content).
+// Grober Rauchtest gegen die echten Lernblätter (content/).
 // Bewusst keine Detailprüfungen: Wer ein Lernblatt bearbeitet, soll nur echte Importfehler sehen.
 // Das genaue Format prüfen parser.test.ts und lernkarten.test.ts mit den Fixtures in tests/fixtures/inhalt/.
 const content = loadContent(CONTENT_DIR);

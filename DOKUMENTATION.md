@@ -13,8 +13,8 @@
 A learning app for the IHK exam **Abschlussprüfung Teil 2 – Fachinformatiker/-in Daten- und Prozessanalyse (FIDPA)**.
 It turns German Markdown learning sheets ("Deep Dives") and a flashcard JSON into interactive exercises: theory, flashcards,
 timed practice exams with **separate solution sheets**, single tasks, an error journal with spaced repetition, a browser SQL editor
-with auto-checked exercises, auto-checked calculation exercises (Rechenübungen) with new numbers on demand, and optional AI-generated tasks
-(local app only). The Pages version is an installable PWA that works offline.
+with auto-checked exercises, auto-checked calculation exercises (Rechenübungen) with new numbers on demand, and nothing else: no server, no AI.
+The app is a static, installable PWA that works offline.
 
 **Conventions**
 - All UI text is German, informal *du*, short sentences.
@@ -33,33 +33,34 @@ with auto-checked exercises, auto-checked calculation exercises (Rechenübungen)
 
 ## 2. Run modes
 
-One React UI, three ways to run it:
+The app is **static only** (since November 2026): no server, no AI. Content comes from JSON files next to the app, progress lives in
+the browser. The earlier local mode (Vite middleware `/api/…`, progress in a file, Claude tasks and grading, the `mc-*` and
+`sync-content` tools, a source folder outside the repository) was removed; `git show audit-optimierung:DOKUMENTATION.md` describes it.
 
-| | `npm run dev` | `npm start` (vite preview) | `npm run build:pages` (GitHub Pages) |
-|---|---|---|---|
-| API `/api/…` | `server/apiPlugin.ts` via `configureServer` | same middleware via `configurePreviewServer` | none; `src/lib/staticApi.ts` |
-| Learning sheets | live from `AP-2/`, page reloads on change | from `AP-2/`, cache cleared on change (F5) | `content/` → `content.json` + `texte/<id>.json` in the build (§ 3.1) |
-| Progress | `data/fortschritt.json` + daily backups | like dev | `localStorage` of the browser + daily backups in IndexedDB |
-| AI (`.env.local`) | yes | yes | never read, the key can't end up in the build; no AI UI at all (§ 8) |
-| Service worker / PWA | no | no | yes (`server/pwaPlugin.ts`, § 5 "PWA") |
+| | `npm run dev` | `npm run build` + `npm run preview` / GitHub Pages |
+|---|---|---|
+| Learning sheets | `content/`, served from memory by `build/inhaltPlugin.ts`; the page reloads when a sheet changes | `content/` → `content.json`, `details.json`, `texte/<id>.json`, `begriffe.json` in `dist/` (§ 3.1) |
+| Progress | `localStorage` of the browser + daily backups in IndexedDB | same |
+| Service worker / PWA | no (`main.tsx` registers only in a production build) | yes (`build/pwaPlugin.ts`, § 5 "PWA") |
 
-- `src/lib/api.ts` picks the data source by `import.meta.env.MODE` (`pages` → static API).
+- `src/lib/api.ts` exports the one data source (`createStaticApi()`, `src/lib/staticApi.ts`).
 - Public URL: **https://alexseiff.github.io/ap2_lernapp/** (HashRouter, `base: './'`).
-- Every push to `main` runs `.github/workflows/pages.yml`: `npm ci` → `npm test` → `npm run lint` → `npm run build:pages` → deploy.
-- The Pages version is **used by several people**. Each browser has its own progress; there is no shared state and no account.
-- `AP-2/` = the folder above the repo by default; `LERN_QUELLE` in `.env.local` overrides it (e.g. when the repo lives outside OneDrive);
-  `sync-content`, `import-report` and the `mc-*` scripts read it via `server/ladeEnv.ts`.
-- An Electron desktop build existed on a local `desktop` branch; it was dropped in October 2026 – Pages is the version for users.
+- `.github/workflows/pages.yml`: pull requests and pushes to `main` run `npm ci` → `npm test` → `npm run lint` →
+  `npm run format:check` → `npm run build`; only `main` deploys.
+- **The build stops on import issues** (missing required field, duplicate id, dead reference): `contentJsonPlugin` calls `this.error`
+  when `content.issues` is not empty. The dev server still starts and shows them under Daten & Import.
+- The app is **used by several people**. Each browser has its own progress; there is no shared state and no account.
+- Moving a progress file of the old local mode: it is a valid backup – Daten & Import → „Sicherung einspielen“.
 
 ## 3. Architecture
 
 Stack: React 19, Vite 8, TypeScript 7 (`@typescript/native` for `tsc`; TypeScript 6 under the name `typescript` for typescript-eslint),
 Vitest 5, React Router 7 (HashRouter), react-markdown + remark-gfm, remark-math + rehype-katex + KaTeX (formulas, lazy chunk), zod 4,
-sql.js (SQLite/WASM), CodeMirror 6, `@anthropic-ai/sdk`.
+sql.js (SQLite/WASM), CodeMirror 6.
 
 ```
 lern-app/
-├─ shared/            used by client, server and tests (no file-system access)
+├─ shared/            used by app, build and tests (no file-system access)
 │  ├─ config.ts         constants: EXAM_MINUTES, NEW_PER_SESSION, JOURNAL_INTERVALS, CARD_INTERVALS, SAVE_DELAY_MS, DEV_PORT,
 │  │                    HEUTE_MINUTEN / HEUTE_ZEITEN / HEUTE_KARTEN_BLOCK (8.1), SICHER_RICHTIG_AB (8.3)
 │  ├─ types.ts          content model (Topic, Task, Flashcard, Deck, Exam, SqlDataset, SqlExercise, Content …)
@@ -71,23 +72,19 @@ lern-app/
 │  ├─ progress.ts       persisted progress: types, zod schema, checkProgressPut, migrateProgress
 │  ├─ mergeProgress.ts  merge a backup into the current progress (Daten & Import → Zusammenführen)
 │  ├─ rechenweg.ts      RechenSchritt type + German number formatting for worked solutions (Rechenweg)
-│  ├─ texte.ts          content split (plan phase 10): KernInhalt (sections without text) + texts per topic; teileInhalt, inhaltMitTexten
-│  └─ api.ts            API contract: request schemas + response types per route
-├─ server/            runs only inside Vite (dev/preview)
-│  ├─ apiPlugin.ts      route table + middleware for /api/*
-│  ├─ router.ts         tiny router (method, path/regex, handler)
-│  ├─ store.ts          JSON files in data/, atomic write (temp + rename, retry for OneDrive EPERM/EBUSY), daily backups
-│  ├─ contentCache.ts   cached loadContent(), cleared by the file watcher
-│  ├─ loadContent.ts    reads AP-2/*.md, *Lernkarten*.json, *SQL_Uebungen*.json, *Rechen_Uebungen*.json → buildContent()
-│  │                    (Rechenübungen are checked against their template here → ImportIssues; content.json for Pages is built the same way)
-│  ├─ ai.ts             Claude: generateTasks(), gradeAnswer() with structured output
-│  ├─ mcWerkzeug.ts     pure logic of npm run mc-entwurf / mc-uebernehmen (mcEntwurf.ts, mcUebernehmen.ts, mcEntwurfPfade.ts, ladeEnv.ts)
-│  ├─ pagesPlugin.ts    emits content.json (core), texte/<id>.json and begriffe.json (term pages) for the Pages build; preload tag for content.json
-│  ├─ pwaPlugin.ts      vite-plugin-pwa options (manifest, precache) for the Pages build (PWA_OPTIONS, tested)
+│  ├─ texte.ts          content split: StartInhalt (content.json) + Details (card/task texts) + texts per topic; teileInhalt,
+│  │                    inhaltMitDetails, inhaltMitTexten (§ 3.1)
+│  └─ api.ts            types for saving progress and the browser backups
+├─ build/             runs in Node: Vite plugins and content loading (tsconfig.node.json)
+│  ├─ inhalt.ts         reads content/*.md and the JSON files → buildContent() (Rechenübungen are checked against their template
+│  │                    here → ImportIssues); imports three pure modules from src/ (glossar, glossarThema, rechnen/pruefen)
+│  ├─ inhaltPlugin.ts   inhaltDateien(): content.json (start), details.json, texte/<id>.json, begriffe.json – emitted in the build,
+│  │                    served from memory in dev; preload tag for content.json; the build fails on ImportIssues
+│  └─ pwaPlugin.ts      vite-plugin-pwa options (manifest, precache) (PWA_OPTIONS, tested)
+├─ tools/             npm scripts run with tsx
 │  ├─ report.ts         npm run import-report
-│  ├─ quellenPruefen.ts npm run quellen-pruefen (re-check every link of AP2_Quellen.json)
-│  └─ syncContent.ts    npm run sync-content (AP-2 → content/)
-├─ content/           copy of sheets + JSON for Pages and tests (committed, therefore public)
+│  └─ quellenPruefen.ts npm run quellen-pruefen (re-check every link of AP2_Quellen.json)
+├─ content/           the learning sheets and JSON files – the only source (committed, therefore public)
 ├─ public/icons/      PWA icons (192, 512, maskable 512, apple-touch-icon 180), generated once from the desktop icon
 ├─ src/
 │  ├─ pages/            one file per page, mostly rendering
@@ -109,8 +106,7 @@ lern-app/
 │  │                    checker.ts (input checking + Fehlerbilder), formeln.ts (Formelsammlung data, also used by the Rechenwege),
 │  │                    beispiel.ts (faded worked examples, 8.6)
 │  └─ sql/              sqlWorker.ts, engine.ts, runner.ts, checker.ts, errors.ts, lint.ts, types.ts
-├─ tests/             Vitest; fixtures/ with old progress formats and a mini sheet set
-└─ data/              fortschritt.json, generierte-aufgaben.json, backups/ (gitignored, local app only)
+└─ tests/             Vitest; fixtures/ with old progress formats and a mini sheet set
 ```
 
 ### 3.1 Loading and performance (plan phase 10)
@@ -118,19 +114,28 @@ lern-app/
 Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Messung/phase10/`, Lighthouse values in
 `AP-2/Messung_Ausgangslage.md`).
 
-- **Core and texts** (`shared/texte.ts`): `content.json` / `GET /api/content` is a `KernInhalt` – everything except the section texts
-  (`Section.markdown`, about a third of the content). The texts lie per topic in `texte/<id>.json` / `GET /api/texte/<id>` (section id →
+- **Start and details** (`shared/texte.ts`, `src/lib/details.tsx`, November 2026): `content.json` is a `StartInhalt` – cards and tasks
+  only as heads (id, topic, deck, kind, typ, points …; ~0.8 MB instead of ~1.96 MB, gzip 167 kB instead of 506 kB). Questions, answers,
+  `mc`, `rechenweg`, tags and cross references of the cards and `markdown`/`solution` of the tasks lie in `details.json`.
+  The Übersicht and the app frame use `useStartStore()` and render as soon as `content.json` is there. Every other route sits below
+  `<MitDetails>` (layout route in `App.tsx`, also `/druck` and the search dialog), which loads `details.json` once per session and
+  provides the store with the merged content; `useStore()` **throws** outside of it instead of handing out cards without a question.
+  Two widgets of the Übersicht need texts (Markiert, Begriff des Tages): `useDetailsWennDa()` fills them in when the details arrive.
+  `ladeDetailsFuerAdresse` (main.tsx) requests the details at start for any address but the Übersicht; `useVorladen` loads them in
+  idle time. Start and details of different versions throw ("bitte die Seite neu laden"). Tested in `tests/details.test.ts`.
+- **Core and texts** (`shared/texte.ts`): the content below `<MitDetails>` is a `KernInhalt` – everything except the section texts
+  (`Section.markdown`, about a third of the content). The texts lie per topic in `texte/<id>.json` (section id →
   Markdown; DD17 includes the generated glossary list). The store's `content` is typed `KernInhalt`, so the compiler shows every place that
   needs texts. Only four do: the Lernblatt page (`useThemaTexte(topic)`), Glossar, Begriffsseite and search (`useVollerInhalt()`), all in
   `src/lib/texte.ts` (once per session per topic, `startTransition` for the render, „Lädt …“ until then, error text if loading fails).
   A complete `Content` (tests, fixtures) is used directly (`istVoll`). Missing texts for a section (core and texts of different versions) throw
   instead of showing empty sections. `ladeTexteFuerAdresse` (main.tsx) requests the text of a directly opened `#/lernen/<id>` at start.
-- **Preload**: the Pages `index.html` gets `<link rel="preload" href="./content.json" as="fetch" crossorigin>` (pagesPlugin), so the core
+- **Preload**: `index.html` gets `<link rel="preload" href="./content.json" as="fetch" crossorigin>` (inhaltPlugin), so the start file
   downloads in parallel to the JavaScript.
 - **Lazy pages**: only the Übersicht (start page) is in the main bundle; Themen/Thema, Karteikarten, Klausur, Aufgaben, Aufgabe, Material,
-  Fehlerjournal, Einstellungen, Daten, Druck (and Generator) are lazy (`SEITEN` in `App.tsx`) – with them react-markdown/remark-gfm.
+  Fehlerjournal, Einstellungen, Daten, Druck are lazy (`SEITEN` in `App.tsx`) – with them react-markdown/remark-gfm.
 - **Preloading in idle time** (`useVorladen` in `App.tsx`, `imLeerlauf` = `requestIdleCallback`, Safari: timeout): page chunks, all texts and
-  the search index (`bereiteSucheVor`, `src/lib/suchIndex.ts`) – **only** in the local app or when the service worker controls the page (data
+  the search index (`bereiteSucheVor`, `src/lib/suchIndex.ts`) – **only** when the service worker controls the page (data
   from its cache). Not on the very first visit: the service worker downloads everything then, extra requests slow the start (Lighthouse's
   slow-4G model showed +1 s LCP). On the first visit each page loads what it needs when opened.
 - **Caches**: `glossarVon(content)` (client: glossary built once per content object, shared by Glossar, Begriffsseite, search; the server
@@ -162,8 +167,8 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
 | `DeepDive_17_Glossar_Diagramme.md` | reference topic **without** Übungsklausur and Lösungsdatei: every diagram type as an SVG example (Teil 1–6) and the placeholder `<!-- glossar-a-z -->` (Teil 7), which `loadContent` replaces with the whole glossary (see Glossar below). Edit it like any sheet; the SVG code sits directly in the file |
 | `Deep_Dive_SQL_KW28_29.md` | extra topic (id `00`), solutions inside the sheet; keep the file name (SQL links depend on it) |
 | `Lernzettel_Kernthemen.md`, `AP2_Themenliste_und_Beispielfragen.md`, `AP2_SQL_Belegsatz.md` | `MaterialDoc` (Material page); the Belegsatz (id `sql-belegsatz`) also has its own page and the SQL-editor panel (plan phase 6) |
-| `Begriffsseiten_<A–Z>.md`, `Begriffsseiten_0-9.md` | `BegriffsSeite[]` (term pages, plan phase 3): **not** in `content.json`, but in `begriffe.json` (Pages) or `GET /api/begriffe`; `content.begriffe` holds only the index (id, term, variants) |
-| everything else (`Lernplan_*.md`, `Prompt_*.md`, `Ideen.md`, `Begriffsseiten_Hinweise.md`, plan/measurement notes …) | **not read**, not synced: `isContentFile` is an **allow-list** (`INHALT_MD` in `server/loadContent.ts`: `DeepDive_NN_*.md`, `Deep_Dive_SQL*.md`, `Lernzettel_Kernthemen.md`, `AP2_Themenliste*.md`, `AP2_SQL_Belegsatz.md`, `Begriffsseiten_<Buchstabe>.md` + the JSON patterns incl. `AP2_Quellen.json`) – notes in `AP-2/` never end up in the app |
+| `Begriffsseiten_<A–Z>.md`, `Begriffsseiten_0-9.md` | `BegriffsSeite[]` (term pages, plan phase 3): **not** in `content.json`, but in `begriffe.json`; `content.begriffe` holds only the index (id, term, variants) |
+| everything else (`Lernplan_*.md`, `Prompt_*.md`, `Ideen.md`, `Begriffsseiten_Hinweise.md`, plan/measurement notes …) | **not read**: `isContentFile` is an **allow-list** (`INHALT_MD` in `build/inhalt.ts`: `DeepDive_NN_*.md`, `Deep_Dive_SQL*.md`, `Lernzettel_Kernthemen.md`, `AP2_Themenliste*.md`, `AP2_SQL_Belegsatz.md`, `Begriffsseiten_<Buchstabe>.md` + the JSON patterns incl. `AP2_Quellen.json`) – notes in the folder never end up in the app |
 
 - **Prüferfragen**: `> ❓ **Prüferfrage:** Frage` with the italic answer in the next quote line → `Flashcard{kind:'prueferfrage'}`.
   They also remain inside the section Markdown, so they show up in the Lernen view. `shared/prueferfragen.ts` reads the block
@@ -202,20 +207,7 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
   (compared with `mcNorm`: case, whitespace and a final full stop ignored). An invalid block → ImportIssue, the card is imported without `mc`.
   Today no card has `mc`; the Leicht-Modus uses the automatic fallback (§ 5).
 
-**Authoring helper for `mc` (local only, the owner runs it, `server/mcWerkzeug.ts` = pure logic, tested in `tests/mcWerkzeug.test.ts`
-with a mock client – no API call in tests):**
-- `npm run mc-entwurf -- --deck <id> [--max 30] [--anwendung]` (`server/mcEntwurf.ts`): `.env.local` is loaded first (`server/ladeEnv.ts`,
-  same keys as `vite.config.ts`), then `server/ai.ts` provides the client (`getClient`) and `MODEL` (`ANTHROPIC_MODEL`, default
-  `claude-sonnet-5`). Candidates (`mcKandidaten`): cards of the deck with typ wissen/abgrenzung/falle/rechnung (+ anwendung with
-  `--anwendung`), no `mc` yet, not yet in the draft. Requests in batches of 15 (`entwerfeMc`) via `messages.parse` with structured output
-  (`zodOutputFormat(McAntwortSchema)`, like `ai.ts`); every proposal is checked with `pruefeMc` (`pruefeMcAntwort`: unknown/duplicate/missing ids
-  and invalid blocks are reported, a failed batch doesn't stop the others). New entries are appended to `data/mc-entwurf.json`
-  (`{ hinweis, eintraege: [{ id, deck, frage, antwort, status: "offen", mc }] }`); entries already there are kept (`ergaenzeEntwurf`).
-- The owner edits the draft and sets `status` to `angenommen` or `abgelehnt`.
-- `npm run mc-uebernehmen [-- --probe]` (`server/mcUebernehmen.ts`, `uebernehmeMc`): writes the accepted blocks as the last key `mc` of the card
-  into `AP-2/AP2_FIDPA_Lernkarten.json` (temp file + rename). The file is `JSON.stringify(…, null, 2)` formatted (checked: a round trip
-  must reproduce it exactly, otherwise nothing is written); line endings, final newline and BOM are kept; ids and order never change;
-  cards that already have `mc` are not overwritten. Then `npm run sync-content`.
+The AI authoring helper for `mc` (`npm run mc-entwurf` / `mc-uebernehmen`) was removed with the local mode; write `mc` blocks by hand.
 
 ### 4.3 SQL exercises `AP2_SQL_Uebungen.json`
 
@@ -406,14 +398,14 @@ Today **393 entries, 236 different URLs** (Studyflix 227, Wikipedia 115, Gesetze
 204 video pages, 189 articles), every one fetched and its page title checked (2026-10). Built with `AP-2/Messung/quellen_zuordnung.py`
 (section/term → URLs; Studyflix URLs from `https://studyflix.de/system/sitemap1.xml`) and `quellen_pruefen.py` (fetch + title). EUR-Lex
 answers bots with 202 and an empty page, so the AI Act links to the EU-Kommission page instead.
-**Re-check:** `npm run quellen-pruefen` (`server/quellenPruefen.ts`) fetches every URL again (one at a time, 400 ms pause, 20 s timeout) and
-lists everything that doesn't answer 2xx (exit code 1). Replace or remove dead links in `AP-2/AP2_Quellen.json`, then `npm run sync-content`.
+**Re-check:** `npm run quellen-pruefen` (`tools/quellenPruefen.ts`) fetches every URL again (one at a time, 400 ms pause, 20 s timeout) and
+lists everything that doesn't answer 2xx (exit code 1). Replace or remove dead links in `content/AP2_Quellen.json`.
 Size: about 80 KB of `content.json` (core since plan phase 10: ~1.34 MB, ~351 KB gzip).
 
-### 4.5 Updating content for Pages
+### 4.5 Updating content
 
-Formulas in the sheets are written as `$…$` (see § 5 "Markdown, formulas"). Edit files in `AP-2/`, then `npm run sync-content` (copies to `content/`), commit, push. The Pages build reads `content/` only.
-AI-generated tasks (`data/`) never go into the Pages build.
+Formulas in the sheets are written as `$…$` (see § 5 "Markdown, formulas"). Edit the files in `content/` directly, run
+`npm run import-report` and `npm test`, commit, open a pull request. `CONTRIBUTING.md` (German) has the steps.
 
 ## 5. Features (pages and routes)
 
@@ -430,7 +422,6 @@ AI-generated tasks (`data/`) never go into the Pages build.
 | `/diagramme`, `/diagramme/:id` | Diagramm-Übungen | plan phase 7, lazy pages. List with filters in the URL (`typ`, `stufe`, `status`), progress bar, "Nächste offene". Exercise page: scenario, diagram (`components/DiagrammSvg.tsx`: SVG with the `dg-*` classes of DD17, every gap an HTML button laid over the SVG in %, so tap, keyboard and screen reader work), palette below (on phones sticky above the tab bar). Placing: **drag** with Pointer Events (captured on `pointerdown`, start after 6 px, drop target via `elementFromPoint` → `data-slot`; no HTML5 drag and drop – unreliable on iOS) or **tap** an element, then a gap (Esc cancels; tapping a filled gap takes the element out and selects it). `einsetzen` moves single-use elements. "Prüfen" marks every gap green/red and lists violated shape rules; "Hinweis", "Lösung zeigen" (fills the model solution, counts as "mit Lösung"), "Leeren". Progress `diagramme` (§ 6) with repetition like Rechenübungen, badge `diagramme` in the navigation (Lernen → Diagramm-Übungen). Begriffsseiten list matching exercises under „Üben“ (type terms such as EPK, BPMN, Aktivitätsdiagramm show all of that type; otherwise word match in title, scenario and palette); DD5 2.2/2.3 and DD17 1.1/1.2/2.4–2.6 end with a link `#/diagramme?typ=…`. Not (yet) part of "Heute lernen" and the Fehlerjournal |
 | `/rechnen`, `/rechnen/:id` | Rechenübungen | list with filters in the URL (Thema, Schwierigkeit, Tag, Status), progress bar, "Nächste offene"; exercise page (see below) with a faded worked example (8.6) |
 | `/fehlerjournal` | Fehlerjournal | every task below full points comes back after 1, 3, 7 days (`JOURNAL_INTERVALS`); card "🧩 Woran es meistens liegt" and the last error category per entry (8.7) |
-| `/generator` | KI-Aufgaben | Claude generates IHK-style tasks (mc, lueckentext, zuordnung, rechnen, offen) with model solution; local app only (Pages: no nav item, the route redirects to `/`) |
 | `/material`, `/material/:docId` | Material | cheat sheet, topic list, tiles "📏 Formelsammlung" and "🗣️ Operatoren-Trainer" |
 | `/material/operatoren` | Operatoren-Trainer | lazy page: quiz "Was verlangt der Operator hier?" with real tasks, table of all operators (§ 5 phase 8.4) |
 | `/glossar` (old `/material/glossar` redirects, keeps `?stelle=`) | Glossar | lazy page: terms A–Z from `begriff` and `wissen` cards and bold terms of the sheets, letter jump bar, filter, links to the sources; terms with a term page link to it (§ 5 phase 8.9, plan phase 3) |
@@ -439,15 +430,14 @@ AI-generated tasks (`data/`) never go into the Pages build.
 | `/material/sql-belegsatz` | SQL-Belegsatz | lazy page (`pages/SqlBelegsatz.tsx`) of `AP2_SQL_Belegsatz.md` with „Drucken“ (print CSS: two columns, small font → 2 pages A4); in the Glossar area. The same content as a side panel in the SQL editor (`components/Belegsatz.tsx`, `BelegsatzPanel`: button in the toolbar of `/sql` and on every exercise, fixed panel on the right, full width on phones, Esc/„Schließen“ close it and focus returns to the button) |
 | `/material/formeln` | Formelsammlung | lazy page (`pages/Formelsammlung.tsx`, KaTeX): all formulas of `src/rechnen/formeln.ts` grouped by Deep Dive, each with explanation, variables and a link "📐 n Rechenübungen →" to `/rechnen?vorlage=a,b`; jump bar, "🖨️ Drucken" (print CSS: one column, no links). Plan phase 6 added neuron formulas (gewichtete Summe, Stufe, Sigmoid, ReLU, Perzeptron-Lernregel) and formulas that only the sheets had (Laplace, Gegenereignis, mindestens einmal, Erwartungswert, z-Wert, Spearman, Wachstumsrate, Falsch-Positiv-Rate, kostenoptimale Schwelle, MAPE) – those have `vorlagen: []` and show no exercise link |
 | `/einstellungen` | Einstellungen | per-user settings (`Progress.settings`, see § 6): own exam date; switches "❓ Prüferfragen einbeziehen" / "🎤 Fachgespräch-Fragen einbeziehen"; "🤖 Automatische Antworten erlauben" (Leicht-Modus, `leichtAutomatisch`); Datenschutz-Hinweis (`components/Datenschutz.tsx`: no account, no tracking, no cookies, data stays in the browser, only app + content loaded from GitHub Pages; content license line CC BY-NC-SA 4.0 with link to the deed; source links open in a new tab, YouTube only after a click via youtube-nocookie.com) |
-| `/daten` | Daten & Import | import report, re-import (local), backup download, backup import as **🔀 Zusammenführen** (merge) or **⬆ Einspielen (ersetzen)** (replace), reset; local: newest daily backup in `data/backups/`; Pages: "Speicher dauerhaft: ja/nein" and the list of browser daily backups with "↩ Wiederherstellen" |
+| `/daten` | Daten & Import | import report, backup download, backup import as **🔀 Zusammenführen** (merge) or **⬆ Einspielen (ersetzen)** (replace), reset; "Speicher dauerhaft: ja/nein" and the list of browser daily backups with "↩ Wiederherstellen" |
 
 **Not affected by the Prüferfragen switch:** the *Prüferkommentar* in solutions (the scoring scheme; `Solution.kommentar`) is always shown
 (owner decision Q1; tested in `tests/prueferfragen.test.ts`).
 
 **Grading**
-- Automatic: MC, Lückentext, Zuordnung, numeric (`rechnen`, with tolerance). These types currently only exist for AI-generated tasks.
+- Automatic: MC, Lückentext, Zuordnung, numeric (`rechnen`, with tolerance). No sheet task uses these types today (they came from the removed AI generator).
 - Sheet tasks are `offen`: self-assessment against the model solution; a points table becomes checkable criteria.
-- Optional AI grading (local app): points suggestion + feedback + missing aspects; the user can adjust.
 - IHK scale: 100–92 = 1 · 91–81 = 2 · 80–67 = 3 · 66–50 = 4 · 49–30 = 5 · 29–0 = 6.
 
 **Prüferfragen / Fachgespräch switched off** (`settings.prueferfragen` / `settings.fachgespraech`): `cardPool()` (`src/lib/cards.ts`) drops that
@@ -538,7 +528,7 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
   Never: Fachgespräch, `anwendung` without `mc`.
   - **Numbers (content October 2026, no card has `mc` yet):** Begriffskarten 773 → **768** of 789, other Lernkarten 213 → **84** of 539,
     Prüferfragen 5 → **1**. Dropping the FIDPA cards is intended (plan: rather no card than obviously wrong answers); good hand-checked
-    answers for them come from `npm run mc-entwurf` (owner's decision). Sample of 50 cards before/after: `AP-2/Messung/MC_Vergleich_Phase5.md`.
+    answers for them are written by hand (owner's decision). Sample of 50 cards before/after: `AP-2/Messung/MC_Vergleich_Phase5.md`.
   - **Reverse direction** (Begriffskarten): `LeichtKarte.umgekehrt` = { frage: the definition (Markdown), richtig: the term, falsch: the terms of
     the pool cards }. `leichtAbfrage(l, rng)` picks the direction per round and position (50 %); the page shows „Umgekehrt: Welcher Begriff ist
     gemeint?“, the definition as the question, the terms as options, and „Gesucht war“ after answering. Rating as usual (`rateCardLeicht`).
@@ -841,7 +831,7 @@ only in `useCardSession` state and is cleared for the next card – **not persis
   link to it („›“). Glossary search hits link to `/glossar?stelle=g-<id>`. It belongs to the area „Glossar“ (sub-target „Begriffe A–Z“).
 - **Navigation to Deep Dive 17**: sub-target „Diagramme“ of the area „Glossar“ (`GLOSSAR_PFAD = '/lernen/17'` in `navigation.ts`; „Themen“ is
   not highlighted at the same time).
-- **Topic list A–Z** (Deep Dive 17, `src/lib/glossarThema.ts`, `ergaenzeGlossarThema`, called in `loadContent` – so local app, Pages build and
+- **Topic list A–Z** (Deep Dive 17, `src/lib/glossarThema.ts`, `ergaenzeGlossarThema`, called in `ladeInhalt` – so dev server, build and
   tests are identical): the section with `<!-- glossar-a-z -->` gets a count sentence, and one section per letter (`17-begriffe-a` …, `generiert: true`)
   is inserted after it, one line per entry `- Begriff – Definition *(DD n)*`; terms with a term page are a Markdown link `[Begriff](#/glossar/<id>)`
   (internal `#/…` links render as router `<Link>`, `markdownComponents.tsx`). The lines contain no bold, so `baueGlossar` (which only reads bold
@@ -856,9 +846,9 @@ only in `useCardSession` state and is cleared for the next card – **not persis
 - **Parser/check** `shared/begriffsseiten.ts` (pure, `tests/begriffe.test.ts`): `parseBegriffsseiten` (page without id comment → ImportIssue),
   `pruefeBegriffsseiten` (id must exist in the glossary, ids unique, every „Siehe auch“ name must lead to a page, a glossary term or a section
   heading), `mehrZiel` („Deep Dive 5, 6.5“ → section, „Teil 3“ → part, „A3“ → section „A3 …“ or else task `NN-A3`, „SQL-Zusatz 1.2“ → topic 00).
-  `ladeInhalt(dir)` in `server/loadContent.ts` returns `{ content, seiten }`; `loadContent` = `ladeInhalt().content`.
-- **Delivery**: pages are about 1.5 MB, so they are **not** part of `content.json` (only the index `content.begriffe`). Pages build: `begriffe.json`
-  next to `content.json` (precached by the service worker like all JSON); local app: `GET /api/begriffe` (same cache as `/api/content`).
+  `ladeInhalt(dir)` in `build/inhalt.ts` returns `{ content, seiten }`; `loadContent` = `ladeInhalt().content`.
+- **Delivery**: pages are about 1.5 MB, so they are **not** part of `content.json` (only the index `content.begriffe`). `begriffe.json`
+  next to `content.json` (precached by the service worker like all JSON).
   Client: `ladeBegriffe()` in `src/lib/begriffe.ts` (once per session, `api.begriffe()`).
 - **Page** `pages/Begriff.tsx` (`/glossar/:id`, lazy): crumbs Glossar / letter, title, „Auch“, the page Markdown (`###` shown as `h2` for a
   gapless heading order), „Siehe auch“ as chips (`verweisAufloeser`: page → glossary entry → section), **Üben** (`uebungenZuBegriff`: term card
@@ -943,11 +933,10 @@ applied in `main.tsx` before the first render), error boundary per route, own co
   `<summary>`. Filters wrap into two columns instead of overflowing, theory pages no longer overflow horizontally, and filter checkboxes are no
   longer 160 px wide (also fixed on desktop). Swiping on flashcards (optional in the roadmap) is not implemented.
 
-### PWA (phase 7.1, Pages only)
+### PWA (phase 7.1)
 
-- `vite-plugin-pwa` (devDependency, Workbox **generateSW**; `workbox-window` as dependency) is added **only in `--mode pages`**
-  (`server/pwaPlugin.ts`, `PWA_OPTIONS`). `npm run dev`, `npm start` and `npm run build` never produce or register a service worker
-  (`dist/` of `npm run build` has no `sw.js` and no manifest; only an unused 6 kB `workbox-window` chunk is emitted there).
+- `vite-plugin-pwa` (devDependency, Workbox **generateSW**; `workbox-window` as dependency) is part of every build
+  (`build/pwaPlugin.ts`, `PWA_OPTIONS`). `npm run dev` never produces or registers a service worker (`main.tsx`: `import.meta.env.PROD`).
 - **Manifest** `manifest.webmanifest`: name "AP2 Lern-App", short name "AP2 Lernen", `id`/`start_url`/`scope` `./` (relative, works under
   `/ap2_lernapp/` with the HashRouter), `display: standalone`, theme colour `#f2f2f7` (light grouped background). Icons in `public/icons/`: `icon-192.png`,
   `icon-512.png`, `icon-maskable-512.png` (icon at 80 % on a blue gradient, inside the maskable safe zone) and `apple-touch-icon.png` (180 px,
@@ -959,7 +948,7 @@ applied in `main.tsx` before the first render), error boundary per route, own co
   8 MB (content.json ~1.3 MB, begriffe.json ~1.5 MB).
   Navigations fall back to the cached `index.html`, so the app starts offline after the first visit (SQL editor and formulas included).
 - **Updates** (`registerType: 'prompt'`, no `skipWaiting`/`clientsClaim`): every precached file has a revision hash in `sw.js`, so any change
-  (also only `content.json` after `npm run sync-content`) changes `sw.js`. The browser installs the new worker, which then **waits**.
+  (also only `content.json`) changes `sw.js`. The browser installs the new worker, which then **waits**.
   `src/lib/pwa.ts` registers `sw.js` with `workbox-window` after `load` and sets `updateState` on `waiting` (also when a worker from an earlier
   visit is already waiting); `components/UpdateHinweis.tsx` shows the toast **"🔄 Neue Version verfügbar – neu laden?"** with "↻ Neu laden"
   (sends `SKIP_WAITING`, reloads on `controlling`, fallback reload after 3 s) and "Später". Nothing reloads by itself (an exam in progress
@@ -968,7 +957,7 @@ applied in `main.tsx` before the first render), error boundary per route, own co
   Progress is unaffected (the service worker doesn't touch localStorage/IndexedDB; the saver flushes on `pagehide` before the reload).
 - Checked in a headless Edge against `npx vite preview --mode pages`: worker active with 45 cache entries, toast after a rebuild, "Neu laden"
   activates the new build; offline reload of `/sql` runs queries (WASM) and the Rechenweg renders KaTeX with the cached fonts.
-- **Testing locally:** the worker caches the preview origin (`localhost:<port>`). After a new `build:pages` reload once and click
+- **Testing locally:** the worker caches the preview origin (`localhost:<port>`). After a new `npm run build` reload once and click
   "↻ Neu laden", or unregister it in the dev tools (Application → Service Workers).
 
 ## 6. Progress (persisted data)
@@ -1071,7 +1060,6 @@ type Settings = {
   again needs a new map and a new version.
   **Every schema change:** bump `PROGRESS_VERSION`, add a migration step, extend `tests/progress.test.ts` (fixtures in `tests/fixtures/`, one per version).
 - Settings are changed only through `withSettings` (`src/lib/settings.ts`). "Fortschritt zurücksetzen" keeps the settings. The theme stays in `localStorage` (per device).
-- Local app: atomic writes with retry, daily backup `data/backups/fortschritt-YYYY-MM-DD.json` (last 14 kept), broken file → `*.defekt-<ts>`.
 - Pages: `localStorage` key `ap2-fortschritt`; an unreadable value is moved to `ap2-fortschritt-defekt`.
 - **Pages protection (phase 3):**
   - `navigator.storage.persist()` once per page load after the first successful save (`persistentStorage.ts`, via `createStaticApi`);
@@ -1080,7 +1068,6 @@ type Settings = {
     the previously stored JSON (state at the start of the day) is copied, at most one per day, the last 7 kept (`planBackup`, pure).
     Runs fire-and-forget and serialized after the `localStorage` write, so a missing/blocked IndexedDB never delays or breaks saving.
     `staticApi.backups()` returns `{ newest, count, items }`, `readBackup(date)` the JSON; restore = `parseBackup` + `replaceProgress`.
-    The local app is unchanged (`data/backups/`; its `readBackup` rejects with 501).
   - **Backup reminder** (`backupReminder.ts`, pure): Dashboard banner "Letzte Sicherung vor N Tagen – ⬇ jetzt herunterladen" when
     `lastBackupDownloadAt` is at least `backupReminderDays` old and there is a learning day (`activityDays`) after it; without any download
     it counts from the first learning day. "Später" hides it until reload. The number of days is adjustable on `/einstellungen` (Pages only).
@@ -1145,30 +1132,23 @@ empty answer → 0; otherwise self-grading as usual. Einzelaufgabe also records 
 does not. The exercise page links back („Auch als Klausuraufgabe“). Tests: `sqlAufgaben.smoke.test.ts` (real content: every linked
 task accepts its solution and typical exam answers, wrong ones fail), `sqlChecker.test.ts` (`spaltenFrei`), `sqlUebungen.test.ts` (links).
 
-## 8. AI (local app only)
+## 8. AI (removed)
 
-- **Pages has no AI** (owner decision Q3, roadmap 7.4): no "KI-Aufgaben" nav item (sub-target of Einstellungen, `nurLokal`), `/generator` redirects to `/`,
-  no "🤖 KI-Bewertung" button in `GradePanel`, no "Quelle" filter on Einzelaufgaben (`?quelle=` is ignored), no KI section or KI task count
-  on Daten & Import, and the Klausur hint doesn't mention AI grading. Tested in `tests/pagesOhneKi.test.ts` (MODE stubbed to `pages`).
-  AI with a per-user API key in the browser (roadmap 7.5) is **not** implemented.
-
-- `ANTHROPIC_API_KEY` (and optional `ANTHROPIC_MODEL`, default `claude-sonnet-5`) in `lern-app/.env.local`. The key stays in Node.
-- `POST /api/ai/generate` (topicId, count 1–10, types) → tasks with `generated: true`, stored in `data/generierte-aufgaben.json`, deletable.
-- `POST /api/ai/grade` (taskId, answer) → `{ points, feedback, missing }`.
-- Pages: the static API still rejects every AI call with 501 "Nur in der lokalen App verfügbar" (nothing in the UI calls it any more).
+The app has no AI features. Task generation and grading with Claude existed only in the local mode and were removed with it in
+November 2026 (`server/ai.ts`, `/generator`, the "KI-Bewertung" button, `@anthropic-ai/sdk`). `/generator` redirects to `/`.
 
 ## 9. Quality gates
 
 ```bash
 npm test            # Vitest: parser (fixtures), smoke test on real content/, progress migration, stats, SQL checker/lint/errors/runner,
                     # Rechenübungen (templates, properties, checker, content, pages)
-npm run typecheck   # tsc -b
+npm run typecheck   # tsc -b (tsconfig.app.json: src + shared without Node types; tsconfig.node.json: build, tools, tests)
 npm run lint        # ESLint flat config, typescript-eslint, react-hooks, --max-warnings=0
 npm run format:check
-npm run build && npm run build:pages
+npm run build        # tsc -b, then vite build; fails on ImportIssues in content/
 ```
 
-- Tests don't depend on the live `AP-2/` sheets except one broad smoke test on `content/`.
+- Tests read the real sheets in `content/` (smoke tests) and small fixtures in `tests/fixtures/`.
 - The SQL content smoke test runs every setup and solution in Node (sql.js), checks unique IDs, dataset integrity against the DD1 tables
   and that no model solution triggers its own dialect warnings.
 - Rechenübungen: `rechenVorlagen.test.ts` (each template reproduces the sheet example), `rechenEigenschaften.test.ts` (every template over
@@ -1178,14 +1158,13 @@ npm run build && npm run build:pages
   and `rechnenSeiten.test.ts` (server-side render of both pages for every exercise).
 - Leicht-Modus: `leicht.test.ts` (card selection, option building: exactly 4, correct one included, no duplicates, shuffled; all real cards;
   filter counts), `logic.test.ts` (box cap), `leichtRechnen.test.ts` (Rechnen options incl. every exercise of `content/` with several seeds,
-  checker agrees; progress), `leichtSeiten.test.ts` (render of Karteikarten and every Rechenübung in Leicht), `lernkarten.test.ts` (`mc` block),
-  `mcWerkzeug.test.ts` (authoring helper with a mock client).
+  checker agrees; progress), `leichtSeiten.test.ts` (render of Karteikarten and every Rechenübung in Leicht), `lernkarten.test.ts` (`mc` block).
 - Phase 4.4/4.5: `math.test.ts` (every formula in `content/` renders with KaTeX, no result inside a formula), `druck.test.ts` (`/druck` renders
   every solution sheet with formulas, no `katex-error`), `loesungStil.test.ts` (result box after a formula), `formeln.test.ts` (every template has
   formulas, no unknown template ids, valid KaTeX, Rechenwege use the formulas, Formelsammlung page, Material link, `?vorlage=` filter).
   `rechenInhalte.smoke.test.ts` reads numbers inside formulas as text (`70{,}00` = 70,00).
 - Phase 7: `pwa.test.ts` (manifest paths relative, icons exist in the declared size, precache patterns, prompt update; update state),
-  `navigation.test.ts` (bottom bar groups, badges, render), `pagesOhneKi.test.ts` (no AI UI in the Pages build).
+  `navigation.test.ts` (bottom bar groups, badges, render).
 - Phase 8.1–8.4: `heute.test.ts` (planner: weakest topic, exercises, journal share, cards incl. settings and Leicht, interleaving, day seed,
   real content; session), `heuteSeite.test.ts` (`/heute`, Dashboard button, `?karten=`), `eigeneAntwort.test.ts`, `kalibrierung.test.ts`
   (calibration, threshold, `finishExam`, `SicherheitWahl`), `sicherheitSeiten.test.ts` (task, exam, Dashboard card), `progress.test.ts`/
@@ -1211,18 +1190,24 @@ npm run build && npm run build:pages
 - Editor-Aufgaben: `editorAufgaben.test.ts` (detection on `content/` = exact list, string round trip and text fallback, geometry, form rules
   incl. the model solutions of 02-B1/18-B3 without hints, model tables of 02-C1/02-B2/08-C1, comparison finds typical mistakes, editors render
   without any answer content, submitted view, grading aids, task page loads the editor).
+- November 2026: `details.test.ts` (Übersicht renders with the start file alone, `useStore()` throws without details, `<MitDetails>`
+  shows „Lädt …“ until then, details requested at start for sub pages) and `performance.test.ts` (start + details give the core again,
+  start at most half the size, mismatching versions throw, the plugin emits `details.json`).
 - One commit per logical change; formatting-only changes in their own commit.
 
 ## 10. Rules for future changes (for AI agents)
 
 1. **Never lose progress.** Schema change ⇒ migration + test with the old fixtures. Old backups must still import.
-2. **Never break Pages.** Check `npm run build:pages` + `npx vite preview --mode pages` for anything touching loading, paths, WASM or storage.
+2. **Never break Pages.** Check `npm run build` + `npm run preview` for anything touching loading, paths, WASM or storage.
    A broken service worker hits every user: keep `registerType: 'prompt'` and relative paths, and check that `sw.js`, `manifest.webmanifest`
    and every precached URL answer 200. A new file type the app loads at runtime must be added to `globPatterns`, or it is missing offline.
 3. **Multi-user on Pages:** no personal data, dates or names in code or UI; per-user settings go into progress (so they are in the backup)
    or `localStorage`; no server, no tracking.
-4. Keep content read-only in the app; content changes go through `AP-2/` + `npm run sync-content`.
+4. Keep content read-only in the app; content changes are edits in `content/` (`CONTRIBUTING.md`).
 5. Pure logic in `shared/` or `src/lib/` with tests; pages mostly render.
 6. German UI, existing tone and style (2 spaces, single quotes, printWidth ~140, trailing commas).
 7. **Section texts are not in the store** (§ 3.1): a page that needs `Section.markdown` uses `useThemaTexte` or `useVollerInhalt`; lib
    functions that don't need texts take `KernInhalt`. Keep the main bundle small: new pages are lazy, and add them to `SEITEN` in `App.tsx`.
+8. **Card and task texts are not in the start file** (§ 3.1): the Übersicht and everything in the app frame use `useStartStore()` and
+   must not read `question`, `answer`, `markdown` or `solution`; new routes go inside the `<MitDetails>` layout route. A new text
+   field of cards or tasks belongs into `KARTEN_TEXT` / `AUFGABEN_TEXT` (`shared/texte.ts`). No server, no API key in the app.

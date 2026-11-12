@@ -1,46 +1,60 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import type { KernInhalt } from '../../shared/texte';
-import { api, IS_STATIC } from './api';
+import { hatDetails, type KernInhalt, type StartInhalt } from '../../shared/texte';
+import { api } from './api';
 import { createProgressSaver, type SaveState } from './progressSaver';
 import { emptyProgress, migrateProgress, type Progress } from '../../shared/progress';
 
-interface Store {
-  /** Ohne Abschnittstexte – die brauchen nur wenige Seiten, sie holen sie mit useThemaTexte/useVollerInhalt (lib/texte.ts). */
-  content: KernInhalt;
+export interface Store<C extends StartInhalt = KernInhalt> {
+  /**
+   * Ohne Abschnittstexte – die brauchen nur wenige Seiten, sie holen sie mit useThemaTexte/useVollerInhalt (lib/texte.ts).
+   * Mit C = StartInhalt fehlen auch die Texte der Karten und Aufgaben (Übersicht und App-Rahmen, siehe useStartStore).
+   */
+  content: C;
   progress: Progress;
-  aiEnabled: boolean;
-  aiModel: string;
   update: (fn: (p: Progress) => Progress) => void;
   replaceProgress: (p: Progress) => void;
-  reload: () => Promise<void>;
   /** Erster Besuch: noch kein gespeicherter Fortschritt (bis zur ersten Änderung) – dann zeigt die Übersicht die Willkommensseite. */
   firstVisit: boolean;
 }
 
 interface SpeicherStand {
   saveState: SaveState;
-  /** Meldung des Servers, wenn das Speichern abgelehnt wurde (z. B. HTTP 400). */
+  /** Meldung, wenn das Speichern abgelehnt wurde. */
   saveError: string | null;
 }
 
-const StoreContext = createContext<Store | null>(null);
+export const StoreContext = createContext<Store<StartInhalt> | null>(null);
 // Eigener Kontext (Umsetzungsplan Phase 10): Jedes Speichern wechselt den Stand zweimal (speichert → gespeichert). Steckte er im
 // Store, würde dabei jedes Mal die ganze Seite neu rendern – so nur die Kopfleiste und der Fehlerhinweis.
 const SpeicherContext = createContext<SpeicherStand>({ saveState: 'gespeichert', saveError: null });
 
-export function useStore(): Store {
+/** Store für die Übersicht und den App-Rahmen: Karten und Aufgaben nur mit Kopfdaten, dafür sofort nach dem Start da. */
+export function useStartStore(): Store<StartInhalt> {
   const s = useContext(StoreContext);
-  if (!s) throw new Error('useStore außerhalb des StoreProvider');
+  if (!s) throw new Error('useStartStore außerhalb des StoreProvider');
   return s;
+}
+
+const mitDetails = new WeakMap<StartInhalt, boolean>();
+
+/**
+ * Store mit den Texten der Karten und Aufgaben – für alles unterhalb von <MitDetails> (lib/details.tsx), also jede Seite außer der
+ * Übersicht. Außerhalb davon gibt es einen Fehler statt Karten ohne Frage.
+ */
+export function useStore(): Store {
+  const s = useStartStore();
+  let ok = mitDetails.get(s.content);
+  if (ok === undefined) mitDetails.set(s.content, (ok = hatDetails(s.content)));
+  if (!ok) throw new Error('useStore ohne geladene Details – die Seite muss unterhalb von <MitDetails> stehen.');
+  return s as Store;
 }
 
 /** Speicherstand für Kopfleiste und Fehlerhinweis. */
 export const useSpeicherStand = () => useContext(SpeicherContext);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
-  const [content, setContent] = useState<KernInhalt | null>(null);
+  const [content, setContent] = useState<StartInhalt | null>(null);
   const [progress, setProgress] = useState<Progress | null>(null);
-  const [ai, setAi] = useState({ enabled: false, model: '' });
   const [error, setError] = useState<string | null>(null);
   const [saveState, setSaveState] = useState<SaveState>('gespeichert');
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -57,19 +71,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }),
   );
 
-  const reload = useCallback(async () => {
-    setContent(await api.content());
-  }, []);
-
   useEffect(() => {
-    Promise.all([api.content(), api.progress(), api.aiStatus()])
-      .then(([c, p, s]) => {
+    Promise.all([api.content(), api.progress()])
+      .then(([c, p]) => {
         setContent(c);
         setFirstVisit(p === null || p === undefined);
         progressRef.current = migrateProgress(p);
         saver.setBaseRevision(progressRef.current.revision);
         setProgress(progressRef.current);
-        setAi(s);
       })
       .catch((e: Error) => setError(e.message));
   }, [saver]);
@@ -84,7 +93,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('pagehide', flush);
   }, [saver]);
 
-  // Pages-Version: Hat ein anderer Tab gespeichert, ist dieser veraltet – gleich den Hinweis „anderer Tab“ zeigen.
+  // Hat ein anderer Tab gespeichert, ist dieser veraltet – gleich den Hinweis „anderer Tab“ zeigen.
   useEffect(() => api.watchOtherTabs(() => saver.markConflict()), [saver]);
 
   // Den neuen Stand außerhalb des State-Updaters berechnen und speichern – Updater müssen rein sein (StrictMode ruft sie doppelt auf).
@@ -107,14 +116,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     () => ({
       content: content!,
       progress: progress!,
-      aiEnabled: ai.enabled,
-      aiModel: ai.model,
       update,
       replaceProgress,
-      reload,
       firstVisit,
     }),
-    [content, progress, ai, update, replaceProgress, reload, firstVisit],
+    [content, progress, update, replaceProgress, firstVisit],
   );
   const speicher = useMemo(() => ({ saveState, saveError }), [saveState, saveError]);
 
@@ -123,13 +129,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       <div className="page">
         <h1>Fehler beim Laden</h1>
         <p className="error">{error}</p>
-        {IS_STATIC ? (
-          <p>Prüf deine Internetverbindung und lade die Seite neu.</p>
-        ) : (
-          <p>
-            Läuft der Server? Starte die App mit <code>npm run dev</code> im Ordner <code>lern-app</code>.
-          </p>
-        )}
+        <p>Prüf deine Internetverbindung und lade die Seite neu.</p>
       </div>
     );
   }

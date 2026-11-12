@@ -1,8 +1,8 @@
 // Datenqualität (Deep Dive 9): Qualitätsgrade (Vollständigkeit, Eindeutigkeit, Gültigkeit, Plausibilität …) als Anteil in %.
 
 import { z } from 'zod';
-import { fz, L, LoesungsBau, lz, vorlage } from '../hilfen';
-import { F } from '../formeln';
+import { fz, L, LoesungsBau, lz, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
 
 const kennzahlSchema = z
   .object({

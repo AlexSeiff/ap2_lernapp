@@ -1,7 +1,9 @@
 node_modules
 dist
 data
-.env.local
+.env
+.env.*
+!.env.local.example
 tsconfig.tsbuildinfo
 *.defekt-*
 # Lokale Kopie der Projekt-Skills für Codex (Original: .claude/skills)

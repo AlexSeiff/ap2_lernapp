@@ -1,4 +1,4 @@
-// Dauerhafter Speicher (Pages-Version): navigator.storage.persist() bittet den Browser, localStorage und IndexedDB
+// Dauerhafter Speicher: navigator.storage.persist() bittet den Browser, localStorage und IndexedDB
 // dieser Seite nicht von selbst zu löschen (Safari/iOS löscht sonst nach etwa 7 Tagen ohne Besuch).
 // Die Storage-API ist injizierbar, damit Tests ohne Browser laufen. Fehlt sie oder wirft sie, passiert einfach nichts.
 

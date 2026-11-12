@@ -1,22 +1,14 @@
 // Import der Lernkarten-Datei (z. B. AP2_FIDPA_Lernkarten.json) mit Decks, Kartentyp, Schwierigkeit, Tags und optionalem Block „mc“ (Leicht-Modus).
 
 import { z } from 'zod';
-import { pruefeSvg } from './svgDiagramm';
-import type { CardType, Deck, Flashcard, ImportIssue, KartenMc } from './types';
+import { pruefeSvg } from './svgDiagramm.ts';
+import type { CardType, Deck, Flashcard, ImportIssue, KartenMc } from './types.ts';
 
 const CARD_TYPES: CardType[] = ['wissen', 'abgrenzung', 'rechnung', 'anwendung', 'falle', 'begriff'];
 
-interface RawCard {
-  id?: unknown;
-  frage?: unknown;
-  antwort?: unknown;
-  typ?: unknown;
-  schwierigkeit?: unknown;
-  tags?: unknown;
-  mc?: unknown;
-  diagramm?: unknown;
-  rechenweg?: unknown;
-}
+const pflichtText = z.string().trim().min(1);
+// Wahlfelder wie „mc“ und „diagramm“ haben eigene Prüfungen und Fehlerhinweise.
+const kartenSchema = z.looseObject({ id: pflichtText, frage: pflichtText, antwort: pflichtText });
 
 interface RawDeck {
   id?: unknown;
@@ -40,7 +32,7 @@ const McText = z.string().trim().min(1, 'leerer Text');
 
 /**
  * Optionaler Block „mc“ einer Lernkarte (Leicht-Modus, ROADMAP 6.2): genau 3 verschiedene falsche Antworten,
- * keine davon gleich der richtigen. Auch die Entwürfe von `npm run mc-entwurf` werden damit geprüft.
+ * keine davon gleich der richtigen.
  */
 export const KartenMcSchema = z
   .object({
@@ -118,36 +110,39 @@ export function answerToMarkdown(answer: string): string {
 export function parseLernkarten(fileName: string, json: string, topics: Map<string, string>): ParsedCards {
   const issues: ImportIssue[] = [];
   const result: ParsedCards = { decks: [], cards: [], hints: [], issues };
-  let data: { meta?: { hinweise?: unknown; anzahl_karten?: unknown }; decks?: unknown };
+  let data: { meta?: { hinweise?: unknown; anzahl_karten?: unknown }; decks?: unknown } | null;
   try {
     data = JSON.parse(json);
   } catch (e) {
     issues.push({ file: fileName, message: `Ungültiges JSON: ${(e as Error).message}` });
     return result;
   }
-  if (!Array.isArray(data.decks)) {
+  if (!Array.isArray(data?.decks)) {
     issues.push({ file: fileName, message: 'Kein Feld „decks" gefunden.' });
     return result;
   }
   if (Array.isArray(data.meta?.hinweise)) result.hints = data.meta!.hinweise.filter((h): h is string => typeof h === 'string');
 
   const seen = new Set<string>();
-  for (const raw of data.decks as RawDeck[]) {
-    const deckId = String(raw.id ?? '').trim();
-    if (!deckId || !Array.isArray(raw.karten)) {
-      issues.push({ file: fileName, message: `Deck ohne ID oder Karten übersprungen (${String(raw.titel ?? '?')}).` });
+  for (const raw of data.decks as (RawDeck | null)[]) {
+    const deckId = String(raw?.id ?? '').trim();
+    if (!deckId || !Array.isArray(raw?.karten)) {
+      issues.push({ file: fileName, message: `Deck ohne ID oder Karten übersprungen (${String(raw?.titel ?? '?')}).` });
       continue;
     }
     const source = String(raw.quelle ?? '');
     const topicId = topicFromSource(source, String(raw.titel ?? ''), topics);
     const cards: Flashcard[] = [];
-    for (const k of raw.karten as RawCard[]) {
-      const id = String(k.id ?? '').trim();
-      const question = typeof k.frage === 'string' ? k.frage.trim() : '';
-      if (!id || !question) {
-        issues.push({ file: fileName, message: `Karte ohne ID oder Frage in Deck „${deckId}" übersprungen.` });
+    for (const [index, eintrag] of raw.karten.entries()) {
+      const parsed = kartenSchema.safeParse(eintrag);
+      if (!parsed.success) {
+        const feld = parsed.error.issues[0].path[0];
+        const grund = feld ? `Feld „${String(feld)}“ fehlt oder ist kein ausgefüllter Text` : 'Objekt erwartet';
+        issues.push({ file: fileName, message: `Deck „${deckId}“, Karte ${index + 1} übersprungen: ${grund}.` });
         continue;
       }
+      const k = parsed.data;
+      const { id, frage: question } = k;
       if (seen.has(id)) {
         issues.push({ file: fileName, message: `Doppelte Karten-ID ${id} übersprungen.` });
         continue;
@@ -171,7 +166,7 @@ export function parseLernkarten(fileName: string, json: string, topics: Map<stri
         topicId,
         kind: 'lernkarte',
         question,
-        answer: typeof k.antwort === 'string' && k.antwort.trim() ? answerToMarkdown(k.antwort.trim()) : undefined,
+        answer: answerToMarkdown(k.antwort),
         deckId,
         typ,
         schwierigkeit: typeof k.schwierigkeit === 'number' ? k.schwierigkeit : undefined,

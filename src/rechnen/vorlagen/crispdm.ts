@@ -2,8 +2,8 @@
 // die erste k-Means-Iteration (euklidische Abstände, Zuordnung, neue Zentren).
 
 import { z } from 'zod';
-import { fz, intParam, L, LoesungsBau, lz, lzk, median, mittel, tx, vorlage } from '../hilfen';
-import { F } from '../formeln';
+import { fz, intParam, L, LoesungsBau, lz, lzk, median, mittel, tx, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
 
 const artikel = z.string().trim().min(1);
 const assoSchema = z
@@ -162,7 +162,7 @@ export const kmeans = vorlage({
     }
   },
   platzhalter: (d) => ({
-    punkte: d.punkte.map((p, i) => `P${i + 1}(${fz(p[0])}|${fz(p[1])})`).join(' · '),
+    punkte: d.punkte.map((p, i) => `P${i + 1}(${fz(p[0])}|${fz(p[1])})`).join(', '),
     zentren: d.zentren.map((c, j) => `Z${j + 1}(${fz(c[0])}|${fz(c[1])})`).join(' und '),
     k: String(d.zentren.length),
   }),

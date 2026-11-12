@@ -1004,7 +1004,7 @@ ENDE SOLANGE
 ```
 
 ### Beispiel
-Liste 12 · 19 · 23 · 31 · 42 · 57 · 64 · 78, gesucht 57: Mitte (1 + 8) DIV 2 = 4 → 31 < 57, links ← 5; Mitte (5 + 8) DIV 2 = 6 → 57 gefunden. Bei 1.000.000 Datensätzen genügen höchstens 20 Vergleiche ($2^{20} = 1.048.576$).
+Liste 12, 19, 23, 31, 42, 57, 64, 78, gesucht 57: Mitte (1 + 8) DIV 2 = 4 → 31 < 57, links ← 5; Mitte (5 + 8) DIV 2 = 6 → 57 gefunden. Bei 1.000.000 Datensätzen genügen höchstens 20 Vergleiche ($2^{20} = 1.048.576$).
 
 ### Abgrenzung
 Lineare Suche: unsortiert möglich, O(n). Binäre Suche: nur sortiert, O(log n).
@@ -1296,7 +1296,7 @@ BIS getauscht = FALSCH ODER ende = 0
 ```
 
 ### Beispiel
-Lieferzeiten 5 · 3 · 8 · 1: Durchlauf 1 → 3 · 5 · 1 · 8, Durchlauf 2 → 3 · 1 · 5 · 8, Durchlauf 3 → 1 · 3 · 5 · 8. Insgesamt 3 + 2 + 1 = 6 Vergleiche und 4 Vertauschungen.
+Lieferzeiten 5, 3, 8, 1: Durchlauf 1 → 3, 5, 1, 8, Durchlauf 2 → 3, 1, 5, 8, Durchlauf 3 → 1, 3, 5, 8. Insgesamt 3 + 2 + 1 = 6 Vergleiche und 4 Vertauschungen.
 
 ### Abgrenzung
 Selection Sort sucht das Minimum und tauscht es nach vorn (nicht stabil); Merge Sort braucht immer nur O(n log n).

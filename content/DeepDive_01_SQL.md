@@ -365,7 +365,7 @@ LEFT JOIN umsatz_je_kunde u ON k.kunden_id = u.kunden_id
 ORDER BY umsatz DESC;
 ```
 
-Ergebnis: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70 · Weber e.K. 0 · Braun GmbH 0 – anders als in B8 erscheinen auch Kunden ohne Umsatz.
+Ergebnis: Huber GmbH 1471.80; Schmidt AG 945.00; Fischer KG 767.70; Weber e.K. 0; Braun GmbH 0 – anders als in B8 erscheinen auch Kunden ohne Umsatz.
 
 Eine **Fensterfunktion** (`… OVER (…)`) rechnet über eine Gruppe von Zeilen, **ohne** sie zu einer Zeile zu verdichten – jede Zeile bleibt erhalten und bekommt den Gruppenwert dazu:
 

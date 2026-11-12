@@ -24,10 +24,10 @@ import {
   tx,
   vorlage,
   zahlParam,
-} from '../hilfen';
-import { F } from '../formeln';
-import type { Params } from '../typen';
-import type { Zufall } from '../zufall';
+} from '../hilfen.ts';
+import { F } from '../formeln.ts';
+import type { Params } from '../typen.ts';
+import type { Zufall } from '../zufall.ts';
 
 const zahl = z.number().finite();
 const einheit = z.string().trim().min(1).optional();

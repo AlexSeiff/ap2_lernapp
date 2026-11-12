@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { emptyProgress } from '../shared/progress';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { antwortAlsText, editorFuer, leseEditorAntwort, schreibeEditorAntwort } from '../src/lib/editorAufgabe';
@@ -13,7 +13,8 @@ const content = loadContent(CONTENT_DIR);
 const task = (id: string) => content.tasks[id];
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
 }));
 
 const { default: EditorAntwort, EditorPruefung } = await import('../src/components/EditorAntwort');

@@ -2,9 +2,9 @@
 // und ID3 (Entropie, Informationsgewinn je Merkmal, Wurzel des Entscheidungsbaums).
 
 import { z } from 'zod';
-import { fz, intParam, L, LoesungsBau, lz, lzk, tx, vorlage } from '../hilfen';
-import { F } from '../formeln';
-import type { Zufall } from '../zufall';
+import { fz, intParam, L, LoesungsBau, lz, lzk, tx, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
+import type { Zufall } from '../zufall.ts';
 
 // ---------- k-NN ----------
 
@@ -74,7 +74,7 @@ export const knn = vorlage({
     }
   },
   platzhalter: (d) => ({
-    punkte: d.punkte.map((p, i) => `P${i + 1}(${fz(p[0])}|${fz(p[1])}) ${d.klassen[i]}`).join(' · '),
+    punkte: d.punkte.map((p, i) => `P${i + 1}(${fz(p[0])}|${fz(p[1])}) ${d.klassen[i]}`).join(', '),
     neu: `N(${fz(d.neu[0])}|${fz(d.neu[1])})`,
     k: String(d.k),
     n: String(d.punkte.length),
@@ -357,7 +357,7 @@ export const id3 = vorlage({
     b.schritt({
       titel: 'Wurzel des Baums',
       formel: tx('Merkmal mit dem größten Informationsgewinn'),
-      einsetzen: tx(d.merkmale.map((name, j) => `${name}: ${fz(gewinne[j], 3)}`).join(' · ')),
+      einsetzen: tx(d.merkmale.map((name, j) => `${name}: ${fz(gewinne[j], 3)}`).join(', ')),
       ergebnis: gewinne[best],
       runden: 3,
       hinweis: `Wurzel: ${d.merkmale[best]}.`,

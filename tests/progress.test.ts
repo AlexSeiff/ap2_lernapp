@@ -125,6 +125,13 @@ describe('checkProgressPut', () => {
 });
 
 describe('migrateProgress', () => {
+  it('verwendet auch bei ungültiger Versionsnummer alle nötigen Migrationsschritte', () => {
+    const alt = JSON.parse(readFileSync(join(import.meta.dirname, 'fixtures', 'fortschritt-v8-2026-10-09.json'), 'utf8'));
+    const erwartet = migrateProgress({ ...alt, version: 1 });
+    expect(migrateProgress({ ...alt, version: 0.5 })).toEqual(erwartet);
+    expect(migrateProgress({ ...alt, version: -1e20 })).toEqual(erwartet);
+  });
+
   const fixture = (name: string) => JSON.parse(readFileSync(join(import.meta.dirname, 'fixtures', name), 'utf8'));
 
   it('übernimmt den aktuellen Stand (Kopie von data/fortschritt.json vom 22.09.2026) ohne Verlust', () => {
@@ -248,7 +255,9 @@ describe('migrateProgress', () => {
   it('Version 6 (vor der Selbsteinschätzung): lädt bis auf die Version und leere neue Sammlungen unverändert, Versuche ohne sicherheit bleiben gültig', () => {
     const raw = fixture('fortschritt-v6-2026-10-01.json');
     const migrated = migrateProgress(raw);
-    expect(migrated).toEqual(ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }));
+    expect(migrated).toEqual(
+      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }),
+    );
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
     const r = checkProgressPut(migrated, raw);
     expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35, markiert: {} } });

@@ -1,5 +1,5 @@
-// PWA für `npm run build:pages` (Roadmap 7.1): Manifest + Service Worker (Workbox, generateSW), nur in der Pages-Version.
-// Die lokale App (dev/preview/build) bekommt keinen Service Worker – dort wäre veralteter Code im Cache nur hinderlich.
+// PWA (Roadmap 7.1): Manifest + Service Worker (Workbox, generateSW) für den gebauten Stand.
+// Der Entwicklungsserver bekommt keinen Service Worker – dort wäre veralteter Code im Cache nur hinderlich.
 //
 // Vorab gespeichert (precache) wird alles, was die App offline braucht: App-Shell (index.html, JS, CSS), content.json,
 // die Lazy-Chunks (SQL, Rechnen, KaTeX), sql-wasm.wasm, die KaTeX-Schriften (woff2), Manifest und Icons.

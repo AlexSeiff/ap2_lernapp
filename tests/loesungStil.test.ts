@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { Markdown } from '../src/components/Markdown';
 import MathMarkdown from '../src/components/MathMarkdown';
 import { istErgebnis, istSummenZeile, istZahlZelle, punkteArt } from '../src/lib/loesungStil';

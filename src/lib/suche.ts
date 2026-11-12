@@ -161,7 +161,7 @@ export function baueSuchIndex(
       eintrag(
         'aufgabe',
         `${task.code}: ${kurz(task.markdown)}`,
-        ddName(content, task.topicId) || 'KI-Aufgabe',
+        ddName(content, task.topicId),
         klartext(task.markdown),
         `/aufgabe/${encodeURIComponent(task.id)}`,
       ),
@@ -173,7 +173,7 @@ export function baueSuchIndex(
         eintrag(
           'loesung',
           `${task.code}: ${kurz(task.markdown, 80)}`,
-          `Musterlösung · ${ddName(content, task.topicId) || 'KI-Aufgabe'}`,
+          `Musterlösung · ${ddName(content, task.topicId)}`,
           klartext(task.solution.markdown),
           `/aufgabe/${encodeURIComponent(task.id)}`,
         ),

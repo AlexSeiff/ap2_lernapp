@@ -4,16 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import { Kopfleiste } from '../src/components/Kopfleiste';
 import { MobileNav } from '../src/components/MobileNav';
-import {
-  aktiverBereich,
-  aktivesUnterziel,
-  badgeSumme,
-  bereich,
-  BEREICHE,
-  GLOSSAR_PFAD,
-  passtZuZiel,
-  sichtbareZiele,
-} from '../src/lib/navigation';
+import { aktiverBereich, aktivesUnterziel, badgeSumme, bereich, BEREICHE, GLOSSAR_PFAD, passtZuZiel } from '../src/lib/navigation';
 
 // Navigation (Umsetzungsplan Phase 2): vier Bereiche mit Unterzielen, Kopfleiste oben, Tab-Bar unten auf dem Handy.
 
@@ -49,7 +40,6 @@ describe('Bereiche', () => {
       '/material': 'einstellungen',
       '/material/lernzettel': 'einstellungen',
       '/daten': 'einstellungen',
-      '/generator': 'einstellungen',
     };
     for (const [pfad, b] of Object.entries(erwartet)) expect(aktiverBereich(pfad), pfad).toBe(b);
   });
@@ -82,10 +72,8 @@ describe('Bereiche', () => {
     expect(passtZuZiel('/sql/uebungen', '/sql/uebung/X')).toBe(true);
   });
 
-  it('KI-Aufgaben nur lokal; Badges = Summe der fälligen Einträge eines Bereichs', () => {
-    const e = bereich('einstellungen');
-    expect(sichtbareZiele(e, true).map((z) => z.to)).not.toContain('/generator');
-    expect(sichtbareZiele(e, false).map((z) => z.to)).toContain('/generator');
+  it('keine KI-Aufgaben im Menü; Badges = Summe der fälligen Einträge eines Bereichs', () => {
+    expect(bereich('einstellungen').unter.map((z) => z.to)).not.toContain('/generator');
     const badges = { sql: 2, rechnen: 3, diagramme: 5, journal: 4 };
     expect(badgeSumme(bereich('lernen').unter, badges)).toBe(12);
     expect(badgeSumme(bereich('sql').unter, badges)).toBe(2);

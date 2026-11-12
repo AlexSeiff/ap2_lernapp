@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { CARD_INTERVALS } from '../shared/config';
 import { emptyProgress } from '../shared/progress';
 import { PUFFER_TAGE, planeLernplan, THEMEN_PRO_WOCHE, ZIEL_KARTEN } from '../src/lib/lernplan';
-import { loadContent, CONTENT_DIR } from '../server/loadContent';
+import { loadContent, CONTENT_DIR } from '../build/inhalt';
 
 describe('planeLernplan', async () => {
   const content = await loadContent(CONTENT_DIR);

@@ -1281,7 +1281,7 @@ Verfahren zur Gütemessung, bei dem die Daten in k Teile zerlegt werden und jede
 In k Durchläufen wird das Modell auf k − 1 Teilen trainiert und auf dem verbleibenden Teil getestet; die k Ergebnisse werden gemittelt. Üblich sind k = 5 oder k = 10. Vorteile: Jeder Datensatz wird genau einmal getestet, das Ergebnis hängt nicht von einer zufällig günstigen Aufteilung ab, besonders wertvoll bei kleinen Datenmengen. Nachteil: k-facher Rechenaufwand. Genutzt wird sie auch, um Parameter wie k bei k-NN oder die Baumtiefe zu wählen.
 
 ### Beispiel
-1.000 Aufträge, k = 5: fünf Teile à 200. Durchlauf 1 trainiert auf Teil 2–5 (800) und testet auf Teil 1, Durchlauf 2 testet auf Teil 2 usw. Recall-Werte 0,58 · 0,62 · 0,60 · 0,57 · 0,63 ergeben im Mittel 0,60.
+1.000 Aufträge, k = 5: fünf Teile à 200. Durchlauf 1 trainiert auf Teil 2–5 (800) und testet auf Teil 1, Durchlauf 2 testet auf Teil 2 usw. Recall-Werte 0,58; 0,62; 0,60; 0,57; 0,63 ergeben im Mittel 0,60.
 
 ### Abgrenzung
 Der einfache **Train-Test-Split** prüft nur einmal und kann zufällig günstig ausfallen. Bei Zeitreihen wird statt zufällig **chronologisch** getrennt, damit keine Zukunftsinformation ins Training gelangt.

@@ -4,10 +4,10 @@ import ReactMarkdown from 'react-markdown';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import remarkGfm from 'remark-gfm';
 import { describe, expect, it, vi } from 'vitest';
-import { CONTENT_DIR, ladeInhalt } from '../server/loadContent';
-import { contentJsonPlugin } from '../server/pagesPlugin';
+import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
+import { contentJsonPlugin } from '../build/inhaltPlugin';
 import { defaultSettings, emptyProgress } from '../shared/progress';
-import { inhaltMitTexten, istVoll, teileInhalt, themaMitTexten, type KernInhalt } from '../shared/texte';
+import { hatDetails, inhaltMitDetails, inhaltMitTexten, istVoll, teileInhalt, themaMitTexten, type KernInhalt } from '../shared/texte';
 import { Markdown } from '../src/components/Markdown';
 import { cardPool } from '../src/lib/cards';
 import { baueGlossar, glossarVon } from '../src/lib/glossar';
@@ -23,11 +23,14 @@ import { ladeTexteFuerAdresse, themaSofort, vollerInhaltSofort } from '../src/li
 // Ergebnisse liefern wie vorher.
 
 const { content, seiten } = ladeInhalt(CONTENT_DIR);
-const { kern, texte } = teileInhalt(content);
+const { kern: start, details, texte } = teileInhalt(content);
+// Kern = Start mit den Texten der Karten und Aufgaben, aber ohne Abschnittstexte – so sehen ihn die Seiten unterhalb von <MitDetails>.
+const kern = inhaltMitDetails(start, details);
 let storeInhalt: KernInhalt = content;
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content: storeInhalt, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content: storeInhalt, progress: emptyProgress(), update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content: storeInhalt, progress: emptyProgress(), update: () => {}, firstVisit: false }),
 }));
 
 const { Thema } = await import('../src/pages/Themen');
@@ -40,8 +43,26 @@ describe('content.json: Kern und Texte je Thema', () => {
     expect(istVoll(content)).toBe(true);
     expect(Object.keys(texte).sort()).toEqual(content.topics.map((t) => t.id).sort());
     expect(inhaltMitTexten(kern, texte)).toEqual(content);
-    // Das Original bleibt unverändert (der lokale Server cacht es).
+    // Das Original bleibt unverändert.
     expect(content.topics[0].sections[0].markdown.length).toBeGreaterThan(0);
+  });
+
+  it('Start ohne die Texte der Karten und Aufgaben, mit details.json wieder genau der Kern', () => {
+    expect(hatDetails(start)).toBe(false);
+    expect(hatDetails(kern)).toBe(true);
+    expect(start.flashcards.every((k) => !('question' in k) && !('answer' in k) && !('rechenweg' in k))).toBe(true);
+    expect(Object.values(start.tasks).every((t) => !('markdown' in t) && !('solution' in t))).toBe(true);
+    // Kopfdaten, die die Übersicht braucht, bleiben im Start.
+    expect(start.flashcards.map((k) => k.id)).toEqual(content.flashcards.map((k) => k.id));
+    expect(start.flashcards[0]).toMatchObject({ kind: content.flashcards[0].kind });
+    expect(Object.values(start.tasks)[0]).toMatchObject({ points: Object.values(content.tasks)[0].points });
+    expect(inhaltMitTexten(inhaltMitDetails(start, details), texte)).toEqual(content);
+    // Der Start ist höchstens halb so groß wie der Kern.
+    expect(JSON.stringify(start).length).toBeLessThan(JSON.stringify(kern).length / 2);
+    // Passen Start und Details nicht zusammen, gibt es einen Fehler statt Karten ohne Frage.
+    expect(() => inhaltMitDetails(start, { karten: {}, aufgaben: details.aufgaben })).toThrow(/neu laden/);
+    // Das Original bleibt unverändert.
+    expect(content.flashcards[0].question.length).toBeGreaterThan(0);
   });
 
   it('Abschnitts-ids je Thema eindeutig (sie sind die Schlüssel der Textdateien)', () => {
@@ -58,7 +79,7 @@ describe('content.json: Kern und Texte je Thema', () => {
     expect(() => themaMitTexten(t, {})).toThrow(/neu laden/);
   });
 
-  it('Pages-Build: content.json ist der Kern, je Thema texte/<id>.json, dazu begriffe.json und ein Preload im HTML', () => {
+  it('Build: content.json ist der Kern, je Thema texte/<id>.json, dazu begriffe.json und ein Preload im HTML', () => {
     const dateien = new Map<string, string>();
     const plugin = contentJsonPlugin();
     const gen = plugin.generateBundle as unknown as (this: unknown) => void;
@@ -69,7 +90,8 @@ describe('content.json: Kern und Texte je Thema', () => {
       },
     });
     // importedAt ist der Zeitpunkt des Ladens.
-    expect({ ...JSON.parse(dateien.get('content.json')!), importedAt: kern.importedAt }).toEqual(kern);
+    expect({ ...JSON.parse(dateien.get('content.json')!), importedAt: start.importedAt }).toEqual(JSON.parse(JSON.stringify(start)));
+    expect(JSON.parse(dateien.get('details.json')!)).toEqual(JSON.parse(JSON.stringify(details)));
     for (const t of content.topics) expect(JSON.parse(dateien.get(`texte/${t.id}.json`)!)).toEqual(texte[t.id]);
     expect(dateien.has('begriffe.json')).toBe(true);
     const html = (plugin.transformIndexHtml as () => { tag: string; attrs: Record<string, string> }[])();

@@ -109,7 +109,8 @@ function plausibel(id: string, l: Loesung): string[] {
   return fehler;
 }
 
-describe.each(Object.values(VORLAGEN).map((v) => [v.id, v] as const))('Vorlage %s über viele Seeds', (id, v) => {
+// 150 Seeds je Vorlage: auf einem ausgelasteten Rechner (CI, parallele Testdateien) reicht das Standardlimit von 5 s nicht immer.
+describe.each(Object.values(VORLAGEN).map((v) => [v.id, v] as const))('Vorlage %s über viele Seeds', { timeout: 30_000 }, (id, v) => {
   it('erzeugt gültige Daten mit endlichen, plausiblen Ergebnissen', () => {
     for (const seed of SEEDS) {
       const parsed = v.schema.safeParse(v.erzeuge(seed));

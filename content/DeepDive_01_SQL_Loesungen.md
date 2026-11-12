@@ -119,7 +119,7 @@ INNER JOIN produkt p         ON bp.produkt_id = p.produkt_id
 GROUP BY k.name
 ORDER BY umsatz DESC;
 ```
-Ergebnis: Huber GmbH 1471.80 · Schmidt AG 945.00 · Fischer KG 767.70.
+Ergebnis: Huber GmbH 1471.80; Schmidt AG 945.00; Fischer KG 767.70.
 Rechenweg Huber: Best. 100 = 2×249 + 2×189 = 876,00; Best. 102 = 4×129 = 516,00; Best. 105 = 2×39,90 = 79,80.
 
 *Prüferkommentar: 6 P für die drei korrekten Join-Bedingungen (je 2), 3 P für SUM(menge × preis), 2 P GROUP BY, 1 P ORDER BY … DESC. Diese Aufgabengröße ist typisch für den letzten Handlungsschritt einer echten Klausur.*

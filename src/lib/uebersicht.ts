@@ -13,7 +13,7 @@ import { isDue, localDate } from './progress';
 import { rechenSummary } from './rechnen';
 import { sqlSummary } from './sql';
 import { percent } from './grading';
-import type { KernInhalt } from '../../shared/texte';
+import type { StartInhalt } from '../../shared/texte';
 
 export type PruefungsbereichId = 'prozess' | 'qualitaet' | 'wiso';
 
@@ -59,11 +59,11 @@ export interface BereichFortschritt {
 export const quote = (a: Anteil) => (a.gesamt > 0 ? a.erreicht / a.gesamt : 0);
 
 /** Fortschritt je Prüfungsbereich für die Ringe. Es gelten die Einstellungen Prüferfragen/Fachgespräch (cardPool). */
-export function bereichFortschritt(content: KernInhalt, progress: Progress): BereichFortschritt[] {
+export function bereichFortschritt(content: StartInhalt, progress: Progress): BereichFortschritt[] {
   const pool = cardPool(content.flashcards, progress.settings);
   const letzter = new Map<string, number>();
   for (const a of progress.attempts) letzter.set(a.taskId, a.max > 0 ? a.points / a.max : 0);
-  const aufgaben = Object.values(content.tasks).filter((t) => !t.generated);
+  const aufgaben = Object.values(content.tasks);
   return PRUEFUNGSBEREICHE.map((bereich) => {
     const drin = (topicId: string | undefined) => !!topicId && bereich.themen.includes(topicId);
     const karten = pool.filter((c) => drin(c.topicId));
@@ -97,7 +97,7 @@ export interface Faellig {
 }
 
 /** Was heute fällig ist: Fehlerjournal, Karteikarten (fällige und neue getrennt), SQL-, Rechen- und Diagramm-Wiederholungen. */
-export function faellig(content: KernInhalt, progress: Progress, today = localDate()): Faellig {
+export function faellig(content: StartInhalt, progress: Progress, today = localDate()): Faellig {
   const pool = cardPool(content.flashcards, progress.settings);
   return {
     journal: Object.values(progress.journal).filter((j) => !j.resolvedAt && isDue(j.due, today)).length,
@@ -158,7 +158,7 @@ export interface KlausurLauf {
 }
 
 /** Alle abgeschlossenen Übungsklausuren (auch gemischte), älteste zuerst, und der Durchschnitt in Prozent. */
-export function klausurVerlauf(content: KernInhalt, progress: Progress): { laeufe: KlausurLauf[]; schnitt?: number } {
+export function klausurVerlauf(content: StartInhalt, progress: Progress): { laeufe: KlausurLauf[]; schnitt?: number } {
   const laeufe = progress.exams
     .filter((e) => typeof e.total === 'number' && e.max > 0)
     .map((e) => ({

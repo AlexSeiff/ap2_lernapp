@@ -3,7 +3,7 @@ import { percent } from './grading';
 import { addDays, localDate } from './progress';
 import type { Progress } from '../../shared/progress';
 import { isIsoDate } from '../../shared/progress';
-import type { KernInhalt, KernTopic } from '../../shared/texte';
+import type { KernTopic, StartInhalt } from '../../shared/texte';
 
 /** Tage bis zum eigenen Prüfungstermin (YYYY-MM-DD); 0 = heute, negativ = vorbei, undefined = keiner eingetragen. */
 export function daysUntilExam(examDate: string | undefined, today = new Date()): number | undefined {
@@ -32,7 +32,7 @@ export interface TopicStats {
   openJournal: number;
 }
 
-export function topicStats(content: KernInhalt, progress: Progress): TopicStats[] {
+export function topicStats(content: StartInhalt, progress: Progress): TopicStats[] {
   const pool = cardPool(content.flashcards, progress.settings);
   return content.topics.map((topic) => {
     const exams = progress.exams.filter((e) => e.topicId === topic.id && e.total !== undefined);
@@ -131,7 +131,7 @@ export interface ExamTrend {
 }
 
 /** Klausurergebnisse je Thema im Zeitverlauf – nur Themen mit mindestens einer abgeschlossenen Klausur. */
-export function examTrends(content: KernInhalt, progress: Progress): ExamTrend[] {
+export function examTrends(content: StartInhalt, progress: Progress): ExamTrend[] {
   const trends: ExamTrend[] = [];
   for (const topic of content.topics) {
     const runs = progress.exams

@@ -2,8 +2,8 @@
 // maximaler Datenverlust gegenüber einer RPO-Vorgabe.
 
 import { z } from 'zod';
-import { fz, L, LoesungsBau, lz, vorlage } from '../hilfen';
-import { F } from '../formeln';
+import { fz, L, LoesungsBau, lz, vorlage } from '../hilfen.ts';
+import { F } from '../formeln.ts';
 
 const dsSchema = z.object({
   voll: z.number().positive(),
