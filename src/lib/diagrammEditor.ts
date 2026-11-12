@@ -313,7 +313,7 @@ export function standardKante(a: DiagrammAntwort, von: EditorKnoten, nach: Edito
   }
 }
 
-// ---------- Text (KI-Bewertung, Vorlesen) ----------
+// ---------- Text (Vorlesen, Beschreibung der Antwort) ----------
 
 const FORM_KURZ: Partial<Record<Form, string>> = {
   entitaet: 'Entität',

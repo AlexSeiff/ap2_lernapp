@@ -222,7 +222,10 @@ export function editorAlsText(a: EditorAntwort): string {
   return istDiagrammArt(a.editor) ? diagrammAlsText(a as DiagrammAntwort) : tabellenAlsText(a as TabellenAntwort);
 }
 
-/** Antwort als Text (KI-Bewertung): Editor-Antworten werden beschrieben, alles andere bleibt, wie es ist. */
+/**
+ * Antwort als Text: Editor-Antworten werden beschrieben, alles andere bleibt, wie es ist.
+ * Seit dem Wegfall der KI-Bewertung ruft die App das nicht mehr auf; die Tests halten die Textform der Editoren fest.
+ */
 export function antwortAlsText(task: AufgabeFuerEditor, raw: string | undefined): string {
   const art = editorFuer(task);
   if (!art || !raw) return raw ?? '';
