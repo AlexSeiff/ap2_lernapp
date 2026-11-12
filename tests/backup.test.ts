@@ -21,6 +21,11 @@ describe('parseBackup', () => {
     for (const text of ['null', '[]', '{}', '{"attempts": 3}']) expect(() => parseBackup(text)).toThrow('Keine gültige Sicherungsdatei.');
   });
 
+  it('lehnt eine Sicherung aus einer neueren App-Version ab, statt sie abzuschneiden', () => {
+    const neu = JSON.stringify({ ...JSON.parse(fixture('fortschritt-v4-2026-09-30.json')), version: PROGRESS_VERSION + 1, unbekannt: 1 });
+    expect(() => parseBackup(neu)).toThrow('neueren Version');
+  });
+
   it('Dateiname mit App-Name und Datum', () => {
     expect(backupFileName('2026-09-30')).toBe('ap2-lernapp-sicherung-2026-09-30.json');
   });
