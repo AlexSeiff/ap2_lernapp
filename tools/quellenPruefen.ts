@@ -1,11 +1,11 @@
 // npm run quellen-pruefen (Umsetzungsplan Phase 8): ruft jeden Link aus content/AP2_Quellen.json erneut ab und meldet alles, was nicht
-// mit 2xx antwortet. Vor der Prüfung laufen lassen; tote Links in AP-2/AP2_Quellen.json ersetzen oder entfernen, dann sync-content.
+// mit 2xx antwortet. Vor der Prüfung laufen lassen; tote Links in content/AP2_Quellen.json ersetzen oder entfernen.
 // Eine Anfrage nach der anderen mit kurzer Pause – die Anbieter sollen nicht belastet werden.
 
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { parseQuellen } from '../shared/quellen';
-import { CONTENT_DIR } from './loadContent';
+import { parseQuellen } from '../shared/quellen.ts';
+import { CONTENT_DIR } from '../build/inhalt.ts';
 
 const DATEI = join(CONTENT_DIR, 'AP2_Quellen.json');
 const PAUSE_MS = 400;

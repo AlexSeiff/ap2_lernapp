@@ -94,7 +94,12 @@ if (befehl === 'naechste') {
       if (k.schwierigkeit !== undefined && ![1, 2, 3].includes(k.schwierigkeit)) fehler.push(`${wo}: schwierigkeit ${k.schwierigkeit}`);
       if (`${k.frage}${k.antwort}`.includes('$')) fehler.push(`${wo}: „$“ im Text – Karten haben keinen Formelsatz`);
       if (k.mc) {
-        const norm = (s) => String(s).toLowerCase().replace(/\s+/g, ' ').replace(/[.\s]+$/, '').trim();
+        const norm = (s) =>
+          String(s)
+            .toLowerCase()
+            .replace(/\s+/g, ' ')
+            .replace(/[.\s]+$/, '')
+            .trim();
         const f = Array.isArray(k.mc.falsch) ? k.mc.falsch.map(norm) : [];
         if (f.length !== 3) fehler.push(`${wo}: mc braucht genau 3 falsche Antworten`);
         if (new Set(f).size !== f.length) fehler.push(`${wo}: mc-Antworten doppelt`);

@@ -1,16 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { IS_STATIC } from '../lib/api';
-import {
-  aktiverBereich,
-  aktivesUnterziel,
-  badgeSumme,
-  bereich,
-  BEREICHE,
-  type Bereich,
-  type NavBadge,
-  sichtbareZiele,
-} from '../lib/navigation';
+import { aktiverBereich, aktivesUnterziel, badgeSumme, bereich, BEREICHE, type Bereich, type NavBadge } from '../lib/navigation';
 import { Icon } from './Icon';
 
 type Props = {
@@ -66,7 +56,7 @@ export function Kopfleiste({ onSuche, badges, saveText, saveState }: Props) {
               <span className="kopf-label">Übersicht</span>
             </Link>
             {BEREICHE.map((b) => {
-              const n = badgeSumme(sichtbareZiele(b, IS_STATIC), badges);
+              const n = badgeSumme(b.unter, badges);
               return (
                 <Link
                   key={b.id}
@@ -115,7 +105,7 @@ function Unterleiste({ b, pathname, badges }: { b: Bereich; pathname: string; ba
   return (
     <nav className="unterleiste" aria-label={b.label}>
       <div className="unterleiste-innen" ref={leiste}>
-        {sichtbareZiele(b, IS_STATIC).map((z) => (
+        {b.unter.map((z) => (
           <Link key={z.to} to={z.to} className={z === aktiv ? 'active' : ''} aria-current={z === aktiv ? 'page' : undefined}>
             <Icon name={z.icon} /> {z.label}
             {z.badge && <Badge n={badges[z.badge]} />}

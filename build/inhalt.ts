@@ -8,21 +8,13 @@ import type { BegriffsSeite, Content } from '../shared/types.ts';
 import { baueGlossar, ueberschriftKern } from '../src/lib/glossar.ts';
 import { ergaenzeGlossarThema } from '../src/lib/glossarThema.ts';
 import { pruefeRechenUebung } from '../src/rechnen/pruefen.ts';
-import { resolveContentSource } from './contentSource.ts';
 
-/** Explizite Quelle, vorhandener AP-2-Ordner oder die mitgelieferten Inhalte im eigenständigen Checkout. */
-export const SOURCE_DIR = resolveContentSource(resolve(import.meta.dirname, '..'), process.env.LERN_QUELLE);
-
-/**
- * Kopie der Lernblätter im Repository (`npm run sync-content`). Daraus bauen `npm run build:pages` und die Tests –
- * so sehen GitHub Actions und der lokale Build dieselben Inhalte, auch ohne den Ordner AP-2.
- */
+/** Die Lernblätter im Repository – einzige Quelle für Entwicklungsserver, Build und Tests. */
 export const CONTENT_DIR = resolve(import.meta.dirname, '..', 'content');
 
 /**
  * Markdown-Dateien, die die App liest (Positivliste): Lernblätter samt Lösungen, das alte SQL-Lernblatt, die beiden Materialien und die
- * Begriffsseiten (eine Datei je Buchstabe). Alles andere im Ordner AP-2 – Prompts, der persönliche Lernplan, Arbeitsnotizen wie
- * Ideen.md oder Begriffsseiten_Hinweise.md – gehört nicht in die App (sie wird von mehreren Leuten genutzt).
+ * Begriffsseiten (eine Datei je Buchstabe). Alles andere im Ordner – Notizen, Entwürfe – gehört nicht in die App (sie wird von mehreren Leuten genutzt).
  */
 const INHALT_MD = [
   /^DeepDive_\d+_.+\.md$/,
@@ -46,25 +38,25 @@ export function isContentFile(name: string): boolean {
 }
 
 /** Liegt `file` direkt im Quellordner und wird von loadContent() gelesen? (Für den Datei-Watcher.) */
-export function isContentSource(file: string, dir = SOURCE_DIR): boolean {
+export function isContentSource(file: string, dir = CONTENT_DIR): boolean {
   // Windows: Laufwerksbuchstaben können unterschiedlich geschrieben sein.
   const same = resolve(dirname(file)).toLowerCase() === resolve(dir).toLowerCase();
   return same && isContentFile(basename(file));
 }
 
 /** Namen aller Dateien in `dir`, die loadContent() liest (sortiert). */
-export function listContentFiles(dir = SOURCE_DIR): string[] {
+export function listContentFiles(dir = CONTENT_DIR): string[] {
   return readdirSync(dir).filter(isContentFile).sort();
 }
 
 export interface Inhalt {
   content: Content;
-  /** Begriffsseiten mit ganzem Text – die App lädt sie getrennt (begriffe.json bzw. /api/begriffe), content.begriffe ist das Verzeichnis. */
+  /** Begriffsseiten mit ganzem Text – die App lädt sie getrennt (begriffe.json), content.begriffe ist das Verzeichnis. */
   seiten: BegriffsSeite[];
 }
 
 /** Lernblätter, Karten, Übungen und Begriffsseiten lesen, prüfen und zusammensetzen. */
-export function ladeInhalt(dir = SOURCE_DIR): Inhalt {
+export function ladeInhalt(dir = CONTENT_DIR): Inhalt {
   const files = listContentFiles(dir).map((name) => ({ name, text: readFileSync(join(dir, name), 'utf8') }));
   // Rechenübungen werden gegen ihre Vorlage geprüft (unbekannte Vorlage, falsche Daten, fehlende Eingaben → Importhinweis).
   const content = buildContent(files, { pruefeRechenUebung });
@@ -102,6 +94,6 @@ export function ladeInhalt(dir = SOURCE_DIR): Inhalt {
   return { content, seiten };
 }
 
-export function loadContent(dir = SOURCE_DIR): Content {
+export function loadContent(dir = CONTENT_DIR): Content {
   return ladeInhalt(dir).content;
 }

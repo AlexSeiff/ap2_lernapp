@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { IS_STATIC } from '../lib/api';
-import { aktiverBereich, aktivesUnterziel, BEREICHE, sichtbareZiele, type BereichId, type NavBadge } from '../lib/navigation';
+import { aktiverBereich, aktivesUnterziel, BEREICHE, type BereichId, type NavBadge } from '../lib/navigation';
 import { Icon } from './Icon';
 
 /** Alle Lernwerkzeuge an einem Ort; Routen und gespeicherte Lernstände bleiben unverändert. */
@@ -67,7 +66,7 @@ export function Seitenleiste({ badges, onSuche }: { badges: Record<NavBadge, num
                 </button>
               </h2>
               <div id={`seitenleiste-ziele-${b.id}`} hidden={!offen}>
-                {sichtbareZiele(b, IS_STATIC).map((z) => (
+                {b.unter.map((z) => (
                   <Link
                     key={z.to}
                     to={z.to}

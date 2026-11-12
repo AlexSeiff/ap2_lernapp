@@ -32,7 +32,7 @@ const McText = z.string().trim().min(1, 'leerer Text');
 
 /**
  * Optionaler Block „mc“ einer Lernkarte (Leicht-Modus, ROADMAP 6.2): genau 3 verschiedene falsche Antworten,
- * keine davon gleich der richtigen. Auch die Entwürfe von `npm run mc-entwurf` werden damit geprüft.
+ * keine davon gleich der richtigen.
  */
 export const KartenMcSchema = z
   .object({

@@ -403,7 +403,7 @@ export interface SourceFile {
 }
 
 export interface BuildOptions {
-  /** Prüft Rechenübungen gegen ihre Vorlage (server/loadContent.ts übergibt src/rechnen/pruefen.ts). */
+  /** Prüft Rechenübungen gegen ihre Vorlage (build/inhalt.ts übergibt src/rechnen/pruefen.ts). */
   pruefeRechenUebung?: RechenUebungPruefer;
 }
 

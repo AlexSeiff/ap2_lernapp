@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { defaultSettings, emptyProgress, type Progress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { OPERATOREN } from '../src/lib/operatoren';
 import { ausschnitt, baueSuchIndex, bewerte, klartext, normalisiere, suche, SUCH_ART, type SuchArt } from '../src/lib/suche';

@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { emptyProgress } from '../shared/progress';
-import { CONTENT_DIR, ladeInhalt } from '../server/loadContent';
+import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 import {
   bauePodcast,
   dauerMinuten,

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { emptyProgress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { naheWerte, rechenAuswahl, rechenOptionen } from '../src/lib/leichtRechnen';
 import { recordRechenCheck, recordRechenLeicht, rechenStatus } from '../src/lib/rechnen';
 import { pruefeEingabe } from '../src/rechnen/checker';

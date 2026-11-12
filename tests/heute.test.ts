@@ -4,7 +4,7 @@ import { emptyProgress, type Progress } from '../shared/progress';
 import type { Content, Flashcard, RechenUebung, SqlExercise, Task, Topic } from '../shared/types';
 import type { DiagrammUebung } from '../shared/diagrammUebungen';
 import { letzterStand } from '../src/lib/wiederholung';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { aufgabeMinuten, planeHeute, verschraenke } from '../src/lib/heute';
 import {
   aktuellerSchritt,

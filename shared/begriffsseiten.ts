@@ -1,7 +1,7 @@
-// Begriffsseiten (Umsetzungsplan Phase 3): eine ausführliche Seite je Glossarbegriff aus AP-2/Begriffsseiten_<Buchstabe>.md.
+// Begriffsseiten (Umsetzungsplan Phase 3): eine ausführliche Seite je Glossarbegriff aus content/Begriffsseiten_<Buchstabe>.md.
 // Rein, ohne Node/React – Server (Import, Prüfung) und Client (Verweise auflösen) nutzen es gemeinsam.
 //
-// Format einer Seite (siehe AP-2/Prompt_Glossar_Begriffsseiten.md):
+// Format einer Seite:
 //   ## <Begriff>
 //   <!-- id: <glossar-id> · quellen: <Fundstellen> · stand: <JJJJ-MM> -->
 //   Definition (erster Absatz) …

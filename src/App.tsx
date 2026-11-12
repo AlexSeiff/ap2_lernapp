@@ -6,7 +6,6 @@ import { Icon } from './components/Icon';
 import { Kopfleiste } from './components/Kopfleiste';
 import { HeuteLeiste } from './components/HeuteLeiste';
 import { UpdateHinweis } from './components/UpdateHinweis';
-import { IS_STATIC } from './lib/api';
 import { aktiverBereich, type NavBadge } from './lib/navigation';
 import { isDue } from './lib/progress';
 import { rechenSummary } from './lib/rechnen';
@@ -49,8 +48,6 @@ const KlausurAuswahl = lazy(() => SEITEN.klausur().then((m) => ({ default: m.Kla
 const Material = lazy(() => SEITEN.material().then((m) => ({ default: m.Material })));
 const Themen = lazy(() => SEITEN.themen().then((m) => ({ default: m.Themen })));
 const Thema = lazy(() => SEITEN.themen().then((m) => ({ default: m.Thema })));
-// KI-Aufgaben nur in der lokalen App.
-const Generator = lazy(() => import('./pages/Generator').then((m) => ({ default: m.Generator })));
 
 // SQL-Seiten lazy: sql.js (WASM) und CodeMirror landen so nicht im Hauptbundle.
 const SqlFrei = lazy(() => import('./pages/SqlFrei').then((m) => ({ default: m.SqlFrei })));
@@ -123,7 +120,7 @@ function useNavBadges(): Record<NavBadge, number> {
 
 /**
  * Im Leerlauf vorladen (Umsetzungsplan Phase 10): Seiten, Lernblatt-Texte und Suchindex, damit Seitenwechsel, Glossar und Suche nicht
- * warten. Nur wo die Daten nichts kosten – in der lokalen App oder wenn der Service Worker sie aus seinem Cache liefert. Beim
+ * warten. Nur wo die Daten nichts kosten – wenn der Service Worker sie aus seinem Cache liefert. Beim
  * allerersten Besuch nicht: Da lädt der Service Worker selbst gerade alles herunter, und jede weitere Anfrage bremst den Start
  * (auf langsamen Verbindungen sichtbar, Lighthouse misst es mit). Dann lädt jede Seite, was sie braucht, beim Öffnen.
  */
@@ -131,7 +128,7 @@ function useVorladen() {
   const { content, progress } = useStore();
   const { prueferfragen, fachgespraech } = progress.settings;
   useEffect(() => {
-    if (IS_STATIC && !navigator.serviceWorker?.controller) return;
+    if (!navigator.serviceWorker?.controller) return;
     const abbrechen = [
       // Die Seiten, die früher im Hauptbundle steckten.
       imLeerlauf(() => {
@@ -263,7 +260,7 @@ function Layout() {
                       <Route path="/fachgespraech" element={<Fachgespraech />} />
                       <Route path="/podcast" element={<Podcasts />} />
                       <Route path="/podcast/:topicId" element={<Podcast />} />
-                      <Route path="/generator" element={IS_STATIC ? <Navigate to="/" replace /> : <Generator />} />
+                      <Route path="/generator" element={<Navigate to="/" replace />} />
                       <Route path="/material" element={<Material />} />
                       <Route path="/material/formeln" element={<Formelsammlung />} />
                       <Route path="/material/sql-belegsatz" element={<SqlBelegsatz />} />
@@ -286,7 +283,7 @@ function Layout() {
                   </Suspense>
                 </PageErrorBoundary>
               </main>
-              {IS_STATIC && <UpdateHinweis />}
+              <UpdateHinweis />
               {sucheSteuerung.offen && (
                 <Suspense fallback={null}>
                   <SucheDialog onClose={sucheSteuerung.schliessen} />

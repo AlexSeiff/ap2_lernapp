@@ -87,9 +87,7 @@ export const UNTERBEREICHE: Unterbereich[] = [
     id: 'A4',
     bereich: 'prozess',
     titel: 'Rechtliche Auswirkungen von Prozessänderungen',
-    quellen: [
-      { topicId: '10', bloecke: ['C'] },
-    ],
+    quellen: [{ topicId: '10', bloecke: ['C'] }],
   },
   {
     id: 'B1',

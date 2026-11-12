@@ -5,7 +5,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress } from '../shared/progress';
 import { parseQuellen, pruefeQuellenZiele, quellenNachZiel, type Quelle } from '../shared/quellen';
-import { CONTENT_DIR, ladeInhalt, isContentFile } from '../server/loadContent';
+import { CONTENT_DIR, ladeInhalt, isContentFile } from '../build/inhalt';
 
 // Quellen und Lehrvideos (Umsetzungsplan Phase 8): Import, Ziele, Anzeige auf Begriffsseiten und Lernblättern, Zwei-Klick-Video.
 

@@ -5,7 +5,6 @@ import { MiniRing, Ringe } from '../components/Ring';
 import { Welcome } from '../components/Welcome';
 import { useBackupDownload } from '../hooks/useBackupDownload';
 import { useHeuteSitzung } from '../hooks/useHeute';
-import { IS_STATIC } from '../lib/api';
 import { backupReminder } from '../lib/backupReminder';
 import { begriffPfad } from '../lib/begriffe';
 import { formatPoints, ihkGrade } from '../lib/grading';
@@ -693,12 +692,12 @@ function KalibrierungKarte() {
   );
 }
 
-/** Pages-Version: Erinnerung, eine Sicherung herunterzuladen (nach settings.backupReminderDays mit mindestens einem Lerntag seitdem). */
+/** Erinnerung, eine Sicherung herunterzuladen (nach settings.backupReminderDays mit mindestens einem Lerntag seitdem). */
 function BackupBanner() {
   const { progress } = useStore();
   const downloadBackup = useBackupDownload();
   const [later, setLater] = useState(false);
-  const reminder = IS_STATIC && !later ? backupReminder(progress) : undefined;
+  const reminder = !later ? backupReminder(progress) : undefined;
   if (!reminder) return null;
   return (
     <div className="card warn actions" role="status">

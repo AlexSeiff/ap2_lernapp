@@ -1,4 +1,4 @@
-// Gespeicherter Lernfortschritt (data/fortschritt.json): Typen, zod-Schema und Prüfung von PUT /api/progress.
+// Gespeicherter Lernfortschritt (localStorage, Sicherungsdatei): Typen, zod-Schema und Prüfung vor dem Speichern.
 // Liegt in shared/, weil Client (lib/progress.ts, store.tsx) und Server (apiPlugin.ts) dasselbe Format nutzen.
 // Die Typen beschreiben, was die App schreibt. Das Schema ist bewusst toleranter (unbekannte Felder bleiben erhalten,
 // `mode` als beliebiger String, `null` statt NaN), damit ältere oder neuere Dateien nicht abgewiesen werden.
@@ -669,7 +669,7 @@ export const ProgressSchema = z.looseObject({
 
 export type ProgressData = z.infer<typeof ProgressSchema>;
 
-/** Body von PUT /api/progress: der Fortschritt plus optional `reset: true` für bewusstes Zurücksetzen/Einspielen. */
+/** Zu speichernder Stand: der Fortschritt plus optional `reset: true` für bewusstes Zurücksetzen/Einspielen. */
 export const ProgressPutSchema = ProgressSchema.extend({ reset: z.boolean().optional() });
 
 /**

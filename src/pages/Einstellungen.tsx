@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { isIsoDate } from '../../shared/progress';
 import { Datenschutz } from '../components/Datenschutz';
 import { LernzeitenEinstellung } from '../components/Lernzeiten';
-import { IS_STATIC } from '../lib/api';
 import { leichtAutomatischAn } from '../lib/leicht';
 import { withSettings } from '../lib/settings';
 import { daysUntilExam, formatIsoDate } from '../lib/stats';
@@ -145,35 +144,33 @@ export function Einstellungen() {
         </label>
       </section>
 
-      {IS_STATIC && (
-        <section className="card">
-          <h2>
-            <Icon name="save" /> Erinnerung an die Sicherung
-          </h2>
-          <p>Die Übersicht erinnert dich, eine Sicherung herunterzuladen, wenn die letzte so alt ist und du seitdem gelernt hast.</p>
-          <label className="field">
-            Erinnern nach … Tagen
-            <input
-              type="number"
-              min={1}
-              max={365}
-              value={settings.backupReminderDays}
-              onChange={(e) => {
-                const days = Number(e.target.value);
-                if (Number.isInteger(days) && days >= 1 && days <= 365) update((p) => withSettings(p, { backupReminderDays: days }));
-              }}
-            />
-          </label>
-          {settings.lastBackupDownloadAt && (
-            <p className="hint">Letzte heruntergeladene Sicherung: {formatIsoDate(settings.lastBackupDownloadAt)}.</p>
-          )}
-        </section>
-      )}
+      <section className="card">
+        <h2>
+          <Icon name="save" /> Erinnerung an die Sicherung
+        </h2>
+        <p>Die Übersicht erinnert dich, eine Sicherung herunterzuladen, wenn die letzte so alt ist und du seitdem gelernt hast.</p>
+        <label className="field">
+          Erinnern nach … Tagen
+          <input
+            type="number"
+            min={1}
+            max={365}
+            value={settings.backupReminderDays}
+            onChange={(e) => {
+              const days = Number(e.target.value);
+              if (Number.isInteger(days) && days >= 1 && days <= 365) update((p) => withSettings(p, { backupReminderDays: days }));
+            }}
+          />
+        </label>
+        {settings.lastBackupDownloadAt && (
+          <p className="hint">Letzte heruntergeladene Sicherung: {formatIsoDate(settings.lastBackupDownloadAt)}.</p>
+        )}
+      </section>
 
       <p className="hint">
-        <Icon name="save" /> Deine Einstellungen stehen in deinem Fortschritt (
-        {IS_STATIC ? 'in diesem Browser' : 'lokal auf diesem Rechner'}) und ziehen mit jeder Sicherung um. Sichern und Einspielen:{' '}
-        <Link to="/daten">Daten &amp; Import</Link>. Nur das Farbschema (oben unter „Design“) merkt sich jedes Gerät selbst.
+        <Icon name="save" /> Deine Einstellungen stehen in deinem Fortschritt ( in diesem Browser) und ziehen mit jeder Sicherung um.
+        Sichern und Einspielen: <Link to="/daten">Daten &amp; Import</Link>. Nur das Farbschema (oben unter „Design“) merkt sich jedes Gerät
+        selbst.
       </p>
 
       <Datenschutz />

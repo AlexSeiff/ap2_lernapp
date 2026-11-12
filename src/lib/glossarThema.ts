@@ -1,5 +1,5 @@
 // Thema „Glossar & Diagramme“ (Deep Dive 17): Das Blatt enthält nur den Platzhalter GLOSSAR_PLATZHALTER. Beim Laden des Inhalts
-// (server/loadContent.ts, also für lokale App, Pages-Build und Tests gleich) wird an seiner Stelle das komplette Glossar eingesetzt –
+// (build/inhalt.ts, also für Entwicklungsserver, Build und Tests gleich) wird an seiner Stelle das komplette Glossar eingesetzt –
 // ein Abschnitt je Anfangsbuchstabe, gebaut mit baueGlossar(). So ist die Liste nie veraltet, wenn sich Karten oder Blätter ändern.
 // Die Zeilen enthalten keinen Fettdruck: baueGlossar() liest Begriffe nur aus fetten Stellen, die eingesetzte Liste verändert das
 // Glossar also nicht (sonst würde jeder Begriff zusätzlich auf diese Liste verweisen).

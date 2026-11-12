@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { PWA_OPTIONS } from '../server/pwaPlugin';
+import { PWA_OPTIONS } from '../build/pwaPlugin';
 import { createUpdateState } from '../src/lib/pwa';
 
 const PUBLIC = join(import.meta.dirname, '..', 'public');

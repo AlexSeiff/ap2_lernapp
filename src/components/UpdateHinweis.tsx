@@ -2,7 +2,7 @@ import { useState, useSyncExternalStore } from 'react';
 import { aktualisieren, updateState } from '../lib/pwa';
 import { Icon } from './Icon';
 
-/** Hinweis „Neue Version verfügbar“ der Pages-Version (Service Worker wartet, Roadmap 7.1). */
+/** Hinweis „Neue Version verfügbar“ (Service Worker wartet, Roadmap 7.1). */
 export function UpdateHinweis() {
   const wartet = useSyncExternalStore(updateState.subscribe, updateState.get, () => false);
   const [spaeter, setSpaeter] = useState(false);

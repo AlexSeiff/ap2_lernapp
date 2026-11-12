@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import { isIsoDate } from '../../shared/progress';
-import { IS_STATIC } from '../lib/api';
 import { parseBackup } from '../lib/backup';
 import { withSettings } from '../lib/settings';
 import { useStore } from '../lib/store';
@@ -44,8 +43,8 @@ export function Welcome() {
           <b>
             <Icon name="save" /> Dein Fortschritt
           </b>{' '}
-          bleibt nur {IS_STATIC ? 'in diesem Browser' : 'auf diesem Rechner'} – lade ab und zu eine Sicherung herunter (
-          <i>Daten &amp; Import</i>). Mit der Sicherung kannst du auch auf ein anderes Gerät umziehen.
+          bleibt nur in diesem Browser – lade ab und zu eine Sicherung herunter (<i>Daten &amp; Import</i>). Mit der Sicherung kannst du
+          auch auf ein anderes Gerät umziehen.
         </li>
         <li>
           <b>

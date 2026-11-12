@@ -4,7 +4,7 @@ import katex from 'katex';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { CONTENT_DIR } from '../server/loadContent';
+import { CONTENT_DIR } from '../build/inhalt';
 import MathMarkdown from '../src/components/MathMarkdown';
 import { escapeStrayDollars } from '../src/lib/mathDollar';
 

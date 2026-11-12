@@ -4,8 +4,8 @@ import ReactMarkdown from 'react-markdown';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import remarkGfm from 'remark-gfm';
 import { describe, expect, it, vi } from 'vitest';
-import { CONTENT_DIR, ladeInhalt } from '../server/loadContent';
-import { contentJsonPlugin } from '../server/pagesPlugin';
+import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
+import { contentJsonPlugin } from '../build/inhaltPlugin';
 import { defaultSettings, emptyProgress } from '../shared/progress';
 import { inhaltMitTexten, istVoll, teileInhalt, themaMitTexten, type KernInhalt } from '../shared/texte';
 import { Markdown } from '../src/components/Markdown';
@@ -40,7 +40,7 @@ describe('content.json: Kern und Texte je Thema', () => {
     expect(istVoll(content)).toBe(true);
     expect(Object.keys(texte).sort()).toEqual(content.topics.map((t) => t.id).sort());
     expect(inhaltMitTexten(kern, texte)).toEqual(content);
-    // Das Original bleibt unverändert (der lokale Server cacht es).
+    // Das Original bleibt unverändert.
     expect(content.topics[0].sections[0].markdown.length).toBeGreaterThan(0);
   });
 
@@ -58,7 +58,7 @@ describe('content.json: Kern und Texte je Thema', () => {
     expect(() => themaMitTexten(t, {})).toThrow(/neu laden/);
   });
 
-  it('Pages-Build: content.json ist der Kern, je Thema texte/<id>.json, dazu begriffe.json und ein Preload im HTML', () => {
+  it('Build: content.json ist der Kern, je Thema texte/<id>.json, dazu begriffe.json und ein Preload im HTML', () => {
     const dateien = new Map<string, string>();
     const plugin = contentJsonPlugin();
     const gen = plugin.generateBundle as unknown as (this: unknown) => void;

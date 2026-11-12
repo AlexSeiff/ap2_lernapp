@@ -63,7 +63,7 @@ export function bereichFortschritt(content: KernInhalt, progress: Progress): Ber
   const pool = cardPool(content.flashcards, progress.settings);
   const letzter = new Map<string, number>();
   for (const a of progress.attempts) letzter.set(a.taskId, a.max > 0 ? a.points / a.max : 0);
-  const aufgaben = Object.values(content.tasks).filter((t) => !t.generated);
+  const aufgaben = Object.values(content.tasks);
   return PRUEFUNGSBEREICHE.map((bereich) => {
     const drin = (topicId: string | undefined) => !!topicId && bereich.themen.includes(topicId);
     const karten = pool.filter((c) => drin(c.topicId));

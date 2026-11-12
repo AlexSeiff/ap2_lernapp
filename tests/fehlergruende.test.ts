@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress, FEHLERGRUENDE, type Attempt, type ExamRun, type Progress } from '../shared/progress';
 import type { Task } from '../shared/types';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { FEHLERGRUND_INFO, fehlerStatistik, letzterFehlergrund } from '../src/lib/fehlergruende';
 import { finishExam, recordAttempt, setzeFehlergrund } from '../src/lib/progress';

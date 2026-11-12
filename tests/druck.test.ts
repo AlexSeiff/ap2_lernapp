@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import type { MarkdownProps } from '../src/components/markdownComponents';
 
 // Rauchtest der Druckansicht /druck mit den echten Lernblättern (Server-Rendering ohne Browser).

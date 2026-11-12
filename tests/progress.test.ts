@@ -255,7 +255,9 @@ describe('migrateProgress', () => {
   it('Version 6 (vor der Selbsteinschätzung): lädt bis auf die Version und leere neue Sammlungen unverändert, Versuche ohne sicherheit bleiben gültig', () => {
     const raw = fixture('fortschritt-v6-2026-10-01.json');
     const migrated = migrateProgress(raw);
-    expect(migrated).toEqual(ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }));
+    expect(migrated).toEqual(
+      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }),
+    );
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
     const r = checkProgressPut(migrated, raw);
     expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35, markiert: {} } });

@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { Markdown } from '../src/components/Markdown';
 import { findeOperatoren, OPERATOR_NACH_ID, OPERATOREN, operatorFrage, operatorHaeufigkeit, zerlegeText } from '../src/lib/operatoren';
 import { erzeugeZufall } from '../src/rechnen/zufall';

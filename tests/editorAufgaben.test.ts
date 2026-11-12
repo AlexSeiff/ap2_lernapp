@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { emptyProgress } from '../shared/progress';
 import type { Form } from '../shared/diagrammUebungen';
 import { ConfirmContext } from '../src/hooks/useConfirm';
@@ -94,7 +94,7 @@ describe('Erkennung', () => {
   it('genau die Modellierungsaufgaben der Blätter bekommen einen Editor', () => {
     const mitEditor = Object.fromEntries(
       Object.values(content.tasks)
-        .filter((t) => !t.generated && editorFuer(t))
+        .filter((t) => editorFuer(t))
         .map((t) => [t.id, editorFuer(t)]),
     );
     expect(mitEditor).toEqual({

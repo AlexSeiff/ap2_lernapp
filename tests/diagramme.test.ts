@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { pruefeDiagramme } from '../shared/parser';
 import { pruefeSvg, svgBloecke, svgIds } from '../shared/svgDiagramm';
 import { defaultSettings } from '../shared/progress';

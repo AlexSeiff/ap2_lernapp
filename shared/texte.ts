@@ -1,6 +1,6 @@
 // Lernblatt-Texte getrennt vom Kern (Umsetzungsplan Phase 10): Die Abschnittstexte machen gut ein Drittel des Inhalts aus, gebraucht
-// werden sie aber nur auf der Lernblatt-Seite, im Glossar, auf Begriffsseiten und in der Suche. content.json bzw. /api/content enthält
-// deshalb nur den Kern (Abschnitte ohne Text); die Texte liegen je Thema in texte/<id>.json bzw. /api/texte/<id> und werden nachgeladen.
+// werden sie aber nur auf der Lernblatt-Seite, im Glossar, auf Begriffsseiten und in der Suche. content.json enthält
+// deshalb nur den Kern (Abschnitte ohne Text); die Texte liegen je Thema in texte/<id>.json und werden nachgeladen.
 // Rein, ohne Dateizugriff; getestet in tests/texte.test.ts.
 
 import type { Content, Section, Topic } from './types.ts';
@@ -14,7 +14,7 @@ export type KernInhalt = Omit<Content, 'topics'> & { topics: KernTopic[] };
 /** Texte eines Themas: Abschnitts-id → Markdown. */
 export type ThemaTexte = Record<string, string>;
 
-/** Teilt den Inhalt in Kern und Texte je Thema (Build und lokaler Server). Das Original bleibt unverändert. */
+/** Teilt den Inhalt in Kern und Texte je Thema (Build und Entwicklungsserver). Das Original bleibt unverändert. */
 export function teileInhalt(content: Content): { kern: KernInhalt; texte: Record<string, ThemaTexte> } {
   const texte: Record<string, ThemaTexte> = {};
   const topics = content.topics.map((t) => {

@@ -60,10 +60,7 @@ export function planeLernplan(content: KernInhalt, progress: Progress, today: st
   // Bedarf je Thema: Abstand zum Ziel 92 % (ohne Daten: voll), gewichtet mit dem Umfang (Aufgaben + Karten).
   const bedarf = stats.map((s) => {
     const stand = s.lastExam ?? s.avgTaskPct;
-    const umfang = Math.max(
-      1,
-      Object.values(content.tasks).filter((t) => t.topicId === s.topic.id && !t.generated).length + s.cardsTotal / 10,
-    );
+    const umfang = Math.max(1, Object.values(content.tasks).filter((t) => t.topicId === s.topic.id).length + s.cardsTotal / 10);
     return { s, stand, bedarf: Math.max(5, 92 - (stand ?? 0)) * umfang };
   });
   const summe = bedarf.reduce((a, b) => a + b.bedarf, 0) || 1;

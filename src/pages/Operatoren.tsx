@@ -11,13 +11,7 @@ import { Icon } from '../components/Icon';
 export function Operatoren() {
   const { content } = useStore();
   useStelle();
-  const aufgaben = useMemo(
-    () =>
-      Object.values(content.tasks)
-        .filter((t) => !t.generated)
-        .map((t) => ({ id: t.id, text: t.markdown })),
-    [content],
-  );
+  const aufgaben = useMemo(() => Object.values(content.tasks).map((t) => ({ id: t.id, text: t.markdown })), [content]);
   const haeufigkeit = useMemo(() => operatorHaeufigkeit(aufgaben.map((a) => a.text)), [aufgaben]);
   const [frage, setFrage] = useState<OperatorFrage | undefined>(() => operatorFrage(aufgaben));
   const [gewaehlt, setGewaehlt] = useState<number | null>(null);

@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { emptyProgress } from '../shared/progress';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { aktivesUnterziel, bereich } from '../src/lib/navigation';
 
 // SQL-Belegsatz (Umsetzungsplan Phase 6, E3): Material aus AP2_SQL_Belegsatz.md, Seite unter Glossar, Knopf im SQL-Editor.

@@ -1,9 +1,8 @@
 // Importbericht: `npm run import-report`
-import './ladeEnv';
-import { loadContent, SOURCE_DIR } from './loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt.ts';
 
 const c = loadContent();
-console.log(`Quelle: ${SOURCE_DIR}\n`);
+console.log(`Quelle: ${CONTENT_DIR}\n`);
 for (const t of c.topics) {
   const tasks = Object.values(c.tasks).filter((x) => x.topicId === t.id);
   const withSol = tasks.filter((x) => x.solution).length;

@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { buildContent, parseCriteria, parseSolutions, parseTopic, stripKw, toLines } from '../shared/parser';
-import { loadContent } from '../server/loadContent';
+import { loadContent } from '../build/inhalt';
 
 // Kleine Lernblatt-Fixtures im Format der echten Blätter – so bricht das Bearbeiten eines Lernblatts keine Formattests.
 // Grobe Prüfungen gegen die echten Inhalte stehen in inhalte.smoke.test.ts.

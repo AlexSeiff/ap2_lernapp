@@ -3,13 +3,13 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { formatZahl } from '../shared/rechenweg';
 import { parseRechenUebungen } from '../shared/rechenUebungen';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { formatWert, pruefeAntworten } from '../src/rechnen/checker';
 import { baueInstanz } from '../src/rechnen/instanz';
 import { pruefeRechenUebung } from '../src/rechnen/pruefen';
 import { findeVorlage } from '../src/rechnen/vorlagen/index';
 
-// Rauchtest der echten Rechenübungen (content/AP2_Rechen_Uebungen.json, Kopie aus AP-2 per npm run sync-content):
+// Rauchtest der echten Rechenübungen (content/AP2_Rechen_Uebungen.json):
 // alles wird ohne Importhinweis gelesen, jede Vorlage existiert, „Neue Zahlen“ funktioniert für viele Seeds, und die
 // festen Übungen ergeben genau die Zahlen, die in der Musterlösung der angegebenen Aufgabe stehen – bzw. bei einem
 // Rechenbeispiel aus dem Theorieteil (Quelle ohne „Übungsklausur“, z. B. „DD3 Teil 4.3“) im Theorieteil des Lernblatts.

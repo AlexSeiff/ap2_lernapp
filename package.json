@@ -7,21 +7,16 @@
   "scripts": {
     "dev": "vite --open",
     "build": "tsc -b && vite build",
-    "start": "npm run build && vite preview --open",
-    "build:pages": "tsc -b && vite build --mode pages",
+    "preview": "vite preview --open",
     "typecheck": "tsc -b",
     "test": "vitest run",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "import-report": "tsx server/report.ts",
-    "sync-content": "tsx server/syncContent.ts",
-    "mc-entwurf": "tsx server/mcEntwurf.ts",
-    "mc-uebernehmen": "tsx server/mcUebernehmen.ts",
-    "quellen-pruefen": "tsx server/quellenPruefen.ts"
+    "import-report": "tsx tools/report.ts",
+    "quellen-pruefen": "tsx tools/quellenPruefen.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^1.8.0",
     "@codemirror/autocomplete": "^6.20.3",
     "@codemirror/commands": "^6.11.1",
     "@codemirror/lang-sql": "^6.10.0",

@@ -19,7 +19,7 @@ function memoryStorage(initial: Record<string, string> = {}) {
   };
 }
 
-describe('Fortschritt im Browser (Pages-Version)', () => {
+describe('Fortschritt im Browser', () => {
   it('liest null, solange nichts gespeichert ist, und speichert mit steigender Revision', () => {
     const storage = memoryStorage();
     const store = createLocalProgressStore(() => storage);

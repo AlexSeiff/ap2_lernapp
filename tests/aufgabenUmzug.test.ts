@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CONTENT_DIR, loadContent } from '../server/loadContent';
+import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { AUFGABEN_UMZUG_V9 } from '../shared/aufgabenUmzug';
 import { migrateProgress, PROGRESS_VERSION } from '../shared/progress';
 

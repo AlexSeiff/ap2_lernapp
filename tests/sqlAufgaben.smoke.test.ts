@@ -4,7 +4,7 @@
 
 import initSqlJs, { type SqlJsStatic } from 'sql.js';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { CONTENT_DIR, ladeInhalt } from '../server/loadContent';
+import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 import { sqlUebungZuAufgabe, vergleichFuerAufgabe } from '../src/lib/sqlAufgabe';
 import { compareResults } from '../src/sql/checker';
 import type { SqlValue, StatementResult } from '../src/sql/types';

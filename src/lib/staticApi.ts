@@ -1,6 +1,6 @@
-// Datenquelle der GitHub-Pages-Version (npm run build:pages): kein Server, keine KI.
-// Inhalte kommen aus content.json (beim Build aus content/ erzeugt), der Fortschritt aus dem localStorage des Browsers.
-// Gespeichert wird nach denselben Regeln wie auf dem lokalen Server (checkProgressPut: Schema, Revision → 409, Versuchs-Rückgang).
+// Datenquelle der App: kein Server.
+// Inhalte kommen aus content.json (aus content/ erzeugt), der Fortschritt aus dem localStorage des Browsers.
+// Vor dem Speichern prüft checkProgressPut den Stand (Schema, Revision → 409, Versuchs-Rückgang).
 
 import type { SaveProgressRequest } from '../../shared/api';
 import { checkProgressPut } from '../../shared/progress';
@@ -12,12 +12,10 @@ import { createBrowserBackups, openIndexedDbBackups, type BrowserBackups } from 
 import { createPersistRequest } from './persistentStorage';
 import { localDate } from './progress';
 
-/** Schlüssel des Fortschritts im localStorage. Inhalt: dasselbe JSON wie data/fortschritt.json. */
+/** Schlüssel des Fortschritts im localStorage. Inhalt: dasselbe JSON wie eine heruntergeladene Sicherung. */
 export const PROGRESS_KEY = 'ap2-fortschritt';
-/** Hier landet ein nicht lesbarer Stand, bevor er überschrieben wird (wie *.defekt-* auf dem Server). */
+/** Hier landet ein nicht lesbarer Stand, bevor er überschrieben wird. */
 export const BROKEN_KEY = 'ap2-fortschritt-defekt';
-
-export const AI_UNAVAILABLE = 'Nur in der lokalen App verfügbar (braucht den API-Schlüssel).';
 
 type KeyValueStorage = Pick<Storage, 'getItem' | 'setItem'>;
 
@@ -51,7 +49,7 @@ export function createLocalProgressStore(storage: () => KeyValueStorage) {
         return null;
       }
     },
-    /** Wie PUT /api/progress: prüft den Body und speichert ihn mit der nächsten Revision. Wirft ApiError. */
+    /** Prüft den Body und speichert ihn mit der nächsten Revision. Wirft ApiError. */
     save(body: SaveProgressRequest): { ok: true; revision: number } {
       let checked: ReturnType<typeof checkProgressPut>;
       try {
@@ -74,7 +72,6 @@ export function createStaticApi(
   requestPersist: () => Promise<unknown> = createPersistRequest(),
   backups: BrowserBackups = createBrowserBackups(() => openIndexedDbBackups()),
 ): DataSource {
-  const aiUnavailable = () => Promise.reject(new ApiError(501, AI_UNAVAILABLE));
   return {
     content: async () => {
       const res = await fetch(`${import.meta.env.BASE_URL}content.json`);
@@ -111,10 +108,6 @@ export function createStaticApi(
     },
     backups: () => backups.info(),
     readBackup: (date) => backups.read(date),
-    aiStatus: async () => ({ enabled: false, model: '' }),
-    generate: aiUnavailable,
-    grade: aiUnavailable,
-    deleteGenerated: aiUnavailable,
     watchOtherTabs: (onChange) => {
       // Das storage-Ereignis kommt nur in den anderen Tabs an – dieser Tab ist dann veraltet.
       const listener = (e: StorageEvent) => {

@@ -206,7 +206,6 @@ export function planeHeute(content: KernInhalt, progress: Progress, opt: PlanOpt
       Object.values(content.tasks).filter(
         (t) =>
           t.topicId === s.topic.id &&
-          !t.generated &&
           !verplant.has(t.id) &&
           !beantwortet.has(t.id) &&
           !schonHeute.has(t.id) &&
