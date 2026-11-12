@@ -4,7 +4,7 @@
 
 import type { SaveProgressRequest } from '../../shared/api';
 import { checkProgressPut } from '../../shared/progress';
-import type { KernInhalt, ThemaTexte } from '../../shared/texte';
+import type { Details, StartInhalt, ThemaTexte } from '../../shared/texte';
 import type { BegriffsSeite } from '../../shared/types';
 import type { DataSource } from './api';
 import { ApiError } from './apiError';
@@ -76,7 +76,12 @@ export function createStaticApi(
     content: async () => {
       const res = await fetch(`${import.meta.env.BASE_URL}content.json`);
       if (!res.ok) throw new ApiError(res.status, `Die Lernblätter konnten nicht geladen werden (Fehler ${res.status}).`);
-      return (await res.json()) as KernInhalt;
+      return (await res.json()) as StartInhalt;
+    },
+    details: async () => {
+      const res = await fetch(`${import.meta.env.BASE_URL}details.json`);
+      if (!res.ok) throw new ApiError(res.status, `Karten und Aufgaben konnten nicht geladen werden (Fehler ${res.status}).`);
+      return (await res.json()) as Details;
     },
     begriffe: async () => {
       const res = await fetch(`${import.meta.env.BASE_URL}begriffe.json`);

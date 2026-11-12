@@ -20,7 +20,8 @@ import { localDate } from '../lib/progress';
 import { rechenSummary } from '../lib/rechnen';
 import { sqlSummary } from '../lib/sql';
 import { daysUntilExam, examTrends, formatIsoDate, studyStreak, topicStats } from '../lib/stats';
-import { useStore } from '../lib/store';
+import { useDetailsWennDa } from '../lib/details';
+import { useStartStore } from '../lib/store';
 import { begriffDesTages, bereichFortschritt, faellig, klausurVerlauf, quote, type Anteil } from '../lib/uebersicht';
 import { HEUTE_MINUTEN, SICHER_RICHTIG_AB } from '../../shared/config';
 import { Icon } from '../components/Icon';
@@ -33,13 +34,13 @@ const pct = (v?: number) => (v === undefined ? '–' : `${Math.round(v)} %`);
 const prozent = (a: Anteil) => `${Math.round(quote(a) * 100)} %`;
 
 export function Dashboard() {
-  const { firstVisit } = useStore();
+  const { firstVisit } = useStartStore();
   return firstVisit ? <Welcome /> : <Uebersicht />;
 }
 
 /** Persönliches Lernjournal: Tagesplan, Randnotizen und Fortschritt auf einer Notizbuchseite. */
 function Uebersicht() {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const today = localDate();
   const stats = topicStats(content, progress);
   const trends = examTrends(content, progress);
@@ -229,7 +230,7 @@ function Uebersicht() {
 
 /** „Weiterlernen“: Einstieg in „Heute lernen“ (ROADMAP 8.1; läuft schon eine Runde, geht es dort weiter) und die letzte Lesestelle. */
 function Weiterlernen() {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const sitzung = useHeuteSitzung();
   const laeuft = sitzung && !istFertig(sitzung);
   const [stelle] = useState(holeLeseStelle);
@@ -274,7 +275,7 @@ function Weiterlernen() {
 
 /** Countdown bis zum eigenen Prüfungstermin; ohne Termin ein Link zum Eintragen. */
 function Countdown() {
-  const { progress } = useStore();
+  const { progress } = useStartStore();
   const { examDate } = progress.settings;
   const days = daysUntilExam(examDate);
   if (days === undefined || !examDate)
@@ -305,7 +306,7 @@ function Countdown() {
 }
 
 function Lernserie() {
-  const { progress } = useStore();
+  const { progress } = useStartStore();
   const streak = studyStreak(progress);
   return (
     <div
@@ -327,7 +328,7 @@ function Lernserie() {
 
 /** Fortschrittsringe je Prüfungsbereich: außen Karten sicher, innen Übungen gelöst. */
 function BereichRinge() {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const bereiche = bereichFortschritt(content, progress);
   return (
     <section className="widget farbe-violet">
@@ -363,7 +364,7 @@ function BereichRinge() {
 }
 
 function FaelligWidget({ today }: { today: string }) {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const f = faellig(content, progress, today);
   const zeilen: { to: string; icon: IconName; label: string; anzahl: number; zusatz?: string }[] = [
     { to: '/fehlerjournal', icon: 'notebook-pen', label: 'Wiederholungen fällig', anzahl: f.journal },
@@ -403,7 +404,7 @@ function FaelligWidget({ today }: { today: string }) {
 
 /** SQL-, Rechen- und Diagramm-Übungen: gelöst und fällige Wiederholungen. */
 function UebungenWidget({ today }: { today: string }) {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const arten = [
     {
       to: '/sql/uebungen',
@@ -470,7 +471,7 @@ function UebungenWidget({ today }: { today: string }) {
 
 /** Kartenstand: wie viele Karten zuletzt gewusst, unsicher oder nicht gewusst waren – mit Sprung auf die Seite. */
 function KartenstandWidget() {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const pool = useMemo(() => cardPool(content.flashcards, progress.settings), [content, progress.settings]);
   const stand = kartenstand(pool, progress);
   return (
@@ -511,9 +512,12 @@ function KartenstandWidget() {
 
 /** Markierte Karten (Umsetzungsplan Phase 4): Anzahl, die ersten Fragen und Start. */
 function MarkiertWidget() {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const markiert = markierteIds(progress);
   const karten = cardPool(content.flashcards, progress.settings).filter((c) => markiert.has(c.id));
+  // Die Fragen stehen in details.json – sie erscheinen, sobald es geladen ist.
+  const voll = useDetailsWennDa();
+  const fragen = karten.slice(0, 3).map((c) => ({ id: c.id, frage: voll?.flashcards.find((v) => v.id === c.id)?.question }));
   return (
     <section className="widget farbe-amber">
       <h2>
@@ -525,11 +529,14 @@ function MarkiertWidget() {
       </Link>
       {karten.length > 0 ? (
         <ul className="plain w-liste">
-          {karten.slice(0, 3).map((c) => (
-            <li key={c.id} className="small">
-              {c.question}
-            </li>
-          ))}
+          {fragen.map(
+            (c) =>
+              c.frage && (
+                <li key={c.id} className="small">
+                  {c.frage}
+                </li>
+              ),
+          )}
           {karten.length > 3 && (
             <li className="small">
               <Link to="/karteikarten?markiert=1&blaettern=1">Alle {karten.length} durchblättern →</Link>
@@ -545,8 +552,9 @@ function MarkiertWidget() {
 
 /** Begriff des Tages: eine Begriffsseite, fest je Tag. */
 function BegriffWidget({ today }: { today: string }) {
-  const { content } = useStore();
-  const tag = useMemo(() => begriffDesTages(content, today), [content, today]);
+  // Braucht die Begriffskarten mit Text (details.json) – das Widget erscheint, sobald sie geladen sind.
+  const voll = useDetailsWennDa();
+  const tag = useMemo(() => voll && begriffDesTages(voll, today), [voll, today]);
   if (!tag) return null;
   return (
     <section className="widget farbe-sky">
@@ -566,7 +574,7 @@ function BegriffWidget({ today }: { today: string }) {
 
 /** Klausurverlauf: Durchschnitt mit IHK-Note, Verlauf aller Übungsklausuren und die letzten fünf. */
 function KlausurWidget() {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const { laeufe, schnitt } = klausurVerlauf(content, progress);
   return (
     <section className="widget farbe-green">
@@ -646,7 +654,7 @@ function Delta({ value }: { value?: number }) {
 
 /** Selbsteinschätzung (ROADMAP 8.3): Wie oft lagst du bei „sicher“, „teils“, „unsicher“ richtig? */
 function KalibrierungKarte() {
-  const { progress } = useStore();
+  const { progress } = useStartStore();
   const k = kalibrierung(progress.attempts);
   if (!k.anzahl) return null;
   const ab = Math.round(SICHER_RICHTIG_AB * 100);
@@ -694,7 +702,7 @@ function KalibrierungKarte() {
 
 /** Erinnerung, eine Sicherung herunterzuladen (nach settings.backupReminderDays mit mindestens einem Lerntag seitdem). */
 function BackupBanner() {
-  const { progress } = useStore();
+  const { progress } = useStartStore();
   const downloadBackup = useBackupDownload();
   const [later, setLater] = useState(false);
   const reminder = !later ? backupReminder(progress) : undefined;

@@ -14,7 +14,8 @@ const [erstes, zweites] = content.topics.filter((t) => t.exam?.blocks.length);
 let progress: Progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 
 const { Themen, Thema } = await import('../src/pages/Themen');

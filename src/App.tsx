@@ -1,5 +1,5 @@
 import { lazy, type ReactNode, Suspense, useEffect, useState } from 'react';
-import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { CONFLICT_MESSAGE } from '../shared/progress';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Icon } from './components/Icon';
@@ -11,8 +11,9 @@ import { isDue } from './lib/progress';
 import { rechenSummary } from './lib/rechnen';
 import { diagrammSummary, diagrammUebungen } from './lib/diagramme';
 import { sqlSummary } from './lib/sql';
-import { useSpeicherStand, useStore } from './lib/store';
-import { imLeerlauf, ladeTexteImLeerlauf } from './lib/texte';
+import { ladeInhaltMitDetails, MitDetails } from './lib/details';
+import { useSpeicherStand, useStartStore } from './lib/store';
+import { imLeerlauf, ladeAlleTexte } from './lib/texte';
 import { Dashboard } from './pages/Dashboard';
 
 // Umsetzungsplan Phase 10: Nur die Übersicht (Startseite) steckt im Hauptbundle. Die übrigen Seiten, die früher mit ihm kamen, sind
@@ -100,7 +101,7 @@ function useSuche() {
 
 /** Fällige Wiederholungen je Art (Badges in Kopfleiste, Unterleiste und Tab-Bar). */
 function useNavBadges(): Record<NavBadge, number> {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   return {
     journal: Object.values(progress.journal).filter((j) => !j.resolvedAt && isDue(j.due)).length,
     sql: sqlSummary(
@@ -125,7 +126,7 @@ function useNavBadges(): Record<NavBadge, number> {
  * (auf langsamen Verbindungen sichtbar, Lighthouse misst es mit). Dann lädt jede Seite, was sie braucht, beim Öffnen.
  */
 function useVorladen() {
-  const { content, progress } = useStore();
+  const { content, progress } = useStartStore();
   const { prueferfragen, fachgespraech } = progress.settings;
   useEffect(() => {
     if (!navigator.serviceWorker?.controller) return;
@@ -134,9 +135,16 @@ function useVorladen() {
       imLeerlauf(() => {
         for (const laden of Object.values(SEITEN)) void laden().catch(() => {});
       }, 3000),
-      ladeTexteImLeerlauf(content),
+      // Erst die Texte der Karten und Aufgaben (details.json), dann die Lernblatt-Texte.
       imLeerlauf(() => {
-        void import('./lib/suchIndex').then((m) => m.bereiteSucheVor(content, { prueferfragen, fachgespraech }));
+        void ladeInhaltMitDetails(content)
+          .then(ladeAlleTexte)
+          .catch(() => {});
+      }),
+      imLeerlauf(() => {
+        void Promise.all([ladeInhaltMitDetails(content), import('./lib/suchIndex')])
+          .then(([voll, m]) => m.bereiteSucheVor(voll, { prueferfragen, fachgespraech }))
+          .catch(() => {});
       }, 8000),
     ];
     return () => abbrechen.forEach((f) => f());
@@ -223,7 +231,9 @@ function Layout() {
           path="/druck"
           element={
             <Suspense fallback={<div className="page loading">Lädt …</div>}>
-              <Druck />
+              <MitDetails>
+                <Druck />
+              </MitDetails>
             </Suspense>
           }
         />
@@ -240,37 +250,46 @@ function Layout() {
                   <Suspense fallback={<div className="page loading">Lädt …</div>}>
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
-                      <Route path="/heute" element={<Heute />} />
-                      <Route path="/lernen" element={<Themen />} />
-                      <Route path="/lernen/:topicId" element={<Thema />} />
-                      <Route path="/karteikarten" element={<Karteikarten />} />
-                      <Route path="/karteikarten/stand" element={<Kartenstand />} />
-                      <Route path="/klausur" element={<KlausurAuswahl />} />
-                      <Route path="/klausur/:topicId" element={<Klausur />} />
-                      <Route path="/aufgaben" element={<Aufgaben />} />
-                      <Route path="/aufgabe/:taskId" element={<Aufgabe />} />
-                      <Route path="/sql" element={<SqlFrei />} />
-                      <Route path="/sql/uebungen" element={<SqlUebungen />} />
-                      <Route path="/sql/uebung/:id" element={<SqlUebung />} />
-                      <Route path="/rechnen" element={<RechenUebungen />} />
-                      <Route path="/rechnen/:id" element={<RechenUebung />} />
-                      <Route path="/diagramme" element={<DiagrammUebungen />} />
-                      <Route path="/diagramme/:id" element={<DiagrammUebung />} />
-                      <Route path="/fehlerjournal" element={<Fehlerjournal />} />
-                      <Route path="/fachgespraech" element={<Fachgespraech />} />
-                      <Route path="/podcast" element={<Podcasts />} />
-                      <Route path="/podcast/:topicId" element={<Podcast />} />
                       <Route path="/generator" element={<Navigate to="/" replace />} />
-                      <Route path="/material" element={<Material />} />
-                      <Route path="/material/formeln" element={<Formelsammlung />} />
-                      <Route path="/material/sql-belegsatz" element={<SqlBelegsatz />} />
-                      <Route path="/material/operatoren" element={<Operatoren />} />
-                      <Route path="/glossar" element={<Glossar />} />
-                      <Route path="/glossar/:id" element={<Begriff />} />
-                      <Route path="/material/glossar" element={<AlteGlossarAdresse />} />
-                      <Route path="/material/:docId" element={<Material />} />
-                      <Route path="/einstellungen" element={<Einstellungen />} />
-                      <Route path="/daten" element={<Daten />} />
+                      {/* Alle anderen Seiten brauchen die Texte der Karten und Aufgaben (details.json). */}
+                      <Route
+                        element={
+                          <MitDetails>
+                            <Outlet />
+                          </MitDetails>
+                        }
+                      >
+                        <Route path="/heute" element={<Heute />} />
+                        <Route path="/lernen" element={<Themen />} />
+                        <Route path="/lernen/:topicId" element={<Thema />} />
+                        <Route path="/karteikarten" element={<Karteikarten />} />
+                        <Route path="/karteikarten/stand" element={<Kartenstand />} />
+                        <Route path="/klausur" element={<KlausurAuswahl />} />
+                        <Route path="/klausur/:topicId" element={<Klausur />} />
+                        <Route path="/aufgaben" element={<Aufgaben />} />
+                        <Route path="/aufgabe/:taskId" element={<Aufgabe />} />
+                        <Route path="/sql" element={<SqlFrei />} />
+                        <Route path="/sql/uebungen" element={<SqlUebungen />} />
+                        <Route path="/sql/uebung/:id" element={<SqlUebung />} />
+                        <Route path="/rechnen" element={<RechenUebungen />} />
+                        <Route path="/rechnen/:id" element={<RechenUebung />} />
+                        <Route path="/diagramme" element={<DiagrammUebungen />} />
+                        <Route path="/diagramme/:id" element={<DiagrammUebung />} />
+                        <Route path="/fehlerjournal" element={<Fehlerjournal />} />
+                        <Route path="/fachgespraech" element={<Fachgespraech />} />
+                        <Route path="/podcast" element={<Podcasts />} />
+                        <Route path="/podcast/:topicId" element={<Podcast />} />
+                        <Route path="/material" element={<Material />} />
+                        <Route path="/material/formeln" element={<Formelsammlung />} />
+                        <Route path="/material/sql-belegsatz" element={<SqlBelegsatz />} />
+                        <Route path="/material/operatoren" element={<Operatoren />} />
+                        <Route path="/glossar" element={<Glossar />} />
+                        <Route path="/glossar/:id" element={<Begriff />} />
+                        <Route path="/material/glossar" element={<AlteGlossarAdresse />} />
+                        <Route path="/material/:docId" element={<Material />} />
+                        <Route path="/einstellungen" element={<Einstellungen />} />
+                        <Route path="/daten" element={<Daten />} />
+                      </Route>
                       <Route
                         path="*"
                         element={
@@ -286,7 +305,9 @@ function Layout() {
               <UpdateHinweis />
               {sucheSteuerung.offen && (
                 <Suspense fallback={null}>
-                  <SucheDialog onClose={sucheSteuerung.schliessen} />
+                  <MitDetails fallback={null}>
+                    <SucheDialog onClose={sucheSteuerung.schliessen} />
+                  </MitDetails>
                 </Suspense>
               )}
             </div>

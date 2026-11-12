@@ -12,7 +12,8 @@ import { CONTENT_DIR, ladeInhalt, isContentFile } from '../build/inhalt';
 const { content, seiten } = ladeInhalt(CONTENT_DIR);
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
 }));
 
 const { Thema } = await import('../src/pages/Themen');

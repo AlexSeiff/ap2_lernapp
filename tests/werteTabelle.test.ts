@@ -13,7 +13,8 @@ const content = loadContent(CONTENT_DIR);
 const task = (id: string) => content.tasks[id];
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
 }));
 
 const { default: EditorAntwort, EditorPruefung } = await import('../src/components/EditorAntwort');

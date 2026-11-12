@@ -3,11 +3,11 @@ import { backupFileName } from '../lib/backup';
 import { localDate } from '../lib/progress';
 import { withSettings } from '../lib/settings';
 import { downloadText } from '../lib/sheets';
-import { useStore } from '../lib/store';
+import { useStartStore } from '../lib/store';
 
 /** Lädt den Fortschritt als Sicherungsdatei herunter und merkt sich den Tag (settings.lastBackupDownloadAt) für die Erinnerung. */
 export function useBackupDownload(): () => void {
-  const { progress, update } = useStore();
+  const { progress, update } = useStartStore();
   return useCallback(() => {
     const today = localDate();
     downloadText(backupFileName(today), JSON.stringify(progress, null, 2), 'application/json');

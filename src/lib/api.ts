@@ -1,5 +1,5 @@
 import type { BackupInfo, SaveProgressRequest } from '../../shared/api';
-import type { KernInhalt, ThemaTexte } from '../../shared/texte';
+import type { Details, StartInhalt, ThemaTexte } from '../../shared/texte';
 import type { BegriffsSeite } from '../../shared/types';
 import { ApiError } from './apiError';
 import { createStaticApi } from './staticApi';
@@ -8,8 +8,10 @@ export { ApiError };
 
 /** Woher die App Inhalte und Fortschritt bekommt: JSON-Dateien neben der App und der Speicher des Browsers (staticApi.ts). */
 export interface DataSource {
-  /** Kern ohne Abschnittstexte (shared/texte.ts). */
-  content(): Promise<KernInhalt>;
+  /** Start: Inhalt ohne Abschnittstexte und ohne die Texte der Karten und Aufgaben (shared/texte.ts). */
+  content(): Promise<StartInhalt>;
+  /** Texte der Karten und Aufgaben – nachgeladen, sobald eine andere Seite als die Übersicht sie braucht (lib/details.tsx). */
+  details(): Promise<Details>;
   /** Begriffsseiten mit Text – getrennt geladen, erst wenn sie gebraucht werden (lib/begriffe.ts). */
   begriffe(): Promise<BegriffsSeite[]>;
   /** Abschnittstexte eines Themas – getrennt vom Kern, nachgeladen (lib/texte.ts). */

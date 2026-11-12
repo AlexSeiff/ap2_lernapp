@@ -15,14 +15,14 @@ export const STAND_TEXT: Record<Rating, { titel: string; kurz: string; zeichen: 
   nicht: { titel: 'Nicht gewusst', kurz: 'nicht gewusst', zeichen: '✗' },
 };
 
-export interface StandEintrag {
-  card: Flashcard;
+export interface StandEintrag<K = Flashcard> {
+  card: K;
   state: CardState;
   stand: Rating;
 }
 
-export interface Kartenstand {
-  gruppen: Record<Rating, StandEintrag[]>;
+export interface Kartenstand<K = Flashcard> {
+  gruppen: Record<Rating, StandEintrag<K>[]>;
   /** Karten im Pool, die noch nie bewertet wurden. */
   neu: number;
   gesamt: number;
@@ -35,8 +35,8 @@ export interface Kartenstand {
 export const standVon = (s: CardState): Rating => s.last ?? (s.box >= 2 ? 'gewusst' : 'unsicher');
 
 /** Teilt die Karten des Pools nach der letzten Bewertung auf; neue Karten zählen nur mit. */
-export function kartenstand(pool: Flashcard[], progress: Pick<Progress, 'cards'>): Kartenstand {
-  const gruppen: Record<Rating, StandEintrag[]> = { gewusst: [], unsicher: [], nicht: [] };
+export function kartenstand<K extends Pick<Flashcard, 'id'>>(pool: K[], progress: Pick<Progress, 'cards'>): Kartenstand<K> {
+  const gruppen: Record<Rating, StandEintrag<K>[]> = { gewusst: [], unsicher: [], nicht: [] };
   let neu = 0;
   for (const card of pool) {
     const state = progress.cards[card.id];

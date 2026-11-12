@@ -11,7 +11,8 @@ import { aktivesUnterziel, bereich } from '../src/lib/navigation';
 const content = loadContent(CONTENT_DIR);
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
 }));
 
 const { SqlBelegsatz } = await import('../src/pages/SqlBelegsatz');

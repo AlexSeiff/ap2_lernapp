@@ -12,7 +12,8 @@ const { content, seiten } = ladeInhalt(CONTENT_DIR);
 const progress = emptyProgress();
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '' }),
+  useStore: () => ({ content, progress, update: () => {} }),
+  useStartStore: () => ({ content, progress, update: () => {} }),
 }));
 
 const { begriffsWoerter, seitenFinder, uebungenZuBegriff, verweisAufloeser } = await import('../src/lib/begriffe');

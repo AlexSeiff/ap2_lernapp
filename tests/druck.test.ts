@@ -12,7 +12,8 @@ import type { MarkdownProps } from '../src/components/markdownComponents';
 const content = loadContent(CONTENT_DIR);
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '' }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {} }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {} }),
 }));
 vi.mock('../src/components/Markdown', async () => {
   const { default: MathMarkdown } = await import('../src/components/MathMarkdown');

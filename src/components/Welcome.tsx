@@ -2,12 +2,12 @@ import { useRef, useState } from 'react';
 import { isIsoDate } from '../../shared/progress';
 import { parseBackup } from '../lib/backup';
 import { withSettings } from '../lib/settings';
-import { useStore } from '../lib/store';
+import { useStartStore } from '../lib/store';
 import { Icon } from './Icon';
 
 /** Willkommensseite beim ersten Besuch (noch kein gespeicherter Fortschritt). Verschwindet mit der ersten Änderung. */
 export function Welcome() {
-  const { update, replaceProgress } = useStore();
+  const { update, replaceProgress } = useStartStore();
   const [examDate, setExamDate] = useState('');
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);

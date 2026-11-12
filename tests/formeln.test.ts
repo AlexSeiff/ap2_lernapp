@@ -13,7 +13,8 @@ import { VORLAGEN } from '../src/rechnen/vorlagen/index';
 const content = loadContent(CONTENT_DIR);
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '' }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {} }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {} }),
 }));
 
 const { Formelsammlung } = await import('../src/pages/Formelsammlung');

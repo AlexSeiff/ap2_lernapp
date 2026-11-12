@@ -8,6 +8,7 @@ import { emptyProgress } from '../shared/progress';
 
 vi.mock('../src/lib/store', () => ({
   useStore: () => ({ progress: emptyProgress(), update: () => {} }),
+  useStartStore: () => ({ progress: emptyProgress(), update: () => {} }),
 }));
 
 const { Einstellungen } = await import('../src/pages/Einstellungen');

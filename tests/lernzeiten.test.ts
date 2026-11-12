@@ -23,7 +23,8 @@ import {
 const content = loadContent(CONTENT_DIR);
 let progress: Progress = emptyProgress();
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 const { Einstellungen } = await import('../src/pages/Einstellungen');
 const { Heute } = await import('../src/pages/Heute');

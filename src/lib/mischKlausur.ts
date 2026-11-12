@@ -16,7 +16,7 @@
 
 import type { Exam, ExamBlock, MaterialDoc, Section, Task, Topic } from '../../shared/types';
 import { erzeugeZufall } from '../rechnen/zufall';
-import type { KernInhalt, KernTopic } from '../../shared/texte';
+import type { KernInhalt, KernTopic, StartInhalt } from '../../shared/texte';
 
 export type MischBereich = 'prozess' | 'qualitaet' | 'gemischt';
 
@@ -417,7 +417,7 @@ export function klausurFuer(content: KernInhalt, id: string | undefined): Klausu
 }
 
 /** Anzeigename einer Klausur aus der Historie (ExamRun.topicId) – ohne die gemischte Klausur aufzubauen. */
-export function klausurName(content: KernInhalt, id: string): string {
+export function klausurName(content: StartInhalt, id: string): string {
   const m = parseMischId(id);
   if (m) return `Gemischt (${MISCH_BEREICHE.find((b) => b.id === m.bereich)!.kurz})`;
   return content.topics.find((t) => t.id === id)?.title ?? id;

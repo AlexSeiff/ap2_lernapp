@@ -18,9 +18,11 @@ export interface InhaltDateien {
 export function inhaltDateien(dir = CONTENT_DIR): InhaltDateien {
   const { content, seiten } = ladeInhalt(dir);
   const dateien = new Map<string, string>();
-  // Kern ohne Abschnittstexte: Die App startet, sobald er da ist; die Texte je Thema lädt sie nach.
-  const { kern, texte } = teileInhalt(content);
+  // Start ohne Texte: Die App zeigt die Übersicht, sobald er da ist. Karten- und Aufgabentexte (details.json) und die
+  // Abschnittstexte je Thema lädt sie nach.
+  const { kern, details, texte } = teileInhalt(content);
   dateien.set('content.json', JSON.stringify(kern));
+  dateien.set('details.json', JSON.stringify(details));
   for (const [id, t] of Object.entries(texte)) dateien.set(`texte/${id}.json`, JSON.stringify(t));
   // Begriffsseiten getrennt (etwa 1,6 MB): Die App lädt sie erst, wenn eine Begriffsseite oder die Suche sie braucht.
   dateien.set('begriffe.json', JSON.stringify(seiten));

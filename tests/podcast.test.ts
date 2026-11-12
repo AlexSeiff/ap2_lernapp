@@ -24,7 +24,8 @@ const { content, seiten } = ladeInhalt(CONTENT_DIR);
 const topic = (id: string) => content.topics.find((t) => t.id === id)!;
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress: emptyProgress(), update: () => {}, firstVisit: false }),
 }));
 
 describe('Text zum Vorlesen', () => {

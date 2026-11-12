@@ -13,7 +13,8 @@ const content = loadContent(CONTENT_DIR);
 const progress: Progress = { ...emptyProgress(), attempts: [{ taskId: '03-B1', date: '2026-09-20', points: 2, max: 10, mode: 'einzel' }] };
 
 vi.mock('../src/lib/store', () => ({
-  useStore: () => ({ content, progress, update: () => {}, aiEnabled: false, aiModel: '', firstVisit: false }),
+  useStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
+  useStartStore: () => ({ content, progress, update: () => {}, firstVisit: false }),
 }));
 
 const { Heute } = await import('../src/pages/Heute');

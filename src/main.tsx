@@ -4,6 +4,7 @@ import { App } from './App';
 import { ConfirmProvider } from './components/ConfirmDialog';
 import { registriereServiceWorker } from './lib/pwa';
 import { StoreProvider } from './lib/store';
+import { ladeDetailsFuerAdresse } from './lib/details';
 import { ladeTexteFuerAdresse } from './lib/texte';
 import { leseTheme, wendeThemeAn } from './lib/theme';
 import './styles.css';
@@ -14,6 +15,7 @@ import './paper.css';
 wendeThemeAn(leseTheme());
 // Direkt geöffnetes Lernblatt: seinen Text gleich mit dem Inhalt laden (lib/texte.ts).
 ladeTexteFuerAdresse(window.location.hash);
+ladeDetailsFuerAdresse(window.location.hash);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

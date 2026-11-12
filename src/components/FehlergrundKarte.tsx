@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { FEHLERGRUND_INFO, fehlerStatistik } from '../lib/fehlergruende';
-import { useStore } from '../lib/store';
+import { useStartStore } from '../lib/store';
 import { Icon } from './Icon';
 
 /** Häufigste Fehlergründe (ROADMAP 8.7) mit Tipp – auch auf der Übersicht. */
 export function FehlergrundKarte() {
-  const { progress } = useStore();
+  const { progress } = useStartStore();
   const s = fehlerStatistik(progress.attempts);
   if (!s.anzahl) return null;
   const top = s.haeufigster ? FEHLERGRUND_INFO[s.haeufigster] : undefined;

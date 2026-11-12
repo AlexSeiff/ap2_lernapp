@@ -1,12 +1,15 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import type { KernInhalt } from '../../shared/texte';
+import { hatDetails, type KernInhalt, type StartInhalt } from '../../shared/texte';
 import { api } from './api';
 import { createProgressSaver, type SaveState } from './progressSaver';
 import { emptyProgress, migrateProgress, type Progress } from '../../shared/progress';
 
-interface Store {
-  /** Ohne Abschnittstexte – die brauchen nur wenige Seiten, sie holen sie mit useThemaTexte/useVollerInhalt (lib/texte.ts). */
-  content: KernInhalt;
+export interface Store<C extends StartInhalt = KernInhalt> {
+  /**
+   * Ohne Abschnittstexte – die brauchen nur wenige Seiten, sie holen sie mit useThemaTexte/useVollerInhalt (lib/texte.ts).
+   * Mit C = StartInhalt fehlen auch die Texte der Karten und Aufgaben (Übersicht und App-Rahmen, siehe useStartStore).
+   */
+  content: C;
   progress: Progress;
   update: (fn: (p: Progress) => Progress) => void;
   replaceProgress: (p: Progress) => void;
@@ -20,22 +23,37 @@ interface SpeicherStand {
   saveError: string | null;
 }
 
-const StoreContext = createContext<Store | null>(null);
+export const StoreContext = createContext<Store<StartInhalt> | null>(null);
 // Eigener Kontext (Umsetzungsplan Phase 10): Jedes Speichern wechselt den Stand zweimal (speichert → gespeichert). Steckte er im
 // Store, würde dabei jedes Mal die ganze Seite neu rendern – so nur die Kopfleiste und der Fehlerhinweis.
 const SpeicherContext = createContext<SpeicherStand>({ saveState: 'gespeichert', saveError: null });
 
-export function useStore(): Store {
+/** Store für die Übersicht und den App-Rahmen: Karten und Aufgaben nur mit Kopfdaten, dafür sofort nach dem Start da. */
+export function useStartStore(): Store<StartInhalt> {
   const s = useContext(StoreContext);
-  if (!s) throw new Error('useStore außerhalb des StoreProvider');
+  if (!s) throw new Error('useStartStore außerhalb des StoreProvider');
   return s;
+}
+
+const mitDetails = new WeakMap<StartInhalt, boolean>();
+
+/**
+ * Store mit den Texten der Karten und Aufgaben – für alles unterhalb von <MitDetails> (lib/details.tsx), also jede Seite außer der
+ * Übersicht. Außerhalb davon gibt es einen Fehler statt Karten ohne Frage.
+ */
+export function useStore(): Store {
+  const s = useStartStore();
+  let ok = mitDetails.get(s.content);
+  if (ok === undefined) mitDetails.set(s.content, (ok = hatDetails(s.content)));
+  if (!ok) throw new Error('useStore ohne geladene Details – die Seite muss unterhalb von <MitDetails> stehen.');
+  return s as Store;
 }
 
 /** Speicherstand für Kopfleiste und Fehlerhinweis. */
 export const useSpeicherStand = () => useContext(SpeicherContext);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
-  const [content, setContent] = useState<KernInhalt | null>(null);
+  const [content, setContent] = useState<StartInhalt | null>(null);
   const [progress, setProgress] = useState<Progress | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [saveState, setSaveState] = useState<SaveState>('gespeichert');
