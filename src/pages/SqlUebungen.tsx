@@ -2,7 +2,6 @@
 
 import { Link, useSearchParams } from 'react-router-dom';
 import type { SqlExercise } from '../../shared/types';
-import { SqlTabs } from '../components/SqlTabs';
 import { sqlStatus, sqlSummary } from '../lib/sql';
 import { useStore } from '../lib/store';
 import { LEVEL_LABELS, stars, STATUS_CLASS, STATUS_LABELS } from '../lib/uebungLabels';
@@ -52,7 +51,6 @@ export function SqlUebungen() {
 
   return (
     <div className="page">
-      <SqlTabs />
       <h1>
         <Icon name="target" /> SQL-Übungen
       </h1>

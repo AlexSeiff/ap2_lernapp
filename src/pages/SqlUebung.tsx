@@ -9,7 +9,6 @@ import { DiffTable, ExecOutput, LintWarnings, ResultTable, SqlError, withCode } 
 import { BelegsatzPanel } from '../components/Belegsatz';
 import { SchemaBrowser } from '../components/SchemaBrowser';
 import { SqlEditor, type SqlEditorHandle } from '../components/SqlEditor';
-import { SqlTabs } from '../components/SqlTabs';
 import { useConfirm } from '../hooks/useConfirm';
 import { useSqlSession } from '../hooks/useSqlSession';
 import { meldeFertig } from '../lib/heuteSitzung';
@@ -78,7 +77,6 @@ function SqlUebungView({ id }: { id: string }) {
   if (!ex || !ds) {
     return (
       <div className="page">
-        <SqlTabs />
         <h1>Übung nicht gefunden</h1>
         <p>
           <Link to="/sql/uebungen">← Zur Übungsliste</Link>
@@ -207,7 +205,6 @@ function SqlUebungView({ id }: { id: string }) {
 
   return (
     <div className="page sql-page paper-sheet">
-      <SqlTabs />
       <p className="crumbs">
         <Link to="/sql/uebungen">Übungen</Link> / {ex.thema}
       </p>

@@ -91,7 +91,7 @@ lern-app/
 │  ├─ hooks/            useExamRun, useCardSession (+ useCardFilters), useSqlSession, useRechenUebung, useConfirm, useBackupDownload,
 │  │                    useHeute (running „Heute lernen“ session)
 │  ├─ components/       AnswerInput, Markdown (+ MathMarkdown, markdownComponents), TheoryMarkdown, Rechenweg, TaskParts, ErrorBoundary,
-│  │                    ConfirmDialog, SqlEditor, ResultTable, SchemaBrowser, SqlTabs, Kopfleiste (header + Unterleiste), MobileNav (tab bar < 600 px), UpdateHinweis (PWA toast),
+│  │                    ConfirmDialog, SqlEditor, ResultTable, SchemaBrowser, Kopfleiste (header + Unterleiste), MobileNav (tab bar < 600 px), UpdateHinweis (PWA toast),
 │  │                    HeuteLeiste, EigeneAntwort, SicherheitWahl, OperatorTipp, FehlergrundWahl + FehlergrundKarte (8.7),
 │  │                    SucheDialog (8.8, lazy) (phase 8)
 │  ├─ lib/              pure logic (progress, grading, stats, cards, leicht + leichtRechnen (Leicht-Modus), shuffle, examTimer, sheets, sql, sqlLinks, loesungStil, mathDollar,

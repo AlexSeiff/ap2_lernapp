@@ -557,10 +557,6 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 .badge.typ-begriff { background: var(--c-indigo-soft); color: var(--c-indigo); }
 
 /* SQL-Editor */
-.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
-.tabs a { padding: 6px 14px; border-radius: 8px 8px 0 0; color: var(--muted); border: 1px solid transparent; border-bottom: none; margin-bottom: -1px; }
-.tabs a:hover { color: var(--accent); text-decoration: none; }
-.tabs a.active { color: var(--accent); font-weight: 600; background: var(--surface); border-color: var(--border); }
 .sql-toolbar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; margin: 10px 0; }
 .sql-toolbar label { display: flex; flex-direction: column; font-size: 0.82rem; color: var(--muted); gap: 3px; }
 .sql-toolbar select { max-width: 100%; }
@@ -773,7 +769,6 @@ tr.diff-extra .diff-mark, .diff-key.extra { color: var(--low); }
   .choice { padding: 9px 0; }
   .filters label.check { min-height: 44px; padding-bottom: 0; }
   summary { padding: 8px 0; }
-  .tabs a { padding: 11px 14px; }
 }
 
 /* Formelsammlung (/material/formeln) */

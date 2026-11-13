@@ -7,7 +7,6 @@ import { ExecOutput, LintWarnings } from '../components/ResultTable';
 import { BelegsatzPanel } from '../components/Belegsatz';
 import { SchemaBrowser } from '../components/SchemaBrowser';
 import { SqlEditor, type SqlEditorHandle } from '../components/SqlEditor';
-import { SqlTabs } from '../components/SqlTabs';
 import { useConfirm } from '../hooks/useConfirm';
 import { useSqlSession } from '../hooks/useSqlSession';
 import { decodeQuery } from '../lib/sqlLinks';
@@ -187,7 +186,6 @@ export function SqlFrei() {
   if (!dataset) {
     return (
       <div className="page">
-        <SqlTabs />
         <h1>
           <Icon name="database" /> SQL-Editor
         </h1>
@@ -198,7 +196,6 @@ export function SqlFrei() {
 
   return (
     <div className="page sql-page">
-      <SqlTabs />
       <h1>
         <Icon name="database" /> SQL-Editor
       </h1>
