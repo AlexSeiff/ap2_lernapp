@@ -495,11 +495,33 @@ button.seitenleiste-schalter.bereich-aktiv { color: var(--notebook-blue); }
   .kopf-bereiche .kopf-label { position: static; width: auto; height: auto; padding: 0; margin: 0; overflow: visible; clip: auto; white-space: nowrap; }
   .kopf-rechts { margin-left: auto; }
   .unterleiste { display: block; background: var(--surface); border-bottom: 1px solid var(--border); }
-  .unterleiste-innen { flex-wrap: nowrap; overflow-x: auto; gap: 5px; padding: 11px 28px 0; scrollbar-width: thin; }
+  .unterleiste-innen { --roll-einzug: 28px; flex-wrap: nowrap; overflow-x: auto; gap: 5px; padding: 11px var(--roll-einzug) 0; scrollbar-width: thin; }
   .unterleiste a { min-height: 40px; padding: 9px 13px; background: var(--surface-2); }
   .unterleiste a.active { background: var(--surface); }
   main { padding-bottom: 0; }
+
+  /* Rollpfeile an den Rändern der Registerleisten (Kopfleiste.tsx): Passen nicht alle Reiter in die Breite, zeigt ein Pfeil mit
+     Verlauf, dass dort noch welche liegen, und rollt sie auf Klick herein. Der Rand klebt mit Breite 0 an der Kante der Leiste,
+     damit sich beim Ein- und Ausblenden nichts verschiebt; `order` statt DOM-Reihenfolge, damit die Lesezeichenfarben
+     (nth-child) der Reiter gleich bleiben. `position: sticky` misst ab dem Innenabstand der Leiste – `--roll-einzug` gleicht
+     ihn aus, damit der Pfeil bündig an der Kante sitzt. */
+  .kopf-bereiche { --roll-grund: var(--surface-2); }
+  .unterleiste-innen { --roll-grund: var(--surface); }
+  .roll-rand { position: sticky; z-index: 2; flex: none; align-self: stretch; width: 0; }
+  .roll-rand.links { left: calc(-1 * var(--roll-einzug, 0px)); order: -1; margin-right: -5px; }
+  .roll-rand.rechts { right: calc(-1 * var(--roll-einzug, 0px)); margin-left: -5px; }
+  [data-mehr-links] > .roll-rand.links, [data-mehr-rechts] > .roll-rand.rechts { display: block; }
+  .roll-rand > .roll-pfeil {
+    position: absolute; top: 0; bottom: 0; display: flex; align-items: center; width: 46px; min-height: 0; padding: 0 2px; margin: 0;
+    border: 0; border-radius: 0; box-shadow: none; color: var(--muted); cursor: pointer;
+  }
+  .roll-rand.links > .roll-pfeil { left: 0; justify-content: flex-start; background: linear-gradient(to right, var(--roll-grund) 55%, transparent); }
+  .roll-rand.rechts > .roll-pfeil { right: 0; justify-content: flex-end; background: linear-gradient(to left, var(--roll-grund) 55%, transparent); }
+  .roll-rand.links > .roll-pfeil .icon { transform: rotate(180deg); }
+  .roll-rand > .roll-pfeil:hover:not(:disabled) { filter: none; color: var(--text); }
+  .roll-rand > .roll-pfeil:active:not(:disabled) { transform: none; }
 }
+.roll-rand { display: none; }
 @media screen and (max-width: 900px) {
   .kopf-innen { gap: 12px; padding-inline: 16px; }
   .kopf-bereiche a { padding-inline: 10px; }
@@ -515,7 +537,7 @@ button.seitenleiste-schalter.bereich-aktiv { color: var(--notebook-blue); }
   .kopf-bereiche a { min-height: 44px; padding: 10px 11px; }
   .kopf-bereiche a.active { min-height: 49px; }
   .kopf-rechts .suche-knopf { border-radius: 4px; }
-  .unterleiste-innen { padding: 9px 12px 0; }
+  .unterleiste-innen { --roll-einzug: 12px; padding: 9px var(--roll-einzug) 0; }
   .unterleiste a { min-height: 42px; }
   .toast { bottom: max(12px, env(safe-area-inset-bottom, 0px)); }
 }
