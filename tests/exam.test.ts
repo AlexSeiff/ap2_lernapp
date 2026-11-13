@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { emptyProgress, type ExamRun, type Progress } from '../shared/progress';
 import type { Flashcard, Task } from '../shared/types';
-import { filterCards, readCardFilter, withCardFilter } from '../src/lib/cards';
+import { fallenKarten, filterCards, readCardFilter, withCardFilter } from '../src/lib/cards';
 import { finishExam, submitExam } from '../src/lib/progress';
 
 const NOW = '2026-09-22T10:00:00.000Z';
@@ -103,5 +103,15 @@ describe('Karteikarten-Filter', () => {
     expect(filterCards(cards, readCardFilter(new URLSearchParams('markiert=1'))).map((c) => c.id)).toEqual([]);
     expect(ids('markiert=ja')).toEqual(['a', 'b', 'c']);
     expect(withCardFilter(new URLSearchParams('markiert=1&typ=falle'), { markiert: 'alle' }).toString()).toBe('typ=falle');
+  });
+
+  it('„Fallen wiederholen“ folgt Thema und Deck, nicht den übrigen Filtern', () => {
+    const mitFallen = [...cards, card('d', { topicId: '02', typ: 'falle', deckId: 'd2' })];
+    const ids = (q: string) => fallenKarten(mitFallen, readCardFilter(new URLSearchParams(q))).map((c) => c.id);
+    expect(ids('')).toEqual(['a', 'd']);
+    expect(ids('thema=02')).toEqual(['d']);
+    expect(ids('deck=d1')).toEqual(['a']);
+    expect(ids('deck=d2&typ=wissen&stufe=3&markiert=1')).toEqual(['d']);
+    expect(ids('deck=gibt-es-nicht')).toEqual([]);
   });
 });

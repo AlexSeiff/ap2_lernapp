@@ -8,7 +8,7 @@ import { SqlUebungLinks } from '../components/SqlUebungLinks';
 import { KartenAntwort, KartenFrage } from '../components/KartenText';
 import { Markdown } from '../components/Markdown';
 import { useCardFilters, useCardSession } from '../hooks/useCardSession';
-import { rundenKarten } from '../lib/cards';
+import { fallenKarten, rundenKarten } from '../lib/cards';
 import { leichtZahlen } from '../lib/leicht';
 import { shuffle } from '../lib/shuffle';
 import { isDue, LEICHT_MAX_BOX } from '../lib/progress';
@@ -291,9 +291,7 @@ export function Karteikarten() {
     );
   }
 
-  const traps = pool.filter(
-    (c) => c.typ === 'falle' && (f.thema === 'alle' || c.topicId === f.thema) && (!leichtModus || leicht.has(c.id)),
-  );
+  const traps = fallenKarten(pool, f).filter((c) => !leichtModus || leicht.has(c.id));
   const lz = leichtZahlen(alle, leicht);
   const typLeicht = (typ: string) => pool.filter((c) => c.typ === typ && leicht.has(c.id)).length;
   const setMode = (an: boolean) => update((p) => withSettings(p, { leichtModus: an }));

@@ -41,6 +41,16 @@ export function filterCards(cards: Flashcard[], f: CardFilter, markiert: Readonl
   );
 }
 
+/**
+ * Die Fallen-Karten für „Fallen wiederholen“: die des gewählten Themas bzw. Decks. Die übrigen Filter (Art, Typ, Stufe,
+ * markiert) zählen hier bewusst nicht – der Knopf wiederholt alle typischen Prüfungsfehler des Bereichs.
+ */
+export function fallenKarten(cards: Flashcard[], f: Pick<CardFilter, 'thema' | 'deck'>): Flashcard[] {
+  return cards.filter(
+    (c) => c.typ === 'falle' && (f.thema === 'alle' || c.topicId === f.thema) && (f.deck === 'alle' || c.deckId === f.deck),
+  );
+}
+
 /** Welche Kartenarten die Einstellungen zulassen (Prüferfragen und Fachgespräch lassen sich ausschalten). */
 export type CardKindSettings = Pick<Settings, 'prueferfragen' | 'fachgespraech'>;
 
