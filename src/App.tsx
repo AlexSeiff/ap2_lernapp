@@ -3,7 +3,7 @@ import { HashRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-
 import { CONFLICT_MESSAGE } from '../shared/progress';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Icon } from './components/Icon';
-import { Inhaltsseite, Kopfzeile, Register } from './components/Buch';
+import { Inhaltsseite, Kopfzeile } from './components/Buch';
 import { HeuteLeiste } from './components/HeuteLeiste';
 import { UpdateHinweis } from './components/UpdateHinweis';
 import { useRaster } from './hooks/useRaster';
@@ -211,7 +211,7 @@ export function App() {
   );
 }
 
-/** Das Buch um alle Seiten außer der Druckansicht: Inhaltsseite, Ringe, Blatt und Haftstreifen (components/Buch.tsx). */
+/** Das Buch um alle Seiten außer der Druckansicht: Inhaltsseite, Ringe und Blatt (components/Buch.tsx). */
 function Buch({ children, onSuche }: { children: ReactNode; onSuche: () => void }) {
   const { pathname } = useLocation();
   const { saveState } = useSpeicherStand();
@@ -243,7 +243,6 @@ function Buch({ children, onSuche }: { children: ReactNode; onSuche: () => void 
             {children}
           </main>
         </div>
-        <Register badges={badges} />
       </InhaltSlotContext.Provider>
     </div>
   );

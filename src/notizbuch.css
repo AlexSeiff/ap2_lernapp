@@ -134,9 +134,11 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 #inhalt { min-width: 0; padding: 0; }
 
 @media screen and (min-width: 1100px) {
+  /* Platz für das seitliche Glossarregister; auch bei schmaleren Desktopfenstern mittig. */
+  :root { --buch-breite: min(1280px, calc(100vw - 96px)); }
   .buch {
-    display: grid; grid-template-columns: calc(10 * var(--k)) minmax(0, 1fr); max-width: calc(60 * var(--k));
-    margin: 14px calc(var(--streifen) + 14px) 14px 14px; padding: 8px; min-height: calc(100vh - 28px);
+    display: grid; grid-template-columns: calc(10 * var(--k)) minmax(0, 1fr); width: var(--buch-breite);
+    margin: 14px auto; padding: 8px; min-height: calc(100vh - 28px);
     background: var(--deckel); border-radius: 10px; box-shadow: 0 10px 30px -8px var(--schatten);
   }
   .inhaltsseite { border-radius: 4px 0 0 4px; box-shadow: inset -22px 0 24px -20px var(--schatten); }
@@ -148,10 +150,6 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='78' height='104'%3E%3Ccircle cx='13' cy='52' r='6.5' fill='%2310151d' fill-opacity='.62'/%3E%3Ccircle cx='65' cy='52' r='6.5' fill='%2310151d' fill-opacity='.62'/%3E%3Crect x='10' y='45.5' width='58' height='13' rx='6.5' fill='none' stroke='%23737d8a' stroke-width='4'/%3E%3Crect x='10' y='45.5' width='58' height='13' rx='6.5' fill='none' stroke='%23e6eaef' stroke-width='1.3'/%3E%3C/svg%3E") repeat-y 0 0 / 78px calc(4 * var(--k));
   }
 }
-@media screen and (min-width: 1900px) {
-  .buch { margin-inline: auto; }
-}
-
 /* ── Linke Seite: Etikett und Inhaltsverzeichnis ─────────────────────────── */
 .etikett {
   display: block; height: calc(4 * var(--k)); margin-bottom: var(--k); padding: 10px 12px; background: var(--surface); border-radius: 8px;
@@ -422,3 +420,30 @@ a.haft:hover { text-decoration: none; transform: rotate(-0.6deg); }
 .karten-start { border-radius: 3px; }
 /* Zettel haben überall dieselbe knappe Rundung – die älteren Ebenen runden je nach Seite unterschiedlich stark. */
 #inhalt :is(.card, .widget, .tile, .kpi, .filter-box, .karten-start) { border-radius: 3px; }
+
+/* Bereichsnavigation als Inhaltsverzeichnis auf der linken Buchseite. */
+.inhalt-ueberschrift { margin: 0 0 10px; padding-bottom: 9px; border-bottom: 1px solid var(--border); color: var(--blau); font: 700 19px / var(--k) var(--hand); }
+.inhalt-gruppe { margin: 0; }
+.bereichs-link { display: flex; align-items: center; gap: 9px; min-height: 42px; border-bottom: 1px dotted var(--border); color: var(--text); font-size: 15px; font-weight: 700; line-height: 1.3; text-decoration: none; }
+.bereichs-link:hover, .bereichs-link:focus-visible { color: var(--blau); text-decoration: underline; }
+.bereichs-link.aktiv { color: var(--paper-good); }
+.bereichs-link .icon { flex: none; width: 16px; height: 16px; color: var(--blau); }
+.bereichs-link.aktiv .icon { color: inherit; }
+.bereichs-badge { margin-left: auto; color: var(--rot); font-size: 12px; white-space: nowrap; }
+.bereichs-pfeil { margin-left: auto; color: var(--muted); }
+.bereichs-badge + .bereichs-pfeil { margin-left: 0; }
+.bereichs-inhalt .inhalt { padding: 7px 0 8px 13px; border-bottom: 1px dotted var(--border); }
+.bereichs-inhalt .inhalt > li { min-height: 29px; align-items: center; font-size: 14px; line-height: 1.35; }
+.bereichs-inhalt .inhalt > li::after { content: none; }
+.bereichs-inhalt .inhalt > li > a { flex: 1; padding-left: 12px; white-space: normal; overflow: visible; }
+.bereichs-inhalt .inhalt > li.hier > a { position: relative; margin: 0; background: none; color: var(--paper-good); }
+.bereichs-inhalt .inhalt > li.hier > a::before { content: '›'; position: absolute; left: 0; }
+.bereichs-inhalt .inhalt > li.inhalt-abschnitte { padding-left: 12px; }
+@media screen and (max-width: 1099.98px) {
+  .bereichs-link { min-height: 44px; }
+  .bereichs-inhalt .inhalt > li { min-height: 40px; font-size: 16px; }
+  .blatt { padding-bottom: calc(2 * var(--k)); }
+}
+
+/* Leerer Abschnitts-Slot darf keinen Platz zwischen den Navigationspunkten belegen. */
+.bereichs-inhalt .inhalt > li.inhalt-abschnitte:empty { display: none; }

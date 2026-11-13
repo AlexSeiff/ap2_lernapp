@@ -12,6 +12,7 @@ import { useVollerInhalt } from '../lib/texte';
 import type { Content } from '../../shared/types';
 import { KartenWechsel } from '../components/KartenWechsel';
 import { Icon } from '../components/Icon';
+import './glossar-register.css';
 
 export function Glossar() {
   const [params] = useSearchParams();

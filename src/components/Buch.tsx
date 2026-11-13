@@ -4,7 +4,7 @@ import { aktiverBereich, aktivesUnterziel, badgeSumme, bereich, BEREICHE, type N
 import { Icon } from './Icon';
 
 // Rahmen des Notizbuchs (notizbuch.css): links die Inhaltsseite, in der Mitte die Ringe, rechts das Blatt mit Kopfzeile und Seite,
-// am Buchrand die Haftstreifen der Bereiche. Auf dem Handy: ein Spiralblock, die Haftstreifen unten, die Inhaltsseite als Einschub.
+// die Bereichsnavigation auf der Inhaltsseite. Auf dem Handy: ein Spiralblock mit Inhaltsseite als Einschub.
 
 type Badges = Record<NavBadge, number>;
 
@@ -18,8 +18,8 @@ function suchKuerzel(): string {
 const datumHeute = () => new Date().toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' });
 
 /**
- * Linke Buchseite: Etikett und Inhaltsverzeichnis. Auf der Übersicht stehen alle Bereiche, sonst nur der aktive – unter seinem
- * aktiven Ziel ist Platz für die Abschnitte der offenen Seite (lib/inhaltSlot.ts). Auf dem Handy ein Einschub von links.
+ * Linke Buchseite: Alle Bereiche stehen im Inhaltsverzeichnis; der aktive zeigt seine Unterziele. Unter dem aktiven Ziel
+ * ist Platz für die Abschnitte der offenen Seite (lib/inhaltSlot.ts). Auf dem Handy ein Einschub von links.
  */
 export function Inhaltsseite({
   badges,
@@ -35,7 +35,6 @@ export function Inhaltsseite({
   const { pathname } = useLocation();
   const aktiv = aktiverBereich(pathname);
   const ziel = aktiv ? aktivesUnterziel(pathname, bereich(aktiv)) : undefined;
-  const gruppen = aktiv ? [bereich(aktiv)] : BEREICHE;
   useEffect(() => {
     if (!offen) return;
     const onKey = (e: KeyboardEvent) => {
@@ -51,72 +50,60 @@ export function Inhaltsseite({
           <button type="button" className="inhalt-zu" onClick={onSchliessen}>
             <Icon name="x" /> Schließen
           </button>
-          <Link to="/" className="etikett" aria-current={pathname === '/' ? 'page' : undefined}>
+          <Link to="/" className="etikett" onClick={onSchliessen}>
             <b>AP2 Lern-App</b>
             <span>Abschlussprüfung Teil 2</span>
             <span>Daten- und Prozessanalyse</span>
           </Link>
-          {gruppen.map((b) => (
-            <nav key={b.id} className="inhalt-gruppe" aria-label={b.label}>
-              <p className="inhalt-titel">{b.label}</p>
-              <ul className="inhalt">
-                {b.unter.map((z) => {
-                  const n = z.badge ? badges[z.badge] : 0;
-                  const hier = z === ziel;
-                  return [
-                    <li key={z.to} className={hier ? 'hier' : undefined}>
-                      <Link to={z.to} aria-current={hier ? 'page' : undefined}>
-                        {z.label}
-                      </Link>
-                      {n > 0 && <small className="faellig">{n} fällig</small>}
-                    </li>,
-                    hier && <li key="abschnitte" className="inhalt-abschnitte" ref={slotRef} />,
-                  ];
-                })}
-              </ul>
-            </nav>
-          ))}
+          <nav className="bereichs-inhalt" aria-label="Bereiche und Inhaltsverzeichnis">
+            <p className="inhalt-ueberschrift">Inhalt</p>
+            <Link
+              to="/"
+              className={`bereichs-link${pathname === '/' ? ' aktiv' : ''}`}
+              onClick={onSchliessen}
+              aria-current={pathname === '/' ? 'page' : undefined}
+            >
+              <Icon name="house" /> <span>Übersicht</span>
+            </Link>
+            {BEREICHE.map((b) => {
+              const istAktiv = aktiv === b.id;
+              const n = badgeSumme(b.unter, badges);
+              return (
+                <div key={b.id} className="inhalt-gruppe">
+                  <Link to={b.to} className={`bereichs-link${istAktiv ? ' aktiv' : ''}`} onClick={onSchliessen}>
+                    <Icon name={b.icon} /> <span>{b.label}</span>
+                    {n > 0 && <small className="bereichs-badge">{n} fällig</small>}
+                    {b.unter.length > 0 && (
+                      <span className="bereichs-pfeil" aria-hidden="true">
+                        {istAktiv ? '⌄' : '›'}
+                      </span>
+                    )}
+                  </Link>
+                  {istAktiv && (
+                    <ul className="inhalt">
+                      {b.unter.map((z) => {
+                        const anzahl = z.badge ? badges[z.badge] : 0;
+                        const hier = z === ziel;
+                        return [
+                          <li key={z.to} className={hier ? 'hier' : undefined}>
+                            <Link to={z.to} onClick={onSchliessen} aria-current={hier ? 'page' : undefined}>
+                              {z.label}
+                            </Link>
+                            {anzahl > 0 && <small className="faellig">{anzahl} fällig</small>}
+                          </li>,
+                          hier && <li key="abschnitte" className="inhalt-abschnitte" ref={slotRef} />,
+                        ];
+                      })}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
         </div>
       </aside>
       {offen && <div className="inhalt-schleier" onClick={onSchliessen} aria-hidden="true" />}
     </>
-  );
-}
-
-/** Haftstreifen am Buchrand (auf dem Handy unten): Übersicht und die vier Bereiche, mit der Zahl der fälligen Wiederholungen. */
-export function Register({ badges }: { badges: Badges }) {
-  const { pathname } = useLocation();
-  const aktiv = aktiverBereich(pathname);
-  const start = pathname === '/';
-  return (
-    <nav className="register" aria-label="Bereiche">
-      <Link to="/" className={`streifen s-uebersicht${start ? ' active' : ''}`} aria-current={start ? 'page' : undefined}>
-        <Icon name="house" />
-        <span className="streifen-name">Übersicht</span>
-      </Link>
-      {BEREICHE.map((b) => {
-        const n = badgeSumme(b.unter, badges);
-        return (
-          <Link
-            key={b.id}
-            to={b.to}
-            className={`streifen s-${b.id}${aktiv === b.id ? ' active' : ''}`}
-            aria-current={aktiv === b.id ? 'page' : undefined}
-          >
-            <Icon name={b.icon} />
-            <span className="streifen-name">{b.label}</span>
-            {n > 0 && (
-              <>
-                <span className="streifen-zahl" aria-hidden="true">
-                  {n}
-                </span>
-                <span className="sr-only">, {n} fällig</span>
-              </>
-            )}
-          </Link>
-        );
-      })}
-    </nav>
   );
 }
 

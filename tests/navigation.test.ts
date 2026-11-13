@@ -2,11 +2,10 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { Inhaltsseite, Kopfzeile, Register } from '../src/components/Buch';
+import { Inhaltsseite, Kopfzeile } from '../src/components/Buch';
 import { aktiverBereich, aktivesUnterziel, badgeSumme, bereich, BEREICHE, GLOSSAR_PFAD, passtZuZiel } from '../src/lib/navigation';
 
-// Navigation: vier Bereiche mit Unterzielen. Im Notizbuch stehen sie als Haftstreifen am Buchrand (Handy: unten), die Unterziele im
-// Inhaltsverzeichnis auf der linken Seite (components/Buch.tsx).
+// Navigation: vier Bereiche mit Unterzielen auf der linken Inhaltsseite (components/Buch.tsx).
 
 const ohneTrenner = (html: string) => html.replace(/<!-- -->/g, '');
 
@@ -86,39 +85,28 @@ describe('Komponenten', () => {
   const render = (pfad: string, kind: ReturnType<typeof createElement>) =>
     ohneTrenner(renderToString(createElement(MemoryRouter, { initialEntries: [pfad] }, kind)));
 
-  it('Haftstreifen: Übersicht und vier Bereiche, aktiver Streifen mit aria-current, Zahl der fälligen Wiederholungen', () => {
-    const html = render('/sql/uebungen', createElement(Register, { badges }));
-    for (const l of ['Übersicht', 'Lernen', 'Glossar', 'SQL-Editor', 'Einstellungen'])
-      expect(html).toContain(`<span class="streifen-name">${l}</span>`);
-    expect(html.match(/aria-current="page"/g)).toHaveLength(1);
-    expect(html).toMatch(
-      /class="streifen s-sql active" aria-current="page" href="\/sql".*?<span class="streifen-zahl" aria-hidden="true">2<\/span>/,
-    );
-    expect(html).toContain(', 1 fällig');
-    expect(html).not.toMatch(/class="streifen s-glossar[^>]*>.*?streifen-zahl.*?s-sql/);
-  });
-
-  it('Inhaltsseite im Bereich: nur dessen Ziele, das aktive hervorgehoben, darunter Platz für die Abschnitte der Seite', () => {
+  it('Inhaltsseite zeigt alle Bereiche und die Unterziele des aktiven Bereichs', () => {
     const html = render('/karteikarten', createElement(Inhaltsseite, { badges, offen: false, onSchliessen: () => {}, slotRef: () => {} }));
     expect(html).toContain('AP2 Lern-App');
-    expect(html).toContain('<nav class="inhalt-gruppe" aria-label="Lernen">');
-    expect(html).not.toContain('aria-label="Glossar"');
+    for (const l of ['Übersicht', 'Lernen', 'Glossar', 'SQL-Editor', 'Einstellungen']) expect(html).toContain(`>${l}</span>`);
+    expect(html).toMatch(/class="bereichs-link aktiv" href="\/lernen"/);
     expect(html).toMatch(
       /<li class="hier"><a aria-current="page" href="\/karteikarten"[^>]*>Karteikarten<\/a><\/li><li class="inhalt-abschnitte"><\/li>/,
     );
     expect(html).toContain('Fehlerjournal</a><small class="faellig">1 fällig</small>');
+    expect(html).not.toContain('Begriffe A–Z');
     expect(html.match(/aria-current="page"/g)).toHaveLength(1);
     expect(html).not.toContain('inhalt-schleier');
   });
 
-  it('Inhaltsseite auf der Übersicht: alle Bereiche, kein Platz für Abschnitte; geöffnet mit Schleier zum Schließen', () => {
+  it('Inhaltsseite auf der Übersicht: alle Bereiche, keine Unterziele; geöffnet mit Schleier zum Schließen', () => {
     const html = render('/', createElement(Inhaltsseite, { badges, offen: true, onSchliessen: () => {}, slotRef: () => {} }));
-    for (const l of ['Lernen', 'Glossar', 'SQL-Editor', 'Einstellungen'])
-      expect(html).toContain(`<nav class="inhalt-gruppe" aria-label="${l}">`);
+    for (const l of ['Übersicht', 'Lernen', 'Glossar', 'SQL-Editor', 'Einstellungen']) expect(html).toContain(`>${l}</span>`);
     expect(html).not.toContain('inhalt-abschnitte');
+    expect(html).not.toContain('Begriffe A–Z');
     expect(html).toContain('class="inhaltsseite seite offen"');
     expect(html).toContain('inhalt-schleier');
-    expect(html).toMatch(/class="etikett" aria-current="page" href="\/"/);
+    expect(html).toMatch(/class="bereichs-link aktiv" aria-current="page" href="\/"/);
   });
 
   it('Kopfzeile: Pfad, Suche, Speicherstand und der Knopf zur Inhaltsseite', () => {
