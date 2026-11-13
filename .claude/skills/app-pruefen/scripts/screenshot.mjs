@@ -16,7 +16,8 @@
 // --klick     = erst als CSS-Selektor versucht, sonst das erste sichtbare Bedienelement, dessen Text den Wert enthält
 // --taste     = " ", Enter, Escape, ArrowLeft, ArrowRight, Tab, 1–9 oder ein einzelnes Zeichen
 // --js        = Ausdruck im Seitenkontext; das Ergebnis wird ausgegeben (z. B. document.title)
-// Ausgabe: Pfade der Bilder, Ergebnisse von --js und alle Konsolenfehler/Ausnahmen der Seite (Exit-Code 1 bei Ausnahmen).
+// Ausgabe: Pfade der Bilder, Ergebnisse von --js und alle Konsolenfehler/Ausnahmen der Seite (Exit-Code 1 bei Ausnahmen der Seite,
+// 2 wenn das Skript selbst scheitert, z. B. weil es nichts zum Klicken findet).
 
 import { spawn } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -202,10 +203,18 @@ async function main() {
   );
   const fehler = [];
   let ausnahme = false;
+  let cdp = null;
+  // Auch wenn eine Aktion scheitert (z. B. nichts zum Klicken gefunden), soll die Liste der Seitenfehler erscheinen.
+  const berichte = () => {
+    if (fehler.length) {
+      console.log(`\nKonsole/Fehler der Seite (${fehler.length}):`);
+      for (const f of fehler) console.log(`  ${f}`);
+    } else console.log('Keine Konsolenfehler.');
+  };
   try {
     const port = await warteAufPort(profil);
     const ziel = await (await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: 'PUT' })).json();
-    const cdp = await Cdp.verbinde(ziel.webSocketDebuggerUrl);
+    cdp = await Cdp.verbinde(ziel.webSocketDebuggerUrl);
     cdp.hoerer.push((m) => {
       if (m.method === 'Runtime.exceptionThrown') {
         ausnahme = true;
@@ -266,8 +275,13 @@ async function main() {
         console.log(`bild: ${datei}`);
       }
     }
-    cdp.ws.close();
+  } catch (e) {
+    berichte();
+    throw e;
   } finally {
+    // Im finally statt am Ende des try: Bleibt die Verbindung nach einem Fehler offen, hält sie Node am Leben – das Skript
+    // meldete dann den Fehler, beendete sich aber nie.
+    cdp?.ws.close();
     browser.kill();
     await schlafe(300);
     try {
@@ -276,14 +290,17 @@ async function main() {
       /* Edge hält das Profil manchmal noch kurz fest */
     }
   }
-  if (fehler.length) {
-    console.log(`\nKonsole/Fehler der Seite (${fehler.length}):`);
-    for (const f of fehler) console.log(`  ${f}`);
-  } else console.log('Keine Konsolenfehler.');
+  berichte();
   process.exitCode = ausnahme ? 1 : 0;
 }
 
-main().catch((e) => {
-  console.error(`Fehler: ${e.message}`);
-  process.exitCode = 2;
-});
+main()
+  .catch((e) => {
+    console.error(`Fehler: ${e.message}`);
+    process.exitCode = 2;
+  })
+  .finally(() => {
+    // Sicherheitsnetz: Hält doch noch etwas den Prozess offen (Verbindung, Browserprozess), nach kurzer Frist hart beenden.
+    // unref(), damit die Frist selbst das normale Ende nicht verzögert.
+    setTimeout(() => process.exit(process.exitCode ?? 0), 3000).unref();
+  });

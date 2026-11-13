@@ -49,6 +49,7 @@ Options: `--handy` (390 × 844, touch), `--dunkel`, `--wenig-bewegung` (prefers-
 `--warten <ms>` after loading (default 800), `--danach <ms>` after every click/key (default 600; use 0 to catch frames of an animation). Actions: `--klick "<text or CSS>"` (exact button/link text first, then contains; a real mouse click, so it counts as a user gesture – needed for speech output, fullscreen, clipboard),
 `--taste " " | Enter | Escape | ArrowRight | 1…`, `--pause <ms>`, `--js "<expression>"` (prints the result), `--bild <file.png>`.
 The script prints page exceptions and console errors at the end and exits with 1 on an exception – treat that as a finding.
+If the script itself fails (e.g. nothing to click for `--klick`), it lists the visible buttons and exits with 2.
 
 Then **open every screenshot with Read** and look at it. Save them in the scratchpad, never in the repo.
 
