@@ -1,11 +1,13 @@
-import { lazy, type ReactNode, Suspense, useEffect, useState } from 'react';
+import { lazy, type ReactNode, Suspense, useCallback, useEffect, useState } from 'react';
 import { HashRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { CONFLICT_MESSAGE } from '../shared/progress';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Icon } from './components/Icon';
-import { Kopfleiste } from './components/Kopfleiste';
+import { Inhaltsseite, Kopfzeile, Register } from './components/Buch';
 import { HeuteLeiste } from './components/HeuteLeiste';
 import { UpdateHinweis } from './components/UpdateHinweis';
+import { useRaster } from './hooks/useRaster';
+import { InhaltSlotContext } from './lib/inhaltSlot';
 import { aktiverBereich, type NavBadge } from './lib/navigation';
 import { isDue } from './lib/progress';
 import { rechenSummary } from './lib/rechnen';
@@ -99,7 +101,7 @@ function useSuche() {
   return { offen, oeffnen, schliessen };
 }
 
-/** Fällige Wiederholungen je Art (Badges in Kopfleiste, Unterleiste und Tab-Bar). */
+/** Fällige Wiederholungen je Art (Zahlen an den Haftstreifen und im Inhaltsverzeichnis). */
 function useNavBadges(): Record<NavBadge, number> {
   const { content, progress } = useStartStore();
   return {
@@ -158,17 +160,6 @@ const SAVE_TEXT: Record<string, string> = {
   fehler: 'Speichern fehlgeschlagen',
 };
 
-function Nav({ onSuche }: { onSuche: () => void }) {
-  const { saveState } = useSpeicherStand();
-  const badges = useNavBadges();
-  useVorladen();
-  return (
-    <>
-      <Kopfleiste onSuche={onSuche} badges={badges} saveText={SAVE_TEXT[saveState] ?? SAVE_TEXT.fehler} saveState={saveState} />
-    </>
-  );
-}
-
 /** „Zum Inhalt springen“: erstes fokussierbares Element, damit Tastatur und Screenreader die Navigation überspringen können. */
 function SkipLink() {
   return (
@@ -220,10 +211,46 @@ export function App() {
   );
 }
 
+/** Das Buch um alle Seiten außer der Druckansicht: Inhaltsseite, Ringe, Blatt und Haftstreifen (components/Buch.tsx). */
+function Buch({ children, onSuche }: { children: ReactNode; onSuche: () => void }) {
+  const { pathname } = useLocation();
+  const { saveState } = useSpeicherStand();
+  const badges = useNavBadges();
+  useVorladen();
+  useRaster();
+  // Platz im Inhaltsverzeichnis für die Abschnitte der offenen Seite (lib/inhaltSlot.ts).
+  const [slot, setSlot] = useState<HTMLElement | null>(null);
+  // Handy: Die Inhaltsseite ist ein Einschub. Gemerkt wird die Adresse, auf der er geöffnet wurde – nach einem Seitenwechsel ist er zu.
+  const [inhaltAuf, setInhaltAuf] = useState<string | null>(null);
+  const inhaltOffen = inhaltAuf === pathname;
+  const schliessen = useCallback(() => setInhaltAuf(null), []);
+  return (
+    <div className="layout buch" data-bereich={aktiverBereich(pathname) ?? 'start'}>
+      <SkipLink />
+      <InhaltSlotContext.Provider value={slot}>
+        <Inhaltsseite badges={badges} offen={inhaltOffen} onSchliessen={schliessen} slotRef={setSlot} />
+        <div className="buchringe" aria-hidden="true" />
+        <div className="blatt seite">
+          <div className="spirale" aria-hidden="true" />
+          <Kopfzeile
+            onSuche={onSuche}
+            onInhalt={() => setInhaltAuf(inhaltOffen ? null : pathname)}
+            inhaltOffen={inhaltOffen}
+            saveText={SAVE_TEXT[saveState] ?? SAVE_TEXT.fehler}
+            saveState={saveState}
+          />
+          <main id="inhalt" tabIndex={-1}>
+            {children}
+          </main>
+        </div>
+        <Register badges={badges} />
+      </InhaltSlotContext.Provider>
+    </div>
+  );
+}
+
 function Layout() {
   const sucheSteuerung = useSuche();
-  // Farbe des Bereichs (styles.css: .layout[data-bereich]) – Lernen, Glossar, SQL und Einstellungen haben je eine Akzentfarbe.
-  const { pathname } = useLocation();
   return (
     <>
       <Routes>
@@ -240,10 +267,8 @@ function Layout() {
         <Route
           path="*"
           element={
-            <div className="layout" data-bereich={aktiverBereich(pathname) ?? 'start'}>
-              <SkipLink />
-              <Nav onSuche={sucheSteuerung.oeffnen} />
-              <main id="inhalt" tabIndex={-1}>
+            <>
+              <Buch onSuche={sucheSteuerung.oeffnen}>
                 <SaveErrorBanner />
                 <HeuteLeiste />
                 <PageErrorBoundary>
@@ -301,7 +326,7 @@ function Layout() {
                     </Routes>
                   </Suspense>
                 </PageErrorBoundary>
-              </main>
+              </Buch>
               <UpdateHinweis />
               {sucheSteuerung.offen && (
                 <Suspense fallback={null}>
@@ -310,7 +335,7 @@ function Layout() {
                   </MitDetails>
                 </Suspense>
               )}
-            </div>
+            </>
           }
         />
       </Routes>

@@ -10,6 +10,13 @@ import { leseTheme, wendeThemeAn } from './lib/theme';
 import './styles.css';
 import './apple.css';
 import './paper.css';
+// Schriften des Notizbuchs, mit der App ausgeliefert (offline): Atkinson Hyperlegible für Text, Kalam für Handschriftliches.
+import '@fontsource/atkinson-hyperlegible/latin-400.css';
+import '@fontsource/atkinson-hyperlegible/latin-400-italic.css';
+import '@fontsource/atkinson-hyperlegible/latin-700.css';
+import '@fontsource/kalam/latin-400.css';
+import '@fontsource/kalam/latin-700.css';
+import './notizbuch.css';
 
 // Farbschema vor dem ersten Zeichnen setzen (kein Aufblitzen im falschen Design).
 wendeThemeAn(leseTheme());

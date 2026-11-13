@@ -18,7 +18,9 @@ The app is a static, installable PWA that works offline.
 
 **Conventions**
 - All UI text is German, informal *du*, short sentences.
-- **Look:** Apple-like (iOS/macOS). Colours, radii and shadows are tokens on `:root` in `styles.css` (light + dark): grouped background
+- **Look:** a squared notebook – an open ring binder on desktop, a spiral pad on phones (see “Notebook design” under Navigation).
+  `notizbuch.css` is the top layer over `styles.css`, `apple.css` and `paper.css` and overrides their tokens; the older layers still
+  carry the component styles. Colours, radii and shadows are tokens on `:root` in `styles.css` (light + dark): grouped background
   `--bg`, cards `--surface` without borders (`--card-border`), `--fill` for segmented controls and search, `--accent` for links/text,
   `--accent-fill` for filled buttons (white text, contrast ≥ 4.5 : 1 in both themes), `--glas` for translucent bars (`backdrop-filter`).
   Secondary buttons are "tinted" (`--accent-soft`), mode switches are segmented controls (`.mode-switch`), tables only have row lines.
@@ -91,7 +93,7 @@ lern-app/
 │  ├─ hooks/            useExamRun, useCardSession (+ useCardFilters), useSqlSession, useRechenUebung, useConfirm, useBackupDownload,
 │  │                    useHeute (running „Heute lernen“ session)
 │  ├─ components/       AnswerInput, Markdown (+ MathMarkdown, markdownComponents), TheoryMarkdown, Rechenweg, TaskParts, ErrorBoundary,
-│  │                    ConfirmDialog, SqlEditor, ResultTable, SchemaBrowser, Kopfleiste (header + Unterleiste), MobileNav (tab bar < 600 px), UpdateHinweis (PWA toast),
+│  │                    ConfirmDialog, SqlEditor, ResultTable, SchemaBrowser, Buch (notebook frame: Inhaltsseite, Register, Kopfzeile), Kaestchen (squared progress bars, tally marks), UpdateHinweis (PWA toast),
 │  │                    HeuteLeiste, EigeneAntwort, SicherheitWahl, OperatorTipp, FehlergrundWahl + FehlergrundKarte (8.7),
 │  │                    SucheDialog (8.8, lazy) (phase 8)
 │  ├─ lib/              pure logic (progress, grading, stats, cards, leicht + leichtRechnen (Leicht-Modus), shuffle, examTimer, sheets, sql, sqlLinks, loesungStil, mathDollar,
@@ -426,7 +428,7 @@ Formulas in the sheets are written as `$…$` (see § 5 "Markdown, formulas"). E
 | `/material/operatoren` | Operatoren-Trainer | lazy page: quiz "Was verlangt der Operator hier?" with real tasks, table of all operators (§ 5 phase 8.4) |
 | `/glossar` (old `/material/glossar` redirects, keeps `?stelle=`) | Glossar | lazy page: terms A–Z from `begriff` and `wissen` cards and bold terms of the sheets, letter jump bar, filter, links to the sources; terms with a term page link to it (§ 5 phase 8.9, plan phase 3) |
 | `/glossar/:id` | Begriff | lazy term page (plan phase 3; section „Weiterlesen und Videos“ since plan phase 8): definition, Erklärung, Beispiel, Abgrenzung, Prüfungsfalle, Merksatz, diagrams; „Siehe auch“, „Üben“ (cards, tasks, Rechen- and SQL-Übungen), „Nachlesen“; star "Karte markieren" next to the h1 for the term's own card (`uebungen.begriffskarte`) and an icon-only star before every card in „Üben“ |
-| (dialog) | Suche | `Strg+K` / `⌘K`, search button in the header (Kopfleiste): global search, lazy (§ 5 phase 8.8) |
+| (dialog) | Suche | `Strg+K` / `⌘K`, search button in the page header (Kopfzeile): global search, lazy (§ 5 phase 8.8) |
 | `/material/sql-belegsatz` | SQL-Belegsatz | lazy page (`pages/SqlBelegsatz.tsx`) of `AP2_SQL_Belegsatz.md` with „Drucken“ (print CSS: two columns, small font → 2 pages A4); in the Glossar area. The same content as a side panel in the SQL editor (`components/Belegsatz.tsx`, `BelegsatzPanel`: button in the toolbar of `/sql` and on every exercise, fixed panel on the right, full width on phones, Esc/„Schließen“ close it and focus returns to the button) |
 | `/material/formeln` | Formelsammlung | lazy page (`pages/Formelsammlung.tsx`, KaTeX): all formulas of `src/rechnen/formeln.ts` grouped by Deep Dive, each with explanation, variables and a link "📐 n Rechenübungen →" to `/rechnen?vorlage=a,b`; jump bar, "🖨️ Drucken" (print CSS: one column, no links). Plan phase 6 added neuron formulas (gewichtete Summe, Stufe, Sigmoid, ReLU, Perzeptron-Lernregel) and formulas that only the sheets had (Laplace, Gegenereignis, mindestens einmal, Erwartungswert, z-Wert, Spearman, Wachstumsrate, Falsch-Positiv-Rate, kostenoptimale Schwelle, MAPE) – those have `vorlagen: []` and show no exercise link |
 | `/einstellungen` | Einstellungen | per-user settings (`Progress.settings`, see § 6): own exam date; switches "❓ Prüferfragen einbeziehen" / "🎤 Fachgespräch-Fragen einbeziehen"; "🤖 Automatische Antworten erlauben" (Leicht-Modus, `leichtAutomatisch`); Datenschutz-Hinweis (`components/Datenschutz.tsx`: no account, no tracking, no cookies, data stays in the browser, only app + content loaded from GitHub Pages; content license line CC BY-NC-SA 4.0 with link to the deed; source links open in a new tab, YouTube only after a click via youtube-nocookie.com) |
@@ -895,7 +897,7 @@ applied in `main.tsx` before the first render), error boundary per route, own co
 - **Four areas** (`BEREICHE` in `src/lib/navigation.ts`, pure and tested), the logo leads to the Übersicht (`/`). No URL changed – the areas
   only group the existing routes:
 
-  | Area | Sub-targets (Unterleiste) |
+  | Area | Sub-targets (table of contents) |
   |---|---|
   | Lernen (`/lernen`) | Heute lernen, Themen, Karteikarten, Einzelaufgaben, Rechenübungen, Übungsklausur, Fehlerjournal |
   | Glossar (`/material/glossar`) | Begriffe A–Z, Diagramme (`GLOSSAR_PFAD` = `/lernen/17`), Formelsammlung, Operatoren |
@@ -905,20 +907,29 @@ applied in `main.tsx` before the first render), error boundary per route, own co
   `aktiverBereich(pathname)` maps every route (`/lernen/17` and the three glossary pages under `/material` → Glossar, other `/material/*` →
   Einstellungen); `aktivesUnterziel` picks the longest matching sub-target. **Due badges**: an area shows the sum of its sub-targets
   (Lernen = Rechnen + Fehlerjournal, SQL = SQL), each sub-target its own; screen readers get ", n fällig".
-- **Desktop/tablet** (`components/Kopfleiste.tsx`): sticky translucent header (`.kopf`, height `--kopf-hoehe` 56 px + safe area =
-  `--kopf-gesamt`) with logo, the four areas (pill, `aria-current="page"`), save state (green dot; text only on error/conflict) and search
-  button (`⌘K` on Apple devices, otherwise `Strg K`). Below it the **Unterleiste** of the active area (pills, horizontally scrollable, the
-  active pill is scrolled into view; not on the Übersicht). Below 760 px the header shows icons only (labels stay as screen-reader text).
-- **Phone (< 600 px)**: slim header (48 px) with logo, area title and round search button; the Unterleiste as swipeable pills; fixed **tab
-  bar** at the bottom (`components/MobileNav.tsx`): Übersicht, Lernen, Glossar, SQL, Einstellungen. `main` has bottom padding so the bar never
-  hides content; the PWA toast sits above it.
-- **Sticky offsets**: everything that sticks or is a jump target respects the header: `.toc`, `.exam-bar`, `.glossar-abc` use
-  `top: var(--kopf-gesamt)`, `.theory`, glossary entries and `.stelle-ziel` have `scroll-margin-top`. `useStelle` corrects the position once
-  scrolling has settled (content above, e.g. formulas, can still grow during smooth scrolling).
+- **Notebook design** (`components/Buch.tsx`, `src/notizbuch.css`): the app is one book.
+  - **Desktop (≥ 1100 px)**: an open ring binder on the desk. Left page (`Inhaltsseite`): label and table of contents – all areas on the
+    Übersicht, otherwise only the active area with due counts (“3 fällig”); below the active target is a slot (`lib/inhaltSlot.ts`)
+    into which a page can portal its own sections (the Lernblatt does this with its parts). Rings in the middle (`.buchringe`), right
+    page (`.blatt`) with the `Kopfzeile` (path, date, save state: green dot, text only on error/conflict, search button – `⌘K` on Apple
+    devices, otherwise `Strg K`) and the page itself. The five areas are sticky-note strips (`Register`, `.streifen`) on the right edge
+    of the book; the active strip is pulled out and underlined (`aria-current="page"`).
+  - **Phone/tablet (< 1100 px)**: a spiral pad with one page. The `Kopfzeile` sticks to the top with the “Inhalt” button (opens the
+    Inhaltsseite as a drawer; closes on navigation, Escape or a tap on the veil) and search; the strips stick up from the bottom edge.
+  - **Raster**: one square = `--k` (26 px). Every text line is exactly one square high and block spacing is whole squares, so the
+    horizontal lines run between text lines, not through the letters. Blocks of arbitrary height (tables, formulas, cards) sit on plain
+    “Zettel” surfaces; `hooks/useRaster.ts` measures each block lying directly on the paper (`RASTER_BLOECKE`, same selector list as in
+    `notizbuch.css`) and sets `--rest` so the next block starts on a grid line again. Only the margin changes, never the block size.
+  - **Pieces**: sticky notes (`.haft`) and the red margin line (`.spalten` / `.rand`) on the Übersicht, progress as hatched squares and
+    the study streak as tally marks (`components/Kaestchen.tsx`), headings in ink blue underlined in red.
+  - **Fonts**: Atkinson Hyperlegible for text, Kalam for handwritten bits – bundled via `@fontsource/*` (latin subsets, woff2 precached).
+- **Sticky offsets**: on desktop nothing sticks at the top (`--kopf-gesamt` is 0); on phones the Kopfzeile is two squares high and
+  `.exam-bar`, `.glossar-abc` use `top: var(--kopf-gesamt)`, `.theory`, glossary entries and `.stelle-ziel` have `scroll-margin-top`.
+  `useStelle` corrects the position once scrolling has settled (content above, e.g. formulas, can still grow during smooth scrolling).
 - **Accessibility**: „Zum Inhalt springen“ (`.skip-link`, first focusable element, focuses `main#inhalt`); labels hidden on small screens
   are visually hidden, not removed (accessible names stay).
-- `index.html`: `viewport-fit=cover` (safe areas for notch and home indicator), `theme-color` light `#f2f2f7` / dark `#000000`, SVG favicon
-  (graduation cap). Manifest `theme_color`/`background_color` `#f2f2f7`.
+- `index.html`: `viewport-fit=cover` (safe areas for notch and home indicator), `theme-color` light `#fdfcf8` / dark `#1f242b` (the paper), SVG favicon
+  (graduation cap). Manifest `theme_color`/`background_color` `#fdfcf8`.
 
 ### Mobile details (phase 7.3, plan phase 2)
 
@@ -938,7 +949,7 @@ applied in `main.tsx` before the first render), error boundary per route, own co
 - `vite-plugin-pwa` (devDependency, Workbox **generateSW**; `workbox-window` as dependency) is part of every build
   (`build/pwaPlugin.ts`, `PWA_OPTIONS`). `npm run dev` never produces or registers a service worker (`main.tsx`: `import.meta.env.PROD`).
 - **Manifest** `manifest.webmanifest`: name "AP2 Lern-App", short name "AP2 Lernen", `id`/`start_url`/`scope` `./` (relative, works under
-  `/ap2_lernapp/` with the HashRouter), `display: standalone`, theme colour `#f2f2f7` (light grouped background). Icons in `public/icons/`: `icon-192.png`,
+  `/ap2_lernapp/` with the HashRouter), `display: standalone`, theme colour `#fdfcf8` (the paper). Icons in `public/icons/`: `icon-192.png`,
   `icon-512.png`, `icon-maskable-512.png` (icon at 80 % on a blue gradient, inside the maskable safe zone) and `apple-touch-icon.png` (180 px,
   linked in `index.html`). They were generated once from the icon of the former desktop build (512 × 512) with Windows System.Drawing
   (high-quality bicubic) and committed – no image library in the project. `tests/pwa.test.ts` checks that every icon exists with the declared size.

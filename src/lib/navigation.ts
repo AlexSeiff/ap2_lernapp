@@ -1,6 +1,6 @@
 // Navigation (Umsetzungsplan Phase 2): vier Bereiche – Lernen, Glossar, SQL-Editor, Einstellungen – mit Unterzielen.
-// Desktop: Kopfleiste oben mit Unterleiste; Handy (unter 600 px): Tab-Bar unten (Übersicht + die vier Bereiche).
-// Rein, ohne React – die Komponenten stehen in components/Kopfleiste.tsx und components/MobileNav.tsx.
+// Im Notizbuch sind die Bereiche Haftstreifen am Buchrand (Handy: unten), die Unterziele stehen im Inhaltsverzeichnis links.
+// Rein, ohne React – die Komponenten stehen in components/Buch.tsx.
 // Keine URL hat sich geändert: Die Bereiche ordnen nur die bestehenden Routen.
 
 import type { IconName } from './icons';
@@ -24,8 +24,6 @@ export interface Bereich {
   to: string;
   icon: IconName;
   label: string;
-  /** Kurzform für die Tab-Bar. */
-  kurz: string;
   unter: NavZiel[];
 }
 
@@ -38,7 +36,6 @@ export const BEREICHE: Bereich[] = [
     to: '/lernen',
     icon: 'book-open',
     label: 'Lernen',
-    kurz: 'Lernen',
     unter: [
       { to: '/heute', icon: 'play', label: 'Heute lernen' },
       { to: '/lernen', icon: 'book-open', label: 'Themen' },
@@ -58,7 +55,6 @@ export const BEREICHE: Bereich[] = [
     to: '/glossar',
     icon: 'book-bookmark',
     label: 'Glossar',
-    kurz: 'Glossar',
     unter: [
       { to: '/glossar', icon: 'library', label: 'Begriffe A–Z' },
       { to: GLOSSAR_PFAD, icon: 'book-bookmark', label: 'Diagramme' },
@@ -72,7 +68,6 @@ export const BEREICHE: Bereich[] = [
     to: '/sql',
     icon: 'database',
     label: 'SQL-Editor',
-    kurz: 'SQL',
     unter: [
       { to: '/sql', icon: 'pencil', label: 'Freier Editor', genau: true },
       { to: '/sql/uebungen', icon: 'target', label: 'Übungen', badge: 'sql' },
@@ -83,7 +78,6 @@ export const BEREICHE: Bereich[] = [
     to: '/einstellungen',
     icon: 'settings',
     label: 'Einstellungen',
-    kurz: 'Einstellungen',
     unter: [
       { to: '/einstellungen', icon: 'settings', label: 'Einstellungen' },
       { to: '/material', icon: 'library', label: 'Material' },

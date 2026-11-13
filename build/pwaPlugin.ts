@@ -25,8 +25,8 @@ export const PWA_OPTIONS = {
     start_url: './',
     scope: './',
     display: 'standalone',
-    background_color: '#f2f2f7',
-    theme_color: '#f2f2f7',
+    background_color: '#fdfcf8',
+    theme_color: '#fdfcf8',
     icons: [
       { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
       { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },

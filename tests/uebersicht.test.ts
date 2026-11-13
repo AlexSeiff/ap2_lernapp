@@ -203,7 +203,8 @@ describe('Übersichtsseite', () => {
     expect(html).toContain('Noch keine Übungsklausur abgeschlossen.');
     expect(html).toContain('Prüfungstermin eintragen →');
     expect(html).toContain('Diagramm-Übungen gelöst');
-    expect(html).toMatch(/aria-label="Prozessanalyse: Karten sicher 0 %, Übungen gelöst 0 %"/);
+    expect(html).toContain('aria-label="Prozessanalyse: Karten sicher 0 %"');
+    expect(html).toContain('aria-label="Prozessanalyse: Übungen gelöst 0 %"');
     expect(html).not.toContain('class="bar"');
     expect(html).toContain('Lernblätter ansehen');
   });

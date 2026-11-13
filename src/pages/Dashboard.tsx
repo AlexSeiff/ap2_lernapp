@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FehlergrundKarte } from '../components/FehlergrundKarte';
+import { Kaestchen, Strichliste } from '../components/Kaestchen';
 import { MiniRing, Ringe } from '../components/Ring';
 import { Welcome } from '../components/Welcome';
 import { useBackupDownload } from '../hooks/useBackupDownload';
@@ -58,17 +59,9 @@ function Uebersicht() {
   });
 
   return (
-    <div className="page dashboard-page notebook-page">
-      <div className="dashboard-kopf">
-        <div>
-          <p className="seiten-auftakt">MEIN AP2-NOTIZBUCH</p>
-          <h1>Übersicht</h1>
-          <p className="dashboard-untertitel">Dein Lernplan und dein Fortschritt auf einen Blick.</p>
-        </div>
-        <Link className="dashboard-bibliothek" to="/lernen">
-          <Icon name="book-open" /> Alle Themen <Icon name="chevron-right" />
-        </Link>
-      </div>
+    <div className="page dashboard-page">
+      <h1>Übersicht</h1>
+      <p className="lead">Dein Lernplan und dein Fortschritt auf einen Blick.</p>
       <BackupBanner />
       {progress.settings.leichtModus && (
         <p className="card info" role="note">
@@ -76,18 +69,19 @@ function Uebersicht() {
           höchstens bis Fach 2; Fach 3–5 erreichst du nur mit „Aufdecken“.
         </p>
       )}
-      <div className="notebook-plan">
-        <Weiterlernen />
-        <div className="notebook-randnotizen" aria-label="Prüfungstermin und Lernserie">
+      {/* Wie im Heft: links der Text auf dem Karo, rechts hinter der roten Randlinie die Haftnotizen. */}
+      <div className="spalten">
+        <div className="raster">
+          <Weiterlernen />
+          <BereichRinge />
+          <KartenstandWidget />
+          <FaelligWidget today={today} />
+          <UebungenWidget today={today} />
+        </div>
+        <aside className="rand" aria-label="Prüfungstermin und Lernserie">
           <Countdown />
           <Lernserie />
-        </div>
-      </div>
-      <div className="widgets notebook-sections">
-        <BereichRinge />
-        <KartenstandWidget />
-        <FaelligWidget today={today} />
-        <UebungenWidget today={today} />
+        </aside>
       </div>
       <details
         className="mehr-widgets"
@@ -237,38 +231,30 @@ function Weiterlernen() {
   const topic = stelle && !istAusgeblendet(progress.settings, stelle.topicId) && content.topics.find((t) => t.id === stelle.topicId);
   const abschnitt = topic && topic.sections.find((s) => s.id === stelle.sectionId);
   return (
-    <section className="widget widget-weiter farbe-indigo">
+    <section className="raster blatt-teil">
       <h2>
         <Icon name="play" /> Weiterlernen
       </h2>
-      <p className="weiter-headline">
-        Kleine Schritte.
-        <br />
-        Großes Wissen.
+      <p className="notiz">Kleine Schritte. Großes Wissen.</p>
+      <p>
+        {sitzung && !laeuft && sitzung.items.length > 0
+          ? '✓ Heute schon eine Runde geschafft.'
+          : `Gemischte Runde, etwa ${HEUTE_MINUTEN} Minuten – aus dem, was fällig ist.`}
       </p>
-      <div className="actions heute-start">
+      <div className="knopfzeile heute-start">
         <Link className="button" to="/heute">
           <Icon name="play" /> {laeuft ? `Heute lernen fortsetzen (${sitzung.index + 1}/${sitzung.items.length})` : 'Heute lernen'}
         </Link>
-        <span className="muted">
-          {sitzung && !laeuft && sitzung.items.length > 0
-            ? '✓ Heute schon eine Runde geschafft.'
-            : `Gemischte Runde, etwa ${HEUTE_MINUTEN} Minuten – aus dem, was fällig ist.`}
-        </span>
-      </div>
-      {topic && abschnitt ? (
-        <p className="weiterlesen">
-          <Link to={`/lernen/${topic.id}?stelle=${encodeURIComponent(abschnitt.id)}`}>
+        {topic && abschnitt ? (
+          <Link className="button secondary weiterlesen" to={`/lernen/${topic.id}?stelle=${encodeURIComponent(abschnitt.id)}`}>
             <Icon name="book-open" /> Weiterlesen: {topic.id === '00' ? 'Zusatz' : `DD ${topic.number}`} · {abschnitt.title}
           </Link>
-        </p>
-      ) : (
-        <p className="weiterlesen">
-          <Link to="/lernen">
+        ) : (
+          <Link className="button secondary weiterlesen" to="/lernen">
             <Icon name="book-open" /> Lernblätter ansehen
           </Link>
-        </p>
-      )}
+        )}
+      </div>
     </section>
   );
 }
@@ -280,19 +266,19 @@ function Countdown() {
   const days = daysUntilExam(examDate);
   if (days === undefined || !examDate)
     return (
-      <Link to="/einstellungen" className="widget w-klein kpi farbe-orange">
-        <span className="w-titel">Prüfung</span>
-        <span className="kpi-value">
+      <Link to="/einstellungen" className="haft">
+        <span>Prüfung</span>
+        <b>
           <Icon name="calendar" />
-        </span>
-        <span className="kpi-label">Prüfungstermin eintragen →</span>
+        </b>
+        <span>Prüfungstermin eintragen →</span>
       </Link>
     );
   return (
-    <Link to="/einstellungen" className="widget w-klein kpi farbe-orange w-countdown" title="Prüfungstermin ändern">
-      <span className="w-titel">Prüfung</span>
-      <span className="kpi-value">{days > 0 ? days : days === 0 ? 'Heute!' : '–'}</span>
-      <span className="kpi-label">
+    <Link to="/einstellungen" className="haft w-countdown" title="Prüfungstermin ändern">
+      <span>{days > 0 ? 'Prüfung in' : 'Prüfung'}</span>
+      <b>{days > 1 ? `${days} Tagen` : days === 1 ? '1 Tag' : days === 0 ? 'Heute!' : '–'}</b>
+      <span>
         {days > 1
           ? `Tage bis zur Prüfung (${formatIsoDate(examDate)})`
           : days === 1
@@ -309,16 +295,14 @@ function Lernserie() {
   const { progress } = useStartStore();
   const streak = studyStreak(progress);
   return (
-    <div
-      className="widget w-klein kpi farbe-pink w-serie"
-      title="Tage in Folge mit Aufgaben, Klausuren, Karteikarten, SQL-, Rechen- oder Diagramm-Übungen"
-    >
-      <span className="w-titel">Lernserie</span>
-      <span className="kpi-value">
+    <div className="haft gruen w-serie" title="Tage in Folge mit Aufgaben, Klausuren, Karteikarten, SQL-, Rechen- oder Diagramm-Übungen">
+      <span>Lernserie</span>
+      <b>
         {streak.current > 0 && <Icon name="flame" />}
         {streak.current} {streak.current === 1 ? 'Tag' : 'Tage'}
-      </span>
-      <span className="kpi-label">
+      </b>
+      <Strichliste n={streak.current} />
+      <span>
         {streak.current > 0 && !streak.today ? 'heute noch lernen, sonst reißt sie' : streak.today ? 'heute schon gelernt' : 'in Folge'}
         {streak.longest > streak.current && ` · Rekord ${streak.longest}`}
       </span>
@@ -326,35 +310,28 @@ function Lernserie() {
   );
 }
 
-/** Fortschrittsringe je Prüfungsbereich: außen Karten sicher, innen Übungen gelöst. */
+/** Fortschritt je Prüfungsbereich als ausgemalte Kästchen: oben Karten sicher, darunter Übungen gelöst. */
 function BereichRinge() {
   const { content, progress } = useStartStore();
   const bereiche = bereichFortschritt(content, progress);
   return (
-    <section className="widget farbe-violet">
+    <section className="raster blatt-teil bereiche">
       <h2>
         <Icon name="target" /> Prüfungsbereiche
       </h2>
-      <ul className="bereich-ringe">
-        {bereiche.map((b) => (
-          <li key={b.bereich.id}>
-            <Ringe
-              werte={[
-                { wert: quote(b.karten), klasse: 'ring-karten' },
-                { wert: quote(b.uebungen), klasse: 'ring-uebungen' },
-              ]}
-              label={`${b.bereich.titel}: Karten sicher ${prozent(b.karten)}, Übungen gelöst ${prozent(b.uebungen)}`}
-            />
+      {bereiche.map((b) => (
+        <div key={b.bereich.id} className="bereich-balken">
+          <p className="balken-kopf">
             <b>{b.bereich.titel}</b>
-            <span className="small" aria-hidden="true">
-              <span className="punkt ring-karten" /> {b.karten.erreicht}/{b.karten.gesamt} Karten
-            </span>
-            <span className="small" aria-hidden="true">
-              <span className="punkt ring-uebungen" /> {b.uebungen.erreicht}/{b.uebungen.gesamt} Übungen
-            </span>
-          </li>
-        ))}
-      </ul>
+            <small>
+              <span className="punkt k-blau" /> {b.karten.erreicht}/{b.karten.gesamt} Karten · <span className="punkt k-rot" />{' '}
+              {b.uebungen.erreicht}/{b.uebungen.gesamt} Übungen
+            </small>
+          </p>
+          <Kaestchen anteil={quote(b.karten)} farbe="blau" label={`${b.bereich.titel}: Karten sicher ${prozent(b.karten)}`} />
+          <Kaestchen anteil={quote(b.uebungen)} farbe="rot" label={`${b.bereich.titel}: Übungen gelöst ${prozent(b.uebungen)}`} />
+        </div>
+      ))}
       <p className="hint">
         Karten ab Fach 3; Übungen: Einzelaufgaben mit mindestens {Math.round(SICHER_RICHTIG_AB * 100)} % der Punkte im letzten Versuch und
         gelöste SQL-, Rechen- und Diagramm-Übungen.

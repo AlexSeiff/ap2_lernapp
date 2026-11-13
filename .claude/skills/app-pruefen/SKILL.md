@@ -74,7 +74,8 @@ In the Pages preview `--js "location.hash='#/…'"` + `--pause 1500` changes the
 Pick what the change touches; for a visual change cover at least light + dark and desktop + phone.
 
 - **Dark mode**: text and borders still visible, no white boxes, formulas (KaTeX) in the text colour.
-- **Phone (390 px)**: nothing wider than the screen, buttons don't wrap mid-word, the bottom tab bar doesn't cover content.
+- **Phone (390 px)**: nothing wider than the screen, buttons don't wrap mid-word, the sticky-note strips at the bottom don't cover content.
+- **Raster**: text lines sit inside the squares – the grid lines run between lines, not through the letters.
 - **Animations**: with `--danach 0`, shoot the same step twice – `--pause 100 --bild mitte.png` (mid-animation: the element should be offset or faded)
   and `--pause 800 --bild ende.png` (settled). With `--wenig-bewegung` the mid shot must already look settled.
 - **Formulas/Markdown**: no raw `$`, `^`, `_`, `**` or red KaTeX errors in the rendered text.

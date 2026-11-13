@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useParams } from 'react-router-dom';
 import { quellenNachZiel } from '../../shared/quellen';
 import { QuellenListe } from '../components/Quellen';
 import { Markdown } from '../components/Markdown';
 import { useLeseStelle } from '../hooks/useLeseStelle';
 import { useStelle } from '../hooks/useStelle';
+import { useInhaltSlot } from '../lib/inhaltSlot';
 import { useStore } from '../lib/store';
 import { useThemaTexte } from '../lib/texte';
 import { cardPool } from '../lib/cards';
@@ -86,6 +88,7 @@ export function Themen() {
 export function Thema() {
   const { topicId } = useParams();
   const { content, progress, update } = useStore();
+  const inhaltSlot = useInhaltSlot();
   const quellen = useMemo(() => quellenNachZiel(content.quellen), [content.quellen]);
   const topic = content.topics.find((t) => t.id === topicId);
   // Abschnittstexte kommen nachgeladen (lib/texte.ts); Sprung und Lesestelle erst, wenn sie im Bild stehen.
@@ -103,40 +106,38 @@ export function Thema() {
 
   return (
     <div className="page with-toc learning-page">
-      <aside className="toc" aria-label="Inhaltsverzeichnis">
-        <div className="toc-kopf">
-          <span className="toc-ausgabe">{topicLabel(topic)}</span>
-          <h2>Inhalt</h2>
-          <span className="toc-hinweis">Dein Weg durchs Lernblatt</span>
-        </div>
-        <nav className="toc-links" aria-label="Abschnitte im Lernblatt">
-          {topic.sections.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className={`toc-l${s.level}`}
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              {s.title}
-            </a>
-          ))}
-          {!!topic.lernziele.length && (
-            <a
-              href="#lernziele"
-              className="toc-l2 toc-lernziele"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('lernziele')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Lernziel-Check
-            </a>
-          )}
-        </nav>
-      </aside>
+      {/* Abschnitte des Lernblatts: stehen im Inhaltsverzeichnis des Buchs unter „Themen“ (components/Buch.tsx). */}
+      {inhaltSlot &&
+        createPortal(
+          <nav className="toc-links" aria-label="Abschnitte im Lernblatt">
+            {topic.sections.map((s) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                className={`toc-l${s.level}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {s.title}
+              </a>
+            ))}
+            {!!topic.lernziele.length && (
+              <a
+                href="#lernziele"
+                className="toc-l2 toc-lernziele"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('lernziele')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Lernziel-Check
+              </a>
+            )}
+          </nav>,
+          inhaltSlot,
+        )}
       <article className="notebook-page learning-sheet">
         <div className="notebook-running-head">
           <span>AP2 · Lernzettel</span>

@@ -2,11 +2,11 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import { Kopfleiste } from '../src/components/Kopfleiste';
-import { MobileNav } from '../src/components/MobileNav';
+import { Inhaltsseite, Kopfzeile, Register } from '../src/components/Buch';
 import { aktiverBereich, aktivesUnterziel, badgeSumme, bereich, BEREICHE, GLOSSAR_PFAD, passtZuZiel } from '../src/lib/navigation';
 
-// Navigation (Umsetzungsplan Phase 2): vier Bereiche mit Unterzielen, Kopfleiste oben, Tab-Bar unten auf dem Handy.
+// Navigation: vier Bereiche mit Unterzielen. Im Notizbuch stehen sie als Haftstreifen am Buchrand (Handy: unten), die Unterziele im
+// Inhaltsverzeichnis auf der linken Seite (components/Buch.tsx).
 
 const ohneTrenner = (html: string) => html.replace(/<!-- -->/g, '');
 
@@ -83,52 +83,57 @@ describe('Bereiche', () => {
 
 describe('Komponenten', () => {
   const badges = { sql: 2, rechnen: 0, diagramme: 0, journal: 1 };
+  const render = (pfad: string, kind: ReturnType<typeof createElement>) =>
+    ohneTrenner(renderToString(createElement(MemoryRouter, { initialEntries: [pfad] }, kind)));
 
-  it('Tab-Bar: Übersicht und vier Bereiche, aktiver Tab mit aria-current, Badges', () => {
-    const html = ohneTrenner(
-      renderToString(createElement(MemoryRouter, { initialEntries: ['/sql/uebungen'] }, createElement(MobileNav, { badges }))),
-    );
-    for (const l of ['Übersicht', 'Lernen', 'Glossar', 'SQL', 'Einstellungen'])
-      expect(html).toContain(`<span class="bn-label">${l}</span>`);
+  it('Haftstreifen: Übersicht und vier Bereiche, aktiver Streifen mit aria-current, Zahl der fälligen Wiederholungen', () => {
+    const html = render('/sql/uebungen', createElement(Register, { badges }));
+    for (const l of ['Übersicht', 'Lernen', 'Glossar', 'SQL-Editor', 'Einstellungen'])
+      expect(html).toContain(`<span class="streifen-name">${l}</span>`);
     expect(html.match(/aria-current="page"/g)).toHaveLength(1);
-    expect(html).toMatch(/class="active" aria-current="page" href="\/sql".*?<span class="nav-badge">2<\/span>/);
+    expect(html).toMatch(
+      /class="streifen s-sql active" aria-current="page" href="\/sql".*?<span class="streifen-zahl" aria-hidden="true">2<\/span>/,
+    );
     expect(html).toContain(', 1 fällig');
-    expect(html).not.toContain('bn-panel');
+    expect(html).not.toMatch(/class="streifen s-glossar[^>]*>.*?streifen-zahl.*?s-sql/);
   });
 
-  it('Kopfleiste: Übersicht, vier Bereiche, Suche, Speicherstatus und die Unterleiste des aktiven Bereichs', () => {
-    const html = ohneTrenner(
-      renderToString(
-        createElement(
-          MemoryRouter,
-          { initialEntries: ['/karteikarten'] },
-          createElement(Kopfleiste, { onSuche: () => {}, badges, saveText: 'Gespeichert', saveState: 'gespeichert' }),
-        ),
-      ),
-    );
+  it('Inhaltsseite im Bereich: nur dessen Ziele, das aktive hervorgehoben, darunter Platz für die Abschnitte der Seite', () => {
+    const html = render('/karteikarten', createElement(Inhaltsseite, { badges, offen: false, onSchliessen: () => {}, slotRef: () => {} }));
     expect(html).toContain('AP2 Lern-App');
-    expect(html).toMatch(/class="kopf-start" href="\/"/);
-    for (const l of ['Lernen', 'Glossar', 'SQL-Editor', 'Einstellungen']) expect(html).toContain(`<span class="kopf-label">${l}</span>`);
-    expect(html).toContain('<span class="kopf-label">Suchen</span>');
-    expect(html).toContain('Gespeichert');
-    // Unterleiste „Lernen“ mit Karteikarten als aktivem Ziel
-    expect(html).toContain('<nav class="unterleiste" aria-label="Lernen">');
-    expect(html).toMatch(/class="active" aria-current="page" href="\/karteikarten"/);
-    expect(html).toContain('Fehlerjournal<span class="nav-badge">1</span>');
+    expect(html).toContain('<nav class="inhalt-gruppe" aria-label="Lernen">');
+    expect(html).not.toContain('aria-label="Glossar"');
+    expect(html).toMatch(
+      /<li class="hier"><a aria-current="page" href="\/karteikarten"[^>]*>Karteikarten<\/a><\/li><li class="inhalt-abschnitte"><\/li>/,
+    );
+    expect(html).toContain('Fehlerjournal</a><small class="faellig">1 fällig</small>');
+    expect(html.match(/aria-current="page"/g)).toHaveLength(1);
+    expect(html).not.toContain('inhalt-schleier');
   });
 
-  it('Übersicht ohne Unterleiste; Speicherfehler sichtbar als Text', () => {
-    const html = ohneTrenner(
-      renderToString(
-        createElement(
-          MemoryRouter,
-          { initialEntries: ['/'] },
-          createElement(Kopfleiste, { onSuche: () => {}, badges, saveText: 'Speichern fehlgeschlagen', saveState: 'fehler' }),
-        ),
-      ),
-    );
-    expect(html).not.toContain('unterleiste');
-    expect(html).toMatch(/class="kopf-start active" aria-current="page" href="\/"/);
-    expect(html).toContain('<span class="">Speichern fehlgeschlagen</span>');
+  it('Inhaltsseite auf der Übersicht: alle Bereiche, kein Platz für Abschnitte; geöffnet mit Schleier zum Schließen', () => {
+    const html = render('/', createElement(Inhaltsseite, { badges, offen: true, onSchliessen: () => {}, slotRef: () => {} }));
+    for (const l of ['Lernen', 'Glossar', 'SQL-Editor', 'Einstellungen'])
+      expect(html).toContain(`<nav class="inhalt-gruppe" aria-label="${l}">`);
+    expect(html).not.toContain('inhalt-abschnitte');
+    expect(html).toContain('class="inhaltsseite seite offen"');
+    expect(html).toContain('inhalt-schleier');
+    expect(html).toMatch(/class="etikett" aria-current="page" href="\/"/);
+  });
+
+  it('Kopfzeile: Pfad, Suche, Speicherstand und der Knopf zur Inhaltsseite', () => {
+    const zeile = (pfad: string, saveText: string, saveState: string) =>
+      render(pfad, createElement(Kopfzeile, { onSuche: () => {}, onInhalt: () => {}, inhaltOffen: false, saveText, saveState }));
+    const html = zeile('/karteikarten', 'Gespeichert', 'gespeichert');
+    expect(html).toContain('<p class="pfad">Lernen › <b>Karteikarten</b></p>');
+    expect(html).toContain('<span class="suche-name">Suchen</span>');
+    expect(html).toContain('<span class="sr-only">Gespeichert</span>');
+    expect(html).toMatch(/class="inhalt-knopf" aria-expanded="false" aria-controls="inhaltsseite"/);
+    // Übersicht ohne Bereich; Speicherfehler sichtbar als Text
+    const start = zeile('/', 'Speichern fehlgeschlagen', 'fehler');
+    expect(start).toContain('<p class="pfad"><b>Übersicht</b></p>');
+    expect(start).toContain('<span class="">Speichern fehlgeschlagen</span>');
+    // Bereich und Ziel heißen gleich: nur einmal nennen
+    expect(zeile('/einstellungen', 'Gespeichert', 'gespeichert')).toContain('<p class="pfad">Einstellungen</p>');
   });
 });

@@ -52,6 +52,14 @@ export const ICONS = {
   ],
   check: [['path', { d: 'M20 6 9 17l-5-5' }]],
   'chevron-right': [['path', { d: 'm9 18 6-6-6-6' }]],
+  list: [
+    ['path', { d: 'M3 5h.01' }],
+    ['path', { d: 'M3 12h.01' }],
+    ['path', { d: 'M3 19h.01' }],
+    ['path', { d: 'M8 5h13' }],
+    ['path', { d: 'M8 12h13' }],
+    ['path', { d: 'M8 19h13' }],
+  ],
   'circle-check': [
     ['circle', { cx: '12', cy: '12', r: '10' }],
     ['path', { d: 'm16 9-5.5 5.5L8 12' }],

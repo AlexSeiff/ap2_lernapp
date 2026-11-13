@@ -1,0 +1,424 @@
+/*
+ * Notizbuch: Die App ist ein aufgeschlagenes, kariertes Ringbuch (auf dem Handy ein Spiralblock).
+ * Oberste Ebene über styles.css, apple.css und paper.css – setzt Farben, Schrift, Buchrahmen und das Kästchenraster.
+ *
+ * Raster: 1 Kästchen = --k. Jede Textzeile ist genau ein Kästchen hoch, Abstände sind ganze Kästchen. So laufen die
+ * waagerechten Linien zwischen den Zeilen statt durch die Buchstaben. Blöcke mit beliebiger Höhe (Tabellen, Formeln, Karten)
+ * liegen als „Zettel“ auf ruhigem Grund; hooks/useRaster.ts gleicht ihre Höhe über --rest bis zur nächsten Linie aus.
+ */
+
+/* ── Farben ──────────────────────────────────────────────────────────────── */
+:root {
+  --k: 26px;
+  --papier: #fdfcf8;
+  --linie: rgba(72, 118, 184, 0.2);
+  --blau: #1c4699;
+  --rot: #b4301f;
+  --tisch: #cbc4b5;
+  --deckel: #22344f;
+  --haft: #ffe98a;
+  --haft-text: #3a3000;
+  --marker: rgba(255, 224, 51, 0.6);
+  --schatten: rgba(20, 24, 32, 0.28);
+  --ring-loch: rgba(16, 21, 29, 0.62);
+  --schrift: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --hand: 'Kalam', 'Segoe Print', 'Bradley Hand', cursive;
+  --streifen: calc(5 * var(--k));
+
+  --bg: var(--tisch);
+  --surface: #ffffff;
+  --surface-2: #f3f1ea;
+  --text: #18202c;
+  --muted: #525c6b;
+  --border: #cdd1d8;
+  --card-border: #cdd1d8;
+  --fill: #e8e6de;
+  --fill-aktiv: #ffffff;
+  --paper-ink: #18202c;
+  --paper-ink-fill: #3b4658;
+  --paper-soft: #eef0f4;
+  --notebook-blue: var(--blau);
+  --notebook-blue-fill: #1c4699;
+  --notebook-clay: var(--rot);
+  --notebook-clay-fill: #b4301f;
+  --paper-line: var(--linie);
+  --paper-margin: color-mix(in srgb, var(--rot) 55%, transparent);
+  --paper-cover: var(--deckel);
+  --paper-good: #1b7742;
+  --paper-mid: #8a5d00;
+  --paper-low: #b4301f;
+  --shell-blue: var(--blau);
+  --shadow: 0 1px 1px rgba(20, 24, 32, 0.08), 0 8px 14px -10px var(--schatten);
+  --shadow-schwebe: 0 2px 3px rgba(20, 24, 32, 0.1), 0 16px 22px -14px var(--schatten);
+  --radius: 3px;
+  --radius-klein: 3px;
+  --kopf-hoehe: 0px;
+  --kopf-gesamt: 0px;
+}
+:root[data-theme='dark'] {
+  --papier: #1f242b;
+  --linie: rgba(150, 184, 230, 0.13);
+  --blau: #9fc3ff;
+  --rot: #ff9488;
+  --tisch: #0e1013;
+  --deckel: #090c11;
+  --haft: #5a5020;
+  --haft-text: #fff3bf;
+  --marker: rgba(255, 214, 64, 0.28);
+  --schatten: rgba(0, 0, 0, 0.6);
+  --ring-loch: rgba(0, 0, 0, 0.7);
+  --surface: #2a3039;
+  --surface-2: #323944;
+  --text: #edece7;
+  --muted: #aab3c0;
+  --border: #454d59;
+  --card-border: #454d59;
+  --fill: #3a424e;
+  --fill-aktiv: #4a5361;
+  --paper-ink: #edece7;
+  --paper-ink-fill: #56627a;
+  --paper-soft: #343b46;
+  --notebook-blue-fill: #3564c2;
+  --notebook-clay-fill: #b4301f;
+  --paper-good: #7fd8a4;
+  --paper-mid: #f0c463;
+  --paper-low: #ff9488;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --papier: #1f242b;
+    --linie: rgba(150, 184, 230, 0.13);
+    --blau: #9fc3ff;
+    --rot: #ff9488;
+    --tisch: #0e1013;
+    --deckel: #090c11;
+    --haft: #5a5020;
+    --haft-text: #fff3bf;
+    --marker: rgba(255, 214, 64, 0.28);
+    --schatten: rgba(0, 0, 0, 0.6);
+    --ring-loch: rgba(0, 0, 0, 0.7);
+    --surface: #2a3039;
+    --surface-2: #323944;
+    --text: #edece7;
+    --muted: #aab3c0;
+    --border: #454d59;
+    --card-border: #454d59;
+    --fill: #3a424e;
+    --fill-aktiv: #4a5361;
+    --paper-ink: #edece7;
+    --paper-ink-fill: #56627a;
+    --paper-soft: #343b46;
+    --notebook-blue-fill: #3564c2;
+    --notebook-clay-fill: #b4301f;
+    --paper-good: #7fd8a4;
+    --paper-mid: #f0c463;
+    --paper-low: #ff9488;
+  }
+}
+
+/* ── Grundschrift ────────────────────────────────────────────────────────── */
+html { background: var(--tisch); }
+body { background: var(--tisch); background-image: none; font: 17px / var(--k) var(--schrift); letter-spacing: 0; }
+h1, h2, h3, .tile-title, .fc-question, .glossar-eintrag dt, button, .button, input, select, textarea { font-family: var(--schrift); letter-spacing: 0; }
+mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker) 10% 90%, transparent 90%); padding: 0 2px; border-radius: 2px; }
+
+/* ── Das Buch: Papier, Ringe, zwei Seiten ────────────────────────────────── */
+.seite {
+  background-color: var(--papier);
+  background-image: linear-gradient(var(--linie) 1px, transparent 1px), linear-gradient(90deg, var(--linie) 1px, transparent 1px);
+  background-size: var(--k) var(--k);
+}
+.buch { position: relative; min-height: 100vh; }
+.blatt { min-width: 0; }
+.buchringe, .spirale, .inhalt-zu, .inhalt-knopf, .inhalt-schleier { display: none; }
+#inhalt { min-width: 0; padding: 0; }
+
+@media screen and (min-width: 1100px) {
+  .buch {
+    display: grid; grid-template-columns: calc(10 * var(--k)) minmax(0, 1fr); max-width: calc(60 * var(--k));
+    margin: 14px calc(var(--streifen) + 14px) 14px 14px; padding: 8px; min-height: calc(100vh - 28px);
+    background: var(--deckel); border-radius: 10px; box-shadow: 0 10px 30px -8px var(--schatten);
+  }
+  .inhaltsseite { border-radius: 4px 0 0 4px; box-shadow: inset -22px 0 24px -20px var(--schatten); }
+  .inhaltsseite-innen { position: sticky; top: 0; max-height: 100vh; overflow-y: auto; scrollbar-width: none; padding: var(--k) calc(2 * var(--k)) var(--k) var(--k); }
+  .inhaltsseite-innen::-webkit-scrollbar { display: none; }
+  .blatt { border-radius: 0 4px 4px 0; padding: 0 var(--k) calc(2 * var(--k)) calc(3 * var(--k)); box-shadow: inset 22px 0 24px -20px var(--schatten); }
+  .buchringe {
+    display: block; position: absolute; z-index: 2; top: 8px; bottom: 8px; left: calc(8px + 10 * var(--k) - 39px); width: 78px; pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='78' height='104'%3E%3Ccircle cx='13' cy='52' r='6.5' fill='%2310151d' fill-opacity='.62'/%3E%3Ccircle cx='65' cy='52' r='6.5' fill='%2310151d' fill-opacity='.62'/%3E%3Crect x='10' y='45.5' width='58' height='13' rx='6.5' fill='none' stroke='%23737d8a' stroke-width='4'/%3E%3Crect x='10' y='45.5' width='58' height='13' rx='6.5' fill='none' stroke='%23e6eaef' stroke-width='1.3'/%3E%3C/svg%3E") repeat-y 0 0 / 78px calc(4 * var(--k));
+  }
+}
+@media screen and (min-width: 1900px) {
+  .buch { margin-inline: auto; }
+}
+
+/* ── Linke Seite: Etikett und Inhaltsverzeichnis ─────────────────────────── */
+.etikett {
+  display: block; height: calc(4 * var(--k)); margin-bottom: var(--k); padding: 10px 12px; background: var(--surface); border-radius: 8px;
+  outline: 2px solid var(--blau); outline-offset: -5px; box-shadow: 0 6px 12px -8px var(--schatten); color: var(--text); text-decoration: none;
+}
+.etikett:hover { text-decoration: none; }
+.etikett b { display: block; font-size: 18px; line-height: 28px; color: var(--blau); }
+.etikett span { display: block; font: 15px / 22px var(--hand); border-bottom: 1px solid var(--border); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.inhalt-gruppe { display: block; margin-bottom: var(--k); }
+.inhalt-titel { margin: 0; font: 700 12.5px / var(--k) var(--schrift); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.inhalt { margin: 0; padding: 0; list-style: none; }
+.inhalt > li { display: flex; align-items: baseline; gap: 6px; min-height: var(--k); font-size: 15.5px; line-height: var(--k); }
+.inhalt > li::after { content: ''; order: 2; flex: 1; min-width: 8px; border-bottom: 2px dotted color-mix(in srgb, var(--muted) 55%, transparent); transform: translateY(-6px); }
+.inhalt > li > a { order: 1; color: var(--text); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.inhalt > li > a:hover { color: var(--blau); text-decoration: underline; }
+.inhalt > li > .faellig { order: 3; font: 700 15px / 1 var(--hand); color: var(--rot); white-space: nowrap; }
+.inhalt > li.hier > a { font-weight: 700; color: var(--blau); background: linear-gradient(transparent 10%, var(--marker) 10% 90%, transparent 90%); padding: 0 3px; margin-left: -3px; }
+/* Abschnitte der offenen Seite (z. B. Teile eines Lernblatts), eingerückt unter dem aktiven Ziel */
+.inhalt > li.inhalt-abschnitte { display: block; min-height: 0; padding-left: calc(var(--k) / 2); }
+.inhalt > li.inhalt-abschnitte::after { content: none; }
+.inhalt-abschnitte:empty { display: none; }
+.inhalt-abschnitte .toc-links { display: flex; flex-direction: column; padding: 0; gap: 0; overflow: visible; }
+.inhalt-abschnitte .toc-links a { display: block; min-height: var(--k); padding: 0 0 0 8px; border: 0; border-left: 2px solid transparent; border-radius: 0; background: none; color: var(--text); font-size: 14.5px; line-height: var(--k); font-weight: 400; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; }
+.inhalt-abschnitte .toc-links a.toc-l1 { font-weight: 700; }
+.inhalt-abschnitte .toc-links a.toc-l3 { padding-left: 20px; font-size: 13.5px; color: var(--muted); }
+.inhalt-abschnitte .toc-links a:hover, .inhalt-abschnitte .toc-links a:focus-visible { color: var(--blau); border-left-color: var(--blau); background: none; }
+.inhalt-abschnitte .toc-links a.toc-lernziele { margin-top: 0; padding-top: 0; border-top: 0; color: var(--blau); }
+
+/* ── Haftstreifen der Bereiche ───────────────────────────────────────────── */
+.register { z-index: 30; }
+.streifen {
+  --c: #ffe14d; display: flex; align-items: center; gap: 7px; color: #241f00; font: 700 16.5px / 1 var(--hand); text-decoration: none; white-space: nowrap;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--c) 82%, #000) 0, var(--c) 14px, var(--c) 100%);
+  box-shadow: 2px 4px 6px -3px var(--schatten);
+}
+.streifen:hover { text-decoration: none; }
+.streifen .icon { width: 17px; height: 17px; flex: none; }
+.streifen.s-lernen { --c: #ff9fc2; }
+.streifen.s-glossar { --c: #a3e38f; }
+.streifen.s-sql { --c: #ffb95e; }
+.streifen.s-einstellungen { --c: #97d4ff; }
+.streifen-zahl { display: grid; place-items: center; min-width: 21px; height: 21px; padding: 0 4px; border: 1.5px solid currentColor; border-radius: 11px; font: 700 12.5px / 1 var(--schrift); }
+:root[data-theme='dark'] .streifen { filter: brightness(0.86) saturate(0.92); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .streifen { filter: brightness(0.86) saturate(0.92); }
+}
+@media screen and (min-width: 1100px) {
+  /* Am rechten Buchrand: Jeder Streifen klebt mit dem linken Ende auf dem Blatt und ragt über den Deckel hinaus. */
+  .register { position: fixed; top: calc(14px + 3 * var(--k)); right: 14px; width: calc(var(--streifen) + 18px); display: flex; flex-direction: column; gap: 14px; }
+  .streifen { height: 38px; padding: 0 8px 0 28px; transform: translateX(-8px) rotate(var(--dreh, 0deg)); transform-origin: left center; transition: transform 0.15s ease-out; }
+  .streifen:nth-child(1) { --dreh: -1.1deg; }
+  .streifen:nth-child(2) { --dreh: 0.8deg; }
+  .streifen:nth-child(3) { --dreh: -0.5deg; }
+  .streifen:nth-child(4) { --dreh: 1.2deg; }
+  .streifen:nth-child(5) { --dreh: -0.9deg; }
+  .streifen:hover { transform: translateX(-4px) rotate(var(--dreh, 0deg)); }
+  .streifen.active { transform: translateX(0) rotate(var(--dreh, 0deg)); box-shadow: 3px 6px 9px -3px var(--schatten); }
+  .streifen.active .streifen-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .streifen-zahl { margin-left: auto; }
+}
+@media screen and (min-width: 1900px) {
+  .register { right: calc((100vw - 60 * var(--k)) / 2 - var(--streifen) / 2 - 14px); }
+}
+
+/* ── Kopfzeile des Blatts ────────────────────────────────────────────────── */
+.kopfzeile { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: calc(2 * var(--k)); font-size: 14.5px; color: var(--muted); }
+.kopfzeile .pfad { margin: 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kopfzeile .pfad b { color: var(--text); }
+.kopfzeile-rechts { display: flex; align-items: center; gap: 14px; flex: none; }
+.kopfzeile .datum { font: 17px / 1 var(--hand); color: var(--blau); white-space: nowrap; }
+.kopfzeile .save-state { font-size: 13.5px; }
+.kopfzeile .suche-knopf, .kopfzeile .inhalt-knopf {
+  align-items: center; gap: 8px; height: 36px; min-height: 0; padding: 0 10px; border: 1.5px solid var(--muted); border-radius: 6px;
+  background: var(--papier); color: var(--text); font: 400 14.5px / 1 var(--schrift); box-shadow: none; background-image: none;
+}
+.kopfzeile .suche-knopf { display: inline-flex; }
+.kopfzeile .inhalt-knopf { font-weight: 700; }
+.kopfzeile .suche-knopf kbd { font: 12px / 1 ui-monospace, Consolas, monospace; padding: 3px 5px; border: 1px solid var(--border); border-radius: 4px; color: var(--muted); background: none; }
+
+/* ── Raster: Blöcke direkt auf dem Papier (dieselbe Liste wie RASTER_BLOECKE in hooks/useRaster.ts) ───────────────── */
+#inhalt { font-size: 17px; line-height: var(--k); }
+/* Mit #inhalt, damit kein älterer Seitenabstand (je Seite und Breite verschieden) das Raster verschiebt. */
+#inhalt .page { max-width: none; margin: 0; padding: 0 0 var(--k); }
+#inhalt .page.narrow { max-width: calc(32 * var(--k)); }
+/* :where hält die Regel bei Spezifität 0, damit einzelne Blöcke --abstand ändern können. --abstand und --rest werden hier für jeden
+   Block neu gesetzt – sonst würden sie vom umgebenden Block erben. */
+:where(#inhalt, .page, .raster, .learning-sheet, .theory, .theory > .md, .page > .md) > * {
+  --abstand: var(--k); --rest: 0px;
+  margin-top: 0 !important; margin-bottom: calc(var(--abstand) + var(--rest)) !important;
+}
+#inhalt > .page { --abstand: 0px; }
+:is(.page, .raster, .learning-sheet, .theory, .md) > .crumbs { --abstand: 0px; }
+/* Überschrift direkt über Text: keine Leerzeile dazwischen. Vor Zetteln, Knöpfen oder Tabellen bleibt ein Kästchen Luft. */
+:is(.page, .raster, .learning-sheet, .theory, .md) > :is(h1, h2, h3, h4):has(+ :is(p, ul, ol, dl, .md, .notiz, .balken-kopf, .bereich-balken)) { --abstand: 0px; }
+.learning-sheet .theory, .learning-sheet > .actions { padding: 0; border: 0; }
+
+#inhalt h1 {
+  padding: 0; border: 0; font: 700 34px / calc(2 * var(--k)) var(--schrift); letter-spacing: -0.01em; color: var(--blau);
+  text-decoration: underline double var(--rot) 2px; text-underline-offset: 6px; text-decoration-skip-ink: none;
+}
+#inhalt h2 {
+  padding: 0; border: 0; font: 700 21px / var(--k) var(--schrift); font-variant: normal; color: var(--blau);
+  text-decoration: underline var(--rot) 2px; text-underline-offset: 4px; text-decoration-skip-ink: none;
+}
+#inhalt h2.part { font-size: 25px; line-height: calc(2 * var(--k)); }
+#inhalt h3 { font: 700 18px / var(--k) var(--schrift); color: var(--text); }
+#inhalt h4 { font: 700 17px / var(--k) var(--schrift); }
+#inhalt h1 .icon, #inhalt h2 .icon { color: inherit; }
+#inhalt h1 .icon { width: 30px; height: 30px; vertical-align: -4px; }
+#inhalt h2 .icon { width: 20px; height: 20px; vertical-align: -3px; padding: 0; background: none; box-shadow: none; }
+#inhalt :is(.card, .widget, .zettel, .flashcard, dialog) :is(h2, h3) { text-decoration: none; }
+#inhalt .lead, #inhalt .dashboard-untertitel { margin-top: 0; font: 17px / var(--k) var(--schrift); font-style: normal; color: var(--muted); }
+#inhalt .crumbs { font-size: 14.5px; line-height: var(--k); }
+#inhalt .md { line-height: var(--k); }
+#inhalt .md :is(p, li) { line-height: var(--k); }
+/* Lesespalte: nicht breiter als gut lesbar */
+.learning-sheet, .page > .md, .page > p, .page > .lead { max-width: calc(31 * var(--k)); }
+
+/* ── Alte Blatt-Deko entfernen: Das Buch selbst ist jetzt das Papier ─────── */
+.notebook-page, .paper-sheet, .learning-sheet { background: none; border: 0; border-radius: 0; box-shadow: none; padding: 0 !important; margin-inline: 0 !important; }
+.notebook-page::before { content: none; }
+#inhalt .page.notebook-page { width: auto; min-height: 0; }
+#inhalt .welcome-page { max-width: calc(31 * var(--k)); }
+.notebook-running-head, .seiten-auftakt { display: none; }
+.page.with-toc, .page.learning-page.with-toc { display: block; max-width: none; }
+.layout > main, .layout[data-bereich] > main { margin: 0; }
+
+/* ── Zettel: alles mit eigener Höhe liegt auf ruhigem Grund ──────────────── */
+.card, .widget, .tile, .kpi, .filter-box, .exam .task-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow);
+}
+.exam .task-card { padding: var(--k); }
+.heute-leiste { background: var(--surface); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow); min-height: calc(2 * var(--k)); padding: 0 12px; }
+#inhalt .md blockquote, .learning-sheet blockquote { background: none; border: 0; border-radius: 0; box-shadow: none; outline: 2px solid var(--rot); outline-offset: -1px; padding: 13px var(--k); }
+#inhalt .md blockquote p { margin: 0; }
+#inhalt .md .table-wrap, #inhalt .md pre, #inhalt .md .katex-display { background: var(--surface); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow); }
+#inhalt .md .table-wrap { padding: 0 13px; }
+#inhalt .md .katex-display { padding: 13px; }
+
+/* ── Knöpfe ──────────────────────────────────────────────────────────────── */
+button, .button { border-radius: 6px; }
+button:not([class]), .button:not(.secondary) { background-image: none; box-shadow: 0 3px 0 color-mix(in srgb, var(--accent-fill) 60%, #000); }
+button.secondary, .button.secondary { background: var(--papier); color: var(--accent); border: 2px solid var(--accent); }
+button.good, button.mid, button.low { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28); }
+.mode-switch { border-radius: 8px; }
+.mode-switch button { box-shadow: none; border-radius: 6px; }
+.mode-switch button[aria-pressed='true'] { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18); }
+
+/* ── Karteikarte: weiße Karte mit roter Kopflinie auf einem kleinen Stapel ─ */
+.flashcard, .flashcard[class*='farbe-'] { border: 1px solid var(--border); border-radius: 4px; background: var(--surface); box-shadow: 0 16px 22px -16px var(--schatten), 5px 6px 0 -1px var(--surface), 5px 6px 0 0 var(--border); }
+.flashcard .fc-meta { border-bottom: 2px solid var(--paper-margin); }
+
+/* ── Handy und Tablet: Spiralblock, eine Seite, Haftstreifen unten ───────── */
+@media screen and (max-width: 1099.98px) {
+  :root { --kopf-hoehe: calc(2 * var(--k)); --kopf-gesamt: calc(2 * var(--k)); }
+  .blatt { padding: 0 var(--k) calc(4 * var(--k)); min-height: 100vh; }
+  .spirale {
+    display: block; height: var(--k); margin: 0 calc(-1 * var(--k));
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='17' r='4' fill='%2310151d' fill-opacity='.6'/%3E%3Crect x='9.5' y='-8' width='7' height='26' rx='3.5' fill='none' stroke='%23737d8a' stroke-width='3'/%3E%3Crect x='9.5' y='-8' width='7' height='26' rx='3.5' fill='none' stroke='%23e6eaef' stroke-width='1'/%3E%3C/svg%3E") repeat-x 0 0 / var(--k) var(--k);
+  }
+  .kopfzeile { position: sticky; top: 0; z-index: 25; margin: 0 calc(-1 * var(--k)); padding: 0 var(--k); background: var(--papier); box-shadow: 0 1px 0 var(--linie), 0 6px 8px -8px var(--schatten); }
+  .kopfzeile .inhalt-knopf { display: inline-flex; flex: none; }
+  .kopfzeile .pfad, .kopfzeile .datum { display: none; }
+  .kopfzeile .suche-knopf { padding: 0 9px; }
+  .kopfzeile .suche-name, .kopfzeile .suche-knopf kbd { display: none; }
+  #inhalt h1 { font-size: 28px; }
+
+  .inhaltsseite { position: fixed; z-index: 60; top: 0; bottom: 0; left: 0; width: min(88vw, calc(13 * var(--k))); overflow-y: auto; transform: translateX(-105%); visibility: hidden; transition: transform 0.2s ease-out, visibility 0.2s; box-shadow: 8px 0 24px -8px var(--schatten); }
+  .inhaltsseite.offen { transform: none; visibility: visible; }
+  .inhaltsseite-innen { padding: var(--k); }
+  .inhalt > li { min-height: calc(1.5 * var(--k)); align-items: center; font-size: 16.5px; }
+  .inhalt-zu { display: inline-flex; align-items: center; gap: 6px; height: 36px; min-height: 0; margin-bottom: var(--k); padding: 0 10px; border: 1.5px solid var(--muted); border-radius: 6px; background: var(--papier); color: var(--text); font: 700 14.5px / 1 var(--schrift); box-shadow: none; }
+  .inhalt-schleier { display: block; position: fixed; z-index: 55; inset: 0; background: rgba(10, 14, 20, 0.45); }
+
+  .register { position: fixed; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: flex-end; gap: 5px; padding: 0 6px; pointer-events: none; }
+  .streifen {
+    pointer-events: auto; flex: 1 1 0; max-width: calc(4.5 * var(--k)); min-width: 0; height: calc(54px + env(safe-area-inset-bottom, 0px)); padding: 6px 2px env(safe-area-inset-bottom, 0px);
+    flex-direction: column; justify-content: center; gap: 3px; font-size: 13px; letter-spacing: -0.01em; transform: rotate(var(--dreh, 0deg)); transform-origin: center bottom;
+    background: linear-gradient(0deg, color-mix(in srgb, var(--c) 82%, #000) 0, var(--c) 12px, var(--c) 100%); box-shadow: 0 -3px 7px -3px var(--schatten);
+  }
+  .streifen:nth-child(1) { --dreh: -1deg; }
+  .streifen:nth-child(2) { --dreh: 0.8deg; }
+  .streifen:nth-child(3) { --dreh: -0.6deg; }
+  .streifen:nth-child(4) { --dreh: 1deg; }
+  .streifen:nth-child(5) { --dreh: -0.8deg; }
+  .streifen.active { height: calc(66px + env(safe-area-inset-bottom, 0px)); }
+  .streifen.active .streifen-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 2px; }
+  .streifen .icon { width: 19px; height: 19px; }
+  .streifen-zahl { position: absolute; top: 3px; right: 5px; min-width: 18px; height: 18px; font-size: 11px; background: var(--c); }
+  .streifen { position: relative; }
+}
+
+/* ── Druck: nur die Seite, kein Buch ─────────────────────────────────────── */
+@media print {
+  .inhaltsseite, .buchringe, .register, .kopfzeile, .spirale { display: none !important; }
+  .buch { display: block; margin: 0; padding: 0; background: none; box-shadow: none; }
+  .seite { background: none; }
+  .blatt { padding: 0; box-shadow: none; }
+}
+
+/* ── Bausteine des Hefts ─────────────────────────────────────────────────── */
+/* Textspalte und Rand: rechts hinter der roten Randlinie stehen Haftnotizen und Randbemerkungen. */
+.spalten { display: grid; grid-template-columns: minmax(0, 1fr) calc(7 * var(--k)); column-gap: var(--k); }
+.spalten > .raster { container-type: inline-size; min-width: 0; }
+.rand { padding-left: var(--k); box-shadow: inset 2px 0 0 var(--paper-margin); }
+.rand > * { margin: 0 0 var(--k); }
+/* Text direkt auf dem Karo (kein Zettel): erbt die Zeilenhöhe, Abstände kommen aus dem Raster. */
+.blatt-teil { background: none; border: 0; padding: 0; box-shadow: none; }
+.notiz { font: 20px / var(--k) var(--hand); color: var(--blau); }
+.knopfzeile { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 10px; min-height: calc(2 * var(--k)); padding: 6px 0; }
+.knopfzeile .button, .knopfzeile button { min-height: 40px; height: 40px; margin: 0; }
+
+/* Haftnotiz */
+.haft {
+  display: block; padding: 13px 12px; background: var(--haft); color: var(--haft-text); font: 17px / var(--k) var(--hand); text-decoration: none;
+  box-shadow: 0 10px 12px -9px var(--schatten); transform: rotate(-1.4deg);
+}
+a.haft:hover { text-decoration: none; transform: rotate(-0.6deg); }
+.haft > span { display: block; }
+.haft > b { display: block; font-size: 30px; line-height: calc(1.5 * var(--k)); }
+.haft > b .icon { width: 30px; height: 30px; }
+.haft.gruen { background: color-mix(in srgb, #7ed6a0 55%, var(--haft)); transform: rotate(1.1deg); }
+.strichliste { display: flex; flex-wrap: wrap; gap: 0 4px; height: var(--k); overflow: hidden; }
+.strichliste svg { flex: none; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+
+/* Fortschritt als ausgemalte Kästchen (components/Kaestchen.tsx) – sitzt genau auf dem Karo */
+.bereich-balken { --abstand: var(--k); }
+.balken-kopf { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 12px; min-height: var(--k); margin: 0; }
+.balken-kopf small { font: 16px / var(--k) var(--hand); color: var(--muted); white-space: nowrap; }
+.kaestchen-balken { display: block; height: var(--k); }
+.kaestchen-balken + .kaestchen-balken .kaestchen { outline-offset: -1px; }
+.kaestchen { display: flex; width: fit-content; height: var(--k); outline: 2px solid var(--text); outline-offset: -1px; }
+.kaestchen.schmal { display: none; }
+.kaestchen i { width: var(--k); height: var(--k); box-shadow: inset -1px 0 0 var(--linie); }
+.kaestchen i.voll, .kaestchen i.teil {
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--kf) 85%, transparent) 0 2.5px, color-mix(in srgb, var(--kf) 38%, transparent) 2.5px 5px) no-repeat;
+}
+.kaestchen i.teil { background-size: calc(var(--f) * 100%) 100%; }
+.k-blau { --kf: #2f63c7; }
+.k-rot { --kf: #c8553d; }
+.k-gruen { --kf: #2c8a57; }
+.punkt.k-blau, .punkt.k-rot, .punkt.k-gruen { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--kf); }
+@container (max-width: 519px) {
+  .kaestchen.breit { display: none; }
+  .kaestchen.schmal { display: flex; }
+}
+
+/* Übersicht: Kacheln als Zettel */
+.dashboard-page .widget, .dashboard-page .widgets > .card, .dashboard-page > .card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow); padding: 13px 20px 19px;
+}
+.dashboard-page .widgets { gap: var(--k); margin: 0; }
+.dashboard-page .widgets > .widget, .dashboard-page .widgets > .card { border-bottom: 1px solid var(--border); }
+.dashboard-page > .card { border-top: 1px solid var(--border); }
+.dashboard-page .mehr-widgets > summary { border: 0; padding: 0; min-height: var(--k); line-height: var(--k); font-size: 15px; }
+.dashboard-page .mehr-widgets[open] > summary { margin-bottom: var(--k); }
+
+@media screen and (max-width: 1099.98px) {
+  .spalten { display: block; }
+  .rand { display: flex; gap: var(--k); padding: 0; box-shadow: none; margin-top: var(--k); }
+  .rand > * { flex: 1; margin: 0; }
+}
+
+/* Glossar: kein Buch im Buch – die Doppelseite liegt als zwei Zettel auf dem Blatt. */
+.book-cover { padding: 0; background: none; border-radius: 0; box-shadow: none; }
+.book-spread { gap: var(--k); overflow: visible; box-shadow: none; border-radius: 0; }
+.book-page, .book-page + .book-page { background: var(--surface); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow); min-height: 0; }
+.karten-start { border-radius: 3px; }
+/* Zettel haben überall dieselbe knappe Rundung – die älteren Ebenen runden je nach Seite unterschiedlich stark. */
+#inhalt :is(.card, .widget, .tile, .kpi, .filter-box, .karten-start) { border-radius: 3px; }
