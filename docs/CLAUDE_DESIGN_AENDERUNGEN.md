@@ -4,7 +4,7 @@ Stand: 13. November 2026. Die Änderungen wurden nach einer lokalen Vorschau fre
 
 ## Gewünschtes Design
 
-- Das Notizbuch steht auf Desktop-Fenstern mittig. Die großen Bereichsreiter sind nicht mehr als Post-its am Rand dargestellt.
+- Das Notizbuch steht auf Desktop-Fenstern mittig und ist maximal 1460 px breit; bei schmaleren Fenstern bleiben 48 px Abstand auf jeder Seite. Die großen Bereichsreiter sind nicht mehr als Post-its am Rand dargestellt.
 - Übersicht, Lernen, Glossar, SQL-Editor und Einstellungen stehen auf der linken Inhaltsseite. Der aktive Bereich zeigt seine Unterpunkte; die Abschnitte der geöffneten Seite und Fälligkeitszahlen bleiben erhalten.
 - Im Glossar stehen die farbigen Buchstabenregister auf großen Bildschirmen am rechten Buchrand. Bei begrenzter Höhe ist das Register scrollbar; auf kleineren Bildschirmen bleibt die Buchstabenauswahl im Suchkasten.
 - Auf Mobilgeräten öffnet der vorhandene Knopf „Inhalt“ die Navigation als Einschub.
