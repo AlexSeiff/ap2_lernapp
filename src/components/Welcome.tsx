@@ -12,12 +12,22 @@ export function Welcome() {
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const start = () => update((p) => withSettings(p, { examDate: isIsoDate(examDate) ? examDate : undefined }));
+  // Die Knöpfe stehen unten auf der Seite (am Handy unter dem Falz). Ohne das bliebe die Scrollposition stehen und die
+  // Übersicht finge mitten auf der Seite an – ohne Überschrift und „Heute lernen“.
+  const nachOben = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const start = () => {
+    update((p) => withSettings(p, { examDate: isIsoDate(examDate) ? examDate : undefined }));
+    nachOben();
+  };
 
   const importBackup = async (file: File) => {
     try {
       // Beim ersten Besuch gibt es nichts zu überschreiben – deshalb ohne Rückfrage.
       replaceProgress(parseBackup(await file.text()));
+      nachOben();
     } catch (e) {
       setError(`Fehler: ${(e as Error).message}`);
     }
