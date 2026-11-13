@@ -69,9 +69,11 @@ Der Ausgangspunkt: Operative Systeme und Auswertungssysteme haben **gegensätzli
 </svg>
 ```
 
+- **Quellsysteme:** die operativen Systeme, in denen die Daten entstehen – OLTP-Datenbanken (Warenwirtschaft, CRM, Buchhaltung), dazu CSV-Exporte und Fremdsysteme. Sie sind auf das Tagesgeschäft ausgelegt, nicht auf Auswertungen (Teil 1); das DWH liest nur aus ihnen.
 - **Staging Area:** Zwischenspeicher für die unveränderten Rohdaten. Zweck: Quellsysteme werden schnell wieder entlastet, und bei Fehlern kann ohne erneuten Zugriff auf die Quelle nachgeladen werden.
 - **Core-DWH:** integrierter, historisierter, unternehmensweiter Datenbestand – die „einzige Wahrheit".
 - **Data Mart:** fachbereichsbezogener Ausschnitt (Vertrieb, Logistik), auf die Fragen dieses Bereichs zugeschnitten und dadurch schnell und verständlich.
+- **Auswertung:** BI-Tools und Berichte greifen auf die Data Marts zu, nicht auf die Quellsysteme – so bremsen Analysen das Tagesgeschäft nicht aus.
 
 **Die vier Merkmale eines DWH nach Inmon** (Standarddefinition, gern abgefragt):
 **themenorientiert** (an fachlichen Themen ausgerichtet, nicht an Prozessen) · **integriert** (vereinheitlichte Formate, Codes und Bezeichnungen) · **zeitbezogen** (historisiert statt überschrieben) · **beständig** (nicht flüchtig – einmal geladene Daten werden nicht geändert oder gelöscht).
