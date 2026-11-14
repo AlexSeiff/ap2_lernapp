@@ -253,7 +253,7 @@ Mehr: Deep Dive 12, Teil 2
 
 | Datei | Wichtigste Regeln | Nachlesen |
 |---|---|---|
-| `AP2_SQL_Uebungen.json` | id `SQL-MH-NNN` (moebelhaus), `SQL-DF-NNN` (datafit), `SQL-DQ-NNN` (kundenimport), `loesung` muss im Datensatz laufen, `vergleich` passend, optional `aufgaben`/`karten` verknüpfen | DOKUMENTATION § 4.3, § 7 |
+| `AP2_SQL_Uebungen.json` | id `SQL-MH-NNN` (moebelhaus), `SQL-DF-NNN` (datafit), `SQL-DQ-NNN` (kundenimport), `SQL-HL-NNN` (holzlager, DD29), `SQL-EL-NNN` (eventlager, DD31), `loesung` muss im Datensatz laufen, `vergleich` passend, optional `aufgaben`/`karten` verknüpfen | DOKUMENTATION § 4.3, § 7 |
 | `AP2_Rechen_Uebungen.json` | id `RE-<BEREICH>-NNN`, möglichst mit `vorlage` + `daten`; feste Zahlen müssen die Musterlösung reproduzieren (`quelleAufgabe`) | DOKUMENTATION § 4.4 (Tabelle aller Vorlagen) |
 | `AP2_Diagramm_Uebungen.json` | jede Lücke in `loesung`, Lösung verletzt keine Formregel | DOKUMENTATION § 4.4b |
 | `AP2_Quellen.json` | nur https, `ziel` muss existieren, `geprueft` = `JJJJ-MM`; Links mit `npm run quellen-pruefen` testen | DOKUMENTATION § 4.4c |

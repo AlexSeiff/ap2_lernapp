@@ -29,6 +29,22 @@
       "quelle": "Deep Dive 9",
       "beschreibung": "Kundentabelle aus der Anlage der DD9-Übungsklausur (10 Datensätze, Datum im ISO-Format, leere E-Mail = NULL) plus eine erfundene Bestelltabelle ohne Fremdschlüssel mit typischen Fehlern.",
       "setup": "PRAGMA foreign_keys = ON;\n-- Importtabellen ohne Fremdschlüssel: genau deshalb können Qualitätsmängel entstehen.\nCREATE TABLE kunde (\n  nr           INTEGER PRIMARY KEY,\n  kunden_id    VARCHAR(10),\n  name         VARCHAR(100),\n  email        VARCHAR(100),\n  plz          VARCHAR(5),\n  geburtsdatum DATE,\n  umsatz       DECIMAL(10,2)\n);\nCREATE TABLE bestellung (\n  bestell_id   INTEGER PRIMARY KEY,\n  kunden_id    VARCHAR(10),\n  bestelldatum DATE,\n  lieferdatum  DATE,\n  betrag       DECIMAL(10,2)\n);\nINSERT INTO kunde (nr, kunden_id, name, email, plz, geburtsdatum, umsatz) VALUES\n  (1, 'K-1001', 'Huber GmbH', 'info@huber.de', '80331', '1985-03-15', 1250.00),\n  (2, 'K-1002', 'Schmidt AG', NULL, '20095', '1979-07-22', 890.50),\n  (3, 'K-1003', 'Fischer KG', 'kontakt@fischer.de', '8033', '1900-01-01', 2100.00),\n  (4, 'K-1004', 'Weber e.K.', 'weber@mail', '50667', '1990-11-30', -450.00),\n  (5, 'K-1005', 'Braun GmbH', 'braun@braun.de', '20095', '1988-05-05', 3200.00),\n  (6, 'K-1006', 'Huber GmbH', 'info@huber.de', '80331', '1985-03-15', 1250.00),\n  (7, 'K-1007', 'Meyer OHG', NULL, '10115', '1900-01-01', 760.00),\n  (8, 'K-1008', 'Braun G.m.b.H.', 'braun@braun.de', '20095', '1988-05-05', 3200.00),\n  (9, 'K-1009', 'Klein AG', 'klein@klein.de', '04109', '2035-02-12', 1500.00),\n  (10, 'K-1010', 'Roth KG', NULL, '70173', '1975-08-28', 980.00);\nINSERT INTO bestellung (bestell_id, kunden_id, bestelldatum, lieferdatum, betrag) VALUES\n  (500, 'K-1001', '2026-03-02', '2026-03-05', 1250.00),\n  (501, 'K-1002', '2026-03-10', '2026-03-14', 890.50),\n  (502, 'K-1005', '2026-04-01', '2026-03-28', 3200.00),\n  (503, 'K-1099', '2026-04-15', '2026-04-18', 420.00),\n  (504, 'K-1004', '2026-05-02', '2026-05-06', -450.00),\n  (505, 'K-1009', '2026-05-20', NULL, 1500.00),\n  (506, 'K-1010', '2026-06-01', '2026-06-03', 0.00);"
+    },
+    {
+      "id": "holzlager",
+      "titel": "Holzlager der Nordholz Manufaktur",
+      "quelle": "Deep Dive 29",
+      "beschreibung": "Holzchargen aus der Übungsklausur von Deep Dive 29: lieferant 1:n charge, charge 1:n messwert n:1 eigenschaft, charge 1:n charge_holzart n:1 holzart. Die Qualitätsstufe (0–10) steht in charge, die Messwerte (Holzfeuchte, Rohdichte, Astanteil) in messwert. Löschweitergabe von charge an messwert und charge_holzart.",
+      "setup": "PRAGMA foreign_keys = ON;\nCREATE TABLE lieferant (\n  l_id     INTEGER PRIMARY KEY,\n  l_name   VARCHAR(60) NOT NULL,\n  l_ort    VARCHAR(40),\n  l_region VARCHAR(30)\n);\nCREATE TABLE charge (\n  c_id          INTEGER PRIMARY KEY,\n  c_bezeichnung VARCHAR(20) NOT NULL,\n  c_jahr        INTEGER,\n  c_qualitaet   INTEGER CHECK (c_qualitaet BETWEEN 0 AND 10),\n  c_lid         INTEGER NOT NULL,\n  FOREIGN KEY (c_lid) REFERENCES lieferant(l_id)\n);\nCREATE TABLE eigenschaft (\n  e_id   INTEGER PRIMARY KEY,\n  e_name VARCHAR(40) NOT NULL\n);\nCREATE TABLE messwert (\n  eid  INTEGER NOT NULL,\n  cid  INTEGER NOT NULL,\n  wert DECIMAL(6,2),\n  PRIMARY KEY (eid, cid),\n  FOREIGN KEY (eid) REFERENCES eigenschaft(e_id),\n  FOREIGN KEY (cid) REFERENCES charge(c_id) ON DELETE CASCADE\n);\nCREATE TABLE holzart (\n  h_id   INTEGER PRIMARY KEY,\n  h_name VARCHAR(30) NOT NULL,\n  h_typ  VARCHAR(20)\n);\nCREATE TABLE charge_holzart (\n  cid    INTEGER NOT NULL,\n  hid    INTEGER NOT NULL,\n  anteil INTEGER,\n  PRIMARY KEY (cid, hid),\n  FOREIGN KEY (cid) REFERENCES charge(c_id) ON DELETE CASCADE,\n  FOREIGN KEY (hid) REFERENCES holzart(h_id)\n);\nINSERT INTO lieferant (l_id, l_name, l_ort, l_region) VALUES\n  (1, 'Sägewerk Harms', 'Soltau', 'Heide'),\n  (2, 'Holzhof Petersen', 'Husum', 'Küste'),\n  (3, 'Sägewerk Brandt', 'Celle', 'Heide'),\n  (4, 'Forstbetrieb Lüning', 'Goslar', 'Harz'),\n  (5, 'Holzkontor Tams', 'Niebüll', 'Küste');\nINSERT INTO charge (c_id, c_bezeichnung, c_jahr, c_qualitaet, c_lid) VALUES\n  (1, 'EI-2024-01', 2024, 8, 1),\n  (2, 'EI-2024-02', 2024, 7, 1),\n  (3, 'BU-2025-01', 2025, 9, 1),\n  (4, 'KI-2025-01', 2025, 7, 1),\n  (5, 'ES-2024-01', 2024, 7, 2),\n  (6, 'EI-2025-03', 2025, 9, 2),\n  (7, 'BU-2025-02', 2025, 8, 2),\n  (8, 'FI-2025-01', 2025, 6, 3),\n  (9, 'KI-2024-02', 2024, 4, 3),\n  (10, 'EI-2025-04', 2025, 7, 3),\n  (11, 'BU-2024-03', 2024, 6, 4),\n  (12, 'ES-2025-02', 2025, 7, 4),\n  (13, 'NU-2025-01', 2025, 9, 4),\n  (14, 'MI-2025-01', 2025, 6, 5),\n  (15, 'FI-2024-02', 2024, 3, 5);\nINSERT INTO eigenschaft (e_id, e_name) VALUES\n  (1, 'Holzfeuchte'),\n  (2, 'Rohdichte'),\n  (3, 'Astanteil');\nINSERT INTO messwert (eid, cid, wert) VALUES\n  (1, 1, 10.5), (1, 2, 13.0), (1, 3, 9.5), (1, 4, 11.0), (1, 5, 12.5),\n  (1, 6, 9.0), (1, 7, 11.5), (1, 8, 14.0), (1, 9, 16.5), (1, 10, 10.0),\n  (1, 11, 12.0), (1, 12, 11.5), (1, 13, 8.5), (1, 14, 15.0), (1, 15, 18.0),\n  (2, 1, 0.71), (2, 3, 0.68), (2, 6, 0.73), (2, 8, 0.45), (2, 9, 0.52), (2, 13, 0.64), (2, 15, 0.47),\n  (3, 1, 4.0), (3, 2, 6.5), (3, 4, 14.0), (3, 8, 12.5), (3, 9, 15.5), (3, 14, 9.0), (3, 15, 17.0);\nINSERT INTO holzart (h_id, h_name, h_typ) VALUES\n  (1, 'Eiche', 'Laubholz'),\n  (2, 'Buche', 'Laubholz'),\n  (3, 'Kiefer', 'Nadelholz'),\n  (4, 'Esche', 'Laubholz'),\n  (5, 'Fichte', 'Nadelholz'),\n  (6, 'Nussbaum', 'Laubholz');\nINSERT INTO charge_holzart (cid, hid, anteil) VALUES\n  (1, 1, 100), (2, 1, 100), (3, 2, 100), (4, 3, 100), (5, 4, 100),\n  (6, 1, 100), (7, 2, 100), (8, 5, 100), (9, 3, 100), (10, 1, 100),\n  (11, 2, 100), (12, 4, 100), (13, 6, 100), (14, 1, 60), (14, 4, 40), (15, 5, 100);",
+      "variante": "INSERT INTO lieferant (l_id, l_name, l_ort, l_region) VALUES (6, 'Sägewerk Ohlsen', 'Bad Harzburg', 'Harz');\nINSERT INTO charge (c_id, c_bezeichnung, c_jahr, c_qualitaet, c_lid) VALUES\n  (16, 'EI-2026-01', 2026, 10, 6),\n  (17, 'BU-2026-01', 2026, 8, 6),\n  (18, 'ES-2026-01', 2026, 7, 6),\n  (19, 'EI-2026-02', 2026, 8, 6),\n  (20, 'KI-2026-01', 2026, 9, 6),\n  (21, 'FI-2026-01', 2026, 2, 5);\nINSERT INTO messwert (eid, cid, wert) VALUES\n  (1, 16, 8.0), (1, 17, 12.5), (1, 18, 10.2), (1, 19, 7.5), (1, 20, 13.5), (1, 21, 19.0), (2, 16, 0.70), (3, 21, 11.0);\nINSERT INTO charge_holzart (cid, hid, anteil) VALUES (16, 1, 100), (17, 2, 100), (18, 4, 100), (19, 1, 100), (20, 3, 100), (21, 5, 100);"
+    },
+    {
+      "id": "eventlager",
+      "titel": "Lagerbestand des Nordholz Eventservice",
+      "quelle": "Deep Dive 31",
+      "beschreibung": "Tabelle lagerbestand aus der Übungsklausur von Deep Dive 31: Lagerbestand je Artikel am Ende jeder Kalenderwoche. SQLite kennt kein STDDEV() – die Standardabweichung wird über SQRT(AVG(x * x) - AVG(x) * AVG(x)) berechnet.",
+      "setup": "CREATE TABLE lagerbestand (\n  artikelnr     INTEGER NOT NULL,\n  kalenderwoche INTEGER NOT NULL,\n  menge         INTEGER NOT NULL,\n  PRIMARY KEY (artikelnr, kalenderwoche)\n);\nINSERT INTO lagerbestand (artikelnr, kalenderwoche, menge) VALUES\n  (1, 1, 14), (1, 2, 6), (1, 3, 10), (1, 4, 18), (1, 5, 7),\n  (2, 1, 9), (2, 2, 12), (2, 3, 8), (2, 4, 11), (2, 5, 10);",
+      "variante": "INSERT INTO lagerbestand (artikelnr, kalenderwoche, menge) VALUES\n  (1, 6, 23), (2, 6, 4), (3, 1, 30), (3, 2, 20), (3, 3, 40), (3, 4, 10), (3, 5, 50), (3, 6, 30);"
     }
   ],
   "uebungen": [
@@ -2204,6 +2220,237 @@
       ],
       "erklaerung": "Ergebnis: 14680.50 gegen 13430.50 – Huber wird doppelt gezählt (+1250). Braun G.m.b.H. bleibt drin: unscharfe Dubletten findet DISTINCT nicht.",
       "quelle_aufgabe": "DD9 Übungsklausur B1 (Konsequenz)"
+    },
+    {
+      "id": "SQL-HL-001",
+      "datensatz": "holzlager",
+      "thema": "Deep Dive 29",
+      "titel": "Chargen mit niedriger Holzfeuchte",
+      "aufgabe": "Liste alle Chargen mit einer Holzfeuchte unter 12 auf: c_bezeichnung, c_jahr, c_qualitaet und wert. Die niedrigste Holzfeuchte steht oben; bei gleicher Holzfeuchte steht die höhere Qualitätsstufe zuerst.",
+      "schwierigkeit": 2,
+      "tags": [
+        "join",
+        "where",
+        "order by"
+      ],
+      "loesung": "SELECT c.c_bezeichnung, c.c_jahr, c.c_qualitaet, m.wert\nFROM charge c\nJOIN messwert m ON m.cid = c.c_id\nJOIN eigenschaft e ON e.e_id = m.eid\nWHERE e.e_name = 'Holzfeuchte' AND m.wert < 12\nORDER BY m.wert ASC, c.c_qualitaet DESC;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "c_bezeichnung",
+          "c_jahr",
+          "c_qualitaet",
+          "wert"
+        ],
+        "toleranz": 0.005
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Du brauchst drei Tabellen: charge, messwert und eigenschaft – verbunden über cid = c_id und eid = e_id.",
+        "Filtere auf den Namen der Eigenschaft (e_name = 'Holzfeuchte') und auf den Wert.",
+        "Zwei Sortierkriterien: ORDER BY wert ASC, c_qualitaet DESC."
+      ],
+      "erklaerung": "Ohne den Filter auf e_name würden auch Rohdichte und Astanteil mit Werten unter 12 erscheinen. Bei 11,5 % Holzfeuchte entscheidet die Qualitätsstufe über die Reihenfolge.",
+      "quelle_aufgabe": "DD29 Übungsklausur C1",
+      "aufgaben": [
+        "29-C1"
+      ]
+    },
+    {
+      "id": "SQL-HL-002",
+      "datensatz": "holzlager",
+      "thema": "Deep Dive 29",
+      "titel": "Qualität je Region",
+      "aufgabe": "Gib für jede Region (l_region) die höchste, die niedrigste und die durchschnittliche Qualitätsstufe der Chargen aus. Die Spalten heißen l_region, hoechste, niedrigste und durchschnitt.",
+      "schwierigkeit": 2,
+      "tags": [
+        "join",
+        "group by",
+        "aggregat"
+      ],
+      "loesung": "SELECT l.l_region,\n       MAX(c.c_qualitaet) AS hoechste,\n       MIN(c.c_qualitaet) AS niedrigste,\n       AVG(c.c_qualitaet) AS durchschnitt\nFROM charge c\nJOIN lieferant l ON l.l_id = c.c_lid\nGROUP BY l.l_region;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "l_region",
+          "hoechste",
+          "niedrigste",
+          "durchschnitt"
+        ],
+        "toleranz": 0.005
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Die Region steht in lieferant, die Qualitätsstufe in charge – verbinde beide über c_lid = l_id.",
+        "MAX(), MIN() und AVG() je Gruppe: GROUP BY l_region."
+      ],
+      "erklaerung": "Die Gruppenspalte l_region steht in SELECT und in GROUP BY. Ergebnis mit den Ausgangsdaten: Harz 9 / 6 / 7,33 · Heide 9 / 4 / 6,86 · Küste 9 / 3 / 6,6.",
+      "quelle_aufgabe": "DD29 Übungsklausur C2",
+      "aufgaben": [
+        "29-C2"
+      ]
+    },
+    {
+      "id": "SQL-HL-003",
+      "datensatz": "holzlager",
+      "thema": "Deep Dive 29",
+      "titel": "Lieferanten mit mehr als zwei guten Chargen",
+      "aufgabe": "Gib je Lieferant (l_name) die Anzahl der Chargen mit einer Qualitätsstufe von 7 oder höher aus (Spalte anzahl). Nur Lieferanten mit mehr als zwei solchen Chargen; der Lieferant mit den meisten guten Chargen zuerst.",
+      "schwierigkeit": 3,
+      "tags": [
+        "join",
+        "where",
+        "group by",
+        "having",
+        "order by"
+      ],
+      "loesung": "SELECT l.l_name, COUNT(c.c_id) AS anzahl\nFROM lieferant l\nJOIN charge c ON c.c_lid = l.l_id\nWHERE c.c_qualitaet >= 7\nGROUP BY l.l_id, l.l_name\nHAVING COUNT(c.c_id) > 2\nORDER BY anzahl DESC;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "l_name",
+          "anzahl"
+        ]
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Die Qualitätsstufe filtert einzelne Chargen – das gehört in WHERE.",
+        "Die Mindestanzahl filtert Gruppen – das gehört in HAVING. „Mehr als zwei“ ist > 2.",
+        "Sortiere absteigend nach der Anzahl."
+      ],
+      "erklaerung": "WHERE wirkt vor dem Gruppieren, HAVING danach. Forstbetrieb Lüning hat nur zwei Chargen ab Stufe 7 und erscheint deshalb nicht.",
+      "quelle_aufgabe": "DD29 Übungsklausur C3",
+      "aufgaben": [
+        "29-C3"
+      ]
+    },
+    {
+      "id": "SQL-HL-004",
+      "datensatz": "holzlager",
+      "thema": "Deep Dive 29",
+      "titel": "Chargen mit der höchsten Qualitätsstufe",
+      "aufgabe": "Liste alle Chargen auf, die die höchste in der Datenbank vorkommende Qualitätsstufe erreichen: c_bezeichnung, c_jahr und c_qualitaet.",
+      "schwierigkeit": 2,
+      "tags": [
+        "unterabfrage",
+        "max"
+      ],
+      "loesung": "SELECT c_bezeichnung, c_jahr, c_qualitaet\nFROM charge\nWHERE c_qualitaet = (SELECT MAX(c_qualitaet) FROM charge);",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "c_bezeichnung",
+          "c_jahr",
+          "c_qualitaet"
+        ]
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Die höchste Stufe ermittelt eine Unterabfrage: SELECT MAX(c_qualitaet) FROM charge.",
+        "Vergleiche c_qualitaet in WHERE mit dem Ergebnis der Unterabfrage."
+      ],
+      "erklaerung": "ORDER BY c_qualitaet DESC LIMIT 1 liefert nur eine Zeile – hier erreichen aber drei Chargen die Stufe 9.",
+      "quelle_aufgabe": "DD29 Übungsklausur C4",
+      "aufgaben": [
+        "29-C4"
+      ]
+    },
+    {
+      "id": "SQL-HL-005",
+      "datensatz": "holzlager",
+      "thema": "Deep Dive 29",
+      "titel": "Chargen eines Lieferanten löschen",
+      "aufgabe": "Entferne alle Chargen des Lieferanten „Holzkontor Tams“ aus der Datenbank. Für messwert und charge_holzart ist eine Löschweitergabe eingerichtet; der Lieferant selbst bleibt erhalten.",
+      "schwierigkeit": 2,
+      "tags": [
+        "dml",
+        "delete",
+        "unterabfrage"
+      ],
+      "loesung": "DELETE FROM charge\nWHERE c_lid = (SELECT l_id FROM lieferant WHERE l_name = 'Holzkontor Tams');",
+      "vergleich": {
+        "reihenfolge": "auto"
+      },
+      "pruefabfrage": "SELECT (SELECT COUNT(*) FROM charge) AS chargen,\n       (SELECT COUNT(*) FROM charge c JOIN lieferant l ON l.l_id = c.c_lid WHERE l.l_name = 'Holzkontor Tams') AS chargen_tams,\n       (SELECT COUNT(*) FROM messwert) AS messwerte,\n       (SELECT COUNT(*) FROM charge_holzart) AS anteile,\n       (SELECT COUNT(*) FROM lieferant) AS lieferanten;",
+      "hinweise": [
+        "Gelöscht wird in charge – die Detailtabellen folgen durch ON DELETE CASCADE von selbst.",
+        "Die l_id des Lieferanten liefert eine Unterabfrage auf lieferant.",
+        "Ohne WHERE würden alle Chargen gelöscht."
+      ],
+      "erklaerung": "Geprüft wird danach die Anzahl der Zeilen in charge, messwert, charge_holzart und lieferant. Der Lieferant bleibt stehen, seine Chargen und deren Messwerte sind weg.",
+      "quelle_aufgabe": "DD29 Übungsklausur C5",
+      "aufgaben": [
+        "29-C5"
+      ]
+    },
+    {
+      "id": "SQL-EL-001",
+      "datensatz": "eventlager",
+      "thema": "Deep Dive 31",
+      "titel": "Höchster und niedrigster Lagerbestand je Artikel",
+      "aufgabe": "Gib je Artikel den höchsten und den niedrigsten Lagerbestand aus. Die Spalten heißen artikelnr, maximum und minimum.",
+      "schwierigkeit": 1,
+      "tags": [
+        "group by",
+        "aggregat",
+        "max",
+        "min"
+      ],
+      "loesung": "SELECT artikelnr, MAX(menge) AS maximum, MIN(menge) AS minimum\nFROM lagerbestand\nGROUP BY artikelnr;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "artikelnr",
+          "maximum",
+          "minimum"
+        ]
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "MAX(menge) und MIN(menge) liefern die Extremwerte.",
+        "„Je Artikel“ heißt GROUP BY artikelnr."
+      ],
+      "erklaerung": "Mit den Ausgangsdaten: Artikel 1 → 18 und 6, Artikel 2 → 12 und 8.",
+      "quelle_aufgabe": "DD31 Übungsklausur C4",
+      "aufgaben": [
+        "31-C4"
+      ]
+    },
+    {
+      "id": "SQL-EL-002",
+      "datensatz": "eventlager",
+      "thema": "Deep Dive 31",
+      "titel": "Mittelwert und Standardabweichung je Artikel",
+      "aufgabe": "Gib je Artikel den Mittelwert und die Standardabweichung des Lagerbestands aus, jeweils auf eine ganze Zahl gerundet. Die Spalten heißen artikelnr, mittelwert und standardabweichung.\n\nSQLite kennt die Funktion STDDEV() aus dem Prüfungshinweis nicht. Verwende die Umformung σ = √(Mittelwert der Quadrate − Quadrat des Mittelwerts) mit den Funktionen AVG(), SQRT() und ROUND().",
+      "schwierigkeit": 3,
+      "tags": [
+        "group by",
+        "aggregat",
+        "avg",
+        "standardabweichung",
+        "round"
+      ],
+      "loesung": "SELECT artikelnr,\n       ROUND(AVG(menge)) AS mittelwert,\n       ROUND(SQRT(AVG(menge * menge) - AVG(menge) * AVG(menge))) AS standardabweichung\nFROM lagerbestand\nGROUP BY artikelnr;",
+      "vergleich": {
+        "reihenfolge": "auto",
+        "spaltennamen": [
+          "artikelnr",
+          "mittelwert",
+          "standardabweichung"
+        ],
+        "toleranz": 0.005
+      },
+      "pruefabfrage": null,
+      "hinweise": [
+        "Der Mittelwert ist AVG(menge), gerundet mit ROUND(…).",
+        "Mittelwert der Quadrate: AVG(menge * menge). Quadrat des Mittelwerts: AVG(menge) * AVG(menge).",
+        "Zusammen: ROUND(SQRT(AVG(menge * menge) - AVG(menge) * AVG(menge)))."
+      ],
+      "erklaerung": "Mit den Ausgangsdaten: Artikel 1 → 11 und 4 (σ = 4,47), Artikel 2 → 10 und 1 (σ = 1,41). In MySQL, PostgreSQL oder Oracle genügt ROUND(STDDEV(menge)); je nach System rechnet STDDEV() mit n oder n − 1 im Nenner.",
+      "quelle_aufgabe": "DD31 Übungsklausur C5",
+      "aufgaben": [
+        "31-C5"
+      ]
     }
   ]
 }

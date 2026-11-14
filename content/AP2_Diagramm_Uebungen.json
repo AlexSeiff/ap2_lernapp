@@ -1066,6 +1066,403 @@
    ]
   },
   {
+   "id": "DG-EPK-006",
+   "typ": "epk",
+   "stufe": 1,
+   "titel": "EPK: Rücknahme gemieteter Geräte",
+   "szenario": "Gemietete MDE-Geräte kommen nach der Veranstaltung zurück. Nach der Sichtprüfung gibt es zwei Fälle: **Ohne Mangel** werden die Daten gelöscht, das Gerät zurückgesetzt und gereinigt. **Mit Mangel** folgt die Fehlerdiagnose – ist eine Reparatur möglich, wird das Ersatzteil bestellt und eingebaut, sonst wird das Gerät ausgesondert. Zurückgesetzte und reparierte Geräte durchlaufen denselben Funktionstest und werden eingelagert.\n\nSetze die fehlenden Elemente ein.",
+   "breite": 780,
+   "hoehe": 990,
+   "knoten": [
+    {
+     "id": "e1",
+     "x": 300,
+     "y": 10,
+     "w": 176,
+     "h": 46,
+     "form": "ereignis",
+     "text": "Gerät ist eingetroffen"
+    },
+    {
+     "id": "f1",
+     "x": 300,
+     "y": 80,
+     "w": 176,
+     "h": 46,
+     "form": "funktion",
+     "text": "Sichtprüfung durchführen"
+    },
+    {
+     "id": "k1",
+     "x": 370,
+     "y": 150,
+     "w": 36,
+     "h": 36,
+     "slot": "s1"
+    },
+    {
+     "id": "e2",
+     "x": 40,
+     "y": 220,
+     "w": 176,
+     "h": 46,
+     "form": "ereignis",
+     "text": "Kein Mangel festgestellt"
+    },
+    {
+     "id": "e3",
+     "x": 300,
+     "y": 220,
+     "w": 176,
+     "h": 46,
+     "slot": "s2"
+    },
+    {
+     "id": "f2",
+     "x": 40,
+     "y": 290,
+     "w": 176,
+     "h": 46,
+     "slot": "s3"
+    },
+    {
+     "id": "f3",
+     "x": 300,
+     "y": 290,
+     "w": 176,
+     "h": 46,
+     "form": "funktion",
+     "text": "Fehlerdiagnose durchführen"
+    },
+    {
+     "id": "e4",
+     "x": 40,
+     "y": 360,
+     "w": 176,
+     "h": 46,
+     "form": "ereignis",
+     "text": "Gerät ist zurückgesetzt"
+    },
+    {
+     "id": "k2",
+     "x": 370,
+     "y": 365,
+     "w": 36,
+     "h": 36,
+     "slot": "s4"
+    },
+    {
+     "id": "e5",
+     "x": 300,
+     "y": 430,
+     "w": 176,
+     "h": 46,
+     "form": "ereignis",
+     "text": "Reparatur möglich"
+    },
+    {
+     "id": "e7",
+     "x": 560,
+     "y": 430,
+     "w": 176,
+     "h": 46,
+     "form": "ereignis",
+     "text": "Reparatur nicht möglich"
+    },
+    {
+     "id": "f4",
+     "x": 300,
+     "y": 500,
+     "w": 176,
+     "h": 46,
+     "form": "funktion",
+     "text": "Ersatzteil bestellen und einbauen"
+    },
+    {
+     "id": "f5",
+     "x": 560,
+     "y": 500,
+     "w": 176,
+     "h": 46,
+     "form": "funktion",
+     "text": "Gerät aussondern"
+    },
+    {
+     "id": "e6",
+     "x": 300,
+     "y": 570,
+     "w": 176,
+     "h": 46,
+     "slot": "s5"
+    },
+    {
+     "id": "e8",
+     "x": 560,
+     "y": 570,
+     "w": 176,
+     "h": 46,
+     "form": "ereignis",
+     "text": "Gerät ist ausgesondert"
+    },
+    {
+     "id": "k3",
+     "x": 240,
+     "y": 650,
+     "w": 36,
+     "h": 36,
+     "slot": "s6"
+    },
+    {
+     "id": "f6",
+     "x": 170,
+     "y": 715,
+     "w": 176,
+     "h": 46,
+     "form": "funktion",
+     "text": "Funktionstest durchführen"
+    },
+    {
+     "id": "e9",
+     "x": 170,
+     "y": 785,
+     "w": 176,
+     "h": 46,
+     "form": "ereignis",
+     "text": "Funktionstest bestanden"
+    },
+    {
+     "id": "f7",
+     "x": 170,
+     "y": 855,
+     "w": 176,
+     "h": 46,
+     "form": "funktion",
+     "text": "Gerät einlagern und buchen"
+    },
+    {
+     "id": "e10",
+     "x": 170,
+     "y": 925,
+     "w": 176,
+     "h": 46,
+     "form": "ereignis",
+     "text": "Gerät ist eingelagert"
+    }
+   ],
+   "kanten": [
+    {
+     "von": "e1",
+     "nach": "f1",
+     "art": "fluss"
+    },
+    {
+     "von": "f1",
+     "nach": "k1",
+     "art": "fluss"
+    },
+    {
+     "von": "k1",
+     "nach": "e2",
+     "art": "fluss",
+     "punkte": [
+      [
+       388,
+       203
+      ],
+      [
+       128,
+       203
+      ]
+     ]
+    },
+    {
+     "von": "k1",
+     "nach": "e3",
+     "art": "fluss"
+    },
+    {
+     "von": "e2",
+     "nach": "f2",
+     "art": "fluss"
+    },
+    {
+     "von": "f2",
+     "nach": "e4",
+     "art": "fluss"
+    },
+    {
+     "von": "e3",
+     "nach": "f3",
+     "art": "fluss"
+    },
+    {
+     "von": "f3",
+     "nach": "k2",
+     "art": "fluss"
+    },
+    {
+     "von": "k2",
+     "nach": "e5",
+     "art": "fluss"
+    },
+    {
+     "von": "k2",
+     "nach": "e7",
+     "art": "fluss",
+     "punkte": [
+      [
+       388,
+       415
+      ],
+      [
+       648,
+       415
+      ]
+     ]
+    },
+    {
+     "von": "e5",
+     "nach": "f4",
+     "art": "fluss"
+    },
+    {
+     "von": "f4",
+     "nach": "e6",
+     "art": "fluss"
+    },
+    {
+     "von": "e7",
+     "nach": "f5",
+     "art": "fluss"
+    },
+    {
+     "von": "f5",
+     "nach": "e8",
+     "art": "fluss"
+    },
+    {
+     "von": "e4",
+     "nach": "k3",
+     "art": "fluss",
+     "punkte": [
+      [
+       128,
+       633
+      ],
+      [
+       258,
+       633
+      ]
+     ]
+    },
+    {
+     "von": "e6",
+     "nach": "k3",
+     "art": "fluss",
+     "punkte": [
+      [
+       388,
+       633
+      ],
+      [
+       258,
+       633
+      ]
+     ]
+    },
+    {
+     "von": "k3",
+     "nach": "f6",
+     "art": "fluss"
+    },
+    {
+     "von": "f6",
+     "nach": "e9",
+     "art": "fluss"
+    },
+    {
+     "von": "e9",
+     "nach": "f7",
+     "art": "fluss"
+    },
+    {
+     "von": "f7",
+     "nach": "e10",
+     "art": "fluss"
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "xor",
+     "text": "XOR",
+     "mehrfach": true
+    },
+    {
+     "id": "p2",
+     "form": "ereignis",
+     "text": "Mangel festgestellt"
+    },
+    {
+     "id": "p3",
+     "form": "funktion",
+     "text": "Daten löschen, zurücksetzen und reinigen"
+    },
+    {
+     "id": "p4",
+     "form": "ereignis",
+     "text": "Gerät ist repariert"
+    },
+    {
+     "id": "d1",
+     "form": "and",
+     "text": "AND",
+     "mehrfach": true
+    },
+    {
+     "id": "d2",
+     "form": "or",
+     "text": "OR",
+     "mehrfach": true
+    },
+    {
+     "id": "d3",
+     "form": "funktion",
+     "text": "Mangel festgestellt"
+    },
+    {
+     "id": "d4",
+     "form": "ereignis",
+     "text": "Daten löschen, zurücksetzen und reinigen"
+    },
+    {
+     "id": "d5",
+     "form": "funktion",
+     "text": "Gerät ist repariert"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2",
+    "s3": "p3",
+    "s4": "p1",
+    "s5": "p4",
+    "s6": "p1"
+   },
+   "hinweise": [
+    "„Entweder ohne Mangel oder mit Mangel“ – es läuft immer genau ein Weg.",
+    "Nach einem Ereignis folgt eine Funktion, nach einer Funktion ein Ereignis.",
+    "Zwei Wege, von denen immer nur einer ankommt, werden mit demselben Konnektor zusammengeführt, mit dem verzweigt wurde."
+   ],
+   "erklaerung": "Beide Entscheidungen sind **exklusiv**: Ein Gerät hat einen Mangel oder nicht, es ist reparierbar oder nicht – deshalb jeweils ein **XOR-Split** nach der prüfenden Funktion. Vor dem gemeinsamen Funktionstest führt ein **XOR-Join** die Zweige „zurückgesetzt“ und „repariert“ zusammen. Der Zweig „Reparatur nicht möglich“ endet mit einem eigenen Endereignis.",
+   "quelle": "DD28 Übungsklausur D1",
+   "tags": [
+    "epk",
+    "xor"
+   ],
+   "varianten": []
+  },
+  {
    "id": "DG-BPMN-001",
    "typ": "bpmn",
    "stufe": 1,
@@ -3705,6 +4102,164 @@
     "uml",
     "sequenzdiagramm",
     "reihenfolge"
+   ],
+   "varianten": []
+  },
+  {
+   "id": "DG-SEQ-005",
+   "typ": "sequenz",
+   "stufe": 1,
+   "titel": "Sequenzdiagramm: Anmeldung eines MDE-Geräts",
+   "szenario": "Ein MDE-Gerät meldet sich mit Benutzername und Passwort bei der API an. Die API lässt die Zugangsdaten vom Authentifizierungsserver prüfen und **wartet** auf das Ergebnis. Danach gibt sie dem Gerät ein Token zurück. Mit dem Token startet das Gerät eine Abrechnungssitzung; die API stößt die Abrechnung beim Abrechnungsserver an, **ohne auf eine Rückmeldung zu warten**, und bestätigt dem Gerät die Anmeldung.\n\nSetze die passenden Nachrichten ein.",
+   "breite": 770,
+   "hoehe": 460,
+   "knoten": [
+    {
+     "id": "g",
+     "x": 15,
+     "y": 10,
+     "w": 150,
+     "h": 440,
+     "form": "lebenslinie",
+     "text": ":Geraet"
+    },
+    {
+     "id": "a",
+     "x": 210,
+     "y": 10,
+     "w": 150,
+     "h": 440,
+     "form": "lebenslinie",
+     "text": ":API"
+    },
+    {
+     "id": "s",
+     "x": 405,
+     "y": 10,
+     "w": 150,
+     "h": 440,
+     "form": "lebenslinie",
+     "text": ":AuthServer"
+    },
+    {
+     "id": "r",
+     "x": 600,
+     "y": 10,
+     "w": 150,
+     "h": 440,
+     "form": "lebenslinie",
+     "text": ":Abrechnungsserver"
+    }
+   ],
+   "kanten": [
+    {
+     "von": "g",
+     "nach": "a",
+     "art": "sync",
+     "text": "POST /api/login",
+     "y": 90
+    },
+    {
+     "von": "a",
+     "nach": "s",
+     "art": "sync",
+     "slot": "s1",
+     "y": 140
+    },
+    {
+     "von": "s",
+     "nach": "a",
+     "art": "antwort",
+     "slot": "s2",
+     "y": 190
+    },
+    {
+     "von": "a",
+     "nach": "g",
+     "art": "antwort",
+     "slot": "s3",
+     "y": 240
+    },
+    {
+     "von": "g",
+     "nach": "a",
+     "art": "sync",
+     "text": "POST /api/sitzung",
+     "y": 290
+    },
+    {
+     "von": "a",
+     "nach": "r",
+     "art": "async",
+     "slot": "s4",
+     "y": 340
+    },
+    {
+     "von": "a",
+     "nach": "g",
+     "art": "antwort",
+     "text": "200 – OK",
+     "y": 390
+    }
+   ],
+   "palette": [
+    {
+     "id": "p1",
+     "form": "sync",
+     "text": "pruefeZugang(benutzer, passwort)"
+    },
+    {
+     "id": "p2",
+     "form": "antwort",
+     "text": "TRUE"
+    },
+    {
+     "id": "p3",
+     "form": "antwort",
+     "text": "200 – OK, Token"
+    },
+    {
+     "id": "p4",
+     "form": "async",
+     "text": "starteAbrechnung(id)"
+    },
+    {
+     "id": "d1",
+     "form": "async",
+     "text": "pruefeZugang(benutzer, passwort)"
+    },
+    {
+     "id": "d2",
+     "form": "sync",
+     "text": "starteAbrechnung(id)"
+    },
+    {
+     "id": "d3",
+     "form": "sync",
+     "text": "TRUE"
+    },
+    {
+     "id": "d4",
+     "form": "async",
+     "text": "200 – OK, Token"
+    }
+   ],
+   "loesung": {
+    "s1": "p1",
+    "s2": "p2",
+    "s3": "p3",
+    "s4": "p4"
+   },
+   "hinweise": [
+    "Wartet der Sender auf das Ergebnis, ist die Nachricht synchron (gefüllte Pfeilspitze).",
+    "Rückgaben wie TRUE oder das Token sind Antworten (gestrichelt).",
+    "„Ohne auf eine Rückmeldung zu warten“ beschreibt eine asynchrone Nachricht (offene Pfeilspitze) – eine Antwort wird hier nicht eingezeichnet."
+   ],
+   "erklaerung": "Die API ruft den AuthServer **synchron** auf: Erst wenn `TRUE` zurückkommt, darf sie das Token ausgeben. Die Abrechnung wird **asynchron** angestoßen – das Gerät erhält seine Bestätigung sofort, auch wenn der Abrechnungsserver noch arbeitet. Das Gerät spricht nur mit der API, nie direkt mit den Servern dahinter.",
+   "quelle": "DD28 Übungsklausur B1",
+   "tags": [
+    "uml",
+    "sequenzdiagramm"
    ],
    "varianten": []
   },

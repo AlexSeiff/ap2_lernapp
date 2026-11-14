@@ -109,6 +109,9 @@ describe('Erkennung', () => {
       '21-B3': 'epk',
       '21-A1': 'aktivitaet',
       '22-B1': 'aktivitaet',
+      '27-B2': 'bpmn',
+      '28-D1': 'epk',
+      '31-B1': 'normalform',
       '03-D3': 'boxplot', // tests/boxplotAntwort.test.ts
       '11-D2': 'struktogramm', // tests/struktogramm.test.ts
       // Verlangte Tabellen (tests/werteTabelle.test.ts)
@@ -175,6 +178,19 @@ describe('Erkennung', () => {
           '24-C3',
           '24-C4',
           '24-D3',
+          '27-C4',
+          '27-D1',
+          '28-B1',
+          '28-B2',
+          '28-C1',
+          '29-A4',
+          '29-A8',
+          '29-B1',
+          '29-D2',
+          '30-C2',
+          '30-D3',
+          '31-A4',
+          '31-A6',
         ].map((id) => [id, 'werte']),
       ),
     });

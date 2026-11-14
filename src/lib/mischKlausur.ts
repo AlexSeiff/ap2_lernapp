@@ -43,7 +43,7 @@ export interface Unterbereich {
 }
 
 /**
- * Unterbereiche der Themenliste und die Blöcke der Übungsklausuren, die sie prüfen. WiSo (DD13/14, Altklausur-Training DD20, DD25, DD26) fehlt bewusst:
+ * Unterbereiche der Themenliste und die Blöcke der Übungsklausuren, die sie prüfen. WiSo (DD13/14, Altklausur-Training DD20, DD25, DD26, DD32, DD33) fehlt bewusst:
  * das ist ein eigener 60-Minuten-Teil mit gebundenen Aufgaben.
  */
 export const UNTERBEREICHE: Unterbereich[] = [
@@ -56,6 +56,8 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '18', bloecke: ['B'] },
       { topicId: '21', bloecke: ['A', 'B'] },
       { topicId: '22', bloecke: ['B', 'C'] },
+      { topicId: '27', bloecke: ['B', 'C'] },
+      { topicId: '28', bloecke: ['B', 'D'] },
     ],
   },
   {
@@ -68,6 +70,8 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '18', bloecke: ['A'] },
       { topicId: '21', bloecke: ['C'] },
       { topicId: '22', bloecke: ['A'] },
+      { topicId: '27', bloecke: ['A'] },
+      { topicId: '28', bloecke: ['A'] },
     ],
   },
   {
@@ -81,6 +85,8 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '18', bloecke: ['C', 'D'] },
       { topicId: '21', bloecke: ['D'] },
       { topicId: '22', bloecke: ['D'] },
+      { topicId: '27', bloecke: ['D'] },
+      { topicId: '28', bloecke: ['C'] },
     ],
   },
   {
@@ -101,6 +107,9 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '15', bloecke: ['A', 'B', 'C'] },
       { topicId: '19', bloecke: ['D'] },
       { topicId: '24', bloecke: ['B', 'C'] },
+      { topicId: '29', bloecke: ['B', 'C'] },
+      { topicId: '30', bloecke: ['C'] },
+      { topicId: '31', bloecke: ['B', 'C'] },
     ],
   },
   {
@@ -117,6 +126,9 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '19', bloecke: ['A', 'B', 'C'] },
       { topicId: '23', bloecke: ['A', 'B'] },
       { topicId: '24', bloecke: ['A'] },
+      { topicId: '29', bloecke: ['A'] },
+      { topicId: '30', bloecke: ['A', 'B'] },
+      { topicId: '31', bloecke: ['A', 'D'] },
     ],
   },
   {
@@ -127,6 +139,7 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '10', bloecke: ['D'] },
       { topicId: '16', bloecke: ['D'] },
       { topicId: '23', bloecke: ['C'] },
+      { topicId: '30', bloecke: ['D'] },
     ],
   },
   {
@@ -137,6 +150,7 @@ export const UNTERBEREICHE: Unterbereich[] = [
       { topicId: '10', bloecke: ['A', 'B', 'C'] },
       { topicId: '23', bloecke: ['D'] },
       { topicId: '24', bloecke: ['D'] },
+      { topicId: '29', bloecke: ['D'] },
     ],
   },
 ];

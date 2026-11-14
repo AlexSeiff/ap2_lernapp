@@ -19,6 +19,8 @@ const { datasets, exercises, issues } = parseSqlUebungen(
   new Map([
     ['01', 'SQL'],
     ['09', 'Datenqualität'],
+    ['29', 'Altklausur-Training Datenqualität IV'],
+    ['31', 'Altklausur-Training Datenqualität VI'],
   ]),
 );
 const byId = new Map(datasets.map((d) => [d.id, d]));

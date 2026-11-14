@@ -8,3 +8,10 @@ tsconfig.tsbuildinfo
 *.defekt-*
 # Lokale Kopie der Projekt-Skills für Codex (Original: .claude/skills)
 .agents/
+
+# Prüfungsfotos und Bildausschnitte bleiben lokal (nicht versionieren)
+foto_transkription/bilder/
+foto_transkription/**/*.jpg
+foto_transkription/**/*.jpeg
+foto_transkription/**/*.png
+foto_transkription/**/*.heic

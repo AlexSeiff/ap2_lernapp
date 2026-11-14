@@ -357,6 +357,62 @@
       "quelleAufgabe": "DD3 Teil 7.2"
     },
     {
+      "id": "RE-ST1-020",
+      "thema": "Deep Dive 31",
+      "titel": "Lagerbestand: Mittelwert, Varianz und Standardabweichung",
+      "schwierigkeit": 2,
+      "tags": [
+        "streuung",
+        "varianz"
+      ],
+      "vorlage": "varianz",
+      "daten": {
+        "werte": [
+          14,
+          6,
+          10,
+          18,
+          7
+        ],
+        "art": "grundgesamtheit",
+        "einheit": "Stück"
+      },
+      "aufgabe": "Lagerbestand eines Artikels am Ende von {{n}} Kalenderwochen (in Stück): {{werte}}.\n\nBerechne Mittelwert, Summe der Abweichungsquadrate, Varianz und Standardabweichung **{{artLang}}**.",
+      "eingaben": [
+        "mittel",
+        "saq",
+        "varianz",
+        "stdabw"
+      ],
+      "quelleAufgabe": "DD31 Übungsklausur C6"
+    },
+    {
+      "id": "RE-ST1-021",
+      "thema": "Deep Dive 31",
+      "titel": "Lagerbestand: Median",
+      "schwierigkeit": 1,
+      "tags": [
+        "lagemaße",
+        "median"
+      ],
+      "vorlage": "lagemasse",
+      "daten": {
+        "werte": [
+          14,
+          6,
+          10,
+          18,
+          7
+        ],
+        "einheit": "Stück"
+      },
+      "aufgabe": "Lagerbestand eines Artikels am Ende von {{n}} Kalenderwochen (in Stück): {{werte}}.\n\nBestimme den Median.",
+      "eingaben": [
+        "median"
+      ],
+      "quelleAufgabe": "DD31 Übungsklausur C7"
+    },
+    {
       "id": "RE-ST2-001",
       "thema": "Deep Dive 4",
       "titel": "Korrelationskoeffizient nach Pearson",
@@ -902,6 +958,76 @@
       "erklaerung": "Gelernt wird nur aus Fehlern: Ist e = 0, bleibt alles gleich. Gewichte von Eingaben mit x = 0 ändern sich nie. Sind die Daten linear trennbar, findet das Perzeptron nach endlich vielen Schritten fehlerfreie Gewichte."
     },
     {
+      "id": "RE-ML-017",
+      "thema": "Deep Dive 29",
+      "titel": "Trenngerade: Funktionswert und Differenz",
+      "schwierigkeit": 1,
+      "tags": [
+        "klassifikation",
+        "trenngerade"
+      ],
+      "aufgabe": "Eine Trenngerade y = 1,5 · x − 1 trennt gesunde Bretter (oberhalb) von befallenen (unterhalb). Geprüft werden die Messpunkte (2 | 8) und (6 | 5).\n\nBerechne je Punkt den Funktionswert der Geraden und die Differenz.\n\n> **Formeln:**\n> - Funktionswert der Trenngeraden: f(x) = m · x + b\n> - Differenz: d = y − f(x)",
+      "eingaben": [
+        {
+          "id": "f1",
+          "label": "Funktionswert f(2)",
+          "loesung": 2
+        },
+        {
+          "id": "d1",
+          "label": "Differenz für (2 | 8)",
+          "loesung": 6
+        },
+        {
+          "id": "f2",
+          "label": "Funktionswert f(6)",
+          "loesung": 8
+        },
+        {
+          "id": "d2",
+          "label": "Differenz für (6 | 5)",
+          "loesung": -3
+        }
+      ],
+      "hinweise": [
+        "Setze x in die Geradengleichung ein: 1,5 · x − 1.",
+        "Differenz = y des Punkts minus Funktionswert – nicht umgekehrt."
+      ],
+      "erklaerung": "Positive Differenz → der Punkt liegt **oberhalb** der Geraden (gesund), negative Differenz → **unterhalb** (befallen). $8 - (1{,}5 \\cdot 2 - 1) = 6$ und $5 - (1{,}5 \\cdot 6 - 1) = -3$.",
+      "quelleAufgabe": "DD29 Übungsklausur A6"
+    },
+    {
+      "id": "RE-ML-018",
+      "thema": "Deep Dive 30",
+      "titel": "Euklidische Distanz über vier Merkmale",
+      "schwierigkeit": 2,
+      "tags": [
+        "knn",
+        "distanz"
+      ],
+      "aufgabe": "Zwei Hubantriebe derselben Klasse: bekannt (Motortemperatur 46,5 °C · Drehzahl 2840 1/min · Drehmoment 2,1 Nm · Laufzeit 260 min) und zu klassifizieren (43,5 °C · 2800 1/min · 1,7 Nm · 248 min). Die Klasse geht mit der Differenz 0 ein.\n\nBerechne die Summe der quadrierten Differenzen und die euklidische Distanz.\n\n> **Formel:** d(p, q) = √(Σ (q_i − p_i)²)",
+      "eingaben": [
+        {
+          "id": "summe",
+          "label": "Summe der quadrierten Differenzen",
+          "runden": 2,
+          "loesung": 1753.16
+        },
+        {
+          "id": "distanz",
+          "label": "Euklidische Distanz",
+          "runden": 2,
+          "loesung": 41.87
+        }
+      ],
+      "hinweise": [
+        "Differenzen: 3 · 40 · 0,4 · 12.",
+        "Quadrieren, addieren, dann die Wurzel ziehen."
+      ],
+      "erklaerung": "$\\sqrt{9 + 1.600 + 0{,}16 + 144} = \\sqrt{1.753{,}16} = 41{,}87$. Die Drehzahl trägt 1.600 von 1.753 bei – ohne Skalierung bestimmt ein einziges Merkmal den Abstand.",
+      "quelleAufgabe": "DD30 Übungsklausur B7"
+    },
+    {
       "id": "RE-PA-001",
       "thema": "Deep Dive 5",
       "titel": "Durchlaufzeit und Wertschöpfungsanteil",
@@ -1136,6 +1262,162 @@
       ],
       "erklaerung": "A-Artikel: Bürostuhl und Schreibtisch (zusammen 76,7 % des Werts bei 33 % der Artikel), B: Monitor, C: Lampe, Kabelkanal, Schrauben. Auf die A-Artikel konzentrieren sich Preisverhandlungen und Bestandsoptimierung; C-Artikel werden mit möglichst wenig Aufwand beschafft.",
       "quelleAufgabe": "DD5 Teil 6.5"
+    },
+    {
+      "id": "RE-PA-012",
+      "thema": "Deep Dive 27",
+      "titel": "Kalkulation für den neuen Prozess",
+      "schwierigkeit": 3,
+      "tags": [
+        "kalkulation",
+        "wirtschaftlichkeit"
+      ],
+      "aufgabe": "Ist-Prozess: Materialkosten 252.000 €, Personalkosten 150.000 €, Abschreibung 2.000 €, sonstige Kosten 4.000 €, sonstige Gemeinkosten 10 % der Herstellkosten, Gewinn 112.200 €, Umsatz 561.000 €.\n\nNeuer Prozess: Umsatz +10 %, Personalkosten −20 %, Abschreibung 38.000 €, sonstige Gemeinkosten nur noch 5 % der Herstellkosten; Materialkosten und sonstige Kosten bleiben gleich.\n\nVervollständige die Kalkulation für den neuen Prozess.\n\n> **Formeln:**\n> - Herstellkosten = Materialkosten + Personalkosten + Abschreibung + sonstige Kosten\n> - sonstige Gemeinkosten = Herstellkosten · Zuschlagsatz\n> - Selbstkosten = Herstellkosten + sonstige Gemeinkosten\n> - Gewinn = Umsatz − Selbstkosten",
+      "eingaben": [
+        {
+          "id": "personal",
+          "label": "Personalkosten neu",
+          "einheit": "€",
+          "loesung": 120000
+        },
+        {
+          "id": "herstell",
+          "label": "Herstellkosten neu",
+          "einheit": "€",
+          "loesung": 414000
+        },
+        {
+          "id": "gemein",
+          "label": "Sonstige Gemeinkosten neu",
+          "einheit": "€",
+          "loesung": 20700
+        },
+        {
+          "id": "selbst",
+          "label": "Selbstkosten neu",
+          "einheit": "€",
+          "loesung": 434700
+        },
+        {
+          "id": "umsatz",
+          "label": "Umsatz neu",
+          "einheit": "€",
+          "loesung": 617100
+        },
+        {
+          "id": "gewinn",
+          "label": "Gewinn neu",
+          "einheit": "€",
+          "loesung": 182400
+        },
+        {
+          "id": "veraenderung",
+          "label": "Veränderung des Gewinns",
+          "einheit": "€",
+          "loesung": 70200
+        }
+      ],
+      "hinweise": [
+        "Personalkosten: 150.000 · 0,8. Umsatz: 561.000 · 1,1.",
+        "Von oben rechnen bis zu den Selbstkosten, dann den Gewinn rückwärts aus dem Umsatz ermitteln.",
+        "Die sonstigen Gemeinkosten beziehen sich auf die **Herstellkosten**."
+      ],
+      "erklaerung": "Der Gewinn steigt von 112.200 € auf 182.400 €, also um 70.200 € – obwohl die Abschreibung um 36.000 € höher ist. Wer 25 % auf die neuen Selbstkosten rechnet, ignoriert die Annahme „Umsatz +10 %“.",
+      "quelleAufgabe": "DD27 Übungsklausur D1"
+    },
+    {
+      "id": "RE-PA-013",
+      "thema": "Deep Dive 28",
+      "titel": "Gerätebedarf für eine Ausgabe",
+      "schwierigkeit": 2,
+      "tags": [
+        "kapazität",
+        "durchsatz"
+      ],
+      "aufgabe": "36.000 Besucher holen zwischen 18:00 und 19:00 Uhr an acht Ausgabestellen je ein Sitzkissen ab. Jede Ausgabe wird mit einem MDE-Gerät gebucht und dauert 4 Sekunden. Die Besucher verteilen sich gleichmäßig; insgesamt sind 10 % Reserve einzuplanen.\n\nWie viele MDE-Geräte werden mindestens benötigt?\n\n> **Formeln:**\n> - Vorgänge je Gerät = verfügbare Zeit / Zeit je Vorgang\n> - Geräte = Anzahl der Vorgänge / Vorgänge je Gerät\n> - Geräte mit Reserve = Geräte · (1 + Reservesatz)",
+      "eingaben": [
+        {
+          "id": "jeGeraet",
+          "label": "Ausgaben je Gerät in einer Stunde",
+          "loesung": 900
+        },
+        {
+          "id": "jeStelle",
+          "label": "Geräte je Ausgabestelle",
+          "loesung": 5
+        },
+        {
+          "id": "ohne",
+          "label": "Geräte ohne Reserve",
+          "loesung": 40
+        },
+        {
+          "id": "mit",
+          "label": "Geräte mit Reserve",
+          "loesung": 44
+        }
+      ],
+      "hinweise": [
+        "Eine Stunde hat 3.600 Sekunden.",
+        "Je Ausgabestelle kommen 36.000 / 8 Besucher.",
+        "Reserve: · 1,1 – und auf ganze Geräte aufrunden."
+      ],
+      "erklaerung": "$3.600 / 4 = 900$ Ausgaben je Gerät, $4.500 / 900 = 5$ Geräte je Ausgabestelle, $8 \\cdot 5 = 40$, mit Reserve $40 \\cdot 1{,}1 = 44$ Geräte.",
+      "quelleAufgabe": "DD28 Übungsklausur B3"
+    },
+    {
+      "id": "RE-PA-014",
+      "thema": "Deep Dive 28",
+      "titel": "Kauf oder Miete: Kosten je Monat",
+      "schwierigkeit": 2,
+      "tags": [
+        "wirtschaftlichkeit",
+        "kostenvergleich"
+      ],
+      "aufgabe": "Ein Etikettendrucker kostet 252,00 € und wird vier Jahre genutzt. Je Monat werden 3.600 Etiketten gedruckt. Eine Rolle mit 600 Etiketten kostet 6,50 €, ein Farbband für 1.200 Etiketten 12,00 €. Die Miete beträgt 95,00 € je Monat einschließlich Verbrauchsmaterial.\n\nBerechne die Kosten je Monat im Kaufmodell und den Vorteil gegenüber der Miete.\n\n> **Formel:** Kosten je Monat (Kauf) = Anschaffungspreis / Nutzungsdauer in Monaten + Verbrauchsmaterial je Monat",
+      "eingaben": [
+        {
+          "id": "anschaffung",
+          "label": "Anschaffung je Monat",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 5.25
+        },
+        {
+          "id": "etiketten",
+          "label": "Etikettenrollen je Monat",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 39
+        },
+        {
+          "id": "farbband",
+          "label": "Farbbänder je Monat",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 36
+        },
+        {
+          "id": "kauf",
+          "label": "Kosten je Monat im Kaufmodell",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 80.25
+        },
+        {
+          "id": "vorteil",
+          "label": "Vorteil des Kaufs je Monat",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 14.75
+        }
+      ],
+      "hinweise": [
+        "Vier Jahre sind 48 Monate.",
+        "3.600 Etiketten = 6 Rollen und 3 Farbbänder."
+      ],
+      "erklaerung": "$252 / 48 + 6 \\cdot 6{,}50 + 3 \\cdot 12{,}00 = 80{,}25$ € je Monat – 14,75 € weniger als die Miete. Kaufen lohnt sich bei dauerhafter Nutzung.",
+      "quelleAufgabe": "DD28 Übungsklausur C5"
     },
     {
       "id": "RE-DQ-001",
@@ -1403,6 +1685,69 @@
       "erklaerung": "Die Summe der wahrscheinlichsten Werte unterschätzt die Dauer, weil die pessimistischen Schätzungen meist weiter vom wahrscheinlichsten Wert entfernt liegen als die optimistischen."
     },
     {
+      "id": "RE-PM-014",
+      "thema": "Deep Dive 28",
+      "titel": "Nutzwertanalyse mit drei Angeboten",
+      "schwierigkeit": 2,
+      "tags": [
+        "nutzwertanalyse",
+        "entscheidung"
+      ],
+      "vorlage": "nutzwert",
+      "daten": {
+        "kriterien": [
+          {
+            "name": "Lieferweg",
+            "gewicht": 15
+          },
+          {
+            "name": "Service",
+            "gewicht": 25
+          },
+          {
+            "name": "Nachhaltigkeit",
+            "gewicht": 30
+          },
+          {
+            "name": "Qualität",
+            "gewicht": 30
+          }
+        ],
+        "alternativen": [
+          {
+            "name": "Angebot 1",
+            "punkte": [
+              1,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "Angebot 2",
+            "punkte": [
+              2,
+              3,
+              3,
+              3
+            ]
+          },
+          {
+            "name": "Angebot 3",
+            "punkte": [
+              3,
+              1,
+              2,
+              2
+            ]
+          }
+        ]
+      },
+      "neueZahlen": false,
+      "aufgabe": "Drei Angebote für mobile Etikettendrucker wurden je Kriterium mit 1 bis 3 Punkten bewertet (3 = beste Bewertung; Gewichte und Punkte siehe Tabelle).\n\nBerechne alle gewichteten Werte und die Nutzwerte. Welches Angebot liegt vorn?",
+      "quelleAufgabe": "DD28 Übungsklausur C1"
+    },
+    {
       "id": "RE-WI-001",
       "thema": "Deep Dive 14",
       "titel": "Arbeitnehmeranteil zur Sozialversicherung",
@@ -1583,6 +1928,178 @@
       "eingaben": ["preis", "menge"],
       "hinweise": ["Im Gleichgewicht sind Angebot und Nachfrage gleich groß.", "Darunter herrscht Nachfrageüberhang, darüber Angebotsüberhang."],
       "erklaerung": "Am Gleichgewichtspreis wird die größtmögliche Menge umgesetzt. Ein Höchstpreis darunter erzeugt Knappheit, ein Mindestpreis darüber Überschüsse."
+    },
+    {
+      "id": "RE-WI-014",
+      "thema": "Deep Dive 32",
+      "titel": "Gewinnanteil nach Geschäftsanteilen",
+      "schwierigkeit": 1,
+      "tags": [
+        "wiso",
+        "gmbh",
+        "gewinnverteilung"
+      ],
+      "aufgabe": "Eine GmbH hat ein Stammkapital von 450.000,00 €. Herr Brodersen hält 270.000,00 €, Frau Jessen den Rest. Ausgeschüttet werden 96.500,00 € im Verhältnis der Geschäftsanteile.\n\nWie hoch ist der Gewinnanteil von Frau Jessen?\n\n> **Formel:** Gewinnanteil = Gewinn · Geschäftsanteil / Stammkapital",
+      "eingaben": [
+        {
+          "id": "anteil",
+          "label": "Gewinnanteil von Frau Jessen",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 38600
+        }
+      ],
+      "hinweise": [
+        "Der Geschäftsanteil von Frau Jessen ist 450.000 − 270.000.",
+        "180.000 / 450.000 = 40 %."
+      ],
+      "erklaerung": "$96.500 \\cdot 180.000 / 450.000 = 38.600$ €. Typischer Fehler: der Anteil des anderen Gesellschafters (57.900 €).",
+      "quelleAufgabe": "DD32 Übungsklausur B6"
+    },
+    {
+      "id": "RE-WI-015",
+      "thema": "Deep Dive 32",
+      "titel": "Rentenversicherung über der Beitragsbemessungsgrenze",
+      "schwierigkeit": 2,
+      "tags": [
+        "wiso",
+        "sozialversicherung",
+        "beitragsbemessungsgrenze"
+      ],
+      "aufgabe": "Bruttoentgelt 9.200,00 € im Monat. Beitragsbemessungsgrenze der Rentenversicherung 8.450,00 € im Monat, Beitragssatz 18,6 %, je zur Hälfte von Arbeitgeber und Arbeitnehmer (Stand 2026).\n\nWie hoch ist der monatliche Arbeitnehmeranteil?\n\n> **Formel:** Arbeitnehmeranteil = beitragspflichtiges Entgelt · Beitragssatz / 2",
+      "eingaben": [
+        {
+          "id": "anteil",
+          "label": "Arbeitnehmeranteil zur Rentenversicherung",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 785.85
+        }
+      ],
+      "hinweise": [
+        "Beitragspflichtig ist höchstens die Beitragsbemessungsgrenze.",
+        "Arbeitnehmeranteil: 9,3 %."
+      ],
+      "erklaerung": "$8.450 \\cdot 0{,}093 = 785{,}85$ €. Das Entgelt oberhalb der Grenze (750 €) bleibt beitragsfrei.",
+      "quelleAufgabe": "DD32 Übungsklausur C6"
+    },
+    {
+      "id": "RE-WI-016",
+      "thema": "Deep Dive 32",
+      "titel": "Wirtschaftlichkeit von vier Aufträgen",
+      "schwierigkeit": 1,
+      "tags": [
+        "wiso",
+        "kennzahlen",
+        "wirtschaftlichkeit"
+      ],
+      "aufgabe": "Vier Aufträge (Aufwand / Ertrag in €): Auftrag 1: 450.000 / 531.000 · Auftrag 2: 280.000 / 343.000 · Auftrag 3: 120.000 / 150.000 · Auftrag 4: 640.000 / 768.000.\n\nBerechne die Wirtschaftlichkeit jedes Auftrags. Welcher Auftrag ist der wirtschaftlichste?\n\n> **Formel:** Wirtschaftlichkeit = Ertrag / Aufwand",
+      "eingaben": [
+        {
+          "id": "w1",
+          "label": "Wirtschaftlichkeit Auftrag 1",
+          "runden": 2,
+          "loesung": 1.18
+        },
+        {
+          "id": "w2",
+          "label": "Wirtschaftlichkeit Auftrag 2",
+          "runden": 3,
+          "loesung": 1.225
+        },
+        {
+          "id": "w3",
+          "label": "Wirtschaftlichkeit Auftrag 3",
+          "runden": 2,
+          "loesung": 1.25
+        },
+        {
+          "id": "w4",
+          "label": "Wirtschaftlichkeit Auftrag 4",
+          "runden": 2,
+          "loesung": 1.2
+        },
+        {
+          "id": "bester",
+          "label": "Nummer des wirtschaftlichsten Auftrags",
+          "loesung": 3
+        }
+      ],
+      "hinweise": [
+        "Ertrag durch Aufwand teilen.",
+        "Entscheidend ist das Verhältnis, nicht der höchste Gewinn."
+      ],
+      "erklaerung": "Auftrag 3 erzielt je Euro Aufwand 1,25 € Ertrag. Auftrag 4 bringt den höchsten Gewinn (128.000 €), ist mit 1,20 aber weniger wirtschaftlich.",
+      "quelleAufgabe": "DD32 Übungsklausur D5"
+    },
+    {
+      "id": "RE-WI-017",
+      "thema": "Deep Dive 33",
+      "titel": "Bruttolohn mit Samstagszuschlag",
+      "schwierigkeit": 2,
+      "tags": [
+        "wiso",
+        "entgelt",
+        "sozialversicherung"
+      ],
+      "aufgabe": "Stundenlohn 17,50 € · 168 Arbeitsstunden, davon 16 an Samstagen · 25 % Zuschlag auf den Stundenlohn für Samstagsarbeit · Urlaubsgeld 300,00 € brutto. Beitragssatz der Rentenversicherung 18,6 %, je zur Hälfte (Stand 2026).\n\nBerechne den Bruttolohn und den Arbeitnehmeranteil zur Rentenversicherung.\n\n> **Formeln:**\n> - Bruttolohn = Stunden · Stundenlohn + Zuschlagsstunden · Stundenlohn · Zuschlagssatz + Sonderzahlung\n> - Arbeitnehmeranteil = Bruttolohn · Beitragssatz / 2",
+      "eingaben": [
+        {
+          "id": "brutto",
+          "label": "Bruttolohn",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 3310
+        },
+        {
+          "id": "rv",
+          "label": "Arbeitnehmeranteil zur Rentenversicherung",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 307.83
+        }
+      ],
+      "hinweise": [
+        "Die 16 Samstagsstunden sind in den 168 Stunden enthalten – nur der Zuschlag kommt dazu.",
+        "Das Urlaubsgeld ist beitragspflichtig.",
+        "Arbeitnehmeranteil: 9,3 %."
+      ],
+      "erklaerung": "$168 \\cdot 17{,}50 + 16 \\cdot 17{,}50 \\cdot 0{,}25 + 300 = 3.310$ €; $3.310 \\cdot 0{,}093 = 307{,}83$ €.",
+      "quelleAufgabe": "DD33 Übungsklausur B5"
+    },
+    {
+      "id": "RE-WI-018",
+      "thema": "Deep Dive 33",
+      "titel": "Umsatz je Mitarbeiter und Veränderung",
+      "schwierigkeit": 2,
+      "tags": [
+        "wiso",
+        "kennzahlen",
+        "prozentrechnung"
+      ],
+      "aufgabe": "2025: 38 Beschäftigte, Umsatz je Mitarbeiter 92.000,00 €. 2026: 42 Beschäftigte, Umsatz 4.116.000,00 €.\n\nBerechne den Umsatz je Mitarbeiter 2026 und die prozentuale Veränderung gegenüber 2025.\n\n> **Formeln:**\n> - Umsatz je Mitarbeiter = Umsatz / Anzahl der Mitarbeiter\n> - prozentuale Veränderung = (neuer Wert − alter Wert) / alter Wert · 100 %",
+      "eingaben": [
+        {
+          "id": "umsatz",
+          "label": "Umsatz je Mitarbeiter 2026",
+          "einheit": "€",
+          "runden": 2,
+          "loesung": 98000
+        },
+        {
+          "id": "veraenderung",
+          "label": "Veränderung gegenüber 2025",
+          "einheit": "%",
+          "runden": 2,
+          "loesung": 6.52
+        }
+      ],
+      "hinweise": [
+        "4.116.000 / 42.",
+        "Bezugsgröße der Veränderung ist der alte Wert (92.000 €)."
+      ],
+      "erklaerung": "$4.116.000 / 42 = 98.000$ €; $(98.000 - 92.000) / 92.000 \\cdot 100 = 6{,}52$ %.",
+      "quelleAufgabe": "DD33 Übungsklausur D5"
     },
     {
       "id": "RE-IT-001",
