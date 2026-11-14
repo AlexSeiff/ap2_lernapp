@@ -134,7 +134,7 @@ Ergebnis: Artikel 1: 18 und 6 · Artikel 2: 12 und 8.
 
 **C5 (7 P):** *(Mittelwert mit AVG 1 P, Standardabweichung 2 P, Runden je 1 P, Aliasnamen 1 P, GROUP BY 1 P)*
 
-Mit der Funktion aus dem Prüfungshinweis lautet der Ausdruck für die Standardabweichung `ROUND(STDDEV(menge)) AS standardabweichung` – der Rest der Abfrage bleibt gleich. Ausführbar im SQL-Editor der App (SQLite) ist die Fassung mit der Umformung:
+In MySQL und PostgreSQL lautet der Ausdruck für die Grundgesamtheit `ROUND(STDDEV_POP(menge)) AS standardabweichung`. Ausführbar im SQL-Editor der App (SQLite) ist die Fassung mit der Umformung:
 
 ```sql
 SELECT artikelnr,
@@ -146,7 +146,7 @@ GROUP BY artikelnr;
 
 Ergebnis: Artikel 1: 11 und 4 · Artikel 2: 10 und 1.
 
-*Prüferkommentar: In der Prüfung genügt die Fassung mit `STDDEV()`. Je nach Datenbanksystem rechnet `STDDEV()` mit n oder mit n − 1 im Nenner – für Artikel 1 ergäbe die Stichprobenformel 5 statt 4. Gemeint ist hier die Standardabweichung aller vorliegenden Wochen (Nenner n), wie in C6.*
+*Prüferkommentar: MySQL versteht `STDDEV()` als `STDDEV_POP()`. In PostgreSQL bezeichnet `STDDEV()` die Stichprobenformel mit n − 1 im Nenner. Für Artikel 1 ergäbe sie 5. Gefragt ist hier wie in C6 die Grundgesamtheit, also gerundet 4.*
 
 **C6 (6 P):** *(Mittelwert 1 P, Abweichungsquadrate 1 P, Varianz 1 P, Standardabweichung 1 P, Interpretation 2 P)*
 
@@ -181,12 +181,12 @@ Interpretation: In mindestens der Hälfte der Wochen lag der Bestand bei höchst
 - **Dublette klären und zusammenführen:** Bei den Zeilen 2 und 3 die Kapazität am Regal nachprüfen und nur den richtigen Datensatz behalten – vermutlich fehlt in Zeile 3 eine Null. Zwei Zeilen für dasselbe Fach würden den Artikel in der Analyse doppelt zählen.
 - **Unmögliche Werte nicht verwenden, sondern an der Quelle korrigieren:** Die Zeilen 5 und 6 (Durchschnitt über dem Maximum, negative Entnahme) aus den Buchungsdaten neu berechnen; bis dahin kennzeichnen und von der Auswertung ausschließen. Ein geschätzter Wert würde den Fehler nur verdecken.
 - **Fehlende Werte gezielt ergänzen:** Fach (Zeile 8) und Kapazität (Zeile 1) lassen sich im Lager aufnehmen, weil es feste Stammdaten sind. Die fehlenden Entnahmen in Zeile 4 nicht mit 0 oder einem Mittelwert füllen – sonst erscheint das Fach fälschlich als ungenutzt bzw. durchschnittlich genutzt.
-- **Prüfregeln für die Zukunft:** Pflichtfelder, Wertebereich ≥ 0, Durchschnitt ≤ Maximum und ein Lagerplatz je Artikel schon bei der Erfassung prüfen, damit die Fehler nicht erneut entstehen.
+- **Prüfregeln für die Zukunft:** Pflichtfelder, Wertebereich ≥ 0 und Durchschnitt ≤ Maximum schon bei der Erfassung prüfen. Einen Artikel darf es in mehreren Fächern geben. Pro Kombination aus Halle, Regal und Fach muss die hinterlegte Fachkapazität eindeutig sein.
 
 *Prüferkommentar: Ein Vorschlag ohne Begründung bringt nur die Hälfte. „Fehlerhafte Zeilen löschen“ ist als alleiniger Vorschlag zu wenig – von acht Zeilen blieben zwei übrig.*
 
 **D4 (4 P):** *(je Aspekt 2 P)*, z. B.:
-- **Personenbezug und Rechtsgrundlage:** Laufwege einzelner Beschäftigter sind personenbezogene Daten. Ihre Verarbeitung braucht eine Rechtsgrundlage nach Art. 6 Abs. 1 DSGVO, z. B. eine Betriebsvereinbarung; die Beschäftigten müssen vorab informiert werden.
+- **Personenbezug und Rechtsgrundlage:** Laufwege einzelner Beschäftigter sind personenbezogene Daten. Vor der Aufzeichnung muss der Betrieb Rechtsgrundlage und Erforderlichkeit prüfen (Art. 6 DSGVO, § 26 BDSG). Eine Betriebsvereinbarung muss die Datenschutzvorgaben einhalten. Die Beschäftigten erfahren vorab Zweck und Umfang der Erfassung.
 - **Zweckbindung:** Die Daten dürfen nur zur Verbesserung der Wege verwendet werden, nicht zur Leistungs- oder Verhaltenskontrolle einzelner Personen.
-- **Datenminimierung:** Soweit möglich anonymisiert oder zusammengefasst aufzeichnen (Wege je Schicht oder je Gerät statt je Person), nur für einen begrenzten Zeitraum, mit festgelegter Löschfrist.
+- **Datenminimierung:** Soweit möglich anonymisiert oder zusammengefasst aufzeichnen (z. B. aufsummierte Wegstrecken mehrerer Personen je Schicht). Eine Gerätekennung bleibt personenbezogen, wenn sie einer Person zugeordnet werden kann. Daten nur für den erforderlichen Zeitraum speichern und eine Löschfrist festlegen.
 - **Mitbestimmung:** Eine technische Einrichtung, die zur Überwachung von Verhalten oder Leistung geeignet ist, darf nur mit Zustimmung des Betriebsrats eingeführt werden (§ 87 Abs. 1 Nr. 6 BetrVG).

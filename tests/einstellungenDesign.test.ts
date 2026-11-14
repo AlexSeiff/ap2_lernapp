@@ -22,5 +22,9 @@ describe('Einstellungen → Design', () => {
     expect(html).toMatch(/aria-pressed="true"><svg.*?<\/svg> System<\/button>/);
     expect(html.match(/aria-pressed="false"><svg.*?<\/svg> (Hell|Dunkel)<\/button>/g)).toHaveLength(2);
     expect(html).not.toContain('unten in der Navigation');
+    expect(html).toContain('aria-labelledby="karo-wahl"');
+    expect(html).toMatch(/aria-pressed="false">Kräftig<\/button>/);
+    expect(html).toMatch(/aria-pressed="true">Dezent<\/button>/);
+    expect(html).toMatch(/aria-pressed="false">Aus<\/button>/);
   });
 });

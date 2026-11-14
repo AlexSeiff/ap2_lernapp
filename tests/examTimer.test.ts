@@ -1,7 +1,36 @@
 import { describe, expect, it } from 'vitest';
-import { formatRemaining, timerAnnouncement } from '../src/lib/examTimer';
+import { EXAM_MINUTES } from '../shared/config';
+import { examMinutes, examRemaining, formatRemaining, timerAnnouncement } from '../src/lib/examTimer';
 
 const min = 60_000;
+
+describe('examMinutes', () => {
+  it('liest die Bearbeitungszeit aus dem Titel der Übungsklausur', () => {
+    expect(examMinutes({ title: 'Übungsklausur WiSo I (100 Punkte, 60 Minuten)' })).toBe(60);
+    expect(examMinutes({ title: 'Übungsklausur SQL (100 Punkte, 90 Minuten)' })).toBe(90);
+    expect(examMinutes({ title: 'Übungsklausur SQL – 100 Punkte, Richtzeit 90 Minuten' })).toBe(90);
+  });
+
+  it('fällt ohne brauchbare Angabe auf EXAM_MINUTES zurück', () => {
+    expect(EXAM_MINUTES).toBe(90);
+    expect(examMinutes({ title: 'Gemischte Probeklausur – Prozessanalyse' })).toBe(90);
+    expect(examMinutes({ title: 'Übungsklausur' })).toBe(90);
+    expect(examMinutes({ title: 'Übungsklausur Test (100 Punkte, 0 Minuten)' })).toBe(90);
+    expect(examMinutes({ title: 'Übungsklausur Test (100 Punkte, 1234 Minuten)' })).toBe(90);
+    expect(examMinutes(undefined)).toBe(90);
+  });
+});
+
+describe('examRemaining', () => {
+  const start = '2026-11-14T09:00:00Z';
+  const at = Date.parse(start);
+
+  it.each([60, 90])('begrenzt die Anzeige vor dem ersten Tick auf %i Minuten und zählt ab dem Start', (minutes) => {
+    expect(examRemaining(start, minutes, at - 7 * min)).toBe(minutes * min);
+    expect(examRemaining(start, minutes, at + 2200)).toBe(minutes * min - 2200);
+    expect(examRemaining(start, minutes, at + minutes * min + 1000)).toBe(0);
+  });
+});
 
 describe('formatRemaining', () => {
   it('zeigt mm:ss und nie negative Zeit', () => {

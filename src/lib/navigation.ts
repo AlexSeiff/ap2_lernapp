@@ -1,5 +1,5 @@
 // Navigation (Umsetzungsplan Phase 2): vier Bereiche – Lernen, Glossar, SQL-Editor, Einstellungen – mit Unterzielen.
-// Im Notizbuch sind die Bereiche Haftstreifen am Buchrand (Handy: unten), die Unterziele stehen im Inhaltsverzeichnis links.
+// Die Inhaltsseite zeigt die Bereiche und die Unterziele des aktiven Bereichs. Auf schmalen Geräten öffnet sie sich als Einschub.
 // Rein, ohne React – die Komponenten stehen in components/Buch.tsx.
 // Keine URL hat sich geändert: Die Bereiche ordnen nur die bestehenden Routen.
 

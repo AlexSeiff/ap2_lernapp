@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { EXAM_MINUTES } from '../../shared/config';
 import type { ExamRun, Fehlergrund, Sicherheit } from '../../shared/progress';
 import type { Task } from '../../shared/types';
+import { examMinutes, examRemaining } from '../lib/examTimer';
 import { klausurFuer } from '../lib/mischKlausur';
 import { finishExam, submitExam } from '../lib/progress';
 import { useStore } from '../lib/store';
@@ -32,8 +32,9 @@ export function useExamRun(topicId: string | undefined) {
   const [result, setResult] = useState<ExamRun | null>(null);
   const now = useNow(!!run && !run.submittedAt);
 
-  const deadline = run ? new Date(run.startedAt).getTime() + EXAM_MINUTES * 60_000 : 0;
-  const remaining = Math.max(0, deadline - now);
+  // Bearbeitungszeit dieser Klausur (WiSo 60, sonst 90 Minuten) – aus dem Titel, nicht aus dem gespeicherten Lauf.
+  const minutes = examMinutes(exam);
+  const remaining = run ? examRemaining(run.startedAt, minutes, now) : 0;
 
   // Zeit abgelaufen → automatisch abgeben (wie in der echten Prüfung). submitExam arbeitet auf dem aktuellen Stand, nicht auf `run`.
   useEffect(() => {
@@ -113,6 +114,7 @@ export function useExamRun(topicId: string | undefined) {
     otherRun,
     result,
     submitted: !!run?.submittedAt,
+    minutes,
     remaining,
     answered,
     scored,

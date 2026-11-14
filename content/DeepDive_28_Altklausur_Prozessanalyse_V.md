@@ -137,7 +137,7 @@ Die Gewichte verraten, was dem Unternehmen wichtig ist – dort entscheidet sich
 5. Kapazität: **Sekunden und Stunden gemischt** oder die Reserve vergessen; abgerundet statt aufgerundet.
 6. Nutzwert: Punkte **nicht im Vergleich** vergeben oder die Gewichtung nicht multipliziert.
 7. Kauf oder Miete: **Anschaffungspreis nicht auf Monate verteilt**.
-8. EPK: **XOR nach einem Ereignis**, zwei Funktionen hintereinander oder ein Pfad ohne Endereignis.
+8. EPK: **XOR-Verzweigung nach einem Ereignis**, zwei Funktionen hintereinander oder ein Pfad ohne Endereignis.
 
 ---
 

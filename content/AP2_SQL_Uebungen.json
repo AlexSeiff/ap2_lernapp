@@ -2421,7 +2421,7 @@
       "datensatz": "eventlager",
       "thema": "Deep Dive 31",
       "titel": "Mittelwert und Standardabweichung je Artikel",
-      "aufgabe": "Gib je Artikel den Mittelwert und die Standardabweichung des Lagerbestands aus, jeweils auf eine ganze Zahl gerundet. Die Spalten heißen artikelnr, mittelwert und standardabweichung.\n\nSQLite kennt die Funktion STDDEV() aus dem Prüfungshinweis nicht. Verwende die Umformung σ = √(Mittelwert der Quadrate − Quadrat des Mittelwerts) mit den Funktionen AVG(), SQRT() und ROUND().",
+      "aufgabe": "Gib je Artikel den Mittelwert und die Standardabweichung des Lagerbestands über alle vorliegenden Wochen (Grundgesamtheit) aus, jeweils auf eine ganze Zahl gerundet. Die Spalten heißen artikelnr, mittelwert und standardabweichung.\n\nIm SQLite-Editor der App steht STDDEV_POP() nicht zur Verfügung. Verwende die Umformung σ = √(Mittelwert der Quadrate − Quadrat des Mittelwerts) mit den Funktionen AVG(), SQRT() und ROUND().",
       "schwierigkeit": 3,
       "tags": [
         "group by",
@@ -2446,7 +2446,7 @@
         "Mittelwert der Quadrate: AVG(menge * menge). Quadrat des Mittelwerts: AVG(menge) * AVG(menge).",
         "Zusammen: ROUND(SQRT(AVG(menge * menge) - AVG(menge) * AVG(menge)))."
       ],
-      "erklaerung": "Mit den Ausgangsdaten: Artikel 1 → 11 und 4 (σ = 4,47), Artikel 2 → 10 und 1 (σ = 1,41). In MySQL, PostgreSQL oder Oracle genügt ROUND(STDDEV(menge)); je nach System rechnet STDDEV() mit n oder n − 1 im Nenner.",
+      "erklaerung": "Mit den Ausgangsdaten: Artikel 1 → 11 und 4 (σ = 4,47), Artikel 2 → 10 und 1 (σ = 1,41). In MySQL und PostgreSQL berechnet ROUND(STDDEV_POP(menge)) denselben Wert. STDDEV() verwendet in PostgreSQL den Stichproben-Nenner n − 1.",
       "quelle_aufgabe": "DD31 Übungsklausur C5",
       "aufgaben": [
         "31-C5"

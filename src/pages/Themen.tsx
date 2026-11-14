@@ -17,6 +17,7 @@ import { Icon } from '../components/Icon';
 import { hatPodcastThema } from '../lib/podcast';
 import { farbKlasse, themaFarbe } from '../lib/farben';
 import { kartenstand, STAENDE } from '../lib/kartenstand';
+import randnotizen from '../../content/AP2_Randnotizen.json';
 
 /** „Deep Dive 3“ oder „Zusatz“ für das ältere SQL-Blatt. */
 const topicLabel = (t: Pick<Topic, 'id' | 'number'>) => (t.id === '00' ? 'Zusatz' : `Deep Dive ${t.number}`);
@@ -103,6 +104,7 @@ export function Thema() {
     );
   const cards = cardPool(content.flashcards, progress.settings).filter((c) => c.topicId === topic.id).length;
   const ausgeblendet = istAusgeblendet(progress.settings, topic.id);
+  const notiz = (randnotizen as Record<string, string>)[topic.id];
 
   return (
     <div className="page with-toc learning-page">
@@ -175,6 +177,11 @@ export function Thema() {
             </button>
           )}
         </div>
+        {notiz && (
+          <aside className="lern-rand rand" aria-label="Randnotiz">
+            <p className="haft">{notiz}</p>
+          </aside>
+        )}
         {ausgeblendet && (
           <p className="card info" role="note">
             <Icon name="eye-off" /> Dieses Lernblatt ist ausgeblendet: Es fehlt in der Themenliste, bei „Weiterlesen“ und in „Heute lernen“.

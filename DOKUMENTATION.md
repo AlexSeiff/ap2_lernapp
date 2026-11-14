@@ -63,7 +63,7 @@ sql.js (SQLite/WASM), CodeMirror 6.
 ```
 lern-app/
 ├─ shared/            used by app, build and tests (no file-system access)
-│  ├─ config.ts         constants: EXAM_MINUTES, NEW_PER_SESSION, JOURNAL_INTERVALS, CARD_INTERVALS, SAVE_DELAY_MS, DEV_PORT,
+│  ├─ config.ts         constants: EXAM_MINUTES (fallback; the duration per exam comes from its title), NEW_PER_SESSION, JOURNAL_INTERVALS, CARD_INTERVALS, SAVE_DELAY_MS, DEV_PORT,
 │  │                    HEUTE_MINUTEN / HEUTE_ZEITEN / HEUTE_KARTEN_BLOCK (8.1), SICHER_RICHTIG_AB (8.3)
 │  ├─ types.ts          content model (Topic, Task, Flashcard, Deck, Exam, SqlDataset, SqlExercise, Content …)
 │  ├─ parser.ts         Markdown sheet + solution parser (pure, line/regex based)
@@ -164,7 +164,7 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
 
 | File | Parsed into |
 |---|---|
-| `DeepDive_NN_Thema.md` | `Topic`: theory sections (`# Teil …`, `## 1.1 …`), `lernziele` (`- [ ]` under `## Lernziel-Check…`), flashcards from Prüferfragen and Fachgespräch, `Exam` from `# Übungsklausur …` with blocks `## Block A – Titel (19 P)` and tasks `**A1 (6 P):** …`, attachments (Anlagen) |
+| `DeepDive_NN_Thema.md` | `Topic`: theory sections (`# Teil …`, `## 1.1 …`), `lernziele` (`- [ ]` under `## Lernziel-Check…`), flashcards from Prüferfragen and Fachgespräch, `Exam` from `# Übungsklausur … (100 Punkte, 90 Minuten)` (the „NN Minuten“ in this heading is the timer duration – WiSo 60, otherwise 90; without it 90) with blocks `## Block A – Titel (19 P)` and tasks `**A1 (6 P):** …`, attachments (Anlagen) |
 | `DeepDive_NN_Thema_Loesungen.md` | `Solution` per task (`**A1 (6 P):**`), `kommentar` from `*Prüferkommentar: …*`, `criteria` from a points table `| Element | P |` |
 | `DeepDive_17_Glossar_Diagramme.md` | reference topic **without** Übungsklausur and Lösungsdatei: every diagram type as an SVG example (Teil 1–6) and the placeholder `<!-- glossar-a-z -->` (Teil 7), which `loadContent` replaces with the whole glossary (see Glossar below). Edit it like any sheet; the SVG code sits directly in the file |
 | `Deep_Dive_SQL_KW28_29.md` | extra topic (id `00`), solutions inside the sheet; keep the file name (SQL links depend on it) |
@@ -419,9 +419,9 @@ Formulas in the sheets are written as `$…$` (see § 5 "Markdown, formulas"). E
 | `/heute` | Heute lernen | lazy page: plan of today's mixed round, start, progress, skip, end (§ 5 "Heute lernen") |
 | `/lernen`, `/lernen/:topicId` | Themen / Thema | **hiding sheets**: button „Ausblenden“ on the sheet (`setzeAusgeblendet`, `src/lib/settings.ts`) → the sheet leaves the tile grid (collapsible „Ausgeblendet (n)“ below it with „Einblenden“), the dashboard's „Weiterlesen“ link and „Schwächste Themen“, and the weakest-topic pick of „Heute lernen“; a hidden sheet still opens by link and shows a note with „Wieder einblenden“; cards, tasks, journal repetitions, search and „Fortschritt je Thema“ are unchanged; theory with table of contents, after each section a box „Weiterlesen und ansehen“ with its sources (plan phase 8, see Quellen below), Prüferfragen as a box "❓ Prüferfrage – erst selbst überlegen" with the answer behind "👁 Antwort zeigen" (`TheoryMarkdown`), ticking off learning goals |
 | `/karteikarten` | Karteikarten | filters (Deep Dive, deck, kind, typ, difficulty; kept in the URL), quick switches for Prüferfragen/Fachgespräch (same settings), Leitner boxes (`CARD_INTERVALS`), max `NEW_PER_SESSION` new cards per round – due cards only once every card of the selection has been seen (`rundenKarten`), "⚠️ Fallen wiederholen", keyboard: Space flip, 1/2/3 rate; mode switch "🃏 Aufdecken \| 🟢 Leicht (4 Antworten)" (see Leicht-Modus below); optional "✍️ Deine Antwort" field (8.2); `?karten=ID,ID,…` = exactly these cards (used by "Heute lernen"); "📖 Durchblättern" (`?blaettern=1`, `KartenBlaettern`): all filtered cards (`alle`, also in Leicht-Modus) one by one, ←/→ or swipe, Space flip, Esc end, options "gemischt" and "Antwort gleich zeigen", slider to jump – no rating, progress untouched (`tests/blaettern.test.ts`); **marking** (plan phase 4): star button `MarkierStern` in the session head of all three card views (outside the clickable card, so no nested controls), key `M`, filter checkbox "Nur markierte (n)" (`?markiert=1`, combines with all other filters and Leicht) |
-| `/klausur`, `/klausur/:topicId` | Übungsklausur | 90-min timer (`aria-live` announcements), attachments, "Wie sicher bist du?" per task (8.3), operators marked (8.4), solutions locked until submission, self-assessment with criteria checkboxes, "Woran lag's?" below full points (8.7), IHK grade, auto-submit on timeout, resumable (`activeExam`). Card "🎲 Gemischte Probeklausur" on `/klausur`; `:topicId` can also be `mix-<bereich>-<seed>` (8.5) |
+| `/klausur`, `/klausur/:topicId` | Übungsklausur | timer with the exam's own duration (`examMinutes(exam)` in `src/lib/examTimer.ts` reads „NN Minuten“ from the exam title: WiSo 60, all others 90; without a number – e.g. the mixed exam – `EXAM_MINUTES` = 90; shown on the start button, on the tiles of `/klausur` and on the print cover page; `tests/klausurDauer.test.ts`), `aria-live` announcements, attachments, "Wie sicher bist du?" per task (8.3), operators marked (8.4), solutions locked until submission, self-assessment with criteria checkboxes, "Woran lag's?" below full points (8.7), IHK grade, auto-submit on timeout, resumable (`activeExam`). Card "🎲 Gemischte Probeklausur" on `/klausur`; `:topicId` can also be `mix-<bereich>-<seed>` (8.5) |
 | `/aufgaben`, `/aufgabe/:taskId` | Einzelaufgaben | filter by topic/block/difficulty/status/search; export a selection as task sheet/solution sheet; task page asks "Wie sicher bist du?" before submitting (8.3) and "Woran lag's?" below full points (8.7); operators in task texts are marked (8.4) |
-| `/druck` | Druck | print view (task sheet or solution sheet, same numbering) → "Als PDF speichern"; also Markdown download. Whole exams (`thema=<id>`, also `thema=mix-…`; `misch=mix-…` is the same, plan phase 6): task sheet with a **cover page** (`Deckblatt`: name, date, `EXAM_MINUTES`, aids, points per block to fill in), solution sheet with a **grading sheet** (`Bewertungsbogen`: every task with max points, empty column, sum, IHK scale; mixed exams show the source „DD n“ because codes repeat). In print every block starts on a new page (`SheetGroup.neuerBlock`); `@page` margin boxes put the title and „Name“ (or the subtitle) in the header and „Seite x von y“ in the footer (Chromium; other browsers print without them), not on the first page. The free selection (`ids=`) stays as before. `/klausur` has a button „Drucken“ that mixes a new exam (`mix-gemischt-<seed>`) and opens its task sheet |
+| `/druck` | Druck | print view (task sheet or solution sheet, same numbering) → "Als PDF speichern"; also Markdown download. Whole exams (`thema=<id>`, also `thema=mix-…`; `misch=mix-…` is the same, plan phase 6): task sheet with a **cover page** (`Deckblatt`: name, date, duration `Sheet.minuten` = `examMinutes(exam)`, aids, points per block to fill in), solution sheet with a **grading sheet** (`Bewertungsbogen`: every task with max points, empty column, sum, IHK scale; mixed exams show the source „DD n“ because codes repeat). In print every block starts on a new page (`SheetGroup.neuerBlock`); `@page` margin boxes put the title and „Name“ (or the subtitle) in the header and „Seite x von y“ in the footer (Chromium; other browsers print without them), not on the first page. The free selection (`ids=`) stays as before. `/klausur` has a button „Drucken“ that mixes a new exam (`mix-gemischt-<seed>`) and opens its task sheet |
 | `/sql`, `/sql/uebungen`, `/sql/uebung/:id` | SQL-Editor | free mode + exercises (see § 7) |
 | `/diagramme`, `/diagramme/:id` | Diagramm-Übungen | plan phase 7, lazy pages. List with filters in the URL (`typ`, `stufe`, `status`), progress bar, "Nächste offene". Exercise page: scenario, diagram (`components/DiagrammSvg.tsx`: SVG with the `dg-*` classes of DD17, every gap an HTML button laid over the SVG in %, so tap, keyboard and screen reader work), palette below (on phones sticky above the tab bar). Placing: **drag** with Pointer Events (captured on `pointerdown`, start after 6 px, drop target via `elementFromPoint` → `data-slot`; no HTML5 drag and drop – unreliable on iOS) or **tap** an element, then a gap (Esc cancels; tapping a filled gap takes the element out and selects it). `einsetzen` moves single-use elements. "Prüfen" marks every gap green/red and lists violated shape rules; "Hinweis", "Lösung zeigen" (fills the model solution, counts as "mit Lösung"), "Leeren". Progress `diagramme` (§ 6) with repetition like Rechenübungen, badge `diagramme` in the navigation (Lernen → Diagramm-Übungen). Begriffsseiten list matching exercises under „Üben“ (type terms such as EPK, BPMN, Aktivitätsdiagramm show all of that type; otherwise word match in title, scenario and palette); DD5 2.2/2.3 and DD17 1.1/1.2/2.4–2.6 end with a link `#/diagramme?typ=…`. Not (yet) part of "Heute lernen" and the Fehlerjournal |
 | `/rechnen`, `/rechnen/:id` | Rechenübungen | list with filters in the URL (Thema, Schwierigkeit, Tag, Status), progress bar, "Nächste offene"; exercise page (see below) with a faded worked example (8.6) |
@@ -562,6 +562,8 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
   values were visible, the result card offers "✏️ Mit neuen Zahlen eintippen" (template exercises).
 
 ### Heute lernen (phase 8.1)
+
+The checklist under **Übersicht → Weiterlernen** uses the same daily plan and session as **Heute lernen**. Ticking the current step saves its completion in `ap2-heute` and selects the next one. Points and card ratings come from the respective exercise.
 
 - **Planner** `planeHeute(content, progress, { today, zufall, minuten })` in `src/lib/heute.ts` (pure, `tests/heute.test.ts`). Target
   `HEUTE_MINUTEN` = 20 min; estimates in `HEUTE_ZEITEN` (`shared/config.ts`): card 0.5 min (Leicht 0.33), task 0.9 min per point (min 3),
@@ -897,33 +899,29 @@ applied in `main.tsx` before the first render), error boundary per route, own co
 
 ### Navigation (plan phase 2; replaces the sidebar and the mobile „Üben“/„Mehr“ menus)
 
+Under **Einstellungen → Design → Karo-Stärke**, learners can choose **Kräftig**, **Dezent** (default) or **Aus**. The choice is stored on the device in `ap2-karo`. It controls the notebook grid and flashcard ruling. Each sheet has a subject-specific margin note from `content/AP2_Randnotizen.json`, keyed by the sheet's topic ID. Narrow screens show the note above the theory.
+
 - **Four areas** (`BEREICHE` in `src/lib/navigation.ts`, pure and tested), the logo leads to the Übersicht (`/`). No URL changed – the areas
   only group the existing routes:
 
   | Area | Sub-targets (table of contents) |
   |---|---|
-  | Lernen (`/lernen`) | Heute lernen, Themen, Karteikarten, Einzelaufgaben, Rechenübungen, Übungsklausur, Fehlerjournal |
-  | Glossar (`/material/glossar`) | Begriffe A–Z, Diagramme (`GLOSSAR_PFAD` = `/lernen/17`), Formelsammlung, Operatoren |
+  | Lernen (`/lernen`) | Heute lernen, Themen, Karteikarten, Kartenstand, Einzelaufgaben, Rechenübungen, Diagramm-Übungen, Übungsklausur, Fehlerjournal, Podcast, Fachgespräch |
+  | Glossar (`/glossar`) | Begriffe A–Z, Diagramme (`GLOSSAR_PFAD` = `/lernen/17`), Formelsammlung, SQL-Belegsatz, Operatoren |
   | SQL-Editor (`/sql`) | Freier Editor (exact match), Übungen (incl. `/sql/uebung/:id`) |
-  | Einstellungen (`/einstellungen`) | Einstellungen, Material (`/material`, `/material/:docId`), Daten & Import, KI-Aufgaben (local only) |
+  | Einstellungen (`/einstellungen`) | Einstellungen, Material (`/material`, `/material/:docId`), Daten & Import |
 
-  `aktiverBereich(pathname)` maps every route (`/lernen/17` and the three glossary pages under `/material` → Glossar, other `/material/*` →
+  `aktiverBereich(pathname)` maps every route (`/lernen/17` and the glossary pages under `/material` → Glossar, other `/material/*` →
   Einstellungen); `aktivesUnterziel` picks the longest matching sub-target. **Due badges**: an area shows the sum of its sub-targets
-  (Lernen = Rechnen + Fehlerjournal, SQL = SQL), each sub-target its own; screen readers get ", n fällig".
+  (Lernen = Rechnen + Diagramme + Fehlerjournal, SQL = SQL). Each sub-target shows its own count.
 - **Notebook design** (`components/Buch.tsx`, `src/notizbuch.css`): the app is one book.
-  - **Desktop (≥ 1100 px)**: an open ring binder on the desk. Left page (`Inhaltsseite`): label and table of contents – all areas on the
-    Übersicht, otherwise only the active area with due counts (“3 fällig”); below the active target is a slot (`lib/inhaltSlot.ts`)
-    into which a page can portal its own sections (the Lernblatt does this with its parts). Rings in the middle (`.buchringe`), right
-    page (`.blatt`) with the `Kopfzeile` (path, date, save state: green dot, text only on error/conflict, search button – `⌘K` on Apple
-    devices, otherwise `Strg K`) and the page itself. The five areas are sticky-note strips (`Register`, `.streifen`) on the right edge
-    of the book; the active strip is pulled out and underlined (`aria-current="page"`).
-  - **Phone/tablet (< 1100 px)**: a spiral pad with one page. The `Kopfzeile` sticks to the top with the “Inhalt” button (opens the
-    Inhaltsseite as a drawer; closes on navigation, Escape or a tap on the veil) and search; the strips stick up from the bottom edge.
+  - **Desktop (≥ 1100 px)**. The left page (`Inhaltsseite`) lists the Übersicht and all four areas. The active area expands to show its links with due counts and the current page's sections (`lib/inhaltSlot.ts`). The right page (`.blatt`) holds the content, path, date, save indicator and search. The glossary has letter tabs along the right edge of the book.
+  - **Phone/tablet (< 1100 px)**. The sticky header contains search and the “Inhalt” button. The button opens the table of contents in a drawer. Choosing a link, pressing Escape or tapping its backdrop closes it. The glossary offers a letter selector in its search panel.
   - **Raster**: one square = `--k` (26 px). Every text line is exactly one square high and block spacing is whole squares, so the
     horizontal lines run between text lines, not through the letters. Blocks of arbitrary height (tables, formulas, cards) sit on plain
     “Zettel” surfaces; `hooks/useRaster.ts` measures each block lying directly on the paper (`RASTER_BLOECKE`, same selector list as in
     `notizbuch.css`) and sets `--rest` so the next block starts on a grid line again. Only the margin changes, never the block size.
-  - **Pieces**: sticky notes (`.haft`) and the red margin line (`.spalten` / `.rand`) on the Übersicht, progress as hatched squares and
+  - **Pieces**: taped sticky notes (`.haft`) and the red margin line (`.rand`) on the Übersicht and learning sheets, progress as hatched squares and
     the study streak as tally marks (`components/Kaestchen.tsx`), headings in ink blue underlined in red.
   - **Fonts**: Atkinson Hyperlegible for text, Kalam for handwritten bits – bundled via `@fontsource/*` (latin subsets, woff2 precached).
 - **Sticky offsets**: on desktop nothing sticks at the top (`--kopf-gesamt` is 0); on phones the Kopfzeile is two squares high and
@@ -1010,6 +1008,8 @@ type Attempt = {
 // ExamRun additionally has sicherheit?: Record<taskId, 1 | 2 | 3> (chosen before submission) and fehlergrund?: Record<taskId, Fehlergrund>
 // (chosen while grading); finishExam copies both into the attempts (fehlergrund only below full points).
 // ExamRun.topicId is a topic id or the id of a mixed exam "mix-<bereich>-<seed>" (phase 8.5, no format change).
+// The duration is not stored: the deadline of a running exam is startedAt + examMinutes(exam) (from the exam title: WiSo 60, otherwise 90
+// minutes; no format change). A WiSo run started before this rule therefore ends after 60 instead of 90 minutes (auto-submit keeps all answers).
 
 type RechenState = {
   attempts: number;              // counted "✓ Prüfen" clicks

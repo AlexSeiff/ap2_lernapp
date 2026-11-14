@@ -77,7 +77,7 @@ Ein Prepared Statement ist eine **SQL-Anweisung mit Platzhaltern**; die Werte we
 - **Sicherheit:** Übergebene Werte werden nie als SQL-Code ausgeführt – Schutz vor **SQL-Injection**.
 - **Geschwindigkeit:** Die Anweisung wird einmal vorbereitet und kann mit wechselnden Werten oft ausgeführt werden.
 
-Genau genommen bereitet in Python erst ein Cursor mit `prepared=True` die Anweisung auf dem Datenbankserver vor; der Standard-Cursor setzt die übergebenen Werte sicher maskiert in die Anweisung ein. Vor SQL-Injection schützt beides – entscheidend ist, dass die Werte als **Parameter** übergeben und nicht in den SQL-Text geklebt werden.
+Bei **MySQL Connector/Python** bereitet ein Cursor mit `prepared=True` die Anweisung auf dem Datenbankserver vor. Der Standard-Cursor setzt die übergebenen Werte clientseitig maskiert in die Anweisung ein. Vor SQL-Injection schützt beides – entscheidend ist, dass die Werte als **Parameter** übergeben und nicht in den SQL-Text geklebt werden.
 
 ## 3.3 Muster in Python
 
@@ -88,7 +88,7 @@ cursor.execute(sql, ("26789", "Leer"))
 verbindung.commit()
 ```
 
-Platzhalter `%s` im SQL-Text, Werte als Tupel im zweiten Argument, am Ende `commit()` – sonst sind die Änderungen nach dem Schließen der Verbindung verloren.
+Platzhalter `%s` im SQL-Text, Werte als Tupel im zweiten Argument, am Ende `commit()` für die eingefügte Zeile. Ohne Autocommit verwirft ein Verbindungsabbruch das noch offene INSERT. `CREATE TABLE` führt in MySQL einen impliziten Commit aus.
 
 ---
 
@@ -107,7 +107,7 @@ Bei einem RESTful Service ist jede **Ressource** über eine **URL** erreichbar; 
 
 ## 4.2 Kennzahlen in SQL
 
-`MIN()`, `MAX()`, `AVG()` und `COUNT()` gibt es in jedem Dialekt. Die Standardabweichung heißt je nach System `STDDEV()`, `STDDEV_POP()` oder `STDEV()` – der Prüfungshinweis nennt den Namen. **SQLite**, das der SQL-Editor der App verwendet, kennt keine dieser Funktionen; dort hilft die Umformung
+Für die Standardabweichung **aller vorliegenden Wochen** teilst du die Summe der quadrierten Abweichungen durch n. MySQL und PostgreSQL bieten dafür `STDDEV_POP()` an. Der Kurzname `STDDEV()` meint in MySQL die Grundgesamtheit, in PostgreSQL die Stichprobe (Nenner n − 1). Im **SQLite-Editor der App** verwendest du für die Grundgesamtheit die Umformung
 
 σ = √(Mittelwert der Quadrate − Quadrat des Mittelwerts), in SQL: `SQRT(AVG(x * x) - AVG(x) * AVG(x))`.
 
@@ -122,7 +122,7 @@ Beispiel mit den Werten 4, 8, 6, 2, 10:
 - Standardabweichung: $\sigma = \sqrt{8}$ = **2,83**
 - Median: sortiert 2, 4, **6**, 8, 10 → **6**
 
-**Interpretieren** heißt: Die Standardabweichung in Beziehung zum Mittelwert setzen (2,83 von 6 ist viel – die Werte streuen stark) und Median und Mittelwert vergleichen (nah beieinander → keine einseitigen Ausreißer; Mittelwert deutlich größer → einzelne hohe Werte ziehen ihn nach oben).
+Hier beträgt die Standardabweichung rund 47 % des Mittelwerts. Ob diese Streuung groß ist, hängt vom fachlichen Vergleichsmaßstab ab. Mittelwert und Median liegen beide bei 6. Auch starke Abweichungen nach unten und oben können sich im Mittelwert ausgleichen. Prüfe mögliche Ausreißer deshalb an den Einzelwerten.
 
 ---
 
@@ -146,7 +146,7 @@ Daten **sichten** (Profiling: Wertebereiche, fehlende Werte, Dubletten) → **be
 
 ## 5.3 Bewegungsdaten von Beschäftigten
 
-Laufwege sind **personenbezogene Daten**, sobald sie einer Person zugeordnet werden können. Dann gilt: **Rechtsgrundlage** nach Art. 6 Abs. 1 DSGVO nötig (z. B. Betriebsvereinbarung) · **Zweckbindung** – nur Wegeoptimierung, keine Leistungs- oder Verhaltenskontrolle · **Datenminimierung** – möglichst anonymisiert oder je Schicht zusammengefasst · **Transparenz** – Beschäftigte vorher informieren (Art. 13 DSGVO) · **Mitbestimmung** des Betriebsrats bei technischen Einrichtungen zur Überwachung (§ 87 Abs. 1 Nr. 6 BetrVG) · **Löschfristen**.
+Laufwege sind **personenbezogene Daten**, sobald sie einer Person zugeordnet werden können. Dann gilt: **Rechtsgrundlage** und Erforderlichkeit der Erfassung für den konkreten Zweck prüfen (Art. 6 DSGVO, § 26 BDSG) · **Zweckbindung** – nur Wegeoptimierung, keine Leistungs- oder Verhaltenskontrolle · **Datenminimierung** – möglichst anonymisiert oder je Schicht zusammengefasst · **Transparenz** – Beschäftigte vorher informieren (Art. 13 DSGVO) · **Mitbestimmung** des Betriebsrats bei technischen Einrichtungen zur Überwachung (§ 87 Abs. 1 Nr. 6 BetrVG) · **Löschfristen**.
 
 ---
 
@@ -272,7 +272,7 @@ Bisher werden die technischen Daten aller vermieteten MDE-Geräte in einer CSV-D
 
 **B1 (13 P):** *Überführen* Sie den Auszug der CSV-Datei in ein relationales Datenbankmodell in der **3. Normalform**. Geben Sie die Datentypen an, kennzeichnen Sie Primärschlüssel und Fremdschlüssel und geben Sie die Beziehungen mit Kardinalitäten an.
 
-**B2 (4 P):** Die Methode `execute` erlaubt es, Werte als Parameter zu übergeben. In der Programmierung spricht man dabei von **Prepared Statements**. *Erklären* Sie den Begriff und **einen** Vorteil.
+**B2 (4 P):** Ein vorbereiteter Cursor führt SQL-Anweisungen mit gebundenen Parametern aus (**Prepared Statements**). *Erklären* Sie den Begriff und **einen** Vorteil.
 
 **B3 (9 P):** *Ergänzen* Sie das folgende Python-Skript so, dass es eine Tabelle für die Mieter anlegt und den ersten Mieter aus dem Auszug einfügt. Denken Sie an den Primärschlüssel.
 
@@ -280,7 +280,7 @@ Bisher werden die technischen Daten aller vermieteten MDE-Geräte in einer CSV-D
 import mysql.connector
 verbindung = mysql.connector.connect(host="localhost", user="event",
                                      password="…", database="mde")
-cursor = verbindung.cursor()
+cursor = verbindung.cursor(prepared=True)
 # Ergänzen Sie das Skript.
 ```
 
@@ -316,7 +316,7 @@ Die Tabelle `lagerbestand` enthält je Artikel den Lagerbestand am Ende jeder Ka
 
 **C4 (4 P):** *Formulieren* Sie eine SQL-Abfrage, die je Artikel den höchsten und den niedrigsten Lagerbestand ausgibt. Die Ergebnisspalten heißen `artikelnr`, `maximum` und `minimum`.
 
-**C5 (7 P):** *Formulieren* Sie eine SQL-Abfrage, die je Artikel den Mittelwert und die Standardabweichung des Lagerbestands ausgibt, jeweils auf eine ganze Zahl gerundet. Die Ergebnisspalten heißen `artikelnr`, `mittelwert` und `standardabweichung`. Hinweis: In vielen Datenbanksystemen berechnet die Aggregatfunktion `STDDEV()` die Standardabweichung. Der SQL-Editor der App arbeitet mit SQLite und kennt sie nicht – verwenden Sie dort die Umformung aus der Formel; die Funktionen `AVG()`, `SQRT()` und `ROUND()` stehen zur Verfügung.
+**C5 (7 P):** *Formulieren* Sie eine SQL-Abfrage, die je Artikel den Mittelwert und die Standardabweichung des Lagerbestands über alle vorliegenden Wochen (Grundgesamtheit) ausgibt, jeweils auf eine ganze Zahl gerundet. Die Ergebnisspalten heißen `artikelnr`, `mittelwert` und `standardabweichung`. In MySQL oder PostgreSQL können Sie `STDDEV_POP()` verwenden. Im SQLite-Editor der App stehen für die Umformung aus der Formel `AVG()`, `SQRT()` und `ROUND()` zur Verfügung.
 
 > **Formel:** σ = √(Mittelwert der Quadrate − Quadrat des Mittelwerts)
 

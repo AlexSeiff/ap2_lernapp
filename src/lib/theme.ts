@@ -29,3 +29,26 @@ export function wendeThemeAn(theme: Theme): void {
     /* ohne Speicher einfach nicht merken */
   }
 }
+
+export const KARO_STAERKEN = { kraeftig: 'Kräftig', dezent: 'Dezent', aus: 'Aus' } as const;
+export type KaroStaerke = keyof typeof KARO_STAERKEN;
+const KARO_SPEICHER = 'ap2-karo';
+
+export function leseKaro(): KaroStaerke {
+  try {
+    const wert = localStorage.getItem(KARO_SPEICHER);
+    if (wert === 'kraeftig' || wert === 'aus') return wert;
+  } catch {
+    /* Ohne Browserspeicher gilt die normale Linienstärke. */
+  }
+  return 'dezent';
+}
+
+export function wendeKaroAn(karo: KaroStaerke): void {
+  document.documentElement.dataset.karo = karo;
+  try {
+    localStorage.setItem(KARO_SPEICHER, karo);
+  } catch {
+    /* Die Auswahl wirkt auch ohne Speicher bis zum Neuladen. */
+  }
+}

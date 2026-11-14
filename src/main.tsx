@@ -6,7 +6,7 @@ import { registriereServiceWorker } from './lib/pwa';
 import { StoreProvider } from './lib/store';
 import { ladeDetailsFuerAdresse } from './lib/details';
 import { ladeTexteFuerAdresse } from './lib/texte';
-import { leseTheme, wendeThemeAn } from './lib/theme';
+import { leseKaro, leseTheme, wendeKaroAn, wendeThemeAn } from './lib/theme';
 import './styles.css';
 import './apple.css';
 import './paper.css';
@@ -20,6 +20,7 @@ import './notizbuch.css';
 
 // Farbschema vor dem ersten Zeichnen setzen (kein Aufblitzen im falschen Design).
 wendeThemeAn(leseTheme());
+wendeKaroAn(leseKaro());
 // Direkt geöffnetes Lernblatt: seinen Text gleich mit dem Inhalt laden (lib/texte.ts).
 ladeTexteFuerAdresse(window.location.hash);
 ladeDetailsFuerAdresse(window.location.hash);

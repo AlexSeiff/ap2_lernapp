@@ -30,8 +30,8 @@ Szenario: **Möbelhaus Nordholz GmbH** mit der Auszubildenden **Carla Witt** und
 | Thema | Das musst du wissen |
 |---|---|
 | **Betriebsrat** | vertritt die **Arbeitnehmer** des Betriebs – nicht die leitenden Angestellten (die haben einen Sprecherausschuss) |
-| **Betriebsvereinbarung** | Vertrag zwischen Arbeitgeber und Betriebsrat; regelt z. B. Pausen, Beginn und Ende der täglichen Arbeitszeit, Urlaubsplan. **Nicht** regelbar: was üblicherweise der Tarifvertrag regelt (Entgelt, Urlaubsdauer) oder was gegen ein Gesetz verstößt |
-| **Tarifvertrag** | zwischen **Gewerkschaft** und **Arbeitgeberverband** (oder einzelnem Arbeitgeber); während der Laufzeit gilt die **Friedenspflicht** |
+| **Betriebsvereinbarung** | Vertrag zwischen Arbeitgeber und Betriebsrat; regelt z. B. Pausen, Beginn und Ende der täglichen Arbeitszeit, Urlaubsplan. Für tariflich geregelte oder tarifübliche Arbeitsbedingungen gilt die Tarifsperre. Ergänzende Vereinbarungen brauchen eine ausdrückliche tarifliche Öffnung (§ 77 Abs. 3 BetrVG) |
+| **Tarifvertrag** | zwischen **Gewerkschaft** und **Arbeitgeberverband** (oder einzelnem Arbeitgeber); die **relative Friedenspflicht** schützt die tariflich geregelten Gegenstände während der Laufzeit |
 | **Entgelttarifvertrag** | Lohn- und Gehaltssätze je Entgeltgruppe, Ausbildungsvergütungen; kurze Laufzeit |
 | **Manteltarifvertrag** | Rahmenbedingungen: Arbeitszeit, Urlaub, Kündigungsfristen, Zuschläge; lange Laufzeit |
 | **Besonderer Kündigungsschutz** | Betriebsratsmitglieder, Schwangere und Mütter, schwerbehinderte Menschen, Auszubildende nach der Probezeit, Beschäftigte in Elternzeit – **nicht**: ältere Beschäftigte oder leitende Angestellte |
@@ -45,7 +45,7 @@ Szenario: **Möbelhaus Nordholz GmbH** mit der Auszubildenden **Carla Witt** und
 |---|---|
 | **Sozialgericht** | zuständig für Streit mit Krankenkasse, Rentenversicherung, Berufsgenossenschaft, Agentur für Arbeit |
 | **Beitragsbemessungsgrenze** | Entgelt **oberhalb** der Grenze bleibt beitragsfrei. Rentenversicherung: **8.450 EUR im Monat** bzw. 101.400 EUR im Jahr (Stand 2026) |
-| **Versicherungspflichtgrenze** | betrifft nur die **Krankenversicherung**: Wer darüber verdient, darf in die private Krankenversicherung wechseln (77.400 EUR im Jahr, Stand 2026) |
+| **Versicherungspflichtgrenze** | allgemeine Jahresarbeitsentgeltgrenze der **Krankenversicherung** (2026: 77.400 EUR). Überschreitet das regelmäßige Jahresarbeitsentgelt bei einer Gehaltserhöhung im laufenden Arbeitsverhältnis diese Grenze, endet die Pflicht zum Jahresende, sofern es auch die Grenze des Folgejahres übersteigt |
 | **Gesetzliche Unfallversicherung** | Träger: **Berufsgenossenschaften**; Beitrag zahlt **allein der Arbeitgeber**; versichert sind Arbeitsunfälle, **Wegeunfälle** auf dem direkten Weg und Berufskrankheiten |
 | **Generationenvertrag** | Umlageverfahren: Die Beiträge der heute Erwerbstätigen finanzieren die Renten der heutigen Rentner |
 
@@ -74,7 +74,7 @@ Beispiel: Ertrag 260.000 EUR bei 200.000 EUR Aufwand: $\frac{260.000}{200.000}$ 
 
 | Thema | Das musst du wissen |
 |---|---|
-| **Arbeitsschutzausschuss** | Pflicht in Betrieben mit **mehr als 20 Beschäftigten** (§ 11 ASiG); tagt mindestens vierteljährlich |
+| **Arbeitsschutzausschuss** | Pflicht bei **mehr als 20 Beschäftigten** (§ 11 ASiG). Teilzeitkräfte zählen bis 20 Wochenstunden mit 0,5, bei mehr als 20 bis 30 Stunden mit 0,75. Der Ausschuss tagt mindestens vierteljährlich |
 | **Brandfall** | **Ruhe bewahren – Brand melden – in Sicherheit bringen – Löschversuch** nur ohne Eigengefährdung; Fenster und Türen **schließen** |
 | **Sicherheitszeichen** | Verbot: rund, roter Rand, Querbalken · Gebot: rund, blau · Warnung: dreieckig, gelb · Rettung: rechteckig, grün · Brandschutz: quadratisch, rot |
 | **AGG-Merkmale** | Rasse und ethnische Herkunft, Geschlecht, Religion und Weltanschauung, Behinderung, Alter, sexuelle Identität – **nicht**: Schulabschluss, Berufserfahrung, Qualifikation |
@@ -84,7 +84,7 @@ Beispiel: Ertrag 260.000 EUR bei 200.000 EUR Aufwand: $\frac{260.000}{200.000}$ 
 
 ## Die 8 häufigsten Fehler aus Prüfersicht
 
-1. **Probezeit der Ausbildung** (ein bis vier Monate) mit der Probezeit im Arbeitsvertrag (höchstens sechs Monate) verwechselt.
+1. **Probezeit der Ausbildung** (ein bis vier Monate) mit der Fristregel im Arbeitsvertrag verwechselt. Die verkürzte Kündigungsfrist während der Probezeit gilt nach § 622 Abs. 3 BGB längstens sechs Monate.
 2. Angenommen, die Ausbildung ende erst mit dem **Vertragsdatum** – sie endet mit der bestandenen Prüfung.
 3. **Betriebsvereinbarung und Tarifvertrag** verwechselt: Entgelt und Urlaubsdauer gehören in den Tarifvertrag.
 4. **Beitragsbemessungsgrenze** und **Versicherungspflichtgrenze** gleichgesetzt.

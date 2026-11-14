@@ -41,10 +41,15 @@ describe('Heute lernen – Seiten', () => {
     for (const it of plan.items) expect(html).toContain(it.titel.replace(/&/g, '&amp;'));
   });
 
-  it('Übersicht hat den Knopf „Heute lernen“', () => {
+  it('Übersicht zeigt den Plan von „Heute lernen“ und lässt den aktuellen Schritt abhaken', () => {
     const html = render('/');
     expect(html).toContain('href="/heute"');
     expect(html).toContain('Heute lernen');
+    const liste = html.match(/<ol class="heute-liste".*?<\/ol>/)?.[0] ?? '';
+    const plan = planeHeute(content, progress, { today: localDate() });
+    expect(liste.match(/type="checkbox"/g)).toHaveLength(plan.items.length);
+    expect(liste.match(/<input[^>]*disabled/g)).toHaveLength(plan.items.length - 1);
+    for (const it of plan.items) expect(liste).toContain(it.titel.replace(/&/g, '&amp;'));
   });
 
   it('Karteikarten mit ?karten=: genau diese Karten', () => {

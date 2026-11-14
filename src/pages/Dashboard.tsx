@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FehlergrundKarte } from '../components/FehlergrundKarte';
 import { Kaestchen, Strichliste } from '../components/Kaestchen';
+import { HeuteSchritte } from '../components/HeuteSchritte';
 import { MiniRing, Ringe } from '../components/Ring';
 import { Welcome } from '../components/Welcome';
 import { useBackupDownload } from '../hooks/useBackupDownload';
@@ -11,7 +12,9 @@ import { begriffPfad } from '../lib/begriffe';
 import { formatPoints, ihkGrade } from '../lib/grading';
 import { cardPool } from '../lib/cards';
 import { diagrammSummary, diagrammUebungen } from '../lib/diagramme';
-import { istFertig } from '../lib/heuteSitzung';
+import { planeHeute } from '../lib/heute';
+import { istFertig, schonDran, setzeSitzung, starteSitzung, weiter } from '../lib/heuteSitzung';
+import { leseDauer } from '../lib/heuteZeit';
 import { kartenstand, STAENDE, STAND_TEXT } from '../lib/kartenstand';
 import { kalibrierung } from '../lib/kalibrierung';
 import { holeLeseStelle } from '../lib/leseStelle';
@@ -24,7 +27,7 @@ import { daysUntilExam, examTrends, formatIsoDate, studyStreak, topicStats } fro
 import { useDetailsWennDa } from '../lib/details';
 import { useStartStore } from '../lib/store';
 import { begriffDesTages, bereichFortschritt, faellig, klausurVerlauf, quote, type Anteil } from '../lib/uebersicht';
-import { HEUTE_MINUTEN, SICHER_RICHTIG_AB } from '../../shared/config';
+import { SICHER_RICHTIG_AB } from '../../shared/config';
 import { Icon } from '../components/Icon';
 import type { IconName } from '../lib/icons';
 
@@ -227,6 +230,16 @@ function Weiterlernen() {
   const { content, progress } = useStartStore();
   const sitzung = useHeuteSitzung();
   const laeuft = sitzung && !istFertig(sitzung);
+  const voll = useDetailsWennDa();
+  const today = localDate();
+  const dauer = leseDauer();
+  const schritte = useMemo(
+    () =>
+      sitzung?.items.length
+        ? sitzung.items
+        : voll && planeHeute(voll, progress, { today, minuten: dauer, ausschliessen: sitzung && schonDran(sitzung) }).items,
+    [sitzung, voll, progress, today, dauer],
+  );
   const [stelle] = useState(holeLeseStelle);
   const topic = stelle && !istAusgeblendet(progress.settings, stelle.topicId) && content.topics.find((t) => t.id === stelle.topicId);
   const abschnitt = topic && topic.sections.find((s) => s.id === stelle.sectionId);
@@ -235,11 +248,10 @@ function Weiterlernen() {
       <h2>
         <Icon name="play" /> Weiterlernen
       </h2>
-      <p className="notiz">Kleine Schritte. Großes Wissen.</p>
       <p>
         {sitzung && !laeuft && sitzung.items.length > 0
-          ? '✓ Heute schon eine Runde geschafft.'
-          : `Gemischte Runde, etwa ${HEUTE_MINUTEN} Minuten – aus dem, was fällig ist.`}
+          ? `Heute erledigt: ${sitzung.erledigt.length} von ${sitzung.items.length} Schritten.`
+          : `Tagesrunde, etwa ${dauer} Minuten.`}
       </p>
       <div className="knopfzeile heute-start">
         <Link className="button" to="/heute">
@@ -255,6 +267,15 @@ function Weiterlernen() {
           </Link>
         )}
       </div>
+      {!!schritte?.length && (
+        <HeuteSchritte
+          items={schritte}
+          index={sitzung?.items.length ? sitzung.index : 0}
+          erledigt={sitzung?.erledigt}
+          uebersprungen={sitzung?.uebersprungen}
+          onAbhaken={() => setzeSitzung(weiter(sitzung?.items.length ? sitzung : starteSitzung(schritte, today, sitzung)))}
+        />
+      )}
     </section>
   );
 }

@@ -39,7 +39,7 @@ Beispiel: 160 Stunden zu 16,00 EUR, davon 10 Stunden mit 50 % Zuschlag: $160 \cd
 | Thema | Das musst du wissen |
 |---|---|
 | **Beiträge** | Renten-, Arbeitslosen-, Kranken- und Pflegeversicherung tragen Arbeitgeber und Arbeitnehmer grundsätzlich **je zur Hälfte**; Rentenversicherung 18,6 %, also 9,3 % für den Arbeitnehmer (Stand 2026) |
-| **Versicherungspflichtgrenze** | 77.400 EUR im Jahr bzw. 6.450 EUR im Monat (Stand 2026). Wer mit seinem regelmäßigen Jahresarbeitsentgelt darüber liegt, wird zum Jahresende versicherungsfrei: Er kann **freiwillig** in der gesetzlichen Krankenversicherung bleiben oder in die private wechseln |
+| **Versicherungspflichtgrenze** | 77.400 EUR im Jahr bzw. 6.450 EUR im Monat (Stand 2026). Steigt das regelmäßige Entgelt im laufenden Arbeitsverhältnis über die Grenze, endet die Versicherungspflicht zum Jahresende, wenn das Entgelt auch die Grenze des Folgejahres übersteigt (§ 6 Abs. 4 SGB V). Danach ist eine freiwillige GKV-Mitgliedschaft oder ein Wechsel in die PKV möglich |
 | **Nominal- und Realeinkommen** | Nominaleinkommen = Betrag in Euro; **Realeinkommen** = was man sich dafür kaufen kann. Steigen die Preise stärker als das Gehalt, sinkt das Realeinkommen |
 
 ## 2.3 Tarif
@@ -52,7 +52,7 @@ Beispiel: 160 Stunden zu 16,00 EUR, davon 10 Stunden mit 50 % Zuschlag: $160 \cd
 
 | Thema | Das musst du wissen |
 |---|---|
-| **Wahlberechtigt** (§ 7 BetrVG) | alle Arbeitnehmer ab **16 Jahren**, auch Auszubildende; Leiharbeitnehmer, wenn sie **länger als drei Monate** im Betrieb eingesetzt werden |
+| **Wahlberechtigt** (§ 7 BetrVG) | alle Arbeitnehmer ab **16 Jahren**, auch Auszubildende; Leiharbeitnehmer ab dem ersten Einsatztag, wenn der Einsatz **länger als drei Monate** geplant ist |
 | **Wählbar** (§ 8 BetrVG) | wahlberechtigt, **18 Jahre** alt und **sechs Monate** im Betrieb |
 | **Wahl** | regelmäßig **alle vier Jahre** zwischen 1. März und 31. Mai |
 | **Betriebsversammlung** | findet während der Arbeitszeit statt; die Teilnahme wird **wie Arbeitszeit vergütet** (§ 44 BetrVG) |
@@ -68,7 +68,7 @@ Beispiel: Die Kündigung einer Arbeitnehmerin geht am 10. Juni zu. Vier Wochen s
 | Rechtsform | Haftung | Kapital | Besonderheit |
 |---|---|---|---|
 | **OHG** | alle Gesellschafter unbeschränkt, auch mit Privatvermögen | kein Mindestkapital | Handelsregister Abteilung A |
-| **KG** | Komplementär unbeschränkt, **Kommanditist nur bis zu seiner im Handelsregister eingetragenen Haftsumme (Einlage)** | kein Mindestkapital | Kommanditisten sind von der Geschäftsführung ausgeschlossen |
+| **KG** | Komplementär unbeschränkt, Kommanditist gegenüber Gläubigern bis zur **Haftsumme**, soweit die vereinbarte Einlage noch nicht bis zu dieser Höhe geleistet ist | kein Mindestkapital | Kommanditisten sind von der Geschäftsführung ausgeschlossen |
 | **GmbH** | nur das Gesellschaftsvermögen | Stammkapital mind. 25.000 EUR | Geschäftsführer, die nicht Gesellschafter sein müssen; Abteilung B |
 | **AG** | nur das Gesellschaftsvermögen | Grundkapital mind. 50.000 EUR | Aktien an der Börse handelbar; Hauptversammlung |
 | **eG** | nur das Genossenschaftsvermögen | Geschäftsanteile der Mitglieder | Eintragung im **Genossenschaftsregister** |
@@ -113,7 +113,7 @@ Umsatz je Mitarbeiter und seine Veränderung: Steigt der Wert von 80.000 EUR auf
 
 ## Ausgangssituation
 
-Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen mit eigener IT-Abteilung. **Frau Sievers** hat ihre Ausbildung zur Fachinformatikerin abgeschlossen und wird zum 1. März 2027 als Datenanalystin eingestellt. **Leon Hartwig**, 17 Jahre alt, ist Auszubildender im ersten Ausbildungsjahr. Die folgenden Aufgaben beziehen sich auf dieses Unternehmen.
+Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen mit eigener IT-Abteilung. **Frau Sievers** hat ihre Ausbildung zur Fachinformatikerin in einem anderen Unternehmen abgeschlossen und wird zum 1. März 2027 als Datenanalystin eingestellt. **Leon Hartwig**, 17 Jahre alt, ist Auszubildender im ersten Ausbildungsjahr. Die folgenden Aufgaben beziehen sich auf dieses Unternehmen.
 
 ## Block A – Einstellung und Ausbildung (20 P)
 
@@ -191,7 +191,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 - (4) Friedenspflicht
 - (5) Günstigkeitsprinzip
 
-**B5 (4 P):** Ein Mitarbeiter der Warenausgabe erhält für März 2027 folgende Abrechnung: Stundenlohn 17,50 EUR · 168 Arbeitsstunden, davon 16 Stunden an Samstagen · für Samstagsarbeit zusätzlich 25 % Zuschlag auf den Stundenlohn · einmaliges Urlaubsgeld von 300,00 EUR brutto. Berechnen Sie a) den Bruttolohn für März und b) den Arbeitnehmeranteil zur gesetzlichen Rentenversicherung (Beitragssatz 18,6 %, je zur Hälfte von Arbeitgeber und Arbeitnehmer, Stand 2026). *(Ergebnisse in EUR eintragen: a, b)*
+**B5 (4 P):** Ein Mitarbeiter der Warenausgabe erhält für März 2026 folgende Abrechnung: Stundenlohn 17,50 EUR · 168 Arbeitsstunden, davon 16 Stunden an Samstagen · für Samstagsarbeit zusätzlich 25 % Zuschlag auf den Stundenlohn · einmaliges Urlaubsgeld von 300,00 EUR brutto. Berechnen Sie a) den Bruttolohn für März und b) den Arbeitnehmeranteil zur gesetzlichen Rentenversicherung (Beitragssatz 18,6 %, je zur Hälfte von Arbeitgeber und Arbeitnehmer, Stand 2026). *(Ergebnisse in EUR eintragen: a, b)*
 
 > **Formeln:**
 > - Bruttolohn = Stunden · Stundenlohn + Zuschlagsstunden · Stundenlohn · Zuschlagssatz + Sonderzahlung
@@ -245,8 +245,8 @@ Auszug aus dem Betriebsverfassungsgesetz zu C1 und C5:
 - 52 volljährige Arbeitnehmer (ohne Auszubildende)
 - 6 volljährige Auszubildende
 - 3 Auszubildende im Alter von 16 Jahren und 2 Auszubildende im Alter von 17 Jahren
-- 2 Leiharbeitnehmer, die für acht Monate im Möbelhaus eingesetzt werden
-- 4 Leiharbeitnehmer, die für sechs Wochen zur Inventur eingesetzt werden
+- 2 volljährige Leiharbeitnehmer, die für acht Monate im Möbelhaus eingesetzt werden
+- 4 volljährige Leiharbeitnehmer, die für sechs Wochen zur Inventur eingesetzt werden
 - 2 Schülerpraktikanten im Alter von 15 Jahren
 
 Ermitteln Sie mithilfe des Gesetzesauszugs, wie viele Personen bei der Betriebsratswahl **wählen** dürfen. *(Anzahl eintragen)*

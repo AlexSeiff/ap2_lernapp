@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { isIsoDate } from '../../shared/progress';
 import { Datenschutz } from '../components/Datenschutz';
@@ -8,13 +9,14 @@ import { daysUntilExam, formatIsoDate } from '../lib/stats';
 import { useStore } from '../lib/store';
 import { Icon } from '../components/Icon';
 import { useTheme } from '../hooks/useTheme';
-import { THEMES } from '../lib/theme';
+import { KARO_STAERKEN, leseKaro, THEMES, wendeKaroAn, type KaroStaerke } from '../lib/theme';
 
 export function Einstellungen() {
   const { progress, update } = useStore();
   const { settings } = progress;
   const days = daysUntilExam(settings.examDate);
   const [theme, setTheme] = useTheme();
+  const [karo, setKaro] = useState(leseKaro);
 
   return (
     <div className="page narrow">
@@ -37,6 +39,22 @@ export function Einstellungen() {
         <p className="hint">
           „System“ folgt der Einstellung deines Geräts (hell oder dunkel). Das Farbschema merkt sich jedes Gerät selbst.
         </p>
+        <h3 id="karo-wahl">Karo-Stärke</h3>
+        <div className="mode-switch" role="group" aria-labelledby="karo-wahl">
+          {(Object.keys(KARO_STAERKEN) as KaroStaerke[]).map((wert) => (
+            <button
+              key={wert}
+              type="button"
+              aria-pressed={karo === wert}
+              onClick={() => {
+                wendeKaroAn(wert);
+                setKaro(wert);
+              }}
+            >
+              {KARO_STAERKEN[wert]}
+            </button>
+          ))}
+        </div>
       </section>
 
       <section className="card">

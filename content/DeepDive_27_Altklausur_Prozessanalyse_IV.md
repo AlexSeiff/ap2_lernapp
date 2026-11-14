@@ -121,7 +121,7 @@ Wer jeden Sonderfall ausmodelliert, verdeckt den **Standardablauf**: Das Modell 
 
 ## 4.4 Risiken bewerten
 
-Drei Faktoren reichen für die Bewertung: **Eintrittswahrscheinlichkeit**, **Schadenshöhe (Auswirkung)** und **Entdeckungswahrscheinlichkeit**. Aus Wahrscheinlichkeit · Auswirkung ergibt sich die Risikokennzahl; die FMEA multipliziert zusätzlich die Entdeckung (Deep Dive 5).
+Drei Faktoren reichen für die Bewertung: **Eintrittswahrscheinlichkeit**, **Schadenshöhe (Auswirkung)** und **Entdeckungswahrscheinlichkeit**. Die klassische FMEA multipliziert die Bewertungen für Auftreten, Bedeutung und Entdeckung zur Risikoprioritätszahl. Je schwieriger ein Fehler zu entdecken ist, desto höher fällt seine Entdeckungsbewertung aus (Deep Dive 5).
 
 ---
 

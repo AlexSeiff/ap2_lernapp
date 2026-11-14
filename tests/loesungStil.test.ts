@@ -173,10 +173,13 @@ describe('Echte Musterlösungen in content/', () => {
     expect(ergebnisse(render('03-D2'))).toEqual([]);
   });
 
-  it('jede kurze Punkteangabe *(… P)* wird umgewandelt', () => {
-    for (const t of Object.values(content.tasks)) {
-      const html = render(t.id);
-      expect(html, t.id).not.toMatch(/<em>\([^<]*\d P\)<\/em>/);
-    }
-  });
+  it.each([...new Set(Object.values(content.tasks).map((t) => t.topicId))])(
+    'DD%s: jede kurze Punkteangabe *(… P)* wird umgewandelt',
+    (id) => {
+      for (const t of Object.values(content.tasks).filter((task) => task.topicId === id)) {
+        const html = render(t.id);
+        expect(html, t.id).not.toMatch(/<em>\([^<]*\d P\)<\/em>/);
+      }
+    },
+  );
 });

@@ -878,14 +878,14 @@
         {
           "id": "ST1-018",
           "frage": "Wie funktioniert die 1,5-IQR-Regel? Beispiel Q1 = 40, Q3 = 70.",
-          "antwort": "Unterer Zaun = Q1 − 1,5 · IQR, oberer Zaun = Q3 + 1,5 · IQR. IQR = 30 → Zäune −5 und 115. Werte außerhalb gelten als Ausreißerverdacht.",
+          "antwort": "Unterer Zaun: Q1\u00a0−\u00a01,5\u00a0·\u00a0IQR. Oberer Zaun: Q3\u00a0+\u00a01,5\u00a0·\u00a0IQR. Bei IQR\u00a0=\u00a030 liegen die Zäune bei −5 und 115. Werte außerhalb gelten als Ausreißerverdacht.",
           "typ": "rechnung",
           "schwierigkeit": 2,
           "tags": [
             "ausreisser",
             "boxplot"
           ],
-          "rechenweg": "$$\\text{Unterer Zaun} = Q_1 - 1{,}5 \\cdot IQR \\qquad \\text{Oberer Zaun} = Q_3 + 1{,}5 \\cdot IQR$$\n\n$IQR = 70 - 40 = 30$\n\n$40 - 1{,}5 \\cdot 30 = -5$ und $70 + 1{,}5 \\cdot 30 = 115$\n\nWerte außerhalb der Zäune gelten als Ausreißerverdacht."
+          "rechenweg": "**Interquartilsabstand**\n\n$IQR = 70 - 40 = 30$\n\n**Unterer Zaun**\n\n$Q_1 - 1{,}5 \\cdot IQR$\n\n$40 - 1{,}5 \\cdot 30 = -5$\n\n**Oberer Zaun**\n\n$Q_3 + 1{,}5 \\cdot IQR$\n\n$70 + 1{,}5 \\cdot 30 = 115$\n\nWerte außerhalb der Zäune gelten als Ausreißerverdacht."
         },
         {
           "id": "ST1-027",

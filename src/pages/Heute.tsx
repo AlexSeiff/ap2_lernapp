@@ -1,4 +1,4 @@
-import { type CSSProperties, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useHeuteSitzung } from '../hooks/useHeute';
 import { HEUTE_ICONS, planeHeute, type HeuteItem } from '../lib/heute';
@@ -8,19 +8,10 @@ import { planeLernplan } from '../lib/lernplan';
 import { addDays, localDate } from '../lib/progress';
 import { formatIsoDate } from '../lib/stats';
 import { useStore } from '../lib/store';
+import { HeuteSchritte } from '../components/HeuteSchritte';
 import { Icon } from '../components/Icon';
 import { KalenderKnopf, lernzeitenText } from '../components/Lernzeiten';
 import { lernzeitenVon } from '../lib/lernzeiten';
-
-const ART_TEXT: Record<HeuteItem['art'], string> = {
-  wiederholung: 'Fehlerjournal',
-  // Nicht „schwächstes Thema“: die zweite Aufgabe kommt aus dem am längsten nicht geübten Thema.
-  aufgabe: 'neue Aufgabe',
-  sql: 'SQL-Übung',
-  rechnen: 'Rechenübung',
-  diagramm: 'Diagramm-Übung',
-  karten: 'Karteikarten',
-};
 
 /** „▶ Heute lernen“ (ROADMAP 8.1): Plan der Tagesrunde, Start und Stand. Die Schritte selbst laufen in den normalen Seiten. */
 export function Heute() {
@@ -65,7 +56,7 @@ export function Heute() {
             Runde beenden
           </button>
         </div>
-        <Schritte items={sitzung.items} index={sitzung.index} erledigt={sitzung.erledigt} uebersprungen={sitzung.uebersprungen} />
+        <HeuteSchritte items={sitzung.items} index={sitzung.index} erledigt={sitzung.erledigt} uebersprungen={sitzung.uebersprungen} />
         <p className="hint">
           Sobald ein Schritt geschafft ist (Aufgabe gespeichert, Übung richtig, Karten bewertet), geht es von selbst weiter – oder oben mit
           „Weiter →“.
@@ -130,7 +121,7 @@ export function Heute() {
               </button>
             )}
           </div>
-          <Schritte items={plan.items} />
+          <HeuteSchritte items={plan.items} />
           <p className="hint">
             Zeiten sind grobe Schätzungen. Jeder Schritt öffnet die passende Seite; dort lernst du wie gewohnt, danach geht es von selbst
             weiter.
@@ -141,47 +132,6 @@ export function Heute() {
       )}
       <LernplanKarte />
     </div>
-  );
-}
-
-function Schritte({
-  items,
-  index,
-  erledigt = [],
-  uebersprungen = [],
-}: {
-  items: HeuteItem[];
-  index?: number;
-  erledigt?: string[];
-  uebersprungen?: string[];
-}) {
-  return (
-    <ol className="heute-liste">
-      {items.map((it, i) => {
-        const status = erledigt.includes(it.key)
-          ? 'erledigt'
-          : uebersprungen.includes(it.key)
-            ? 'übersprungen'
-            : i === index
-              ? 'aktuell'
-              : '';
-        return (
-          <li key={it.key} className={status === 'aktuell' ? 'aktuell' : status ? 'erledigt' : ''} style={{ '--i': i } as CSSProperties}>
-            <span className="heute-status" aria-hidden="true">
-              {status && <Icon name={status === 'erledigt' ? 'check' : status === 'übersprungen' ? 'skip-forward' : 'play'} />}
-            </span>
-            {status && <span className="sr-only">{status}: </span>}
-            <span>
-              <Icon name={HEUTE_ICONS[it.art]} /> {it.titel}
-              <span className="muted small">
-                {' '}
-                · {ART_TEXT[it.art]} · ~{Math.max(1, Math.round(it.minuten))} min
-              </span>
-            </span>
-          </li>
-        );
-      })}
-    </ol>
   );
 }
 

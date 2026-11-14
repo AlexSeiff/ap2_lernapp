@@ -18,12 +18,13 @@
   --deckel: #22344f;
   --haft: #ffe98a;
   --haft-text: #3a3000;
+  --haft-gruen: #c3e39b;
   --marker: rgba(255, 224, 51, 0.6);
   --schatten: rgba(20, 24, 32, 0.28);
   --ring-loch: rgba(16, 21, 29, 0.62);
   --schrift: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --hand: 'Kalam', 'Segoe Print', 'Bradley Hand', cursive;
-  --streifen: calc(5 * var(--k));
+  --karo-farbe: var(--linie);
 
   --bg: var(--tisch);
   --surface: #ffffff;
@@ -64,6 +65,7 @@
   --deckel: #090c11;
   --haft: #5a5020;
   --haft-text: #fff3bf;
+  --haft-gruen: #374c32;
   --marker: rgba(255, 214, 64, 0.28);
   --schatten: rgba(0, 0, 0, 0.6);
   --ring-loch: rgba(0, 0, 0, 0.7);
@@ -94,6 +96,7 @@
     --deckel: #090c11;
     --haft: #5a5020;
     --haft-text: #fff3bf;
+    --haft-gruen: #374c32;
     --marker: rgba(255, 214, 64, 0.28);
     --schatten: rgba(0, 0, 0, 0.6);
     --ring-loch: rgba(0, 0, 0, 0.7);
@@ -116,6 +119,10 @@
   }
 }
 
+/* Die Karo-Wahl betrifft Papierlinien. Rahmen und Fortschrittskästchen behalten ihre Konturen. */
+:root[data-karo='kraeftig'] { --karo-farbe: color-mix(in srgb, var(--blau) 34%, transparent); }
+:root[data-karo='aus'] { --karo-farbe: transparent; }
+
 /* ── Grundschrift ────────────────────────────────────────────────────────── */
 html { background: var(--tisch); }
 body { background: var(--tisch); background-image: none; font: 17px / var(--k) var(--schrift); letter-spacing: 0; }
@@ -125,7 +132,7 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 /* ── Das Buch: Papier, Ringe, zwei Seiten ────────────────────────────────── */
 .seite {
   background-color: var(--papier);
-  background-image: linear-gradient(var(--linie) 1px, transparent 1px), linear-gradient(90deg, var(--linie) 1px, transparent 1px);
+  background-image: linear-gradient(var(--karo-farbe) 1px, transparent 1px), linear-gradient(90deg, var(--karo-farbe) 1px, transparent 1px);
   background-size: var(--k) var(--k);
 }
 .buch { position: relative; min-height: 100vh; }
@@ -178,42 +185,6 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 .inhalt-abschnitte .toc-links a:hover, .inhalt-abschnitte .toc-links a:focus-visible { color: var(--blau); border-left-color: var(--blau); background: none; }
 .inhalt-abschnitte .toc-links a.toc-lernziele { margin-top: 0; padding-top: 0; border-top: 0; color: var(--blau); }
 
-/* ── Haftstreifen der Bereiche ───────────────────────────────────────────── */
-.register { z-index: 30; }
-.streifen {
-  --c: #ffe14d; display: flex; align-items: center; gap: 7px; color: #241f00; font: 700 16.5px / 1 var(--hand); text-decoration: none; white-space: nowrap;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--c) 82%, #000) 0, var(--c) 14px, var(--c) 100%);
-  box-shadow: 2px 4px 6px -3px var(--schatten);
-}
-.streifen:hover { text-decoration: none; }
-.streifen .icon { width: 17px; height: 17px; flex: none; }
-.streifen.s-lernen { --c: #ff9fc2; }
-.streifen.s-glossar { --c: #a3e38f; }
-.streifen.s-sql { --c: #ffb95e; }
-.streifen.s-einstellungen { --c: #97d4ff; }
-.streifen-zahl { display: grid; place-items: center; min-width: 21px; height: 21px; padding: 0 4px; border: 1.5px solid currentColor; border-radius: 11px; font: 700 12.5px / 1 var(--schrift); }
-:root[data-theme='dark'] .streifen { filter: brightness(0.86) saturate(0.92); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .streifen { filter: brightness(0.86) saturate(0.92); }
-}
-@media screen and (min-width: 1100px) {
-  /* Am rechten Buchrand: Jeder Streifen klebt mit dem linken Ende auf dem Blatt und ragt über den Deckel hinaus. */
-  .register { position: fixed; top: calc(14px + 3 * var(--k)); right: 14px; width: calc(var(--streifen) + 18px); display: flex; flex-direction: column; gap: 14px; }
-  .streifen { height: 38px; padding: 0 8px 0 28px; transform: translateX(-8px) rotate(var(--dreh, 0deg)); transform-origin: left center; transition: transform 0.15s ease-out; }
-  .streifen:nth-child(1) { --dreh: -1.1deg; }
-  .streifen:nth-child(2) { --dreh: 0.8deg; }
-  .streifen:nth-child(3) { --dreh: -0.5deg; }
-  .streifen:nth-child(4) { --dreh: 1.2deg; }
-  .streifen:nth-child(5) { --dreh: -0.9deg; }
-  .streifen:hover { transform: translateX(-4px) rotate(var(--dreh, 0deg)); }
-  .streifen.active { transform: translateX(0) rotate(var(--dreh, 0deg)); box-shadow: 3px 6px 9px -3px var(--schatten); }
-  .streifen.active .streifen-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  .streifen-zahl { margin-left: auto; }
-}
-@media screen and (min-width: 1900px) {
-  .register { right: calc((100vw - 60 * var(--k)) / 2 - var(--streifen) / 2 - 14px); }
-}
-
 /* ── Kopfzeile des Blatts ────────────────────────────────────────────────── */
 .kopfzeile { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: calc(2 * var(--k)); font-size: 14.5px; color: var(--muted); }
 .kopfzeile .pfad { margin: 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -245,6 +216,10 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 /* Überschrift direkt über Text: keine Leerzeile dazwischen. Vor Zetteln, Knöpfen oder Tabellen bleibt ein Kästchen Luft. */
 :is(.page, .raster, .learning-sheet, .theory, .md) > :is(h1, h2, h3, h4):has(+ :is(p, ul, ol, dl, .md, .notiz, .balken-kopf, .bereich-balken)) { --abstand: 0px; }
 .learning-sheet .theory, .learning-sheet > .actions { padding: 0; border: 0; }
+/* Der obere Rand der Überschrift darf nicht mit dem Abstand der vorigen Formelgruppe kollabieren. */
+@media screen {
+  .formel-gruppe > h2 { margin: 0 0 var(--k); }
+}
 
 #inhalt h1 {
   padding: 0; border: 0; font: 700 34px / calc(2 * var(--k)) var(--schrift); letter-spacing: -0.01em; color: var(--blau);
@@ -288,6 +263,13 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 #inhalt .md .table-wrap, #inhalt .md pre, #inhalt .md .katex-display { background: var(--surface); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow); }
 #inhalt .md .table-wrap { padding: 0 13px; }
 #inhalt .md .katex-display { padding: 13px; }
+@media screen and (max-width: 600px) {
+  .formel-raster { grid-template-columns: minmax(0, 1fr); }
+  /* Jede Gleichung bleibt zusammen. Bei sehr langen Ausdrücken scrollt nur die jeweilige Formel. */
+  .fc-hinten.rechnung .katex, .aufgaben-formeln .katex, .rw-zeilen .katex, .formel-tex .katex { white-space: nowrap; }
+  .fc-hinten.rechnung .md > p:has(.katex), .rw-zeilen dd { min-width: 0; overflow-x: auto; }
+  .fc-hinten.rechnung .md > p:has(.katex) { padding-block: 3px; }
+}
 
 /* ── Knöpfe ──────────────────────────────────────────────────────────────── */
 button, .button { border-radius: 6px; }
@@ -298,11 +280,13 @@ button.good, button.mid, button.low { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28); }
 .mode-switch button { box-shadow: none; border-radius: 6px; }
 .mode-switch button[aria-pressed='true'] { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18); }
 
-/* ── Karteikarte: weiße Karte mit roter Kopflinie auf einem kleinen Stapel ─ */
-.flashcard, .flashcard[class*='farbe-'] { border: 1px solid var(--border); border-radius: 4px; background: var(--surface); box-shadow: 0 16px 22px -16px var(--schatten), 5px 6px 0 -1px var(--surface), 5px 6px 0 0 var(--border); }
+/* ── Karteikarte: durchgehend liniertes Papier auf einem kleinen Stapel ──── */
+.flashcard, .flashcard[class*='farbe-'] { border: 1px solid var(--border); border-radius: 4px; background: linear-gradient(transparent calc(100% - 1px), color-mix(in srgb, var(--karo-farbe) 58%, transparent) 1px) 0 0 / 100% var(--k) repeat-y, var(--surface); box-shadow: 0 16px 22px -16px var(--schatten), 5px 6px 0 -1px var(--surface), 5px 6px 0 0 var(--border); }
+.flashcard .paper-face { background: transparent; }
 .flashcard .fc-meta { border-bottom: 2px solid var(--paper-margin); }
+.flashcard .fc-hinten.rechnung { background: transparent; }
 
-/* ── Handy und Tablet: Spiralblock, eine Seite, Haftstreifen unten ───────── */
+/* ── Handy und Tablet: Spiralblock, eine Seite mit Inhaltseinschub ───────── */
 @media screen and (max-width: 1099.98px) {
   :root { --kopf-hoehe: calc(2 * var(--k)); --kopf-gesamt: calc(2 * var(--k)); }
   .blatt { padding: 0 var(--k) calc(4 * var(--k)); min-height: 100vh; }
@@ -324,27 +308,20 @@ button.good, button.mid, button.low { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28); }
   .inhalt-zu { display: inline-flex; align-items: center; gap: 6px; height: 36px; min-height: 0; margin-bottom: var(--k); padding: 0 10px; border: 1.5px solid var(--muted); border-radius: 6px; background: var(--papier); color: var(--text); font: 700 14.5px / 1 var(--schrift); box-shadow: none; }
   .inhalt-schleier { display: block; position: fixed; z-index: 55; inset: 0; background: rgba(10, 14, 20, 0.45); }
 
-  .register { position: fixed; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: flex-end; gap: 5px; padding: 0 6px; pointer-events: none; }
-  .streifen {
-    pointer-events: auto; flex: 1 1 0; max-width: calc(4.5 * var(--k)); min-width: 0; height: calc(54px + env(safe-area-inset-bottom, 0px)); padding: 6px 2px env(safe-area-inset-bottom, 0px);
-    flex-direction: column; justify-content: center; gap: 3px; font-size: 13px; letter-spacing: -0.01em; transform: rotate(var(--dreh, 0deg)); transform-origin: center bottom;
-    background: linear-gradient(0deg, color-mix(in srgb, var(--c) 82%, #000) 0, var(--c) 12px, var(--c) 100%); box-shadow: 0 -3px 7px -3px var(--schatten);
-  }
-  .streifen:nth-child(1) { --dreh: -1deg; }
-  .streifen:nth-child(2) { --dreh: 0.8deg; }
-  .streifen:nth-child(3) { --dreh: -0.6deg; }
-  .streifen:nth-child(4) { --dreh: 1deg; }
-  .streifen:nth-child(5) { --dreh: -0.8deg; }
-  .streifen.active { height: calc(66px + env(safe-area-inset-bottom, 0px)); }
-  .streifen.active .streifen-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 2px; }
-  .streifen .icon { width: 19px; height: 19px; }
-  .streifen-zahl { position: absolute; top: 3px; right: 5px; min-width: 18px; height: 18px; font-size: 11px; background: var(--c); }
-  .streifen { position: relative; }
 }
 
 /* ── Druck: nur die Seite, kein Buch ─────────────────────────────────────── */
 @media print {
-  .inhaltsseite, .buchringe, .register, .kopfzeile, .spirale { display: none !important; }
+  html, body { background: #fff; }
+  body {
+    color-scheme: light;
+    --bg: #fff; --surface: #fff; --surface-2: #f3f3f3;
+    --text: #000; --muted: #444; --border: #bbb; --card-border: #bbb;
+    --accent: #000; --accent-soft: #f3f3f3; --code-bg: #f3f3f3;
+    --good: #205532; --good-soft: #f3f3f3; --mid: #674c18; --mid-soft: #f3f3f3;
+    --shadow: none; --paper-ink: #000;
+  }
+  .inhaltsseite, .buchringe, .kopfzeile, .spirale { display: none !important; }
   .buch { display: block; margin: 0; padding: 0; background: none; box-shadow: none; }
   .seite { background: none; }
   .blatt { padding: 0; box-shadow: none; }
@@ -356,6 +333,11 @@ button.good, button.mid, button.low { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28); }
 .spalten > .raster { container-type: inline-size; min-width: 0; }
 .rand { padding-left: var(--k); box-shadow: inset 2px 0 0 var(--paper-margin); }
 .rand > * { margin: 0 0 var(--k); }
+.lern-rand { max-width: 26em; }
+@media screen and (min-width: 1100px) {
+  .learning-sheet:has(.lern-rand) { max-width: calc(39 * var(--k)); padding-right: calc(8 * var(--k)) !important; }
+  .learning-sheet > .lern-rand { position: absolute; inset: 0 0 auto auto; width: calc(7 * var(--k)); }
+}
 /* Text direkt auf dem Karo (kein Zettel): erbt die Zeilenhöhe, Abstände kommen aus dem Raster. */
 .blatt-teil { background: none; border: 0; padding: 0; box-shadow: none; }
 .notiz { font: 20px / var(--k) var(--hand); color: var(--blau); }
@@ -364,14 +346,18 @@ button.good, button.mid, button.low { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28); }
 
 /* Haftnotiz */
 .haft {
-  display: block; padding: 13px 12px; background: var(--haft); color: var(--haft-text); font: 17px / var(--k) var(--hand); text-decoration: none;
+  position: relative; display: block; padding: 13px 12px; background: var(--haft); color: var(--haft-text); font: 17px / var(--k) var(--hand); text-decoration: none;
   box-shadow: 0 10px 12px -9px var(--schatten); transform: rotate(-1.4deg);
+}
+.haft::before {
+  content: ''; position: absolute; top: -5px; left: calc(50% - 21px); width: 42px; height: 10px; pointer-events: none;
+  background: color-mix(in srgb, var(--papier) 72%, transparent); box-shadow: 0 1px 1px #0002; transform: rotate(-5deg);
 }
 a.haft:hover { text-decoration: none; transform: rotate(-0.6deg); }
 .haft > span { display: block; }
 .haft > b { display: block; font-size: 30px; line-height: calc(1.5 * var(--k)); }
 .haft > b .icon { width: 30px; height: 30px; }
-.haft.gruen { background: color-mix(in srgb, #7ed6a0 55%, var(--haft)); transform: rotate(1.1deg); }
+.haft.gruen { background: var(--haft-gruen); transform: rotate(1.1deg); }
 .strichliste { display: flex; flex-wrap: wrap; gap: 0 4px; height: var(--k); overflow: hidden; }
 .strichliste svg { flex: none; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
 
@@ -402,6 +388,10 @@ a.haft:hover { text-decoration: none; transform: rotate(-0.6deg); }
   background: var(--surface); border: 1px solid var(--border); border-radius: 3px; box-shadow: var(--shadow); padding: 13px 20px 19px;
 }
 .dashboard-page .widgets { gap: var(--k); margin: 0; }
+.dashboard-page .heute-liste { margin: 0; }
+.dashboard-page .heute-liste li { align-items: center; }
+.heute-liste input[type='checkbox'] { width: 1.25rem; height: 1.25rem; flex: none; margin: 0; accent-color: var(--blau); }
+.heute-liste label { display: flex; align-items: center; gap: 10px; min-height: 32px; }
 .dashboard-page .widgets > .widget, .dashboard-page .widgets > .card { border-bottom: 1px solid var(--border); }
 .dashboard-page > .card { border-top: 1px solid var(--border); }
 .dashboard-page .mehr-widgets > summary { border: 0; padding: 0; min-height: var(--k); line-height: var(--k); font-size: 15px; }

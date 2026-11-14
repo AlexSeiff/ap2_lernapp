@@ -122,7 +122,7 @@ Antwort: Es werden mindestens **44 MDE-Geräte** benötigt, davon vier als Reser
 - Farbbänder: $\frac{3.600}{1.200} = 3$ Bänder, $3 \cdot 12{,}00$ = **36,00 €**
 - Kosten je Monat im Kaufmodell: $5{,}25 + 39{,}00 + 36{,}00$ = **80,25 €**
 
-Entscheidung: Der Kunde sollte **kaufen** – das Kaufmodell ist je Monat $95{,}00 - 80{,}25$ = **14,75 €** günstiger als die Miete. Die Miete lohnt sich nur bei kurzem oder seltenem Einsatz.
+Entscheidung: Der Kunde sollte **kaufen** – das Kaufmodell ist je Monat $95{,}00 - 80{,}25$ = **14,75 €** günstiger als die Miete. Bei höherem Druckvolumen kann die Pauschalmiete günstiger werden, weil das Verbrauchsmaterial enthalten ist.
 
 *Prüferkommentar: Vier Jahre sind 48 Monate. Wer den Kaufpreis nicht verteilt, vergleicht 327 € mit 95 € und kommt zum falschen Ergebnis.*
 
@@ -148,7 +148,7 @@ Entscheidung: Der Kunde sollte **kaufen** – das Kaufmodell ist je Monat $95{,}
 
 Ablauf in Textform: (E) Gerät ist eingetroffen → (F) Sichtprüfung durchführen → XOR → (E) Kein Mangel festgestellt → (F) Daten löschen, zurücksetzen und reinigen → (E) Gerät ist zurückgesetzt → XOR-Join · (E) Mangel festgestellt → (F) Fehlerdiagnose durchführen → XOR → (E) Reparatur möglich → (F) Ersatzteil bestellen und einbauen → (E) Gerät ist repariert → XOR-Join · (E) Reparatur nicht möglich → (F) Gerät aussondern → (E) Gerät ist ausgesondert. Nach dem XOR-Join: (F) Funktionstest durchführen → (E) Funktionstest bestanden → (F) Gerät einlagern und im Bestand buchen → (E) Gerät ist eingelagert.
 
-*Prüferkommentar: Wer Funktionstest und Einlagerung in beiden Zweigen getrennt zeichnet, erhält die Punkte ebenfalls, wenn jeder Zweig mit einem Ereignis endet. Ein XOR direkt nach einem Ereignis oder zwei Funktionen ohne Ereignis dazwischen kosten je einen Punkt. Der Fall „Funktionstest nicht bestanden“ steht nicht in der Beschreibung und ist nicht verlangt.*
+*Prüferkommentar: Wer Funktionstest und Einlagerung in beiden Zweigen getrennt zeichnet, erhält die Punkte ebenfalls, wenn jeder Zweig mit einem Ereignis endet. Eine XOR-Verzweigung direkt nach einem Ereignis oder zwei Funktionen ohne Ereignis dazwischen kosten je einen Punkt. Ein XOR-Join darf die Ereignisse „zurückgesetzt“ und „repariert“ zusammenführen. Der Fall „Funktionstest nicht bestanden“ steht nicht in der Beschreibung und ist nicht verlangt.*
 
 **D2 (4 P):** *(je Ursache 2 P)*, z. B.:
 - **Gealterte Akkus:** Nach vielen Ladezyklen ist die Kapazität deutlich gesunken; die Laufzeit reicht nicht mehr für eine ganze Veranstaltung.

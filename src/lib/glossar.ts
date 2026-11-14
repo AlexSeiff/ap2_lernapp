@@ -349,31 +349,26 @@ export function glossarBuchstaben(eintraege: GlossarEintrag[]): { buchstabe: str
 /** Abschnittsüberschrift ohne Nummerierung: „2.5 Sequenzdiagramm“ → „Sequenzdiagramm“, „Teil 5 – Boxplot und Ausreißer“ → „Boxplot und Ausreißer“. */
 export const ueberschriftKern = (titel: string) => titel.replace(/^(?:Teil\s+\d+\s*[–-]\s*)?(?:\d+(?:\.\d+)*\.?\s+)?/, '');
 
-/**
- * Das „Thema“ eines Begriffs für die Suche: der Lernblatt-Abschnitt, dessen Überschrift genau der Begriff ist (sonst mit ihm beginnt),
- * ersatzweise die erste Fundstelle im Lernblatt. Ergebnis wie „Deep Dive 17 · 2.5 Sequenzdiagramm“.
- */
-export function glossarThema(e: GlossarEintrag, content?: KernInhalt): string | undefined {
-  const key = glossarSchluessel(e.begriff);
-  if (content && key) {
-    let beginnt: string | undefined;
-    for (const t of content.topics) {
-      for (const s of t.sections) {
-        if (s.generiert) continue;
-        const kern = glossarSchluessel(ueberschriftKern(s.title));
-        if (kern === key) return `${topicLabel(t)} · ${s.title}`;
-        if (!beginnt && kern.startsWith(`${key} `)) beginnt = `${topicLabel(t)} · ${s.title}`;
-      }
-    }
-    if (beginnt) return beginnt;
-  }
-  return e.quellen.find((q) => q.art === 'abschnitt')?.titel;
-}
-
 /** Einträge für die globale Suche (ROADMAP 8.8): Begriff + Definition, Ziel ist der Eintrag im Glossar; im Kontext das Thema des Begriffs. */
 export function glossarSuchEintraege(eintraege: GlossarEintrag[], content?: KernInhalt) {
+  // Jede Überschrift einmal normalisieren. Die erste genaue Überschrift hat Vorrang vor dem ersten Wortpräfix.
+  const genau = new Map<string, string>();
+  const beginnt = new Map<string, string>();
+  for (const t of content?.topics ?? []) {
+    for (const s of t.sections) {
+      if (s.generiert) continue;
+      const kern = glossarSchluessel(ueberschriftKern(s.title));
+      const titel = `${topicLabel(t)} · ${s.title}`;
+      if (!genau.has(kern)) genau.set(kern, titel);
+      for (let i = kern.indexOf(' '); i !== -1; i = kern.indexOf(' ', i + 1)) {
+        const anfang = kern.slice(0, i);
+        if (!beginnt.has(anfang)) beginnt.set(anfang, titel);
+      }
+    }
+  }
   return eintraege.map((e) => {
-    const thema = glossarThema(e, content);
+    const key = glossarSchluessel(e.begriff);
+    const thema = (key && (genau.get(key) ?? beginnt.get(key))) || e.quellen.find((q) => q.art === 'abschnitt')?.titel;
     return {
       art: 'glossar' as const,
       titel: e.begriff,

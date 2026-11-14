@@ -58,7 +58,7 @@ function Deckblatt({ sheet }: { sheet: Sheet }) {
         </div>
         <div>
           <dt>Bearbeitungszeit</dt>
-          <dd>{EXAM_MINUTES} Minuten</dd>
+          <dd>{sheet.minuten ?? EXAM_MINUTES} Minuten</dd>
         </div>
         <div>
           <dt>Hilfsmittel</dt>

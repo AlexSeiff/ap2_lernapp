@@ -18,9 +18,9 @@ export function useRaster() {
     if (!main || typeof ResizeObserver === 'undefined' || typeof MutationObserver === 'undefined') return;
     const k = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--k')) || 26;
     const setze = (el: HTMLElement, hoehe: number) => {
-      const ueber = hoehe % k;
-      const fehlt = ueber < 0.5 || k - ueber < 0.5 ? 0 : k - ueber;
-      if (fehlt) el.style.setProperty('--rest', `${fehlt.toFixed(2)}px`);
+      // Auch Bruchteile eines CSS-Pixels zählen bei langen Seiten mit vielen Blöcken.
+      const fehlt = Math.ceil(hoehe / k) * k - hoehe;
+      if (fehlt) el.style.setProperty('--rest', `${fehlt}px`);
       else el.style.removeProperty('--rest');
     };
     const groesse = new ResizeObserver((eintraege) => {

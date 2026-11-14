@@ -43,6 +43,7 @@ describe('optionText', () => {
   it('macht aus Markdown einen einzeiligen Auswahltext', () => {
     expect(optionText('**Fett** und `code`  \nzweite Zeile')).toBe('Fett und code zweite Zeile');
     expect(optionText('```sql\nSELECT 1\n```')).toBe('SELECT 1');
+    expect(optionText('Zaun: Q1\u00a0−\u00a01,5\u00a0·\u00a0IQR')).toBe('Zaun: Q1\u00a0−\u00a01,5\u00a0·\u00a0IQR');
   });
 });
 

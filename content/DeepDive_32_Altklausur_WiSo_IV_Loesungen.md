@@ -22,7 +22,7 @@
 
 ## Block A – Ausbildung und Arbeitsvertrag (20 P)
 
-**A1 (3 P):** **(2)** – Die Probezeit im Ausbildungsverhältnis ist **Pflicht** und dauert **mindestens einen, höchstens vier Monate** (§ 20 BBiG); (1) ist deshalb falsch. Sechs Monate (3) sind die übliche Höchstdauer im **Arbeitsvertrag**. Weder Ausbildungsdauer (4) noch Berufsschule (5) spielen eine Rolle.
+**A1 (3 P):** **(2)** – Die Probezeit im Ausbildungsverhältnis ist **Pflicht** und dauert **mindestens einen, höchstens vier Monate** (§ 20 BBiG); (1) ist deshalb falsch. Im **Arbeitsvertrag** gilt die verkürzte Kündigungsfrist während einer vereinbarten Probezeit längstens sechs Monate (§ 622 Abs. 3 BGB). Weder Ausbildungsdauer (4) noch Berufsschule (5) spielen eine Rolle.
 
 **A2 (3 P):** **(3)** – Nach der Probezeit können Auszubildende mit **vier Wochen** Frist kündigen, wenn sie die Berufsausbildung aufgeben oder sich **für einen anderen Beruf** ausbilden lassen wollen (§ 22 Abs. 2 Nr. 2 BBiG) – schriftlich und mit Angabe des Grundes. Eine Zustimmung der IHK (2) ist nicht nötig. Der Betrieb kann nach der Probezeit nur noch fristlos aus wichtigem Grund kündigen (5).
 
@@ -30,7 +30,7 @@
 
 **A4 (3 P):** **(1)** – Ein kalendermäßig befristeter Arbeitsvertrag **endet mit Ablauf der vereinbarten Zeit** (§ 15 Abs. 1 TzBfG). Die Befristung braucht die **Schriftform** (5 ist falsch), aber keine Zustimmung einer Behörde (2). Ohne Sachgrund sind **höchstens** zwei Jahre zulässig – eine Mindestdauer (3) gibt es nicht.
 
-**A5 (4 P):** **(2) und (5)** – Die **Lage der Pausen** und die **Grundsätze des Urlaubsplans** sind mitbestimmungspflichtige Angelegenheiten nach § 87 BetrVG und werden durch Betriebsvereinbarung geregelt. Entgelte (3) und Urlaubsdauer (1) regelt der Tarifvertrag – eine Betriebsvereinbarung darf ihn nicht verschlechtern (§ 77 Abs. 3 BetrVG). Elf Stunden regelmäßige Arbeitszeit (4) und eine kürzere Entgeltfortzahlung (6) verstoßen gegen Gesetze (ArbZG, EFZG).
+**A5 (4 P):** **(2) und (5)** – Die **Lage der Pausen** und die **Grundsätze des Urlaubsplans** sind mitbestimmungspflichtige Angelegenheiten nach § 87 BetrVG und werden durch Betriebsvereinbarung geregelt. Entgelte (3) und Urlaubsdauer (1) regelt der Tarifvertrag – für tariflich geregelte oder tarifübliche Arbeitsbedingungen gilt grundsätzlich die Tarifsperre. Ergänzende Betriebsvereinbarungen erfordern eine ausdrückliche tarifliche Öffnung (§ 77 Abs. 3 BetrVG). Elf Stunden regelmäßige Arbeitszeit (4) und eine kürzere Entgeltfortzahlung (6) verstoßen gegen Gesetze (ArbZG, EFZG).
 
 **A6 (4 P):** **a) 8 Wochen · b) 12 Wochen** – Nach der Entbindung besteht ein absolutes Beschäftigungsverbot von **acht Wochen**; bei Früh- und **Mehrlingsgeburten** sowie – auf Antrag – bei einer Behinderung des Kindes verlängert es sich auf **zwölf Wochen** (§ 3 Abs. 2 MuSchG).
 
@@ -40,7 +40,7 @@
 
 **B1 (3 P):** **(3)** – Der Betriebsrat ist die gewählte Interessenvertretung der **Arbeitnehmer** des Betriebs. Leitende Angestellte (2) vertritt er nicht (§ 5 Abs. 3 BetrVG); sie können einen Sprecherausschuss wählen.
 
-**B2 (3 P):** **(4)** – Tarifvertragsparteien sind **Gewerkschaften** und **Arbeitgeberverbände** (oder einzelne Arbeitgeber). Tarifverträge sind für die Tarifgebundenen **verbindlich** (2). Während der Laufzeit gilt die **Friedenspflicht** (5); ein Streik ist letztes Mittel, keine Voraussetzung (3). Geschäftsführung und Betriebsrat (1) schließen Betriebsvereinbarungen.
+**B2 (3 P):** **(4)** – Tarifvertragsparteien sind **Gewerkschaften** und **Arbeitgeberverbände** (oder einzelne Arbeitgeber). Tarifverträge sind für die Tarifgebundenen **verbindlich** (2). Die **relative Friedenspflicht** schützt die tariflich geregelten Gegenstände während der Laufzeit (5). Ein Streik ist letztes Mittel (3). Geschäftsführung und Betriebsrat (1) schließen Betriebsvereinbarungen.
 
 **B3 (3 P):** **(4)** – Das Lebensalter allein begründet keinen besonderen Kündigungsschutz; es zählt nur bei der Sozialauswahl einer betriebsbedingten Kündigung. Besonders geschützt sind Betriebsratsmitglieder (§ 15 KSchG), schwerbehinderte Menschen (Zustimmung des Integrationsamts), Schwangere (§ 17 MuSchG) und Auszubildende nach der Probezeit (§ 22 BBiG).
 

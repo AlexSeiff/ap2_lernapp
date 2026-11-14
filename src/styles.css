@@ -490,8 +490,7 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 .confirm-body p { margin: 0; line-height: 1.5; }
 
 @media print {
-  :root { --bg: #fff; --surface: #fff; --surface-2: #f3f3f3; --text: #000; --muted: #444; --border: #bbb; --accent: #000; --accent-soft: #f3f3f3; --good-soft: #f3f3f3; --code-bg: #f3f3f3; --shadow: none; }
-  .no-print, .kopf, .unterleiste, .skip-link { display: none !important; }
+  .no-print, .skip-link { display: none !important; }
   body { font-size: 11pt; }
   .print-page { padding: 0; max-width: none; }
   pre { white-space: pre-wrap; }
@@ -875,7 +874,6 @@ h1 .icon, h2 .icon { color: var(--accent); }
 .filter-box > summary::-webkit-details-marker { display: none; }
 .filter-box > summary .icon { transition: transform 0.15s; }
 .filter-box[open] > summary .icon { transform: rotate(90deg); }
-@media print { .bottom-nav, .kopf, .unterleiste { display: none !important; } }
 
 /* Begriffsseiten (/glossar/:id, Umsetzungsplan Phase 3) */
 .begriff-seite h1 { margin-bottom: 0.2em; }
@@ -980,6 +978,15 @@ button.stern.nur-icon { padding: 4px 6px; flex: none; }
 .punkte-tabelle .eintrag { min-width: 6em; }
 .punkte-tabelle .summe th, .punkte-tabelle .summe td { font-weight: 700; border-top: 2px solid var(--text); }
 .punkte-tabelle .block-zeile th { background: var(--surface-2); font-weight: 600; }
+
+@media screen and (max-width: 600px) {
+  .print-page { padding: 16px 14px 40px; overflow-wrap: anywhere; }
+  .sheet-head { flex-direction: column; gap: 8px; }
+  .sheet-meta { align-items: flex-start; white-space: normal; }
+  .punkte-tabelle th, .punkte-tabelle td { padding: 5px 6px; }
+  .punkte-tabelle .num { width: auto; }
+  .punkte-tabelle .eintrag { min-width: 3em; }
+}
 .notenschluessel { font-size: 0.85rem; color: var(--muted); }
 @media print {
   .deckblatt { break-after: page; border: none; min-height: 240mm; }
@@ -1366,9 +1373,9 @@ select.sg-neu:hover, select.sg-neu:focus { border-color: var(--border); }
 
 /* Bereichsfarben (App.tsx: .layout[data-bereich]): Lernen Indigo, Glossar Türkis, SQL Orange, Einstellungen Schiefer.
    Die Kopfleiste zeigt jeden Bereich in seiner eigenen Farbe (Kopfleiste.tsx: .kopf-<bereich>). */
-.layout[data-bereich='glossar'], .kopf-bereiche a.kopf-glossar { --accent: var(--c-teal); --accent-fill: var(--c-teal-fill); --accent-soft: var(--c-teal-soft); }
-.layout[data-bereich='sql'], .kopf-bereiche a.kopf-sql { --accent: var(--c-orange); --accent-fill: var(--c-orange-fill); --accent-soft: var(--c-orange-soft); }
-.layout[data-bereich='einstellungen'], .kopf-bereiche a.kopf-einstellungen { --accent: var(--c-slate); --accent-fill: var(--c-slate-fill); --accent-soft: var(--c-slate-soft); }
+.layout[data-bereich='glossar'] { --accent: var(--c-teal); --accent-fill: var(--c-teal-fill); --accent-soft: var(--c-teal-soft); }
+.layout[data-bereich='sql'] { --accent: var(--c-orange); --accent-fill: var(--c-orange-fill); --accent-soft: var(--c-orange-soft); }
+.layout[data-bereich='einstellungen'] { --accent: var(--c-slate); --accent-fill: var(--c-slate-fill); --accent-soft: var(--c-slate-soft); }
 @media (prefers-color-scheme: dark) {
 }
 /* Hauptknöpfe mit leichtem Glanz von oben */

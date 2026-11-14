@@ -1,6 +1,6 @@
 # Altklausur-Training DD27–DD33: Herkunft der Aufgaben
 
-Stand: 13. November 2026. Die Übungsklausuren der Deep Dives 27 bis 33 sind **eigenständig formulierte Übungsvarianten**. Als Anregung für
+Stand: 14. November 2026. Die Übungsklausuren der Deep Dives 27 bis 33 sind **eigenständig formulierte Übungsvarianten**. Als Anregung für
 Aufbau, Aufgabentypen, Punkteverteilung und Niveau dienten Abschriften von Prüfungsunterlagen, die außerhalb von `content/` liegen
 (`foto_transkription/`, nicht Teil der App; die Originalfotos werden nicht versioniert). Texte, Szenario (Möbelhaus Nordholz), Personen, Zahlen,
 Datensätze und Antwortmöglichkeiten sind neu; alle Musterlösungen wurden mit den neuen Zahlen neu gerechnet. Handschriftliche Einträge und
@@ -143,13 +143,27 @@ Quelle 03 Nr. 1, 5, 6, 10, 12, 15, 16, 25, 27.
 - **Quelle 01 (WiSo Ecotec, ältere Prüfung):** Die Aufgaben 18–21 und 26–28 fehlen in der Fotofolge. Sie sind nicht rekonstruiert und in keiner Klausur enthalten.
 - **Quelle 03 (WiSo Korok-IT):** Die Aufgaben 19–22 fehlen. Nicht rekonstruiert.
 - **Quelle 05, Teilaufgabe 1b (2 Punkte):** Die Aufgabenstellung ist auf IMG_0469 abgeschnitten. 29-A2 ist eine eigene Teilaufgabe an dieser Stelle, kein Nachbau.
-- **Quelle 05, IMG_0467/IMG_0473:** Grafikwerte und englischer Begleittext sind in der Abschrift nur angenähert bzw. gekürzt. Die Klausuren verwenden eigene Zahlen und eigene englische Texte.
+- **Quelle 04, IMG_0467, und Quelle 05, IMG_0473:** Die Abschrift von IMG_0467 gibt die Grafikwerte näherungsweise wieder. Auf IMG_0473 steht der englische Begleittext zu pandas, der in der Abschrift gekürzt wurde. Die Klausuren verwenden eigene Zahlen und eigene englische Texte.
 - **Quelle „Mobile Kassensysteme“, IMG_0513/IMG_0516:** Punktwolke und englischer Belegtext sind nur näherungsweise übertragen. 31-A3 gibt eigene Trainingsdaten als Tabelle vor, der Dokumentationsauszug in Block B ist selbst geschrieben.
 - **Sicherheitszeichen (Quelle 07 Nr. 13 und 28):** In der Vorlage als Bilder. In der App nach Form, Farbe und Bildzeichen beschrieben.
 
 ## Fachlich geänderte Stellen
 
-- **32-D4 (Kartell):** Die Vorlage fragt nach einem „anmeldepflichtigen“ Kartell. Eine Anmeldepflicht für Kartelle kennt das GWB seit der 7. Novelle (2005) nicht mehr. Die Aufgabe fragt deshalb, welche Vereinbarung ein verbotenes Kartell ist (§ 1 GWB).
-- **31-C5 (Standardabweichung in SQL):** Die Vorlage nennt `STDDEV()`. SQLite kennt die Funktion nicht; die verknüpfte Übung `SQL-EL-002` verwendet `SQRT(AVG(x * x) - AVG(x) * AVG(x))`, die Musterlösung nennt beide Fassungen.
-- **33-C5 (Wahlberechtigung von Leiharbeitnehmern):** Maßgeblich ist nach § 7 Satz 2 BetrVG die Einsatzdauer von mehr als drei Monaten. Die Aufgabe nennt deshalb die geplante Einsatzdauer (acht Monate bzw. sechs Wochen) statt der bisherigen Einsatzzeit.
-- **Rechengrößen (Stand 2026):** Beitragsbemessungsgrenze der Rentenversicherung 8.450 EUR im Monat bzw. 101.400 EUR im Jahr, Versicherungspflichtgrenze der Krankenversicherung 77.400 EUR im Jahr, Beitragssatz der Rentenversicherung 18,6 %, der Arbeitslosenversicherung 2,6 %. Jährlich prüfen.
+- **32-D4 (Kartell).** Die in Antwort 1 genannten Hersteller legen gemeinsam einen Mindestpreis fest. Diese Vereinbarung beschränkt den Preiswettbewerb und fällt unter das Kartellverbot. [§ 1 GWB](https://www.gesetze-im-internet.de/gwb/__1.html)
+- **31-C5 (Standardabweichung in SQL).** Alle betrachteten Wochen bilden die Grundgesamtheit. In MySQL und PostgreSQL liefert `STDDEV_POP()` die passende Kennzahl. `STDDEV()` aus der Vorlage ist in PostgreSQL ein Alias für die Stichprobenfunktion. Im SQLite-Editor der App berechnet `SQL-EL-002` die Populationsstandardabweichung über `SQRT(AVG(x * x) - AVG(x) * AVG(x))`. [MySQL](https://dev.mysql.com/doc/refman/8.4/en/aggregate-functions.html), [PostgreSQL](https://www.postgresql.org/docs/current/functions-aggregate.html)
+- **33-C5 (Wahlberechtigung von Leiharbeitnehmern).** Bei einer geplanten Einsatzdauer von mehr als drei Monaten gilt das aktive Wahlrecht ab dem ersten Tag. Damit zählen die beiden für acht Monate eingesetzten Leiharbeitnehmer mit. Insgesamt sind 65 Personen wahlberechtigt. [§ 7 BetrVG](https://www.gesetze-im-internet.de/betrvg/__7.html), [BAG, 7 ABR 53/11](https://www.bundesarbeitsgericht.de/entscheidung/7-abr-53-11/)
+- **Rechengrößen für 2026.** Die Beitragsbemessungsgrenze der allgemeinen Rentenversicherung beträgt 8.450 EUR im Monat bzw. 101.400 EUR im Jahr. Die allgemeine Jahresarbeitsentgeltgrenze der Krankenversicherung beträgt 77.400 EUR. Die Beitragssätze liegen bei 18,6 % für die Rentenversicherung und 2,6 % für die Arbeitslosenversicherung. Abrechnungen und Beiträge beziehen sich auf das Kalenderjahr 2026. Für ein neues Jahr die amtlichen Werte erneut prüfen. [BMAS](https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/sozialversicherungs-rechengroessenverordnung-2026.html), [Deutsche Rentenversicherung](https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Zahlen-und-Fakten/Werte-der-Rentenversicherung/werte-der-rentenversicherung_node)
+
+## Fachliche Zweitprüfung am 14. November 2026
+
+| Klausur | Gegenrechnung und Vergleich mit der Musterlösung |
+|---|---|
+| DD27 | 434.700 EUR neue Selbstkosten, 182.400 EUR Gewinn, Zuwachs 70.200 EUR. Monatsmittel der sechs Lagerboxen und Stundensummen aus den Einzelzeilen gebildet. |
+| DD28 | 11 ms für den synchronen Aufruf, 40 Geräte im Einsatz plus 4 Reserve. Die Nutzwerte sind 1,25 / 2,85 / 1,90. Beim angegebenen Volumen kostet der Kauf 80,25 EUR je Monat, die Miete 95 EUR. |
+| DD29 | Beide Geraden trennen alle 15 Trainingspunkte. Auf den fünf Testpunkten treffen sie 3 bzw. 4 Vorhersagen. Die vorzeichenbehafteten Differenzen in A6 sind +6 und −3. |
+| DD30 | Die Abstände der Symbolmittelpunkte im Diagramm ergeben bei k = 1, 5, 11 jeweils 1, 2, 7 Ausfälle. Die unskalierte Distanz aus B7 beträgt 41,87. |
+| DD31 | Mit den zwölf vorgegebenen Daten und der angegebenen Reihenfolge erreichte das Perzeptron die erste fehlerfreie Epoche im fünften Durchlauf. Artikel 1 hat Mittelwert 11, Populationsvarianz 20, Standardabweichung 4,47 und Median 10. |
+| DD32 | Gewinnanteil 38.600 EUR, Arbeitnehmeranteil RV 785,85 EUR. Die Wirtschaftlichkeiten sind 1,18 / 1,225 / 1,25 / 1,20. |
+| DD33 | Brutto 3.310 EUR, Arbeitnehmeranteil RV 307,83 EUR, Umsatz je Beschäftigten 98.000 EUR (+6,52 %). Der früheste Kündigungstermin ist der 15.04.2027. Die erste Mittwochspause muss spätestens um 13:30 Uhr beginnen. |
+
+Für DD29-C1 bis C5 und DD31-C4/C5 liefen die SQL-Anweisungen aus **beiden** Quellen (Musterlösung und verknüpfte Editorübung) auf dem Basis- und dem Variantendatensatz in SQLite. Eine unabhängige Berechnung aus den Tabellenzeilen bestätigte Ergebnisse, verlangte Sortierung und bei DELETE den verbleibenden Bestand aller sechs Tabellen einschließlich der Löschweitergabe. Die SQL-Beispielabfrage des Lernblatts DD29 wurde auf `moebelhaus` geprüft. Für DD31-B3 wurden Tabellenanlage und Einfügen über gebundene Parameter in SQLite mit angepasstem Platzhalter geprüft.

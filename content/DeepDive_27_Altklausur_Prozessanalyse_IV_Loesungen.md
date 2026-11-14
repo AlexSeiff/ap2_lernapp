@@ -151,6 +151,6 @@ Der Gewinn steigt um 70.200 € (rund 63 %), obwohl die Abschreibung um 36.000 �
 
 **Gründe:**
 - **Schlechte Durchlüftung bremst die Trocknung:** Stapel ohne ausreichenden Luftstrom geben kaum Feuchtigkeit ab. Je höher ihr Anteil (Höchstwert 52 % in Monat 4), desto weniger sinkt die mittlere Holzfeuchte.
-- **Zu wenig Personal zum Umsetzen:** Der Personaleinsatz fällt von 340 auf 284 und in Monat 3 auf 180 Stunden – die Stapel werden nicht mehr rechtzeitig umgesetzt, der Anteil schlecht durchlüfteter Stapel steigt weiter. Erst der hohe Einsatz in Monat 4 (310 Stunden) beseitigt das Problem; die Wirkung zeigt sich mit einem Monat Verzögerung ab Monat 5, danach genügen rund 90 Stunden.
+- **Zu wenig Personal zum Umsetzen:** Der Personaleinsatz fällt von 340 auf 284 und in Monat 3 auf 180 Stunden. Dadurch könnten Stapel zu spät umgesetzt worden sein. Der höhere Einsatz in Monat 4 (310 Stunden) könnte erklären, warum der Anteil schlecht durchlüfteter Stapel im Folgemonat auf 7 % fällt. Zum Prüfen dieser Erklärung braucht die Manufaktur beispielsweise die Termine der tatsächlich umgesetzten Stapel.
 
 *Prüferkommentar: Volle Punkte gibt es nur, wenn alle drei Reihen verbunden werden und die Aussagen mit Zahlen belegt sind. „Die Holzfeuchte schwankt“ ist eine Beschreibung, keine Analyse.*

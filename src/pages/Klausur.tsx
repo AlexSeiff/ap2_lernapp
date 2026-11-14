@@ -9,13 +9,12 @@ import { AnhangPanel } from '../components/Belegsatz';
 import { useConfirm } from '../hooks/useConfirm';
 import { useExamRun } from '../hooks/useExamRun';
 import { anhangFuer } from '../lib/anhang';
-import { formatRemaining, timerAnnouncement } from '../lib/examTimer';
+import { examMinutes, formatRemaining, timerAnnouncement } from '../lib/examTimer';
 import { formatPoints, ihkGrade, percent } from '../lib/grading';
 import { sicherheitLabel } from '../lib/kalibrierung';
 import { blockGruppen, istMischId, klausurName, MISCH_BEREICHE, type MischBereich, mischId, parseMischId } from '../lib/mischKlausur';
 import { useStore } from '../lib/store';
 import { neuerSeed } from '../rechnen/zufall';
-import { EXAM_MINUTES } from '../../shared/config';
 import { Icon } from '../components/Icon';
 
 /** Link zu einer neu gemischten Probeklausur (neuer Seed bei jedem Klick). */
@@ -38,7 +37,8 @@ export function KlausurAuswahl() {
     <div className="page">
       <h1>Übungsklausur</h1>
       <p className="lead">
-        90 Minuten, 100 Punkte, ohne Unterlagen – wie in der IHK-Prüfung. Die Musterlösungen bleiben gesperrt, bis du abgibst.
+        100 Punkte, ohne Unterlagen – wie in der IHK-Prüfung: Fachklausuren 90 Minuten, WiSo 60 Minuten. Die Musterlösungen bleiben
+        gesperrt, bis du abgibst.
       </p>
       {active && activeKnown && (
         <div className="card warn">
@@ -85,6 +85,7 @@ export function KlausurAuswahl() {
                 <span className="tile-num">{t.id === '00' ? '＋' : t.number}</span>
                 <span className="tile-title">{t.title}</span>
                 <span className="tile-meta">
+                  {examMinutes(t.exam)} min ·{' '}
                   {runs.length
                     ? `${runs.length}× geschrieben · bestes ${Math.round(best!)} % (Note ${ihkGrade(best!).note})`
                     : 'noch nicht geschrieben'}
@@ -111,6 +112,7 @@ export function Klausur() {
     otherRun,
     result,
     submitted,
+    minutes,
     remaining,
     answered,
     scored,
@@ -193,7 +195,7 @@ export function Klausur() {
               start();
             }}
           >
-            <Icon name="play" /> Klausur starten ({EXAM_MINUTES} min)
+            <Icon name="play" /> Klausur starten ({minutes} min)
           </button>
           {misch && (
             <button type="button" className="secondary" onClick={() => neueMisch(misch.bereich)}>

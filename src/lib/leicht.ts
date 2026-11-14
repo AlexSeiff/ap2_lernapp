@@ -61,12 +61,15 @@ export const leichtAutomatischAn = (s: Pick<Settings, 'leichtAutomatisch'>) => s
 
 /** Antwort (Markdown aus der Lernkarten-Datei) als einzeiliger Auswahltext: ohne Codezäune, Fettdruck und harte Umbrüche. */
 export function optionText(markdown: string): string {
-  return markdown
-    .replace(/```\w*\n?/g, ' ')
-    .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/\s+/g, ' ')
-    .trim();
+  return (
+    markdown
+      .replace(/```\w*\n?/g, ' ')
+      .replace(/\*\*(.+?)\*\*/g, '$1')
+      .replace(/`([^`]+)`/g, '$1')
+      // Bewusst geschützte Leerzeichen in Formeln bleiben auch auf den Auswahlknöpfen erhalten.
+      .replace(/[ \t\r\n]+/g, ' ')
+      .trim()
+  );
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------

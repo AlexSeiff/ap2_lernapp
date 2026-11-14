@@ -28,12 +28,10 @@ function render(path: string): string {
 }
 
 describe('Druckansicht /druck', () => {
-  it('jedes Lösungsblatt rendert ohne Formelfehler', () => {
-    for (const t of content.topics.filter((x) => x.exam)) {
-      const html = render(`/druck?thema=${t.id}&art=loesungen`);
-      expect(html, t.id).toContain('Lösungsblatt');
-      expect(html, t.id).not.toContain('katex-error');
-    }
+  it.each(content.topics.filter((t) => t.exam).map((t) => t.id))('Lösungsblatt DD%s rendert ohne Formelfehler', (id) => {
+    const html = render(`/druck?thema=${id}&art=loesungen`);
+    expect(html).toContain('Lösungsblatt');
+    expect(html).not.toContain('katex-error');
   });
 
   it('Lösungsblatt DD3: Formeln gesetzt, Ergebnisse im Kasten', () => {

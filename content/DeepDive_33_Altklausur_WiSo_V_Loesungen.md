@@ -40,11 +40,11 @@
 
 **B1 (3 P):** **(3)** – Den Beitrag zur Arbeitslosenversicherung (2,6 %, Stand 2026) tragen **Arbeitgeber und Arbeitnehmer je zur Hälfte**. Allein der Arbeitgeber zahlt nur die gesetzliche Unfallversicherung.
 
-**B2 (3 P):** **(3)** – Wer mit seinem regelmäßigen Jahresarbeitsentgelt über der Versicherungspflichtgrenze (Jahresarbeitsentgeltgrenze) liegt, wird zum Ende des Kalenderjahres versicherungsfrei (§ 6 SGB V). Es endet die **Pflicht**, nicht das Recht: Man kann **freiwilliges Mitglied** der GKV bleiben oder in die private Krankenversicherung wechseln. Der Arbeitgeber zahlt weiterhin einen Zuschuss (4 ist falsch). Aussage (1) beschreibt die **Beitragsbemessungsgrenze**.
+**B2 (3 P):** **(3)** – Steigt das regelmäßige Jahresarbeitsentgelt im laufenden Arbeitsverhältnis über die Versicherungspflichtgrenze, endet die Pflicht zum Jahresende, sofern das Entgelt auch die Grenze des Folgejahres übersteigt (§ 6 Abs. 4 SGB V). Es endet die **Pflicht**, nicht das Recht: Man kann **freiwilliges Mitglied** der GKV bleiben oder in die private Krankenversicherung wechseln. Der Arbeitgeber zahlt weiterhin einen Zuschuss (4 ist falsch). Aussage (1) beschreibt die **Beitragsbemessungsgrenze**.
 
 **B3 (3 P):** **(4)** – Das **Nominaleinkommen** ist um 60 EUR gestiegen; weil die Preise stärker gestiegen sind, kann er sich weniger leisten – sein **Realeinkommen** (die Kaufkraft) ist gesunken.
 
-**B4 (3 P):** **(3)** – Die **Tarifautonomie** folgt aus der Koalitionsfreiheit des Art. 9 Abs. 3 GG. Allgemeinverbindlichkeit (1) erstreckt einen Tarifvertrag auf nicht tarifgebundene Betriebe; die Friedenspflicht (4) verbietet Arbeitskämpfe während der Laufzeit.
+**B4 (3 P):** **(3)** – Die **Tarifautonomie** folgt aus der Koalitionsfreiheit des Art. 9 Abs. 3 GG. Allgemeinverbindlichkeit (1) erstreckt einen Tarifvertrag auf nicht tarifgebundene Betriebe; die relative Friedenspflicht (4) schützt die tariflich geregelten Gegenstände während der Laufzeit.
 
 **B5 (4 P):** **a) 3.310,00 EUR · b) 307,83 EUR**
 
@@ -63,7 +63,7 @@
 
 **C1 (3 P):** **(3)** – Wählbar ist, wer wahlberechtigt und 18 Jahre alt ist **und dem Betrieb sechs Monate angehört** (§ 8 BetrVG). Frau Sievers ist am Wahltag erst gut zwei Monate im Möbelhaus. Sie darf **wählen**, aber nicht gewählt werden.
 
-**C2 (3 P):** **(1)** – Die regelmäßigen Betriebsratswahlen finden **alle vier Jahre** zwischen dem 1. März und dem 31. Mai statt (§ 13 BetrVG). Wahlberechtigt ist man ab 16 Jahren (3); ein Betriebsrat kann in jedem Betrieb mit mindestens fünf wahlberechtigten Arbeitnehmern gewählt werden (4). Das Geschlecht in der Minderheit muss entsprechend seinem Anteil vertreten sein – nicht zur Hälfte (2).
+**C2 (3 P):** **(1)** – Die regelmäßigen Betriebsratswahlen finden **alle vier Jahre** zwischen dem 1. März und dem 31. Mai statt (§ 13 BetrVG). Wahlberechtigt ist man ab 16 Jahren (3); die Wahl setzt in der Regel mindestens fünf ständige Wahlberechtigte voraus, von denen drei wählbar sind (§ 1 BetrVG, Antwort 4). Bei einem Betriebsrat ab drei Mitgliedern muss das Geschlecht in der Minderheit mindestens entsprechend seinem Anteil an der Belegschaft vertreten sein (§ 15 Abs. 2 BetrVG, Antwort 2).
 
 **C3 (3 P):** **(4)** – Betriebsversammlungen finden grundsätzlich **während der Arbeitszeit** statt; die Zeit der Teilnahme ist **wie Arbeitszeit zu vergüten** (§ 44 BetrVG). Teilnehmen dürfen alle Arbeitnehmer, auch Auszubildende.
 
@@ -73,7 +73,7 @@
 
 $52 + 6 + 3 + 2 + 2$ = **65 Wahlberechtigte**
 
-Mitgezählt werden alle Arbeitnehmer ab 16 Jahren – auch die fünf jugendlichen Auszubildenden – und die zwei Leiharbeitnehmer, die länger als drei Monate eingesetzt werden. **Nicht** wahlberechtigt sind die vier Leiharbeitnehmer mit sechs Wochen Einsatz und die Schülerpraktikanten (15 Jahre, keine Arbeitnehmer).
+Mitgezählt werden alle Arbeitnehmer ab 16 Jahren – auch die fünf jugendlichen Auszubildenden – und die zwei Leiharbeitnehmer mit acht Monaten geplanter Einsatzdauer. Sie dürfen schon ab dem ersten Einsatztag wählen. **Nicht** wahlberechtigt sind die vier Leiharbeitnehmer mit sechs Wochen Einsatz und die beiden 15-jährigen Schülerpraktikanten, die das Mindestalter noch nicht erreicht haben.
 
 **C6 (4 P):** **15.04.2027**
 
@@ -89,7 +89,7 @@ Zugang am 8. März 2027 + vier Wochen (28 Tage) = 5. April 2027. Der nächste zu
 
 **D1 (3 P):** **(3)** – Abteilung **A** (HRA) enthält Einzelkaufleute und Personengesellschaften (OHG, KG), Abteilung **B** (HRB) Kapitalgesellschaften (GmbH, AG). Das Register wird beim **Amtsgericht** geführt (1) und ist öffentlich (5).
 
-**D2 (3 P):** **(4)** – In der KG haftet der **Komplementär** unbeschränkt, der **Kommanditist** den Gläubigern nur bis zur Höhe seiner im Handelsregister eingetragenen Haftsumme (§ 171 HGB) – in der Regel entspricht sie seiner Einlage. Kommanditisten sind von der Geschäftsführung ausgeschlossen (3); ein Mindestkapital gibt es nicht (2).
+**D2 (3 P):** **(4)** – In der KG haftet der **Komplementär** unbeschränkt, der **Kommanditist** den Gläubigern bis zur eingetragenen Haftsumme. Die unmittelbare Haftung gegenüber Gläubigern entfällt, soweit die vereinbarte Einlage geleistet ist (§ 171 Abs. 1 HGB). Kommanditisten sind von der Geschäftsführung ausgeschlossen (3); ein Mindestkapital gibt es nicht (2).
 
 **D3 (3 P):** **(4)** – Der **Umsatzsteuersatz** ist bundesweit einheitlich und unterscheidet Standorte nicht. Anders der Hebesatz der Gewerbesteuer, den jede Gemeinde festlegt.
 

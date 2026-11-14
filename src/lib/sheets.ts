@@ -1,6 +1,7 @@
 // Erzeugt getrennte Aufgaben- und Lösungsblätter (Markdown) aus einer Aufgabenauswahl.
 
 import type { Section, Task } from '../../shared/types';
+import { examMinutes } from './examTimer';
 import { formatPoints } from './grading';
 import { klausurFuer, type MischKlausur, parseMischId } from './mischKlausur';
 import { localDate } from './progress';
@@ -33,6 +34,8 @@ export interface Sheet {
   totalPoints: number;
   /** Nur bei ganzen Klausuren (Deep Dive oder gemischt): die Blöcke – dann gibt es Deckblatt und Bewertungsbogen. */
   bloecke?: SheetBlock[];
+  /** Nur bei ganzen Klausuren: Bearbeitungszeit in Minuten für das Deckblatt (WiSo 60, sonst 90). */
+  minuten?: number;
 }
 
 function safeName(s: string): string {
@@ -73,6 +76,7 @@ export function examSheet(content: KernInhalt, topicId: string, kind: SheetKind)
         punkte: b.points,
         tasks: b.gruppen.flatMap((g) => g.taskIds.map((id) => content.tasks[id]).filter(Boolean)),
       })),
+      minuten: examMinutes(exam),
     };
   }
   const topic = content.topics.find((t) => t.id === topicId);
@@ -91,6 +95,7 @@ export function examSheet(content: KernInhalt, topicId: string, kind: SheetKind)
     groups,
     totalPoints: topic.exam.totalPoints,
     bloecke: topic.exam.blocks.map((b, i) => ({ label: `Block ${b.letter}`, titel: b.title, punkte: b.points, tasks: groups[i].tasks })),
+    minuten: examMinutes(topic.exam),
   };
 }
 
