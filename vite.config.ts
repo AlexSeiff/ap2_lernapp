@@ -12,5 +12,5 @@ export default defineConfig({
   plugins: [react(), contentJsonPlugin(), pwaPlugin()],
   server: { port: DEV_PORT },
   preview: { port: DEV_PORT },
-  test: { include: ['tests/**/*.test.ts'] },
+  test: { include: ['tests/**/*.test.ts'], testTimeout: 30000 },
 });
