@@ -15,13 +15,15 @@ const ART_TEXT: Record<HeuteItem['art'], string> = {
 export function HeuteSchritte({
   items,
   index,
+  maxIndex = index,
   onAbhaken,
   erledigt = [],
   uebersprungen = [],
 }: {
   items: HeuteItem[];
   index?: number;
-  onAbhaken?: () => void;
+  maxIndex?: number;
+  onAbhaken?: (key: string, erledigt: boolean) => void;
   erledigt?: string[];
   uebersprungen?: string[];
 }) {
@@ -49,7 +51,12 @@ export function HeuteSchritte({
           <li key={it.key} className={status === 'aktuell' ? 'aktuell' : status ? 'erledigt' : ''} style={{ '--i': i } as CSSProperties}>
             {onAbhaken ? (
               <label>
-                <input type="checkbox" checked={status === 'erledigt'} disabled={i !== index} onChange={onAbhaken} />
+                <input
+                  type="checkbox"
+                  checked={status === 'erledigt'}
+                  disabled={maxIndex === undefined || i > maxIndex || status === 'übersprungen'}
+                  onChange={(e) => onAbhaken(it.key, e.currentTarget.checked)}
+                />
                 {beschriftung}
               </label>
             ) : (

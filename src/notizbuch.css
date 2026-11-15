@@ -342,7 +342,10 @@ button.good, button.mid, button.low { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28); }
 .blatt-teil { background: none; border: 0; padding: 0; box-shadow: none; }
 .notiz { font: 20px / var(--k) var(--hand); color: var(--blau); }
 .knopfzeile { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 10px; min-height: calc(2 * var(--k)); padding: 6px 0; }
-.knopfzeile .button, .knopfzeile button { min-height: 40px; height: 40px; margin: 0; }
+.knopfzeile .button { min-height: 40px; max-width: 100%; margin: 0; }
+.knopfzeile h2 { margin: 0; }
+.knopfzeile .weiterlernen { gap: 10px; font-size: 1.15rem; line-height: 1.35; }
+.weiterlernen small { display: block; font-size: 0.9rem; font-weight: 400; }
 
 /* Haftnotiz */
 .haft {

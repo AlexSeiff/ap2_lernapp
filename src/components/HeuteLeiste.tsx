@@ -1,8 +1,17 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useHeuteSitzung } from '../hooks/useHeute';
-import { HEUTE_ICONS } from '../lib/heute';
-import { abonniereFertig, aktuellerSchritt, holeSitzung, istFertig, setzeSitzung, weiter } from '../lib/heuteSitzung';
+import { HEUTE_ICONS, type HeuteItem } from '../lib/heute';
+import {
+  abonniereFertig,
+  aktuellerSchritt,
+  holeSitzung,
+  istFertig,
+  offeneSchritte,
+  setzeSitzung,
+  weiter,
+  type HeuteSitzung,
+} from '../lib/heuteSitzung';
 import { useStartStore } from '../lib/store';
 import { Icon } from './Icon';
 
@@ -16,50 +25,48 @@ const AUTO_WEITER_MS = 1800;
  */
 export function HeuteLeiste() {
   const sitzung = useHeuteSitzung();
+  const schritt = sitzung && aktuellerSchritt(sitzung);
+  if (!sitzung || !schritt) return null;
+  // Ein wieder geöffneter Schritt beginnt mit einem neuen Bewertungsstand und ohne ausstehenden Timer.
+  return <SchrittLeiste key={schritt.key} sitzung={sitzung} schritt={schritt} />;
+}
+
+function SchrittLeiste({ sitzung, schritt }: { sitzung: HeuteSitzung; schritt: HeuteItem }) {
   const { progress } = useStartStore();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [geschafft, setGeschafft] = useState<string | undefined>(); // Schlüssel des Schritts, der gerade als geschafft gilt
-  const kartenStand = useRef<{ key: string; reviews: number } | undefined>(undefined);
+  const [geschafft, setGeschafft] = useState(false);
 
   const naechster = useCallback(() => {
     const aktuell = holeSitzung();
-    if (!aktuell) return;
+    if (!aktuell || aktuellerSchritt(aktuell) !== schritt) return;
     const next = weiter(aktuell);
     setzeSitzung(next);
-    setGeschafft(undefined);
     navigate(istFertig(next) ? '/heute' : aktuellerSchritt(next)!.link);
     window.scrollTo(0, 0);
-  }, [navigate]);
+  }, [navigate, schritt]);
 
   // Aufgabe gespeichert / Übung richtig gelöst → der aktuelle Schritt ist geschafft.
   useEffect(
     () =>
       abonniereFertig((id) => {
-        const schritt = holeSitzung() && aktuellerSchritt(holeSitzung()!);
-        if (schritt && schritt.art !== 'karten' && schritt.ids.includes(id)) setGeschafft(schritt.key);
+        if (schritt.art !== 'karten' && schritt.ids.includes(id)) setGeschafft(true);
       }),
-    [],
+    [schritt],
   );
 
   // Karten: geschafft, sobald jede Karte des Blocks seit Beginn des Schritts bewertet wurde.
-  const schritt = sitzung && !istFertig(sitzung) ? aktuellerSchritt(sitzung) : undefined;
-  const bewertet = schritt?.art === 'karten' ? schritt.ids.reduce((n, id) => n + (progress.cards[id]?.reviews ?? 0), 0) : 0;
-  useEffect(() => {
-    if (!schritt || schritt.art !== 'karten') return;
-    if (kartenStand.current?.key !== schritt.key) kartenStand.current = { key: schritt.key, reviews: bewertet };
-    else if (bewertet - kartenStand.current.reviews >= schritt.ids.length) setGeschafft(schritt.key);
-  }, [schritt, bewertet]);
-
-  const schrittKey = schritt?.key;
-  const istGeschafft = !!schrittKey && geschafft === schrittKey;
+  const bewertet = schritt.art === 'karten' ? schritt.ids.reduce((n, id) => n + (progress.cards[id]?.reviews ?? 0), 0) : 0;
+  const [bewertungenAmStart] = useState(bewertet);
+  const istGeschafft =
+    geschafft || (schritt.art === 'karten' && schritt.ids.length > 0 && bewertet - bewertungenAmStart >= schritt.ids.length);
   useEffect(() => {
     if (!istGeschafft) return;
     const t = setTimeout(naechster, AUTO_WEITER_MS);
     return () => clearTimeout(t);
   }, [istGeschafft, naechster]);
 
-  if (!sitzung || !schritt || pathname === '/heute') return null;
+  if (pathname === '/heute') return null;
   return (
     <div className="heute-leiste no-print" role="region" aria-label="Heute lernen">
       <span>
@@ -73,7 +80,7 @@ export function HeuteLeiste() {
         {istGeschafft && <b role="status"> · ✓ Geschafft – weiter …</b>}
       </span>
       <button type="button" onClick={naechster}>
-        {sitzung.index + 1 < sitzung.items.length ? 'Weiter →' : 'Fertig ✓'}
+        {offeneSchritte(sitzung).length > 1 ? 'Weiter →' : 'Fertig ✓'}
       </button>
     </div>
   );

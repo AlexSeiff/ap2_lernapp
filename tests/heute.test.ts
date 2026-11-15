@@ -12,6 +12,7 @@ import {
   istFertig,
   leseSitzung,
   schonDran,
+  setzeSchrittErledigt,
   sitzungVonHeute,
   starteSitzung,
   weiter,
@@ -438,6 +439,46 @@ describe('Heute-Sitzung', () => {
     expect(aktuellerSchritt(s)).toBeUndefined();
   });
 
+  it('öffnet einen erledigten Schritt erneut und behält spätere Häkchen und übersprungene Schritte', () => {
+    const [erster, zweiter, dritter, vierter] = items;
+    let s = starteSitzung([erster, zweiter, dritter, vierter], TODAY);
+    s = weiter(s);
+    s = weiter(s, true);
+    s = weiter(s);
+    s = setzeSchrittErledigt(s, erster.key, false);
+    expect(aktuellerSchritt(s)).toEqual(erster);
+    expect(s.erledigt).toEqual([dritter.key]);
+    expect(s.uebersprungen).toEqual([zweiter.key]);
+    const geladen = leseSitzung(JSON.parse(JSON.stringify(s)))!;
+    expect(geladen).toEqual(s);
+    s = setzeSchrittErledigt(geladen, erster.key, true);
+    expect(aktuellerSchritt(s)).toEqual(vierter);
+
+    s = weiter(s);
+    expect(istFertig(s)).toBe(true);
+    s = setzeSchrittErledigt(s, dritter.key, false);
+    expect(aktuellerSchritt(s)).toEqual(dritter);
+    s = weiter(s);
+    expect(istFertig(s)).toBe(true);
+    expect(s.erledigt.toSorted()).toEqual([erster.key, dritter.key, vierter.key].toSorted());
+    expect(s.uebersprungen).toEqual([zweiter.key]);
+  });
+
+  it('lässt mehrere entfernte Häkchen in beliebiger Reihenfolge wieder setzen und sperrt spätere Schritte', () => {
+    const [erster, zweiter, dritter, vierter] = items;
+    let s = weiter(weiter(starteSitzung([erster, zweiter, dritter, vierter], TODAY)));
+    s = setzeSchrittErledigt(s, erster.key, false);
+    s = setzeSchrittErledigt(s, zweiter.key, false);
+    s = leseSitzung(JSON.parse(JSON.stringify(s)))!;
+    expect(s.erledigt).toEqual([]);
+    expect(setzeSchrittErledigt(s, vierter.key, true)).toEqual(s);
+    s = setzeSchrittErledigt(s, zweiter.key, true);
+    expect(s.erledigt).toEqual([zweiter.key]);
+    expect(aktuellerSchritt(s)).toEqual(erster);
+    s = setzeSchrittErledigt(s, erster.key, true);
+    expect(aktuellerSchritt(s)).toEqual(dritter);
+  });
+
   it('merkt sich über Runden hinweg, was heute schon dran war – auch beim Beenden', () => {
     const erste = weiter(weiter(starteSitzung(items, TODAY)));
     // Beendet im dritten Schritt: die ersten drei zählen als schon dran.
@@ -459,6 +500,7 @@ describe('Heute-Sitzung', () => {
   it('liest gespeicherte Sitzungen tolerant', () => {
     const s = weiter(starteSitzung(items, TODAY));
     expect(leseSitzung(JSON.parse(JSON.stringify(s)))).toEqual(s);
+    expect(leseSitzung({ ...s, maxIndex: undefined })).toEqual(s);
     expect(leseSitzung(null)).toBeUndefined();
     expect(leseSitzung({ datum: TODAY })).toBeUndefined();
     const kaputt = leseSitzung({

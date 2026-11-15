@@ -9,6 +9,8 @@ export interface HeuteSitzung {
   items: HeuteItem[];
   /** Index des aktuellen Schritts; = items.length → fertig. */
   index: number;
+  /** Höchster bisher erreichter Index; bleibt beim Wiederöffnen früherer Schritte erhalten. */
+  maxIndex: number;
   /** Keys der erledigten (weiter geklickten) Schritte. */
   erledigt: string[];
   /** Keys der übersprungenen Schritte. */
@@ -23,17 +25,24 @@ const ARTEN: HeuteArt[] = ['wiederholung', 'aufgabe', 'sql', 'rechnen', 'diagram
 
 /** Neue Runde; `vorher` (die letzte Runde von heute) gibt weiter, was heute schon dran war. */
 export function starteSitzung(items: HeuteItem[], datum: string, vorher?: HeuteSitzung): HeuteSitzung {
-  return { datum, items, index: 0, erledigt: [], uebersprungen: [], frueher: vorher ? schonDran(vorher) : [] };
+  return { datum, items, index: 0, maxIndex: 0, erledigt: [], uebersprungen: [], frueher: vorher ? schonDran(vorher) : [] };
 }
 
-/** Alle IDs, die heute schon dran waren: frühere Runden und die Schritte dieser Runde bis einschließlich des aktuellen. */
+const istOffen = (s: HeuteSitzung, it: HeuteItem) => !s.erledigt.includes(it.key) && !s.uebersprungen.includes(it.key);
+
+export function offeneSchritte(s: HeuteSitzung): HeuteItem[] {
+  return s.items.slice(s.index).filter((it) => istOffen(s, it));
+}
+
+/** Alle IDs, die heute schon dran waren, einschließlich des aktuellen und aller bereits bearbeiteten Schritte. */
 export function schonDran(s: HeuteSitzung): string[] {
-  return [...new Set([...s.frueher, ...s.items.slice(0, s.index + 1).flatMap((it) => it.ids)])];
+  const dran = s.items.slice(0, s.maxIndex + 1);
+  return [...new Set([...s.frueher, ...dran.flatMap((it) => it.ids)])];
 }
 
 /** Runde abbrechen: Schritte fallen weg, das bisher Gelernte bleibt für die nächste Runde von heute vermerkt. */
 export function beende(s: HeuteSitzung): HeuteSitzung {
-  return { datum: s.datum, items: [], index: 0, erledigt: [], uebersprungen: [], frueher: schonDran(s) };
+  return starteSitzung([], s.datum, s);
 }
 
 export const istFertig = (s: HeuteSitzung) => s.index >= s.items.length;
@@ -43,9 +52,18 @@ export const aktuellerSchritt = (s: HeuteSitzung): HeuteItem | undefined => s.it
 export function weiter(s: HeuteSitzung, uebersprungen = false): HeuteSitzung {
   const item = aktuellerSchritt(s);
   if (!item) return s;
-  return uebersprungen
-    ? { ...s, index: s.index + 1, uebersprungen: [...s.uebersprungen, item.key] }
-    : { ...s, index: s.index + 1, erledigt: [...s.erledigt, item.key] };
+  const naechster = s.items.findIndex((it, i) => i > s.index && istOffen(s, it));
+  const index = naechster < 0 ? s.items.length : naechster;
+  const liste = uebersprungen ? 'uebersprungen' : 'erledigt';
+  return { ...s, index, maxIndex: Math.max(s.maxIndex, index), [liste]: [...s[liste], item.key] };
+}
+
+/** Häkchen in der Tagesliste ändern. Beim Wiederöffnen bleiben spätere erledigte und übersprungene Schritte erhalten. */
+export function setzeSchrittErledigt(s: HeuteSitzung, key: string, erledigt: boolean): HeuteSitzung {
+  const index = s.items.findIndex((it) => it.key === key);
+  if (index < 0 || index > s.maxIndex || s.uebersprungen.includes(key) || erledigt === s.erledigt.includes(key)) return s;
+  if (erledigt) return index === s.index ? weiter(s) : { ...s, erledigt: [...s.erledigt, key] };
+  return { ...s, index: Math.min(s.index, index), erledigt: s.erledigt.filter((k) => k !== key) };
 }
 
 /** Sitzung nur am selben Tag fortsetzen – morgen wird neu geplant. */
@@ -74,10 +92,13 @@ export function leseSitzung(raw: unknown): HeuteSitzung | undefined {
   if (!isObj(raw) || typeof raw.datum !== 'string' || !Array.isArray(raw.items)) return undefined;
   const items = raw.items.map(leseItem).filter((x): x is HeuteItem => x !== undefined);
   const index = typeof raw.index === 'number' && Number.isInteger(raw.index) ? Math.min(Math.max(raw.index, 0), items.length) : 0;
+  const maxIndex =
+    typeof raw.maxIndex === 'number' && Number.isInteger(raw.maxIndex) ? Math.min(Math.max(raw.maxIndex, index), items.length) : index;
   return {
     datum: raw.datum,
     items,
     index,
+    maxIndex,
     erledigt: strings(raw.erledigt),
     uebersprungen: strings(raw.uebersprungen),
     frueher: strings(raw.frueher),

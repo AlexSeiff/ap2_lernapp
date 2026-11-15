@@ -38,7 +38,7 @@ function Probe() {
 describe('Start und Details', () => {
   it('die Übersicht rendert mit dem Start allein – ohne Fragen, Antworten und Aufgabentexte', () => {
     const html = render(start, createElement(Dashboard));
-    expect(html).toContain('Heute lernen');
+    expect(html).toContain('Weiterlernen');
     expect(html).toContain('Kartenstand');
     // Der Begriff des Tages braucht die Begriffskarten mit Text und erscheint erst mit den Details.
     expect(html).not.toContain('w-begriff');

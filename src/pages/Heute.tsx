@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useHeuteSitzung } from '../hooks/useHeute';
 import { HEUTE_ICONS, planeHeute, type HeuteItem } from '../lib/heute';
-import { aktuellerSchritt, beende, istFertig, schonDran, setzeSitzung, starteSitzung, weiter } from '../lib/heuteSitzung';
+import { aktuellerSchritt, beende, istFertig, offeneSchritte, schonDran, setzeSitzung, starteSitzung, weiter } from '../lib/heuteSitzung';
 import { HEUTE_DAUERN, leseDauer, speichereDauer } from '../lib/heuteZeit';
 import { planeLernplan } from '../lib/lernplan';
 import { addDays, localDate } from '../lib/progress';
@@ -36,7 +36,7 @@ export function Heute() {
 
   if (sitzung && laeuft) {
     const schritt = aktuellerSchritt(sitzung)!;
-    const minuten = sitzung.items.slice(sitzung.index).reduce((s, it) => s + it.minuten, 0);
+    const minuten = offeneSchritte(sitzung).reduce((s, it) => s + it.minuten, 0);
     return (
       <div className="page narrow">
         <h1>

@@ -196,7 +196,7 @@ describe('Übersichtsseite', () => {
   it('zeigt alle Widgets und keine alten Balken', () => {
     progress = emptyProgress();
     const html = render();
-    for (const text of ['Weiterlernen', 'Heute lernen', 'Prüfungsbereiche', 'Fällig', 'Übungen', 'Markiert', 'Begriff des Tages']) {
+    for (const text of ['Weiterlernen', 'Prüfungsbereiche', 'Fällig', 'Übungen', 'Markiert', 'Begriff des Tages']) {
       expect(html, text).toContain(text);
     }
     expect(html).toContain('Übungsklausuren');

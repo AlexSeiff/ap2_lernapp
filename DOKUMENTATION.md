@@ -563,7 +563,7 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
 
 ### Heute lernen (phase 8.1)
 
-The checklist under **Übersicht → Weiterlernen** uses the same daily plan and session as **Heute lernen**. Ticking the current step saves its completion in `ap2-heute` and selects the next one. Points and card ratings come from the respective exercise.
+The **Weiterlernen** button opens **Heute lernen**. The checklist below it shares the same daily session. Ticking the current step selects the next open step. Completed steps can be unchecked and checked again in any order, including after the round is complete. Points and card ratings come from the respective exercise.
 
 - **Planner** `planeHeute(content, progress, { today, zufall, minuten })` in `src/lib/heute.ts` (pure, `tests/heute.test.ts`). Target
   `HEUTE_MINUTEN` = 20 min; estimates in `HEUTE_ZEITEN` (`shared/config.ts`): card 0.5 min (Leicht 0.33), task 0.9 min per point (min 3),
@@ -596,10 +596,10 @@ The checklist under **Übersicht → Weiterlernen** uses the same daily plan and
   opens the next one. `/heute` shows the list with ✓/⏭/▶, "⏭ Überspringen", "Runde beenden" and, when done, "🎉 Runde geschafft" + "Noch eine Runde".
   The pages themselves are unchanged – learning is recorded as usual. Karteikarten with `?karten=` show "▶ Heute lernen: n Karten" and a start
   button (no auto start: setting state in an effect is against the lint rules, and a click is more robust).
-- **Session** (`src/lib/heuteSitzung.ts`, pure + tiny store for `useSyncExternalStore`): `{ datum, items, index, erledigt, uebersprungen }` in
+- **Session** (`src/lib/heuteSitzung.ts`, pure + tiny store for `useSyncExternalStore`): `{ datum, items, index, maxIndex, erledigt, uebersprungen, frueher }` in
   `localStorage` key **`ap2-heute`** (try/catch, read tolerantly with `leseSitzung`). Only valid on the same day and device – it is navigation
   state, not progress, so it is not part of `Progress` or the backup.
-- Entry points: Dashboard button (shows "fortsetzen (n/m)" while running), first sub-target of the area „Lernen“.
+- Entry points: Dashboard button (shows “Weiterlernen · Schritt n/m” while running), first sub-target of the area „Lernen“.
 
 ### Anhang der Prüfung (October 2026)
 

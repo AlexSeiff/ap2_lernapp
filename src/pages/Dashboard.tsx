@@ -13,7 +13,7 @@ import { formatPoints, ihkGrade } from '../lib/grading';
 import { cardPool } from '../lib/cards';
 import { diagrammSummary, diagrammUebungen } from '../lib/diagramme';
 import { planeHeute } from '../lib/heute';
-import { istFertig, schonDran, setzeSitzung, starteSitzung, weiter } from '../lib/heuteSitzung';
+import { istFertig, schonDran, setzeSchrittErledigt, setzeSitzung, starteSitzung } from '../lib/heuteSitzung';
 import { leseDauer } from '../lib/heuteZeit';
 import { kartenstand, STAENDE, STAND_TEXT } from '../lib/kartenstand';
 import { kalibrierung } from '../lib/kalibrierung';
@@ -245,18 +245,20 @@ function Weiterlernen() {
   const abschnitt = topic && topic.sections.find((s) => s.id === stelle.sectionId);
   return (
     <section className="raster blatt-teil">
-      <h2>
-        <Icon name="play" /> Weiterlernen
-      </h2>
-      <p>
-        {sitzung && !laeuft && sitzung.items.length > 0
-          ? `Heute erledigt: ${sitzung.erledigt.length} von ${sitzung.items.length} Schritten.`
-          : `Tagesrunde, etwa ${dauer} Minuten.`}
-      </p>
       <div className="knopfzeile heute-start">
-        <Link className="button" to="/heute">
-          <Icon name="play" /> {laeuft ? `Heute lernen fortsetzen (${sitzung.index + 1}/${sitzung.items.length})` : 'Heute lernen'}
-        </Link>
+        <h2>
+          <Link className="button weiterlernen" to="/heute">
+            <Icon name="play" />
+            <span>
+              Weiterlernen{laeuft && ` · Schritt ${sitzung.index + 1}/${sitzung.items.length}`}
+              <small>
+                {sitzung && !laeuft && sitzung.items.length > 0
+                  ? `Heute erledigt: ${sitzung.erledigt.length} von ${sitzung.items.length} Schritten.`
+                  : `Tagesrunde, etwa ${dauer} Minuten.`}
+              </small>
+            </span>
+          </Link>
+        </h2>
         {topic && abschnitt ? (
           <Link className="button secondary weiterlesen" to={`/lernen/${topic.id}?stelle=${encodeURIComponent(abschnitt.id)}`}>
             <Icon name="book-open" /> Weiterlesen: {topic.id === '00' ? 'Zusatz' : `DD ${topic.number}`} · {abschnitt.title}
@@ -271,9 +273,13 @@ function Weiterlernen() {
         <HeuteSchritte
           items={schritte}
           index={sitzung?.items.length ? sitzung.index : 0}
+          maxIndex={sitzung?.maxIndex}
           erledigt={sitzung?.erledigt}
           uebersprungen={sitzung?.uebersprungen}
-          onAbhaken={() => setzeSitzung(weiter(sitzung?.items.length ? sitzung : starteSitzung(schritte, today, sitzung)))}
+          onAbhaken={(key, erledigt) => {
+            const runde = sitzung?.items.length ? sitzung : starteSitzung(schritte, today, sitzung);
+            setzeSitzung(setzeSchrittErledigt(runde, key, erledigt));
+          }}
         />
       )}
     </section>
