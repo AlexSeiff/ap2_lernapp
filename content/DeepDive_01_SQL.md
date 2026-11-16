@@ -336,6 +336,7 @@ CREATE INDEX idx_bestellung_kunde ON bestellung (kunden_id);
 - Primärschlüssel und UNIQUE-Spalten sind automatisch indiziert, Fremdschlüsselspalten in vielen Systemen nicht (MySQL/InnoDB legt sie an, PostgreSQL nicht) – für häufige Joins lohnt ein eigener Index.
 - Sinnvoll für große Tabellen und Spalten, nach denen oft gefiltert, gejoint oder sortiert wird und die viele verschiedene Werte haben (hohe Selektivität). Wenig sinnvoll bei kleinen Tabellen, Spalten mit wenigen Ausprägungen (z. B. Status) und sehr schreiblastigen Tabellen.
 - Ein Index hilft nicht bei `LIKE '%lampe'` (Platzhalter am Anfang) und meist nicht, wenn eine Funktion um die Spalte steht (`WHERE YEAR(bestelldatum) = 2026`) – besser als Bereich formulieren: `bestelldatum >= '2026-01-01' AND bestelldatum < '2027-01-01'`.
+- Ob ein Index genutzt wird, entscheidet der **Query Optimizer** der Datenbank: Er wählt anhand von Statistiken den voraussichtlich günstigsten Weg. Diesen **Ausführungsplan** zeigt `EXPLAIN` vor der Abfrage an (SQLite: `EXPLAIN QUERY PLAN`). Steht dort ein Scan über die ganze große Tabelle trotz selektivem Filter, fehlt ein nutzbarer Index.
 
 ## 3.7 DCL – Rechte vergeben und entziehen
 

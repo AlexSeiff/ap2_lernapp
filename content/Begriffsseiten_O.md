@@ -1,11 +1,17 @@
 <!-- Begriffsseiten O · Stand 2026-10 -->
 ## O-Notation
-<!-- id: o-notation · quellen: Karte DD11, DD11 B7 · stand: 2026-10 -->
+<!-- id: o-notation · quellen: Karte DD11, DD11 B7 · stand: 2026-11 -->
 
 Angabe, wie der Aufwand eines Algorithmus mit der Datenmenge n wächst, z. B. O(n), O(n log n), O(n²); konstante Faktoren fallen weg.
 
 ### Erklärung
-Die O-Notation beschreibt die Größenordnung des Wachstums, meist für den schlechtesten Fall, und macht Verfahren unabhängig von Rechner und Programmiersprache vergleichbar. Typische Klassen, von günstig nach teuer: O(1) konstant, O(log n) logarithmisch (binäre Suche), O(n) linear (lineare Suche), O(n log n) (Merge Sort, Quicksort im Mittel), O(n²) quadratisch (Bubble, Selection, Insertion Sort).
+Die O-Notation beschreibt die Größenordnung des Wachstums und macht Verfahren unabhängig von Rechner und Programmiersprache vergleichbar. Typische Klassen, von günstig nach teuer: O(1) konstant, O(log n) logarithmisch (binäre Suche), O(n) linear (lineare Suche), O(n log n) (Merge Sort, Quicksort im Mittel), O(n²) quadratisch (Bubble, Selection, Insertion Sort).
+
+**Zwei verschiedene Fragen** werden oft vermischt:
+- **Schranke (Notation):** O(f) ist eine **obere** Schranke („wächst höchstens so schnell“), Ω(f) eine **untere** („mindestens so schnell“), Θ(f) die **enge** Schranke (oben und unten, also exakt die Größenordnung).
+- **Fall:** bester, mittlerer und schlechtester Fall beschreiben, für welche Eingaben man rechnet. Zu jedem Fall kann man eine Schranke angeben. Im AP2-Alltag meint „O(…)“ ohne Zusatz meist die obere Schranke im schlechtesten Fall.
+
+Neben der Laufzeit zählt der **Speicherbedarf** (Speicherkomplexität): Merge Sort braucht zusätzlich O(n) Speicher, Bubble, Selection und Insertion Sort nur O(1) (sie sortieren „am Ort“). Bei der **amortisierten** Laufzeit rechnet man den Durchschnitt über viele Operationen: Das Anhängen an ein dynamisches Array kostet gelegentlich O(n) (Vergrößern und Umkopieren), im Mittel über viele Anhänge aber O(1) pro Operation.
 
 ### Beispiel
 Bei n = 1.000 Datensätzen braucht ein O(n²)-Verfahren rund 1.000.000 Vergleiche, ein O(n log n)-Verfahren rund 1.000 · 10 = 10.000. Die binäre Suche findet einen Wert unter 1.000.000 sortierten Sätzen mit höchstens 20 Vergleichen, weil $2^{20} = 1.048.576$.
@@ -19,7 +25,7 @@ Bei n = 1.000 Datensätzen braucht ein O(n²)-Verfahren rund 1.000.000 Vergleich
 | Quicksort | O(n log n) | O(n log n) | O(n²) |
 
 ### Prüfungsfalle
-Konstanten mitschreiben („O(2n)“) oder den besten Fall als typischen Aufwand angeben.
+Konstanten mitschreiben („O(2n)“), den besten Fall als typischen Aufwand angeben oder O mit „schlechtester Fall“ gleichsetzen – O ist die Schranke, der Fall eine eigene Angabe. O(n) heißt auch nicht „genau n Schritte“, sondern „wächst höchstens linear“.
 
 ### Merksatz
 O zählt nicht Sekunden, sondern wie schnell die Arbeit mit n wächst.
@@ -28,26 +34,34 @@ Siehe auch: Aufwand (Komplexität) · Binäre Suche · Lineare Suche · Quicksor
 Mehr: Deep Dive 11, B7
 
 ## OAuth 2.0
-<!-- id: oauth-2-0 · quellen: Karte DD15, DD15 3.3 · stand: 2026-10 -->
+<!-- id: oauth-2-0 · quellen: Karte DD15, DD15 3.3 · stand: 2026-11 -->
 
 Autorisierungsrahmen (RFC 6749): Ein Autorisierungsserver stellt einer Anwendung ein zeitlich begrenztes Access Token mit festgelegten Rechten aus, ohne dass sie das Passwort erhält.
 
 ### Erklärung
-Der Nutzer meldet sich beim Autorisierungsserver an und stimmt zu, welche Rechte (**Scopes**) die Anwendung bekommt. Die Anwendung erhält ein **Access Token**, das sie bei jedem API-Aufruf im Header mitschickt (`Authorization: Bearer …`). Läuft es ab, holt sie mit einem Refresh Token ein neues. So lässt sich Zugriff gezielt delegieren und jederzeit entziehen, ohne das Passwort zu ändern.
+Der Nutzer meldet sich beim Autorisierungsserver an und stimmt zu, welche Rechte (**Scopes**) die Anwendung bekommt. Die Anwendung erhält ein **Access Token**, das sie bei jedem API-Aufruf im Header mitschickt (`Authorization: Bearer …`). So lässt sich Zugriff gezielt delegieren und jederzeit entziehen, ohne das Passwort zu ändern. Scopes sollten so klein wie möglich sein (minimale Rechte).
+
+**Zwei wichtige Abläufe (Grant Types):**
+- **Authorization Code mit PKCE:** Standard, wenn ein Nutzer beteiligt ist (Web-App, mobile App, Single-Page-App). Die App erhält erst einen kurzlebigen Code und tauscht ihn gegen das Token. **PKCE** (Proof Key for Code Exchange) bindet den Tausch an ein Geheimnis, das die App vorher erzeugt hat – ein abgefangener Code ist dadurch wertlos.
+- **Client Credentials:** Maschine zu Maschine ohne Nutzer, die Anwendung authentifiziert sich selbst (z. B. ein nächtlicher Importjob). Die älteren Abläufe Implicit und Password gelten als veraltet.
+
+**Tokens:** Das **Access Token** ist kurzlebig und für die API bestimmt. Ein **Refresh Token** holt ein neues Access Token, ohne dass sich der Nutzer erneut anmelden muss; es ist langlebiger und besonders schützenswert. Bei der **Refresh-Token-Rotation** wird mit jedem Einsatz ein neues Refresh Token ausgegeben und das alte ungültig – wird ein altes erneut verwendet, deutet das auf Diebstahl hin und die Kette wird gesperrt.
 
 ### Beispiel
-Ein Dashboard-Tool des Möbelhauses darf über OAuth 2.0 nur lesend auf die Kalender der Servicetechniker zugreifen (Scope „calendar.read“). Das Passwort der Techniker sieht das Tool nie.
+Ein Dashboard-Tool des Möbelhauses darf über OAuth 2.0 nur lesend auf die Kalender der Servicetechniker zugreifen (Scope „calendar.read“). Das Passwort der Techniker sieht das Tool nie. Der nächtliche Importjob dagegen nutzt Client Credentials, weil dabei kein Mensch zustimmen kann.
 
 ### Abgrenzung
 | Verfahren | Zweck |
 |---|---|
-| OAuth 2.0 | Autorisierung: was darf die Anwendung? |
-| OpenID Connect | Zusatz für Authentifizierung: wer ist der Nutzer? |
+| OAuth 2.0 | Autorisierung: was darf die Anwendung? Liefert ein Access Token für die API |
+| OpenID Connect (OIDC) | Aufsatz für Authentifizierung: wer ist der Nutzer? Liefert zusätzlich ein **ID-Token** (ein JWT mit Identitätsangaben) für die Anwendung |
 | API-Schlüssel | identifiziert nur die Anwendung |
-| JWT | Tokenformat, oft als Access Token verwendet |
+| JWT | Tokenformat, oft als Access Token oder ID-Token verwendet |
+
+Das **ID-Token** ist für die Anwendung bestimmt (wer hat sich angemeldet?), das **Access Token** für die API (was darf aufgerufen werden?).
 
 ### Prüfungsfalle
-OAuth 2.0 als Anmeldeverfahren bezeichnen – es regelt Berechtigungen; die Anmeldung ergänzt OpenID Connect.
+OAuth 2.0 als Anmeldeverfahren bezeichnen – es regelt Berechtigungen; die Anmeldung ergänzt OpenID Connect. Ebenso falsch: ein ID-Token als Zugangsschlüssel für eine API verwenden.
 
 ### Merksatz
 OAuth gibt der Anwendung einen befristeten Schlüssel, nicht das Passwort.

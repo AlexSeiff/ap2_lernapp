@@ -181,6 +181,33 @@ Korrelation zeigt, dass etwas zusammen auftritt – nicht, warum.
 Siehe auch: Korrelation · Kausalität · Drittvariable · Signifikanz
 Mehr: Deep Dive 4, 1.3
 
+## Schema Evolution
+<!-- id: schema-evolution · quellen: DD8 5.1, DD8 3.3 · stand: 2026-11 -->
+
+Kontrollierte Weiterentwicklung eines Datenschemas (Spalte ergänzen, Typ ändern, umbenennen, entfernen), ohne dass bestehende Daten und Auswertungen kaputtgehen.
+
+### Erklärung
+Quellsysteme ändern sich: Der Onlineshop liefert plötzlich eine neue Spalte. Man unterscheidet:
+- **additive Änderungen** (neue, optionale Spalte): meist abwärtskompatibel, alte Auswertungen laufen weiter, alte Zeilen erhalten NULL.
+- **verändernde Änderungen** (Typ ändern, umbenennen, Spalte löschen): brechen Konsumenten, brauchen Abstimmung und Migration.
+
+Plattformen wie Delta Lake oder Iceberg lehnen Schreibzugriffe mit abweichendem Schema standardmäßig ab (Schemaprüfung) und erlauben Änderungen nur, wenn man sie ausdrücklich zulässt (Schema Evolution). Bewährt sind Schema-Versionen, Kompatibilitätsregeln, Tests und eine Information an alle Abnehmer.
+
+### Beispiel
+Der Webshop der Möbelhaus Nordholz GmbH ergänzt die Spalte `versandart`. Bei strenger Schemaprüfung bricht der nächtliche Ladelauf ab. Mit erlaubter Schema Evolution wird die Spalte in der Zieltabelle ergänzt; die 180.000 bereits geladenen Zeilen haben dort NULL. Würde der Shop `preis` von Euro in Cent umstellen, wäre das eine verändernde Änderung: Der Lauf liefe durch, die Zahlen wären aber falsch.
+
+### Abgrenzung
+**Schema-on-Write** prüft das Schema beim Laden, **Schema-on-Read** erst beim Lesen. Die **Historisierung** (Slowly Changing Dimensions) bewahrt alte **Inhalte** einer Dimension, Schema Evolution ändert die **Struktur** der Tabelle.
+
+### Prüfungsfalle
+Schema Evolution mit Historisierung verwechseln – die eine betrifft Spalten, die andere die Werte der Datensätze.
+
+### Merksatz
+Schema Evolution: neue Spalte erlaubt – aber bitte so, dass nichts kaputtgeht.
+
+Siehe auch: Schema-on-Write · Schema-on-Read · Delta Lake · Historisierung · Metadaten
+Mehr: Deep Dive 8, 5.1
+
 ## Schema-on-Read
 <!-- id: schema-on-read · quellen: Karte DD8, DD8 5.1, DD15 4.1 · stand: 2026-10 -->
 
@@ -1613,6 +1640,38 @@ Zweck erfüllt – Daten weg.
 Siehe auch: Datenminimierung · Zweckbindung · DSGVO · Personenbezogene Daten
 Mehr: Deep Dive 10, 2.1
 
+## Sperren (Locking)
+<!-- id: sperren · quellen: DD15 4.2, DD1 3.5 · stand: 2026-11 -->
+
+Auch: Locking, Sperrgranularität
+
+Mechanismus, mit dem ein Datenbanksystem gleichzeitige Zugriffe koordiniert, indem es Daten für andere Transaktionen vorübergehend blockiert.
+
+### Erklärung
+**Sperrarten:** Eine **Lesesperre** (shared) erlaubt anderen weiteres Lesen, aber kein Schreiben. Eine **Schreibsperre** (exclusive) ist ausschließlich: Andere dürfen die Daten weder mit Sperre lesen noch schreiben.
+
+| gehalten \ angefordert | Lesen | Schreiben |
+|---|---|---|
+| Lesesperre | möglich | wartet |
+| Schreibsperre | wartet | wartet |
+
+**Granularität:** gesperrt werden kann eine Zeile, eine Seite, die Tabelle oder die Datenbank. Feine Sperren erlauben viel Parallelität, kosten aber Verwaltungsaufwand; grobe sind billig, lassen andere länger warten. Üblicherweise werden Sperren bis zum Ende der Transaktion (COMMIT oder ROLLBACK) gehalten. Höhere Isolationsstufen sperren mehr oder länger; manche Systeme arbeiten zusätzlich mit Versionen (MVCC), damit Leser Schreiber nicht blockieren. Risiken: Wartezeiten und **Deadlocks**.
+
+### Beispiel
+Zwei Disponenten ändern den Bestand in der Tabelle `lager` mit 5.000 Artikeln. Bei einer Zeilensperre blockiert Disponent 1 nur Artikel 10; Disponent 2 kann Artikel 11 ungestört ändern. Bei einer Tabellensperre müsste er auf alle 5.000 Artikel warten.
+
+### Abgrenzung
+**Pessimistisches Sperren** sperrt schon beim Lesen (`SELECT … FOR UPDATE`), **optimistisches Sperren** sperrt nicht, sondern prüft beim Schreiben eine Versionsspalte. Mit der **Aussperrung** im Arbeitskampf hat der Begriff nichts zu tun.
+
+### Prüfungsfalle
+Annehmen, eine Lesesperre blockiere andere Leser. Mehrere Lesesperren sind gleichzeitig möglich; ein Schreiber muss warten.
+
+### Merksatz
+Fein sperren erlaubt Parallelität, grob sperren spart Aufwand – gehalten wird bis zum Transaktionsende.
+
+Siehe auch: Pessimistisches Sperren · Optimistisches Sperren · Deadlock · Transaktion · Isolationsstufen · Lost Update
+Mehr: Deep Dive 15, 4.2
+
 ## Spezifität
 <!-- id: spezifitat · quellen: Karte DD7, DD7 2.2 · stand: 2026-10 -->
 
@@ -2396,6 +2455,31 @@ Jede Teilmenge ein Spiegel des Ganzen.
 
 Siehe auch: Train-Test-Split · Kreuzvalidierung · Unausgeglichene Klassen · SMOTE
 Mehr: Deep Dive 7, 4.5
+
+## Stream-Verarbeitung
+<!-- id: stream-verarbeitung · quellen: DD8 5.2 · stand: 2026-11 -->
+
+Auch: Stream Processing, Streaming
+
+Fortlaufende Verarbeitung von Ereignissen, sobald sie entstehen, mit Reaktionszeiten von Millisekunden bis wenigen Sekunden.
+
+### Erklärung
+Ereignisse (Bons, Sensorwerte, Klicks) fließen durch eine Pipeline: Quelle → Nachrichtensystem (z. B. Apache Kafka) → Verarbeitung (z. B. Apache Flink oder Spark Streaming) → Ziel. Aggregationen laufen über **Zeitfenster** („Umsatz der letzten 5 Minuten“). Herausforderungen: verspätet oder in falscher Reihenfolge eintreffende Ereignisse, doppelte Zustellung (Verarbeitung muss mehrfaches Ausführen vertragen), Ausfallsicherheit und höherer Betriebsaufwand. „Echtzeit“ bedeutet in der Praxis meist „nahezu in Echtzeit“.
+
+### Beispiel
+Jeder Kassenbon der Möbelhaus Nordholz GmbH wird als Ereignis gesendet. Fällt der Bestand eines Artikels unter den Mindestbestand von 5 Stück, löst die Verarbeitung binnen Sekunden eine Nachbestellwarnung aus. Parallel zeigt ein Dashboard den Umsatz je Filiale im gleitenden 5-Minuten-Fenster.
+
+### Abgrenzung
+Die **Batch-Verarbeitung** sammelt Daten und verarbeitet sie zu festen Zeiten – einfach, aber mit Verzögerung. Streaming lohnt sich nur, wenn die Entscheidung von der aktuellen Information abhängt (Betrugserkennung, Bestandswarnung).
+
+### Prüfungsfalle
+Streaming für jede Auswertung fordern. Ein Monatsbericht braucht keinen Datenstrom; der Aufwand wäre nicht gerechtfertigt.
+
+### Merksatz
+Stream: jedes Ereignis sofort. Batch: der ganze Stapel später.
+
+Siehe auch: Batch-Verarbeitung · Velocity · Change Data Capture · ETL
+Mehr: Deep Dive 8, 5.2
 
 ## Streik
 <!-- id: streik · quellen: Karte DD13, DD13 5.4 · stand: 2026-10 -->

@@ -99,21 +99,28 @@ Siehe auch: Patchmanagement · Firewall · Least Privilege · IT-Grundschutz · 
 Mehr: Deep Dive 10, 5.3
 
 ## Hashing
-<!-- id: hashing · quellen: Karte DD10, DD10 4.2 · stand: 2026-10 -->
+<!-- id: hashing · quellen: Karte DD10, DD10 4.2 · stand: 2026-11 -->
 
 Einwegfunktion, die aus beliebigen Daten einen Wert fester Länge berechnet, der sich nicht umkehren lässt; dient der Integritätsprüfung und der Passwortspeicherung.
 
 ### Erklärung
-Schon eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert; so fallen Manipulationen auf. SHA-256 liefert z. B. immer 256 Bit (64 Hexadezimalzeichen). Passwörter werden gehasht gespeichert, zusätzlich mit einem **Salt** (Zufallswert je Passwort), damit gleiche Passwörter verschiedene Hashes ergeben und vorberechnete Tabellen nutzlos sind. Für Passwörter nimmt man bewusst langsame Verfahren wie Argon2, bcrypt, scrypt oder PBKDF2; MD5 und SHA-1 gelten als unsicher.
+Schon eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert; so fallen Manipulationen auf. SHA-256 liefert z. B. immer 256 Bit (64 Hexadezimalzeichen). Eine gute kryptografische Hashfunktion ist
+- **preimage-resistent:** Aus dem Hash lässt sich die Eingabe nicht berechnen (Einweg),
+- **second-preimage-resistent:** Zu einer gegebenen Eingabe findet man keine zweite mit demselben Hash,
+- **kollisionsresistent:** Man findet überhaupt keine zwei verschiedenen Eingaben mit gleichem Hash.
+
+Bei MD5 und SHA-1 sind Kollisionen praktisch erzeugbar – sie gelten für Sicherheitszwecke als unsicher.
+
+**Passwörter** speichert man gehasht mit einem **Salt** (Zufallswert je Passwort), damit gleiche Passwörter verschiedene Hashes ergeben und vorberechnete Tabellen nutzlos sind. Optional kommt ein **Pepper** hinzu, ein geheimer Wert, getrennt von der Datenbank aufbewahrt. Entscheidend ist ein **langsames, einstellbares Verfahren** (Argon2id, bcrypt, scrypt oder PBKDF2 mit hoher Iterationszahl): Der **Work Factor** (Rechen- bzw. Speicheraufwand) wird so gewählt, dass ein einzelner Login kaum auffällt, Brute Force aber unbezahlbar wird, und wird mit stärkerer Hardware erhöht. Ein schneller Hash wie SHA-256 allein ist für Passwörter ungeeignet, weil Angreifer damit enorm viele Versuche pro Sekunde schaffen.
 
 ### Beispiel
 Nach dem Export einer CSV an den Steuerberater wird der SHA-256-Wert der Datei mitgeschickt. Der Empfänger berechnet ihn erneut – stimmen beide überein, ist die Datei unverändert.
 
 ### Abgrenzung
-**Verschlüsselung** ist mit dem Schlüssel umkehrbar und schützt die Vertraulichkeit; Hashing ist nicht umkehrbar und schützt die Integrität. Die digitale Signatur verschlüsselt (signiert) den Hash mit dem privaten Schlüssel.
+**Verschlüsselung** ist mit dem Schlüssel umkehrbar und schützt die Vertraulichkeit; Hashing ist nicht umkehrbar und schützt die Integrität. Die digitale Signatur verschlüsselt (signiert) den Hash mit dem privaten Schlüssel. Ein einfacher Hash beweist keine Herkunft: Wer die Datei ändert, kann den Hash gleich mitändern – dafür braucht man eine Signatur oder einen schlüsselbasierten Hash (HMAC).
 
 ### Prüfungsfalle
-„Passwörter werden verschlüsselt gespeichert“ – richtig ist: gehasht mit Salt.
+„Passwörter werden verschlüsselt gespeichert“ – richtig ist: gehasht mit Salt und mit einem langsamen Verfahren (Argon2id, bcrypt …), nicht mit SHA-256 allein.
 
 ### Merksatz
 Hashing hat keinen Rückweg.

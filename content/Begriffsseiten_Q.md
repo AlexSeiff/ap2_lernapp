@@ -137,6 +137,33 @@ Erst die Position berechnen, dann den Wert ablesen.
 Siehe auch: Interquartilsabstand (IQR) · Median · Boxplot · Fünf-Punkte-Zusammenfassung · Ausreißer
 Mehr: Deep Dive 3, 4.2
 
+## Query Optimizer
+<!-- id: qury-optimizer · quellen: DD1 3.6, Fachgespräch DD1 · stand: 2026-11 -->
+
+Auch: Abfrageoptimierer
+
+Komponente des Datenbanksystems, die für eine SQL-Abfrage aus mehreren möglichen Wegen den voraussichtlich günstigsten auswählt.
+
+### Erklärung
+SQL ist deklarativ: Du beschreibst, **was** du willst, nicht **wie** es berechnet wird. Der Optimizer überlegt Alternativen – Index oder voller Tabellen-Scan, Reihenfolge und Verfahren der Joins – und schätzt deren Kosten aus **Statistiken** (Zeilenzahl, Werteverteilung). Den günstigsten Weg gibt er als Ausführungsplan an die Ausführung weiter. Er arbeitet meist kostenbasiert, also mit Schätzungen.
+
+Grenzen: Veraltete Statistiken führen zu schlechten Plänen. Er kann einen fehlenden Index nicht erfinden, und eine Funktion um die Spalte (`WHERE YEAR(bestelldatum) = 2026`) verhindert oft die Indexnutzung. Beeinflussen kannst du den Plan über passende Indizes, aktuelle Statistiken und gut formulierte Bedingungen.
+
+### Beispiel
+`bestellung` hat 400.000 Zeilen. Der Filter `kunden_id = 4` trifft 12 Zeilen, also $\frac{12}{400000} = 0{,}003\,\%$: Mit Index wählt der Optimizer den Indexzugriff. Würde ein Filter wie `status = 'offen'` rund 60 % der Zeilen treffen, ist das Lesen der ganzen Tabelle meist günstiger als hunderttausendfach in den Index zu springen – und er wählt den Scan.
+
+### Abgrenzung
+Der **Index** ist eine Zusatzstruktur, der Optimizer entscheidet, ob er genutzt wird. Der **Ausführungsplan** ist das Ergebnis dieser Entscheidung.
+
+### Prüfungsfalle
+Annehmen, ein vorhandener Index werde immer genutzt. Bei geringer Selektivität oder bei einer Funktion auf der Spalte ignoriert ihn der Optimizer zu Recht.
+
+### Merksatz
+Du sagst, was du willst – der Optimizer sucht den Weg.
+
+Siehe auch: Ausführungsplan · Index · Transaktion
+Mehr: Deep Dive 1, 3.6
+
 ## Quicksort
 <!-- id: quicksort · quellen: Karte DD11, DD11 B7 · stand: 2026-10 -->
 

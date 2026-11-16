@@ -222,6 +222,31 @@ Basic Auth nie ohne HTTPS.
 Siehe auch: API-Schlüssel · OAuth 2.0 · Nur HTTPS · Authentifizierung an APIs
 Mehr: Deep Dive 15, 3.3
 
+## Batch-Verarbeitung
+<!-- id: batch-verarbeitung · quellen: DD8 5.2, DD8 3.1 · stand: 2026-11 -->
+
+Auch: Batch Processing, Stapelverarbeitung
+
+Verarbeitung gesammelter Datenmengen in einem Lauf (Stapel) zu festen Zeiten oder auf Anstoß – z. B. der nächtliche ETL-Lauf ins Data Warehouse.
+
+### Erklärung
+Daten sammeln sich zunächst im Quellsystem. Ein Job liest den ganzen Stapel, verarbeitet ihn und schreibt das Ergebnis. Vorteile: einfach, robust und wiederholbar (bei einem Fehler startet man den Lauf erneut), gut für große Mengen, die Last lässt sich in ein Nachtfenster legen. Nachteil: Die Auswertung zeigt höchstens den Stand des letzten Laufs; die **Latenz** entspricht ungefähr dem Laufintervall. Zwischenform: **Micro-Batches** mit sehr kurzem Intervall (Sekunden bis Minuten).
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH lädt die Kassenbons jede Nacht um 02:00 Uhr ins DWH (rund 180.000 Positionen, Laufzeit etwa 45 Minuten). Ein Bon von 10:15 Uhr ist daher erst gut 15 Stunden später im Dashboard sichtbar, einer von 02:05 Uhr fast 24 Stunden später. Für den Wochenbericht des Controllings reicht das völlig.
+
+### Abgrenzung
+Die **Stream-Verarbeitung** verarbeitet jedes Ereignis fortlaufend, sobald es entsteht – aktueller, aber aufwendiger. Entscheidend ist die Frage, wie aktuell die Information sein muss, damit die Entscheidung noch etwas nützt.
+
+### Prüfungsfalle
+Batch pauschal als „veraltet“ und Streaming als „immer besser“ bezeichnen. Für Monatsberichte und Wochenauswertungen ist Batch die richtige, einfachere Wahl.
+
+### Merksatz
+Batch sammelt und verarbeitet im Stapel – aktuell ist nur, was der letzte Lauf geholt hat.
+
+Siehe auch: Stream-Verarbeitung · ETL · Deltaextraktion · Velocity
+Mehr: Deep Dive 8, 5.2
+
 ## BBiG
 <!-- id: bbig · quellen: Karte DD13, DD13 1.1 · stand: 2026-10 -->
 

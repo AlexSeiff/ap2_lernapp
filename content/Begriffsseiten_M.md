@@ -568,6 +568,35 @@ Nur wenn der Zufall allein entscheidet, darf man Lücken einfach streichen.
 Siehe auch: MAR · MNAR · Fehlende Werte · Imputation
 Mehr: Deep Dive 9, 4.1
 
+## Medallion-Architektur
+<!-- id: medallion-architektur · quellen: DD8 5.1 · stand: 2026-11 -->
+
+Schichtenmodell in Lakehouse-Plattformen: Daten werden stufenweise von roh (Bronze) über bereinigt (Silver) zu auswertungsfertig (Gold) veredelt.
+
+### Erklärung
+| Stufe | Inhalt | Typische Schritte |
+|---|---|---|
+| Bronze | Rohdaten unverändert wie geliefert, mit Quelle und Ladezeit | nur anhängen, nichts löschen |
+| Silver | bereinigt und vereinheitlicht | Dubletten entfernen, Typen und Formate angleichen, Schlüssel harmonisieren, fehlerhafte Sätze in Quarantäne |
+| Gold | fachlich aufbereitet für Berichte und Modelle | aggregieren, Kennzahlen berechnen, Star-Schema und Data Marts |
+
+Jede Stufe erhöht die Qualität; die Schichten lassen sich getrennt berechtigen (Bronze nur für Data Engineers) und aus der vorigen Stufe jederzeit neu aufbauen. Der Preis: mehr Speicher und mehr Pipelines. Die Idee entspricht Staging → Core → Data Mart im klassischen DWH und passt zu ELT.
+
+### Beispiel
+Kassenbons der Möbelhaus Nordholz GmbH: Bronze enthält 180.000 Positionen roh. Silver entfernt 1.800 Dubletten (1 %) und leitet 600 fehlerhafte Sätze in die Quarantäne – übrig bleiben 177.600. Gold liefert den Tagesumsatz je Filiale (12 Filialen, also 12 Zeilen pro Tag) für das Dashboard.
+
+### Abgrenzung
+Die Medaillen beschreiben den **Veredelungsgrad**, nicht die Wichtigkeit oder eine Schutzklasse. Die **Medallion-Architektur** ist ein Muster im Lakehouse; **ETL** ist der Prozess, der zwischen den Stufen arbeitet.
+
+### Prüfungsfalle
+Die Bronze-Schicht nach der Bereinigung löschen. Sie bleibt als unveränderte Quelle erhalten, damit sich Fehler korrigieren und Regeln später neu anwenden lassen.
+
+### Merksatz
+Bronze bewahrt, Silver putzt, Gold liefert.
+
+Siehe auch: Lakehouse · Delta Lake · ELT · Staging Area · Data Mart · Data Lake
+Mehr: Deep Dive 8, 5.1
+
 ## Median
 <!-- id: median · quellen: Karte DD3, DD3 Teil 3 · stand: 2026-10 -->
 
