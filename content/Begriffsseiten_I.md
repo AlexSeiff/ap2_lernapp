@@ -96,6 +96,51 @@ Imputieren ja, aber kennzeichnen und begründen.
 Siehe auch: Fehlende Werte · MCAR · Median · Modus
 Mehr: Deep Dive 9, 4.1
 
+## IN, BETWEEN, LIKE
+<!-- id: in-between-like · quellen: Karte DD1, DD1 1.2, DD19 5.2, DD19 5.5 · stand: 2026-11 -->
+
+Drei SQL-Vergleichsoperatoren für WHERE: `IN` prüft die Zugehörigkeit zu einer Werteliste, `BETWEEN` einen Bereich einschließlich der Grenzen, `LIKE` ein Textmuster mit Platzhaltern.
+Auch: IN-Operator, BETWEEN, LIKE, Wildcard
+
+### Erklärung
+| Operator | Bedeutung | gleichwertig zu |
+|---|---|---|
+| `x IN (a, b, c)` | x ist einer der Werte (Liste oder Unterabfrage) | `x = a OR x = b OR x = c` |
+| `x BETWEEN a AND b` | x liegt im Bereich, **Grenzen eingeschlossen** | `x >= a AND x <= b` |
+| `x LIKE muster` | Text passt zum Muster | – |
+
+Bei `BETWEEN` steht die **untere Grenze zuerst**: `BETWEEN 249 AND 129` liefert nie eine Zeile. Es gilt auch für Datum und Text. Im Muster von `LIKE` steht `%` für beliebig viele Zeichen (auch keines) und `_` für genau ein Zeichen; `'S%'` = beginnt mit S, `'%tisch%'` = enthält „tisch“, `'_ischer%'` = ein beliebiges Zeichen, dann „ischer“. Ein Muster ohne Platzhalter wirkt wie `=`. Alle drei lassen sich mit `NOT` verneinen (`NOT IN`, `NOT BETWEEN`, `NOT LIKE`).
+
+NULL: Ist der geprüfte Wert NULL, erfüllt die Zeile keinen der Operatoren (Ergebnis UNKNOWN), auch nicht `NOT IN`. Enthält die Liste von `NOT IN` ein NULL, liefert die Bedingung nie eine Zeile.
+
+Dialekt: `LIKE` unterscheidet in SQLite Groß- und Kleinschreibung nicht (nur ASCII), in MySQL hängt es von der Sortierung ab, in PostgreSQL unterscheidet `LIKE` sie, `ILIKE` nicht.
+
+### Beispiel
+```sql
+SELECT bezeichnung, preis FROM produkt WHERE preis BETWEEN 129 AND 249;
+```
+Ergebnis: Bürostuhl Comfort 249 · Monitor 27 Zoll 189 · Dockingstation 129 – die Grenzen 129 und 249 zählen mit.
+```sql
+SELECT name FROM kunde WHERE ort IN ('Köln', 'Hamburg');
+```
+Ergebnis: Schmidt AG · Weber e.K. · Braun GmbH.
+```sql
+SELECT bezeichnung FROM produkt WHERE bezeichnung LIKE 'Schreibtisch%';
+```
+Ergebnis: Schreibtisch Basic · Schreibtischlampe. Mit `LIKE '%GmbH'` fänden sich Huber GmbH und Braun GmbH.
+
+### Abgrenzung
+`=` vergleicht genau einen Wert, `IN` mehrere; `>=`/`<=` ersetzt BETWEEN, `LIKE` ersetzt `=`, wenn nur ein Teil des Textes bekannt ist. Für komplexere Muster gibt es reguläre Ausdrücke (`REGEXP`, kein Standard-SQL). Ein führendes `%` (`LIKE '%tisch'`) verhindert oft die Nutzung eines Index.
+
+### Prüfungsfalle
+`LIKE 'S*'` mit Sternchen statt `%` – das sucht den Text „S*“ und liefert nichts. Ebenso beliebt: `BETWEEN` mit vertauschten Grenzen (leeres Ergebnis) und die Annahme, die Obergrenze zähle nicht mit.
+
+### Merksatz
+IN = Liste, BETWEEN = Bereich mit Grenzen, LIKE = Muster mit % und _.
+
+Siehe auch: WHERE · Unterabfrage · NOT IN mit NULL · NULL · Dreiwertige Logik
+Mehr: Deep Dive 1, 1.2 · Deep Dive 19, 5.2 · Deep Dive 19, 5.5
+
 ## Include
 <!-- id: include · quellen: Karte DD15, DD15 5.1 · stand: 2026-10 -->
 
@@ -382,6 +427,34 @@ INNER JOIN zeigt nur Paare – wer keinen Partner hat, verschwindet.
 
 Siehe auch: LEFT JOIN · Fremdschlüssel · Primärschlüssel
 Mehr: Deep Dive 1, 2.2
+
+## INSERT
+<!-- id: insert · quellen: Karte DD1, DD1 2.4, DD1 2.5 · stand: 2026-11 -->
+
+SQL-Anweisung (DML), die neue Zeilen in eine Tabelle einfügt.
+Auch: INSERT INTO
+
+### Erklärung
+Zwei Formen: `INSERT INTO tabelle (spalten) VALUES (werte), …` mit festen Werten und `INSERT INTO tabelle (spalten) SELECT …`, das Zeilen aus einer Abfrage übernimmt (z. B. in eine Archivtabelle). Spaltenliste und Werte müssen nach Anzahl, Reihenfolge und Datentyp zusammenpassen; Text und Datum stehen in einfachen Anführungszeichen. Nicht genannte Spalten erhalten ihren `DEFAULT`-Wert oder NULL – bei einer `NOT NULL`-Spalte ohne Default ist das ein Fehler. Die Datenbank prüft alle Constraints (Primärschlüssel, UNIQUE, CHECK, Fremdschlüssel); wird einer verletzt, wird die **gesamte Anweisung abgelehnt**. Mehrere Zeilen in einer Anweisung (`VALUES (…), (…)`) kennen SQLite und MySQL.
+
+### Beispiel
+```sql
+INSERT INTO kunde (kunden_id, name, ort, registriert_am)
+VALUES (6, 'Krause OHG', 'Bremen', '2026-07-06');
+```
+Danach hat `kunde` 6 Zeilen. Dieselbe Anweisung mit `kunden_id` 1 scheitert (der Primärschlüssel ist schon vergeben). Eine Bestellung für `kunden_id` 99 scheitert am Fremdschlüssel, weil es diesen Kunden nicht gibt.
+
+### Abgrenzung
+INSERT legt **neue** Zeilen an, UPDATE ändert vorhandene, DELETE entfernt Zeilen. `CREATE TABLE` (DDL) erzeugt die Struktur, INSERT füllt sie.
+
+### Prüfungsfalle
+Spaltenliste und `VALUES` passen nicht zusammen (andere Anzahl oder Reihenfolge) oder eine Pflichtspalte fehlt – beides endet im Fehler. Bei Fremdschlüsseln zuerst die Elternzeile einfügen (Kunde, Bestellung), dann die Kindzeilen (Bestellposition).
+
+### Merksatz
+INSERT: so viele Werte wie Spalten, in derselben Reihenfolge.
+
+Siehe auch: UPDATE · DELETE FROM · DML · Primärschlüssel · Fremdschlüssel
+Mehr: Deep Dive 1, 2.4 · Deep Dive 1, 2.5
 
 ## Insertion Sort
 <!-- id: insertion-sort · quellen: Karte DD11, DD11 B7 · stand: 2026-10 -->

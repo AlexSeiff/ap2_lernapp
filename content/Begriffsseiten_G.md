@@ -766,6 +766,46 @@ Eine Entität, ein führender Datensatz.
 Siehe auch: Dublette · Dublettenbereinigung · Master Data Management · Record Linkage · Stammdaten
 Mehr: Deep Dive 9, 4.2 · Deep Dive 9, 5.4
 
+## GRANT / REVOKE (DCL)
+<!-- id: grant-revoke · quellen: Karte DD1, DD1 3.7, DD23 4 · stand: 2026-11 -->
+
+SQL-Befehle der Data Control Language (DCL): GRANT vergibt Rechte an Benutzer oder Rollen, REVOKE entzieht sie wieder.
+Auch: GRANT, REVOKE, DCL, Data Control Language
+
+### Erklärung
+Form wie im Anhang der IHK-Prüfung (MySQL): `GRANT recht ON objekt TO benutzer | rolle [WITH GRANT OPTION]` und `REVOKE recht ON objekt FROM benutzer | rolle`. Rechte sind z. B. `SELECT`, `INSERT`, `UPDATE`, `DELETE`. Das Objekt ist `*.*` (alle Datenbanken), `datenbank.*` (alle Objekte einer Datenbank) oder `datenbank.tabelle`. Eine **Rolle** bündelt Rechte (`CREATE ROLE …`), und `GRANT rolle TO benutzer` – ohne ON – weist sie zu; das setzt RBAC und Least Privilege um. `WITH GRANT OPTION` erlaubt dem Empfänger, das Recht weiterzugeben. Mit einer View begrenzt man zusätzlich Spalten und Zeilen, die ein Recht freigibt.
+
+Dialekt: Hier nur als Konzept – SQLite hat keine Benutzerverwaltung, GRANT und REVOKE lassen sich im SQL-Editor der App nicht ausführen. Auch die Schreibweise der Benutzer (`'name'@'%'`) ist MySQL-spezifisch.
+
+### Beispiel
+```sql
+CREATE USER 'analyst'@'%' IDENTIFIED BY 'Passwort';
+CREATE ROLE controlling;
+GRANT SELECT ON moebelhaus.bestellung TO controlling;
+GRANT SELECT ON moebelhaus.bestellposition TO controlling;
+GRANT controlling TO 'analyst'@'%';
+REVOKE SELECT ON moebelhaus.bestellposition FROM controlling;
+```
+Die Rolle `controlling` darf Bestellungen nur lesen, nicht ändern; der Benutzer `analyst` erbt das über die Rolle. Nach dem REVOKE sieht die Rolle die Positionen nicht mehr.
+
+### Abgrenzung
+| Gruppe | Befehle | Wirkung |
+|---|---|---|
+| DDL | CREATE, ALTER, DROP | Struktur |
+| DML | INSERT, UPDATE, DELETE | Daten |
+| DCL | GRANT, REVOKE | Rechte |
+
+Authentifizierung klärt, wer sich anmeldet (Benutzer, Passwort); GRANT und REVOKE regeln die Autorisierung.
+
+### Prüfungsfalle
+`TO` und `FROM` vertauschen: GRANT gibt **TO**, REVOKE nimmt **FROM**. Außerdem: `WITH GRANT OPTION` vergessen, wenn das Weitergaberecht verlangt ist, und Einzelrechte an Personen statt an eine Rolle vergeben.
+
+### Merksatz
+GRANT gibt TO, REVOKE nimmt FROM.
+
+Siehe auch: Autorisierung · RBAC · Least Privilege · Rollen · View
+Mehr: Deep Dive 1, 3.7 · Deep Dive 23, Teil 4
+
 ## Granularität
 <!-- id: granularitat · quellen: Karte DD8, DD8 4.1 · stand: 2026-10 -->
 

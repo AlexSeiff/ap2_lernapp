@@ -780,6 +780,39 @@ Eindeutig, endlich, ausführbar – aus Sequenz, Verzweigung, Wiederholung.
 Siehe auch: Pseudocode · Struktogramm · Programmablaufplan · Aufwand (Komplexität) · Maximum suchen
 Mehr: Deep Dive 11, Prüfungsrelevanz · Deep Dive 11, B1
 
+## Alias (AS)
+<!-- id: alias · quellen: Karte DD1, DD1 1.4, DD1 2.6 · stand: 2026-11 -->
+
+Namensvergabe in einer SQL-Abfrage: Mit `AS` bekommen Spalten, berechnete Ausdrücke und Tabellen einen kürzeren oder aussagekräftigeren Namen, der nur für diese Abfrage gilt.
+Auch: AS, Spaltenalias, Tabellenalias
+
+### Erklärung
+Ein **Spaltenalias** benennt die Ergebnisspalte (`preis * 1.19 AS brutto`, `COUNT(*) AS anzahl`) – bei berechneten Spalten und Aggregaten sinnvoll, sonst steht der Ausdruck als Überschrift. Namen mit Leerzeichen setzt man in Anführungszeichen. Ein **Tabellenalias** (`FROM kunde AS k` oder kurz `FROM kunde k`) macht JOINs lesbar und ist Pflicht bei einem Self-Join (dieselbe Tabelle zweimal) und bei einer Unterabfrage in FROM (abgeleitete Tabelle, in MySQL ohne Alias ein Fehler). Hat eine Tabelle einen Alias, nutzt man ab dann nur noch ihn (`k.name`, nicht `kunde.name`).
+
+Gültigkeit: Ein Spaltenalias entsteht erst im SELECT. Nach Standard-SQL ist er deshalb in ORDER BY nutzbar, aber nicht in WHERE (MySQL erlaubt ihn zusätzlich in GROUP BY und HAVING). SQLite ist großzügiger und akzeptiert ihn auch in WHERE.
+
+### Beispiel
+```sql
+SELECT k.name, COUNT(*) AS anzahl_bestellungen
+FROM kunde AS k
+JOIN bestellung AS b ON b.kunden_id = k.kunden_id
+GROUP BY k.name
+ORDER BY anzahl_bestellungen DESC, k.name;
+```
+Ergebnis: Huber GmbH 3 · Fischer KG 2 · Schmidt AG 1. Ohne die Tabellenaliase müsste man `kunde.kunden_id` und `bestellung.kunden_id` ausschreiben.
+
+### Abgrenzung
+Ein Alias benennt nur in der Ausgabe um; die Tabelle behält ihre Spaltennamen. Dauerhaft umbenennen kann nur `ALTER TABLE … RENAME` (DDL). Eine View speichert eine ganze Abfrage unter einem Namen, ein Alias nur einen einzelnen Namen.
+
+### Prüfungsfalle
+Den Spaltenalias im WHERE verwenden (`WHERE brutto > 200`) – nach Standard-SQL ein Fehler; in der Prüfung die Rechnung ausschreiben. Ebenso häufig: eine Spalte, die in beiden JOIN-Tabellen vorkommt, ohne Präfix schreiben (`kunden_id` statt `k.kunden_id`) – Fehler „mehrdeutig“.
+
+### Merksatz
+Der Alias entsteht im SELECT – davor kennt ihn niemand.
+
+Siehe auch: SELECT · ORDER BY · INNER JOIN · WHERE · Unterabfrage
+Mehr: Deep Dive 1, 1.4 · Deep Dive 1, 2.6
+
 ## Allgemeinverbindlicherklärung
 <!-- id: allgemeinverbindlicherklarung · quellen: DD13 5.2, Karte DD13 · stand: 2026-10 -->
 
