@@ -248,6 +248,8 @@ Mehr: Deep Dive 16, 4.4
 
 Um die Preissteigerung bereinigter Lohn, der die tatsächliche Kaufkraft des Einkommens zeigt.
 
+Auch: Realeinkommen, Nominallohn, Nominaleinkommen
+
 ### Erklärung
 Der **Nominallohn** ist der ausgezahlte Betrag in Euro. Steigen die Preise (Inflation), kann man sich davon weniger kaufen. Die Veränderung des Reallohns erhält man näherungsweise als Nominallohnsteigerung minus Inflationsrate, exakt über den Quotienten der Wachstumsfaktoren.
 
@@ -403,6 +405,42 @@ Rechte haben kann jeder Mensch, Rechte gestalten erst der Geschäftsfähige.
 
 Siehe auch: Geschäftsfähigkeit · Natürliche Personen · Juristische Person · Taschengeldparagraf
 Mehr: Deep Dive 14, 2.1
+
+## Rechtsformen
+<!-- id: rechtsformen · quellen: Karte DD14, DD14 3.1, DD14 3.2, DD20 4.3 · stand: 2026-11 -->
+
+Rechtliche Organisationsformen eines Unternehmens: Sie bestimmen, wer haftet, wie viel Kapital nötig ist, wer das Unternehmen leitet und wo es eingetragen wird.
+
+### Erklärung
+Grundsätzlich unterscheidet man **Einzelunternehmen**, **Personengesellschaften** (GbR, OHG, KG) und **Kapitalgesellschaften** (GmbH, UG, AG); dazu kommt die Genossenschaft (eG). Bei Personengesellschaften steht die Person im Vordergrund, die Gesellschafter haften regelmäßig persönlich. Kapitalgesellschaften sind juristische Personen: Es haftet das Gesellschaftsvermögen, die Gesellschafter riskieren nur ihre Einlage. Sie entstehen erst mit der Eintragung ins Handelsregister.
+
+| Rechtsform | Mindestkapital | Haftung | Register |
+|---|---|---|---|
+| Einzelunternehmen (e. K.) | keines | Inhaber unbeschränkt, auch privat | Handelsregister A (Kaufmann) |
+| GbR | keines | alle Gesellschafter unbeschränkt | nicht im Handelsregister |
+| OHG | keines | alle Gesellschafter unbeschränkt | Handelsregister A |
+| KG | keines | Komplementär unbeschränkt, Kommanditist bis zur Haftsumme | Handelsregister A |
+| GmbH | 25.000 € Stammkapital | Gesellschaftsvermögen | Handelsregister B |
+| UG (haftungsbeschränkt) | ab 1 € | Gesellschaftsvermögen | Handelsregister B |
+| AG | 50.000 € Grundkapital | Gesellschaftsvermögen | Handelsregister B |
+| eG | Geschäftsanteile der Mitglieder | Genossenschaftsvermögen | Genossenschaftsregister |
+
+Die Beträge gelten nach dem Stand 2026. Bei der GmbH muss das Stammkapital bei der Gründung nicht voll eingezahlt sein; mindestens die Hälfte, also 12.500 €, ist vor der Anmeldung zu leisten. Die **GmbH & Co. KG** ist eine KG, deren Komplementär eine GmbH ist – eine Personengesellschaft (Abteilung A) mit faktisch beschränkter Haftung. Die Wahl der Rechtsform hängt von Haftungsrisiko, Kapitalbedarf, Leitung, Gründungsaufwand und Steuern ab.
+
+### Beispiel
+Drei Gründer wollen ein Möbelhandelsunternehmen starten, haben zusammen 40.000 € und möchten nicht mit dem Privatvermögen haften. Die AG scheidet aus (50.000 € Grundkapital nötig). Die GmbH passt: 25.000 € Stammkapital, davon bei der Gründung mindestens 12.500 € einzuzahlen. Gerät das Unternehmen in Verluste von 100.000 €, haftet in der GmbH das Gesellschaftsvermögen; die Gesellschafter verlieren höchstens ihre Einlagen. Beim Einzelunternehmen wären die vollen 100.000 € eine Forderung gegen das Privatvermögen des Inhabers.
+
+### Abgrenzung
+Die **Personengesellschaft** haftet über die Personen, die **Kapitalgesellschaft** nur mit dem Gesellschaftsvermögen. Handelsregister **A** gilt für Einzelkaufleute und Personengesellschaften, **B** für Kapitalgesellschaften.
+
+### Prüfungsfalle
+Haftung und Kapital vertauschen: Die GmbH ist nicht auf 25.000 € Haftung begrenzt – diese Summe ist das Mindestkapital; und die AG braucht 50.000 €, nicht 25.000 €.
+
+### Merksatz
+Personen haften persönlich, Kapital haftet mit Kapital – A für Personen, B für Kapital.
+
+Siehe auch: Einzelunternehmen · GbR · OHG · KG · GmbH · UG (haftungsbeschränkt) · AG · GmbH & Co. KG · Handelsregister
+Mehr: Deep Dive 14, 3.2 · Deep Dive 14, 3.1 · Deep Dive 20, 4.3
 
 ## Rechtsgrundlagen
 <!-- id: rechtsgrundlagen · quellen: DD13 1.1 · stand: 2026-10 -->
@@ -756,6 +794,46 @@ Gute Daten zur falschen Frage sind schlechte Daten.
 
 Siehe auch: Datenqualität · Vollständigkeit · Korrektheit · Datenminimierung · CRISP-DM
 Mehr: Deep Dive 9, Teil 1
+
+## Rentabilität
+<!-- id: rentabilitat · quellen: Karte DD20, DD20 4.3, DD25 Teil 3 · stand: 2026-11 -->
+
+Verhältnis des Gewinns zum eingesetzten Kapital oder zum Umsatz, ausgedrückt in Prozent – sie zeigt, wie ertragreich ein Unternehmen wirtschaftet.
+
+### Erklärung
+Es gibt drei Kennzahlen, die sich nur in der Bezugsgröße unterscheiden:
+- **Eigenkapitalrentabilität:** $\text{EKR} = \frac{\text{Gewinn}}{\text{Eigenkapital}} \cdot 100\,\%$ – wie hoch verzinst sich das Geld der Eigentümer?
+- **Gesamtkapitalrentabilität:** $\text{GKR} = \frac{\text{Gewinn} + \text{Fremdkapitalzinsen}}{\text{Gesamtkapital}} \cdot 100\,\%$ – wie hoch verzinst sich alles Kapital im Unternehmen? Die Zinsen werden addiert, weil sie das Entgelt für das Fremdkapital sind und den Gewinn schon gemindert haben.
+- **Umsatzrentabilität:** $\text{UR} = \frac{\text{Gewinn}}{\text{Umsatz}} \cdot 100\,\%$ – wie viel Gewinn bleibt von 100 € Umsatz übrig?
+
+Gewinn ist der Jahresüberschuss nach Abzug aller Aufwendungen; Gesamtkapital ist Eigenkapital plus Fremdkapital (Bilanzsumme). Beurteilt wird im Vergleich: mit dem Vorjahr, dem Branchenwert und einer risikoarmen Geldanlage. Solange die Gesamtkapitalrentabilität über dem Fremdkapitalzins liegt, steigert zusätzliches Fremdkapital die Eigenkapitalrentabilität (**Leverage-Effekt**) – allerdings bei höherem Risiko.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH hat im Geschäftsjahr 1.800.000 € Umsatz und 90.000 € Gewinn. Das Eigenkapital beträgt 600.000 €, das Fremdkapital 900.000 € bei 5 % Zinsen, also 45.000 € Zinsen. Das Gesamtkapital ist $600.000 + 900.000 = 1.500.000$ €.
+- $\frac{90.000}{600.000} \cdot 100$ = **15,00 %** Eigenkapitalrentabilität
+- $\frac{90.000 + 45.000}{1.500.000} \cdot 100$ = **9,00 %** Gesamtkapitalrentabilität
+- $\frac{90.000}{1.800.000} \cdot 100$ = **5,00 %** Umsatzrentabilität
+
+Deutung: Von 100 € Umsatz bleiben 5 € Gewinn; die Eigentümer erhalten 15 % auf ihr Kapital. Die Gesamtkapitalrentabilität (9 %) liegt über dem Fremdkapitalzins (5 %) – deshalb ist die Eigenkapitalrentabilität höher als die Gesamtkapitalrentabilität.
+
+### Abgrenzung
+| Kennzahl | Quotient | Aussage |
+|---|---|---|
+| Rentabilität | Gewinn / Kapital oder Umsatz | Wie ertragreich ist der Kapitaleinsatz? |
+| Wirtschaftlichkeit | Ertrag / Aufwand | Wird mit Überschuss gearbeitet (Wert über 1)? |
+| Produktivität | Output / Input (Mengen) | Wie ergiebig ist der Einsatz an Arbeit, Material und Maschinen? |
+| Gewinn | absoluter Betrag in € | Wie viel bleibt übrig – ohne Bezug zum Einsatz? |
+
+Der **Return on Investment** ist die Rentabilität einer einzelnen Investition.
+
+### Prüfungsfalle
+Typische Fehler: bei der Gesamtkapitalrentabilität die Fremdkapitalzinsen vergessen, bei der Eigenkapitalrentabilität den Umsatz statt des Eigenkapitals in den Nenner setzen oder das Ergebnis nicht deuten, obwohl der Operator „Beurteilen“ lautet.
+
+### Merksatz
+Rentabilität = Gewinn durch Einsatz – bei der Gesamtkapitalrentabilität zählen die Zinsen im Zähler mit.
+
+Siehe auch: Return on Investment · Wirtschaftlichkeitsbetrachtung · GmbH
+Mehr: Deep Dive 20, 4.3 · Deep Dive 25, Teil 3
 
 ## Rentenversicherung
 <!-- id: rentenversicherung · quellen: Karte DD14, DD14 1.2 · stand: 2026-10 -->

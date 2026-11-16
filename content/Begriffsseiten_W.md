@@ -691,6 +691,42 @@ Ware hin, Geld zurück – zwischen allen fünf Sektoren.
 Siehe auch: Bruttoinlandsprodukt · Bedürfnis · Geldpolitik
 Mehr: Deep Dive 14, 4.1
 
+## Wirtschaftssektoren
+<!-- id: wirtschaftssektoren · quellen: Karte DD20, DD20 6.3, DD26 Teil 4 · stand: 2026-11 -->
+
+Einteilung der Wirtschaft nach der Art der Tätigkeit in den primären Sektor (Urproduktion), den sekundären Sektor (Verarbeitung) und den tertiären Sektor (Dienstleistungen).
+
+Auch: Drei-Sektoren-Modell, Primärer Sektor, Sekundärer Sektor, Tertiärer Sektor
+
+### Erklärung
+| Sektor | Tätigkeit | Beispiele |
+|---|---|---|
+| primär | Gewinnung von Rohstoffen und Naturprodukten (Urproduktion) | Land- und Forstwirtschaft, Fischerei, Bergbau |
+| sekundär | Be- und Verarbeitung von Rohstoffen zu Gütern | Industrie, Handwerk, Bau |
+| tertiär | Dienstleistungen ohne eigene Gütererzeugung | Handel, Logistik, IT, Banken, Gesundheit |
+
+Der Bergbau wird in der Lehre meist zum primären Sektor gezählt (Rohstoffgewinnung); die amtliche Statistik rechnet ihn zum produzierenden Gewerbe. In Industrieländern verschiebt sich die Beschäftigung im Strukturwandel vom primären über den sekundären zum tertiären Sektor. Zusätzlich unterscheidet man Betriebe nach dem Ziel: **erwerbswirtschaftlich** (Gewinnerzielung) und **gemeinwirtschaftlich** (Bedarfsdeckung, z. B. Stadtwerke).
+
+### Beispiel
+Eine Region hat 20.000 Erwerbstätige: 600 im primären, 5.400 im sekundären und 14.000 im tertiären Sektor.
+- primär: $\frac{600}{20.000} \cdot 100$ = **3,00 %**
+- sekundär: $\frac{5.400}{20.000} \cdot 100$ = **27,00 %**
+- tertiär: $\frac{14.000}{20.000} \cdot 100$ = **70,00 %**
+
+Zuordnung in der Lieferkette der Möbelhaus Nordholz GmbH: Der Forstbetrieb, der das Holz schlägt, ist primär; die Möbelfabrik und die Tischlerei sind sekundär; das Möbelhaus (Handel) und die Spedition sind tertiär.
+
+### Abgrenzung
+Die Sektoren des **Wirtschaftskreislaufs** (Haushalte, Unternehmen, Staat, Banken, Ausland) sind etwas anderes: Sie ordnen Wirtschaftsakteure, nicht Tätigkeitsarten.
+
+### Prüfungsfalle
+Handel und Logistik dem sekundären Sektor zuordnen, weil sie mit Waren zu tun haben – wer nichts herstellt, sondern Leistungen erbringt (auch den Warenhandel), gehört zum tertiären Sektor.
+
+### Merksatz
+Primär holt, sekundär macht, tertiär leistet.
+
+Siehe auch: Arbeitsteilung · Wirtschaftskreislauf · Konjunkturphasen
+Mehr: Deep Dive 20, 6.3 · Deep Dive 26, Teil 4
+
 ## Wohlgeformt
 <!-- id: wohlgeformt · quellen: Karte DD15, DD15 2.3 · stand: 2026-10 -->
 

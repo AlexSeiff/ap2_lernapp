@@ -3,11 +3,11 @@
     "titel": "AP2 Fachbegriffe – Begriffskarten zu allen Deep Dives",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-10-06",
-    "aktualisiert_am": "2026-10-17",
+    "aktualisiert_am": "2026-11-16",
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 816,
+    "anzahl_karten": 824,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -5428,7 +5428,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 13",
       "status": "behandelt",
-      "anzahl_karten": 44,
+      "anzahl_karten": 47,
       "karten": [
         {
           "id": "FB-duale-ausbildung",
@@ -5869,6 +5869,36 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-fortbildung",
+          "frage": "Fortbildung",
+          "antwort": "Berufliche Weiterbildung, die auf dem erlernten Beruf aufbaut: Sie erhält und erweitert Kenntnisse oder führt zum Aufstieg (z. B. Fachwirt, Ausbildereignung); der Beruf bleibt derselbe (§ 1 Abs. 4 BBiG).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-umschulung",
+          "frage": "Umschulung",
+          "antwort": "Berufliche Weiterbildung, die zu einer anderen beruflichen Tätigkeit befähigt (§ 1 Abs. 5 BBiG) – etwa wenn der alte Beruf nicht mehr ausgeübt werden kann; die Agentur für Arbeit fördert sie z. B. mit einem Bildungsgutschein.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-europass",
+          "frage": "Europass",
+          "antwort": "Kostenloser digitaler EU-Dienst, der Qualifikationen und Kompetenzen europaweit verständlich darstellt (Lebenslauf, Mobilitätsnachweis); er ersetzt keine Zeugnisse und ist nicht verpflichtend.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -5878,7 +5908,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 14",
       "status": "behandelt",
-      "anzahl_karten": 108,
+      "anzahl_karten": 113,
       "karten": [
         {
           "id": "FB-sozialversicherung",
@@ -6954,6 +6984,56 @@
           "id": "FB-asynchrone-kommunikation",
           "frage": "Asynchrone Kommunikation",
           "antwort": "Zeitversetzter Austausch (E-Mail, Ticket, Wiki, geteilte Dokumente); geeignet für dokumentierte Aufgaben und Entscheidungen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-rentabilitat",
+          "frage": "Rentabilität",
+          "antwort": "Gewinn im Verhältnis zu Kapital oder Umsatz in Prozent: Eigenkapitalrentabilität = Gewinn / Eigenkapital · 100 %; Gesamtkapitalrentabilität = (Gewinn + Fremdkapitalzinsen) / Gesamtkapital · 100 %; Umsatzrentabilität = Gewinn / Umsatz · 100 %.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-arbeitsteilung",
+          "frage": "Arbeitsteilung",
+          "antwort": "Zerlegung einer Gesamtaufgabe in Teilaufgaben, die verschiedene Mitarbeiter (betrieblich), Unternehmen (überbetrieblich) oder Länder (international) übernehmen – Spezialisierung steigert die Produktivität.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-wirtschaftssektoren",
+          "frage": "Wirtschaftssektoren",
+          "antwort": "Dreiteilung der Wirtschaft: primär (Urproduktion, z. B. Land- und Forstwirtschaft), sekundär (Verarbeitung: Industrie, Handwerk, Bau), tertiär (Dienstleistungen: Handel, Logistik, IT, Banken).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-standortfaktoren",
+          "frage": "Standortfaktoren",
+          "antwort": "Einflüsse auf die Standortwahl: harte Faktoren sind messbar (Miete, Löhne, Verkehrsanbindung, Absatzmarkt, Gewerbesteuer-Hebesatz), weiche wirken indirekt (Image, Wohn- und Freizeitwert, Unternehmerklima).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-rechtsformen",
+          "frage": "Rechtsformen",
+          "antwort": "Organisationsformen eines Unternehmens: Einzelunternehmen, Personengesellschaften (GbR, OHG, KG) und Kapitalgesellschaften (GmbH 25.000 €, UG ab 1 €, AG 50.000 €) unterscheiden sich in Haftung, Kapital und Handelsregister (A bzw. B).",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [

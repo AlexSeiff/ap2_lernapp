@@ -829,7 +829,9 @@ Mehr: Deep Dive 10, 2.3
 Betriebsverfassungsgesetz: regelt Wahl, Aufgaben und Beteiligungsrechte von Betriebsrat und Jugend- und Auszubildendenvertretung.
 
 ### Erklärung
-Wichtige Paragrafen: § 1 (Errichtung ab fünf Wahlberechtigten), §§ 7–9 (Wahlrecht, Wählbarkeit, Größe), § 43 (Betriebsversammlung), § 77 (Betriebsvereinbarung), § 87 (Mitbestimmung in sozialen Angelegenheiten, Nr. 6: technische Überwachungseinrichtungen), § 99 (personelle Einzelmaßnahmen), § 102 (Anhörung vor Kündigung).
+Wichtige Paragrafen: § 1 (Errichtung ab fünf Wahlberechtigten), § 7 (Wahlrecht ab 16 Jahren), § 8 (Wählbarkeit nach sechs Monaten Betriebszugehörigkeit), § 9 (Größe), § 43 (Betriebsversammlung), § 77 (Betriebsvereinbarung), § 87 (Mitbestimmung in sozialen Angelegenheiten), § 99 (personelle Einzelmaßnahmen), § 102 (Anhörung vor Kündigung).
+
+Zu **§ 87 Abs. 1** gehören unter anderem Ordnung des Betriebs (Nr. 1), Beginn und Ende der täglichen Arbeitszeit samt Pausen (Nr. 2), Urlaubsgrundsätze und Urlaubsplan (Nr. 5), technische Überwachungseinrichtungen (Nr. 6), Gesundheitsschutz (Nr. 7), Lohngestaltung (Nr. 10) und Akkord- und Prämiensätze (Nr. 11). Dabei entscheidet der Betriebsrat gleichberechtigt mit; ohne seine Zustimmung ist die Maßnahme unwirksam, bei Streit entscheidet die Einigungsstelle. Wirtschaftliche Angelegenheiten (z. B. Filialgründung, Bau einer Halle) lösen dagegen nur Information und Beratung aus.
 
 ### Beispiel
 Ein neues Dashboard mit Bearbeitungszeiten je Mitarbeiter fällt unter § 87 Abs. 1 Nr. 6 BetrVG – ohne Zustimmung des Betriebsrats darf es nicht eingeführt werden.
@@ -840,7 +842,7 @@ Das BetrVG regelt die Mitbestimmung im Betrieb; die Mitbestimmung im Aufsichtsra
 ### Merksatz
 Betriebsrat-Fragen beantwortet das BetrVG.
 
-Siehe auch: Betriebsrat · Beteiligungsrechte · Mitbestimmung · Unternehmensmitbestimmung
+Siehe auch: Betriebsrat · Beteiligungsrechte · Mitbestimmung · Unternehmensmitbestimmung · Wahlberechtigt · Wählbar
 Mehr: Deep Dive 13, 4.1 · Deep Dive 13, 4.2
 
 ## Bewegungsdaten

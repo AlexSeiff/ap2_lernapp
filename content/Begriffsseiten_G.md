@@ -1036,8 +1036,19 @@ Mehr: Deep Dive 14, 1.4
 
 Gesetzliche Kündigungsfrist von 4 Wochen zum 15. oder zum Ende eines Kalendermonats (§ 622 Abs. 1 BGB).
 
+Auch: Kündigungsfristen, Kündigungsfrist
+
 ### Erklärung
 Die Grundfrist gilt für beide Seiten. Die nach Betriebszugehörigkeit verlängerten Fristen (ab 2 Jahren 1 Monat zum Monatsende bis 7 Monate ab 20 Jahren) gelten gesetzlich **nur für Kündigungen durch den Arbeitgeber** (§ 622 Abs. 2). In einer vereinbarten Probezeit (höchstens 6 Monate) gelten 2 Wochen zu jedem Tag. Maßgeblich für den Fristbeginn ist der **Zugang** der Kündigung.
+
+| Situation (§ 622 BGB) | Frist |
+|---|---|
+| Grundfrist, beide Seiten | 4 Wochen zum 15. oder Monatsende |
+| Probezeit (höchstens 6 Monate) | 2 Wochen, zu jedem Tag |
+| Arbeitgeber, ab 2 / 5 / 8 / 10 Jahren | 1 / 2 / 3 / 4 Monate zum Monatsende |
+| Arbeitgeber, ab 12 / 15 / 20 Jahren | 5 / 6 / 7 Monate zum Monatsende |
+
+Eine **außerordentliche** Kündigung (§ 626 BGB) braucht keine Frist, aber einen wichtigen Grund und muss binnen zwei Wochen nach Kenntnis erklärt werden.
 
 ### Beispiel
 Herr Kaya (6 Jahre im Betrieb), Kündigung geht am Dienstag, 10.03.2026, zu:

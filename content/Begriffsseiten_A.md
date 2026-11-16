@@ -1598,6 +1598,40 @@ Gefährdung beurteilen, nach STOP schützen, unterweisen, dokumentieren.
 Siehe auch: Arbeitgeberpflichten · Gefährdungsbeurteilung · STOP-Prinzip · DGUV · Unterweisung
 Mehr: Deep Dive 14, 5.1
 
+## Arbeitsteilung
+<!-- id: arbeitsteilung · quellen: Karte DD20, DD20 6.2 · stand: 2026-11 -->
+
+Zerlegung einer Gesamtaufgabe in Teilaufgaben, die von verschiedenen Mitarbeitern, Betrieben oder Ländern übernommen werden und sich dadurch spezialisieren.
+
+### Erklärung
+Man unterscheidet vier Ebenen:
+| Ebene | Was wird geteilt | Beispiel |
+|---|---|---|
+| betrieblich (Arbeitszerlegung) | ein Arbeitsprozess innerhalb eines Betriebs auf mehrere Mitarbeiter | Wareneingang prüfen, einlagern, kommissionieren, ausliefern – jeweils eigene Teams |
+| überbetrieblich (zwischenbetrieblich) | Prozessschritte auf andere Unternehmen (Zulieferer, Outsourcing) | Kundendienst an eine Fremdfirma, Beschläge von einem Zulieferer |
+| beruflich (volkswirtschaftlich) | Spezialisierung auf Berufe, Branchen, Regionen | Tischlerin, Fachinformatiker, Spediteur |
+| international | Länder erzeugen, was sie relativ günstig können, und handeln miteinander | Möbel aus weltweiter Produktion |
+
+**Vorteile:** Übung und Spezialwissen machen schneller und fehlerärmer, die Produktivität steigt, die Stückkosten sinken. **Nachteile:** eintönige Arbeit und geringere Motivation, gegenseitige Abhängigkeit (der Ausfall eines Glieds stört die Kette), mehr Abstimmungs- und Transportaufwand. Weil jeder nur einen Teil herstellt, muss getauscht werden – daraus entstehen Märkte und Geld als Tauschmittel.
+
+### Beispiel
+Die Montage eines Regals besteht aus 4 Arbeitsschritten:
+- Jeder von 4 Mitarbeitern baut ein Regal allein und braucht 24 Minuten. In 60 Minuten schafft jeder $\frac{60}{24} = 2{,}5$ Regale, zusammen **10 Regale**.
+- Mit Arbeitsteilung macht jeder nur einen Schritt und wird darin schneller: 5 Minuten je Schritt. Alle 5 Minuten verlässt ein Regal die Linie, in 60 Minuten $\frac{60}{5}$ = **12 Regale**.
+- Steigerung: $\frac{12 - 10}{10} \cdot 100$ = **20 %** mehr Output bei gleicher Mitarbeiterzahl.
+
+### Abgrenzung
+Betriebliche Arbeitsteilung bleibt im Betrieb; wandert ein Schritt zu einer Fremdfirma, ist es **überbetriebliche** Arbeitsteilung. Davon zu unterscheiden sind Unternehmensverbindungen (Fusion, Konzern, Kartell) – sie beschreiben, wie Unternehmen zusammenhängen, nicht, wie Arbeit verteilt wird.
+
+### Prüfungsfalle
+Die Auslagerung an ein anderes Unternehmen als „betriebliche“ Arbeitsteilung einordnen – betrieblich heißt: innerhalb des Betriebs.
+
+### Merksatz
+Betrieblich im Haus, überbetrieblich über die Firmengrenze, international über die Landesgrenze.
+
+Siehe auch: Aufbauorganisation · Ablauforganisation · Wirtschaftssektoren · Wirtschaftskreislauf
+Mehr: Deep Dive 20, 6.2
+
 ## Arbeitsvertrag
 <!-- id: arbeitsvertrag · quellen: Karte DD13, DD13 3.1 · stand: 2026-10 -->
 

@@ -640,6 +640,35 @@ Formkaufmann ist man durch die Form, nicht durch das Geschäft.
 Siehe auch: Istkaufmann · Kannkaufmann · Handelsregister · GmbH · AG
 Mehr: Deep Dive 14, 3.1
 
+## Fortbildung
+<!-- id: fortbildung · quellen: Karte DD33, DD33 Teil 5 · stand: 2026-11 -->
+
+Berufliche Weiterbildung, die auf dem erlernten Beruf aufbaut: Sie erhält und erweitert die beruflichen Kenntnisse oder führt zum beruflichen Aufstieg (§ 1 Abs. 4 BBiG).
+
+### Erklärung
+Man unterscheidet die **Anpassungsfortbildung** (Kenntnisse auffrischen oder an neue Technik anpassen, z. B. eine neue Programmiersprache oder eine Datenschutzschulung) und die **Aufstiegsfortbildung** (höhere Qualifikation mit Kammerprüfung, z. B. Fachwirt, Meister oder die Ausbildereignung nach AEVO). Der Beruf bleibt derselbe; die Fortbildung setzt in der Regel eine abgeschlossene Ausbildung oder Berufserfahrung voraus. Gefördert wird sie unter anderem durch das Aufstiegs-BAföG, durch Zuschüsse des Arbeitgebers oder durch einen Bildungsgutschein der Agentur für Arbeit.
+
+### Beispiel
+Lea Sommer hat bei der Möbelhaus Nordholz GmbH die Ausbildung zur Fachinformatikerin abgeschlossen und arbeitet als Anwendungsentwicklerin. Nach zwei Berufsjahren legt sie die Ausbildereignungsprüfung ab, um selbst ausbilden zu dürfen. Das ist eine Fortbildung: Sie bleibt in ihrem Beruf und erwirbt eine zusätzliche Befähigung. Fortbildungen sind in der Regel freiwillig; die Kosten tragen je nach Vereinbarung Betrieb oder Beschäftigte.
+
+### Abgrenzung
+| | Fortbildung | Umschulung |
+|---|---|---|
+| Ziel | im gleichen Beruf erhalten, erweitern, aufsteigen | zu einer anderen beruflichen Tätigkeit befähigen |
+| Beispiel | Fachwirt, Ausbildereignung, neues Framework | Lageristin wird Fachinformatikerin |
+| Rechtsgrundlage | § 1 Abs. 4 BBiG | § 1 Abs. 5 BBiG |
+
+Beide gehören zur beruflichen **Weiterbildung** (Oberbegriff). Die Erstausbildung dagegen ist die Berufsausbildung auf Grundlage des Ausbildungsvertrags.
+
+### Prüfungsfalle
+Eine Qualifizierung für einen anderen Beruf als Fortbildung bezeichnen – wer zu einem anderen Beruf befähigt wird, macht eine Umschulung.
+
+### Merksatz
+Fortbildung: gleicher Beruf, mehr Können – Umschulung: neuer Beruf.
+
+Siehe auch: Umschulung · Duale Ausbildung · BBiG · IHK · Europass
+Mehr: Deep Dive 33, Teil 5
+
 ## Freier Puffer
 <!-- id: freier-puffer · quellen: Karte DD12, DD12 3.2 · stand: 2026-10 -->
 
