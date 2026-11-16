@@ -1557,6 +1557,33 @@ Discovery entdeckt, wie es wirklich läuft.
 Siehe auch: Process Mining · Event Log · Conformance Checking · Enhancement · Case ID
 Mehr: Deep Dive 5, 5.2
 
+## Diversity Management
+<!-- id: diversity-management · quellen: Karte DD26, DD26 Teil 5, DD32 Teil 5 · stand: 2026-11 -->
+
+Unternehmensstrategie, die die Vielfalt der Beschäftigten (z. B. Alter, Geschlecht, Herkunft, Religion, Behinderung, sexuelle Orientierung) bewusst wahrnimmt, wertschätzt und als Potenzial für den Unternehmenserfolg nutzt.
+
+Auch: Diversity, Vielfaltsmanagement
+
+### Erklärung
+Typische Vielfaltsdimensionen: Alter, ethnische Herkunft und Nationalität, Geschlecht und geschlechtliche Identität, körperliche und geistige Fähigkeiten, Religion und Weltanschauung, sexuelle Orientierung, soziale Herkunft. Das Ziel ist doppelt: **Benachteiligung vermeiden** und **Unterschiede nutzen**. Gemischte Teams bringen mehr Perspektiven, erreichen vielfältigere Kundengruppen, erleichtern die Gewinnung von Fachkräften und stärken die Arbeitgeberattraktivität.
+
+Typische Maßnahmen: merkmalsneutrale Stellenausschreibungen, Bewerbungsverfahren nach Qualifikation, barrierefreie Arbeitsplätze, flexible Arbeitszeitmodelle, Mentoring, Schulungen gegen Vorurteile. Möglich sind Spannungen und Mehraufwand; Quoten sind nur ein mögliches Instrument, nicht das Konzept selbst.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH schreibt eine Stelle in der IT ohne Alters- und Geschlechtshinweise aus, wählt nur nach Qualifikation, richtet einen höhenverstellbaren Arbeitsplatz für eine Mitarbeiterin im Rollstuhl ein und bietet Teilzeit für Eltern an. So verbindet sie die Rechtspflicht des AGG mit dem freiwilligen Ziel, aus der Vielfalt Nutzen zu ziehen.
+
+### Abgrenzung
+Das **AGG** ist zwingendes Recht und verbietet Benachteiligung wegen sechs Merkmalen; Diversity Management geht darüber hinaus und ist freiwillig. Die AGG-Merkmale umfassen nicht Schulabschluss, Berufserfahrung oder Qualifikation – danach darf ausgewählt werden.
+
+### Prüfungsfalle
+Diversity Management als Auswahl nach Herkunft, als Streben nach möglichst einheitlichen Teams oder als Personalabbau missverstehen. Richtig: Vielfalt als Potenzial nutzen und Benachteiligung vermeiden.
+
+### Merksatz
+Vielfalt nutzen statt nur Benachteiligung verbieten.
+
+Siehe auch: AGG · Compliance · Arbeitgeberpflichten · Nachhaltigkeit
+Mehr: Deep Dive 26, Teil 5 · Deep Dive 32, Teil 5 · Deep Dive 13, 6.1
+
 ## DMAIC
 <!-- id: dmaic · quellen: Karte DD5, DD5 6.3 · stand: 2026-10 -->
 

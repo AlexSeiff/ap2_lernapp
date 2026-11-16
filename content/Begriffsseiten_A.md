@@ -1535,12 +1535,21 @@ Siehe auch: Grenzwertanalyse · Black-Box-Test · Testfall · Testdesign
 Mehr: Deep Dive 16, 2.2 · Deep Dive 16, 2.3
 
 ## Arbeitgeberpflichten
-<!-- id: arbeitgeberpflichten · quellen: DD14 5.1 · stand: 2026-10 -->
+<!-- id: arbeitgeberpflichten · quellen: DD14 5.1, DD20 5.1 · stand: 2026-11 -->
 
 Pflichten des Arbeitgebers im Arbeitsschutz: Gefährdungsbeurteilung, Schutzmaßnahmen, Wirksamkeitskontrolle, Dokumentation, Unterweisung sowie Bestellung von Fachkraft für Arbeitssicherheit und Betriebsarzt.
 
 ### Erklärung
 Grundlage ist das Arbeitsschutzgesetz: Der Arbeitgeber muss die Gefährdungen jedes Arbeitsplatzes beurteilen und dokumentieren (§§ 5, 6 ArbSchG), daraus Maßnahmen nach dem **STOP-Prinzip** ableiten, deren Wirksamkeit prüfen und die Beschäftigten unterweisen (§ 12 ArbSchG) – bei Einstellung, bei Veränderungen und mindestens jährlich, Jugendliche mindestens halbjährlich. Nach dem Arbeitssicherheitsgesetz bestellt er eine **Fachkraft für Arbeitssicherheit** und einen **Betriebsarzt**. Die Kosten trägt er allein.
+
+**Erste Hilfe und Beauftragte (Stand 2026):**
+
+| Rolle | Aufgabe und Regel |
+|---|---|
+| **Erste Hilfe** (§ 10 ArbSchG) | Der Arbeitgeber organisiert Erste Hilfe, Brandbekämpfung und Evakuierung, stellt Verbandmaterial, Meldeeinrichtungen und Rettungswege bereit und benennt geeignete Beschäftigte. Nach DGUV Vorschrift 1 (§ 26): bei 2 bis 20 anwesenden Versicherten mindestens **1 Ersthelfer**, darüber in Verwaltungs- und Handelsbetrieben **5 %**, in sonstigen Betrieben **10 %** der anwesenden Versicherten. Ausbildung mit 9 Unterrichtseinheiten bei einer ermächtigten Stelle, Auffrischung in der Regel alle 2 Jahre. Ersthelfer sind bei der Hilfeleistung gesetzlich unfallversichert |
+| **Fachkraft für Arbeitssicherheit** und **Betriebsarzt** (ASiG) | beraten und unterstützen den Arbeitgeber, tragen aber nicht die Verantwortung |
+| **Sicherheitsbeauftragter** (§ 22 SGB VII) | Beschäftigter, der den Arbeitgeber **nebenbei** unterstützt: achtet darauf, dass Schutzeinrichtungen und persönliche Schutzausrüstung vorhanden sind und richtig benutzt werden, und weist auf Gefahren hin. Er hat **kein Weisungsrecht**, trägt **keine rechtliche Verantwortung** und darf wegen der Aufgabe nicht benachteiligt werden; der Betriebsrat wird an der Bestellung beteiligt. Pflicht seit der Änderung vom 29.05.2026: ab **50 Beschäftigten**; bei mehr als 20 und weniger als 50 nur bei besonderer Gefährdung; unter 250 Beschäftigten ohne besondere Gefahr genügt einer. Frühere Fassung und ältere Klausuren: Pflicht schon bei mehr als 20 Beschäftigten |
+| **Arbeitsschutzausschuss** (§ 11 ASiG) | bei mehr als 20 Beschäftigten; Arbeitgeber, zwei Betriebsratsmitglieder, Betriebsarzt, Fachkraft und Sicherheitsbeauftragte tagen mindestens **vierteljährlich** |
 
 ### Beispiel
 Für die Büroarbeitsplätze der Datenanalyse beurteilt das Möbelhaus Bildschirm, Licht, Stuhl und Arbeitszeiten, beschafft höhenverstellbare Tische, regelt Pausen und Tätigkeitswechsel und bietet eine Vorsorge für die Augen an.
@@ -1549,13 +1558,13 @@ Für die Büroarbeitsplätze der Datenanalyse beurteilt das Möbelhaus Bildschir
 Die arbeitsvertraglichen Pflichten (Vergütung, Beschäftigung, Zeugnis) stehen im Arbeitsvertrag; die **Fürsorgepflicht** umfasst den Arbeitsschutz als einen Teil.
 
 ### Prüfungsfalle
-Persönliche Schutzausrüstung als erste Maßnahme nennen – nach STOP ist sie das letzte Mittel.
+Persönliche Schutzausrüstung als erste Maßnahme nennen – nach STOP ist sie das letzte Mittel. Auch: den Sicherheitsbeauftragten für verantwortlich oder weisungsbefugt halten – die Verantwortung bleibt beim Arbeitgeber.
 
 ### Merksatz
 Beurteilen, schützen, prüfen, dokumentieren, unterweisen.
 
-Siehe auch: Arbeitsschutz · Gefährdungsbeurteilung · STOP-Prinzip · Unterweisung · Bildschirmarbeit
-Mehr: Deep Dive 14, 5.1
+Siehe auch: Arbeitsschutz · Gefährdungsbeurteilung · STOP-Prinzip · Unterweisung · Bildschirmarbeit · Gewerbeaufsichtsamt
+Mehr: Deep Dive 14, 5.1 · Deep Dive 20, 5.1
 
 ## Arbeitslosengeld I
 <!-- id: arbeitslosengeld-i · quellen: Karte DD14, DD14 1.4 · stand: 2026-10 -->

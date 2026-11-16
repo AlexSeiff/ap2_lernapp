@@ -407,6 +407,43 @@ Ein Ereignis darf nie beide Standorte treffen.
 Siehe auch: Hochverfügbarkeit · Verfügbarkeitsklassen · Single Point of Failure · Disaster Recovery · 3-2-1-Regel
 Mehr: Deep Dive 16, 4.5
 
+## Gerichtszuständigkeit
+<!-- id: gerichtszustandigkeit · quellen: Karte DD20, DD20 3.2, DD32 Teil 3 · stand: 2026-11 -->
+
+Welches Gericht für einen Streit zuständig ist, richtet sich nach dem Rechtsgebiet: Arbeitsrecht, Sozialrecht, Verwaltungsrecht, Steuerrecht oder allgemeines Zivilrecht haben jeweils eigene Gerichte.
+
+Auch: Arbeitsgericht, Sozialgericht, Verwaltungsgericht, Amtsgericht, Landgericht, Familiengericht
+
+### Erklärung
+| Gericht | zuständig für | Beispiele |
+|---|---|---|
+| **Arbeitsgericht** | Streit zwischen Arbeitgeber und Arbeitnehmer und aus Tarif- und Betriebsverfassungsrecht | Kündigungsschutzklage, Lohn, Zeugnis, Urlaub |
+| **Sozialgericht** | Streit mit Trägern der Sozialversicherung und der Agentur für Arbeit, **nach erfolglosem Widerspruch** | Bescheid der Berufsgenossenschaft, Krankenkasse, Rentenversicherung |
+| **Verwaltungsgericht** | Streit mit Behörden im öffentlichen Recht | Anordnung der Gewerbeaufsicht, Baugenehmigung |
+| **Finanzgericht** | Steuersachen nach erfolglosem Einspruch | Steuerbescheid |
+| **Amtsgericht** | Zivilsachen bis 5.000 € Streitwert, Wohnraummiete, Familiengericht (Scheidung, Sorgerecht, Unterhalt), Handelsregister, Mahnverfahren, Insolvenz | Nachbarschaftsstreit, Mietstreit |
+| **Landgericht** | Zivilsachen über 5.000 € Streitwert (Anwaltszwang) | Kaufpreisklage über 12.000 € |
+
+Arbeits- und Sozialgerichte haben den Instanzenzug Arbeitsgericht – Landesarbeitsgericht – Bundesarbeitsgericht bzw. Sozialgericht – Landessozialgericht – Bundessozialgericht. Im Arbeitsgerichtsverfahren erster Instanz trägt jede Seite ihre Anwaltskosten selbst (§ 12a ArbGG). Bei Streit im Ausbildungsverhältnis ist zunächst der **Schlichtungsausschuss der IHK** anzurufen, falls die Kammer einen eingerichtet hat (§ 111 ArbGG). Beträge Stand 2026.
+
+### Beispiel
+1. Der Möbelhaus Nordholz GmbH wird eine Kündigung ausgesprochen: Klage binnen drei Wochen beim **Arbeitsgericht**.
+2. Die Berufsgenossenschaft verweigert nach erfolglosem Widerspruch die Anerkennung eines Wegeunfalls: **Sozialgericht**.
+3. Die Gewerbeaufsicht ordnet einen Umbau an, den der Betrieb für unzumutbar hält: **Verwaltungsgericht**.
+4. Ein Lieferant zahlt 12.000 € Kaufpreis nicht: **Landgericht** (nach Mahnverfahren beim zentralen Mahngericht, das beim Amtsgericht angesiedelt ist).
+
+### Abgrenzung
+Arbeitsgericht (Streit mit dem Arbeitgeber) und Sozialgericht (Streit mit der Versicherung oder Behörde der Sozialversicherung) werden gern vertauscht; das **Familiengericht** ist eine Abteilung des Amtsgerichts und hat nichts mit dem Arbeitsrecht zu tun.
+
+### Prüfungsfalle
+Streit mit der Berufsgenossenschaft oder Krankenkasse vor das Arbeitsgericht bringen, oder ohne Widerspruch klagen.
+
+### Merksatz
+Arbeit: Arbeitsgericht – Versicherung: Sozialgericht – Behörde: Verwaltungsgericht – Zivil: Amts- oder Landgericht (5.000 €).
+
+Siehe auch: Widerspruchsverfahren · Kündigungsschutzklage · Gewerbeaufsichtsamt · Berufsgenossenschaft · Handelsregister · Mahnverfahren
+Mehr: Deep Dive 20, 3.2 · Deep Dive 13, 1.4
+
 ## Geringverdienergrenze
 <!-- id: geringverdienergrenze · quellen: Karte DD14, DD14 1.3 · stand: 2026-10 -->
 
@@ -580,6 +617,37 @@ Erst nacherfüllen, dann zurücktreten oder mindern.
 Siehe auch: Garantie · Mangelhafte Lieferung · Sachmangel · Beweislastumkehr beim Verbrauchsgüterkauf · Verjährung
 Mehr: Deep Dive 14, 2.5
 
+## Gewerbeaufsichtsamt
+<!-- id: gewerbeaufsichtsamt · quellen: Karte DD14, DD14 5.1, DD20 3.2, DD33 Teil 1 · stand: 2026-11 -->
+
+Landesbehörde, die überwacht, ob Betriebe die staatlichen Arbeitsschutzvorschriften einhalten, und sie dabei berät – die staatliche Säule des dualen Arbeitsschutzsystems.
+
+Auch: Gewerbeaufsicht, Arbeitsschutzbehörde, Amt für Arbeitsschutz
+
+### Erklärung
+Zuständig sind die **Länder**; der Name wechselt (Gewerbeaufsichtsamt, Amt oder Landesamt für Arbeitsschutz, Regierungspräsidium). Sie überwacht ArbSchG, Arbeitszeitgesetz, JArbSchG, Mutterschutzgesetz, Arbeitsstättenverordnung und Gefahrstoffrecht. Sie darf Betriebe auch unangemeldet besichtigen, Auskünfte verlangen, **Anordnungen** erlassen (§ 22 ArbSchG) und bei Verstößen Bußgelder verhängen oder Strafverfolgung anstoßen. Weitere Aufgaben: Ausnahmegenehmigungen (z. B. Sonntagsarbeit), Meldung von Schwangerschaften durch den Arbeitgeber (§ 27 MuSchG) und die Entscheidung, ob ausnahmsweise eine Kündigung einer Schwangeren zulässig ist (§ 17 Abs. 2 MuSchG; zuständig ist die von der obersten Landesbehörde bestimmte Stelle).
+
+| | Gewerbeaufsicht | Berufsgenossenschaft |
+|---|---|---|
+| Rechtsform | staatliche Landesbehörde | selbstverwaltete Körperschaft der Unfallversicherung |
+| Grundlage | staatliche Gesetze und Verordnungen | Unfallverhütungsvorschriften (DGUV) |
+| Zusätzlich | Bußgelder, Anordnungen | Versicherungsleistungen, Beratung |
+
+### Beispiel
+Eine Beschäftigte meldet, dass im Lager der Möbelhaus Nordholz GmbH ein Fluchtweg zugestellt ist. Die Gewerbeaufsicht besichtigt, ordnet die Räumung mit Frist an und kann bei Verstoß ein Bußgeld verhängen. Die Berufsgenossenschaft berät unabhängig davon zur DGUV Vorschrift 1.
+
+### Abgrenzung
+Das **Gewerbeamt** (Ordnungsamt) nimmt Gewerbeanmeldungen entgegen, hat mit dem Arbeitsschutz aber nichts zu tun. Die **Unfallanzeige** geht an die Berufsgenossenschaft, nicht an die Gewerbeaufsicht. Gegen Bescheide der Gewerbeaufsicht ist das **Verwaltungsgericht** zuständig.
+
+### Prüfungsfalle
+Die Gewerbeaufsicht für den Träger der Unfallversicherung halten oder umgekehrt die Berufsgenossenschaft für eine staatliche Behörde.
+
+### Merksatz
+Gewerbeaufsicht kontrolliert das staatliche Arbeitsschutzrecht, die BG versichert und verhütet nach eigenen Vorschriften.
+
+Siehe auch: Duales System · Arbeitsschutz · Berufsgenossenschaft · DGUV · Arbeitgeberpflichten · Mutterschutz · Gerichtszuständigkeit
+Mehr: Deep Dive 14, 5.1 · Deep Dive 20, 3.2
+
 ## Gewicht
 <!-- id: gewicht · quellen: Karte DD6, DD6 8.2, DD6 9.2 · stand: 2026-10 -->
 
@@ -696,6 +764,31 @@ Glätten zeigt den Trend, verschluckt aber den Rand.
 
 Siehe auch: Zeitreihe · Arithmetisches Mittel · Regression · Liniendiagramm
 Mehr: Deep Dive 4, 3.1
+
+## Globalisierung
+<!-- id: globalisierung · quellen: Karte DD20, DD20 6.4, DD26 Teil 4 · stand: 2026-11 -->
+
+Zunehmende weltweite Verflechtung von Märkten, Unternehmen, Kapital und Informationen, die vor allem durch Handelsliberalisierung und moderne Technik vorangetrieben wird.
+
+### Erklärung
+**Fördernde Faktoren:** Abbau von Zöllen und Handelshemmnissen, Freihandelsabkommen, Liberalisierung von Waren- und Kapitalverkehr, billiger Transport (Container), Internet und Kommunikationstechnik, Standardisierung, Niederlassungen im Ausland. **Hemmende Faktoren:** Zölle, Importquoten, Handelsbeschränkungen, Rückverlagerung der Produktion (Reshoring).
+
+**Folgen:** Mehr internationale Arbeitsteilung und Spezialisierung, größere Auswahl und oft niedrigere Preise, neue Absatzmärkte und Exportchancen; zugleich schärferer Wettbewerb, Verlagerung von Arbeitsplätzen, **Abhängigkeit von Lieferketten**, Umweltbelastung durch Transporte und Wirkung von Krisen weltweit.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH bezieht Beschläge aus Asien, weil sie dort günstiger sind. Wird ein Freihandelsabkommen geschlossen oder werden Zölle abgebaut, sinken die Einkaufskosten (Globalisierung gefördert). Führt die Politik Importquoten ein, steigen die Kosten, und das Unternehmen prüft, Beschläge wieder in Europa zu beziehen.
+
+### Abgrenzung
+**Internationale Arbeitsteilung** ist eine Folge, die Globalisierung der übergreifende Prozess. **Digitalisierung** beschleunigt sie, ist aber ein eigener Wandel. Der **Außenhandel** zwischen Staaten gab es schon vor der heutigen Globalisierung.
+
+### Prüfungsfalle
+Maßnahmen verwechseln, die Globalisierung hemmen (Zölle, Quoten, Importbeschränkungen) und fördern (Zollabbau, Freihandel, Liberalisierung).
+
+### Merksatz
+Zölle und Quoten bremsen die Globalisierung, Freihandel und Technik treiben sie an.
+
+Siehe auch: Arbeitsteilung · Spezialisierung · Wirtschaftssektoren · Nachhaltigkeit
+Mehr: Deep Dive 20, 6.4 · Deep Dive 26, Teil 4
 
 ## GmbH
 <!-- id: gmbh · quellen: Karte DD14, DD14 3.2 · stand: 2026-10 -->
