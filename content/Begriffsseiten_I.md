@@ -691,6 +691,48 @@ Intervall: Abstände ja, Verhältnisse nein – weil die Null nur vereinbart ist
 Siehe auch: Skalenniveau · Verhältnisskala · Ordinalskala · Nominalskala
 Mehr: Deep Dive 3, Teil 1
 
+## IoT (Internet of Things)
+<!-- id: iot · quellen: Karte DD22, DD22 4.3, DD24 D4 · stand: 2026-11 -->
+
+Vernetzung physischer Geräte mit Sensoren, die selbstständig Messwerte über ein Netz an eine zentrale Plattform senden und dort ausgewertet oder von dort gesteuert werden.
+
+Auch: Internet der Dinge
+
+### Erklärung
+Ein IoT-System besteht aus vier Teilen, die in Prüfungen (oft in einem englischen Text) abgefragt werden:
+
+| Ebene | Aufgabe | Beispiele |
+|---|---|---|
+| **Gerät** (device level) | Messen und Senden | Sensoren, Steuerung, Kommunikationsmodul |
+| **Vernetzung** (connectivity) | Daten transportieren | WLAN, Mobilfunk (LTE-M, NB-IoT), Bluetooth Low Energy zu einem Gateway, LPWAN |
+| **Plattform** (service platform) | Daten empfangen, speichern, auswerten | Echtzeit-Alarme, Auswertung über Monate, vorausschauende Wartung (Predictive Maintenance) |
+| **Integration** | Ergebnis in die Abläufe bringen | Alarm direkt in die Einsatzplanung und auf das Tablet des Technikers |
+
+**Sicherheit** gehört in jede Ebene: Verschlüsselung der Übertragung, Authentifizierung jedes Geräts, signierte Firmware-Updates. Ungesicherte IoT-Geräte werden gekapert und als Botnetz für DDoS-Angriffe missbraucht.
+
+**Recht in Deutschland:** Die DSGVO gilt, sobald Daten einer Person zuzuordnen sind (bei Pflegebetten sogar Gesundheitsdaten nach Art. 9); mit dem Plattformbetreiber braucht man einen Vertrag zur Auftragsverarbeitung. Bei Medizinprodukten kommt das Medizinprodukterecht dazu.
+
+**Vorteile:** Störungen werden erkannt, bevor der Kunde anruft; Wartung nach Zustand statt nach Kalender; Daten in Echtzeit. **Nachteile:** hohe Investition, Datenschutz- und Sicherheitsaufwand, Abhängigkeit von Netz und Plattformanbieter.
+
+### Beispiel
+Im Holzlager der Nordholz Manufaktur messen sechs Sensoren (je Lagerbox einer) alle 15 Minuten Temperatur und Luftfeuchte. Messungen je Tag: $6 \cdot 24 \cdot 4$ = **576**. Die Sensoren senden per Funk an ein Gateway, das die Werte in eine Cloud-Datenbank überträgt; die Plattform schlägt Alarm, wenn die Holzfeuchte den Sollbereich verlässt.
+
+### Abgrenzung
+| | IoT-Sensor | MDE-Gerät |
+|---|---|---|
+| Bedienung | läuft selbstständig | wird von einer Person bedient |
+| Daten | laufende Messwerte | Scans und Eingaben |
+| Beispiel | Klimasensor im Lager | Handscanner an der Warenausgabe |
+
+### Prüfungsfalle
+Nur Technik aufzählen und Recht und Sicherheit vergessen – gerade bei IoT-Fragen sind Datenschutz (DSGVO) und Geräteabsicherung der erwartete Zusatzpunkt. Auch bei „Vernetzung“ nicht nur „Internet“ schreiben, sondern eine konkrete Technologie nennen.
+
+### Merksatz
+Sensor – Funk – Plattform – Auswertung, und Sicherheit auf jeder Stufe.
+
+Siehe auch: MDE-Geräte · Gateway · Cloud-Speicherung · DSGVO · Auftragsverarbeiter · Zeitreihe
+Mehr: Deep Dive 22, 4.3
+
 ## Ishikawa-Diagramm
 <!-- id: ishikawa-diagramm · quellen: Karte DD5, DD5 4.1, DD17 1.6 · stand: 2026-10 -->
 

@@ -521,10 +521,26 @@ Mehr: Deep Dive 10, Teil 1
 Einzelnes künstliches Neuron mit Stufenfunktion, das seine Gewichte mit der Perzeptron-Lernregel aus gelabelten Beispielen lernt (Rosenblatt 1958).
 
 ### Erklärung
-Das Perzeptron berechnet z = Σ wᵢ · xᵢ + b und gibt 1 aus, wenn z ≥ 0 ist, sonst 0. Es lernt überwacht: Ist die Ausgabe falsch, werden Gewichte und Bias nach der Regel wᵢ neu = wᵢ + η · (t − y) · xᵢ angepasst. Ein Durchlauf durch alle Fälle ist eine Epoche; gelernt wird, bis eine Epoche fehlerfrei bleibt. Weil es nur eine Trenngerade zieht, lernt es nur linear trennbare Klassen – AND und OR, aber nicht XOR.
+Das Perzeptron besteht aus sechs Bausteinen, die in Prüfungen oft an einer Skizze zugeordnet werden:
+
+| Baustein | Aufgabe |
+|---|---|
+| **Eingänge** x₁ … xₙ | Messwerte des Falls |
+| **Gewichte** w₁ … wₙ | Bedeutung jedes Eingangs; werden gelernt |
+| **Bias** b | verschiebt die Schwelle; in der Skizze oft als konstanter Eingang „1“ mit eigenem Gewicht w₀ |
+| **Nettoeingabefunktion** | bildet die gewichtete Summe z = Σ wᵢ · xᵢ + b |
+| **Sprungfunktion** (Aktivierung) | macht aus z die Klasse: 1, wenn z ≥ 0 ist, sonst 0 |
+| **Ausgang** y | vorhergesagte Klasse |
+
+Es lernt überwacht: Die Ausgabe y wird mit dem bekannten Label t verglichen. Ist sie falsch, wird der Fehler t − y zurückgeführt und Gewichte und Bias nach der Regel wᵢ neu = wᵢ + η · (t − y) · xᵢ angepasst. Ein Durchlauf durch alle Fälle ist eine Epoche; gelernt wird, bis eine Epoche fehlerfrei bleibt. Weil es nur eine Trenngerade zieht, lernt es nur linear trennbare Klassen – AND und OR, aber nicht XOR. Der Bias ist nötig, weil die Trenngerade sonst immer durch den Nullpunkt liefe.
 
 ### Beispiel
-AND mit Start w₁ = w₂ = 0,5, b = −0,1 und η = 0,2: Der Fall (0|1) ergibt z = 0,4 und y = 1, verlangt ist 0. Also w₂ = 0,3 und b = −0,3. Nach einem weiteren Fehler bei (1|0) ist w₁ = 0,3, b = −0,5, und die zweite Epoche bleibt fehlerfrei.
+**Klassifizieren:** Der Nordholz Eventservice beurteilt MDE-Akkus mit den Messwerten m1 (Innenwiderstand) und m2 (Selbstentladung). Das Perzeptron hat b = 3,5; w₁ = −0,4 und w₂ = −1,0 (1 = gut, 0 = schlecht).
+
+- Akku A mit m1 = 4,5 und m2 = 1,2: $z = 3{,}5 + (-0{,}4) \cdot 4{,}5 + (-1{,}0) \cdot 1{,}2 = 3{,}5 - 1{,}8 - 1{,}2$ = **0,5**. Sprungfunktion: 0,5 ≥ 0 → y = 1, gut.
+- Akku B mit m1 = 5,5 und m2 = 3,6: $z = 3{,}5 - 2{,}2 - 3{,}6$ = **−2,3**. Sprungfunktion: −2,3 < 0 → y = 0, schlecht.
+
+**Lernen** (AND mit Start w₁ = w₂ = 0,5, b = −0,1 und η = 0,2): Der Fall (0|1) ergibt z = 0,4 und y = 1, verlangt ist 0. Also w₂ = 0,3 und b = −0,3. Nach einem weiteren Fehler bei (1|0) ist w₁ = 0,3, b = −0,5, und die zweite Epoche bleibt fehlerfrei.
 
 ### Abgrenzung
 | | Perzeptron | Mehrschichtiges Perzeptron |
@@ -534,11 +550,48 @@ AND mit Start w₁ = w₂ = 0,5, b = −0,1 und η = 0,2: Der Fall (0|1) ergibt 
 | Training | Perzeptron-Lernregel | Backpropagation |
 | lernt XOR | nein | ja |
 
+### Prüfungsfalle
+**Nettoeingabefunktion** (bildet die Summe) und **Sprungfunktion** (macht daraus 0 oder 1) verwechseln – ebenso **Bias** (eine Zahl, die die Schwelle verschiebt) und **Gewichte** (bewerten die Eingänge). Beim Lernalgorithmus als Struktogramm: Der Epochenzähler gehört außerhalb der inneren Schleife über die Trainingsfälle, der Fehler wird erst nach dem Lesen von Messwerten und Label gebildet.
+
 ### Merksatz
 Ein Perzeptron zieht genau eine Gerade.
 
-Siehe auch: Neuron · Perzeptron-Lernregel · Lineare Trennbarkeit · Mehrschichtiges Perzeptron
+Siehe auch: Neuron · Perzeptron-Lernregel · Stufenfunktion · Bias · Lineare Trennbarkeit · Mehrschichtiges Perzeptron
 Mehr: Deep Dive 6, 9.4 · Deep Dive 6, 9.5
+
+## Perzeptron-Lernregel
+<!-- id: perzeptron-lernregel · quellen: Karte DD6, DD6 9.4, DD6 9.5, DD31 2.3 · stand: 2026-11 -->
+
+Regel, mit der ein Perzeptron aus gelabelten Beispielen lernt: Bei falscher Ausgabe werden Gewichte und Bias um Lernrate mal Fehler mal Eingabe verändert, bei richtiger Ausgabe bleibt alles gleich.
+
+### Erklärung
+Für jeden Trainingsfall mit dem Sollwert t (Label 0 oder 1) wird die Ausgabe y berechnet. Dann gilt:
+
+$e = t - y$  ·  $w_i^{neu} = w_i + \eta \cdot e \cdot x_i$  ·  $b^{neu} = b + \eta \cdot e$
+
+Dabei ist e der **Fehler** (Soll minus Ist, also −1, 0 oder +1), η die **Lernrate** (Schrittweite), xᵢ der Eingabewert und b der **Bias** (in Klausuren oft als Gewicht w₀ eines konstanten Eingangs 1 geschrieben; dann gilt für ihn dieselbe Formel mit Eingabe 1). Ist e = 0, ändert sich nichts; eine Eingabe mit xᵢ = 0 ändert ihr Gewicht nicht. Ein Durchlauf durch alle Trainingsfälle ist eine **Epoche**; trainiert wird, bis eine Epoche ohne Fehler bleibt oder eine Höchstzahl an Epochen erreicht ist. Bei linear trennbaren Daten ist das nach endlich vielen Schritten der Fall.
+
+### Beispiel
+Perzeptron zur Akkubeurteilung mit b = 3,5; w₁ = −0,4; w₂ = −1,0 und η = 0,1. Trainingsfall: m1 = 6,0; m2 = 1,9; Label t = 1 (gut).
+
+1. Nettoeingabe: $z = 3{,}5 - 0{,}4 \cdot 6{,}0 - 1{,}0 \cdot 1{,}9$ = **−0,8**
+2. Sprungfunktion: z < 0 → y = 0, aber t = 1 → Fehler $e = 1 - 0 = 1$
+3. Anpassen: $w_1^{neu} = -0{,}4 + 0{,}1 \cdot 1 \cdot 6{,}0$ = **0,2**; $w_2^{neu} = -1{,}0 + 0{,}1 \cdot 1 \cdot 1{,}9$ = **−0,81**; $b^{neu} = 3{,}5 + 0{,}1 \cdot 1$ = **3,6**
+4. Probe: $z = 3{,}6 + 0{,}2 \cdot 6{,}0 - 0{,}81 \cdot 1{,}9$ = **3,261** → y = 1, jetzt richtig.
+
+Die neuen Gewichte gelten für alle Fälle. Dass ein früher richtig klassifizierter Fall nun falsch sein kann, ist normal – deshalb braucht man mehrere Epochen.
+
+### Abgrenzung
+Das mehrschichtige Perzeptron lernt nicht mit dieser Regel, sondern mit **Backpropagation**, weil der Fehler durch mehrere Schichten zurückgerechnet werden muss. Die Lernrate ist ein vorgegebener Wert (Hyperparameter), die Gewichte werden gelernt.
+
+### Prüfungsfalle
+Fehler als **Ist minus Soll** rechnen – dann laufen die Gewichte in die falsche Richtung. Außerdem den Bias vergessen: Er wird bei jedem Fehler mit angepasst (Änderung η · e, ohne Eingabewert). Im Struktogramm gehört der Epochenzähler **außerhalb** der inneren Schleife über die Trainingsfälle.
+
+### Merksatz
+Nur bei Fehler ändern, um Lernrate · (Soll − Ist) · Eingabe.
+
+Siehe auch: Perzeptron · Stufenfunktion · Lernrate · Epoche · Bias · Lineare Trennbarkeit · Backpropagation
+Mehr: Deep Dive 6, 9.4 · Deep Dive 6, 9.5 · Deep Dive 31, 2.3
 
 ## Pessimistisches Sperren
 <!-- id: pessimistisches-sperren · quellen: Karte DD15, DD15 4.2 · stand: 2026-10 -->
@@ -753,6 +806,43 @@ Physisch = so, wie es im konkreten DBMS angelegt wird.
 Siehe auch: Konzeptionelles Datenmodell · Logisches Datenmodell · DDL · Index
 Mehr: Deep Dive 2, 1.1
 
+## Pilotbetrieb
+<!-- id: pilotbetrieb · quellen: Karte DD18, DD18 2.3, DD22 2.1, DD28 2.3 · stand: 2026-11 -->
+
+Einführung eines neuen Systems oder Prozesses zunächst in kleinem Umfang – an einem Standort, in einem Bereich oder mit einer Nutzergruppe – im echten Betrieb, bevor es für alle ausgerollt wird.
+
+Auch: Pilotphase
+
+### Erklärung
+Der Pilotbetrieb verkleinert das Risiko: Fehler, Bedienprobleme und fehlende Schulung zeigen sich früh und treffen nur wenige. Er liefert außerdem Messwerte für die Wirtschaftlichkeit und zeigt, ob die Beschäftigten die Lösung annehmen. Damit er mehr ist als „einfach mal ausprobieren“, legt man vorher fest:
+
+1. **Umfang und Dauer** (z. B. eine Filiale, sechs Wochen),
+2. **Erfolgskriterien** mit Kennzahlen (z. B. Wartezeit, Fehlerquote),
+3. **Rückmeldewege** für die Anwender,
+4. **Entscheidung** nach der Auswertung: ausrollen, nachbessern oder abbrechen.
+
+Nachteile: zusätzlicher Aufwand, vorübergehend zwei Verfahren nebeneinander, und die Pilotgruppe ist nicht unbedingt repräsentativ.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH führt Abholschränke zunächst in einer Filiale ein. Ausgangswert: durchschnittliche Wartezeit 12 Minuten. Erfolgskriterium: Reduktion um mindestens 30 %, also auf höchstens $12 \cdot (1 - 0{,}30)$ = **8,4 Minuten**. Der Pilot misst 8,0 Minuten – das Kriterium ist erfüllt, die Geschäftsleitung entscheidet für den Rollout. Zugleich nennen die Mitarbeiter der Warenausgabe Bedienprobleme mit dem Abholcode; sie fließen in die Schulung ein.
+
+### Abgrenzung
+| Begriff | Wer / womit | Zweck |
+|---|---|---|
+| Testbetrieb, Abnahmetest | Tester oder Fachabteilung, Testdaten und Testumgebung | prüfen, ob das System die Anforderungen erfüllt |
+| **Pilotbetrieb** | echte Anwender, echte Daten, begrenzter Bereich | Praxistauglichkeit und Akzeptanz belegen |
+| Parallelbetrieb | alle Anwender, altes und neues System gleichzeitig | Umstellung absichern |
+| Sofortumstellung („Big Bang“) | alle, an einem Stichtag | schnelle Umstellung, hohes Risiko |
+
+### Prüfungsfalle
+Pilotbetrieb mit Testen gleichsetzen – ein Pilot läuft mit echten Anwendern im Realbetrieb. Und als Gegenmaßnahme nur „Pilotphase“ hinschreiben, ohne zu sagen, **was** sie der Befürchtung entgegensetzt (z. B. „Bedienfehler fallen früh auf und werden vor dem Rollout behoben“).
+
+### Merksatz
+Erst klein und echt, dann groß – mit vorher festgelegten Erfolgskriterien.
+
+Siehe auch: Abnahmetest · Testkonzept · Akzeptanz und Widerstände · Wirtschaftlichkeitsbetrachtung · Soll-Ist-Vergleich
+Mehr: Deep Dive 18, 2.3 · Deep Dive 22, 2.1
+
 ## Pivot
 <!-- id: pivot · quellen: Karte DD8, DD8 4.5 · stand: 2026-10 -->
 
@@ -849,14 +939,16 @@ Ein Auftrag mit Abholung vor Eingang wird abgewiesen.
 | Wertebereich | liegt der Wert im Bereich? | Umsatz ≥ 0 |
 | Plausibilitätsprüfung | passt es fachlich zusammen? | Ende nach Start |
 
+Alle vier sind **Datenvalidierung**: Sie prüfen gegen Regeln und beantworten, ob ein Wert **zulässig** ist. Ob er auch **richtig** ist, klärt erst die **Datenverifizierung** durch Abgleich mit der Quelle (Beleg, Messgerät, zweite Erfassung). Ein Messwert von 44,9 °C besteht jede Plausibilitätsprüfung, kann aber trotzdem falsch gemessen sein.
+
 ### Prüfungsfalle
-„Gültig“ mit „korrekt“ gleichsetzen – eine fünfstellige PLZ kann trotzdem falsch sein.
+„Gültig“ mit „korrekt“ gleichsetzen – eine fünfstellige PLZ kann trotzdem falsch sein. Ebenso Validierung und Verifizierung gleichsetzen: Die eine prüft gegen Regeln, die andere gegen die Wirklichkeit.
 
 ### Merksatz
 Plausibel heißt: Es kann so stimmen – nicht: Es stimmt sicher.
 
-Siehe auch: Formatprüfung · Pflichtfelder · CHECK · Quarantäne
-Mehr: Deep Dive 9, 5.1
+Siehe auch: Formatprüfung · Pflichtfelder · CHECK · Quarantäne · Datenverifizierung
+Mehr: Deep Dive 9, 5.1 · Deep Dive 30, 2.3
 
 ## Polaritätsprofil
 <!-- id: polaritatsprofil · quellen: Karte DD3, DD3 7.4 · stand: 2026-10 -->
