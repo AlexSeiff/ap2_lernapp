@@ -538,6 +538,33 @@ Sieben Prinzipien, damit der Nutzer seine Aufgabe ohne Umweg und Ärger erledigt
 Siehe auch: Gebrauchstauglichkeit · Barrierefreiheit · ISO/IEC 25010
 Mehr: Deep Dive 11, A5
 
+## Interpolation
+<!-- id: interpolation · quellen: Karte DD4, DD4 2.2 · stand: 2026-11 -->
+
+Schätzung eines Werts innerhalb des beobachteten Wertebereichs der Einflussgröße – im Unterschied zur Extrapolation außerhalb davon, daher deutlich verlässlicher.
+
+### Erklärung
+Bei einer Regression setzt du ein x ein, das zwischen dem kleinsten und größten beobachteten x liegt. Auch ein fehlender Wert zwischen zwei Nachbarn lässt sich so schätzen; bei der **linearen Interpolation** liegt er auf der Geraden zwischen den Nachbarpunkten: $y = y_1 + \frac{x - x_1}{x_2 - x_1} \cdot (y_2 - y_1)$. Das nutzen auch Tabellenwerkzeuge, etwa bei Quartilen (QUARTILE.INKL). Verlässlich ist das aber nur, wenn der Bereich dicht mit Daten belegt ist und der Zusammenhang dort glatt verläuft; große Datenlücken und starke Streuung bleiben Unsicherheiten.
+
+### Beispiel
+Regressionsgleichung $\hat{y} = 24{,}8 + 6{,}4 \cdot x$ aus Beobachtungen für x = 1 bis 5:
+- Prognose für x = 3,5 (innerhalb): $24{,}8 + 6{,}4 \cdot 3{,}5 = 24{,}8 + 22{,}4 = 47{,}2$ T€ – Interpolation, vertretbar.
+- Prognose für x = 20 wäre Extrapolation.
+
+Fehlender Wert: Angenommen, der Umsatz von Monat 3 fehlt, bekannt sind Monat 2 mit 40 und Monat 4 mit 52 T€. Linear interpoliert: $40 + \frac{3 - 2}{4 - 2} \cdot (52 - 40) = 46$ T€. Tatsächlich waren es 42 T€ – die Schätzung liegt nah, ist aber nur eine Schätzung.
+
+### Abgrenzung
+**Extrapolation** reicht über die Daten hinaus und ist riskant; Interpolation bleibt dazwischen. Beim Füllen von Datenlücken spricht man von **Imputation**; die lineare Interpolation ist dafür ein mögliches Verfahren, besonders bei Zeitreihen.
+
+### Prüfungsfalle
+Zu schreiben, innerhalb des Bereichs sei die Prognose „sicher“: Auch hier streuen die Daten (siehe Residuen), und der Hinweis auf den abgedeckten x-Bereich gehört in die Antwort.
+
+### Merksatz
+Zwischen den Daten wissen wir mehr als dahinter.
+
+Siehe auch: Extrapolation · Regressionsgerade · Regression · Residuum · Imputation · Quartil
+Mehr: Deep Dive 4, 2.2 · Deep Dive 3, 4.2
+
 ## Interquartilsabstand (IQR)
 <!-- id: interquartilsabstand · quellen: Karte DD3, DD3 4.2, DD3 5.2 · stand: 2026-10 -->
 

@@ -136,7 +136,7 @@ Laplace auf ungleich wahrscheinliche Ergebnisse anwenden – „Auftrag reklamie
 ### Merksatz
 Nur bei fairen Verhältnissen gilt: günstig durch möglich.
 
-Siehe auch: Relative Häufigkeit · Gegenereignis
+Siehe auch: Relative Häufigkeit · Gegenereignis · Bedingte Wahrscheinlichkeit
 Mehr: Deep Dive 3, 7.1
 
 ## Lastenheft

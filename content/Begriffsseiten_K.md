@@ -771,14 +771,45 @@ Zehn Warenkörbe, Schreibtisch (S) in 5, Bürostuhl (B) in 6, beide in 4. S → 
 | Konfidenz | Wie oft folgt B, wenn A gekauft wird? |
 | Lift | Wie viel häufiger als zufällig? |
 
+Nicht verwechseln mit dem **Konfidenzintervall** der Statistik: Es gibt den Schwankungsbereich eines Stichprobenwerts (z. B. des Mittelwerts) an und hat mit Warenkorbregeln nichts zu tun.
+
 ### Prüfungsfalle
 Eine hohe Konfidenz als echten Zusammenhang werten – liegt B ohnehin in fast jedem Warenkorb, ist die Konfidenz jeder Regel auf B hoch; erst ein Lift über 1 zeigt den Zusammenhang.
 
 ### Merksatz
 Konfidenz zählt die Richtung, Lift prüft den Zufall.
 
-Siehe auch: Support · Lift · Assoziationsanalyse · Apriori-Algorithmus
+Siehe auch: Support · Lift · Assoziationsanalyse · Apriori-Algorithmus · Konfidenzintervall · Bedingte Wahrscheinlichkeit
 Mehr: Deep Dive 6, 4.1 · Deep Dive 6, 4.2
+
+## Konfidenzintervall
+<!-- id: konfidenzintervall · quellen: DD3 7.3, DD4 1.3 · stand: 2026-11 -->
+
+Bereich um einen Stichprobenwert (z. B. den Mittelwert), der den unbekannten wahren Wert der Grundgesamtheit mit einer vorgegebenen Sicherheit, dem Konfidenzniveau (meist 95 %), überdeckt.
+
+### Erklärung
+Für den Mittelwert gilt bei großer Stichprobe $\bar{x} \pm z \cdot \frac{s}{\sqrt{n}}$ mit $z = 1{,}96$ für 95 %, 1,645 für 90 % und 2,576 für 99 %. Der Bruch $\frac{s}{\sqrt{n}}$ ist der **Standardfehler**: die Unsicherheit des Mittelwerts, nicht die Streuung der Einzelwerte. Bei kleiner Stichprobe (etwa n < 30) und unbekanntem σ nimmt man statt z den größeren t-Wert; das Intervall wird breiter. Das Intervall wird schmaler bei größerem n (vierfache Stichprobe → halbe Breite), kleinerer Streuung und niedrigerem Konfidenzniveau. Genau gedeutet: Zöge man immer wieder Stichproben und bildete jedes Mal das Intervall, überdeckten 95 % dieser Intervalle den wahren Wert. Umgangssprachlich: „Mit 95 % Sicherheit liegt der wahre Wert in diesem Bereich.“ Es besteht ein Bezug zum Hypothesentest: Liegt der Wert der Nullhypothese außerhalb des 95 %-Intervalls, wäre der zweiseitige Test bei α = 5 % signifikant.
+
+### Beispiel
+Lieferzeiten: 100 Aufträge, $\bar{x} = 60$ min, $s = 12$ min.
+- Standardfehler: $\frac{12}{\sqrt{100}} = 1{,}2$ min
+- 95 %-Intervall: $60 \pm 1{,}96 \cdot 1{,}2 = 60 \pm 2{,}35$ → **[57,65 ; 62,35] min**
+
+Bei 400 statt 100 Aufträgen (gleiches s): Standardfehler 0,6 min, $60 \pm 1{,}96 \cdot 0{,}6 = 60 \pm 1{,}18$ → [58,82 ; 61,18] min – die Genauigkeit der Schätzung verdoppelt sich.
+
+### Abgrenzung
+- **Konfidenz** (Assoziationsanalyse) ist eine Kennzahl für Regeln im Warenkorb und hat mit Stichprobenunsicherheit nichts zu tun.
+- Der **Streubereich** der Einzelwerte (Mittelwert ± Standardabweichung) ist viel breiter als das Konfidenzintervall des Mittelwerts.
+- Ein **Prognoseintervall** gilt für einen einzelnen neuen Wert und ist breiter als das Konfidenzintervall der Geraden.
+
+### Prüfungsfalle
+Das Intervall [57,65 ; 62,35] als „95 % aller Lieferungen dauern so lange“ lesen. Es sagt etwas über den Mittelwert, nicht über einzelne Aufträge.
+
+### Merksatz
+Das Konfidenzintervall sagt, wie genau der Mittelwert getroffen ist – nicht, wie die Einzelwerte streuen.
+
+Siehe auch: Stichprobe · Standardabweichung · Normalverteilung · Signifikanz · Hypothesentest · Konfidenz
+Mehr: Deep Dive 3, 7.3 · Deep Dive 4, 1.3
 
 ## Konfusionsmatrix
 <!-- id: konfusionsmatrix · quellen: Karte DD7, DD7 Teil 2, DD17 6.10 · stand: 2026-10 -->
@@ -1105,7 +1136,7 @@ Aus r ≈ 0 auf „kein Zusammenhang“ schließen – ein U-förmiger Zusammenh
 ### Merksatz
 Korrelation zeigt, dass sich etwas gemeinsam bewegt – nicht, warum.
 
-Siehe auch: Kausalität · Korrelationskoeffizient nach Pearson · Streudiagramm · Regression
+Siehe auch: Kausalität · Korrelationskoeffizient nach Pearson · Spearman-Rangkorrelation · Streudiagramm · Regression · Multikollinearität
 Mehr: Deep Dive 4, 1.1 · Deep Dive 4, 1.3
 
 ## Korrelationskoeffizient nach Pearson
@@ -1128,7 +1159,7 @@ Pearson auf Zufriedenheitsstufen (ordinal) anwenden oder aus r eine Wirkungsrich
 ### Merksatz
 Pearson misst Linien – für Ränge nimm Spearman.
 
-Siehe auch: Korrelation · Kausalität · Bestimmtheitsmaß · Streudiagramm
+Siehe auch: Korrelation · Kausalität · Bestimmtheitsmaß · Spearman-Rangkorrelation · Effektgröße · Streudiagramm
 Mehr: Deep Dive 4, 1.2 · Deep Dive 4, 2.3
 
 ## KPI

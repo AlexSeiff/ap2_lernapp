@@ -755,7 +755,7 @@ H0: „Zwischen Schulungsstunden und Fehlerquote besteht in der Grundgesamtheit 
 ### Merksatz
 Man widerlegt die Nullhypothese – beweisen kann man sie nicht.
 
-Siehe auch: P-Wert · Signifikanz · Korrelation · Scheinkorrelation · Kausalität
+Siehe auch: P-Wert · Signifikanz · Alternativhypothese · Hypothesentest · Fehler 1. Art · Fehler 2. Art · Korrelation · Scheinkorrelation · Kausalität
 Mehr: Deep Dive 4, 1.3
 
 ## Nur Untertabellen
