@@ -100,6 +100,36 @@ Eine Zielgruppe, eine Frage, wenige Zahlen – jede mit Vergleich und Datum.
 Siehe auch: KPI · Einheitliche Skalen · Aktualitätsstempel · Vergleichsmaßstab mitliefern · Wenige Kennzahlen
 Mehr: Deep Dive 11, A4
 
+## Data Catalog
+<!-- id: data-catalog · quellen: DD8 5.1, DD8 3.3 · stand: 2026-11 -->
+
+Auch: Datenkatalog
+
+Durchsuchbares Verzeichnis der Datenbestände eines Unternehmens, das zu jedem Datensatz die Metadaten bündelt: Bedeutung, Herkunft, Verantwortliche, Qualität und Zugriffsregeln.
+
+### Erklärung
+Ein Katalog speichert nicht die Daten selbst, sondern die **Metadaten** darüber. Er macht Daten auffindbar („Gibt es schon eine Retourenquote?“), schafft Vertrauen durch Definition und Verantwortlichen und beugt dem **Data Swamp** vor. Typische Inhalte: fachliche Beschreibung und Kennzahlendefinition, Data Owner, Aktualisierungsrhythmus, Schutzklasse oder Kennzeichen „enthält personenbezogene Daten“, Qualitätskennzahlen und die Data Lineage. Ein **Data Dictionary** ist enger gefasst: die technische Beschreibung der Tabellen und Spalten einer einzelnen Datenbank. Ein Katalog muss gepflegt werden – ein veralteter Katalog ist schlimmer als keiner.
+
+### Beispiel
+Die Analystin der Möbelhaus Nordholz GmbH sucht „Retourenquote“. Der Katalog zeigt: Definition (Retouren geteilt durch Lieferungen), Data Owner Vertrieb, Quelle Warenwirtschaft, täglich 03:00 Uhr aktualisiert, Schutzklasse „intern“, keine personenbezogenen Daten. So rechnet nicht jede Abteilung ihre eigene Version.
+
+### Abgrenzung
+| Begriff | Fokus |
+|---|---|
+| Metadaten | die Informationen über Daten selbst |
+| Data Catalog | das durchsuchbare Verzeichnis dieser Metadaten |
+| Data Lineage | Herkunft und Weg der Daten (eine Metadatenart im Katalog) |
+| Data Governance | Regeln und Rollen, die der Katalog sichtbar macht |
+
+### Prüfungsfalle
+Den Katalog für ein Speichersystem halten, das die Daten enthält – er verweist nur auf sie.
+
+### Merksatz
+Der Katalog ist die Suchmaschine für Daten, nicht das Datenlager.
+
+Siehe auch: Metadaten · Data Governance · Data Lineage · Data Lake · Datenqualität
+Mehr: Deep Dive 8, 5.1
+
 ## Data Governance
 <!-- id: data-governance · quellen: Karte DD9, DD9 5.2 · stand: 2026-10 -->
 
@@ -150,6 +180,37 @@ Erst speichern, später verstehen – aber nur mit Katalog.
 
 Siehe auch: Data Warehouse · Schema-on-Read · ELT · Lakehouse · Big Data
 Mehr: Deep Dive 8, 5.1
+
+## Data Lineage
+<!-- id: data-lineage · quellen: DD8 3.3, DD8 5.1 · stand: 2026-11 -->
+
+Auch: Datenherkunft
+
+Nachverfolgung, woher Daten stammen, welche Transformationen sie durchlaufen haben und wohin sie fließen – von der Quelle bis zur Kennzahl im Bericht.
+
+### Erklärung
+Lineage dokumentiert den Weg Quelle → Transformationsschritte → Ziel, im besten Fall bis auf Spaltenebene. Nutzen:
+- **Fehlersuche:** Von einer falschen Kennzahl rückwärts bis zur Ursache gehen.
+- **Auswirkungsanalyse:** Vor einer Änderung sehen, welche Berichte an einer Spalte hängen.
+- **Nachweis:** Herkunft und Verarbeitung belegen, z. B. zur Rechenschaftspflicht nach DSGVO oder bei Prüfungen.
+- **Vertrauen:** Fachbereiche sehen, woraus eine Zahl entsteht.
+
+Erfasst wird Lineage automatisch (aus ETL-Werkzeugen, SQL-Skripten, Katalog) oder von Hand.
+
+### Beispiel
+Die Kennzahl „Umsatz netto“ im Dashboard stammt aus der View `v_umsatz`, diese aus der Faktentabelle im DWH, diese aus der Staging Area, diese aus `bestellposition` der Warenwirtschaft. Ändert die Warenwirtschaft die Berechnung der Mehrwertsteuer, zeigt die Lineage sofort, dass drei Berichte betroffen sind.
+
+### Abgrenzung
+**Metadaten** sind der Oberbegriff; Lineage ist eine Art davon. Ein **Änderungsprotokoll** (Audit-Log) hält fest, wer wann etwas geändert hat – nicht, woher die Werte kommen. **Versionierung** speichert alte Stände, nicht den Herkunftsweg.
+
+### Prüfungsfalle
+Lineage mit Datensicherung oder ER-Modell verwechseln. Sie beschreibt den Datenfluss, nicht die Struktur der Tabellen.
+
+### Merksatz
+Lineage beantwortet: Woher kommt diese Zahl, und was hängt von ihr ab?
+
+Siehe auch: Metadaten · Data Catalog · Data Governance · Datenqualität · ETL
+Mehr: Deep Dive 8, 3.3
 
 ## Data Mart
 <!-- id: data-mart · quellen: Karte DD8, DD8 Teil 2 · stand: 2026-10 -->
@@ -970,6 +1031,36 @@ Zweimal gelöscht ist auch nur gelöscht.
 
 Siehe auch: Idempotent · REST · GET · POST · PUT
 Mehr: Deep Dive 15, 3.2 · Deep Dive 1, 2.4
+
+## Delta Lake
+<!-- id: delta-lake · quellen: DD8 5.1 · stand: 2026-11 -->
+
+Offenes Tabellenformat für Data Lakes: Es legt über Parquet-Dateien im Objektspeicher ein Transaktionsprotokoll und bringt ACID-Transaktionen, Schemaprüfung und Versionierung mit.
+
+### Erklärung
+Die Daten selbst liegen als Parquet-Dateien. Ein Protokoll hält jede Änderung als neue **Version** fest. Daraus folgt:
+- **ACID-Transaktionen:** Ein Schreibvorgang gilt ganz oder gar nicht; Leser sehen nie halbfertige Stände. Gleichzeitige Schreiber werden per optimistischer Nebenläufigkeitskontrolle abgeglichen.
+- **Schemaprüfung:** Schreibversuche mit abweichendem Schema werden abgelehnt, solange man die Änderung nicht ausdrücklich erlaubt (siehe Schema Evolution).
+- **Zeitreise (Time Travel):** ältere Versionen abfragen oder die Tabelle auf einen früheren Stand zurücksetzen.
+- **UPDATE, DELETE und MERGE** auch auf Lake-Daten, z. B. für Korrekturen oder Löschanträge nach DSGVO.
+- Batch und Streaming können dieselbe Tabelle nutzen.
+
+Vergleichbare Tabellenformate sind Apache Iceberg und Apache Hudi.
+
+### Beispiel
+Ein fehlerhafter Ladelauf überschreibt um 03:10 Uhr in der Silver-Tabelle `kunde_bereinigt` die Postleitzahlen. Das Möbelhaus setzt die Tabelle von Version 42 auf Version 41 zurück und startet den korrigierten Lauf neu – ohne die Rohdaten erneut laden zu müssen.
+
+### Abgrenzung
+**Parquet** ist nur ein Dateiformat ohne Transaktionen; Delta Lake ist das Tabellenformat darüber. Ein **Data Lake** ist die Speicherart, Delta Lake eine Technik, die ihn zum **Lakehouse** macht.
+
+### Prüfungsfalle
+Delta Lake mit Deltaextraktion verwechseln. Delta Lake ist ein Tabellenformat mit Versionsprotokoll; die Deltaextraktion lädt nur die Änderungen aus einem Quellsystem.
+
+### Merksatz
+Delta Lake macht aus Dateien im See verlässliche Tabellen.
+
+Siehe auch: Lakehouse · Parquet · Data Lake · ACID · Medallion-Architektur · Schema Evolution
+Mehr: Deep Dive 8, 5.1
 
 ## Deltaextraktion
 <!-- id: deltaxtraktion · quellen: Karte DD8, DD8 3.1 · stand: 2026-10 -->

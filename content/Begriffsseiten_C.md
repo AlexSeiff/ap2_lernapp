@@ -49,6 +49,37 @@ Ohne Case ID kein Prozess, nur lose Ereignisse.
 Siehe auch: Event Log · Activity · Timestamp · Process Mining · Fehlende Case ID
 Mehr: Deep Dive 5, 5.1
 
+## Change Data Capture (CDC)
+<!-- id: change-data-capture · quellen: DD8 3.1 · stand: 2026-11 -->
+
+Verfahren, das Änderungen (Einfügen, Ändern, Löschen) in einer Quelldatenbank erkennt und als Änderungsstrom an Zielsysteme weitergibt.
+
+### Erklärung
+CDC ist eine Technik, mit der sich die Deltaextraktion umsetzen lässt. Die Änderungen werden auf drei Wegen erkannt:
+
+| Variante | Funktionsweise | Eigenschaft |
+|---|---|---|
+| log-basiert | liest das Transaktionsprotokoll der Datenbank | geringe Last auf der Quelle, erkennt auch Löschungen |
+| trigger-basiert | Trigger schreiben jede Änderung in eine Änderungstabelle | belastet die Quelle bei jeder Änderung |
+| zeitstempel-basiert | Abfrage auf eine Spalte wie „geändert_am“ | einfach, aber Löschungen bleiben unbemerkt |
+
+Jedes Änderungsereignis enthält Art der Änderung, Zeitpunkt und betroffenen Datensatz (oft alter und neuer Wert). Typische Verwendung: DWH oder Data Lake aktuell halten, Systeme replizieren, Streaming-Auswertungen füttern. Zum Start braucht es einen vollständigen Ausgangsstand (Initial Load), danach genügen die Änderungen.
+
+### Beispiel
+Die Tabelle `bestellung` hat 400.000 Zeilen. An einem Tag werden 1.200 Zeilen neu angelegt oder geändert und 15 gelöscht. Die Vollextraktion liest 400.000 Zeilen. Eine zeitstempelbasierte Abfrage findet 1.200 Zeilen, übersieht aber die 15 Löschungen. Log-basiertes CDC liefert 1.215 Ereignisse, also nur $\frac{1215}{400000} \approx 0{,}3\,\%$ des Bestands – einschließlich der Löschungen.
+
+### Abgrenzung
+Die **Deltaextraktion** beschreibt das Ziel („nur Änderungen laden“), CDC eine Technik, mit der man die Änderungen findet. Die **Vollextraktion** liest immer alles.
+
+### Prüfungsfalle
+Zeitstempel-basiert „alles erkannt“ annehmen – gelöschte Zeilen haben keinen neuen Zeitstempel und fehlen im Ziel weiter.
+
+### Merksatz
+CDC fragt nicht „wie sieht die Tabelle aus?“, sondern „was hat sich geändert?“.
+
+Siehe auch: Deltaextraktion · Vollextraktion · ETL · Stream-Verarbeitung · Transaktion
+Mehr: Deep Dive 8, 3.1
+
 ## Chartjunk
 <!-- id: chartjunk · quellen: Karte DD11, DD11 A2 · stand: 2026-10 -->
 

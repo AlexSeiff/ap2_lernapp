@@ -2220,6 +2220,35 @@ Das Ministerium verordnet, der Betrieb bildet aus, die IHK prüft.
 Siehe auch: BBiG · Ausbildungsbetrieb · Rahmenlehrplan · IHK · Duale Ausbildung
 Mehr: Deep Dive 13, 1.1
 
+## Ausführungsplan (EXPLAIN)
+<!-- id: ausfuhrungsplan · quellen: DD1 3.6, Fachgespräch DD1 · stand: 2026-11 -->
+
+Die Schrittfolge, mit der das Datenbanksystem eine SQL-Abfrage tatsächlich ausführt; der Query Optimizer wählt sie aus, und `EXPLAIN` zeigt sie an.
+
+### Erklärung
+Der Plan besteht aus Operatoren: **Tabellen-Scan** (alle Zeilen lesen), **Index-Zugriff** (über einen Index gezielt zu den Treffern springen), **Join-Verfahren** (z. B. Nested Loop, Hash Join), Sortieren und Aggregieren. Zu jedem Schritt zeigen die meisten Systeme die geschätzten Kosten und Zeilenzahlen. `EXPLAIN` vor einer Abfrage zeigt den Plan, ohne das Ergebnis zu liefern. Systeme mit `EXPLAIN ANALYZE` (z. B. PostgreSQL) führen die Abfrage zusätzlich aus und messen die echten Zeilenzahlen und Zeiten; SQLite nutzt `EXPLAIN QUERY PLAN`, SQL Server einen grafischen Plan.
+
+So liest du einen Plan bei einer langsamen Abfrage: Steht bei einem selektiven Filter ein Scan über die ganze große Tabelle, fehlt ein passender Index oder er ist nicht nutzbar (z. B. wegen einer Funktion um die Spalte). Weichen geschätzte und tatsächliche Zeilenzahlen stark voneinander ab, sind die Statistiken veraltet.
+
+### Beispiel
+In SQLite zeigt die Möbelhaus Nordholz GmbH den Plan für eine Kundenabfrage:
+```sql
+EXPLAIN QUERY PLAN SELECT * FROM bestellung WHERE kunden_id = 4;
+```
+Ohne Index lautet der Plan `SCAN bestellung` – jede Zeile wird gelesen. Nach `CREATE INDEX idx_bestellung_kunde ON bestellung (kunden_id);` steht dort `SEARCH bestellung USING INDEX idx_bestellung_kunde (kunden_id=?)`: Nur die passenden Zeilen werden angefasst.
+
+### Abgrenzung
+Der **Query Optimizer** ist die Komponente, die den Plan auswählt; der **Ausführungsplan** ist sein Ergebnis. Ein Plan ist keine Garantie: Wachsen die Daten oder ändern sich die Statistiken, kann dieselbe Abfrage später einen anderen Plan bekommen.
+
+### Prüfungsfalle
+`EXPLAIN` allein führt die Abfrage nicht aus, `EXPLAIN ANALYZE` dagegen schon – bei `UPDATE` oder `DELETE` würden dabei tatsächlich Daten geändert. Zum Ausprobieren in einer Transaktion mit `ROLLBACK` arbeiten.
+
+### Merksatz
+Wer eine langsame Abfrage verbessern will, schaut zuerst in den Ausführungsplan.
+
+Siehe auch: Query Optimizer · Index · Transaktion
+Mehr: Deep Dive 1, 3.6
+
 ## Auslastung
 <!-- id: auslastung · quellen: Karte DD5, DD5 3.2 · stand: 2026-10 -->
 

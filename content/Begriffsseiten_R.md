@@ -378,6 +378,45 @@ Was das Gesetz verlangt, braucht keine Einwilligung.
 Siehe auch: Einwilligung · Vertragserfüllung · Berechtigtes Interesse · DSGVO · Speicherbegrenzung
 Mehr: Deep Dive 10, 2.2 · Deep Dive 10, 2.3
 
+## Rechtmäßigkeit der Verarbeitung
+<!-- id: rechtmassigkeit-der-verarbeitung · quellen: DD10 2.1, DD10 2.2 · stand: 2026-11 -->
+
+Auch: Art. 6 DSGVO, Verbot mit Erlaubnisvorbehalt
+
+Grundsatz nach Art. 5 und Art. 6 DSGVO: Personenbezogene Daten dürfen nur verarbeitet werden, wenn mindestens eine von sechs Rechtsgrundlagen greift.
+
+### Erklärung
+| Art. 6 Abs. 1 | Rechtsgrundlage | Kerngedanke |
+|---|---|---|
+| lit. a | Einwilligung | freiwillig, informiert, widerrufbar |
+| lit. b | Vertrag | für Vertragserfüllung oder vorvertragliche Maßnahmen nötig |
+| lit. c | rechtliche Verpflichtung | ein Gesetz verlangt die Verarbeitung |
+| lit. d | lebenswichtige Interessen | Schutz von Leben oder Gesundheit |
+| lit. e | öffentliche Aufgabe | v. a. Behörden, Aufgabe im öffentlichen Interesse |
+| lit. f | berechtigtes Interesse | nach Abwägung; nicht für Behörden bei ihren Aufgaben |
+
+Die Grundlage gilt je Zweck und muss vorab feststehen und dokumentiert sein (Verzeichnis von Verarbeitungstätigkeiten, Datenschutzhinweise). Für besondere Kategorien (z. B. Gesundheitsdaten) braucht es zusätzlich eine Ausnahme nach Art. 9. Bei lit. e und f können Betroffene widersprechen (Art. 21).
+
+### Beispiel
+| Verarbeitung der Möbelhaus Nordholz GmbH | Grundlage |
+|---|---|
+| Lieferadresse für die Sofalieferung | lit. b Vertrag |
+| Newsletter an Kundinnen | lit. a Einwilligung |
+| Rechnungen aufbewahren | lit. c rechtliche Verpflichtung |
+| automatische Betrugsprüfung bei Bestellungen | lit. f berechtigtes Interesse |
+
+### Abgrenzung
+Die **Rechtmäßigkeit** (Art. 6) beantwortet „Darf ich die Daten überhaupt verarbeiten?“, die **TOM** (Art. 32) „Wie schütze ich sie dabei?“. Die Seite **Rechtsgrundlagen** meint dagegen das Ausbildungsrecht (BBiG, Ausbildungsordnung).
+
+### Prüfungsfalle
+Die Einwilligung für alles verlangen oder als einzige Grundlage nennen. Es gibt sechs gleichrangige Grundlagen; das berechtigte Interesse ist zudem kein Freifahrtschein, sondern braucht eine dokumentierte Abwägung.
+
+### Merksatz
+Verbot mit Erlaubnisvorbehalt: ohne eine der sechs Grundlagen keine Verarbeitung.
+
+Siehe auch: Einwilligung · Vertragserfüllung · Rechtliche Verpflichtung · Lebenswichtige Interessen · Berechtigtes Interesse · DSGVO
+Mehr: Deep Dive 10, 2.2
+
 ## Rechtsfähigkeit
 <!-- id: rechtsfahigkeit · quellen: Karte DD14, DD14 2.1 · stand: 2026-10 -->
 

@@ -96,7 +96,7 @@ Die Schichtenarchitektur oben (Staging → Core-DWH → Data Marts) entspricht d
 
 ## 3.1 Die drei Phasen
 
-**E – Extract:** Daten aus den Quellsystemen lesen. Varianten: **Vollextraktion** (alles) oder **Deltaextraktion** (nur Änderungen seit dem letzten Lauf – schneller, aber setzt Änderungskennzeichen oder Zeitstempel voraus). Meist nachts, um die Quellsysteme nicht zu belasten.
+**E – Extract:** Daten aus den Quellsystemen lesen. Varianten: **Vollextraktion** (alles) oder **Deltaextraktion** (nur Änderungen seit dem letzten Lauf – schneller, aber setzt Änderungskennzeichen oder Zeitstempel voraus). Meist nachts, um die Quellsysteme nicht zu belasten. Die Änderungen erkennt man über eine Zeitstempelspalte, Trigger oder – am saubersten – das Transaktionsprotokoll der Datenbank (**Change Data Capture, CDC**): Es liefert Einfügungen, Änderungen **und Löschungen** als Ereignisstrom, bei Zeitstempeln bleiben Löschungen unbemerkt.
 
 **T – Transform:** Der eigentliche Arbeitsschritt. Typische Aufgaben:
 - **Bereinigen:** fehlende Werte behandeln, Dubletten entfernen, Ausreißer prüfen
@@ -119,7 +119,7 @@ Die Schichtenarchitektur oben (Staging → Core-DWH → Data Marts) entspricht d
 
 ## 3.3 Datenqualität im ETL
 
-Der ETL-Prozess ist der **wichtigste Ort für Qualitätssicherung** – hier passieren alle Daten einen definierten Kontrollpunkt. Bewährt sind: Regelwerk mit Pflichtprüfungen, Quarantänebereich für fehlerhafte Sätze, Fehlerprotokoll mit Verantwortlichem, Ladeprotokoll mit Kennzahlen (gelesene, geladene, abgewiesene Sätze) und Abstimmsummen gegen das Quellsystem.
+Der ETL-Prozess ist der **wichtigste Ort für Qualitätssicherung** – hier passieren alle Daten einen definierten Kontrollpunkt. Bewährt sind: Regelwerk mit Pflichtprüfungen, Quarantänebereich für fehlerhafte Sätze, Fehlerprotokoll mit Verantwortlichem, Ladeprotokoll mit Kennzahlen (gelesene, geladene, abgewiesene Sätze) und Abstimmsummen gegen das Quellsystem. Damit man eine falsche Kennzahl bis zur Ursache zurückverfolgen kann, dokumentiert man die **Data Lineage**: Quelle → Transformationsschritte → Bericht. Sie zeigt auch vorab, welche Berichte von einer Änderung in der Quelle betroffen wären.
 
 > ❓ **Prüferfrage:** Warum ist es ein Fehler, ungültige Datensätze im ETL einfach zu verwerfen?
 > *Weil die Information über das Problem verloren geht und niemand die Ursache im Quellsystem beheben kann. Zudem stimmen die Summen im DWH nicht mehr mit der Quelle überein, ohne dass die Differenz erklärbar wäre. Richtig ist eine Quarantäne mit Fehlerprotokoll und einem Verantwortlichen für die Nachbearbeitung.*
@@ -267,6 +267,8 @@ Roll-up heißt auch **Drill-up** (Verdichten). Merkhilfe Slice/Dice: Slice schne
 | Risiko | unflexibel bei neuen Anforderungen | **Data Swamp** – ohne Katalog und Governance wird der See unbrauchbar |
 
 Der Begriff **Lakehouse** bezeichnet Ansätze, die Flexibilität des Data Lake mit den Struktur- und Qualitätsgarantien des DWH verbinden. Technisch liegen die Daten in günstigem Objektspeicher in offenen Dateiformaten (z. B. Parquet); ein Tabellenformat wie Delta Lake oder Apache Iceberg ergänzt Transaktionen (ACID), Schemaprüfung und Versionierung. Häufig werden die Daten dabei in Stufen veredelt: Rohdaten → bereinigt → auswertungsfertig (oft „Bronze/Silver/Gold" genannt) – das entspricht der Idee Staging → Core → Data Mart.
+
+Diese **Medallion-Architektur** im Einzelnen: **Bronze** = Rohdaten unverändert mit Quelle und Ladezeit (bleiben als Ausgangspunkt erhalten); **Silver** = bereinigt und vereinheitlicht (Dubletten entfernt, Schlüssel harmonisiert, fehlerhafte Sätze in Quarantäne); **Gold** = fachlich aufbereitet für Berichte und Modelle (Kennzahlen, Star-Schema). **Delta Lake** speichert die Tabellen als Parquet-Dateien mit Versionsprotokoll: ACID-Transaktionen, Schemaprüfung (Schema Evolution nur, wenn ausdrücklich erlaubt) und Zeitreise zu früheren Ständen. Ein **Data Catalog** (durchsuchbares Verzeichnis der Metadaten mit Bedeutung, Verantwortlichem, Schutzklasse und Lineage) hält den See auffindbar und verhindert den Data Swamp.
 
 ## 5.2 Die 5 V von Big Data
 

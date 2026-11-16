@@ -1038,6 +1038,42 @@ Precision: Wenn das Modell Alarm schlägt – wie oft zu Recht?
 Siehe auch: Recall · F1-Maß · Accuracy · Konfusionsmatrix
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.4
 
+## Prepared Statements
+<!-- id: prepared-statements · quellen: DD10 4.5 · stand: 2026-11 -->
+
+Auch: Parametrisierte Abfragen
+
+SQL-Anweisungen mit Platzhaltern, bei denen die Werte getrennt vom Befehl an die Datenbank übergeben werden – der wirksamste Schutz gegen SQL-Injection.
+
+### Erklärung
+In zwei Schritten: Die Datenbank erhält zuerst die Anweisung mit Platzhaltern (`?` oder `:name`) und legt die Struktur fest (**prepare**). Danach werden die Werte gebunden und die Anweisung ausgeführt (**execute**). Die Werte werden nie als SQL-Code gelesen, auch wenn sie Anführungszeichen oder SQL-Schlüsselwörter enthalten. Nebeneffekt: Bei wiederholter Ausführung kann das System den vorbereiteten Plan wiederverwenden.
+
+Grenzen:
+- Platzhalter gibt es nur für **Werte**, nicht für Tabellen- oder Spaltennamen. Dort hilft eine feste Liste erlaubter Namen (Whitelist).
+- Werte per Textverkettung in die Anweisung einzubauen, bevor man sie „vorbereitet“, hebt den Schutz auf.
+- ORMs und gespeicherte Prozeduren sind nur sicher, wenn sie intern nicht ebenfalls SQL zusammenbauen.
+
+### Beispiel
+Unsicher (Eingabe wird in den Befehl geklebt) und sicher (Pseudocode):
+```
+sql = "SELECT * FROM kunde WHERE email = '" + eingabe + "'"   -- unsicher
+sql = "SELECT * FROM kunde WHERE email = ?"                    -- sicher
+ergebnis = datenbank.ausfuehren(sql, [eingabe])
+```
+Gibt jemand `x' OR '1'='1` ein, sucht die Datenbank nach genau diesem Text als E-Mail-Adresse und findet keine Zeile. Der Angriffsversuch bleibt wirkungslos.
+
+### Abgrenzung
+**Eingabevalidierung** prüft, ob eine Eingabe sinnvoll ist, und ergänzt den Schutz. **Escaping** (Sonderzeichen entschärfen) ist fehleranfälliger als Parametrisierung. „Parametrisierte Abfrage“ meint dasselbe wie Prepared Statement.
+
+### Prüfungsfalle
+Anführungszeichen herausfiltern oder Werte „von Hand“ in die Anweisung einsetzen und das als sicher bezeichnen. Sicher ist nur die Trennung von Befehl und Daten.
+
+### Merksatz
+Befehl und Daten getrennt übergeben – dann wird aus Eingabe nie Code.
+
+Siehe auch: SQL-Injection · Security by Design · Least Privilege
+Mehr: Deep Dive 10, 4.5
+
 ## Primärschlüssel
 <!-- id: primarschlussel · quellen: Karte DD1, DD2 1.2 · stand: 2026-10 -->
 
