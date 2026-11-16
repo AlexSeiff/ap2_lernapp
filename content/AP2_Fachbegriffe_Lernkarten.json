@@ -3,11 +3,11 @@
     "titel": "AP2 Fachbegriffe – Begriffskarten zu allen Deep Dives",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-10-06",
-    "aktualisiert_am": "2026-10-17",
+    "aktualisiert_am": "2026-11-16",
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 816,
+    "anzahl_karten": 831,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -1921,7 +1921,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 6",
       "status": "behandelt",
-      "anzahl_karten": 58,
+      "anzahl_karten": 67,
       "karten": [
         {
           "id": "FB-crisp-dm",
@@ -2502,6 +2502,96 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-cnn",
+          "frage": "CNN (Convolutional Neural Network)",
+          "antwort": "Neuronales Netz für Bilder: Lernbare Filter (Kernel) werden mit einer Schrittweite (Stride) über das Bild geschoben und erzeugen Feature Maps; Padding füllt den Rand auf.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-data-leakage",
+          "frage": "Data Leakage",
+          "antwort": "Das Modell nutzt beim Training Informationen, die zum Vorhersagezeitpunkt nicht vorliegen oder aus den Testdaten stammen – die Testgüte wirkt unrealistisch gut. Abhilfe: erst aufteilen, dann nur aus den Trainingsdaten lernen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-dbscan",
+          "frage": "DBSCAN",
+          "antwort": "Dichtebasiertes Clusterverfahren: Punkte in dichten Regionen (Radius ε, Mindestzahl MinPts) bilden Cluster, Punkte in dünnen Regionen gelten als Rauschen; k muss nicht vorgegeben werden.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-dimensionsreduktion",
+          "frage": "Dimensionsreduktion",
+          "antwort": "Unüberwachte Verfahren, die viele Merkmale zu wenigen verdichten oder auswählen, ohne viel Information zu verlieren – z. B. PCA; verringert Spalten, nicht Zeilen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gini-index",
+          "frage": "Gini-Index",
+          "antwort": "Unreinheitsmaß einer Datenmenge, G = 1 − Σ pᵢ²: 0 bedeutet rein. Alternative zur Entropie bei der Baumaufteilung (CART); nicht der Gini-Koeffizient der Statistik.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gradient-boosting",
+          "frage": "Gradient Boosting",
+          "antwort": "Ensemble aus nacheinander trainierten Bäumen, von denen jeder die Restfehler (Residuen) der bisherigen ausgleicht; XGBoost ist eine verbreitete Umsetzung. Gegenstück zum parallel abstimmenden Random Forest.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-hierarchisches-clustering",
+          "frage": "Hierarchisches Clustering",
+          "antwort": "Clusterverfahren, das ähnlichste Cluster schrittweise verschmilzt (oder von oben teilt); das Ergebnis ist ein Dendrogramm, an dem man die Clusterzahl durch Abschneiden wählt.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-pca",
+          "frage": "PCA",
+          "antwort": "Hauptkomponentenanalyse: Dimensionsreduktion, die die Daten auf neue, unkorrelierte Achsen mit größter Varianz dreht; man behält nur die ersten Komponenten. Vorher skalieren.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-pooling",
+          "frage": "Pooling",
+          "antwort": "Schicht im CNN, die Feature Maps verkleinert: Max-Pooling nimmt je Fenster den größten Wert, Average-Pooling den Mittelwert; ohne lernbare Gewichte.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -2511,7 +2601,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 7",
       "status": "behandelt",
-      "anzahl_karten": 27,
+      "anzahl_karten": 33,
       "karten": [
         {
           "id": "FB-konfusionsmatrix",
@@ -2779,6 +2869,66 @@
           "antwort": "Fälle der Mehrheitsklasse im Trainingsdatensatz weglassen, um die Klassen auszugleichen; einfach, kostet aber Information.",
           "typ": "begriff",
           "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-bias-variance-trade-off",
+          "frage": "Bias-Variance-Trade-off",
+          "antwort": "Zielkonflikt der Modellkomplexität: Ein zu einfaches Modell hat hohen Bias (systematischer Fehler, Underfitting), ein zu komplexes hohe Varianz (Overfitting); der Gesamtfehler ist bei mittlerer Komplexität am kleinsten.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-early-stopping",
+          "frage": "Early Stopping",
+          "antwort": "Das Training wird abgebrochen, sobald der Validierungsfehler über mehrere Epochen (Geduld) nicht mehr sinkt, obwohl der Trainingsfehler weiter fällt – Schutz vor Overfitting.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-entscheidungsschwelle",
+          "frage": "Entscheidungsschwelle",
+          "antwort": "Grenze für den Score eines Klassifikators, ab der ein Fall als positiv gilt (meist 0,5, aber änderbar). Senken: mehr Recall, weniger Precision; Wahl nach den Fehlerkosten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-hyperparameter",
+          "frage": "Hyperparameter",
+          "antwort": "Einstellung eines Lernverfahrens, die vor dem Training festgelegt wird (z. B. k, Baumtiefe, Lernrate); wird per Grid oder Random Search mit Validierungsdaten abgestimmt, nie an den Testdaten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-lernkurve",
+          "frage": "Lernkurve",
+          "antwort": "Diagramm der Güte auf Trainings- und Validierungsdaten über der Trainingsmenge: große Lücke = Overfitting, beide niedrig = Underfitting.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-regularisierung",
+          "frage": "Regularisierung",
+          "antwort": "Gegenmittel gegen Overfitting: große Gewichte werden im Training bestraft (L2 verkleinert alle, L1 setzt manche auf 0); die Stärke λ ist ein Hyperparameter.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
           "tags": [
             "fachbegriff"
           ]

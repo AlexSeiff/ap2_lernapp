@@ -5,7 +5,7 @@
 Harmonisches Mittel aus Precision und Recall: $F_1 = \frac{2 \cdot P \cdot R}{P + R}$.
 
 ### Erklärung
-Das F1-Maß fasst die beiden gegenläufigen Kennzahlen eines Klassifikationsmodells in einer Zahl zusammen. Weil es das harmonische und nicht das arithmetische Mittel ist, liegt es immer näher am kleineren der beiden Werte: Ein Modell mit sehr hoher Precision, aber kaum Recall bekommt ein schlechtes F1. Es eignet sich besonders bei **unausgeglichenen Klassen**, wo die Accuracy täuscht. Die richtig negativen Fälle (TN) gehen nicht ein.
+Dabei ist $P$ die Precision $\frac{TP}{TP + FP}$ und $R$ der Recall $\frac{TP}{TP + FN}$ (TP = richtig positiv, FP = falsch positiv, FN = falsch negativ). Das F1-Maß fasst die beiden gegenläufigen Kennzahlen eines Klassifikationsmodells in einer Zahl zusammen. Weil es das harmonische und nicht das arithmetische Mittel ist, liegt es immer näher am kleineren der beiden Werte: Ein Modell mit sehr hoher Precision, aber kaum Recall bekommt ein schlechtes F1. Es eignet sich besonders bei **unausgeglichenen Klassen**, wo die Accuracy täuscht. Die richtig negativen Fälle (TN) gehen nicht ein.
 
 ### Beispiel
 Reklamationsmodell im Möbelhaus: TP = 60, FP = 90, FN = 40. Precision $= \frac{60}{150} = 0{,}40$, Recall $= \frac{60}{100} = 0{,}60$.

@@ -622,6 +622,30 @@ Wer öfter vorkommt, zählt mehr.
 Siehe auch: Arithmetisches Mittel · Median · Lagemaß · Geometrisches Mittel
 Mehr: Deep Dive 3, Teil 3
 
+## Gini-Index
+<!-- id: gini-index · quellen: DD6 7.3 · stand: 2026-11 -->
+
+Unreinheitsmaß für eine Datenmenge bezüglich der Zielklasse: 0 bedeutet rein; er ist die Alternative zur Entropie bei der Wahl der Aufteilung in Entscheidungsbäumen (z. B. CART).
+Auch: Gini-Unreinheit, Gini Impurity
+
+### Erklärung
+$G = 1 - \sum_i p_i^2$ mit $p_i$ als Anteil der Klasse $i$ in der Menge. Anschaulich ist $G$ die Wahrscheinlichkeit, dass zwei zufällig gezogene Fälle zu verschiedenen Klassen gehören. Bei zwei Klassen liegt $G$ zwischen 0 (rein) und 0,5 (halbe-halbe), bei $k$ Klassen höchstens $1 - \frac{1}{k}$. Für eine Aufteilung nach Merkmal $A$ werden die Teilmengen $S_v$ nach ihrem Anteil gewichtet: $G_{Split} = \sum_v \frac{n_v}{n} \cdot G(S_v)$ mit $n_v$ als Fallzahl der Teilmenge und $n$ als Gesamtzahl. Gewählt wird das Merkmal mit dem größten Gewinn $G(S) - G_{Split}$. Gini braucht keinen Logarithmus und ist deshalb schneller zu rechnen als die Entropie; beide führen meist zu ähnlichen Bäumen.
+
+### Beispiel
+Zehn Aufträge, 4 mit und 6 ohne Reklamation: $G = 1 - (0{,}4^2 + 0{,}6^2) = 1 - 0{,}52 = 0{,}48$. Aufteilung nach Spediteur: Nordtrans 3 : 1 (4 Fälle) → $G = 1 - (0{,}75^2 + 0{,}25^2) = 0{,}375$; Rheinlogistik 1 : 2 (3 Fälle) → $G = 1 - (\frac{1}{9} + \frac{4}{9}) = 0{,}444$; Eigenlieferung 0 : 3 (3 Fälle) → $G = 0$. Gewichtet: $G_{Split} = 0{,}4 \cdot 0{,}375 + 0{,}3 \cdot 0{,}444 + 0{,}3 \cdot 0 = 0{,}283$, Gewinn $= 0{,}48 - 0{,}283 = 0{,}197$. (Die Entropie derselben Menge ist 0,971, der Informationsgewinn 0,371 – die Zahlenwerte sind nicht vergleichbar, die Rangfolge der Merkmale meist schon.)
+
+### Abgrenzung
+**Entropie/Informationsgewinn** (ID3, C4.5) und **Gini-Index** (CART) messen beide die Unreinheit. Der **Gini-Koeffizient** der Statistik misst die Ungleichverteilung von Einkommen und hat mit dem Entscheidungsbaum nichts zu tun.
+
+### Prüfungsfalle
+Die Teilmengen-Werte nicht nach Fallzahl gewichten oder den Gini-Index mit dem Gini-Koeffizienten verwechseln. ID3 rechnet mit dem Informationsgewinn, nicht mit Gini.
+
+### Merksatz
+Gini: Eins minus die Summe der quadrierten Anteile – null ist rein.
+
+Siehe auch: Entropie · Informationsgewinn · Entscheidungsbaum · ID3 · Random Forest
+Mehr: Deep Dive 6, 7.3
+
 ## Gleichgewichtspreis
 <!-- id: gleichgewichtspreis · quellen: Karte DD14, DD14 4.2 · stand: 2026-10 -->
 
@@ -765,6 +789,34 @@ Eine Entität, ein führender Datensatz.
 
 Siehe auch: Dublette · Dublettenbereinigung · Master Data Management · Record Linkage · Stammdaten
 Mehr: Deep Dive 9, 4.2 · Deep Dive 9, 5.4
+
+## Gradient Boosting
+<!-- id: gradient-boosting · quellen: DD6 8.3 · stand: 2026-11 -->
+
+Ensemble-Verfahren, bei dem Entscheidungsbäume nacheinander trainiert werden und jeder neue Baum die Fehler der bisherigen Bäume ausgleicht; XGBoost ist eine verbreitete, schnelle Umsetzung.
+Auch: XGBoost, Boosting
+
+### Erklärung
+Start mit einer einfachen Vorhersage (z. B. dem Mittelwert). Dann: Residuum $r = y - \hat{y}$ je Fall berechnen, einen kleinen Baum auf diese Residuen trainieren und seine Vorhersage gedämpft addieren: $\hat{y}_{neu} = \hat{y}_{alt} + \eta \cdot h(x)$. Dabei ist $y$ der wahre Wert, $\hat{y}$ die bisherige Vorhersage, $h(x)$ die Ausgabe des neuen Baums und $\eta$ (eta) die Lernrate, z. B. 0,1. Das wird für viele Runden wiederholt. **Random Forest** trainiert viele unabhängige, tiefe Bäume parallel und mittelt (senkt die Varianz); **Boosting** trainiert flache Bäume nacheinander (senkt den Bias). Weil Boosting leicht überanpasst, werden Lernrate, Baumtiefe und Rundenzahl abgestimmt, oft mit Early Stopping. XGBoost ergänzt eine eingebaute Regularisierung, geht mit fehlenden Werten um und rechnet parallel. Bei tabellarischen Daten gehört es zu den stärksten Verfahren, ist aber – wie der Random Forest – kaum erklärbar.
+
+### Beispiel
+Reparaturdauer in Minuten für vier Aufträge: 40, 60, 80, 120. Start: Mittelwert 75 für alle. Residuen: −35, −15, +5, +45. Ein Baum mit einer Teilung (Aufträge 1–2 gegen 3–4) sagt die mittleren Residuen voraus: $\frac{-35 - 15}{2} = -25$ und $\frac{5 + 45}{2} = +25$. Mit $\eta = 0{,}5$: neue Vorhersagen $75 + 0{,}5 \cdot (-25) = 62{,}5$ (Aufträge 1–2) und $75 + 0{,}5 \cdot 25 = 87{,}5$ (Aufträge 3–4). Neue Residuen: −22,5; −2,5; −7,5; +32,5. Mittlerer quadratischer Fehler: vorher $\frac{1.225 + 225 + 25 + 2.025}{4} = 875$, nachher $\frac{506{,}25 + 6{,}25 + 56{,}25 + 1.056{,}25}{4} = 406{,}25$. Die nächste Runde würde erneut auf die Residuen trainieren.
+
+### Abgrenzung
+| | Random Forest | Gradient Boosting |
+|---|---|---|
+| Aufbau | Bäume unabhängig, parallel | Bäume nacheinander, jeder korrigiert |
+| Bäume | tief | flach |
+| Overfitting | robust | Gefahr, braucht Feinabstimmung |
+
+### Prüfungsfalle
+Boosting als „viele Bäume stimmen ab“ beschreiben – das ist Bagging/Random Forest. Und: XGBoost ist kein eigenes Verfahren, sondern eine Umsetzung von Gradient Boosting.
+
+### Merksatz
+Random Forest stimmt ab, Boosting verbessert nacheinander.
+
+Siehe auch: Random Forest · Bagging · Entscheidungsbaum · Residuum · Lernrate · Early Stopping · Overfitting
+Mehr: Deep Dive 6, 8.3
 
 ## Granularität
 <!-- id: granularitat · quellen: Karte DD8, DD8 4.1 · stand: 2026-10 -->

@@ -575,7 +575,7 @@ Mehr: Deep Dive 5, 2.3 · Deep Dive 17, 1.2
 Überanpassung: Das Modell lernt die Trainingsdaten samt Rauschen auswendig und ist auf neuen Daten deutlich schlechter.
 
 ### Erklärung
-Ursachen sind ein zu komplexes Modell, zu wenige Daten oder zu langes Training. Erkennbar ist Overfitting an der großen Lücke zwischen Trainings- und Testgüte. Gegenmaßnahmen: mehr Daten, einfacheres Modell, Regularisierung, Entscheidungsbäume beschneiden (Pruning) oder in der Tiefe begrenzen, Kreuzvalidierung, frühzeitiger Abbruch.
+Ursachen sind ein zu komplexes Modell, zu wenige Daten oder zu langes Training. Erkennbar ist Overfitting an der großen Lücke zwischen Trainings- und Testgüte. In der Sprache des Bias-Variance-Trade-offs: geringer Bias, aber hohe Varianz. Gegenmaßnahmen: mehr Daten, einfacheres Modell, **Regularisierung** (große Gewichte bestrafen), Entscheidungsbäume beschneiden (Pruning) oder in der Tiefe begrenzen, **Early Stopping** (Training abbrechen, wenn der Validierungsfehler steigt), Kreuzvalidierung zur zuverlässigen Messung. Die **Lernkurve** zeigt, ob mehr Daten die Lücke verkleinern.
 
 ### Beispiel
 Ein ungeschnittener ID3-Baum zur Reklamationsvorhersage erreicht 99 % Accuracy auf den Trainingsdaten, aber nur 71 % auf den Testdaten. Mit begrenzter Baumtiefe sinkt die Trainingsgüte auf 85 %, die Testgüte steigt auf 82 %.
@@ -593,7 +593,7 @@ Ein Modell nach der Trainingsgüte beurteilen – aussagekräftig ist nur die G�
 ### Merksatz
 Wer auswendig lernt, besteht nur die Übung, nicht die Prüfung.
 
-Siehe auch: Underfitting · Kreuzvalidierung · Train-Test-Split · Entscheidungsbaum
+Siehe auch: Underfitting · Kreuzvalidierung · Train-Test-Split · Entscheidungsbaum · Regularisierung · Early Stopping · Lernkurve · Bias-Variance-Trade-off
 Mehr: Deep Dive 7, 1.2 · Deep Dive 6, 7.3
 
 ## Oversampling

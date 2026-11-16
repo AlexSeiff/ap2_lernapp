@@ -835,6 +835,7 @@ Mehr: Deep Dive 6, 2.1
 <!-- id: merkmale-bilden · quellen: DD6 Teil 5 · stand: 2026-10 -->
 
 Schritt der Datenvorbereitung (Feature Engineering): Aus vorhandenen Rohdaten werden neue, aussagekräftige Merkmale berechnet.
+Auch: Feature Engineering
 
 ### Erklärung
 Rohdaten sind oft nicht direkt nutzbar: Ein Zeitstempel sagt wenig, die daraus berechnete Dauer viel. Typisch sind Differenzen (Dauer), Umrechnungen (Alter aus Geburtsdatum), Zerlegungen (Wochentag, Monat), Verhältnisse (Retourenquote) und Aggregationen (Umsatz der letzten 90 Tage). Gute Merkmale verbessern ein Modell oft stärker als ein komplizierteres Verfahren.
@@ -851,7 +852,7 @@ Merkmale aus Informationen bilden, die zum Vorhersagezeitpunkt noch nicht vorlie
 ### Merksatz
 Nicht der Zeitstempel zählt, sondern die Dauer dazwischen.
 
-Siehe auch: Merkmal · Kategorien kodieren · Standardisierung · Min-Max-Normalisierung
+Siehe auch: Merkmal · Kategorien kodieren · Standardisierung · Min-Max-Normalisierung · Data Leakage
 Mehr: Deep Dive 6, Teil 5
 
 ## Metadaten

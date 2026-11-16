@@ -91,10 +91,10 @@ Mehr: Deep Dive 16, 4.5 · Deep Dive 10, 4.4
 Klassifikations- und Regressionsverfahren, bei dem viele Entscheidungsbäume gemeinsam abstimmen.
 
 ### Erklärung
-Jeder Baum wird auf einer zufälligen Stichprobe der Trainingsdaten (Ziehen mit Zurücklegen, **Bagging**) trainiert und darf an jedem Knoten nur aus einer zufälligen Teilmenge der Merkmale wählen. Für einen neuen Fall stimmen alle Bäume ab; bei Klassifikation entscheidet die Mehrheit, bei Regression der Mittelwert. Einzelne Bäume überanpassen leicht, ihre Fehler gleichen sich im Wald weitgehend aus.
+Jeder Baum wird auf einer zufälligen Stichprobe der Trainingsdaten (Ziehen mit Zurücklegen, **Bagging**) trainiert und darf an jedem Knoten nur aus einer zufälligen Teilmenge der Merkmale wählen. Für einen neuen Fall stimmen alle Bäume ab; bei Klassifikation entscheidet die Mehrheit, bei Regression der Mittelwert. Einzelne Bäume überanpassen leicht, ihre Fehler gleichen sich im Wald weitgehend aus. Wichtige Hyperparameter sind die Zahl der Bäume, die maximale Tiefe und die Zahl der Merkmale je Knoten. Der Anteil der Bäume, die für eine Klasse stimmen, lässt sich als Score nutzen und mit einer Entscheidungsschwelle zuordnen. Fälle, die ein Baum nicht in seiner Stichprobe hatte (Out-of-Bag), liefern ohne eigenen Testsatz eine erste Schätzung der Güte; die Merkmalswichtigkeit zeigt, welche Merkmale die Abstimmung am stärksten beeinflussen. Benötigt keine Skalierung der Merkmale.
 
 ### Beispiel
-Reklamationsvorhersage im Möbelhaus: 300 Bäume bewerten einen Auftrag, 210 sagen „Reklamation“ – der Wald stuft ihn als riskant ein. Genauer als ein Einzelbaum, aber dem Fachbereich lässt sich nicht mehr eine einzelne Regel zeigen.
+Reklamationsvorhersage im Möbelhaus: 300 Bäume bewerten einen Auftrag, 210 sagen „Reklamation“ – der Wald stuft ihn als riskant ein ($\frac{210}{300} = 70\ \%$ Stimmenanteil, über der Schwelle 50 %). Genauer als ein Einzelbaum, aber dem Fachbereich lässt sich nicht mehr eine einzelne Regel zeigen.
 
 ### Abgrenzung
 | | Entscheidungsbaum | Random Forest |
@@ -109,7 +109,7 @@ Wer „Erklärbarkeit für den Fachbereich“ als Anforderung liest und trotzdem
 ### Merksatz
 Viele schwache Bäume, eine starke Mehrheit – aber keine lesbare Regel mehr.
 
-Siehe auch: Entscheidungsbaum · Bagging · Overfitting · Support Vector Machine · Transparenz und Erklärbarkeit
+Siehe auch: Entscheidungsbaum · Bagging · Gradient Boosting · Hyperparameter · Overfitting · Support Vector Machine · Transparenz und Erklärbarkeit
 Mehr: Deep Dive 6, 2.4 · Deep Dive 6, 8.3
 
 ## Ransomware
@@ -275,7 +275,7 @@ Mehr: Deep Dive 14, 4.5
 Trefferquote (Sensitivität) eines Klassifikators: Anteil der tatsächlich positiven Fälle, die das Modell gefunden hat – $\text{Recall} = \frac{TP}{TP + FN}$.
 
 ### Erklärung
-Der Nenner ist die Zeile der tatsächlich positiven Fälle in der Konfusionsmatrix. Der Recall ist wichtig, wenn ein übersehener Fall (FN) teuer ist. Im Zusammenhang mit der ROC-Kurve heißt er auch Richtig-Positiv-Rate (TPR).
+TP (richtig positiv) sind die positiven Fälle, die das Modell gefunden hat; FN (falsch negativ) sind die positiven Fälle, die es übersehen hat. Der Nenner TP + FN ist die Zeile der tatsächlich positiven Fälle in der Konfusionsmatrix. Der Recall ist wichtig, wenn ein übersehener Fall (FN) teuer ist. Im Zusammenhang mit der ROC-Kurve heißt er auch Richtig-Positiv-Rate (TPR).
 
 ### Beispiel
 1.000 Aufträge, 100 tatsächlich reklamiert, das Modell erkennt 60 davon: $\text{Recall} = \frac{60}{60 + 40} = 0{,}60$ = 60 %. Ein Modell, das immer „keine Reklamation“ sagt, hat 90 % Accuracy, aber 0 % Recall.
@@ -588,6 +588,36 @@ Nach jeder Änderung: Läuft alles, was schon lief?
 
 Siehe auch: Fehlernachtest · Testgetriebene Entwicklung (TDD) · Testpyramide · Testfall · Komponententest
 Mehr: Deep Dive 16, 2.4
+
+## Regularisierung
+<!-- id: regularisierung · quellen: DD7 1.2 · stand: 2026-11 -->
+
+Gegenmittel gegen Overfitting: Beim Training werden große Gewichte bestraft, sodass das Modell einfach bleibt; L1 und L2 sind die gängigen Strafen.
+Auch: L1-Regularisierung, L2-Regularisierung, Lasso, Ridge
+
+### Erklärung
+Statt nur den Fehler zu minimieren, minimiert das Training $J(w) = \text{Fehler}(w) + \lambda \cdot \text{Strafe}(w)$. Dabei ist $\text{Fehler}(w)$ der Trainingsfehler (z. B. der mittlere quadratische Fehler), $w_j$ sind die Gewichte und $\lambda \ge 0$ die Stärke der Regularisierung (ein Hyperparameter). **L2 (Ridge)** nutzt die Strafe $\sum_j w_j^2$ und verkleinert alle Gewichte, ohne sie auf genau null zu setzen. **L1 (Lasso)** nutzt $\sum_j \lvert w_j \rvert$ und setzt unwichtige Gewichte auf null – das wirkt wie eine automatische Merkmalsauswahl. $\lambda = 0$ bedeutet keine Regularisierung; ein zu großes $\lambda$ erzeugt Underfitting. Die Merkmale müssen skaliert sein, weil die Strafe sonst Merkmale mit kleinen Zahlenwerten benachteiligt. Weitere Formen: Dropout bei neuronalen Netzen, Pruning bei Bäumen.
+
+### Beispiel
+Lineare Regression für die Reparaturdauer mit drei Gewichten, $\lambda = 0{,}5$, Trainingsfehler (MSE) 20. Ohne Regularisierung ist $w = (4; -3; 2)$. L2-Strafe: $16 + 9 + 4 = 29$, also $J = 20 + 0{,}5 \cdot 29 = 34{,}5$. L1-Strafe: $4 + 3 + 2 = 9$, also $J = 20 + 0{,}5 \cdot 9 = 24{,}5$. Die regularisierte Lösung $w = (3; -2; 1)$ hat einen etwas höheren Trainingsfehler von 22, aber L2-Strafe $9 + 4 + 1 = 14$: $J = 22 + 0{,}5 \cdot 14 = 29$. Das Training bevorzugt sie (29 < 34,5): ein minimal schlechterer Fit auf den Trainingsdaten gegen ein einfacheres, stabileres Modell.
+
+### Abgrenzung
+| | L1 (Lasso) | L2 (Ridge) |
+|---|---|---|
+| Strafterm | Summe der Beträge | Summe der Quadrate |
+| Gewichte | einige exakt 0 | alle klein, nie exakt 0 |
+| Nutzen | Merkmalsauswahl | gleichmäßige Dämpfung |
+
+Mit der **Normalisierung** (Skalieren bzw. Normalformen in Datenbanken) hat Regularisierung nichts zu tun.
+
+### Prüfungsfalle
+Regularisierung gegen Underfitting empfehlen – sie macht das Modell einfacher und passt zu Overfitting. Bei Underfitting wird sie eher gelockert ($\lambda$ senken).
+
+### Merksatz
+Große Gewichte kosten Strafe – so bleibt das Modell schlicht.
+
+Siehe auch: Overfitting · Underfitting · Hyperparameter · Early Stopping · Bias-Variance-Trade-off · Gewicht · Skalierung
+Mehr: Deep Dive 7, 1.2
 
 ## Reifegradmodelle
 <!-- id: reifegradmodelle · quellen: Karte DD5, DD5 6.6 · stand: 2026-10 -->
@@ -1158,10 +1188,12 @@ Mehr: Deep Dive 11, A5
 Receiver Operating Characteristic: Kurve, die für alle Entscheidungsschwellen die Richtig-Positiv-Rate (Recall) gegen die Falsch-Positiv-Rate abträgt.
 
 ### Erklärung
-Ein Klassifikator liefert zunächst einen Score; erst die Schwelle macht daraus „positiv“ oder „negativ“, und jede Schwelle ergibt eine eigene Konfusionsmatrix. Die ROC-Kurve zeigt alle auf einmal: Punkt (0 | 0) heißt nie Alarm, (1 | 1) immer Alarm, oben links (0 | 1) wäre perfekt. Die Diagonale entspricht Raten. Die Fläche darunter (**AUC**) fasst die Trennschärfe zusammen: 1 perfekt, 0,5 Zufall.
+Ein Klassifikator liefert zunächst einen Score; erst die Schwelle macht daraus „positiv“ oder „negativ“, und jede Schwelle ergibt eine eigene Konfusionsmatrix. Die ROC-Kurve zeigt alle auf einmal: Punkt (0 | 0) heißt nie Alarm, (1 | 1) immer Alarm, oben links (0 | 1) wäre perfekt. Die Diagonale entspricht Raten. Die Fläche darunter (**AUC**) fasst die Trennschärfe zusammen: 1 perfekt, 0,5 Zufall. Jeder Punkt ist ein Wertepaar aus $\text{TPR} = \frac{TP}{TP + FN}$ (Richtig-Positiv-Rate = Recall: Anteil der tatsächlich Positiven, die gefunden wurden) und $\text{FPR} = \frac{FP}{FP + TN}$ (Falsch-Positiv-Rate = 1 − Spezifität: Anteil der tatsächlich Negativen, die fälschlich Alarm auslösen). TP, FN, FP und TN sind die Felder der Konfusionsmatrix bei der jeweiligen Schwelle. Senkt man die Schwelle, wandert der Punkt nach oben rechts: Mehr Treffer, aber auch mehr Fehlalarme.
 
 ### Beispiel
 Reklamationsmodell bei Schwelle 50 %: FPR = $\frac{90}{900}$ = 10 %, Recall = 60 % → Punkt (0,10 | 0,60), deutlich über der Diagonale.
+
+Kleines Beispiel zum Nachrechnen: Zehn Aufträge, 4 Reklamationen und 6 ohne; die Scores der Reklamationen sind 0,90; 0,80; 0,55 und 0,40, die der übrigen sechs 0,65; 0,45; 0,35; 0,25; 0,15 und 0,10. Bei Schwelle 0,5 sind TP = 3, FN = 1, FP = 1, TN = 5 → TPR $= \frac{3}{4} = 0{,}75$, FPR $= \frac{1}{6} = 0{,}17$. Bei Schwelle 0,4 sind TP = 4, FN = 0, FP = 2, TN = 4 → TPR $= 1{,}00$, FPR $= \frac{2}{6} = 0{,}33$. Bei Schwelle 0,3 sind TP = 4, FP = 3, TN = 3 → TPR $= 1{,}00$, FPR $= \frac{3}{6} = 0{,}50$. Die Punkte (0,17 | 0,75), (0,33 | 1,00) und (0,50 | 1,00) wandern mit sinkender Schwelle nach oben rechts; die vollständige Kurve ergibt eine AUC von 0,875 (siehe AUC).
 
 ### Abgrenzung
 Die AUC ist schwellenunabhängig und gut zum Modellvergleich; welche Schwelle im Betrieb gilt, entscheiden die Kosten von FP und FN. Bei stark unausgeglichenen Klassen ist die Precision-Recall-Kurve aussagekräftiger.
@@ -1172,7 +1204,7 @@ Auf der x-Achse steht die Falsch-Positiv-Rate (1 − Spezifität), nicht die Pre
 ### Merksatz
 Je näher an der linken oberen Ecke, desto besser.
 
-Siehe auch: AUC · Falsch-Positiv-Rate · Recall · Spezifität · Konfusionsmatrix
+Siehe auch: AUC · Entscheidungsschwelle · Falsch-Positiv-Rate · Recall · Spezifität · Konfusionsmatrix
 Mehr: Deep Dive 7, 4.4 · Deep Dive 17, 6.10
 
 ## ROLAP / MOLAP

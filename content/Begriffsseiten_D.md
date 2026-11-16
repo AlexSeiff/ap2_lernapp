@@ -151,6 +151,29 @@ Erst speichern, später verstehen – aber nur mit Katalog.
 Siehe auch: Data Warehouse · Schema-on-Read · ELT · Lakehouse · Big Data
 Mehr: Deep Dive 8, 5.1
 
+## Data Leakage
+<!-- id: data-leakage · quellen: DD6 Teil 5, DD7 1.1 · stand: 2026-11 -->
+
+Datenleck beim Modellbau: Das Modell nutzt beim Training Informationen, die zum Zeitpunkt der echten Vorhersage nicht vorliegen würden oder aus den Testdaten stammen – die Testgüte fällt dadurch unrealistisch gut aus.
+
+### Erklärung
+Es gibt zwei Hauptformen. **Target Leakage:** Ein Merkmal enthält die Antwort oder entsteht erst nach dem vorherzusagenden Ereignis (z. B. „Gutschrift erstellt“ bei der Vorhersage von Reklamationen). **Train-Test-Kontamination:** Informationen aus den Testdaten fließen ins Training, etwa wenn Skalierungswerte (Minimum, Maximum, Mittelwert) aus allen Daten berechnet, Resampling oder SMOTE vor dem Split angewendet, Dubletten in beiden Mengen gelassen oder bei Zeitreihen zufällig statt chronologisch geteilt wird. Warnzeichen sind auffällig gute Kennzahlen (Recall nahe 100 %) und ein Einbruch im Betrieb. Die Prüffrage für jedes Merkmal lautet: War diese Information zum Entscheidungszeitpunkt bereits bekannt? Die richtige Reihenfolge ist: zuerst aufteilen, dann Skalierung, Kodierung und Resampling nur aus den Trainingsdaten lernen und anschließend auf die Testdaten anwenden.
+
+### Beispiel
+Das Reklamationsmodell der Möbelhaus Nordholz GmbH soll bei Auftragsabschluss das Risiko vorhersagen. Unter den Merkmalen steckt „Gutschrift erstellt (ja/nein)“, das erst nach einer Reklamation gesetzt wird. Auf den 1.000 Testaufträgen (100 Reklamationen) findet das Modell alle: TP = 100, FN = 0, FP = 0, TN = 900, also $\text{Recall} = \frac{100}{100 + 0} = 100\ \%$ und $\text{Precision} = \frac{100}{100 + 0} = 100\ \%$. Im Betrieb ist das Merkmal bei Auftragsabschluss immer „nein“; das Modell sagt nie „Reklamation“ voraus: TP = 0, FN = 100, Recall $= \frac{0}{0 + 100} = 0\ \%$, bei 90 % Accuracy. Das Ergebnis im Test war ein Trugbild.
+
+### Abgrenzung
+**Overfitting** zeigt sich schon im Test (große Lücke zu den Trainingsdaten); Data Leakage verdeckt sich im Test – dort sieht alles gut aus, der Fehler tritt erst im Betrieb auf. **Model Drift** entsteht später, weil sich die Realität ändert; Leakage ist von Anfang an ein Konstruktionsfehler.
+
+### Prüfungsfalle
+Eine sehr hohe Testgüte als Erfolg feiern, statt sie zu hinterfragen; oder Skalierungswerte vor dem Split aus allen Daten berechnen.
+
+### Merksatz
+Erst teilen, dann lernen – und nur Merkmale nutzen, die vorher bekannt sind.
+
+Siehe auch: Train-Test-Split · Overfitting · Merkmale bilden · Zielvariable · Kreuzvalidierung · Model Drift
+Mehr: Deep Dive 6, Teil 5 · Deep Dive 7, 1.1
+
 ## Data Mart
 <!-- id: data-mart · quellen: Karte DD8, DD8 Teil 2 · stand: 2026-10 -->
 
@@ -640,6 +663,40 @@ JSON kennt sechs Typen – das Datum ist ein String.
 Siehe auch: JSON · ISO 8601 · DECIMAL · Postleitzahlen als Text · Keine Datentypen
 Mehr: Deep Dive 15, 2.2 · Deep Dive 15, 1.3
 
+## DBSCAN
+<!-- id: dbscan · quellen: DD6 Teil 3 · stand: 2026-11 -->
+
+Dichtebasiertes Clusterverfahren: Punkte in dicht besiedelten Regionen werden zu Clustern verbunden, Punkte in dünn besiedelten Regionen gelten als Rauschen; die Clusteranzahl muss nicht vorgegeben werden.
+
+### Erklärung
+DBSCAN (Density-Based Spatial Clustering of Applications with Noise) hat zwei Hyperparameter: den Radius $\varepsilon$ (Epsilon) der Nachbarschaft und die Mindestzahl **MinPts** an Punkten in dieser Nachbarschaft (der Punkt selbst zählt mit). Ein **Kernpunkt** hat mindestens MinPts Punkte im Radius $\varepsilon$; ein **Randpunkt** ist selbst kein Kernpunkt, liegt aber im Radius eines Kernpunkts; alle übrigen sind **Rauschpunkte**. Ein Cluster entsteht, indem man von einem Kernpunkt aus alle erreichbaren Kern- und Randpunkte einsammelt. Stärken: beliebige Clusterform, Ausreißer werden erkannt, kein k nötig. Schwächen: Ergebnis hängt von $\varepsilon$ und MinPts ab, Cluster mit sehr unterschiedlicher Dichte werden schlecht getrennt, und die Merkmale müssen wie bei k-Means skaliert sein, weil der Abstand zählt.
+
+### Beispiel
+Sieben Kunden nach Bestellungen pro Jahr und Bestellwert (in 100 €): P1(2|2), P2(3|1), P3(1|3), P4(7|8), P5(8|7), P6(9|9), P7(15|1). Mit $\varepsilon = 2{,}5$ und MinPts = 3 (euklidischer Abstand):
+
+- P1: Abstand zu P2 und P3 jeweils $\sqrt{2} \approx 1{,}41$ → 3 Punkte (mit sich selbst) → Kernpunkt.
+- P2 und P3: Abstand zueinander $\sqrt{8} \approx 2{,}83 > 2{,}5$, also nur 2 Punkte → kein Kernpunkt, aber im Radius von P1 → Randpunkte von Cluster 1.
+- P4, P5, P6: Abstände $\sqrt{2} \approx 1{,}41$ und $\sqrt{5} \approx 2{,}24$ → jeder hat 3 Punkte → Kernpunkte, gemeinsam Cluster 2.
+- P7: kein weiterer Punkt in Reichweite → Rauschen.
+
+Ergebnis: zwei Cluster (Gelegenheits- und Stammkunden) und ein Ausreißer. k-Means müsste P7 einem Cluster zuordnen und zöge dessen Zentrum zur Seite.
+
+### Abgrenzung
+| | k-Means | DBSCAN |
+|---|---|---|
+| Vorgabe | Clusteranzahl k | Radius ε und MinPts |
+| Clusterform | kugelig, ähnlich groß | beliebig |
+| Ausreißer | werden zugeordnet | als Rauschen markiert |
+
+### Prüfungsfalle
+Bei DBSCAN eine Clusteranzahl k angeben wollen – sie ergibt sich aus den Daten. Und: Rauschpunkte sind kein eigenes Cluster.
+
+### Merksatz
+Dichte verbindet, Leere trennt.
+
+Siehe auch: Clustering · K-Means · Euklidischer Abstand · Skalierung · Hierarchisches Clustering · Ausreißer
+Mehr: Deep Dive 6, Teil 3
+
 ## DDG
 <!-- id: ddg · quellen: DD10 2.4 · stand: 2026-10 -->
 
@@ -853,7 +910,7 @@ Deep Learning für kleine Tabellen mit wenigen hundert Zeilen empfehlen – dort
 ### Merksatz
 KI ⊃ ML ⊃ Deep Learning.
 
-Siehe auch: Machine Learning · Neuronale Netze · Künstliche Intelligenz · Generative KI · Overfitting
+Siehe auch: Machine Learning · Neuronale Netze · CNN (Convolutional Neural Network) · Künstliche Intelligenz · Generative KI · Overfitting
 Mehr: Deep Dive 6, 8.1 · Deep Dive 6, 8.2
 
 ## DEFAULT
@@ -1247,6 +1304,29 @@ Signieren privat, prüfen öffentlich.
 
 Siehe auch: Asymmetrische Verschlüsselung · Hashing · PKI · Integrität · Schutzziele
 Mehr: Deep Dive 10, 4.2
+
+## Dimensionsreduktion
+<!-- id: dimensionsreduktion · quellen: DD6 2.2 · stand: 2026-11 -->
+
+Unüberwachte Verfahren, die viele Merkmale zu wenigen verdichten oder auf die wichtigsten beschränken, ohne den Großteil der Information zu verlieren.
+
+### Erklärung
+Viele Merkmale machen Modelle langsam und anfälliger für Overfitting; zudem verlieren Abstände in sehr vielen Dimensionen an Aussagekraft („Fluch der Dimensionalität“). Dimensionsreduktion hilft auch beim Visualisieren (z. B. auf zwei Achsen) und beim Bündeln stark korrelierter Merkmale. Zwei Wege: **Merkmalsauswahl** lässt Merkmale weg (z. B. eines von zwei fast identischen); **Merkmalsextraktion** bildet aus den alten Merkmalen neue, weniger zahlreiche – das bekannteste Verfahren ist die **PCA**. Der Preis: Neu gebildete Merkmale sind schwerer zu deuten. Vorher werden die Merkmale skaliert.
+
+### Beispiel
+Kundendaten mit 8 Merkmalen. Umsatz netto und Umsatz brutto sind perfekt korreliert (r = 1,00), Anzahl Bestellungen und Anzahl Rechnungen fast (r = 0,98). Je eines der beiden Paare wird gestrichen: 8 − 2 = 6 Merkmale, also $\frac{2}{8} = 25\ \%$ weniger Spalten bei kaum weniger Information.
+
+### Abgrenzung
+Dimensionsreduktion verringert die **Spalten** (Merkmale), Clustering fasst **Zeilen** (Datensätze) zu Gruppen zusammen. Die „Dimension“ im Data Warehouse (Dimensionstabelle) ist etwas anderes.
+
+### Prüfungsfalle
+Dimensionsreduktion mit dem Löschen von Datensätzen gleichsetzen – es verschwinden Spalten, nicht Zeilen. Auch die „Dimension“ im Star-Schema ist nicht gemeint.
+
+### Merksatz
+Weniger Spalten, gleiche Aussage.
+
+Siehe auch: PCA · Clustering · Unüberwachtes Lernen · Merkmal · Skalierung · Korrelation · Dimensionstabelle
+Mehr: Deep Dive 6, 2.2
 
 ## Dimensionstabelle
 <!-- id: dimensionstabelle · quellen: Karte DD8, DD8 4.1 · stand: 2026-10 -->

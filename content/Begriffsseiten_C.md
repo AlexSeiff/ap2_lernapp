@@ -192,8 +192,46 @@ Ohne Skalierung clustern – dann entscheidet allein das Merkmal mit der größt
 ### Merksatz
 Keine Labels, aber Ähnlichkeit – das ist Clustering.
 
-Siehe auch: K-Means · Unüberwachtes Lernen · Euklidischer Abstand · Skalierung · Klassifikation
+Siehe auch: K-Means · DBSCAN · Hierarchisches Clustering · Unüberwachtes Lernen · Euklidischer Abstand · Skalierung · Klassifikation
 Mehr: Deep Dive 6, Teil 3
+
+## CNN (Convolutional Neural Network)
+<!-- id: cnn · quellen: DD6 8.1, DD6 8.2 · stand: 2026-11 -->
+
+Neuronales Netz für Bilddaten (und andere gitterartige Daten), das kleine, lernbare Filter über das Bild schiebt und so Muster wie Kanten und Formen erkennt.
+Auch: Faltungsnetz, Convolution, Feature Map
+
+### Erklärung
+Ein vollvernetztes Netz würde jedes Pixel mit jedem Neuron verbinden – das sind sehr viele Gewichte und die Bildstruktur geht verloren. Ein CNN arbeitet stattdessen mit **Faltungsschichten** (Convolution): Ein **Filter** (auch **Kernel**), z. B. 3 × 3 Gewichte, wird mit der **Schrittweite** (Stride) über das Bild geschoben. An jeder Position werden Filtergewichte und darunterliegende Pixelwerte multipliziert und aufsummiert; das Ergebnis aller Positionen ist eine **Feature Map** (Merkmalskarte). Derselbe Filter wird überall im Bild verwendet (Gewichtsteilung), und seine Gewichte werden – wie bei jedem Netz – per Backpropagation gelernt. Mehrere Filter erzeugen mehrere Feature Maps. **Padding** füllt den Bildrand mit Nullen auf, damit die Ausgabe nicht schrumpft. Auf eine Faltung folgen meist eine Aktivierungsfunktion (ReLU) und **Pooling**; am Ende stehen vollvernetzte Schichten für die Entscheidung. Frühe Schichten erkennen einfache Muster (Kanten), tiefe Schichten komplexe (Formen, Objekte).
+
+Größe der Feature Map: $n_{aus} = \left\lfloor \frac{n - f + 2p}{s} \right\rfloor + 1$ mit $n$ = Kantenlänge der Eingabe, $f$ = Kantenlänge des Filters, $p$ = Padding je Seite, $s$ = Stride (die Klammern ⌊ ⌋ runden ab).
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH prüft Fotos von Rücksendungen auf Transportschäden. Zur Veranschaulichung ein winziges Bild (4 × 4, Helligkeit 0 oder 1) mit einer senkrechten Kante und ein Filter für senkrechte Kanten:
+
+Bild: in jeder der vier Zeilen `0 0 1 1`. Filter (2 × 2): obere Zeile −1, 1; untere Zeile −1, 1. Stride 1, Padding 0 → Größe $\frac{4 - 2 + 0}{1} + 1 = 3$, die Feature Map ist 3 × 3.
+
+Position links oben: $-1 \cdot 0 + 1 \cdot 0 + (-1) \cdot 0 + 1 \cdot 0 = 0$. Eine Spalte weiter: $-1 \cdot 0 + 1 \cdot 1 + (-1) \cdot 0 + 1 \cdot 1 = 2$. Noch eine Spalte weiter: $-1 \cdot 1 + 1 \cdot 1 + (-1) \cdot 1 + 1 \cdot 1 = 0$. Jede Zeile der Feature Map lautet `0 2 0` – der hohe Wert in der Mitte zeigt, wo die Kante liegt.
+
+Größenbeispiele bei einem 28 × 28-Bild und 3 × 3-Filter: Padding 0, Stride 1 → 26 × 26; Padding 1, Stride 1 → 28 × 28; Padding 0, Stride 2 → 13 × 13. Gewichte: Eine vollvernetzte Schicht mit 100 Neuronen braucht 784 · 100 = 78.400 Gewichte, 8 Filter à 3 × 3 (je ein Bias) nur 8 · (9 + 1) = 80 Parameter.
+
+### Abgrenzung
+| | Mehrschichtiges Perzeptron | CNN |
+|---|---|---|
+| Verbindungen | jedes Neuron mit allen Eingaben | kleiner Filter, überall dasselbe Gewicht |
+| Eignung | tabellarische Merkmale | Bilder (Nachbarschaft zählt) |
+| Gewichtsanzahl | sehr hoch bei Bildern | niedrig |
+
+Beide sind neuronale Netze und werden per Backpropagation trainiert. Bei tabellarischen Auftragsdaten sind Entscheidungsbaum oder Random Forest meist die bessere Wahl.
+
+### Prüfungsfalle
+Den Filter als festen, von Hand entworfenen Bildfilter verstehen – seine Gewichte werden beim Training gelernt. Ebenso falsch: „Padding verkleinert das Bild“ – es erhält die Größe (bzw. verhindert das Schrumpfen).
+
+### Merksatz
+Ein kleiner Filter wandert über das Bild und sucht überall dasselbe Muster.
+
+Siehe auch: Neuronale Netze · Deep Learning · Pooling · Aktivierungsfunktion · Backpropagation · Mehrschichtiges Perzeptron
+Mehr: Deep Dive 6, 8.1 · Deep Dive 6, 8.2
 
 ## COALESCE
 <!-- id: coalesce · quellen: Karte DD1, DD1 3.1 · stand: 2026-10 -->

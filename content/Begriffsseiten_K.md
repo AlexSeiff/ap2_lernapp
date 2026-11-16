@@ -42,7 +42,7 @@ Euro-Beträge und Stückzahlen unskaliert clustern – dann entscheidet allein d
 ### Merksatz
 Zuordnen, Mittelwert bilden, wiederholen – bis nichts mehr wandert.
 
-Siehe auch: K-Nächste-Nachbarn · Clustering · Euklidischer Abstand · Standardisierung
+Siehe auch: K-Nächste-Nachbarn · Clustering · DBSCAN · Hierarchisches Clustering · Euklidischer Abstand · Standardisierung
 Mehr: Deep Dive 6, 2.4 · Deep Dive 6, Teil 3
 
 ## K-Nächste-Nachbarn
@@ -1278,10 +1278,10 @@ Mehr: Deep Dive 11, A1 · Deep Dive 17, 6.4
 Verfahren zur Gütemessung, bei dem die Daten in k Teile zerlegt werden und jeder Teil einmal als Testmenge dient (k-fold Cross Validation).
 
 ### Erklärung
-In k Durchläufen wird das Modell auf k − 1 Teilen trainiert und auf dem verbleibenden Teil getestet; die k Ergebnisse werden gemittelt. Üblich sind k = 5 oder k = 10. Vorteile: Jeder Datensatz wird genau einmal getestet, das Ergebnis hängt nicht von einer zufällig günstigen Aufteilung ab, besonders wertvoll bei kleinen Datenmengen. Nachteil: k-facher Rechenaufwand. Genutzt wird sie auch, um Parameter wie k bei k-NN oder die Baumtiefe zu wählen.
+In k Durchläufen wird das Modell auf k − 1 Teilen trainiert und auf dem verbleibenden Teil getestet; die k Ergebnisse werden gemittelt: $\bar{G} = \frac{1}{k} \sum_{i=1}^{k} G_i$, mit $G_i$ als Gütewert (z. B. Recall) des i-ten Durchlaufs. Die Streuung der $G_i$ zeigt zusätzlich, wie stabil das Modell ist. Üblich sind k = 5 oder k = 10. Vorteile: Jeder Datensatz wird genau einmal getestet, das Ergebnis hängt nicht von einer zufällig günstigen Aufteilung ab, besonders wertvoll bei kleinen Datenmengen. Nachteil: k-facher Rechenaufwand. Bei seltenen Klassen wird **stratifiziert** gefaltet, sodass jeder Teil denselben Klassenanteil hat. Genutzt wird sie auch, um **Hyperparameter** wie k bei k-NN oder die Baumtiefe zu wählen; das fertige Modell wird danach einmal auf zurückgehaltenen Testdaten geprüft. Alle Vorverarbeitung (Skalierung, Resampling) gehört in jeden Durchlauf einzeln, nur aus den k − 1 Trainingsteilen.
 
 ### Beispiel
-1.000 Aufträge, k = 5: fünf Teile à 200. Durchlauf 1 trainiert auf Teil 2–5 (800) und testet auf Teil 1, Durchlauf 2 testet auf Teil 2 usw. Recall-Werte 0,58; 0,62; 0,60; 0,57; 0,63 ergeben im Mittel 0,60.
+1.000 Aufträge, k = 5: fünf Teile à 200. Durchlauf 1 trainiert auf Teil 2–5 (800) und testet auf Teil 1, Durchlauf 2 testet auf Teil 2 usw. Recall-Werte 0,58; 0,62; 0,60; 0,57; 0,63 ergeben im Mittel $\frac{0{,}58 + 0{,}62 + 0{,}60 + 0{,}57 + 0{,}63}{5} = \frac{3{,}00}{5} = 0{,}60$.
 
 ### Abgrenzung
 Der einfache **Train-Test-Split** prüft nur einmal und kann zufällig günstig ausfallen. Bei Zeitreihen wird statt zufällig **chronologisch** getrennt, damit keine Zukunftsinformation ins Training gelangt.
@@ -1292,7 +1292,7 @@ Skalierungswerte vorab aus allen Daten berechnen – sie gehören in jedem Durch
 ### Merksatz
 Jeder Teil darf einmal Prüfer sein – das Mittel zählt.
 
-Siehe auch: Overfitting · Testdaten · K-Nächste-Nachbarn
+Siehe auch: Overfitting · Testdaten · K-Nächste-Nachbarn · Hyperparameter · Data Leakage · Stratifizierte Aufteilung
 Mehr: Deep Dive 7, 1.3
 
 ## Kriterien der Sozialauswahl
