@@ -19,7 +19,7 @@ Signifikanz sagt nichts über die Stärke (dafür r bzw. die Effektgröße) und 
 ### Merksatz
 Kleiner p-Wert = Zufall unwahrscheinlich – nicht: Effekt groß oder ursächlich.
 
-Siehe auch: Nullhypothese · Signifikanz · Scheinkorrelation · Korrelation
+Siehe auch: Nullhypothese · Signifikanz · Hypothesentest · Effektgröße · Konfidenzintervall · Scheinkorrelation · Korrelation
 Mehr: Deep Dive 4, 1.3
 
 ## Pachtvertrag

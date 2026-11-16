@@ -80,7 +80,7 @@ Falsch positiv ist der Fehlalarm (Fehler 1. Art). Welcher Fehler schwerer wiegt,
 ### Merksatz
 FN = übersehen.
 
-Siehe auch: Falsch positiv · Recall · Konfusionsmatrix · Richtig positiv
+Siehe auch: Falsch positiv · Recall · Konfusionsmatrix · Richtig positiv · Fehler 2. Art
 Mehr: Deep Dive 7, 2.1 · Deep Dive 7, 2.4
 
 ## Falsch positiv
@@ -100,7 +100,7 @@ Falsch negativ ist der übersehene Fall (Fehler 2. Art). Teuer ist ein FP z. B. 
 ### Merksatz
 FP = Fehlalarm.
 
-Siehe auch: Falsch negativ · Precision · Falsch-Positiv-Rate · Konfusionsmatrix
+Siehe auch: Falsch negativ · Precision · Falsch-Positiv-Rate · Konfusionsmatrix · Fehler 1. Art
 Mehr: Deep Dive 7, 2.1 · Deep Dive 7, 2.4
 
 ## Falsch-Positiv-Rate
@@ -228,6 +228,66 @@ Ohne Zeitstempel keine Reihenfolge, ohne Reihenfolge kein Prozess.
 
 Siehe auch: Timestamp · Event Log · Zu grobe Zeitstempel · Fehlende Case ID · Zeitzonen-/Sommerzeitprobleme
 Mehr: Deep Dive 5, 5.3
+
+## Fehler 1. Art (α-Fehler)
+<!-- id: fehler-1-art · quellen: Karte DD4, DD4 1.3, DD7 2.1 · stand: 2026-11 -->
+
+Die Nullhypothese wird verworfen, obwohl sie zutrifft – ein Fehlalarm: Man behauptet einen Effekt, den es gar nicht gibt. Die Wahrscheinlichkeit dafür ist höchstens das Signifikanzniveau α.
+
+Auch: Fehler erster Art, Typ-I-Fehler
+
+### Erklärung
+α legt man vor dem Test fest, meist 5 %. Würde man 100-mal einen nicht vorhandenen Effekt testen, wäre er im Schnitt 5-mal „signifikant“. Das Risiko wächst bei **Mehrfachtests**: Bei k unabhängigen Tests ist die Wahrscheinlichkeit für mindestens einen Fehlalarm $1 - (1 - \alpha)^k$. Gegenmaßnahmen: strengeres α, Korrektur für Mehrfachtests (z. B. Bonferroni: α geteilt durch k) und Ergebnisse an neuen Daten bestätigen. In der Konfusionsmatrix entspricht der Fehler 1. Art dem **falsch positiven** Fall.
+
+### Beispiel
+Das Möbelhaus prüft 20 Merkmale (Wochentag, Filiale, Lieferweg …) auf einen Zusammenhang mit der Reklamationsquote, α = 5 %. Gibt es in Wahrheit keinen einzigen, liegt die Wahrscheinlichkeit für mindestens einen Zufallstreffer bei $1 - 0{,}95^{20} = 1 - 0{,}358 = 0{,}642$, also rund 64 %. Ein einzelner „signifikanter“ Treffer unter 20 Tests ist daher kein Beleg.
+
+### Abgrenzung
+| | Fehler 1. Art | Fehler 2. Art |
+|---|---|---|
+| Entscheidung | H0 verworfen | H0 beibehalten |
+| Wahrheit | H0 stimmt | H0 ist falsch |
+| Folge | Fehlalarm | übersehener Effekt |
+| Wahrscheinlichkeit | α | β |
+| Konfusionsmatrix | falsch positiv | falsch negativ |
+
+α ist die vorab gewählte Obergrenze, der p-Wert dagegen wird aus den Daten berechnet.
+
+### Prüfungsfalle
+α = 5 % als „H0 ist zu 5 % wahr“ deuten, α mit dem p-Wert gleichsetzen oder die beiden Fehlerarten vertauschen. Merkhilfe: Art 1 = zu Unrecht verurteilt (Fehlalarm), Art 2 = Täter laufen gelassen.
+
+### Merksatz
+Fehler 1. Art: Alarm, obwohl nichts ist.
+
+Siehe auch: Fehler 2. Art · Nullhypothese · Signifikanz · P-Wert · Falsch positiv · Hypothesentest
+Mehr: Deep Dive 4, 1.3 · Deep Dive 7, 2.1
+
+## Fehler 2. Art (β-Fehler)
+<!-- id: fehler-2-art · quellen: Karte DD4, DD4 1.3, DD7 2.1 · stand: 2026-11 -->
+
+Die Nullhypothese wird beibehalten, obwohl sie falsch ist – ein echter Effekt wird übersehen. Die Wahrscheinlichkeit dafür heißt β, ihr Gegenstück 1 − β ist die Teststärke (Power).
+
+Auch: Fehler zweiter Art, Typ-II-Fehler
+
+### Erklärung
+Die **Teststärke** ist die Wahrscheinlichkeit, einen tatsächlich vorhandenen Effekt zu entdecken; üblich ist das Planungsziel von mindestens 80 %. Sie steigt mit größerer Stichprobe, größerem wahren Effekt, geringerer Streuung und höherem α. Bei fester Stichprobe wirken α und β gegenläufig: Wer α senkt, um Fehlalarme zu vermeiden, übersieht mehr echte Effekte. In der Konfusionsmatrix entspricht der Fehler 2. Art dem **falsch negativen** Fall, die Teststärke dem Recall des Tests.
+
+### Beispiel
+Bisherige Reparaturdauer 60 min (σ = 10 min); eine neue Checkliste senkt sie in Wahrheit auf 56 min. Einseitiger z-Test mit α = 5 % (kritischer Wert −1,645):
+- 25 Reparaturen: Standardfehler $\frac{10}{\sqrt{25}} = 2$, H0 wird verworfen, wenn $\bar{x} < 60 - 1{,}645 \cdot 2 = 56{,}71$. Bei wahrem μ = 56 geschieht das mit Wahrscheinlichkeit $\Phi\left(\frac{56{,}71 - 56}{2}\right) = \Phi(0{,}36) \approx 0{,}64$. Teststärke 64 %, β ≈ 36 %: Mit gut einer Chance von drei bleibt der echte Effekt unentdeckt.
+- 50 Reparaturen: Standardfehler 1,41, Grenze 57,67, Teststärke $\Phi(1{,}18) \approx 0{,}88$ – jetzt reicht die Stichprobe.
+
+### Abgrenzung
+Der Fehler 1. Art ist der Fehlalarm (zu Unrecht „signifikant“), der Fehler 2. Art das Übersehen (zu Unrecht „nicht signifikant“). Welcher schwerer wiegt, hängt vom Schaden ab – wie bei Precision und Recall.
+
+### Prüfungsfalle
+„Nicht signifikant“ als „es gibt keinen Effekt“ lesen. Bei kleiner Stichprobe war oft nur die Teststärke zu gering. Und: α allein zu verkleinern verbessert nichts, es erhöht β.
+
+### Merksatz
+Fehler 2. Art: Effekt da, aber nicht entdeckt.
+
+Siehe auch: Fehler 1. Art · Hypothesentest · Falsch negativ · Recall · Effektgröße · Nullhypothese
+Mehr: Deep Dive 4, 1.3 · Deep Dive 7, 2.1
 
 ## Fehlernachtest
 <!-- id: fehlernachtest · quellen: Karte DD16, DD16 2.4 · stand: 2026-10 -->

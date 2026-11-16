@@ -26,6 +26,37 @@ Extract holt, Transform veredelt, Load liefert.
 Siehe auch: ETL · Deltaextraktion · Vollextraktion · Staging Area · T – Transform
 Mehr: Deep Dive 8, 3.1
 
+## Effektgröße
+<!-- id: effektgrosse · quellen: Karte DD4, DD4 1.2, DD4 1.3 · stand: 2026-11 -->
+
+Maß dafür, wie groß ein Effekt, Unterschied oder Zusammenhang tatsächlich ist – unabhängig davon, wie groß die Stichprobe war.
+
+### Erklärung
+Der p-Wert beantwortet „Ist es wahrscheinlich kein Zufall?“, die Effektgröße „Wie groß ist der Effekt?“. Typische Maße sind der Korrelationskoeffizient r, das Bestimmtheitsmaß R² (erklärter Anteil) und für den Vergleich zweier Mittelwerte **Cohens d**: $d = \frac{\bar{x}_1 - \bar{x}_2}{s}$ mit s als gemeinsamer Standardabweichung innerhalb der Gruppen. Als grobe Faustregel gelten d ≈ 0,2 klein, 0,5 mittel, 0,8 groß; die Grenzen unterscheiden sich je nach Quelle und Fachgebiet. Ebenso wichtig ist der absolute Effekt in der Praxis (Minuten, Euro, Prozentpunkte): Lohnt sich ein Effekt, hängt von Kosten und Nutzen ab. Die erwartete Effektgröße braucht man auch, um vorab die nötige Stichprobengröße zu planen.
+
+### Beispiel
+Zwei Lieferrouten, Streuung innerhalb der Routen s = 10 min: Route A im Mittel 62 min, Route B 58 min. Der Effekt ist $d = \frac{62 - 58}{10} = 0{,}4$ – klein bis mittel. Näherungsweise mit einem z-Test (zweiseitig):
+- 100 Fahrten je Route: Standardfehler der Differenz $10 \cdot \sqrt{2/100} = 1{,}41$, $z = \frac{4}{1{,}41} = 2{,}83$, p ≈ 0,005 → hochsignifikant.
+- 10 Fahrten je Route: Standardfehler $10 \cdot \sqrt{2/10} = 4{,}47$, $z = \frac{4}{4{,}47} = 0{,}89$, p ≈ 0,37 → nicht signifikant.
+
+Derselbe Effekt (d = 0,4, vier Minuten) – nur die Stichprobe unterscheidet sich, und mit ihr der p-Wert.
+
+### Abgrenzung
+| Kennzahl | Frage |
+|---|---|
+| p-Wert / Signifikanz | Ist der Effekt wahrscheinlich echt? |
+| Effektgröße | Wie groß ist er? |
+| Konfidenzintervall | Wie genau ist er geschätzt? |
+
+### Prüfungsfalle
+Aus „hochsignifikant“ auf einen großen Effekt schließen (siehe Signifikanz) – oder aus „nicht signifikant“ auf „kein Effekt“: bei kleiner Stichprobe fehlt oft nur die Teststärke.
+
+### Merksatz
+Der p-Wert sagt, ob; die Effektgröße sagt, wie viel.
+
+Siehe auch: Signifikanz · P-Wert · Korrelationskoeffizient nach Pearson · Bestimmtheitsmaß · Hypothesentest · Fehler 2. Art · Konfidenzintervall
+Mehr: Deep Dive 4, 1.2 · Deep Dive 4, 1.3
+
 ## Eigentum
 <!-- id: eigentum · quellen: Karte DD14, DD14 2.4 · stand: 2026-10 -->
 
@@ -1318,7 +1349,7 @@ Eine Prognose ohne Hinweis auf den beobachteten Wertebereich abgeben.
 ### Merksatz
 Die Gerade kennt nur ihre Daten – außerhalb rät sie.
 
-Siehe auch: Regressionsgerade · Regressionsgleichung · Regression · Overfitting
+Siehe auch: Regressionsgerade · Regressionsgleichung · Regression · Interpolation · Achsenabschnitt · Overfitting
 Mehr: Deep Dive 4, 2.2
 
 ## Ausgelassen

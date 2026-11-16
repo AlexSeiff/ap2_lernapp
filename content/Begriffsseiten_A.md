@@ -270,6 +270,34 @@ Hohe Accuracy bei seltenen Fällen beweist nichts – erst mit der Baseline verg
 Siehe auch: Konfusionsmatrix · Precision · Recall · Balanced Accuracy · Unausgeglichene Klassen
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.3
 
+## Achsenabschnitt (Intercept)
+<!-- id: achsenabschnitt · quellen: Karte DD4, DD4 2.1, DD4 2.2 · stand: 2026-11 -->
+
+Konstante a der Regressionsgleichung: der Wert, den das Modell als Schätzung ŷ liefert, wenn die Einflussgröße x gleich null ist.
+
+Auch: Intercept, Konstante
+
+### Erklärung
+In $\hat{y} = a + b \cdot x$ legt a die Höhe der Geraden fest, die Steigung b ihre Neigung. Rechnerisch gilt $a = \bar{y} - b \cdot \bar{x}$: Die Gerade verläuft immer durch den Schwerpunkt der Daten $(\bar{x} \mid \bar{y})$. a hat die Einheit von y. Als „Grundwert“ darf man a nur deuten, wenn x = 0 im beobachteten Bereich liegt oder zumindest sinnvoll ist; sonst ist a eine Extrapolation und nur ein Rechenwert, der die Gerade an die richtige Stelle schiebt. Bei mehreren Einflussgrößen ist a der Schätzwert, wenn alle x gleichzeitig null sind. Lässt man a weg (Regression durch den Ursprung), ändern sich Koeffizienten und R² – das ist nur zulässig, wenn x = 0 zwingend y = 0 bedeutet.
+
+### Beispiel
+Werbebudget x und Umsatz y der Möbelhaus Nordholz GmbH: $\bar{x} = 3$, $\bar{y} = 44$, $b = 6{,}4$.
+$a = 44 - 6{,}4 \cdot 3 = 44 - 19{,}2 = 24{,}8$ T€.
+Beobachtet wurde nur x = 1 bis 5. „Bei 0 € Werbung 24,8 T€ Umsatz“ ist deshalb nur ein Rechenwert, kein belegter Grundumsatz.
+Anders bei einer Montagezeit-Gleichung $\hat{y} = 12 + 5 \cdot x$ (x = Anzahl Möbelteile, y in Minuten): Montiert werden meist 2 bis 10 Teile, und 12 min Rüstzeit je Auftrag sind fachlich plausibel – dort ist a deutbar.
+
+### Abgrenzung
+Die **Steigung b** sagt, um wie viel sich ŷ je Einheit x ändert; der Achsenabschnitt a sagt, auf welcher Höhe die Gerade startet. a ist nicht der Mittelwert ȳ – ȳ ist der Wert der Geraden an der Stelle x̄ (hier 44, nicht 24,8).
+
+### Prüfungsfalle
+a ohne Prüfung als „Wert ohne Einfluss von x“ ausgeben. Liegt x = 0 außerhalb der Daten oder kommt ein unsinniger Wert heraus (etwa ein negativer Umsatz), nur als Rechenwert bezeichnen.
+
+### Merksatz
+b ist die Botschaft, a nur der Startpunkt der Geraden.
+
+Siehe auch: Regressionsgerade · Regressionskoeffizient · Extrapolation · Residuum
+Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.2
+
 ## Achsenbeschriftung mit Einheit
 <!-- id: achsenbeschriftung-mit-einheit · quellen: DD11 A2 · stand: 2026-10 -->
 
@@ -804,6 +832,33 @@ Allgemeinverbindlich heißt: Der Staat macht den Tarifvertrag zur Regel für all
 
 Siehe auch: Tarifvertrag · Tarifbindung · Tarifautonomie · Günstigkeitsprinzip
 Mehr: Deep Dive 13, 5.2
+
+## Alternativhypothese
+<!-- id: alternativhypothese · quellen: Karte DD4, DD4 1.3 · stand: 2026-11 -->
+
+Gegenannahme (H1) zur Nullhypothese: die Behauptung, die man belegen möchte – z. B. „es gibt einen Zusammenhang“ oder „die neue Methode ist schneller“. Sie gilt als gestützt, wenn die Nullhypothese verworfen wird.
+
+### Erklärung
+H0 und H1 schließen sich aus und werden **vor** dem Test formuliert. Eine **ungerichtete** (zweiseitige) H1 behauptet nur „es gibt einen Unterschied“ ($\mu_1 \neq \mu_2$), eine **gerichtete** (einseitige) eine Richtung ($\mu_1 < \mu_2$). Die Richtung darf nicht erst nach einem Blick auf die Daten gewählt werden. Entscheidung: Ist $p < \alpha$, wird H0 verworfen und die Daten sprechen für H1. Sonst wird H0 beibehalten – das heißt „nicht widerlegt“, nicht „bewiesen“.
+
+### Beispiel
+Das Möbelhaus testet eine neue Lieferroute. H0: „Die mittlere Lieferzeit ist unverändert.“ H1 (einseitig): „Die mittlere Lieferzeit ist kürzer.“ Ergibt der Test p = 0,02 bei α = 0,05, wird H0 verworfen – die Verkürzung gilt als statistisch gesichert. Wäre H1 zweiseitig („Lieferzeit ist anders“), wäre auch eine Verlängerung ein Treffer.
+
+### Abgrenzung
+| | Nullhypothese H0 | Alternativhypothese H1 |
+|---|---|---|
+| Inhalt | kein Effekt, kein Unterschied | Effekt, Unterschied, Zusammenhang |
+| Rolle | wird getestet und ggf. verworfen | wird bei Verwerfen von H0 gestützt |
+| Beweisbar? | nie bestätigt | nie „bewiesen“, nur gestützt |
+
+### Prüfungsfalle
+Die Hypothesen nachträglich passend zum Ergebnis formulieren, oder „H0 nicht verworfen“ als „H1 ist widerlegt“ bzw. „H0 stimmt“ deuten.
+
+### Merksatz
+H1 wird nicht bewiesen, sondern bekommt Rückenwind, wenn H0 scheitert.
+
+Siehe auch: Nullhypothese · Hypothesentest · P-Wert · Signifikanz · Fehler 1. Art
+Mehr: Deep Dive 4, 1.3
 
 ## Alternativtext
 <!-- id: alternativtext · quellen: Karte DD11, DD11 A5 · stand: 2026-10 -->

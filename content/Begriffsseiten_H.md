@@ -231,6 +231,36 @@ Heatmap: Tabelle, deren Zahlen man sieht, bevor man sie liest.
 Siehe auch: Dashboard · Barrierefreiheit · Liniendiagramm · Streudiagramm
 Mehr: Deep Dive 17, 6.9 · Deep Dive 11, A1
 
+## Heteroskedastizität
+<!-- id: heteroskedastizitat · quellen: Karte DD4, DD4 2.3 · stand: 2026-11 -->
+
+Die Streuung der Residuen einer Regression ist nicht konstant, sondern ändert sich systematisch mit x oder ŷ – im Residuenplot typisch als Trichter.
+
+### Erklärung
+Häufige Ursachen: Größenordnung (große Filialen schwanken absolut stärker als kleine), eine fehlende Einflussgröße oder eine falsche Modellform. Die geschätzte Gerade bleibt dabei im Mittel richtig, aber Standardfehler, p-Werte und Konfidenzintervalle der Koeffizienten werden unzuverlässig, und Prognosen sind nicht überall gleich genau. Gegenmaßnahmen: die Zielgröße transformieren (z. B. logarithmieren, sodass Fehler relativ statt absolut werden), gewichtete Regression, robuste Standardfehler oder das Modell um fehlende Einflussgrößen erweitern. Erkennen: Residuen über ŷ oder x auftragen; ein Trichter oder eine Welle zeigt das Problem.
+
+### Beispiel
+Umsatzprognose für fünf Filialen: Der Prognosefehler wächst mit der Größe.
+
+| Filialumsatz (T€) | 50 | 100 | 300 | 1.000 | 3.000 |
+|---|---|---|---|---|---|
+| Fehlerbetrag (T€) | 2 | 4 | 12 | 40 | 120 |
+| Fehler in % | 4 | 4 | 4 | 4 | 4 |
+
+Absolut öffnet sich ein Trichter (2 bis 120 T€), relativ ist der Fehler konstant bei 4 %. Eine Regression auf dem Logarithmus des Umsatzes arbeitet mit solchen relativen Fehlern und ist dort passender.
+
+### Abgrenzung
+Das Gegenstück ist die **Homoskedastizität** (gleich breites Band). Heteroskedastizität betrifft die **Streuung** der Residuen, nicht ihren Mittelwert – der ist bei der Kleinste-Quadrate-Geraden immer null.
+
+### Prüfungsfalle
+Aus einem Trichter ableiten, die Gerade selbst sei „falsch“: Betroffen ist vor allem die Genauigkeit der Aussagen (Tests, Intervalle). Auch nicht mit Autokorrelation (Muster über die Zeit) verwechseln.
+
+### Merksatz
+Hetero = verschieden: Die Fehler streuen mal wenig, mal viel.
+
+Siehe auch: Homoskedastizität · Residuum · Regressionsgerade · MAPE · Regression
+Mehr: Deep Dive 4, 2.3
+
 ## Histogramm
 <!-- id: histogramm · quellen: Karte DD11, DD11 A1, DD17 6.6 · stand: 2026-10 -->
 
@@ -345,6 +375,31 @@ HOLAP: verdichtet schnell, im Detail relational.
 Siehe auch: ROLAP · MOLAP · OLAP-Würfel · Drill-down · OLAP
 Mehr: Deep Dive 8, 4.5
 
+## Homoskedastizität
+<!-- id: homoskedastizitat · quellen: Karte DD4, DD4 2.3 · stand: 2026-11 -->
+
+Voraussetzung der linearen Regression: Die Residuen streuen für alle x-Werte etwa gleich stark – die Fehlervarianz ist konstant.
+
+Auch: Konstante Fehlervarianz
+
+### Erklärung
+Prüfen lässt sich das im **Residuenplot**: Residuen e auf der y-Achse, x oder ŷ auf der x-Achse. Ein gleichmäßig breites Band um die Null ohne erkennbares Muster spricht für Homoskedastizität. Sie ist neben dem linearen Zusammenhang, unabhängigen Residuen und – für Tests und Intervalle – annähernd normalverteilten Residuen eine der Regressionsannahmen. Nur wenn sie gilt, stimmen die Standardfehler und damit p-Werte und Konfidenzintervalle der Koeffizienten. Rechnerische Tests (z. B. Breusch-Pagan) gibt es, in der Prüfung genügt der Blick auf den Residuenplot.
+
+### Beispiel
+Residuen der Werbebudget-Regression, nach x geordnet: −1,2 / +2,4 / −2,0 / +1,6 / −0,8 T€. Die Beträge 1,2 / 2,4 / 2,0 / 1,6 / 0,8 wachsen oder schrumpfen nicht systematisch, es gibt keinen Trichter. Mit nur fünf Punkten ist das allerdings eine schwache Aussage – die Annahme lässt sich erst bei mehr Daten verlässlich beurteilen.
+
+### Abgrenzung
+**Heteroskedastizität** ist das Gegenteil (Trichterform). Die Residuensumme null ist kein Beleg für Homoskedastizität: Sie gilt bei der Kleinste-Quadrate-Geraden immer, auch bei Trichtern.
+
+### Prüfungsfalle
+„Die Residuen summieren sich zu null, also ist die Streuung konstant“ – das sind zwei verschiedene Eigenschaften.
+
+### Merksatz
+Homo = gleich: ein Band mit gleicher Breite.
+
+Siehe auch: Heteroskedastizität · Residuum · Regressionsgerade · Regression
+Mehr: Deep Dive 4, 2.3
+
 ## Horizontale Partitionierung
 <!-- id: horizontale-partitionierung · quellen: DD8 5.3 · stand: 2026-10 -->
 
@@ -449,3 +504,41 @@ Asymmetrisch einigen, symmetrisch verschlüsseln.
 
 Siehe auch: Symmetrische Verschlüsselung · Asymmetrische Verschlüsselung · PKI · Hashing · Man-in-the-Middle
 Mehr: Deep Dive 10, 4.2
+
+## Hypothesentest
+<!-- id: hypothesentest · quellen: Karte DD4, DD4 1.3 · stand: 2026-11 -->
+
+Statistisches Verfahren, das anhand einer Stichprobe entscheidet, ob eine Annahme über die Grundgesamtheit (die Nullhypothese) beibehalten oder verworfen wird.
+
+Auch: Signifikanztest, Statistischer Test
+
+### Erklärung
+Ablauf:
+1. Nullhypothese H0 und Alternativhypothese H1 formulieren.
+2. Signifikanzniveau α festlegen (üblich 5 %) – vor der Auswertung.
+3. Passenden Test wählen; er hängt von Skalenniveau, Verteilung und Fragestellung ab (z. B. t-Test für Mittelwerte, Test auf Korrelation, Chi-Quadrat-Test für Häufigkeiten).
+4. Prüfgröße und p-Wert berechnen.
+5. Entscheiden: $p < \alpha$ → H0 verwerfen, sonst beibehalten.
+6. Fachlich deuten, auch mit der Effektgröße – nicht nur „signifikant“.
+
+Zwei Fehler sind möglich: der **Fehler 1. Art** (H0 fälschlich verworfen) und der **Fehler 2. Art** (H0 fälschlich beibehalten). Jeder Test gilt nur, wenn seine Voraussetzungen stimmen, vor allem eine zufällige, repräsentative Stichprobe.
+
+### Beispiel
+Bisherige Reparaturdauer: μ₀ = 60 min, σ = 10 min. Nach Einführung einer Checkliste ergeben 25 Reparaturen den Mittelwert $\bar{x} = 56$ min.
+- H0: μ = 60 min; H1: μ < 60 min (einseitig); α = 5 %.
+- $z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{56 - 60}{10 / \sqrt{25}} = \frac{-4}{2} = -2{,}0$
+- Kritischer Wert (einseitig, 5 %): −1,645. Da −2,0 < −1,645, ist $p \approx 0{,}023 < 0{,}05$ → H0 wird verworfen.
+
+Deutung: Die Verkürzung ist statistisch gesichert. Ob 4 Minuten (rund 7 %; Effektgröße d = 0,4) den Aufwand der Checkliste lohnen, ist eine fachliche Frage.
+
+### Abgrenzung
+Ein **Konfidenzintervall** liefert dieselbe Information aus anderer Sicht: einen Wertebereich für den wahren Wert. Ein **A/B-Test** ist die Anwendung eines Hypothesentests auf zwei Varianten. Der **p-Wert** ist nur ein Zwischenergebnis des Tests.
+
+### Prüfungsfalle
+Den p-Wert als Wahrscheinlichkeit lesen, dass H0 stimmt (er ist die Wahrscheinlichkeit der Daten unter H0), „nicht verworfen“ als Beweis für H0 nehmen oder α nachträglich passend wählen.
+
+### Merksatz
+Wie vor Gericht: Im Zweifel gilt H0 – verurteilt wird nur bei klarer Beweislage (p < α).
+
+Siehe auch: Nullhypothese · Alternativhypothese · P-Wert · Signifikanz · Fehler 1. Art · Fehler 2. Art · Effektgröße · Konfidenzintervall
+Mehr: Deep Dive 4, 1.3

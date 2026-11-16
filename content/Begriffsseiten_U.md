@@ -84,7 +84,7 @@ Die logistische Regression ist trotz des Namens ein Klassifikationsverfahren –
 ### Merksatz
 Gibt es eine Spalte mit der richtigen Antwort, ist es überwachtes Lernen.
 
-Siehe auch: Unüberwachtes Lernen · Klassifikation · Regression · Zielvariable · Validierungsdaten
+Siehe auch: Unüberwachtes Lernen · Klassifikation · Regression · Regressionskoeffizient · Zielvariable · Validierungsdaten
 Mehr: Deep Dive 6, 2.2 · Deep Dive 6, 2.3
 
 ## UG (haftungsbeschränkt)

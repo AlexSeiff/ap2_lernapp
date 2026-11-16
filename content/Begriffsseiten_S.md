@@ -45,6 +45,33 @@ Gleiches Passwort, anderer Salt, anderer Hash.
 Siehe auch: Hashing · Brute Force · Authentifizierung
 Mehr: Deep Dive 10, 4.2
 
+## Satz von Bayes
+<!-- id: satz-von-bayes · quellen: DD3 7.1, DD7 2.3 · stand: 2026-11 -->
+
+Formel, mit der man bedingte Wahrscheinlichkeiten umkehrt: Aus P(B | A) wird P(A | B) berechnet – unter Einbeziehung der Ausgangshäufigkeit von A.
+
+### Erklärung
+$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$ mit $P(B) = P(B \mid A) \cdot P(A) + P(B \mid \bar{A}) \cdot P(\bar{A})$. P(A) ist die Ausgangswahrscheinlichkeit (Basisrate, Prävalenz), P(A | B) die aktualisierte Wahrscheinlichkeit nach der Beobachtung B. Kernaussage: Ist A selten, sind selbst bei einem guten Test die meisten Alarme Fehlalarme (**Basisratenfehler**, wenn man das ignoriert). Auf dieselbe Weise hängen Recall und Precision zusammen. Der Naive-Bayes-Klassifikator im Machine Learning nutzt den Satz mit der vereinfachenden Annahme unabhängiger Merkmale.
+
+### Beispiel
+Im Kundenimport sind 2 % der Datensätze fehlerhaft. Eine Prüfregel schlägt bei 90 % der fehlerhaften an (Recall) und fälschlich bei 5 % der fehlerfreien (Falsch-Positiv-Rate). Wie wahrscheinlich ist ein Datensatz fehlerhaft, wenn die Regel anschlägt?
+- $P(\text{Meldung}) = 0{,}90 \cdot 0{,}02 + 0{,}05 \cdot 0{,}98 = 0{,}018 + 0{,}049 = 0{,}067$
+- $P(\text{fehlerhaft} \mid \text{Meldung}) = \frac{0{,}90 \cdot 0{,}02}{0{,}067} = \frac{0{,}018}{0{,}067} = 0{,}269$
+
+Gegenprobe mit 1.000 Datensätzen: 20 fehlerhaft, davon 18 gemeldet; 980 fehlerfrei, davon 49 fälschlich gemeldet. Precision $\frac{18}{18 + 49} = 26{,}9\ \%$. Trotz 90 % Recall ist nur gut jede vierte Meldung echt.
+
+### Abgrenzung
+Die **bedingte Wahrscheinlichkeit** ist die Grundgröße, der Satz von Bayes ihr Umrechner. Recall = P(Meldung | fehlerhaft), Precision = P(fehlerhaft | Meldung): Bayes verbindet beide über die Basisrate.
+
+### Prüfungsfalle
+Die Basisrate ignorieren („Die Regel trifft zu 90 % – also sind 90 % der Meldungen korrekt“). Das verwechselt P(Meldung | fehlerhaft) mit P(fehlerhaft | Meldung).
+
+### Merksatz
+Wer die Basisrate vergisst, hält Fehlalarme für Treffer.
+
+Siehe auch: Bedingte Wahrscheinlichkeit · Precision · Recall · Konfusionsmatrix · Falsch-Positiv-Rate
+Mehr: Deep Dive 7, 2.3 · Deep Dive 3, 7.1
+
 ## Säulendiagramm
 <!-- id: saulendiagramm · quellen: DD17 6.2 · stand: 2026-10 -->
 
@@ -963,7 +990,7 @@ Bei 2 Mio. Kundendatensätzen ist die Korrelation zwischen Alter und Warenkorbwe
 ### Merksatz
 Signifikant heißt „kein Zufall“, nicht „wichtig“.
 
-Siehe auch: Nullhypothese · P-Wert · Korrelation · Scheinkorrelation · Stärke
+Siehe auch: Nullhypothese · P-Wert · Hypothesentest · Effektgröße · Fehler 1. Art · Korrelation · Scheinkorrelation · Stärke
 Mehr: Deep Dive 4, 1.3
 
 ## Single Point of Failure
@@ -1616,6 +1643,48 @@ Eine Farbe für die Botschaft, Grau für den Rest.
 
 Siehe auch: Data-Ink-Ratio · Chartjunk · Barrierefreiheit · Sortieren
 Mehr: Deep Dive 11, A2
+
+## Spearman-Rangkorrelation
+<!-- id: spearman-rangkorrelation · quellen: Karte DD4, DD4 1.2 · stand: 2026-11 -->
+
+Korrelationsmaß r_s zwischen −1 und +1, das nicht mit den Messwerten, sondern mit ihren Rangplätzen rechnet; es eignet sich für ordinale Daten und für gleichgerichtete (monotone) Zusammenhänge.
+
+Auch: Rangkorrelation nach Spearman, Rangkorrelationskoeffizient
+
+### Erklärung
+Vorgehen: Die Werte jedes Merkmals in eine Rangfolge bringen (kleinster Wert = Rang 1), je Merkmalsträger die Rangdifferenz d bilden, einsetzen:
+$r_s = 1 - \frac{6 \cdot \sum d^2}{n \cdot (n^2 - 1)}$.
+Gleiche Werte (Bindungen) erhalten den Mittelwert ihrer Rangplätze; die Kurzformel gilt dann nur näherungsweise (exakt: Pearson-r auf den Rängen). Gedeutet wird $r_s$ wie Pearsons r: Vorzeichen = Richtung, Betrag = Stärke. Weil nur die Reihenfolge zählt, ist Spearman robust gegen Ausreißer und erfasst auch gekrümmte, aber stets steigende oder fallende Zusammenhänge. Auch ein hohes $r_s$ ist kein Kausalitätsbeleg.
+
+### Beispiel
+Fünf Filialen, Rangfolge nach Kundenzufriedenheit (Schulnotenranking) und nach Umsatz:
+
+| Filiale | A | B | C | D | E |
+|---|---|---|---|---|---|
+| Rang Zufriedenheit | 1 | 2 | 3 | 4 | 5 |
+| Rang Umsatz | 2 | 1 | 3 | 4 | 5 |
+| d | −1 | 1 | 0 | 0 | 0 |
+| d² | 1 | 1 | 0 | 0 | 0 |
+
+$\sum d^2 = 2$, $r_s = 1 - \frac{6 \cdot 2}{5 \cdot (25 - 1)} = 1 - \frac{12}{120} = 0{,}90$ → starker positiver Zusammenhang.
+Ausreißer-Effekt: Bei x = 1, 2, 3, 4, 5 und y = 1, 2, 3, 4, 100 ist Pearsons r etwa 0,72, Spearman aber exakt 1,0 – die Rangfolge stimmt perfekt.
+
+### Abgrenzung
+| | Pearson r | Spearman $r_s$ |
+|---|---|---|
+| Daten | metrisch | mindestens ordinal |
+| Rechnet mit | Messwerten | Rangplätzen |
+| Erfasst | lineare Zusammenhänge | monotone Zusammenhänge |
+| Ausreißer | empfindlich | robust |
+
+### Prüfungsfalle
+Pearson auf Zufriedenheitsstufen (ordinal) anwenden. Oder aus $r_s \approx 0$ „kein Zusammenhang“ folgern: Nicht monotone Zusammenhänge (U-Form) bleiben unentdeckt.
+
+### Merksatz
+Pearson misst Linien, Spearman misst Reihenfolgen.
+
+Siehe auch: Korrelationskoeffizient nach Pearson · Korrelation · Skalenniveau · Ausreißer · Kausalität
+Mehr: Deep Dive 4, 1.2
 
 ## Speicherbegrenzung
 <!-- id: speicherbegrenzung · quellen: Karte DD10, DD10 2.1 · stand: 2026-10 -->

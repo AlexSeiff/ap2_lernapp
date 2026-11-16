@@ -7,7 +7,7 @@
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 837,
+    "anzahl_karten": 852,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -555,7 +555,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 3",
       "status": "behandelt",
-      "anzahl_karten": 38,
+      "anzahl_karten": 40,
       "karten": [
         {
           "id": "FB-skalenniveau",
@@ -940,6 +940,26 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-bedingte-wahrscheinlichkeit",
+          "frage": "Bedingte Wahrscheinlichkeit",
+          "antwort": "P(A | B) = P(A und B) / P(B): Wahrscheinlichkeit von A, wenn B bereits eingetreten ist. P(A | B) ist nicht P(B | A) – Recall, Precision und die Konfidenz einer Assoziationsregel sind bedingte Wahrscheinlichkeiten.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-satz-von-bayes",
+          "frage": "Satz von Bayes",
+          "antwort": "P(A | B) = P(B | A) · P(A) / P(B): Kehrt eine bedingte Wahrscheinlichkeit um und berücksichtigt die Basisrate. Ist A selten, sind selbst bei guten Tests die meisten Alarme Fehlalarme.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -949,7 +969,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 4",
       "status": "behandelt",
-      "anzahl_karten": 20,
+      "anzahl_karten": 33,
       "karten": [
         {
           "id": "FB-streudiagramm",
@@ -1148,6 +1168,136 @@
           "antwort": "Verfahren, das die Parameter der Regressionsgeraden so bestimmt, dass die Summe der quadrierten Abweichungen (RSS) minimal wird.",
           "typ": "begriff",
           "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-achsenabschnitt",
+          "frage": "Achsenabschnitt (Intercept)",
+          "antwort": "Konstante a der Regressionsgleichung ŷ = a + b · x: der Schätzwert bei x = 0, berechnet als a = ȳ − b · x̄. Nur deutbar, wenn x = 0 im beobachteten Bereich liegt – sonst ein reiner Rechenwert (Extrapolation).",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-alternativhypothese",
+          "frage": "Alternativhypothese",
+          "antwort": "Gegenannahme H1 zur Nullhypothese: die Behauptung, die man belegen will (Zusammenhang, Unterschied). Sie gilt als gestützt, wenn H0 verworfen wird; bewiesen wird sie nie.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-effektgrosse",
+          "frage": "Effektgröße",
+          "antwort": "Maß dafür, wie groß ein Effekt oder Zusammenhang ist (z. B. r, R², Cohens d), unabhängig vom Stichprobenumfang. Der p-Wert sagt nur, ob ein Effekt wahrscheinlich kein Zufall ist – nicht, wie groß er ist.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-fehler-1-art",
+          "frage": "Fehler 1. Art (α-Fehler)",
+          "antwort": "Die Nullhypothese wird verworfen, obwohl sie stimmt – ein Fehlalarm (in der Konfusionsmatrix: falsch positiv). Die Wahrscheinlichkeit ist höchstens das Signifikanzniveau α, meist 5 %.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-fehler-2-art",
+          "frage": "Fehler 2. Art (β-Fehler)",
+          "antwort": "Die Nullhypothese wird beibehalten, obwohl sie falsch ist – ein echter Effekt bleibt unentdeckt (falsch negativ). Wahrscheinlichkeit β; die Teststärke 1 − β ist die Chance, einen vorhandenen Effekt zu finden.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-heteroskedastizitat",
+          "frage": "Heteroskedastizität",
+          "antwort": "Die Streuung der Residuen einer Regression ändert sich mit x oder ŷ (Trichterform im Residuenplot). Standardfehler, p-Werte und Konfidenzintervalle werden unzuverlässig; Gegenmittel z. B. die Zielgröße logarithmieren.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-homoskedastizitat",
+          "frage": "Homoskedastizität",
+          "antwort": "Annahme der linearen Regression: Die Residuen streuen für alle x-Werte etwa gleich stark (gleich breites Band im Residuenplot). Dass die Residuen sich zu null summieren, ist dafür kein Beleg.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-hypothesentest",
+          "frage": "Hypothesentest",
+          "antwort": "Verfahren, das mit einer Stichprobe entscheidet, ob die Nullhypothese verworfen wird: H0, H1 und α festlegen, Prüfgröße und p-Wert berechnen, bei p < α verwerfen. Möglich sind der Fehler 1. und der Fehler 2. Art.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-interpolation",
+          "frage": "Interpolation",
+          "antwort": "Schätzung innerhalb des beobachteten Wertebereichs von x (z. B. zwischen zwei Messpunkten) – verlässlicher als die Extrapolation außerhalb. Auch zum Füllen von Datenlücken genutzt.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-konfidenzintervall",
+          "frage": "Konfidenzintervall",
+          "antwort": "Bereich um einen Stichprobenwert (Mittelwert: x̄ ± 1,96 · s / √n für 95 %), der den wahren Wert der Grundgesamtheit mit der gewählten Sicherheit überdeckt. Nicht der Streubereich der Einzelwerte und nicht die „Konfidenz“ der Assoziationsregeln.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-multikollinearitat",
+          "frage": "Multikollinearität",
+          "antwort": "In der multiplen Regression sind mehrere Einflussgrößen stark untereinander korreliert. Die Koeffizienten werden instabil und kaum deutbar; erkennbar am Varianzinflationsfaktor VIF (ab etwa 5 bis 10 kritisch).",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-regressionskoeffizient",
+          "frage": "Regressionskoeffizient",
+          "antwort": "Faktor vor einer Einflussgröße in der Regressionsgleichung (bei einem x die Steigung b): Änderung von ŷ je Einheit der Einflussgröße, bei mehreren x bei konstant gehaltenen übrigen Größen. Beschreibt einen Zusammenhang, keine Ursache.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-spearman-rangkorrelation",
+          "frage": "Spearman-Rangkorrelation",
+          "antwort": "Korrelationsmaß r_s (−1 bis +1), das mit Rangplätzen rechnet: r_s = 1 − 6 · Σd² / (n · (n² − 1)). Für ordinale Daten und monotone Zusammenhänge, robust gegen Ausreißer – das Gegenstück zu Pearson, der Linearität misst.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
           "tags": [
             "fachbegriff"
           ]

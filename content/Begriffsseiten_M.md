@@ -274,7 +274,7 @@ Mehr: Deep Dive 13, 5.1
 Mean Absolute Percentage Error (mittlerer absoluter prozentualer Fehler): durchschnittliche prozentuale Abweichung der Prognose vom tatsächlichen Wert.
 
 ### Erklärung
-$\text{MAPE} = \frac{1}{n} \sum \frac{|y - \hat{y}|}{|y|} \cdot 100\ \%$. Weil er relativ ist, lassen sich Modelle über verschiedene Größenordnungen vergleichen (Filiale mit 100 T€ und mit 5 Mio. € Umsatz). Liegt y nahe 0, explodiert der Bruch; bei y = 0 ist er nicht definiert.
+$\text{MAPE} = \frac{1}{n} \sum \frac{|y - \hat{y}|}{|y|} \cdot 100\ \%$. Weil er relativ ist, lassen sich Modelle über verschiedene Größenordnungen vergleichen (Filiale mit 100 T€ und mit 5 Mio. € Umsatz). Liegt y nahe 0, explodiert der Bruch; bei y = 0 ist er nicht definiert. Außerdem ist er asymmetrisch: Eine zu niedrige Prognose kann höchstens 100 % Abweichung ergeben, eine zu hohe beliebig viel – Überschätzungen werden stärker bestraft.
 
 ### Beispiel
 Umsätze (T€) y = 100, 120, 90, 130, 110; Prognosen 90, 126, 84, 132, 108:
@@ -1525,6 +1525,30 @@ MTTR runter = schneller wieder da.
 
 Siehe auch: MTBF · MTTF · Verfügbarkeit · Hochverfügbarkeit
 Mehr: Deep Dive 16, 4.2
+
+## Multikollinearität
+<!-- id: multikollinearitat · quellen: Karte DD4, DD4 1.2, DD4 2.3 · stand: 2026-11 -->
+
+Bei einer Regression mit mehreren Einflussgrößen hängen zwei oder mehr davon selbst stark zusammen, sodass sich ihre Einzeleffekte nicht sauber trennen lassen.
+
+### Erklärung
+Die Regressionskoeffizienten werden instabil: Schon kleine Änderungen der Daten verschieben sie stark, sogar das Vorzeichen kann kippen, und die Einzelwirkung einer Größe ist kaum deutbar. Das Gesamtmodell (R², Prognose innerhalb des Datenbereichs) leidet dagegen oft kaum. Erkennen lässt sich das an hohen Korrelationen zwischen den x-Variablen (|r| > 0,8 ist auffällig) und am **Varianzinflationsfaktor** $\text{VIF}_j = \frac{1}{1 - R_j^2}$; dabei ist $R_j^2$ das Bestimmtheitsmaß, wenn x_j aus den übrigen Einflussgrößen vorhergesagt wird. Faustregel: VIF über 5 bis 10 ist problematisch. Gegenmaßnahmen: eine der Größen weglassen, Größen zu einem Index zusammenfassen, mehr Daten oder Regularisierung (Ridge). Ist eine Größe eine exakte Umrechnung einer anderen (Umsatz in € und in T€), lässt sich das Modell gar nicht schätzen.
+
+### Beispiel
+Umsatz je Filiale aus Verkaufsfläche x₁ und Zahl der Beschäftigten x₂. Beide hängen mit r = 0,95 zusammen. Bei zwei Einflussgrößen ist $R_j^2 = r^2 = 0{,}9025$ und $\text{VIF} = \frac{1}{1 - 0{,}9025} = \frac{1}{0{,}0975} = 10{,}3$.
+Wert über 10: Das Modell kann nicht sagen, ob die Fläche oder das Personal den Umsatz treibt. Sinnvoll wäre nur eine der beiden Größen oder die Kennzahl „Fläche je Beschäftigtem“.
+
+### Abgrenzung
+Erwünscht ist eine Korrelation zwischen **x und y** (sonst erklärt x nichts). Multikollinearität ist die unerwünschte Korrelation **zwischen den x-Variablen**. Eine **Drittvariable** beeinflusst x und y; Multikollinearität betrifft nur die x untereinander.
+
+### Prüfungsfalle
+Multikollinearität mit schlechter Prognosegüte gleichsetzen – betroffen ist vor allem die Deutung der einzelnen Koeffizienten.
+
+### Merksatz
+Wenn zwei x dasselbe sagen, weiß das Modell nicht, wem es den Effekt zuschreiben soll.
+
+Siehe auch: Regressionskoeffizient · Regression · Korrelation · Bestimmtheitsmaß · Drittvariable
+Mehr: Deep Dive 4, 1.2 · Deep Dive 4, 2.3
 
 ## Multiplizität
 <!-- id: multiplizitat · quellen: Karte DD15 · stand: 2026-10 -->

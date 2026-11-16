@@ -318,6 +318,34 @@ Gearbeitet wird kurz, gewartet wird lang.
 Siehe auch: Durchlaufzeit · Liegezeit · Wertstromanalyse · Lean Management
 Mehr: Deep Dive 5, 3.1
 
+## Bedingte Wahrscheinlichkeit
+<!-- id: bedingte-wahrscheinlichkeit · quellen: DD3 7.1, DD7 2.2 · stand: 2026-11 -->
+
+Wahrscheinlichkeit, dass ein Ereignis A eintritt, wenn man schon weiß, dass ein anderes Ereignis B eingetreten ist – geschrieben P(A | B), gesprochen „P von A unter der Bedingung B“.
+
+### Erklärung
+$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$ mit $P(B) > 0$. Die Bedingung B ist der neue „Nenner“: Man betrachtet nur noch die Fälle, in denen B eingetreten ist. Umgestellt ergibt sich der Multiplikationssatz $P(A \cap B) = P(B) \cdot P(A \mid B)$. Zwei Ereignisse sind **unabhängig**, wenn $P(A \mid B) = P(A)$ gilt, also B nichts über A verrät. Wichtig: P(A | B) und P(B | A) sind verschiedene Zahlen. Auch bekannte Kennzahlen sind bedingte Wahrscheinlichkeiten: Der **Recall** ist P(Vorhersage positiv | tatsächlich positiv), die **Precision** P(tatsächlich positiv | Vorhersage positiv), die **Konfidenz** einer Assoziationsregel A → B ist P(B | A).
+
+### Beispiel
+1.000 Aufträge: 300 mit Expresslieferung (E), 100 reklamiert (R), 60 sowohl Express als auch reklamiert.
+- $P(R) = \frac{100}{1000} = 10\ \%$
+- $P(R \mid E) = \frac{60}{300} = 20\ \%$ – unter den Expressaufträgen ist die Reklamationsquote doppelt so hoch.
+- $P(E \mid R) = \frac{60}{100} = 60\ \%$ – unter den Reklamationen sind 60 % Expressaufträge.
+
+Unabhängig wären R und E, wenn $P(R \cap E) = P(R) \cdot P(E) = 0{,}10 \cdot 0{,}30 = 0{,}03$ gälte. Beobachtet sind 0,06 – die Ereignisse hängen zusammen.
+
+### Abgrenzung
+Die **gemeinsame** Wahrscheinlichkeit P(A ∩ B) bezieht sich auf alle Fälle (hier 60 von 1.000 = 6 %), die **bedingte** nur auf die Fälle mit B. Der **Satz von Bayes** rechnet P(B | A) in P(A | B) um.
+
+### Prüfungsfalle
+P(A | B) und P(B | A) verwechseln: „60 % der Reklamationen sind Express“ heißt nicht „60 % der Expressaufträge werden reklamiert“.
+
+### Merksatz
+Die Bedingung wird zum Nenner.
+
+Siehe auch: Satz von Bayes · Laplace-Wahrscheinlichkeit · Relative Häufigkeit · Konfusionsmatrix · Precision · Recall · Konfidenz
+Mehr: Deep Dive 3, 7.1 · Deep Dive 7, 2.2
+
 ## Bedürfnis
 <!-- id: bedurfnis · quellen: Karte DD14, DD14 4.1 · stand: 2026-10 -->
 
@@ -642,10 +670,13 @@ Mehr: Deep Dive 13, 3.4
 R²: Anteil der Streuung der Zielgröße y, den das Regressionsmodell erklärt.
 
 ### Erklärung
-Allgemein gilt $R^2 = 1 - \frac{\sum e^2}{S_{yy}}$ (unerklärte durch gesamte Streuung). Auf den Trainingsdaten liegt R² zwischen 0 und 1, auf Testdaten kann es negativ werden, wenn das Modell schlechter ist als der Mittelwert. Bei der einfachen linearen Regression gilt $R^2 = r^2$. Ein hohes R² beweist weder Kausalität noch Prognosefähigkeit außerhalb des beobachteten Bereichs.
+Allgemein gilt $R^2 = 1 - \frac{\sum e^2}{S_{yy}}$ (unerklärte durch gesamte Streuung). Auf den Trainingsdaten liegt R² zwischen 0 und 1, auf Testdaten kann es negativ werden, wenn das Modell schlechter ist als der Mittelwert (Fehlerquadratsumme größer als $S_{yy}$). Bei der einfachen linearen Regression gilt $R^2 = r^2$. Ein hohes R² beweist weder Kausalität noch Prognosefähigkeit außerhalb des beobachteten Bereichs.
+
+**Mehrere Einflussgrößen:** Mit jeder zusätzlichen Variablen sinkt R² auf den Trainingsdaten nie und steigt meist leicht, auch wenn die Variable nichts erklärt. Deshalb vergleicht man Modelle mit unterschiedlich vielen Einflussgrößen über das **korrigierte (adjustierte) R²**: $R^2_{\text{korr}} = 1 - (1 - R^2) \cdot \frac{n - 1}{n - k - 1}$ mit n = Zahl der Beobachtungen und k = Zahl der Einflussgrößen. Es sinkt, wenn eine neue Variable zu wenig beiträgt.
 
 ### Beispiel
 Werbebudget und Umsatz über fünf Monate: $r = \frac{64}{\sqrt{10 \cdot 424}} = 0{,}983$, also $R^2 = 0{,}983^2 = 0{,}966$. Rund 96,6 % der Umsatzschwankungen werden durch das Werbebudget erklärt. Kontrolle: $1 - \frac{14{,}4}{424} = 0{,}966$.
+Korrigiertes R² (n = 5, k = 1): $1 - 0{,}034 \cdot \frac{4}{3} = 0{,}955$. Käme eine zweite, kaum nützliche Variable hinzu (k = 2), und R² stiege auf 0,968, sänke das korrigierte R² auf $1 - 0{,}032 \cdot \frac{4}{2} = 0{,}936$ – das Modell wurde nicht besser.
 
 ### Abgrenzung
 r (Korrelationskoeffizient) misst Stärke und Richtung zwischen −1 und +1; R² misst den erklärten Anteil und hat kein Vorzeichen.
@@ -656,7 +687,7 @@ r (Korrelationskoeffizient) misst Stärke und Richtung zwischen −1 und +1; R²
 ### Merksatz
 R² sagt, wie viel erklärt ist – nicht warum.
 
-Siehe auch: R² · Korrelationskoeffizient nach Pearson · Regressionsgerade · Grenzen von R² · Kausalität
+Siehe auch: R² · Korrelationskoeffizient nach Pearson · Regressionsgerade · Grenzen von R² · Kausalität · Effektgröße · Multikollinearität
 Mehr: Deep Dive 4, 2.3
 
 ## Beteiligungsrechte

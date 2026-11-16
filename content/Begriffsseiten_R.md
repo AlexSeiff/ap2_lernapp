@@ -5,11 +5,11 @@
 Bestimmtheitsmaß einer Regression: der Anteil der Streuung der Zielgröße, den das Modell erklärt – $R^2 = 1 - \frac{\sum (y - \hat{y})^2}{\sum (y - \bar{y})^2}$.
 
 ### Erklärung
-R² vergleicht das Modell mit einem trivialen Modell, das immer den Mittelwert ȳ vorhersagt. 1 bedeutet perfekte Anpassung, 0 „nicht besser als der Mittelwert“; auf Testdaten kann R² sogar negativ werden. Bei der einfachen linearen Regression (ein x) gilt $R^2 = r^2$. Weil R² einheitenlos ist, lassen sich Modelle auf denselben Daten gut vergleichen.
+R² vergleicht das Modell mit einem trivialen Modell, das immer den Mittelwert ȳ vorhersagt. 1 bedeutet perfekte Anpassung, 0 „nicht besser als der Mittelwert“. Auf den Trainingsdaten liegt R² einer Kleinste-Quadrate-Regression mit Achsenabschnitt zwischen 0 und 1; auf **Testdaten** kann es negativ werden, wenn die Fehler größer sind als beim Mittelwertmodell. Bei der einfachen linearen Regression (ein x) gilt $R^2 = r^2$. Weil R² einheitenlos ist, lassen sich Modelle auf denselben Daten gut vergleichen. Bei mehreren Einflussgrößen sinkt R² mit jeder zusätzlichen Variablen nie, auch wenn sie nutzlos ist; das **korrigierte R²** bestraft zusätzliche Variablen und kann dabei sinken (Formel und Zahlen unter Bestimmtheitsmaß).
 
 ### Beispiel
-Monatsumsätze des Möbelhauses (T€): Die quadrierten Prognosefehler summieren sich zu 180, die quadrierten Abweichungen vom Mittelwert 110 zu 1.000.
-$R^2 = 1 - \frac{180}{1000} = 0{,}82$ – das Modell erklärt 82 % der Umsatzschwankungen.
+Monatsumsätze des Möbelhauses (T€), Mittelwert 110: Die quadrierten Prognosefehler summieren sich zu 180, die quadrierten Abweichungen vom Mittelwert zu 1.000.
+$R^2 = 1 - \frac{180}{1000} = 0{,}82$ – das Modell erklärt 82 % der Umsatzschwankungen. Hätte das Modell auf Testdaten dagegen Fehlerquadrate von 1.250 bei 1.000 Abweichungsquadraten, wäre $R^2 = 1 - \frac{1250}{1000} = -0{,}25$ – schlechter als „immer 110 prognostizieren“.
 
 ### Abgrenzung
 | Maß | Aussage |
@@ -593,8 +593,12 @@ Mehr: Deep Dive 1, 2.5 · Deep Dive 2, 1.5 · Deep Dive 9, 5.1
 ### Erklärung
 Wie die Klassifikation braucht die Regression gelabelte Trainingsdaten, also Fälle mit bekanntem Zielwert. Der Unterschied liegt allein in der Zielvariablen: eine Zahl statt einer Kategorie. Verfahren sind die lineare Regression (Regressionsgerade), Regressionsbäume oder Random Forests; bewertet wird mit MAE, RMSE, MAPE oder R².
 
+**Formen der linearen Regression:** Die *einfache* nutzt eine Einflussgröße ($\hat{y} = a + b \cdot x$), die *multiple* mehrere ($\hat{y} = a + b_1 \cdot x_1 + b_2 \cdot x_2 + \dots$), die *polynomiale* nimmt Potenzen von x dazu ($\hat{y} = a + b_1 \cdot x + b_2 \cdot x^2$) und bildet so gekrümmte Zusammenhänge ab. Die Koeffizienten werden nach der Methode der kleinsten Quadrate bestimmt; die verbleibenden Abweichungen $e = y - \hat{y}$ heißen **Residuen** und sollen zufällig um null streuen.
+
+**Gültigkeit und Anpassung:** Eine Prognose innerhalb des beobachteten x-Bereichs (**Interpolation**) ist verlässlicher als eine außerhalb (**Extrapolation**). Ein zu einfaches Modell (Gerade durch eine Kurve) ist unterangepasst (**Underfitting**), ein zu komplexes (Polynom hohen Grades durch wenige Punkte) überangepasst (**Overfitting**): Es trifft die Trainingsdaten fast perfekt, aber neue Daten schlecht. Deshalb wird die Güte an Testdaten geprüft. Eine Regression beschreibt einen Zusammenhang, beweist aber keine Ursache (siehe Kausalität).
+
 ### Beispiel
-Das Möbelhaus prognostiziert aus Werbebudget, Saison und Filiale den Monatsumsatz in T€ – eine Regression. Die Frage „Wird dieser Auftrag reklamiert – ja/nein?“ wäre dagegen eine Klassifikation.
+Das Möbelhaus prognostiziert aus Werbebudget, Saison und Filiale den Monatsumsatz in T€ – eine (multiple) Regression; nur mit dem Werbebudget wäre sie einfach. Die Frage „Wird dieser Auftrag reklamiert – ja/nein?“ wäre dagegen eine Klassifikation.
 
 ### Abgrenzung
 | | Regression | Klassifikation |
@@ -603,12 +607,12 @@ Das Möbelhaus prognostiziert aus Werbebudget, Saison und Filiale den Monatsumsa
 | Gütemaße | MAE, RMSE, R² | Accuracy, Precision, Recall, F1 |
 
 ### Prüfungsfalle
-Die **logistische** Regression ist trotz ihres Namens ein Klassifikationsverfahren – sie schätzt die Wahrscheinlichkeit einer Klasse.
+Die **logistische** Regression ist trotz ihres Namens ein Klassifikationsverfahren – sie schätzt die Wahrscheinlichkeit einer Klasse. Und: Ein gutes Regressionsmodell zeigt einen Zusammenhang, aber keine Kausalität – und gilt nur im Bereich der Trainingsdaten.
 
 ### Merksatz
 Zahl vorhersagen = Regression, Klasse vorhersagen = Klassifikation.
 
-Siehe auch: Klassifikation · Überwachtes Lernen · Regressionsgerade · Logistische Regression · RMSE
+Siehe auch: Klassifikation · Überwachtes Lernen · Regressionsgerade · Regressionskoeffizient · Logistische Regression · RMSE · Residuum · Interpolation · Extrapolation · Overfitting · Underfitting · Multikollinearität · Kausalität
 Mehr: Deep Dive 6, 2.3 · Deep Dive 4, Teil 2
 
 ## Regressionsgerade
@@ -637,7 +641,31 @@ Prognosen weit außerhalb des beobachteten x-Bereichs (Extrapolation) sind unzul
 ### Merksatz
 b ist die Botschaft: „Pro Einheit x ändert sich y um b.“
 
-Siehe auch: Residuum · R² · Korrelationskoeffizient nach Pearson · Extrapolation · Streudiagramm
+Siehe auch: Residuum · R² · Korrelationskoeffizient nach Pearson · Extrapolation · Interpolation · Regressionskoeffizient · Achsenabschnitt · Streudiagramm
+Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.2
+
+## Regressionskoeffizient
+<!-- id: regressionskoffizient · quellen: Karte DD4, DD4 2.1, DD4 2.2 · stand: 2026-11 -->
+
+Zahl vor einer Einflussgröße in der Regressionsgleichung (bei einem x die Steigung b): Sie gibt an, um wie viel sich der geschätzte Wert ŷ ändert, wenn die Einflussgröße um eine Einheit steigt.
+
+### Erklärung
+Einfache Regression: $\hat{y} = a + b \cdot x$. Multiple Regression mit mehreren Einflussgrößen: $\hat{y} = a + b_1 \cdot x_1 + b_2 \cdot x_2$. Jedes $b_j$ gilt bei **konstant gehaltenen übrigen Größen** („unter sonst gleichen Bedingungen“). Die Einheit ist „Einheit von y je Einheit von x_j“; deshalb sind Koeffizienten verschiedener Variablen nicht direkt vergleichbar – einen Vergleich erlauben standardisierte Koeffizienten. Das Vorzeichen zeigt die Richtung. Bei einer Einflussgröße gilt $b = \frac{S_{xy}}{S_{xx}} = r \cdot \frac{s_y}{s_x}$. Bestimmt werden die Koeffizienten mit der Methode der kleinsten Quadrate. Sie beschreiben einen Zusammenhang, keine nachgewiesene Ursache.
+
+### Beispiel
+Einfach: Werbebudget und Umsatz, $b = \frac{64}{10} = 6{,}4$: Je 1 T€ mehr Werbung steigt der Umsatz im Mittel um 6,4 T€. Kontrolle über r: $0{,}983 \cdot \sqrt{424 / 10} = 0{,}983 \cdot 6{,}51 = 6{,}4$.
+Multipel (angenommene Gleichung): $\hat{y} = 10 + 4{,}5 \cdot x_1 + 8 \cdot x_2$ mit x₁ = Werbebudget (T€), x₂ = Zahl der Verkäufer. Bei gleichem Personal bringt 1 T€ Werbung 4,5 T€ Umsatz, bei gleichem Werbebudget ein zusätzlicher Verkäufer 8 T€. Prognose für x₁ = 4 und x₂ = 3: $10 + 18 + 24 = 52$ T€.
+
+### Abgrenzung
+Der Korrelationskoeffizient r ist einheitenlos, liegt zwischen −1 und +1 und ist symmetrisch. Der Regressionskoeffizient b hat eine Einheit, ist nicht auf −1 bis +1 beschränkt und hängt von der Richtung ab: Die Regression von y auf x liefert ein anderes b als die von x auf y. Der **Achsenabschnitt** a ist ebenfalls ein Koeffizient, aber kein Steigungsmaß.
+
+### Prüfungsfalle
+b ohne Einheit und ohne „im Mittel“ interpretieren oder aus einem kleinen b auf „unwichtig“ schließen – b = 0,002 kann bei x in Millionen sehr viel sein. Und: kein Rückschluss auf Kausalität.
+
+### Merksatz
+b = Änderung von ŷ je Einheit x – mit Einheit und „im Mittel“.
+
+Siehe auch: Regressionsgerade · Achsenabschnitt · Regression · Multikollinearität · Korrelationskoeffizient nach Pearson · Kausalität
 Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.2
 
 ## Regressionstest
@@ -909,7 +937,7 @@ Mehr: Deep Dive 14, 1.2 · Deep Dive 14, 1.3
 Abweichung zwischen beobachtetem und vom Modell geschätztem Wert: $e = y - \hat{y}$.
 
 ### Erklärung
-Residuen zeigen, wo die Regressionsgerade danebenliegt. Bei der Kleinste-Quadrate-Geraden summieren sie sich immer zu null; ihre Quadratsumme ist die unerklärte Streuung und geht in R² ein. Erwünscht ist eine **zufällige** Streuung um null. Ein Muster (erst alle negativ, dann alle positiv, Trichterform) zeigt, dass das lineare Modell nicht passt.
+Residuen zeigen, wo die Regressionsgerade danebenliegt. Bei der Kleinste-Quadrate-Geraden summieren sie sich immer zu null; ihre Quadratsumme ist die unerklärte Streuung und geht in R² ein. Erwünscht ist eine **zufällige** Streuung um null. Ein Muster (erst alle negativ, dann alle positiv) zeigt, dass das lineare Modell nicht passt. Wächst die Streuung mit x (Trichterform), liegt **Heteroskedastizität** vor; gleich breit bleibt sie bei **Homoskedastizität**.
 
 ### Beispiel
 Gerade $\hat{y} = 24{,}8 + 6{,}4 \cdot x$, Monat 2: x = 2, y = 40. Geschätzt $\hat{y} = 37{,}6$, also $e = 40 - 37{,}6 = 2{,}4$ T€. Alle Residuen: −1,2 / +2,4 / −2,0 / +1,6 / −0,8 – Summe 0, Quadratsumme 14,4, kein erkennbares Muster.
@@ -923,7 +951,7 @@ Gemessen wird senkrecht in y-Richtung, nicht rechtwinklig zur Geraden – und da
 ### Merksatz
 Residuen sollen rauschen, nicht erzählen.
 
-Siehe auch: Regressionsgerade · R² · RMSE · MAE · Streudiagramm
+Siehe auch: Regressionsgerade · R² · RMSE · MAE · Streudiagramm · Homoskedastizität · Heteroskedastizität
 Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.3
 
 ## REST-API
