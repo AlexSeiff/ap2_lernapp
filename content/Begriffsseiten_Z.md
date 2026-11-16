@@ -308,6 +308,71 @@ Gemeinsam eindeutig, einzeln nicht.
 Siehe auch: Primärschlüssel · Zwischentabelle · Partielle Abhängigkeit · 2. Normalform · Surrogatschlüssel
 Mehr: Deep Dive 2, 1.2 · Deep Dive 2, 1.5
 
+## Zuschlagskalkulation
+<!-- id: zuschlagskalkulation · quellen: Karte DD27, DD27 5.1, DD18 5.3 · stand: 2026-11 -->
+
+Kalkulationsverfahren, bei dem die Einzelkosten direkt zugerechnet und die Gemeinkosten über Prozentzuschläge aufgeschlagen werden, bis man über die Selbstkosten und den Gewinnzuschlag beim Verkaufspreis ankommt.
+
+Auch: Kalkulationsschema, Kalkulation, Selbstkosten, Herstellkosten, Zuschlagssatz, Gewinnzuschlag
+
+### Erklärung
+| Zeile | Rechnung |
+|---|---|
+| Fertigungsmaterial (Einzelkosten) | gegeben |
+| + Materialgemeinkosten (MGK) | Fertigungsmaterial · Zuschlagssatz |
+| = **Materialkosten** | |
+| Fertigungslöhne (Einzelkosten) | gegeben |
+| + Fertigungsgemeinkosten (FGK) | Fertigungslöhne · Zuschlagssatz |
+| = **Fertigungskosten** | |
+| **Herstellkosten** | Materialkosten + Fertigungskosten |
+| + Verwaltungsgemeinkosten (VwGK) | Herstellkosten · Zuschlagssatz |
+| + Vertriebsgemeinkosten (VtGK) | Herstellkosten · Zuschlagssatz |
+| = **Selbstkosten** | |
+| + Gewinn | Selbstkosten · Gewinnzuschlag |
+| = **Barverkaufspreis** (netto) | |
+
+Den Zuschlagssatz liefert die Kostenrechnung aus den Vorperiodenwerten:
+
+$\text{Zuschlagssatz} = \frac{\text{Gemeinkosten}}{\text{Zuschlagsgrundlage}} \cdot 100\,\%$
+
+Grundlage ist das Fertigungsmaterial (für MGK), die Fertigungslöhne (für FGK) und die Herstellkosten (für VwGK und VtGK). Den Gewinnzuschlag bezieht man auf die Selbstkosten:
+
+$\text{Gewinnzuschlag} = \frac{\text{Gewinn}}{\text{Selbstkosten}} \cdot 100\,\% \qquad \text{Gewinn} = \text{Verkaufspreis} - \text{Selbstkosten}$
+
+Die Selbstkosten sind die Preisuntergrenze auf lange Sicht. Wird weiter bis zum Listenpreis gerechnet (Skonto, Rabatt, Umsatzsteuer), geschieht dies „im Hundert“ jeweils auf dem höheren Preis. In AP2-Aufgaben ist das Schema oft **verkürzt** vorgegeben (z. B. Materialkosten, Personalkosten, sonstige Gemeinkosten, Selbstkosten, Gewinn, Umsatz): dann nur die genannten Zeilen und Sätze verwenden und Zwischenzeilen nachrechnen.
+
+### Beispiel
+Die Werkstatt der Möbelhaus Nordholz GmbH kalkuliert ein Eigenmarken-Regal. Fertigungsmaterial 100,00 €, Fertigungslöhne 80,00 €, MGK 10 %, FGK 150 %, VwGK 10 %, VtGK 5 %, Gewinnzuschlag 12 %.
+
+| Zeile | Rechnung | Betrag |
+|---|---|---|
+| Fertigungsmaterial | | 100,00 € |
+| + MGK | $100 \cdot 10\,\%$ | 10,00 € |
+| = Materialkosten | | 110,00 € |
+| Fertigungslöhne | | 80,00 € |
+| + FGK | $80 \cdot 150\,\%$ | 120,00 € |
+| = Fertigungskosten | | 200,00 € |
+| **Herstellkosten** | $110 + 200$ | **310,00 €** |
+| + VwGK | $310 \cdot 10\,\%$ | 31,00 € |
+| + VtGK | $310 \cdot 5\,\%$ | 15,50 € |
+| = **Selbstkosten** | $310 + 31 + 15{,}50$ | **356,50 €** |
+| + Gewinn | $356{,}50 \cdot 12\,\%$ | 42,78 € |
+| = **Barverkaufspreis** | | **399,28 €** |
+
+Mit 19 % Umsatzsteuer (Regelsatz, Stand 2026, ohne Skonto und Rabatt) kostet das Regal $399{,}28 \cdot 1{,}19$ = **475,14 €** brutto. Ergebnis: Unter 356,50 € Nettopreis macht das Möbelhaus auf Dauer Verlust.
+
+### Abgrenzung
+Die **Einzelkosten** lassen sich einem Stück direkt zurechnen, **Gemeinkosten** nur über Schlüssel (Direkt / indirekt). Die Zuschlagskalkulation ist Vollkostenrechnung; die **Deckungsbeitragsrechnung** rechnet nur mit variablen Kosten und beantwortet z. B. Zusatzaufträge. Die **Wirtschaftlichkeitsbetrachtung** vergleicht Kosten und Nutzen eines Vorhabens, nicht den Preis eines Stücks.
+
+### Prüfungsfalle
+Zuschläge auf der falschen Grundlage rechnen (VwGK auf das Material statt auf die Herstellkosten), den Zuschlag nur addieren statt prozentual zu berechnen (110 % entsprechen · 1,10), den Gewinn auf den Verkaufspreis statt auf die Selbstkosten beziehen und Einzel- mit Gemeinkosten vertauschen.
+
+### Merksatz
+Einzelkosten direkt, Gemeinkosten per Zuschlag, Gewinn auf die Selbstkosten.
+
+Siehe auch: Direkt / indirekt · Fixkosten · Variable Kosten · Deckungsbeitrag · Personalkosten · Prozesskosten je Fall · Wirtschaftlichkeitsbetrachtung
+Mehr: Deep Dive 27, 5.1 · Deep Dive 18, 5.3 · Deep Dive 18, 5.4
+
 ## Zustandsdiagramm
 <!-- id: zustandsdiagramm · quellen: Karte DD15, DD15 5.4, DD17 2.6 · stand: 2026-10 -->
 

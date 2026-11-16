@@ -622,12 +622,16 @@ Siehe auch: Mahnverfahren · Gewährleistung · Kaufvertrag
 Mehr: Deep Dive 14, 2.5
 
 ## Verkürzung
-<!-- id: verkurzung · quellen: DD13 1.4 · stand: 2026-10 -->
+<!-- id: verkurzung · quellen: DD13 1.4, DD20 Teil 2 · stand: 2026-11 -->
 
 Kürzung der Ausbildungszeit durch die IHK auf gemeinsamen Antrag von Auszubildendem und Ausbildendem, wenn das Ausbildungsziel in kürzerer Zeit erreichbar ist (§ 8 Abs. 1 BBiG).
 
+Auch: Verlängerung der Ausbildung, Verkürzung der Ausbildung, Ausbildungsdauer
+
 ### Erklärung
-Gründe sind z. B. Abitur, eine einschlägige Vorbildung oder sehr gute Leistungen. Die Verkürzung wird vorab beantragt und ändert das vertragliche Ausbildungsende. Davon zu unterscheiden ist die **vorzeitige Zulassung** zur Abschlussprüfung nach § 45 BBiG: Sie wird später wegen guter Leistungen gewährt, der Vertrag endet dann mit dem vorzeitigen Bestehen. In Ausnahmefällen kann die Ausbildungszeit auch verlängert werden (§ 8 Abs. 2).
+Gründe sind z. B. Abitur, eine einschlägige Vorbildung oder sehr gute Leistungen. Die Verkürzung wird vorab beantragt und ändert das vertragliche Ausbildungsende. Davon zu unterscheiden ist die **vorzeitige Zulassung** zur Abschlussprüfung nach § 45 BBiG: Sie wird später wegen guter Leistungen gewährt, der Vertrag endet dann mit dem vorzeitigen Bestehen.
+
+**Verlängerung:** In Ausnahmefällen kann die zuständige Stelle die Ausbildungszeit **auf Antrag des Auszubildenden** verlängern, wenn das nötig ist, um das Ausbildungsziel zu erreichen (z. B. nach längerer Krankheit); der Ausbildende wird vorher angehört (§ 8 Abs. 2 BBiG). Besteht der Auszubildende die Abschlussprüfung nicht, verlängert sich das Ausbildungsverhältnis **auf sein Verlangen** bis zur nächsten Wiederholungsprüfung, höchstens um **ein Jahr** (§ 21 Abs. 3 BBiG). Bei einer **Teilzeitberufsausbildung** (§ 7a BBiG) verlängert sich die Dauer entsprechend, das Ende ist aber auf höchstens das Anderthalbfache der Vollzeitdauer begrenzt.
 
 ### Beispiel
 Lea hat Abitur. Mit dem Möbelhaus Nordholz beantragt sie zu Beginn eine Verkürzung von 36 auf 30 Monate; die IHK gibt dem Antrag statt.
@@ -640,13 +644,13 @@ Lea hat Abitur. Mit dem Möbelhaus Nordholz beantragt sie zu Beginn eine Verkür
 | Wirkung | neues Vertragsende | Ende mit Bekanntgabe des Ergebnisses |
 
 ### Prüfungsfalle
-Die Verkürzung als einseitiges Recht des Auszubildenden darstellen – der Antrag ist gemeinsam zu stellen, entscheiden muss die IHK.
+Die Verkürzung als einseitiges Recht des Auszubildenden darstellen – der Antrag ist gemeinsam zu stellen, entscheiden muss die IHK. Bei der Verlängerung dagegen stellt der **Auszubildende** den Antrag (nach Nichtbestehen: Verlangen, höchstens ein Jahr); der Betrieb kann sie nicht erzwingen.
 
 ### Merksatz
 Verkürzen beantragen beide – entscheiden tut die Kammer.
 
 Siehe auch: BBiG · Vorzeitiges Bestehen · Probezeit · Prüfungsausschuss
-Mehr: Deep Dive 13, 1.4
+Mehr: Deep Dive 13, 1.4 · Deep Dive 20, Teil 2
 
 ## Versicherungspflichtgrenze
 <!-- id: versicherungspflichtgrenze · quellen: Karte DD14, DD14 1.3 · stand: 2026-10 -->

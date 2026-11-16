@@ -442,6 +442,56 @@ Erst den Auftrag schriftlich, dann der Angriff.
 Siehe auch: Patchmanagement · Härtung · Security by Design · SQL-Injection
 Mehr: Deep Dive 10, 5.3
 
+## Personalkosten
+<!-- id: personalkosten · quellen: Karte DD18, DD18 5.3, DD18 5.4, DD14 1.3 · stand: 2026-11 -->
+
+Alle Kosten, die dem Arbeitgeber durch die Beschäftigung entstehen: Bruttoentgelt plus Arbeitgeberanteile zur Sozialversicherung und weitere Personalnebenkosten.
+
+Auch: Lohnnebenkosten, Personalnebenkosten
+
+### Erklärung
+Bestandteile:
+- **Bruttoentgelt** einschließlich Zuschlägen und Sonderzahlungen (13. Gehalt, Urlaubs- und Weihnachtsgeld). Darin stecken schon die **Arbeitnehmeranteile** zur Sozialversicherung – sie werden nicht zusätzlich gerechnet.
+- **Arbeitgeberanteile** zur Kranken-, Pflege-, Renten- und Arbeitslosenversicherung (2026: KV 7,3 % + halber Zusatzbeitrag, PV 1,8 %, RV 9,3 %, ALV 1,3 %; mit 2,9 % Zusatzbeitrag zusammen 21,15 %).
+- **Unfallversicherung** (Berufsgenossenschaft, zahlt der Arbeitgeber allein; Beitrag nach Lohnsumme und Gefahrklasse) und **Umlagen** (z. B. für Entgeltfortzahlung, Mutterschaft, Insolvenzgeld).
+- **Freiwillige oder tarifliche Leistungen**: betriebliche Altersversorgung, Zuschüsse, Weiterbildung, Arbeitskleidung.
+
+$\text{Personalkosten} = \text{Bruttoentgelt} + \text{AG-Anteile SV} + \text{sonstige Personalnebenkosten}$
+
+$\text{Nebenkostenquote} = \frac{\text{Personalnebenkosten}}{\text{Bruttoentgelt}} \cdot 100\,\%$
+
+Für die Kalkulation braucht man den **Stundensatz**: Bezahlte Ausfallzeiten (Urlaub, Feiertage, Krankheit) kosten Geld ohne Arbeitsleistung, deshalb teilt man die Jahreskosten nur durch die **produktiven Stunden**:
+
+$\text{Stundensatz} = \frac{\text{Jahrespersonalkosten}}{\text{produktive Jahresstunden}}$
+
+### Beispiel
+Ein Mitarbeiter der Möbelhaus Nordholz GmbH verdient 3.200 € brutto im Monat (40 Stunden, Fünf-Tage-Woche). Annahme: Zusatzbeitrag 2,9 %, Beitrag zur Unfallversicherung 1,0 % des Bruttos.
+
+| Position | Rechnung | Betrag |
+|---|---|---|
+| Bruttoentgelt | gegeben | 3.200,00 € |
+| AG-Anteil Sozialversicherung | $3.200 \cdot 21{,}15\,\%$ | 676,80 € |
+| Unfallversicherung | $3.200 \cdot 1\,\%$ | 32,00 € |
+| **Personalkosten je Monat** | | **3.908,80 €** |
+
+Nebenkostenquote: $\frac{676{,}80 + 32{,}00}{3.200} \cdot 100$ = **22,15 %**
+
+Jahreskosten: $12 \cdot 3.908{,}80$ = 46.905,60 €. Produktive Stunden: 52 Wochen · 40 Stunden = 2.080 Stunden, minus 30 Urlaubstage, 10 Feiertage und 10 Krankheitstage (50 Tage · 8 Stunden = 400 Stunden) = 1.680 Stunden.
+
+$\frac{46.905{,}60}{1.680}$ = **27,92 € je produktive Stunde**
+
+### Abgrenzung
+Das **Bruttoentgelt** ist die Sicht des Arbeitnehmers, das **Nettoentgelt** sein Auszahlungsbetrag. Die Personalkosten sind die Sicht des Arbeitgebers und liegen deutlich über dem Brutto. **Prozesskosten je Fall** verteilen sie auf einen Vorgang; in der **Zuschlagskalkulation** gehen sie als Fertigungslöhne ein.
+
+### Prüfungsfalle
+Den Arbeitnehmeranteil zusätzlich zum Brutto aufschlagen (er steckt schon im Brutto), die Unfallversicherung vergessen oder als Abzug vom Arbeitnehmer behandeln und den Stundensatz mit allen bezahlten statt den produktiven Stunden berechnen.
+
+### Merksatz
+Personalkosten sind Brutto plus Arbeitgeberanteile plus Nebenkosten – je Stunde nur durch die produktiven Stunden geteilt.
+
+Siehe auch: Summe SV-Arbeitnehmeranteil · Nettoentgelt · Sozialversicherung · Unfallversicherung · Prozesskosten je Fall · Zuschlagskalkulation · Entgeltfortzahlung · Beitragsbemessungsgrenze
+Mehr: Deep Dive 18, 5.3 · Deep Dive 18, 5.4 · Deep Dive 14, 1.3
+
 ## Personenbezogene Daten
 <!-- id: personenbezogene-daten · quellen: Karte DD10, DD10 Teil 1 · stand: 2026-10 -->
 
@@ -1034,6 +1084,35 @@ Womit man nicht rechnet, ist Text.
 
 Siehe auch: Formatprüfung · Nominalskala · JSON · CSV
 Mehr: Deep Dive 15, 1.3
+
+## Praktikum
+<!-- id: praktikum · quellen: Karte DD13, DD25 Teil 2, DD32 Teil 4, DD33 Teil 3 · stand: 2026-11 -->
+
+Befristetes Verhältnis, in dem jemand praktische Kenntnisse und Erfahrungen für einen Beruf erwirbt, ohne dass es eine Berufsausbildung oder ein Arbeitsverhältnis ist (§ 26 BBiG); das Lernen steht im Vordergrund, nicht die Arbeitsleistung.
+
+Auch: Praktikant, Schülerpraktikum, Pflichtpraktikum, Orientierungspraktikum
+
+### Erklärung
+Für Praktikanten gelten nach § 26 BBiG einzelne Regeln des Ausbildungsrechts entsprechend (z. B. Pflichten, Zeugnis); eine schriftliche Vertragsabfassung ist nicht vorgeschrieben, aber üblich und sinnvoll. Wer in Wahrheit ein reguläres Arbeitsverhältnis führt, ist Arbeitnehmer, egal wie der Vertrag heißt.
+
+**Mindestlohn (§ 22 MiLoG):** Praktikanten gelten grundsätzlich als Arbeitnehmer und erhalten den gesetzlichen Mindestlohn (2026: 13,90 € je Stunde). Ausgenommen sind: ein **Pflichtpraktikum** (Schul-, Ausbildungs- oder Hochschulordnung), ein **Orientierungspraktikum** bis drei Monate, ein **ausbildungsbegleitendes Praktikum** bis drei Monate (nicht, wenn zuvor schon eines beim selben Betrieb bestand) sowie Einstiegsqualifizierung und Berufsausbildungsvorbereitung. Minderjährige ohne abgeschlossene Berufsausbildung haben ebenfalls keinen Mindestlohnanspruch.
+
+**Schülerpraktikum:** Kinder unter 15 dürfen nicht beschäftigt werden, außer im Betriebspraktikum während der Vollzeitschulpflicht (§ 5 Abs. 2 JArbSchG); dabei gelten die Schutzvorschriften des JArbSchG (z. B. höchstens 7 Stunden täglich und 35 Stunden wöchentlich, Pausen, Nachtruhe). Schülerpraktikanten unter 16 sind bei der Betriebsratswahl nicht wahlberechtigt.
+
+### Beispiel
+Zwei noch vollzeitschulpflichtige Schüler (15 Jahre) absolvieren zwei Wochen ein Pflichtpraktikum bei der Möbelhaus Nordholz GmbH: kein Mindestlohn, Arbeitszeit höchstens 7 Stunden täglich und 35 Stunden wöchentlich (§ 7 JArbSchG), keine Wahlberechtigung bei der Betriebsratswahl (unter 16). Ein Studierender macht ein freiwilliges Praktikum über sechs Monate: Mindestlohn von 13,90 €/Std., da freiwillig und länger als drei Monate.
+
+### Abgrenzung
+Das **Ausbildungsverhältnis** folgt dem BBiG mit Ausbildungsplan, Prüfung und Mindestausbildungsvergütung; der **Werkstudent** arbeitet als Arbeitnehmer neben dem Studium. Die **Probezeit** gehört zu einem Arbeits- oder Ausbildungsverhältnis, ein Probearbeiten ist kein Praktikum.
+
+### Prüfungsfalle
+Jedes Praktikum für mindestlohnfrei halten. Mindestlohnfrei sind nur die genannten Fälle (Pflicht, Orientierung oder begleitend bis drei Monate); ein freiwilliges Praktikum über drei Monate ist es nicht.
+
+### Merksatz
+Praktikum heißt lernen statt arbeiten; mindestlohnfrei nur bei Pflicht oder bis drei Monate Orientierung.
+
+Siehe auch: BBiG · JArbSchG · Mindestlohn · Wahlberechtigt · Arbeitsvertrag · Unfallversicherung
+Mehr: Deep Dive 13, 2.4 · Deep Dive 25, Teil 4 · Deep Dive 33, Teil 3
 
 ## Prävention
 <!-- id: pravention · quellen: DD9 4.2, DD9 Teil 5 · stand: 2026-10 -->

@@ -1741,6 +1741,29 @@ Fein sperren erlaubt Parallelität, grob sperren spart Aufwand – gehalten wird
 Siehe auch: Pessimistisches Sperren · Optimistisches Sperren · Deadlock · Transaktion · Isolationsstufen · Lost Update
 Mehr: Deep Dive 15, 4.2
 
+## Spezialisierung
+<!-- id: spezialisierung · quellen: Karte DD20, DD20 6.2, DD26 Teil 4 · stand: 2026-11 -->
+
+Konzentration von Personen, Betrieben oder Ländern auf bestimmte Tätigkeiten, Produkte oder Märkte, die sie besonders gut oder günstig beherrschen.
+
+### Erklärung
+Spezialisierung ist die Folge der Arbeitsteilung und tritt auf mehreren Ebenen auf: **Mitarbeiter** (Fachkraft), **Betrieb** (Kernkompetenz, Auslagerung des Übrigen), **Volkswirtschaft** (Länder produzieren, was sie relativ günstig können, und handeln). **Vorteile:** Übung und Fachwissen erhöhen Qualität und Tempo, die Stückkosten sinken. **Nachteile:** Abhängigkeit von Partnern und Lieferketten (Klumpenrisiko), einseitige Belastung und geringere Flexibilität bei Marktveränderungen. Wer spezialisiert ist, muss tauschen – das erzeugt Märkte und Handel.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH konzentriert sich auf Verkauf und Beratung (Kernkompetenz) und lagert die Auslieferung an einen Spediteur aus. Der Verkauf wird besser, aber der Betrieb ist nun von der Zuverlässigkeit des Spediteurs abhängig.
+
+### Abgrenzung
+Im Datenmodell und in der Objektorientierung bedeutet **Spezialisierung** etwas anderes: Eine Unterklasse erweitert eine Oberklasse (Gegenstück zur Generalisierung). Von der **Arbeitsteilung** (Aufteilung von Arbeitsschritten) unterscheidet sich die Spezialisierung durch den Blick auf die Fokussierung.
+
+### Prüfungsfalle
+Spezialisierung ausschließlich als Vorteil darstellen: Die Abhängigkeit und das Klumpenrisiko gehören zur Beurteilung dazu.
+
+### Merksatz
+Wer sich spezialisiert, wird besser und abhängiger zugleich.
+
+Siehe auch: Arbeitsteilung · Globalisierung · Wirtschaftssektoren · Generalisierung
+Mehr: Deep Dive 20, 6.2 · Deep Dive 26, Teil 4
+
 ## Spezifität
 <!-- id: spezifitat · quellen: Karte DD7, DD7 2.2 · stand: 2026-10 -->
 

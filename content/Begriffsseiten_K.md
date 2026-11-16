@@ -181,6 +181,43 @@ Kannkaufmann: Er kann, muss aber nicht – und erst die Eintragung macht ihn zum
 Siehe auch: Istkaufmann · Formkaufmann · Handelsregister
 Mehr: Deep Dive 14, 3.1
 
+## Kapitalgesellschaft und Personengesellschaft
+<!-- id: kapitalgesellschaft-und-personengesellschaft · quellen: Karte DD14, DD14 3.2, DD20 4.3, DD32 Teil 2, DD33 Teil 4 · stand: 2026-11 -->
+
+Personengesellschaften (GbR, OHG, KG) beruhen auf den Gesellschaftern als Personen, die in der Regel persönlich haften; Kapitalgesellschaften (GmbH, UG, AG) sind juristische Personen, bei denen das Kapital im Vordergrund steht und das Gesellschaftsvermögen haftet.
+
+Auch: Kapitalgesellschaft, Personengesellschaft, Kapitalgesellschaften, Personengesellschaften
+
+### Erklärung
+| Merkmal | Personengesellschaft | Kapitalgesellschaft |
+|---|---|---|
+| Beispiele | GbR, OHG, KG | GmbH, UG, AG |
+| Rechtsstellung | OHG und KG sind rechtsfähig, aber **keine** juristische Person | **juristische Person** |
+| Haftung | Gesellschafter persönlich und unbeschränkt (KG: Kommanditisten nur bis zur Haftsumme) | nur das **Gesellschaftsvermögen**; Gesellschafter riskieren ihre Einlage |
+| Mindestkapital | keines | GmbH 25.000 €, UG ab 1 €, AG 50.000 € |
+| Leitung | Gesellschafter führen selbst (Selbstorganschaft) | Geschäftsführer bzw. Vorstand, auch **Nichtgesellschafter** möglich (Fremdorganschaft) |
+| Handelsregister | Abteilung **A** | Abteilung **B** (Entstehung erst mit Eintragung) |
+| Kaufmann | als Handelsgewerbe (Istkaufmann) | stets Kaufmann kraft Rechtsform (Formkaufmann) |
+| Besteuerung | Gewinn wird bei den Gesellschaftern versteuert (Einkommensteuer) | Gesellschaft zahlt Körperschaftsteuer; Gewinnausschüttung wird beim Gesellschafter nochmals besteuert |
+| Gewinnverteilung | nach Gesellschaftsvertrag | nach Geschäftsanteilen bzw. Aktien (GmbH: wenn der Gesellschaftsvertrag nichts anderes bestimmt) |
+
+Kapitalgesellschaften haben Pflichten zur Rechnungslegung (Jahresabschluss, Offenlegung) und eine Pflicht zur notariellen Gründung bei GmbH und AG. Die **GmbH & Co. KG** ist eine Personengesellschaft (KG) mit einer GmbH als Komplementärin und verbindet die Haftungsbeschränkung mit der Personengesellschaft. Beträge Stand 2026.
+
+### Beispiel
+Drei Gründer wollen das Möbelhaus Nordholz betreiben. Als **OHG** haften alle drei mit dem Privatvermögen, Kapital ist nicht vorgeschrieben, die Eintragung erfolgt in Abteilung A. Als **GmbH** müssen sie 25.000 € Stammkapital aufbringen (davon mindestens 12.500 € bei Gründung), haften nur mit dem Gesellschaftsvermögen und können einen Geschäftsführer einsetzen, der nicht Gesellschafter ist. Verluste von 100.000 € treffen die Gesellschafter der OHG daher privat, die der GmbH höchstens in Höhe ihrer Einlage.
+
+### Abgrenzung
+Das **Einzelunternehmen** ist weder Personen- noch Kapitalgesellschaft, sondern ein Unternehmen mit einem Inhaber, der unbeschränkt haftet. Die **eG** (Genossenschaft) ist eine eigene Rechtsform. „Juristische Person“ bedeutet nicht „Kapitalgesellschaft“: Auch Verein, Stiftung und Körperschaften des öffentlichen Rechts sind juristische Personen.
+
+### Prüfungsfalle
+Die OHG für eine juristische Person oder die GmbH für eine Personengesellschaft halten. Auch vertauscht werden Haftung (GmbH haftet nicht „mit 25.000 €“, die Summe ist das Mindestkapital) und Register (A für Personen, B für Kapital).
+
+### Merksatz
+Personengesellschaft: Person haftet, Abteilung A. Kapitalgesellschaft: Kapital haftet, Abteilung B.
+
+Siehe auch: Rechtsformen · GmbH · OHG · KG · AG · UG (haftungsbeschränkt) · Handelsregister · Juristische Person · Einzelunternehmen
+Mehr: Deep Dive 14, 3.2 · Deep Dive 20, 4.3 · Deep Dive 32, Teil 2 · Deep Dive 33, Teil 4
+
 ## Kapitalwert
 <!-- id: kapitalwert · quellen: Karte DD12, DD12 4.2 · stand: 2026-10 -->
 
@@ -1033,12 +1070,14 @@ Siehe auch: Konzentration · Kooperation · Kartell · Juristische Person
 Mehr: Deep Dive 14, 3.4
 
 ## Kooperation
-<!-- id: kooperation · quellen: Karte DD14, DD14 3.4 · stand: 2026-10 -->
+<!-- id: kooperation · quellen: Karte DD14, DD14 3.4, DD20 6.5 · stand: 2026-11 -->
 
 Zusammenarbeit von Unternehmen, die dabei rechtlich und wirtschaftlich selbstständig bleiben.
 
+Auch: Joint Venture, Arbeitsgemeinschaft, ARGE, Strategische Allianz
+
 ### Erklärung
-Unternehmen bündeln Kräfte in einzelnen Bereichen, ohne ihre Eigenständigkeit aufzugeben: Arbeitsgemeinschaft für ein gemeinsames Projekt, Einkaufsgemeinschaft für bessere Konditionen, gemeinsame Forschung oder Werbung. Grenze ist das Kartellverbot: Absprachen über Preise, Mengen oder Gebiete, die den Wettbewerb beschränken, sind grundsätzlich verboten.
+Unternehmen bündeln Kräfte in einzelnen Bereichen, ohne ihre Eigenständigkeit aufzugeben: **Arbeitsgemeinschaft (ARGE)** für ein gemeinsames Projekt (z. B. Großauftrag, nur vorübergehend), **Einkaufsgemeinschaft** für bessere Konditionen, gemeinsame Forschung oder Werbung. Beim **Joint Venture** gründen die Partner gemeinsam ein neues Unternehmen (häufig eine GmbH) für ein Projekt oder einen Markt und halten Anteile daran; die Gründer bleiben selbstständig, das Gemeinschaftsunternehmen gehört ihnen gemeinsam. Grenze ist das Kartellverbot: Absprachen über Preise, Mengen oder Gebiete, die den Wettbewerb beschränken, sind grundsätzlich verboten.
 
 ### Beispiel
 Mehrere unabhängige Möbelhäuser gründen eine Einkaufsgemeinschaft und bestellen Bürostühle gemeinsam, um Mengenrabatte zu erhalten. Ihre Verkaufspreise legt jedes Haus weiter selbst fest.
@@ -1050,14 +1089,16 @@ Mehrere unabhängige Möbelhäuser gründen eine Einkaufsgemeinschaft und bestel
 | Konzern | ja | nein |
 | Fusion | nein | nein |
 
+Ein **Joint Venture** ist keine Fusion: Die Partner bleiben bestehen und gründen nur zusätzlich ein gemeinsames Unternehmen. Eine **ARGE** ist zeitlich auf ein Projekt begrenzt, ein Joint Venture dauerhaft angelegt.
+
 ### Prüfungsfalle
-Vereinbaren die Einkaufspartner zusätzlich gemeinsame Verkaufspreise, ist es keine erlaubte Kooperation mehr, sondern ein Kartell.
+Vereinbaren die Einkaufspartner zusätzlich gemeinsame Verkaufspreise, ist es keine erlaubte Kooperation mehr, sondern ein Kartell. Ein Joint Venture nicht mit einer Fusion verwechseln (dort gehen die Beteiligten in einem Unternehmen auf).
 
 ### Merksatz
 Kooperation: zusammen arbeiten, getrennt bleiben.
 
-Siehe auch: Kartell · Konzern · Konzentration
-Mehr: Deep Dive 14, 3.4
+Siehe auch: Kartell · Konzern · Konzentration · Fusion
+Mehr: Deep Dive 14, 3.4 · Deep Dive 20, 6.5
 
 ## Kopfgesteuerte Schleife
 <!-- id: kopfgesteurte-schleife · quellen: Karte DD11, DD11 B1, DD17 4.2 · stand: 2026-10 -->

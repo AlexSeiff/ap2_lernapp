@@ -371,6 +371,40 @@ Wunsch – plus Geld – plus Markt.
 Siehe auch: Ökonomisches Prinzip · Produktionsfaktoren · Gleichgewichtspreis · Wirtschaftskreislauf
 Mehr: Deep Dive 14, 4.1
 
+## Befristung
+<!-- id: befristung · quellen: Karte DD13, DD13 3.1, DD25 Teil 2, DD32 Teil 1 · stand: 2026-11 -->
+
+Vereinbarung, dass ein Arbeitsvertrag nach einer bestimmten Zeit oder bei Zweckerreichung von selbst endet, ohne dass eine Kündigung nötig ist; geregelt im Teilzeit- und Befristungsgesetz (TzBfG).
+
+Auch: Befristeter Arbeitsvertrag, TzBfG, Sachgrund, Sachgrundlose Befristung
+
+### Erklärung
+Die Befristung braucht die **Schriftform** und muss **vor Arbeitsaufnahme** vereinbart sein (§ 14 Abs. 4 TzBfG); sonst gilt der Vertrag als unbefristet (§ 16). Zwei Wege:
+
+| Art | Voraussetzung | Dauer |
+|---|---|---|
+| **mit Sachgrund** (§ 14 Abs. 1) | z. B. vorübergehender Bedarf, **Vertretung** (Elternzeit), Erprobung, **Anschluss an Ausbildung oder Studium**, Eigenart der Arbeitsleistung, Gründe in der Person | nach dem Sachgrund; sehr lange Kettenbefristungen können rechtsmissbräuchlich sein |
+| **ohne Sachgrund** (§ 14 Abs. 2) | kein früheres Arbeitsverhältnis mit demselben Arbeitgeber | höchstens **2 Jahre**; innerhalb dieser Zeit höchstens **3 Verlängerungen** (nahtlos, ohne Änderung der übrigen Bedingungen) |
+
+Ausnahmen: In den ersten vier Jahren nach Gründung eines Unternehmens sind bis zu vier Jahre ohne Sachgrund möglich (Abs. 2a); Arbeitnehmer ab 52 Jahren nach mindestens vier Monaten Arbeitslosigkeit dürfen bis zu fünf Jahre sachgrundlos befristet werden (Abs. 3); Tarifverträge können abweichen.
+
+**Ende:** Eine Zeitbefristung endet automatisch mit Fristablauf; eine ordentliche Kündigung ist nur möglich, wenn sie vereinbart wurde (§ 15 Abs. 4). Arbeitet der Arbeitnehmer mit Wissen des Arbeitgebers nach Ablauf weiter und widerspricht dieser nicht unverzüglich, wird der Vertrag unbefristet (§ 15 Abs. 5). Befristet Beschäftigte dürfen nicht schlechter behandelt werden als vergleichbare unbefristete (§ 4 Abs. 2), haben also Anspruch auf Urlaub; will der Arbeitnehmer die Unwirksamkeit geltend machen, muss er innerhalb von **drei Wochen** nach dem vereinbarten Ende klagen (§ 17).
+
+### Beispiel
+Tim schließt seine Ausbildung bei der Möbelhaus Nordholz GmbH ab und erhält einen auf zwölf Monate befristeten Vertrag, schriftlich vor Beginn unterzeichnet (Sachgrund: Anschluss an die Ausbildung). Ein anderer Neueinsteiger wird ohne Sachgrund für 12 Monate befristet und zweimal um je sechs Monate verlängert: Gesamtdauer 24 Monate, zwei Verlängerungen – zulässig. Eine weitere Verlängerung wäre unzulässig, weil sie die Zwei-Jahres-Grenze überschritte. Wäre die Befristung nur per E-Mail vereinbart, bestünde ein unbefristetes Arbeitsverhältnis.
+
+### Abgrenzung
+Die **Kündigung** beendet ein Arbeitsverhältnis durch Erklärung, die Befristung durch Zeitablauf. Die **Probezeit** ist keine Befristung, sondern eine kurze Kündigungsfrist im unbefristeten Vertrag (eine Befristung zur Erprobung ist dagegen möglich). Das **Ausbildungsverhältnis** endet nach dem BBiG mit der Prüfung. Bei der **Leiharbeit** kann der Leiharbeitnehmer beim Verleiher unbefristet angestellt sein.
+
+### Prüfungsfalle
+Eine mündliche, E-Mail- oder nachträgliche Befristung für wirksam halten, oder annehmen, Betriebsrat oder Agentur für Arbeit müssten der Befristung zustimmen. Falsch ist auch, befristet Beschäftigten Urlaub abzusprechen oder sie bei der Betriebsratsgröße nicht mitzuzählen.
+
+### Merksatz
+Schriftlich vor Arbeitsbeginn; ohne Sachgrund zwei Jahre, drei Verlängerungen, keine Zuvorbeschäftigung.
+
+Siehe auch: Arbeitsvertrag · Ordentliche Kündigung · Probezeit · Leiharbeit · Wahlberechtigt · Nachweisgesetz · Betriebsrat
+Mehr: Deep Dive 13, 3.1 · Deep Dive 25, Teil 2 · Deep Dive 32, Teil 1
+
 ## Beitragsbemessungsgrenze
 <!-- id: beitragsbemessungsgrenze · quellen: Karte DD14, DD14 1.3 · stand: 2026-10 -->
 
@@ -786,6 +820,45 @@ Ab 5 wählbar, ab 16 wählen, ab 18 gewählt werden, 4 Jahre im Amt.
 
 Siehe auch: BetrVG · Beteiligungsrechte · Betriebsvereinbarung · Jugend- und Auszubildendenvertretung · Stakeholderanalyse
 Mehr: Deep Dive 13, 4.1 · Deep Dive 12, 1.4
+
+## Betriebstypen
+<!-- id: betriebstypen · quellen: Karte DD20, DD20 6.3, DD32 Teil 4, DD26 Teil 4 · stand: 2026-11 -->
+
+Einteilung von Betrieben nach dem Ziel (erwerbswirtschaftlich oder gemeinwirtschaftlich) und nach der Art der Leistung (Industrie, Handwerk, Handel, Dienstleistung).
+
+Auch: Betriebsarten, erwerbswirtschaftlicher Betrieb, gemeinwirtschaftlicher Betrieb
+
+### Erklärung
+**Nach dem Ziel:**
+| Typ | Ziel | Beispiele |
+|---|---|---|
+| **erwerbswirtschaftlich** | Gewinn erzielen (Rentabilität) | Möbelhaus, Industrieunternehmen, Bank |
+| **gemeinwirtschaftlich** | Bedarfsdeckung für die Allgemeinheit, kostendeckend, nicht gewinnorientiert | Stadtwerke, kommunale Verkehrsbetriebe, öffentliche Bibliotheken |
+
+**Nach der Leistung:**
+| Typ | Kennzeichen |
+|---|---|
+| Industrie | maschinelle Herstellung in Serie oder Masse |
+| Handwerk | handwerkliche, oft individuelle Fertigung (Handwerkskammer, Handwerksrolle) |
+| Handel | Waren ohne wesentliche Bearbeitung weiterverkaufen (Groß- und Einzelhandel) |
+| Dienstleistung | immaterielle Leistung (Banken, Verkehr, IT, Beratung) |
+
+Industrie und Handwerk gehören zum sekundären, Handel und Dienstleistung zum tertiären Sektor (Wirtschaftssektoren). Ein Betrieb ist die technisch-organisatorische Einheit, ein Unternehmen die rechtlich-wirtschaftliche Einheit; ein Unternehmen kann mehrere Betriebe haben.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH ist ein **erwerbswirtschaftlicher Handelsbetrieb** (tertiärer Sektor). Die Stadtwerke, die das Gebäude mit Strom versorgen, sind **gemeinwirtschaftlich** organisiert: Sie sollen die Versorgung zu fairen Preisen sichern und müssen keine hohen Gewinne erzielen.
+
+### Abgrenzung
+Von der Einteilung nach **Sektoren** (primär, sekundär, tertiär: Art der Tätigkeit) und von der **Rechtsform** (GmbH, AG: rechtliche Gestaltung) zu unterscheiden. Ein gemeinwirtschaftlicher Betrieb darf trotzdem in privater Rechtsform (z. B. GmbH) geführt werden.
+
+### Prüfungsfalle
+„Gemeinwirtschaftlich“ als „darf keinen Gewinn machen“ oder „öffentliche Rechtsform“ deuten. Maßgeblich ist das Ziel der Bedarfsdeckung, nicht die Rechtsform. Auch den Handel dem sekundären Sektor zuordnen.
+
+### Merksatz
+Erwerbswirtschaftlich will Gewinn, gemeinwirtschaftlich will Bedarfsdeckung.
+
+Siehe auch: Wirtschaftssektoren · Rechtsformen · Rentabilität · Arbeitsteilung
+Mehr: Deep Dive 20, 6.3 · Deep Dive 32, Teil 4 · Deep Dive 26, Teil 4
 
 ## Betriebsvereinbarung
 <!-- id: betriebsvereinbarung · quellen: Karte DD13, DD13 4.4 · stand: 2026-10 -->

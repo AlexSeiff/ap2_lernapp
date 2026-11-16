@@ -176,6 +176,40 @@ Versichert ab der Haustür – Kita-Umweg ja, Einkaufsbummel nein.
 Siehe auch: Unfallversicherung · Berufsgenossenschaft · Unfall
 Mehr: Deep Dive 14, 5.1
 
+## Weisungsrecht
+<!-- id: weisungsrecht · quellen: Karte DD13, DD13 3.1, DD25 Teil 2, DD32 Teil 4 · stand: 2026-11 -->
+
+Recht des Arbeitgebers, Inhalt, Ort und Zeit der Arbeitsleistung sowie Ordnung und Verhalten im Betrieb nach billigem Ermessen näher zu bestimmen, soweit Vertrag, Betriebsvereinbarung, Tarifvertrag oder Gesetz nichts anderes festlegen (§ 106 GewO).
+
+Auch: Direktionsrecht
+
+### Erklärung
+Der Arbeitsvertrag beschreibt die Arbeit nur im Rahmen; der Arbeitgeber **konkretisiert** sie durch Weisungen (§ 611a BGB: weisungsgebundene Arbeit). Gegenstand sind **Inhalt** (welche Aufgaben im Rahmen der vereinbarten Tätigkeit), **Ort** (z. B. andere Filiale, wenn der Vertrag den Einsatzort offen lässt), **Zeit** (Lage der Arbeitszeit, nicht ihr Umfang) und **Ordnung und Verhalten** (Dienstkleidung, Zugangsregeln, Umgang mit IT-Systemen).
+
+**Grenzen:** Die Weisung muss billiges Ermessen wahren (Interessen beider Seiten abwägen) und darf nicht gegen Gesetz (Arbeitszeitgesetz, JArbSchG, Mutterschutz, AGG), Tarifvertrag, Betriebsvereinbarung oder Arbeitsvertrag verstoßen. Bei Arbeitszeitlage, Überwachung oder Versetzungen redet der Betriebsrat mit (§ 87, § 99 BetrVG). Rechtswidrige Weisungen müssen nicht befolgt werden; wer eine rechtmäßige Weisung verweigert, riskiert Abmahnung und verhaltensbedingte Kündigung.
+
+**Besonderheiten:** Dem Auszubildenden dürfen nur Aufgaben übertragen werden, die dem Ausbildungszweck dienen und seinen Kräften angemessen sind (§ 14 BBiG); er muss Weisungen im Rahmen der Ausbildung befolgen (§ 13 BBiG). Bei **Leiharbeit** erteilt der Entleiher die fachlichen Weisungen.
+
+### Beispiel
+| Weisung | zulässig? |
+|---|---|
+| Die Verkäuferin soll ab Montag in der zweiten Filiale der Möbelhaus Nordholz GmbH im selben Stadtgebiet arbeiten; der Vertrag lässt den Einsatzort offen | ja, Konkretisierung des Orts |
+| Der Datenanalystin wird das Gehalt gekürzt, weil sie „zu langsam“ sei | nein, Vergütung ist Vertragsinhalt; nur Vertragsänderung oder Änderungskündigung |
+| Der Azubi soll dauerhaft nur Regale einräumen statt IT-Aufgaben zu lernen | nein, kein Ausbildungszweck (§ 14 BBiG) |
+| Die Arbeitszeit wird ohne Betriebsrat auf Schichtdienst umgestellt | nur mit Mitbestimmung des Betriebsrats (§ 87 BetrVG) |
+
+### Abgrenzung
+Von der **Weisungsbefugnis im Organigramm** (wer darf wem Anweisungen geben: Einlinien-, Mehrlinien-, Stabliniensystem) unterscheidet sich das arbeitsrechtliche Weisungsrecht durch Rechtsgrundlage und Grenzen. In der DSGVO ist der Auftragsverarbeiter „weisungsgebunden“ – anderer Zusammenhang.
+
+### Prüfungsfalle
+Das Weisungsrecht für grenzenlos halten oder glauben, durch Weisung ließen sich wesentliche Vertragsbedingungen (Vergütung, Arbeitszeitumfang, Art der Tätigkeit) ändern. Das geht nur durch Vertragsänderung oder Änderungskündigung.
+
+### Merksatz
+Der Arbeitgeber darf den Vertrag konkretisieren, nicht ändern – und nur nach billigem Ermessen.
+
+Siehe auch: Arbeitsvertrag · Mitbestimmung · Betriebsvereinbarung · Einliniensystem · Stabliniensystem · Leiharbeit · Abmahnung · Ausbildungsbetrieb
+Mehr: Deep Dive 13, 3.1 · Deep Dive 25, Teil 2
+
 ## Weiterarbeit ohne Vereinbarung
 <!-- id: weiterarbeit-ohne-vereinbarung · quellen: DD13 1.4 · stand: 2026-10 -->
 
@@ -198,6 +232,39 @@ Weiterarbeiten ohne Absprache heißt: unbefristet eingestellt.
 
 Siehe auch: Probezeit · Ausbildungsbetrieb · Jugend- und Auszubildendenvertretung
 Mehr: Deep Dive 13, 1.4
+
+## Werktage und Arbeitstage
+<!-- id: werktage-und-arbeitstage · quellen: Karte DD13, DD13 2.3, DD26 Teil 1 · stand: 2026-11 -->
+
+Werktage sind alle Kalendertage außer Sonn- und gesetzlichen Feiertagen (also Montag bis Samstag, sechs je Woche, § 3 Abs. 2 BUrlG); Arbeitstage sind die Tage, an denen im Betrieb tatsächlich gearbeitet wird, meist Montag bis Freitag.
+
+Auch: Werktage, Arbeitstage, Werktag, Arbeitstag
+
+### Erklärung
+Das Gesetz zählt Urlaub in **Werktagen** (BUrlG, JArbSchG). Tarif- und Arbeitsverträge nennen ihn oft in **Arbeitstagen**; wie die Tage gezählt werden, steht dann im Vertrag (häufig: alle Kalendertage außer Samstag, Sonntag und Feiertag). Wer verschiedene Quellen vergleicht, muss erst auf dieselbe Einheit umrechnen:
+
+$\text{Arbeitstage} = \text{Werktage} \cdot \frac{\text{Arbeitstage je Woche}}{6}$
+
+Bei der Fünf-Tage-Woche also Arbeitstage = Werktage · 5/6, umgekehrt Werktage = Arbeitstage · 6/5. Bei einer Vier-Tage-Woche rechnet man mit 4/6. Gesetzliche Feiertage zählen nicht als Urlaubstage.
+
+### Beispiel
+Mia ist am 01.01.2026 16 Jahre alt, also „noch nicht 17“: Das JArbSchG gibt ihr **27 Werktage**. Der Tarifvertrag der Möbelhaus Nordholz GmbH nennt **26 Arbeitstage**.
+
+Gesetz in Arbeitstagen: $27 \cdot \frac{5}{6}$ = **22,5 Arbeitstage**
+
+Der Tarifvertrag mit 26 Arbeitstagen ist günstiger, also gilt er. Ohne Umrechnung hätte „27 gegen 26“ fälschlich das Gesetz gewinnen lassen. Der gesetzliche Mindesturlaub Erwachsener von 24 Werktagen entspricht ebenso $24 \cdot \frac{5}{6}$ = **20 Arbeitstagen**.
+
+### Abgrenzung
+**Kalendertage** zählen jeden Tag (z. B. Fristen wie die Unfallanzeige bei Arbeitsunfähigkeit von mehr als drei Kalendertagen). Auch das Arbeitszeitgesetz rechnet „werktäglich“, also Montag bis Samstag.
+
+### Prüfungsfalle
+Werktage und Arbeitstage ohne Umrechnung vergleichen oder falsch herum umrechnen (· 6/5 statt · 5/6). Bei einem Ergebnis wie 22,5 nicht eigenmächtig auf- oder abrunden, wenn die Aufgabe es nicht verlangt.
+
+### Merksatz
+Werktage zählen Montag bis Samstag, Arbeitstage Montag bis Freitag: von Werktagen zu Arbeitstagen mal fünf Sechstel.
+
+Siehe auch: Urlaub · JArbSchG · Arbeitszeitgesetz · Günstigkeitsprinzip · Tarifvertrag
+Mehr: Deep Dive 26, Teil 1 · Deep Dive 13, 2.3
 
 ## Werkvertrag
 <!-- id: werkvertrag · quellen: Karte DD14, DD14 2.4 · stand: 2026-10 -->
@@ -507,6 +574,36 @@ Bei Personalmaßnahmen kann der Betriebsrat bremsen, aber das Gericht hat das le
 
 Siehe auch: Anhörung · Mitbestimmung · Einigungsstelle · Betriebsrat
 Mehr: Deep Dive 13, 4.2
+
+## Widerspruchsverfahren
+<!-- id: widerspruchsverfahren · quellen: Karte DD20, DD20 3.2, DD32 Teil 3 · stand: 2026-11 -->
+
+Verwaltungsrechtliches Vorverfahren: Die Behörde prüft ihren Bescheid auf den Widerspruch des Betroffenen noch einmal, bevor dieser vor dem Sozial- oder Verwaltungsgericht klagen kann.
+
+Auch: Vorverfahren
+
+### Erklärung
+1. Die Behörde (z. B. Berufsgenossenschaft, Krankenkasse, Rentenversicherung) erlässt einen **Bescheid** mit Rechtsbehelfsbelehrung.
+2. Der Betroffene legt innerhalb **eines Monats** nach Bekanntgabe **Widerspruch** ein (schriftlich oder zur Niederschrift, bei der Behörde, die den Bescheid erlassen hat).
+3. Die Behörde prüft Recht- und Zweckmäßigkeit: Sie **hilft ab** oder erlässt einen **Widerspruchsbescheid**.
+4. Gegen den Widerspruchsbescheid kann der Betroffene innerhalb **eines Monats** nach Zustellung **Klage** erheben.
+
+Fehlt die Rechtsbehelfsbelehrung oder ist sie fehlerhaft, verlängert sich die Frist auf **ein Jahr**. Im Sozialrecht ist das Vorverfahren grundsätzlich Voraussetzung der Klage und kostenfrei; im allgemeinen Verwaltungsrecht richtet es sich nach Landesrecht und ist in einigen Ländern abgeschafft oder eingeschränkt.
+
+### Beispiel
+Die Berufsgenossenschaft lehnt es ab, einen Sturz der Mitarbeiterin Dietrich als Wegeunfall anzuerkennen. Frau Dietrich legt innerhalb eines Monats Widerspruch ein. Weist die BG ihn zurück, kann sie binnen eines Monats beim **Sozialgericht** klagen, nicht beim Arbeitsgericht.
+
+### Abgrenzung
+Das Wort „Widerspruch“ kommt in anderen Zusammenhängen vor: Widerspruch des **Betriebsrats** (Beteiligungsrecht), **Widerspruch** nach DSGVO (Betroffenenrecht) und Widerspruch gegen den **Mahnbescheid** (zwei Wochen). Gegen eine **Kündigung** gibt es kein Widerspruchsverfahren, sondern die Kündigungsschutzklage binnen drei Wochen.
+
+### Prüfungsfalle
+Sofort klagen, ohne vorher Widerspruch eingelegt zu haben, oder die Frist von einem Monat mit den drei Wochen der Kündigungsschutzklage verwechseln. Bei Streit mit einem Sozialversicherungsträger ist das **Sozialgericht** zuständig.
+
+### Merksatz
+Erst Widerspruch binnen eines Monats, dann Klage binnen eines Monats.
+
+Siehe auch: Gerichtszuständigkeit · Berufsgenossenschaft · Unfallversicherung · Kündigungsschutzklage · Widerspruch / Zustimmungsverweigerung · Betroffenenrechte
+Mehr: Deep Dive 20, 3.2
 
 ## Wiederherstellungszeit
 <!-- id: wiederherstellungszeit · quellen: Karte DD16, DD16 4.4 · stand: 2026-10 -->

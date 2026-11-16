@@ -1581,12 +1581,27 @@ Siehe auch: Assoziation · Klassendiagramm · Min-Max-Notation · MC-Notation ·
 Mehr: Deep Dive 15, 5.3
 
 ## Mutterschutz
-<!-- id: mutterschutz · quellen: Karte DD13, DD13 2.4 · stand: 2026-10 -->
+<!-- id: mutterschutz · quellen: Karte DD13, DD13 2.4, DD20 3.4 · stand: 2026-11 -->
 
 Gesetzlicher Schutz schwangerer und stillender Frauen nach dem Mutterschutzgesetz (MuSchG): Schutzfristen vor und nach der Entbindung, Kündigungsverbot und Beschäftigungsverbote.
 
+Auch: MuSchG, Schutzfristen, Beschäftigungsverbot, Mutterschaftsgeld
+
 ### Erklärung
 **Schutzfrist** 6 Wochen vor der Entbindung (die Frau darf auf eigenen ausdrücklichen Wunsch weiterarbeiten) und 8 Wochen danach (absolutes Beschäftigungsverbot); 12 Wochen bei Früh- und Mehrlingsgeburten sowie auf Antrag bei Behinderung des Kindes. Seit 01.06.2025 gibt es gestaffelte Schutzfristen auch nach einer **Fehlgeburt** ab der 13. Schwangerschaftswoche (2, 6 bzw. 8 Wochen; Stand 2026). **Kündigungsverbot** (§ 17 MuSchG) während der Schwangerschaft bis 4 Monate nach der Entbindung bzw. nach einer Fehlgeburt nach der 12. Woche. In den Schutzfristen zahlen Krankenkasse und Arbeitgeber gemeinsam das Mutterschaftsgeld bzw. den Zuschuss bis zum Nettoentgelt.
+
+**Weitere Teilthemen (Stand 2026):**
+
+| Thema | Regel |
+|---|---|
+| Mitteilung | Die Schwangere **soll** Schwangerschaft und Entbindungstermin so früh wie möglich mitteilen (§ 15), sie muss es nicht; auf Verlangen legt sie ein ärztliches Zeugnis vor. Der Arbeitgeber meldet die Mitteilung unverzüglich der Aufsichtsbehörde (Gewerbeaufsicht, § 27) und darf sie nicht an Unbefugte weitergeben. Das Kündigungsverbot gilt, wenn er von der Schwangerschaft weiß oder sie ihm binnen zwei Wochen nach Zugang der Kündigung mitgeteilt wird |
+| Arbeitszeit | höchstens 8,5 Stunden täglich bzw. 90 Stunden in der Doppelwoche (Minderjährige 8 bzw. 80), mindestens 11 Stunden Ruhezeit; **keine Nachtarbeit** zwischen 20 und 6 Uhr (bis 22 Uhr nur mit behördlicher Genehmigung und ausdrücklicher Bereitschaft der Frau), Sonn- und Feiertagsarbeit nur auf ausdrückliches Verlangen und mit Ersatzruhetag |
+| Gefährdungen | Der Arbeitgeber muss den Arbeitsplatz beurteilen und Schutzmaßnahmen treffen. Verboten sind Tätigkeiten mit unverantwortbarer Gefährdung, etwa bestimmte Gefahrstoffe, regelmäßiges Heben von mehr als 5 kg, gelegentliches von mehr als 10 kg, Akkord- und Fließarbeit. Gelingt kein sicherer Arbeitsplatz, folgt die Umsetzung, zuletzt die Freistellung |
+| Freistellung | für Vorsorgeuntersuchungen und, in den ersten 12 Monaten nach der Geburt, für Stillzeiten (zweimal täglich 30 Minuten oder einmal 60 Minuten), ohne Entgeltminderung |
+| Beschäftigungsverbote | **generell** (Schutzfristen, gefährliche Tätigkeiten) oder **individuell** durch ärztliches Zeugnis (§ 16). Bei einem Verbot außerhalb der Schutzfristen zahlt der Arbeitgeber **Mutterschutzlohn** in Höhe des Durchschnittsentgelts der letzten drei Monate vor der Schwangerschaft (§ 18) |
+| Mutterschaftsgeld | gesetzlich Versicherte: Krankenkasse **13 € je Kalendertag**; der Arbeitgeber zahlt als **Zuschuss** die Differenz zum durchschnittlichen kalendertäglichen Nettoentgelt (§ 20). Nicht gesetzlich Versicherte erhalten einmalig höchstens 210 € vom Bund (§ 19) |
+| Urlaub | Zeiten eines Beschäftigungsverbots gelten für den Urlaubsanspruch als Beschäftigungszeit; nicht genommener Urlaub kann im laufenden oder im nächsten Jahr genommen werden (§ 24) |
+| Ausnahme vom Kündigungsverbot | nur in besonderen Fällen, die nicht mit der Schwangerschaft zusammenhängen, kann die zuständige Landesbehörde die Kündigung vorab für zulässig erklären (§ 17 Abs. 2); die Kündigung bleibt schriftlich und mit Grund zu erklären |
 
 ### Beispiel
 Errechneter Geburtstermin einer Mitarbeiterin: 15.05.2026. Schutzfrist ab 03.04.2026; Entbindung tatsächlich am 15.05. → Schutzfrist bis 10.07.2026, Kündigungsverbot bis 15.09.2026.
@@ -1600,8 +1615,8 @@ Die 8 Wochen nach der Geburt für verzichtbar halten – nur die 6 Wochen davor 
 ### Merksatz
 Sechs vor, acht nach, vier Monate unkündbar.
 
-Siehe auch: Elternzeit · Besonderer Kündigungsschutz · Schwerbehinderte Menschen
-Mehr: Deep Dive 13, 2.4
+Siehe auch: Elternzeit · Besonderer Kündigungsschutz · Schwerbehinderte Menschen · Gewerbeaufsichtsamt
+Mehr: Deep Dive 13, 2.4 · Deep Dive 20, 3.4
 
 ## Ausgelassen
 - Merkmale – Abschnittstitel Struktogramm

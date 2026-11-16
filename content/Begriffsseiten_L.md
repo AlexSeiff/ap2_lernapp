@@ -392,6 +392,45 @@ Links bleibt alles, rechts füllt NULL die Lücken.
 Siehe auch: INNER JOIN · NULL · NULL-Logik (Prüferklassiker)
 Mehr: Deep Dive 1, 2.2
 
+## Leiharbeit
+<!-- id: leiharbeit · quellen: Karte DD25, DD25 Teil 2, DD25 Teil 4, DD33 Teil 3 · stand: 2026-11 -->
+
+Arbeitnehmerüberlassung: Ein Verleiher überlässt einem Entleiher seine Arbeitnehmer (Leiharbeitnehmer) gegen Entgelt zur Arbeit im fremden Betrieb (Arbeitnehmerüberlassungsgesetz, AÜG).
+
+Auch: Arbeitnehmerüberlassung, Zeitarbeit, AÜG, Verleiher, Entleiher, Leiharbeitnehmer
+
+### Erklärung
+Es entsteht ein **Dreiecksverhältnis**:
+
+| Beziehung | Vertrag | Folgen |
+|---|---|---|
+| Verleiher – Leiharbeitnehmer | **Arbeitsvertrag** | Verleiher zahlt Lohn und Sozialversicherung, gewährt Urlaub, kündigt |
+| Verleiher – Entleiher | **Überlassungsvertrag** | Entleiher zahlt das Überlassungsentgelt an den Verleiher |
+| Entleiher – Leiharbeitnehmer | **kein Vertrag** | Entleiher erteilt die **fachlichen Weisungen** und ist am Einsatzplatz für den Arbeitsschutz verantwortlich |
+
+**Regeln (Stand 2026):** Der Verleiher braucht eine **Erlaubnis** der Bundesagentur für Arbeit. Ein Leiharbeitnehmer darf demselben Entleiher grundsätzlich höchstens **18 Monate** überlassen werden (Tarifvertrag oder Betriebsvereinbarung können abweichen). Es gilt der Grundsatz der Gleichstellung mit vergleichbaren Stammbeschäftigten (Lohn, wesentliche Arbeitsbedingungen); ein Tarifvertrag darf in den ersten **neun Monaten** abweichen, danach gilt grundsätzlich gleiches Entgelt. Der Entleiher darf Leiharbeitnehmer nicht als Streikbrecher einsetzen. Beim Entleiher sind Leiharbeitnehmer **wahlberechtigt zum Betriebsrat, wenn sie länger als drei Monate** eingesetzt werden (§ 7 BetrVG); der Betriebsrat des Entleihers ist bei der Übernahme zu beteiligen (§ 99 BetrVG).
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH holt zur Inventur vier Leiharbeitnehmer für sechs Wochen und zwei weitere für acht Monate. Lohn und Sozialabgaben zahlt jeweils die Zeitarbeitsfirma, die Anweisungen im Lager gibt das Möbelhaus. Bei der Betriebsratswahl dürfen nur die zwei Leiharbeitnehmer mit acht Monaten Einsatz wählen, die vier mit sechs Wochen nicht.
+
+### Abgrenzung
+| Form | Wer schuldet was |
+|---|---|
+| Leiharbeit | Arbeitskraft; Weisung beim Entleiher |
+| **Werkvertrag** | ein Erfolg; der Auftragnehmer setzt eigene Leute nach eigener Organisation ein; kein Weisungsrecht des Auftraggebers |
+| Befristeter Arbeitsvertrag | direkt mit dem Betrieb, kein Dritter |
+
+Wird ein „Werkvertrag“ wie Leiharbeit gelebt (Weisungen des Auftraggebers an Fremdpersonal), liegt verdeckte Arbeitnehmerüberlassung vor.
+
+### Prüfungsfalle
+Den Lohn dem Entleiher oder die Weisung dem Verleiher zuordnen (genau umgekehrt: der Verleiher zahlt, der Entleiher weist an). Bei der Betriebsratswahl kurzzeitig eingesetzte Leiharbeitnehmer mitzuzählen.
+
+### Merksatz
+Der Verleiher zahlt, der Entleiher weist an.
+
+Siehe auch: Weisungsrecht · Werkvertrag · Befristung · Wahlberechtigt · Betriebsrat · Arbeitsvertrag · Arbeitsschutz
+Mehr: Deep Dive 25, Teil 2 · Deep Dive 25, Teil 4 · Deep Dive 33, Teil 3
+
 ## Leihvertrag
 <!-- id: leihvertrag · quellen: Karte DD14, DD14 2.4 · stand: 2026-10 -->
 

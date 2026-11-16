@@ -7,7 +7,7 @@
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 867,
+    "anzahl_karten": 885,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -5282,7 +5282,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 12",
       "status": "behandelt",
-      "anzahl_karten": 55,
+      "anzahl_karten": 57,
       "karten": [
         {
           "id": "FB-projekt",
@@ -5839,6 +5839,26 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-personalkosten",
+          "frage": "Personalkosten",
+          "antwort": "Brutto plus Arbeitgeberanteile zur Sozialversicherung, Unfallversicherung, Umlagen und freiwillige Leistungen; Stundensatz = Jahrespersonalkosten / produktive Jahresstunden (ohne Urlaub, Feiertage, Krankheit).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-zuschlagskalkulation",
+          "frage": "Zuschlagskalkulation",
+          "antwort": "Einzelkosten direkt, Gemeinkosten per Zuschlagssatz: Materialkosten + Fertigungskosten = Herstellkosten; + Verwaltungs- und Vertriebsgemeinkosten = Selbstkosten; + Gewinn (Zuschlag auf die Selbstkosten) = Verkaufspreis.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -5848,7 +5868,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 13",
       "status": "behandelt",
-      "anzahl_karten": 47,
+      "anzahl_karten": 54,
       "karten": [
         {
           "id": "FB-duale-ausbildung",
@@ -6319,6 +6339,76 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-urlaub",
+          "frage": "Urlaub",
+          "antwort": "Bezahlte Freistellung zur Erholung: gesetzlich mindestens 24 Werktage (= 20 Arbeitstage bei Fünf-Tage-Woche, § 3 BUrlG); voller Anspruch nach 6 Monaten Wartezeit, davor 1/12 je vollem Monat (Teilurlaub); Übertragung nur bis 31.03.; Urlaubsplan und -grundsätze unterliegen der Mitbestimmung (§ 87 BetrVG), bei Ende des Arbeitsverhältnisses gibt es eine Urlaubsbescheinigung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-werktage-und-arbeitstage",
+          "frage": "Werktage und Arbeitstage",
+          "antwort": "Werktage = Montag bis Samstag (6 je Woche), Arbeitstage = Tage, an denen gearbeitet wird (meist Montag bis Freitag). Umrechnung bei Fünf-Tage-Woche: Arbeitstage = Werktage · 5 / 6 (27 Werktage = 22,5 Arbeitstage).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-weisungsrecht",
+          "frage": "Weisungsrecht",
+          "antwort": "Recht des Arbeitgebers, Inhalt, Ort und Zeit der Arbeit sowie Ordnung im Betrieb nach billigem Ermessen zu bestimmen (§ 106 GewO) – soweit Gesetz, Tarifvertrag, Betriebsvereinbarung oder Arbeitsvertrag nichts anderes regeln; es konkretisiert den Vertrag, ändert ihn aber nicht.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-praktikum",
+          "frage": "Praktikum",
+          "antwort": "Befristetes Lernverhältnis ohne Berufsausbildung und ohne Arbeitsverhältnis (§ 26 BBiG); Mindestlohn grundsätzlich ja, nicht bei Pflichtpraktikum und Orientierungs- oder ausbildungsbegleitendem Praktikum bis 3 Monate; Schülerpraktikum: JArbSchG (z. B. höchstens 7 Stunden täglich).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-befristung",
+          "frage": "Befristung",
+          "antwort": "Arbeitsvertrag endet ohne Kündigung mit Zeitablauf oder Zweckerreichung (TzBfG); nur schriftlich vor Arbeitsbeginn wirksam; ohne Sachgrund höchstens 2 Jahre mit bis zu 3 Verlängerungen und nur ohne frühere Beschäftigung beim selben Arbeitgeber (§ 14 TzBfG).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-leiharbeit",
+          "frage": "Leiharbeit",
+          "antwort": "Arbeitnehmerüberlassung (AÜG): Der Verleiher stellt den Leiharbeitnehmer an und zahlt den Lohn, der Entleiher erteilt die fachlichen Weisungen; Höchstüberlassung grundsätzlich 18 Monate; im Entleiherbetrieb wahlberechtigt zum Betriebsrat bei mehr als 3 Monaten Einsatz.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-diversity-management",
+          "frage": "Diversity Management",
+          "antwort": "Strategie, die Vielfalt der Belegschaft (Alter, Geschlecht, Herkunft, Religion, Behinderung, sexuelle Orientierung) als Potenzial nutzt und Benachteiligung vermeidet; geht über das Pflichtgesetz AGG hinaus und ist freiwillig.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -6328,7 +6418,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 14",
       "status": "behandelt",
-      "anzahl_karten": 113,
+      "anzahl_karten": 122,
       "karten": [
         {
           "id": "FB-sozialversicherung",
@@ -7454,6 +7544,96 @@
           "id": "FB-rechtsformen",
           "frage": "Rechtsformen",
           "antwort": "Organisationsformen eines Unternehmens: Einzelunternehmen, Personengesellschaften (GbR, OHG, KG) und Kapitalgesellschaften (GmbH 25.000 €, UG ab 1 €, AG 50.000 €) unterscheiden sich in Haftung, Kapital und Handelsregister (A bzw. B).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gewerbeaufsichtsamt",
+          "frage": "Gewerbeaufsichtsamt",
+          "antwort": "Landesbehörde (auch Amt für Arbeitsschutz), die die Einhaltung staatlicher Arbeitsschutzvorschriften überwacht, berät, Anordnungen und Bußgelder erlässt – die staatliche Säule neben den Berufsgenossenschaften; Streit darüber geht vor das Verwaltungsgericht.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-widerspruchsverfahren",
+          "frage": "Widerspruchsverfahren",
+          "antwort": "Verwaltungsrechtliches Vorverfahren: Widerspruch binnen 1 Monat nach Bescheid bei der Behörde, dann Widerspruchsbescheid, danach Klage binnen 1 Monat – z. B. beim Sozialgericht gegen Bescheide der Berufsgenossenschaft oder Krankenkasse.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gerichtszustandigkeit",
+          "frage": "Gerichtszuständigkeit",
+          "antwort": "Arbeitsgericht: Streit Arbeitgeber – Arbeitnehmer; Sozialgericht: Streit mit Sozialversicherungsträgern (nach Widerspruch); Verwaltungsgericht: Streit mit Behörden; Amtsgericht: Zivilsachen bis 5.000 €, Familien- und Registersachen; Landgericht: Zivilsachen über 5.000 €.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-kapitalgesellschaft-und-personengesellschaft",
+          "frage": "Kapitalgesellschaft und Personengesellschaft",
+          "antwort": "Personengesellschaft (GbR, OHG, KG): Gesellschafter haften persönlich, kein Mindestkapital, Handelsregister A. Kapitalgesellschaft (GmbH, UG, AG): juristische Person, nur das Gesellschaftsvermögen haftet, Mindestkapital, Handelsregister B.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-betriebstypen",
+          "frage": "Betriebstypen",
+          "antwort": "Nach dem Ziel erwerbswirtschaftlich (Gewinn) oder gemeinwirtschaftlich (Bedarfsdeckung, z. B. Stadtwerke); nach der Leistung Industrie, Handwerk, Handel oder Dienstleistung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-globalisierung",
+          "frage": "Globalisierung",
+          "antwort": "Weltweite Verflechtung von Märkten und Unternehmen; gefördert durch Zollabbau, Freihandel und moderne Technik, gehemmt durch Zölle, Importquoten und Reshoring; Folgen: mehr Wettbewerb und Arbeitsteilung, aber auch Abhängigkeit von Lieferketten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-spezialisierung",
+          "frage": "Spezialisierung",
+          "antwort": "Konzentration von Personen, Betrieben oder Ländern auf Tätigkeiten oder Produkte, die sie besonders gut beherrschen: höhere Produktivität und niedrigere Stückkosten, aber größere Abhängigkeit (nicht mit der Spezialisierung im Klassendiagramm verwechseln).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-umweltprinzipien",
+          "frage": "Umweltprinzipien",
+          "antwort": "Verursacherprinzip: der Verursacher zahlt; Vorsorgeprinzip: Schäden von vornherein vermeiden; Kooperationsprinzip: Staat, Wirtschaft und Bürger arbeiten zusammen; Gemeinlastprinzip: die Allgemeinheit zahlt, wenn kein Verursacher feststellbar ist.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-umweltzeichen",
+          "frage": "Umweltzeichen",
+          "antwort": "Freiwillige Kennzeichen für umweltfreundlichere Produkte, vor allem der Blaue Engel (schadstoffarm, ressourcenschonend); weitere: EU-Ecolabel, FSC (Holz); der Grüne Punkt ist kein Gütesiegel, sondern zeigt die Beteiligung an einem dualen System.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
