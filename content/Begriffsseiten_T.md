@@ -250,6 +250,16 @@ Art. 32 nennt beispielhaft Pseudonymisierung und Verschlüsselung, die dauerhaft
 | Pseudonymisierte Kundennummern im Data Warehouse | Schulung zu Phishing |
 | tägliches Backup mit Wiederherstellungstest | Vier-Augen-Prinzip bei Rechtevergabe |
 
+**Beispiel Zugriffskontrolle** – die Personalakten der Möbelhaus Nordholz GmbH liegen im Personalsystem. Das Schutzziel Vertraulichkeit wird so umgesetzt:
+
+| technisch | organisatorisch |
+|---|---|
+| Anmeldung mit Passwort und zweitem Faktor (MFA) | Berechtigungskonzept: Wer darf welche Akten lesen oder ändern? |
+| Rollen und Rechte im System (RBAC), nur die Personalabteilung sieht Personalakten | Rechtevergabe nur auf schriftlichen Antrag mit Freigabe der Führungskraft |
+| automatische Bildschirmsperre, Protokollierung der Zugriffe | regelmäßige Überprüfung der Rechte, Rechte-Entzug beim Abteilungswechsel |
+
+Eine häufig verwendete Ordnungshilfe unterscheidet drei Stufen: **Zutrittskontrolle** (wer kommt in den Raum oder das Gebäude?), **Zugangskontrolle** (wer kann sich am System anmelden?) und **Zugriffskontrolle** (was darf er dort mit welchen Daten tun?). Die ausführliche Liste aus dem früheren BDSG (Anlage zu § 9) ist nicht mehr Gesetz, taugt aber weiterhin zum systematischen Aufzählen.
+
 ### Abgrenzung
 Privacy by Design und by Default (Art. 25) verlangen, Datenschutz schon beim Entwurf einzubauen; Art. 32 regelt die laufende Sicherheit der Verarbeitung.
 
@@ -259,8 +269,8 @@ Pseudonymisierung ist eine TOM, keine Befreiung von der DSGVO – die Daten blei
 ### Merksatz
 TOM = Technik plus Organisation, angemessen zum Risiko und regelmäßig geprüft.
 
-Siehe auch: Pseudonymisierung · Privacy by Design · Schutzziele · Rechenschaftspflicht · Auftragsverarbeiter
-Mehr: Deep Dive 10, 2.4
+Siehe auch: Pseudonymisierung · Privacy by Design · Schutzziele · Rechenschaftspflicht · Auftragsverarbeiter · RBAC · Mehr-Faktor-Authentifizierung
+Mehr: Deep Dive 10, 2.4 · Deep Dive 10, 4.3
 
 ## Teilprozess
 <!-- id: teilprozess · quellen: Karte DD5, DD5 2.1 · stand: 2026-10 -->
@@ -665,21 +675,29 @@ Gesamtkosten einer Investition über den ganzen Lebenszyklus: Anschaffung, Einf�
 ### Erklärung
 Die TCO macht sichtbar, dass der Kaufpreis oft nur ein kleiner Teil der Kosten ist. Laufende Kosten (Lizenzen, Wartung, Betrieb, Support, Personal) und versteckte Kosten (Einarbeitung, Ausfallzeiten, Migration) entscheiden über die Wirtschaftlichkeit. TCO-Vergleiche sind die Grundlage für Make-or-Buy- und Anbieterentscheidungen.
 
+**Angebotsvergleich über die Nutzungsdauer:** Man unterscheidet **einmalige** Kosten (Grundpreis, Hardware) und **laufende** Kosten (Lizenzmiete, Support, Updates), multipliziert die laufenden Kosten mit der richtigen Zahl an Jahren und rechnet nur die **zusätzlich** benötigte Menge ab, wenn Leistungen im Grundpreis enthalten sind. Formel: $\text{Gesamtkosten} = \text{einmalige Kosten} + \sum (\text{laufende Kosten je Jahr} \cdot \text{Anzahl der Jahre})$. Gilt eine Leistung „ab dem zweiten Jahr“, zählt sie Nutzungsdauer minus 1 Mal. Am Ende stehen der Differenzbetrag und eine begründete Empfehlung – auch mit nicht rechenbaren Punkten wie Abhängigkeit oder Planbarkeit.
+
 ### Beispiel
 BI-Software für das Möbelhaus über fünf Jahre:
 Anschaffung 20.000 € + Einführung und Schulung 5.000 € + Lizenzen und Betrieb $5 \cdot 6.000 = 30.000$ € + Ablösung 2.000 € = **57.000 €**. Ein Konkurrenzprodukt für 12.000 € mit 9.000 € laufenden Kosten pro Jahr erreicht schon mit Kauf und Betrieb $12.000 + 5 \cdot 9.000 = 57.000$ € – mit Einführung und Ablösung ist es trotz des niedrigeren Kaufpreises teurer.
+
+**Zwei Angebote über fünf Jahre.** Die Möbelhaus Nordholz GmbH braucht für ein Ausleihsystem drei Lizenzen und plant fünf Jahre Nutzung.
+- Angebot X: Grundpreis 6.000 € einmalig inkl. 2 Lizenzen; jede weitere Lizenz 400 € je Jahr; Support 50 € je Anfrage bei 30 Anfragen im Jahr; ein Update je Jahr für 900 €, erstmals im zweiten Jahr.
+- Angebot Y: 14.000 € einmalig inkl. 3 Lizenzen, Support und Updates enthalten.
+
+Angebot X: Grundpreis 6.000 € + zusätzliche Lizenz $1 \cdot 400 \cdot 5 = 2.000$ € + Support $30 \cdot 5 \cdot 50 = 7.500$ € + Updates $4 \cdot 900 = 3.600$ € = **19.100 €**. Angebot Y: **14.000 €**. Differenz $19.100 - 14.000$ = **5.100 €** zugunsten von Y. Empfehlung: Angebot Y – günstiger über die Nutzungsdauer und planbar; Nachteil ist die höhere Anfangsinvestition (14.000 € statt 6.000 €).
 
 ### Abgrenzung
 TCO sammelt die Kosten; ROI, Amortisationszeit und Kapitalwert stellen ihnen den Nutzen gegenüber.
 
 ### Prüfungsfalle
-Nur den Anschaffungspreis vergleichen – der häufigste Fehler in Wirtschaftlichkeitsrechnungen.
+Nur den Anschaffungspreis vergleichen – der häufigste Fehler in Wirtschaftlichkeitsrechnungen. Beim Mehrjahresvergleich außerdem: Updates „ab dem zweiten Jahr“ für alle Jahre zählen, Inklusivlizenzen im Grundpreis doppelt abrechnen oder die Empfehlung ohne Begründung abgeben.
 
 ### Merksatz
 Der Preis ist der Eintritt, die TCO ist die ganze Reise.
 
 Siehe auch: Make or Buy · Return on Investment · Amortisationszeit · Wirtschaftlichkeitsbetrachtung · Laufend
-Mehr: Deep Dive 12, 4.1
+Mehr: Deep Dive 12, 4.1 · Deep Dive 21, 6.2
 
 ## Total Quality Management
 <!-- id: total-quality-management · quellen: Karte DD5, DD5 6.3 · stand: 2026-10 -->

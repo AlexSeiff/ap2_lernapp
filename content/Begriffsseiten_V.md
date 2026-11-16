@@ -932,6 +932,52 @@ Eine Bedingung, zwei Wege – genau einer wird gegangen.
 Siehe auch: Sequenz · Wiederholung · Raute · Struktogramm · Programmablaufplan
 Mehr: Deep Dive 11, B1 · Deep Dive 17, 4.1 · Deep Dive 17, 4.2
 
+## Videoüberwachung
+<!-- id: videouberwachung · quellen: Karte DD19, DD19 3.5, DD10 2.1, DD10 2.2, DD20 · stand: 2026-11 -->
+
+Beobachtung und Aufzeichnung von Räumen oder Personen mit Kameras; weil Menschen erkennbar sind, ist das eine Verarbeitung personenbezogener Daten und unterliegt der DSGVO.
+
+Auch: Videoerfassung, Kameraüberwachung
+
+### Erklärung
+Hier geht es um die **Datenschutz-Seite** (Stand 2026). Wer Kameras betreibt, braucht eine **Rechtsgrundlage** und muss die Grundsätze der DSGVO einhalten:
+
+| Anforderung | Was heißt das bei Kameras? |
+|---|---|
+| **Rechtsgrundlage** | meist berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO (z. B. Schutz vor Diebstahl, Hausrecht) nach einer Interessenabwägung; für öffentlich zugängliche Räume ergänzt § 4 BDSG die Regeln |
+| **Erforderlichkeit** | Gibt es ein milderes Mittel (Beleuchtung, Zutrittskontrolle, Personal)? Erst dann Kameras |
+| **Zweckbindung** | Zweck vorher festlegen und nicht für andere Zwecke nutzen (z. B. keine Leistungskontrolle) |
+| **Datenminimierung** | nur den nötigen Bildausschnitt erfassen, Nachbargrundstücke und Privatbereiche ausblenden; bei Bildanalyse nur die relevante Region speichern |
+| **Speicherbegrenzung** | Aufnahmen automatisch und zügig löschen; Aufsichtsbehörden halten meist wenige Tage, häufig 72 Stunden, für ausreichend |
+| **Transparenz** | Hinweisschild am Eingang des erfassten Bereichs: Kamera-Symbol, Verantwortlicher, Zweck, Kontakt; weitere Pflichtangaben nach Art. 13 DSGVO z. B. über einen Aushang oder QR-Code |
+| **Sicherheit (TOM)** | Zugriff nur für wenige Berechtigte mit Protokoll, Verschlüsselung der Aufnahmen |
+| **Folgenabschätzung** | bei systematischer, umfangreicher Überwachung öffentlich zugänglicher Bereiche Pflicht (Art. 35 Abs. 3 lit. c) |
+
+**Verboten bzw. besonders heikel:** Kameras in Toiletten, Umkleiden, Sanitär- und Pausenräumen; Ton aufnehmen (§ 201 StGB); dauernde Überwachung von Beschäftigten am Arbeitsplatz. **Biometrische Gesichtserkennung** betrifft besondere Kategorien nach Art. 9 DSGVO und ist nur in engen Ausnahmen erlaubt.
+
+**Beschäftigte:** Der Betriebsrat hat nach § 87 Abs. 1 Nr. 6 BetrVG mitzubestimmen; üblich ist eine **Betriebsvereinbarung**. Eine Einwilligung der Beschäftigten taugt kaum als Grundlage, weil sie wegen des Abhängigkeitsverhältnisses als nicht freiwillig gilt.
+
+### Beispiel
+Im Verkaufsraum der Möbelhaus Nordholz GmbH sollen zwei Kameras am Eingang und an der Kasse Diebstahl verhindern. Das Möbelhaus legt den Zweck „Schutz vor Diebstahl und Raub“ fest, filmt nur diese zwei Bereiche (nicht die Umkleide der Beschäftigten und nicht den Gehweg), hängt Hinweisschilder am Eingang auf, löscht die Aufnahmen automatisch nach 72 Stunden, beschränkt den Zugriff auf die Marktleitung und schließt mit dem Betriebsrat eine Betriebsvereinbarung. Fragt eine Klausur nach zwei Maßnahmen für den rechtskonformen Betrieb, sind Hinweisschilder und automatische Löschung die naheliegenden Antworten.
+
+### Abgrenzung
+| | Videoüberwachung | Videoerfassung für Bilderkennung |
+|---|---|---|
+| Zweck | Sicherheit, Beweissicherung | Prozess, z. B. Etikett oder Kennzeichen lesen |
+| Personen im Bild | Hauptgegenstand | unerwünschter Beifang |
+| typische Maßnahme | Hinweisschild, kurze Löschfrist | nur die Etikettenregion speichern, Personen unkenntlich machen |
+
+Beide brauchen Rechtsgrundlage, Hinweisschilder und eine Löschfrist. Eine **Zutrittskontrolle** per Chip oder Schloss ist dagegen eine technische und organisatorische Maßnahme und kein Ersatz für Kameras, sondern oft das mildere Mittel.
+
+### Prüfungsfalle
+Das Hinweisschild für die Rechtsgrundlage halten: Es stellt nur Transparenz her. Zulässig wird die Überwachung erst durch Rechtsgrundlage, Erforderlichkeit und Interessenabwägung. Außerdem „Einwilligung der Mitarbeiter“ als Standardlösung nennen – im Arbeitsverhältnis ist sie problematisch, besser sind Betriebsvereinbarung und berechtigtes Interesse.
+
+### Merksatz
+Kamera nur mit Grund, Hinweisschild, kleinem Blickfeld und kurzer Löschfrist.
+
+Siehe auch: DSGVO · Berechtigtes Interesse · Zweckbindung · Datenminimierung · Speicherbegrenzung · Datenschutz-Folgenabschätzung · Betriebsvereinbarung · Betriebsrat · Technische und organisatorische Maßnahmen
+Mehr: Deep Dive 19, 3.5 · Deep Dive 10, 2.2
+
 ## Vier-Augen-Prinzip
 <!-- id: vier-augen-prinzip · quellen: Karte DD9, DD9 5.2 · stand: 2026-10 -->
 

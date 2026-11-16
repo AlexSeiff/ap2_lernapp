@@ -314,6 +314,41 @@ Schriftform heißt: Original mit eigener Unterschrift.
 Siehe auch: Textform · Notarielle Beurkundung · Ordentliche Kündigung · Außerordentliche Kündigung
 Mehr: Deep Dive 13, 3.1 · Deep Dive 14, 2.3
 
+## Schutzart (IP-Code)
+<!-- id: schutzart · quellen: Karte DD28, DD28 2.1, DD31 Block B · stand: 2026-11 -->
+
+Angabe nach DIN EN 60529, wie gut das Gehäuse eines Geräts gegen das Eindringen von festen Fremdkörpern (Staub) und Wasser schützt; geschrieben als „IP“ und zwei Ziffern.
+
+Auch: IP-Schutzart, IP-Code
+
+### Erklärung
+„IP“ steht für Ingress Protection (Eindringschutz). Die **erste Ziffer** (0 bis 6) gibt den Schutz gegen feste Fremdkörper und Staub an, die **zweite Ziffer** (0 bis 9) den Schutz gegen Wasser. Je höher die Ziffer, desto besser der Schutz. Ein „X“ bedeutet: nicht geprüft.
+
+| Ziffer | 1. Stelle: Fremdkörper, Staub | 2. Stelle: Wasser |
+|---|---|---|
+| 0 | kein Schutz | kein Schutz |
+| 4 | Fremdkörper über 1 mm | Spritzwasser aus allen Richtungen |
+| 5 | staubgeschützt | Strahlwasser (Düse) |
+| 6 | staubdicht | starkes Strahlwasser |
+| 7 | – | zeitweiliges Untertauchen (bis 1 m, 30 Minuten) |
+| 8 | – | dauerhaftes Untertauchen (nach Herstellerangabe) |
+| 9 | – | Hochdruck- und Heißwasserstrahl |
+
+### Beispiel
+Die Mietgeräte des Nordholz Eventservice tragen diese Angaben: Handscanner „ScanGo 3“ **IP54**, Handgerät „HandLog M“ **IP65**, Tablet „TabPay X“ **IP67**. Auf einem Stadtfest mit Regen und Staub genügt IP54 (staubgeschützt, Spritzwasser). Ein Tablet, das an einer Spülstation auch einmal in den Wassereimer fallen kann, braucht IP67.
+
+### Abgrenzung
+Die Schutzart sagt **nichts** über Stürze aus – dafür gibt es einen eigenen Stoßschutz-Code (IK) oder die Angabe „sturzfest aus 1,5 m“. In einer Gerätedatenbank hängt die Schutzart vom **Modell** ab, nicht vom einzelnen Gerät: Sie gehört in die Modelltabelle (3. Normalform).
+
+### Prüfungsfalle
+Zwei Ziffern nicht verwechseln: IP54 ist **nicht** „Stufe 54“, sondern 5 = Staub, 4 = Wasser. Außerdem ist eine höhere Zahl bei der Wasserziffer nicht automatisch besser für jede Art Wasser: Ein Gerät mit IPX7 (Untertauchen) ist nicht zwingend gegen Strahlwasser (IPX5/6) geprüft.
+
+### Merksatz
+IP, dann Staub, dann Wasser – zwei Ziffern, zwei Fragen.
+
+Siehe auch: MDE-Geräte · 3. Normalform
+Mehr: Deep Dive 28, 2.1
+
 ## Schutzbedarfsfeststellung
 <!-- id: schutzbedarfsfeststellung · quellen: Karte DD10, DD10 5.1 · stand: 2026-10 -->
 
@@ -915,6 +950,38 @@ Daten finden, ordnen, bereitstellen, prüfen und schützen.
 
 Siehe auch: Datenqualität · Durchführen einer Prozessanalyse · DSGVO · Data Warehouse
 Mehr: Deep Dive 1, Prüfungsrelevanz · Deep Dive 2, Prüfungsrelevanz · Deep Dive 8, Prüfungsrelevanz · Deep Dive 10, Prüfungsrelevanz
+
+## Sigmoid-Funktion
+<!-- id: sigmoid-funktion · quellen: Karte DD6, DD6 9.3 · stand: 2026-11 -->
+
+Aktivierungsfunktion mit S-förmiger Kurve, die jede Summe z auf einen Wert zwischen 0 und 1 abbildet; die Ausgabe lässt sich als Wahrscheinlichkeit lesen.
+
+Auch: Logistische Funktion
+
+### Erklärung
+Formel: $\sigma(z) = \dfrac{1}{1 + e^{-z}}$. Dabei ist z die gewichtete Summe des Neurons (Nettoeingabe) und e die eulersche Zahl (≈ 2,718). Eigenschaften: σ(0) = 0,5; für große positive z nähert sich σ der 1, für große negative z der 0. Anders als die Stufenfunktion ist sie **glatt** und überall differenzierbar, deshalb lässt sie sich beim Training mehrschichtiger Netze mit Backpropagation verwenden. Bei sehr großen oder kleinen z wird die Kurve fast waagerecht – dann lernt das Neuron kaum noch (Sättigung). Die Sigmoid-Funktion ist dieselbe Kurve wie bei der logistischen Regression.
+
+### Beispiel
+Ein Neuron zum Reklamationsrisiko hat die Summe z = 0,75:
+
+$e^{-0{,}75} \approx 0{,}4724$, also $\sigma(0{,}75) = \dfrac{1}{1 + 0{,}4724}$ = **0,68**
+
+Deutung: Das Modell schätzt eine Reklamationswahrscheinlichkeit von rund 68 %. Mit der Entscheidungsgrenze 0,5 lautet die Klasse „Reklamation“. Zum Vergleich: σ(0) = 0,5 und σ(−2) = 1 / (1 + 7,389) ≈ 0,12.
+
+### Abgrenzung
+| | Sigmoid | ReLU | Stufenfunktion |
+|---|---|---|---|
+| Wertebereich | zwischen 0 und 1 | 0 bis unendlich | 0 oder 1 |
+| Einsatz | Ausgabe als Wahrscheinlichkeit | verdeckte Schichten tiefer Netze | klassisches Perzeptron |
+
+### Prüfungsfalle
+Im Exponenten steht **minus z**. Wer e^(+z) rechnet, erhält 1 − σ(z), hier also 0,32 statt 0,68. Und: Ein Ergebnis von 0,68 ist keine Klasse, sondern eine Wahrscheinlichkeit – erst die Schwelle (meist 0,5) macht daraus eine Entscheidung.
+
+### Merksatz
+Sigmoid quetscht jede Zahl in den Bereich von 0 bis 1.
+
+Siehe auch: Aktivierungsfunktion · Stufenfunktion · ReLU · Neuron · Logistische Regression · Backpropagation
+Mehr: Deep Dive 6, 9.3
 
 ## Signifikanz
 <!-- id: signifikanz · quellen: Karte DD4, DD4 1.3 · stand: 2026-10 -->
@@ -1918,19 +1985,21 @@ Die Einfluss-Interesse-Matrix ergibt vier Felder:
 
 Aus der Einordnung folgen Maßnahmen: regelmäßige Abstimmungen, Lenkungsausschuss, Newsletter oder nur gelegentliche Information.
 
+Zur Analyse gehört auch die **Haltung** zum Projekt (Befürworter, neutral, Gegner) und die **Befürchtung** hinter einem Widerstand: Die Geschäftsleitung fürchtet meist Kosten, Termine und fehlenden Nutzen, die Beschäftigten Kontrolle, Überforderung oder Arbeitsplatzverlust. Zu jeder Befürchtung wählt man eine Gegenmaßnahme, die genau sie entkräftet (Information, Beteiligung, Schulung, Betriebsvereinbarung, Pilotbetrieb).
+
 ### Beispiel
-Reporting-Projekt: Vertriebsleitung (hoher Einfluss, hohes Interesse) → eng einbinden, Teilnahme an jedem Review. Betriebsrat (hoher Einfluss, mittleres Interesse) → früh zufriedenstellen, Betriebsvereinbarung abstimmen. Filialmitarbeitende (geringer Einfluss, hohes Interesse) → informieren und schulen.
+Reporting-Projekt: Vertriebsleitung (hoher Einfluss, hohes Interesse) → eng einbinden, Teilnahme an jedem Review. Betriebsrat (hoher Einfluss, mittleres Interesse) → früh zufriedenstellen, Betriebsvereinbarung abstimmen. Filialmitarbeitende (geringer Einfluss, hohes Interesse) → informieren und schulen. Die Filialmitarbeitenden befürchten, dass das Dashboard ihre Verkaufszahlen einzeln kontrolliert – Gegenmaßnahme: Auswertung nur je Filiale, Zweck und Zugriff in einer Betriebsvereinbarung festgelegt.
 
 ### Abgrenzung
 Die **Stakeholderanalyse** bewertet Personen und Gruppen; die **Risikoanalyse** bewertet Ereignisse nach Wahrscheinlichkeit und Schaden. Ein kritischer Stakeholder kann allerdings selbst ein Risiko sein.
 
 ### Prüfungsfalle
-Stakeholder nur auflisten, ohne Bewertung und Strategie.
+Stakeholder nur auflisten, ohne Bewertung und Strategie – und Widerstände zwar erkennen, aber keine zur Befürchtung passende Gegenmaßnahme nennen.
 
 ### Merksatz
 Wer hat Macht, wer hat Interesse – und wie gehe ich mit ihm um?
 
-Siehe auch: Stakeholder · Risikomanagement · Projektstrukturplan
+Siehe auch: Stakeholder · Risikomanagement · Projektstrukturplan · Akzeptanz und Widerstände
 Mehr: Deep Dive 12, 1.4
 
 ## Stammdaten
@@ -2583,6 +2652,40 @@ Feste Spalten, feste Typen, direkt per SQL auswertbar.
 
 Siehe auch: Semistrukturierte Daten · Unstrukturierte Daten · Schema-on-Write · Datentypen
 Mehr: Deep Dive 15, 1.1
+
+## Stufenfunktion
+<!-- id: stufenfunktion · quellen: Karte DD6, DD6 9.3, DD31 2.3 · stand: 2026-11 -->
+
+Aktivierungsfunktion des klassischen Perzeptrons: Sie gibt 1 aus, sobald die gewichtete Summe z die Schwelle erreicht (z ≥ 0), sonst 0.
+
+Auch: Sprungfunktion, Schwellenwertfunktion
+
+### Erklärung
+Die Stufenfunktion macht aus der Nettoeingabe z eine Ja/Nein-Entscheidung: y = 1 für z ≥ 0, y = 0 für z < 0. Die „Schwelle“ steckt im **Bias**: Er verschiebt, ab welcher gewichteten Summe das Neuron feuert. Weil die Funktion nur zwei Werte kennt, eignet sie sich für eine Klassifikation mit zwei Klassen (z. B. gut/schlecht). Ihr Nachteil: An der Stufe hat sie keine sinnvolle Steigung – deshalb lassen sich mehrschichtige Netze damit nicht per Backpropagation trainieren, sie nutzen Sigmoid oder ReLU.
+
+### Beispiel
+Perzeptron zur Akkubeurteilung mit z = 3,5 − 0,4 · m1 − 1,0 · m2:
+- Akku mit m1 = 4,5 und m2 = 1,2: $z = 3{,}5 - 1{,}8 - 1{,}2$ = **0,5** → y = 1 (gut).
+- Akku mit m1 = 5,5 und m2 = 3,6: $z = 3{,}5 - 2{,}2 - 3{,}6$ = **−2,3** → y = 0 (schlecht).
+- Grenzfall z = 0 → y = 1, denn es gilt „≥ 0“.
+
+### Abgrenzung
+| Funktion | Ausgabe | Steigung / Training |
+|---|---|---|
+| **Stufenfunktion** | nur 0 oder 1 | Perzeptron-Lernregel |
+| Sigmoid-Funktion | stufenlos zwischen 0 und 1 | differenzierbar, Backpropagation |
+| ReLU | 0 oder z | differenzierbar (bis auf den Knick), Backpropagation |
+
+In der Prüfung heißt sie meist **Sprungfunktion**; im Perzeptron-Schaubild ist es der Kreis mit der Stufe hinter der Nettoeingabefunktion.
+
+### Prüfungsfalle
+Nettoeingabefunktion (bildet die Summe z) und Sprungfunktion (macht daraus 0 oder 1) verwechseln. Und beim Grenzfall z = 0 nicht „0“ schreiben: Mit „z ≥ 0“ ergibt sich 1.
+
+### Merksatz
+Summe rechnen, dann springen: ab null eine Eins.
+
+Siehe auch: Aktivierungsfunktion · Perzeptron · Perzeptron-Lernregel · Sigmoid-Funktion · ReLU · Bias
+Mehr: Deep Dive 6, 9.3 · Deep Dive 31, 2.3
 
 ## Summe bilden
 <!-- id: summe-bilden · quellen: DD11 B5 · stand: 2026-10 -->

@@ -703,6 +703,49 @@ Die Tabelle zeigt auf sich selbst – und an der Spitze steht NULL.
 Siehe auch: Fremdschlüssel · Kardinalität · Zwischentabelle · Vom Minimum zur NULL-Fähigkeit · Chen-Notation
 Mehr: Deep Dive 2, 1.4
 
+## Relationale Datenbank
+<!-- id: relationale-datenbank · quellen: Karte DD30, DD30 4.2, DD15 4.1 · stand: 2026-11 -->
+
+Datenbank, die ihre Daten in Tabellen (Relationen) mit festem Schema speichert; Beziehungen zwischen den Tabellen entstehen über Primär- und Fremdschlüssel, abgefragt wird sie mit SQL.
+
+### Erklärung
+Eine **Tabelle** besteht aus Zeilen (Datensätzen) und Spalten (Attributen). Jede Spalte hat einen festen **Datentyp**, jede Zeile einen **Primärschlüssel**. Zusammengehörige Daten liegen nicht in einer großen Tabelle, sondern verteilt auf mehrere Tabellen, die über **Fremdschlüssel** verknüpft sind (**Normalisierung** vermeidet Redundanz). Zum Lesen verbindet man die Tabellen mit einem `JOIN`. Das Datenbanksystem prüft Datentypen, Pflichtfelder und Fremdschlüssel selbst (**Schema-on-Write**) und führt Änderungen als **Transaktionen** nach **ACID** aus – deshalb sind relationale Datenbanken die erste Wahl für Buchhaltung, Bestände und Aufträge.
+
+Die Begriffe im Vergleich zur Dokumentendatenbank:
+
+| relational | dokumentenorientiert |
+|---|---|
+| Datenbank | Datenbank |
+| Tabelle | Collection |
+| Zeile (Datensatz) | Dokument |
+| Spalte (Attribut) | Feld |
+
+### Beispiel
+Bei der Möbelhaus Nordholz GmbH liegen Kunden und Bestellungen in zwei Tabellen:
+
+- kunde(**kunden_id**, name, ort)
+- bestellung(**bestell_id**, datum, kunden_id↑)
+
+Der Fremdschlüssel `kunden_id` in `bestellung` verweist auf genau einen Kunden; ein Kunde kann viele Bestellungen haben (1:n). Die Frage „Welche Bestellungen hat der Kunde 1042?“ beantwortet ein `JOIN` über `kunden_id`. Trägt jemand eine `kunden_id` ein, die es nicht gibt, lehnt die Datenbank die Zeile ab.
+
+### Abgrenzung
+| | relational | dokumentenorientiert (NoSQL) |
+|---|---|---|
+| Schema | fest, vor dem Speichern definiert | flexibel, jedes Dokument darf andere Felder haben |
+| Zusammengehöriges | auf Tabellen verteilt, per `JOIN` gelesen | als Dokument verschachtelt (eingebettet) |
+| Konsistenz | ACID, Fremdschlüssel erzwungen | oft nur eventually consistent (BASE) |
+| Abfrage | SQL | herstellerspezifisch, meist JSON-Abfragen |
+| typisch für | Aufträge, Bestände, Buchhaltung | Produktkataloge mit wechselnden Attributen |
+
+### Prüfungsfalle
+„Relational“ kommt von **Relation = Tabelle**, nicht von den Beziehungen zwischen den Tabellen. Und: Relational heißt nicht „langsam“ oder „veraltet“ – sobald strenge Konsistenz gefragt ist, ist es die richtige Antwort.
+
+### Merksatz
+Tabellen mit festem Schema, verknüpft über Schlüssel, gesichert durch ACID.
+
+Siehe auch: Primärschlüssel · Fremdschlüssel · Normalisierung · ACID · Schema-on-Write · NoSQL · Dokumentenorientierte Datenbank
+Mehr: Deep Dive 30, 4.2 · Deep Dive 15, 4.1
+
 ## Relative Häufigkeit
 <!-- id: relative-haufigkeit · quellen: Karte DD3 · stand: 2026-10 -->
 
@@ -756,6 +799,31 @@ Gute Daten zur falschen Frage sind schlechte Daten.
 
 Siehe auch: Datenqualität · Vollständigkeit · Korrektheit · Datenminimierung · CRISP-DM
 Mehr: Deep Dive 9, Teil 1
+
+## ReLU
+<!-- id: relu · quellen: Karte DD6, DD6 9.3 · stand: 2026-11 -->
+
+Rectified Linear Unit: Aktivierungsfunktion max(0, z) – negative Summen werden zu 0, positive bleiben unverändert.
+
+Auch: Rectified Linear Unit
+
+### Erklärung
+Formel: $y = \max(0,\ z)$ mit z als gewichteter Summe des Neurons. Für z ≤ 0 ist die Ausgabe 0, für z > 0 ist sie gleich z; nach oben gibt es keine Grenze. ReLU ist der Standard in den **verdeckten Schichten** tiefer Netze: Sie ist extrem einfach zu berechnen, und für positive z bleibt die Steigung konstant 1, sodass beim Training das Lernsignal nicht abklingt (anders als bei der gesättigten Sigmoid-Kurve). Sie ist nichtlinear – der Knick bei 0 reicht, damit mehrere Schichten mehr können als ein einzelnes Neuron. Schwäche: Ein Neuron, dessen Summe dauerhaft negativ ist, gibt immer 0 aus und lernt nicht mehr („totes Neuron“).
+
+### Beispiel
+Drei Neuronen einer verdeckten Schicht haben die Summen z = 0,75; −1,2 und 0. Nach ReLU: $\max(0;\ 0{,}75)$ = **0,75**, $\max(0;\ -1{,}2)$ = **0** und $\max(0;\ 0)$ = **0**. Nur das erste Neuron gibt etwas an die nächste Schicht weiter.
+
+### Abgrenzung
+Die Sigmoid-Funktion begrenzt die Ausgabe auf 0 bis 1 und eignet sich für die **Ausgabeschicht** bei Wahrscheinlichkeiten; ReLU kennt keine Obergrenze und steht in den **verdeckten Schichten**. Die Stufenfunktion liefert nur 0 oder 1 und ist für Backpropagation ungeeignet.
+
+### Prüfungsfalle
+Negative Werte mit −z „spiegeln“: ReLU setzt sie auf 0, nicht auf den Betrag. Und ReLU-Ausgaben nicht als Wahrscheinlichkeit lesen – sie können größer als 1 sein.
+
+### Merksatz
+ReLU: Negatives wird null, Positives bleibt.
+
+Siehe auch: Aktivierungsfunktion · Sigmoid-Funktion · Stufenfunktion · Neuron · Neuronale Netze · Backpropagation
+Mehr: Deep Dive 6, 9.3
 
 ## Rentenversicherung
 <!-- id: rentenversicherung · quellen: Karte DD14, DD14 1.2 · stand: 2026-10 -->
@@ -819,6 +887,16 @@ Auch: REST
 ### Erklärung
 **Ressourcen** sind Substantive im Plural (`/reparaturauftraege/5001`), keine Verben. GET liest, POST legt an, PUT ersetzt, PATCH ändert teilweise, DELETE löscht; das Ergebnis meldet ein Statuscode (2xx Erfolg, 4xx Client-, 5xx Serverfehler). Zustandslos heißt: Der Server speichert keinen Sitzungszustand, jede Anfrage bringt alles mit, auch das Token. Beschrieben wird eine REST-API mit **OpenAPI**.
 
+Die **REST-Prinzipien**, die in Prüfungen (oft als englische Kurzbeschreibung) abgefragt werden:
+
+| Prinzip | Bedeutung | Vorteil |
+|---|---|---|
+| **Client-Server** | Oberfläche und Datenhaltung sind getrennt | Client und Server lassen sich unabhängig weiterentwickeln |
+| **Zustandslos** (stateless) | Jede Anfrage enthält alles, was der Server braucht | Jeder Server kann jede Anfrage bearbeiten – einfache Skalierung, ein Serverausfall verliert keine Sitzung |
+| **Cacheable** | Antworten sagen, ob sie zwischengespeichert werden dürfen | Wiederholte Abfragen kommen aus dem Cache: weniger Serverlast, schnellere Antwort |
+| **Uniform Interface** | Ressourcen über URIs, wenige Standardmethoden und einheitliche Darstellungen (z. B. JSON) | Jeder Client nutzt die API ohne Sonderwissen |
+| **Layered System** (Schichtensystem) | Der Client weiß nicht, ob er direkt mit dem Server spricht | Proxys, Load Balancer und Caches lassen sich unsichtbar dazwischenschalten |
+
 ### Beispiel
 ```http
 GET  /reparaturauftraege?status=offen&seite=2   → 200 OK, JSON-Liste
@@ -834,13 +912,13 @@ Ein Partner liest offene Aufträge gezielt und aktuell, statt nachts eine CSV-Da
 | GraphQL | ein Endpunkt, Client wählt die Felder |
 
 ### Prüfungsfalle
-POST ist nicht idempotent: Ein wiederholtes POST nach einem Timeout legt eine zweite Bestellung an.
+POST ist nicht idempotent: Ein wiederholtes POST nach einem Timeout legt eine zweite Bestellung an. Und „zustandslos“ heißt nicht, dass der Server keine Daten speichert, sondern dass er sich **zwischen zwei Anfragen nichts über den Client merkt** (keine Sitzung). Bei „Vorteil des Prinzips“ nicht nur das Schlagwort wiederholen, sondern den Nutzen für das Szenario nennen (z. B. Cache: Artikeldaten werden nicht bei jedem Aufruf neu aus der Datenbank gelesen).
 
 ### Merksatz
 Substantiv in der URI, Verb in der HTTP-Methode.
 
 Siehe auch: Idempotent · Zustandslos · HTTP-Statuscode · OpenAPI · SOAP
-Mehr: Deep Dive 15, 3.1 · Deep Dive 15, 3.2
+Mehr: Deep Dive 15, 3.1 · Deep Dive 15, 3.2 · Deep Dive 24, 6.1
 
 ## Retrospektive
 <!-- id: retrospektive · quellen: Karte DD12 · stand: 2026-10 -->

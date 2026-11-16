@@ -55,6 +55,46 @@ OAuth gibt der Anwendung einen befristeten Schlüssel, nicht das Passwort.
 Siehe auch: API-Schlüssel · JWT · Autorisierung · Authentifizierung · REST
 Mehr: Deep Dive 15, 3.3
 
+## OCR (Texterkennung)
+<!-- id: ocr · quellen: Karte DD19, DD19 3.1, DD18 Block C · stand: 2026-11 -->
+
+Optical Character Recognition: Verfahren, das Zeichen auf einem Bild oder Scan (z. B. Etikett, Rechnung, Kennzeichen) erkennt und in maschinenlesbaren Text umwandelt.
+
+Auch: Texterkennung, Optische Zeichenerkennung
+
+### Erklärung
+OCR ist nur ein Schritt im Workflow einer automatischen Erfassung:
+
+| Schritt | Aufgabe |
+|---|---|
+| 1. Bildaufnahme | Kamera oder Scanner erzeugt ein digitales Bild |
+| 2. Vorverarbeitung | Kontrast und Helligkeit verbessern, Rauschen entfernen, Bild entzerren |
+| 3. Lokalisierung | Region mit dem Text finden und ausschneiden (Cropping) |
+| 4. **Texterkennung (OCR)** | Zeichen im Ausschnitt in Text umwandeln |
+| 5. Validierung | Format prüfen (regulärer Ausdruck, Prüfziffer), Abgleich mit der Datenbank |
+| 6. Entscheidung | Treffer → Vorgang freigeben; sonst Fehlermeldung oder manuelle Prüfung |
+
+Moderne OCR nutzt neuronale Netze. Sie liefert zu jedem Zeichen oft einen **Vertrauenswert**; liegt er unter einer Schwelle, wird manuell geprüft. Fehlerquellen sind schlechte Auflösung, Schräglage, Verschmutzung, Spiegelungen und ähnlich aussehende Zeichen (0/O, 1/I/l).
+
+### Beispiel
+Das Palettenetikett im Wareneingang hat das Format „LS-JJJJ-NNNNNN“, z. B. LS-2026-004711. Die OCR liest „LS-2O26-004711“ (Buchstabe O statt Null). Die **Formatprüfung** mit dem Muster „LS-, vier Ziffern, Bindestrich, sechs Ziffern“ weist den Wert ab, der Vorgang geht zur manuellen Prüfung. Ohne Validierung wäre die falsche Nummer in der Datenbank gelandet.
+
+### Abgrenzung
+| Verfahren | liest | Besonderheit |
+|---|---|---|
+| **OCR** | Klartext (Buchstaben, Ziffern) | fehleranfälliger, braucht Validierung |
+| Barcode / QR-Code | maschinenlesbares Muster | sehr robust, oft mit Prüfziffer |
+| Objekterkennung | Objekte im Bild (Palette, Person) | liefert Bounding Boxes, aber keinen Text |
+
+### Prüfungsfalle
+Den OCR-Ausgabewert ungeprüft übernehmen: Ein Workflow ohne **Validierung** (Format, Abgleich mit der Datenbank) verliert Punkte. Außerdem: OCR erkennt den Text, **lokalisieren** muss man ihn vorher.
+
+### Merksatz
+OCR liest, die Validierung entscheidet, ob man dem Gelesenen traut.
+
+Siehe auch: Plausibilitätsprüfung · Formatprüfung · Datenverifizierung · Neuronale Netze
+Mehr: Deep Dive 19, 3.1
+
 ## OHG
 <!-- id: ohg · quellen: Karte DD14, DD14 3.2 · stand: 2026-10 -->
 

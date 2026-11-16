@@ -640,6 +640,40 @@ JSON kennt sechs Typen – das Datum ist ein String.
 Siehe auch: JSON · ISO 8601 · DECIMAL · Postleitzahlen als Text · Keine Datentypen
 Mehr: Deep Dive 15, 2.2 · Deep Dive 15, 1.3
 
+## Datenverifizierung
+<!-- id: datenverifizierung · quellen: Karte DD30, DD30 2.3, DD9 5.1 · stand: 2026-11 -->
+
+Prüfung, ob Daten mit der Quelle oder der Wirklichkeit übereinstimmen, also richtig sind – im Unterschied zur Datenvalidierung, die nur prüft, ob sie den festgelegten Regeln entsprechen.
+
+Auch: Datenvalidierung, Validierung und Verifizierung
+
+### Erklärung
+Beide Prüfungen sichern die Datenqualität, fragen aber Verschiedenes:
+
+| | Datenvalidierung | Datenverifizierung |
+|---|---|---|
+| Frage | Sind die Daten **zulässig**? | Sind die Daten **richtig**? |
+| Prüft gegen | Regeln: Datentyp, Format, Wertebereich, Pflichtfeld | Quelle oder Wirklichkeit |
+| Typische Mittel | Constraint, Prüfregel beim Import, Formatprüfung | Abgleich mit Originalbeleg oder Messgerät, zweite Messung, Doppelerfassung, Prüfsumme, Stichprobe |
+| Grenze | Ein zulässiger Wert kann trotzdem falsch sein | aufwendig, oft nur stichprobenweise möglich |
+
+**Doppelerfassung:** Zwei Personen erfassen dieselben Daten unabhängig voneinander, abweichende Werte werden geklärt. Eine **Prüfsumme** zeigt, ob Daten bei der Übertragung unverändert geblieben sind.
+
+### Beispiel
+Das Messgerät „HolzCheck“ der Nordholz Manufaktur liefert für eine Lagerbox die Holzfeuchte 12,4 %. Die Importprüfung (Validierung) lässt den Wert durch: Er ist eine Zahl und liegt im zulässigen Bereich von 6 bis 20 %. Ein Techniker misst mit einem zweiten Handgerät 17,2 % – die **Verifizierung** zeigt, dass der Sensor falsch misst. Der Wert war zulässig, aber nicht richtig.
+
+### Abgrenzung
+Mit „Validierung“ sind auch andere Dinge gemeint: **Valide** beim XML-Dokument heißt „entspricht dem Schema“, **Validierungsdaten** im maschinellen Lernen sind Daten zum Abstimmen eines Modells. Die **Plausibilitätsprüfung** ist eine Form der Validierung: Sie prüft, ob Werte zueinander passen.
+
+### Prüfungsfalle
+Beide Begriffe nur mit „Daten werden geprüft“ beschreiben – das bringt keinen Punkt. Entscheidend ist, **wogegen** geprüft wird: gegen Regeln (Validierung) oder gegen die Wirklichkeit (Verifizierung). Auch das Beispiel muss passen: „Formatfehler in der ID“ gehört zur Validierung, „Abgleich mit dem Messprotokoll“ zur Verifizierung.
+
+### Merksatz
+Validierung: zulässig laut Regel. Verifizierung: richtig laut Wirklichkeit.
+
+Siehe auch: Plausibilitätsprüfung · Formatprüfung · Valide · Validierungsdaten · Korrektheit · Gültigkeit · Vier-Augen-Prinzip
+Mehr: Deep Dive 30, 2.3 · Deep Dive 9, 5.1
+
 ## DDG
 <!-- id: ddg · quellen: DD10 2.4 · stand: 2026-10 -->
 
@@ -1446,12 +1480,33 @@ Mehr: Deep Dive 1, 2.4 · Deep Dive 1, 3.9
 NoSQL-Datenbanktyp, der Daten als JSON-ähnliche Dokumente mit flexiblem Schema speichert (z. B. MongoDB).
 
 ### Erklärung
-Ein Dokument fasst zusammengehörige Daten verschachtelt zusammen – etwa eine Bestellung samt Positionen –, statt sie auf mehrere Tabellen zu verteilen. Dokumente einer Sammlung dürfen unterschiedliche Felder haben. Das passt zu wechselnden Attributen und wird häufig horizontal skaliert. Preis: Die Datenbank prüft bei **Schema-on-Read** keine Pflichtfelder oder Typen – das muss die Anwendung oder eine optional eingerichtete Schemaprüfung (z. B. JSON Schema) übernehmen. Viele Systeme sind nur **eventually consistent** (BASE).
+Ein Dokument fasst zusammengehörige Daten verschachtelt zusammen – etwa eine Bestellung samt Positionen –, statt sie auf mehrere Tabellen zu verteilen. Dokumente einer Sammlung dürfen unterschiedliche Felder haben. Das passt zu wechselnden Attributen und wird häufig horizontal skaliert.
+
+Ein Dokument besteht aus **Feldern** (`"name": wert`). Ein Feld kann ein einfacher Wert, ein **Objekt** `{ }` (verschachteltes Dokument) oder ein **Array** `[ ]` (Liste von Werten oder Objekten) sein. Bei zusammengehörigen Daten hat man zwei Gestaltungsmöglichkeiten:
+- **Einbetten:** Die Unterdaten stehen als Array oder Objekt im übergeordneten Dokument (Bestellung mit ihren Positionen). Eine einzige Abfrage liefert alles, ein Fremdschlüssel entfällt. Geeignet, wenn die Daten fast immer gemeinsam gelesen werden und ihre Anzahl begrenzt bleibt.
+- **Verweisen:** Das Dokument enthält nur die Kennung eines anderen Dokuments (wie ein Fremdschlüssel). Geeignet, wenn die Unterdaten von vielen Dokumenten genutzt, einzeln geändert werden oder unbegrenzt wachsen (ein Dokument darf je System nur begrenzt groß sein, bei MongoDB 16 MB). Die Datenbank prüft solche Verweise nicht auf Gültigkeit – das muss die Anwendung tun.
+
+Preis der Flexibilität: Die Datenbank prüft bei **Schema-on-Read** keine Pflichtfelder oder Typen – das muss die Anwendung oder eine optional eingerichtete Schemaprüfung (z. B. JSON Schema) übernehmen. Viele Systeme sind nur **eventually consistent** (BASE).
 
 ### Beispiel
 Im Produktkatalog der Möbelhaus Nordholz GmbH hat ein Bürostuhl „Sitzhöhe“ und „Belastbarkeit“, ein Monitor „Diagonale“ und „Auflösung“. In einer Dokumentdatenbank bekommt jedes Produkt einfach seine eigenen Felder – ohne leere Spalten.
 
+Eine Bestellung als Dokument – die Positionen sind als **Array eingebettet**, der Kunde wird **verwiesen**:
+```json
+{
+  "bestell_id": 4711,
+  "kunden_id": 1042,
+  "positionen": [
+    { "artikel": "Bürostuhl Nova", "menge": 2, "preis": 189.00 },
+    { "artikel": "Schreibtisch Lund", "menge": 1, "preis": 349.00 }
+  ]
+}
+```
+Die Positionen gehören nur zu dieser Bestellung und werden immer mit ihr gelesen, deshalb stehen sie im Array; der Kunde hat viele Bestellungen und ändert seine Adresse einmal zentral, deshalb steht nur `kunden_id` im Dokument. In einer relationalen Datenbank wären das drei Tabellen (kunde, bestellung, position) mit zwei Fremdschlüsseln.
+
 ### Abgrenzung
+In der Fachsprache entspricht der Datenbank die Datenbank, der Tabelle die **Collection**, der Zeile das **Dokument** und der Spalte das **Feld**.
+
 | Typ | Beispiel | geeignet für |
 |---|---|---|
 | dokumentenorientiert | MongoDB | wechselnde Attribute |
@@ -1460,13 +1515,13 @@ Im Produktkatalog der Möbelhaus Nordholz GmbH hat ein Bürostuhl „Sitzhöhe�
 | Graph | Neo4j | Beziehungsnetze |
 
 ### Prüfungsfalle
-Für Buchhaltung oder Lagerbestände ohne Prüfung der Konsistenzanforderung NoSQL wählen – dort ist ACID Pflicht.
+Für Buchhaltung oder Lagerbestände ohne Prüfung der Konsistenzanforderung NoSQL wählen – dort ist ACID Pflicht. Und beim Entwurf Einbetten und Verweisen vermischen: Wer alles einbettet, speichert dieselben Kundendaten in jeder Bestellung doppelt und muss Änderungen überall nachziehen.
 
 ### Merksatz
-Ein Dokument je Sache, Regeln bringt die Anwendung mit.
+Ein Dokument je Sache, Regeln bringt die Anwendung mit – eingebettet, was zusammengehört, verwiesen, was geteilt wird.
 
-Siehe auch: NoSQL · JSON · Schema-on-Read · BASE · Key-Value-Datenbank
-Mehr: Deep Dive 15, 4.1
+Siehe auch: NoSQL · Relationale Datenbank · JSON · Schema-on-Read · BASE · Key-Value-Datenbank
+Mehr: Deep Dive 15, 4.1 · Deep Dive 30, 4.3
 
 ## DPMO
 <!-- id: dpmo · quellen: Karte DD5, DD5 6.3 · stand: 2026-10 -->

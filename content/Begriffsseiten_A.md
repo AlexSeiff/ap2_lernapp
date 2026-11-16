@@ -746,6 +746,51 @@ Jede Zahl braucht ein Datum, sonst ist sie nicht einzuordnen.
 Siehe auch: Dashboard · Aktualität · Vergleichsmaßstab mitliefern · ETL
 Mehr: Deep Dive 11, A4
 
+## Akzeptanz und Widerstände
+<!-- id: akzeptanz-und-widerstande · quellen: Karte DD18, DD18 2.3, DD21 Teil 5, DD22 2.1, DD27 A6 · stand: 2026-11 -->
+
+Akzeptanz ist die Bereitschaft der Betroffenen, eine Neuerung – etwa ein neues System oder einen geänderten Ablauf – zu nutzen und mitzutragen; Widerstand entsteht, wenn sie Nachteile befürchten.
+
+Auch: Widerstände im Change, Befürchtung und Gegenmaßnahme
+
+### Erklärung
+Neue Technik scheitert selten an der Technik, sondern an Menschen, die sich übergangen oder bedroht fühlen. Die Prüfungsaufgabe lautet fast immer: **Befürchtung nennen, passende Gegenmaßnahme beschreiben.** Die Gegenmaßnahme muss **genau diese Befürchtung** entkräften – eine sinnvolle, aber unpassende Maßnahme bringt keine Punkte.
+
+Die vier Werkzeuge gegen Widerstand:
+- **Kommunikation:** früh, offen und mehrfach informieren (Ziel, Gründe, Zeitplan, was sich für wen ändert).
+- **Beteiligung:** Betroffene in Projektteam, Workshops oder als Key-User einbinden; Betriebsrat von Anfang an.
+- **Qualifizierung:** Schulung, Handbuch, Ansprechpartner in der Anfangszeit.
+- **Absicherung:** Betriebsvereinbarung, Beschäftigungszusage, Pilotbetrieb, Kennzahlen zur Wirkung.
+
+| Betroffene | typische Befürchtung | passende Gegenmaßnahme |
+|---|---|---|
+| Beschäftigte | Arbeitsplatzverlust durch Automatisierung | frühe Information, Qualifizierung für neue Aufgaben, Zusage in der Betriebsvereinbarung |
+| Beschäftigte | Überforderung durch neue Technik | Schulung, feste Ansprechpartner, schrittweise Einführung (Pilotbetrieb) |
+| Beschäftigte | Leistungs- und Verhaltenskontrolle | Betriebsvereinbarung mit Zweckbindung, keine personenbezogene Leistungsauswertung, Transparenz über die erfassten Daten |
+| Betriebsrat | Mitbestimmung wird übergangen (§ 87 Abs. 1 Nr. 6 BetrVG) | frühe Einbindung, Betriebsvereinbarung vor der Einführung |
+| Geschäftsleitung | Investition rechnet sich nicht | Wirtschaftlichkeitsrechnung vorab, Pilotbetrieb mit Kennzahlen |
+| Führungskräfte | Kontrollverlust, geänderte Zuständigkeiten | klare Rollenbeschreibung, Einbindung in die Einführung |
+
+### Beispiel
+Im Projekt ABHOLAPP der Möbelhaus Nordholz GmbH fürchten die Mitarbeiter der Warenausgabe schon im Kick-off, dass die Abholschränke ihre Stellen überflüssig machen. Zwei passende Maßnahmen: (1) offene Information über den Plan – eine Teilzeitstelle wird durch Renteneintritt frei und nicht neu besetzt, es gibt keine Kündigungen; das wird in einer Betriebsvereinbarung festgehalten. (2) Qualifizierung der Beschäftigten für die neue Aufgabe „Abholschränke befüllen und betreuen“. Eine Schulung zur Bedienung der App allein würde diese Befürchtung nicht entkräften.
+
+### Abgrenzung
+| Begriff | Frage |
+|---|---|
+| **Akzeptanz und Widerstände** | Wie holen wir die Betroffenen ab? |
+| Stakeholderanalyse | Wer ist betroffen, wie viel Einfluss und Interesse hat er? |
+| Änderungsmanagement | Wie behandeln wir Änderungswünsche am Projektumfang (Change Requests)? |
+| Betriebsvereinbarung | Wie sichern wir die Zusagen verbindlich ab? |
+
+### Prüfungsfalle
+Auf jede Befürchtung mit „Schulung“ antworten. Schulung hilft gegen Überforderung, nicht gegen Angst um den Arbeitsplatz oder vor Kontrolle. Außerdem: Die Befürchtung muss konkret zur genannten Gruppe passen, die Gegenmaßnahme erklärt, **wie** sie die Befürchtung ausräumt.
+
+### Merksatz
+Erst die Befürchtung benennen, dann die Maßnahme, die genau sie entkräftet.
+
+Siehe auch: Stakeholder · Stakeholderanalyse · Betriebsrat · Betriebsvereinbarung · Mitbestimmung · Pilotbetrieb · Änderungsmanagement
+Mehr: Deep Dive 18, 2.3 · Deep Dive 22, 2.1 · Deep Dive 21, Teil 5
+
 ## Algorithmus
 <!-- id: algorithmus · quellen: Karte DD11, DD11 Prüfungsrelevanz, DD11 B1 · stand: 2026-10 -->
 
@@ -998,13 +1043,15 @@ Mitten im Dashboard-Projekt wünscht der Vertrieb eine zusätzliche Auswertung j
 ### Abgrenzung
 Im agilen Vorgehen landen neue Wünsche im **Product Backlog** und werden vom Product Owner priorisiert – auch das ist kontrolliertes Änderungsmanagement, nur ohne formalen Antrag.
 
+Nicht verwechseln mit dem **Umgang mit Widerständen** bei einer Einführung („Change“ im Sinne der Veränderung für die Beschäftigten): Dort geht es nicht um Änderungswünsche am Projektumfang, sondern um die Befürchtungen der Betroffenen und passende Gegenmaßnahmen wie Information, Beteiligung und Schulung – siehe Akzeptanz und Widerstände.
+
 ### Prüfungsfalle
 Änderungen „schnell nebenbei“ einbauen – dann stimmen Soll-Ist-Vergleich und Abnahmegrundlage nicht mehr.
 
 ### Merksatz
 Jede Änderung wird bewertet, entschieden und dokumentiert – nie stillschweigend eingebaut.
 
-Siehe auch: Scope Creep · Pflichtenheft · Soll-Ist-Vergleich · Magisches Dreieck · Product Backlog
+Siehe auch: Scope Creep · Pflichtenheft · Soll-Ist-Vergleich · Magisches Dreieck · Product Backlog · Akzeptanz und Widerstände
 Mehr: Deep Dive 12, Teil 5
 
 ## Anfechtung

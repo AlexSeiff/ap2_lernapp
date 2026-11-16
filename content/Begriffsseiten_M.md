@@ -568,6 +568,46 @@ Nur wenn der Zufall allein entscheidet, darf man Lücken einfach streichen.
 Siehe auch: MAR · MNAR · Fehlende Werte · Imputation
 Mehr: Deep Dive 9, 4.1
 
+## MDE-Geräte
+<!-- id: mde-gerate · quellen: Karte DD28, DD28 2.1, DD31 Block B · stand: 2026-11 -->
+
+Mobile Datenerfassungsgeräte: robuste Handgeräte wie Handscanner oder Tablets, mit denen Daten direkt am Ort des Geschehens erfasst und an ein Zentralsystem übertragen werden.
+
+Auch: Mobile Datenerfassung, MDE
+
+### Erklärung
+MDE-Geräte ersetzen Zettel und spätere Handeingabe (Medienbruch) durch sofortiges Erfassen, z. B. beim Wareneingang, bei der Inventur oder an einer Ausgabestelle. Bei einer Ist-Aufnahme von Geräten oder einer Beschaffung sind diese **Merkmale** wichtig, weil sie über Betrieb, Software und Austausch entscheiden:
+
+| Merkmal | Warum wichtig? |
+|---|---|
+| **Betriebssystem und Version** | bestimmt, welche Software läuft und wie lange es Sicherheitsupdates gibt |
+| **Erfassungstechnik** | Barcode-/QR-Scanner, RFID, NFC, Kartenleser – legt fest, was das Gerät lesen kann |
+| **Funkverbindung** | WLAN, Mobilfunk, Bluetooth – bestimmt, wo das Gerät online arbeitet |
+| **Akku** | Kapazität, Laufzeit, wechselbar oder fest verbaut |
+| **Robustheit** | Schutzart (IP-Code), Sturzfestigkeit |
+| **Bedienung** | Displaygröße, Touch oder Tasten, mit Handschuhen bedienbar |
+
+Ohne Funkverbindung braucht das Gerät einen **Offline-Puffer**: Es speichert Scans zwischen und überträgt sie, sobald es wieder Netz hat.
+
+### Beispiel
+Der Nordholz Eventservice gibt auf einem Stadtfest Liegestühle aus. Anforderung → passendes Merkmal:
+- Einsatz im Freien bei Regen und Staub → Schutzart mindestens IP54.
+- Kein WLAN auf dem Festgelände → Mobilfunk-Modul oder Offline-Puffer.
+- Bedienung mit Arbeitshandschuhen → Tasten oder Touchscreen für Handschuhe.
+- Ausgabe der Liegestühle per QR-Code → Kamera-Scanner mit QR-Erkennung.
+
+### Abgrenzung
+Ein **IoT-Sensor** läuft selbstständig und liefert laufend Messwerte, ein **MDE-Gerät** wird von einer Person bedient. Ein normales Smartphone kann Scanner-Aufgaben übernehmen, ist aber meist weniger robust und hat weniger Akkureserve.
+
+### Prüfungsfalle
+Merkmale ohne Bedeutung für Betrieb oder Software („Gehäusefarbe“) bringen keinen Punkt. Auch „Funkverbindung“ und „Erfassungstechnik“ nicht verwechseln: Das eine überträgt die Daten, das andere liest den Code.
+
+### Merksatz
+MDE-Gerät = Scanner plus Funk, gebaut für den rauen Alltag – wähle es nach Einsatzort.
+
+Siehe auch: Schutzart (IP-Code) · IoT · Ist-Aufnahme · Methoden der Ist-Aufnahme
+Mehr: Deep Dive 28, 2.1
+
 ## Median
 <!-- id: median · quellen: Karte DD3, DD3 Teil 3 · stand: 2026-10 -->
 
@@ -884,30 +924,46 @@ Mehr: Deep Dive 15, 1.1
 ## Methoden der Ist-Aufnahme
 <!-- id: methoden-der-ist-aufnahme · quellen: Karte DD5, DD5 1.2 · stand: 2026-10 -->
 
-Verfahren, mit denen der tatsächliche Ablauf eines Prozesses erhoben wird: Interview, Workshop, Fragebogen, Beobachtung, Dokumentenanalyse und Auswertung von Systemdaten.
+Verfahren, mit denen der tatsächliche Ablauf eines Prozesses erhoben wird: Interview, Workshop, Fragebogen, Beobachtung, Zeitmessung, Selbstaufschreibung, Dokumentenanalyse und Auswertung von Systemdaten.
 
 ### Erklärung
-Die Ist-Aufnahme ist der zweite Schritt der Prozessanalyse, nach der Abgrenzung des Prozesses. **Interviews** und **Workshops** liefern Kontext und Erfahrungswissen, aber eine subjektive Sicht. **Fragebögen** erreichen viele Personen. **Beobachtung** (auch als Multimomentaufnahme mit Stichproben) zeigt das reale Verhalten. **Dokumentenanalyse** wertet Formulare und Arbeitsanweisungen aus. **Systemdaten** (Event Logs) sind objektiv und vollständig, erklären aber nicht das Warum. Deshalb kombiniert man datengetriebene und befragende Methoden.
+Die Ist-Aufnahme ist der zweite Schritt der Prozessanalyse, nach der Abgrenzung des Prozesses. **Interviews** und **Workshops** liefern Kontext und Erfahrungswissen, aber eine subjektive Sicht. **Fragebögen** erreichen viele Personen. **Beobachtung** (auch als **Multimomentaufnahme**: Stichproben in festen oder zufälligen Abständen, was gerade getan wird) zeigt das reale Verhalten und die Anteile der Tätigkeiten. **Zeitmessung** (Zeitaufnahme) stoppt die Dauer einzelner Schritte. Bei der **Selbstaufschreibung** notieren die Beschäftigten selbst über einen Zeitraum, was sie wann tun. **Dokumentenanalyse** wertet Formulare und Arbeitsanweisungen aus. **Systemdaten** (Event Logs) sind objektiv und vollständig, erklären aber nicht das Warum. Deshalb kombiniert man datengetriebene und befragende Methoden.
+
+In der Klausur gilt: **auf die Situation anwenden**, nicht nur das Schlagwort nennen.
 
 ### Beispiel
 Für den Reparaturservice wertet die Analystin das Event Log aus (Liegezeit vor „Teil bestellen“ im Schnitt 26 h) und fragt in Interviews mit der Disposition nach den Gründen.
+
+An der Warenausgabe der Möbelhaus Nordholz GmbH (Samstag, lange Schlangen):
+
+| Methode | So wird sie dort angewendet |
+|---|---|
+| Beobachtung / Multimomentaufnahme | samstags im 15-Minuten-Takt die Länge der Schlange zählen |
+| Zeitmessung | Dauer je Abholung von „Abholschein vorgelegt“ bis „Ware übergeben“ stoppen |
+| Interview | Mitarbeiter der Warenausgabe nach Engpässen fragen |
+| Fragebogen | Kunden an der Ausfahrt kurz zur Wartezeit befragen |
+| Dokumentenanalyse | Scannerprotokolle (Uhrzeit jeder Abholung) auswerten |
+| Selbstaufschreibung | Mitarbeiter notieren eine Woche lang ihre Unterbrechungen |
 
 ### Abgrenzung
 | Methode | Stärke | Schwäche |
 |---|---|---|
 | Interview | Kontext, Ursachen | subjektiv, beschreibt oft das Soll |
 | Fragebogen | viele Befragte | wenig Tiefe |
-| Beobachtung | reales Verhalten | aufwendig, Beobachtereffekt |
+| Beobachtung / Multimomentaufnahme | reales Verhalten, Tätigkeitsanteile | aufwendig, Beobachtereffekt |
+| Zeitmessung | genaue Dauern je Schritt | aufwendig, Verhalten ändert sich unter Beobachtung, nur Momentaufnahme |
+| Selbstaufschreibung | wenig Aufwand für den Analysten, längerer Zeitraum | ungenau, Mehrarbeit für die Beschäftigten, geschönte Angaben möglich |
+| Dokumentenanalyse | schnell, belegbar | zeigt nur das Dokumentierte |
 | Systemdaten | objektiv, vollständig | kein Warum |
 
 ### Prüfungsfalle
-Nur eine Methode nennen – erwartet werden mindestens drei mit Vor- und Nachteilen.
+Nur eine Methode nennen – erwartet werden mindestens drei mit Vor- und Nachteilen. Und Methoden nennen, die zur Aufgabe nicht passen: Für die Ist-Aufnahme von Geräten (nicht von Abläufen) sind Inventarlisten, Dokumentenanalyse, Befragung der Nutzer und automatisches Auslesen der Geräte sinnvoll, eine Zeitmessung nicht.
 
 ### Merksatz
 Die Daten zeigen das Was, die Menschen erklären das Warum.
 
-Siehe auch: Ist-Aufnahme · Event Log · Process Mining · Liegezeit
-Mehr: Deep Dive 5, 1.2
+Siehe auch: Ist-Aufnahme · Event Log · Process Mining · Liegezeit · MDE-Geräte
+Mehr: Deep Dive 5, 1.2 · Deep Dive 21, 3.1
 
 ## Midijob
 <!-- id: midijob · quellen: Karte DD14 · stand: 2026-10 -->

@@ -149,6 +149,53 @@ Chen zeigt nur das Maximum, und zwar beim Gegenüber.
 Siehe auch: Min-Max-Notation · Krähenfußnotation · MC-Notation · Kardinalität · Beziehung
 Mehr: Deep Dive 2, 1.3 · Deep Dive 17, 3.1
 
+## Cloud-Speicherung
+<!-- id: cloud-speicherung · quellen: Karte DD29, DD29 5.1, DD19 4.1 · stand: 2026-11 -->
+
+Ablage von Daten auf den Servern eines externen Anbieters, auf die man über das Internet zugreift und die meist nach Nutzung abgerechnet werden.
+
+Auch: Cloud-Datenbank, Datenspeicherung in der Cloud
+
+### Erklärung
+**Vorteile:** Der Speicher wächst bei Bedarf mit (Skalierung), die eigene Hardware und ihre Wartung entfallen, die Daten sind von überall erreichbar, und gute Anbieter bieten Sicherungen und Redundanz über mehrere Standorte.
+
+**Nachteile** (typische Prüfungsfrage – Nennung plus Erläuterung in einem Satz):
+- **Abhängigkeit vom Anbieter:** Preiserhöhungen, geänderte Schnittstellen oder ein eingestellter Dienst treffen das Unternehmen direkt; ein Wechsel ist aufwendig (Lock-in).
+- **Abhängigkeit von der Internetverbindung:** Ohne Leitung kein Zugriff und kein Speichern.
+- **Daten außerhalb des eigenen Zugriffs:** Speicherort und Zugriffe Dritter müssen vertraglich geregelt und kontrolliert werden.
+- **Laufende Kosten**, die mit Datenmenge und Abrufen wachsen (Bilddaten werden dauerhaft teuer).
+- **Angriffsfläche** über das Internet.
+
+**Datenschutz:** Der Cloud-Anbieter ist bei personenbezogenen Daten **Auftragsverarbeiter**; nötig ist ein Vertrag nach Art. 28 DSGVO. Liegen die Daten in einem Drittland, braucht man zusätzlich eine Grundlage für den Transfer, z. B. Standardvertragsklauseln. Verantwortlich bleibt das Unternehmen selbst. Typische Maßnahmen: Standort in der EU, Verschlüsselung (idealerweise mit eigenem Schlüssel), Rollen und Rechte, Protokollierung. Die Cloud kann auch Teil der Datensicherung sein, z. B. als externe Kopie der 3-2-1-Regel.
+
+### Beispiel
+In der Nordholz Manufaktur liegen die Messdaten der Klimasensoren und die Bilder des Kamerawagens in einer Cloud-Datenbank. Den Schutzbedarf bestimmt man je Schutzziel:
+
+| Schutzziel | Einstufung | Begründung |
+|---|---|---|
+| Verfügbarkeit | hoch | Messwerte laufen ständig ein; ein kurzer Ausfall lässt sich am Sensor überbrücken, ein langer führt zu Lücken |
+| Integrität | sehr hoch | Verfälschte Werte führen zu falsch getrockneten Chargen – Serienschäden |
+| Vertraulichkeit | normal | Klimawerte und Holzbilder, keine personenbezogenen Daten |
+
+### Abgrenzung
+| | Cloud | eigener Server (On-Premises) |
+|---|---|---|
+| Hardware und Betrieb | beim Anbieter | im Haus |
+| Kosten | laufend, nutzungsabhängig | hohe Anschaffung, dann Betrieb |
+| Skalierung | schnell, flexibel | durch Beschaffung begrenzt |
+| Kontrolle über Standort und Zugriff | geringer, vertraglich geregelt | voll beim Unternehmen |
+
+Der Anbieter sichert das Rechenzentrum; für Daten, Zugriffsrechte und Konfiguration bleibt der Kunde verantwortlich.
+
+### Prüfungsfalle
+Nachteile nur nennen („Abhängigkeit“) und nicht erläutern – dann fehlt die Hälfte der Punkte. Und: Die Verantwortung für den Datenschutz geht **nicht** an den Cloud-Anbieter über.
+
+### Merksatz
+Cloud heißt: fremde Hardware, eigene Verantwortung.
+
+Siehe auch: Auftragsverarbeiter · Standardvertragsklauseln · Schutzbedarfsfeststellung · Schutzziele · 3-2-1-Regel · Georedundanz
+Mehr: Deep Dive 29, 5.1 · Deep Dive 19, 4.1
+
 ## Cluster
 <!-- id: cluster · quellen: Karte DD16, DD16 4.5 · stand: 2026-10 -->
 
