@@ -729,7 +729,7 @@ Die Daten sortiert lassen und einfach die ersten 80 % nehmen – das Modell lern
 ### Merksatz
 Erst teilen, dann trainieren – und der Test bleibt unberührt.
 
-Siehe auch: Testdaten · Trainingsdaten · Kreuzvalidierung · Stratifizierte Aufteilung · Validierungsdaten
+Siehe auch: Testdaten · Trainingsdaten · Kreuzvalidierung · Stratifizierte Aufteilung · Validierungsdaten · Data Leakage
 Mehr: Deep Dive 7, 1.1
 
 ## Trainingsdaten

@@ -1260,10 +1260,10 @@ Mehr: Deep Dive 16, 2.4
 Synthetic Minority Over-sampling Technique: Oversampling-Verfahren, das für die seltene Klasse künstliche Datensätze zwischen vorhandenen Fällen und ihren nächsten Nachbarn erzeugt.
 
 ### Erklärung
-Bei unausgeglichenen Klassen lernt ein Modell die seltene Klasse schlecht. Statt Fälle der Minderheit einfach zu kopieren, wählt SMOTE zu einem Fall einen seiner k nächsten Nachbarn aus derselben Klasse und erzeugt einen neuen Punkt auf der Verbindungsstrecke dazwischen. So entstehen neue, ähnliche, aber nicht identische Fälle. SMOTE wird nur auf die Trainingsdaten angewendet – und zwar nach dem Train-Test-Split.
+Bei unausgeglichenen Klassen lernt ein Modell die seltene Klasse schlecht. Statt Fälle der Minderheit einfach zu kopieren, wählt SMOTE zu einem Fall einen seiner k nächsten Nachbarn aus derselben Klasse und erzeugt einen neuen Punkt auf der Verbindungsstrecke dazwischen: $x_{neu} = x + \lambda \cdot (x_{Nachbar} - x)$. Dabei ist $x$ der Ausgangsfall, $x_{Nachbar}$ der gewählte Nachbar und $\lambda$ eine Zufallszahl zwischen 0 und 1 (0 ergibt den Ausgangsfall, 1 den Nachbarn; die Rechnung gilt für jedes Merkmal einzeln). So entstehen neue, ähnliche, aber nicht identische Fälle. Weil die Nachbarn über Abstände gesucht werden, müssen die Merkmale skaliert sein; kategoriale Merkmale benötigen eine angepasste Variante. SMOTE wird nur auf die Trainingsdaten angewendet – und zwar nach dem Train-Test-Split.
 
 ### Beispiel
-Im Reklamationsmodell sind 10 % der Aufträge reklamiert. Zwischen einem reklamierten Auftrag mit 3 Tagen Lieferzeit und seinem Nachbarn mit 5 Tagen entsteht ein synthetischer Fall mit z. B. 4,2 Tagen. Die Testmenge behält ihre reale Verteilung.
+Im Reklamationsmodell sind 10 % der Aufträge reklamiert. Zwischen einem reklamierten Auftrag mit 3 Tagen Lieferzeit und seinem Nachbarn mit 5 Tagen entsteht bei $\lambda = 0{,}6$ ein synthetischer Fall mit $3 + 0{,}6 \cdot (5 - 3) = 4{,}2$ Tagen. Die Testmenge behält ihre reale Verteilung.
 
 ### Abgrenzung
 **Undersampling** entfernt Fälle der Mehrheit (kostet Information); einfaches **Oversampling** dupliziert Fälle (Gefahr des Auswendiglernens); **Klassengewichte** lassen die Daten unverändert und gewichten Fehler unterschiedlich.

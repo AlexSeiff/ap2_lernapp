@@ -372,6 +372,30 @@ Erfindung → Patent (angemeldet, 20 Jahre); Programm → Urheberrecht (automati
 Siehe auch: Urheberrecht · Open Source · Proprietäre Software
 Mehr: Deep Dive 14, 2.7
 
+## PCA
+<!-- id: pca · quellen: DD6 2.2 · stand: 2026-11 -->
+
+Hauptkomponentenanalyse (Principal Component Analysis): Dimensionsreduktion, die die Daten auf neue, untereinander unkorrelierte Achsen dreht, die möglichst viel Streuung (Varianz) erklären; man behält nur die ersten.
+Auch: Hauptkomponentenanalyse, Principal Component Analysis
+
+### Erklärung
+Die erste **Hauptkomponente** zeigt in die Richtung der größten Streuung der Daten, die zweite steht senkrecht darauf und erklärt den größten Rest usw. Ablauf: Merkmale standardisieren, Kovarianzmatrix berechnen, ihre Eigenvektoren (die Richtungen) und Eigenwerte $\lambda_j$ (die Varianz je Richtung) bestimmen, nach Eigenwert sortieren, die ersten Komponenten behalten und die Daten darauf projizieren. Anteil der erklärten Varianz der Komponente $j$: $\frac{\lambda_j}{\sum_i \lambda_i}$. Bei standardisierten Daten ist die Summe aller Eigenwerte gleich der Zahl der Merkmale. Jede Komponente ist eine Mischung der Originalmerkmale und daher schwer zu deuten; PCA erfasst nur lineare Zusammenhänge und ignoriert eine Zielvariable. Die PCA wird nur auf den Trainingsdaten angepasst und dann auf die Testdaten angewendet (sonst Data Leakage).
+
+### Beispiel
+Vier standardisierte Kundenmerkmale ergeben die Eigenwerte 2,4; 1,1; 0,4 und 0,1 (Summe 4 = Anzahl der Merkmale). Erklärte Varianz: $\frac{2{,}4}{4} = 60\ \%$, $\frac{1{,}1}{4} = 27{,}5\ \%$, $\frac{0{,}4}{4} = 10\ \%$, $\frac{0{,}1}{4} = 2{,}5\ \%$. Kumuliert: 60 %, 87,5 %, 97,5 %, 100 %. Zwei Komponenten reichen für 87,5 % der Information: Aus 4 Merkmalen werden 2.
+
+### Abgrenzung
+**Merkmalsauswahl** streicht vorhandene Spalten, PCA bildet neue Spalten aus allen alten. PCA ist unüberwacht; sie sucht Streuung, nicht Trennung zwischen Klassen.
+
+### Prüfungsfalle
+PCA ohne vorherige Skalierung rechnen – das Merkmal mit den größten Zahlen (z. B. Umsatz in Euro) dominiert dann die erste Komponente. Die Komponenten als Originalmerkmale zu lesen ist ebenfalls falsch.
+
+### Merksatz
+Neue Achsen entlang der größten Streuung – die ersten behalten.
+
+Siehe auch: Dimensionsreduktion · Skalierung · Standardisierung · Unüberwachtes Lernen · Varianz · Korrelation
+Mehr: Deep Dive 6, 2.2
+
 ## PDCA
 <!-- id: pdca · quellen: Karte DD5, DD5 4.2, DD5 6.2 · stand: 2026-10 -->
 
@@ -898,6 +922,34 @@ Pool = wer eigenständig handelt, Lane = wer innerhalb davon arbeitet.
 Siehe auch: Lane · Nachrichtenfluss · Sequenzfluss · BPMN
 Mehr: Deep Dive 5, 2.1 · Deep Dive 17, 1.1
 
+## Pooling
+<!-- id: pooling · quellen: DD6 8.2 · stand: 2026-11 -->
+
+Schicht in einem CNN, die eine Feature Map verkleinert, indem sie kleine Fenster zu einem Wert zusammenfasst: Max-Pooling nimmt den größten Wert, Average-Pooling den Mittelwert.
+
+### Erklärung
+Üblich ist ein 2 × 2-Fenster mit Schrittweite 2; das Fenster überlappt nicht, die Feature Map halbiert sich in jeder Richtung. Pooling hat keine lernbaren Gewichte. Es spart Rechenaufwand und Parameter, macht das Netz unempfindlicher gegen kleine Verschiebungen im Bild und mindert Overfitting. Max-Pooling behält den stärksten Treffer eines Fensters (gut für „ist das Muster irgendwo hier?“), Average-Pooling glättet. Größe der Ausgabe: $n_{aus} = \left\lfloor \frac{n - f}{s} \right\rfloor + 1$ mit $n$ = Kantenlänge der Eingabe, $f$ = Fenstergröße, $s$ = Schrittweite.
+
+### Beispiel
+Feature Map 4 × 4 mit den Zeilen `1 3 2 1`, `4 6 5 2`, `7 2 1 0`, `3 8 4 9`; Fenster 2 × 2, Schrittweite 2 → $\frac{4 - 2}{2} + 1 = 2$, Ausgabe 2 × 2.
+
+- **Max-Pooling:** oben links max(1; 3; 4; 6) = 6, oben rechts max(2; 1; 5; 2) = 5, unten links max(7; 2; 3; 8) = 8, unten rechts max(1; 0; 4; 9) = 9 → `6 5` / `8 9`.
+- **Average-Pooling:** oben links $\frac{1 + 3 + 4 + 6}{4} = 3{,}5$, oben rechts $\frac{2 + 1 + 5 + 2}{4} = 2{,}5$, unten links $\frac{7 + 2 + 3 + 8}{4} = 5$, unten rechts $\frac{1 + 0 + 4 + 9}{4} = 3{,}5$ → `3,5 2,5` / `5 3,5`.
+
+Aus 16 Werten werden 4, also 75 % weniger.
+
+### Abgrenzung
+Die **Faltung** (Filter) lernt Gewichte und erzeugt Feature Maps; **Pooling** verkleinert sie nur nach einer festen Regel. Mit „Connection Pooling“ bei Datenbanken hat es nichts zu tun.
+
+### Prüfungsfalle
+Annehmen, Pooling werde trainiert (es hat keine Gewichte), oder Max- und Average-Pooling gleichsetzen.
+
+### Merksatz
+Pooling fasst zusammen: Max behält den stärksten Treffer, Average den Durchschnitt.
+
+Siehe auch: CNN (Convolutional Neural Network) · Neuronale Netze · Deep Learning · Overfitting
+Mehr: Deep Dive 6, 8.2
+
 ## Portfolioanalyse
 <!-- id: portfolioanalyse · quellen: Karte DD5, DD5 6.5 · stand: 2026-10 -->
 
@@ -1015,7 +1067,7 @@ Mehr: Deep Dive 9, 4.2 · Deep Dive 9, Teil 5
 Kennzahl der Konfusionsmatrix: Anteil der als positiv vorhergesagten Fälle, die wirklich positiv sind – $\text{Precision} = \frac{TP}{TP + FP}$.
 
 ### Erklärung
-Precision (positiver Vorhersagewert) beantwortet: Wie verlässlich ist ein Alarm des Modells? Sie ist wichtig, wenn **Fehlalarme (FP) teuer** sind. Precision und Recall lassen sich meist nur gegeneinander verbessern: Eine niedrigere Entscheidungsschwelle findet mehr echte Fälle, erzeugt aber mehr Fehlalarme.
+TP (richtig positiv) sind die Fälle, die das Modell als positiv vorhersagt und die es wirklich sind; FP (falsch positiv) sind die Fälle, die es als positiv vorhersagt, die aber negativ sind. TP + FP ist also die Spalte der positiven Vorhersagen in der Konfusionsmatrix. Precision (positiver Vorhersagewert) beantwortet: Wie verlässlich ist ein Alarm des Modells? Sie ist wichtig, wenn **Fehlalarme (FP) teuer** sind. Precision und Recall lassen sich meist nur gegeneinander verbessern: Eine niedrigere Entscheidungsschwelle findet mehr echte Fälle, erzeugt aber mehr Fehlalarme.
 
 ### Beispiel
 Das Reklamationsmodell sagt 150 Reklamationen voraus, 60 davon treten ein (TP = 60, FP = 90):

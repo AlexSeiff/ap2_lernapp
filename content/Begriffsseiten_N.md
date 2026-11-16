@@ -325,7 +325,7 @@ Ein neuronales Netz für einen kleinen Datensatz mit Erklärungspflicht empfehle
 ### Merksatz
 Je mehr Daten und je weniger Erklärungsbedarf, desto eher ein neuronales Netz.
 
-Siehe auch: Neuron · Perzeptron · Mehrschichtiges Perzeptron · Deep Learning · Entscheidungsbaum
+Siehe auch: Neuron · Perzeptron · Mehrschichtiges Perzeptron · Deep Learning · CNN (Convolutional Neural Network) · Entscheidungsbaum
 Mehr: Deep Dive 6, 2.4 · Deep Dive 6, 8.2 · Deep Dive 6, Teil 9
 
 ## Nichtige Vereinbarungen

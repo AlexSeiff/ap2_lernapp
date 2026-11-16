@@ -2055,10 +2055,12 @@ Mehr: Deep Dive 2, 1.2
 Area Under the Curve: Fläche unter der ROC-Kurve; 1 = perfekte Trennung, 0,5 = Zufall – ein schwellenunabhängiges Maß für die Trennschärfe eines Klassifikators.
 
 ### Erklärung
-Die ROC-Kurve trägt für alle Entscheidungsschwellen die Richtig-Positiv-Rate (Recall) gegen die Falsch-Positiv-Rate ab. Die AUC fasst sie in einer Zahl zusammen. Anschaulich ist sie die Wahrscheinlichkeit, dass ein zufälliger positiver Fall einen höheren Score bekommt als ein zufälliger negativer. Sie eignet sich zum Vergleich mehrerer Modelle; sie sagt aber nicht, welche Schwelle im Betrieb gilt, und kennt keine Fehlerkosten. Bei stark unausgeglichenen Klassen wirkt sie oft zu optimistisch – dann ist die Precision-Recall-Kurve aussagekräftiger.
+Die ROC-Kurve trägt für alle Entscheidungsschwellen die Richtig-Positiv-Rate (Recall) gegen die Falsch-Positiv-Rate ab. Die AUC fasst sie in einer Zahl zusammen. Anschaulich ist sie die Wahrscheinlichkeit, dass ein zufälliger positiver Fall einen höheren Score bekommt als ein zufälliger negativer: $\text{AUC} = \frac{\text{Paare mit höherem Score beim Positiven}}{n_{pos} \cdot n_{neg}}$ (Gleichstände zählen halb), mit $n_{pos}$ und $n_{neg}$ als Anzahl der positiven und negativen Fälle. Sie eignet sich zum Vergleich mehrerer Modelle; sie sagt aber nicht, welche Schwelle im Betrieb gilt, und kennt keine Fehlerkosten. Bei stark unausgeglichenen Klassen wirkt sie oft zu optimistisch – dann ist die Precision-Recall-Kurve aussagekräftiger.
 
 ### Beispiel
 Zwei Reklamationsmodelle: Modell A AUC 0,82, Modell B AUC 0,64. A trennt Reklamationen deutlich besser; die konkrete Schwelle wird danach nach den Fehlerkosten gewählt.
+
+Zum Nachrechnen: 4 Reklamationen mit den Scores 0,90; 0,80; 0,55; 0,40 und 6 Aufträge ohne Reklamation mit 0,65; 0,45; 0,35; 0,25; 0,15; 0,10 ergeben $4 \cdot 6 = 24$ Paare. Der Score 0,90 liegt über allen 6, 0,80 ebenfalls über allen 6, 0,55 über 5 (nicht über 0,65), 0,40 über 4 (nicht über 0,65 und 0,45): $6 + 6 + 5 + 4 = 21$ Paare, also $\text{AUC} = \frac{21}{24} = 0{,}875$.
 
 ### Abgrenzung
 | Wert | Bedeutung |
@@ -2075,7 +2077,7 @@ Eine AUC von 0,5 als „halb so gut wie perfekt“ deuten – sie bedeutet: wert
 ### Merksatz
 AUC 0,5 ist Münzwurf, 1,0 ist perfekt.
 
-Siehe auch: ROC-Kurve · Recall · Falsch-Positiv-Rate · Konfusionsmatrix · Unausgeglichene Klassen
+Siehe auch: ROC-Kurve · Entscheidungsschwelle · Recall · Falsch-Positiv-Rate · Konfusionsmatrix · Unausgeglichene Klassen
 Mehr: Deep Dive 7, 4.4
 
 ## Aufbauorganisation

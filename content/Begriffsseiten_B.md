@@ -52,6 +52,8 @@ Die normale Accuracy wird von der Mehrheitsklasse dominiert. Die Balanced Accura
 
 $\text{Balanced Accuracy} = \frac{\text{Recall} + \text{Spezifität}}{2}$
 
+Dabei ist $\text{Recall} = \frac{TP}{TP + FN}$ (Anteil der tatsächlich Positiven, die erkannt wurden) und $\text{Spezifität} = \frac{TN}{TN + FP}$ (Anteil der tatsächlich Negativen, die richtig als negativ erkannt wurden); TP = richtig positiv, FN = falsch negativ, TN = richtig negativ, FP = falsch positiv. Zum Vergleich: $\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$.
+
 ### Beispiel
 1.000 Aufträge, 100 Reklamationen; TP = 60, FN = 40, FP = 90, TN = 810. Recall $= \frac{60}{100} = 60\,\%$, Spezifität $= \frac{810}{900} = 90\,\%$, Balanced Accuracy $= \frac{60 + 90}{2} = 75\,\%$. Das triviale Modell „nie Reklamation“: $\frac{0 + 100}{2} = 50\,\%$ – obwohl seine Accuracy mit 90 % höher liegt als die des Modells (87 %).
 
@@ -181,10 +183,10 @@ Vergleichswert eines trivialen Ansatzes, ohne den keine Gütekennzahl eines Mode
 Auch: Baseline zum Vergleich
 
 ### Erklärung
-Eine Kennzahl wie „87 % Accuracy“ sagt allein nichts. Erst der Vergleich mit einer Baseline zeigt, ob das Modell einen Mehrwert bringt. Typische Baselines: immer die Mehrheitsklasse (Klassifikation), immer der Mittelwert (Regression, R² = 0), naive Prognose mit dem letzten Wert oder Vorjahresmonat (Zeitreihe) und die bisherige Regel des Fachbereichs.
+Eine Kennzahl wie „87 % Accuracy“ sagt allein nichts. Erst der Vergleich mit einer Baseline zeigt, ob das Modell einen Mehrwert bringt. Typische Baselines: immer die Mehrheitsklasse (Klassifikation), immer der Mittelwert (Regression, R² = 0), naive Prognose mit dem letzten Wert oder Vorjahresmonat (Zeitreihe) und die bisherige Regel des Fachbereichs. Die Mehrheitsklassen-Baseline erreicht eine Balanced Accuracy von genau 50 % und eine AUC von 0,5; die Mittelwert-Baseline einer Regression hat R² = 0 und einen RMSE in Höhe der Standardabweichung der Zielgröße. Ein Modell lohnt sich nur, wenn es die passende Baseline in der Kennzahl schlägt, die fachlich zählt (z. B. Recall oder Kosten, nicht Accuracy).
 
 ### Beispiel
-Bei 100 Reklamationen unter 1.000 Aufträgen erreicht „nie Reklamation“ 90 % Accuracy bei 0 % Recall. Das Modell mit 87 % Accuracy und 60 % Recall ist fachlich trotzdem besser – das zeigt erst der Vergleich.
+Bei 100 Reklamationen unter 1.000 Aufträgen erreicht „nie Reklamation“ 90 % Accuracy bei 0 % Recall. Das Modell mit 87 % Accuracy und 60 % Recall ist fachlich trotzdem besser – das zeigt erst der Vergleich. Bei der Reparaturdauer (Mittelwert 75 Minuten, Standardabweichung 30 Minuten) hat die Baseline „immer 75 Minuten“ einen RMSE von 30 Minuten; ein Modell mit RMSE 18 Minuten verringert den typischen Fehler um $\frac{30 - 18}{30} = 40\ \%$.
 
 ### Abgrenzung
 Die Baseline ist kein Zielwert des Fachbereichs, sondern die Untergrenze: Was ein Modell nicht schlägt, braucht niemand.
@@ -997,8 +999,45 @@ In einem neuronalen Netz ist der Bias dagegen eine lernbare Zahl jedes Neurons, 
 ### Merksatz
 Wer verzerrte Daten füttert, erntet verzerrte Entscheidungen.
 
-Siehe auch: Transparenz und Erklärbarkeit · Stichprobe · Trainingsdaten · KI-Verordnung · Neuron
+Siehe auch: Transparenz und Erklärbarkeit · Stichprobe · Trainingsdaten · KI-Verordnung · Neuron · Bias-Variance-Trade-off
 Mehr: Deep Dive 6, 6.2 · Deep Dive 6, 9.2
+
+## Bias-Variance-Trade-off
+<!-- id: bias-variance-trade-off · quellen: DD7 1.2, DD6 8.3 · stand: 2026-11 -->
+
+Zielkonflikt bei der Modellkomplexität: Ein zu einfaches Modell macht systematische Fehler (hoher Bias), ein zu komplexes reagiert übermäßig auf Zufälligkeiten der Trainingsdaten (hohe Varianz) – der Gesamtfehler ist bei mittlerer Komplexität am kleinsten.
+
+### Erklärung
+Für den quadratischen Fehler (Regression) lässt sich der erwartete Vorhersagefehler zerlegen: $\text{Fehler} = \text{Bias}^2 + \text{Varianz} + \sigma^2$. **Bias** ist die mittlere Abweichung der Vorhersagen vom wahren Wert (systematischer Fehler, typisch bei **Underfitting**). **Varianz** ist die Streuung der Vorhersagen, wenn man dasselbe Verfahren auf andere Trainingsstichproben anwendet (typisch bei **Overfitting**). $\sigma^2$ ist das Rauschen der Daten, das kein Modell wegbekommt. Mehr Komplexität senkt den Bias, erhöht aber die Varianz – deshalb gibt es ein Optimum dazwischen, das man mit Validierungsdaten oder Kreuzvalidierung sucht. Gegen hohe Varianz helfen mehr Daten, Regularisierung oder Bagging (Random Forest); gegen hohen Bias hilft ein flexibleres Modell oder bessere Merkmale.
+
+### Beispiel
+Die Reparaturdauer eines Auftrags beträgt im Mittel 100 Minuten, das Rauschen ist $\sigma^2 = 25$. Drei Modelle werden auf je drei verschiedenen Trainingsstichproben trainiert und sagen den Auftrag so voraus:
+
+| Modell | Vorhersagen (Minuten) | Mittel | Bias | Bias² | Varianz | Gesamtfehler |
+|---|---|---|---|---|---|---|
+| A zu einfach | 80, 82, 78 | 80 | −20 | 400 | 2,67 | 427,67 |
+| C mittel | 94, 100, 97 | 97 | −3 | 9 | 6,00 | 40,00 |
+| B zu komplex | 90, 112, 98 | 100 | 0 | 0 | 82,67 | 107,67 |
+
+Rechnung für A: Varianz $= \frac{0^2 + 2^2 + (-2)^2}{3} = 2{,}67$, Gesamtfehler $= 400 + 2{,}67 + 25 = 427{,}67$. Modell A ist stabil, aber systematisch falsch; B trifft im Mittel, schwankt aber stark; C hat den kleinsten Gesamtfehler. (Drei Läufe dienen nur der Anschauung; in der Praxis ist der wahre Wert unbekannt, der Zusammenhang wird über Trainings- und Validierungsgüte sichtbar.)
+
+### Abgrenzung
+| | hoher Bias | hohe Varianz |
+|---|---|---|
+| Symptom | Training und Test schlecht | Training gut, Test deutlich schlechter |
+| Passender Begriff | Underfitting | Overfitting |
+| Abhilfe | komplexeres Modell, bessere Merkmale | mehr Daten, Regularisierung, einfacheres Modell |
+
+Der Bias in diesem Zusammenhang ist ein statistischer, systematischer Fehler – nicht die Benachteiligung von Gruppen und nicht der Bias-Wert eines Neurons.
+
+### Prüfungsfalle
+Annehmen, ein komplexeres Modell sei immer besser: Es senkt zwar den Fehler auf den Trainingsdaten, die Testgüte kann dabei aber sinken.
+
+### Merksatz
+Zu einfach trifft daneben, zu komplex zittert – gesucht ist die goldene Mitte.
+
+Siehe auch: Overfitting · Underfitting · Bias · Varianz · Kreuzvalidierung
+Mehr: Deep Dive 7, 1.2
 
 ## Big Data
 <!-- id: big-data · quellen: Karte DD8, DD8 5.2 · stand: 2026-10 -->

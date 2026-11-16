@@ -118,7 +118,7 @@ Validierungsdaten mit „validen“ (formal korrekten) Daten verwechseln – es 
 ### Merksatz
 Training lernt, Validierung wählt, Test urteilt.
 
-Siehe auch: Trainingsdaten · Testdaten · Kreuzvalidierung · Overfitting
+Siehe auch: Trainingsdaten · Testdaten · Kreuzvalidierung · Overfitting · Hyperparameter
 Mehr: Deep Dive 6, 2.1 · Deep Dive 7, 1.3
 
 ## Value

@@ -261,6 +261,42 @@ Hetero = verschieden: Die Fehler streuen mal wenig, mal viel.
 Siehe auch: Homoskedastizität · Residuum · Regressionsgerade · MAPE · Regression
 Mehr: Deep Dive 4, 2.3
 
+## Hierarchisches Clustering
+<!-- id: hierarchisches-clustering · quellen: DD6 Teil 3 · stand: 2026-11 -->
+
+Clusterverfahren, das eine Hierarchie verschachtelter Gruppen aufbaut; üblich ist der Weg von unten nach oben, bei dem die jeweils ähnlichsten Cluster schrittweise verschmolzen werden. Das Ergebnis wird als Dendrogramm dargestellt.
+Auch: Dendrogramm
+
+### Erklärung
+Beim **agglomerativen** Vorgehen beginnt jeder Punkt als eigenes Cluster; in jedem Schritt werden die beiden Cluster mit dem kleinsten Abstand verschmolzen, bis nur eines übrig ist (das **divisive** Gegenstück teilt von oben nach unten). Der Abstand zwischen Clustern hängt vom **Linkage** ab: **Single** nimmt die nächsten Punkte beider Cluster, **Complete** die entferntesten, **Average** den Mittelwert, **Ward** minimiert den Varianzzuwachs. Das **Dendrogramm** zeigt die Verschmelzungen; die Höhe einer Verbindung ist der Abstand, bei dem verschmolzen wurde. Wer waagerecht auf einer Höhe abschneidet, erhält die Cluster – die Clusterzahl wird also erst am Ende gewählt. Nachteile: hoher Rechen- und Speicherbedarf bei vielen Punkten, ein Schritt ist nicht umkehrbar, und die Merkmale müssen skaliert sein.
+
+### Beispiel
+Fünf Spediteure nach durchschnittlicher Lieferdauer in Tagen: A = 1, B = 2, C = 6, D = 8, E = 20. Abstände: A–B = 1, C–D = 2, B–C = 4, A–C = 5, B–D = 6, A–D = 7, D–E = 12, C–E = 14, B–E = 18, A–E = 19. **Complete Linkage:**
+
+1. Kleinster Abstand A–B = 1 → Cluster {A, B} bei Höhe 1.
+2. Nächster: C–D = 2 → {C, D} bei Höhe 2.
+3. {A, B} gegen {C, D}: größter Einzelabstand = max(5; 7; 4; 6) = 7. {C, D} gegen E: max(14; 12) = 14. Kleinster Wert 7 → {A, B, C, D} bei Höhe 7.
+4. {A, B, C, D} gegen E: max(19; 18; 14; 12) = 19 → alles verschmolzen bei Höhe 19.
+
+Schnitt bei Höhe 5 → drei Cluster {A, B}, {C, D}, {E}; Schnitt bei Höhe 10 → {A, B, C, D} und {E}. Mit **Single Linkage** wären die Höhen 1, 2, 4 und 12 – derselbe Baum, anderes Maß.
+
+### Abgrenzung
+| | k-Means | Hierarchisches Clustering |
+|---|---|---|
+| Clusteranzahl | vorher festlegen | am Dendrogramm wählen |
+| Ergebnis | eine Gruppierung | Hierarchie aller Gruppierungen |
+| Aufwand | gering | hoch bei vielen Punkten |
+
+### Prüfungsfalle
+Im Dendrogramm die Reihenfolge der Blätter auf der Achse als Ähnlichkeit lesen – nur die Höhe der Verbindung zählt.
+
+### Merksatz
+Von unten verschmelzen, am Dendrogramm abschneiden.
+
+Siehe auch: Clustering · K-Means · DBSCAN · Euklidischer Abstand · Skalierung
+Mehr: Deep Dive 6, Teil 3
+
+
 ## Histogramm
 <!-- id: histogramm · quellen: Karte DD11, DD11 A1, DD17 6.6 · stand: 2026-10 -->
 
@@ -505,6 +541,42 @@ Asymmetrisch einigen, symmetrisch verschlüsseln.
 Siehe auch: Symmetrische Verschlüsselung · Asymmetrische Verschlüsselung · PKI · Hashing · Man-in-the-Middle
 Mehr: Deep Dive 10, 4.2
 
+## Hyperparameter
+<!-- id: hyperparameter · quellen: DD6 2.1, DD6 9.4, DD7 1.3 · stand: 2026-11 -->
+
+Einstellung eines Lernverfahrens, die vor dem Training festgelegt und nicht aus den Daten gelernt wird, z. B. k bei k-NN, die Baumtiefe oder die Lernrate.
+Auch: Hyperparameter-Tuning, Grid Search, Random Search
+
+### Erklärung
+**Parameter** (z. B. Gewichte eines Netzes, die Schwellen eines Baums) werden vom Training gelernt; **Hyperparameter** bestimmt der Mensch. Das **Tuning** probiert Kandidaten aus und vergleicht sie mit Validierungsdaten oder per Kreuzvalidierung; erst das gewählte Modell wird einmal auf den Testdaten geprüft. Bei der **Grid Search** werden alle Kombinationen eines festen Rasters getestet, bei der **Random Search** zufällig gezogene Kombinationen aus vorgegebenen Bereichen – bei vielen Hyperparametern oft effizienter, weil meist nur wenige davon wirklich wichtig sind. Der Aufwand: Anzahl Kombinationen mal Anzahl Folds der Kreuzvalidierung.
+
+### Beispiel
+Entscheidungsbaum für Reklamationen: Baumtiefe {3, 5, 8} und Mindestzahl Fälle je Blatt {5, 20} ergeben 3 · 2 = 6 Kombinationen; bei 5-facher Kreuzvalidierung sind das 6 · 5 = 30 Trainingsläufe. Mittlerer Recall über die fünf Folds:
+
+| Tiefe | Blatt 5 | Blatt 20 |
+|---|---|---|
+| 3 | 0,52 | 0,53 |
+| 5 | 0,57 | 0,60 |
+| 8 | 0,55 | 0,58 |
+
+Gewählt wird Tiefe 5 mit Blatt 20 (Recall 0,60; z. B. die Folds 0,58; 0,62; 0,60; 0,57; 0,63 → Mittel 0,60). Das fertige Modell wird einmal auf den Testdaten geprüft. Eine Random Search mit einem Budget von 4 Kombinationen käme mit 4 · 5 = 20 Läufen aus.
+
+### Abgrenzung
+| | Parameter | Hyperparameter |
+|---|---|---|
+| Wer legt fest? | das Training | der Mensch |
+| Beispiele | Gewichte, Bias | k, Baumtiefe, Lernrate, Batchgröße |
+| Wann? | während des Trainings | davor |
+
+### Prüfungsfalle
+Hyperparameter an den Testdaten einstellen – die Testdaten gehen dann indirekt ins Training ein und die gemessene Güte ist zu optimistisch.
+
+### Merksatz
+Parameter lernt das Modell, Hyperparameter stellst du ein.
+
+Siehe auch: Validierungsdaten · Kreuzvalidierung · Lernrate · Overfitting · K-Nächste-Nachbarn · Testdaten
+Mehr: Deep Dive 6, 2.1 · Deep Dive 6, 9.4 · Deep Dive 7, 1.3
+
 ## Hypothesentest
 <!-- id: hypothesentest · quellen: Karte DD4, DD4 1.3 · stand: 2026-11 -->
 
@@ -542,3 +614,4 @@ Wie vor Gericht: Im Zweifel gilt H0 – verurteilt wird nur bei klarer Beweislag
 
 Siehe auch: Nullhypothese · Alternativhypothese · P-Wert · Signifikanz · Fehler 1. Art · Fehler 2. Art · Effektgröße · Konfidenzintervall
 Mehr: Deep Dive 4, 1.3
+

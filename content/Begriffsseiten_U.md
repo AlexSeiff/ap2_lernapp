@@ -221,10 +221,10 @@ Mehr: Deep Dive 14, 5.2
 Situation bei der Klassifikation, in der die interessierende Klasse sehr selten ist (z. B. 2 % Reklamationen), sodass die Accuracy irreführend hoch ausfällt.
 
 ### Erklärung
-Ein Modell, das immer die Mehrheitsklasse vorhersagt, erreicht dann hohe Accuracy, findet aber keinen einzigen relevanten Fall. Abhilfe auf drei Ebenen: **bewerten** mit Precision, Recall, F1 oder Balanced Accuracy; **aufteilen** stratifiziert, damit jede Teilmenge denselben Klassenanteil hat; **trainieren** mit Oversampling (z. B. SMOTE), Undersampling, Klassengewichten oder angepasster Entscheidungsschwelle.
+Ein Modell, das immer die Mehrheitsklasse vorhersagt, erreicht dann hohe Accuracy, findet aber keinen einzigen relevanten Fall. Abhilfe auf drei Ebenen: **bewerten** mit Precision, Recall, F1 oder Balanced Accuracy; **aufteilen** stratifiziert, damit jede Teilmenge denselben Klassenanteil hat; **trainieren** mit Oversampling (z. B. SMOTE), Undersampling, Klassengewichten oder angepasster Entscheidungsschwelle. **Klassengewichte** lassen die Daten unverändert und lassen Fehler bei der seltenen Klasse stärker zählen; üblich ist $w_c = \frac{N}{K \cdot n_c}$ mit $N$ = Zahl aller Fälle, $K$ = Zahl der Klassen und $n_c$ = Zahl der Fälle der Klasse $c$. Der Sammelbegriff für Over- und Undersampling ist **Resampling**; es verändert nur die Trainingsdaten.
 
 ### Beispiel
-Bei 2 % Reklamationen erreicht das Modell „nie Reklamation“ 98 % Accuracy, aber 0 % Recall. Balanced Accuracy: $(0\ \% + 100\ \%) / 2 = 50\ \%$ – entlarvt das Modell als wertlos.
+Bei 2 % Reklamationen erreicht das Modell „nie Reklamation“ 98 % Accuracy, aber 0 % Recall. Balanced Accuracy: $(0\ \% + 100\ \%) / 2 = 50\ \%$ – entlarvt das Modell als wertlos. Klassengewichte bei 1.000 Aufträgen mit 100 Reklamationen: Reklamation $\frac{1.000}{2 \cdot 100} = 5$, keine Reklamation $\frac{1.000}{2 \cdot 900} = 0{,}56$ – ein übersehener Reklamationsfall zählt im Training etwa neunmal so stark.
 
 ### Abgrenzung
 Unausgeglichene Klassen sind ein Merkmal der Daten, Overfitting ein Fehler des Modells. Resampling ändert die Trainingsdaten, Klassengewichte das Verfahren.
@@ -235,7 +235,7 @@ Resampling vor der Aufteilung in Training und Test – Kopien landen in beiden M
 ### Merksatz
 Seltene Klasse? Accuracy weglegen, Recall und F1 anschauen.
 
-Siehe auch: Accuracy · Balanced Accuracy · Oversampling · Undersampling · Stratifizierte Aufteilung
+Siehe auch: Accuracy · Balanced Accuracy · Oversampling · Undersampling · Stratifizierte Aufteilung · Entscheidungsschwelle
 Mehr: Deep Dive 6, Teil 5 · Deep Dive 7, 4.5
 
 ## Underfitting
@@ -262,7 +262,7 @@ Gegen Underfitting „mehr Daten“ vorschlagen – das hilft vor allem gegen Ov
 ### Merksatz
 Overfitting lernt auswendig, Underfitting lernt gar nicht.
 
-Siehe auch: Overfitting · Kreuzvalidierung · Trainingsdaten · Testdaten
+Siehe auch: Overfitting · Kreuzvalidierung · Trainingsdaten · Testdaten · Lernkurve · Bias-Variance-Trade-off · Regularisierung
 Mehr: Deep Dive 7, 1.2
 
 ## Undersampling
@@ -595,7 +595,7 @@ Eine Aufgabe als Klassifikation einordnen, obwohl die Gruppen vorher nicht bekan
 ### Merksatz
 Keine Labels? Dann finden statt vorhersagen.
 
-Siehe auch: Überwachtes Lernen · Clustering · Assoziationsanalyse · K-Means
+Siehe auch: Überwachtes Lernen · Clustering · Assoziationsanalyse · K-Means · Dimensionsreduktion
 Mehr: Deep Dive 6, 2.2 · Deep Dive 6, Teil 3
 
 ## Unvollständige Fälle
