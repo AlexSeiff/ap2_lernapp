@@ -1433,6 +1433,36 @@ Was gebaut wird (Product Owner), wie gearbeitet wird (Scrum Master), wer baut (D
 Siehe auch: Product Owner · Scrum Master · Developers · Scrum · Product Backlog
 Mehr: Deep Dive 12, Teil 2
 
+## ROUND
+<!-- id: round · quellen: Karte DD1, DD9 2.1, DD31 4.2 · stand: 2026-11 -->
+
+SQL-Funktion, die eine Zahl kaufmännisch auf eine angegebene Zahl von Nachkommastellen rundet: `ROUND(x, n)`.
+Auch: ROUND-Funktion, Runden in SQL
+
+### Erklärung
+`ROUND(x)` rundet auf eine ganze Zahl, `ROUND(x, 2)` auf zwei Nachkommastellen. Kaufmännisch heißt: Ab 5 wird aufgerundet, auch bei negativen Zahlen weg von null (2,5 → 3, −2,5 → −3). Gerundet wird nur das Ergebnis der Abfrage, die gespeicherten Werte bleiben unverändert – erst `UPDATE … SET preis = ROUND(…)` ändert sie. Man rundet **zuletzt**, nach der ganzen Rechnung (`ROUND(SUM(…), 2)`); wer Zwischenergebnisse rundet, summiert Rundungsfehler auf. Ist der Wert NULL, ist auch das Ergebnis NULL.
+
+Dialekt: In MySQL, PostgreSQL und Oracle rundet ein negatives n vor dem Komma (`ROUND(1234.567, -2)` = 1200); SQLite kennt das nicht und liefert hier 1235. Außerdem liefert SQLite immer eine Kommazahl (REAL).
+
+### Beispiel
+```sql
+SELECT bezeichnung, ROUND(preis * 1.19, 2) AS brutto
+FROM produkt;
+```
+Ergebnis: Bürostuhl Comfort 296,31 · Schreibtisch Basic 474,81 · Monitor 27 Zoll 224,91 · Dockingstation 153,51 · Schreibtischlampe 47,48. Die Lampe zeigt die Rundung: 39,90 · 1,19 = 47,481 → 47,48.
+
+### Abgrenzung
+`ROUND` rundet zum nächsten Wert, `CAST(2.7 AS INTEGER)` schneidet die Nachkommastellen ab (2,7 → 2, `ROUND(2.7)` → 3). Eine bloße Formatierung der Anzeige (z. B. `FORMAT` in MySQL) ändert den Zahlenwert nicht und erzeugt Text.
+
+### Prüfungsfalle
+Ganzzahldivision: `ROUND(5 / 2)` liefert 2, weil schon `5 / 2` mit zwei ganzen Zahlen auf 2 abgeschnitten wird (SQLite, SQL Server; MySQL rechnet hier 2,5). Mindestens ein Operand muss eine Kommazahl sein: `ROUND(5 * 1.0 / 2)` = 3.
+
+### Merksatz
+Erst rechnen, zuletzt runden – und auf ganzzahlige Division achten.
+
+Siehe auch: SELECT · Datentypen · COALESCE · CONCAT
+Mehr: Deep Dive 31, 4.2 · Deep Dive 9, 2.1
+
 ## RPO
 <!-- id: rpo · quellen: Karte DD10, DD10 4.4, DD10 5.4 · stand: 2026-10 -->
 

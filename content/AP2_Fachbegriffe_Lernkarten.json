@@ -7,7 +7,7 @@
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 885,
+    "anzahl_karten": 895,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -23,7 +23,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 1",
       "status": "behandelt",
-      "anzahl_karten": 25,
+      "anzahl_karten": 35,
       "karten": [
         {
           "id": "FB-primarschlussel",
@@ -269,6 +269,106 @@
           "id": "FB-ausfuhrungsplan",
           "frage": "Ausführungsplan (EXPLAIN)",
           "antwort": "Schrittfolge, mit der die Datenbank eine Abfrage ausführt (Scan, Indexzugriff, Join-Verfahren); EXPLAIN zeigt ihn an, EXPLAIN ANALYZE führt die Abfrage zusätzlich aus.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-select",
+          "frage": "SELECT",
+          "antwort": "SQL-Anweisung, die Daten abfragt und eine Ergebnistabelle liefert: SELECT wählt die Spalten (Projektion), WHERE die Zeilen (Selektion). Sie wird nach HAVING ausgeführt, kurz vor ORDER BY.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-order-by",
+          "frage": "ORDER BY",
+          "antwort": "Sortiert das Ergebnis aufsteigend (ASC, Standard) oder absteigend (DESC); ASC/DESC gilt je Kriterium. Wird nach SELECT ausgeführt und darf daher Aliase nutzen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-insert",
+          "frage": "INSERT",
+          "antwort": "SQL-Anweisung (DML), die neue Zeilen einfügt: INSERT INTO tabelle (spalten) VALUES (werte) oder INSERT INTO … SELECT. Spalten und Werte müssen zusammenpassen, Constraints werden geprüft.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-update",
+          "frage": "UPDATE",
+          "antwort": "SQL-Anweisung (DML), die Werte vorhandener Zeilen ändert (UPDATE t SET spalte = wert WHERE …); ohne WHERE sind alle Zeilen betroffen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-delete-from",
+          "frage": "DELETE FROM",
+          "antwort": "SQL-Anweisung (DML), die Zeilen einer Tabelle löscht; ohne WHERE alle Zeilen, die Tabelle bleibt bestehen und das Löschen lässt sich per ROLLBACK zurücknehmen (anders als TRUNCATE und DROP).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-grant-revoke",
+          "frage": "GRANT / REVOKE (DCL)",
+          "antwort": "SQL-Befehle der Data Control Language: GRANT vergibt Rechte an Benutzer oder Rollen (TO), REVOKE entzieht sie (FROM); WITH GRANT OPTION erlaubt die Weitergabe.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-alias",
+          "frage": "Alias (AS)",
+          "antwort": "Kurzname für eine Spalte, einen Ausdruck oder eine Tabelle, der nur in dieser Abfrage gilt; ein Spaltenalias entsteht erst im SELECT und ist daher in ORDER BY, nach Standard-SQL aber nicht in WHERE nutzbar.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-round",
+          "frage": "ROUND",
+          "antwort": "SQL-Funktion ROUND(x, n): rundet kaufmännisch auf n Nachkommastellen; rundet nur das Abfrageergebnis, nicht die gespeicherten Daten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-in-between-like",
+          "frage": "IN, BETWEEN, LIKE",
+          "antwort": "Vergleichsoperatoren in WHERE: IN = Werteliste, BETWEEN = Bereich einschließlich beider Grenzen, LIKE = Textmuster mit % (beliebig viele Zeichen) und _ (genau ein Zeichen).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-concat",
+          "frage": "CONCAT",
+          "antwort": "SQL-Funktion zum Verketten von Texten (Standard-Operator: ||); bei NULL verhalten sich die Systeme verschieden, || liefert NULL.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [

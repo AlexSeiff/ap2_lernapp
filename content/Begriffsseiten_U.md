@@ -696,6 +696,37 @@ Wer nur die Mitte eines Falls sieht, misst ihn zu kurz.
 Siehe auch: Event Log · Durchlaufzeit · Process Mining · Uneinheitliche Aktivitätsbezeichnungen · Case ID
 Mehr: Deep Dive 5, 5.3
 
+## UPDATE
+<!-- id: update · quellen: Karte DD1, DD1 2.4, DD19 5.5 · stand: 2026-11 -->
+
+SQL-Anweisung (DML), die Werte bereits vorhandener Zeilen ändert; WHERE bestimmt, welche Zeilen, ohne WHERE sind es alle.
+Auch: UPDATE SET
+
+### Erklärung
+`UPDATE tabelle SET spalte = wert [, spalte2 = wert2] [WHERE bedingung]`. Mehrere Spalten trennt man mit **Komma**, nicht mit AND. Rechts vom `=` darf ein Ausdruck stehen, der die alten Werte nutzt (`preis = preis * 1.05`); `SET spalte = NULL` setzt auf „unbekannt“ (hier ist `=` eine Zuweisung, kein Vergleich). Auch Unterabfragen sind möglich, z. B. `WHERE a_id IN (SELECT …)`, wenn die Bedingung über eine andere Tabelle läuft. Constraints (CHECK, Fremdschlüssel, NOT NULL) werden geprüft; wird einer verletzt, ändert sich keine Zeile. Trifft die Bedingung keine Zeile, ist das kein Fehler – es werden 0 Zeilen geändert. Vorsicht in der Praxis: erst mit `SELECT … WHERE …` prüfen, welche Zeilen betroffen wären, und in einer Transaktion arbeiten (ROLLBACK möglich).
+
+Dialekt: Ein UPDATE über einen JOIN schreibt jedes System anders (MySQL `UPDATE a JOIN b …`, SQL Server `UPDATE … FROM`); mit einer Unterabfrage in WHERE klappt es überall.
+
+### Beispiel
+```sql
+UPDATE produkt
+SET preis = ROUND(preis * 1.05, 2)
+WHERE kategorie = 'Elektronik';
+```
+2 Zeilen ändern sich: Monitor 27 Zoll 189 → 198,45 und Dockingstation 129 → 135,45. Ohne die WHERE-Zeile würden alle 5 Produkte um 5 % teurer, auch Möbel und Zubehör.
+
+### Abgrenzung
+UPDATE ändert **Werte** vorhandener Zeilen, INSERT legt neue Zeilen an, DELETE entfernt sie. `ALTER TABLE` (DDL) ändert die **Struktur** der Tabelle, nicht ihren Inhalt.
+
+### Prüfungsfalle
+UPDATE ohne WHERE trifft die gesamte Tabelle – der klassische Fehlersuche-Punkt. Zweiter Klassiker: `SET ort = 'Bonn' AND registriert_am = '2026-01-01'` statt Komma; AND wird dann als logischer Ausdruck gelesen, und `ort` bekommt den Wert 0 statt „Bonn“.
+
+### Merksatz
+Ohne WHERE gilt UPDATE für alle.
+
+Siehe auch: INSERT · DELETE FROM · DML · WHERE · Transaktion
+Mehr: Deep Dive 1, 2.4 · Deep Dive 19, 5.5
+
 ## Urheberrecht
 <!-- id: urheberrecht · quellen: Karte DD14, DD14 2.7 · stand: 2026-10 -->
 

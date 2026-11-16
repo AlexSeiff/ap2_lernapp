@@ -1087,8 +1087,42 @@ Idempotent mit „gleiche Antwort“ verwechseln – gemeint ist der Zustand auf
 ### Merksatz
 Zweimal gelöscht ist auch nur gelöscht.
 
-Siehe auch: Idempotent · REST · GET · POST · PUT
+Siehe auch: Idempotent · REST · GET · POST · PUT · DELETE FROM
 Mehr: Deep Dive 15, 3.2 · Deep Dive 1, 2.4
+
+## DELETE FROM
+<!-- id: delete-from · quellen: Karte DD1, DD1 2.4, DD1 3.9, DD29 4 · stand: 2026-11 -->
+
+SQL-Anweisung (DML), die Zeilen aus einer Tabelle löscht; WHERE bestimmt, welche, ohne WHERE sind es alle. Die Tabelle selbst bleibt bestehen.
+Auch: SQL-DELETE
+
+### Erklärung
+`DELETE FROM tabelle [WHERE bedingung]` – ohne Spaltenliste, denn es werden ganze Zeilen entfernt (`DELETE * FROM …` ist kein gültiges SQL). Hängen an einer Zeile noch Kindzeilen über einen Fremdschlüssel, lehnt die Datenbank das Löschen ab (`RESTRICT`), außer der Fremdschlüssel ist mit `ON DELETE CASCADE` (Kindzeilen werden mitgelöscht) oder `ON DELETE SET NULL` angelegt. Sonst gilt: erst die Kindzeilen löschen, dann die Elternzeile. In einer Transaktion lässt sich DELETE per ROLLBACK zurücknehmen. Wie bei allen Vergleichen löscht `WHERE ort = NULL` nichts, richtig ist `IS NULL`. Vor dem Löschen prüft man die Auswahl mit demselben WHERE in einem SELECT.
+
+### Beispiel
+```sql
+DELETE FROM bestellposition WHERE bestell_id = 105;
+DELETE FROM bestellung WHERE bestell_id = 105;
+```
+Die erste Anweisung entfernt 1 Zeile (2 Schreibtischlampen), die zweite die Bestellung selbst; danach gibt es 5 Bestellungen. In umgekehrter Reihenfolge scheitert das Löschen der Bestellung am Fremdschlüssel, solange die Position noch existiert.
+
+### Abgrenzung
+| Befehl | Gruppe | Wirkung |
+|---|---|---|
+| DELETE FROM | DML | löscht ausgewählte Zeilen (WHERE), per ROLLBACK umkehrbar |
+| TRUNCATE TABLE | DDL | leert die ganze Tabelle, kein WHERE |
+| DROP TABLE | DDL | entfernt Tabelle samt Struktur |
+
+Dialekt: SQLite kennt kein TRUNCATE; dort leert `DELETE FROM tabelle` die Tabelle. Mit der HTTP-Methode DELETE (REST) hat der SQL-Befehl nur den Namen gemeinsam.
+
+### Prüfungsfalle
+`DELETE FROM kunde;` ohne WHERE löscht alle Kunden. Und `DELETE FROM kunde WHERE kunden_id NOT IN (SELECT kunden_id FROM bestellung)` löscht nichts, sobald die Unterabfrage ein NULL enthält – dann NOT EXISTS verwenden.
+
+### Merksatz
+DELETE FROM ohne WHERE leert die Tabelle – erst prüfen, dann löschen.
+
+Siehe auch: INSERT · UPDATE · DML · DDL · Referenzielle Integrität
+Mehr: Deep Dive 1, 2.4 · Deep Dive 1, 3.9 · Deep Dive 29, Teil 4
 
 ## Delta Lake
 <!-- id: delta-lake · quellen: DD8 5.1 · stand: 2026-11 -->
@@ -1119,6 +1153,7 @@ Delta Lake macht aus Dateien im See verlässliche Tabellen.
 
 Siehe auch: Lakehouse · Parquet · Data Lake · ACID · Medallion-Architektur · Schema Evolution
 Mehr: Deep Dive 8, 5.1
+
 
 ## Deltaextraktion
 <!-- id: deltaxtraktion · quellen: Karte DD8, DD8 3.1 · stand: 2026-10 -->

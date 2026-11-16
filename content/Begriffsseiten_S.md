@@ -643,6 +643,45 @@ Versicherte und Arbeitgeber verwalten ihre Kassen selbst.
 Siehe auch: Solidarprinzip · Umlageverfahren · Pflichtversicherung · Sozialversicherung
 Mehr: Deep Dive 14, 1.1
 
+## SELECT
+<!-- id: select · quellen: Karte DD1, DD1 1.1, DD1 2.6, DD19 5.2 · stand: 2026-11 -->
+
+SQL-Anweisung, die Daten aus einer oder mehreren Tabellen abfragt und eine Ergebnistabelle liefert; sie verändert keine Daten.
+Auch: SELECT-Anweisung, SELECT DISTINCT
+
+### Erklärung
+SELECT wählt die **Spalten** des Ergebnisses (Projektion) und kann Ausdrücke, Aggregatfunktionen und Aliase enthalten; die **Zeilen** wählt WHERE (Selektion). `SELECT *` liefert alle Spalten, `SELECT DISTINCT` entfernt doppelte Ergebniszeilen (NULL-Werte gelten dabei als gleich).
+
+Geschrieben wird in der Reihenfolge SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT, **ausgeführt** wird so: FROM/JOIN → WHERE → GROUP BY → HAVING → **SELECT** → DISTINCT → ORDER BY → LIMIT. Deshalb kennt ORDER BY die Aliase aus dem SELECT, WHERE aber nicht. Jede Spalte im SELECT, die nicht aggregiert wird, gehört bei GROUP BY auch in die Gruppierung.
+
+Dialekt: Die Zeilenzahl begrenzt man in SQLite und MySQL mit `LIMIT n`, in SQL Server mit `TOP n`, in Oracle und Standard-SQL mit `FETCH FIRST n ROWS ONLY`.
+
+### Beispiel
+```sql
+SELECT bezeichnung, preis * 1.19 AS brutto
+FROM produkt
+WHERE kategorie = 'Elektronik'
+ORDER BY brutto DESC;
+```
+Ergebnis: Monitor 27 Zoll 224,91 · Dockingstation 153,51 (189 · 1,19 und 129 · 1,19). Die Alias-Spalte `brutto` entsteht im SELECT und ist deshalb im ORDER BY nutzbar. Mit `SELECT DISTINCT ort FROM kunde` ergeben die 5 Kunden nur 3 Zeilen: Hamburg, Köln, München.
+
+### Abgrenzung
+| Begriff | wählt aus | steht in |
+|---|---|---|
+| Projektion | Spalten | SELECT |
+| Selektion | Zeilen | WHERE |
+
+SELECT liest nur; INSERT, UPDATE und DELETE ändern Daten (DML).
+
+### Prüfungsfalle
+Den Alias im WHERE verwenden: `WHERE brutto > 200`. WHERE läuft vor SELECT, nach Standard-SQL und in MySQL ist das ein Fehler. SQLite lässt es durch – in der Prüfung die Rechnung ausschreiben (`WHERE preis * 1.19 > 200`).
+
+### Merksatz
+SELECT steht zuerst, wird aber fast zuletzt ausgeführt.
+
+Siehe auch: WHERE · GROUP BY · HAVING · ORDER BY · Alias (AS) · Unterabfrage
+Mehr: Deep Dive 1, 1.1 · Deep Dive 1, 2.6 · Deep Dive 19, 5.2
+
 ## Selection Sort
 <!-- id: selection-sort · quellen: Karte DD11, DD11 B7 · stand: 2026-10 -->
 

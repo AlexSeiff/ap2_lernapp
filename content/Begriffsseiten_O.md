@@ -448,6 +448,38 @@ Ordentlich heißt: mit Frist, schriftlich, und beim Arbeitgeber oft mit Begründ
 Siehe auch: Außerordentliche Kündigung · Kündigungsschutzgesetz · Schriftform · Änderungskündigung · Abmahnung
 Mehr: Deep Dive 13, 3.2 · Deep Dive 13, 3.3
 
+## ORDER BY
+<!-- id: order-by · quellen: Karte DD1, DD1 1.3, DD19 5.2, DD29 4 · stand: 2026-11 -->
+
+SQL-Klausel, die das Ergebnis nach einer oder mehreren Spalten oder Ausdrücken sortiert: aufsteigend (`ASC`, Standard) oder absteigend (`DESC`).
+Auch: ASC, DESC
+
+### Erklärung
+ORDER BY steht am Ende der Abfrage (nur LIMIT kommt danach) und wird nach dem SELECT ausgeführt – deshalb darf es als einzige Klausel die Aliase aus dem SELECT verwenden. Bei mehreren Kriterien sortiert das erste, jedes weitere nur bei Gleichstand; `ASC`/`DESC` gilt **je Kriterium einzeln**. Statt eines Namens geht auch die Spaltennummer (`ORDER BY 2`), das ist aber fehleranfällig. Ohne ORDER BY ist die Reihenfolge der Zeilen **nicht garantiert**. Datumsangaben im Format `JJJJ-MM-TT` sortieren als Text richtig, Zahlen, die als Text gespeichert sind, nicht (`'10'` kommt vor `'9'`).
+
+NULL: SQLite und MySQL behandeln NULL als kleinsten Wert (bei `ASC` zuerst, bei `DESC` zuletzt), Oracle und PostgreSQL als größten. `NULLS FIRST` bzw. `NULLS LAST` legt es fest (SQLite ab 3.30, PostgreSQL, Oracle; nicht MySQL).
+
+### Beispiel
+```sql
+SELECT ort, COUNT(*) AS anzahl
+FROM kunde
+GROUP BY ort
+ORDER BY anzahl DESC, ort ASC;
+```
+Ergebnis: Hamburg 2 · München 2 · Köln 1. Zuerst zählt `anzahl` (absteigend); den Gleichstand bei 2 entscheidet `ort` aufsteigend (Hamburg vor München).
+
+### Abgrenzung
+ORDER BY ordnet nur die Ausgabe und ändert nichts in der Tabelle. GROUP BY bildet Gruppen und garantiert keine Reihenfolge. Sortieralgorithmen wie Bubble Sort oder Quicksort sind ein anderes Thema (Verfahren im Programm, nicht SQL-Klausel).
+
+### Prüfungsfalle
+`ORDER BY ort, anzahl DESC` sortiert nur `anzahl` absteigend, `ort` bleibt aufsteigend. Wer „beide absteigend“ will, schreibt `DESC` hinter jedes Kriterium.
+
+### Merksatz
+Ohne ORDER BY keine Reihenfolge – und DESC gilt nur für das Wort davor.
+
+Siehe auch: SELECT · GROUP BY · NULL · Alias (AS)
+Mehr: Deep Dive 1, 1.3 · Deep Dive 19, 5.2 · Deep Dive 29, Teil 4
+
 ## Ordinalskala
 <!-- id: ordinalskala · quellen: Karte DD3, DD3 Teil 1 · stand: 2026-10 -->
 

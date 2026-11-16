@@ -316,6 +316,40 @@ Was nicht dokumentiert ist, gilt als nicht eingehalten.
 Siehe auch: Rechenschaftspflicht · ISMS · IT-Grundschutz · Data Governance
 Mehr: Deep Dive 10, 5.1
 
+## CONCAT
+<!-- id: concat · quellen: Karte DD1, DD1 1.4 · stand: 2026-11 -->
+
+SQL-Funktion, die mehrere Texte (und Werte, die in Text umgewandelt werden) zu einer Zeichenkette verkettet: `CONCAT(a, b, …)`; als Operator geht dasselbe mit `a || b`.
+Auch: Verkettung, Zeichenkettenverkettung
+
+### Erklärung
+Verkettet wird **innerhalb einer Zeile**: `CONCAT(name, ' (', ort, ')')` setzt Name und Ort zusammen. Feste Textteile stehen in einfachen Anführungszeichen, Leerzeichen und Trennzeichen muss man selbst einfügen. `CONCAT_WS(trenner, a, b, …)` setzt das Trennzeichen automatisch.
+
+NULL und Dialekt: Hier unterscheiden sich die Systeme. Der Standard-Operator `||` liefert bei einem NULL-Operanden **NULL**. `CONCAT` überspringt NULL in SQLite (ab 3.44), PostgreSQL und SQL Server, liefert in MySQL dagegen NULL. `CONCAT_WS` überspringt NULL. Portabel ist `COALESCE(ort, '')`. In MySQL ist `||` standardmäßig der ODER-Operator, dort also `CONCAT` verwenden.
+
+### Beispiel
+```sql
+SELECT CONCAT(name, ' (', ort, ')') AS kunde
+FROM kunde;
+```
+Ergebnis: Huber GmbH (München) · Schmidt AG (Hamburg) · Fischer KG (München) · Weber e.K. (Köln) · Braun GmbH (Hamburg). Gleichwertig: `name || ' (' || ort || ')'`.
+```sql
+SELECT 'a' || NULL AS mit_pipes, CONCAT('a', NULL, 'b') AS mit_concat;
+```
+Ergebnis in SQLite: NULL und `ab` – dieselbe Aufgabe, zwei Ergebnisse.
+
+### Abgrenzung
+`CONCAT` verbindet Texte **einer Zeile**. `GROUP_CONCAT` (SQLite, MySQL) bzw. `STRING_AGG` (Standard, PostgreSQL) verbindet die Werte **mehrerer Zeilen** einer Gruppe zu einem Text (Aggregatfunktion). `UNION` stapelt Zeilen untereinander und verkettet nichts.
+
+### Prüfungsfalle
+Mit `+` verketten: In SQLite und MySQL addiert `+` Zahlen – `'a' + 'b'` ergibt 0, nicht „ab“ (nur SQL Server verkettet damit). Zweite Falle: eine NULL-Spalte in einer `||`-Kette macht das ganze Ergebnis NULL.
+
+### Merksatz
+Verketten mit CONCAT oder `||` – und NULL vorher mit COALESCE abfangen.
+
+Siehe auch: COALESCE · NULL · SELECT · Datentypen
+Mehr: Deep Dive 1, 1.4 · Deep Dive 1, 3.1
+
 ## Conformance Checking
 <!-- id: conformance-checking · quellen: Karte DD5, DD5 5.2 · stand: 2026-10 -->
 
