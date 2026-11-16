@@ -1165,6 +1165,33 @@ Pythagoras im Merkmalsraum – vorher skalieren.
 Siehe auch: K-Means · K-Nächste-Nachbarn · Skalieren · Min-Max-Normalisierung · Levenshtein-Distanz
 Mehr: Deep Dive 6, 3.1
 
+## Europass
+<!-- id: europass · quellen: Karte DD20, DD20 5.5 · stand: 2026-11 -->
+
+Kostenloser digitaler Dienst der EU, der hilft, Qualifikationen, Fähigkeiten und Kompetenzen bei Bewerbungen und Auslandsaufenthalten in Europa verständlich darzustellen.
+
+### Erklärung
+Über das Europass-Portal lassen sich ein Profil und ein europäischer Lebenslauf erstellen; dazu gibt es Zeugniserläuterungen, die Abschlüsse auch für ausländische Arbeitgeber erklären, und den Mobilitätsnachweis für Lern- und Arbeitsaufenthalte im Ausland. Der Europass **ersetzt keine Zeugnisse**, ist **nicht verpflichtend**, vergibt keine Abschlüsse und vermittelt keine Ausbildungsplätze. Er richtet sich an alle, nicht nur an Hochschulabsolventen. Ein Teil der Ausbildung darf im Ausland stattfinden: bis zu einem Viertel der in der Ausbildungsordnung festgelegten Dauer (§ 2 Abs. 3 BBiG).
+
+### Beispiel
+Mia Albers (Ausbildungsdauer 36 Monate) möchte einen Teil ihrer Ausbildung in Dänemark verbringen. Höchstens ein Viertel darf im Ausland liegen: $36 \cdot \frac{1}{4}$ = **9 Monate**. Den Auslandsaufenthalt kann sie im Europass-Mobilitätsnachweis festhalten; ihr Lebenslauf lässt sich im Europass-Format erstellen. Die Abschlussprüfung bei der IHK wird dadurch nicht ersetzt.
+
+### Abgrenzung
+| | Europass | Zeugnis / Abschluss |
+|---|---|---|
+| Zweck | Qualifikationen verständlich darstellen | Qualifikation amtlich bescheinigen |
+| Kosten | kostenlos | je nach Prüfung |
+| Pflicht | freiwillig | Voraussetzung für den Berufsabschluss |
+
+### Prüfungsfalle
+Den Europass für ein kostenpflichtiges Zertifikat oder für einen Ersatz der IHK-Abschlussprüfung halten – er ist ein kostenloses Darstellungs- und Dokumentationsinstrument.
+
+### Merksatz
+Europass: kostenlos, freiwillig, macht Qualifikationen europaweit lesbar – ersetzt aber kein Zeugnis.
+
+Siehe auch: Arbeitszeugnis · Duale Ausbildung · Fortbildung · IHK
+Mehr: Deep Dive 20, 5.5
+
 ## Event Log
 <!-- id: event-log · quellen: Karte DD5, DD5 5.1, DD5 5.3 · stand: 2026-10 -->
 

@@ -2075,6 +2075,38 @@ Kein Angemessenheitsbeschluss? Dann Standardvertragsklauseln plus Transferprüfu
 Siehe auch: DSGVO · Personenbezogene Daten · Datenschutzbeauftragter
 Mehr: Deep Dive 10, 2.4
 
+## Standortfaktoren
+<!-- id: standortfaktoren · quellen: Karte DD33, DD33 Teil 4 · stand: 2026-11 -->
+
+Gegebenheiten eines Ortes, die die Standortwahl eines Unternehmens beeinflussen – unterteilt in harte (messbare) und weiche (schwer messbare) Faktoren.
+
+### Erklärung
+| | harte Standortfaktoren | weiche Standortfaktoren |
+|---|---|---|
+| Merkmal | in Euro oder Zahlen erfassbar, wirken direkt auf Kosten und Erlöse | schwer zu messen, wirken meist indirekt über Menschen |
+| Beispiele | Grundstückspreise und Miete, Löhne, Gewerbesteuer-Hebesatz, Verkehrsanbindung, Absatzmarkt und Kundennähe, Nähe zu Lieferanten, Fachkräfteangebot, Fördermittel | Image der Region, Wohn- und Freizeitwert, Kultur- und Bildungsangebot, Unternehmerfreundlichkeit der Verwaltung, Klima |
+
+Welche Faktoren zählen, hängt von der Branche ab: Ein Handelsbetrieb braucht Kundennähe und Laufkundschaft, ein Industriebetrieb Verkehrsanbindung und Rohstoffnähe, ein IT-Unternehmen Fachkräfte. Der **Gewerbesteuer-Hebesatz** legt die Gemeinde fest; deshalb ist er ein echter Standortfaktor. Für den Vergleich nutzt man einen Kostenvergleich bei den harten Faktoren und eine Nutzwertanalyse, wenn weiche Faktoren mitbewertet werden sollen.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH vergleicht zwei Lagerstandorte mit je 2.500 m²:
+- Standort A: Miete 12 € je m² und Monat, also $2.500 \cdot 12 \cdot 12 = 360.000$ € im Jahr; kurze Wege zu den Filialen.
+- Standort B: Miete 9 € je m² und Monat, also $2.500 \cdot 9 \cdot 12 = 270.000$ € im Jahr; dafür 120.000 € höhere Transportkosten im Jahr.
+
+Miete plus Transport: A kostet 360.000 €, B kostet $270.000 + 120.000 = 390.000$ €. A ist um 30.000 € im Jahr günstiger, obwohl die Miete höher ist. Weiche Faktoren (Image des Standorts, Erreichbarkeit für Mitarbeiter) kommen als qualitative Beurteilung hinzu.
+
+### Abgrenzung
+Standortfaktoren unterscheiden Orte voneinander. Was überall gleich ist, etwa der Umsatzsteuersatz, ist deshalb kein Standortfaktor.
+
+### Prüfungsfalle
+Den bundeseinheitlichen Umsatzsteuersatz als Standortfaktor nennen, den örtlich verschiedenen Gewerbesteuer-Hebesatz aber nicht – es ist genau umgekehrt.
+
+### Merksatz
+Hart ist, was man in Euro rechnen kann; weich ist, was Menschen anzieht.
+
+Siehe auch: Nutzwertanalyse · Wirtschaftlichkeitsbetrachtung · Arbeitsteilung
+Mehr: Deep Dive 33, Teil 4
+
 ## Star-Schema
 <!-- id: star-schema · quellen: Karte DD8, DD8 4.2, DD8 4.3, DD17 3.4 · stand: 2026-10 -->
 
@@ -2269,7 +2301,7 @@ Einteilung der Arbeitnehmer in sechs Lohnsteuerklassen, nach denen der Arbeitgeb
 | V | Partner zu III |
 | VI | zweites und jedes weitere Dienstverhältnis |
 
-Die Steuerklasse beeinflusst nur den monatlichen Abzug, nicht die endgültige Einkommensteuer – die ergibt sich aus der Veranlagung. Die Kombination III/V besteht weiterhin; eine früher geplante Abschaffung zugunsten des Faktorverfahrens wurde nicht beschlossen (Stand 2026).
+Die Steuerklasse beeinflusst nur den monatlichen Abzug, nicht die endgültige Einkommensteuer – die ergibt sich aus der Veranlagung. Die Kombination III/V besteht weiterhin; Pläne, sie zugunsten des Faktorverfahrens zu ersetzen, sind noch nicht umgesetzt (Stand 2026) – in der Prüfung gilt das heutige Recht.
 
 ### Beispiel
 Lea (ledig) hat Steuerklasse I. Nimmt sie zusätzlich einen Minijob mit individueller Besteuerung oder eine zweite Teilzeitstelle an, wird die zweite Stelle nach Klasse VI besteuert – sofern der Minijob nicht pauschal versteuert wird.

@@ -169,6 +169,29 @@ Die Jungen zahlen für die Alten – heute, nicht auf Vorrat.
 Siehe auch: Rentenversicherung · Solidarprinzip · Drei Säulen · Pflichtversicherung
 Mehr: Deep Dive 14, 1.1 · Deep Dive 14, 1.5
 
+## Umschulung
+<!-- id: umschulung · quellen: Karte DD33, DD33 Teil 5 · stand: 2026-11 -->
+
+Berufliche Weiterbildung, die zu einer anderen beruflichen Tätigkeit befähigt (§ 1 Abs. 5 BBiG) – meist, weil der bisherige Beruf nicht mehr ausgeübt werden kann.
+
+### Erklärung
+Anlass sind z. B. gesundheitliche Gründe, ein weggefallener Arbeitsplatz oder ein Strukturwandel in der Branche. Eine Umschulung in einen anerkannten Ausbildungsberuf dauert meist weniger als die Erstausbildung, weil Vorkenntnisse angerechnet werden, und endet mit einer Prüfung bei der zuständigen Stelle (z. B. IHK). Bei Arbeitslosen oder von Arbeitslosigkeit Bedrohten kann die **Agentur für Arbeit** die Kosten über einen **Bildungsgutschein** übernehmen und fördert so die Weiterbildung; Voraussetzung ist unter anderem, dass die Maßnahme notwendig ist und die Eingliederung verbessert.
+
+### Beispiel
+Frau Brandt war 15 Jahre Lagerarbeiterin und kann wegen eines Rückenleidens nicht mehr schwer heben. Sie meldet sich bei der Agentur für Arbeit und lässt sich mit einem Bildungsgutschein zur Fachinformatikerin umschulen. Der alte Beruf ist nicht mehr möglich, der neue Beruf ist ein anderer – das ist eine Umschulung. Würde sie dagegen als Lagerarbeiterin den Gabelstaplerschein erwerben, bliebe sie in ihrem Beruf: Fortbildung.
+
+### Abgrenzung
+Die **Fortbildung** baut auf dem bisherigen Beruf auf (Aufstieg, Anpassung); die Umschulung wechselt den Beruf. Die **Erstausbildung** (duale Ausbildung) ist die erste Berufsausbildung nach der Schule.
+
+### Prüfungsfalle
+Jede Weiterbildung als Umschulung bezeichnen – ohne Berufswechsel ist es eine Fortbildung. Stellen für Umschulungen und Weiterbildungen: Agentur für Arbeit (Bildungsgutschein), nicht die Krankenkasse oder der Betriebsrat.
+
+### Merksatz
+Umschulung heißt neuer Beruf – oft, weil der alte nicht mehr geht.
+
+Siehe auch: Fortbildung · Duale Ausbildung · BBiG · Arbeitslosenversicherung
+Mehr: Deep Dive 33, Teil 5
+
 ## Umweltmanagementsysteme
 <!-- id: umweltmanagementsysteme · quellen: DD14 5.2 · stand: 2026-10 -->
 
