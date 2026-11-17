@@ -117,7 +117,7 @@ Stichtag für den Urlaub ist das **Alter zu Beginn des Kalenderjahres**. Jonas (
 - Werktäglich höchstens **8 Stunden**, verlängerbar auf **10**, wenn im Durchschnitt von sechs Monaten bzw. 24 Wochen 8 Stunden nicht überschritten werden. Werktage sind **Montag bis Samstag**.
 - Ruhepausen: **30 min** bei mehr als 6 Stunden, **45 min** bei mehr als 9 Stunden; nie länger als 6 Stunden ohne Pause.
 - Ruhezeit mindestens **11 Stunden** zwischen zwei Arbeitstagen.
-- Ein Gesetzentwurf (Juni 2026) will eine wöchentliche statt einer täglichen Höchstarbeitszeit einführen – noch nicht verabschiedet (Stand Oktober 2026, vor der Prüfung prüfen). In der Prüfung gilt das obige Recht.
+- Ein Referentenentwurf (Juni 2026) sieht eine wöchentliche statt einer täglichen Höchstarbeitszeit vor – nicht verabschiedet (Stand November 2026; Kabinettsbeschluss erwartet, vor der Prüfung prüfen). In der Prüfung gilt das obige Recht.
 
 ## 2.3 Bundesurlaubsgesetz
 

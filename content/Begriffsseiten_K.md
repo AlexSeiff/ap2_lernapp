@@ -196,8 +196,8 @@ Auch: Kapitalgesellschaft, Personengesellschaft, Kapitalgesellschaften, Personen
 | Haftung | Gesellschafter persönlich und unbeschränkt (KG: Kommanditisten nur bis zur Haftsumme) | nur das **Gesellschaftsvermögen**; Gesellschafter riskieren ihre Einlage |
 | Mindestkapital | keines | GmbH 25.000 €, UG ab 1 €, AG 50.000 € |
 | Leitung | Gesellschafter führen selbst (Selbstorganschaft) | Geschäftsführer bzw. Vorstand, auch **Nichtgesellschafter** möglich (Fremdorganschaft) |
-| Handelsregister | Abteilung **A** | Abteilung **B** (Entstehung erst mit Eintragung) |
-| Kaufmann | als Handelsgewerbe (Istkaufmann) | stets Kaufmann kraft Rechtsform (Formkaufmann) |
+| Register | OHG/KG: Handelsregister Abteilung **A** (GbR: nicht im Handelsregister, freiwillig im Gesellschaftsregister) | Handelsregister Abteilung **B** (Entstehung erst mit Eintragung) |
+| Kaufmann | OHG/KG: Kaufmann (Handelsgesellschaft); GbR: kein Kaufmann (betreibt sie ein Handelsgewerbe, ist sie eine OHG) | stets Kaufmann kraft Rechtsform (Formkaufmann) |
 | Besteuerung | Gewinn wird bei den Gesellschaftern versteuert (Einkommensteuer) | Gesellschaft zahlt Körperschaftsteuer; Gewinnausschüttung wird beim Gesellschafter nochmals besteuert |
 | Gewinnverteilung | nach Gesellschaftsvertrag | nach Geschäftsanteilen bzw. Aktien (GmbH: wenn der Gesellschaftsvertrag nichts anderes bestimmt) |
 
@@ -207,10 +207,10 @@ Kapitalgesellschaften haben Pflichten zur Rechnungslegung (Jahresabschluss, Offe
 Drei Gründer wollen das Möbelhaus Nordholz betreiben. Als **OHG** haften alle drei mit dem Privatvermögen, Kapital ist nicht vorgeschrieben, die Eintragung erfolgt in Abteilung A. Als **GmbH** müssen sie 25.000 € Stammkapital aufbringen (davon mindestens 12.500 € bei Gründung), haften nur mit dem Gesellschaftsvermögen und können einen Geschäftsführer einsetzen, der nicht Gesellschafter ist. Verluste von 100.000 € treffen die Gesellschafter der OHG daher privat, die der GmbH höchstens in Höhe ihrer Einlage.
 
 ### Abgrenzung
-Das **Einzelunternehmen** ist weder Personen- noch Kapitalgesellschaft, sondern ein Unternehmen mit einem Inhaber, der unbeschränkt haftet. Die **eG** (Genossenschaft) ist eine eigene Rechtsform. „Juristische Person“ bedeutet nicht „Kapitalgesellschaft“: Auch Verein, Stiftung und Körperschaften des öffentlichen Rechts sind juristische Personen.
+Das **Einzelunternehmen** ist weder Personen- noch Kapitalgesellschaft, sondern ein Unternehmen mit einem Inhaber, der unbeschränkt haftet (Kleingewerbetreibende müssen nicht ins Handelsregister, nur der eingetragene Kaufmann führt „e. K.“). Die **eG** (Genossenschaft) ist eine eigene Rechtsform. „Juristische Person“ bedeutet nicht „Kapitalgesellschaft“: Auch Verein, Stiftung und Körperschaften des öffentlichen Rechts sind juristische Personen.
 
 ### Prüfungsfalle
-Die OHG für eine juristische Person oder die GmbH für eine Personengesellschaft halten. Auch vertauscht werden Haftung (GmbH haftet nicht „mit 25.000 €“, die Summe ist das Mindestkapital) und Register (A für Personen, B für Kapital).
+Die OHG für eine juristische Person oder die GmbH für eine Personengesellschaft halten. Auch vertauscht werden Haftung (GmbH haftet nicht „mit 25.000 €“, die Summe ist das Mindestkapital) und Register (A für OHG/KG, B für Kapital; die GbR steht nicht im Handelsregister).
 
 ### Merksatz
 Personengesellschaft: Person haftet, Abteilung A. Kapitalgesellschaft: Kapital haftet, Abteilung B.
@@ -1077,7 +1077,7 @@ Zusammenarbeit von Unternehmen, die dabei rechtlich und wirtschaftlich selbstst�
 Auch: Joint Venture, Arbeitsgemeinschaft, ARGE, Strategische Allianz
 
 ### Erklärung
-Unternehmen bündeln Kräfte in einzelnen Bereichen, ohne ihre Eigenständigkeit aufzugeben: **Arbeitsgemeinschaft (ARGE)** für ein gemeinsames Projekt (z. B. Großauftrag, nur vorübergehend), **Einkaufsgemeinschaft** für bessere Konditionen, gemeinsame Forschung oder Werbung. Beim **Joint Venture** gründen die Partner gemeinsam ein neues Unternehmen (häufig eine GmbH) für ein Projekt oder einen Markt und halten Anteile daran; die Gründer bleiben selbstständig, das Gemeinschaftsunternehmen gehört ihnen gemeinsam. Grenze ist das Kartellverbot: Absprachen über Preise, Mengen oder Gebiete, die den Wettbewerb beschränken, sind grundsätzlich verboten.
+Unternehmen bündeln Kräfte in einzelnen Bereichen, ohne ihre Eigenständigkeit aufzugeben: **Arbeitsgemeinschaft (ARGE)** für ein gemeinsames Projekt (z. B. Großauftrag, nur vorübergehend), **Einkaufsgemeinschaft** für bessere Konditionen, gemeinsame Forschung oder Werbung. Beim **Joint Venture** betreiben die Partner gemeinsam ein Vorhaben, häufig als gemeinsames Unternehmen (z. B. eine GmbH), für ein Projekt oder einen Markt und halten Anteile daran; die Gründer bleiben selbstständig, das Gemeinschaftsunternehmen gehört ihnen gemeinsam. Grenze ist das Kartellverbot: Absprachen über Preise, Mengen oder Gebiete, die den Wettbewerb beschränken, sind grundsätzlich verboten.
 
 ### Beispiel
 Mehrere unabhängige Möbelhäuser gründen eine Einkaufsgemeinschaft und bestellen Bürostühle gemeinsam, um Mengenrabatte zu erhalten. Ihre Verkaufspreise legt jedes Haus weiter selbst fest.
@@ -1089,7 +1089,7 @@ Mehrere unabhängige Möbelhäuser gründen eine Einkaufsgemeinschaft und bestel
 | Konzern | ja | nein |
 | Fusion | nein | nein |
 
-Ein **Joint Venture** ist keine Fusion: Die Partner bleiben bestehen und gründen nur zusätzlich ein gemeinsames Unternehmen. Eine **ARGE** ist zeitlich auf ein Projekt begrenzt, ein Joint Venture dauerhaft angelegt.
+Ein **Joint Venture** ist keine Fusion: Die Partner bleiben bestehen und gründen nur zusätzlich ein gemeinsames Unternehmen. Eine **ARGE** ist zeitlich auf ein Projekt begrenzt, ein Joint Venture meist dauerhafter angelegt (kann aber auch vertraglich und befristet sein).
 
 ### Prüfungsfalle
 Vereinbaren die Einkaufspartner zusätzlich gemeinsame Verkaufspreise, ist es keine erlaubte Kooperation mehr, sondern ein Kartell. Ein Joint Venture nicht mit einer Fusion verwechseln (dort gehen die Beteiligten in einem Unternehmen auf).

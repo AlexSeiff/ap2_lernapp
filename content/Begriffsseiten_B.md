@@ -397,7 +397,7 @@ Tim schließt seine Ausbildung bei der Möbelhaus Nordholz GmbH ab und erhält e
 Die **Kündigung** beendet ein Arbeitsverhältnis durch Erklärung, die Befristung durch Zeitablauf. Die **Probezeit** ist keine Befristung, sondern eine kurze Kündigungsfrist im unbefristeten Vertrag (eine Befristung zur Erprobung ist dagegen möglich). Das **Ausbildungsverhältnis** endet nach dem BBiG mit der Prüfung. Bei der **Leiharbeit** kann der Leiharbeitnehmer beim Verleiher unbefristet angestellt sein.
 
 ### Prüfungsfalle
-Eine mündliche, E-Mail- oder nachträgliche Befristung für wirksam halten, oder annehmen, Betriebsrat oder Agentur für Arbeit müssten der Befristung zustimmen. Falsch ist auch, befristet Beschäftigten Urlaub abzusprechen oder sie bei der Betriebsratsgröße nicht mitzuzählen.
+Eine mündliche, E-Mail- oder nachträgliche Befristung für wirksam halten, oder annehmen, die Befristung selbst bedürfe der Zustimmung von Betriebsrat oder Agentur für Arbeit. (Der Betriebsrat wird bei der Einstellung nach § 99 BetrVG beteiligt, nicht aber zur Befristungsabrede als solcher.) Falsch ist auch, befristet Beschäftigten Urlaub abzusprechen oder sie bei der Betriebsratsgröße nicht mitzuzählen.
 
 ### Merksatz
 Schriftlich vor Arbeitsbeginn; ohne Sachgrund zwei Jahre, drei Verlängerungen, keine Zuvorbeschäftigung.
@@ -960,7 +960,7 @@ Mehr: Deep Dive 10, 2.3
 Betriebsverfassungsgesetz: regelt Wahl, Aufgaben und Beteiligungsrechte von Betriebsrat und Jugend- und Auszubildendenvertretung.
 
 ### Erklärung
-Wichtige Paragrafen: § 1 (Errichtung ab fünf Wahlberechtigten), § 7 (Wahlrecht ab 16 Jahren), § 8 (Wählbarkeit nach sechs Monaten Betriebszugehörigkeit), § 9 (Größe), § 43 (Betriebsversammlung), § 77 (Betriebsvereinbarung), § 87 (Mitbestimmung in sozialen Angelegenheiten), § 99 (personelle Einzelmaßnahmen), § 102 (Anhörung vor Kündigung).
+Wichtige Paragrafen: § 1 (Errichtung ab fünf Wahlberechtigten), § 7 (Wahlrecht ab 16 Jahren), § 8 (Wählbarkeit: 18 Jahre und sechs Monate Betriebszugehörigkeit), § 9 (Größe), § 43 (Betriebsversammlung), § 77 (Betriebsvereinbarung), § 87 (Mitbestimmung in sozialen Angelegenheiten), § 99 (personelle Einzelmaßnahmen), § 102 (Anhörung vor Kündigung).
 
 Zu **§ 87 Abs. 1** gehören unter anderem Ordnung des Betriebs (Nr. 1), Beginn und Ende der täglichen Arbeitszeit samt Pausen (Nr. 2), Urlaubsgrundsätze und Urlaubsplan (Nr. 5), technische Überwachungseinrichtungen (Nr. 6), Gesundheitsschutz (Nr. 7), Lohngestaltung (Nr. 10) und Akkord- und Prämiensätze (Nr. 11). Dabei entscheidet der Betriebsrat gleichberechtigt mit; ohne seine Zustimmung ist die Maßnahme unwirksam, bei Streit entscheidet die Einigungsstelle. Wirtschaftliche Angelegenheiten (z. B. Filialgründung, Bau einer Halle) lösen dagegen nur Information und Beratung aus.
 

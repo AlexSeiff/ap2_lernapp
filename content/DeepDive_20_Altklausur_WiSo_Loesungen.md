@@ -80,7 +80,7 @@ $$3.600 \cdot \frac{14{,}6\,\% + 2{,}9\,\%}{2} = 3.600 \cdot 8{,}75\,\% = 315{,}
 
 **D1 (3 P):** **(2)** – Der Europass ist ein **kostenloser** digitaler Dienst der EU, der hilft, Qualifikationen und Kompetenzen europaweit verständlich darzustellen. Er ersetzt keine Zeugnisse, vermittelt keine Ausbildungsplätze und ist nicht verpflichtend.
 
-**D2 (3 P):** **(2)** – Der Sicherheitsbeauftragte **unterstützt** den Arbeitgeber, achtet auf das Vorhandensein und die Benutzung von Schutzeinrichtungen und weist auf Gefahren hin. Er hat **keine Verantwortung** (1), kein Weisungs- oder Stilllegungsrecht (4), ist nicht automatisch im Betriebsrat (3) und schließt keine Betriebsvereinbarungen (5).
+**D2 (3 P):** **(2)** – Der Sicherheitsbeauftragte **unterstützt** den Arbeitgeber, achtet auf das Vorhandensein und die Benutzung von Schutzeinrichtungen und weist auf Gefahren hin. Er hat **keine Verantwortung** (1), kein Weisungs- oder Stilllegungsrecht (4), ist nicht automatisch im Betriebsrat (3) und schließt keine Betriebsvereinbarungen (5). *Prüferkommentar: Die Aufgabe fragt nur die Rolle ab, nicht die Beschäftigtenzahl. Die Bestellpflicht (§ 22 SGB VII) gilt seit 29.05.2026 ab 50 Beschäftigten (bei 21–49 nur bei besonderer Gefährdung); ältere Klausuren nennen noch „mehr als 20“.*
 
 **D3 (4 P):** **(2) und (4)** – Menschenrettung geht vor: **Notruf absetzen** und **gefährdete Personen warnen und in Sicherheit bringen**. Löschen nur ohne Eigengefährdung (1), keine Aufzüge (3), Fenster nicht öffnen (5), Wertsachen bleiben zurück (6).
 

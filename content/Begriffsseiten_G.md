@@ -421,8 +421,8 @@ Auch: Arbeitsgericht, Sozialgericht, Verwaltungsgericht, Amtsgericht, Landgerich
 | **Sozialgericht** | Streit mit Trägern der Sozialversicherung und der Agentur für Arbeit, **nach erfolglosem Widerspruch** | Bescheid der Berufsgenossenschaft, Krankenkasse, Rentenversicherung |
 | **Verwaltungsgericht** | Streit mit Behörden im öffentlichen Recht | Anordnung der Gewerbeaufsicht, Baugenehmigung |
 | **Finanzgericht** | Steuersachen nach erfolglosem Einspruch | Steuerbescheid |
-| **Amtsgericht** | Zivilsachen bis 5.000 € Streitwert, Wohnraummiete, Familiengericht (Scheidung, Sorgerecht, Unterhalt), Handelsregister, Mahnverfahren, Insolvenz | Nachbarschaftsstreit, Mietstreit |
-| **Landgericht** | Zivilsachen über 5.000 € Streitwert (Anwaltszwang) | Kaufpreisklage über 12.000 € |
+| **Amtsgericht** | Zivilsachen bis 10.000 € Streitwert (seit 01.01.2026, § 23 Nr. 1 GVG; vorher 5.000 €), außerdem unabhängig vom Streitwert Wohnraummiete, Familiengericht (Scheidung, Sorgerecht, Unterhalt), Handelsregister, Mahnverfahren, Insolvenz | Nachbarschaftsstreit, Mietstreit |
+| **Landgericht** | Zivilsachen über 10.000 € Streitwert (Anwaltszwang) | Kaufpreisklage über 12.000 € |
 
 Arbeits- und Sozialgerichte haben den Instanzenzug Arbeitsgericht – Landesarbeitsgericht – Bundesarbeitsgericht bzw. Sozialgericht – Landessozialgericht – Bundessozialgericht. Im Arbeitsgerichtsverfahren erster Instanz trägt jede Seite ihre Anwaltskosten selbst (§ 12a ArbGG). Bei Streit im Ausbildungsverhältnis ist zunächst der **Schlichtungsausschuss der IHK** anzurufen, falls die Kammer einen eingerichtet hat (§ 111 ArbGG). Beträge Stand 2026.
 
@@ -430,16 +430,17 @@ Arbeits- und Sozialgerichte haben den Instanzenzug Arbeitsgericht – Landesarbe
 1. Der Möbelhaus Nordholz GmbH wird eine Kündigung ausgesprochen: Klage binnen drei Wochen beim **Arbeitsgericht**.
 2. Die Berufsgenossenschaft verweigert nach erfolglosem Widerspruch die Anerkennung eines Wegeunfalls: **Sozialgericht**.
 3. Die Gewerbeaufsicht ordnet einen Umbau an, den der Betrieb für unzumutbar hält: **Verwaltungsgericht**.
-4. Ein Lieferant zahlt 12.000 € Kaufpreis nicht: **Landgericht** (nach Mahnverfahren beim zentralen Mahngericht, das beim Amtsgericht angesiedelt ist).
+4. Ein Lieferant zahlt 12.000 € Kaufpreis nicht: **Landgericht** (12.000 € liegen über 10.000 €; Mahnverfahren laufen beim zentralen Mahngericht, das beim Amtsgericht angesiedelt ist).
+5. Ein Kunde zahlt eine Rechnung über 8.000 € nicht: **Amtsgericht** (8.000 € liegen unter der Grenze von 10.000 €; bis Ende 2025 wäre es das Landgericht gewesen).
 
 ### Abgrenzung
 Arbeitsgericht (Streit mit dem Arbeitgeber) und Sozialgericht (Streit mit der Versicherung oder Behörde der Sozialversicherung) werden gern vertauscht; das **Familiengericht** ist eine Abteilung des Amtsgerichts und hat nichts mit dem Arbeitsrecht zu tun.
 
 ### Prüfungsfalle
-Streit mit der Berufsgenossenschaft oder Krankenkasse vor das Arbeitsgericht bringen, oder ohne Widerspruch klagen.
+Streit mit der Berufsgenossenschaft oder Krankenkasse vor das Arbeitsgericht bringen, oder ohne Widerspruch klagen. Außerdem die Streitwertgrenze: Ältere Klausuren und Lehrbücher nennen noch 5.000 € – seit 01.01.2026 gilt 10.000 €.
 
 ### Merksatz
-Arbeit: Arbeitsgericht – Versicherung: Sozialgericht – Behörde: Verwaltungsgericht – Zivil: Amts- oder Landgericht (5.000 €).
+Arbeit: Arbeitsgericht – Versicherung: Sozialgericht – Behörde: Verwaltungsgericht – Zivil: Amts- oder Landgericht (Grenze 10.000 €, seit 2026).
 
 Siehe auch: Widerspruchsverfahren · Kündigungsschutzklage · Gewerbeaufsichtsamt · Berufsgenossenschaft · Handelsregister · Mahnverfahren
 Mehr: Deep Dive 20, 3.2 · Deep Dive 13, 1.4

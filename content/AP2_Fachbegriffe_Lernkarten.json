@@ -7753,7 +7753,7 @@
         {
           "id": "FB-gerichtszustandigkeit",
           "frage": "Gerichtszuständigkeit",
-          "antwort": "Arbeitsgericht: Streit Arbeitgeber – Arbeitnehmer; Sozialgericht: Streit mit Sozialversicherungsträgern (nach Widerspruch); Verwaltungsgericht: Streit mit Behörden; Amtsgericht: Zivilsachen bis 5.000 €, Familien- und Registersachen; Landgericht: Zivilsachen über 5.000 €.",
+          "antwort": "Arbeitsgericht: Streit Arbeitgeber – Arbeitnehmer; Sozialgericht: Streit mit Sozialversicherungsträgern (nach Widerspruch); Verwaltungsgericht: Streit mit Behörden; Amtsgericht: Zivilsachen bis 10.000 € (seit 2026), Wohnraummiete, Familien- und Registersachen; Landgericht: Zivilsachen über 10.000 €.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [

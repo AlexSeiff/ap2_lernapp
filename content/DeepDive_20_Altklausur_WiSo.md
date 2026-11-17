@@ -129,9 +129,9 @@ Wirksam **sofort**: Werbe- und Verkaufsförderungsaktionen, Preisaktionen, Vertr
 |---|---|
 | **Arbeitgeber** | trägt die **Verantwortung** für den Arbeitsschutz |
 | **Fachkraft für Arbeitssicherheit** | berät und unterstützt den Arbeitgeber (Gefährdungsbeurteilung, Unfallverhütung) |
-| **Sicherheitsbeauftragter** (ab 20 Beschäftigten) | **unterstützt** den Arbeitgeber, achtet auf Vorhandensein **und** ordnungsgemäße Benutzung von Schutzeinrichtungen, weist auf Gefahren hin – **ohne** eigene Verantwortung oder Weisungsrecht |
+| **Sicherheitsbeauftragter** (§ 22 SGB VII; Stand 2026: Pflicht seit 29.05.2026 ab 50 Beschäftigten, bei 21–49 nur bei besonderer Gefährdung; früher ab mehr als 20) | **unterstützt** den Arbeitgeber, achtet auf Vorhandensein **und** ordnungsgemäße Benutzung von Schutzeinrichtungen, weist auf Gefahren hin – **ohne** eigene Verantwortung oder Weisungsrecht |
 | **Betriebsarzt** | arbeitsmedizinische Beratung |
-| **Arbeitsschutzausschuss** (ab 20 Beschäftigten) | Arbeitgeber, Betriebsrat, Fachkraft, Betriebsarzt, Sicherheitsbeauftragte – vierteljährlich |
+| **Arbeitsschutzausschuss** (§ 11 ASiG, mehr als 20 Beschäftigte) | Arbeitgeber, Betriebsrat, Fachkraft, Betriebsarzt, Sicherheitsbeauftragte – vierteljährlich |
 
 ## 5.2 Verhalten im Brandfall
 

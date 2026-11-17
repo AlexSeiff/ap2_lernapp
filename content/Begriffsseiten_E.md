@@ -1293,10 +1293,10 @@ Mehr: Deep Dive 6, 3.1
 Kostenloser digitaler Dienst der EU, der hilft, Qualifikationen, Fähigkeiten und Kompetenzen bei Bewerbungen und Auslandsaufenthalten in Europa verständlich darzustellen.
 
 ### Erklärung
-Über das Europass-Portal lassen sich ein Profil und ein europäischer Lebenslauf erstellen; dazu gibt es Zeugniserläuterungen, die Abschlüsse auch für ausländische Arbeitgeber erklären, und den Mobilitätsnachweis für Lern- und Arbeitsaufenthalte im Ausland. Der Europass **ersetzt keine Zeugnisse**, ist **nicht verpflichtend**, vergibt keine Abschlüsse und vermittelt keine Ausbildungsplätze. Er richtet sich an alle, nicht nur an Hochschulabsolventen. Ein Teil der Ausbildung darf im Ausland stattfinden: bis zu einem Viertel der in der Ausbildungsordnung festgelegten Dauer (§ 2 Abs. 3 BBiG).
+Über das Europass-Portal lassen sich ein Profil und ein europäischer Lebenslauf erstellen; dazu gibt es Zeugniserläuterungen, die Abschlüsse auch für ausländische Arbeitgeber erklären, und den Mobilitätsnachweis für Lern- und Arbeitsaufenthalte im Ausland. Der Europass **ersetzt keine Zeugnisse**, ist **nicht verpflichtend**, vergibt keine Abschlüsse und vermittelt keine Ausbildungsplätze. Er richtet sich an alle, nicht nur an Hochschulabsolventen. Ein Teil der Ausbildung kann im Ausland stattfinden, wenn das dem Ausbildungsziel dient; die Gesamtdauer **soll** ein Viertel der in der Ausbildungsordnung festgelegten Dauer nicht überschreiten (§ 2 Abs. 3 BBiG – eine Soll-Vorschrift).
 
 ### Beispiel
-Mia Albers (Ausbildungsdauer 36 Monate) möchte einen Teil ihrer Ausbildung in Dänemark verbringen. Höchstens ein Viertel darf im Ausland liegen: $36 \cdot \frac{1}{4}$ = **9 Monate**. Den Auslandsaufenthalt kann sie im Europass-Mobilitätsnachweis festhalten; ihr Lebenslauf lässt sich im Europass-Format erstellen. Die Abschlussprüfung bei der IHK wird dadurch nicht ersetzt.
+Mia Albers (Ausbildungsdauer 36 Monate) möchte einen Teil ihrer Ausbildung in Dänemark verbringen. Als Richtwert gilt höchstens ein Viertel im Ausland: $36 \cdot \frac{1}{4}$ = **9 Monate**. Den Auslandsaufenthalt kann sie im Europass-Mobilitätsnachweis festhalten; ihr Lebenslauf lässt sich im Europass-Format erstellen. Die Abschlussprüfung bei der IHK wird dadurch nicht ersetzt.
 
 ### Abgrenzung
 | | Europass | Zeugnis / Abschluss |

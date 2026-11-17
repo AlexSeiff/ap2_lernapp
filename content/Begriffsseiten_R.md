@@ -455,8 +455,8 @@ Grundsätzlich unterscheidet man **Einzelunternehmen**, **Personengesellschaften
 
 | Rechtsform | Mindestkapital | Haftung | Register |
 |---|---|---|---|
-| Einzelunternehmen (e. K.) | keines | Inhaber unbeschränkt, auch privat | Handelsregister A (Kaufmann) |
-| GbR | keines | alle Gesellschafter unbeschränkt | nicht im Handelsregister |
+| Einzelunternehmen (e. K.) | keines | Inhaber unbeschränkt, auch privat | Handelsregister A, sofern Kaufmann (Kleingewerbe: keine Eintragung nötig) |
+| GbR | keines | alle Gesellschafter unbeschränkt | Gesellschaftsregister (freiwillig, eGbR), nicht Handelsregister; kein Kaufmann |
 | OHG | keines | alle Gesellschafter unbeschränkt | Handelsregister A |
 | KG | keines | Komplementär unbeschränkt, Kommanditist bis zur Haftsumme | Handelsregister A |
 | GmbH | 25.000 € Stammkapital | Gesellschaftsvermögen | Handelsregister B |
@@ -470,7 +470,7 @@ Die Beträge gelten nach dem Stand 2026. Bei der GmbH muss das Stammkapital bei 
 Drei Gründer wollen ein Möbelhandelsunternehmen starten, haben zusammen 40.000 € und möchten nicht mit dem Privatvermögen haften. Die AG scheidet aus (50.000 € Grundkapital nötig). Die GmbH passt: 25.000 € Stammkapital, davon bei der Gründung mindestens 12.500 € einzuzahlen. Gerät das Unternehmen in Verluste von 100.000 €, haftet in der GmbH das Gesellschaftsvermögen; die Gesellschafter verlieren höchstens ihre Einlagen. Beim Einzelunternehmen wären die vollen 100.000 € eine Forderung gegen das Privatvermögen des Inhabers.
 
 ### Abgrenzung
-Die **Personengesellschaft** haftet über die Personen, die **Kapitalgesellschaft** nur mit dem Gesellschaftsvermögen. Handelsregister **A** gilt für Einzelkaufleute und Personengesellschaften, **B** für Kapitalgesellschaften.
+Die **Personengesellschaft** haftet über die Personen, die **Kapitalgesellschaft** nur mit dem Gesellschaftsvermögen. Handelsregister **A** gilt für eingetragene Einzelkaufleute sowie OHG und KG, **B** für Kapitalgesellschaften; die GbR steht (freiwillig) im Gesellschaftsregister.
 
 ### Prüfungsfalle
 Haftung und Kapital vertauschen: Die GmbH ist nicht auf 25.000 € Haftung begrenzt – diese Summe ist das Mindestkapital; und die AG braucht 50.000 €, nicht 25.000 €.
