@@ -42,7 +42,7 @@ Euro-Beträge und Stückzahlen unskaliert clustern – dann entscheidet allein d
 ### Merksatz
 Zuordnen, Mittelwert bilden, wiederholen – bis nichts mehr wandert.
 
-Siehe auch: K-Nächste-Nachbarn · Clustering · Euklidischer Abstand · Standardisierung
+Siehe auch: K-Nächste-Nachbarn · Clustering · DBSCAN · Hierarchisches Clustering · Euklidischer Abstand · Standardisierung
 Mehr: Deep Dive 6, 2.4 · Deep Dive 6, Teil 3
 
 ## K-Nächste-Nachbarn
@@ -180,6 +180,43 @@ Kannkaufmann: Er kann, muss aber nicht – und erst die Eintragung macht ihn zum
 
 Siehe auch: Istkaufmann · Formkaufmann · Handelsregister
 Mehr: Deep Dive 14, 3.1
+
+## Kapitalgesellschaft und Personengesellschaft
+<!-- id: kapitalgesellschaft-und-personengesellschaft · quellen: Karte DD14, DD14 3.2, DD20 4.3, DD32 Teil 2, DD33 Teil 4 · stand: 2026-11 -->
+
+Personengesellschaften (GbR, OHG, KG) beruhen auf den Gesellschaftern als Personen, die in der Regel persönlich haften; Kapitalgesellschaften (GmbH, UG, AG) sind juristische Personen, bei denen das Kapital im Vordergrund steht und das Gesellschaftsvermögen haftet.
+
+Auch: Kapitalgesellschaft, Personengesellschaft, Kapitalgesellschaften, Personengesellschaften
+
+### Erklärung
+| Merkmal | Personengesellschaft | Kapitalgesellschaft |
+|---|---|---|
+| Beispiele | GbR, OHG, KG | GmbH, UG, AG |
+| Rechtsstellung | OHG und KG sind rechtsfähig, aber **keine** juristische Person | **juristische Person** |
+| Haftung | Gesellschafter persönlich und unbeschränkt (KG: Kommanditisten nur bis zur Haftsumme) | nur das **Gesellschaftsvermögen**; Gesellschafter riskieren ihre Einlage |
+| Mindestkapital | keines | GmbH 25.000 €, UG ab 1 €, AG 50.000 € |
+| Leitung | Gesellschafter führen selbst (Selbstorganschaft) | Geschäftsführer bzw. Vorstand, auch **Nichtgesellschafter** möglich (Fremdorganschaft) |
+| Register | OHG/KG: Handelsregister Abteilung **A** (GbR: nicht im Handelsregister, freiwillig im Gesellschaftsregister) | Handelsregister Abteilung **B** (Entstehung erst mit Eintragung) |
+| Kaufmann | OHG/KG: Kaufmann (Handelsgesellschaft); GbR: kein Kaufmann (betreibt sie ein Handelsgewerbe, ist sie eine OHG) | stets Kaufmann kraft Rechtsform (Formkaufmann) |
+| Besteuerung | Gewinn wird bei den Gesellschaftern versteuert (Einkommensteuer) | Gesellschaft zahlt Körperschaftsteuer; Gewinnausschüttung wird beim Gesellschafter nochmals besteuert |
+| Gewinnverteilung | nach Gesellschaftsvertrag | nach Geschäftsanteilen bzw. Aktien (GmbH: wenn der Gesellschaftsvertrag nichts anderes bestimmt) |
+
+Kapitalgesellschaften haben Pflichten zur Rechnungslegung (Jahresabschluss, Offenlegung) und eine Pflicht zur notariellen Gründung bei GmbH und AG. Die **GmbH & Co. KG** ist eine Personengesellschaft (KG) mit einer GmbH als Komplementärin und verbindet die Haftungsbeschränkung mit der Personengesellschaft. Beträge Stand 2026.
+
+### Beispiel
+Drei Gründer wollen das Möbelhaus Nordholz betreiben. Als **OHG** haften alle drei mit dem Privatvermögen, Kapital ist nicht vorgeschrieben, die Eintragung erfolgt in Abteilung A. Als **GmbH** müssen sie 25.000 € Stammkapital aufbringen (davon mindestens 12.500 € bei Gründung), haften nur mit dem Gesellschaftsvermögen und können einen Geschäftsführer einsetzen, der nicht Gesellschafter ist. Verluste von 100.000 € treffen die Gesellschafter der OHG daher privat, die der GmbH höchstens in Höhe ihrer Einlage.
+
+### Abgrenzung
+Das **Einzelunternehmen** ist weder Personen- noch Kapitalgesellschaft, sondern ein Unternehmen mit einem Inhaber, der unbeschränkt haftet (Kleingewerbetreibende müssen nicht ins Handelsregister, nur der eingetragene Kaufmann führt „e. K.“). Die **eG** (Genossenschaft) ist eine eigene Rechtsform. „Juristische Person“ bedeutet nicht „Kapitalgesellschaft“: Auch Verein, Stiftung und Körperschaften des öffentlichen Rechts sind juristische Personen.
+
+### Prüfungsfalle
+Die OHG für eine juristische Person oder die GmbH für eine Personengesellschaft halten. Auch vertauscht werden Haftung (GmbH haftet nicht „mit 25.000 €“, die Summe ist das Mindestkapital) und Register (A für OHG/KG, B für Kapital; die GbR steht nicht im Handelsregister).
+
+### Merksatz
+Personengesellschaft: Person haftet, Abteilung A. Kapitalgesellschaft: Kapital haftet, Abteilung B.
+
+Siehe auch: Rechtsformen · GmbH · OHG · KG · AG · UG (haftungsbeschränkt) · Handelsregister · Juristische Person · Einzelunternehmen
+Mehr: Deep Dive 14, 3.2 · Deep Dive 20, 4.3 · Deep Dive 32, Teil 2 · Deep Dive 33, Teil 4
 
 ## Kapitalwert
 <!-- id: kapitalwert · quellen: Karte DD12, DD12 4.2 · stand: 2026-10 -->
@@ -771,14 +808,45 @@ Zehn Warenkörbe, Schreibtisch (S) in 5, Bürostuhl (B) in 6, beide in 4. S → 
 | Konfidenz | Wie oft folgt B, wenn A gekauft wird? |
 | Lift | Wie viel häufiger als zufällig? |
 
+Nicht verwechseln mit dem **Konfidenzintervall** der Statistik: Es gibt den Schwankungsbereich eines Stichprobenwerts (z. B. des Mittelwerts) an und hat mit Warenkorbregeln nichts zu tun.
+
 ### Prüfungsfalle
 Eine hohe Konfidenz als echten Zusammenhang werten – liegt B ohnehin in fast jedem Warenkorb, ist die Konfidenz jeder Regel auf B hoch; erst ein Lift über 1 zeigt den Zusammenhang.
 
 ### Merksatz
 Konfidenz zählt die Richtung, Lift prüft den Zufall.
 
-Siehe auch: Support · Lift · Assoziationsanalyse · Apriori-Algorithmus
+Siehe auch: Support · Lift · Assoziationsanalyse · Apriori-Algorithmus · Konfidenzintervall · Bedingte Wahrscheinlichkeit
 Mehr: Deep Dive 6, 4.1 · Deep Dive 6, 4.2
+
+## Konfidenzintervall
+<!-- id: konfidenzintervall · quellen: DD3 7.3, DD4 1.3 · stand: 2026-11 -->
+
+Bereich um einen Stichprobenwert (z. B. den Mittelwert), der den unbekannten wahren Wert der Grundgesamtheit mit einer vorgegebenen Sicherheit, dem Konfidenzniveau (meist 95 %), überdeckt.
+
+### Erklärung
+Für den Mittelwert gilt bei großer Stichprobe $\bar{x} \pm z \cdot \frac{s}{\sqrt{n}}$ mit $z = 1{,}96$ für 95 %, 1,645 für 90 % und 2,576 für 99 %. Der Bruch $\frac{s}{\sqrt{n}}$ ist der **Standardfehler**: die Unsicherheit des Mittelwerts, nicht die Streuung der Einzelwerte. Bei kleiner Stichprobe (etwa n < 30) und unbekanntem σ nimmt man statt z den größeren t-Wert; das Intervall wird breiter. Das Intervall wird schmaler bei größerem n (vierfache Stichprobe → halbe Breite), kleinerer Streuung und niedrigerem Konfidenzniveau. Genau gedeutet: Zöge man immer wieder Stichproben und bildete jedes Mal das Intervall, überdeckten 95 % dieser Intervalle den wahren Wert. Umgangssprachlich: „Mit 95 % Sicherheit liegt der wahre Wert in diesem Bereich.“ Es besteht ein Bezug zum Hypothesentest: Liegt der Wert der Nullhypothese außerhalb des 95 %-Intervalls, wäre der zweiseitige Test bei α = 5 % signifikant.
+
+### Beispiel
+Lieferzeiten: 100 Aufträge, $\bar{x} = 60$ min, $s = 12$ min.
+- Standardfehler: $\frac{12}{\sqrt{100}} = 1{,}2$ min
+- 95 %-Intervall: $60 \pm 1{,}96 \cdot 1{,}2 = 60 \pm 2{,}35$ → **[57,65 ; 62,35] min**
+
+Bei 400 statt 100 Aufträgen (gleiches s): Standardfehler 0,6 min, $60 \pm 1{,}96 \cdot 0{,}6 = 60 \pm 1{,}18$ → [58,82 ; 61,18] min – die Genauigkeit der Schätzung verdoppelt sich.
+
+### Abgrenzung
+- **Konfidenz** (Assoziationsanalyse) ist eine Kennzahl für Regeln im Warenkorb und hat mit Stichprobenunsicherheit nichts zu tun.
+- Der **Streubereich** der Einzelwerte (Mittelwert ± Standardabweichung) ist viel breiter als das Konfidenzintervall des Mittelwerts.
+- Ein **Prognoseintervall** gilt für einen einzelnen neuen Wert und ist breiter als das Konfidenzintervall der Geraden.
+
+### Prüfungsfalle
+Das Intervall [57,65 ; 62,35] als „95 % aller Lieferungen dauern so lange“ lesen. Es sagt etwas über den Mittelwert, nicht über einzelne Aufträge.
+
+### Merksatz
+Das Konfidenzintervall sagt, wie genau der Mittelwert getroffen ist – nicht, wie die Einzelwerte streuen.
+
+Siehe auch: Stichprobe · Standardabweichung · Normalverteilung · Signifikanz · Hypothesentest · Konfidenz
+Mehr: Deep Dive 3, 7.3 · Deep Dive 4, 1.3
 
 ## Konfusionsmatrix
 <!-- id: konfusionsmatrix · quellen: Karte DD7, DD7 Teil 2, DD17 6.10 · stand: 2026-10 -->
@@ -1002,12 +1070,14 @@ Siehe auch: Konzentration · Kooperation · Kartell · Juristische Person
 Mehr: Deep Dive 14, 3.4
 
 ## Kooperation
-<!-- id: kooperation · quellen: Karte DD14, DD14 3.4 · stand: 2026-10 -->
+<!-- id: kooperation · quellen: Karte DD14, DD14 3.4, DD20 6.5 · stand: 2026-11 -->
 
 Zusammenarbeit von Unternehmen, die dabei rechtlich und wirtschaftlich selbstständig bleiben.
 
+Auch: Joint Venture, Arbeitsgemeinschaft, ARGE, Strategische Allianz
+
 ### Erklärung
-Unternehmen bündeln Kräfte in einzelnen Bereichen, ohne ihre Eigenständigkeit aufzugeben: Arbeitsgemeinschaft für ein gemeinsames Projekt, Einkaufsgemeinschaft für bessere Konditionen, gemeinsame Forschung oder Werbung. Grenze ist das Kartellverbot: Absprachen über Preise, Mengen oder Gebiete, die den Wettbewerb beschränken, sind grundsätzlich verboten.
+Unternehmen bündeln Kräfte in einzelnen Bereichen, ohne ihre Eigenständigkeit aufzugeben: **Arbeitsgemeinschaft (ARGE)** für ein gemeinsames Projekt (z. B. Großauftrag, nur vorübergehend), **Einkaufsgemeinschaft** für bessere Konditionen, gemeinsame Forschung oder Werbung. Beim **Joint Venture** betreiben die Partner gemeinsam ein Vorhaben, häufig als gemeinsames Unternehmen (z. B. eine GmbH), für ein Projekt oder einen Markt und halten Anteile daran; die Gründer bleiben selbstständig, das Gemeinschaftsunternehmen gehört ihnen gemeinsam. Grenze ist das Kartellverbot: Absprachen über Preise, Mengen oder Gebiete, die den Wettbewerb beschränken, sind grundsätzlich verboten.
 
 ### Beispiel
 Mehrere unabhängige Möbelhäuser gründen eine Einkaufsgemeinschaft und bestellen Bürostühle gemeinsam, um Mengenrabatte zu erhalten. Ihre Verkaufspreise legt jedes Haus weiter selbst fest.
@@ -1019,14 +1089,16 @@ Mehrere unabhängige Möbelhäuser gründen eine Einkaufsgemeinschaft und bestel
 | Konzern | ja | nein |
 | Fusion | nein | nein |
 
+Ein **Joint Venture** ist keine Fusion: Die Partner bleiben bestehen und gründen nur zusätzlich ein gemeinsames Unternehmen. Eine **ARGE** ist zeitlich auf ein Projekt begrenzt, ein Joint Venture meist dauerhafter angelegt (kann aber auch vertraglich und befristet sein).
+
 ### Prüfungsfalle
-Vereinbaren die Einkaufspartner zusätzlich gemeinsame Verkaufspreise, ist es keine erlaubte Kooperation mehr, sondern ein Kartell.
+Vereinbaren die Einkaufspartner zusätzlich gemeinsame Verkaufspreise, ist es keine erlaubte Kooperation mehr, sondern ein Kartell. Ein Joint Venture nicht mit einer Fusion verwechseln (dort gehen die Beteiligten in einem Unternehmen auf).
 
 ### Merksatz
 Kooperation: zusammen arbeiten, getrennt bleiben.
 
-Siehe auch: Kartell · Konzern · Konzentration
-Mehr: Deep Dive 14, 3.4
+Siehe auch: Kartell · Konzern · Konzentration · Fusion
+Mehr: Deep Dive 14, 3.4 · Deep Dive 20, 6.5
 
 ## Kopfgesteuerte Schleife
 <!-- id: kopfgesteurte-schleife · quellen: Karte DD11, DD11 B1, DD17 4.2 · stand: 2026-10 -->
@@ -1105,7 +1177,7 @@ Aus r ≈ 0 auf „kein Zusammenhang“ schließen – ein U-förmiger Zusammenh
 ### Merksatz
 Korrelation zeigt, dass sich etwas gemeinsam bewegt – nicht, warum.
 
-Siehe auch: Kausalität · Korrelationskoeffizient nach Pearson · Streudiagramm · Regression
+Siehe auch: Kausalität · Korrelationskoeffizient nach Pearson · Spearman-Rangkorrelation · Streudiagramm · Regression · Multikollinearität
 Mehr: Deep Dive 4, 1.1 · Deep Dive 4, 1.3
 
 ## Korrelationskoeffizient nach Pearson
@@ -1128,7 +1200,7 @@ Pearson auf Zufriedenheitsstufen (ordinal) anwenden oder aus r eine Wirkungsrich
 ### Merksatz
 Pearson misst Linien – für Ränge nimm Spearman.
 
-Siehe auch: Korrelation · Kausalität · Bestimmtheitsmaß · Streudiagramm
+Siehe auch: Korrelation · Kausalität · Bestimmtheitsmaß · Spearman-Rangkorrelation · Effektgröße · Streudiagramm
 Mehr: Deep Dive 4, 1.2 · Deep Dive 4, 2.3
 
 ## KPI
@@ -1278,10 +1350,10 @@ Mehr: Deep Dive 11, A1 · Deep Dive 17, 6.4
 Verfahren zur Gütemessung, bei dem die Daten in k Teile zerlegt werden und jeder Teil einmal als Testmenge dient (k-fold Cross Validation).
 
 ### Erklärung
-In k Durchläufen wird das Modell auf k − 1 Teilen trainiert und auf dem verbleibenden Teil getestet; die k Ergebnisse werden gemittelt. Üblich sind k = 5 oder k = 10. Vorteile: Jeder Datensatz wird genau einmal getestet, das Ergebnis hängt nicht von einer zufällig günstigen Aufteilung ab, besonders wertvoll bei kleinen Datenmengen. Nachteil: k-facher Rechenaufwand. Genutzt wird sie auch, um Parameter wie k bei k-NN oder die Baumtiefe zu wählen.
+In k Durchläufen wird das Modell auf k − 1 Teilen trainiert und auf dem verbleibenden Teil getestet; die k Ergebnisse werden gemittelt: $\bar{G} = \frac{1}{k} \sum_{i=1}^{k} G_i$, mit $G_i$ als Gütewert (z. B. Recall) des i-ten Durchlaufs. Die Streuung der $G_i$ zeigt zusätzlich, wie stabil das Modell ist. Üblich sind k = 5 oder k = 10. Vorteile: Jeder Datensatz wird genau einmal getestet, das Ergebnis hängt nicht von einer zufällig günstigen Aufteilung ab, besonders wertvoll bei kleinen Datenmengen. Nachteil: k-facher Rechenaufwand. Bei seltenen Klassen wird **stratifiziert** gefaltet, sodass jeder Teil denselben Klassenanteil hat. Genutzt wird sie auch, um **Hyperparameter** wie k bei k-NN oder die Baumtiefe zu wählen; das fertige Modell wird danach einmal auf zurückgehaltenen Testdaten geprüft. Alle Vorverarbeitung (Skalierung, Resampling) gehört in jeden Durchlauf einzeln, nur aus den k − 1 Trainingsteilen.
 
 ### Beispiel
-1.000 Aufträge, k = 5: fünf Teile à 200. Durchlauf 1 trainiert auf Teil 2–5 (800) und testet auf Teil 1, Durchlauf 2 testet auf Teil 2 usw. Recall-Werte 0,58; 0,62; 0,60; 0,57; 0,63 ergeben im Mittel 0,60.
+1.000 Aufträge, k = 5: fünf Teile à 200. Durchlauf 1 trainiert auf Teil 2–5 (800) und testet auf Teil 1, Durchlauf 2 testet auf Teil 2 usw. Recall-Werte 0,58; 0,62; 0,60; 0,57; 0,63 ergeben im Mittel $\frac{0{,}58 + 0{,}62 + 0{,}60 + 0{,}57 + 0{,}63}{5} = \frac{3{,}00}{5} = 0{,}60$.
 
 ### Abgrenzung
 Der einfache **Train-Test-Split** prüft nur einmal und kann zufällig günstig ausfallen. Bei Zeitreihen wird statt zufällig **chronologisch** getrennt, damit keine Zukunftsinformation ins Training gelangt.
@@ -1292,7 +1364,7 @@ Skalierungswerte vorab aus allen Daten berechnen – sie gehören in jedem Durch
 ### Merksatz
 Jeder Teil darf einmal Prüfer sein – das Mittel zählt.
 
-Siehe auch: Overfitting · Testdaten · K-Nächste-Nachbarn
+Siehe auch: Overfitting · Testdaten · K-Nächste-Nachbarn · Hyperparameter · Data Leakage · Stratifizierte Aufteilung
 Mehr: Deep Dive 7, 1.3
 
 ## Kriterien der Sozialauswahl

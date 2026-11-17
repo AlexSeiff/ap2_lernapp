@@ -1,11 +1,17 @@
 <!-- Begriffsseiten O · Stand 2026-10 -->
 ## O-Notation
-<!-- id: o-notation · quellen: Karte DD11, DD11 B7 · stand: 2026-10 -->
+<!-- id: o-notation · quellen: Karte DD11, DD11 B7 · stand: 2026-11 -->
 
 Angabe, wie der Aufwand eines Algorithmus mit der Datenmenge n wächst, z. B. O(n), O(n log n), O(n²); konstante Faktoren fallen weg.
 
 ### Erklärung
-Die O-Notation beschreibt die Größenordnung des Wachstums, meist für den schlechtesten Fall, und macht Verfahren unabhängig von Rechner und Programmiersprache vergleichbar. Typische Klassen, von günstig nach teuer: O(1) konstant, O(log n) logarithmisch (binäre Suche), O(n) linear (lineare Suche), O(n log n) (Merge Sort, Quicksort im Mittel), O(n²) quadratisch (Bubble, Selection, Insertion Sort).
+Die O-Notation beschreibt die Größenordnung des Wachstums und macht Verfahren unabhängig von Rechner und Programmiersprache vergleichbar. Typische Klassen, von günstig nach teuer: O(1) konstant, O(log n) logarithmisch (binäre Suche), O(n) linear (lineare Suche), O(n log n) (Merge Sort, Quicksort im Mittel), O(n²) quadratisch (Bubble, Selection, Insertion Sort).
+
+**Zwei verschiedene Fragen** werden oft vermischt:
+- **Schranke (Notation):** O(f) ist eine **obere** Schranke („wächst höchstens so schnell“), Ω(f) eine **untere** („mindestens so schnell“), Θ(f) die **enge** Schranke (oben und unten, also exakt die Größenordnung).
+- **Fall:** bester, mittlerer und schlechtester Fall beschreiben, für welche Eingaben man rechnet. Zu jedem Fall kann man eine Schranke angeben. Im AP2-Alltag meint „O(…)“ ohne Zusatz meist die obere Schranke im schlechtesten Fall.
+
+Neben der Laufzeit zählt der **Speicherbedarf** (Speicherkomplexität): Merge Sort braucht zusätzlich O(n) Speicher, Bubble, Selection und Insertion Sort nur O(1) (sie sortieren „am Ort“). Bei der **amortisierten** Laufzeit rechnet man den Durchschnitt über viele Operationen: Das Anhängen an ein dynamisches Array kostet gelegentlich O(n) (Vergrößern und Umkopieren), im Mittel über viele Anhänge aber O(1) pro Operation.
 
 ### Beispiel
 Bei n = 1.000 Datensätzen braucht ein O(n²)-Verfahren rund 1.000.000 Vergleiche, ein O(n log n)-Verfahren rund 1.000 · 10 = 10.000. Die binäre Suche findet einen Wert unter 1.000.000 sortierten Sätzen mit höchstens 20 Vergleichen, weil $2^{20} = 1.048.576$.
@@ -19,7 +25,7 @@ Bei n = 1.000 Datensätzen braucht ein O(n²)-Verfahren rund 1.000.000 Vergleich
 | Quicksort | O(n log n) | O(n log n) | O(n²) |
 
 ### Prüfungsfalle
-Konstanten mitschreiben („O(2n)“) oder den besten Fall als typischen Aufwand angeben.
+Konstanten mitschreiben („O(2n)“), den besten Fall als typischen Aufwand angeben oder O mit „schlechtester Fall“ gleichsetzen – O ist die Schranke, der Fall eine eigene Angabe. O(n) heißt auch nicht „genau n Schritte“, sondern „wächst höchstens linear“.
 
 ### Merksatz
 O zählt nicht Sekunden, sondern wie schnell die Arbeit mit n wächst.
@@ -28,32 +34,80 @@ Siehe auch: Aufwand (Komplexität) · Binäre Suche · Lineare Suche · Quicksor
 Mehr: Deep Dive 11, B7
 
 ## OAuth 2.0
-<!-- id: oauth-2-0 · quellen: Karte DD15, DD15 3.3 · stand: 2026-10 -->
+<!-- id: oauth-2-0 · quellen: Karte DD15, DD15 3.3 · stand: 2026-11 -->
 
 Autorisierungsrahmen (RFC 6749): Ein Autorisierungsserver stellt einer Anwendung ein zeitlich begrenztes Access Token mit festgelegten Rechten aus, ohne dass sie das Passwort erhält.
 
 ### Erklärung
-Der Nutzer meldet sich beim Autorisierungsserver an und stimmt zu, welche Rechte (**Scopes**) die Anwendung bekommt. Die Anwendung erhält ein **Access Token**, das sie bei jedem API-Aufruf im Header mitschickt (`Authorization: Bearer …`). Läuft es ab, holt sie mit einem Refresh Token ein neues. So lässt sich Zugriff gezielt delegieren und jederzeit entziehen, ohne das Passwort zu ändern.
+Der Nutzer meldet sich beim Autorisierungsserver an und stimmt zu, welche Rechte (**Scopes**) die Anwendung bekommt. Die Anwendung erhält ein **Access Token**, das sie bei jedem API-Aufruf im Header mitschickt (`Authorization: Bearer …`). So lässt sich Zugriff gezielt delegieren und jederzeit entziehen, ohne das Passwort zu ändern. Scopes sollten so klein wie möglich sein (minimale Rechte).
+
+**Zwei wichtige Abläufe (Grant Types):**
+- **Authorization Code mit PKCE:** Standard, wenn ein Nutzer beteiligt ist (Web-App, mobile App, Single-Page-App). Die App erhält erst einen kurzlebigen Code und tauscht ihn gegen das Token. **PKCE** (Proof Key for Code Exchange) bindet den Tausch an ein Geheimnis, das die App vorher erzeugt hat – ein abgefangener Code ist dadurch wertlos.
+- **Client Credentials:** Maschine zu Maschine ohne Nutzer, die Anwendung authentifiziert sich selbst (z. B. ein nächtlicher Importjob). Die älteren Abläufe Implicit und Password gelten als veraltet.
+
+**Tokens:** Das **Access Token** ist kurzlebig und für die API bestimmt. Ein **Refresh Token** holt ein neues Access Token, ohne dass sich der Nutzer erneut anmelden muss; es ist langlebiger und besonders schützenswert. Bei der **Refresh-Token-Rotation** wird mit jedem Einsatz ein neues Refresh Token ausgegeben und das alte ungültig – wird ein altes erneut verwendet, deutet das auf Diebstahl hin und die Kette wird gesperrt.
 
 ### Beispiel
-Ein Dashboard-Tool des Möbelhauses darf über OAuth 2.0 nur lesend auf die Kalender der Servicetechniker zugreifen (Scope „calendar.read“). Das Passwort der Techniker sieht das Tool nie.
+Ein Dashboard-Tool des Möbelhauses darf über OAuth 2.0 nur lesend auf die Kalender der Servicetechniker zugreifen (Scope „calendar.read“). Das Passwort der Techniker sieht das Tool nie. Der nächtliche Importjob dagegen nutzt Client Credentials, weil dabei kein Mensch zustimmen kann.
 
 ### Abgrenzung
 | Verfahren | Zweck |
 |---|---|
-| OAuth 2.0 | Autorisierung: was darf die Anwendung? |
-| OpenID Connect | Zusatz für Authentifizierung: wer ist der Nutzer? |
+| OAuth 2.0 | Autorisierung: was darf die Anwendung? Liefert ein Access Token für die API |
+| OpenID Connect (OIDC) | Aufsatz für Authentifizierung: wer ist der Nutzer? Liefert zusätzlich ein **ID-Token** (ein JWT mit Identitätsangaben) für die Anwendung |
 | API-Schlüssel | identifiziert nur die Anwendung |
-| JWT | Tokenformat, oft als Access Token verwendet |
+| JWT | Tokenformat, oft als Access Token oder ID-Token verwendet |
+
+Das **ID-Token** ist für die Anwendung bestimmt (wer hat sich angemeldet?), das **Access Token** für die API (was darf aufgerufen werden?).
 
 ### Prüfungsfalle
-OAuth 2.0 als Anmeldeverfahren bezeichnen – es regelt Berechtigungen; die Anmeldung ergänzt OpenID Connect.
+OAuth 2.0 als Anmeldeverfahren bezeichnen – es regelt Berechtigungen; die Anmeldung ergänzt OpenID Connect. Ebenso falsch: ein ID-Token als Zugangsschlüssel für eine API verwenden.
 
 ### Merksatz
 OAuth gibt der Anwendung einen befristeten Schlüssel, nicht das Passwort.
 
 Siehe auch: API-Schlüssel · JWT · Autorisierung · Authentifizierung · REST
 Mehr: Deep Dive 15, 3.3
+
+## OCR (Texterkennung)
+<!-- id: ocr · quellen: Karte DD19, DD19 3.1, DD18 Block C · stand: 2026-11 -->
+
+Optical Character Recognition: Verfahren, das Zeichen auf einem Bild oder Scan (z. B. Etikett, Rechnung, Kennzeichen) erkennt und in maschinenlesbaren Text umwandelt.
+
+Auch: Texterkennung, Optische Zeichenerkennung
+
+### Erklärung
+OCR ist nur ein Schritt im Workflow einer automatischen Erfassung:
+
+| Schritt | Aufgabe |
+|---|---|
+| 1. Bildaufnahme | Kamera oder Scanner erzeugt ein digitales Bild |
+| 2. Vorverarbeitung | Kontrast und Helligkeit verbessern, Rauschen entfernen, Bild entzerren |
+| 3. Lokalisierung | Region mit dem Text finden und ausschneiden (Cropping) |
+| 4. **Texterkennung (OCR)** | Zeichen im Ausschnitt in Text umwandeln |
+| 5. Validierung | Format prüfen (regulärer Ausdruck, Prüfziffer), Abgleich mit der Datenbank |
+| 6. Entscheidung | Treffer → Vorgang freigeben; sonst Fehlermeldung oder manuelle Prüfung |
+
+Moderne OCR nutzt neuronale Netze. Sie liefert zu jedem Zeichen oft einen **Vertrauenswert**; liegt er unter einer Schwelle, wird manuell geprüft. Fehlerquellen sind schlechte Auflösung, Schräglage, Verschmutzung, Spiegelungen und ähnlich aussehende Zeichen (0/O, 1/I/l).
+
+### Beispiel
+Das Palettenetikett im Wareneingang hat das Format „LS-JJJJ-NNNNNN“, z. B. LS-2026-004711. Die OCR liest „LS-2O26-004711“ (Buchstabe O statt Null). Die **Formatprüfung** mit dem Muster „LS-, vier Ziffern, Bindestrich, sechs Ziffern“ weist den Wert ab, der Vorgang geht zur manuellen Prüfung. Ohne Validierung wäre die falsche Nummer in der Datenbank gelandet.
+
+### Abgrenzung
+| Verfahren | liest | Besonderheit |
+|---|---|---|
+| **OCR** | Klartext (Buchstaben, Ziffern) | fehleranfälliger, braucht Validierung |
+| Barcode / QR-Code | maschinenlesbares Muster | sehr robust, oft mit Prüfziffer |
+| Objekterkennung | Objekte im Bild (Palette, Person) | liefert Bounding Boxes, aber keinen Text |
+
+### Prüfungsfalle
+Den OCR-Ausgabewert ungeprüft übernehmen: Ein Workflow ohne **Validierung** (Format, Abgleich mit der Datenbank) verliert Punkte. Außerdem: OCR erkennt den Text, **lokalisieren** muss man ihn vorher.
+
+### Merksatz
+OCR liest, die Validierung entscheidet, ob man dem Gelesenen traut.
+
+Siehe auch: Plausibilitätsprüfung · Formatprüfung · Datenverifizierung · Neuronale Netze
+Mehr: Deep Dive 19, 3.1
 
 ## OHG
 <!-- id: ohg · quellen: Karte DD14, DD14 3.2 · stand: 2026-10 -->
@@ -434,6 +488,38 @@ Ordentlich heißt: mit Frist, schriftlich, und beim Arbeitgeber oft mit Begründ
 Siehe auch: Außerordentliche Kündigung · Kündigungsschutzgesetz · Schriftform · Änderungskündigung · Abmahnung
 Mehr: Deep Dive 13, 3.2 · Deep Dive 13, 3.3
 
+## ORDER BY
+<!-- id: order-by · quellen: Karte DD1, DD1 1.3, DD19 5.2, DD29 4 · stand: 2026-11 -->
+
+SQL-Klausel, die das Ergebnis nach einer oder mehreren Spalten oder Ausdrücken sortiert: aufsteigend (`ASC`, Standard) oder absteigend (`DESC`).
+Auch: ASC, DESC
+
+### Erklärung
+ORDER BY steht am Ende der Abfrage (nur LIMIT kommt danach) und wird nach dem SELECT ausgeführt – deshalb darf es nach Standard-SQL als einzige Klausel die Aliase aus dem SELECT verwenden (MySQL erlaubt sie zusätzlich in GROUP BY und HAVING, SQLite auch in WHERE; innerhalb von Ausdrücken meist nicht). Bei mehreren Kriterien sortiert das erste, jedes weitere nur bei Gleichstand; `ASC`/`DESC` gilt **je Kriterium einzeln**. Statt eines Namens geht auch die Spaltennummer (`ORDER BY 2`), das ist aber fehleranfällig. Ohne ORDER BY ist die Reihenfolge der Zeilen **nicht garantiert**. Datumsangaben im Format `JJJJ-MM-TT` sortieren als Text richtig, Zahlen, die als Text gespeichert sind, nicht (`'10'` kommt vor `'9'`).
+
+NULL: SQLite und MySQL behandeln NULL als kleinsten Wert (bei `ASC` zuerst, bei `DESC` zuletzt), Oracle und PostgreSQL als größten. `NULLS FIRST` bzw. `NULLS LAST` legt es fest (SQLite ab 3.30, PostgreSQL, Oracle; nicht MySQL).
+
+### Beispiel
+```sql
+SELECT ort, COUNT(*) AS anzahl
+FROM kunde
+GROUP BY ort
+ORDER BY anzahl DESC, ort ASC;
+```
+Ergebnis: Hamburg 2 · München 2 · Köln 1. Zuerst zählt `anzahl` (absteigend); den Gleichstand bei 2 entscheidet `ort` aufsteigend (Hamburg vor München).
+
+### Abgrenzung
+ORDER BY ordnet nur die Ausgabe und ändert nichts in der Tabelle. GROUP BY bildet Gruppen und garantiert keine Reihenfolge. Sortieralgorithmen wie Bubble Sort oder Quicksort sind ein anderes Thema (Verfahren im Programm, nicht SQL-Klausel).
+
+### Prüfungsfalle
+`ORDER BY ort, anzahl DESC` sortiert nur `anzahl` absteigend, `ort` bleibt aufsteigend. Wer „beide absteigend“ will, schreibt `DESC` hinter jedes Kriterium.
+
+### Merksatz
+Ohne ORDER BY keine Reihenfolge – und DESC gilt nur für das Wort davor.
+
+Siehe auch: SELECT · GROUP BY · NULL · Alias (AS)
+Mehr: Deep Dive 1, 1.3 · Deep Dive 19, 5.2 · Deep Dive 29, Teil 4
+
 ## Ordinalskala
 <!-- id: ordinalskala · quellen: Karte DD3, DD3 Teil 1 · stand: 2026-10 -->
 
@@ -575,7 +661,7 @@ Mehr: Deep Dive 5, 2.3 · Deep Dive 17, 1.2
 Überanpassung: Das Modell lernt die Trainingsdaten samt Rauschen auswendig und ist auf neuen Daten deutlich schlechter.
 
 ### Erklärung
-Ursachen sind ein zu komplexes Modell, zu wenige Daten oder zu langes Training. Erkennbar ist Overfitting an der großen Lücke zwischen Trainings- und Testgüte. Gegenmaßnahmen: mehr Daten, einfacheres Modell, Regularisierung, Entscheidungsbäume beschneiden (Pruning) oder in der Tiefe begrenzen, Kreuzvalidierung, frühzeitiger Abbruch.
+Ursachen sind ein zu komplexes Modell, zu wenige Daten oder zu langes Training. Erkennbar ist Overfitting an der großen Lücke zwischen Trainings- und Testgüte. In der Sprache des Bias-Variance-Trade-offs: geringer Bias, aber hohe Varianz. Gegenmaßnahmen: mehr Daten, einfacheres Modell, **Regularisierung** (große Gewichte bestrafen), Entscheidungsbäume beschneiden (Pruning) oder in der Tiefe begrenzen, **Early Stopping** (Training abbrechen, wenn der Validierungsfehler steigt), Kreuzvalidierung zur zuverlässigen Messung. Die **Lernkurve** zeigt, ob mehr Daten die Lücke verkleinern.
 
 ### Beispiel
 Ein ungeschnittener ID3-Baum zur Reklamationsvorhersage erreicht 99 % Accuracy auf den Trainingsdaten, aber nur 71 % auf den Testdaten. Mit begrenzter Baumtiefe sinkt die Trainingsgüte auf 85 %, die Testgüte steigt auf 82 %.
@@ -593,7 +679,7 @@ Ein Modell nach der Trainingsgüte beurteilen – aussagekräftig ist nur die G�
 ### Merksatz
 Wer auswendig lernt, besteht nur die Übung, nicht die Prüfung.
 
-Siehe auch: Underfitting · Kreuzvalidierung · Train-Test-Split · Entscheidungsbaum
+Siehe auch: Underfitting · Kreuzvalidierung · Train-Test-Split · Entscheidungsbaum · Regularisierung · Early Stopping · Lernkurve · Bias-Variance-Trade-off
 Mehr: Deep Dive 7, 1.2 · Deep Dive 6, 7.3
 
 ## Oversampling

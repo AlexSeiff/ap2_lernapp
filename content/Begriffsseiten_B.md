@@ -52,6 +52,8 @@ Die normale Accuracy wird von der Mehrheitsklasse dominiert. Die Balanced Accura
 
 $\text{Balanced Accuracy} = \frac{\text{Recall} + \text{Spezifität}}{2}$
 
+Dabei ist $\text{Recall} = \frac{TP}{TP + FN}$ (Anteil der tatsächlich Positiven, die erkannt wurden) und $\text{Spezifität} = \frac{TN}{TN + FP}$ (Anteil der tatsächlich Negativen, die richtig als negativ erkannt wurden); TP = richtig positiv, FN = falsch negativ, TN = richtig negativ, FP = falsch positiv. Zum Vergleich: $\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$.
+
 ### Beispiel
 1.000 Aufträge, 100 Reklamationen; TP = 60, FN = 40, FP = 90, TN = 810. Recall $= \frac{60}{100} = 60\,\%$, Spezifität $= \frac{810}{900} = 90\,\%$, Balanced Accuracy $= \frac{60 + 90}{2} = 75\,\%$. Das triviale Modell „nie Reklamation“: $\frac{0 + 100}{2} = 50\,\%$ – obwohl seine Accuracy mit 90 % höher liegt als die des Modells (87 %).
 
@@ -181,10 +183,10 @@ Vergleichswert eines trivialen Ansatzes, ohne den keine Gütekennzahl eines Mode
 Auch: Baseline zum Vergleich
 
 ### Erklärung
-Eine Kennzahl wie „87 % Accuracy“ sagt allein nichts. Erst der Vergleich mit einer Baseline zeigt, ob das Modell einen Mehrwert bringt. Typische Baselines: immer die Mehrheitsklasse (Klassifikation), immer der Mittelwert (Regression, R² = 0), naive Prognose mit dem letzten Wert oder Vorjahresmonat (Zeitreihe) und die bisherige Regel des Fachbereichs.
+Eine Kennzahl wie „87 % Accuracy“ sagt allein nichts. Erst der Vergleich mit einer Baseline zeigt, ob das Modell einen Mehrwert bringt. Typische Baselines: immer die Mehrheitsklasse (Klassifikation), immer der Mittelwert (Regression, R² = 0), naive Prognose mit dem letzten Wert oder Vorjahresmonat (Zeitreihe) und die bisherige Regel des Fachbereichs. Die Mehrheitsklassen-Baseline erreicht eine Balanced Accuracy von genau 50 % und eine AUC von 0,5; die Mittelwert-Baseline einer Regression hat R² = 0 und einen RMSE in Höhe der Standardabweichung der Zielgröße. Ein Modell lohnt sich nur, wenn es die passende Baseline in der Kennzahl schlägt, die fachlich zählt (z. B. Recall oder Kosten, nicht Accuracy).
 
 ### Beispiel
-Bei 100 Reklamationen unter 1.000 Aufträgen erreicht „nie Reklamation“ 90 % Accuracy bei 0 % Recall. Das Modell mit 87 % Accuracy und 60 % Recall ist fachlich trotzdem besser – das zeigt erst der Vergleich.
+Bei 100 Reklamationen unter 1.000 Aufträgen erreicht „nie Reklamation“ 90 % Accuracy bei 0 % Recall. Das Modell mit 87 % Accuracy und 60 % Recall ist fachlich trotzdem besser – das zeigt erst der Vergleich. Bei der Reparaturdauer (Mittelwert 75 Minuten, Standardabweichung 30 Minuten) hat die Baseline „immer 75 Minuten“ einen RMSE von 30 Minuten; ein Modell mit RMSE 18 Minuten verringert den typischen Fehler um $\frac{30 - 18}{30} = 40\ \%$.
 
 ### Abgrenzung
 Die Baseline ist kein Zielwert des Fachbereichs, sondern die Untergrenze: Was ein Modell nicht schlägt, braucht niemand.
@@ -221,6 +223,31 @@ Basic Auth nie ohne HTTPS.
 
 Siehe auch: API-Schlüssel · OAuth 2.0 · Nur HTTPS · Authentifizierung an APIs
 Mehr: Deep Dive 15, 3.3
+
+## Batch-Verarbeitung
+<!-- id: batch-verarbeitung · quellen: DD8 5.2, DD8 3.1 · stand: 2026-11 -->
+
+Auch: Batch Processing, Stapelverarbeitung
+
+Verarbeitung gesammelter Datenmengen in einem Lauf (Stapel) zu festen Zeiten oder auf Anstoß – z. B. der nächtliche ETL-Lauf ins Data Warehouse.
+
+### Erklärung
+Daten sammeln sich zunächst im Quellsystem. Ein Job liest den ganzen Stapel, verarbeitet ihn und schreibt das Ergebnis. Vorteile: einfach, robust und wiederholbar (bei einem Fehler startet man den Lauf erneut), gut für große Mengen, die Last lässt sich in ein Nachtfenster legen. Nachteil: Die Auswertung zeigt höchstens den Stand des letzten Laufs; die **Latenz** entspricht ungefähr dem Laufintervall. Zwischenform: **Micro-Batches** mit sehr kurzem Intervall (Sekunden bis Minuten).
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH lädt die Kassenbons jede Nacht um 02:00 Uhr ins DWH (rund 180.000 Positionen, Laufzeit etwa 45 Minuten). Ein Bon von 10:15 Uhr ist daher erst gut 15 Stunden später im Dashboard sichtbar, einer von 02:05 Uhr fast 24 Stunden später. Für den Wochenbericht des Controllings reicht das völlig.
+
+### Abgrenzung
+Die **Stream-Verarbeitung** verarbeitet jedes Ereignis fortlaufend, sobald es entsteht – aktueller, aber aufwendiger. Entscheidend ist die Frage, wie aktuell die Information sein muss, damit die Entscheidung noch etwas nützt.
+
+### Prüfungsfalle
+Batch pauschal als „veraltet“ und Streaming als „immer besser“ bezeichnen. Für Monatsberichte und Wochenauswertungen ist Batch die richtige, einfachere Wahl.
+
+### Merksatz
+Batch sammelt und verarbeitet im Stapel – aktuell ist nur, was der letzte Lauf geholt hat.
+
+Siehe auch: Stream-Verarbeitung · ETL · Deltaextraktion · Velocity
+Mehr: Deep Dive 8, 5.2
 
 ## BBiG
 <!-- id: bbig · quellen: Karte DD13, DD13 1.1 · stand: 2026-10 -->
@@ -293,6 +320,34 @@ Gearbeitet wird kurz, gewartet wird lang.
 Siehe auch: Durchlaufzeit · Liegezeit · Wertstromanalyse · Lean Management
 Mehr: Deep Dive 5, 3.1
 
+## Bedingte Wahrscheinlichkeit
+<!-- id: bedingte-wahrscheinlichkeit · quellen: DD3 7.1, DD7 2.2 · stand: 2026-11 -->
+
+Wahrscheinlichkeit, dass ein Ereignis A eintritt, wenn man schon weiß, dass ein anderes Ereignis B eingetreten ist – geschrieben P(A | B), gesprochen „P von A unter der Bedingung B“.
+
+### Erklärung
+$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$ mit $P(B) > 0$. Die Bedingung B ist der neue „Nenner“: Man betrachtet nur noch die Fälle, in denen B eingetreten ist. Umgestellt ergibt sich der Multiplikationssatz $P(A \cap B) = P(B) \cdot P(A \mid B)$. Zwei Ereignisse sind **unabhängig**, wenn $P(A \mid B) = P(A)$ gilt, also B nichts über A verrät. Wichtig: P(A | B) und P(B | A) sind verschiedene Zahlen. Auch bekannte Kennzahlen sind bedingte Wahrscheinlichkeiten: Der **Recall** ist P(Vorhersage positiv | tatsächlich positiv), die **Precision** P(tatsächlich positiv | Vorhersage positiv), die **Konfidenz** einer Assoziationsregel A → B ist P(B | A).
+
+### Beispiel
+1.000 Aufträge: 300 mit Expresslieferung (E), 100 reklamiert (R), 60 sowohl Express als auch reklamiert.
+- $P(R) = \frac{100}{1000} = 10\ \%$
+- $P(R \mid E) = \frac{60}{300} = 20\ \%$ – unter den Expressaufträgen ist die Reklamationsquote doppelt so hoch.
+- $P(E \mid R) = \frac{60}{100} = 60\ \%$ – unter den Reklamationen sind 60 % Expressaufträge.
+
+Unabhängig wären R und E, wenn $P(R \cap E) = P(R) \cdot P(E) = 0{,}10 \cdot 0{,}30 = 0{,}03$ gälte. Beobachtet sind 0,06 – die Ereignisse hängen zusammen.
+
+### Abgrenzung
+Die **gemeinsame** Wahrscheinlichkeit P(A ∩ B) bezieht sich auf alle Fälle (hier 60 von 1.000 = 6 %), die **bedingte** nur auf die Fälle mit B. Der **Satz von Bayes** rechnet P(B | A) in P(A | B) um.
+
+### Prüfungsfalle
+P(A | B) und P(B | A) verwechseln: „60 % der Reklamationen sind Express“ heißt nicht „60 % der Expressaufträge werden reklamiert“.
+
+### Merksatz
+Die Bedingung wird zum Nenner.
+
+Siehe auch: Satz von Bayes · Laplace-Wahrscheinlichkeit · Relative Häufigkeit · Konfusionsmatrix · Precision · Recall · Konfidenz
+Mehr: Deep Dive 3, 7.1 · Deep Dive 7, 2.2
+
 ## Bedürfnis
 <!-- id: bedurfnis · quellen: Karte DD14, DD14 4.1 · stand: 2026-10 -->
 
@@ -315,6 +370,40 @@ Wunsch – plus Geld – plus Markt.
 
 Siehe auch: Ökonomisches Prinzip · Produktionsfaktoren · Gleichgewichtspreis · Wirtschaftskreislauf
 Mehr: Deep Dive 14, 4.1
+
+## Befristung
+<!-- id: befristung · quellen: Karte DD13, DD13 3.1, DD25 Teil 2, DD32 Teil 1 · stand: 2026-11 -->
+
+Vereinbarung, dass ein Arbeitsvertrag nach einer bestimmten Zeit oder bei Zweckerreichung von selbst endet, ohne dass eine Kündigung nötig ist; geregelt im Teilzeit- und Befristungsgesetz (TzBfG).
+
+Auch: Befristeter Arbeitsvertrag, TzBfG, Sachgrund, Sachgrundlose Befristung
+
+### Erklärung
+Die Befristung braucht die **Schriftform** und muss **vor Arbeitsaufnahme** vereinbart sein (§ 14 Abs. 4 TzBfG); sonst gilt der Vertrag als unbefristet (§ 16). Zwei Wege:
+
+| Art | Voraussetzung | Dauer |
+|---|---|---|
+| **mit Sachgrund** (§ 14 Abs. 1) | z. B. vorübergehender Bedarf, **Vertretung** (Elternzeit), Erprobung, **Anschluss an Ausbildung oder Studium**, Eigenart der Arbeitsleistung, Gründe in der Person | nach dem Sachgrund; sehr lange Kettenbefristungen können rechtsmissbräuchlich sein |
+| **ohne Sachgrund** (§ 14 Abs. 2) | kein früheres Arbeitsverhältnis mit demselben Arbeitgeber | höchstens **2 Jahre**; innerhalb dieser Zeit höchstens **3 Verlängerungen** (nahtlos, ohne Änderung der übrigen Bedingungen) |
+
+Ausnahmen: In den ersten vier Jahren nach Gründung eines Unternehmens sind bis zu vier Jahre ohne Sachgrund möglich (Abs. 2a); Arbeitnehmer ab 52 Jahren nach mindestens vier Monaten Arbeitslosigkeit dürfen bis zu fünf Jahre sachgrundlos befristet werden (Abs. 3); Tarifverträge können abweichen.
+
+**Ende:** Eine Zeitbefristung endet automatisch mit Fristablauf; eine ordentliche Kündigung ist nur möglich, wenn sie vereinbart wurde (§ 15 Abs. 4). Arbeitet der Arbeitnehmer mit Wissen des Arbeitgebers nach Ablauf weiter und widerspricht dieser nicht unverzüglich, wird der Vertrag unbefristet (§ 15 Abs. 5). Befristet Beschäftigte dürfen nicht schlechter behandelt werden als vergleichbare unbefristete (§ 4 Abs. 2), haben also Anspruch auf Urlaub; will der Arbeitnehmer die Unwirksamkeit geltend machen, muss er innerhalb von **drei Wochen** nach dem vereinbarten Ende klagen (§ 17).
+
+### Beispiel
+Tim schließt seine Ausbildung bei der Möbelhaus Nordholz GmbH ab und erhält einen auf zwölf Monate befristeten Vertrag, schriftlich vor Beginn unterzeichnet (Sachgrund: Anschluss an die Ausbildung). Ein anderer Neueinsteiger wird ohne Sachgrund für 12 Monate befristet und zweimal um je sechs Monate verlängert: Gesamtdauer 24 Monate, zwei Verlängerungen – zulässig. Eine weitere Verlängerung wäre unzulässig, weil sie die Zwei-Jahres-Grenze überschritte. Wäre die Befristung nur per E-Mail vereinbart, bestünde ein unbefristetes Arbeitsverhältnis.
+
+### Abgrenzung
+Die **Kündigung** beendet ein Arbeitsverhältnis durch Erklärung, die Befristung durch Zeitablauf. Die **Probezeit** ist keine Befristung, sondern eine kurze Kündigungsfrist im unbefristeten Vertrag (eine Befristung zur Erprobung ist dagegen möglich). Das **Ausbildungsverhältnis** endet nach dem BBiG mit der Prüfung. Bei der **Leiharbeit** kann der Leiharbeitnehmer beim Verleiher unbefristet angestellt sein.
+
+### Prüfungsfalle
+Eine mündliche, E-Mail- oder nachträgliche Befristung für wirksam halten, oder annehmen, die Befristung selbst bedürfe der Zustimmung von Betriebsrat oder Agentur für Arbeit. (Der Betriebsrat wird bei der Einstellung nach § 99 BetrVG beteiligt, nicht aber zur Befristungsabrede als solcher.) Falsch ist auch, befristet Beschäftigten Urlaub abzusprechen oder sie bei der Betriebsratsgröße nicht mitzuzählen.
+
+### Merksatz
+Schriftlich vor Arbeitsbeginn; ohne Sachgrund zwei Jahre, drei Verlängerungen, keine Zuvorbeschäftigung.
+
+Siehe auch: Arbeitsvertrag · Ordentliche Kündigung · Probezeit · Leiharbeit · Wahlberechtigt · Nachweisgesetz · Betriebsrat
+Mehr: Deep Dive 13, 3.1 · Deep Dive 25, Teil 2 · Deep Dive 32, Teil 1
 
 ## Beitragsbemessungsgrenze
 <!-- id: beitragsbemessungsgrenze · quellen: Karte DD14, DD14 1.3 · stand: 2026-10 -->
@@ -617,10 +706,13 @@ Mehr: Deep Dive 13, 3.4
 R²: Anteil der Streuung der Zielgröße y, den das Regressionsmodell erklärt.
 
 ### Erklärung
-Allgemein gilt $R^2 = 1 - \frac{\sum e^2}{S_{yy}}$ (unerklärte durch gesamte Streuung). Auf den Trainingsdaten liegt R² zwischen 0 und 1, auf Testdaten kann es negativ werden, wenn das Modell schlechter ist als der Mittelwert. Bei der einfachen linearen Regression gilt $R^2 = r^2$. Ein hohes R² beweist weder Kausalität noch Prognosefähigkeit außerhalb des beobachteten Bereichs.
+Allgemein gilt $R^2 = 1 - \frac{\sum e^2}{S_{yy}}$ (unerklärte durch gesamte Streuung). Auf den Trainingsdaten liegt R² einer Kleinste-Quadrate-Regression mit Achsenabschnitt zwischen 0 und 1, auf Testdaten kann es negativ werden, wenn das Modell schlechter ist als der Mittelwert (Fehlerquadratsumme größer als $S_{yy}$). Bei der einfachen linearen Regression gilt $R^2 = r^2$. Ein hohes R² beweist weder Kausalität noch Prognosefähigkeit außerhalb des beobachteten Bereichs.
+
+**Mehrere Einflussgrößen:** Mit jeder zusätzlichen Variablen sinkt R² auf den Trainingsdaten nie und steigt meist leicht, auch wenn die Variable nichts erklärt. Deshalb vergleicht man Modelle mit unterschiedlich vielen Einflussgrößen über das **korrigierte (adjustierte) R²**: $R^2_{\text{korr}} = 1 - (1 - R^2) \cdot \frac{n - 1}{n - k - 1}$ mit n = Zahl der Beobachtungen und k = Zahl der Einflussgrößen. Es sinkt, wenn eine neue Variable zu wenig beiträgt.
 
 ### Beispiel
 Werbebudget und Umsatz über fünf Monate: $r = \frac{64}{\sqrt{10 \cdot 424}} = 0{,}983$, also $R^2 = 0{,}983^2 = 0{,}966$. Rund 96,6 % der Umsatzschwankungen werden durch das Werbebudget erklärt. Kontrolle: $1 - \frac{14{,}4}{424} = 0{,}966$.
+Korrigiertes R² (n = 5, k = 1): $1 - 0{,}034 \cdot \frac{4}{3} = 0{,}955$. Käme eine zweite, kaum nützliche Variable hinzu (k = 2), und R² stiege auf 0,968, sänke das korrigierte R² auf $1 - 0{,}032 \cdot \frac{4}{2} = 0{,}936$ – das Modell wurde nicht besser.
 
 ### Abgrenzung
 r (Korrelationskoeffizient) misst Stärke und Richtung zwischen −1 und +1; R² misst den erklärten Anteil und hat kein Vorzeichen.
@@ -631,7 +723,7 @@ r (Korrelationskoeffizient) misst Stärke und Richtung zwischen −1 und +1; R²
 ### Merksatz
 R² sagt, wie viel erklärt ist – nicht warum.
 
-Siehe auch: R² · Korrelationskoeffizient nach Pearson · Regressionsgerade · Grenzen von R² · Kausalität
+Siehe auch: R² · Korrelationskoeffizient nach Pearson · Regressionsgerade · Grenzen von R² · Kausalität · Effektgröße · Multikollinearität
 Mehr: Deep Dive 4, 2.3
 
 ## Beteiligungsrechte
@@ -728,6 +820,45 @@ Ab 5 wählbar, ab 16 wählen, ab 18 gewählt werden, 4 Jahre im Amt.
 
 Siehe auch: BetrVG · Beteiligungsrechte · Betriebsvereinbarung · Jugend- und Auszubildendenvertretung · Stakeholderanalyse
 Mehr: Deep Dive 13, 4.1 · Deep Dive 12, 1.4
+
+## Betriebstypen
+<!-- id: betriebstypen · quellen: Karte DD20, DD20 6.3, DD32 Teil 4, DD26 Teil 4 · stand: 2026-11 -->
+
+Einteilung von Betrieben nach dem Ziel (erwerbswirtschaftlich oder gemeinwirtschaftlich) und nach der Art der Leistung (Industrie, Handwerk, Handel, Dienstleistung).
+
+Auch: Betriebsarten, erwerbswirtschaftlicher Betrieb, gemeinwirtschaftlicher Betrieb
+
+### Erklärung
+**Nach dem Ziel:**
+| Typ | Ziel | Beispiele |
+|---|---|---|
+| **erwerbswirtschaftlich** | Gewinn erzielen (Rentabilität) | Möbelhaus, Industrieunternehmen, Bank |
+| **gemeinwirtschaftlich** | Bedarfsdeckung für die Allgemeinheit, kostendeckend, nicht gewinnorientiert | Stadtwerke, kommunale Verkehrsbetriebe, öffentliche Bibliotheken |
+
+**Nach der Leistung:**
+| Typ | Kennzeichen |
+|---|---|
+| Industrie | maschinelle Herstellung in Serie oder Masse |
+| Handwerk | handwerkliche, oft individuelle Fertigung (Handwerkskammer, Handwerksrolle) |
+| Handel | Waren ohne wesentliche Bearbeitung weiterverkaufen (Groß- und Einzelhandel) |
+| Dienstleistung | immaterielle Leistung (Banken, Verkehr, IT, Beratung) |
+
+Industrie und Handwerk gehören zum sekundären, Handel und Dienstleistung zum tertiären Sektor (Wirtschaftssektoren). Ein Betrieb ist die technisch-organisatorische Einheit, ein Unternehmen die rechtlich-wirtschaftliche Einheit; ein Unternehmen kann mehrere Betriebe haben.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH ist ein **erwerbswirtschaftlicher Handelsbetrieb** (tertiärer Sektor). Die Stadtwerke, die das Gebäude mit Strom versorgen, sind **gemeinwirtschaftlich** organisiert: Sie sollen die Versorgung zu fairen Preisen sichern und müssen keine hohen Gewinne erzielen.
+
+### Abgrenzung
+Von der Einteilung nach **Sektoren** (primär, sekundär, tertiär: Art der Tätigkeit) und von der **Rechtsform** (GmbH, AG: rechtliche Gestaltung) zu unterscheiden. Ein gemeinwirtschaftlicher Betrieb darf trotzdem in privater Rechtsform (z. B. GmbH) geführt werden.
+
+### Prüfungsfalle
+„Gemeinwirtschaftlich“ als „darf keinen Gewinn machen“ oder „öffentliche Rechtsform“ deuten. Maßgeblich ist das Ziel der Bedarfsdeckung, nicht die Rechtsform. Auch den Handel dem sekundären Sektor zuordnen.
+
+### Merksatz
+Erwerbswirtschaftlich will Gewinn, gemeinwirtschaftlich will Bedarfsdeckung.
+
+Siehe auch: Wirtschaftssektoren · Rechtsformen · Rentabilität · Arbeitsteilung
+Mehr: Deep Dive 20, 6.3 · Deep Dive 32, Teil 4 · Deep Dive 26, Teil 4
 
 ## Betriebsvereinbarung
 <!-- id: betriebsvereinbarung · quellen: Karte DD13, DD13 4.4 · stand: 2026-10 -->
@@ -829,7 +960,9 @@ Mehr: Deep Dive 10, 2.3
 Betriebsverfassungsgesetz: regelt Wahl, Aufgaben und Beteiligungsrechte von Betriebsrat und Jugend- und Auszubildendenvertretung.
 
 ### Erklärung
-Wichtige Paragrafen: § 1 (Errichtung ab fünf Wahlberechtigten), §§ 7–9 (Wahlrecht, Wählbarkeit, Größe), § 43 (Betriebsversammlung), § 77 (Betriebsvereinbarung), § 87 (Mitbestimmung in sozialen Angelegenheiten, Nr. 6: technische Überwachungseinrichtungen), § 99 (personelle Einzelmaßnahmen), § 102 (Anhörung vor Kündigung).
+Wichtige Paragrafen: § 1 (Errichtung ab fünf Wahlberechtigten), § 7 (Wahlrecht ab 16 Jahren), § 8 (Wählbarkeit: 18 Jahre und sechs Monate Betriebszugehörigkeit), § 9 (Größe), § 43 (Betriebsversammlung), § 77 (Betriebsvereinbarung), § 87 (Mitbestimmung in sozialen Angelegenheiten), § 99 (personelle Einzelmaßnahmen), § 102 (Anhörung vor Kündigung).
+
+Zu **§ 87 Abs. 1** gehören unter anderem Ordnung des Betriebs (Nr. 1), Beginn und Ende der täglichen Arbeitszeit samt Pausen (Nr. 2), Urlaubsgrundsätze und Urlaubsplan (Nr. 5), technische Überwachungseinrichtungen (Nr. 6), Gesundheitsschutz (Nr. 7), Lohngestaltung (Nr. 10) und Akkord- und Prämiensätze (Nr. 11). Dabei entscheidet der Betriebsrat gleichberechtigt mit; ohne seine Zustimmung ist die Maßnahme unwirksam, bei Streit entscheidet die Einigungsstelle. Wirtschaftliche Angelegenheiten (z. B. Filialgründung, Bau einer Halle) lösen dagegen nur Information und Beratung aus.
 
 ### Beispiel
 Ein neues Dashboard mit Bearbeitungszeiten je Mitarbeiter fällt unter § 87 Abs. 1 Nr. 6 BetrVG – ohne Zustimmung des Betriebsrats darf es nicht eingeführt werden.
@@ -840,7 +973,7 @@ Das BetrVG regelt die Mitbestimmung im Betrieb; die Mitbestimmung im Aufsichtsra
 ### Merksatz
 Betriebsrat-Fragen beantwortet das BetrVG.
 
-Siehe auch: Betriebsrat · Beteiligungsrechte · Mitbestimmung · Unternehmensmitbestimmung
+Siehe auch: Betriebsrat · Beteiligungsrechte · Mitbestimmung · Unternehmensmitbestimmung · Wahlberechtigt · Wählbar
 Mehr: Deep Dive 13, 4.1 · Deep Dive 13, 4.2
 
 ## Bewegungsdaten
@@ -939,8 +1072,45 @@ In einem neuronalen Netz ist der Bias dagegen eine lernbare Zahl jedes Neurons, 
 ### Merksatz
 Wer verzerrte Daten füttert, erntet verzerrte Entscheidungen.
 
-Siehe auch: Transparenz und Erklärbarkeit · Stichprobe · Trainingsdaten · KI-Verordnung · Neuron
+Siehe auch: Transparenz und Erklärbarkeit · Stichprobe · Trainingsdaten · KI-Verordnung · Neuron · Bias-Variance-Trade-off
 Mehr: Deep Dive 6, 6.2 · Deep Dive 6, 9.2
+
+## Bias-Variance-Trade-off
+<!-- id: bias-variance-trade-off · quellen: DD7 1.2, DD6 8.3 · stand: 2026-11 -->
+
+Zielkonflikt bei der Modellkomplexität: Ein zu einfaches Modell macht systematische Fehler (hoher Bias), ein zu komplexes reagiert übermäßig auf Zufälligkeiten der Trainingsdaten (hohe Varianz) – der Gesamtfehler ist bei mittlerer Komplexität am kleinsten.
+
+### Erklärung
+Für den quadratischen Fehler (Regression) lässt sich der erwartete Vorhersagefehler zerlegen: $\text{Fehler} = \text{Bias}^2 + \text{Varianz} + \sigma^2$. **Bias** ist die mittlere Abweichung der Vorhersagen vom wahren Wert (systematischer Fehler, typisch bei **Underfitting**). **Varianz** ist die Streuung der Vorhersagen, wenn man dasselbe Verfahren auf andere Trainingsstichproben anwendet (typisch bei **Overfitting**). $\sigma^2$ ist das Rauschen der Daten, das kein Modell wegbekommt. Mehr Komplexität senkt den Bias, erhöht aber die Varianz – deshalb gibt es ein Optimum dazwischen, das man mit Validierungsdaten oder Kreuzvalidierung sucht. Gegen hohe Varianz helfen mehr Daten, Regularisierung oder Bagging (Random Forest); gegen hohen Bias hilft ein flexibleres Modell oder bessere Merkmale.
+
+### Beispiel
+Die Reparaturdauer eines Auftrags beträgt im Mittel 100 Minuten, das Rauschen ist $\sigma^2 = 25$. Drei Modelle werden auf je drei verschiedenen Trainingsstichproben trainiert und sagen den Auftrag so voraus:
+
+| Modell | Vorhersagen (Minuten) | Mittel | Bias | Bias² | Varianz | Gesamtfehler |
+|---|---|---|---|---|---|---|
+| A zu einfach | 80, 82, 78 | 80 | −20 | 400 | 2,67 | 427,67 |
+| C mittel | 94, 100, 97 | 97 | −3 | 9 | 6,00 | 40,00 |
+| B zu komplex | 90, 112, 98 | 100 | 0 | 0 | 82,67 | 107,67 |
+
+Rechnung für A: Varianz $= \frac{0^2 + 2^2 + (-2)^2}{3} = 2{,}67$, Gesamtfehler $= 400 + 2{,}67 + 25 = 427{,}67$. Modell A ist stabil, aber systematisch falsch; B trifft im Mittel, schwankt aber stark; C hat den kleinsten Gesamtfehler. (Drei Läufe dienen nur der Anschauung; in der Praxis ist der wahre Wert unbekannt, der Zusammenhang wird über Trainings- und Validierungsgüte sichtbar.)
+
+### Abgrenzung
+| | hoher Bias | hohe Varianz |
+|---|---|---|
+| Symptom | Training und Test schlecht | Training gut, Test deutlich schlechter |
+| Passender Begriff | Underfitting | Overfitting |
+| Abhilfe | komplexeres Modell, bessere Merkmale | mehr Daten, Regularisierung, einfacheres Modell |
+
+Der Bias in diesem Zusammenhang ist ein statistischer, systematischer Fehler – nicht die Benachteiligung von Gruppen und nicht der Bias-Wert eines Neurons.
+
+### Prüfungsfalle
+Annehmen, ein komplexeres Modell sei immer besser: Es senkt zwar den Fehler auf den Trainingsdaten, die Testgüte kann dabei aber sinken.
+
+### Merksatz
+Zu einfach trifft daneben, zu komplex zittert – gesucht ist die goldene Mitte.
+
+Siehe auch: Overfitting · Underfitting · Bias · Varianz · Kreuzvalidierung
+Mehr: Deep Dive 7, 1.2
 
 ## Big Data
 <!-- id: big-data · quellen: Karte DD8, DD8 5.2 · stand: 2026-10 -->

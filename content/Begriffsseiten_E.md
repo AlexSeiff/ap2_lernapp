@@ -26,6 +26,68 @@ Extract holt, Transform veredelt, Load liefert.
 Siehe auch: ETL · Deltaextraktion · Vollextraktion · Staging Area · T – Transform
 Mehr: Deep Dive 8, 3.1
 
+## Early Stopping
+<!-- id: early-stopping · quellen: DD7 1.2, DD6 9.4 · stand: 2026-11 -->
+
+Frühzeitiger Abbruch des Trainings, sobald der Fehler auf den Validierungsdaten nicht mehr sinkt, obwohl der Trainingsfehler weiter fällt – Schutz vor Overfitting bei schrittweise lernenden Verfahren.
+
+### Erklärung
+Neuronale Netze und Boosting-Verfahren lernen in vielen Runden (Epochen). Der Trainingsfehler sinkt dabei fast immer weiter; ab einem Punkt beginnt das Modell aber, Rauschen auswendig zu lernen, und der Validierungsfehler steigt wieder. Early Stopping misst nach jeder Epoche den Validierungsfehler und bricht ab, wenn er sich über eine festgelegte Zahl Epochen (**Geduld**, patience) nicht verbessert hat. Anschließend werden die Gewichte der besten Epoche wiederhergestellt. Die Geduld ist ein Hyperparameter. Als Kontrolldaten dienen Validierungsdaten, nicht die Testdaten.
+
+### Beispiel
+Validierungsfehler eines Netzes für die Reklamationsvorhersage, Geduld = 2:
+
+| Epoche | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|
+| Trainingsfehler | 0,60 | 0,45 | 0,33 | 0,25 | 0,19 | 0,15 | 0,12 |
+| Validierungsfehler | 0,62 | 0,51 | 0,45 | 0,42 | 0,41 | 0,43 | 0,46 |
+
+Beste Epoche ist 5 (0,41). In Epoche 6 (0,43) und 7 (0,46) gibt es keine Verbesserung – zwei Epochen Geduld sind aufgebraucht, das Training stoppt nach Epoche 7. Verwendet werden die Gewichte aus Epoche 5.
+
+### Abgrenzung
+Early Stopping begrenzt die **Trainingsdauer**; Regularisierung bestraft große Gewichte, Pruning stutzt Bäume, mehr Daten verringern die Varianz. Alle wirken gegen Overfitting, aber an unterschiedlichen Stellen.
+
+### Prüfungsfalle
+Den Abbruchzeitpunkt am Trainingsfehler festmachen (er sinkt immer) oder an den Testdaten, oder am Ende die Gewichte der letzten statt der besten Epoche behalten.
+
+### Merksatz
+Aufhören, wenn die Validierung dreht.
+
+Siehe auch: Overfitting · Epoche · Validierungsdaten · Regularisierung · Lernkurve · Hyperparameter
+Mehr: Deep Dive 7, 1.2 · Deep Dive 6, 9.4
+
+## Effektgröße
+<!-- id: effektgrosse · quellen: Karte DD4, DD4 1.2, DD4 1.3 · stand: 2026-11 -->
+
+Maß dafür, wie groß ein Effekt, Unterschied oder Zusammenhang tatsächlich ist – unabhängig davon, wie groß die Stichprobe war.
+
+### Erklärung
+Der p-Wert beantwortet „Wäre ein so deutliches Ergebnis allein durch Zufall plausibel?“, die Effektgröße „Wie groß ist der Effekt?“. Typische Maße sind der Korrelationskoeffizient r, das Bestimmtheitsmaß R² (erklärter Anteil) und für den Vergleich zweier Mittelwerte **Cohens d**: $d = \frac{\bar{x}_1 - \bar{x}_2}{s}$ mit s als gemeinsamer Standardabweichung innerhalb der Gruppen. Als grobe Faustregel gelten d ≈ 0,2 klein, 0,5 mittel, 0,8 groß; die Grenzen unterscheiden sich je nach Quelle und Fachgebiet. Ebenso wichtig ist der absolute Effekt in der Praxis (Minuten, Euro, Prozentpunkte): Lohnt sich ein Effekt, hängt von Kosten und Nutzen ab. Die erwartete Effektgröße braucht man auch, um vorab die nötige Stichprobengröße zu planen.
+
+### Beispiel
+Zwei Lieferrouten, Streuung innerhalb der Routen s = 10 min: Route A im Mittel 62 min, Route B 58 min. Der Effekt ist $d = \frac{62 - 58}{10} = 0{,}4$ – klein bis mittel. Näherungsweise mit einem z-Test (zweiseitig):
+- 100 Fahrten je Route: Standardfehler der Differenz $10 \cdot \sqrt{2/100} = 1{,}41$, $z = \frac{4}{1{,}41} = 2{,}83$, p ≈ 0,005 → hochsignifikant.
+- 10 Fahrten je Route: Standardfehler $10 \cdot \sqrt{2/10} = 4{,}47$, $z = \frac{4}{4{,}47} = 0{,}89$, p ≈ 0,37 → nicht signifikant.
+
+Derselbe Effekt (d = 0,4, vier Minuten) – nur die Stichprobe unterscheidet sich, und mit ihr der p-Wert.
+
+### Abgrenzung
+| Kennzahl | Frage |
+|---|---|
+| p-Wert / Signifikanz | Lässt sich der Effekt durch Zufall erklären? |
+| Effektgröße | Wie groß ist er? |
+| Konfidenzintervall | Wie genau ist er geschätzt? |
+
+### Prüfungsfalle
+Aus „hochsignifikant“ auf einen großen Effekt schließen (siehe Signifikanz) – oder aus „nicht signifikant“ auf „kein Effekt“: bei kleiner Stichprobe fehlt oft nur die Teststärke.
+
+### Merksatz
+Der p-Wert sagt, ob Zufall als Erklärung ausreicht; die Effektgröße sagt, wie viel.
+
+Siehe auch: Signifikanz · P-Wert · Korrelationskoeffizient nach Pearson · Bestimmtheitsmaß · Hypothesentest · Fehler 2. Art · Konfidenzintervall
+Mehr: Deep Dive 4, 1.2 · Deep Dive 4, 1.3
+
+
 ## Eigentum
 <!-- id: eigentum · quellen: Karte DD14, DD14 2.4 · stand: 2026-10 -->
 
@@ -649,7 +711,7 @@ Das Minuszeichen vergessen – die Logarithmen von Anteilen sind negativ, die En
 ### Merksatz
 Je gemischter, desto höher die Entropie.
 
-Siehe auch: Informationsgewinn · ID3 · Entscheidungsbaum · Klassifikation
+Siehe auch: Informationsgewinn · Gini-Index · ID3 · Entscheidungsbaum · Klassifikation
 Mehr: Deep Dive 6, 7.3
 
 ## Entschädigung
@@ -682,7 +744,7 @@ Mehr: Deep Dive 13, 1.2 · Deep Dive 13, 6.1
 Überwachtes Lernverfahren, das Daten durch verschachtelte Ja/Nein- bzw. Merkmalsfragen in immer reinere Gruppen zerlegt; direkt lesbar und für Fachbereiche erklärbar.
 
 ### Erklärung
-Jeder innere Knoten prüft ein Merkmal, jeder Ast steht für eine Ausprägung, jedes Blatt liefert eine Klasse (Klassifikation) oder einen Wert (Regressionsbaum). Aufgebaut wird von oben: Der Algorithmus **ID3** wählt an jedem Knoten das Merkmal mit dem größten Informationsgewinn. Stärken: als Regelwerk lesbar, wichtig für Art. 22 DSGVO und Akzeptanz im Fachbereich. Schwächen: ohne Begrenzung wächst der Baum bis zum **Overfitting** (Gegenmittel: Tiefe begrenzen, Pruning); ID3 bevorzugt Merkmale mit vielen Ausprägungen und braucht kategoriale Merkmale.
+Jeder innere Knoten prüft ein Merkmal, jeder Ast steht für eine Ausprägung, jedes Blatt liefert eine Klasse (Klassifikation) oder einen Wert (Regressionsbaum). Aufgebaut wird von oben: Der Algorithmus **ID3** wählt an jedem Knoten das Merkmal mit dem größten Informationsgewinn (Entropie); **CART** nutzt stattdessen den **Gini-Index** als Unreinheitsmaß und kann auch Regressionsbäume bauen. Abgebrochen wird, wenn ein Knoten rein ist oder keine Merkmale mehr übrig sind. Stärken: als Regelwerk lesbar, wichtig für Art. 22 DSGVO und Akzeptanz im Fachbereich; keine Skalierung der Merkmale nötig, weil nur Schwellen je Merkmal verglichen werden. Schwächen: ohne Begrenzung wächst der Baum bis zum **Overfitting** (Gegenmittel: die Hyperparameter maximale Tiefe und Mindestgröße eines Blatts setzen, nachträglich beschneiden = Pruning); ID3 bevorzugt Merkmale mit vielen Ausprägungen und braucht kategoriale Merkmale (CART und C4.5 teilen Zahlen an einer Schwelle, z. B. „Lieferdauer ≤ 5 Tage“); schon kleine Änderungen der Daten können einen anderen Baum ergeben.
 
 ### Beispiel
 Reklamationsbaum der Möbelhaus Nordholz GmbH:
@@ -739,7 +801,7 @@ Eine Auftragsnummer als Merkmal zulassen – sie trennt perfekt, sagt für neue 
 ### Merksatz
 Der Baum ist das Modell, das man vorlesen kann.
 
-Siehe auch: ID3 · Entropie · Informationsgewinn · Random Forest · Overfitting
+Siehe auch: ID3 · Entropie · Informationsgewinn · Gini-Index · Random Forest · Overfitting · Hyperparameter
 Mehr: Deep Dive 6, 2.4 · Deep Dive 6, 7.3
 
 ## Entscheidungsknoten
@@ -783,6 +845,38 @@ Raute entscheidet, Balken parallelisiert.
 
 Siehe auch: Aktivitätsdiagramm · Gabelung (Fork) · Vereinigung (Join) · XOR-Gateway · Endknoten
 Mehr: Deep Dive 17, 2.4 · Deep Dive 15, 5.2
+
+## Entscheidungsschwelle
+<!-- id: entscheidungsschwelle · quellen: DD7 4.2, DD7 4.4, DD7 4.5 · stand: 2026-11 -->
+
+Grenze für den Score oder die Wahrscheinlichkeit eines Klassifikators, ab der ein Fall als positiv eingestuft wird; üblich ist 0,5, sie lässt sich aber an die Fehlerkosten anpassen.
+Auch: Decision Threshold
+
+### Erklärung
+Verfahren wie die logistische Regression oder ein Random Forest (Anteil der Bäume) liefern zunächst einen Score $p$ zwischen 0 und 1. Die Regel lautet: $p \ge t$ → positiv, sonst negativ, mit $t$ als Entscheidungsschwelle. **Senkt** man $t$, wird häufiger Alarm gegeben: Der Recall steigt oder bleibt gleich (weniger FN), die Precision sinkt in der Regel (mehr FP). **Erhöht** man $t$, ist es umgekehrt. Jede Schwelle ergibt eine eigene Konfusionsmatrix; die ROC-Kurve zeigt alle Schwellen auf einmal. Sind die Scores gut kalibrierte Wahrscheinlichkeiten und verursachen nur FN und FP Kosten, liegt die kostenoptimale Schwelle bei $t^* = \frac{K_{FP}}{K_{FP} + K_{FN}}$ mit $K_{FP}$ = Kosten je Fehlalarm und $K_{FN}$ = Kosten je übersehenem Fall. Bei Fehlerkosten von 15 € (FP) und 120 € (FN) ist $t^* = \frac{15}{15 + 120} = 11{,}1\ \%$. Die Schwelle wird auf Validierungsdaten gewählt, nicht auf den Testdaten.
+
+### Beispiel
+Zehn Aufträge der Möbelhaus Nordholz GmbH mit Modell-Score und tatsächlichem Ergebnis (R = Reklamation): 0,90 R · 0,80 R · 0,65 nein · 0,55 R · 0,45 nein · 0,40 R · 0,35 nein · 0,25 nein · 0,15 nein · 0,10 nein. Vier Reklamationen, sechs ohne. Fehlerkosten: FN 120 €, FP 15 €.
+
+| Schwelle | TP | FP | FN | TN | Precision | Recall | Kosten |
+|---|---|---|---|---|---|---|---|
+| 0,5 | 3 | 1 | 1 | 5 | 3/4 = 75 % | 3/4 = 75 % | 1·120 + 1·15 = 135 € |
+| 0,4 | 4 | 2 | 0 | 4 | 4/6 = 67 % | 4/4 = 100 % | 0·120 + 2·15 = 30 € |
+| 0,3 | 4 | 3 | 0 | 3 | 4/7 = 57 % | 4/4 = 100 % | 0·120 + 3·15 = 45 € |
+
+Die Standardschwelle 0,5 ist unter diesen drei Schwellen die teuerste; bei 0,4 werden alle Reklamationen gefunden, ohne dass die Fehlalarme die Ersparnis auffressen. Bei 0,3 kommt nur noch ein Fehlalarm hinzu, die Kosten steigen wieder. Die Formel $t^*$ gilt nur für kalibrierte Wahrscheinlichkeiten; die Scores dieses Beispiels sind das nicht, deshalb wird die Schwelle hier direkt aus den Kosten der getesteten Werte gewählt (günstigste getestete Schwelle: 0,4).
+
+### Abgrenzung
+Die **AUC** ist schwellenunabhängig, **Precision**, **Recall** und **Accuracy** gelten immer nur für eine bestimmte Schwelle. Die Schwelle ist ein Betriebsparameter, kein Lernergebnis – anders als ein Gewicht wird sie nicht trainiert, sondern festgelegt.
+
+### Prüfungsfalle
+Die Schwelle 0,5 als unveränderlich ansehen oder bei seltenen, teuren Fällen nicht senken. Ebenso falsch: nach dem Verschieben der Schwelle von einem „besseren Modell“ sprechen – es ist nur eine andere Abwägung zwischen FP und FN.
+
+### Merksatz
+Schwelle runter: mehr Alarme, mehr Treffer, mehr Fehlalarme.
+
+Siehe auch: Logistische Regression · ROC-Kurve · Precision · Recall · Konfusionsmatrix · Unausgeglichene Klassen
+Mehr: Deep Dive 7, 4.2 · Deep Dive 7, 4.4
 
 ## Entscheidungstabellentest
 <!-- id: entscheidungstabellentest · quellen: Karte DD16, DD16 2.2 · stand: 2026-10 -->
@@ -856,6 +950,34 @@ Ereignis – Funktion – Ereignis: Wer entscheidet, ist immer eine Funktion.
 
 Siehe auch: Ereignis · Funktion · Konnektor · Erweiterte EPK (eEPK) · BPMN
 Mehr: Deep Dive 5, 2.3 · Deep Dive 17, 1.2
+
+## Epoche
+<!-- id: epoche · quellen: Karte DD6, DD6 9.4, DD6 9.5 · stand: 2026-11 -->
+
+Ein vollständiger Durchlauf durch alle Trainingsdaten beim Training eines Modells; neuronale Netze werden meist über viele Epochen trainiert.
+
+### Erklärung
+Bei kleinen Datenmengen wird nach jedem Fall oder nach jeder Epoche angepasst, bei großen teilt man die Trainingsdaten in **Mini-Batches**: Die **Batchgröße** $B$ gibt an, wie viele Fälle für einen Anpassungsschritt (eine **Iteration**) der Gewichte genutzt werden. Bei $N$ Trainingsfällen gilt: $\text{Iterationen je Epoche} = \left\lceil \frac{N}{B} \right\rceil$ (aufgerundet, weil der letzte Batch kleiner sein darf). Gelernt wird so lange, bis der Fehler nicht mehr sinkt, eine Höchstzahl Epochen erreicht ist oder Early Stopping greift. Epochenzahl, Batchgröße und Lernrate sind Hyperparameter.
+
+### Beispiel
+18.000 Aufträge der Möbelhaus Nordholz GmbH, Batchgröße 200: $\frac{18.000}{200} = 90$ Iterationen je Epoche; bei 20 Epochen sind das $20 \cdot 90 = 1.800$ Gewichtsanpassungen. Bei 18.100 Aufträgen wären es $\lceil 90{,}5 \rceil = 91$ Iterationen, der letzte Batch hätte nur 100 Fälle. Das Perzeptron im Deep Dive lernt AND aus vier Fällen: Eine Epoche sind alle vier Fälle; in Epoche 2 ändern sich die Gewichte nicht mehr, das Training ist fertig.
+
+### Abgrenzung
+| Begriff | Bedeutung |
+|---|---|
+| Epoche | ein Durchlauf durch alle Trainingsdaten |
+| Batch | Teilmenge der Daten für einen Schritt |
+| Iteration | ein Schritt der Gewichtsanpassung |
+| Lernrate | wie groß jeder Schritt ist |
+
+### Prüfungsfalle
+„Eine Epoche ist ein einzelner Trainingsfall“ – das wäre eine Iteration bei Batchgröße 1. Auch falsch: mehr Epochen seien immer besser; zu viele führen zu Overfitting (Gegenmittel: Early Stopping).
+
+### Merksatz
+Eine Epoche: einmal alle Daten gesehen.
+
+Siehe auch: Perzeptron-Lernregel · Lernrate · Backpropagation · Early Stopping · Overfitting · Neuronale Netze · Hyperparameter
+Mehr: Deep Dive 6, 9.4 · Deep Dive 6, 9.5
 
 ## Ereignis
 <!-- id: ereignis · quellen: Karte DD5, DD5 2.3, DD17 1.2 · stand: 2026-10 -->
@@ -1165,6 +1287,33 @@ Pythagoras im Merkmalsraum – vorher skalieren.
 Siehe auch: K-Means · K-Nächste-Nachbarn · Skalieren · Min-Max-Normalisierung · Levenshtein-Distanz
 Mehr: Deep Dive 6, 3.1
 
+## Europass
+<!-- id: europass · quellen: Karte DD20, DD20 5.5 · stand: 2026-11 -->
+
+Kostenloser digitaler Dienst der EU, der hilft, Qualifikationen, Fähigkeiten und Kompetenzen bei Bewerbungen und Auslandsaufenthalten in Europa verständlich darzustellen.
+
+### Erklärung
+Über das Europass-Portal lassen sich ein Profil und ein europäischer Lebenslauf erstellen; dazu gibt es Zeugniserläuterungen, die Abschlüsse auch für ausländische Arbeitgeber erklären, und den Mobilitätsnachweis für Lern- und Arbeitsaufenthalte im Ausland. Der Europass **ersetzt keine Zeugnisse**, ist **nicht verpflichtend**, vergibt keine Abschlüsse und vermittelt keine Ausbildungsplätze. Er richtet sich an alle, nicht nur an Hochschulabsolventen. Ein Teil der Ausbildung kann im Ausland stattfinden, wenn das dem Ausbildungsziel dient; die Gesamtdauer **soll** ein Viertel der in der Ausbildungsordnung festgelegten Dauer nicht überschreiten (§ 2 Abs. 3 BBiG – eine Soll-Vorschrift).
+
+### Beispiel
+Mia Albers (Ausbildungsdauer 36 Monate) möchte einen Teil ihrer Ausbildung in Dänemark verbringen. Als Richtwert gilt höchstens ein Viertel im Ausland: $36 \cdot \frac{1}{4}$ = **9 Monate**. Den Auslandsaufenthalt kann sie im Europass-Mobilitätsnachweis festhalten; ihr Lebenslauf lässt sich im Europass-Format erstellen. Die Abschlussprüfung bei der IHK wird dadurch nicht ersetzt.
+
+### Abgrenzung
+| | Europass | Zeugnis / Abschluss |
+|---|---|---|
+| Zweck | Qualifikationen verständlich darstellen | Qualifikation amtlich bescheinigen |
+| Kosten | kostenlos | je nach Prüfung |
+| Pflicht | freiwillig | Voraussetzung für den Berufsabschluss |
+
+### Prüfungsfalle
+Den Europass für ein kostenpflichtiges Zertifikat oder für einen Ersatz der IHK-Abschlussprüfung halten – er ist ein kostenloses Darstellungs- und Dokumentationsinstrument.
+
+### Merksatz
+Europass: kostenlos, freiwillig, macht Qualifikationen europaweit lesbar – ersetzt aber kein Zeugnis.
+
+Siehe auch: Arbeitszeugnis · Duale Ausbildung · Fortbildung · IHK
+Mehr: Deep Dive 20, 5.5
+
 ## Event Log
 <!-- id: event-log · quellen: Karte DD5, DD5 5.1, DD5 5.3 · stand: 2026-10 -->
 
@@ -1291,7 +1440,7 @@ Eine Prognose ohne Hinweis auf den beobachteten Wertebereich abgeben.
 ### Merksatz
 Die Gerade kennt nur ihre Daten – außerhalb rät sie.
 
-Siehe auch: Regressionsgerade · Regressionsgleichung · Regression · Overfitting
+Siehe auch: Regressionsgerade · Regressionsgleichung · Regression · Interpolation · Achsenabschnitt · Overfitting
 Mehr: Deep Dive 4, 2.2
 
 ## Ausgelassen

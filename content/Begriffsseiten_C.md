@@ -49,6 +49,37 @@ Ohne Case ID kein Prozess, nur lose Ereignisse.
 Siehe auch: Event Log · Activity · Timestamp · Process Mining · Fehlende Case ID
 Mehr: Deep Dive 5, 5.1
 
+## Change Data Capture (CDC)
+<!-- id: change-data-capture · quellen: DD8 3.1 · stand: 2026-11 -->
+
+Verfahren, das Änderungen (Einfügen, Ändern, Löschen) in einer Quelldatenbank erkennt und als Änderungsstrom an Zielsysteme weitergibt.
+
+### Erklärung
+CDC ist eine Technik, mit der sich die Deltaextraktion umsetzen lässt. Die Änderungen werden auf drei Wegen erkannt:
+
+| Variante | Funktionsweise | Eigenschaft |
+|---|---|---|
+| log-basiert | liest das Transaktionsprotokoll der Datenbank | geringe Last auf der Quelle, erkennt auch Löschungen |
+| trigger-basiert | Trigger schreiben jede Änderung in eine Änderungstabelle | belastet die Quelle bei jeder Änderung, erkennt auch Löschungen |
+| zeitstempel-basiert | Abfrage auf eine Spalte wie „geändert_am“ | einfach, aber physisch gelöschte Zeilen bleiben unbemerkt (außer bei Soft Delete) und Zwischenstände gehen verloren |
+
+Jedes Änderungsereignis enthält Art der Änderung, Zeitpunkt und betroffenen Datensatz (oft alter und neuer Wert). Typische Verwendung: DWH oder Data Lake aktuell halten, Systeme replizieren, Streaming-Auswertungen füttern. Zum Start braucht es einen vollständigen Ausgangsstand (Initial Load), danach genügen die Änderungen. Das Ziel muss auch die Lösch-Ereignisse anwenden, sonst bleiben veraltete Zeilen stehen.
+
+### Beispiel
+Die Tabelle `bestellung` hat 400.000 Zeilen. An einem Tag werden 1.200 Zeilen neu angelegt oder geändert und 15 gelöscht. Die Vollextraktion liest 400.000 Zeilen. Eine zeitstempelbasierte Abfrage findet 1.200 Zeilen, übersieht aber die 15 Löschungen. Log-basiertes CDC liefert 1.215 Ereignisse (bei höchstens einer Änderung je Zeile), also nur $\frac{1215}{400000} \approx 0{,}3\,\%$ des Bestands – einschließlich der Löschungen.
+
+### Abgrenzung
+Die **Deltaextraktion** beschreibt das Ziel („nur Änderungen laden“), CDC eine Technik, mit der man die Änderungen findet. Die **Vollextraktion** liest immer alles.
+
+### Prüfungsfalle
+Zeitstempel-basiert „alles erkannt“ annehmen – physisch gelöschte Zeilen haben keinen neuen Zeitstempel und bleiben im Ziel stehen.
+
+### Merksatz
+CDC fragt nicht „wie sieht die Tabelle aus?“, sondern „was hat sich geändert?“.
+
+Siehe auch: Deltaextraktion · Vollextraktion · ETL · Stream-Verarbeitung · Transaktion
+Mehr: Deep Dive 8, 3.1
+
 ## Chartjunk
 <!-- id: chartjunk · quellen: Karte DD11, DD11 A2 · stand: 2026-10 -->
 
@@ -149,6 +180,53 @@ Chen zeigt nur das Maximum, und zwar beim Gegenüber.
 Siehe auch: Min-Max-Notation · Krähenfußnotation · MC-Notation · Kardinalität · Beziehung
 Mehr: Deep Dive 2, 1.3 · Deep Dive 17, 3.1
 
+## Cloud-Speicherung
+<!-- id: cloud-speicherung · quellen: Karte DD29, DD29 5.1, DD19 4.1 · stand: 2026-11 -->
+
+Ablage von Daten auf den Servern eines externen Anbieters, auf die man über das Internet zugreift und die meist nach Nutzung abgerechnet werden.
+
+Auch: Cloud-Datenbank, Datenspeicherung in der Cloud
+
+### Erklärung
+**Vorteile:** Der Speicher wächst bei Bedarf mit (Skalierung), die eigene Hardware und ihre Wartung entfallen, die Daten sind von überall erreichbar, und gute Anbieter bieten Sicherungen und Redundanz über mehrere Standorte.
+
+**Nachteile** (typische Prüfungsfrage – Nennung plus Erläuterung in einem Satz):
+- **Abhängigkeit vom Anbieter:** Preiserhöhungen, geänderte Schnittstellen oder ein eingestellter Dienst treffen das Unternehmen direkt; ein Wechsel ist aufwendig (Lock-in).
+- **Abhängigkeit von der Internetverbindung:** Ohne Leitung kein Zugriff und kein Speichern.
+- **Daten außerhalb des eigenen Zugriffs:** Speicherort und Zugriffe Dritter müssen vertraglich geregelt und kontrolliert werden.
+- **Laufende Kosten**, die mit Datenmenge und Abrufen wachsen (Bilddaten werden dauerhaft teuer).
+- **Angriffsfläche** über das Internet.
+
+**Datenschutz:** Der Cloud-Anbieter ist bei personenbezogenen Daten in der Regel **Auftragsverarbeiter**; nötig ist ein Vertrag nach Art. 28 DSGVO. Liegen die Daten in einem Drittland, braucht man zusätzlich eine Grundlage für den Transfer, z. B. Standardvertragsklauseln. Verantwortlich bleibt das Unternehmen selbst. Typische Maßnahmen: Standort in der EU, Verschlüsselung (idealerweise mit eigenem Schlüssel), Rollen und Rechte, Protokollierung. Die Cloud kann auch Teil der Datensicherung sein, z. B. als externe Kopie der 3-2-1-Regel.
+
+### Beispiel
+In der Nordholz Manufaktur liegen die Messdaten der Klimasensoren und die Bilder des Kamerawagens in einer Cloud-Datenbank. Den Schutzbedarf bestimmt man je Schutzziel:
+
+| Schutzziel | Einstufung | Begründung |
+|---|---|---|
+| Verfügbarkeit | normal | Kurze Ausfälle lassen sich am Sensor überbrücken; erst bei längerem Ausfall entstehen Lücken in der Messreihe |
+| Integrität | sehr hoch | Verfälschte Werte führen zu falsch getrockneten Chargen – Serienschäden |
+| Vertraulichkeit | normal | Klimawerte und Holzbilder, keine personenbezogenen Daten |
+
+### Abgrenzung
+| | Cloud | eigener Server (On-Premises) |
+|---|---|---|
+| Hardware und Betrieb | beim Anbieter | im Haus |
+| Kosten | laufend, nutzungsabhängig | hohe Anschaffung, dann Betrieb |
+| Skalierung | schnell, flexibel | durch Beschaffung begrenzt |
+| Kontrolle über Standort und Zugriff | geringer, vertraglich geregelt | voll beim Unternehmen |
+
+Der Anbieter sichert das Rechenzentrum; für Daten, Zugriffsrechte und Konfiguration bleibt der Kunde verantwortlich.
+
+### Prüfungsfalle
+Nachteile nur nennen („Abhängigkeit“) und nicht erläutern – dann fehlt die Hälfte der Punkte. Und: Die Verantwortung für den Datenschutz geht **nicht** an den Cloud-Anbieter über.
+
+### Merksatz
+Cloud heißt: fremde Hardware, eigene Verantwortung.
+
+Siehe auch: Auftragsverarbeiter · Standardvertragsklauseln · Schutzbedarfsfeststellung · Schutzziele · 3-2-1-Regel · Georedundanz
+Mehr: Deep Dive 29, 5.1 · Deep Dive 19, 4.1
+
 ## Cluster
 <!-- id: cluster · quellen: Karte DD16, DD16 4.5 · stand: 2026-10 -->
 
@@ -192,8 +270,46 @@ Ohne Skalierung clustern – dann entscheidet allein das Merkmal mit der größt
 ### Merksatz
 Keine Labels, aber Ähnlichkeit – das ist Clustering.
 
-Siehe auch: K-Means · Unüberwachtes Lernen · Euklidischer Abstand · Skalierung · Klassifikation
+Siehe auch: K-Means · DBSCAN · Hierarchisches Clustering · Unüberwachtes Lernen · Euklidischer Abstand · Skalierung · Klassifikation
 Mehr: Deep Dive 6, Teil 3
+
+## CNN (Convolutional Neural Network)
+<!-- id: cnn · quellen: DD6 8.1, DD6 8.2 · stand: 2026-11 -->
+
+Neuronales Netz für Bilddaten (und andere gitterartige Daten), das kleine, lernbare Filter über das Bild schiebt und so Muster wie Kanten und Formen erkennt.
+Auch: Faltungsnetz, Convolution, Feature Map
+
+### Erklärung
+Ein vollvernetztes Netz würde jedes Pixel mit jedem Neuron verbinden – das sind sehr viele Gewichte und die Bildstruktur geht verloren. Ein CNN arbeitet stattdessen mit **Faltungsschichten** (Convolution): Ein **Filter** (auch **Kernel**), z. B. 3 × 3 Gewichte, wird mit der **Schrittweite** (Stride) über das Bild geschoben. An jeder Position werden Filtergewichte und darunterliegende Pixelwerte multipliziert und aufsummiert; das Ergebnis aller Positionen ist eine **Feature Map** (Merkmalskarte). Derselbe Filter wird überall im Bild verwendet (Gewichtsteilung), und seine Gewichte werden – wie bei jedem Netz – per Backpropagation gelernt. Mehrere Filter erzeugen mehrere Feature Maps. **Padding** füllt den Bildrand mit Nullen auf, damit die Ausgabe nicht schrumpft. Auf eine Faltung folgen meist eine Aktivierungsfunktion (ReLU) und **Pooling**; am Ende stehen vollvernetzte Schichten für die Entscheidung. Frühe Schichten erkennen einfache Muster (Kanten), tiefe Schichten komplexe (Formen, Objekte).
+
+Größe der Feature Map: $n_{aus} = \left\lfloor \frac{n - f + 2p}{s} \right\rfloor + 1$ mit $n$ = Kantenlänge der Eingabe, $f$ = Kantenlänge des Filters, $p$ = Padding je Seite, $s$ = Stride (die Klammern ⌊ ⌋ runden ab).
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH prüft Fotos von Rücksendungen auf Transportschäden. Zur Veranschaulichung ein winziges Bild (4 × 4, Helligkeit 0 oder 1) mit einer senkrechten Kante und ein Filter für senkrechte Kanten:
+
+Bild: in jeder der vier Zeilen `0 0 1 1`. Filter (2 × 2): obere Zeile −1, 1; untere Zeile −1, 1. Stride 1, Padding 0 → Größe $\frac{4 - 2 + 0}{1} + 1 = 3$, die Feature Map ist 3 × 3.
+
+Position links oben: $-1 \cdot 0 + 1 \cdot 0 + (-1) \cdot 0 + 1 \cdot 0 = 0$. Eine Spalte weiter: $-1 \cdot 0 + 1 \cdot 1 + (-1) \cdot 0 + 1 \cdot 1 = 2$. Noch eine Spalte weiter: $-1 \cdot 1 + 1 \cdot 1 + (-1) \cdot 1 + 1 \cdot 1 = 0$. Jede Zeile der Feature Map lautet `0 2 0` – der hohe Wert in der Mitte zeigt, wo die Kante liegt.
+
+Größenbeispiele bei einem 28 × 28-Bild und 3 × 3-Filter: Padding 0, Stride 1 → 26 × 26; Padding 1, Stride 1 → 28 × 28; Padding 0, Stride 2 → 13 × 13. Gewichte: Eine vollvernetzte Schicht mit 100 Neuronen braucht 784 · 100 + 100 = 78.500 Parameter (Gewichte und Bias), 8 Filter à 3 × 3 mit je einem Bias nur 8 · (9 + 1) = 80 Parameter.
+
+### Abgrenzung
+| | Mehrschichtiges Perzeptron | CNN |
+|---|---|---|
+| Verbindungen | jedes Neuron mit allen Eingaben | kleiner Filter, überall dasselbe Gewicht |
+| Eignung | tabellarische Merkmale | Bilder (Nachbarschaft zählt) |
+| Gewichtsanzahl | sehr hoch bei Bildern | niedrig |
+
+Beide sind neuronale Netze und werden per Backpropagation trainiert. Bei tabellarischen Auftragsdaten sind Entscheidungsbaum oder Random Forest meist die bessere Wahl.
+
+### Prüfungsfalle
+Den Filter als festen, von Hand entworfenen Bildfilter verstehen – seine Gewichte werden beim Training gelernt. Ebenso falsch: „Padding verkleinert das Bild“ – es erhält die Größe (bzw. verhindert das Schrumpfen).
+
+### Merksatz
+Ein kleiner Filter wandert über das Bild und sucht überall dasselbe Muster.
+
+Siehe auch: Neuronale Netze · Deep Learning · Pooling · Aktivierungsfunktion · Backpropagation · Mehrschichtiges Perzeptron
+Mehr: Deep Dive 6, 8.1 · Deep Dive 6, 8.2
 
 ## COALESCE
 <!-- id: coalesce · quellen: Karte DD1, DD1 3.1 · stand: 2026-10 -->
@@ -246,6 +362,40 @@ Was nicht dokumentiert ist, gilt als nicht eingehalten.
 
 Siehe auch: Rechenschaftspflicht · ISMS · IT-Grundschutz · Data Governance
 Mehr: Deep Dive 10, 5.1
+
+## CONCAT
+<!-- id: concat · quellen: Karte DD1, DD1 1.4 · stand: 2026-11 -->
+
+SQL-Funktion, die mehrere Texte (und Werte, die in Text umgewandelt werden) zu einer Zeichenkette verkettet: `CONCAT(a, b, …)`; als Operator geht dasselbe mit `a || b`.
+Auch: Verkettung, Zeichenkettenverkettung
+
+### Erklärung
+Verkettet wird **innerhalb einer Zeile**: `CONCAT(name, ' (', ort, ')')` setzt Name und Ort zusammen. Feste Textteile stehen in einfachen Anführungszeichen, Leerzeichen und Trennzeichen muss man selbst einfügen. `CONCAT_WS(trenner, a, b, …)` setzt das Trennzeichen automatisch.
+
+NULL und Dialekt: Hier unterscheiden sich die Systeme. Der Standard-Operator `||` liefert bei einem NULL-Operanden **NULL** (Ausnahme Oracle: dort wird NULL wie ein leerer Text behandelt). `CONCAT` überspringt NULL in SQLite (ab 3.44), PostgreSQL und SQL Server, liefert in MySQL dagegen NULL. `CONCAT_WS` überspringt NULL. Portabel ist `COALESCE(ort, '')`. In MySQL ist `||` standardmäßig der ODER-Operator, dort also `CONCAT` verwenden.
+
+### Beispiel
+```sql
+SELECT CONCAT(name, ' (', ort, ')') AS kunde
+FROM kunde;
+```
+Ergebnis: Huber GmbH (München) · Schmidt AG (Hamburg) · Fischer KG (München) · Weber e.K. (Köln) · Braun GmbH (Hamburg). Gleichwertig: `name || ' (' || ort || ')'`.
+```sql
+SELECT 'a' || NULL AS mit_pipes, CONCAT('a', NULL, 'b') AS mit_concat;
+```
+Ergebnis in SQLite: NULL und `ab` – dieselbe Aufgabe, zwei Ergebnisse.
+
+### Abgrenzung
+`CONCAT` verbindet Texte **einer Zeile**. `GROUP_CONCAT` (SQLite, MySQL), `STRING_AGG` (PostgreSQL, SQL Server, SQLite ab 3.44) bzw. `LISTAGG` (Standard, Oracle) verbindet die Werte **mehrerer Zeilen** einer Gruppe zu einem Text (Aggregatfunktion). `UNION` stapelt Zeilen untereinander und verkettet nichts.
+
+### Prüfungsfalle
+Mit `+` verketten: In SQLite und MySQL addiert `+` Zahlen – `'a' + 'b'` ergibt 0, nicht „ab“ (nur SQL Server verkettet damit). Zweite Falle: eine NULL-Spalte in einer `||`-Kette macht das ganze Ergebnis NULL (nicht in Oracle).
+
+### Merksatz
+Verketten mit CONCAT oder `||` – und NULL vorher mit COALESCE abfangen.
+
+Siehe auch: COALESCE · NULL · SELECT · Datentypen
+Mehr: Deep Dive 1, 1.4 · Deep Dive 1, 3.1
 
 ## Conformance Checking
 <!-- id: conformance-checking · quellen: Karte DD5, DD5 5.2 · stand: 2026-10 -->

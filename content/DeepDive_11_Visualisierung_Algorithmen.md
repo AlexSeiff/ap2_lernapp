@@ -239,6 +239,8 @@ Der letzte Punkt ist der fachlich wichtigste für deine Fachrichtung: **Ein fehl
 
 **Aufwand (Komplexität)** beschreibt, wie die Zahl der Rechenschritte mit der Datenmenge n wächst – angegeben in der **O-Notation**. Konstante Faktoren fallen weg, es zählt nur die Größenordnung: Bei n = 1.000 Datensätzen braucht ein Verfahren mit O(n²) rund 1.000.000 Vergleiche, eines mit O(n log n) nur rund 10.000.
 
+Genauer: **O** ist eine **obere** Schranke („wächst höchstens so schnell“), **Ω** eine **untere** und **Θ** die **enge** Schranke (beides zugleich). Davon getrennt ist die Frage nach dem **Fall** (bester, mittlerer, schlechtester): Zu jedem Fall lässt sich eine Schranke angeben; „O(…)“ ohne Zusatz meint meist die obere Schranke im schlechtesten Fall. Neben der Laufzeit zählt der **Speicherbedarf**: Merge Sort braucht zusätzlich O(n) Speicher, Bubble, Selection und Insertion Sort nur O(1). **Amortisiert** heißt: im Durchschnitt über viele Operationen – das Anhängen an ein dynamisches Array kostet gelegentlich O(n) (Umkopieren), im Mittel aber O(1).
+
 | Verfahren | Prinzip | bester Fall | mittlerer Fall | schlechtester Fall | stabil |
 |---|---|---|---|---|---|
 | **Lineare Suche** | von vorn nach hinten jedes Element prüfen; Liste darf unsortiert sein | O(1) | O(n) | O(n) | – |

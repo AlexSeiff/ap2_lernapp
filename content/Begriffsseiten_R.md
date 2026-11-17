@@ -5,11 +5,11 @@
 Bestimmtheitsmaß einer Regression: der Anteil der Streuung der Zielgröße, den das Modell erklärt – $R^2 = 1 - \frac{\sum (y - \hat{y})^2}{\sum (y - \bar{y})^2}$.
 
 ### Erklärung
-R² vergleicht das Modell mit einem trivialen Modell, das immer den Mittelwert ȳ vorhersagt. 1 bedeutet perfekte Anpassung, 0 „nicht besser als der Mittelwert“; auf Testdaten kann R² sogar negativ werden. Bei der einfachen linearen Regression (ein x) gilt $R^2 = r^2$. Weil R² einheitenlos ist, lassen sich Modelle auf denselben Daten gut vergleichen.
+R² vergleicht das Modell mit einem trivialen Modell, das immer den Mittelwert ȳ vorhersagt. 1 bedeutet perfekte Anpassung, 0 „nicht besser als der Mittelwert“. Auf den Trainingsdaten liegt R² einer Kleinste-Quadrate-Regression mit Achsenabschnitt zwischen 0 und 1; auf **Testdaten** kann es negativ werden, wenn die Fehler größer sind als beim Mittelwertmodell. Bei der einfachen linearen Regression (ein x) gilt $R^2 = r^2$. Weil R² einheitenlos ist, lassen sich Modelle auf denselben Daten gut vergleichen. Bei mehreren Einflussgrößen sinkt R² mit jeder zusätzlichen Variablen nie, auch wenn sie nutzlos ist; das **korrigierte R²** bestraft zusätzliche Variablen und kann dabei sinken (Formel und Zahlen unter Bestimmtheitsmaß).
 
 ### Beispiel
-Monatsumsätze des Möbelhauses (T€): Die quadrierten Prognosefehler summieren sich zu 180, die quadrierten Abweichungen vom Mittelwert 110 zu 1.000.
-$R^2 = 1 - \frac{180}{1000} = 0{,}82$ – das Modell erklärt 82 % der Umsatzschwankungen.
+Monatsumsätze des Möbelhauses (T€), Mittelwert 110: Die quadrierten Prognosefehler summieren sich zu 180, die quadrierten Abweichungen vom Mittelwert zu 1.000.
+$R^2 = 1 - \frac{180}{1000} = 0{,}82$ – das Modell erklärt 82 % der Umsatzschwankungen. Hätte das Modell auf Testdaten dagegen Fehlerquadrate von 1.250 bei 1.000 Abweichungsquadraten, wäre $R^2 = 1 - \frac{1250}{1000} = -0{,}25$ – schlechter als „immer 110 prognostizieren“.
 
 ### Abgrenzung
 | Maß | Aussage |
@@ -91,10 +91,10 @@ Mehr: Deep Dive 16, 4.5 · Deep Dive 10, 4.4
 Klassifikations- und Regressionsverfahren, bei dem viele Entscheidungsbäume gemeinsam abstimmen.
 
 ### Erklärung
-Jeder Baum wird auf einer zufälligen Stichprobe der Trainingsdaten (Ziehen mit Zurücklegen, **Bagging**) trainiert und darf an jedem Knoten nur aus einer zufälligen Teilmenge der Merkmale wählen. Für einen neuen Fall stimmen alle Bäume ab; bei Klassifikation entscheidet die Mehrheit, bei Regression der Mittelwert. Einzelne Bäume überanpassen leicht, ihre Fehler gleichen sich im Wald weitgehend aus.
+Jeder Baum wird auf einer zufälligen Stichprobe der Trainingsdaten (Ziehen mit Zurücklegen, **Bagging**) trainiert und darf an jedem Knoten nur aus einer zufälligen Teilmenge der Merkmale wählen. Für einen neuen Fall stimmen alle Bäume ab; bei Klassifikation entscheidet die Mehrheit, bei Regression der Mittelwert. Einzelne Bäume überanpassen leicht, ihre Fehler gleichen sich im Wald weitgehend aus. Wichtige Hyperparameter sind die Zahl der Bäume, die maximale Tiefe und die Zahl der Merkmale je Knoten. Der Anteil der Bäume, die für eine Klasse stimmen, lässt sich als Score nutzen und mit einer Entscheidungsschwelle zuordnen. Fälle, die ein Baum nicht in seiner Stichprobe hatte (Out-of-Bag), liefern ohne eigenen Testsatz eine erste Schätzung der Güte; die Merkmalswichtigkeit zeigt, welche Merkmale die Abstimmung am stärksten beeinflussen. Benötigt keine Skalierung der Merkmale.
 
 ### Beispiel
-Reklamationsvorhersage im Möbelhaus: 300 Bäume bewerten einen Auftrag, 210 sagen „Reklamation“ – der Wald stuft ihn als riskant ein. Genauer als ein Einzelbaum, aber dem Fachbereich lässt sich nicht mehr eine einzelne Regel zeigen.
+Reklamationsvorhersage im Möbelhaus: 300 Bäume bewerten einen Auftrag, 210 sagen „Reklamation“ – der Wald stuft ihn als riskant ein ($\frac{210}{300} = 70\ \%$ Stimmenanteil, über der Schwelle 50 %). Genauer als ein Einzelbaum, aber dem Fachbereich lässt sich nicht mehr eine einzelne Regel zeigen.
 
 ### Abgrenzung
 | | Entscheidungsbaum | Random Forest |
@@ -109,7 +109,7 @@ Wer „Erklärbarkeit für den Fachbereich“ als Anforderung liest und trotzdem
 ### Merksatz
 Viele schwache Bäume, eine starke Mehrheit – aber keine lesbare Regel mehr.
 
-Siehe auch: Entscheidungsbaum · Bagging · Overfitting · Support Vector Machine · Transparenz und Erklärbarkeit
+Siehe auch: Entscheidungsbaum · Bagging · Gradient Boosting · Hyperparameter · Overfitting · Support Vector Machine · Transparenz und Erklärbarkeit
 Mehr: Deep Dive 6, 2.4 · Deep Dive 6, 8.3
 
 ## Ransomware
@@ -248,6 +248,8 @@ Mehr: Deep Dive 16, 4.4
 
 Um die Preissteigerung bereinigter Lohn, der die tatsächliche Kaufkraft des Einkommens zeigt.
 
+Auch: Realeinkommen, Nominallohn, Nominaleinkommen
+
 ### Erklärung
 Der **Nominallohn** ist der ausgezahlte Betrag in Euro. Steigen die Preise (Inflation), kann man sich davon weniger kaufen. Die Veränderung des Reallohns erhält man näherungsweise als Nominallohnsteigerung minus Inflationsrate, exakt über den Quotienten der Wachstumsfaktoren.
 
@@ -275,7 +277,7 @@ Mehr: Deep Dive 14, 4.5
 Trefferquote (Sensitivität) eines Klassifikators: Anteil der tatsächlich positiven Fälle, die das Modell gefunden hat – $\text{Recall} = \frac{TP}{TP + FN}$.
 
 ### Erklärung
-Der Nenner ist die Zeile der tatsächlich positiven Fälle in der Konfusionsmatrix. Der Recall ist wichtig, wenn ein übersehener Fall (FN) teuer ist. Im Zusammenhang mit der ROC-Kurve heißt er auch Richtig-Positiv-Rate (TPR).
+TP (richtig positiv) sind die positiven Fälle, die das Modell gefunden hat; FN (falsch negativ) sind die positiven Fälle, die es übersehen hat. Der Nenner TP + FN ist die Zeile der tatsächlich positiven Fälle in der Konfusionsmatrix. Der Recall ist wichtig, wenn ein übersehener Fall (FN) teuer ist. Im Zusammenhang mit der ROC-Kurve heißt er auch Richtig-Positiv-Rate (TPR).
 
 ### Beispiel
 1.000 Aufträge, 100 tatsächlich reklamiert, das Modell erkennt 60 davon: $\text{Recall} = \frac{60}{60 + 40} = 0{,}60$ = 60 %. Ein Modell, das immer „keine Reklamation“ sagt, hat 90 % Accuracy, aber 0 % Recall.
@@ -378,6 +380,45 @@ Was das Gesetz verlangt, braucht keine Einwilligung.
 Siehe auch: Einwilligung · Vertragserfüllung · Berechtigtes Interesse · DSGVO · Speicherbegrenzung
 Mehr: Deep Dive 10, 2.2 · Deep Dive 10, 2.3
 
+## Rechtmäßigkeit der Verarbeitung
+<!-- id: rechtmassigkeit-der-verarbeitung · quellen: DD10 2.1, DD10 2.2 · stand: 2026-11 -->
+
+Auch: Art. 6 DSGVO, Verbot mit Erlaubnisvorbehalt
+
+Grundsatz nach Art. 5 und Art. 6 DSGVO: Personenbezogene Daten dürfen nur verarbeitet werden, wenn mindestens eine von sechs Rechtsgrundlagen greift.
+
+### Erklärung
+| Art. 6 Abs. 1 | Rechtsgrundlage | Kerngedanke |
+|---|---|---|
+| lit. a | Einwilligung | freiwillig, informiert, widerrufbar |
+| lit. b | Vertrag | für Vertragserfüllung oder vorvertragliche Maßnahmen nötig |
+| lit. c | rechtliche Verpflichtung | ein Gesetz verlangt die Verarbeitung |
+| lit. d | lebenswichtige Interessen | Schutz von Leben oder Gesundheit |
+| lit. e | öffentliche Aufgabe | v. a. Behörden, Aufgabe im öffentlichen Interesse |
+| lit. f | berechtigtes Interesse | nach Abwägung; nicht für Behörden bei ihren Aufgaben |
+
+Die Grundlage gilt je Zweck und muss vorab feststehen und dokumentiert sein (Verzeichnis von Verarbeitungstätigkeiten, Datenschutzhinweise). Für besondere Kategorien (z. B. Gesundheitsdaten) braucht es zusätzlich eine Ausnahme nach Art. 9. Bei lit. e und f können Betroffene widersprechen (Art. 21).
+
+### Beispiel
+| Verarbeitung der Möbelhaus Nordholz GmbH | Grundlage |
+|---|---|
+| Lieferadresse für die Sofalieferung | lit. b Vertrag |
+| Newsletter an Kundinnen | lit. a Einwilligung |
+| Rechnungen aufbewahren | lit. c rechtliche Verpflichtung |
+| Betrugsprüfung bei Bestellungen (bei Ablehnung mit menschlicher Prüfung) | lit. f berechtigtes Interesse |
+
+### Abgrenzung
+Die **Rechtmäßigkeit** (Art. 6) beantwortet „Darf ich die Daten überhaupt verarbeiten?“, die **TOM** (Art. 32) „Wie schütze ich sie dabei?“. Die Seite **Rechtsgrundlagen** meint dagegen das Ausbildungsrecht (BBiG, Ausbildungsordnung).
+
+### Prüfungsfalle
+Die Einwilligung für alles verlangen oder als einzige Grundlage nennen. Es gibt sechs gleichrangige Grundlagen; das berechtigte Interesse ist zudem kein Freifahrtschein, sondern braucht eine dokumentierte Abwägung.
+
+### Merksatz
+Verbot mit Erlaubnisvorbehalt: ohne eine der sechs Grundlagen keine Verarbeitung.
+
+Siehe auch: Einwilligung · Vertragserfüllung · Rechtliche Verpflichtung · Lebenswichtige Interessen · Berechtigtes Interesse · DSGVO
+Mehr: Deep Dive 10, 2.2
+
 ## Rechtsfähigkeit
 <!-- id: rechtsfahigkeit · quellen: Karte DD14, DD14 2.1 · stand: 2026-10 -->
 
@@ -403,6 +444,42 @@ Rechte haben kann jeder Mensch, Rechte gestalten erst der Geschäftsfähige.
 
 Siehe auch: Geschäftsfähigkeit · Natürliche Personen · Juristische Person · Taschengeldparagraf
 Mehr: Deep Dive 14, 2.1
+
+## Rechtsformen
+<!-- id: rechtsformen · quellen: Karte DD14, DD14 3.1, DD14 3.2, DD20 4.3 · stand: 2026-11 -->
+
+Rechtliche Organisationsformen eines Unternehmens: Sie bestimmen, wer haftet, wie viel Kapital nötig ist, wer das Unternehmen leitet und wo es eingetragen wird.
+
+### Erklärung
+Grundsätzlich unterscheidet man **Einzelunternehmen**, **Personengesellschaften** (GbR, OHG, KG) und **Kapitalgesellschaften** (GmbH, UG, AG); dazu kommt die Genossenschaft (eG). Bei Personengesellschaften steht die Person im Vordergrund, die Gesellschafter haften regelmäßig persönlich. Kapitalgesellschaften sind juristische Personen: Es haftet das Gesellschaftsvermögen, die Gesellschafter riskieren nur ihre Einlage. Sie entstehen erst mit der Eintragung ins Handelsregister.
+
+| Rechtsform | Mindestkapital | Haftung | Register |
+|---|---|---|---|
+| Einzelunternehmen (e. K.) | keines | Inhaber unbeschränkt, auch privat | Handelsregister A, sofern Kaufmann (Kleingewerbe: keine Eintragung nötig) |
+| GbR | keines | alle Gesellschafter unbeschränkt | Gesellschaftsregister (freiwillig, eGbR), nicht Handelsregister; kein Kaufmann |
+| OHG | keines | alle Gesellschafter unbeschränkt | Handelsregister A |
+| KG | keines | Komplementär unbeschränkt, Kommanditist bis zur Haftsumme | Handelsregister A |
+| GmbH | 25.000 € Stammkapital | Gesellschaftsvermögen | Handelsregister B |
+| UG (haftungsbeschränkt) | ab 1 € | Gesellschaftsvermögen | Handelsregister B |
+| AG | 50.000 € Grundkapital | Gesellschaftsvermögen | Handelsregister B |
+| eG | Geschäftsanteile der Mitglieder | Genossenschaftsvermögen | Genossenschaftsregister |
+
+Die Beträge gelten nach dem Stand 2026. Bei der GmbH muss das Stammkapital bei der Gründung nicht voll eingezahlt sein; mindestens die Hälfte, also 12.500 €, ist vor der Anmeldung zu leisten. Die **GmbH & Co. KG** ist eine KG, deren Komplementär eine GmbH ist – eine Personengesellschaft (Abteilung A) mit faktisch beschränkter Haftung. Die Wahl der Rechtsform hängt von Haftungsrisiko, Kapitalbedarf, Leitung, Gründungsaufwand und Steuern ab.
+
+### Beispiel
+Drei Gründer wollen ein Möbelhandelsunternehmen starten, haben zusammen 40.000 € und möchten nicht mit dem Privatvermögen haften. Die AG scheidet aus (50.000 € Grundkapital nötig). Die GmbH passt: 25.000 € Stammkapital, davon bei der Gründung mindestens 12.500 € einzuzahlen. Gerät das Unternehmen in Verluste von 100.000 €, haftet in der GmbH das Gesellschaftsvermögen; die Gesellschafter verlieren höchstens ihre Einlagen. Beim Einzelunternehmen wären die vollen 100.000 € eine Forderung gegen das Privatvermögen des Inhabers.
+
+### Abgrenzung
+Die **Personengesellschaft** haftet über die Personen, die **Kapitalgesellschaft** nur mit dem Gesellschaftsvermögen. Handelsregister **A** gilt für eingetragene Einzelkaufleute sowie OHG und KG, **B** für Kapitalgesellschaften; die GbR steht (freiwillig) im Gesellschaftsregister.
+
+### Prüfungsfalle
+Haftung und Kapital vertauschen: Die GmbH ist nicht auf 25.000 € Haftung begrenzt – diese Summe ist das Mindestkapital; und die AG braucht 50.000 €, nicht 25.000 €.
+
+### Merksatz
+Personen haften persönlich, Kapital haftet mit Kapital – A für Personen, B für Kapital.
+
+Siehe auch: Einzelunternehmen · GbR · OHG · KG · GmbH · UG (haftungsbeschränkt) · AG · GmbH & Co. KG · Handelsregister
+Mehr: Deep Dive 14, 3.2 · Deep Dive 14, 3.1 · Deep Dive 20, 4.3
 
 ## Rechtsgrundlagen
 <!-- id: rechtsgrundlagen · quellen: DD13 1.1 · stand: 2026-10 -->
@@ -516,8 +593,12 @@ Mehr: Deep Dive 1, 2.5 · Deep Dive 2, 1.5 · Deep Dive 9, 5.1
 ### Erklärung
 Wie die Klassifikation braucht die Regression gelabelte Trainingsdaten, also Fälle mit bekanntem Zielwert. Der Unterschied liegt allein in der Zielvariablen: eine Zahl statt einer Kategorie. Verfahren sind die lineare Regression (Regressionsgerade), Regressionsbäume oder Random Forests; bewertet wird mit MAE, RMSE, MAPE oder R².
 
+**Formen der linearen Regression:** Die *einfache* nutzt eine Einflussgröße ($\hat{y} = a + b \cdot x$), die *multiple* mehrere ($\hat{y} = a + b_1 \cdot x_1 + b_2 \cdot x_2 + \dots$), die *polynomiale* nimmt Potenzen von x dazu ($\hat{y} = a + b_1 \cdot x + b_2 \cdot x^2$) und bildet so gekrümmte Zusammenhänge ab. Die Koeffizienten werden nach der Methode der kleinsten Quadrate bestimmt; die verbleibenden Abweichungen $e = y - \hat{y}$ heißen **Residuen** und sollen zufällig um null streuen.
+
+**Gültigkeit und Anpassung:** Eine Prognose innerhalb des beobachteten x-Bereichs (**Interpolation**) ist verlässlicher als eine außerhalb (**Extrapolation**). Ein zu einfaches Modell (Gerade durch eine Kurve) ist unterangepasst (**Underfitting**), ein zu komplexes (Polynom hohen Grades durch wenige Punkte) überangepasst (**Overfitting**): Es trifft die Trainingsdaten fast perfekt, aber neue Daten schlecht. Deshalb wird die Güte an Testdaten geprüft. Eine Regression beschreibt einen Zusammenhang, beweist aber keine Ursache (siehe Kausalität).
+
 ### Beispiel
-Das Möbelhaus prognostiziert aus Werbebudget, Saison und Filiale den Monatsumsatz in T€ – eine Regression. Die Frage „Wird dieser Auftrag reklamiert – ja/nein?“ wäre dagegen eine Klassifikation.
+Das Möbelhaus prognostiziert aus Werbebudget, Saison und Filiale den Monatsumsatz in T€ – eine (multiple) Regression; nur mit dem Werbebudget wäre sie einfach. Die Frage „Wird dieser Auftrag reklamiert – ja/nein?“ wäre dagegen eine Klassifikation.
 
 ### Abgrenzung
 | | Regression | Klassifikation |
@@ -526,12 +607,12 @@ Das Möbelhaus prognostiziert aus Werbebudget, Saison und Filiale den Monatsumsa
 | Gütemaße | MAE, RMSE, R² | Accuracy, Precision, Recall, F1 |
 
 ### Prüfungsfalle
-Die **logistische** Regression ist trotz ihres Namens ein Klassifikationsverfahren – sie schätzt die Wahrscheinlichkeit einer Klasse.
+Die **logistische** Regression ist trotz ihres Namens ein Klassifikationsverfahren – sie schätzt die Wahrscheinlichkeit einer Klasse. Und: Ein gutes Regressionsmodell zeigt einen Zusammenhang, aber keine Kausalität – und gilt nur im Bereich der Trainingsdaten.
 
 ### Merksatz
 Zahl vorhersagen = Regression, Klasse vorhersagen = Klassifikation.
 
-Siehe auch: Klassifikation · Überwachtes Lernen · Regressionsgerade · Logistische Regression · RMSE
+Siehe auch: Klassifikation · Überwachtes Lernen · Regressionsgerade · Regressionskoeffizient · Logistische Regression · RMSE · Residuum · Interpolation · Extrapolation · Overfitting · Underfitting · Multikollinearität · Kausalität
 Mehr: Deep Dive 6, 2.3 · Deep Dive 4, Teil 2
 
 ## Regressionsgerade
@@ -560,7 +641,31 @@ Prognosen weit außerhalb des beobachteten x-Bereichs (Extrapolation) sind unzul
 ### Merksatz
 b ist die Botschaft: „Pro Einheit x ändert sich y um b.“
 
-Siehe auch: Residuum · R² · Korrelationskoeffizient nach Pearson · Extrapolation · Streudiagramm
+Siehe auch: Residuum · R² · Korrelationskoeffizient nach Pearson · Extrapolation · Interpolation · Regressionskoeffizient · Achsenabschnitt · Streudiagramm
+Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.2
+
+## Regressionskoeffizient
+<!-- id: regressionskoffizient · quellen: Karte DD4, DD4 2.1, DD4 2.2 · stand: 2026-11 -->
+
+Zahl vor einer Einflussgröße in der Regressionsgleichung (bei einem x die Steigung b): Sie gibt an, um wie viel sich der geschätzte Wert ŷ ändert, wenn die Einflussgröße um eine Einheit steigt.
+
+### Erklärung
+Einfache Regression: $\hat{y} = a + b \cdot x$. Multiple Regression mit mehreren Einflussgrößen: $\hat{y} = a + b_1 \cdot x_1 + b_2 \cdot x_2$. Jedes $b_j$ gilt bei **konstant gehaltenen übrigen Größen** („unter sonst gleichen Bedingungen“). Die Einheit ist „Einheit von y je Einheit von x_j“; deshalb sind Koeffizienten verschiedener Variablen nicht direkt vergleichbar – einen Vergleich erlauben standardisierte Koeffizienten. Das Vorzeichen zeigt die Richtung. Bei einer Einflussgröße gilt $b = \frac{S_{xy}}{S_{xx}} = r \cdot \frac{s_y}{s_x}$. Bestimmt werden die Koeffizienten mit der Methode der kleinsten Quadrate. Sie beschreiben einen Zusammenhang, keine nachgewiesene Ursache.
+
+### Beispiel
+Einfach: Werbebudget und Umsatz, $b = \frac{64}{10} = 6{,}4$: Je 1 T€ mehr Werbung steigt der Umsatz im Mittel um 6,4 T€. Kontrolle über r: $0{,}983 \cdot \sqrt{424 / 10} = 0{,}983 \cdot 6{,}51 = 6{,}4$.
+Multipel (angenommene Gleichung): $\hat{y} = 10 + 4{,}5 \cdot x_1 + 8 \cdot x_2$ mit x₁ = Werbebudget (T€), x₂ = Zahl der Verkäufer. Bei gleichem Personal bringt 1 T€ Werbung 4,5 T€ Umsatz, bei gleichem Werbebudget ein zusätzlicher Verkäufer 8 T€. Prognose für x₁ = 4 und x₂ = 3: $10 + 18 + 24 = 52$ T€.
+
+### Abgrenzung
+Der Korrelationskoeffizient r ist einheitenlos, liegt zwischen −1 und +1 und ist symmetrisch. Der Regressionskoeffizient b hat eine Einheit, ist nicht auf −1 bis +1 beschränkt und hängt von der Richtung ab: Die Regression von y auf x liefert ein anderes b als die von x auf y. Der **Achsenabschnitt** a ist ebenfalls ein Koeffizient, aber kein Steigungsmaß.
+
+### Prüfungsfalle
+b ohne Einheit und ohne „im Mittel“ interpretieren oder aus einem kleinen b auf „unwichtig“ schließen – b = 0,002 kann bei x in Millionen sehr viel sein. Und: kein Rückschluss auf Kausalität.
+
+### Merksatz
+b = Änderung von ŷ je Einheit x – mit Einheit und „im Mittel“.
+
+Siehe auch: Regressionsgerade · Achsenabschnitt · Regression · Multikollinearität · Korrelationskoeffizient nach Pearson · Kausalität
 Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.2
 
 ## Regressionstest
@@ -588,6 +693,36 @@ Nach jeder Änderung: Läuft alles, was schon lief?
 
 Siehe auch: Fehlernachtest · Testgetriebene Entwicklung (TDD) · Testpyramide · Testfall · Komponententest
 Mehr: Deep Dive 16, 2.4
+
+## Regularisierung
+<!-- id: regularisierung · quellen: DD7 1.2 · stand: 2026-11 -->
+
+Gegenmittel gegen Overfitting: Beim Training werden große Gewichte bestraft, sodass das Modell einfach bleibt; L1 und L2 sind die gängigen Strafen.
+Auch: L1-Regularisierung, L2-Regularisierung, Lasso, Ridge
+
+### Erklärung
+Statt nur den Fehler zu minimieren, minimiert das Training $J(w) = \text{Fehler}(w) + \lambda \cdot \text{Strafe}(w)$. Dabei ist $\text{Fehler}(w)$ der Trainingsfehler (z. B. der mittlere quadratische Fehler), $w_j$ sind die Gewichte und $\lambda \ge 0$ die Stärke der Regularisierung (ein Hyperparameter). **L2 (Ridge)** nutzt die Strafe $\sum_j w_j^2$ und verkleinert alle Gewichte, ohne sie auf genau null zu setzen. **L1 (Lasso)** nutzt $\sum_j \lvert w_j \rvert$ und setzt unwichtige Gewichte auf null – das wirkt wie eine automatische Merkmalsauswahl. $\lambda = 0$ bedeutet keine Regularisierung; ein zu großes $\lambda$ erzeugt Underfitting. Die Merkmale müssen skaliert sein, weil die Strafe sonst Merkmale mit kleinen Zahlenwerten benachteiligt. Weitere Formen: Dropout bei neuronalen Netzen, Pruning bei Bäumen.
+
+### Beispiel
+Lineare Regression für die Reparaturdauer mit drei Gewichten, $\lambda = 0{,}5$, Trainingsfehler (MSE) 20. Ohne Regularisierung ist $w = (4; -3; 2)$. L2-Strafe: $16 + 9 + 4 = 29$, also $J = 20 + 0{,}5 \cdot 29 = 34{,}5$. Die Lösung $w = (3; -2; 1)$ hat einen etwas höheren Trainingsfehler von 22, aber L2-Strafe $9 + 4 + 1 = 14$: $J = 22 + 0{,}5 \cdot 14 = 29$. Das Training bevorzugt sie (29 < 34,5): ein minimal schlechterer Fit auf den Trainingsdaten gegen ein einfacheres, stabileres Modell. Bei L1 würden dieselben Gewichte mit den Beträgen bestraft (Summe $4 + 3 + 2 = 9$ gegen $3 + 2 + 1 = 6$).
+
+### Abgrenzung
+| | L1 (Lasso) | L2 (Ridge) |
+|---|---|---|
+| Strafterm | Summe der Beträge | Summe der Quadrate |
+| Gewichte | einige exakt 0 | alle klein, nie exakt 0 |
+| Nutzen | Merkmalsauswahl | gleichmäßige Dämpfung |
+
+Mit der **Normalisierung** (Skalieren bzw. Normalformen in Datenbanken) hat Regularisierung nichts zu tun.
+
+### Prüfungsfalle
+Regularisierung gegen Underfitting empfehlen – sie macht das Modell einfacher und passt zu Overfitting. Bei Underfitting wird sie eher gelockert ($\lambda$ senken).
+
+### Merksatz
+Große Gewichte kosten Strafe – so bleibt das Modell schlicht.
+
+Siehe auch: Overfitting · Underfitting · Hyperparameter · Early Stopping · Bias-Variance-Trade-off · Gewicht · Skalierung
+Mehr: Deep Dive 7, 1.2
 
 ## Reifegradmodelle
 <!-- id: reifegradmodelle · quellen: Karte DD5, DD5 6.6 · stand: 2026-10 -->
@@ -703,6 +838,49 @@ Die Tabelle zeigt auf sich selbst – und an der Spitze steht NULL.
 Siehe auch: Fremdschlüssel · Kardinalität · Zwischentabelle · Vom Minimum zur NULL-Fähigkeit · Chen-Notation
 Mehr: Deep Dive 2, 1.4
 
+## Relationale Datenbank
+<!-- id: relationale-datenbank · quellen: Karte DD30, DD30 4.2, DD15 4.1 · stand: 2026-11 -->
+
+Datenbank, die ihre Daten in Tabellen (Relationen) mit festem Schema speichert; Beziehungen zwischen den Tabellen entstehen über Primär- und Fremdschlüssel, abgefragt wird sie mit SQL.
+
+### Erklärung
+Eine **Tabelle** besteht aus Zeilen (Datensätzen) und Spalten (Attributen). Jede Spalte hat einen festen **Datentyp**, jede Zeile einen **Primärschlüssel**. Zusammengehörige Daten liegen nicht in einer großen Tabelle, sondern verteilt auf mehrere Tabellen, die über **Fremdschlüssel** verknüpft sind (**Normalisierung** vermeidet Redundanz). Zum Lesen verbindet man die Tabellen mit einem `JOIN`. Das Datenbanksystem prüft Datentypen, Pflichtfelder und Fremdschlüssel selbst (**Schema-on-Write**) und führt Änderungen als **Transaktionen** nach **ACID** aus – deshalb sind relationale Datenbanken die erste Wahl für Buchhaltung, Bestände und Aufträge.
+
+Die Begriffe im Vergleich zur Dokumentendatenbank:
+
+| relational | dokumentenorientiert |
+|---|---|
+| Datenbank | Datenbank |
+| Tabelle | Collection |
+| Zeile (Datensatz) | Dokument |
+| Spalte (Attribut) | Feld |
+
+### Beispiel
+Bei der Möbelhaus Nordholz GmbH liegen Kunden und Bestellungen in zwei Tabellen:
+
+- kunde(**kunden_id**, name, ort)
+- bestellung(**bestell_id**, datum, kunden_id↑)
+
+Der Fremdschlüssel `kunden_id` in `bestellung` verweist auf genau einen Kunden; ein Kunde kann viele Bestellungen haben (1:n). Die Frage „Welche Bestellungen hat der Kunde 1042?“ beantwortet ein `JOIN` über `kunden_id`. Trägt jemand eine `kunden_id` ein, die es nicht gibt, lehnt die Datenbank die Zeile ab.
+
+### Abgrenzung
+| | relational | dokumentenorientiert (NoSQL) |
+|---|---|---|
+| Schema | fest, vor dem Speichern definiert | flexibel, jedes Dokument darf andere Felder haben |
+| Zusammengehöriges | auf Tabellen verteilt, per `JOIN` gelesen | als Dokument verschachtelt (eingebettet) |
+| Konsistenz | ACID, Fremdschlüssel erzwungen | oft nur eventually consistent (BASE) |
+| Abfrage | SQL | herstellerspezifisch, meist JSON-Abfragen |
+| typisch für | Aufträge, Bestände, Buchhaltung | Produktkataloge mit wechselnden Attributen |
+
+### Prüfungsfalle
+„Relational“ kommt von **Relation = Tabelle**, nicht von den Beziehungen zwischen den Tabellen. Und: Relational heißt nicht „langsam“ oder „veraltet“ – sobald strenge Konsistenz gefragt ist, ist es die richtige Antwort.
+
+### Merksatz
+Tabellen mit festem Schema, verknüpft über Schlüssel, gesichert durch ACID.
+
+Siehe auch: Primärschlüssel · Fremdschlüssel · Normalisierung · ACID · Schema-on-Write · NoSQL · Dokumentenorientierte Datenbank
+Mehr: Deep Dive 30, 4.2 · Deep Dive 15, 4.1
+
 ## Relative Häufigkeit
 <!-- id: relative-haufigkeit · quellen: Karte DD3 · stand: 2026-10 -->
 
@@ -757,6 +935,72 @@ Gute Daten zur falschen Frage sind schlechte Daten.
 Siehe auch: Datenqualität · Vollständigkeit · Korrektheit · Datenminimierung · CRISP-DM
 Mehr: Deep Dive 9, Teil 1
 
+## ReLU
+<!-- id: relu · quellen: Karte DD6, DD6 9.3 · stand: 2026-11 -->
+
+Rectified Linear Unit: Aktivierungsfunktion max(0, z) – negative Summen werden zu 0, positive bleiben unverändert.
+
+Auch: Rectified Linear Unit
+
+### Erklärung
+Formel: $y = \max(0,\ z)$ mit z als gewichteter Summe des Neurons. Für z ≤ 0 ist die Ausgabe 0, für z > 0 ist sie gleich z; nach oben gibt es keine Grenze. ReLU ist der Standard in den **verdeckten Schichten** tiefer Netze: Sie ist extrem einfach zu berechnen, und für positive z bleibt die Steigung konstant 1, sodass beim Training das Lernsignal nicht abklingt (anders als bei der gesättigten Sigmoid-Kurve). Sie ist nichtlinear – der Knick bei 0 reicht, damit mehrere Schichten mehr können als ein einzelnes Neuron. Schwäche: Ein Neuron, dessen Summe dauerhaft negativ ist, gibt immer 0 aus und lernt nicht mehr („totes Neuron“).
+
+### Beispiel
+Drei Neuronen einer verdeckten Schicht haben die Summen z = 0,75; −1,2 und 0. Nach ReLU: $\max(0;\ 0{,}75)$ = **0,75**, $\max(0;\ -1{,}2)$ = **0** und $\max(0;\ 0)$ = **0**. Nur das erste Neuron gibt etwas an die nächste Schicht weiter.
+
+### Abgrenzung
+Die Sigmoid-Funktion begrenzt die Ausgabe auf 0 bis 1 und eignet sich für die **Ausgabeschicht** bei Wahrscheinlichkeiten; ReLU kennt keine Obergrenze und steht in den **verdeckten Schichten**. Die Stufenfunktion liefert nur 0 oder 1 und ist für Backpropagation ungeeignet.
+
+### Prüfungsfalle
+Negative Werte mit −z „spiegeln“: ReLU setzt sie auf 0, nicht auf den Betrag. Und ReLU-Ausgaben nicht als Wahrscheinlichkeit lesen – sie können größer als 1 sein.
+
+### Merksatz
+ReLU: Negatives wird null, Positives bleibt.
+
+Siehe auch: Aktivierungsfunktion · Sigmoid-Funktion · Stufenfunktion · Neuron · Neuronale Netze · Backpropagation
+Mehr: Deep Dive 6, 9.3
+
+## Rentabilität
+<!-- id: rentabilitat · quellen: Karte DD20, DD20 4.3, DD25 Teil 3 · stand: 2026-11 -->
+
+Verhältnis des Gewinns zum eingesetzten Kapital oder zum Umsatz, ausgedrückt in Prozent – sie zeigt, wie ertragreich ein Unternehmen wirtschaftet.
+
+### Erklärung
+Es gibt drei Kennzahlen, die sich nur in der Bezugsgröße unterscheiden:
+- **Eigenkapitalrentabilität:** $\text{EKR} = \frac{\text{Gewinn}}{\text{Eigenkapital}} \cdot 100\,\%$ – wie hoch verzinst sich das Geld der Eigentümer?
+- **Gesamtkapitalrentabilität:** $\text{GKR} = \frac{\text{Gewinn} + \text{Fremdkapitalzinsen}}{\text{Gesamtkapital}} \cdot 100\,\%$ – wie hoch verzinst sich alles Kapital im Unternehmen? Die Zinsen werden addiert, weil sie das Entgelt für das Fremdkapital sind und den Gewinn schon gemindert haben.
+- **Umsatzrentabilität:** $\text{UR} = \frac{\text{Gewinn}}{\text{Umsatz}} \cdot 100\,\%$ – wie viel Gewinn bleibt von 100 € Umsatz übrig?
+
+Gewinn ist der Jahresüberschuss nach Abzug aller Aufwendungen; Gesamtkapital ist Eigenkapital plus Fremdkapital (Bilanzsumme). Beurteilt wird im Vergleich: mit dem Vorjahr, dem Branchenwert und einer risikoarmen Geldanlage. Solange die Gesamtkapitalrentabilität über dem Fremdkapitalzins liegt, steigert zusätzliches Fremdkapital die Eigenkapitalrentabilität (**Leverage-Effekt**) – allerdings bei höherem Risiko.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH hat im Geschäftsjahr 1.800.000 € Umsatz und 90.000 € Gewinn. Das Eigenkapital beträgt 600.000 €, das Fremdkapital 900.000 € bei 5 % Zinsen, also 45.000 € Zinsen. Das Gesamtkapital ist $600.000 + 900.000 = 1.500.000$ €.
+- $\frac{90.000}{600.000} \cdot 100$ = **15,00 %** Eigenkapitalrentabilität
+- $\frac{90.000 + 45.000}{1.500.000} \cdot 100$ = **9,00 %** Gesamtkapitalrentabilität
+- $\frac{90.000}{1.800.000} \cdot 100$ = **5,00 %** Umsatzrentabilität
+
+Deutung: Von 100 € Umsatz bleiben 5 € Gewinn; die Eigentümer erhalten 15 % auf ihr Kapital. Die Gesamtkapitalrentabilität (9 %) liegt über dem Fremdkapitalzins (5 %) – deshalb ist die Eigenkapitalrentabilität höher als die Gesamtkapitalrentabilität.
+
+### Abgrenzung
+| Kennzahl | Quotient | Aussage |
+|---|---|---|
+| Rentabilität | Gewinn / Kapital oder Umsatz | Wie ertragreich ist der Kapitaleinsatz? |
+| Wirtschaftlichkeit | Ertrag / Aufwand | Wird mit Überschuss gearbeitet (Wert über 1)? |
+| Produktivität | Output / Input (Mengen) | Wie ergiebig ist der Einsatz an Arbeit, Material und Maschinen? |
+| Gewinn | absoluter Betrag in € | Wie viel bleibt übrig – ohne Bezug zum Einsatz? |
+
+Der **Return on Investment** ist die Rentabilität einer einzelnen Investition.
+
+### Prüfungsfalle
+Typische Fehler: bei der Gesamtkapitalrentabilität die Fremdkapitalzinsen vergessen, bei der Eigenkapitalrentabilität den Umsatz statt des Eigenkapitals in den Nenner setzen oder das Ergebnis nicht deuten, obwohl der Operator „Beurteilen“ lautet.
+
+### Merksatz
+Rentabilität = Gewinn durch Einsatz – bei der Gesamtkapitalrentabilität zählen die Zinsen im Zähler mit.
+
+Siehe auch: Return on Investment · Wirtschaftlichkeitsbetrachtung · GmbH
+Mehr: Deep Dive 20, 4.3 · Deep Dive 25, Teil 3
+
+
 ## Rentenversicherung
 <!-- id: rentenversicherung · quellen: Karte DD14, DD14 1.2 · stand: 2026-10 -->
 
@@ -792,7 +1036,7 @@ Mehr: Deep Dive 14, 1.2 · Deep Dive 14, 1.3
 Abweichung zwischen beobachtetem und vom Modell geschätztem Wert: $e = y - \hat{y}$.
 
 ### Erklärung
-Residuen zeigen, wo die Regressionsgerade danebenliegt. Bei der Kleinste-Quadrate-Geraden summieren sie sich immer zu null; ihre Quadratsumme ist die unerklärte Streuung und geht in R² ein. Erwünscht ist eine **zufällige** Streuung um null. Ein Muster (erst alle negativ, dann alle positiv, Trichterform) zeigt, dass das lineare Modell nicht passt.
+Residuen zeigen, wo die Regressionsgerade danebenliegt. Bei der Kleinste-Quadrate-Geraden summieren sie sich immer zu null; ihre Quadratsumme ist die unerklärte Streuung und geht in R² ein. Erwünscht ist eine **zufällige** Streuung um null. Ein Muster (erst alle negativ, dann alle positiv) zeigt, dass das lineare Modell nicht passt. Wächst die Streuung mit x (Trichterform), liegt **Heteroskedastizität** vor; gleich breit bleibt sie bei **Homoskedastizität**.
 
 ### Beispiel
 Gerade $\hat{y} = 24{,}8 + 6{,}4 \cdot x$, Monat 2: x = 2, y = 40. Geschätzt $\hat{y} = 37{,}6$, also $e = 40 - 37{,}6 = 2{,}4$ T€. Alle Residuen: −1,2 / +2,4 / −2,0 / +1,6 / −0,8 – Summe 0, Quadratsumme 14,4, kein erkennbares Muster.
@@ -806,7 +1050,7 @@ Gemessen wird senkrecht in y-Richtung, nicht rechtwinklig zur Geraden – und da
 ### Merksatz
 Residuen sollen rauschen, nicht erzählen.
 
-Siehe auch: Regressionsgerade · R² · RMSE · MAE · Streudiagramm
+Siehe auch: Regressionsgerade · R² · RMSE · MAE · Streudiagramm · Homoskedastizität · Heteroskedastizität
 Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.3
 
 ## REST-API
@@ -818,6 +1062,16 @@ Auch: REST
 
 ### Erklärung
 **Ressourcen** sind Substantive im Plural (`/reparaturauftraege/5001`), keine Verben. GET liest, POST legt an, PUT ersetzt, PATCH ändert teilweise, DELETE löscht; das Ergebnis meldet ein Statuscode (2xx Erfolg, 4xx Client-, 5xx Serverfehler). Zustandslos heißt: Der Server speichert keinen Sitzungszustand, jede Anfrage bringt alles mit, auch das Token. Beschrieben wird eine REST-API mit **OpenAPI**.
+
+Die **REST-Prinzipien**, die in Prüfungen (oft als englische Kurzbeschreibung) abgefragt werden:
+
+| Prinzip | Bedeutung | Vorteil |
+|---|---|---|
+| **Client-Server** | Oberfläche und Datenhaltung sind getrennt | Client und Server lassen sich unabhängig weiterentwickeln |
+| **Zustandslos** (stateless) | Jede Anfrage enthält alles, was der Server braucht | Jeder Server kann jede Anfrage bearbeiten – einfache Skalierung, ein Serverausfall verliert keine Sitzung |
+| **Cacheable** | Antworten sagen, ob sie zwischengespeichert werden dürfen | Wiederholte Abfragen kommen aus dem Cache: weniger Serverlast, schnellere Antwort |
+| **Uniform Interface** | Ressourcen über URIs, wenige Standardmethoden und einheitliche Darstellungen (z. B. JSON) | Jeder Client nutzt die API ohne Sonderwissen |
+| **Layered System** (Schichtensystem) | Der Client weiß nicht, ob er direkt mit dem Server spricht | Proxys, Load Balancer und Caches lassen sich unsichtbar dazwischenschalten |
 
 ### Beispiel
 ```http
@@ -834,13 +1088,13 @@ Ein Partner liest offene Aufträge gezielt und aktuell, statt nachts eine CSV-Da
 | GraphQL | ein Endpunkt, Client wählt die Felder |
 
 ### Prüfungsfalle
-POST ist nicht idempotent: Ein wiederholtes POST nach einem Timeout legt eine zweite Bestellung an.
+POST ist nicht idempotent: Ein wiederholtes POST nach einem Timeout legt eine zweite Bestellung an. Und „zustandslos“ heißt nicht, dass der Server keine Daten speichert, sondern dass er sich **zwischen zwei Anfragen nichts über den Client merkt** (keine Sitzung). Bei „Vorteil des Prinzips“ nicht nur das Schlagwort wiederholen, sondern den Nutzen für das Szenario nennen (z. B. Cache: Artikeldaten werden nicht bei jedem Aufruf neu aus der Datenbank gelesen).
 
 ### Merksatz
 Substantiv in der URI, Verb in der HTTP-Methode.
 
 Siehe auch: Idempotent · Zustandslos · HTTP-Statuscode · OpenAPI · SOAP
-Mehr: Deep Dive 15, 3.1 · Deep Dive 15, 3.2
+Mehr: Deep Dive 15, 3.1 · Deep Dive 15, 3.2 · Deep Dive 24, 6.1
 
 ## Retrospektive
 <!-- id: retrospektive · quellen: Karte DD12 · stand: 2026-10 -->
@@ -1158,10 +1412,12 @@ Mehr: Deep Dive 11, A5
 Receiver Operating Characteristic: Kurve, die für alle Entscheidungsschwellen die Richtig-Positiv-Rate (Recall) gegen die Falsch-Positiv-Rate abträgt.
 
 ### Erklärung
-Ein Klassifikator liefert zunächst einen Score; erst die Schwelle macht daraus „positiv“ oder „negativ“, und jede Schwelle ergibt eine eigene Konfusionsmatrix. Die ROC-Kurve zeigt alle auf einmal: Punkt (0 | 0) heißt nie Alarm, (1 | 1) immer Alarm, oben links (0 | 1) wäre perfekt. Die Diagonale entspricht Raten. Die Fläche darunter (**AUC**) fasst die Trennschärfe zusammen: 1 perfekt, 0,5 Zufall.
+Ein Klassifikator liefert zunächst einen Score; erst die Schwelle macht daraus „positiv“ oder „negativ“, und jede Schwelle ergibt eine eigene Konfusionsmatrix. Die ROC-Kurve zeigt alle auf einmal: Punkt (0 | 0) heißt nie Alarm, (1 | 1) immer Alarm, oben links (0 | 1) wäre perfekt. Die Diagonale entspricht Raten. Die Fläche darunter (**AUC**) fasst die Trennschärfe zusammen: 1 perfekt, 0,5 Zufall. Jeder Punkt ist ein Wertepaar aus $\text{TPR} = \frac{TP}{TP + FN}$ (Richtig-Positiv-Rate = Recall: Anteil der tatsächlich Positiven, die gefunden wurden) und $\text{FPR} = \frac{FP}{FP + TN}$ (Falsch-Positiv-Rate = 1 − Spezifität: Anteil der tatsächlich Negativen, die fälschlich Alarm auslösen). TP, FN, FP und TN sind die Felder der Konfusionsmatrix bei der jeweiligen Schwelle. Senkt man die Schwelle, wandert der Punkt nach oben rechts: Mehr Treffer, aber auch mehr Fehlalarme.
 
 ### Beispiel
 Reklamationsmodell bei Schwelle 50 %: FPR = $\frac{90}{900}$ = 10 %, Recall = 60 % → Punkt (0,10 | 0,60), deutlich über der Diagonale.
+
+Kleines Beispiel zum Nachrechnen: Zehn Aufträge, 4 Reklamationen und 6 ohne; die Scores der Reklamationen sind 0,90; 0,80; 0,55 und 0,40, die der übrigen sechs 0,65; 0,45; 0,35; 0,25; 0,15 und 0,10. Bei Schwelle 0,5 sind TP = 3, FN = 1, FP = 1, TN = 5 → TPR $= \frac{3}{4} = 0{,}75$, FPR $= \frac{1}{6} = 0{,}17$. Bei Schwelle 0,4 sind TP = 4, FN = 0, FP = 2, TN = 4 → TPR $= 1{,}00$, FPR $= \frac{2}{6} = 0{,}33$. Bei Schwelle 0,3 sind TP = 4, FP = 3, TN = 3 → TPR $= 1{,}00$, FPR $= \frac{3}{6} = 0{,}50$. Die Punkte (0,17 | 0,75), (0,33 | 1,00) und (0,50 | 1,00) wandern mit sinkender Schwelle nach oben rechts; die vollständige Kurve ergibt eine AUC von 0,875 (siehe AUC).
 
 ### Abgrenzung
 Die AUC ist schwellenunabhängig und gut zum Modellvergleich; welche Schwelle im Betrieb gilt, entscheiden die Kosten von FP und FN. Bei stark unausgeglichenen Klassen ist die Precision-Recall-Kurve aussagekräftiger.
@@ -1172,7 +1428,7 @@ Auf der x-Achse steht die Falsch-Positiv-Rate (1 − Spezifität), nicht die Pre
 ### Merksatz
 Je näher an der linken oberen Ecke, desto besser.
 
-Siehe auch: AUC · Falsch-Positiv-Rate · Recall · Spezifität · Konfusionsmatrix
+Siehe auch: AUC · Entscheidungsschwelle · Falsch-Positiv-Rate · Recall · Spezifität · Konfusionsmatrix
 Mehr: Deep Dive 7, 4.4 · Deep Dive 17, 6.10
 
 ## ROLAP / MOLAP
@@ -1255,6 +1511,36 @@ Was gebaut wird (Product Owner), wie gearbeitet wird (Scrum Master), wer baut (D
 
 Siehe auch: Product Owner · Scrum Master · Developers · Scrum · Product Backlog
 Mehr: Deep Dive 12, Teil 2
+
+## ROUND
+<!-- id: round · quellen: Karte DD1, DD9 2.1, DD31 4.2 · stand: 2026-11 -->
+
+SQL-Funktion, die eine Zahl (üblicherweise kaufmännisch) auf eine angegebene Zahl von Nachkommastellen rundet: `ROUND(x, n)`.
+Auch: ROUND-Funktion, Runden in SQL
+
+### Erklärung
+`ROUND(x)` rundet auf eine ganze Zahl, `ROUND(x, 2)` auf zwei Nachkommastellen. Kaufmännisch heißt: Ab 5 wird aufgerundet, auch bei negativen Zahlen weg von null (2,5 → 3, −2,5 → −3). Das gilt für exakte Dezimalzahlen; bei Fließkommazahlen (FLOAT, REAL) kann die Binärdarstellung oder das System (z. B. PostgreSQL mit `double precision`: zur geraden Zahl) ein anderes Ergebnis liefern. Gerundet wird nur das Ergebnis der Abfrage, die gespeicherten Werte bleiben unverändert – erst `UPDATE … SET preis = ROUND(…)` ändert sie. Man rundet **zuletzt**, nach der ganzen Rechnung (`ROUND(SUM(…), 2)`); wer Zwischenergebnisse rundet, summiert Rundungsfehler auf. Ist der Wert NULL, ist auch das Ergebnis NULL.
+
+Dialekt: In MySQL, PostgreSQL und Oracle rundet ein negatives n vor dem Komma (`ROUND(1234.567, -2)` = 1200); SQLite kennt das nicht und liefert hier 1235. Außerdem liefert SQLite immer eine Kommazahl (REAL).
+
+### Beispiel
+```sql
+SELECT bezeichnung, ROUND(preis * 1.19, 2) AS brutto
+FROM produkt;
+```
+Ergebnis: Bürostuhl Comfort 296,31 · Schreibtisch Basic 474,81 · Monitor 27 Zoll 224,91 · Dockingstation 153,51 · Schreibtischlampe 47,48. Die Lampe zeigt die Rundung: 39,90 · 1,19 = 47,481 → 47,48.
+
+### Abgrenzung
+`ROUND` rundet zum nächsten Wert, `CAST(2.7 AS INTEGER)` ergibt in SQLite und SQL Server 2 (abgeschnitten), `ROUND(2.7)` dagegen 3; MySQL, PostgreSQL und Oracle runden beim CAST ebenfalls auf 3. Wer abschneiden will, nutzt `FLOOR` bzw. `TRUNC`. Eine bloße Formatierung der Anzeige (z. B. `FORMAT` in MySQL) ändert den Zahlenwert nicht und erzeugt Text.
+
+### Prüfungsfalle
+Ganzzahldivision: `ROUND(5 / 2)` liefert 2, weil schon `5 / 2` mit zwei ganzen Zahlen auf 2 abgeschnitten wird (SQLite, SQL Server; MySQL rechnet hier 2,5). Mindestens ein Operand muss eine Kommazahl sein: `ROUND(5 * 1.0 / 2)` = 3.
+
+### Merksatz
+Erst rechnen, zuletzt runden – und auf ganzzahlige Division achten.
+
+Siehe auch: SELECT · Datentypen · COALESCE · CONCAT
+Mehr: Deep Dive 31, 4.2 · Deep Dive 9, 2.1
 
 ## RPO
 <!-- id: rpo · quellen: Karte DD10, DD10 4.4, DD10 5.4 · stand: 2026-10 -->

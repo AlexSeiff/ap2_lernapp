@@ -325,7 +325,7 @@ Ein neuronales Netz für einen kleinen Datensatz mit Erklärungspflicht empfehle
 ### Merksatz
 Je mehr Daten und je weniger Erklärungsbedarf, desto eher ein neuronales Netz.
 
-Siehe auch: Neuron · Perzeptron · Mehrschichtiges Perzeptron · Deep Learning · Entscheidungsbaum
+Siehe auch: Neuron · Perzeptron · Mehrschichtiges Perzeptron · Deep Learning · CNN (Convolutional Neural Network) · Entscheidungsbaum
 Mehr: Deep Dive 6, 2.4 · Deep Dive 6, 8.2 · Deep Dive 6, Teil 9
 
 ## Nichtige Vereinbarungen
@@ -755,7 +755,7 @@ H0: „Zwischen Schulungsstunden und Fehlerquote besteht in der Grundgesamtheit 
 ### Merksatz
 Man widerlegt die Nullhypothese – beweisen kann man sie nicht.
 
-Siehe auch: P-Wert · Signifikanz · Korrelation · Scheinkorrelation · Kausalität
+Siehe auch: P-Wert · Signifikanz · Alternativhypothese · Hypothesentest · Fehler 1. Art · Fehler 2. Art · Korrelation · Scheinkorrelation · Kausalität
 Mehr: Deep Dive 4, 1.3
 
 ## Nur Untertabellen

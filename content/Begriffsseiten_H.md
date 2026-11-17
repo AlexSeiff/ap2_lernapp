@@ -99,21 +99,28 @@ Siehe auch: Patchmanagement · Firewall · Least Privilege · IT-Grundschutz · 
 Mehr: Deep Dive 10, 5.3
 
 ## Hashing
-<!-- id: hashing · quellen: Karte DD10, DD10 4.2 · stand: 2026-10 -->
+<!-- id: hashing · quellen: Karte DD10, DD10 4.2 · stand: 2026-11 -->
 
 Einwegfunktion, die aus beliebigen Daten einen Wert fester Länge berechnet, der sich nicht umkehren lässt; dient der Integritätsprüfung und der Passwortspeicherung.
 
 ### Erklärung
-Schon eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert; so fallen Manipulationen auf. SHA-256 liefert z. B. immer 256 Bit (64 Hexadezimalzeichen). Passwörter werden gehasht gespeichert, zusätzlich mit einem **Salt** (Zufallswert je Passwort), damit gleiche Passwörter verschiedene Hashes ergeben und vorberechnete Tabellen nutzlos sind. Für Passwörter nimmt man bewusst langsame Verfahren wie Argon2, bcrypt, scrypt oder PBKDF2; MD5 und SHA-1 gelten als unsicher.
+Schon eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert; so fallen Manipulationen auf. SHA-256 liefert z. B. immer 256 Bit (64 Hexadezimalzeichen). Eine gute kryptografische Hashfunktion ist
+- **preimage-resistent:** Aus dem Hash lässt sich die Eingabe praktisch nicht berechnen (Einweg),
+- **second-preimage-resistent:** Zu einer gegebenen Eingabe findet man keine zweite mit demselben Hash,
+- **kollisionsresistent:** Es ist praktisch nicht möglich, zwei verschiedene Eingaben mit gleichem Hash zu finden (mathematisch gibt es Kollisionen immer, sie sind nur nicht auffindbar).
+
+Bei MD5 und SHA-1 sind Kollisionen praktisch erzeugbar – sie gelten für Sicherheitszwecke als unsicher.
+
+**Passwörter** speichert man gehasht mit einem **Salt** (Zufallswert je Passwort), damit gleiche Passwörter verschiedene Hashes ergeben und vorberechnete Tabellen nutzlos sind. Optional kommt ein **Pepper** hinzu, ein geheimer Wert, getrennt von der Datenbank aufbewahrt. Entscheidend ist ein **langsames, einstellbares Verfahren** (Argon2id, bcrypt, scrypt oder PBKDF2 mit hoher Iterationszahl): Der **Work Factor** (Rechen- bzw. Speicheraufwand) wird so gewählt, dass ein einzelner Login kaum auffällt, Brute Force aber unbezahlbar wird, und wird mit stärkerer Hardware erhöht. Ein schneller Hash wie SHA-256 allein ist für Passwörter ungeeignet, weil Angreifer damit enorm viele Versuche pro Sekunde schaffen.
 
 ### Beispiel
 Nach dem Export einer CSV an den Steuerberater wird der SHA-256-Wert der Datei mitgeschickt. Der Empfänger berechnet ihn erneut – stimmen beide überein, ist die Datei unverändert.
 
 ### Abgrenzung
-**Verschlüsselung** ist mit dem Schlüssel umkehrbar und schützt die Vertraulichkeit; Hashing ist nicht umkehrbar und schützt die Integrität. Die digitale Signatur verschlüsselt (signiert) den Hash mit dem privaten Schlüssel.
+**Verschlüsselung** ist mit dem Schlüssel umkehrbar und schützt die Vertraulichkeit; Hashing ist nicht umkehrbar und schützt die Integrität. Die digitale Signatur verschlüsselt (signiert) den Hash mit dem privaten Schlüssel. Ein einfacher Hash beweist keine Herkunft: Wer die Datei ändert, kann den Hash gleich mitändern – dafür braucht man eine Signatur oder einen schlüsselbasierten Hash (HMAC).
 
 ### Prüfungsfalle
-„Passwörter werden verschlüsselt gespeichert“ – richtig ist: gehasht mit Salt.
+„Passwörter werden verschlüsselt gespeichert“ – richtig ist: gehasht mit Salt und mit einem langsamen Verfahren (Argon2id, bcrypt …), nicht mit SHA-256 allein.
 
 ### Merksatz
 Hashing hat keinen Rückweg.
@@ -223,6 +230,72 @@ Heatmap: Tabelle, deren Zahlen man sieht, bevor man sie liest.
 
 Siehe auch: Dashboard · Barrierefreiheit · Liniendiagramm · Streudiagramm
 Mehr: Deep Dive 17, 6.9 · Deep Dive 11, A1
+
+## Heteroskedastizität
+<!-- id: heteroskedastizitat · quellen: Karte DD4, DD4 2.3 · stand: 2026-11 -->
+
+Die Streuung der Residuen einer Regression ist nicht konstant, sondern ändert sich systematisch mit x oder ŷ – im Residuenplot typisch als Trichter.
+
+### Erklärung
+Häufige Ursachen: Größenordnung (große Filialen schwanken absolut stärker als kleine), eine fehlende Einflussgröße oder eine falsche Modellform. Die geschätzte Gerade bleibt dabei im Mittel richtig, aber Standardfehler, p-Werte und Konfidenzintervalle der Koeffizienten werden unzuverlässig, und Prognosen sind nicht überall gleich genau. Gegenmaßnahmen: die Zielgröße transformieren (z. B. logarithmieren, sodass Fehler relativ statt absolut werden), gewichtete Regression, robuste Standardfehler oder das Modell um fehlende Einflussgrößen erweitern. Erkennen: Residuen über ŷ oder x auftragen; ein Trichter (die Streuung wird größer oder kleiner) zeigt das Problem. Eine Welle oder Kurve zeigt dagegen eine nichtlineare Beziehung, ein Muster über die Zeit Autokorrelation.
+
+### Beispiel
+Umsatzprognose für fünf Filialen: Der Prognosefehler wächst mit der Größe.
+
+| Filialumsatz (T€) | 50 | 100 | 300 | 1.000 | 3.000 |
+|---|---|---|---|---|---|
+| Fehlerbetrag (T€) | 2 | 4 | 12 | 40 | 120 |
+| Fehler in % | 4 | 4 | 4 | 4 | 4 |
+
+Absolut öffnet sich ein Trichter (2 bis 120 T€), relativ ist der Fehler konstant bei 4 %. Eine Regression auf dem Logarithmus des Umsatzes arbeitet mit solchen relativen Fehlern und ist dort passender.
+
+### Abgrenzung
+Das Gegenstück ist die **Homoskedastizität** (gleich breites Band). Heteroskedastizität betrifft die **Streuung** der Residuen, nicht ihren Mittelwert – der ist bei der Kleinste-Quadrate-Geraden immer null.
+
+### Prüfungsfalle
+Aus einem Trichter ableiten, die Gerade selbst sei „falsch“: Betroffen ist vor allem die Genauigkeit der Aussagen (Tests, Intervalle). Auch nicht mit Autokorrelation (Muster über die Zeit) verwechseln.
+
+### Merksatz
+Hetero = verschieden: Die Fehler streuen mal wenig, mal viel.
+
+Siehe auch: Homoskedastizität · Residuum · Regressionsgerade · MAPE · Regression
+Mehr: Deep Dive 4, 2.3
+
+## Hierarchisches Clustering
+<!-- id: hierarchisches-clustering · quellen: DD6 Teil 3 · stand: 2026-11 -->
+
+Clusterverfahren, das eine Hierarchie verschachtelter Gruppen aufbaut; üblich ist der Weg von unten nach oben, bei dem die jeweils ähnlichsten Cluster schrittweise verschmolzen werden. Das Ergebnis wird als Dendrogramm dargestellt.
+Auch: Dendrogramm
+
+### Erklärung
+Beim **agglomerativen** Vorgehen beginnt jeder Punkt als eigenes Cluster; in jedem Schritt werden die beiden Cluster mit dem kleinsten Abstand verschmolzen, bis nur eines übrig ist (das **divisive** Gegenstück teilt von oben nach unten). Der Abstand zwischen Clustern hängt vom **Linkage** ab: **Single** nimmt die nächsten Punkte beider Cluster, **Complete** die entferntesten, **Average** den Mittelwert, **Ward** minimiert den Varianzzuwachs. Das **Dendrogramm** zeigt die Verschmelzungen; die Höhe einer Verbindung ist der Abstand, bei dem verschmolzen wurde. Wer waagerecht auf einer Höhe abschneidet, erhält die Cluster – die Clusterzahl wird also erst am Ende gewählt. Nachteile: hoher Rechen- und Speicherbedarf bei vielen Punkten, ein Schritt ist nicht umkehrbar, und die Merkmale müssen skaliert sein.
+
+### Beispiel
+Fünf Spediteure nach durchschnittlicher Lieferdauer in Tagen: A = 1, B = 2, C = 6, D = 8, E = 20. Abstände: A–B = 1, C–D = 2, B–C = 4, A–C = 5, B–D = 6, A–D = 7, D–E = 12, C–E = 14, B–E = 18, A–E = 19. **Complete Linkage:**
+
+1. Kleinster Abstand A–B = 1 → Cluster {A, B} bei Höhe 1.
+2. Nächster: C–D = 2 → {C, D} bei Höhe 2.
+3. {A, B} gegen {C, D}: größter Einzelabstand = max(5; 7; 4; 6) = 7. {C, D} gegen E: max(14; 12) = 14. Kleinster Wert 7 → {A, B, C, D} bei Höhe 7.
+4. {A, B, C, D} gegen E: max(19; 18; 14; 12) = 19 → alles verschmolzen bei Höhe 19.
+
+Schnitt bei Höhe 5 → drei Cluster {A, B}, {C, D}, {E}; Schnitt bei Höhe 10 → {A, B, C, D} und {E}. Mit **Single Linkage** wären die Höhen 1, 2, 4 und 12 – derselbe Baum, anderes Maß.
+
+### Abgrenzung
+| | k-Means | Hierarchisches Clustering |
+|---|---|---|
+| Clusteranzahl | vorher festlegen | am Dendrogramm wählen |
+| Ergebnis | eine Gruppierung | Hierarchie aller Gruppierungen |
+| Aufwand | gering | hoch bei vielen Punkten |
+
+### Prüfungsfalle
+Im Dendrogramm die Reihenfolge der Blätter auf der Achse als Ähnlichkeit lesen – nur die Höhe der Verbindung zählt.
+
+### Merksatz
+Von unten verschmelzen, am Dendrogramm abschneiden.
+
+Siehe auch: Clustering · K-Means · DBSCAN · Euklidischer Abstand · Skalierung
+Mehr: Deep Dive 6, Teil 3
+
 
 ## Histogramm
 <!-- id: histogramm · quellen: Karte DD11, DD11 A1, DD17 6.6 · stand: 2026-10 -->
@@ -338,6 +411,31 @@ HOLAP: verdichtet schnell, im Detail relational.
 Siehe auch: ROLAP · MOLAP · OLAP-Würfel · Drill-down · OLAP
 Mehr: Deep Dive 8, 4.5
 
+## Homoskedastizität
+<!-- id: homoskedastizitat · quellen: Karte DD4, DD4 2.3 · stand: 2026-11 -->
+
+Voraussetzung der linearen Regression: Die Residuen streuen für alle x-Werte etwa gleich stark – die Fehlervarianz ist konstant.
+
+Auch: Konstante Fehlervarianz
+
+### Erklärung
+Prüfen lässt sich das im **Residuenplot**: Residuen e auf der y-Achse, x oder ŷ auf der x-Achse. Ein gleichmäßig breites Band um die Null ohne erkennbares Muster spricht für Homoskedastizität. Sie ist neben dem linearen Zusammenhang, unabhängigen Residuen und – für Tests und Intervalle – annähernd normalverteilten Residuen eine der Regressionsannahmen. Nur wenn sie gilt, stimmen die Standardfehler und damit p-Werte und Konfidenzintervalle der Koeffizienten. Rechnerische Tests (z. B. Breusch-Pagan) gibt es, in der Prüfung genügt der Blick auf den Residuenplot.
+
+### Beispiel
+Residuen der Werbebudget-Regression, nach x geordnet: −1,2 / +2,4 / −2,0 / +1,6 / −0,8 T€. Die Beträge 1,2 / 2,4 / 2,0 / 1,6 / 0,8 wachsen oder schrumpfen nicht systematisch, es gibt keinen Trichter. Mit nur fünf Punkten ist das allerdings eine schwache Aussage – die Annahme lässt sich erst bei mehr Daten verlässlich beurteilen.
+
+### Abgrenzung
+**Heteroskedastizität** ist das Gegenteil (Trichterform). Die Residuensumme null ist kein Beleg für Homoskedastizität: Sie gilt bei der Kleinste-Quadrate-Geraden immer, auch bei Trichtern.
+
+### Prüfungsfalle
+„Die Residuen summieren sich zu null, also ist die Streuung konstant“ – das sind zwei verschiedene Eigenschaften.
+
+### Merksatz
+Homo = gleich: ein Band mit gleicher Breite.
+
+Siehe auch: Heteroskedastizität · Residuum · Regressionsgerade · Regression
+Mehr: Deep Dive 4, 2.3
+
 ## Horizontale Partitionierung
 <!-- id: horizontale-partitionierung · quellen: DD8 5.3 · stand: 2026-10 -->
 
@@ -442,3 +540,78 @@ Asymmetrisch einigen, symmetrisch verschlüsseln.
 
 Siehe auch: Symmetrische Verschlüsselung · Asymmetrische Verschlüsselung · PKI · Hashing · Man-in-the-Middle
 Mehr: Deep Dive 10, 4.2
+
+## Hyperparameter
+<!-- id: hyperparameter · quellen: DD6 2.1, DD6 9.4, DD7 1.3 · stand: 2026-11 -->
+
+Einstellung eines Lernverfahrens, die vor dem Training festgelegt und nicht aus den Daten gelernt wird, z. B. k bei k-NN, die Baumtiefe oder die Lernrate.
+Auch: Hyperparameter-Tuning, Grid Search, Random Search
+
+### Erklärung
+**Parameter** (z. B. Gewichte eines Netzes, die Schwellen eines Baums) werden vom Training gelernt; **Hyperparameter** bestimmt der Mensch. Das **Tuning** probiert Kandidaten aus und vergleicht sie mit Validierungsdaten oder per Kreuzvalidierung; erst das gewählte Modell wird einmal auf den Testdaten geprüft. Bei der **Grid Search** werden alle Kombinationen eines festen Rasters getestet, bei der **Random Search** zufällig gezogene Kombinationen aus vorgegebenen Bereichen – bei vielen Hyperparametern oft effizienter, weil meist nur wenige davon wirklich wichtig sind. Der Aufwand: Anzahl Kombinationen mal Anzahl Folds der Kreuzvalidierung.
+
+### Beispiel
+Entscheidungsbaum für Reklamationen: Baumtiefe {3, 5, 8} und Mindestzahl Fälle je Blatt {5, 20} ergeben 3 · 2 = 6 Kombinationen; bei 5-facher Kreuzvalidierung sind das 6 · 5 = 30 Trainingsläufe. Mittlerer Recall über die fünf Folds:
+
+| Tiefe | Blatt 5 | Blatt 20 |
+|---|---|---|
+| 3 | 0,52 | 0,53 |
+| 5 | 0,57 | 0,60 |
+| 8 | 0,55 | 0,58 |
+
+Gewählt wird Tiefe 5 mit Blatt 20 (Recall 0,60; z. B. die Folds 0,58; 0,62; 0,60; 0,57; 0,63 → Mittel 0,60). Das fertige Modell wird einmal auf den Testdaten geprüft. Eine Random Search mit einem Budget von 4 Kombinationen käme mit 4 · 5 = 20 Läufen aus.
+
+### Abgrenzung
+| | Parameter | Hyperparameter |
+|---|---|---|
+| Wer legt fest? | das Training | der Mensch |
+| Beispiele | Gewichte, Bias | k, Baumtiefe, Lernrate, Batchgröße |
+| Wann? | während des Trainings | davor |
+
+### Prüfungsfalle
+Hyperparameter an den Testdaten einstellen – die Testdaten gehen dann indirekt ins Training ein und die gemessene Güte ist zu optimistisch.
+
+### Merksatz
+Parameter lernt das Modell, Hyperparameter stellst du ein.
+
+Siehe auch: Validierungsdaten · Kreuzvalidierung · Lernrate · Overfitting · K-Nächste-Nachbarn · Testdaten
+Mehr: Deep Dive 6, 2.1 · Deep Dive 6, 9.4 · Deep Dive 7, 1.3
+
+## Hypothesentest
+<!-- id: hypothesentest · quellen: Karte DD4, DD4 1.3 · stand: 2026-11 -->
+
+Statistisches Verfahren, das anhand einer Stichprobe entscheidet, ob eine Annahme über die Grundgesamtheit (die Nullhypothese) beibehalten oder verworfen wird.
+
+Auch: Signifikanztest, Statistischer Test
+
+### Erklärung
+Ablauf:
+1. Nullhypothese H0 und Alternativhypothese H1 formulieren.
+2. Signifikanzniveau α festlegen (üblich 5 %) – vor der Auswertung.
+3. Passenden Test wählen; er hängt von Skalenniveau, Verteilung und Fragestellung ab (z. B. t-Test für Mittelwerte, Test auf Korrelation, Chi-Quadrat-Test für Häufigkeiten).
+4. Prüfgröße und p-Wert berechnen.
+5. Entscheiden: $p < \alpha$ → H0 verwerfen, sonst beibehalten.
+6. Fachlich deuten, auch mit der Effektgröße – nicht nur „signifikant“.
+
+Zwei Fehler sind möglich: der **Fehler 1. Art** (H0 fälschlich verworfen) und der **Fehler 2. Art** (H0 fälschlich beibehalten). Jeder Test gilt nur, wenn seine Voraussetzungen stimmen, vor allem eine zufällige, repräsentative Stichprobe.
+
+### Beispiel
+Bisherige Reparaturdauer: μ₀ = 60 min, σ = 10 min. Nach Einführung einer Checkliste ergeben 25 Reparaturen den Mittelwert $\bar{x} = 56$ min.
+- H0: μ = 60 min; H1: μ < 60 min (einseitig); α = 5 %.
+- $z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{56 - 60}{10 / \sqrt{25}} = \frac{-4}{2} = -2{,}0$
+- Kritischer Wert (einseitig, 5 %): −1,645. Da −2,0 < −1,645, ist $p \approx 0{,}023 < 0{,}05$ → H0 wird verworfen.
+
+Deutung: Die Verkürzung ist statistisch signifikant, also kaum durch Zufall erklärbar (bei α = 5 % bleibt ein Restrisiko für einen Fehler 1. Art). Ob 4 Minuten (rund 7 %; Effektgröße d = 0,4) den Aufwand der Checkliste lohnen, ist eine fachliche Frage.
+
+### Abgrenzung
+Ein **Konfidenzintervall** liefert dieselbe Information aus anderer Sicht: einen Wertebereich für den wahren Wert. Ein **A/B-Test** ist die Anwendung eines Hypothesentests auf zwei Varianten. Der **p-Wert** ist nur ein Zwischenergebnis des Tests.
+
+### Prüfungsfalle
+Den p-Wert als Wahrscheinlichkeit lesen, dass H0 stimmt (er ist die Wahrscheinlichkeit, unter H0 ein mindestens so extremes Ergebnis zu erhalten), „nicht verworfen“ als Beweis für H0 nehmen oder α nachträglich passend wählen.
+
+### Merksatz
+Wie vor Gericht: Im Zweifel gilt H0 – verurteilt wird nur bei klarer Beweislage (p < α).
+
+Siehe auch: Nullhypothese · Alternativhypothese · P-Wert · Signifikanz · Fehler 1. Art · Fehler 2. Art · Effektgröße · Konfidenzintervall
+Mehr: Deep Dive 4, 1.3
+

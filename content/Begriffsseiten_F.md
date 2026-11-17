@@ -5,7 +5,7 @@
 Harmonisches Mittel aus Precision und Recall: $F_1 = \frac{2 \cdot P \cdot R}{P + R}$.
 
 ### Erklärung
-Das F1-Maß fasst die beiden gegenläufigen Kennzahlen eines Klassifikationsmodells in einer Zahl zusammen. Weil es das harmonische und nicht das arithmetische Mittel ist, liegt es immer näher am kleineren der beiden Werte: Ein Modell mit sehr hoher Precision, aber kaum Recall bekommt ein schlechtes F1. Es eignet sich besonders bei **unausgeglichenen Klassen**, wo die Accuracy täuscht. Die richtig negativen Fälle (TN) gehen nicht ein.
+Dabei ist $P$ die Precision $\frac{TP}{TP + FP}$ und $R$ der Recall $\frac{TP}{TP + FN}$ (TP = richtig positiv, FP = falsch positiv, FN = falsch negativ). Das F1-Maß fasst die beiden gegenläufigen Kennzahlen eines Klassifikationsmodells in einer Zahl zusammen. Weil es das harmonische und nicht das arithmetische Mittel ist, liegt es immer näher am kleineren der beiden Werte: Ein Modell mit sehr hoher Precision, aber kaum Recall bekommt ein schlechtes F1. Es eignet sich besonders bei **unausgeglichenen Klassen**, wo die Accuracy täuscht. Die richtig negativen Fälle (TN) gehen nicht ein.
 
 ### Beispiel
 Reklamationsmodell im Möbelhaus: TP = 60, FP = 90, FN = 40. Precision $= \frac{60}{150} = 0{,}40$, Recall $= \frac{60}{100} = 0{,}60$.
@@ -80,7 +80,7 @@ Falsch positiv ist der Fehlalarm (Fehler 1. Art). Welcher Fehler schwerer wiegt,
 ### Merksatz
 FN = übersehen.
 
-Siehe auch: Falsch positiv · Recall · Konfusionsmatrix · Richtig positiv
+Siehe auch: Falsch positiv · Recall · Konfusionsmatrix · Richtig positiv · Fehler 2. Art
 Mehr: Deep Dive 7, 2.1 · Deep Dive 7, 2.4
 
 ## Falsch positiv
@@ -100,7 +100,7 @@ Falsch negativ ist der übersehene Fall (Fehler 2. Art). Teuer ist ein FP z. B. 
 ### Merksatz
 FP = Fehlalarm.
 
-Siehe auch: Falsch negativ · Precision · Falsch-Positiv-Rate · Konfusionsmatrix
+Siehe auch: Falsch negativ · Precision · Falsch-Positiv-Rate · Konfusionsmatrix · Fehler 1. Art
 Mehr: Deep Dive 7, 2.1 · Deep Dive 7, 2.4
 
 ## Falsch-Positiv-Rate
@@ -228,6 +228,66 @@ Ohne Zeitstempel keine Reihenfolge, ohne Reihenfolge kein Prozess.
 
 Siehe auch: Timestamp · Event Log · Zu grobe Zeitstempel · Fehlende Case ID · Zeitzonen-/Sommerzeitprobleme
 Mehr: Deep Dive 5, 5.3
+
+## Fehler 1. Art (α-Fehler)
+<!-- id: fehler-1-art · quellen: Karte DD4, DD4 1.3, DD7 2.1 · stand: 2026-11 -->
+
+Die Nullhypothese wird verworfen, obwohl sie zutrifft – ein Fehlalarm: Man behauptet einen Effekt, den es gar nicht gibt. Die Wahrscheinlichkeit dafür ist höchstens das Signifikanzniveau α.
+
+Auch: Fehler erster Art, Typ-I-Fehler
+
+### Erklärung
+α legt man vor dem Test fest, meist 5 %. Würde man 100-mal einen nicht vorhandenen Effekt testen, wäre er im Schnitt 5-mal „signifikant“. Das Risiko wächst bei **Mehrfachtests**: Bei k unabhängigen Tests ist die Wahrscheinlichkeit für mindestens einen Fehlalarm $1 - (1 - \alpha)^k$. Gegenmaßnahmen: strengeres α, Korrektur für Mehrfachtests (z. B. Bonferroni: α geteilt durch k) und Ergebnisse an neuen Daten bestätigen. In der Konfusionsmatrix entspricht der Fehler 1. Art dem **falsch positiven** Fall.
+
+### Beispiel
+Das Möbelhaus prüft 20 Merkmale (Wochentag, Filiale, Lieferweg …) auf einen Zusammenhang mit der Reklamationsquote, α = 5 %. Gibt es in Wahrheit keinen einzigen, liegt die Wahrscheinlichkeit für mindestens einen Zufallstreffer bei $1 - 0{,}95^{20} = 1 - 0{,}358 = 0{,}642$, also rund 64 %. Ein einzelner „signifikanter“ Treffer unter 20 Tests ist daher ohne Korrektur kein belastbarer Beleg (Bonferroni: nur $p < 0{,}05 / 20 = 0{,}0025$ zählt).
+
+### Abgrenzung
+| | Fehler 1. Art | Fehler 2. Art |
+|---|---|---|
+| Entscheidung | H0 verworfen | H0 beibehalten |
+| Wahrheit | H0 stimmt | H0 ist falsch |
+| Folge | Fehlalarm | übersehener Effekt |
+| Wahrscheinlichkeit | α | β |
+| Konfusionsmatrix | falsch positiv | falsch negativ |
+
+α ist die vorab gewählte Obergrenze, der p-Wert dagegen wird aus den Daten berechnet.
+
+### Prüfungsfalle
+α = 5 % als „H0 ist zu 5 % wahr“ deuten, α mit dem p-Wert gleichsetzen oder die beiden Fehlerarten vertauschen. Merkhilfe: Art 1 = zu Unrecht verurteilt (Fehlalarm), Art 2 = Täter laufen gelassen.
+
+### Merksatz
+Fehler 1. Art: Alarm, obwohl nichts ist.
+
+Siehe auch: Fehler 2. Art · Nullhypothese · Signifikanz · P-Wert · Falsch positiv · Hypothesentest
+Mehr: Deep Dive 4, 1.3 · Deep Dive 7, 2.1
+
+## Fehler 2. Art (β-Fehler)
+<!-- id: fehler-2-art · quellen: Karte DD4, DD4 1.3, DD7 2.1 · stand: 2026-11 -->
+
+Die Nullhypothese wird beibehalten, obwohl sie falsch ist – ein echter Effekt wird übersehen. Die Wahrscheinlichkeit dafür heißt β, ihr Gegenstück 1 − β ist die Teststärke (Power).
+
+Auch: Fehler zweiter Art, Typ-II-Fehler
+
+### Erklärung
+Die **Teststärke** ist die Wahrscheinlichkeit, einen tatsächlich vorhandenen Effekt zu entdecken; üblich ist das Planungsziel von mindestens 80 %. Sie steigt mit größerer Stichprobe, größerem wahren Effekt, geringerer Streuung und höherem α. Bei fester Stichprobe wirken α und β gegenläufig: Wer α senkt, um Fehlalarme zu vermeiden, übersieht mehr echte Effekte. In der Konfusionsmatrix entspricht der Fehler 2. Art dem **falsch negativen** Fall, die Teststärke dem Recall des Tests.
+
+### Beispiel
+Bisherige Reparaturdauer 60 min (σ = 10 min); eine neue Checkliste senkt sie in Wahrheit auf 56 min. Einseitiger z-Test mit α = 5 % (kritischer Wert −1,645):
+- 25 Reparaturen: Standardfehler $\frac{10}{\sqrt{25}} = 2$, H0 wird verworfen, wenn $\bar{x} < 60 - 1{,}645 \cdot 2 = 56{,}71$. Bei wahrem μ = 56 geschieht das mit Wahrscheinlichkeit $\Phi\left(\frac{56{,}71 - 56}{2}\right) = \Phi(0{,}36) \approx 0{,}64$. Teststärke 64 %, β ≈ 36 %: Mit gut einer Chance von drei bleibt der echte Effekt unentdeckt.
+- 50 Reparaturen: Standardfehler 1,41, Grenze 57,67, Teststärke $\Phi(1{,}18) \approx 0{,}88$ – jetzt reicht die Stichprobe.
+
+### Abgrenzung
+Der Fehler 1. Art ist der Fehlalarm (zu Unrecht „signifikant“), der Fehler 2. Art das Übersehen (zu Unrecht „nicht signifikant“). Welcher schwerer wiegt, hängt vom Schaden ab – wie bei Precision und Recall.
+
+### Prüfungsfalle
+„Nicht signifikant“ als „es gibt keinen Effekt“ lesen. Bei kleiner Stichprobe war oft nur die Teststärke zu gering. Und: α allein zu verkleinern verbessert nichts, es erhöht β.
+
+### Merksatz
+Fehler 2. Art: Effekt da, aber nicht entdeckt.
+
+Siehe auch: Fehler 1. Art · Hypothesentest · Falsch negativ · Recall · Effektgröße · Nullhypothese
+Mehr: Deep Dive 4, 1.3 · Deep Dive 7, 2.1
 
 ## Fehlernachtest
 <!-- id: fehlernachtest · quellen: Karte DD16, DD16 2.4 · stand: 2026-10 -->
@@ -639,6 +699,35 @@ Formkaufmann ist man durch die Form, nicht durch das Geschäft.
 
 Siehe auch: Istkaufmann · Kannkaufmann · Handelsregister · GmbH · AG
 Mehr: Deep Dive 14, 3.1
+
+## Fortbildung
+<!-- id: fortbildung · quellen: Karte DD33, DD33 Teil 5 · stand: 2026-11 -->
+
+Berufliche Weiterbildung, die auf dem erlernten Beruf aufbaut: Sie erhält und erweitert die beruflichen Kenntnisse oder führt zum beruflichen Aufstieg (§ 1 Abs. 4 BBiG).
+
+### Erklärung
+Man unterscheidet die **Anpassungsfortbildung** (Kenntnisse auffrischen oder an neue Technik anpassen, z. B. eine neue Programmiersprache oder eine Datenschutzschulung) und die **Aufstiegsfortbildung** (höhere Qualifikation mit Kammerprüfung, z. B. Fachwirt, Meister). Die Ausbildereignung nach AEVO ist eine zusätzliche Qualifikation und wird oft ebenfalls als Fortbildung bezeichnet. Der Beruf bleibt derselbe; die Fortbildung setzt in der Regel eine abgeschlossene Ausbildung oder Berufserfahrung voraus. Gefördert wird sie unter anderem durch das Aufstiegs-BAföG, durch Zuschüsse des Arbeitgebers oder durch einen Bildungsgutschein der Agentur für Arbeit.
+
+### Beispiel
+Lea Sommer hat bei der Möbelhaus Nordholz GmbH die Ausbildung zur Fachinformatikerin abgeschlossen und arbeitet als Anwendungsentwicklerin. Nach zwei Berufsjahren legt sie die Ausbildereignungsprüfung ab, um selbst ausbilden zu dürfen. Das ist eine Fortbildung: Sie bleibt in ihrem Beruf und erwirbt eine zusätzliche Befähigung. Fortbildungen sind in der Regel freiwillig; die Kosten tragen je nach Vereinbarung Betrieb oder Beschäftigte.
+
+### Abgrenzung
+| | Fortbildung | Umschulung |
+|---|---|---|
+| Ziel | im gleichen Beruf erhalten, erweitern, aufsteigen | zu einer anderen beruflichen Tätigkeit befähigen |
+| Beispiel | Fachwirt, Ausbildereignung, neues Framework | Lageristin wird Fachinformatikerin |
+| Rechtsgrundlage | § 1 Abs. 4 BBiG | § 1 Abs. 5 BBiG |
+
+Beide gehören zur beruflichen **Weiterbildung** (Oberbegriff). Die Erstausbildung dagegen ist die Berufsausbildung auf Grundlage des Ausbildungsvertrags.
+
+### Prüfungsfalle
+Eine Qualifizierung für einen anderen Beruf als Fortbildung bezeichnen – wer zu einem anderen Beruf befähigt wird, macht eine Umschulung.
+
+### Merksatz
+Fortbildung: gleicher Beruf, mehr Können – Umschulung: neuer Beruf.
+
+Siehe auch: Umschulung · Duale Ausbildung · BBiG · IHK · Europass
+Mehr: Deep Dive 33, Teil 5
 
 ## Freier Puffer
 <!-- id: freier-puffer · quellen: Karte DD12, DD12 3.2 · stand: 2026-10 -->

@@ -270,6 +270,34 @@ Hohe Accuracy bei seltenen Fällen beweist nichts – erst mit der Baseline verg
 Siehe auch: Konfusionsmatrix · Precision · Recall · Balanced Accuracy · Unausgeglichene Klassen
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.3
 
+## Achsenabschnitt (Intercept)
+<!-- id: achsenabschnitt · quellen: Karte DD4, DD4 2.1, DD4 2.2 · stand: 2026-11 -->
+
+Konstante a der Regressionsgleichung: der Wert, den das Modell als Schätzung ŷ liefert, wenn die Einflussgröße x gleich null ist.
+
+Auch: Intercept, Konstante
+
+### Erklärung
+In $\hat{y} = a + b \cdot x$ legt a die Höhe der Geraden fest, die Steigung b ihre Neigung. Rechnerisch gilt $a = \bar{y} - b \cdot \bar{x}$: Die Gerade verläuft immer durch den Schwerpunkt der Daten $(\bar{x} \mid \bar{y})$. a hat die Einheit von y. Als „Grundwert“ darf man a nur deuten, wenn x = 0 im beobachteten Bereich liegt oder zumindest sinnvoll ist; sonst ist a eine Extrapolation und nur ein Rechenwert, der die Gerade an die richtige Stelle schiebt. Bei mehreren Einflussgrößen ist a der Schätzwert, wenn alle x gleichzeitig null sind. Lässt man a weg (Regression durch den Ursprung), ändern sich Koeffizienten und R² – das ist nur zulässig, wenn x = 0 zwingend y = 0 bedeutet.
+
+### Beispiel
+Werbebudget x und Umsatz y der Möbelhaus Nordholz GmbH: $\bar{x} = 3$, $\bar{y} = 44$, $b = 6{,}4$.
+$a = 44 - 6{,}4 \cdot 3 = 44 - 19{,}2 = 24{,}8$ T€.
+Beobachtet wurde nur x = 1 bis 5. „Bei 0 € Werbung 24,8 T€ Umsatz“ ist deshalb nur ein Rechenwert, kein belegter Grundumsatz.
+Anders bei einer Montagezeit-Gleichung $\hat{y} = 12 + 5 \cdot x$ (x = Anzahl Möbelteile, y in Minuten): Montiert werden meist 2 bis 10 Teile, und 12 min Rüstzeit je Auftrag sind fachlich plausibel – dort ist a deutbar.
+
+### Abgrenzung
+Die **Steigung b** sagt, um wie viel sich ŷ je Einheit x ändert; der Achsenabschnitt a sagt, auf welcher Höhe die Gerade startet. a ist nicht der Mittelwert ȳ – ȳ ist der Wert der Geraden an der Stelle x̄ (hier 44, nicht 24,8).
+
+### Prüfungsfalle
+a ohne Prüfung als „Wert ohne Einfluss von x“ ausgeben. Liegt x = 0 außerhalb der Daten oder kommt ein unsinniger Wert heraus (etwa ein negativer Umsatz), nur als Rechenwert bezeichnen.
+
+### Merksatz
+b ist die Botschaft, a nur der Startpunkt der Geraden.
+
+Siehe auch: Regressionsgerade · Regressionskoeffizient · Extrapolation · Residuum
+Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.2
+
 ## Achsenbeschriftung mit Einheit
 <!-- id: achsenbeschriftung-mit-einheit · quellen: DD11 A2 · stand: 2026-10 -->
 
@@ -746,6 +774,51 @@ Jede Zahl braucht ein Datum, sonst ist sie nicht einzuordnen.
 Siehe auch: Dashboard · Aktualität · Vergleichsmaßstab mitliefern · ETL
 Mehr: Deep Dive 11, A4
 
+## Akzeptanz und Widerstände
+<!-- id: akzeptanz-und-widerstande · quellen: Karte DD18, DD18 2.3, DD21 Teil 5, DD22 2.1, DD27 A6 · stand: 2026-11 -->
+
+Akzeptanz ist die Bereitschaft der Betroffenen, eine Neuerung – etwa ein neues System oder einen geänderten Ablauf – zu nutzen und mitzutragen; Widerstand entsteht, wenn sie Nachteile befürchten.
+
+Auch: Widerstände im Change, Befürchtung und Gegenmaßnahme
+
+### Erklärung
+Neue Technik scheitert selten an der Technik, sondern an Menschen, die sich übergangen oder bedroht fühlen. Die Prüfungsaufgabe lautet fast immer: **Befürchtung nennen, passende Gegenmaßnahme beschreiben.** Die Gegenmaßnahme muss **genau diese Befürchtung** entkräften – eine sinnvolle, aber unpassende Maßnahme bringt keine Punkte.
+
+Die vier Werkzeuge gegen Widerstand:
+- **Kommunikation:** früh, offen und mehrfach informieren (Ziel, Gründe, Zeitplan, was sich für wen ändert).
+- **Beteiligung:** Betroffene in Projektteam, Workshops oder als Key-User einbinden; Betriebsrat von Anfang an.
+- **Qualifizierung:** Schulung, Handbuch, Ansprechpartner in der Anfangszeit.
+- **Absicherung:** Betriebsvereinbarung, Beschäftigungszusage, Pilotbetrieb, Kennzahlen zur Wirkung.
+
+| Betroffene | typische Befürchtung | passende Gegenmaßnahme |
+|---|---|---|
+| Beschäftigte | Arbeitsplatzverlust durch Automatisierung | frühe Information, Qualifizierung für neue Aufgaben, Zusage in der Betriebsvereinbarung |
+| Beschäftigte | Überforderung durch neue Technik | Schulung, feste Ansprechpartner, schrittweise Einführung (Pilotbetrieb) |
+| Beschäftigte | Leistungs- und Verhaltenskontrolle | Betriebsvereinbarung mit Zweckbindung, keine personenbezogene Leistungsauswertung, Transparenz über die erfassten Daten |
+| Betriebsrat | Mitbestimmung wird übergangen (§ 87 Abs. 1 Nr. 6 BetrVG) | frühe Einbindung, Betriebsvereinbarung vor der Einführung |
+| Geschäftsleitung | Investition rechnet sich nicht | Wirtschaftlichkeitsrechnung vorab, Pilotbetrieb mit Kennzahlen |
+| Führungskräfte | Kontrollverlust, geänderte Zuständigkeiten | klare Rollenbeschreibung, Einbindung in die Einführung |
+
+### Beispiel
+Im Projekt ABHOLAPP der Möbelhaus Nordholz GmbH fürchten die Mitarbeiter der Warenausgabe schon im Kick-off, dass die Abholschränke ihre Stellen überflüssig machen. Zwei passende Maßnahmen: (1) offene Information über den Plan – eine Teilzeitstelle wird durch Renteneintritt frei und nicht neu besetzt, es gibt keine Kündigungen; das wird in einer Betriebsvereinbarung festgehalten. (2) Qualifizierung der Beschäftigten für die neue Aufgabe „Abholschränke befüllen und betreuen“. Eine Schulung zur Bedienung der App allein würde diese Befürchtung nicht entkräften.
+
+### Abgrenzung
+| Begriff | Frage |
+|---|---|
+| **Akzeptanz und Widerstände** | Wie holen wir die Betroffenen ab? |
+| Stakeholderanalyse | Wer ist betroffen, wie viel Einfluss und Interesse hat er? |
+| Änderungsmanagement | Wie behandeln wir Änderungswünsche am Projektumfang (Change Requests)? |
+| Betriebsvereinbarung | Wie sichern wir die Zusagen verbindlich ab? |
+
+### Prüfungsfalle
+Auf jede Befürchtung mit „Schulung“ antworten. Schulung hilft gegen Überforderung, nicht gegen Angst um den Arbeitsplatz oder vor Kontrolle. Außerdem: Die Befürchtung muss konkret zur genannten Gruppe passen, die Gegenmaßnahme erklärt, **wie** sie die Befürchtung ausräumt.
+
+### Merksatz
+Erst die Befürchtung benennen, dann die Maßnahme, die genau sie entkräftet.
+
+Siehe auch: Stakeholder · Stakeholderanalyse · Betriebsrat · Betriebsvereinbarung · Mitbestimmung · Pilotbetrieb · Änderungsmanagement
+Mehr: Deep Dive 18, 2.3 · Deep Dive 22, 2.1 · Deep Dive 21, Teil 5
+
 ## Algorithmus
 <!-- id: algorithmus · quellen: Karte DD11, DD11 Prüfungsrelevanz, DD11 B1 · stand: 2026-10 -->
 
@@ -780,6 +853,39 @@ Eindeutig, endlich, ausführbar – aus Sequenz, Verzweigung, Wiederholung.
 Siehe auch: Pseudocode · Struktogramm · Programmablaufplan · Aufwand (Komplexität) · Maximum suchen
 Mehr: Deep Dive 11, Prüfungsrelevanz · Deep Dive 11, B1
 
+## Alias (AS)
+<!-- id: alias · quellen: Karte DD1, DD1 1.4, DD1 2.6 · stand: 2026-11 -->
+
+Namensvergabe in einer SQL-Abfrage: Mit `AS` bekommen Spalten, berechnete Ausdrücke und Tabellen einen kürzeren oder aussagekräftigeren Namen, der nur für diese Abfrage gilt.
+Auch: AS, Spaltenalias, Tabellenalias
+
+### Erklärung
+Ein **Spaltenalias** benennt die Ergebnisspalte (`preis * 1.19 AS brutto`, `COUNT(*) AS anzahl`) – bei berechneten Spalten und Aggregaten sinnvoll, sonst steht der Ausdruck als Überschrift. Namen mit Leerzeichen setzt man in Anführungszeichen. Ein **Tabellenalias** (`FROM kunde AS k` oder kurz `FROM kunde k`) macht JOINs lesbar und ist Pflicht bei einem Self-Join (dieselbe Tabelle zweimal) und bei einer Unterabfrage in FROM (abgeleitete Tabelle, in MySQL ohne Alias ein Fehler). Hat eine Tabelle einen Alias, nutzt man ab dann nur noch ihn (`k.name`, nicht `kunde.name`).
+
+Gültigkeit: Ein Spaltenalias entsteht erst im SELECT. Nach Standard-SQL ist er deshalb in ORDER BY nutzbar, aber nicht in WHERE (MySQL erlaubt ihn zusätzlich in GROUP BY und HAVING). SQLite ist großzügiger und akzeptiert ihn auch in WHERE.
+
+### Beispiel
+```sql
+SELECT k.name, COUNT(*) AS anzahl_bestellungen
+FROM kunde AS k
+JOIN bestellung AS b ON b.kunden_id = k.kunden_id
+GROUP BY k.name
+ORDER BY anzahl_bestellungen DESC, k.name;
+```
+Ergebnis: Huber GmbH 3 · Fischer KG 2 · Schmidt AG 1. Ohne die Tabellenaliase müsste man `kunde.kunden_id` und `bestellung.kunden_id` ausschreiben.
+
+### Abgrenzung
+Ein Alias benennt nur in der Ausgabe um; die Tabelle behält ihre Spaltennamen. Dauerhaft umbenennen kann nur `ALTER TABLE … RENAME` (DDL). Eine View speichert eine ganze Abfrage unter einem Namen, ein Alias nur einen einzelnen Namen.
+
+### Prüfungsfalle
+Den Spaltenalias im WHERE verwenden (`WHERE brutto > 200`) – nach Standard-SQL ein Fehler; in der Prüfung die Rechnung ausschreiben. Ebenso häufig: eine Spalte, die in beiden JOIN-Tabellen vorkommt, ohne Präfix schreiben (`kunden_id` statt `k.kunden_id`) – Fehler „mehrdeutig“.
+
+### Merksatz
+Der Alias entsteht im SELECT – davor kennt ihn niemand.
+
+Siehe auch: SELECT · ORDER BY · INNER JOIN · WHERE · Unterabfrage
+Mehr: Deep Dive 1, 1.4 · Deep Dive 1, 2.6
+
 ## Allgemeinverbindlicherklärung
 <!-- id: allgemeinverbindlicherklarung · quellen: DD13 5.2, Karte DD13 · stand: 2026-10 -->
 
@@ -804,6 +910,33 @@ Allgemeinverbindlich heißt: Der Staat macht den Tarifvertrag zur Regel für all
 
 Siehe auch: Tarifvertrag · Tarifbindung · Tarifautonomie · Günstigkeitsprinzip
 Mehr: Deep Dive 13, 5.2
+
+## Alternativhypothese
+<!-- id: alternativhypothese · quellen: Karte DD4, DD4 1.3 · stand: 2026-11 -->
+
+Gegenannahme (H1) zur Nullhypothese: die Behauptung, die man belegen möchte – z. B. „es gibt einen Zusammenhang“ oder „die neue Methode ist schneller“. Sie gilt als gestützt, wenn die Nullhypothese verworfen wird.
+
+### Erklärung
+H0 und H1 schließen sich aus und werden **vor** dem Test formuliert. Eine **ungerichtete** (zweiseitige) H1 behauptet nur „es gibt einen Unterschied“ ($\mu_1 \neq \mu_2$), eine **gerichtete** (einseitige) eine Richtung ($\mu_1 < \mu_2$). Die Richtung darf nicht erst nach einem Blick auf die Daten gewählt werden. Entscheidung: Ist $p < \alpha$, wird H0 verworfen und die Daten sprechen für H1. Sonst wird H0 beibehalten – das heißt „nicht widerlegt“, nicht „bewiesen“.
+
+### Beispiel
+Das Möbelhaus testet eine neue Lieferroute. H0: „Die mittlere Lieferzeit ist unverändert.“ H1 (einseitig): „Die mittlere Lieferzeit ist kürzer.“ Ergibt der Test p = 0,02 bei α = 0,05, wird H0 verworfen – die Verkürzung ist statistisch signifikant, die Daten sprechen für H1. Wäre H1 zweiseitig („Lieferzeit ist anders“), wäre auch eine Verlängerung ein Treffer.
+
+### Abgrenzung
+| | Nullhypothese H0 | Alternativhypothese H1 |
+|---|---|---|
+| Inhalt | kein Effekt, kein Unterschied | Effekt, Unterschied, Zusammenhang |
+| Rolle | wird getestet und ggf. verworfen | wird bei Verwerfen von H0 gestützt |
+| Beweisbar? | nie bestätigt | nie „bewiesen“, nur gestützt |
+
+### Prüfungsfalle
+Die Hypothesen nachträglich passend zum Ergebnis formulieren, oder „H0 nicht verworfen“ als „H1 ist widerlegt“ bzw. „H0 stimmt“ deuten.
+
+### Merksatz
+H1 wird nicht bewiesen, sondern bekommt Rückenwind, wenn H0 scheitert.
+
+Siehe auch: Nullhypothese · Hypothesentest · P-Wert · Signifikanz · Fehler 1. Art
+Mehr: Deep Dive 4, 1.3
 
 ## Alternativtext
 <!-- id: alternativtext · quellen: Karte DD11, DD11 A5 · stand: 2026-10 -->
@@ -998,13 +1131,15 @@ Mitten im Dashboard-Projekt wünscht der Vertrieb eine zusätzliche Auswertung j
 ### Abgrenzung
 Im agilen Vorgehen landen neue Wünsche im **Product Backlog** und werden vom Product Owner priorisiert – auch das ist kontrolliertes Änderungsmanagement, nur ohne formalen Antrag.
 
+Nicht verwechseln mit dem **Umgang mit Widerständen** bei einer Einführung („Change“ im Sinne der Veränderung für die Beschäftigten): Dort geht es nicht um Änderungswünsche am Projektumfang, sondern um die Befürchtungen der Betroffenen und passende Gegenmaßnahmen wie Information, Beteiligung und Schulung – siehe Akzeptanz und Widerstände.
+
 ### Prüfungsfalle
 Änderungen „schnell nebenbei“ einbauen – dann stimmen Soll-Ist-Vergleich und Abnahmegrundlage nicht mehr.
 
 ### Merksatz
 Jede Änderung wird bewertet, entschieden und dokumentiert – nie stillschweigend eingebaut.
 
-Siehe auch: Scope Creep · Pflichtenheft · Soll-Ist-Vergleich · Magisches Dreieck · Product Backlog
+Siehe auch: Scope Creep · Pflichtenheft · Soll-Ist-Vergleich · Magisches Dreieck · Product Backlog · Akzeptanz und Widerstände
 Mehr: Deep Dive 12, Teil 5
 
 ## Anfechtung
@@ -1480,12 +1615,21 @@ Siehe auch: Grenzwertanalyse · Black-Box-Test · Testfall · Testdesign
 Mehr: Deep Dive 16, 2.2 · Deep Dive 16, 2.3
 
 ## Arbeitgeberpflichten
-<!-- id: arbeitgeberpflichten · quellen: DD14 5.1 · stand: 2026-10 -->
+<!-- id: arbeitgeberpflichten · quellen: DD14 5.1, DD20 5.1 · stand: 2026-11 -->
 
 Pflichten des Arbeitgebers im Arbeitsschutz: Gefährdungsbeurteilung, Schutzmaßnahmen, Wirksamkeitskontrolle, Dokumentation, Unterweisung sowie Bestellung von Fachkraft für Arbeitssicherheit und Betriebsarzt.
 
 ### Erklärung
 Grundlage ist das Arbeitsschutzgesetz: Der Arbeitgeber muss die Gefährdungen jedes Arbeitsplatzes beurteilen und dokumentieren (§§ 5, 6 ArbSchG), daraus Maßnahmen nach dem **STOP-Prinzip** ableiten, deren Wirksamkeit prüfen und die Beschäftigten unterweisen (§ 12 ArbSchG) – bei Einstellung, bei Veränderungen und mindestens jährlich, Jugendliche mindestens halbjährlich. Nach dem Arbeitssicherheitsgesetz bestellt er eine **Fachkraft für Arbeitssicherheit** und einen **Betriebsarzt**. Die Kosten trägt er allein.
+
+**Erste Hilfe und Beauftragte (Stand 2026):**
+
+| Rolle | Aufgabe und Regel |
+|---|---|
+| **Erste Hilfe** (§ 10 ArbSchG) | Der Arbeitgeber organisiert Erste Hilfe, Brandbekämpfung und Evakuierung, stellt Verbandmaterial, Meldeeinrichtungen und Rettungswege bereit und benennt geeignete Beschäftigte. Nach DGUV Vorschrift 1 (§ 26): bei 2 bis 20 anwesenden Versicherten mindestens **1 Ersthelfer**, darüber in Verwaltungs- und Handelsbetrieben **5 %**, in sonstigen Betrieben **10 %** der anwesenden Versicherten. Ausbildung mit 9 Unterrichtseinheiten bei einer ermächtigten Stelle, Auffrischung in der Regel alle 2 Jahre. Ersthelfer sind bei der Hilfeleistung gesetzlich unfallversichert |
+| **Fachkraft für Arbeitssicherheit** und **Betriebsarzt** (ASiG) | beraten und unterstützen den Arbeitgeber, tragen aber nicht die Verantwortung |
+| **Sicherheitsbeauftragter** (§ 22 SGB VII) | Beschäftigter, der den Arbeitgeber **nebenbei** unterstützt: achtet darauf, dass Schutzeinrichtungen und persönliche Schutzausrüstung vorhanden sind und richtig benutzt werden, und weist auf Gefahren hin. Er hat **kein Weisungsrecht**, trägt **keine rechtliche Verantwortung** und darf wegen der Aufgabe nicht benachteiligt werden; der Betriebsrat wird an der Bestellung beteiligt. Pflicht seit der Änderung vom 29.05.2026: ab **50 Beschäftigten**; bei mehr als 20 und weniger als 50 nur bei besonderer Gefährdung; unter 250 Beschäftigten ohne besondere Gefahr genügt einer. Frühere Fassung und ältere Klausuren: Pflicht schon bei mehr als 20 Beschäftigten; die DGUV Vorschrift 1 (§ 20) nennt noch die alte Grenze, das Gesetz geht vor |
+| **Arbeitsschutzausschuss** (§ 11 ASiG) | bei mehr als 20 Beschäftigten; Arbeitgeber, zwei Betriebsratsmitglieder, Betriebsarzt, Fachkraft und Sicherheitsbeauftragte tagen mindestens **vierteljährlich** |
 
 ### Beispiel
 Für die Büroarbeitsplätze der Datenanalyse beurteilt das Möbelhaus Bildschirm, Licht, Stuhl und Arbeitszeiten, beschafft höhenverstellbare Tische, regelt Pausen und Tätigkeitswechsel und bietet eine Vorsorge für die Augen an.
@@ -1494,13 +1638,13 @@ Für die Büroarbeitsplätze der Datenanalyse beurteilt das Möbelhaus Bildschir
 Die arbeitsvertraglichen Pflichten (Vergütung, Beschäftigung, Zeugnis) stehen im Arbeitsvertrag; die **Fürsorgepflicht** umfasst den Arbeitsschutz als einen Teil.
 
 ### Prüfungsfalle
-Persönliche Schutzausrüstung als erste Maßnahme nennen – nach STOP ist sie das letzte Mittel.
+Persönliche Schutzausrüstung als erste Maßnahme nennen – nach STOP ist sie das letzte Mittel. Auch: den Sicherheitsbeauftragten für verantwortlich oder weisungsbefugt halten – die Verantwortung bleibt beim Arbeitgeber.
 
 ### Merksatz
 Beurteilen, schützen, prüfen, dokumentieren, unterweisen.
 
-Siehe auch: Arbeitsschutz · Gefährdungsbeurteilung · STOP-Prinzip · Unterweisung · Bildschirmarbeit
-Mehr: Deep Dive 14, 5.1
+Siehe auch: Arbeitsschutz · Gefährdungsbeurteilung · STOP-Prinzip · Unterweisung · Bildschirmarbeit · Gewerbeaufsichtsamt
+Mehr: Deep Dive 14, 5.1 · Deep Dive 20, 5.1
 
 ## Arbeitslosengeld I
 <!-- id: arbeitslosengeld-i · quellen: Karte DD14, DD14 1.4 · stand: 2026-10 -->
@@ -1597,6 +1741,40 @@ Gefährdung beurteilen, nach STOP schützen, unterweisen, dokumentieren.
 
 Siehe auch: Arbeitgeberpflichten · Gefährdungsbeurteilung · STOP-Prinzip · DGUV · Unterweisung
 Mehr: Deep Dive 14, 5.1
+
+## Arbeitsteilung
+<!-- id: arbeitsteilung · quellen: Karte DD20, DD20 6.2 · stand: 2026-11 -->
+
+Zerlegung einer Gesamtaufgabe in Teilaufgaben, die von verschiedenen Mitarbeitern, Betrieben oder Ländern übernommen werden und sich dadurch spezialisieren.
+
+### Erklärung
+Man unterscheidet vier Ebenen:
+| Ebene | Was wird geteilt | Beispiel |
+|---|---|---|
+| betrieblich (Arbeitszerlegung) | ein Arbeitsprozess innerhalb eines Betriebs auf mehrere Mitarbeiter | Wareneingang prüfen, einlagern, kommissionieren, ausliefern – jeweils eigene Teams |
+| überbetrieblich (zwischenbetrieblich) | Prozessschritte auf andere Unternehmen (Zulieferer, Outsourcing) | Kundendienst an eine Fremdfirma, Beschläge von einem Zulieferer |
+| beruflich (volkswirtschaftlich) | Spezialisierung auf Berufe, Branchen, Regionen | Tischlerin, Fachinformatiker, Spediteur |
+| international | Länder erzeugen, was sie relativ günstig können, und handeln miteinander | Möbel aus weltweiter Produktion |
+
+**Vorteile:** Übung und Spezialwissen machen schneller und fehlerärmer, die Produktivität steigt, die Stückkosten sinken. **Nachteile:** eintönige Arbeit und geringere Motivation, gegenseitige Abhängigkeit (der Ausfall eines Glieds stört die Kette), mehr Abstimmungs- und Transportaufwand. Weil jeder nur einen Teil herstellt, muss getauscht werden – daraus entstehen Märkte und Geld als Tauschmittel.
+
+### Beispiel
+Die Montage eines Regals besteht aus 4 Arbeitsschritten:
+- Jeder von 4 Mitarbeitern baut ein Regal allein und braucht 24 Minuten. In 60 Minuten schafft jeder $\frac{60}{24} = 2{,}5$ Regale, zusammen **10 Regale**.
+- Mit Arbeitsteilung macht jeder nur einen Schritt und wird darin schneller: 5 Minuten je Schritt. Alle 5 Minuten verlässt ein Regal die Linie, in 60 Minuten $\frac{60}{5}$ = **12 Regale**.
+- Steigerung: $\frac{12 - 10}{10} \cdot 100$ = **20 %** mehr Output bei gleicher Mitarbeiterzahl.
+
+### Abgrenzung
+Betriebliche Arbeitsteilung bleibt im Betrieb; wandert ein Schritt zu einer Fremdfirma, ist es **überbetriebliche** Arbeitsteilung. Davon zu unterscheiden sind Unternehmensverbindungen (Fusion, Konzern, Kartell) – sie beschreiben, wie Unternehmen zusammenhängen, nicht, wie Arbeit verteilt wird.
+
+### Prüfungsfalle
+Die Auslagerung an ein anderes Unternehmen als „betriebliche“ Arbeitsteilung einordnen – betrieblich heißt: innerhalb des Betriebs.
+
+### Merksatz
+Betrieblich im Haus, überbetrieblich über die Firmengrenze, international über die Landesgrenze.
+
+Siehe auch: Aufbauorganisation · Ablauforganisation · Wirtschaftssektoren · Wirtschaftskreislauf
+Mehr: Deep Dive 20, 6.2
 
 ## Arbeitsvertrag
 <!-- id: arbeitsvertrag · quellen: Karte DD13, DD13 3.1 · stand: 2026-10 -->
@@ -1966,10 +2144,12 @@ Mehr: Deep Dive 2, 1.2
 Area Under the Curve: Fläche unter der ROC-Kurve; 1 = perfekte Trennung, 0,5 = Zufall – ein schwellenunabhängiges Maß für die Trennschärfe eines Klassifikators.
 
 ### Erklärung
-Die ROC-Kurve trägt für alle Entscheidungsschwellen die Richtig-Positiv-Rate (Recall) gegen die Falsch-Positiv-Rate ab. Die AUC fasst sie in einer Zahl zusammen. Anschaulich ist sie die Wahrscheinlichkeit, dass ein zufälliger positiver Fall einen höheren Score bekommt als ein zufälliger negativer. Sie eignet sich zum Vergleich mehrerer Modelle; sie sagt aber nicht, welche Schwelle im Betrieb gilt, und kennt keine Fehlerkosten. Bei stark unausgeglichenen Klassen wirkt sie oft zu optimistisch – dann ist die Precision-Recall-Kurve aussagekräftiger.
+Die ROC-Kurve trägt für alle Entscheidungsschwellen die Richtig-Positiv-Rate (Recall) gegen die Falsch-Positiv-Rate ab. Die AUC fasst sie in einer Zahl zusammen. Anschaulich ist sie die Wahrscheinlichkeit, dass ein zufälliger positiver Fall einen höheren Score bekommt als ein zufälliger negativer: $\text{AUC} = \frac{\text{Paare mit höherem Score beim Positiven}}{n_{pos} \cdot n_{neg}}$ (Gleichstände zählen halb), mit $n_{pos}$ und $n_{neg}$ als Anzahl der positiven und negativen Fälle. Sie eignet sich zum Vergleich mehrerer Modelle; sie sagt aber nicht, welche Schwelle im Betrieb gilt, und kennt keine Fehlerkosten. Bei stark unausgeglichenen Klassen wirkt sie oft zu optimistisch – dann ist die Precision-Recall-Kurve aussagekräftiger.
 
 ### Beispiel
 Zwei Reklamationsmodelle: Modell A AUC 0,82, Modell B AUC 0,64. A trennt Reklamationen deutlich besser; die konkrete Schwelle wird danach nach den Fehlerkosten gewählt.
+
+Zum Nachrechnen: 4 Reklamationen mit den Scores 0,90; 0,80; 0,55; 0,40 und 6 Aufträge ohne Reklamation mit 0,65; 0,45; 0,35; 0,25; 0,15; 0,10 ergeben $4 \cdot 6 = 24$ Paare. Der Score 0,90 liegt über allen 6, 0,80 ebenfalls über allen 6, 0,55 über 5 (nicht über 0,65), 0,40 über 4 (nicht über 0,65 und 0,45): $6 + 6 + 5 + 4 = 21$ Paare, also $\text{AUC} = \frac{21}{24} = 0{,}875$.
 
 ### Abgrenzung
 | Wert | Bedeutung |
@@ -1986,7 +2166,7 @@ Eine AUC von 0,5 als „halb so gut wie perfekt“ deuten – sie bedeutet: wert
 ### Merksatz
 AUC 0,5 ist Münzwurf, 1,0 ist perfekt.
 
-Siehe auch: ROC-Kurve · Recall · Falsch-Positiv-Rate · Konfusionsmatrix · Unausgeglichene Klassen
+Siehe auch: ROC-Kurve · Entscheidungsschwelle · Recall · Falsch-Positiv-Rate · Konfusionsmatrix · Unausgeglichene Klassen
 Mehr: Deep Dive 7, 4.4
 
 ## Aufbauorganisation
@@ -2219,6 +2399,35 @@ Das Ministerium verordnet, der Betrieb bildet aus, die IHK prüft.
 
 Siehe auch: BBiG · Ausbildungsbetrieb · Rahmenlehrplan · IHK · Duale Ausbildung
 Mehr: Deep Dive 13, 1.1
+
+## Ausführungsplan (EXPLAIN)
+<!-- id: ausfuhrungsplan · quellen: DD1 3.6, Fachgespräch DD1 · stand: 2026-11 -->
+
+Die Schrittfolge, mit der das Datenbanksystem eine SQL-Abfrage tatsächlich ausführt; der Query Optimizer wählt sie aus, und `EXPLAIN` zeigt sie an.
+
+### Erklärung
+Der Plan besteht aus Operatoren: **Tabellen-Scan** (alle Zeilen lesen), **Index-Zugriff** (über einen Index gezielt zu den Treffern springen), **Join-Verfahren** (z. B. Nested Loop, Hash Join), Sortieren und Aggregieren. Zu jedem Schritt zeigen die meisten Systeme die geschätzten Kosten und Zeilenzahlen. `EXPLAIN` vor einer Abfrage zeigt den Plan, ohne das Ergebnis zu liefern. Systeme mit `EXPLAIN ANALYZE` (z. B. PostgreSQL) führen die Abfrage zusätzlich aus und messen die echten Zeilenzahlen und Zeiten; SQLite nutzt `EXPLAIN QUERY PLAN`, SQL Server einen grafischen Plan.
+
+So liest du einen Plan bei einer langsamen Abfrage: Steht bei einem selektiven Filter ein Scan über die ganze große Tabelle, fehlt ein passender Index oder er ist nicht nutzbar (z. B. wegen einer Funktion um die Spalte). Weichen geschätzte und tatsächliche Zeilenzahlen stark voneinander ab, sind die Statistiken veraltet.
+
+### Beispiel
+In SQLite zeigt die Möbelhaus Nordholz GmbH den Plan für eine Kundenabfrage:
+```sql
+EXPLAIN QUERY PLAN SELECT * FROM bestellung WHERE kunden_id = 4;
+```
+Ohne Index lautet der Plan `SCAN bestellung` – jede Zeile wird gelesen. Nach `CREATE INDEX idx_bestellung_kunde ON bestellung (kunden_id);` steht dort `SEARCH bestellung USING INDEX idx_bestellung_kunde (kunden_id=?)`: Nur die passenden Zeilen werden angefasst.
+
+### Abgrenzung
+Der **Query Optimizer** ist die Komponente, die den Plan auswählt; der **Ausführungsplan** ist sein Ergebnis. Ein Plan ist keine Garantie: Wachsen die Daten oder ändern sich die Statistiken, kann dieselbe Abfrage später einen anderen Plan bekommen.
+
+### Prüfungsfalle
+`EXPLAIN` allein führt die Abfrage nicht aus, `EXPLAIN ANALYZE` dagegen schon – bei `UPDATE` oder `DELETE` würden dabei tatsächlich Daten geändert. Zum Ausprobieren in einer Transaktion mit `ROLLBACK` arbeiten.
+
+### Merksatz
+Wer eine langsame Abfrage verbessern will, schaut zuerst in den Ausführungsplan.
+
+Siehe auch: Query Optimizer · Index · Transaktion
+Mehr: Deep Dive 1, 3.6
 
 ## Auslastung
 <!-- id: auslastung · quellen: Karte DD5, DD5 3.2 · stand: 2026-10 -->

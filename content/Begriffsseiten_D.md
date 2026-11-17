@@ -100,6 +100,36 @@ Eine Zielgruppe, eine Frage, wenige Zahlen – jede mit Vergleich und Datum.
 Siehe auch: KPI · Einheitliche Skalen · Aktualitätsstempel · Vergleichsmaßstab mitliefern · Wenige Kennzahlen
 Mehr: Deep Dive 11, A4
 
+## Data Catalog
+<!-- id: data-catalog · quellen: DD8 5.1, DD8 3.3 · stand: 2026-11 -->
+
+Auch: Datenkatalog
+
+Durchsuchbares Verzeichnis der Datenbestände eines Unternehmens, das zu jedem Datensatz die Metadaten bündelt: Bedeutung, Herkunft, Verantwortliche, Qualität und Zugriffsregeln.
+
+### Erklärung
+Ein Katalog speichert nicht die Daten selbst, sondern die **Metadaten** darüber. Er macht Daten auffindbar („Gibt es schon eine Retourenquote?“), schafft Vertrauen durch Definition und Verantwortlichen und beugt dem **Data Swamp** vor. Typische Inhalte: fachliche Beschreibung und Kennzahlendefinition, Data Owner, Aktualisierungsrhythmus, Schutzklasse oder Kennzeichen „enthält personenbezogene Daten“, Qualitätskennzahlen und die Data Lineage. Ein **Data Dictionary** ist enger gefasst: die technische Beschreibung der Tabellen und Spalten einer einzelnen Datenbank. Ein Katalog muss gepflegt werden – ein veralteter Katalog ist schlimmer als keiner.
+
+### Beispiel
+Die Analystin der Möbelhaus Nordholz GmbH sucht „Retourenquote“. Der Katalog zeigt: Definition (Retouren geteilt durch Lieferungen), Data Owner Vertrieb, Quelle Warenwirtschaft, täglich 03:00 Uhr aktualisiert, Schutzklasse „intern“, keine personenbezogenen Daten. So rechnet nicht jede Abteilung ihre eigene Version.
+
+### Abgrenzung
+| Begriff | Fokus |
+|---|---|
+| Metadaten | die Informationen über Daten selbst |
+| Data Catalog | das durchsuchbare Verzeichnis dieser Metadaten |
+| Data Lineage | Herkunft und Weg der Daten (eine Metadatenart im Katalog) |
+| Data Governance | Regeln und Rollen, die der Katalog sichtbar macht |
+
+### Prüfungsfalle
+Den Katalog für ein Speichersystem halten, das die Daten enthält – er verweist nur auf sie.
+
+### Merksatz
+Der Katalog ist die Suchmaschine für Daten, nicht das Datenlager.
+
+Siehe auch: Metadaten · Data Governance · Data Lineage · Data Lake · Datenqualität
+Mehr: Deep Dive 8, 5.1
+
 ## Data Governance
 <!-- id: data-governance · quellen: Karte DD9, DD9 5.2 · stand: 2026-10 -->
 
@@ -150,6 +180,61 @@ Erst speichern, später verstehen – aber nur mit Katalog.
 
 Siehe auch: Data Warehouse · Schema-on-Read · ELT · Lakehouse · Big Data
 Mehr: Deep Dive 8, 5.1
+
+## Data Leakage
+<!-- id: data-leakage · quellen: DD6 Teil 5, DD7 1.1 · stand: 2026-11 -->
+
+Datenleck beim Modellbau: Das Modell nutzt beim Training Informationen, die zum Zeitpunkt der echten Vorhersage nicht vorliegen würden oder aus den Testdaten stammen – die Testgüte fällt dadurch unrealistisch gut aus.
+
+### Erklärung
+Es gibt zwei Hauptformen. **Target Leakage:** Ein Merkmal enthält die Antwort oder entsteht erst nach dem vorherzusagenden Ereignis (z. B. „Gutschrift erstellt“ bei der Vorhersage von Reklamationen). **Train-Test-Kontamination:** Informationen aus den Testdaten fließen ins Training, etwa wenn Skalierungswerte (Minimum, Maximum, Mittelwert) aus allen Daten berechnet, Resampling oder SMOTE vor dem Split angewendet, Dubletten in beiden Mengen gelassen oder bei Zeitreihen zufällig statt chronologisch geteilt wird. Warnzeichen sind auffällig gute Kennzahlen (Recall nahe 100 %) und ein Einbruch im Betrieb. Die Prüffrage für jedes Merkmal lautet: War diese Information zum Entscheidungszeitpunkt bereits bekannt? Die richtige Reihenfolge ist: zuerst aufteilen. Skalierung und Kodierung werden nur aus den Trainingsdaten gelernt und dann unverändert auf die Testdaten angewendet. Resampling (Oversampling, SMOTE, Undersampling) verändert ausschließlich die Trainingsdaten – die Testdaten behalten ihre reale Klassenverteilung.
+
+### Beispiel
+Das Reklamationsmodell der Möbelhaus Nordholz GmbH soll bei Auftragsabschluss das Risiko vorhersagen. Unter den Merkmalen steckt „Gutschrift erstellt (ja/nein)“, das erst nach einer Reklamation gesetzt wird. Auf den 1.000 Testaufträgen (100 Reklamationen) findet das Modell alle: TP = 100, FN = 0, FP = 0, TN = 900, also $\text{Recall} = \frac{100}{100 + 0} = 100\ \%$ und $\text{Precision} = \frac{100}{100 + 0} = 100\ \%$. Im Betrieb ist das Merkmal bei Auftragsabschluss immer „nein“. Verlässt sich das Modell fast nur darauf, sagt es kaum noch „Reklamation“ voraus – im Extremfall TP = 0, FN = 100, Recall $= \frac{0}{0 + 100} = 0\ \%$, bei 90 % Accuracy. Das Ergebnis im Test war ein Trugbild.
+
+### Abgrenzung
+**Overfitting** zeigt sich schon im Test (große Lücke zu den Trainingsdaten); Data Leakage verdeckt sich im Test – dort sieht alles gut aus, der Fehler tritt erst im Betrieb auf. **Model Drift** entsteht später, weil sich die Realität ändert; Leakage ist von Anfang an ein Konstruktionsfehler.
+
+### Prüfungsfalle
+Eine sehr hohe Testgüte als Erfolg feiern, statt sie zu hinterfragen; oder Skalierungswerte vor dem Split aus allen Daten berechnen.
+
+### Merksatz
+Erst teilen, dann lernen – und nur Merkmale nutzen, die vorher bekannt sind.
+
+Siehe auch: Train-Test-Split · Overfitting · Merkmale bilden · Zielvariable · Kreuzvalidierung · Model Drift
+Mehr: Deep Dive 6, Teil 5 · Deep Dive 7, 1.1
+
+## Data Lineage
+<!-- id: data-lineage · quellen: DD8 3.3, DD8 5.1 · stand: 2026-11 -->
+
+Auch: Datenherkunft
+
+Nachverfolgung, woher Daten stammen, welche Transformationen sie durchlaufen haben und wohin sie fließen – von der Quelle bis zur Kennzahl im Bericht.
+
+### Erklärung
+Lineage dokumentiert den Weg Quelle → Transformationsschritte → Ziel, im besten Fall bis auf Spaltenebene. Nutzen:
+- **Fehlersuche:** Von einer falschen Kennzahl rückwärts bis zur Ursache gehen.
+- **Auswirkungsanalyse:** Vor einer Änderung sehen, welche Berichte an einer Spalte hängen.
+- **Nachweis:** Herkunft und Verarbeitung belegen, z. B. zur Rechenschaftspflicht nach DSGVO oder bei Prüfungen.
+- **Vertrauen:** Fachbereiche sehen, woraus eine Zahl entsteht.
+
+Erfasst wird Lineage automatisch (aus ETL-Werkzeugen, SQL-Skripten, Katalog) oder von Hand.
+
+### Beispiel
+Die Kennzahl „Umsatz netto“ im Dashboard stammt aus der View `v_umsatz`, diese aus der Faktentabelle im DWH, diese aus der Staging Area, diese aus `bestellposition` der Warenwirtschaft. Ändert die Warenwirtschaft die Berechnung der Mehrwertsteuer, zeigt die Lineage sofort, dass drei Berichte betroffen sind.
+
+### Abgrenzung
+**Metadaten** sind der Oberbegriff; Lineage ist eine Art davon. Ein **Änderungsprotokoll** (Audit-Log) hält fest, wer wann etwas geändert hat – nicht, woher die Werte kommen. **Versionierung** speichert alte Stände, nicht den Herkunftsweg.
+
+### Prüfungsfalle
+Lineage mit Datensicherung oder ER-Modell verwechseln. Sie beschreibt den Datenfluss, nicht die Struktur der Tabellen.
+
+### Merksatz
+Lineage beantwortet: Woher kommt diese Zahl, und was hängt von ihr ab?
+
+Siehe auch: Metadaten · Data Catalog · Data Governance · Datenqualität · ETL
+Mehr: Deep Dive 8, 3.3
+
 
 ## Data Mart
 <!-- id: data-mart · quellen: Karte DD8, DD8 Teil 2 · stand: 2026-10 -->
@@ -640,6 +725,75 @@ JSON kennt sechs Typen – das Datum ist ein String.
 Siehe auch: JSON · ISO 8601 · DECIMAL · Postleitzahlen als Text · Keine Datentypen
 Mehr: Deep Dive 15, 2.2 · Deep Dive 15, 1.3
 
+## Datenverifizierung
+<!-- id: datenverifizierung · quellen: Karte DD30, DD30 2.3, DD9 5.1 · stand: 2026-11 -->
+
+Prüfung, ob Daten mit der Quelle oder der Wirklichkeit übereinstimmen, also richtig sind – im Unterschied zur Datenvalidierung, die nur prüft, ob sie den festgelegten Regeln entsprechen.
+
+Auch: Datenvalidierung, Validierung und Verifizierung
+
+### Erklärung
+Beide Prüfungen sichern die Datenqualität, fragen aber Verschiedenes:
+
+| | Datenvalidierung | Datenverifizierung |
+|---|---|---|
+| Frage | Sind die Daten **zulässig**? | Sind die Daten **richtig**? |
+| Prüft gegen | Regeln: Datentyp, Format, Wertebereich, Pflichtfeld | Quelle oder Wirklichkeit |
+| Typische Mittel | Constraint, Prüfregel beim Import, Formatprüfung | Abgleich mit Originalbeleg oder Messgerät, zweite Messung, Doppelerfassung, Prüfsumme, Stichprobe |
+| Grenze | Ein zulässiger Wert kann trotzdem falsch sein | aufwendig, oft nur stichprobenweise möglich |
+
+**Doppelerfassung:** Zwei Personen erfassen dieselben Daten unabhängig voneinander, abweichende Werte werden geklärt. Eine **Prüfsumme** zeigt, ob Daten bei der Übertragung unverändert geblieben sind.
+
+### Beispiel
+Das Messgerät „HolzCheck“ der Nordholz Manufaktur liefert für eine Lagerbox die Holzfeuchte 12,4 %. Die Importprüfung (Validierung) lässt den Wert durch: Er ist eine Zahl und liegt im zulässigen Bereich von 6 bis 20 %. Ein Techniker misst mit einem kalibrierten Referenzgerät 17,2 % – die **Verifizierung** zeigt, dass der Sensor falsch misst. Der Wert war zulässig, aber nicht richtig.
+
+### Abgrenzung
+Mit „Validierung“ sind auch andere Dinge gemeint: **Valide** beim XML-Dokument heißt „entspricht dem Schema“, **Validierungsdaten** im maschinellen Lernen sind Daten zum Abstimmen eines Modells. Die **Plausibilitätsprüfung** ist eine Form der Validierung: Sie prüft, ob Werte zueinander passen.
+
+### Prüfungsfalle
+Beide Begriffe nur mit „Daten werden geprüft“ beschreiben – das bringt keinen Punkt. Entscheidend ist, **wogegen** geprüft wird: gegen Regeln (Validierung) oder gegen die Wirklichkeit (Verifizierung). Auch das Beispiel muss passen: „Formatfehler in der ID“ gehört zur Validierung, „Abgleich mit dem Messprotokoll“ zur Verifizierung.
+
+### Merksatz
+Validierung: zulässig laut Regel. Verifizierung: richtig laut Wirklichkeit.
+
+Siehe auch: Plausibilitätsprüfung · Formatprüfung · Valide · Validierungsdaten · Korrektheit · Gültigkeit · Vier-Augen-Prinzip
+Mehr: Deep Dive 30, 2.3 · Deep Dive 9, 5.1
+
+## DBSCAN
+<!-- id: dbscan · quellen: DD6 Teil 3 · stand: 2026-11 -->
+
+Dichtebasiertes Clusterverfahren: Punkte in dicht besiedelten Regionen werden zu Clustern verbunden, Punkte in dünn besiedelten Regionen gelten als Rauschen; die Clusteranzahl muss nicht vorgegeben werden.
+
+### Erklärung
+DBSCAN (Density-Based Spatial Clustering of Applications with Noise) hat zwei Hyperparameter: den Radius $\varepsilon$ (Epsilon) der Nachbarschaft und die Mindestzahl **MinPts** an Punkten in dieser Nachbarschaft (der Punkt selbst zählt mit). Ein **Kernpunkt** hat mindestens MinPts Punkte im Radius $\varepsilon$; ein **Randpunkt** ist selbst kein Kernpunkt, liegt aber im Radius eines Kernpunkts; alle übrigen sind **Rauschpunkte**. Ein Cluster entsteht, indem man von einem Kernpunkt aus alle erreichbaren Kern- und Randpunkte einsammelt. Stärken: beliebige Clusterform, Ausreißer werden erkannt, kein k nötig. Schwächen: Ergebnis hängt von $\varepsilon$ und MinPts ab, Cluster mit sehr unterschiedlicher Dichte werden schlecht getrennt, und die Merkmale müssen wie bei k-Means skaliert sein, weil der Abstand zählt.
+
+### Beispiel
+Sieben Kunden nach Bestellungen pro Jahr und Bestellwert (in 100 €): P1(2|2), P2(3|1), P3(1|3), P4(7|8), P5(8|7), P6(9|9), P7(15|1). Mit $\varepsilon = 2{,}5$ und MinPts = 3 (euklidischer Abstand):
+
+- P1: Abstand zu P2 und P3 jeweils $\sqrt{2} \approx 1{,}41$ → 3 Punkte (mit sich selbst) → Kernpunkt.
+- P2 und P3: Abstand zueinander $\sqrt{8} \approx 2{,}83 > 2{,}5$, also nur 2 Punkte → kein Kernpunkt, aber im Radius von P1 → Randpunkte von Cluster 1.
+- P4, P5, P6: Abstände $\sqrt{2} \approx 1{,}41$ und $\sqrt{5} \approx 2{,}24$ → jeder hat 3 Punkte → Kernpunkte, gemeinsam Cluster 2.
+- P7: kein weiterer Punkt in Reichweite → Rauschen.
+
+Ergebnis: zwei Cluster (Gelegenheits- und Stammkunden) und ein Ausreißer. k-Means müsste P7 einem Cluster zuordnen und zöge dessen Zentrum zur Seite.
+
+### Abgrenzung
+| | k-Means | DBSCAN |
+|---|---|---|
+| Vorgabe | Clusteranzahl k | Radius ε und MinPts |
+| Clusterform | kugelig, ähnlich groß | beliebig |
+| Ausreißer | werden zugeordnet | als Rauschen markiert |
+
+### Prüfungsfalle
+Bei DBSCAN eine Clusteranzahl k angeben wollen – sie ergibt sich aus den Daten. Und: Rauschpunkte sind kein eigenes Cluster.
+
+### Merksatz
+Dichte verbindet, Leere trennt.
+
+Siehe auch: Clustering · K-Means · Euklidischer Abstand · Skalierung · Hierarchisches Clustering · Ausreißer
+Mehr: Deep Dive 6, Teil 3
+
+
 ## DDG
 <!-- id: ddg · quellen: DD10 2.4 · stand: 2026-10 -->
 
@@ -853,7 +1007,7 @@ Deep Learning für kleine Tabellen mit wenigen hundert Zeilen empfehlen – dort
 ### Merksatz
 KI ⊃ ML ⊃ Deep Learning.
 
-Siehe auch: Machine Learning · Neuronale Netze · Künstliche Intelligenz · Generative KI · Overfitting
+Siehe auch: Machine Learning · Neuronale Netze · CNN (Convolutional Neural Network) · Künstliche Intelligenz · Generative KI · Overfitting
 Mehr: Deep Dive 6, 8.1 · Deep Dive 6, 8.2
 
 ## DEFAULT
@@ -968,8 +1122,73 @@ Idempotent mit „gleiche Antwort“ verwechseln – gemeint ist der Zustand auf
 ### Merksatz
 Zweimal gelöscht ist auch nur gelöscht.
 
-Siehe auch: Idempotent · REST · GET · POST · PUT
+Siehe auch: Idempotent · REST · GET · POST · PUT · DELETE FROM
 Mehr: Deep Dive 15, 3.2 · Deep Dive 1, 2.4
+
+## DELETE FROM
+<!-- id: delete-from · quellen: Karte DD1, DD1 2.4, DD1 3.9, DD29 4 · stand: 2026-11 -->
+
+SQL-Anweisung (DML), die Zeilen aus einer Tabelle löscht; WHERE bestimmt, welche, ohne WHERE sind es alle. Die Tabelle selbst bleibt bestehen.
+Auch: SQL-DELETE
+
+### Erklärung
+`DELETE FROM tabelle [WHERE bedingung]` – ohne Spaltenliste, denn es werden ganze Zeilen entfernt (`DELETE * FROM …` ist kein gültiges SQL). Hängen an einer Zeile noch Kindzeilen über einen Fremdschlüssel, lehnt die Datenbank das Löschen ab (`RESTRICT`), außer der Fremdschlüssel ist mit `ON DELETE CASCADE` (Kindzeilen werden mitgelöscht) oder `ON DELETE SET NULL` angelegt. Sonst gilt: erst die Kindzeilen löschen, dann die Elternzeile. In einer Transaktion lässt sich DELETE per ROLLBACK zurücknehmen. Wie bei allen Vergleichen löscht `WHERE ort = NULL` nichts, richtig ist `IS NULL`. Vor dem Löschen prüft man die Auswahl mit demselben WHERE in einem SELECT.
+
+### Beispiel
+```sql
+DELETE FROM bestellposition WHERE bestell_id = 105;
+DELETE FROM bestellung WHERE bestell_id = 105;
+```
+Die erste Anweisung entfernt 1 Zeile (2 Schreibtischlampen), die zweite die Bestellung selbst; danach gibt es 5 Bestellungen. In umgekehrter Reihenfolge scheitert das Löschen der Bestellung am Fremdschlüssel, solange die Position noch existiert.
+
+### Abgrenzung
+| Befehl | Gruppe | Wirkung |
+|---|---|---|
+| DELETE FROM | DML | löscht ausgewählte Zeilen (WHERE), in einer Transaktion per ROLLBACK umkehrbar |
+| TRUNCATE TABLE | DDL | leert die ganze Tabelle, kein WHERE; je nach System (z. B. MySQL, Oracle) nicht per ROLLBACK umkehrbar |
+| DROP TABLE | DDL | entfernt Tabelle samt Struktur; je nach System nicht per ROLLBACK umkehrbar |
+
+Dialekt: SQLite kennt kein TRUNCATE; dort leert `DELETE FROM tabelle` die Tabelle. SQLite prüft Fremdschlüssel nur, wenn `PRAGMA foreign_keys = ON` gesetzt ist (in der App der Fall). Mit der HTTP-Methode DELETE (REST) hat der SQL-Befehl nur den Namen gemeinsam.
+
+### Prüfungsfalle
+`DELETE FROM kunde;` ohne WHERE löscht alle Kunden. Und `DELETE FROM kunde WHERE kunden_id NOT IN (SELECT kunden_id FROM bestellung)` löscht nichts, sobald die Unterabfrage ein NULL enthält – dann NOT EXISTS verwenden.
+
+### Merksatz
+DELETE FROM ohne WHERE leert die Tabelle – erst prüfen, dann löschen.
+
+Siehe auch: INSERT · UPDATE · DML · DDL · Referenzielle Integrität
+Mehr: Deep Dive 1, 2.4 · Deep Dive 1, 3.9 · Deep Dive 29, Teil 4
+
+## Delta Lake
+<!-- id: delta-lake · quellen: DD8 5.1 · stand: 2026-11 -->
+
+Offenes Tabellenformat für Data Lakes: Es legt über Parquet-Dateien im Objektspeicher ein Transaktionsprotokoll und bringt ACID-Transaktionen, Schemaprüfung und Versionierung mit.
+
+### Erklärung
+Die Daten selbst liegen als Parquet-Dateien. Ein Protokoll hält jede Änderung als neue **Version** fest. Daraus folgt:
+- **ACID-Transaktionen:** Ein Schreibvorgang gilt ganz oder gar nicht; Leser sehen nie halbfertige Stände. Gleichzeitige Schreiber werden per optimistischer Nebenläufigkeitskontrolle abgeglichen.
+- **Schemaprüfung:** Schreibversuche mit abweichendem Schema werden abgelehnt, solange man die Änderung nicht ausdrücklich erlaubt (siehe Schema Evolution).
+- **Zeitreise (Time Travel):** ältere Versionen abfragen oder die Tabelle auf einen früheren Stand zurücksetzen.
+- **UPDATE, DELETE und MERGE** auch auf Lake-Daten, z. B. für Korrekturen. Für Löschanträge nach DSGVO reicht DELETE allein nicht: Die alten Dateien bleiben per Zeitreise lesbar, bis `VACUUM` sie nach der Aufbewahrungsfrist physisch entfernt (danach geht auch die Zeitreise zu diesen Ständen verloren).
+- Batch und Streaming können dieselbe Tabelle nutzen.
+
+Vergleichbare Tabellenformate sind Apache Iceberg und Apache Hudi.
+
+### Beispiel
+Ein fehlerhafter Ladelauf überschreibt um 03:10 Uhr in der Silver-Tabelle `kunde_bereinigt` die Postleitzahlen. Das Möbelhaus setzt die Tabelle von Version 42 auf Version 41 zurück und startet den korrigierten Lauf neu – ohne die Rohdaten erneut laden zu müssen.
+
+### Abgrenzung
+**Parquet** ist nur ein Dateiformat ohne Transaktionen; Delta Lake ist das Tabellenformat darüber. Ein **Data Lake** ist die Speicherart, Delta Lake eine Technik, die ihn zum **Lakehouse** macht.
+
+### Prüfungsfalle
+Delta Lake mit Deltaextraktion verwechseln. Delta Lake ist ein Tabellenformat mit Versionsprotokoll; die Deltaextraktion lädt nur die Änderungen aus einem Quellsystem.
+
+### Merksatz
+Delta Lake macht aus Dateien im See verlässliche Tabellen.
+
+Siehe auch: Lakehouse · Parquet · Data Lake · ACID · Medallion-Architektur · Schema Evolution
+Mehr: Deep Dive 8, 5.1
+
 
 ## Deltaextraktion
 <!-- id: deltaxtraktion · quellen: Karte DD8, DD8 3.1 · stand: 2026-10 -->
@@ -1248,6 +1467,29 @@ Signieren privat, prüfen öffentlich.
 Siehe auch: Asymmetrische Verschlüsselung · Hashing · PKI · Integrität · Schutzziele
 Mehr: Deep Dive 10, 4.2
 
+## Dimensionsreduktion
+<!-- id: dimensionsreduktion · quellen: DD6 2.2 · stand: 2026-11 -->
+
+Verfahren, die viele Merkmale zu wenigen verdichten oder auf die wichtigsten beschränken (meist unüberwacht, z. B. PCA), ohne den Großteil der Information zu verlieren.
+
+### Erklärung
+Viele Merkmale machen Modelle langsam und anfälliger für Overfitting; zudem verlieren Abstände in sehr vielen Dimensionen an Aussagekraft („Fluch der Dimensionalität“). Dimensionsreduktion hilft auch beim Visualisieren (z. B. auf zwei Achsen) und beim Bündeln stark korrelierter Merkmale. Zwei Wege: **Merkmalsauswahl** lässt Merkmale weg (z. B. eines von zwei fast identischen); **Merkmalsextraktion** bildet aus den alten Merkmalen neue, weniger zahlreiche – das bekannteste Verfahren ist die **PCA**. Der Preis: Neu gebildete Merkmale sind schwerer zu deuten. Vorher werden die Merkmale skaliert.
+
+### Beispiel
+Kundendaten mit 8 Merkmalen. Umsatz netto und Umsatz brutto sind perfekt korreliert (r = 1,00), Anzahl Bestellungen und Anzahl Rechnungen fast (r = 0,98). Je eines der beiden Paare wird gestrichen: 8 − 2 = 6 Merkmale, also $\frac{2}{8} = 25\ \%$ weniger Spalten bei kaum weniger Information.
+
+### Abgrenzung
+Dimensionsreduktion verringert die **Spalten** (Merkmale), Clustering fasst **Zeilen** (Datensätze) zu Gruppen zusammen. Die „Dimension“ im Data Warehouse (Dimensionstabelle) ist etwas anderes.
+
+### Prüfungsfalle
+Dimensionsreduktion mit dem Löschen von Datensätzen gleichsetzen – es verschwinden Spalten, nicht Zeilen. Auch die „Dimension“ im Star-Schema ist nicht gemeint.
+
+### Merksatz
+Weniger Spalten, gleiche Aussage.
+
+Siehe auch: PCA · Clustering · Unüberwachtes Lernen · Merkmal · Skalierung · Korrelation · Dimensionstabelle
+Mehr: Deep Dive 6, 2.2
+
 ## Dimensionstabelle
 <!-- id: dimensionstabelle · quellen: Karte DD8, DD8 4.1 · stand: 2026-10 -->
 
@@ -1385,6 +1627,33 @@ Discovery entdeckt, wie es wirklich läuft.
 Siehe auch: Process Mining · Event Log · Conformance Checking · Enhancement · Case ID
 Mehr: Deep Dive 5, 5.2
 
+## Diversity Management
+<!-- id: diversity-management · quellen: Karte DD26, DD26 Teil 5, DD32 Teil 5 · stand: 2026-11 -->
+
+Unternehmensstrategie, die die Vielfalt der Beschäftigten (z. B. Alter, Geschlecht, Herkunft, Religion, Behinderung, sexuelle Orientierung) bewusst wahrnimmt, wertschätzt und als Potenzial für den Unternehmenserfolg nutzt.
+
+Auch: Diversity, Vielfaltsmanagement
+
+### Erklärung
+Typische Vielfaltsdimensionen: Alter, ethnische Herkunft und Nationalität, Geschlecht und geschlechtliche Identität, körperliche und geistige Fähigkeiten, Religion und Weltanschauung, sexuelle Orientierung, soziale Herkunft. Das Ziel ist doppelt: **Benachteiligung vermeiden** und **Unterschiede nutzen**. Gemischte Teams bringen mehr Perspektiven, erreichen vielfältigere Kundengruppen, erleichtern die Gewinnung von Fachkräften und stärken die Arbeitgeberattraktivität.
+
+Typische Maßnahmen: merkmalsneutrale Stellenausschreibungen, Bewerbungsverfahren nach Qualifikation, barrierefreie Arbeitsplätze, flexible Arbeitszeitmodelle, Mentoring, Schulungen gegen Vorurteile. Möglich sind Spannungen und Mehraufwand; Quoten sind nur ein mögliches Instrument, nicht das Konzept selbst.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH schreibt eine Stelle in der IT ohne Alters- und Geschlechtshinweise aus, wählt nur nach Qualifikation, richtet einen höhenverstellbaren Arbeitsplatz für eine Mitarbeiterin im Rollstuhl ein und bietet Teilzeit für Eltern an. So verbindet sie die Rechtspflicht des AGG mit dem freiwilligen Ziel, aus der Vielfalt Nutzen zu ziehen.
+
+### Abgrenzung
+Das **AGG** ist zwingendes Recht und verbietet Benachteiligung wegen sechs Merkmalen; Diversity Management geht darüber hinaus und ist freiwillig. Die AGG-Merkmale umfassen nicht Schulabschluss, Berufserfahrung oder Qualifikation – danach darf ausgewählt werden.
+
+### Prüfungsfalle
+Diversity Management als Auswahl nach Herkunft, als Streben nach möglichst einheitlichen Teams oder als Personalabbau missverstehen. Richtig: Vielfalt als Potenzial nutzen und Benachteiligung vermeiden.
+
+### Merksatz
+Vielfalt nutzen statt nur Benachteiligung verbieten.
+
+Siehe auch: AGG · Compliance · Arbeitgeberpflichten · Nachhaltigkeit
+Mehr: Deep Dive 26, Teil 5 · Deep Dive 32, Teil 5 · Deep Dive 13, 6.1
+
 ## DMAIC
 <!-- id: dmaic · quellen: Karte DD5, DD5 6.3 · stand: 2026-10 -->
 
@@ -1446,12 +1715,33 @@ Mehr: Deep Dive 1, 2.4 · Deep Dive 1, 3.9
 NoSQL-Datenbanktyp, der Daten als JSON-ähnliche Dokumente mit flexiblem Schema speichert (z. B. MongoDB).
 
 ### Erklärung
-Ein Dokument fasst zusammengehörige Daten verschachtelt zusammen – etwa eine Bestellung samt Positionen –, statt sie auf mehrere Tabellen zu verteilen. Dokumente einer Sammlung dürfen unterschiedliche Felder haben. Das passt zu wechselnden Attributen und wird häufig horizontal skaliert. Preis: Die Datenbank prüft bei **Schema-on-Read** keine Pflichtfelder oder Typen – das muss die Anwendung oder eine optional eingerichtete Schemaprüfung (z. B. JSON Schema) übernehmen. Viele Systeme sind nur **eventually consistent** (BASE).
+Ein Dokument fasst zusammengehörige Daten verschachtelt zusammen – etwa eine Bestellung samt Positionen –, statt sie auf mehrere Tabellen zu verteilen. Dokumente einer Sammlung dürfen unterschiedliche Felder haben. Das passt zu wechselnden Attributen und wird häufig horizontal skaliert.
+
+Ein Dokument besteht aus **Feldern** (`"name": wert`). Ein Feld kann ein einfacher Wert, ein **Objekt** `{ }` (verschachteltes Dokument) oder ein **Array** `[ ]` (Liste von Werten oder Objekten) sein. Bei zusammengehörigen Daten hat man zwei Gestaltungsmöglichkeiten:
+- **Einbetten:** Die Unterdaten stehen als Array oder Objekt im übergeordneten Dokument (Bestellung mit ihren Positionen). Eine einzige Abfrage liefert alles, ein Fremdschlüssel entfällt. Geeignet, wenn die Daten fast immer gemeinsam gelesen werden und ihre Anzahl begrenzt bleibt.
+- **Verweisen:** Das Dokument enthält nur die Kennung eines anderen Dokuments (wie ein Fremdschlüssel). Geeignet, wenn die Unterdaten von vielen Dokumenten genutzt, einzeln geändert werden oder unbegrenzt wachsen (ein Dokument darf je System nur begrenzt groß sein, bei MongoDB 16 MB). Die Datenbank prüft solche Verweise nicht auf Gültigkeit – das muss die Anwendung tun.
+
+Preis der Flexibilität: Die Datenbank prüft bei **Schema-on-Read** keine Pflichtfelder oder Typen – das muss die Anwendung oder eine optional eingerichtete Schemaprüfung (z. B. JSON Schema) übernehmen. Viele Systeme sind nur **eventually consistent** (BASE).
 
 ### Beispiel
 Im Produktkatalog der Möbelhaus Nordholz GmbH hat ein Bürostuhl „Sitzhöhe“ und „Belastbarkeit“, ein Monitor „Diagonale“ und „Auflösung“. In einer Dokumentdatenbank bekommt jedes Produkt einfach seine eigenen Felder – ohne leere Spalten.
 
+Eine Bestellung als Dokument – die Positionen sind als **Array eingebettet**, der Kunde wird **verwiesen**:
+```json
+{
+  "bestell_id": 4711,
+  "kunden_id": 1042,
+  "positionen": [
+    { "artikel": "Bürostuhl Nova", "menge": 2, "preis": 189.00 },
+    { "artikel": "Schreibtisch Lund", "menge": 1, "preis": 349.00 }
+  ]
+}
+```
+Die Positionen gehören nur zu dieser Bestellung und werden immer mit ihr gelesen, deshalb stehen sie im Array; der Kunde hat viele Bestellungen und ändert seine Adresse einmal zentral, deshalb steht nur `kunden_id` im Dokument. In einer relationalen Datenbank wären das drei Tabellen (kunde, bestellung, position) mit zwei Fremdschlüsseln.
+
 ### Abgrenzung
+In der Fachsprache entspricht der Datenbank die Datenbank, der Tabelle die **Collection**, der Zeile das **Dokument** und der Spalte das **Feld**.
+
 | Typ | Beispiel | geeignet für |
 |---|---|---|
 | dokumentenorientiert | MongoDB | wechselnde Attribute |
@@ -1460,13 +1750,13 @@ Im Produktkatalog der Möbelhaus Nordholz GmbH hat ein Bürostuhl „Sitzhöhe�
 | Graph | Neo4j | Beziehungsnetze |
 
 ### Prüfungsfalle
-Für Buchhaltung oder Lagerbestände ohne Prüfung der Konsistenzanforderung NoSQL wählen – dort ist ACID Pflicht.
+Für Buchhaltung oder Lagerbestände ohne Prüfung der Konsistenzanforderung NoSQL wählen – dort ist ACID Pflicht. Und beim Entwurf Einbetten und Verweisen vermischen: Wer alles einbettet, speichert dieselben Kundendaten in jeder Bestellung doppelt und muss Änderungen überall nachziehen.
 
 ### Merksatz
-Ein Dokument je Sache, Regeln bringt die Anwendung mit.
+Ein Dokument je Sache, Regeln bringt die Anwendung mit – eingebettet, was zusammengehört, verwiesen, was geteilt wird.
 
-Siehe auch: NoSQL · JSON · Schema-on-Read · BASE · Key-Value-Datenbank
-Mehr: Deep Dive 15, 4.1
+Siehe auch: NoSQL · Relationale Datenbank · JSON · Schema-on-Read · BASE · Key-Value-Datenbank
+Mehr: Deep Dive 15, 4.1 · Deep Dive 30, 4.3
 
 ## DPMO
 <!-- id: dpmo · quellen: Karte DD5, DD5 6.3 · stand: 2026-10 -->

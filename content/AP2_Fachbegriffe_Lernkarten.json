@@ -3,11 +3,11 @@
     "titel": "AP2 Fachbegriffe – Begriffskarten zu allen Deep Dives",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-10-06",
-    "aktualisiert_am": "2026-10-17",
+    "aktualisiert_am": "2026-11-16",
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 816,
+    "anzahl_karten": 905,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -23,7 +23,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 1",
       "status": "behandelt",
-      "anzahl_karten": 23,
+      "anzahl_karten": 35,
       "karten": [
         {
           "id": "FB-primarschlussel",
@@ -251,6 +251,126 @@
           "antwort": "Standardmodus vieler Datenbanksysteme: Jede Anweisung wird sofort als eigene Transaktion festgeschrieben; ein späteres ROLLBACK greift nicht. Mehrere Anweisungen bündelt man mit BEGIN … COMMIT.",
           "typ": "begriff",
           "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-query-optimizer",
+          "frage": "Query Optimizer",
+          "antwort": "Komponente des Datenbanksystems, die aus mehreren möglichen Wegen für eine SQL-Abfrage den voraussichtlich günstigsten wählt – anhand von Statistiken und geschätzten Kosten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-ausfuhrungsplan",
+          "frage": "Ausführungsplan (EXPLAIN)",
+          "antwort": "Schrittfolge, mit der die Datenbank eine Abfrage ausführt (Scan, Indexzugriff, Join-Verfahren); EXPLAIN zeigt ihn an, EXPLAIN ANALYZE führt die Abfrage zusätzlich aus.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-select",
+          "frage": "SELECT",
+          "antwort": "SQL-Anweisung, die Daten abfragt und eine Ergebnistabelle liefert: SELECT wählt die Spalten (Projektion), WHERE die Zeilen (Selektion). Sie wird nach HAVING ausgeführt, kurz vor ORDER BY.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-order-by",
+          "frage": "ORDER BY",
+          "antwort": "Sortiert das Ergebnis aufsteigend (ASC, Standard) oder absteigend (DESC); ASC/DESC gilt je Kriterium. Wird nach SELECT ausgeführt und darf daher Aliase nutzen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-insert",
+          "frage": "INSERT",
+          "antwort": "SQL-Anweisung (DML), die neue Zeilen einfügt: INSERT INTO tabelle (spalten) VALUES (werte) oder INSERT INTO … SELECT. Spalten und Werte müssen zusammenpassen, Constraints werden geprüft.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-update",
+          "frage": "UPDATE",
+          "antwort": "SQL-Anweisung (DML), die Werte vorhandener Zeilen ändert (UPDATE t SET spalte = wert WHERE …); ohne WHERE sind alle Zeilen betroffen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-delete-from",
+          "frage": "DELETE FROM",
+          "antwort": "SQL-Anweisung (DML), die Zeilen einer Tabelle löscht; ohne WHERE alle Zeilen, die Tabelle bleibt bestehen. In einer Transaktion lässt sich das Löschen per ROLLBACK zurücknehmen; TRUNCATE und DROP sind DDL und je nach System (z. B. MySQL, Oracle) nicht per ROLLBACK umkehrbar.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-grant-revoke",
+          "frage": "GRANT / REVOKE (DCL)",
+          "antwort": "SQL-Befehle der Data Control Language: GRANT vergibt Rechte an Benutzer oder Rollen (TO), REVOKE entzieht sie (FROM); WITH GRANT OPTION erlaubt die Weitergabe.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-alias",
+          "frage": "Alias (AS)",
+          "antwort": "Kurzname für eine Spalte, einen Ausdruck oder eine Tabelle, der nur in dieser Abfrage gilt; ein Spaltenalias entsteht erst im SELECT und ist daher in ORDER BY, nach Standard-SQL aber nicht in WHERE nutzbar.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-round",
+          "frage": "ROUND",
+          "antwort": "SQL-Funktion ROUND(x, n): rundet auf n Nachkommastellen (üblicherweise kaufmännisch); rundet nur das Abfrageergebnis, nicht die gespeicherten Daten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-in-between-like",
+          "frage": "IN, BETWEEN, LIKE",
+          "antwort": "Vergleichsoperatoren in WHERE: IN = Werteliste, BETWEEN = Bereich einschließlich beider Grenzen, LIKE = Textmuster mit % (beliebig viele Zeichen) und _ (genau ein Zeichen).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-concat",
+          "frage": "CONCAT",
+          "antwort": "SQL-Funktion zum Verketten von Texten (Standard-Operator: ||); bei NULL verhalten sich die Systeme verschieden, || liefert meist NULL (Oracle: nicht).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
           "tags": [
             "fachbegriff"
           ]
@@ -535,7 +655,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 3",
       "status": "behandelt",
-      "anzahl_karten": 38,
+      "anzahl_karten": 40,
       "karten": [
         {
           "id": "FB-skalenniveau",
@@ -920,6 +1040,26 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-bedingte-wahrscheinlichkeit",
+          "frage": "Bedingte Wahrscheinlichkeit",
+          "antwort": "P(A | B) = P(A und B) / P(B): Wahrscheinlichkeit von A, wenn B bereits eingetreten ist. P(A | B) ist nicht P(B | A) – Recall, Precision und die Konfidenz einer Assoziationsregel sind bedingte Wahrscheinlichkeiten.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-satz-von-bayes",
+          "frage": "Satz von Bayes",
+          "antwort": "P(A | B) = P(B | A) · P(A) / P(B): Kehrt eine bedingte Wahrscheinlichkeit um und berücksichtigt die Basisrate. Ist A selten, sind selbst bei guten Tests die meisten Alarme Fehlalarme.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -929,7 +1069,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 4",
       "status": "behandelt",
-      "anzahl_karten": 20,
+      "anzahl_karten": 33,
       "karten": [
         {
           "id": "FB-streudiagramm",
@@ -1131,6 +1271,136 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-achsenabschnitt",
+          "frage": "Achsenabschnitt (Intercept)",
+          "antwort": "Konstante a der Regressionsgleichung ŷ = a + b · x: der Schätzwert bei x = 0, berechnet als a = ȳ − b · x̄. Nur deutbar, wenn x = 0 im beobachteten Bereich liegt – sonst ein reiner Rechenwert (Extrapolation).",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-alternativhypothese",
+          "frage": "Alternativhypothese",
+          "antwort": "Gegenannahme H1 zur Nullhypothese: die Behauptung, die man belegen will (Zusammenhang, Unterschied). Sie gilt als gestützt, wenn H0 verworfen wird; bewiesen wird sie nie.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-effektgrosse",
+          "frage": "Effektgröße",
+          "antwort": "Maß dafür, wie groß ein Effekt oder Zusammenhang ist (z. B. r, R², Cohens d), unabhängig vom Stichprobenumfang. Der p-Wert sagt nur, ob ein Effekt wahrscheinlich kein Zufall ist – nicht, wie groß er ist.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-fehler-1-art",
+          "frage": "Fehler 1. Art (α-Fehler)",
+          "antwort": "Die Nullhypothese wird verworfen, obwohl sie stimmt – ein Fehlalarm (in der Konfusionsmatrix: falsch positiv). Die Wahrscheinlichkeit ist höchstens das Signifikanzniveau α, meist 5 %.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-fehler-2-art",
+          "frage": "Fehler 2. Art (β-Fehler)",
+          "antwort": "Die Nullhypothese wird beibehalten, obwohl sie falsch ist – ein echter Effekt bleibt unentdeckt (falsch negativ). Wahrscheinlichkeit β; die Teststärke 1 − β ist die Chance, einen vorhandenen Effekt zu finden.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-heteroskedastizitat",
+          "frage": "Heteroskedastizität",
+          "antwort": "Die Streuung der Residuen einer Regression ändert sich mit x oder ŷ (Trichterform im Residuenplot). Standardfehler, p-Werte und Konfidenzintervalle werden unzuverlässig; Gegenmittel z. B. die Zielgröße logarithmieren.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-homoskedastizitat",
+          "frage": "Homoskedastizität",
+          "antwort": "Annahme der linearen Regression: Die Residuen streuen für alle x-Werte etwa gleich stark (gleich breites Band im Residuenplot). Dass die Residuen sich zu null summieren, ist dafür kein Beleg.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-hypothesentest",
+          "frage": "Hypothesentest",
+          "antwort": "Verfahren, das mit einer Stichprobe entscheidet, ob die Nullhypothese verworfen wird: H0, H1 und α festlegen, Prüfgröße und p-Wert berechnen, bei p < α verwerfen. Möglich sind der Fehler 1. und der Fehler 2. Art.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-interpolation",
+          "frage": "Interpolation",
+          "antwort": "Schätzung innerhalb des beobachteten Wertebereichs von x (z. B. zwischen zwei Messpunkten) – verlässlicher als die Extrapolation außerhalb. Auch zum Füllen von Datenlücken genutzt.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-konfidenzintervall",
+          "frage": "Konfidenzintervall",
+          "antwort": "Bereich um einen Stichprobenwert (Mittelwert: x̄ ± 1,96 · s / √n für 95 %), der den wahren Wert der Grundgesamtheit mit der gewählten Sicherheit überdeckt. Nicht der Streubereich der Einzelwerte und nicht die „Konfidenz“ der Assoziationsregeln.",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-multikollinearitat",
+          "frage": "Multikollinearität",
+          "antwort": "In der multiplen Regression sind mehrere Einflussgrößen stark untereinander korreliert. Die Koeffizienten werden instabil und kaum deutbar; erkennbar am Varianzinflationsfaktor VIF (ab etwa 5 bis 10 kritisch).",
+          "typ": "begriff",
+          "schwierigkeit": 3,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-regressionskoeffizient",
+          "frage": "Regressionskoeffizient",
+          "antwort": "Faktor vor einer Einflussgröße in der Regressionsgleichung (bei einem x die Steigung b): Änderung von ŷ je Einheit der Einflussgröße, bei mehreren x bei konstant gehaltenen übrigen Größen. Beschreibt einen Zusammenhang, keine Ursache.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-spearman-rangkorrelation",
+          "frage": "Spearman-Rangkorrelation",
+          "antwort": "Korrelationsmaß r_s (−1 bis +1), das mit Rangplätzen rechnet: r_s = 1 − 6 · Σd² / (n · (n² − 1)). Für ordinale Daten und monotone Zusammenhänge, robust gegen Ausreißer – das Gegenstück zu Pearson, der Linearität misst.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -1140,7 +1410,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 5",
       "status": "behandelt",
-      "anzahl_karten": 75,
+      "anzahl_karten": 77,
       "karten": [
         {
           "id": "FB-kernprozess",
@@ -1912,6 +2182,26 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-mde-gerate",
+          "frage": "MDE-Geräte",
+          "antwort": "Mobile Datenerfassungsgeräte (Handscanner, Tablets) zum Erfassen von Daten direkt am Einsatzort. Wichtige Merkmale: Betriebssystem, Erfassungstechnik, Funkverbindung, Akku, Robustheit (Schutzart), Bedienung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-schutzart",
+          "frage": "Schutzart (IP-Code)",
+          "antwort": "Zwei Ziffern nach „IP“: die erste für den Schutz gegen Staub und Fremdkörper (0–6), die zweite gegen Wasser (0–9). IP54 = staubgeschützt und Spritzwasser, IP67 = staubdicht und zeitweiliges Untertauchen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -1921,7 +2211,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 6",
       "status": "behandelt",
-      "anzahl_karten": 58,
+      "anzahl_karten": 68,
       "karten": [
         {
           "id": "FB-crisp-dm",
@@ -2502,6 +2792,106 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-cnn",
+          "frage": "CNN (Convolutional Neural Network)",
+          "antwort": "Neuronales Netz für Bilder: Lernbare Filter (Kernel) werden mit einer Schrittweite (Stride) über das Bild geschoben und erzeugen Feature Maps; Padding füllt den Rand auf.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-data-leakage",
+          "frage": "Data Leakage",
+          "antwort": "Das Modell nutzt beim Training Informationen, die zum Vorhersagezeitpunkt nicht vorliegen oder aus den Testdaten stammen – die Testgüte wirkt unrealistisch gut. Abhilfe: erst aufteilen, dann nur aus den Trainingsdaten lernen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-dbscan",
+          "frage": "DBSCAN",
+          "antwort": "Dichtebasiertes Clusterverfahren: Punkte in dichten Regionen (Radius ε, Mindestzahl MinPts) bilden Cluster, Punkte in dünnen Regionen gelten als Rauschen; k muss nicht vorgegeben werden.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-dimensionsreduktion",
+          "frage": "Dimensionsreduktion",
+          "antwort": "Verfahren, die viele Merkmale zu wenigen verdichten oder auswählen (meist unüberwacht), ohne viel Information zu verlieren – z. B. PCA; verringert Spalten, nicht Zeilen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gini-index",
+          "frage": "Gini-Index",
+          "antwort": "Unreinheitsmaß einer Datenmenge, G = 1 − Σ pᵢ²: 0 bedeutet rein. Alternative zur Entropie bei der Baumaufteilung (CART); nicht der Gini-Koeffizient der Statistik.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gradient-boosting",
+          "frage": "Gradient Boosting",
+          "antwort": "Ensemble aus nacheinander trainierten Bäumen, von denen jeder die Restfehler (Residuen) der bisherigen ausgleicht; XGBoost ist eine verbreitete Umsetzung. Gegenstück zum parallel abstimmenden Random Forest.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-hierarchisches-clustering",
+          "frage": "Hierarchisches Clustering",
+          "antwort": "Clusterverfahren, das ähnlichste Cluster schrittweise verschmilzt (oder von oben teilt); das Ergebnis ist ein Dendrogramm, an dem man die Clusterzahl durch Abschneiden wählt.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-pca",
+          "frage": "PCA",
+          "antwort": "Hauptkomponentenanalyse: Dimensionsreduktion, die die Daten auf neue, unkorrelierte Achsen mit größter Varianz dreht; man behält nur die ersten Komponenten. Vorher skalieren.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-pooling",
+          "frage": "Pooling",
+          "antwort": "Schicht im CNN, die Feature Maps verkleinert: Max-Pooling nimmt je Fenster den größten Wert, Average-Pooling den Mittelwert; ohne lernbare Gewichte.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-ocr",
+          "frage": "OCR (Texterkennung)",
+          "antwort": "Optical Character Recognition: wandelt Zeichen in einem Bild in Text um. Im Workflow folgt sie auf Aufnahme, Vorverarbeitung und Lokalisierung; danach prüft die Validierung das Ergebnis (Format, Datenbankabgleich).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -2511,7 +2901,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 7",
       "status": "behandelt",
-      "anzahl_karten": 27,
+      "anzahl_karten": 33,
       "karten": [
         {
           "id": "FB-konfusionsmatrix",
@@ -2782,6 +3172,66 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-bias-variance-trade-off",
+          "frage": "Bias-Variance-Trade-off",
+          "antwort": "Zielkonflikt der Modellkomplexität: Ein zu einfaches Modell hat hohen Bias (systematischer Fehler, Underfitting), ein zu komplexes hohe Varianz (Overfitting); der Gesamtfehler ist bei mittlerer Komplexität am kleinsten.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-early-stopping",
+          "frage": "Early Stopping",
+          "antwort": "Das Training wird abgebrochen, sobald der Validierungsfehler über mehrere Epochen (Geduld) nicht mehr sinkt, obwohl der Trainingsfehler weiter fällt – Schutz vor Overfitting.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-entscheidungsschwelle",
+          "frage": "Entscheidungsschwelle",
+          "antwort": "Grenze für den Score eines Klassifikators, ab der ein Fall als positiv gilt (meist 0,5, aber änderbar). Senken: Recall steigt oder bleibt gleich, Precision sinkt meist; Wahl nach den Fehlerkosten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-hyperparameter",
+          "frage": "Hyperparameter",
+          "antwort": "Einstellung eines Lernverfahrens, die vor dem Training festgelegt wird (z. B. k, Baumtiefe, Lernrate); wird per Grid oder Random Search mit Validierungsdaten abgestimmt, nie an den Testdaten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-lernkurve",
+          "frage": "Lernkurve",
+          "antwort": "Diagramm der Güte auf Trainings- und Validierungsdaten über der Trainingsmenge: große Lücke = Overfitting, beide niedrig = Underfitting.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-regularisierung",
+          "frage": "Regularisierung",
+          "antwort": "Gegenmittel gegen Overfitting: große Gewichte werden im Training bestraft (L2 verkleinert alle, L1 setzt manche auf 0); die Stärke λ ist ein Hyperparameter.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -2791,7 +3241,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 8",
       "status": "behandelt",
-      "anzahl_karten": 44,
+      "anzahl_karten": 52,
       "karten": [
         {
           "id": "FB-oltp",
@@ -3232,6 +3682,86 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-change-data-capture",
+          "frage": "Change Data Capture (CDC)",
+          "antwort": "Technik, die Änderungen (Einfügen, Ändern, Löschen) in einer Quelldatenbank erkennt und als Änderungsstrom weitergibt – meist über das Transaktionsprotokoll; erkennt im Gegensatz zu reinen Zeitstempeln auch physische Löschungen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-batch-verarbeitung",
+          "frage": "Batch-Verarbeitung",
+          "antwort": "Verarbeitung gesammelter Daten in einem Lauf zu festen Zeiten (z. B. nächtlicher ETL-Lauf): einfach und robust, aber die Auswertung zeigt nur den Stand des letzten Laufs.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-stream-verarbeitung",
+          "frage": "Stream-Verarbeitung",
+          "antwort": "Fortlaufende Verarbeitung von Ereignissen, sobald sie entstehen (Sekunden oder weniger); lohnt sich nur, wenn die Entscheidung von der aktuellen Information abhängt, z. B. Betrugserkennung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-schema-evolution",
+          "frage": "Schema Evolution",
+          "antwort": "Kontrollierte Weiterentwicklung eines Datenschemas (Spalte ergänzen, Typ ändern), ohne dass bestehende Daten und Auswertungen kaputtgehen; additive Änderungen sind meist abwärtskompatibel.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-data-lineage",
+          "frage": "Data Lineage",
+          "antwort": "Dokumentierter Weg der Daten von der Quelle über alle Transformationen bis zur Kennzahl im Bericht – für Fehlersuche, Auswirkungsanalyse und Nachweise.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-delta-lake",
+          "frage": "Delta Lake",
+          "antwort": "Offenes Tabellenformat über Parquet-Dateien im Data Lake, das mit einem Transaktionsprotokoll ACID-Transaktionen, Schemaprüfung und Zeitreise zu älteren Versionen ergänzt.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-medallion-architektur",
+          "frage": "Medallion-Architektur",
+          "antwort": "Schichtenmodell im Lakehouse: Bronze (Rohdaten), Silver (bereinigt und vereinheitlicht), Gold (fachlich aufbereitet für Berichte und Modelle).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-data-catalog",
+          "frage": "Data Catalog",
+          "antwort": "Durchsuchbares Verzeichnis der Datenbestände mit Metadaten wie Bedeutung, Herkunft, Verantwortlichem und Schutzklasse; speichert nicht die Daten selbst.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -3241,7 +3771,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 9",
       "status": "behandelt",
-      "anzahl_karten": 30,
+      "anzahl_karten": 31,
       "karten": [
         {
           "id": "FB-datenqualitat",
@@ -3542,6 +4072,16 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-datenverifizierung",
+          "frage": "Datenverifizierung",
+          "antwort": "Prüft, ob Daten mit der Quelle oder Wirklichkeit übereinstimmen (richtig). Die Datenvalidierung prüft dagegen nur Regeln wie Format und Wertebereich (zulässig).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -3551,7 +4091,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 10",
       "status": "behandelt",
-      "anzahl_karten": 81,
+      "anzahl_karten": 85,
       "karten": [
         {
           "id": "FB-dsgvo",
@@ -4362,6 +4902,46 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-rechtmassigkeit-der-verarbeitung",
+          "frage": "Rechtmäßigkeit der Verarbeitung",
+          "antwort": "Verbot mit Erlaubnisvorbehalt nach Art. 6 DSGVO: Personenbezogene Daten dürfen nur verarbeitet werden, wenn eine von sechs Rechtsgrundlagen greift (Einwilligung, Vertrag, rechtliche Verpflichtung, lebenswichtige Interessen, öffentliche Aufgabe, berechtigtes Interesse).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-prepared-statements",
+          "frage": "Prepared Statements",
+          "antwort": "SQL mit Platzhaltern, bei dem die Werte getrennt vom Befehl übergeben werden und nie als Code gelten – der wirksamste Schutz gegen SQL-Injection.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-cloud-speicherung",
+          "frage": "Cloud-Speicherung",
+          "antwort": "Ablage von Daten auf den Servern eines externen Anbieters. Nachteile: Abhängigkeit von Anbieter und Internetverbindung, Daten außerhalb des eigenen Zugriffs (Auftragsverarbeitung, Speicherort), laufende Kosten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-videouberwachung",
+          "frage": "Videoüberwachung",
+          "antwort": "Kameras erfassen Personen und damit personenbezogene Daten: Rechtsgrundlage und Erforderlichkeit prüfen, Hinweisschilder, Zweckbindung, Datenminimierung, kurze Löschfrist; bei Beschäftigten Betriebsrat und Betriebsvereinbarung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -4862,7 +5442,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 12",
       "status": "behandelt",
-      "anzahl_karten": 55,
+      "anzahl_karten": 59,
       "karten": [
         {
           "id": "FB-projekt",
@@ -5419,6 +5999,46 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-personalkosten",
+          "frage": "Personalkosten",
+          "antwort": "Brutto plus Arbeitgeberanteile zur Sozialversicherung, Unfallversicherung, Umlagen und freiwillige Leistungen; Stundensatz = Jahrespersonalkosten / produktive Jahresstunden (ohne Urlaub, Feiertage, Krankheit).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-zuschlagskalkulation",
+          "frage": "Zuschlagskalkulation",
+          "antwort": "Einzelkosten direkt, Gemeinkosten per Zuschlagssatz: Materialkosten + Fertigungskosten = Herstellkosten; + Verwaltungs- und Vertriebsgemeinkosten = Selbstkosten; + Gewinn (Zuschlag auf die Selbstkosten) = Verkaufspreis.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-pilotbetrieb",
+          "frage": "Pilotbetrieb",
+          "antwort": "Einführung zunächst in kleinem Umfang (ein Standort, eine Nutzergruppe) im echten Betrieb, bevor alle umgestellt werden: Fehler fallen früh auf, der Nutzen wird gemessen, die Akzeptanz geprüft.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-akzeptanz-und-widerstande",
+          "frage": "Akzeptanz und Widerstände",
+          "antwort": "Bereitschaft der Betroffenen, eine Neuerung mitzutragen. Gegen Widerstand nennt man die Befürchtung und eine Gegenmaßnahme, die genau sie entkräftet: Information, Beteiligung, Schulung, Betriebsvereinbarung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -5428,7 +6048,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 13",
       "status": "behandelt",
-      "anzahl_karten": 44,
+      "anzahl_karten": 54,
       "karten": [
         {
           "id": "FB-duale-ausbildung",
@@ -5869,6 +6489,106 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-fortbildung",
+          "frage": "Fortbildung",
+          "antwort": "Berufliche Weiterbildung, die auf dem erlernten Beruf aufbaut: Sie erhält und erweitert Kenntnisse oder führt zum Aufstieg (z. B. Fachwirt, Ausbildereignung); der Beruf bleibt derselbe (§ 1 Abs. 4 BBiG).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-umschulung",
+          "frage": "Umschulung",
+          "antwort": "Berufliche Weiterbildung, die zu einer anderen beruflichen Tätigkeit befähigt (§ 1 Abs. 5 BBiG) – etwa wenn der alte Beruf nicht mehr ausgeübt werden kann; die Agentur für Arbeit fördert sie z. B. mit einem Bildungsgutschein.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-europass",
+          "frage": "Europass",
+          "antwort": "Kostenloser digitaler EU-Dienst, der Qualifikationen und Kompetenzen europaweit verständlich darstellt (Lebenslauf, Mobilitätsnachweis); er ersetzt keine Zeugnisse und ist nicht verpflichtend.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-urlaub",
+          "frage": "Urlaub",
+          "antwort": "Bezahlte Freistellung zur Erholung: gesetzlich mindestens 24 Werktage (= 20 Arbeitstage bei Fünf-Tage-Woche, § 3 BUrlG); voller Anspruch nach 6 Monaten Wartezeit, davor 1/12 je vollem Monat (Teilurlaub); Übertragung nur bis 31.03.; Urlaubsplan und -grundsätze unterliegen der Mitbestimmung (§ 87 BetrVG), bei Ende des Arbeitsverhältnisses gibt es eine Urlaubsbescheinigung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-werktage-und-arbeitstage",
+          "frage": "Werktage und Arbeitstage",
+          "antwort": "Werktage = Montag bis Samstag (6 je Woche), Arbeitstage = Tage, an denen gearbeitet wird (meist Montag bis Freitag). Umrechnung bei Fünf-Tage-Woche: Arbeitstage = Werktage · 5 / 6 (27 Werktage = 22,5 Arbeitstage).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-weisungsrecht",
+          "frage": "Weisungsrecht",
+          "antwort": "Recht des Arbeitgebers, Inhalt, Ort und Zeit der Arbeit sowie Ordnung im Betrieb nach billigem Ermessen zu bestimmen (§ 106 GewO) – soweit Gesetz, Tarifvertrag, Betriebsvereinbarung oder Arbeitsvertrag nichts anderes regeln; es konkretisiert den Vertrag, ändert ihn aber nicht.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-praktikum",
+          "frage": "Praktikum",
+          "antwort": "Befristetes Lernverhältnis ohne Berufsausbildung und ohne Arbeitsverhältnis (§ 26 BBiG); Mindestlohn grundsätzlich ja, nicht bei Pflichtpraktikum und Orientierungs- oder ausbildungsbegleitendem Praktikum bis 3 Monate; Schülerpraktikum: JArbSchG (z. B. höchstens 7 Stunden täglich).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-befristung",
+          "frage": "Befristung",
+          "antwort": "Arbeitsvertrag endet ohne Kündigung mit Zeitablauf oder Zweckerreichung (TzBfG); nur schriftlich vor Arbeitsbeginn wirksam; ohne Sachgrund höchstens 2 Jahre mit bis zu 3 Verlängerungen und nur ohne frühere Beschäftigung beim selben Arbeitgeber (§ 14 TzBfG).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-leiharbeit",
+          "frage": "Leiharbeit",
+          "antwort": "Arbeitnehmerüberlassung (AÜG): Der Verleiher stellt den Leiharbeitnehmer an und zahlt den Lohn, der Entleiher erteilt die fachlichen Weisungen; Höchstüberlassung grundsätzlich 18 Monate; im Entleiherbetrieb wahlberechtigt zum Betriebsrat bei mehr als 3 Monaten Einsatz.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-diversity-management",
+          "frage": "Diversity Management",
+          "antwort": "Strategie, die Vielfalt der Belegschaft (Alter, Geschlecht, Herkunft, Religion, Behinderung, sexuelle Orientierung) als Potenzial nutzt und Benachteiligung vermeidet; geht über das Pflichtgesetz AGG hinaus und ist freiwillig.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -5878,7 +6598,7 @@
       "pruefungsbereich": "Wirtschafts- und Sozialkunde",
       "quelle": "Deep Dive 14",
       "status": "behandelt",
-      "anzahl_karten": 108,
+      "anzahl_karten": 122,
       "karten": [
         {
           "id": "FB-sozialversicherung",
@@ -6959,6 +7679,146 @@
           "tags": [
             "fachbegriff"
           ]
+        },
+        {
+          "id": "FB-rentabilitat",
+          "frage": "Rentabilität",
+          "antwort": "Gewinn im Verhältnis zu Kapital oder Umsatz in Prozent: Eigenkapitalrentabilität = Gewinn / Eigenkapital · 100 %; Gesamtkapitalrentabilität = (Gewinn + Fremdkapitalzinsen) / Gesamtkapital · 100 %; Umsatzrentabilität = Gewinn / Umsatz · 100 %.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-arbeitsteilung",
+          "frage": "Arbeitsteilung",
+          "antwort": "Zerlegung einer Gesamtaufgabe in Teilaufgaben, die verschiedene Mitarbeiter (betrieblich), Unternehmen (überbetrieblich) oder Länder (international) übernehmen – Spezialisierung steigert die Produktivität.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-wirtschaftssektoren",
+          "frage": "Wirtschaftssektoren",
+          "antwort": "Dreiteilung der Wirtschaft: primär (Urproduktion, z. B. Land- und Forstwirtschaft), sekundär (Verarbeitung: Industrie, Handwerk, Bau), tertiär (Dienstleistungen: Handel, Logistik, IT, Banken).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-standortfaktoren",
+          "frage": "Standortfaktoren",
+          "antwort": "Einflüsse auf die Standortwahl: harte Faktoren sind messbar (Miete, Löhne, Verkehrsanbindung, Absatzmarkt, Gewerbesteuer-Hebesatz), weiche wirken indirekt (Image, Wohn- und Freizeitwert, Unternehmerklima).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-rechtsformen",
+          "frage": "Rechtsformen",
+          "antwort": "Organisationsformen eines Unternehmens: Einzelunternehmen, Personengesellschaften (GbR, OHG, KG) und Kapitalgesellschaften (GmbH 25.000 €, UG ab 1 €, AG 50.000 €) unterscheiden sich in Haftung, Kapital und Handelsregister (A bzw. B).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gewerbeaufsichtsamt",
+          "frage": "Gewerbeaufsichtsamt",
+          "antwort": "Landesbehörde (auch Amt für Arbeitsschutz), die die Einhaltung staatlicher Arbeitsschutzvorschriften überwacht, berät, Anordnungen und Bußgelder erlässt – die staatliche Säule neben den Berufsgenossenschaften; Streit darüber geht vor das Verwaltungsgericht.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-widerspruchsverfahren",
+          "frage": "Widerspruchsverfahren",
+          "antwort": "Verwaltungsrechtliches Vorverfahren: Widerspruch binnen 1 Monat nach Bescheid bei der Behörde, dann Widerspruchsbescheid, danach Klage binnen 1 Monat – z. B. beim Sozialgericht gegen Bescheide der Berufsgenossenschaft oder Krankenkasse.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-gerichtszustandigkeit",
+          "frage": "Gerichtszuständigkeit",
+          "antwort": "Arbeitsgericht: Streit Arbeitgeber – Arbeitnehmer; Sozialgericht: Streit mit Sozialversicherungsträgern (nach Widerspruch); Verwaltungsgericht: Streit mit Behörden; Amtsgericht: Zivilsachen bis 10.000 € (seit 2026), Wohnraummiete, Familien- und Registersachen; Landgericht: Zivilsachen über 10.000 €.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-kapitalgesellschaft-und-personengesellschaft",
+          "frage": "Kapitalgesellschaft und Personengesellschaft",
+          "antwort": "Personengesellschaft (GbR, OHG, KG): Gesellschafter haften persönlich, kein Mindestkapital, Handelsregister A. Kapitalgesellschaft (GmbH, UG, AG): juristische Person, nur das Gesellschaftsvermögen haftet, Mindestkapital, Handelsregister B.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-betriebstypen",
+          "frage": "Betriebstypen",
+          "antwort": "Nach dem Ziel erwerbswirtschaftlich (Gewinn) oder gemeinwirtschaftlich (Bedarfsdeckung, z. B. Stadtwerke); nach der Leistung Industrie, Handwerk, Handel oder Dienstleistung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-globalisierung",
+          "frage": "Globalisierung",
+          "antwort": "Weltweite Verflechtung von Märkten und Unternehmen; gefördert durch Zollabbau, Freihandel und moderne Technik, gehemmt durch Zölle, Importquoten und Reshoring; Folgen: mehr Wettbewerb und Arbeitsteilung, aber auch Abhängigkeit von Lieferketten.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-spezialisierung",
+          "frage": "Spezialisierung",
+          "antwort": "Konzentration von Personen, Betrieben oder Ländern auf Tätigkeiten oder Produkte, die sie besonders gut beherrschen: höhere Produktivität und niedrigere Stückkosten, aber größere Abhängigkeit (nicht mit der Spezialisierung im Klassendiagramm verwechseln).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-umweltprinzipien",
+          "frage": "Umweltprinzipien",
+          "antwort": "Verursacherprinzip: der Verursacher zahlt; Vorsorgeprinzip: Schäden von vornherein vermeiden; Kooperationsprinzip: Staat, Wirtschaft und Bürger arbeiten zusammen; Gemeinlastprinzip: die Allgemeinheit zahlt, wenn kein Verursacher feststellbar ist.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-umweltzeichen",
+          "frage": "Umweltzeichen",
+          "antwort": "Freiwillige Kennzeichen für umweltfreundlichere Produkte, vor allem der Blaue Engel (schadstoffarm, ressourcenschonend); weitere: EU-Ecolabel, FSC (Holz); der Grüne Punkt ist kein Gütesiegel, sondern zeigt die Beteiligung an einem dualen System.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
         }
       ]
     },
@@ -6968,7 +7828,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 15",
       "status": "behandelt",
-      "anzahl_karten": 83,
+      "anzahl_karten": 86,
       "karten": [
         {
           "id": "FB-strukturierte-daten",
@@ -7802,6 +8662,36 @@
           "id": "FB-schwimmbahn",
           "frage": "Schwimmbahn",
           "antwort": "Spalte oder Zeile im UML-Aktivitätsdiagramm, die Aktionen einem Zuständigen (Person, Abteilung, System) zuordnet.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-sperren",
+          "frage": "Sperren (Locking)",
+          "antwort": "Mechanismus zur Koordination gleichzeitiger Zugriffe: Lesesperren sind parallel möglich, Schreibsperren sind exklusiv; gesperrt wird je nach Granularität Zeile, Tabelle oder mehr; Schreibsperren gelten bis zum Ende der Transaktion, Lesesperren je nach Isolationsstufe kürzer oder bis dahin.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-relationale-datenbank",
+          "frage": "Relationale Datenbank",
+          "antwort": "Speichert Daten in Tabellen mit festem Schema; Beziehungen laufen über Primär- und Fremdschlüssel, abgefragt wird mit SQL, Änderungen sichern Transaktionen nach ACID.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-iot",
+          "frage": "IoT (Internet of Things)",
+          "antwort": "Vernetzte Geräte mit Sensoren senden Messwerte über Funknetze an eine Plattform, die sie auswertet (z. B. vorausschauende Wartung); zu beachten sind Geräte-Sicherheit und DSGVO.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [

@@ -19,7 +19,7 @@ Signifikanz sagt nichts über die Stärke (dafür r bzw. die Effektgröße) und 
 ### Merksatz
 Kleiner p-Wert = Zufall unwahrscheinlich – nicht: Effekt groß oder ursächlich.
 
-Siehe auch: Nullhypothese · Signifikanz · Scheinkorrelation · Korrelation
+Siehe auch: Nullhypothese · Signifikanz · Hypothesentest · Effektgröße · Konfidenzintervall · Scheinkorrelation · Korrelation
 Mehr: Deep Dive 4, 1.3
 
 ## Pachtvertrag
@@ -372,6 +372,30 @@ Erfindung → Patent (angemeldet, 20 Jahre); Programm → Urheberrecht (automati
 Siehe auch: Urheberrecht · Open Source · Proprietäre Software
 Mehr: Deep Dive 14, 2.7
 
+## PCA
+<!-- id: pca · quellen: DD6 2.2 · stand: 2026-11 -->
+
+Hauptkomponentenanalyse (Principal Component Analysis): Dimensionsreduktion, die die Daten auf neue, untereinander unkorrelierte Achsen dreht, die möglichst viel Streuung (Varianz) erklären; man behält nur die ersten.
+Auch: Hauptkomponentenanalyse, Principal Component Analysis
+
+### Erklärung
+Die erste **Hauptkomponente** zeigt in die Richtung der größten Streuung der Daten, die zweite steht senkrecht darauf und erklärt den größten Rest usw. Ablauf: Merkmale standardisieren, Kovarianzmatrix berechnen, ihre Eigenvektoren (die Richtungen) und Eigenwerte $\lambda_j$ (die Varianz je Richtung) bestimmen, nach Eigenwert sortieren, die ersten Komponenten behalten und die Daten darauf projizieren. Anteil der erklärten Varianz der Komponente $j$: $\frac{\lambda_j}{\sum_i \lambda_i}$. Bei standardisierten Daten ist die Summe aller Eigenwerte gleich der Zahl der Merkmale. Jede Komponente ist eine Mischung der Originalmerkmale und daher schwer zu deuten; PCA erfasst nur lineare Zusammenhänge und ignoriert eine Zielvariable. Die PCA wird nur auf den Trainingsdaten angepasst und dann auf die Testdaten angewendet (sonst Data Leakage).
+
+### Beispiel
+Vier standardisierte Kundenmerkmale ergeben die Eigenwerte 2,4; 1,1; 0,4 und 0,1 (Summe 4 = Anzahl der Merkmale). Erklärte Varianz: $\frac{2{,}4}{4} = 60\ \%$, $\frac{1{,}1}{4} = 27{,}5\ \%$, $\frac{0{,}4}{4} = 10\ \%$, $\frac{0{,}1}{4} = 2{,}5\ \%$. Kumuliert: 60 %, 87,5 %, 97,5 %, 100 %. Zwei Komponenten reichen für 87,5 % der Information: Aus 4 Merkmalen werden 2.
+
+### Abgrenzung
+**Merkmalsauswahl** streicht vorhandene Spalten, PCA bildet neue Spalten aus allen alten. PCA ist unüberwacht; sie sucht Streuung, nicht Trennung zwischen Klassen.
+
+### Prüfungsfalle
+PCA ohne vorherige Skalierung rechnen – das Merkmal mit den größten Zahlen (z. B. Umsatz in Euro) dominiert dann die erste Komponente. Die Komponenten als Originalmerkmale zu lesen ist ebenfalls falsch.
+
+### Merksatz
+Neue Achsen entlang der größten Streuung – die ersten behalten.
+
+Siehe auch: Dimensionsreduktion · Skalierung · Standardisierung · Unüberwachtes Lernen · Varianz · Korrelation
+Mehr: Deep Dive 6, 2.2
+
 ## PDCA
 <!-- id: pdca · quellen: Karte DD5, DD5 4.2, DD5 6.2 · stand: 2026-10 -->
 
@@ -418,6 +442,56 @@ Erst den Auftrag schriftlich, dann der Angriff.
 Siehe auch: Patchmanagement · Härtung · Security by Design · SQL-Injection
 Mehr: Deep Dive 10, 5.3
 
+## Personalkosten
+<!-- id: personalkosten · quellen: Karte DD18, DD18 5.3, DD18 5.4, DD14 1.3 · stand: 2026-11 -->
+
+Alle Kosten, die dem Arbeitgeber durch die Beschäftigung entstehen: Bruttoentgelt plus Arbeitgeberanteile zur Sozialversicherung und weitere Personalnebenkosten.
+
+Auch: Lohnnebenkosten, Personalnebenkosten
+
+### Erklärung
+Bestandteile:
+- **Bruttoentgelt** einschließlich Zuschlägen und Sonderzahlungen (13. Gehalt, Urlaubs- und Weihnachtsgeld). Darin stecken schon die **Arbeitnehmeranteile** zur Sozialversicherung – sie werden nicht zusätzlich gerechnet.
+- **Arbeitgeberanteile** zur Kranken-, Pflege-, Renten- und Arbeitslosenversicherung (2026: KV 7,3 % + halber Zusatzbeitrag, PV 1,8 %, RV 9,3 %, ALV 1,3 %; mit 2,9 % Zusatzbeitrag zusammen 21,15 %).
+- **Unfallversicherung** (Berufsgenossenschaft, zahlt der Arbeitgeber allein; Beitrag nach Lohnsumme und Gefahrklasse) und **Umlagen** (z. B. für Entgeltfortzahlung, Mutterschaft, Insolvenzgeld).
+- **Freiwillige oder tarifliche Leistungen**: betriebliche Altersversorgung, Zuschüsse, Weiterbildung, Arbeitskleidung.
+
+$\text{Personalkosten} = \text{Bruttoentgelt} + \text{AG-Anteile SV} + \text{sonstige Personalnebenkosten}$
+
+$\text{Nebenkostenquote} = \frac{\text{Personalnebenkosten}}{\text{Bruttoentgelt}} \cdot 100\,\%$
+
+Für die Kalkulation braucht man den **Stundensatz**: Bezahlte Ausfallzeiten (Urlaub, Feiertage, Krankheit) kosten Geld ohne Arbeitsleistung, deshalb teilt man die Jahreskosten nur durch die **produktiven Stunden**:
+
+$\text{Stundensatz} = \frac{\text{Jahrespersonalkosten}}{\text{produktive Jahresstunden}}$
+
+### Beispiel
+Ein Mitarbeiter der Möbelhaus Nordholz GmbH verdient 3.200 € brutto im Monat (40 Stunden, Fünf-Tage-Woche). Annahme: Zusatzbeitrag 2,9 %, Beitrag zur Unfallversicherung 1,0 % des Bruttos.
+
+| Position | Rechnung | Betrag |
+|---|---|---|
+| Bruttoentgelt | gegeben | 3.200,00 € |
+| AG-Anteil Sozialversicherung | $3.200 \cdot 21{,}15\,\%$ | 676,80 € |
+| Unfallversicherung | $3.200 \cdot 1\,\%$ | 32,00 € |
+| **Personalkosten je Monat** | | **3.908,80 €** |
+
+Nebenkostenquote: $\frac{676{,}80 + 32{,}00}{3.200} \cdot 100$ = **22,15 %**
+
+Jahreskosten: $12 \cdot 3.908{,}80$ = 46.905,60 €. Produktive Stunden: 52 Wochen · 40 Stunden = 2.080 Stunden, minus 30 Urlaubstage, 10 Feiertage und 10 Krankheitstage (50 Tage · 8 Stunden = 400 Stunden) = 1.680 Stunden.
+
+$\frac{46.905{,}60}{1.680}$ = **27,92 € je produktive Stunde**
+
+### Abgrenzung
+Das **Bruttoentgelt** ist die Sicht des Arbeitnehmers, das **Nettoentgelt** sein Auszahlungsbetrag. Die Personalkosten sind die Sicht des Arbeitgebers und liegen deutlich über dem Brutto. **Prozesskosten je Fall** verteilen sie auf einen Vorgang; in der **Zuschlagskalkulation** gehen sie als Fertigungslöhne ein.
+
+### Prüfungsfalle
+Den Arbeitnehmeranteil zusätzlich zum Brutto aufschlagen (er steckt schon im Brutto), die Unfallversicherung vergessen oder als Abzug vom Arbeitnehmer behandeln und den Stundensatz mit allen bezahlten statt den produktiven Stunden berechnen.
+
+### Merksatz
+Personalkosten sind Brutto plus Arbeitgeberanteile plus Nebenkosten – je Stunde nur durch die produktiven Stunden geteilt.
+
+Siehe auch: Summe SV-Arbeitnehmeranteil · Nettoentgelt · Sozialversicherung · Unfallversicherung · Prozesskosten je Fall · Zuschlagskalkulation · Entgeltfortzahlung · Beitragsbemessungsgrenze
+Mehr: Deep Dive 18, 5.3 · Deep Dive 18, 5.4 · Deep Dive 14, 1.3
+
 ## Personenbezogene Daten
 <!-- id: personenbezogene-daten · quellen: Karte DD10, DD10 Teil 1 · stand: 2026-10 -->
 
@@ -447,10 +521,26 @@ Mehr: Deep Dive 10, Teil 1
 Einzelnes künstliches Neuron mit Stufenfunktion, das seine Gewichte mit der Perzeptron-Lernregel aus gelabelten Beispielen lernt (Rosenblatt 1958).
 
 ### Erklärung
-Das Perzeptron berechnet z = Σ wᵢ · xᵢ + b und gibt 1 aus, wenn z ≥ 0 ist, sonst 0. Es lernt überwacht: Ist die Ausgabe falsch, werden Gewichte und Bias nach der Regel wᵢ neu = wᵢ + η · (t − y) · xᵢ angepasst. Ein Durchlauf durch alle Fälle ist eine Epoche; gelernt wird, bis eine Epoche fehlerfrei bleibt. Weil es nur eine Trenngerade zieht, lernt es nur linear trennbare Klassen – AND und OR, aber nicht XOR.
+Das Perzeptron besteht aus sechs Bausteinen, die in Prüfungen oft an einer Skizze zugeordnet werden:
+
+| Baustein | Aufgabe |
+|---|---|
+| **Eingänge** x₁ … xₙ | Messwerte des Falls |
+| **Gewichte** w₁ … wₙ | Bedeutung jedes Eingangs; werden gelernt |
+| **Bias** b | verschiebt die Schwelle; in der Skizze oft als konstanter Eingang „1“ mit eigenem Gewicht w₀ |
+| **Nettoeingabefunktion** | bildet die gewichtete Summe z = Σ wᵢ · xᵢ + b |
+| **Sprungfunktion** (Aktivierung) | macht aus z die Klasse: 1, wenn z ≥ 0 ist, sonst 0 |
+| **Ausgang** y | vorhergesagte Klasse |
+
+Es lernt überwacht: Die Ausgabe y wird mit dem bekannten Label t verglichen. Ist sie falsch, wird der Fehler t − y zurückgeführt und Gewichte und Bias nach der Regel wᵢ neu = wᵢ + η · (t − y) · xᵢ angepasst. Ein Durchlauf durch alle Fälle ist eine Epoche; gelernt wird, bis eine Epoche fehlerfrei bleibt. Weil es nur eine Trenngerade zieht, lernt es nur linear trennbare Klassen – AND und OR, aber nicht XOR. Der Bias ist nötig, weil die Trenngerade sonst immer durch den Nullpunkt liefe.
 
 ### Beispiel
-AND mit Start w₁ = w₂ = 0,5, b = −0,1 und η = 0,2: Der Fall (0|1) ergibt z = 0,4 und y = 1, verlangt ist 0. Also w₂ = 0,3 und b = −0,3. Nach einem weiteren Fehler bei (1|0) ist w₁ = 0,3, b = −0,5, und die zweite Epoche bleibt fehlerfrei.
+**Klassifizieren:** Der Nordholz Eventservice beurteilt MDE-Akkus mit den Messwerten m1 (Innenwiderstand) und m2 (Selbstentladung). Das Perzeptron hat b = 3,5; w₁ = −0,4 und w₂ = −1,0 (1 = gut, 0 = schlecht).
+
+- Akku A mit m1 = 4,5 und m2 = 1,2: $z = 3{,}5 + (-0{,}4) \cdot 4{,}5 + (-1{,}0) \cdot 1{,}2 = 3{,}5 - 1{,}8 - 1{,}2$ = **0,5**. Sprungfunktion: 0,5 ≥ 0 → y = 1, gut.
+- Akku B mit m1 = 5,5 und m2 = 3,6: $z = 3{,}5 - 2{,}2 - 3{,}6$ = **−2,3**. Sprungfunktion: −2,3 < 0 → y = 0, schlecht.
+
+**Lernen** (AND mit Start w₁ = w₂ = 0,5, b = −0,1 und η = 0,2): Der Fall (0|1) ergibt z = 0,4 und y = 1, verlangt ist 0. Also w₂ = 0,3 und b = −0,3. Nach einem weiteren Fehler bei (1|0) ist w₁ = 0,3, b = −0,5, und die zweite Epoche bleibt fehlerfrei.
 
 ### Abgrenzung
 | | Perzeptron | Mehrschichtiges Perzeptron |
@@ -460,11 +550,48 @@ AND mit Start w₁ = w₂ = 0,5, b = −0,1 und η = 0,2: Der Fall (0|1) ergibt 
 | Training | Perzeptron-Lernregel | Backpropagation |
 | lernt XOR | nein | ja |
 
+### Prüfungsfalle
+**Nettoeingabefunktion** (bildet die Summe) und **Sprungfunktion** (macht daraus 0 oder 1) verwechseln – ebenso **Bias** (eine Zahl, die die Schwelle verschiebt) und **Gewichte** (bewerten die Eingänge). Beim Lernalgorithmus als Struktogramm: Der Epochenzähler gehört außerhalb der inneren Schleife über die Trainingsfälle, der Fehler wird erst nach dem Lesen von Messwerten und Label gebildet.
+
 ### Merksatz
 Ein Perzeptron zieht genau eine Gerade.
 
-Siehe auch: Neuron · Perzeptron-Lernregel · Lineare Trennbarkeit · Mehrschichtiges Perzeptron
+Siehe auch: Neuron · Perzeptron-Lernregel · Stufenfunktion · Bias · Lineare Trennbarkeit · Mehrschichtiges Perzeptron
 Mehr: Deep Dive 6, 9.4 · Deep Dive 6, 9.5
+
+## Perzeptron-Lernregel
+<!-- id: perzeptron-lernregel · quellen: Karte DD6, DD6 9.4, DD6 9.5, DD31 2.3 · stand: 2026-11 -->
+
+Regel, mit der ein Perzeptron aus gelabelten Beispielen lernt: Bei falscher Ausgabe werden Gewichte und Bias um Lernrate mal Fehler mal Eingabe verändert, bei richtiger Ausgabe bleibt alles gleich.
+
+### Erklärung
+Für jeden Trainingsfall mit dem Sollwert t (Label 0 oder 1) wird die Ausgabe y berechnet. Dann gilt:
+
+$e = t - y$  ·  $w_i^{neu} = w_i + \eta \cdot e \cdot x_i$  ·  $b^{neu} = b + \eta \cdot e$
+
+Dabei ist e der **Fehler** (Soll minus Ist, also −1, 0 oder +1), η die **Lernrate** (Schrittweite), xᵢ der Eingabewert und b der **Bias** (in Klausuren oft als Gewicht w₀ eines konstanten Eingangs 1 geschrieben; dann gilt für ihn dieselbe Formel mit Eingabe 1). Ist e = 0, ändert sich nichts; eine Eingabe mit xᵢ = 0 ändert ihr Gewicht nicht. Ein Durchlauf durch alle Trainingsfälle ist eine **Epoche**; trainiert wird, bis eine Epoche ohne Fehler bleibt oder eine Höchstzahl an Epochen erreicht ist. Bei linear trennbaren Daten ist das nach endlich vielen Schritten der Fall.
+
+### Beispiel
+Perzeptron zur Akkubeurteilung mit b = 3,5; w₁ = −0,4; w₂ = −1,0 und η = 0,1. Trainingsfall: m1 = 6,0; m2 = 1,9; Label t = 1 (gut).
+
+1. Nettoeingabe: $z = 3{,}5 - 0{,}4 \cdot 6{,}0 - 1{,}0 \cdot 1{,}9$ = **−0,8**
+2. Sprungfunktion: z < 0 → y = 0, aber t = 1 → Fehler $e = 1 - 0 = 1$
+3. Anpassen: $w_1^{neu} = -0{,}4 + 0{,}1 \cdot 1 \cdot 6{,}0$ = **0,2**; $w_2^{neu} = -1{,}0 + 0{,}1 \cdot 1 \cdot 1{,}9$ = **−0,81**; $b^{neu} = 3{,}5 + 0{,}1 \cdot 1$ = **3,6**
+4. Probe: $z = 3{,}6 + 0{,}2 \cdot 6{,}0 - 0{,}81 \cdot 1{,}9$ = **3,261** → y = 1, jetzt richtig.
+
+Die neuen Gewichte gelten für alle Fälle. Dass ein früher richtig klassifizierter Fall nun falsch sein kann, ist normal – deshalb braucht man mehrere Epochen.
+
+### Abgrenzung
+Das mehrschichtige Perzeptron lernt nicht mit dieser Regel, sondern mit **Backpropagation**, weil der Fehler durch mehrere Schichten zurückgerechnet werden muss. Die Lernrate ist ein vorgegebener Wert (Hyperparameter), die Gewichte werden gelernt.
+
+### Prüfungsfalle
+Fehler als **Ist minus Soll** rechnen – dann laufen die Gewichte in die falsche Richtung. Außerdem den Bias vergessen: Er wird bei jedem Fehler mit angepasst (Änderung η · e, ohne Eingabewert). Im Struktogramm gehört der Epochenzähler **außerhalb** der inneren Schleife über die Trainingsfälle.
+
+### Merksatz
+Nur bei Fehler ändern, um Lernrate · (Soll − Ist) · Eingabe.
+
+Siehe auch: Perzeptron · Stufenfunktion · Lernrate · Epoche · Bias · Lineare Trennbarkeit · Backpropagation
+Mehr: Deep Dive 6, 9.4 · Deep Dive 6, 9.5 · Deep Dive 31, 2.3
 
 ## Pessimistisches Sperren
 <!-- id: pessimistisches-sperren · quellen: Karte DD15, DD15 4.2 · stand: 2026-10 -->
@@ -679,6 +806,43 @@ Physisch = so, wie es im konkreten DBMS angelegt wird.
 Siehe auch: Konzeptionelles Datenmodell · Logisches Datenmodell · DDL · Index
 Mehr: Deep Dive 2, 1.1
 
+## Pilotbetrieb
+<!-- id: pilotbetrieb · quellen: Karte DD18, DD18 2.3, DD22 2.1, DD28 2.3 · stand: 2026-11 -->
+
+Einführung eines neuen Systems oder Prozesses zunächst in kleinem Umfang – an einem Standort, in einem Bereich oder mit einer Nutzergruppe – im echten Betrieb, bevor es für alle ausgerollt wird.
+
+Auch: Pilotphase
+
+### Erklärung
+Der Pilotbetrieb verkleinert das Risiko: Fehler, Bedienprobleme und fehlende Schulung zeigen sich früh und treffen nur wenige. Er liefert außerdem Messwerte für die Wirtschaftlichkeit und zeigt, ob die Beschäftigten die Lösung annehmen. Damit er mehr ist als „einfach mal ausprobieren“, legt man vorher fest:
+
+1. **Umfang und Dauer** (z. B. eine Filiale, sechs Wochen),
+2. **Erfolgskriterien** mit Kennzahlen (z. B. Wartezeit, Fehlerquote),
+3. **Rückmeldewege** für die Anwender,
+4. **Entscheidung** nach der Auswertung: ausrollen, nachbessern oder abbrechen.
+
+Nachteile: zusätzlicher Aufwand, vorübergehend zwei Verfahren nebeneinander, und die Pilotgruppe ist nicht unbedingt repräsentativ.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH führt Abholschränke zunächst in einer Filiale ein. Ausgangswert: durchschnittliche Wartezeit 12 Minuten. Erfolgskriterium: Reduktion um mindestens 30 %, also auf höchstens $12 \cdot (1 - 0{,}30)$ = **8,4 Minuten**. Der Pilot misst 8,0 Minuten – das Kriterium ist erfüllt, die Geschäftsleitung entscheidet für den Rollout. Zugleich nennen die Mitarbeiter der Warenausgabe Bedienprobleme mit dem Abholcode; sie fließen in die Schulung ein.
+
+### Abgrenzung
+| Begriff | Wer / womit | Zweck |
+|---|---|---|
+| Testbetrieb, Abnahmetest | Tester oder Fachabteilung, Testdaten und Testumgebung | prüfen, ob das System die Anforderungen erfüllt |
+| **Pilotbetrieb** | echte Anwender, echte Daten, begrenzter Bereich | Praxistauglichkeit und Akzeptanz belegen |
+| Parallelbetrieb | alle Anwender, altes und neues System gleichzeitig | Umstellung absichern |
+| Sofortumstellung („Big Bang“) | alle, an einem Stichtag | schnelle Umstellung, hohes Risiko |
+
+### Prüfungsfalle
+Pilotbetrieb mit Testen gleichsetzen – ein Pilot läuft mit echten Anwendern im Realbetrieb. Und als Gegenmaßnahme nur „Pilotphase“ hinschreiben, ohne zu sagen, **was** sie der Befürchtung entgegensetzt (z. B. „Bedienfehler fallen früh auf und werden vor dem Rollout behoben“).
+
+### Merksatz
+Erst klein und echt, dann groß – mit vorher festgelegten Erfolgskriterien.
+
+Siehe auch: Abnahmetest · Testkonzept · Akzeptanz und Widerstände · Wirtschaftlichkeitsbetrachtung · Soll-Ist-Vergleich
+Mehr: Deep Dive 18, 2.3 · Deep Dive 22, 2.1
+
 ## Pivot
 <!-- id: pivot · quellen: Karte DD8, DD8 4.5 · stand: 2026-10 -->
 
@@ -775,14 +939,16 @@ Ein Auftrag mit Abholung vor Eingang wird abgewiesen.
 | Wertebereich | liegt der Wert im Bereich? | Umsatz ≥ 0 |
 | Plausibilitätsprüfung | passt es fachlich zusammen? | Ende nach Start |
 
+Alle vier sind **Datenvalidierung**: Sie prüfen gegen Regeln und beantworten, ob ein Wert **zulässig** ist. Ob er auch **richtig** ist, klärt erst die **Datenverifizierung** durch Abgleich mit der Quelle (Beleg, Messgerät, zweite Erfassung). Ein Messwert von 44,9 °C besteht jede Plausibilitätsprüfung, kann aber trotzdem falsch gemessen sein.
+
 ### Prüfungsfalle
-„Gültig“ mit „korrekt“ gleichsetzen – eine fünfstellige PLZ kann trotzdem falsch sein.
+„Gültig“ mit „korrekt“ gleichsetzen – eine fünfstellige PLZ kann trotzdem falsch sein. Ebenso Validierung und Verifizierung gleichsetzen: Die eine prüft gegen Regeln, die andere gegen die Wirklichkeit.
 
 ### Merksatz
 Plausibel heißt: Es kann so stimmen – nicht: Es stimmt sicher.
 
-Siehe auch: Formatprüfung · Pflichtfelder · CHECK · Quarantäne
-Mehr: Deep Dive 9, 5.1
+Siehe auch: Formatprüfung · Pflichtfelder · CHECK · Quarantäne · Datenverifizierung
+Mehr: Deep Dive 9, 5.1 · Deep Dive 30, 2.3
 
 ## Polaritätsprofil
 <!-- id: polaritatsprofil · quellen: Karte DD3, DD3 7.4 · stand: 2026-10 -->
@@ -898,6 +1064,34 @@ Pool = wer eigenständig handelt, Lane = wer innerhalb davon arbeitet.
 Siehe auch: Lane · Nachrichtenfluss · Sequenzfluss · BPMN
 Mehr: Deep Dive 5, 2.1 · Deep Dive 17, 1.1
 
+## Pooling
+<!-- id: pooling · quellen: DD6 8.2 · stand: 2026-11 -->
+
+Schicht in einem CNN, die eine Feature Map verkleinert, indem sie kleine Fenster zu einem Wert zusammenfasst: Max-Pooling nimmt den größten Wert, Average-Pooling den Mittelwert.
+
+### Erklärung
+Üblich ist ein 2 × 2-Fenster mit Schrittweite 2; das Fenster überlappt nicht, die Feature Map halbiert sich in jeder Richtung. Pooling hat keine lernbaren Gewichte. Es spart Rechenaufwand und Parameter, macht das Netz unempfindlicher gegen kleine Verschiebungen im Bild und mindert Overfitting. Max-Pooling behält den stärksten Treffer eines Fensters (gut für „ist das Muster irgendwo hier?“), Average-Pooling glättet. Größe der Ausgabe: $n_{aus} = \left\lfloor \frac{n - f}{s} \right\rfloor + 1$ mit $n$ = Kantenlänge der Eingabe, $f$ = Fenstergröße, $s$ = Schrittweite.
+
+### Beispiel
+Feature Map 4 × 4 mit den Zeilen `1 3 2 1`, `4 6 5 2`, `7 2 1 0`, `3 8 4 9`; Fenster 2 × 2, Schrittweite 2 → $\frac{4 - 2}{2} + 1 = 2$, Ausgabe 2 × 2.
+
+- **Max-Pooling:** oben links max(1; 3; 4; 6) = 6, oben rechts max(2; 1; 5; 2) = 5, unten links max(7; 2; 3; 8) = 8, unten rechts max(1; 0; 4; 9) = 9 → `6 5` / `8 9`.
+- **Average-Pooling:** oben links $\frac{1 + 3 + 4 + 6}{4} = 3{,}5$, oben rechts $\frac{2 + 1 + 5 + 2}{4} = 2{,}5$, unten links $\frac{7 + 2 + 3 + 8}{4} = 5$, unten rechts $\frac{1 + 0 + 4 + 9}{4} = 3{,}5$ → `3,5 2,5` / `5 3,5`.
+
+Aus 16 Werten werden 4, also 75 % weniger.
+
+### Abgrenzung
+Die **Faltung** (Filter) lernt Gewichte und erzeugt Feature Maps; **Pooling** verkleinert sie nur nach einer festen Regel. Mit „Connection Pooling“ bei Datenbanken hat es nichts zu tun.
+
+### Prüfungsfalle
+Annehmen, Pooling werde trainiert (es hat keine Gewichte), oder Max- und Average-Pooling gleichsetzen.
+
+### Merksatz
+Pooling fasst zusammen: Max behält den stärksten Treffer, Average den Durchschnitt.
+
+Siehe auch: CNN (Convolutional Neural Network) · Neuronale Netze · Deep Learning · Overfitting
+Mehr: Deep Dive 6, 8.2
+
 ## Portfolioanalyse
 <!-- id: portfolioanalyse · quellen: Karte DD5, DD5 6.5 · stand: 2026-10 -->
 
@@ -983,6 +1177,35 @@ Womit man nicht rechnet, ist Text.
 Siehe auch: Formatprüfung · Nominalskala · JSON · CSV
 Mehr: Deep Dive 15, 1.3
 
+## Praktikum
+<!-- id: praktikum · quellen: Karte DD13, DD25 Teil 2, DD32 Teil 4, DD33 Teil 3 · stand: 2026-11 -->
+
+Befristetes Verhältnis, in dem jemand praktische Kenntnisse und Erfahrungen für einen Beruf erwirbt, ohne dass es eine Berufsausbildung oder ein Arbeitsverhältnis ist (§ 26 BBiG); das Lernen steht im Vordergrund, nicht die Arbeitsleistung.
+
+Auch: Praktikant, Schülerpraktikum, Pflichtpraktikum, Orientierungspraktikum
+
+### Erklärung
+Für Praktikanten gelten nach § 26 BBiG einzelne Regeln des Ausbildungsrechts entsprechend (z. B. Pflichten, Zeugnis); eine schriftliche Vertragsabfassung ist nicht vorgeschrieben, aber üblich und sinnvoll. Wer in Wahrheit ein reguläres Arbeitsverhältnis führt, ist Arbeitnehmer, egal wie der Vertrag heißt.
+
+**Mindestlohn (§ 22 MiLoG):** Praktikanten gelten grundsätzlich als Arbeitnehmer und erhalten den gesetzlichen Mindestlohn (2026: 13,90 € je Stunde). Ausgenommen sind: ein **Pflichtpraktikum** (Schul-, Ausbildungs- oder Hochschulordnung), ein **Orientierungspraktikum** bis drei Monate, ein **ausbildungsbegleitendes Praktikum** bis drei Monate (nicht, wenn zuvor schon eines beim selben Betrieb bestand) sowie Einstiegsqualifizierung und Berufsausbildungsvorbereitung. Minderjährige ohne abgeschlossene Berufsausbildung haben ebenfalls keinen Mindestlohnanspruch.
+
+**Schülerpraktikum:** Kinder unter 15 dürfen nicht beschäftigt werden, außer im Betriebspraktikum während der Vollzeitschulpflicht (§ 5 Abs. 2 JArbSchG); dabei gelten die Schutzvorschriften des JArbSchG (z. B. höchstens 7 Stunden täglich und 35 Stunden wöchentlich, Pausen, Nachtruhe). Schülerpraktikanten unter 16 sind bei der Betriebsratswahl nicht wahlberechtigt.
+
+### Beispiel
+Zwei noch vollzeitschulpflichtige Schüler (15 Jahre) absolvieren zwei Wochen ein Pflichtpraktikum bei der Möbelhaus Nordholz GmbH: kein Mindestlohn, Arbeitszeit höchstens 7 Stunden täglich und 35 Stunden wöchentlich (§ 7 JArbSchG), keine Wahlberechtigung bei der Betriebsratswahl (unter 16). Ein Studierender macht ein freiwilliges Praktikum über sechs Monate: Mindestlohn von 13,90 €/Std., da freiwillig und länger als drei Monate.
+
+### Abgrenzung
+Das **Ausbildungsverhältnis** folgt dem BBiG mit Ausbildungsplan, Prüfung und Mindestausbildungsvergütung; der **Werkstudent** arbeitet als Arbeitnehmer neben dem Studium. Die **Probezeit** gehört zu einem Arbeits- oder Ausbildungsverhältnis, ein Probearbeiten ist kein Praktikum.
+
+### Prüfungsfalle
+Jedes Praktikum für mindestlohnfrei halten. Mindestlohnfrei sind nur die genannten Fälle (Pflicht, Orientierung oder begleitend bis drei Monate); ein freiwilliges Praktikum über drei Monate ist es nicht.
+
+### Merksatz
+Praktikum heißt lernen statt arbeiten; mindestlohnfrei nur bei Pflicht oder bis drei Monate Orientierung.
+
+Siehe auch: BBiG · JArbSchG · Mindestlohn · Wahlberechtigt · Arbeitsvertrag · Unfallversicherung
+Mehr: Deep Dive 13, 2.4 · Deep Dive 25, Teil 4 · Deep Dive 33, Teil 3
+
 ## Prävention
 <!-- id: pravention · quellen: DD9 4.2, DD9 Teil 5 · stand: 2026-10 -->
 
@@ -1015,7 +1238,7 @@ Mehr: Deep Dive 9, 4.2 · Deep Dive 9, Teil 5
 Kennzahl der Konfusionsmatrix: Anteil der als positiv vorhergesagten Fälle, die wirklich positiv sind – $\text{Precision} = \frac{TP}{TP + FP}$.
 
 ### Erklärung
-Precision (positiver Vorhersagewert) beantwortet: Wie verlässlich ist ein Alarm des Modells? Sie ist wichtig, wenn **Fehlalarme (FP) teuer** sind. Precision und Recall lassen sich meist nur gegeneinander verbessern: Eine niedrigere Entscheidungsschwelle findet mehr echte Fälle, erzeugt aber mehr Fehlalarme.
+TP (richtig positiv) sind die Fälle, die das Modell als positiv vorhersagt und die es wirklich sind; FP (falsch positiv) sind die Fälle, die es als positiv vorhersagt, die aber negativ sind. TP + FP ist also die Spalte der positiven Vorhersagen in der Konfusionsmatrix. Precision (positiver Vorhersagewert) beantwortet: Wie verlässlich ist ein Alarm des Modells? Sie ist wichtig, wenn **Fehlalarme (FP) teuer** sind. Precision und Recall lassen sich meist nur gegeneinander verbessern: Eine niedrigere Entscheidungsschwelle findet mehr echte Fälle, erzeugt aber mehr Fehlalarme.
 
 ### Beispiel
 Das Reklamationsmodell sagt 150 Reklamationen voraus, 60 davon treten ein (TP = 60, FP = 90):
@@ -1037,6 +1260,42 @@ Precision: Wenn das Modell Alarm schlägt – wie oft zu Recht?
 
 Siehe auch: Recall · F1-Maß · Accuracy · Konfusionsmatrix
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.4
+
+## Prepared Statements
+<!-- id: prepared-statements · quellen: DD10 4.5 · stand: 2026-11 -->
+
+Auch: Parametrisierte Abfragen
+
+SQL-Anweisungen mit Platzhaltern, bei denen die Werte getrennt vom Befehl an die Datenbank übergeben werden – der wirksamste Schutz gegen SQL-Injection.
+
+### Erklärung
+In zwei Schritten: Die Datenbank erhält zuerst die Anweisung mit Platzhaltern (`?` oder `:name`) und legt die Struktur fest (**prepare**). Danach werden die Werte gebunden und die Anweisung ausgeführt (**execute**). Die Werte werden nie als SQL-Code gelesen, auch wenn sie Anführungszeichen oder SQL-Schlüsselwörter enthalten. Nebeneffekt: Bei wiederholter Ausführung kann das System den vorbereiteten Plan wiederverwenden.
+
+Grenzen:
+- Platzhalter gibt es nur für **Werte**, nicht für Tabellen- oder Spaltennamen. Dort hilft eine feste Liste erlaubter Namen (Whitelist).
+- Werte per Textverkettung in die Anweisung einzubauen, bevor man sie „vorbereitet“, hebt den Schutz auf.
+- ORMs und gespeicherte Prozeduren sind nur sicher, wenn sie intern nicht ebenfalls SQL zusammenbauen.
+
+### Beispiel
+Unsicher (Eingabe wird in den Befehl geklebt) und sicher (Pseudocode):
+```
+sql = "SELECT * FROM kunde WHERE email = '" + eingabe + "'"   -- unsicher
+sql = "SELECT * FROM kunde WHERE email = ?"                    -- sicher
+ergebnis = datenbank.ausfuehren(sql, [eingabe])
+```
+Gibt jemand `x' OR '1'='1` ein, sucht die Datenbank nach genau diesem Text als E-Mail-Adresse und findet keine Zeile. Der Angriffsversuch bleibt wirkungslos.
+
+### Abgrenzung
+**Eingabevalidierung** prüft, ob eine Eingabe sinnvoll ist, und ergänzt den Schutz. **Escaping** (Sonderzeichen entschärfen) ist fehleranfälliger als Parametrisierung. „Parametrisierte Abfrage“ meint dasselbe wie Prepared Statement.
+
+### Prüfungsfalle
+Anführungszeichen herausfiltern oder Werte „von Hand“ in die Anweisung einsetzen und das als sicher bezeichnen. Sicher ist nur die Trennung von Befehl und Daten.
+
+### Merksatz
+Befehl und Daten getrennt übergeben – dann wird aus Eingabe nie Code.
+
+Siehe auch: SQL-Injection · Security by Design · Least Privilege
+Mehr: Deep Dive 10, 4.5
 
 ## Primärschlüssel
 <!-- id: primarschlussel · quellen: Karte DD1, DD2 1.2 · stand: 2026-10 -->

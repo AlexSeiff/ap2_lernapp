@@ -407,6 +407,44 @@ Ein Ereignis darf nie beide Standorte treffen.
 Siehe auch: Hochverfügbarkeit · Verfügbarkeitsklassen · Single Point of Failure · Disaster Recovery · 3-2-1-Regel
 Mehr: Deep Dive 16, 4.5
 
+## Gerichtszuständigkeit
+<!-- id: gerichtszustandigkeit · quellen: Karte DD20, DD20 3.2, DD32 Teil 3 · stand: 2026-11 -->
+
+Welches Gericht für einen Streit zuständig ist, richtet sich nach dem Rechtsgebiet: Arbeitsrecht, Sozialrecht, Verwaltungsrecht, Steuerrecht oder allgemeines Zivilrecht haben jeweils eigene Gerichte.
+
+Auch: Arbeitsgericht, Sozialgericht, Verwaltungsgericht, Amtsgericht, Landgericht, Familiengericht
+
+### Erklärung
+| Gericht | zuständig für | Beispiele |
+|---|---|---|
+| **Arbeitsgericht** | Streit zwischen Arbeitgeber und Arbeitnehmer und aus Tarif- und Betriebsverfassungsrecht | Kündigungsschutzklage, Lohn, Zeugnis, Urlaub |
+| **Sozialgericht** | Streit mit Trägern der Sozialversicherung und der Agentur für Arbeit, **nach erfolglosem Widerspruch** | Bescheid der Berufsgenossenschaft, Krankenkasse, Rentenversicherung |
+| **Verwaltungsgericht** | Streit mit Behörden im öffentlichen Recht | Anordnung der Gewerbeaufsicht, Baugenehmigung |
+| **Finanzgericht** | Steuersachen nach erfolglosem Einspruch | Steuerbescheid |
+| **Amtsgericht** | Zivilsachen bis 10.000 € Streitwert (seit 01.01.2026, § 23 Nr. 1 GVG; vorher 5.000 €), außerdem unabhängig vom Streitwert Wohnraummiete, Familiengericht (Scheidung, Sorgerecht, Unterhalt), Handelsregister, Mahnverfahren, Insolvenz | Nachbarschaftsstreit, Mietstreit |
+| **Landgericht** | Zivilsachen über 10.000 € Streitwert (Anwaltszwang) | Kaufpreisklage über 12.000 € |
+
+Arbeits- und Sozialgerichte haben den Instanzenzug Arbeitsgericht – Landesarbeitsgericht – Bundesarbeitsgericht bzw. Sozialgericht – Landessozialgericht – Bundessozialgericht. Im Arbeitsgerichtsverfahren erster Instanz trägt jede Seite ihre Anwaltskosten selbst (§ 12a ArbGG). Bei Streit im Ausbildungsverhältnis ist zunächst der **Schlichtungsausschuss der IHK** anzurufen, falls die Kammer einen eingerichtet hat (§ 111 ArbGG). Beträge Stand 2026.
+
+### Beispiel
+1. Der Möbelhaus Nordholz GmbH wird eine Kündigung ausgesprochen: Klage binnen drei Wochen beim **Arbeitsgericht**.
+2. Die Berufsgenossenschaft verweigert nach erfolglosem Widerspruch die Anerkennung eines Wegeunfalls: **Sozialgericht**.
+3. Die Gewerbeaufsicht ordnet einen Umbau an, den der Betrieb für unzumutbar hält: **Verwaltungsgericht**.
+4. Ein Lieferant zahlt 12.000 € Kaufpreis nicht: **Landgericht** (12.000 € liegen über 10.000 €; Mahnverfahren laufen beim zentralen Mahngericht, das beim Amtsgericht angesiedelt ist).
+5. Ein Kunde zahlt eine Rechnung über 8.000 € nicht: **Amtsgericht** (8.000 € liegen unter der Grenze von 10.000 €; bis Ende 2025 wäre es das Landgericht gewesen).
+
+### Abgrenzung
+Arbeitsgericht (Streit mit dem Arbeitgeber) und Sozialgericht (Streit mit der Versicherung oder Behörde der Sozialversicherung) werden gern vertauscht; das **Familiengericht** ist eine Abteilung des Amtsgerichts und hat nichts mit dem Arbeitsrecht zu tun.
+
+### Prüfungsfalle
+Streit mit der Berufsgenossenschaft oder Krankenkasse vor das Arbeitsgericht bringen, oder ohne Widerspruch klagen. Außerdem die Streitwertgrenze: Ältere Klausuren und Lehrbücher nennen noch 5.000 € – seit 01.01.2026 gilt 10.000 €.
+
+### Merksatz
+Arbeit: Arbeitsgericht – Versicherung: Sozialgericht – Behörde: Verwaltungsgericht – Zivil: Amts- oder Landgericht (Grenze 10.000 €, seit 2026).
+
+Siehe auch: Widerspruchsverfahren · Kündigungsschutzklage · Gewerbeaufsichtsamt · Berufsgenossenschaft · Handelsregister · Mahnverfahren
+Mehr: Deep Dive 20, 3.2 · Deep Dive 13, 1.4
+
 ## Geringverdienergrenze
 <!-- id: geringverdienergrenze · quellen: Karte DD14, DD14 1.3 · stand: 2026-10 -->
 
@@ -580,6 +618,37 @@ Erst nacherfüllen, dann zurücktreten oder mindern.
 Siehe auch: Garantie · Mangelhafte Lieferung · Sachmangel · Beweislastumkehr beim Verbrauchsgüterkauf · Verjährung
 Mehr: Deep Dive 14, 2.5
 
+## Gewerbeaufsichtsamt
+<!-- id: gewerbeaufsichtsamt · quellen: Karte DD14, DD14 5.1, DD20 3.2, DD33 Teil 1 · stand: 2026-11 -->
+
+Landesbehörde, die überwacht, ob Betriebe die staatlichen Arbeitsschutzvorschriften einhalten, und sie dabei berät – die staatliche Säule des dualen Arbeitsschutzsystems.
+
+Auch: Gewerbeaufsicht, Arbeitsschutzbehörde, Amt für Arbeitsschutz
+
+### Erklärung
+Zuständig sind die **Länder**; der Name wechselt (Gewerbeaufsichtsamt, Amt oder Landesamt für Arbeitsschutz, Regierungspräsidium). Sie überwacht ArbSchG, Arbeitszeitgesetz, JArbSchG, Mutterschutzgesetz, Arbeitsstättenverordnung und Gefahrstoffrecht. Sie darf Betriebe auch unangemeldet besichtigen, Auskünfte verlangen, **Anordnungen** erlassen (§ 22 ArbSchG) und bei Verstößen Bußgelder verhängen oder Strafverfolgung anstoßen. Weitere Aufgaben: Ausnahmegenehmigungen (z. B. Sonntagsarbeit), Meldung von Schwangerschaften durch den Arbeitgeber (§ 27 MuSchG) und die Entscheidung, ob ausnahmsweise eine Kündigung einer Schwangeren zulässig ist (§ 17 Abs. 2 MuSchG; zuständig ist die von der obersten Landesbehörde bestimmte Stelle).
+
+| | Gewerbeaufsicht | Berufsgenossenschaft |
+|---|---|---|
+| Rechtsform | staatliche Landesbehörde | selbstverwaltete Körperschaft der Unfallversicherung |
+| Grundlage | staatliche Gesetze und Verordnungen | Unfallverhütungsvorschriften (DGUV) |
+| Zusätzlich | Bußgelder, Anordnungen | Versicherungsleistungen, Beratung |
+
+### Beispiel
+Eine Beschäftigte meldet, dass im Lager der Möbelhaus Nordholz GmbH ein Fluchtweg zugestellt ist. Die Gewerbeaufsicht besichtigt, ordnet die Räumung mit Frist an und kann bei Verstoß ein Bußgeld verhängen. Die Berufsgenossenschaft berät unabhängig davon zur DGUV Vorschrift 1.
+
+### Abgrenzung
+Das **Gewerbeamt** (Ordnungsamt) nimmt Gewerbeanmeldungen entgegen, hat mit dem Arbeitsschutz aber nichts zu tun. Die **Unfallanzeige** geht an die Berufsgenossenschaft, nicht an die Gewerbeaufsicht. Gegen Bescheide der Gewerbeaufsicht ist das **Verwaltungsgericht** zuständig.
+
+### Prüfungsfalle
+Die Gewerbeaufsicht für den Träger der Unfallversicherung halten oder umgekehrt die Berufsgenossenschaft für eine staatliche Behörde.
+
+### Merksatz
+Gewerbeaufsicht kontrolliert das staatliche Arbeitsschutzrecht, die BG versichert und verhütet nach eigenen Vorschriften.
+
+Siehe auch: Duales System · Arbeitsschutz · Berufsgenossenschaft · DGUV · Arbeitgeberpflichten · Mutterschutz · Gerichtszuständigkeit
+Mehr: Deep Dive 14, 5.1 · Deep Dive 20, 3.2
+
 ## Gewicht
 <!-- id: gewicht · quellen: Karte DD6, DD6 8.2, DD6 9.2 · stand: 2026-10 -->
 
@@ -621,6 +690,30 @@ Wer öfter vorkommt, zählt mehr.
 
 Siehe auch: Arithmetisches Mittel · Median · Lagemaß · Geometrisches Mittel
 Mehr: Deep Dive 3, Teil 3
+
+## Gini-Index
+<!-- id: gini-index · quellen: DD6 7.3 · stand: 2026-11 -->
+
+Unreinheitsmaß für eine Datenmenge bezüglich der Zielklasse: 0 bedeutet rein; er ist die Alternative zur Entropie bei der Wahl der Aufteilung in Entscheidungsbäumen (z. B. CART).
+Auch: Gini-Unreinheit, Gini Impurity
+
+### Erklärung
+$G = 1 - \sum_i p_i^2$ mit $p_i$ als Anteil der Klasse $i$ in der Menge. Anschaulich ist $G$ die Wahrscheinlichkeit, dass zwei zufällig gezogene Fälle zu verschiedenen Klassen gehören. Bei zwei Klassen liegt $G$ zwischen 0 (rein) und 0,5 (halbe-halbe), bei $k$ Klassen höchstens $1 - \frac{1}{k}$. Für eine Aufteilung nach Merkmal $A$ werden die Teilmengen $S_v$ nach ihrem Anteil gewichtet: $G_{Split} = \sum_v \frac{n_v}{n} \cdot G(S_v)$ mit $n_v$ als Fallzahl der Teilmenge und $n$ als Gesamtzahl. Gewählt wird das Merkmal mit dem größten Gewinn $G(S) - G_{Split}$. Gini braucht keinen Logarithmus und ist deshalb schneller zu rechnen als die Entropie; beide führen meist zu ähnlichen Bäumen.
+
+### Beispiel
+Zehn Aufträge, 4 mit und 6 ohne Reklamation: $G = 1 - (0{,}4^2 + 0{,}6^2) = 1 - 0{,}52 = 0{,}48$. Aufteilung nach Spediteur: Nordtrans 3 : 1 (4 Fälle) → $G = 1 - (0{,}75^2 + 0{,}25^2) = 0{,}375$; Rheinlogistik 1 : 2 (3 Fälle) → $G = 1 - (\frac{1}{9} + \frac{4}{9}) = 0{,}444$; Eigenlieferung 0 : 3 (3 Fälle) → $G = 0$. Gewichtet: $G_{Split} = 0{,}4 \cdot 0{,}375 + 0{,}3 \cdot 0{,}444 + 0{,}3 \cdot 0 = 0{,}283$, Gewinn $= 0{,}48 - 0{,}283 = 0{,}197$. (Die Entropie derselben Menge ist 0,971, der Informationsgewinn 0,371 – die Zahlenwerte sind nicht vergleichbar, die Rangfolge der Merkmale meist schon.)
+
+### Abgrenzung
+**Entropie/Informationsgewinn** (ID3, C4.5) und **Gini-Index** (CART) messen beide die Unreinheit. Der **Gini-Koeffizient** der Statistik misst die Ungleichverteilung von Einkommen und hat mit dem Entscheidungsbaum nichts zu tun.
+
+### Prüfungsfalle
+Die Teilmengen-Werte nicht nach Fallzahl gewichten oder den Gini-Index mit dem Gini-Koeffizienten verwechseln. ID3 rechnet mit dem Informationsgewinn, nicht mit Gini.
+
+### Merksatz
+Gini: Eins minus die Summe der quadrierten Anteile – null ist rein.
+
+Siehe auch: Entropie · Informationsgewinn · Entscheidungsbaum · ID3 · Random Forest
+Mehr: Deep Dive 6, 7.3
 
 ## Gleichgewichtspreis
 <!-- id: gleichgewichtspreis · quellen: Karte DD14, DD14 4.2 · stand: 2026-10 -->
@@ -672,6 +765,31 @@ Glätten zeigt den Trend, verschluckt aber den Rand.
 
 Siehe auch: Zeitreihe · Arithmetisches Mittel · Regression · Liniendiagramm
 Mehr: Deep Dive 4, 3.1
+
+## Globalisierung
+<!-- id: globalisierung · quellen: Karte DD20, DD20 6.4, DD26 Teil 4 · stand: 2026-11 -->
+
+Zunehmende weltweite Verflechtung von Märkten, Unternehmen, Kapital und Informationen, die vor allem durch Handelsliberalisierung und moderne Technik vorangetrieben wird.
+
+### Erklärung
+**Fördernde Faktoren:** Abbau von Zöllen und Handelshemmnissen, Freihandelsabkommen, Liberalisierung von Waren- und Kapitalverkehr, billiger Transport (Container), Internet und Kommunikationstechnik, Standardisierung, Niederlassungen im Ausland. **Hemmende Faktoren:** Zölle, Importquoten, Handelsbeschränkungen, Rückverlagerung der Produktion (Reshoring).
+
+**Folgen:** Mehr internationale Arbeitsteilung und Spezialisierung, größere Auswahl und oft niedrigere Preise, neue Absatzmärkte und Exportchancen; zugleich schärferer Wettbewerb, Verlagerung von Arbeitsplätzen, **Abhängigkeit von Lieferketten**, Umweltbelastung durch Transporte und Wirkung von Krisen weltweit.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH bezieht Beschläge aus Asien, weil sie dort günstiger sind. Wird ein Freihandelsabkommen geschlossen oder werden Zölle abgebaut, sinken die Einkaufskosten (Globalisierung gefördert). Führt die Politik Importquoten ein, steigen die Kosten, und das Unternehmen prüft, Beschläge wieder in Europa zu beziehen.
+
+### Abgrenzung
+**Internationale Arbeitsteilung** ist eine Folge, die Globalisierung der übergreifende Prozess. **Digitalisierung** beschleunigt sie, ist aber ein eigener Wandel. Der **Außenhandel** zwischen Staaten gab es schon vor der heutigen Globalisierung.
+
+### Prüfungsfalle
+Maßnahmen verwechseln, die Globalisierung hemmen (Zölle, Quoten, Importbeschränkungen) und fördern (Zollabbau, Freihandel, Liberalisierung).
+
+### Merksatz
+Zölle und Quoten bremsen die Globalisierung, Freihandel und Technik treiben sie an.
+
+Siehe auch: Arbeitsteilung · Spezialisierung · Wirtschaftssektoren · Nachhaltigkeit
+Mehr: Deep Dive 20, 6.4 · Deep Dive 26, Teil 4
 
 ## GmbH
 <!-- id: gmbh · quellen: Karte DD14, DD14 3.2 · stand: 2026-10 -->
@@ -765,6 +883,76 @@ Eine Entität, ein führender Datensatz.
 
 Siehe auch: Dublette · Dublettenbereinigung · Master Data Management · Record Linkage · Stammdaten
 Mehr: Deep Dive 9, 4.2 · Deep Dive 9, 5.4
+
+## Gradient Boosting
+<!-- id: gradient-boosting · quellen: DD6 8.3 · stand: 2026-11 -->
+
+Ensemble-Verfahren, bei dem Entscheidungsbäume nacheinander trainiert werden und jeder neue Baum die Fehler der bisherigen Bäume ausgleicht; XGBoost ist eine verbreitete, schnelle Umsetzung.
+Auch: Boosting; XGBoost ist eine verbreitete Umsetzung
+
+### Erklärung
+Start mit einer einfachen Vorhersage (z. B. dem Mittelwert). Dann: Residuum $r = y - \hat{y}$ je Fall berechnen (bei der Regression mit quadratischem Fehler; allgemein ist es der negative Gradient der Verlustfunktion), einen kleinen Baum auf diese Residuen trainieren und seine Vorhersage gedämpft addieren: $\hat{y}_{neu} = \hat{y}_{alt} + \eta \cdot h(x)$. Dabei ist $y$ der wahre Wert, $\hat{y}$ die bisherige Vorhersage, $h(x)$ die Ausgabe des neuen Baums und $\eta$ (eta) die Lernrate, z. B. 0,1. Das wird für viele Runden wiederholt. **Random Forest** trainiert viele unabhängige, tiefe Bäume parallel und mittelt (senkt die Varianz); **Boosting** trainiert flache Bäume nacheinander (senkt den Bias). Weil Boosting leicht überanpasst, werden Lernrate, Baumtiefe und Rundenzahl abgestimmt, oft mit Early Stopping. XGBoost ergänzt eine eingebaute Regularisierung, geht mit fehlenden Werten um und rechnet parallel. Bei tabellarischen Daten gehört es zu den stärksten Verfahren, ist aber – wie der Random Forest – nicht mehr als einzelne Regel lesbar.
+
+### Beispiel
+Reparaturdauer in Minuten für vier Aufträge: 40, 60, 80, 120. Start: Mittelwert 75 für alle. Residuen: −35, −15, +5, +45. Ein Baum mit einer Teilung (Aufträge 1–2 gegen 3–4) sagt die mittleren Residuen voraus: $\frac{-35 - 15}{2} = -25$ und $\frac{5 + 45}{2} = +25$. Mit $\eta = 0{,}5$: neue Vorhersagen $75 + 0{,}5 \cdot (-25) = 62{,}5$ (Aufträge 1–2) und $75 + 0{,}5 \cdot 25 = 87{,}5$ (Aufträge 3–4). Neue Residuen: −22,5; −2,5; −7,5; +32,5. Mittlerer quadratischer Fehler: vorher $\frac{1.225 + 225 + 25 + 2.025}{4} = 875$, nachher $\frac{506{,}25 + 6{,}25 + 56{,}25 + 1.056{,}25}{4} = 406{,}25$. Die nächste Runde würde erneut auf die Residuen trainieren.
+
+### Abgrenzung
+| | Random Forest | Gradient Boosting |
+|---|---|---|
+| Aufbau | Bäume unabhängig, parallel | Bäume nacheinander, jeder korrigiert |
+| Bäume | tief | flach |
+| Overfitting | robust | Gefahr, braucht Feinabstimmung |
+
+### Prüfungsfalle
+Boosting als „viele Bäume stimmen ab“ beschreiben – das ist Bagging/Random Forest. Und: XGBoost ist kein eigenes Verfahren, sondern eine Umsetzung von Gradient Boosting.
+
+### Merksatz
+Random Forest stimmt ab, Boosting verbessert nacheinander.
+
+Siehe auch: Random Forest · Bagging · Entscheidungsbaum · Residuum · Lernrate · Early Stopping · Overfitting
+Mehr: Deep Dive 6, 8.3
+
+## GRANT / REVOKE (DCL)
+<!-- id: grant-revoke · quellen: Karte DD1, DD1 3.7, DD23 4 · stand: 2026-11 -->
+
+SQL-Befehle der Data Control Language (DCL): GRANT vergibt Rechte an Benutzer oder Rollen, REVOKE entzieht sie wieder.
+Auch: GRANT, REVOKE, DCL, Data Control Language
+
+### Erklärung
+Form wie in MySQL: `GRANT recht ON objekt TO benutzer | rolle [WITH GRANT OPTION]` und `REVOKE recht ON objekt FROM benutzer | rolle`. Rechte sind z. B. `SELECT`, `INSERT`, `UPDATE`, `DELETE`. Das Objekt ist `*.*` (alle Datenbanken), `datenbank.*` (alle Objekte einer Datenbank) oder `datenbank.tabelle`. Eine **Rolle** bündelt Rechte (`CREATE ROLE …`), und `GRANT rolle TO benutzer` – ohne ON – weist sie zu; das setzt RBAC und Least Privilege um. `WITH GRANT OPTION` erlaubt dem Empfänger, das Recht weiterzugeben. Mit einer View begrenzt man zusätzlich Spalten und Zeilen, die ein Recht freigibt.
+
+Dialekt: Hier nur als Konzept – SQLite hat keine Benutzerverwaltung, GRANT und REVOKE lassen sich im SQL-Editor der App nicht ausführen. Auch die Schreibweise der Benutzer (`'name'@'%'`) ist MySQL-spezifisch.
+
+### Beispiel
+```sql
+CREATE USER 'analyst'@'%' IDENTIFIED BY 'Passwort';
+CREATE ROLE controlling;
+GRANT SELECT ON moebelhaus.bestellung TO controlling;
+GRANT SELECT ON moebelhaus.bestellposition TO controlling;
+GRANT controlling TO 'analyst'@'%';
+SET DEFAULT ROLE controlling TO 'analyst'@'%';
+REVOKE SELECT ON moebelhaus.bestellposition FROM controlling;
+```
+Die Rolle `controlling` darf Bestellungen nur lesen, nicht ändern; der Benutzer `analyst` erbt das über die Rolle. In MySQL muss die Rolle dafür zusätzlich aktiviert werden (`SET DEFAULT ROLE` bzw. `SET ROLE`); erst dann gelten die Rechte. Nach dem REVOKE sieht die Rolle die Positionen nicht mehr.
+
+### Abgrenzung
+| Gruppe | Befehle | Wirkung |
+|---|---|---|
+| DDL | CREATE, ALTER, DROP | Struktur |
+| DML | INSERT, UPDATE, DELETE | Daten |
+| DCL | GRANT, REVOKE | Rechte |
+
+Authentifizierung klärt, wer sich anmeldet (Benutzer, Passwort); GRANT und REVOKE regeln die Autorisierung.
+
+### Prüfungsfalle
+`TO` und `FROM` vertauschen: GRANT gibt **TO**, REVOKE nimmt **FROM**. Außerdem: `WITH GRANT OPTION` vergessen, wenn das Weitergaberecht verlangt ist, und Einzelrechte an Personen statt an eine Rolle vergeben.
+
+### Merksatz
+GRANT gibt TO, REVOKE nimmt FROM.
+
+Siehe auch: Autorisierung · RBAC · Least Privilege · Rollen · View
+Mehr: Deep Dive 1, 3.7 · Deep Dive 23, Teil 4
+
 
 ## Granularität
 <!-- id: granularitat · quellen: Karte DD8, DD8 4.1 · stand: 2026-10 -->
@@ -1036,8 +1224,19 @@ Mehr: Deep Dive 14, 1.4
 
 Gesetzliche Kündigungsfrist von 4 Wochen zum 15. oder zum Ende eines Kalendermonats (§ 622 Abs. 1 BGB).
 
+Auch: Kündigungsfristen, Kündigungsfrist
+
 ### Erklärung
 Die Grundfrist gilt für beide Seiten. Die nach Betriebszugehörigkeit verlängerten Fristen (ab 2 Jahren 1 Monat zum Monatsende bis 7 Monate ab 20 Jahren) gelten gesetzlich **nur für Kündigungen durch den Arbeitgeber** (§ 622 Abs. 2). In einer vereinbarten Probezeit (höchstens 6 Monate) gelten 2 Wochen zu jedem Tag. Maßgeblich für den Fristbeginn ist der **Zugang** der Kündigung.
+
+| Situation (§ 622 BGB) | Frist |
+|---|---|
+| Grundfrist, beide Seiten | 4 Wochen zum 15. oder Monatsende |
+| Probezeit (höchstens 6 Monate) | 2 Wochen, zu jedem Tag |
+| Arbeitgeber, ab 2 / 5 / 8 / 10 Jahren | 1 / 2 / 3 / 4 Monate zum Monatsende |
+| Arbeitgeber, ab 12 / 15 / 20 Jahren | 5 / 6 / 7 Monate zum Monatsende |
+
+Eine **außerordentliche** Kündigung (§ 626 BGB) braucht keine Frist, aber einen wichtigen Grund und muss binnen zwei Wochen nach Kenntnis erklärt werden.
 
 ### Beispiel
 Herr Kaya (6 Jahre im Betrieb), Kündigung geht am Dienstag, 10.03.2026, zu:

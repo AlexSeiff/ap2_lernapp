@@ -274,7 +274,7 @@ Mehr: Deep Dive 13, 5.1
 Mean Absolute Percentage Error (mittlerer absoluter prozentualer Fehler): durchschnittliche prozentuale Abweichung der Prognose vom tatsächlichen Wert.
 
 ### Erklärung
-$\text{MAPE} = \frac{1}{n} \sum \frac{|y - \hat{y}|}{|y|} \cdot 100\ \%$. Weil er relativ ist, lassen sich Modelle über verschiedene Größenordnungen vergleichen (Filiale mit 100 T€ und mit 5 Mio. € Umsatz). Liegt y nahe 0, explodiert der Bruch; bei y = 0 ist er nicht definiert.
+$\text{MAPE} = \frac{1}{n} \sum \frac{|y - \hat{y}|}{|y|} \cdot 100\ \%$. Weil er relativ ist, lassen sich Modelle über verschiedene Größenordnungen vergleichen (Filiale mit 100 T€ und mit 5 Mio. € Umsatz). Liegt y nahe 0, explodiert der Bruch; bei y = 0 ist er nicht definiert. Außerdem ist er asymmetrisch: Eine zu niedrige Prognose kann höchstens 100 % Abweichung ergeben, eine zu hohe beliebig viel – Überschätzungen werden stärker bestraft.
 
 ### Beispiel
 Umsätze (T€) y = 100, 120, 90, 130, 110; Prognosen 90, 126, 84, 132, 108:
@@ -568,6 +568,76 @@ Nur wenn der Zufall allein entscheidet, darf man Lücken einfach streichen.
 Siehe auch: MAR · MNAR · Fehlende Werte · Imputation
 Mehr: Deep Dive 9, 4.1
 
+## MDE-Geräte
+<!-- id: mde-gerate · quellen: Karte DD28, DD28 2.1, DD31 Block B · stand: 2026-11 -->
+
+Mobile Datenerfassungsgeräte: robuste Handgeräte wie Handscanner oder Tablets, mit denen Daten direkt am Ort des Geschehens erfasst und an ein Zentralsystem übertragen werden.
+
+Auch: Mobile Datenerfassung, MDE
+
+### Erklärung
+MDE-Geräte ersetzen Zettel und spätere Handeingabe (Medienbruch) durch sofortiges Erfassen, z. B. beim Wareneingang, bei der Inventur oder an einer Ausgabestelle. Bei einer Ist-Aufnahme von Geräten oder einer Beschaffung sind diese **Merkmale** wichtig, weil sie über Betrieb, Software und Austausch entscheiden:
+
+| Merkmal | Warum wichtig? |
+|---|---|
+| **Betriebssystem und Version** | bestimmt, welche Software läuft und wie lange es Sicherheitsupdates gibt |
+| **Erfassungstechnik** | Barcode-/QR-Scanner, RFID, NFC, Kartenleser – legt fest, was das Gerät lesen kann |
+| **Funkverbindung** | WLAN, Mobilfunk, Bluetooth – bestimmt, wo das Gerät online arbeitet |
+| **Akku** | Kapazität, Laufzeit, wechselbar oder fest verbaut |
+| **Robustheit** | Schutzart (IP-Code), Sturzfestigkeit |
+| **Bedienung** | Displaygröße, Touch oder Tasten, mit Handschuhen bedienbar |
+
+Ohne Funkverbindung braucht das Gerät einen **Offline-Puffer**: Es speichert Scans zwischen und überträgt sie, sobald es wieder Netz hat.
+
+### Beispiel
+Der Nordholz Eventservice gibt auf einem Stadtfest Liegestühle aus. Anforderung → passendes Merkmal:
+- Einsatz im Freien bei Regen und Staub → Schutzart mindestens IP54.
+- Kein WLAN auf dem Festgelände → Mobilfunk-Modul oder Offline-Puffer.
+- Bedienung mit Arbeitshandschuhen → Tasten oder Touchscreen für Handschuhe.
+- Ausgabe der Liegestühle per QR-Code → Kamera-Scanner mit QR-Erkennung.
+
+### Abgrenzung
+Ein **IoT-Sensor** läuft selbstständig und liefert laufend Messwerte, ein **MDE-Gerät** wird von einer Person bedient. Ein normales Smartphone kann Scanner-Aufgaben übernehmen, ist aber meist weniger robust und hat weniger Akkureserve.
+
+### Prüfungsfalle
+Merkmale ohne Bedeutung für Betrieb oder Software („Gehäusefarbe“) bringen keinen Punkt. Auch „Funkverbindung“ und „Erfassungstechnik“ nicht verwechseln: Das eine überträgt die Daten, das andere liest den Code.
+
+### Merksatz
+MDE-Gerät = Scanner plus Funk, gebaut für den rauen Alltag – wähle es nach Einsatzort.
+
+Siehe auch: Schutzart (IP-Code) · IoT · Ist-Aufnahme · Methoden der Ist-Aufnahme
+Mehr: Deep Dive 28, 2.1
+
+## Medallion-Architektur
+<!-- id: medallion-architektur · quellen: DD8 5.1 · stand: 2026-11 -->
+
+Schichtenmodell in Lakehouse-Plattformen: Daten werden stufenweise von roh (Bronze) über bereinigt (Silver) zu auswertungsfertig (Gold) veredelt.
+
+### Erklärung
+| Stufe | Inhalt | Typische Schritte |
+|---|---|---|
+| Bronze | Rohdaten unverändert wie geliefert (keine fachliche Bereinigung), mit Quelle und Ladezeit | nur anhängen; Löschfristen und Löschanträge gelten auch hier |
+| Silver | bereinigt und vereinheitlicht | Dubletten entfernen, Typen und Formate angleichen, Schlüssel harmonisieren, fehlerhafte Sätze in Quarantäne |
+| Gold | fachlich aufbereitet für Berichte und Modelle | aggregieren, Kennzahlen berechnen, Star-Schema und Data Marts |
+
+Jede Stufe erhöht die Qualität; die Schichten lassen sich getrennt berechtigen (Bronze nur für Data Engineers) und aus der vorigen Stufe jederzeit neu aufbauen. Der Preis: mehr Speicher und mehr Pipelines. Die Idee entspricht Staging → Core → Data Mart im klassischen DWH und passt zu ELT.
+
+### Beispiel
+Kassenbons der Möbelhaus Nordholz GmbH: Bronze enthält 180.000 Positionen roh. Silver entfernt 1.800 Dubletten (1 %) und leitet 600 fehlerhafte Sätze in die Quarantäne – übrig bleiben 177.600. Gold liefert den Tagesumsatz je Filiale (12 Filialen, also 12 Zeilen pro Tag) für das Dashboard.
+
+### Abgrenzung
+Die Medaillen beschreiben den **Veredelungsgrad**, nicht die Wichtigkeit oder eine Schutzklasse. Die **Medallion-Architektur** ist ein Muster im Lakehouse; **ETL** ist der Prozess, der zwischen den Stufen arbeitet.
+
+### Prüfungsfalle
+Die Bronze-Schicht nach der Bereinigung löschen. Sie bleibt als unveränderte Quelle erhalten, damit sich Fehler korrigieren und Regeln später neu anwenden lassen – aber nur, solange Aufbewahrung und Datenschutz es erlauben.
+
+### Merksatz
+Bronze bewahrt, Silver putzt, Gold liefert.
+
+Siehe auch: Lakehouse · Delta Lake · ELT · Staging Area · Data Mart · Data Lake
+Mehr: Deep Dive 8, 5.1
+
+
 ## Median
 <!-- id: median · quellen: Karte DD3, DD3 Teil 3 · stand: 2026-10 -->
 
@@ -835,6 +905,7 @@ Mehr: Deep Dive 6, 2.1
 <!-- id: merkmale-bilden · quellen: DD6 Teil 5 · stand: 2026-10 -->
 
 Schritt der Datenvorbereitung (Feature Engineering): Aus vorhandenen Rohdaten werden neue, aussagekräftige Merkmale berechnet.
+Auch: Feature Engineering
 
 ### Erklärung
 Rohdaten sind oft nicht direkt nutzbar: Ein Zeitstempel sagt wenig, die daraus berechnete Dauer viel. Typisch sind Differenzen (Dauer), Umrechnungen (Alter aus Geburtsdatum), Zerlegungen (Wochentag, Monat), Verhältnisse (Retourenquote) und Aggregationen (Umsatz der letzten 90 Tage). Gute Merkmale verbessern ein Modell oft stärker als ein komplizierteres Verfahren.
@@ -851,7 +922,7 @@ Merkmale aus Informationen bilden, die zum Vorhersagezeitpunkt noch nicht vorlie
 ### Merksatz
 Nicht der Zeitstempel zählt, sondern die Dauer dazwischen.
 
-Siehe auch: Merkmal · Kategorien kodieren · Standardisierung · Min-Max-Normalisierung
+Siehe auch: Merkmal · Kategorien kodieren · Standardisierung · Min-Max-Normalisierung · Data Leakage
 Mehr: Deep Dive 6, Teil 5
 
 ## Metadaten
@@ -884,30 +955,47 @@ Mehr: Deep Dive 15, 1.1
 ## Methoden der Ist-Aufnahme
 <!-- id: methoden-der-ist-aufnahme · quellen: Karte DD5, DD5 1.2 · stand: 2026-10 -->
 
-Verfahren, mit denen der tatsächliche Ablauf eines Prozesses erhoben wird: Interview, Workshop, Fragebogen, Beobachtung, Dokumentenanalyse und Auswertung von Systemdaten.
+Verfahren, mit denen der tatsächliche Ablauf eines Prozesses erhoben wird: Interview, Workshop, Fragebogen, Beobachtung, Zeitmessung, Selbstaufschreibung, Dokumentenanalyse und Auswertung von Systemdaten.
 
 ### Erklärung
-Die Ist-Aufnahme ist der zweite Schritt der Prozessanalyse, nach der Abgrenzung des Prozesses. **Interviews** und **Workshops** liefern Kontext und Erfahrungswissen, aber eine subjektive Sicht. **Fragebögen** erreichen viele Personen. **Beobachtung** (auch als Multimomentaufnahme mit Stichproben) zeigt das reale Verhalten. **Dokumentenanalyse** wertet Formulare und Arbeitsanweisungen aus. **Systemdaten** (Event Logs) sind objektiv und vollständig, erklären aber nicht das Warum. Deshalb kombiniert man datengetriebene und befragende Methoden.
+Die Ist-Aufnahme ist der zweite Schritt der Prozessanalyse, nach der Abgrenzung des Prozesses. **Interviews** und **Workshops** liefern Kontext und Erfahrungswissen, aber eine subjektive Sicht. **Fragebögen** erreichen viele Personen. **Beobachtung** (auch als **Multimomentaufnahme**: Stichproben in festen oder zufälligen Abständen, was gerade getan wird) zeigt das reale Verhalten und die Anteile der Tätigkeiten. **Zeitmessung** (Zeitaufnahme) stoppt die Dauer einzelner Schritte. Bei der **Selbstaufschreibung** notieren die Beschäftigten selbst über einen Zeitraum, was sie wann tun. **Dokumentenanalyse** wertet Formulare und Arbeitsanweisungen aus. **Systemdaten** (Event Logs) sind objektiv und vollständig, erklären aber nicht das Warum. Deshalb kombiniert man datengetriebene und befragende Methoden.
+
+In der Klausur gilt: **auf die Situation anwenden**, nicht nur das Schlagwort nennen.
 
 ### Beispiel
 Für den Reparaturservice wertet die Analystin das Event Log aus (Liegezeit vor „Teil bestellen“ im Schnitt 26 h) und fragt in Interviews mit der Disposition nach den Gründen.
+
+An der Warenausgabe der Möbelhaus Nordholz GmbH (Samstag, lange Schlangen):
+
+| Methode | So wird sie dort angewendet |
+|---|---|
+| Beobachtung / Multimomentaufnahme | samstags im 15-Minuten-Takt die Länge der Schlange zählen |
+| Zeitmessung | Dauer je Abholung von „Abholschein vorgelegt“ bis „Ware übergeben“ stoppen |
+| Interview | Mitarbeiter der Warenausgabe nach Engpässen fragen |
+| Fragebogen | Kunden an der Ausfahrt kurz zur Wartezeit befragen |
+| Dokumentenanalyse | Arbeitsanweisung und Abholschein-Formular auf Abweichungen prüfen |
+| Systemdaten | Scannerprotokolle (Uhrzeit jeder Abholung) auswerten |
+| Selbstaufschreibung | Mitarbeiter notieren eine Woche lang ihre Unterbrechungen |
 
 ### Abgrenzung
 | Methode | Stärke | Schwäche |
 |---|---|---|
 | Interview | Kontext, Ursachen | subjektiv, beschreibt oft das Soll |
 | Fragebogen | viele Befragte | wenig Tiefe |
-| Beobachtung | reales Verhalten | aufwendig, Beobachtereffekt |
+| Beobachtung / Multimomentaufnahme | reales Verhalten, Tätigkeitsanteile | aufwendig, Beobachtereffekt |
+| Zeitmessung | genaue Dauern je Schritt | aufwendig, Verhalten ändert sich unter Beobachtung, nur Momentaufnahme |
+| Selbstaufschreibung | wenig Aufwand für den Analysten, längerer Zeitraum | ungenau, Mehrarbeit für die Beschäftigten, geschönte Angaben möglich |
+| Dokumentenanalyse | schnell, belegbar | zeigt nur das Dokumentierte |
 | Systemdaten | objektiv, vollständig | kein Warum |
 
 ### Prüfungsfalle
-Nur eine Methode nennen – erwartet werden mindestens drei mit Vor- und Nachteilen.
+Nur eine Methode nennen – erwartet werden mindestens drei mit Vor- und Nachteilen. Und Methoden nennen, die zur Aufgabe nicht passen: Für die Ist-Aufnahme von Geräten (nicht von Abläufen) sind Inventarlisten, Dokumentenanalyse, Befragung der Nutzer und automatisches Auslesen der Geräte sinnvoll, eine Zeitmessung nicht.
 
 ### Merksatz
 Die Daten zeigen das Was, die Menschen erklären das Warum.
 
-Siehe auch: Ist-Aufnahme · Event Log · Process Mining · Liegezeit
-Mehr: Deep Dive 5, 1.2
+Siehe auch: Ist-Aufnahme · Event Log · Process Mining · Liegezeit · MDE-Geräte
+Mehr: Deep Dive 5, 1.2 · Deep Dive 21, 3.1
 
 ## Midijob
 <!-- id: midijob · quellen: Karte DD14 · stand: 2026-10 -->
@@ -1497,6 +1585,30 @@ MTTR runter = schneller wieder da.
 Siehe auch: MTBF · MTTF · Verfügbarkeit · Hochverfügbarkeit
 Mehr: Deep Dive 16, 4.2
 
+## Multikollinearität
+<!-- id: multikollinearitat · quellen: Karte DD4, DD4 1.2, DD4 2.3 · stand: 2026-11 -->
+
+Bei einer Regression mit mehreren Einflussgrößen hängen zwei oder mehr davon selbst stark zusammen, sodass sich ihre Einzeleffekte nicht sauber trennen lassen.
+
+### Erklärung
+Die Regressionskoeffizienten werden instabil: Schon kleine Änderungen der Daten verschieben sie stark, sogar das Vorzeichen kann kippen, und die Einzelwirkung einer Größe ist kaum deutbar. Das Gesamtmodell (R², Prognose innerhalb des Datenbereichs) leidet dagegen oft kaum. Erkennen lässt sich das an hohen Korrelationen zwischen den x-Variablen (|r| > 0,8 ist auffällig) und am **Varianzinflationsfaktor** $\text{VIF}_j = \frac{1}{1 - R_j^2}$; dabei ist $R_j^2$ das Bestimmtheitsmaß, wenn x_j aus den übrigen Einflussgrößen vorhergesagt wird. Faustregel: VIF über 5 bis 10 ist problematisch. Gegenmaßnahmen: eine der Größen weglassen, Größen zu einem Index zusammenfassen, mehr Daten oder Regularisierung (Ridge). Ist eine Größe eine exakte Umrechnung einer anderen (Umsatz in € und in T€), lässt sich das Modell gar nicht schätzen.
+
+### Beispiel
+Umsatz je Filiale aus Verkaufsfläche x₁ und Zahl der Beschäftigten x₂. Beide hängen mit r = 0,95 zusammen. Bei zwei Einflussgrößen ist $R_j^2 = r^2 = 0{,}9025$ und $\text{VIF} = \frac{1}{1 - 0{,}9025} = \frac{1}{0{,}0975} = 10{,}3$.
+Wert über 10: Das Modell kann nicht sagen, ob die Fläche oder das Personal den Umsatz treibt. Sinnvoll wäre nur eine der beiden Größen oder die Kennzahl „Fläche je Beschäftigtem“.
+
+### Abgrenzung
+Erwünscht ist eine Korrelation zwischen **x und y** (sonst erklärt x nichts). Multikollinearität ist die unerwünschte Korrelation **zwischen den x-Variablen**. Eine **Drittvariable** beeinflusst x und y; Multikollinearität betrifft nur die x untereinander.
+
+### Prüfungsfalle
+Multikollinearität mit schlechter Prognosegüte gleichsetzen – betroffen ist vor allem die Deutung der einzelnen Koeffizienten.
+
+### Merksatz
+Wenn zwei x dasselbe sagen, weiß das Modell nicht, wem es den Effekt zuschreiben soll.
+
+Siehe auch: Regressionskoeffizient · Regression · Korrelation · Bestimmtheitsmaß · Drittvariable
+Mehr: Deep Dive 4, 1.2 · Deep Dive 4, 2.3
+
 ## Multiplizität
 <!-- id: multiplizitat · quellen: Karte DD15 · stand: 2026-10 -->
 
@@ -1527,12 +1639,27 @@ Siehe auch: Assoziation · Klassendiagramm · Min-Max-Notation · MC-Notation ·
 Mehr: Deep Dive 15, 5.3
 
 ## Mutterschutz
-<!-- id: mutterschutz · quellen: Karte DD13, DD13 2.4 · stand: 2026-10 -->
+<!-- id: mutterschutz · quellen: Karte DD13, DD13 2.4, DD20 3.4 · stand: 2026-11 -->
 
 Gesetzlicher Schutz schwangerer und stillender Frauen nach dem Mutterschutzgesetz (MuSchG): Schutzfristen vor und nach der Entbindung, Kündigungsverbot und Beschäftigungsverbote.
 
+Auch: MuSchG, Schutzfristen, Beschäftigungsverbot, Mutterschaftsgeld
+
 ### Erklärung
 **Schutzfrist** 6 Wochen vor der Entbindung (die Frau darf auf eigenen ausdrücklichen Wunsch weiterarbeiten) und 8 Wochen danach (absolutes Beschäftigungsverbot); 12 Wochen bei Früh- und Mehrlingsgeburten sowie auf Antrag bei Behinderung des Kindes. Seit 01.06.2025 gibt es gestaffelte Schutzfristen auch nach einer **Fehlgeburt** ab der 13. Schwangerschaftswoche (2, 6 bzw. 8 Wochen; Stand 2026). **Kündigungsverbot** (§ 17 MuSchG) während der Schwangerschaft bis 4 Monate nach der Entbindung bzw. nach einer Fehlgeburt nach der 12. Woche. In den Schutzfristen zahlen Krankenkasse und Arbeitgeber gemeinsam das Mutterschaftsgeld bzw. den Zuschuss bis zum Nettoentgelt.
+
+**Weitere Teilthemen (Stand 2026):**
+
+| Thema | Regel |
+|---|---|
+| Mitteilung | Die Schwangere **soll** Schwangerschaft und Entbindungstermin so früh wie möglich mitteilen (§ 15), sie muss es nicht; auf Verlangen legt sie ein ärztliches Zeugnis vor. Der Arbeitgeber meldet die Mitteilung unverzüglich der Aufsichtsbehörde (Gewerbeaufsicht, § 27) und darf sie nicht an Unbefugte weitergeben. Das Kündigungsverbot gilt, wenn er von der Schwangerschaft weiß oder sie ihm binnen zwei Wochen nach Zugang der Kündigung mitgeteilt wird |
+| Arbeitszeit | höchstens 8,5 Stunden täglich bzw. 90 Stunden in der Doppelwoche (Minderjährige 8 bzw. 80), mindestens 11 Stunden Ruhezeit; **keine Nachtarbeit** zwischen 20 und 6 Uhr (bis 22 Uhr nur mit behördlicher Genehmigung und ausdrücklicher Bereitschaft der Frau), Sonn- und Feiertagsarbeit nur auf ausdrückliches Verlangen und mit Ersatzruhetag |
+| Gefährdungen | Der Arbeitgeber muss den Arbeitsplatz beurteilen und Schutzmaßnahmen treffen. Verboten sind Tätigkeiten mit unverantwortbarer Gefährdung, etwa bestimmte Gefahrstoffe, regelmäßiges Heben von mehr als 5 kg und gelegentliches von mehr als 10 kg; Akkord- und Fließarbeit sind (§ 11 Abs. 6) ohne Gefährdungsprüfung verboten, getaktete Arbeit nur bei Gefährdung. Gelingt kein sicherer Arbeitsplatz, folgt die Umsetzung, zuletzt die Freistellung |
+| Freistellung | für Vorsorgeuntersuchungen und, in den ersten 12 Monaten nach der Geburt, für Stillzeiten (für die erforderliche Zeit, mindestens zweimal täglich 30 Minuten oder einmal 60 Minuten; § 7), ohne Entgeltminderung (§ 23) |
+| Beschäftigungsverbote | **generell** (Schutzfristen, gefährliche Tätigkeiten) oder **individuell** durch ärztliches Zeugnis (§ 16). Bei einem Verbot außerhalb der Schutzfristen zahlt der Arbeitgeber **Mutterschutzlohn** in Höhe des Durchschnittsentgelts der letzten drei Monate vor der Schwangerschaft (§ 18) |
+| Mutterschaftsgeld | gesetzlich Versicherte: Krankenkasse **13 € je Kalendertag** (§ 19 MuSchG i. V. m. § 24i SGB V); der Arbeitgeber zahlt als **Zuschuss** die Differenz zum durchschnittlichen kalendertäglichen Nettoentgelt (§ 20). Nicht gesetzlich Versicherte erhalten einmalig höchstens 210 € vom Bund (§ 19) |
+| Urlaub | Zeiten eines Beschäftigungsverbots gelten für den Urlaubsanspruch als Beschäftigungszeit; nicht genommener Urlaub kann im laufenden oder im nächsten Jahr genommen werden (§ 24) |
+| Ausnahme vom Kündigungsverbot | nur in besonderen Fällen, die nicht mit der Schwangerschaft zusammenhängen, kann die zuständige Landesbehörde die Kündigung vorab für zulässig erklären (§ 17 Abs. 2); die Kündigung bleibt schriftlich und mit Grund zu erklären |
 
 ### Beispiel
 Errechneter Geburtstermin einer Mitarbeiterin: 15.05.2026. Schutzfrist ab 03.04.2026; Entbindung tatsächlich am 15.05. → Schutzfrist bis 10.07.2026, Kündigungsverbot bis 15.09.2026.
@@ -1546,8 +1673,8 @@ Die 8 Wochen nach der Geburt für verzichtbar halten – nur die 6 Wochen davor 
 ### Merksatz
 Sechs vor, acht nach, vier Monate unkündbar.
 
-Siehe auch: Elternzeit · Besonderer Kündigungsschutz · Schwerbehinderte Menschen
-Mehr: Deep Dive 13, 2.4
+Siehe auch: Elternzeit · Besonderer Kündigungsschutz · Schwerbehinderte Menschen · Gewerbeaufsichtsamt
+Mehr: Deep Dive 13, 2.4 · Deep Dive 20, 3.4
 
 ## Ausgelassen
 - Merkmale – Abschnittstitel Struktogramm

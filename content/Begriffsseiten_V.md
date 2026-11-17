@@ -118,7 +118,7 @@ Validierungsdaten mit „validen“ (formal korrekten) Daten verwechseln – es 
 ### Merksatz
 Training lernt, Validierung wählt, Test urteilt.
 
-Siehe auch: Trainingsdaten · Testdaten · Kreuzvalidierung · Overfitting
+Siehe auch: Trainingsdaten · Testdaten · Kreuzvalidierung · Overfitting · Hyperparameter
 Mehr: Deep Dive 6, 2.1 · Deep Dive 7, 1.3
 
 ## Value
@@ -622,12 +622,16 @@ Siehe auch: Mahnverfahren · Gewährleistung · Kaufvertrag
 Mehr: Deep Dive 14, 2.5
 
 ## Verkürzung
-<!-- id: verkurzung · quellen: DD13 1.4 · stand: 2026-10 -->
+<!-- id: verkurzung · quellen: DD13 1.4, DD20 Teil 2 · stand: 2026-11 -->
 
 Kürzung der Ausbildungszeit durch die IHK auf gemeinsamen Antrag von Auszubildendem und Ausbildendem, wenn das Ausbildungsziel in kürzerer Zeit erreichbar ist (§ 8 Abs. 1 BBiG).
 
+Auch: Verlängerung der Ausbildung, Verkürzung der Ausbildung, Ausbildungsdauer
+
 ### Erklärung
-Gründe sind z. B. Abitur, eine einschlägige Vorbildung oder sehr gute Leistungen. Die Verkürzung wird vorab beantragt und ändert das vertragliche Ausbildungsende. Davon zu unterscheiden ist die **vorzeitige Zulassung** zur Abschlussprüfung nach § 45 BBiG: Sie wird später wegen guter Leistungen gewährt, der Vertrag endet dann mit dem vorzeitigen Bestehen. In Ausnahmefällen kann die Ausbildungszeit auch verlängert werden (§ 8 Abs. 2).
+Gründe sind z. B. Abitur, eine einschlägige Vorbildung oder sehr gute Leistungen. Die Verkürzung wird vorab beantragt und ändert das vertragliche Ausbildungsende. Davon zu unterscheiden ist die **vorzeitige Zulassung** zur Abschlussprüfung nach § 45 BBiG: Sie wird später wegen guter Leistungen gewährt, der Vertrag endet dann mit dem vorzeitigen Bestehen.
+
+**Verlängerung:** In Ausnahmefällen kann die zuständige Stelle die Ausbildungszeit **auf Antrag des Auszubildenden** verlängern, wenn das nötig ist, um das Ausbildungsziel zu erreichen (z. B. nach längerer Krankheit); der Ausbildende wird vorher angehört (§ 8 Abs. 2 BBiG). Besteht der Auszubildende die Abschlussprüfung nicht, verlängert sich das Ausbildungsverhältnis **auf sein Verlangen** bis zur nächsten Wiederholungsprüfung, höchstens um **ein Jahr** (§ 21 Abs. 3 BBiG). Bei einer **Teilzeitberufsausbildung** (§ 7a BBiG) verlängert sich die Dauer entsprechend, das Ende ist aber auf höchstens das Anderthalbfache der Vollzeitdauer begrenzt.
 
 ### Beispiel
 Lea hat Abitur. Mit dem Möbelhaus Nordholz beantragt sie zu Beginn eine Verkürzung von 36 auf 30 Monate; die IHK gibt dem Antrag statt.
@@ -640,13 +644,13 @@ Lea hat Abitur. Mit dem Möbelhaus Nordholz beantragt sie zu Beginn eine Verkür
 | Wirkung | neues Vertragsende | Ende mit Bekanntgabe des Ergebnisses |
 
 ### Prüfungsfalle
-Die Verkürzung als einseitiges Recht des Auszubildenden darstellen – der Antrag ist gemeinsam zu stellen, entscheiden muss die IHK.
+Die Verkürzung als einseitiges Recht des Auszubildenden darstellen – der Antrag ist gemeinsam zu stellen, entscheiden muss die IHK. Bei der Verlängerung dagegen stellt der **Auszubildende** den Antrag (nach Nichtbestehen: Verlangen, höchstens ein Jahr); der Betrieb kann sie nicht erzwingen.
 
 ### Merksatz
 Verkürzen beantragen beide – entscheiden tut die Kammer.
 
 Siehe auch: BBiG · Vorzeitiges Bestehen · Probezeit · Prüfungsausschuss
-Mehr: Deep Dive 13, 1.4
+Mehr: Deep Dive 13, 1.4 · Deep Dive 20, Teil 2
 
 ## Versicherungspflichtgrenze
 <!-- id: versicherungspflichtgrenze · quellen: Karte DD14, DD14 1.3 · stand: 2026-10 -->
@@ -931,6 +935,52 @@ Eine Bedingung, zwei Wege – genau einer wird gegangen.
 
 Siehe auch: Sequenz · Wiederholung · Raute · Struktogramm · Programmablaufplan
 Mehr: Deep Dive 11, B1 · Deep Dive 17, 4.1 · Deep Dive 17, 4.2
+
+## Videoüberwachung
+<!-- id: videouberwachung · quellen: Karte DD19, DD19 3.5, DD10 2.1, DD10 2.2, DD20 · stand: 2026-11 -->
+
+Beobachtung und Aufzeichnung von Räumen oder Personen mit Kameras; weil Menschen erkennbar sind, ist das eine Verarbeitung personenbezogener Daten und unterliegt der DSGVO.
+
+Auch: Videoerfassung, Kameraüberwachung
+
+### Erklärung
+Hier geht es um die **Datenschutz-Seite** (Stand 2026). Wer Kameras betreibt, braucht eine **Rechtsgrundlage** und muss die Grundsätze der DSGVO einhalten:
+
+| Anforderung | Was heißt das bei Kameras? |
+|---|---|
+| **Rechtsgrundlage** | meist berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO (z. B. Schutz vor Diebstahl, Hausrecht) nach einer Interessenabwägung; § 4 BDSG gilt nur für öffentliche Stellen und ist für private Betreiber nicht die Rechtsgrundlage; bei Beschäftigten kommt § 26 BDSG hinzu |
+| **Erforderlichkeit** | Gibt es ein milderes Mittel (Beleuchtung, Zutrittskontrolle, Personal)? Erst dann Kameras |
+| **Zweckbindung** | Zweck vorher festlegen und nicht für andere Zwecke nutzen (z. B. keine Leistungskontrolle) |
+| **Datenminimierung** | nur den nötigen Bildausschnitt erfassen, Nachbargrundstücke und Privatbereiche ausblenden; bei Bildanalyse nur die relevante Region speichern |
+| **Speicherbegrenzung** | Aufnahmen automatisch und zügig löschen; Aufsichtsbehörden halten meist wenige Tage, häufig 72 Stunden, für ausreichend |
+| **Transparenz** | Hinweisschild am Eingang des erfassten Bereichs: Kamera-Symbol, Verantwortlicher, Zweck, Kontakt; weitere Pflichtangaben nach Art. 13 DSGVO z. B. über einen Aushang oder QR-Code |
+| **Sicherheit (TOM)** | Zugriff nur für wenige Berechtigte mit Protokoll, Verschlüsselung der Aufnahmen |
+| **Folgenabschätzung** | bei systematischer, umfangreicher Überwachung öffentlich zugänglicher Bereiche Pflicht (Art. 35 Abs. 3 lit. c) |
+
+**Verboten bzw. besonders heikel:** Kameras in Toiletten, Umkleiden, Sanitär- und Pausenräumen; Ton aufnehmen (§ 201 StGB); dauernde Überwachung von Beschäftigten am Arbeitsplatz. **Biometrische Gesichtserkennung** betrifft besondere Kategorien nach Art. 9 DSGVO und ist nur in engen Ausnahmen erlaubt.
+
+**Beschäftigte:** Der Betriebsrat hat nach § 87 Abs. 1 Nr. 6 BetrVG mitzubestimmen; üblich ist eine **Betriebsvereinbarung**. Eine Einwilligung der Beschäftigten taugt kaum als Grundlage, weil sie wegen des Abhängigkeitsverhältnisses als nicht freiwillig gilt.
+
+### Beispiel
+Im Verkaufsraum der Möbelhaus Nordholz GmbH sollen zwei Kameras am Eingang und an der Kasse Diebstahl verhindern. Das Möbelhaus legt den Zweck „Schutz vor Diebstahl und Raub“ fest, filmt nur diese zwei Bereiche (nicht die Umkleide der Beschäftigten und nicht den Gehweg), hängt Hinweisschilder am Eingang auf, löscht die Aufnahmen automatisch nach 72 Stunden, beschränkt den Zugriff auf die Marktleitung und schließt mit dem Betriebsrat eine Betriebsvereinbarung. Fragt eine Klausur nach zwei Maßnahmen für den rechtskonformen Betrieb, sind Hinweisschilder und automatische Löschung die naheliegenden Antworten.
+
+### Abgrenzung
+| | Videoüberwachung | Videoerfassung für Bilderkennung |
+|---|---|---|
+| Zweck | Sicherheit, Beweissicherung | Prozess, z. B. Etikett oder Kennzeichen lesen |
+| Personen im Bild | Hauptgegenstand | unerwünschter Beifang |
+| typische Maßnahme | Hinweisschild, kurze Löschfrist | nur die Etikettenregion speichern, Personen unkenntlich machen |
+
+Beide brauchen Rechtsgrundlage, Hinweisschilder und eine Löschfrist. Eine **Zutrittskontrolle** per Chip oder Schloss ist dagegen eine technische und organisatorische Maßnahme und kein Ersatz für Kameras, sondern oft das mildere Mittel.
+
+### Prüfungsfalle
+Das Hinweisschild für die Rechtsgrundlage halten: Es stellt nur Transparenz her. Zulässig wird die Überwachung erst durch Rechtsgrundlage, Erforderlichkeit und Interessenabwägung. Außerdem „Einwilligung der Mitarbeiter“ als Standardlösung nennen – im Arbeitsverhältnis ist sie problematisch, besser sind Betriebsvereinbarung und berechtigtes Interesse.
+
+### Merksatz
+Kamera nur mit Grund, Hinweisschild, kleinem Blickfeld und kurzer Löschfrist.
+
+Siehe auch: DSGVO · Berechtigtes Interesse · Zweckbindung · Datenminimierung · Speicherbegrenzung · Datenschutz-Folgenabschätzung · Betriebsvereinbarung · Betriebsrat · Technische und organisatorische Maßnahmen
+Mehr: Deep Dive 19, 3.5 · Deep Dive 10, 2.2
 
 ## Vier-Augen-Prinzip
 <!-- id: vier-augen-prinzip · quellen: Karte DD9, DD9 5.2 · stand: 2026-10 -->

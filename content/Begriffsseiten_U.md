@@ -84,7 +84,7 @@ Die logistische Regression ist trotz des Namens ein Klassifikationsverfahren –
 ### Merksatz
 Gibt es eine Spalte mit der richtigen Antwort, ist es überwachtes Lernen.
 
-Siehe auch: Unüberwachtes Lernen · Klassifikation · Regression · Zielvariable · Validierungsdaten
+Siehe auch: Unüberwachtes Lernen · Klassifikation · Regression · Regressionskoeffizient · Zielvariable · Validierungsdaten
 Mehr: Deep Dive 6, 2.2 · Deep Dive 6, 2.3
 
 ## UG (haftungsbeschränkt)
@@ -169,6 +169,29 @@ Die Jungen zahlen für die Alten – heute, nicht auf Vorrat.
 Siehe auch: Rentenversicherung · Solidarprinzip · Drei Säulen · Pflichtversicherung
 Mehr: Deep Dive 14, 1.1 · Deep Dive 14, 1.5
 
+## Umschulung
+<!-- id: umschulung · quellen: Karte DD33, DD33 Teil 5 · stand: 2026-11 -->
+
+Berufliche Weiterbildung, die zu einer anderen beruflichen Tätigkeit befähigt (§ 1 Abs. 5 BBiG) – meist, weil der bisherige Beruf nicht mehr ausgeübt werden kann.
+
+### Erklärung
+Anlass sind z. B. gesundheitliche Gründe, ein weggefallener Arbeitsplatz oder ein Strukturwandel in der Branche. Eine Umschulung in einen anerkannten Ausbildungsberuf dauert meist weniger als die Erstausbildung, weil Vorkenntnisse angerechnet werden, und endet mit einer Prüfung bei der zuständigen Stelle (z. B. IHK). Wer die Kosten trägt, hängt vom Anlass ab: Bei Arbeitslosen oder von Arbeitslosigkeit Bedrohten kann die **Agentur für Arbeit** die Kosten über einen **Bildungsgutschein** übernehmen (Voraussetzung ist unter anderem, dass die Maßnahme notwendig ist und die Eingliederung verbessert). Muss der Beruf aus gesundheitlichen Gründen gewechselt werden, ist meist die **Deutsche Rentenversicherung** als Reha-Träger zuständig (Leistungen zur Teilhabe am Arbeitsleben); nach einem Arbeitsunfall oder einer Berufskrankheit die **Berufsgenossenschaft**.
+
+### Beispiel
+Frau Brandt war 15 Jahre Lagerarbeiterin. Der Betrieb hat ihr gekündigt, weil der Lagerbereich geschlossen wurde. Sie ist arbeitslos gemeldet und lässt sich von der Agentur für Arbeit mit einem Bildungsgutschein zur Fachinformatikerin umschulen. Der alte Beruf ist nicht mehr zu halten, der neue Beruf ist ein anderer – das ist eine Umschulung. Würde sie dagegen als Lagerarbeiterin den Gabelstaplerschein erwerben, bliebe sie in ihrem Beruf: Fortbildung.
+
+### Abgrenzung
+Die **Fortbildung** baut auf dem bisherigen Beruf auf (Aufstieg, Anpassung); die Umschulung wechselt den Beruf. Die **Erstausbildung** (duale Ausbildung) ist die erste Berufsausbildung nach der Schule.
+
+### Prüfungsfalle
+Jede Weiterbildung als Umschulung bezeichnen – ohne Berufswechsel ist es eine Fortbildung. Kostenträger: bei Arbeitslosigkeit die Agentur für Arbeit (Bildungsgutschein), nicht die Krankenkasse oder der Betriebsrat. Bei gesundheitlich erzwungenem Berufswechsel kann stattdessen die Rentenversicherung (bei Arbeitsunfall die Berufsgenossenschaft) die Umschulung als Reha-Leistung tragen.
+
+### Merksatz
+Umschulung heißt neuer Beruf – oft, weil der alte nicht mehr geht.
+
+Siehe auch: Fortbildung · Duale Ausbildung · BBiG · Arbeitslosenversicherung
+Mehr: Deep Dive 33, Teil 5
+
 ## Umweltmanagementsysteme
 <!-- id: umweltmanagementsysteme · quellen: DD14 5.2 · stand: 2026-10 -->
 
@@ -192,16 +215,80 @@ ISO 14001 = Norm zum Zertifizieren, EMAS = EU-System mit öffentlicher Umwelterk
 Siehe auch: Nachhaltigkeit · Green IT · PUE · PDCA · Abfallhierarchie
 Mehr: Deep Dive 14, 5.2
 
+## Umweltprinzipien
+<!-- id: umweltprinzipien · quellen: Karte DD26, DD26 Teil 5, DD33 Teil 5 · stand: 2026-11 -->
+
+Grundsätze der Umweltpolitik: Verursacherprinzip, Vorsorgeprinzip, Kooperationsprinzip und ergänzend das Gemeinlastprinzip.
+
+Auch: Verursacherprinzip, Vorsorgeprinzip, Gemeinlastprinzip, Kooperationsprinzip
+
+### Erklärung
+| Prinzip | Inhalt | Beispiel |
+|---|---|---|
+| **Verursacherprinzip** | Wer die Umweltbelastung verursacht, trägt die Kosten ihrer Vermeidung oder Beseitigung | Abwasserabgabe, CO₂-Preis, Entsorgungskosten beim Hersteller |
+| **Vorsorgeprinzip** | Umweltschäden von vornherein vermeiden, auch ohne letzte wissenschaftliche Sicherheit | Grenzwerte, Genehmigungsverfahren, Umweltverträglichkeitsprüfung |
+| **Kooperationsprinzip** | Staat, Wirtschaft, Verbände und Bürger arbeiten zusammen | Selbstverpflichtungen, freiwilliges Umweltmanagement (z. B. EMAS) |
+| **Gemeinlastprinzip** | Die Allgemeinheit (über Steuern) trägt die Kosten, wenn kein Verursacher feststellbar oder heranziehbar ist | Sanierung alter Deponien |
+
+Die ersten drei gelten als Grundprinzipien, das Gemeinlastprinzip ist die Ausnahme.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH liefert in Mehrwegtransportboxen aus, damit weniger Verpackungsabfall entsteht (Vorsorge). Für die Entsorgung ihrer Altgeräte zahlt sie die Entsorgungsgebühr selbst (Verursacher). Sie tauscht sich mit Kommune und Branchenverband zu Recyclingquoten aus (Kooperation). Eine unbekannte Altlast auf dem Nachbargrundstück saniert dagegen die Stadt aus Steuern (Gemeinlast).
+
+### Abgrenzung
+**Nachhaltigkeit** ist das übergeordnete Leitbild (ökologisch, ökonomisch, sozial); die Umweltprinzipien sind Werkzeuge der Umweltpolitik. Die **Abfallhierarchie** ordnet die Abfallbehandlung (vermeiden vor verwerten vor beseitigen).
+
+### Prüfungsfalle
+Verursacher- und Gemeinlastprinzip vertauschen: Beim Verursacherprinzip zahlt der Schädiger, beim Gemeinlastprinzip die Allgemeinheit. Auch „Vorsorge“ nicht mit der Schadensbeseitigung nach dem Ereignis verwechseln.
+
+### Merksatz
+Verursacher zahlt, Vorsorge verhindert, Kooperation verbindet, Gemeinlast nur im Notfall.
+
+Siehe auch: Nachhaltigkeit · Abfallhierarchie · Umweltmanagementsysteme · Umweltzeichen
+Mehr: Deep Dive 26, Teil 5 · Deep Dive 33, Teil 5
+
+## Umweltzeichen
+<!-- id: umweltzeichen · quellen: Karte DD20, DD20 5.4 · stand: 2026-11 -->
+
+Freiwilliges Kennzeichen, das Produkte oder Dienstleistungen mit nachweislich geringerer Umweltbelastung nach festen Kriterien auszeichnet; in Deutschland vor allem der Blaue Engel.
+
+Auch: Blauer Engel, Umweltsiegel
+
+### Erklärung
+Der **Blaue Engel** wurde 1978 eingeführt und ist das staatliche Umweltzeichen Deutschlands (Bundesumweltministerium, Umweltbundesamt, unabhängige Jury, Vergabe über die RAL gGmbH). Produkte erhalten es, wenn sie schadstoffarm, ressourcenschonend und umweltschonend hergestellt sind; die Kriterien werden produktgruppenweise festgelegt und regelmäßig überprüft. Weitere Zeichen:
+
+| Zeichen | Aussage |
+|---|---|
+| Blauer Engel | geprüft umweltfreundlich (z. B. Büropapier aus Altpapier) |
+| EU-Ecolabel (Euroblume) | europäisches Umweltzeichen |
+| FSC | Holz aus verantwortungsvoller Forstwirtschaft |
+| Grüner Punkt | Hersteller beteiligt sich an einem dualen System der Verpackungsentsorgung; **kein** Gütesiegel |
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH kauft Büropapier mit dem Blauen Engel. Das zeigt, dass das Papier ressourcenschonend hergestellt wurde. Holzmöbel mit FSC-Zeichen belegen verantwortungsvolle Forstwirtschaft; der Grüne Punkt auf der Verpackung sagt nichts über die Umweltqualität.
+
+### Abgrenzung
+Das **EU-Energielabel** (Effizienzklassen) ist eine Pflichtkennzeichnung mit Verbrauchsangaben und kein Umweltzeichen. **Umweltmanagementsysteme** (ISO 14001, EMAS) bewerten Organisationen, Umweltzeichen Produkte.
+
+### Prüfungsfalle
+Den Grünen Punkt für ein Umweltgütesiegel oder den Blauen Engel für eine Pflichtkennzeichnung halten; auch Umweltzeichen für Produkte mit Zertifikaten für Betriebe (EMAS) verwechseln.
+
+### Merksatz
+Blauer Engel heißt: schadstoffarm und ressourcenschonend – freiwillig und geprüft; der Grüne Punkt ist kein Gütesiegel.
+
+Siehe auch: Umweltmanagementsysteme · Nachhaltigkeit · Abfallhierarchie · Umweltprinzipien
+Mehr: Deep Dive 20, 5.4
+
 ## Unausgeglichene Klassen
 <!-- id: unausgeglichene-klassen · quellen: Karte DD6, DD6 Teil 5, DD7 4.5 · stand: 2026-10 -->
 
 Situation bei der Klassifikation, in der die interessierende Klasse sehr selten ist (z. B. 2 % Reklamationen), sodass die Accuracy irreführend hoch ausfällt.
 
 ### Erklärung
-Ein Modell, das immer die Mehrheitsklasse vorhersagt, erreicht dann hohe Accuracy, findet aber keinen einzigen relevanten Fall. Abhilfe auf drei Ebenen: **bewerten** mit Precision, Recall, F1 oder Balanced Accuracy; **aufteilen** stratifiziert, damit jede Teilmenge denselben Klassenanteil hat; **trainieren** mit Oversampling (z. B. SMOTE), Undersampling, Klassengewichten oder angepasster Entscheidungsschwelle.
+Ein Modell, das immer die Mehrheitsklasse vorhersagt, erreicht dann hohe Accuracy, findet aber keinen einzigen relevanten Fall. Abhilfe auf drei Ebenen: **bewerten** mit Precision, Recall, F1 oder Balanced Accuracy; **aufteilen** stratifiziert, damit jede Teilmenge denselben Klassenanteil hat; **trainieren** mit Oversampling (z. B. SMOTE), Undersampling, Klassengewichten oder angepasster Entscheidungsschwelle. **Klassengewichte** lassen die Daten unverändert und lassen Fehler bei der seltenen Klasse stärker zählen; üblich ist $w_c = \frac{N}{K \cdot n_c}$ mit $N$ = Zahl aller Fälle, $K$ = Zahl der Klassen und $n_c$ = Zahl der Fälle der Klasse $c$. Der Sammelbegriff für Over- und Undersampling ist **Resampling**; es verändert nur die Trainingsdaten.
 
 ### Beispiel
-Bei 2 % Reklamationen erreicht das Modell „nie Reklamation“ 98 % Accuracy, aber 0 % Recall. Balanced Accuracy: $(0\ \% + 100\ \%) / 2 = 50\ \%$ – entlarvt das Modell als wertlos.
+Bei 2 % Reklamationen erreicht das Modell „nie Reklamation“ 98 % Accuracy, aber 0 % Recall. Balanced Accuracy: $(0\ \% + 100\ \%) / 2 = 50\ \%$ – entlarvt das Modell als wertlos. Klassengewichte bei 1.000 Aufträgen mit 100 Reklamationen: Reklamation $\frac{1.000}{2 \cdot 100} = 5$, keine Reklamation $\frac{1.000}{2 \cdot 900} = 0{,}56$ – ein übersehener Reklamationsfall zählt im Training etwa neunmal so stark.
 
 ### Abgrenzung
 Unausgeglichene Klassen sind ein Merkmal der Daten, Overfitting ein Fehler des Modells. Resampling ändert die Trainingsdaten, Klassengewichte das Verfahren.
@@ -212,7 +299,7 @@ Resampling vor der Aufteilung in Training und Test – Kopien landen in beiden M
 ### Merksatz
 Seltene Klasse? Accuracy weglegen, Recall und F1 anschauen.
 
-Siehe auch: Accuracy · Balanced Accuracy · Oversampling · Undersampling · Stratifizierte Aufteilung
+Siehe auch: Accuracy · Balanced Accuracy · Oversampling · Undersampling · Stratifizierte Aufteilung · Entscheidungsschwelle
 Mehr: Deep Dive 6, Teil 5 · Deep Dive 7, 4.5
 
 ## Underfitting
@@ -239,7 +326,7 @@ Gegen Underfitting „mehr Daten“ vorschlagen – das hilft vor allem gegen Ov
 ### Merksatz
 Overfitting lernt auswendig, Underfitting lernt gar nicht.
 
-Siehe auch: Overfitting · Kreuzvalidierung · Trainingsdaten · Testdaten
+Siehe auch: Overfitting · Kreuzvalidierung · Trainingsdaten · Testdaten · Lernkurve · Bias-Variance-Trade-off · Regularisierung
 Mehr: Deep Dive 7, 1.2
 
 ## Undersampling
@@ -312,12 +399,23 @@ Siehe auch: Unfallversicherung · Wegeunfall · Berufsgenossenschaft · Arbeitss
 Mehr: Deep Dive 14, 5.1
 
 ## Unfallversicherung
-<!-- id: unfallversicherung · quellen: Karte DD14, DD14 1.2 · stand: 2026-10 -->
+<!-- id: unfallversicherung · quellen: Karte DD14, DD14 1.2, DD20 3.1 · stand: 2026-11 -->
 
 Zweig der gesetzlichen Sozialversicherung, getragen von Berufsgenossenschaften und Unfallkassen, den allein der Arbeitgeber finanziert und der Arbeits- und Wegeunfälle sowie Berufskrankheiten abdeckt.
 
+Auch: Durchgangsarzt, D-Arzt, Verletztengeld, Heilbehandlung
+
 ### Erklärung
 Die Unfallversicherung (SGB VII) zahlt Heilbehandlung, Reha, Verletztengeld und Renten nach Arbeits- und Wegeunfällen. Die Beiträge richten sich nach Lohnsumme und Gefahrklasse des Betriebs, nicht nach einem festen Prozentsatz. Die Berufsgenossenschaften erlassen außerdem Unfallverhütungsvorschriften (DGUV Vorschriften) und überwachen den Arbeitsschutz. Versichert sind alle Beschäftigten und Auszubildenden ab dem ersten Tag.
+
+**Ablauf und Leistungen nach einem Arbeitsunfall:**
+1. **Erste Hilfe** im Betrieb, bei Bedarf Notruf.
+2. **Durchgangsarzt (D-Arzt):** Ein von den Unfallversicherungsträgern zugelassener Facharzt (Chirurgie oder Orthopädie). Zu ihm muss der Verletzte, wenn er über den Unfalltag hinaus arbeitsunfähig ist oder die Behandlung voraussichtlich länger als eine Woche dauert. Er entscheidet über das Heilverfahren und erstellt den Durchgangsarztbericht. Bei leichten Verletzungen genügt der Hausarzt.
+3. **Unfallanzeige** des Arbeitgebers an die Berufsgenossenschaft, wenn die Arbeitsunfähigkeit mehr als drei Tage dauert, innerhalb von drei Tagen nach Kenntnis.
+4. **Heilbehandlung und Reha:** Es gilt „Reha vor Rente“. Die Unfallversicherung zahlt Heilbehandlung, medizinische, berufliche (z. B. Umschulung) und soziale Rehabilitation sowie Hilfsmittel und Pflege.
+5. **Geldleistungen:** Während der ersten sechs Wochen zahlt der Arbeitgeber das Entgelt weiter, danach zahlt die BG **Verletztengeld** (80 % des Regelentgelts, höchstens das Nettoentgelt). Bleibt die Erwerbsfähigkeit über die 26. Woche hinaus um mindestens 20 % gemindert, gibt es eine **Verletztenrente**.
+
+Der Arbeitgeber haftet seinen Beschäftigten für Personenschäden eines Arbeitsunfalls nicht privatrechtlich (Haftungsablösung, § 104 SGB VII), außer bei Vorsatz oder auf dem Weg zur Arbeit. **Berufskrankheiten** stehen in einer amtlichen Liste (Berufskrankheiten-Verordnung), z. B. Lärmschwerhörigkeit oder bestimmte Hauterkrankungen.
 
 ### Beispiel
 Jonas (17, Azubi im Möbelhaus Nordholz) verletzt sich beim Aufbau eines Regals – die Berufsgenossenschaft trägt Behandlung und gegebenenfalls Reha; auf seiner Gehaltsabrechnung taucht kein Beitrag auf.
@@ -334,8 +432,8 @@ Die Unfallversicherung als hälftig finanziert angeben oder einen Arbeitnehmeran
 ### Merksatz
 Unfall? Die Berufsgenossenschaft zahlt – und der Arbeitgeber allein zahlt sie.
 
-Siehe auch: Unfall · Berufsgenossenschaft · Wegeunfall · Krankenversicherung · Arbeitsschutz
-Mehr: Deep Dive 14, 1.2
+Siehe auch: Unfall · Berufsgenossenschaft · Wegeunfall · Krankenversicherung · Arbeitsschutz · Widerspruchsverfahren · Gerichtszuständigkeit
+Mehr: Deep Dive 14, 1.2 · Deep Dive 20, 3.1
 
 ## Ungleiche Klassenbreiten
 <!-- id: ungleiche-klassenbreiten · quellen: DD11 A3 · stand: 2026-10 -->
@@ -572,7 +670,7 @@ Eine Aufgabe als Klassifikation einordnen, obwohl die Gruppen vorher nicht bekan
 ### Merksatz
 Keine Labels? Dann finden statt vorhersagen.
 
-Siehe auch: Überwachtes Lernen · Clustering · Assoziationsanalyse · K-Means
+Siehe auch: Überwachtes Lernen · Clustering · Assoziationsanalyse · K-Means · Dimensionsreduktion
 Mehr: Deep Dive 6, 2.2 · Deep Dive 6, Teil 3
 
 ## Unvollständige Fälle
@@ -597,6 +695,37 @@ Wer nur die Mitte eines Falls sieht, misst ihn zu kurz.
 
 Siehe auch: Event Log · Durchlaufzeit · Process Mining · Uneinheitliche Aktivitätsbezeichnungen · Case ID
 Mehr: Deep Dive 5, 5.3
+
+## UPDATE
+<!-- id: update · quellen: Karte DD1, DD1 2.4, DD19 5.5 · stand: 2026-11 -->
+
+SQL-Anweisung (DML), die Werte bereits vorhandener Zeilen ändert; WHERE bestimmt, welche Zeilen, ohne WHERE sind es alle.
+Auch: UPDATE SET
+
+### Erklärung
+`UPDATE tabelle SET spalte = wert [, spalte2 = wert2] [WHERE bedingung]`. Mehrere Spalten trennt man mit **Komma**, nicht mit AND. Rechts vom `=` darf ein Ausdruck stehen, der die alten Werte nutzt (`preis = preis * 1.05`); `SET spalte = NULL` setzt auf „unbekannt“ (hier ist `=` eine Zuweisung, kein Vergleich). Auch Unterabfragen sind möglich, z. B. `WHERE a_id IN (SELECT …)`, wenn die Bedingung über eine andere Tabelle läuft. Constraints (CHECK, Fremdschlüssel, NOT NULL) werden geprüft; wird einer verletzt, ändert sich keine Zeile. Trifft die Bedingung keine Zeile, ist das kein Fehler – es werden 0 Zeilen geändert. Vorsicht in der Praxis: erst mit `SELECT … WHERE …` prüfen, welche Zeilen betroffen wären, und in einer Transaktion arbeiten (ROLLBACK möglich).
+
+Dialekt: Ein UPDATE über einen JOIN schreibt jedes System anders (MySQL `UPDATE a JOIN b …`, SQL Server `UPDATE … FROM`); mit einer Unterabfrage in WHERE klappt es überall.
+
+### Beispiel
+```sql
+UPDATE produkt
+SET preis = ROUND(preis * 1.05, 2)
+WHERE kategorie = 'Elektronik';
+```
+2 Zeilen ändern sich: Monitor 27 Zoll 189 → 198,45 und Dockingstation 129 → 135,45. Ohne die WHERE-Zeile würden alle 5 Produkte um 5 % teurer, auch Möbel und Zubehör.
+
+### Abgrenzung
+UPDATE ändert **Werte** vorhandener Zeilen, INSERT legt neue Zeilen an, DELETE entfernt sie. `ALTER TABLE` (DDL) ändert die **Struktur** der Tabelle, nicht ihren Inhalt.
+
+### Prüfungsfalle
+UPDATE ohne WHERE trifft die gesamte Tabelle – der klassische Fehlersuche-Punkt. Zweiter Klassiker: `SET ort = 'Bonn' AND registriert_am = '2026-01-01'` statt Komma; AND wird dann als logischer Ausdruck gelesen, und `ort` bekommt den Wert 0 statt „Bonn“.
+
+### Merksatz
+Ohne WHERE gilt UPDATE für alle.
+
+Siehe auch: INSERT · DELETE FROM · DML · WHERE · Transaktion
+Mehr: Deep Dive 1, 2.4 · Deep Dive 19, 5.5
 
 ## Urheberrecht
 <!-- id: urheberrecht · quellen: Karte DD14, DD14 2.7 · stand: 2026-10 -->
@@ -624,6 +753,48 @@ Urheberrecht entsteht von selbst – im Job gehören die Nutzungsrechte dem Arbe
 
 Siehe auch: Patent · Open Source · Datenbankherstellerrecht · Copyleft
 Mehr: Deep Dive 14, 2.7
+
+## Urlaub
+<!-- id: urlaub · quellen: Karte DD13, DD13 2.3, DD25 Teil 4, DD26 Teil 1, DD33 Teil 1 · stand: 2026-11 -->
+
+Bezahlte Freistellung von der Arbeit zur Erholung: Nach dem Bundesurlaubsgesetz (BUrlG) mindestens 24 Werktage im Jahr; Jugendliche, schwerbehinderte Menschen, Tarif- und Arbeitsvertrag können mehr vorsehen.
+
+Auch: Urlaubsanspruch, Bundesurlaubsgesetz, BUrlG, Mindesturlaub, Teilurlaub, Urlaubsbescheinigung, Urlaubsplan, Urlaubsgrundsätze
+
+### Erklärung
+| Thema | Regel (Stand 2026) |
+|---|---|
+| Dauer (§ 3 BUrlG) | mindestens **24 Werktage** (Montag bis Samstag) = **20 Arbeitstage** bei einer Fünf-Tage-Woche. Mehr gilt für Jugendliche (§ 19 JArbSchG: 30/27/25 Werktage nach dem Alter am 1. Januar), schwerbehinderte Menschen (5 Arbeitstage Zusatzurlaub) und nach Tarif- oder Arbeitsvertrag (günstigere Regel gilt) |
+| Wartezeit (§ 4) | der **volle** Anspruch entsteht erstmals nach **sechs Monaten** Bestehen des Arbeitsverhältnisses |
+| Teilurlaub (§ 5) | **1/12 je vollem Beschäftigungsmonat**, wenn die Wartezeit im Kalenderjahr nicht erfüllt wird (Beginn nach dem 1. Juli), bei Ausscheiden vor erfüllter Wartezeit und bei Ausscheiden in der **ersten** Jahreshälfte. Bruchteile ab einem halben Tag werden aufgerundet, kleinere nicht abgerundet |
+| Festlegung (§ 7) | Urlaubswünsche sind zu berücksichtigen, außer dringende betriebliche Belange oder Wünsche anderer Beschäftigter, die sozial vorgehen (z. B. Schulferien der Kinder), stehen entgegen. Urlaub ist zusammenhängend zu gewähren; bei mehr als 12 Werktagen muss ein Teil mindestens 12 aufeinanderfolgende Werktage umfassen |
+| Übertragung (§ 7) | Urlaub ist im laufenden Jahr zu gewähren und zu nehmen; Übertragung nur aus dringenden betrieblichen oder persönlichen Gründen bis **31. März** des Folgejahres. Nach der Rechtsprechung verfällt er nur, wenn der Arbeitgeber rechtzeitig auf den Anspruch und den Verfall hingewiesen und zum Nehmen aufgefordert hat |
+| Krankheit (§ 9) | durch ärztliches Zeugnis nachgewiesene Krankheitstage im Urlaub werden **nicht** angerechnet |
+| Abgeltung (§ 7 Abs. 4) | Auszahlung statt Urlaub nur, wenn das Arbeitsverhältnis endet und der Urlaub nicht mehr genommen werden kann |
+| Urlaubsentgelt (§ 11) | Durchschnittsverdienst der letzten 13 Wochen, vor Urlaubsantritt auszuzahlen |
+| Urlaubsbescheinigung (§ 6 Abs. 2) | bei Ende des Arbeitsverhältnisses stellt der Arbeitgeber eine Bescheinigung über den im laufenden Jahr gewährten oder abgegoltenen Urlaub aus; der neue Arbeitgeber verlangt sie, weil im selben Jahr kein Doppelanspruch besteht (§ 6 Abs. 1) |
+| Mitbestimmung (§ 87 Abs. 1 Nr. 5 BetrVG) | der Betriebsrat bestimmt bei **Urlaubsgrundsätzen** (allgemeine Regeln, z. B. Betriebsferien, Sperrzeiten) und beim **Urlaubsplan** mit – und bei der zeitlichen Lage für einzelne Beschäftigte, wenn keine Einigung zustande kommt. Die **Dauer** des Urlaubs legen Gesetz, Tarif- oder Arbeitsvertrag fest, nicht der Betriebsrat |
+
+Formel für Teilurlaub: $\text{Teilurlaub} = \text{Jahresurlaub} \cdot \frac{\text{volle Monate}}{12}$
+
+### Beispiel
+Lea beginnt am 01.09.2026 im Möbelhaus Nordholz (Fünf-Tage-Woche, gesetzlicher Mindesturlaub 20 Arbeitstage). Die Wartezeit ist 2026 nicht mehr erfüllbar; sie hat vier volle Monate (September bis Dezember):
+
+$20 \cdot \frac{4}{12}$ = **6,67 Arbeitstage**, aufgerundet **7 Arbeitstage** (Bruchteil 0,67 ist mindestens ein halber Tag).
+
+Ab dem 01.03.2027 ist die Wartezeit erfüllt, für 2027 gilt der volle Anspruch. Scheidet Lea am 30.09.2027 aus, steht ihr der volle Jahresurlaub zu (Ausscheiden in der zweiten Jahreshälfte); bei einem Ausscheiden zum 30.06.2027 wären es $20 \cdot \frac{6}{12}$ = **10 Arbeitstage**. Nicht genommenen Urlaub bekommt sie dann ausgezahlt, und der Betrieb stellt ihr die Urlaubsbescheinigung aus.
+
+### Abgrenzung
+**Werktage und Arbeitstage** sind verschiedene Zähleinheiten (Umrechnung auf der eigenen Seite). **Entgeltfortzahlung** bei Krankheit ist kein Urlaub, und **Elternzeit** oder Sonderurlaub (z. B. Umzug, Hochzeit nach Tarif- oder Arbeitsvertrag) sind eigene Freistellungen; Bildungsurlaub regelt das Landesrecht und gilt nicht überall.
+
+### Prüfungsfalle
+Werktage und Arbeitstage gleichsetzen („24 Tage Gesetz, 24 Tage Tarif – gleich“) oder Urlaub vor Ablauf der Wartezeit ganz verweigern (Teilurlaub steht zu). Auch typisch: Urlaubsübertragung „bis zu sechs Monate“ statt bis 31. März, das Alter Jugendlicher am Geburtstag statt am 1. Januar zu prüfen und den Betriebsrat über die **Dauer** des Urlaubs mitbestimmen zu lassen.
+
+### Merksatz
+24 Werktage sind 20 Arbeitstage; nach sechs Monaten voll, davor ein Zwölftel je Monat; Übertragung nur bis 31. März.
+
+Siehe auch: Werktage und Arbeitstage · JArbSchG · Mitbestimmung · Entgeltfortzahlung · Tarifvertrag · Günstigkeitsprinzip · Schwerbehinderte Menschen · Arbeitsvertrag
+Mehr: Deep Dive 13, 2.3 · Deep Dive 25, Teil 4 · Deep Dive 26, Teil 1 · Deep Dive 33, Teil 1
 
 ## Usability-Test
 <!-- id: usability-test · quellen: Karte DD11, DD11 A5, DD16 2.4 · stand: 2026-10 -->

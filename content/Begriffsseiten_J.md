@@ -105,24 +105,33 @@ Siehe auch: KG · Formkaufmann · Personenbezogene Daten
 Mehr: Deep Dive 14, 2.1 · Deep Dive 10, Teil 1
 
 ## JWT
-<!-- id: jwt · quellen: Karte DD15, DD15 3.3 · stand: 2026-10 -->
+<!-- id: jwt · quellen: Karte DD15, DD15 3.3 · stand: 2026-11 -->
 
 JSON Web Token: kompaktes Token aus Header, Nutzdaten (Claims) und Signatur, jeweils Base64url-kodiert und durch Punkte getrennt – signiert, aber nicht verschlüsselt.
 
 ### Erklärung
-Nach der Anmeldung stellt ein Server das Token aus; der Client schickt es bei jeder API-Anfrage im Header mit (`Authorization: Bearer …`). Der Server prüft die Signatur und die Ablaufzeit (`exp`) und muss keine Sitzung speichern – passend zur Zustandslosigkeit von REST. Die Signatur schützt vor Veränderung, nicht vor dem Mitlesen: Jeder kann die Claims dekodieren. Standard ist RFC 7519.
+Nach der Anmeldung stellt ein Server das Token aus; der Client schickt es bei jeder API-Anfrage im Header mit (`Authorization: Bearer …`). Der Server prüft die Signatur und die Claims und muss keine Sitzung speichern – passend zur Zustandslosigkeit von REST. Standard ist RFC 7519.
+
+**Signatur ist nicht Verschlüsselung.** Das übliche JWT ist ein **JWS** (signiert): Die Signatur schützt vor Veränderung, nicht vor dem Mitlesen – jeder kann die Claims dekodieren. Ein **JWE** ist die verschlüsselte Variante, die den Inhalt vertraulich hält; sie wird seltener eingesetzt. Signiert wird entweder mit einem gemeinsamen Geheimnis (HMAC, z. B. HS256) oder asymmetrisch (privater Schlüssel signiert, öffentlicher Schlüssel prüft, z. B. RS256).
+
+**Was der Empfänger prüfen muss:**
+- die Signatur, mit dem erwarteten Algorithmus (`alg: none` und unerwartete Verfahren ablehnen)
+- `exp` (abgelaufen?) und `nbf` (noch nicht gültig?)
+- `iss` (Aussteller: stammt es vom erwarteten Server?) und `aud` (Zielgruppe: ist es für diese API gedacht?)
+
+**Betrieb:** kurze Laufzeit (Minuten bis Stunden), Schlüssel regelmäßig wechseln (Rotation, Schlüsselkennung `kid` im Header) und das Token nur über HTTPS senden. Ein Bearer-Token gilt für jeden, der es besitzt: Wird es gestohlen und erneut eingespielt (Replay), kann es bis zum Ablauf missbraucht werden. Weil der Server nichts speichert, lässt sich ein JWT nicht einfach widerrufen – deshalb die kurze Laufzeit.
 
 ### Beispiel
-Ein Token `xxxxx.yyyyy.zzzzz` enthält im Mittelteil `{"sub": "filiale-koeln", "rolle": "lesen", "exp": 1767225600}`. Die Filial-App darf damit lesen, bis die Ablaufzeit erreicht ist.
+Ein Token `xxxxx.yyyyy.zzzzz` enthält im Mittelteil `{"iss": "auth.nordholz.example", "aud": "reparatur-api", "sub": "filiale-koeln", "rolle": "lesen", "exp": 1767225600}`. Die Filial-App darf damit lesen, bis die Ablaufzeit erreicht ist. Schickt sie dasselbe Token an eine andere API, lehnt diese es ab, weil `aud` nicht passt.
 
 ### Abgrenzung
 **OAuth 2.0** ist ein Autorisierungsrahmen, der Access Tokens ausgibt – diese können JWTs sein. Ein **API-Schlüssel** ist ein fester Geheimwert ohne eingebaute Ablaufzeit und identifiziert nur die Anwendung.
 
 ### Prüfungsfalle
-Vertrauliche Daten in ein JWT schreiben, weil es „sicher signiert“ ist – Base64url ist keine Verschlüsselung.
+Vertrauliche Daten in ein JWT schreiben, weil es „sicher signiert“ ist – Base64url ist keine Verschlüsselung. Ebenso falsch: nur die Signatur prüfen und `exp`, `iss` und `aud` ignorieren.
 
 ### Merksatz
-JWT: lesbar für alle, fälschbar für niemanden – solange die Signatur geprüft wird.
+JWT: lesbar für alle, fälschbar nur mit dem Schlüssel – solange die Signatur geprüft wird.
 
 Siehe auch: JSON · REST · OAuth 2.0
 Mehr: Deep Dive 15, 3.3

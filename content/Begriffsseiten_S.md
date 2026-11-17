@@ -45,6 +45,33 @@ Gleiches Passwort, anderer Salt, anderer Hash.
 Siehe auch: Hashing · Brute Force · Authentifizierung
 Mehr: Deep Dive 10, 4.2
 
+## Satz von Bayes
+<!-- id: satz-von-bayes · quellen: DD3 7.1, DD7 2.3 · stand: 2026-11 -->
+
+Formel, mit der man bedingte Wahrscheinlichkeiten umkehrt: Aus P(B | A) wird P(A | B) berechnet – unter Einbeziehung der Ausgangshäufigkeit von A.
+
+### Erklärung
+$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$ mit $P(B) = P(B \mid A) \cdot P(A) + P(B \mid \bar{A}) \cdot P(\bar{A})$. P(A) ist die Ausgangswahrscheinlichkeit (Basisrate, Prävalenz), P(A | B) die aktualisierte Wahrscheinlichkeit nach der Beobachtung B. Kernaussage: Ist A selten, sind selbst bei einem guten Test die meisten Alarme Fehlalarme (**Basisratenfehler**, wenn man das ignoriert). Auf dieselbe Weise hängen Recall und Precision zusammen. Der Naive-Bayes-Klassifikator im Machine Learning nutzt den Satz mit der vereinfachenden Annahme, dass die Merkmale bei bekannter Klasse voneinander unabhängig sind.
+
+### Beispiel
+Im Kundenimport sind 2 % der Datensätze fehlerhaft. Eine Prüfregel schlägt bei 90 % der fehlerhaften an (Recall) und fälschlich bei 5 % der fehlerfreien (Falsch-Positiv-Rate). Wie wahrscheinlich ist ein Datensatz fehlerhaft, wenn die Regel anschlägt?
+- $P(\text{Meldung}) = 0{,}90 \cdot 0{,}02 + 0{,}05 \cdot 0{,}98 = 0{,}018 + 0{,}049 = 0{,}067$
+- $P(\text{fehlerhaft} \mid \text{Meldung}) = \frac{0{,}90 \cdot 0{,}02}{0{,}067} = \frac{0{,}018}{0{,}067} = 0{,}269$
+
+Gegenprobe mit 1.000 Datensätzen: 20 fehlerhaft, davon 18 gemeldet; 980 fehlerfrei, davon 49 fälschlich gemeldet. Precision $\frac{18}{18 + 49} = 26{,}9\ \%$. Trotz 90 % Recall ist nur gut jede vierte Meldung echt.
+
+### Abgrenzung
+Die **bedingte Wahrscheinlichkeit** ist die Grundgröße, der Satz von Bayes ihr Umrechner. Recall = P(Meldung | fehlerhaft), Precision = P(fehlerhaft | Meldung): Bayes verbindet beide über die Basisrate.
+
+### Prüfungsfalle
+Die Basisrate ignorieren („Die Regel trifft zu 90 % – also sind 90 % der Meldungen korrekt“). Das verwechselt P(Meldung | fehlerhaft) mit P(fehlerhaft | Meldung).
+
+### Merksatz
+Wer die Basisrate vergisst, hält Fehlalarme für Treffer.
+
+Siehe auch: Bedingte Wahrscheinlichkeit · Precision · Recall · Konfusionsmatrix · Falsch-Positiv-Rate
+Mehr: Deep Dive 7, 2.3 · Deep Dive 3, 7.1
+
 ## Säulendiagramm
 <!-- id: saulendiagramm · quellen: DD17 6.2 · stand: 2026-10 -->
 
@@ -181,6 +208,33 @@ Korrelation zeigt, dass etwas zusammen auftritt – nicht, warum.
 Siehe auch: Korrelation · Kausalität · Drittvariable · Signifikanz
 Mehr: Deep Dive 4, 1.3
 
+## Schema Evolution
+<!-- id: schema-evolution · quellen: DD8 5.1, DD8 3.3 · stand: 2026-11 -->
+
+Kontrollierte Weiterentwicklung eines Datenschemas (Spalte ergänzen, Typ ändern, umbenennen, entfernen), ohne dass bestehende Daten und Auswertungen kaputtgehen.
+
+### Erklärung
+Quellsysteme ändern sich: Der Onlineshop liefert plötzlich eine neue Spalte. Man unterscheidet:
+- **additive Änderungen** (neue, optionale Spalte): meist abwärtskompatibel, alte Auswertungen laufen weiter, alte Zeilen erhalten NULL.
+- **verändernde Änderungen** (Typ ändern, umbenennen, Spalte löschen): brechen Konsumenten, brauchen Abstimmung und Migration.
+
+Plattformen wie Delta Lake oder Iceberg lehnen Schreibzugriffe mit abweichendem Schema standardmäßig ab (Schemaprüfung) und erlauben Änderungen nur, wenn man sie ausdrücklich zulässt (Schema Evolution). Bewährt sind Schema-Versionen, Kompatibilitätsregeln, Tests und eine Information an alle Abnehmer.
+
+### Beispiel
+Der Webshop der Möbelhaus Nordholz GmbH ergänzt die Spalte `versandart`. Bei strenger Schemaprüfung bricht der nächtliche Ladelauf ab. Mit erlaubter Schema Evolution wird die Spalte in der Zieltabelle ergänzt; die 180.000 bereits geladenen Zeilen haben dort NULL. Würde der Shop dagegen `preis` von Euro in Cent umstellen, ändert sich das Schema gar nicht (gleicher Name, gleicher Typ): Der Lauf liefe durch, die Zahlen wären aber falsch – so etwas fängt nur eine Datenqualitätsprüfung (Plausibilität, Abstimmsummen) ab, nicht die Schemaprüfung.
+
+### Abgrenzung
+**Schema-on-Write** prüft das Schema beim Laden, **Schema-on-Read** erst beim Lesen. Die **Historisierung** (Slowly Changing Dimensions) bewahrt alte **Inhalte** einer Dimension, Schema Evolution ändert die **Struktur** der Tabelle.
+
+### Prüfungsfalle
+Schema Evolution mit Historisierung verwechseln – die eine betrifft Spalten, die andere die Werte der Datensätze.
+
+### Merksatz
+Schema Evolution: neue Spalte erlaubt – aber bitte so, dass nichts kaputtgeht.
+
+Siehe auch: Schema-on-Write · Schema-on-Read · Delta Lake · Historisierung · Metadaten
+Mehr: Deep Dive 8, 5.1
+
 ## Schema-on-Read
 <!-- id: schema-on-read · quellen: Karte DD8, DD8 5.1, DD15 4.1 · stand: 2026-10 -->
 
@@ -313,6 +367,41 @@ Schriftform heißt: Original mit eigener Unterschrift.
 
 Siehe auch: Textform · Notarielle Beurkundung · Ordentliche Kündigung · Außerordentliche Kündigung
 Mehr: Deep Dive 13, 3.1 · Deep Dive 14, 2.3
+
+## Schutzart (IP-Code)
+<!-- id: schutzart · quellen: Karte DD28, DD28 2.1, DD31 Block B · stand: 2026-11 -->
+
+Angabe nach DIN EN 60529, wie gut das Gehäuse eines Geräts gegen das Eindringen von festen Fremdkörpern (Staub) und Wasser schützt; geschrieben als „IP“ und zwei Ziffern.
+
+Auch: IP-Schutzart, IP-Code
+
+### Erklärung
+„IP“ steht für Ingress Protection (Eindringschutz). Die **erste Ziffer** (0 bis 6) gibt den Schutz gegen feste Fremdkörper und Staub an, die **zweite Ziffer** (0 bis 9) den Schutz gegen Wasser. Je höher die Ziffer, desto besser der Schutz. Ein „X“ bedeutet: nicht geprüft.
+
+| Ziffer | 1. Stelle: Fremdkörper, Staub | 2. Stelle: Wasser |
+|---|---|---|
+| 0 | kein Schutz | kein Schutz |
+| 4 | Fremdkörper über 1 mm | Spritzwasser aus allen Richtungen |
+| 5 | staubgeschützt | Strahlwasser (Düse) |
+| 6 | staubdicht | starkes Strahlwasser |
+| 7 | – | zeitweiliges Untertauchen (bis 1 m, 30 Minuten) |
+| 8 | – | dauerhaftes Untertauchen (nach Herstellerangabe) |
+| 9 | – | Hochdruck- und Heißwasserstrahl |
+
+### Beispiel
+Die Mietgeräte des Nordholz Eventservice tragen diese Angaben: Handscanner „ScanGo 3“ **IP54**, Handgerät „HandLog M“ **IP65**, Tablet „TabPay X“ **IP67**. Auf einem Stadtfest mit Regen und Staub genügt IP54 (staubgeschützt, Spritzwasser). Ein Tablet, das an einer Spülstation auch einmal in den Wassereimer fallen kann, braucht IP67.
+
+### Abgrenzung
+Die Schutzart sagt **nichts** über Stürze aus – dafür gibt es einen eigenen Stoßschutz-Code (IK) oder die Angabe „sturzfest aus 1,5 m“. In einer Gerätedatenbank hängt die Schutzart vom **Modell** ab, nicht vom einzelnen Gerät: Sie gehört in die Modelltabelle (3. Normalform).
+
+### Prüfungsfalle
+Zwei Ziffern nicht verwechseln: IP54 ist **nicht** „Stufe 54“, sondern 5 = Staub, 4 = Wasser. Außerdem ist eine höhere Zahl bei der Wasserziffer nicht automatisch besser für jede Art Wasser: Ein Gerät mit IPX7 (Untertauchen) ist nicht zwingend gegen Strahlwasser (IPX5/6) geprüft.
+
+### Merksatz
+IP, dann Staub, dann Wasser – zwei Ziffern, zwei Fragen.
+
+Siehe auch: MDE-Geräte · 3. Normalform
+Mehr: Deep Dive 28, 2.1
 
 ## Schutzbedarfsfeststellung
 <!-- id: schutzbedarfsfeststellung · quellen: Karte DD10, DD10 5.1 · stand: 2026-10 -->
@@ -588,6 +677,45 @@ Versicherte und Arbeitgeber verwalten ihre Kassen selbst.
 
 Siehe auch: Solidarprinzip · Umlageverfahren · Pflichtversicherung · Sozialversicherung
 Mehr: Deep Dive 14, 1.1
+
+## SELECT
+<!-- id: select · quellen: Karte DD1, DD1 1.1, DD1 2.6, DD19 5.2 · stand: 2026-11 -->
+
+SQL-Anweisung, die Daten aus einer oder mehreren Tabellen abfragt und eine Ergebnistabelle liefert; sie verändert keine Daten.
+Auch: SELECT-Anweisung, SELECT DISTINCT
+
+### Erklärung
+SELECT wählt die **Spalten** des Ergebnisses (Projektion) und kann Ausdrücke, Aggregatfunktionen und Aliase enthalten; die **Zeilen** wählt WHERE (Selektion). `SELECT *` liefert alle Spalten, `SELECT DISTINCT` entfernt doppelte Ergebniszeilen (NULL-Werte gelten dabei als gleich).
+
+Geschrieben wird in der Reihenfolge SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT, **ausgeführt** wird so: FROM/JOIN → WHERE → GROUP BY → HAVING → **SELECT** → DISTINCT → ORDER BY → LIMIT. Deshalb kennt ORDER BY die Aliase aus dem SELECT, WHERE aber nicht. Jede Spalte im SELECT, die nicht aggregiert wird, gehört bei GROUP BY auch in die Gruppierung.
+
+Dialekt: Die Zeilenzahl begrenzt man in SQLite und MySQL mit `LIMIT n`, in SQL Server mit `TOP n`, in Oracle und Standard-SQL mit `FETCH FIRST n ROWS ONLY`.
+
+### Beispiel
+```sql
+SELECT bezeichnung, preis * 1.19 AS brutto
+FROM produkt
+WHERE kategorie = 'Elektronik'
+ORDER BY brutto DESC;
+```
+Ergebnis: Monitor 27 Zoll 224,91 · Dockingstation 153,51 (189 · 1,19 und 129 · 1,19). Die Alias-Spalte `brutto` entsteht im SELECT und ist deshalb im ORDER BY nutzbar. Mit `SELECT DISTINCT ort FROM kunde` ergeben die 5 Kunden nur 3 Zeilen: Hamburg, Köln, München.
+
+### Abgrenzung
+| Begriff | wählt aus | steht in |
+|---|---|---|
+| Projektion | Spalten | SELECT |
+| Selektion | Zeilen | WHERE |
+
+SELECT liest nur; INSERT, UPDATE und DELETE ändern Daten (DML).
+
+### Prüfungsfalle
+Den Alias im WHERE verwenden: `WHERE brutto > 200`. WHERE läuft vor SELECT, nach Standard-SQL und in MySQL ist das ein Fehler. SQLite lässt es durch – in der Prüfung die Rechnung ausschreiben (`WHERE preis * 1.19 > 200`).
+
+### Merksatz
+SELECT steht zuerst, wird aber fast zuletzt ausgeführt.
+
+Siehe auch: WHERE · GROUP BY · HAVING · ORDER BY · Alias (AS) · Unterabfrage
+Mehr: Deep Dive 1, 1.1 · Deep Dive 1, 2.6 · Deep Dive 19, 5.2
 
 ## Selection Sort
 <!-- id: selection-sort · quellen: Karte DD11, DD11 B7 · stand: 2026-10 -->
@@ -916,6 +1044,38 @@ Daten finden, ordnen, bereitstellen, prüfen und schützen.
 Siehe auch: Datenqualität · Durchführen einer Prozessanalyse · DSGVO · Data Warehouse
 Mehr: Deep Dive 1, Prüfungsrelevanz · Deep Dive 2, Prüfungsrelevanz · Deep Dive 8, Prüfungsrelevanz · Deep Dive 10, Prüfungsrelevanz
 
+## Sigmoid-Funktion
+<!-- id: sigmoid-funktion · quellen: Karte DD6, DD6 9.3 · stand: 2026-11 -->
+
+Aktivierungsfunktion mit S-förmiger Kurve, die jede Summe z auf einen Wert zwischen 0 und 1 abbildet; die Ausgabe lässt sich als Wahrscheinlichkeit lesen.
+
+Auch: Logistische Funktion
+
+### Erklärung
+Formel: $\sigma(z) = \dfrac{1}{1 + e^{-z}}$. Dabei ist z die gewichtete Summe des Neurons (Nettoeingabe) und e die eulersche Zahl (≈ 2,718). Eigenschaften: σ(0) = 0,5; für große positive z nähert sich σ der 1, für große negative z der 0. Anders als die Stufenfunktion ist sie **glatt** und überall differenzierbar, deshalb lässt sie sich beim Training mehrschichtiger Netze mit Backpropagation verwenden. Bei sehr großen oder kleinen z wird die Kurve fast waagerecht – dann lernt das Neuron kaum noch (Sättigung). Die Sigmoid-Funktion ist dieselbe Kurve wie bei der logistischen Regression.
+
+### Beispiel
+Ein Neuron zum Reklamationsrisiko hat die Summe z = 0,75:
+
+$e^{-0{,}75} \approx 0{,}4724$, also $\sigma(0{,}75) = \dfrac{1}{1 + 0{,}4724}$ = **0,68**
+
+Deutung: Das Modell schätzt eine Reklamationswahrscheinlichkeit von rund 68 %. Mit der Entscheidungsgrenze 0,5 lautet die Klasse „Reklamation“. Zum Vergleich: σ(0) = 0,5 und σ(−2) = 1 / (1 + 7,389) ≈ 0,12.
+
+### Abgrenzung
+| | Sigmoid | ReLU | Stufenfunktion |
+|---|---|---|---|
+| Wertebereich | zwischen 0 und 1 | 0 bis unendlich | 0 oder 1 |
+| Einsatz | Ausgabe als Wahrscheinlichkeit | verdeckte Schichten tiefer Netze | klassisches Perzeptron |
+
+### Prüfungsfalle
+Im Exponenten steht **minus z**. Wer e^(+z) rechnet, erhält 1 − σ(z), hier also 0,32 statt 0,68. Und: Ein Ergebnis von 0,68 ist keine Klasse, sondern eine Wahrscheinlichkeit – erst die Schwelle (meist 0,5) macht daraus eine Entscheidung.
+
+### Merksatz
+Sigmoid quetscht jede Zahl in den Bereich von 0 bis 1.
+
+Siehe auch: Aktivierungsfunktion · Stufenfunktion · ReLU · Neuron · Logistische Regression · Backpropagation
+Mehr: Deep Dive 6, 9.3
+
 ## Signifikanz
 <!-- id: signifikanz · quellen: Karte DD4, DD4 1.3 · stand: 2026-10 -->
 
@@ -928,7 +1088,7 @@ Ein Signifikanztest geht von der **Nullhypothese** aus („kein Zusammenhang“,
 Bei 2 Mio. Kundendatensätzen ist die Korrelation zwischen Alter und Warenkorbwert mit r = 0,03 hochsignifikant (p < 0,001). Praktisch ist sie bedeutungslos: $R^2 = 0{,}03^2 = 0{,}0009$, das Alter erklärt rund 0,1 % der Streuung.
 
 ### Abgrenzung
-**Signifikanz** beantwortet „Ist der Effekt wahrscheinlich echt?“, die **Stärke** (r, R²) „Wie groß ist er?“. Bei sehr großen Datenmengen wird fast alles signifikant, bei sehr kleinen kann selbst ein auffälliges r Zufall sein.
+**Signifikanz** beantwortet „Lässt sich der Effekt durch Zufall erklären?“, die **Stärke** (r, R²) „Wie groß ist er?“. Bei sehr großen Datenmengen wird fast alles signifikant, bei sehr kleinen kann selbst ein auffälliges r Zufall sein.
 
 ### Prüfungsfalle
 „Signifikant, also ist der Zusammenhang stark bzw. ursächlich“ – beides folgt nicht.
@@ -936,7 +1096,7 @@ Bei 2 Mio. Kundendatensätzen ist die Korrelation zwischen Alter und Warenkorbwe
 ### Merksatz
 Signifikant heißt „kein Zufall“, nicht „wichtig“.
 
-Siehe auch: Nullhypothese · P-Wert · Korrelation · Scheinkorrelation · Stärke
+Siehe auch: Nullhypothese · P-Wert · Hypothesentest · Effektgröße · Fehler 1. Art · Korrelation · Scheinkorrelation · Stärke
 Mehr: Deep Dive 4, 1.3
 
 ## Single Point of Failure
@@ -1206,10 +1366,10 @@ Mehr: Deep Dive 16, 2.4
 Synthetic Minority Over-sampling Technique: Oversampling-Verfahren, das für die seltene Klasse künstliche Datensätze zwischen vorhandenen Fällen und ihren nächsten Nachbarn erzeugt.
 
 ### Erklärung
-Bei unausgeglichenen Klassen lernt ein Modell die seltene Klasse schlecht. Statt Fälle der Minderheit einfach zu kopieren, wählt SMOTE zu einem Fall einen seiner k nächsten Nachbarn aus derselben Klasse und erzeugt einen neuen Punkt auf der Verbindungsstrecke dazwischen. So entstehen neue, ähnliche, aber nicht identische Fälle. SMOTE wird nur auf die Trainingsdaten angewendet – und zwar nach dem Train-Test-Split.
+Bei unausgeglichenen Klassen lernt ein Modell die seltene Klasse schlecht. Statt Fälle der Minderheit einfach zu kopieren, wählt SMOTE zu einem Fall einen seiner k nächsten Nachbarn aus derselben Klasse und erzeugt einen neuen Punkt auf der Verbindungsstrecke dazwischen: $x_{neu} = x + \lambda \cdot (x_{Nachbar} - x)$. Dabei ist $x$ der Ausgangsfall, $x_{Nachbar}$ der gewählte Nachbar und $\lambda$ eine Zufallszahl zwischen 0 und 1 (0 ergibt den Ausgangsfall, 1 den Nachbarn; die Rechnung wird für jedes Merkmal mit demselben λ ausgeführt). So entstehen neue, ähnliche, aber nicht identische Fälle. Weil die Nachbarn über Abstände gesucht werden, müssen die Merkmale skaliert sein; kategoriale Merkmale benötigen eine angepasste Variante. SMOTE wird nur auf die Trainingsdaten angewendet – und zwar nach dem Train-Test-Split.
 
 ### Beispiel
-Im Reklamationsmodell sind 10 % der Aufträge reklamiert. Zwischen einem reklamierten Auftrag mit 3 Tagen Lieferzeit und seinem Nachbarn mit 5 Tagen entsteht ein synthetischer Fall mit z. B. 4,2 Tagen. Die Testmenge behält ihre reale Verteilung.
+Im Reklamationsmodell sind 10 % der Aufträge reklamiert. Zwischen einem reklamierten Auftrag mit 3 Tagen Lieferzeit und seinem Nachbarn mit 5 Tagen entsteht bei $\lambda = 0{,}6$ ein synthetischer Fall mit $3 + 0{,}6 \cdot (5 - 3) = 4{,}2$ Tagen. Die Testmenge behält ihre reale Verteilung.
 
 ### Abgrenzung
 **Undersampling** entfernt Fälle der Mehrheit (kostet Information); einfaches **Oversampling** dupliziert Fälle (Gefahr des Auswendiglernens); **Klassengewichte** lassen die Daten unverändert und gewichten Fehler unterschiedlich.
@@ -1590,6 +1750,48 @@ Eine Farbe für die Botschaft, Grau für den Rest.
 Siehe auch: Data-Ink-Ratio · Chartjunk · Barrierefreiheit · Sortieren
 Mehr: Deep Dive 11, A2
 
+## Spearman-Rangkorrelation
+<!-- id: spearman-rangkorrelation · quellen: Karte DD4, DD4 1.2 · stand: 2026-11 -->
+
+Korrelationsmaß r_s zwischen −1 und +1, das nicht mit den Messwerten, sondern mit ihren Rangplätzen rechnet; es eignet sich für ordinale Daten und für gleichgerichtete (monotone) Zusammenhänge.
+
+Auch: Rangkorrelation nach Spearman, Rangkorrelationskoeffizient
+
+### Erklärung
+Vorgehen: Die Werte jedes Merkmals in eine Rangfolge bringen (z. B. kleinster Wert = Rang 1; beide Merkmale werden in dieselbe Richtung gerankt), je Merkmalsträger die Rangdifferenz d bilden, einsetzen:
+$r_s = 1 - \frac{6 \cdot \sum d^2}{n \cdot (n^2 - 1)}$.
+Gleiche Werte (Bindungen) erhalten den Mittelwert ihrer Rangplätze; die Kurzformel gilt dann nur näherungsweise (exakt: Pearson-r auf den Rängen). Gedeutet wird $r_s$ wie Pearsons r: Vorzeichen = Richtung, Betrag = Stärke. Weil nur die Reihenfolge zählt, ist Spearman robust gegen Ausreißer und erfasst auch gekrümmte, aber stets steigende oder fallende Zusammenhänge. Auch ein hohes $r_s$ ist kein Kausalitätsbeleg.
+
+### Beispiel
+Fünf Filialen, Rangfolge nach Kundenzufriedenheit (Rang 1 = zufriedenste Filiale) und nach Umsatz (Rang 1 = höchster Umsatz):
+
+| Filiale | A | B | C | D | E |
+|---|---|---|---|---|---|
+| Rang Zufriedenheit | 1 | 2 | 3 | 4 | 5 |
+| Rang Umsatz | 2 | 1 | 3 | 4 | 5 |
+| d | −1 | 1 | 0 | 0 | 0 |
+| d² | 1 | 1 | 0 | 0 | 0 |
+
+$\sum d^2 = 2$, $r_s = 1 - \frac{6 \cdot 2}{5 \cdot (25 - 1)} = 1 - \frac{12}{120} = 0{,}90$ → starker positiver Zusammenhang.
+Ausreißer-Effekt: Bei x = 1, 2, 3, 4, 5 und y = 1, 2, 3, 4, 100 ist Pearsons r etwa 0,72, Spearman aber exakt 1,0 – die Rangfolge stimmt perfekt.
+
+### Abgrenzung
+| | Pearson r | Spearman $r_s$ |
+|---|---|---|
+| Daten | metrisch | mindestens ordinal |
+| Rechnet mit | Messwerten | Rangplätzen |
+| Erfasst | lineare Zusammenhänge | monotone Zusammenhänge |
+| Ausreißer | empfindlich | robust |
+
+### Prüfungsfalle
+Pearson auf Zufriedenheitsstufen (ordinal) anwenden. Oder aus $r_s \approx 0$ „kein Zusammenhang“ folgern: Nicht monotone Zusammenhänge (U-Form) bleiben unentdeckt.
+
+### Merksatz
+Pearson misst Linien, Spearman misst Reihenfolgen.
+
+Siehe auch: Korrelationskoeffizient nach Pearson · Korrelation · Skalenniveau · Ausreißer · Kausalität
+Mehr: Deep Dive 4, 1.2
+
 ## Speicherbegrenzung
 <!-- id: speicherbegrenzung · quellen: Karte DD10, DD10 2.1 · stand: 2026-10 -->
 
@@ -1612,6 +1814,61 @@ Zweck erfüllt – Daten weg.
 
 Siehe auch: Datenminimierung · Zweckbindung · DSGVO · Personenbezogene Daten
 Mehr: Deep Dive 10, 2.1
+
+## Sperren (Locking)
+<!-- id: sperren · quellen: DD15 4.2, DD1 3.5 · stand: 2026-11 -->
+
+Auch: Locking, Sperrgranularität
+
+Mechanismus, mit dem ein Datenbanksystem gleichzeitige Zugriffe koordiniert, indem es Daten für andere Transaktionen vorübergehend blockiert.
+
+### Erklärung
+**Sperrarten:** Eine **Lesesperre** (shared) erlaubt anderen weiteres Lesen, aber kein Schreiben. Eine **Schreibsperre** (exclusive) ist ausschließlich: Andere dürfen die Daten weder mit Sperre lesen noch schreiben.
+
+| gehalten \ angefordert | Lesesperre | Schreibsperre |
+|---|---|---|
+| Lesesperre | möglich | wartet |
+| Schreibsperre | wartet | wartet |
+
+**Granularität:** gesperrt werden kann eine Zeile, eine Seite, die Tabelle oder die Datenbank. Feine Sperren erlauben viel Parallelität, kosten aber Verwaltungsaufwand; grobe sind billig, lassen andere länger warten. Schreibsperren werden bis zum Ende der Transaktion (COMMIT oder ROLLBACK) gehalten, Lesesperren je nach Isolationsstufe kürzer oder bis dahin. Höhere Isolationsstufen sperren mehr oder länger. Systeme mit MVCC (Versionen) lassen normale Lesezugriffe trotz Schreibsperre zu: Sie lesen die letzte bestätigte Version. Risiken: Wartezeiten und **Deadlocks**.
+
+### Beispiel
+Zwei Disponenten ändern den Bestand in der Tabelle `lager` mit 5.000 Artikeln. Bei einer Zeilensperre blockiert Disponent 1 nur Artikel 10; Disponent 2 kann Artikel 11 ungestört ändern. Bei einer Tabellensperre müsste er auf alle 5.000 Artikel warten.
+
+### Abgrenzung
+**Pessimistisches Sperren** sperrt schon beim Lesen (`SELECT … FOR UPDATE`), **optimistisches Sperren** sperrt nicht, sondern prüft beim Schreiben eine Versionsspalte. Mit der **Aussperrung** im Arbeitskampf hat der Begriff nichts zu tun.
+
+### Prüfungsfalle
+Annehmen, eine Lesesperre blockiere andere Leser. Mehrere Lesesperren sind gleichzeitig möglich; ein Schreiber muss warten.
+
+### Merksatz
+Fein sperren erlaubt Parallelität, grob sperren spart Aufwand – Schreibsperren gelten bis zum Transaktionsende.
+
+Siehe auch: Pessimistisches Sperren · Optimistisches Sperren · Deadlock · Transaktion · Isolationsstufen · Lost Update
+Mehr: Deep Dive 15, 4.2
+
+## Spezialisierung
+<!-- id: spezialisierung · quellen: Karte DD20, DD20 6.2, DD26 Teil 4 · stand: 2026-11 -->
+
+Konzentration von Personen, Betrieben oder Ländern auf bestimmte Tätigkeiten, Produkte oder Märkte, die sie besonders gut oder günstig beherrschen.
+
+### Erklärung
+Spezialisierung ist die Folge der Arbeitsteilung und tritt auf mehreren Ebenen auf: **Mitarbeiter** (Fachkraft), **Betrieb** (Kernkompetenz, Auslagerung des Übrigen), **Volkswirtschaft** (Länder produzieren, was sie relativ günstig können, und handeln). **Vorteile:** Übung und Fachwissen erhöhen Qualität und Tempo, die Stückkosten sinken. **Nachteile:** Abhängigkeit von Partnern und Lieferketten (Klumpenrisiko), einseitige Belastung und geringere Flexibilität bei Marktveränderungen. Wer spezialisiert ist, muss tauschen – das erzeugt Märkte und Handel.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH konzentriert sich auf Verkauf und Beratung (Kernkompetenz) und lagert die Auslieferung an einen Spediteur aus. Der Verkauf wird besser, aber der Betrieb ist nun von der Zuverlässigkeit des Spediteurs abhängig.
+
+### Abgrenzung
+Im Datenmodell und in der Objektorientierung bedeutet **Spezialisierung** etwas anderes: Eine Unterklasse erweitert eine Oberklasse (Gegenstück zur Generalisierung). Von der **Arbeitsteilung** (Aufteilung von Arbeitsschritten) unterscheidet sich die Spezialisierung durch den Blick auf die Fokussierung.
+
+### Prüfungsfalle
+Spezialisierung ausschließlich als Vorteil darstellen: Die Abhängigkeit und das Klumpenrisiko gehören zur Beurteilung dazu.
+
+### Merksatz
+Wer sich spezialisiert, wird besser und abhängiger zugleich.
+
+Siehe auch: Arbeitsteilung · Globalisierung · Wirtschaftssektoren · Generalisierung
+Mehr: Deep Dive 20, 6.2 · Deep Dive 26, Teil 4
 
 ## Spezifität
 <!-- id: spezifitat · quellen: Karte DD7, DD7 2.2 · stand: 2026-10 -->
@@ -1918,19 +2175,21 @@ Die Einfluss-Interesse-Matrix ergibt vier Felder:
 
 Aus der Einordnung folgen Maßnahmen: regelmäßige Abstimmungen, Lenkungsausschuss, Newsletter oder nur gelegentliche Information.
 
+Zur Analyse gehört auch die **Haltung** zum Projekt (Befürworter, neutral, Gegner) und die **Befürchtung** hinter einem Widerstand: Die Geschäftsleitung fürchtet meist Kosten, Termine und fehlenden Nutzen, die Beschäftigten Kontrolle, Überforderung oder Arbeitsplatzverlust. Zu jeder Befürchtung wählt man eine Gegenmaßnahme, die genau sie entkräftet (Information, Beteiligung, Schulung, Betriebsvereinbarung, Pilotbetrieb).
+
 ### Beispiel
-Reporting-Projekt: Vertriebsleitung (hoher Einfluss, hohes Interesse) → eng einbinden, Teilnahme an jedem Review. Betriebsrat (hoher Einfluss, mittleres Interesse) → früh zufriedenstellen, Betriebsvereinbarung abstimmen. Filialmitarbeitende (geringer Einfluss, hohes Interesse) → informieren und schulen.
+Reporting-Projekt: Vertriebsleitung (hoher Einfluss, hohes Interesse) → eng einbinden, Teilnahme an jedem Review. Betriebsrat (hoher Einfluss, mittleres Interesse) → früh zufriedenstellen, Betriebsvereinbarung abstimmen. Filialmitarbeitende (geringer Einfluss, hohes Interesse) → informieren und schulen. Die Filialmitarbeitenden befürchten, dass das Dashboard ihre Verkaufszahlen einzeln kontrolliert – Gegenmaßnahme: Auswertung nur je Filiale, Zweck und Zugriff in einer Betriebsvereinbarung festgelegt.
 
 ### Abgrenzung
 Die **Stakeholderanalyse** bewertet Personen und Gruppen; die **Risikoanalyse** bewertet Ereignisse nach Wahrscheinlichkeit und Schaden. Ein kritischer Stakeholder kann allerdings selbst ein Risiko sein.
 
 ### Prüfungsfalle
-Stakeholder nur auflisten, ohne Bewertung und Strategie.
+Stakeholder nur auflisten, ohne Bewertung und Strategie – und Widerstände zwar erkennen, aber keine zur Befürchtung passende Gegenmaßnahme nennen.
 
 ### Merksatz
 Wer hat Macht, wer hat Interesse – und wie gehe ich mit ihm um?
 
-Siehe auch: Stakeholder · Risikomanagement · Projektstrukturplan
+Siehe auch: Stakeholder · Risikomanagement · Projektstrukturplan · Akzeptanz und Widerstände
 Mehr: Deep Dive 12, 1.4
 
 ## Stammdaten
@@ -2074,6 +2333,38 @@ Kein Angemessenheitsbeschluss? Dann Standardvertragsklauseln plus Transferprüfu
 
 Siehe auch: DSGVO · Personenbezogene Daten · Datenschutzbeauftragter
 Mehr: Deep Dive 10, 2.4
+
+## Standortfaktoren
+<!-- id: standortfaktoren · quellen: Karte DD33, DD33 Teil 4 · stand: 2026-11 -->
+
+Gegebenheiten eines Ortes, die die Standortwahl eines Unternehmens beeinflussen – unterteilt in harte (messbare) und weiche (schwer messbare) Faktoren.
+
+### Erklärung
+| | harte Standortfaktoren | weiche Standortfaktoren |
+|---|---|---|
+| Merkmal | in Euro oder Zahlen erfassbar, wirken direkt auf Kosten und Erlöse | schwer zu messen, wirken meist indirekt über Menschen |
+| Beispiele | Grundstückspreise und Miete, Löhne, Gewerbesteuer-Hebesatz, Verkehrsanbindung, Absatzmarkt und Kundennähe, Nähe zu Lieferanten, Fachkräfteangebot, Fördermittel | Image der Region, Wohn- und Freizeitwert, Kultur- und Bildungsangebot, Unternehmerfreundlichkeit der Verwaltung, Klima |
+
+Welche Faktoren zählen, hängt von der Branche ab: Ein Handelsbetrieb braucht Kundennähe und Laufkundschaft, ein Industriebetrieb Verkehrsanbindung und Rohstoffnähe, ein IT-Unternehmen Fachkräfte. Der **Gewerbesteuer-Hebesatz** legt die Gemeinde fest; deshalb ist er ein echter Standortfaktor. Für den Vergleich nutzt man einen Kostenvergleich bei den harten Faktoren und eine Nutzwertanalyse, wenn weiche Faktoren mitbewertet werden sollen.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH vergleicht zwei Lagerstandorte mit je 2.500 m²:
+- Standort A: Miete 12 € je m² und Monat, also $2.500 \cdot 12 \cdot 12 = 360.000$ € im Jahr; kurze Wege zu den Filialen.
+- Standort B: Miete 9 € je m² und Monat, also $2.500 \cdot 9 \cdot 12 = 270.000$ € im Jahr; dafür 120.000 € höhere Transportkosten im Jahr.
+
+Miete plus Transport: A kostet 360.000 €, B kostet $270.000 + 120.000 = 390.000$ €. A ist um 30.000 € im Jahr günstiger, obwohl die Miete höher ist. Weiche Faktoren (Image des Standorts, Erreichbarkeit für Mitarbeiter) kommen als qualitative Beurteilung hinzu.
+
+### Abgrenzung
+Standortfaktoren unterscheiden Orte voneinander. Was überall gleich ist, etwa der Umsatzsteuersatz, ist deshalb kein Standortfaktor.
+
+### Prüfungsfalle
+Den bundeseinheitlichen Umsatzsteuersatz als Standortfaktor nennen, den örtlich verschiedenen Gewerbesteuer-Hebesatz aber nicht – es ist genau umgekehrt.
+
+### Merksatz
+Hart ist, was man in Euro rechnen kann; weich ist, was Menschen anzieht.
+
+Siehe auch: Nutzwertanalyse · Wirtschaftlichkeitsbetrachtung · Arbeitsteilung
+Mehr: Deep Dive 33, Teil 4
 
 ## Star-Schema
 <!-- id: star-schema · quellen: Karte DD8, DD8 4.2, DD8 4.3, DD17 3.4 · stand: 2026-10 -->
@@ -2269,7 +2560,7 @@ Einteilung der Arbeitnehmer in sechs Lohnsteuerklassen, nach denen der Arbeitgeb
 | V | Partner zu III |
 | VI | zweites und jedes weitere Dienstverhältnis |
 
-Die Steuerklasse beeinflusst nur den monatlichen Abzug, nicht die endgültige Einkommensteuer – die ergibt sich aus der Veranlagung. Die Kombination III/V besteht weiterhin; eine früher geplante Abschaffung zugunsten des Faktorverfahrens wurde nicht beschlossen (Stand 2026).
+Die Steuerklasse beeinflusst nur den monatlichen Abzug, nicht die endgültige Einkommensteuer – die ergibt sich aus der Veranlagung. Die Kombination III/V besteht weiterhin; Pläne, sie zugunsten des Faktorverfahrens zu ersetzen, sind noch nicht umgesetzt (Stand 2026) – in der Prüfung gilt das heutige Recht.
 
 ### Beispiel
 Lea (ledig) hat Steuerklasse I. Nimmt sie zusätzlich einen Minijob mit individueller Besteuerung oder eine zweite Teilzeitstelle an, wird die zweite Stelle nach Klasse VI besteuert – sofern der Minijob nicht pauschal versteuert wird.
@@ -2364,6 +2655,31 @@ Jede Teilmenge ein Spiegel des Ganzen.
 
 Siehe auch: Train-Test-Split · Kreuzvalidierung · Unausgeglichene Klassen · SMOTE
 Mehr: Deep Dive 7, 4.5
+
+## Stream-Verarbeitung
+<!-- id: stream-verarbeitung · quellen: DD8 5.2 · stand: 2026-11 -->
+
+Auch: Stream Processing, Streaming
+
+Fortlaufende Verarbeitung von Ereignissen, sobald sie entstehen, mit Reaktionszeiten von Millisekunden bis wenigen Sekunden.
+
+### Erklärung
+Ereignisse (Bons, Sensorwerte, Klicks) fließen durch eine Pipeline: Quelle → Nachrichtensystem (z. B. Apache Kafka) → Verarbeitung (z. B. Apache Flink oder Spark Streaming) → Ziel. Aggregationen laufen über **Zeitfenster** („Umsatz der letzten 5 Minuten“). Herausforderungen: verspätet oder in falscher Reihenfolge eintreffende Ereignisse, doppelte Zustellung (Verarbeitung muss mehrfaches Ausführen vertragen), Ausfallsicherheit und höherer Betriebsaufwand. „Echtzeit“ bedeutet in der Praxis meist „nahezu in Echtzeit“.
+
+### Beispiel
+Jeder Kassenbon der Möbelhaus Nordholz GmbH wird als Ereignis gesendet. Fällt der Bestand eines Artikels unter den Mindestbestand von 5 Stück, löst die Verarbeitung binnen Sekunden eine Nachbestellwarnung aus. Parallel zeigt ein Dashboard den Umsatz je Filiale im gleitenden 5-Minuten-Fenster.
+
+### Abgrenzung
+Die **Batch-Verarbeitung** sammelt Daten und verarbeitet sie zu festen Zeiten – einfach, aber mit Verzögerung. Streaming lohnt sich nur, wenn die Entscheidung von der aktuellen Information abhängt (Betrugserkennung, Bestandswarnung).
+
+### Prüfungsfalle
+Streaming für jede Auswertung fordern. Ein Monatsbericht braucht keinen Datenstrom; der Aufwand wäre nicht gerechtfertigt.
+
+### Merksatz
+Stream: jedes Ereignis sofort. Batch: der ganze Stapel später.
+
+Siehe auch: Batch-Verarbeitung · Velocity · Change Data Capture · ETL
+Mehr: Deep Dive 8, 5.2
 
 ## Streik
 <!-- id: streik · quellen: Karte DD13, DD13 5.4 · stand: 2026-10 -->
@@ -2583,6 +2899,40 @@ Feste Spalten, feste Typen, direkt per SQL auswertbar.
 
 Siehe auch: Semistrukturierte Daten · Unstrukturierte Daten · Schema-on-Write · Datentypen
 Mehr: Deep Dive 15, 1.1
+
+## Stufenfunktion
+<!-- id: stufenfunktion · quellen: Karte DD6, DD6 9.3, DD31 2.3 · stand: 2026-11 -->
+
+Aktivierungsfunktion des klassischen Perzeptrons: Sie gibt 1 aus, sobald die gewichtete Summe z die Schwelle erreicht (z ≥ 0), sonst 0.
+
+Auch: Sprungfunktion, Schwellenwertfunktion
+
+### Erklärung
+Die Stufenfunktion macht aus der Nettoeingabe z eine Ja/Nein-Entscheidung: y = 1 für z ≥ 0, y = 0 für z < 0. Die „Schwelle“ steckt im **Bias**: Er verschiebt, ab welcher gewichteten Summe das Neuron feuert. Weil die Funktion nur zwei Werte kennt, eignet sie sich für eine Klassifikation mit zwei Klassen (z. B. gut/schlecht). Ihr Nachteil: An der Stufe hat sie keine sinnvolle Steigung – deshalb lassen sich mehrschichtige Netze damit nicht per Backpropagation trainieren, sie nutzen Sigmoid oder ReLU.
+
+### Beispiel
+Perzeptron zur Akkubeurteilung mit z = 3,5 − 0,4 · m1 − 1,0 · m2:
+- Akku mit m1 = 4,5 und m2 = 1,2: $z = 3{,}5 - 1{,}8 - 1{,}2$ = **0,5** → y = 1 (gut).
+- Akku mit m1 = 5,5 und m2 = 3,6: $z = 3{,}5 - 2{,}2 - 3{,}6$ = **−2,3** → y = 0 (schlecht).
+- Grenzfall z = 0 → y = 1, denn es gilt „≥ 0“.
+
+### Abgrenzung
+| Funktion | Ausgabe | Steigung / Training |
+|---|---|---|
+| **Stufenfunktion** | nur 0 oder 1 | Perzeptron-Lernregel |
+| Sigmoid-Funktion | stufenlos zwischen 0 und 1 | differenzierbar, Backpropagation |
+| ReLU | 0 oder z | differenzierbar (bis auf den Knick), Backpropagation |
+
+In der Prüfung heißt sie meist **Sprungfunktion**; im Perzeptron-Schaubild ist es der Kreis mit der Stufe hinter der Nettoeingabefunktion.
+
+### Prüfungsfalle
+Nettoeingabefunktion (bildet die Summe z) und Sprungfunktion (macht daraus 0 oder 1) verwechseln. Und beim Grenzfall z = 0 nicht „0“ schreiben: Mit „z ≥ 0“ ergibt sich 1.
+
+### Merksatz
+Summe rechnen, dann springen: ab null eine Eins.
+
+Siehe auch: Aktivierungsfunktion · Perzeptron · Perzeptron-Lernregel · Sigmoid-Funktion · ReLU · Bias
+Mehr: Deep Dive 6, 9.3 · Deep Dive 31, 2.3
 
 ## Summe bilden
 <!-- id: summe-bilden · quellen: DD11 B5 · stand: 2026-10 -->

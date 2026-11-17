@@ -136,7 +136,7 @@ Laplace auf ungleich wahrscheinliche Ergebnisse anwenden – „Auftrag reklamie
 ### Merksatz
 Nur bei fairen Verhältnissen gilt: günstig durch möglich.
 
-Siehe auch: Relative Häufigkeit · Gegenereignis
+Siehe auch: Relative Häufigkeit · Gegenereignis · Bedingte Wahrscheinlichkeit
 Mehr: Deep Dive 3, 7.1
 
 ## Lastenheft
@@ -392,6 +392,45 @@ Links bleibt alles, rechts füllt NULL die Lücken.
 Siehe auch: INNER JOIN · NULL · NULL-Logik (Prüferklassiker)
 Mehr: Deep Dive 1, 2.2
 
+## Leiharbeit
+<!-- id: leiharbeit · quellen: Karte DD25, DD25 Teil 2, DD25 Teil 4, DD33 Teil 3 · stand: 2026-11 -->
+
+Arbeitnehmerüberlassung: Ein Verleiher überlässt einem Entleiher seine Arbeitnehmer (Leiharbeitnehmer) gegen Entgelt zur Arbeit im fremden Betrieb (Arbeitnehmerüberlassungsgesetz, AÜG).
+
+Auch: Arbeitnehmerüberlassung, Zeitarbeit, AÜG, Verleiher, Entleiher, Leiharbeitnehmer
+
+### Erklärung
+Es entsteht ein **Dreiecksverhältnis**:
+
+| Beziehung | Vertrag | Folgen |
+|---|---|---|
+| Verleiher – Leiharbeitnehmer | **Arbeitsvertrag** | Verleiher zahlt Lohn und Sozialversicherung, gewährt Urlaub, kündigt |
+| Verleiher – Entleiher | **Überlassungsvertrag** | Entleiher zahlt das Überlassungsentgelt an den Verleiher |
+| Entleiher – Leiharbeitnehmer | **kein Vertrag** | Entleiher erteilt die **fachlichen Weisungen** und ist am Einsatzplatz für den Arbeitsschutz verantwortlich |
+
+**Regeln (Stand 2026):** Der Verleiher braucht eine **Erlaubnis** der Bundesagentur für Arbeit. Ein Leiharbeitnehmer darf demselben Entleiher grundsätzlich höchstens **18 Monate** überlassen werden (Tarifvertrag oder Betriebsvereinbarung können abweichen). Es gilt der Grundsatz der Gleichstellung mit vergleichbaren Stammbeschäftigten (Lohn, wesentliche Arbeitsbedingungen); ein Tarifvertrag darf in den ersten **neun Monaten** abweichen, danach gilt grundsätzlich gleiches Entgelt. Der Entleiher darf Leiharbeitnehmer nicht als Streikbrecher einsetzen. Beim Entleiher sind Leiharbeitnehmer **wahlberechtigt zum Betriebsrat, wenn sie länger als drei Monate** eingesetzt werden (§ 7 BetrVG); der Betriebsrat des Entleihers ist bei der Übernahme zu beteiligen (§ 99 BetrVG).
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH holt zur Inventur vier Leiharbeitnehmer für sechs Wochen und zwei weitere für acht Monate. Lohn und Sozialabgaben zahlt jeweils die Zeitarbeitsfirma, die Anweisungen im Lager gibt das Möbelhaus. Bei der Betriebsratswahl dürfen nur die zwei Leiharbeitnehmer mit acht Monaten Einsatz wählen, die vier mit sechs Wochen nicht.
+
+### Abgrenzung
+| Form | Wer schuldet was |
+|---|---|
+| Leiharbeit | Arbeitskraft; Weisung beim Entleiher |
+| **Werkvertrag** | ein Erfolg; der Auftragnehmer setzt eigene Leute nach eigener Organisation ein; kein Weisungsrecht des Auftraggebers |
+| Befristeter Arbeitsvertrag | direkt mit dem Betrieb, kein Dritter |
+
+Wird ein „Werkvertrag“ wie Leiharbeit gelebt (Weisungen des Auftraggebers an Fremdpersonal), liegt verdeckte Arbeitnehmerüberlassung vor.
+
+### Prüfungsfalle
+Den Lohn dem Entleiher oder die Weisung dem Verleiher zuordnen (genau umgekehrt: der Verleiher zahlt, der Entleiher weist an). Bei der Betriebsratswahl kurzzeitig eingesetzte Leiharbeitnehmer mitzuzählen.
+
+### Merksatz
+Der Verleiher zahlt, der Entleiher weist an.
+
+Siehe auch: Weisungsrecht · Werkvertrag · Befristung · Wahlberechtigt · Betriebsrat · Arbeitsvertrag · Arbeitsschutz
+Mehr: Deep Dive 25, Teil 2 · Deep Dive 25, Teil 4 · Deep Dive 33, Teil 3
+
 ## Leihvertrag
 <!-- id: leihvertrag · quellen: Karte DD14, DD14 2.4 · stand: 2026-10 -->
 
@@ -443,6 +482,41 @@ Zins rauf, Inflation runter – Zins runter, Wirtschaft rauf.
 Siehe auch: Geldpolitik · Fiskalpolitik · Inflation · Magisches Viereck
 Mehr: Deep Dive 14, 4.4
 
+## Lernkurve
+<!-- id: lernkurve · quellen: DD7 1.2 · stand: 2026-11 -->
+
+Diagramm, das die Güte (oder den Fehler) eines Modells auf Trainings- und Validierungsdaten in Abhängigkeit von der Größe der Trainingsmenge zeigt; daran erkennt man Over- und Underfitting und ob mehr Daten helfen.
+Auch: Learning Curve
+
+### Erklärung
+Auf der x-Achse steht die Zahl der Trainingsfälle, auf der y-Achse die Güte, jeweils eine Kurve für Training und Validierung. Ist die Trainingskurve hoch und die Validierungskurve deutlich tiefer, liegt **Overfitting** vor; schließt sich die Lücke mit mehr Daten, lohnt es sich, mehr Daten zu beschaffen. Liegen beide Kurven niedrig dicht beieinander, ist das Modell zu einfach (**Underfitting**): Mehr Daten bringen nichts, ein flexibleres Modell oder bessere Merkmale schon. Bei neuronalen Netzen wird oft der Fehler über die Epochen aufgetragen; steigt der Validierungsfehler wieder, ist Early Stopping angezeigt.
+
+### Beispiel
+F1-Wert des Reklamationsmodells bei 500, 2.000 und 8.000 Trainingsfällen:
+
+| Modell | Fälle | Training | Validierung | Lücke |
+|---|---|---|---|---|
+| Baum ohne Tiefenbegrenzung | 500 | 1,00 | 0,60 | 0,40 |
+| Baum ohne Tiefenbegrenzung | 2.000 | 0,98 | 0,68 | 0,30 |
+| Baum ohne Tiefenbegrenzung | 8.000 | 0,95 | 0,74 | 0,21 |
+| Baum der Tiefe 1 | 500 | 0,64 | 0,60 | 0,04 |
+| Baum der Tiefe 1 | 2.000 | 0,63 | 0,61 | 0,02 |
+| Baum der Tiefe 1 | 8.000 | 0,62 | 0,62 | 0,00 |
+
+Der tiefe Baum überanpasst (große Lücke), mehr Daten verkleinern sie von 0,40 auf 0,21 – mehr Daten helfen. Der Baum mit Tiefe 1 hat keine Lücke, aber beide Werte bleiben bei etwa 0,62: Underfitting, mehr Daten ändern daran nichts.
+
+### Abgrenzung
+Die **Lernkurve** zeigt Güte über Datenmenge oder Epochen; die **ROC-Kurve** zeigt Recall gegen Falsch-Positiv-Rate über alle Schwellen; die **Lernrate** ist eine Schrittweite des Trainings.
+
+### Prüfungsfalle
+Bei zwei niedrigen, eng beieinander liegenden Kurven „mehr Daten beschaffen“ empfehlen – das hilft nur bei hoher Varianz (Overfitting).
+
+### Merksatz
+Große Lücke: einfacher oder mehr Daten; beide tief: komplexer.
+
+Siehe auch: Overfitting · Underfitting · Validierungsdaten · Bias-Variance-Trade-off · Early Stopping · Epoche
+Mehr: Deep Dive 7, 1.2
+
 ## Lernrate
 <!-- id: lernrate · quellen: Karte DD6, DD6 9.4 · stand: 2026-10 -->
 
@@ -460,7 +534,7 @@ Die Lernrate in der Lernregel weglassen und nur w + (t − y) · x rechnen.
 ### Merksatz
 Zu groß springt, zu klein schleicht.
 
-Siehe auch: Perzeptron-Lernregel · Backpropagation · Epoche · Validierungsdaten
+Siehe auch: Perzeptron-Lernregel · Backpropagation · Epoche · Validierungsdaten · Hyperparameter
 Mehr: Deep Dive 6, 9.4
 
 ## Lessons Learned
@@ -788,10 +862,10 @@ Mehr: Deep Dive 2, 1.1
 Überwachtes Klassifikationsverfahren, das die Wahrscheinlichkeit für eine Klasse schätzt und dann per Schwellenwert zuordnet; robust und gut interpretierbar.
 
 ### Erklärung
-Trotz des Namens ist sie ein **Klassifikations**verfahren. Sie bildet aus den Merkmalen eine gewichtete Summe und presst sie mit der logistischen (Sigmoid-)Funktion in den Bereich 0 bis 1. Liegt die Wahrscheinlichkeit über dem Schwellenwert (meist 0,5), wird die positive Klasse vorhergesagt. Die Gewichte zeigen, welche Merkmale das Risiko erhöhen oder senken – das macht sie für Fachbereiche gut erklärbar.
+Trotz des Namens ist sie ein **Klassifikations**verfahren. Sie bildet aus den Merkmalen eine gewichtete Summe $z = b + w_1 x_1 + w_2 x_2 + \dots$ und presst sie mit der logistischen (Sigmoid-)Funktion in den Bereich 0 bis 1: $p = \frac{1}{1 + e^{-z}}$. Dabei sind $x_i$ die Merkmalswerte, $w_i$ die gelernten Gewichte, $b$ der Achsenabschnitt (Bias) und $p$ die geschätzte Wahrscheinlichkeit der positiven Klasse. Bei $z = 0$ ist $p = 0{,}5$; ein positives Gewicht erhöht das Risiko, ein negatives senkt es. Liegt $p$ über der Entscheidungsschwelle (meist 0,5), wird die positive Klasse vorhergesagt. Gelernt werden die Gewichte über ein Gradientenverfahren, das die Wahrscheinlichkeit der beobachteten Klassen maximiert (Maximum Likelihood) – nicht wie bei der linearen Regression über die kleinsten Quadrate. Weil $e^{w_i}$ angibt, um welchen Faktor die Chance (Odds $\frac{p}{1-p}$) pro Einheit von $x_i$ steigt, ist das Modell für Fachbereiche gut erklärbar.
 
 ### Beispiel
-Ein Modell schätzt für einen Reparaturauftrag eine Reklamationswahrscheinlichkeit von 0,73 → über 0,5 → Klasse „Reklamation“. Senkt man die Schwelle auf 0,3, findet man mehr echte Reklamationen (Recall steigt), aber auch mehr Fehlalarme.
+Reklamationsmodell mit $b = -3$, $w_1 = 0{,}5$ (je Tag Lieferdauer) und $w_2 = 1{,}2$ (Spezialverpackung, 0 oder 1). Auftrag A: 6 Tage, Spezialverpackung: $z = -3 + 0{,}5 \cdot 6 + 1{,}2 \cdot 1 = 1{,}2$, $p = \frac{1}{1 + e^{-1{,}2}} = \frac{1}{1 + 0{,}301} = 0{,}77$ → über 0,5 → Klasse „Reklamation“. Auftrag B: 2 Tage, Standardverpackung: $z = -3 + 0{,}5 \cdot 2 + 0 = -2$, $p = \frac{1}{1 + e^{2}} = 0{,}12$ → keine Reklamation. Jeder zusätzliche Tag Lieferdauer multipliziert die Chance mit $e^{0{,}5} \approx 1{,}65$. Senkt man die Schwelle auf 0,3, findet man mehr echte Reklamationen (Recall steigt), aber auch mehr Fehlalarme.
 
 ### Abgrenzung
 | Verfahren | Zielgröße |
@@ -800,12 +874,12 @@ Ein Modell schätzt für einen Reparaturauftrag eine Reklamationswahrscheinlichk
 | Logistische Regression | Klasse (ja/nein) mit Wahrscheinlichkeit |
 
 ### Prüfungsfalle
-Sie wegen des Wortes „Regression“ der Regression statt der Klassifikation zuordnen.
+Sie wegen des Wortes „Regression“ der Regression statt der Klassifikation zuordnen. Ebenso falsch: im Sigmoid den Exponenten ohne Minus schreiben ($e^{z}$ statt $e^{-z}$) – dann kommt $1 - p$ heraus.
 
 ### Merksatz
 Logistisch heißt: Wahrscheinlichkeit rein, Klasse raus.
 
-Siehe auch: Klassifikation · Regression · Entscheidungsbaum · Random Forest
+Siehe auch: Klassifikation · Regression · Entscheidungsschwelle · Entscheidungsbaum · Random Forest
 Mehr: Deep Dive 6, 2.4
 
 ## Lohnsteuer
