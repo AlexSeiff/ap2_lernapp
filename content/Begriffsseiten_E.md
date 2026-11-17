@@ -48,7 +48,7 @@ Beste Epoche ist 5 (0,41). In Epoche 6 (0,43) und 7 (0,46) gibt es keine Verbess
 Early Stopping begrenzt die **Trainingsdauer**; Regularisierung bestraft große Gewichte, Pruning stutzt Bäume, mehr Daten verringern die Varianz. Alle wirken gegen Overfitting, aber an unterschiedlichen Stellen.
 
 ### Prüfungsfalle
-Den Abbruchzeitpunkt am Trainingsfehler festmachen (er sinkt immer) oder an den Testdaten, oder am Ende die Gewichte der letzten statt der besten Epoche behalten.
+Den Abbruchzeitpunkt am Trainingsfehler festmachen (er sinkt meist weiter, auch wenn die Generalisierung schon schlechter wird) oder an den Testdaten, oder am Ende die Gewichte der letzten statt der besten Epoche behalten.
 
 ### Merksatz
 Aufhören, wenn die Validierung dreht.

@@ -701,7 +701,7 @@ Gegenmittel gegen Overfitting: Beim Training werden große Gewichte bestraft, so
 Auch: L1-Regularisierung, L2-Regularisierung, Lasso, Ridge
 
 ### Erklärung
-Statt nur den Fehler zu minimieren, minimiert das Training $J(w) = \text{Fehler}(w) + \lambda \cdot \text{Strafe}(w)$. Dabei ist $\text{Fehler}(w)$ der Trainingsfehler (z. B. der mittlere quadratische Fehler), $w_j$ sind die Gewichte und $\lambda \ge 0$ die Stärke der Regularisierung (ein Hyperparameter). **L2 (Ridge)** nutzt die Strafe $\sum_j w_j^2$ und verkleinert alle Gewichte, ohne sie auf genau null zu setzen. **L1 (Lasso)** nutzt $\sum_j \lvert w_j \rvert$ und setzt unwichtige Gewichte auf null – das wirkt wie eine automatische Merkmalsauswahl. $\lambda = 0$ bedeutet keine Regularisierung; ein zu großes $\lambda$ erzeugt Underfitting. Die Merkmale müssen skaliert sein, weil die Strafe sonst Merkmale mit kleinen Zahlenwerten benachteiligt. Weitere Formen: Dropout bei neuronalen Netzen, Pruning bei Bäumen.
+Statt nur den Fehler zu minimieren, minimiert das Training $J(w) = \text{Fehler}(w) + \lambda \cdot \text{Strafe}(w)$. Dabei ist $\text{Fehler}(w)$ der Trainingsfehler (z. B. der mittlere quadratische Fehler), $w_j$ sind die Gewichte und $\lambda \ge 0$ die Stärke der Regularisierung (ein Hyperparameter). **L2 (Ridge)** nutzt die Strafe $\sum_j w_j^2$ und dämpft die Gewichte insgesamt, setzt sie aber nicht systematisch auf null. **L1 (Lasso)** nutzt $\sum_j \lvert w_j \rvert$ und setzt unwichtige Gewichte auf null – das wirkt wie eine automatische Merkmalsauswahl. $\lambda = 0$ bedeutet keine Regularisierung; ein zu großes $\lambda$ erzeugt Underfitting. Die Merkmale müssen skaliert sein, weil die Strafe sonst Merkmale mit kleinen Zahlenwerten benachteiligt. Weitere Formen: Dropout bei neuronalen Netzen, Pruning bei Bäumen.
 
 ### Beispiel
 Lineare Regression für die Reparaturdauer mit drei Gewichten, $\lambda = 0{,}5$, Trainingsfehler (MSE) 20. Ohne Regularisierung ist $w = (4; -3; 2)$. L2-Strafe: $16 + 9 + 4 = 29$, also $J = 20 + 0{,}5 \cdot 29 = 34{,}5$. Die Lösung $w = (3; -2; 1)$ hat einen etwas höheren Trainingsfehler von 22, aber L2-Strafe $9 + 4 + 1 = 14$: $J = 22 + 0{,}5 \cdot 14 = 29$. Das Training bevorzugt sie (29 < 34,5): ein minimal schlechterer Fit auf den Trainingsdaten gegen ein einfacheres, stabileres Modell. Bei L1 würden dieselben Gewichte mit den Beträgen bestraft (Summe $4 + 3 + 2 = 9$ gegen $3 + 2 + 1 = 6$).
@@ -710,7 +710,7 @@ Lineare Regression für die Reparaturdauer mit drei Gewichten, $\lambda = 0{,}5$
 | | L1 (Lasso) | L2 (Ridge) |
 |---|---|---|
 | Strafterm | Summe der Beträge | Summe der Quadrate |
-| Gewichte | einige exakt 0 | alle klein, nie exakt 0 |
+| Gewichte | einige exakt 0 | alle klein, meist nicht 0 |
 | Nutzen | Merkmalsauswahl | gleichmäßige Dämpfung |
 
 Mit der **Normalisierung** (Skalieren bzw. Normalformen in Datenbanken) hat Regularisierung nichts zu tun.

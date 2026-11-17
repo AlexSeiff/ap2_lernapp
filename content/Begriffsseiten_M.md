@@ -1591,14 +1591,14 @@ Mehr: Deep Dive 16, 4.2
 Bei einer Regression mit mehreren Einflussgrößen hängen zwei oder mehr davon selbst stark zusammen, sodass sich ihre Einzeleffekte nicht sauber trennen lassen.
 
 ### Erklärung
-Die Regressionskoeffizienten werden instabil: Schon kleine Änderungen der Daten verschieben sie stark, sogar das Vorzeichen kann kippen, und die Einzelwirkung einer Größe ist kaum deutbar. Das Gesamtmodell (R², Prognose innerhalb des Datenbereichs) leidet dagegen oft kaum. Erkennen lässt sich das an hohen Korrelationen zwischen den x-Variablen (|r| > 0,8 ist auffällig) und am **Varianzinflationsfaktor** $\text{VIF}_j = \frac{1}{1 - R_j^2}$; dabei ist $R_j^2$ das Bestimmtheitsmaß, wenn x_j aus den übrigen Einflussgrößen vorhergesagt wird. Faustregel: VIF über 5 bis 10 ist problematisch. Gegenmaßnahmen: eine der Größen weglassen, Größen zu einem Index zusammenfassen, mehr Daten oder Regularisierung (Ridge). Ist eine Größe eine exakte Umrechnung einer anderen (Umsatz in € und in T€), lässt sich das Modell gar nicht schätzen.
+Die Regressionskoeffizienten werden instabil: Schon kleine Änderungen der Daten verschieben sie stark, sogar das Vorzeichen kann kippen, und die Einzelwirkung einer Größe ist kaum deutbar. Das Gesamtmodell (R², Prognose innerhalb des Datenbereichs) leidet dagegen oft kaum. Erkennen lässt sich das an hohen Korrelationen zwischen den x-Variablen (|r| > 0,8 ist auffällig) und am **Varianzinflationsfaktor** $\text{VIF}_j = \frac{1}{1 - R_j^2}$; dabei ist $R_j^2$ das Bestimmtheitsmaß, wenn x_j aus den übrigen Einflussgrößen vorhergesagt wird. Faustregel: VIF über 5 bis 10 ist problematisch. Gegenmaßnahmen: eine der Größen weglassen, Größen zu einem Index zusammenfassen, mehr Daten oder Regularisierung (Ridge). Ist eine Größe eine exakte Umrechnung einer anderen (Umsatz in € und in T€), lassen sich die einzelnen Koeffizienten nicht eindeutig bestimmen.
 
 ### Beispiel
 Umsatz je Filiale aus Verkaufsfläche x₁ und Zahl der Beschäftigten x₂. Beide hängen mit r = 0,95 zusammen. Bei zwei Einflussgrößen ist $R_j^2 = r^2 = 0{,}9025$ und $\text{VIF} = \frac{1}{1 - 0{,}9025} = \frac{1}{0{,}0975} = 10{,}3$.
 Wert über 10: Das Modell kann nicht sagen, ob die Fläche oder das Personal den Umsatz treibt. Sinnvoll wäre nur eine der beiden Größen oder die Kennzahl „Fläche je Beschäftigtem“.
 
 ### Abgrenzung
-Erwünscht ist eine Korrelation zwischen **x und y** (sonst erklärt x nichts). Multikollinearität ist die unerwünschte Korrelation **zwischen den x-Variablen**. Eine **Drittvariable** beeinflusst x und y; Multikollinearität betrifft nur die x untereinander.
+Erwünscht ist in der Regel eine Korrelation zwischen **x und y** (ohne sie erklärt x meist nichts). Multikollinearität ist die unerwünschte Korrelation **zwischen den x-Variablen**. Eine **Drittvariable** beeinflusst x und y; Multikollinearität betrifft nur die x untereinander.
 
 ### Prüfungsfalle
 Multikollinearität mit schlechter Prognosegüte gleichsetzen – betroffen ist vor allem die Deutung der einzelnen Koeffizienten.

@@ -382,13 +382,13 @@ Auch: Hauptkomponentenanalyse, Principal Component Analysis
 Die erste **Hauptkomponente** zeigt in die Richtung der größten Streuung der Daten, die zweite steht senkrecht darauf und erklärt den größten Rest usw. Ablauf: Merkmale standardisieren, Kovarianzmatrix berechnen, ihre Eigenvektoren (die Richtungen) und Eigenwerte $\lambda_j$ (die Varianz je Richtung) bestimmen, nach Eigenwert sortieren, die ersten Komponenten behalten und die Daten darauf projizieren. Anteil der erklärten Varianz der Komponente $j$: $\frac{\lambda_j}{\sum_i \lambda_i}$. Bei standardisierten Daten ist die Summe aller Eigenwerte gleich der Zahl der Merkmale. Jede Komponente ist eine Mischung der Originalmerkmale und daher schwer zu deuten; PCA erfasst nur lineare Zusammenhänge und ignoriert eine Zielvariable. Die PCA wird nur auf den Trainingsdaten angepasst und dann auf die Testdaten angewendet (sonst Data Leakage).
 
 ### Beispiel
-Vier standardisierte Kundenmerkmale ergeben die Eigenwerte 2,4; 1,1; 0,4 und 0,1 (Summe 4 = Anzahl der Merkmale). Erklärte Varianz: $\frac{2{,}4}{4} = 60\ \%$, $\frac{1{,}1}{4} = 27{,}5\ \%$, $\frac{0{,}4}{4} = 10\ \%$, $\frac{0{,}1}{4} = 2{,}5\ \%$. Kumuliert: 60 %, 87,5 %, 97,5 %, 100 %. Zwei Komponenten reichen für 87,5 % der Information: Aus 4 Merkmalen werden 2.
+Vier standardisierte Kundenmerkmale ergeben die Eigenwerte 2,4; 1,1; 0,4 und 0,1 (Summe 4 = Anzahl der Merkmale). Erklärte Varianz: $\frac{2{,}4}{4} = 60\ \%$, $\frac{1{,}1}{4} = 27{,}5\ \%$, $\frac{0{,}4}{4} = 10\ \%$, $\frac{0{,}1}{4} = 2{,}5\ \%$. Kumuliert: 60 %, 87,5 %, 97,5 %, 100 %. Zwei Komponenten erklären 87,5 % der Gesamtvarianz: Aus 4 Merkmalen werden 2. Ob das für die Aufgabe reicht, muss gesondert geprüft werden.
 
 ### Abgrenzung
 **Merkmalsauswahl** streicht vorhandene Spalten, PCA bildet neue Spalten aus allen alten. PCA ist unüberwacht; sie sucht Streuung, nicht Trennung zwischen Klassen.
 
 ### Prüfungsfalle
-PCA ohne vorherige Skalierung rechnen – das Merkmal mit den größten Zahlen (z. B. Umsatz in Euro) dominiert dann die erste Komponente. Die Komponenten als Originalmerkmale zu lesen ist ebenfalls falsch.
+Die Skalierung nicht festlegen: Haben die Merkmale verschiedene Einheiten (Umsatz in Euro, Alter in Jahren), dominiert bei nicht standardisierten Daten das Merkmal mit der größten Varianz die erste Komponente. Die Komponenten als Originalmerkmale zu lesen ist ebenfalls falsch.
 
 ### Merksatz
 Neue Achsen entlang der größten Streuung – die ersten behalten.

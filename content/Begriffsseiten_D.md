@@ -1485,7 +1485,7 @@ Dimensionsreduktion verringert die **Spalten** (Merkmale), Clustering fasst **Ze
 Dimensionsreduktion mit dem Löschen von Datensätzen gleichsetzen – es verschwinden Spalten, nicht Zeilen. Auch die „Dimension“ im Star-Schema ist nicht gemeint.
 
 ### Merksatz
-Weniger Spalten, gleiche Aussage.
+Weniger Spalten, möglichst viel relevante Information – den Informationsverlust prüfen.
 
 Siehe auch: PCA · Clustering · Unüberwachtes Lernen · Merkmal · Skalierung · Korrelation · Dimensionstabelle
 Mehr: Deep Dive 6, 2.2

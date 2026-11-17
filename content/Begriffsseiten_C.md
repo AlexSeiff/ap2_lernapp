@@ -303,7 +303,7 @@ Größenbeispiele bei einem 28 × 28-Bild und 3 × 3-Filter: Padding 0, Stride 1
 Beide sind neuronale Netze und werden per Backpropagation trainiert. Bei tabellarischen Auftragsdaten sind Entscheidungsbaum oder Random Forest meist die bessere Wahl.
 
 ### Prüfungsfalle
-Den Filter als festen, von Hand entworfenen Bildfilter verstehen – seine Gewichte werden beim Training gelernt. Ebenso falsch: „Padding verkleinert das Bild“ – es erhält die Größe (bzw. verhindert das Schrumpfen).
+Den Filter als festen, von Hand entworfenen Bildfilter verstehen – seine Gewichte werden beim Training gelernt. Ebenso falsch: „Padding verkleinert das Bild“ – Padding ergänzt den Rand; passend gewählt (bei Stride 1) bleibt die Größe erhalten. Mit größerem Stride schrumpft die Feature Map trotzdem.
 
 ### Merksatz
 Ein kleiner Filter wandert über das Bild und sucht überall dasselbe Muster.

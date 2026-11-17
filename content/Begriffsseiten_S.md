@@ -51,7 +51,7 @@ Mehr: Deep Dive 10, 4.2
 Formel, mit der man bedingte Wahrscheinlichkeiten umkehrt: Aus P(B | A) wird P(A | B) berechnet – unter Einbeziehung der Ausgangshäufigkeit von A.
 
 ### Erklärung
-$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$ mit $P(B) = P(B \mid A) \cdot P(A) + P(B \mid \bar{A}) \cdot P(\bar{A})$. P(A) ist die Ausgangswahrscheinlichkeit (Basisrate, Prävalenz), P(A | B) die aktualisierte Wahrscheinlichkeit nach der Beobachtung B. Kernaussage: Ist A selten, sind selbst bei einem guten Test die meisten Alarme Fehlalarme (**Basisratenfehler**, wenn man das ignoriert). Auf dieselbe Weise hängen Recall und Precision zusammen. Der Naive-Bayes-Klassifikator im Machine Learning nutzt den Satz mit der vereinfachenden Annahme, dass die Merkmale bei bekannter Klasse voneinander unabhängig sind.
+$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$ mit $P(B) = P(B \mid A) \cdot P(A) + P(B \mid \bar{A}) \cdot P(\bar{A})$. P(A) ist die Ausgangswahrscheinlichkeit (Basisrate, Prävalenz), P(A | B) die aktualisierte Wahrscheinlichkeit nach der Beobachtung B. Kernaussage: Ist A selten, können selbst bei einem guten Test die meisten Alarme Fehlalarme sein; ob sie überwiegen, hängt zusätzlich von Recall und Falsch-positiv-Rate ab (**Basisratenfehler**, wenn man das ignoriert). Auf dieselbe Weise hängen Recall und Precision zusammen. Der Naive-Bayes-Klassifikator im Machine Learning nutzt den Satz mit der vereinfachenden Annahme, dass die Merkmale bei bekannter Klasse voneinander unabhängig sind.
 
 ### Beispiel
 Im Kundenimport sind 2 % der Datensätze fehlerhaft. Eine Prüfregel schlägt bei 90 % der fehlerhaften an (Recall) und fälschlich bei 5 % der fehlerfreien (Falsch-Positiv-Rate). Wie wahrscheinlich ist ein Datensatz fehlerhaft, wenn die Regel anschlägt?
@@ -1760,7 +1760,7 @@ Auch: Rangkorrelation nach Spearman, Rangkorrelationskoeffizient
 ### Erklärung
 Vorgehen: Die Werte jedes Merkmals in eine Rangfolge bringen (z. B. kleinster Wert = Rang 1; beide Merkmale werden in dieselbe Richtung gerankt), je Merkmalsträger die Rangdifferenz d bilden, einsetzen:
 $r_s = 1 - \frac{6 \cdot \sum d^2}{n \cdot (n^2 - 1)}$.
-Gleiche Werte (Bindungen) erhalten den Mittelwert ihrer Rangplätze; die Kurzformel gilt dann nur näherungsweise (exakt: Pearson-r auf den Rängen). Gedeutet wird $r_s$ wie Pearsons r: Vorzeichen = Richtung, Betrag = Stärke. Weil nur die Reihenfolge zählt, ist Spearman robust gegen Ausreißer und erfasst auch gekrümmte, aber stets steigende oder fallende Zusammenhänge. Auch ein hohes $r_s$ ist kein Kausalitätsbeleg.
+Gleiche Werte (Bindungen) erhalten den Mittelwert ihrer Rangplätze; die Kurzformel ist dann nicht mehr verlässlich und kann stark danebenliegen; richtig ist der Pearson-Korrelationskoeffizient der Ränge. Gedeutet wird $r_s$ wie Pearsons r: Vorzeichen = Richtung, Betrag = Stärke. Weil nur die Reihenfolge zählt, ist Spearman robust gegen Ausreißer und erfasst auch gekrümmte, aber stets steigende oder fallende Zusammenhänge. Auch ein hohes $r_s$ ist kein Kausalitätsbeleg.
 
 ### Beispiel
 Fünf Filialen, Rangfolge nach Kundenzufriedenheit (Rang 1 = zufriedenste Filiale) und nach Umsatz (Rang 1 = höchster Umsatz):

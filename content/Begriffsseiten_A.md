@@ -290,7 +290,7 @@ Anders bei einer Montagezeit-Gleichung $\hat{y} = 12 + 5 \cdot x$ (x = Anzahl M�
 Die **Steigung b** sagt, um wie viel sich ŷ je Einheit x ändert; der Achsenabschnitt a sagt, auf welcher Höhe die Gerade startet. a ist nicht der Mittelwert ȳ – ȳ ist der Wert der Geraden an der Stelle x̄ (hier 44, nicht 24,8).
 
 ### Prüfungsfalle
-a ohne Prüfung als „Wert ohne Einfluss von x“ ausgeben. Liegt x = 0 außerhalb der Daten oder kommt ein unsinniger Wert heraus (etwa ein negativer Umsatz), nur als Rechenwert bezeichnen.
+a ohne Prüfung als „Wert ohne Einfluss von x“ ausgeben. Liegt x = 0 außerhalb der Daten, braucht die Deutung eine fachliche Begründung wie bei der Rüstzeit; fehlt sie oder kommt ein unsinniger Wert heraus (etwa ein negativer Umsatz), a nur als Rechenwert bezeichnen.
 
 ### Merksatz
 b ist die Botschaft, a nur der Startpunkt der Geraden.
