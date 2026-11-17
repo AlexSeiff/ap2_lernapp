@@ -887,10 +887,10 @@ Mehr: Deep Dive 9, 4.2 · Deep Dive 9, 5.4
 <!-- id: gradient-boosting · quellen: DD6 8.3 · stand: 2026-11 -->
 
 Ensemble-Verfahren, bei dem Entscheidungsbäume nacheinander trainiert werden und jeder neue Baum die Fehler der bisherigen Bäume ausgleicht; XGBoost ist eine verbreitete, schnelle Umsetzung.
-Auch: XGBoost, Boosting
+Auch: Boosting; XGBoost ist eine verbreitete Umsetzung
 
 ### Erklärung
-Start mit einer einfachen Vorhersage (z. B. dem Mittelwert). Dann: Residuum $r = y - \hat{y}$ je Fall berechnen, einen kleinen Baum auf diese Residuen trainieren und seine Vorhersage gedämpft addieren: $\hat{y}_{neu} = \hat{y}_{alt} + \eta \cdot h(x)$. Dabei ist $y$ der wahre Wert, $\hat{y}$ die bisherige Vorhersage, $h(x)$ die Ausgabe des neuen Baums und $\eta$ (eta) die Lernrate, z. B. 0,1. Das wird für viele Runden wiederholt. **Random Forest** trainiert viele unabhängige, tiefe Bäume parallel und mittelt (senkt die Varianz); **Boosting** trainiert flache Bäume nacheinander (senkt den Bias). Weil Boosting leicht überanpasst, werden Lernrate, Baumtiefe und Rundenzahl abgestimmt, oft mit Early Stopping. XGBoost ergänzt eine eingebaute Regularisierung, geht mit fehlenden Werten um und rechnet parallel. Bei tabellarischen Daten gehört es zu den stärksten Verfahren, ist aber – wie der Random Forest – kaum erklärbar.
+Start mit einer einfachen Vorhersage (z. B. dem Mittelwert). Dann: Residuum $r = y - \hat{y}$ je Fall berechnen (bei der Regression mit quadratischem Fehler; allgemein ist es der negative Gradient der Verlustfunktion), einen kleinen Baum auf diese Residuen trainieren und seine Vorhersage gedämpft addieren: $\hat{y}_{neu} = \hat{y}_{alt} + \eta \cdot h(x)$. Dabei ist $y$ der wahre Wert, $\hat{y}$ die bisherige Vorhersage, $h(x)$ die Ausgabe des neuen Baums und $\eta$ (eta) die Lernrate, z. B. 0,1. Das wird für viele Runden wiederholt. **Random Forest** trainiert viele unabhängige, tiefe Bäume parallel und mittelt (senkt die Varianz); **Boosting** trainiert flache Bäume nacheinander (senkt den Bias). Weil Boosting leicht überanpasst, werden Lernrate, Baumtiefe und Rundenzahl abgestimmt, oft mit Early Stopping. XGBoost ergänzt eine eingebaute Regularisierung, geht mit fehlenden Werten um und rechnet parallel. Bei tabellarischen Daten gehört es zu den stärksten Verfahren, ist aber – wie der Random Forest – nicht mehr als einzelne Regel lesbar.
 
 ### Beispiel
 Reparaturdauer in Minuten für vier Aufträge: 40, 60, 80, 120. Start: Mittelwert 75 für alle. Residuen: −35, −15, +5, +45. Ein Baum mit einer Teilung (Aufträge 1–2 gegen 3–4) sagt die mittleren Residuen voraus: $\frac{-35 - 15}{2} = -25$ und $\frac{5 + 45}{2} = +25$. Mit $\eta = 0{,}5$: neue Vorhersagen $75 + 0{,}5 \cdot (-25) = 62{,}5$ (Aufträge 1–2) und $75 + 0{,}5 \cdot 25 = 87{,}5$ (Aufträge 3–4). Neue Residuen: −22,5; −2,5; −7,5; +32,5. Mittlerer quadratischer Fehler: vorher $\frac{1.225 + 225 + 25 + 2.025}{4} = 875$, nachher $\frac{506{,}25 + 6{,}25 + 56{,}25 + 1.056{,}25}{4} = 406{,}25$. Die nächste Runde würde erneut auf die Residuen trainieren.
@@ -918,7 +918,7 @@ SQL-Befehle der Data Control Language (DCL): GRANT vergibt Rechte an Benutzer od
 Auch: GRANT, REVOKE, DCL, Data Control Language
 
 ### Erklärung
-Form wie im Anhang der IHK-Prüfung (MySQL): `GRANT recht ON objekt TO benutzer | rolle [WITH GRANT OPTION]` und `REVOKE recht ON objekt FROM benutzer | rolle`. Rechte sind z. B. `SELECT`, `INSERT`, `UPDATE`, `DELETE`. Das Objekt ist `*.*` (alle Datenbanken), `datenbank.*` (alle Objekte einer Datenbank) oder `datenbank.tabelle`. Eine **Rolle** bündelt Rechte (`CREATE ROLE …`), und `GRANT rolle TO benutzer` – ohne ON – weist sie zu; das setzt RBAC und Least Privilege um. `WITH GRANT OPTION` erlaubt dem Empfänger, das Recht weiterzugeben. Mit einer View begrenzt man zusätzlich Spalten und Zeilen, die ein Recht freigibt.
+Form wie in MySQL: `GRANT recht ON objekt TO benutzer | rolle [WITH GRANT OPTION]` und `REVOKE recht ON objekt FROM benutzer | rolle`. Rechte sind z. B. `SELECT`, `INSERT`, `UPDATE`, `DELETE`. Das Objekt ist `*.*` (alle Datenbanken), `datenbank.*` (alle Objekte einer Datenbank) oder `datenbank.tabelle`. Eine **Rolle** bündelt Rechte (`CREATE ROLE …`), und `GRANT rolle TO benutzer` – ohne ON – weist sie zu; das setzt RBAC und Least Privilege um. `WITH GRANT OPTION` erlaubt dem Empfänger, das Recht weiterzugeben. Mit einer View begrenzt man zusätzlich Spalten und Zeilen, die ein Recht freigibt.
 
 Dialekt: Hier nur als Konzept – SQLite hat keine Benutzerverwaltung, GRANT und REVOKE lassen sich im SQL-Editor der App nicht ausführen. Auch die Schreibweise der Benutzer (`'name'@'%'`) ist MySQL-spezifisch.
 
@@ -929,9 +929,10 @@ CREATE ROLE controlling;
 GRANT SELECT ON moebelhaus.bestellung TO controlling;
 GRANT SELECT ON moebelhaus.bestellposition TO controlling;
 GRANT controlling TO 'analyst'@'%';
+SET DEFAULT ROLE controlling TO 'analyst'@'%';
 REVOKE SELECT ON moebelhaus.bestellposition FROM controlling;
 ```
-Die Rolle `controlling` darf Bestellungen nur lesen, nicht ändern; der Benutzer `analyst` erbt das über die Rolle. Nach dem REVOKE sieht die Rolle die Positionen nicht mehr.
+Die Rolle `controlling` darf Bestellungen nur lesen, nicht ändern; der Benutzer `analyst` erbt das über die Rolle. In MySQL muss die Rolle dafür zusätzlich aktiviert werden (`SET DEFAULT ROLE` bzw. `SET ROLE`); erst dann gelten die Rechte. Nach dem REVOKE sieht die Rolle die Positionen nicht mehr.
 
 ### Abgrenzung
 | Gruppe | Befehle | Wirkung |

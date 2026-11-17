@@ -405,7 +405,7 @@ Die Grundlage gilt je Zweck und muss vorab feststehen und dokumentiert sein (Ver
 | Lieferadresse für die Sofalieferung | lit. b Vertrag |
 | Newsletter an Kundinnen | lit. a Einwilligung |
 | Rechnungen aufbewahren | lit. c rechtliche Verpflichtung |
-| automatische Betrugsprüfung bei Bestellungen | lit. f berechtigtes Interesse |
+| Betrugsprüfung bei Bestellungen (bei Ablehnung mit menschlicher Prüfung) | lit. f berechtigtes Interesse |
 
 ### Abgrenzung
 Die **Rechtmäßigkeit** (Art. 6) beantwortet „Darf ich die Daten überhaupt verarbeiten?“, die **TOM** (Art. 32) „Wie schütze ich sie dabei?“. Die Seite **Rechtsgrundlagen** meint dagegen das Ausbildungsrecht (BBiG, Ausbildungsordnung).
@@ -704,7 +704,7 @@ Auch: L1-Regularisierung, L2-Regularisierung, Lasso, Ridge
 Statt nur den Fehler zu minimieren, minimiert das Training $J(w) = \text{Fehler}(w) + \lambda \cdot \text{Strafe}(w)$. Dabei ist $\text{Fehler}(w)$ der Trainingsfehler (z. B. der mittlere quadratische Fehler), $w_j$ sind die Gewichte und $\lambda \ge 0$ die Stärke der Regularisierung (ein Hyperparameter). **L2 (Ridge)** nutzt die Strafe $\sum_j w_j^2$ und verkleinert alle Gewichte, ohne sie auf genau null zu setzen. **L1 (Lasso)** nutzt $\sum_j \lvert w_j \rvert$ und setzt unwichtige Gewichte auf null – das wirkt wie eine automatische Merkmalsauswahl. $\lambda = 0$ bedeutet keine Regularisierung; ein zu großes $\lambda$ erzeugt Underfitting. Die Merkmale müssen skaliert sein, weil die Strafe sonst Merkmale mit kleinen Zahlenwerten benachteiligt. Weitere Formen: Dropout bei neuronalen Netzen, Pruning bei Bäumen.
 
 ### Beispiel
-Lineare Regression für die Reparaturdauer mit drei Gewichten, $\lambda = 0{,}5$, Trainingsfehler (MSE) 20. Ohne Regularisierung ist $w = (4; -3; 2)$. L2-Strafe: $16 + 9 + 4 = 29$, also $J = 20 + 0{,}5 \cdot 29 = 34{,}5$. L1-Strafe: $4 + 3 + 2 = 9$, also $J = 20 + 0{,}5 \cdot 9 = 24{,}5$. Die regularisierte Lösung $w = (3; -2; 1)$ hat einen etwas höheren Trainingsfehler von 22, aber L2-Strafe $9 + 4 + 1 = 14$: $J = 22 + 0{,}5 \cdot 14 = 29$. Das Training bevorzugt sie (29 < 34,5): ein minimal schlechterer Fit auf den Trainingsdaten gegen ein einfacheres, stabileres Modell.
+Lineare Regression für die Reparaturdauer mit drei Gewichten, $\lambda = 0{,}5$, Trainingsfehler (MSE) 20. Ohne Regularisierung ist $w = (4; -3; 2)$. L2-Strafe: $16 + 9 + 4 = 29$, also $J = 20 + 0{,}5 \cdot 29 = 34{,}5$. Die Lösung $w = (3; -2; 1)$ hat einen etwas höheren Trainingsfehler von 22, aber L2-Strafe $9 + 4 + 1 = 14$: $J = 22 + 0{,}5 \cdot 14 = 29$. Das Training bevorzugt sie (29 < 34,5): ein minimal schlechterer Fit auf den Trainingsdaten gegen ein einfacheres, stabileres Modell. Bei L1 würden dieselben Gewichte mit den Beträgen bestraft (Summe $4 + 3 + 2 = 9$ gegen $3 + 2 + 1 = 6$).
 
 ### Abgrenzung
 | | L1 (Lasso) | L2 (Ridge) |
@@ -1515,11 +1515,11 @@ Mehr: Deep Dive 12, Teil 2
 ## ROUND
 <!-- id: round · quellen: Karte DD1, DD9 2.1, DD31 4.2 · stand: 2026-11 -->
 
-SQL-Funktion, die eine Zahl kaufmännisch auf eine angegebene Zahl von Nachkommastellen rundet: `ROUND(x, n)`.
+SQL-Funktion, die eine Zahl (üblicherweise kaufmännisch) auf eine angegebene Zahl von Nachkommastellen rundet: `ROUND(x, n)`.
 Auch: ROUND-Funktion, Runden in SQL
 
 ### Erklärung
-`ROUND(x)` rundet auf eine ganze Zahl, `ROUND(x, 2)` auf zwei Nachkommastellen. Kaufmännisch heißt: Ab 5 wird aufgerundet, auch bei negativen Zahlen weg von null (2,5 → 3, −2,5 → −3). Gerundet wird nur das Ergebnis der Abfrage, die gespeicherten Werte bleiben unverändert – erst `UPDATE … SET preis = ROUND(…)` ändert sie. Man rundet **zuletzt**, nach der ganzen Rechnung (`ROUND(SUM(…), 2)`); wer Zwischenergebnisse rundet, summiert Rundungsfehler auf. Ist der Wert NULL, ist auch das Ergebnis NULL.
+`ROUND(x)` rundet auf eine ganze Zahl, `ROUND(x, 2)` auf zwei Nachkommastellen. Kaufmännisch heißt: Ab 5 wird aufgerundet, auch bei negativen Zahlen weg von null (2,5 → 3, −2,5 → −3). Das gilt für exakte Dezimalzahlen; bei Fließkommazahlen (FLOAT, REAL) kann die Binärdarstellung oder das System (z. B. PostgreSQL mit `double precision`: zur geraden Zahl) ein anderes Ergebnis liefern. Gerundet wird nur das Ergebnis der Abfrage, die gespeicherten Werte bleiben unverändert – erst `UPDATE … SET preis = ROUND(…)` ändert sie. Man rundet **zuletzt**, nach der ganzen Rechnung (`ROUND(SUM(…), 2)`); wer Zwischenergebnisse rundet, summiert Rundungsfehler auf. Ist der Wert NULL, ist auch das Ergebnis NULL.
 
 Dialekt: In MySQL, PostgreSQL und Oracle rundet ein negatives n vor dem Komma (`ROUND(1234.567, -2)` = 1200); SQLite kennt das nicht und liefert hier 1235. Außerdem liefert SQLite immer eine Kommazahl (REAL).
 
@@ -1531,7 +1531,7 @@ FROM produkt;
 Ergebnis: Bürostuhl Comfort 296,31 · Schreibtisch Basic 474,81 · Monitor 27 Zoll 224,91 · Dockingstation 153,51 · Schreibtischlampe 47,48. Die Lampe zeigt die Rundung: 39,90 · 1,19 = 47,481 → 47,48.
 
 ### Abgrenzung
-`ROUND` rundet zum nächsten Wert, `CAST(2.7 AS INTEGER)` schneidet die Nachkommastellen ab (2,7 → 2, `ROUND(2.7)` → 3). Eine bloße Formatierung der Anzeige (z. B. `FORMAT` in MySQL) ändert den Zahlenwert nicht und erzeugt Text.
+`ROUND` rundet zum nächsten Wert, `CAST(2.7 AS INTEGER)` ergibt in SQLite und SQL Server 2 (abgeschnitten), `ROUND(2.7)` dagegen 3; MySQL, PostgreSQL und Oracle runden beim CAST ebenfalls auf 3. Wer abschneiden will, nutzt `FLOOR` bzw. `TRUNC`. Eine bloße Formatierung der Anzeige (z. B. `FORMAT` in MySQL) ändert den Zahlenwert nicht und erzeugt Text.
 
 ### Prüfungsfalle
 Ganzzahldivision: `ROUND(5 / 2)` liefert 2, weil schon `5 / 2` mit zwei ganzen Zahlen auf 2 abgeschnitten wird (SQLite, SQL Server; MySQL rechnet hier 2,5). Mindestens ein Operand muss eine Kommazahl sein: `ROUND(5 * 1.0 / 2)` = 3.

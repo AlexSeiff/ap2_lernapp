@@ -495,7 +495,7 @@ SQL-Klausel, die das Ergebnis nach einer oder mehreren Spalten oder Ausdrücken 
 Auch: ASC, DESC
 
 ### Erklärung
-ORDER BY steht am Ende der Abfrage (nur LIMIT kommt danach) und wird nach dem SELECT ausgeführt – deshalb darf es als einzige Klausel die Aliase aus dem SELECT verwenden. Bei mehreren Kriterien sortiert das erste, jedes weitere nur bei Gleichstand; `ASC`/`DESC` gilt **je Kriterium einzeln**. Statt eines Namens geht auch die Spaltennummer (`ORDER BY 2`), das ist aber fehleranfällig. Ohne ORDER BY ist die Reihenfolge der Zeilen **nicht garantiert**. Datumsangaben im Format `JJJJ-MM-TT` sortieren als Text richtig, Zahlen, die als Text gespeichert sind, nicht (`'10'` kommt vor `'9'`).
+ORDER BY steht am Ende der Abfrage (nur LIMIT kommt danach) und wird nach dem SELECT ausgeführt – deshalb darf es nach Standard-SQL als einzige Klausel die Aliase aus dem SELECT verwenden (MySQL erlaubt sie zusätzlich in GROUP BY und HAVING, SQLite auch in WHERE; innerhalb von Ausdrücken meist nicht). Bei mehreren Kriterien sortiert das erste, jedes weitere nur bei Gleichstand; `ASC`/`DESC` gilt **je Kriterium einzeln**. Statt eines Namens geht auch die Spaltennummer (`ORDER BY 2`), das ist aber fehleranfällig. Ohne ORDER BY ist die Reihenfolge der Zeilen **nicht garantiert**. Datumsangaben im Format `JJJJ-MM-TT` sortieren als Text richtig, Zahlen, die als Text gespeichert sind, nicht (`'10'` kommt vor `'9'`).
 
 NULL: SQLite und MySQL behandeln NULL als kleinsten Wert (bei `ASC` zuerst, bei `DESC` zuletzt), Oracle und PostgreSQL als größten. `NULLS FIRST` bzw. `NULLS LAST` legt es fest (SQLite ab 3.30, PostgreSQL, Oracle; nicht MySQL).
 

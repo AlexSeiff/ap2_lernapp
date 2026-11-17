@@ -96,7 +96,7 @@ Die Schichtenarchitektur oben (Staging → Core-DWH → Data Marts) entspricht d
 
 ## 3.1 Die drei Phasen
 
-**E – Extract:** Daten aus den Quellsystemen lesen. Varianten: **Vollextraktion** (alles) oder **Deltaextraktion** (nur Änderungen seit dem letzten Lauf – schneller, aber setzt Änderungskennzeichen oder Zeitstempel voraus). Meist nachts, um die Quellsysteme nicht zu belasten. Die Änderungen erkennt man über eine Zeitstempelspalte, Trigger oder – am saubersten – das Transaktionsprotokoll der Datenbank (**Change Data Capture, CDC**): Es liefert Einfügungen, Änderungen **und Löschungen** als Ereignisstrom, bei Zeitstempeln bleiben Löschungen unbemerkt.
+**E – Extract:** Daten aus den Quellsystemen lesen. Varianten: **Vollextraktion** (alles) oder **Deltaextraktion** (nur Änderungen seit dem letzten Lauf – schneller, aber setzt Änderungskennzeichen oder Zeitstempel voraus). Meist nachts, um die Quellsysteme nicht zu belasten. Die Änderungen erkennt man über eine Zeitstempelspalte, Trigger oder – am saubersten – das Transaktionsprotokoll der Datenbank (**Change Data Capture, CDC**): Es liefert Einfügungen, Änderungen **und Löschungen** als Ereignisstrom, bei Zeitstempeln bleiben physische Löschungen unbemerkt.
 
 **T – Transform:** Der eigentliche Arbeitsschritt. Typische Aufgaben:
 - **Bereinigen:** fehlende Werte behandeln, Dubletten entfernen, Ausreißer prüfen
@@ -268,7 +268,7 @@ Roll-up heißt auch **Drill-up** (Verdichten). Merkhilfe Slice/Dice: Slice schne
 
 Der Begriff **Lakehouse** bezeichnet Ansätze, die Flexibilität des Data Lake mit den Struktur- und Qualitätsgarantien des DWH verbinden. Technisch liegen die Daten in günstigem Objektspeicher in offenen Dateiformaten (z. B. Parquet); ein Tabellenformat wie Delta Lake oder Apache Iceberg ergänzt Transaktionen (ACID), Schemaprüfung und Versionierung. Häufig werden die Daten dabei in Stufen veredelt: Rohdaten → bereinigt → auswertungsfertig (oft „Bronze/Silver/Gold" genannt) – das entspricht der Idee Staging → Core → Data Mart.
 
-Diese **Medallion-Architektur** im Einzelnen: **Bronze** = Rohdaten unverändert mit Quelle und Ladezeit (bleiben als Ausgangspunkt erhalten); **Silver** = bereinigt und vereinheitlicht (Dubletten entfernt, Schlüssel harmonisiert, fehlerhafte Sätze in Quarantäne); **Gold** = fachlich aufbereitet für Berichte und Modelle (Kennzahlen, Star-Schema). **Delta Lake** speichert die Tabellen als Parquet-Dateien mit Versionsprotokoll: ACID-Transaktionen, Schemaprüfung (Schema Evolution nur, wenn ausdrücklich erlaubt) und Zeitreise zu früheren Ständen. Ein **Data Catalog** (durchsuchbares Verzeichnis der Metadaten mit Bedeutung, Verantwortlichem, Schutzklasse und Lineage) hält den See auffindbar und verhindert den Data Swamp.
+Diese **Medallion-Architektur** im Einzelnen: **Bronze** = Rohdaten unverändert mit Quelle und Ladezeit (bleiben als Ausgangspunkt erhalten, solange Aufbewahrung und Datenschutz es erlauben); **Silver** = bereinigt und vereinheitlicht (Dubletten entfernt, Schlüssel harmonisiert, fehlerhafte Sätze in Quarantäne); **Gold** = fachlich aufbereitet für Berichte und Modelle (Kennzahlen, Star-Schema). **Delta Lake** speichert die Tabellen als Parquet-Dateien mit Versionsprotokoll: ACID-Transaktionen, Schemaprüfung (Schema Evolution nur, wenn ausdrücklich erlaubt) und Zeitreise zu früheren Ständen. Ein **Data Catalog** (durchsuchbares Verzeichnis der Metadaten mit Bedeutung, Verantwortlichem, Schutzklasse und Lineage) hält den See auffindbar und verhindert den Data Swamp.
 
 ## 5.2 Die 5 V von Big Data
 

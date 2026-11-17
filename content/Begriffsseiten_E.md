@@ -62,7 +62,7 @@ Mehr: Deep Dive 7, 1.2 · Deep Dive 6, 9.4
 Maß dafür, wie groß ein Effekt, Unterschied oder Zusammenhang tatsächlich ist – unabhängig davon, wie groß die Stichprobe war.
 
 ### Erklärung
-Der p-Wert beantwortet „Ist es wahrscheinlich kein Zufall?“, die Effektgröße „Wie groß ist der Effekt?“. Typische Maße sind der Korrelationskoeffizient r, das Bestimmtheitsmaß R² (erklärter Anteil) und für den Vergleich zweier Mittelwerte **Cohens d**: $d = \frac{\bar{x}_1 - \bar{x}_2}{s}$ mit s als gemeinsamer Standardabweichung innerhalb der Gruppen. Als grobe Faustregel gelten d ≈ 0,2 klein, 0,5 mittel, 0,8 groß; die Grenzen unterscheiden sich je nach Quelle und Fachgebiet. Ebenso wichtig ist der absolute Effekt in der Praxis (Minuten, Euro, Prozentpunkte): Lohnt sich ein Effekt, hängt von Kosten und Nutzen ab. Die erwartete Effektgröße braucht man auch, um vorab die nötige Stichprobengröße zu planen.
+Der p-Wert beantwortet „Wäre ein so deutliches Ergebnis allein durch Zufall plausibel?“, die Effektgröße „Wie groß ist der Effekt?“. Typische Maße sind der Korrelationskoeffizient r, das Bestimmtheitsmaß R² (erklärter Anteil) und für den Vergleich zweier Mittelwerte **Cohens d**: $d = \frac{\bar{x}_1 - \bar{x}_2}{s}$ mit s als gemeinsamer Standardabweichung innerhalb der Gruppen. Als grobe Faustregel gelten d ≈ 0,2 klein, 0,5 mittel, 0,8 groß; die Grenzen unterscheiden sich je nach Quelle und Fachgebiet. Ebenso wichtig ist der absolute Effekt in der Praxis (Minuten, Euro, Prozentpunkte): Lohnt sich ein Effekt, hängt von Kosten und Nutzen ab. Die erwartete Effektgröße braucht man auch, um vorab die nötige Stichprobengröße zu planen.
 
 ### Beispiel
 Zwei Lieferrouten, Streuung innerhalb der Routen s = 10 min: Route A im Mittel 62 min, Route B 58 min. Der Effekt ist $d = \frac{62 - 58}{10} = 0{,}4$ – klein bis mittel. Näherungsweise mit einem z-Test (zweiseitig):
@@ -74,7 +74,7 @@ Derselbe Effekt (d = 0,4, vier Minuten) – nur die Stichprobe unterscheidet sic
 ### Abgrenzung
 | Kennzahl | Frage |
 |---|---|
-| p-Wert / Signifikanz | Ist der Effekt wahrscheinlich echt? |
+| p-Wert / Signifikanz | Lässt sich der Effekt durch Zufall erklären? |
 | Effektgröße | Wie groß ist er? |
 | Konfidenzintervall | Wie genau ist er geschätzt? |
 
@@ -82,7 +82,7 @@ Derselbe Effekt (d = 0,4, vier Minuten) – nur die Stichprobe unterscheidet sic
 Aus „hochsignifikant“ auf einen großen Effekt schließen (siehe Signifikanz) – oder aus „nicht signifikant“ auf „kein Effekt“: bei kleiner Stichprobe fehlt oft nur die Teststärke.
 
 ### Merksatz
-Der p-Wert sagt, ob; die Effektgröße sagt, wie viel.
+Der p-Wert sagt, ob Zufall als Erklärung ausreicht; die Effektgröße sagt, wie viel.
 
 Siehe auch: Signifikanz · P-Wert · Korrelationskoeffizient nach Pearson · Bestimmtheitsmaß · Hypothesentest · Fehler 2. Art · Konfidenzintervall
 Mehr: Deep Dive 4, 1.2 · Deep Dive 4, 1.3
@@ -853,7 +853,7 @@ Grenze für den Score oder die Wahrscheinlichkeit eines Klassifikators, ab der e
 Auch: Decision Threshold
 
 ### Erklärung
-Verfahren wie die logistische Regression oder ein Random Forest (Anteil der Bäume) liefern zunächst einen Score $p$ zwischen 0 und 1. Die Regel lautet: $p \ge t$ → positiv, sonst negativ, mit $t$ als Entscheidungsschwelle. **Senkt** man $t$, wird häufiger Alarm gegeben: Der Recall steigt (weniger FN), die Precision sinkt (mehr FP). **Erhöht** man $t$, ist es umgekehrt. Jede Schwelle ergibt eine eigene Konfusionsmatrix; die ROC-Kurve zeigt alle Schwellen auf einmal. Sind die Scores gut kalibrierte Wahrscheinlichkeiten und verursachen nur FN und FP Kosten, liegt die kostenoptimale Schwelle bei $t^* = \frac{K_{FP}}{K_{FP} + K_{FN}}$ mit $K_{FP}$ = Kosten je Fehlalarm und $K_{FN}$ = Kosten je übersehenem Fall. Bei Fehlerkosten von 15 € (FP) und 120 € (FN) ist $t^* = \frac{15}{15 + 120} = 11{,}1\ \%$. Die Schwelle wird auf Validierungsdaten gewählt, nicht auf den Testdaten.
+Verfahren wie die logistische Regression oder ein Random Forest (Anteil der Bäume) liefern zunächst einen Score $p$ zwischen 0 und 1. Die Regel lautet: $p \ge t$ → positiv, sonst negativ, mit $t$ als Entscheidungsschwelle. **Senkt** man $t$, wird häufiger Alarm gegeben: Der Recall steigt oder bleibt gleich (weniger FN), die Precision sinkt in der Regel (mehr FP). **Erhöht** man $t$, ist es umgekehrt. Jede Schwelle ergibt eine eigene Konfusionsmatrix; die ROC-Kurve zeigt alle Schwellen auf einmal. Sind die Scores gut kalibrierte Wahrscheinlichkeiten und verursachen nur FN und FP Kosten, liegt die kostenoptimale Schwelle bei $t^* = \frac{K_{FP}}{K_{FP} + K_{FN}}$ mit $K_{FP}$ = Kosten je Fehlalarm und $K_{FN}$ = Kosten je übersehenem Fall. Bei Fehlerkosten von 15 € (FP) und 120 € (FN) ist $t^* = \frac{15}{15 + 120} = 11{,}1\ \%$. Die Schwelle wird auf Validierungsdaten gewählt, nicht auf den Testdaten.
 
 ### Beispiel
 Zehn Aufträge der Möbelhaus Nordholz GmbH mit Modell-Score und tatsächlichem Ergebnis (R = Reklamation): 0,90 R · 0,80 R · 0,65 nein · 0,55 R · 0,45 nein · 0,40 R · 0,35 nein · 0,25 nein · 0,15 nein · 0,10 nein. Vier Reklamationen, sechs ohne. Fehlerkosten: FN 120 €, FP 15 €.
@@ -864,7 +864,7 @@ Zehn Aufträge der Möbelhaus Nordholz GmbH mit Modell-Score und tatsächlichem 
 | 0,4 | 4 | 2 | 0 | 4 | 4/6 = 67 % | 4/4 = 100 % | 0·120 + 2·15 = 30 € |
 | 0,3 | 4 | 3 | 0 | 3 | 4/7 = 57 % | 4/4 = 100 % | 0·120 + 3·15 = 45 € |
 
-Die Standardschwelle 0,5 ist hier die teuerste; bei 0,4 werden alle Reklamationen gefunden, ohne dass die Fehlalarme die Ersparnis auffressen. Bei 0,3 kommt nur noch ein Fehlalarm hinzu, die Kosten steigen wieder.
+Die Standardschwelle 0,5 ist unter diesen drei Schwellen die teuerste; bei 0,4 werden alle Reklamationen gefunden, ohne dass die Fehlalarme die Ersparnis auffressen. Bei 0,3 kommt nur noch ein Fehlalarm hinzu, die Kosten steigen wieder. Die Formel $t^*$ gilt nur für kalibrierte Wahrscheinlichkeiten; die Scores dieses Beispiels sind das nicht, deshalb wird die Schwelle hier direkt aus den Kosten der getesteten Werte gewählt (günstigste getestete Schwelle: 0,4).
 
 ### Abgrenzung
 Die **AUC** ist schwellenunabhängig, **Precision**, **Recall** und **Accuracy** gelten immer nur für eine bestimmte Schwelle. Die Schwelle ist ein Betriebsparameter, kein Lernergebnis – anders als ein Gewicht wird sie nicht trainiert, sondern festgelegt.

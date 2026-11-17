@@ -920,7 +920,7 @@ Gegenannahme (H1) zur Nullhypothese: die Behauptung, die man belegen möchte –
 H0 und H1 schließen sich aus und werden **vor** dem Test formuliert. Eine **ungerichtete** (zweiseitige) H1 behauptet nur „es gibt einen Unterschied“ ($\mu_1 \neq \mu_2$), eine **gerichtete** (einseitige) eine Richtung ($\mu_1 < \mu_2$). Die Richtung darf nicht erst nach einem Blick auf die Daten gewählt werden. Entscheidung: Ist $p < \alpha$, wird H0 verworfen und die Daten sprechen für H1. Sonst wird H0 beibehalten – das heißt „nicht widerlegt“, nicht „bewiesen“.
 
 ### Beispiel
-Das Möbelhaus testet eine neue Lieferroute. H0: „Die mittlere Lieferzeit ist unverändert.“ H1 (einseitig): „Die mittlere Lieferzeit ist kürzer.“ Ergibt der Test p = 0,02 bei α = 0,05, wird H0 verworfen – die Verkürzung gilt als statistisch gesichert. Wäre H1 zweiseitig („Lieferzeit ist anders“), wäre auch eine Verlängerung ein Treffer.
+Das Möbelhaus testet eine neue Lieferroute. H0: „Die mittlere Lieferzeit ist unverändert.“ H1 (einseitig): „Die mittlere Lieferzeit ist kürzer.“ Ergibt der Test p = 0,02 bei α = 0,05, wird H0 verworfen – die Verkürzung ist statistisch signifikant, die Daten sprechen für H1. Wäre H1 zweiseitig („Lieferzeit ist anders“), wäre auch eine Verlängerung ein Treffer.
 
 ### Abgrenzung
 | | Nullhypothese H0 | Alternativhypothese H1 |

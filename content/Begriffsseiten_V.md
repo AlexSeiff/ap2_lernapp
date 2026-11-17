@@ -948,7 +948,7 @@ Hier geht es um die **Datenschutz-Seite** (Stand 2026). Wer Kameras betreibt, br
 
 | Anforderung | Was heißt das bei Kameras? |
 |---|---|
-| **Rechtsgrundlage** | meist berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO (z. B. Schutz vor Diebstahl, Hausrecht) nach einer Interessenabwägung; für öffentlich zugängliche Räume ergänzt § 4 BDSG die Regeln |
+| **Rechtsgrundlage** | meist berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO (z. B. Schutz vor Diebstahl, Hausrecht) nach einer Interessenabwägung; § 4 BDSG gilt nur für öffentliche Stellen und ist für private Betreiber nicht die Rechtsgrundlage; bei Beschäftigten kommt § 26 BDSG hinzu |
 | **Erforderlichkeit** | Gibt es ein milderes Mittel (Beleuchtung, Zutrittskontrolle, Personal)? Erst dann Kameras |
 | **Zweckbindung** | Zweck vorher festlegen und nicht für andere Zwecke nutzen (z. B. keine Leistungskontrolle) |
 | **Datenminimierung** | nur den nötigen Bildausschnitt erfassen, Nachbargrundstücke und Privatbereiche ausblenden; bei Bildanalyse nur die relevante Region speichern |

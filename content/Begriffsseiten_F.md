@@ -240,7 +240,7 @@ Auch: Fehler erster Art, Typ-I-Fehler
 α legt man vor dem Test fest, meist 5 %. Würde man 100-mal einen nicht vorhandenen Effekt testen, wäre er im Schnitt 5-mal „signifikant“. Das Risiko wächst bei **Mehrfachtests**: Bei k unabhängigen Tests ist die Wahrscheinlichkeit für mindestens einen Fehlalarm $1 - (1 - \alpha)^k$. Gegenmaßnahmen: strengeres α, Korrektur für Mehrfachtests (z. B. Bonferroni: α geteilt durch k) und Ergebnisse an neuen Daten bestätigen. In der Konfusionsmatrix entspricht der Fehler 1. Art dem **falsch positiven** Fall.
 
 ### Beispiel
-Das Möbelhaus prüft 20 Merkmale (Wochentag, Filiale, Lieferweg …) auf einen Zusammenhang mit der Reklamationsquote, α = 5 %. Gibt es in Wahrheit keinen einzigen, liegt die Wahrscheinlichkeit für mindestens einen Zufallstreffer bei $1 - 0{,}95^{20} = 1 - 0{,}358 = 0{,}642$, also rund 64 %. Ein einzelner „signifikanter“ Treffer unter 20 Tests ist daher kein Beleg.
+Das Möbelhaus prüft 20 Merkmale (Wochentag, Filiale, Lieferweg …) auf einen Zusammenhang mit der Reklamationsquote, α = 5 %. Gibt es in Wahrheit keinen einzigen, liegt die Wahrscheinlichkeit für mindestens einen Zufallstreffer bei $1 - 0{,}95^{20} = 1 - 0{,}358 = 0{,}642$, also rund 64 %. Ein einzelner „signifikanter“ Treffer unter 20 Tests ist daher ohne Korrektur kein belastbarer Beleg (Bonferroni: nur $p < 0{,}05 / 20 = 0{,}0025$ zählt).
 
 ### Abgrenzung
 | | Fehler 1. Art | Fehler 2. Art |

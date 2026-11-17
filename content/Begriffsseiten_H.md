@@ -105,9 +105,9 @@ Einwegfunktion, die aus beliebigen Daten einen Wert fester Länge berechnet, der
 
 ### Erklärung
 Schon eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert; so fallen Manipulationen auf. SHA-256 liefert z. B. immer 256 Bit (64 Hexadezimalzeichen). Eine gute kryptografische Hashfunktion ist
-- **preimage-resistent:** Aus dem Hash lässt sich die Eingabe nicht berechnen (Einweg),
+- **preimage-resistent:** Aus dem Hash lässt sich die Eingabe praktisch nicht berechnen (Einweg),
 - **second-preimage-resistent:** Zu einer gegebenen Eingabe findet man keine zweite mit demselben Hash,
-- **kollisionsresistent:** Man findet überhaupt keine zwei verschiedenen Eingaben mit gleichem Hash.
+- **kollisionsresistent:** Es ist praktisch nicht möglich, zwei verschiedene Eingaben mit gleichem Hash zu finden (mathematisch gibt es Kollisionen immer, sie sind nur nicht auffindbar).
 
 Bei MD5 und SHA-1 sind Kollisionen praktisch erzeugbar – sie gelten für Sicherheitszwecke als unsicher.
 
@@ -237,7 +237,7 @@ Mehr: Deep Dive 17, 6.9 · Deep Dive 11, A1
 Die Streuung der Residuen einer Regression ist nicht konstant, sondern ändert sich systematisch mit x oder ŷ – im Residuenplot typisch als Trichter.
 
 ### Erklärung
-Häufige Ursachen: Größenordnung (große Filialen schwanken absolut stärker als kleine), eine fehlende Einflussgröße oder eine falsche Modellform. Die geschätzte Gerade bleibt dabei im Mittel richtig, aber Standardfehler, p-Werte und Konfidenzintervalle der Koeffizienten werden unzuverlässig, und Prognosen sind nicht überall gleich genau. Gegenmaßnahmen: die Zielgröße transformieren (z. B. logarithmieren, sodass Fehler relativ statt absolut werden), gewichtete Regression, robuste Standardfehler oder das Modell um fehlende Einflussgrößen erweitern. Erkennen: Residuen über ŷ oder x auftragen; ein Trichter oder eine Welle zeigt das Problem.
+Häufige Ursachen: Größenordnung (große Filialen schwanken absolut stärker als kleine), eine fehlende Einflussgröße oder eine falsche Modellform. Die geschätzte Gerade bleibt dabei im Mittel richtig, aber Standardfehler, p-Werte und Konfidenzintervalle der Koeffizienten werden unzuverlässig, und Prognosen sind nicht überall gleich genau. Gegenmaßnahmen: die Zielgröße transformieren (z. B. logarithmieren, sodass Fehler relativ statt absolut werden), gewichtete Regression, robuste Standardfehler oder das Modell um fehlende Einflussgrößen erweitern. Erkennen: Residuen über ŷ oder x auftragen; ein Trichter (die Streuung wird größer oder kleiner) zeigt das Problem. Eine Welle oder Kurve zeigt dagegen eine nichtlineare Beziehung, ein Muster über die Zeit Autokorrelation.
 
 ### Beispiel
 Umsatzprognose für fünf Filialen: Der Prognosefehler wächst mit der Größe.
@@ -601,13 +601,13 @@ Bisherige Reparaturdauer: μ₀ = 60 min, σ = 10 min. Nach Einführung einer Ch
 - $z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{56 - 60}{10 / \sqrt{25}} = \frac{-4}{2} = -2{,}0$
 - Kritischer Wert (einseitig, 5 %): −1,645. Da −2,0 < −1,645, ist $p \approx 0{,}023 < 0{,}05$ → H0 wird verworfen.
 
-Deutung: Die Verkürzung ist statistisch gesichert. Ob 4 Minuten (rund 7 %; Effektgröße d = 0,4) den Aufwand der Checkliste lohnen, ist eine fachliche Frage.
+Deutung: Die Verkürzung ist statistisch signifikant, also kaum durch Zufall erklärbar (bei α = 5 % bleibt ein Restrisiko für einen Fehler 1. Art). Ob 4 Minuten (rund 7 %; Effektgröße d = 0,4) den Aufwand der Checkliste lohnen, ist eine fachliche Frage.
 
 ### Abgrenzung
 Ein **Konfidenzintervall** liefert dieselbe Information aus anderer Sicht: einen Wertebereich für den wahren Wert. Ein **A/B-Test** ist die Anwendung eines Hypothesentests auf zwei Varianten. Der **p-Wert** ist nur ein Zwischenergebnis des Tests.
 
 ### Prüfungsfalle
-Den p-Wert als Wahrscheinlichkeit lesen, dass H0 stimmt (er ist die Wahrscheinlichkeit der Daten unter H0), „nicht verworfen“ als Beweis für H0 nehmen oder α nachträglich passend wählen.
+Den p-Wert als Wahrscheinlichkeit lesen, dass H0 stimmt (er ist die Wahrscheinlichkeit, unter H0 ein mindestens so extremes Ergebnis zu erhalten), „nicht verworfen“ als Beweis für H0 nehmen oder α nachträglich passend wählen.
 
 ### Merksatz
 Wie vor Gericht: Im Zweifel gilt H0 – verurteilt wird nur bei klarer Beweislage (p < α).

@@ -435,7 +435,7 @@ SQL-Anweisung (DML), die neue Zeilen in eine Tabelle einfügt.
 Auch: INSERT INTO
 
 ### Erklärung
-Zwei Formen: `INSERT INTO tabelle (spalten) VALUES (werte), …` mit festen Werten und `INSERT INTO tabelle (spalten) SELECT …`, das Zeilen aus einer Abfrage übernimmt (z. B. in eine Archivtabelle). Spaltenliste und Werte müssen nach Anzahl, Reihenfolge und Datentyp zusammenpassen; Text und Datum stehen in einfachen Anführungszeichen. Nicht genannte Spalten erhalten ihren `DEFAULT`-Wert oder NULL – bei einer `NOT NULL`-Spalte ohne Default ist das ein Fehler. Die Datenbank prüft alle Constraints (Primärschlüssel, UNIQUE, CHECK, Fremdschlüssel); wird einer verletzt, wird die **gesamte Anweisung abgelehnt**. Mehrere Zeilen in einer Anweisung (`VALUES (…), (…)`) kennen SQLite und MySQL.
+Zwei Formen: `INSERT INTO tabelle (spalten) VALUES (werte), …` mit festen Werten und `INSERT INTO tabelle (spalten) SELECT …`, das Zeilen aus einer Abfrage übernimmt (z. B. in eine Archivtabelle). Spaltenliste und Werte müssen nach Anzahl, Reihenfolge und Datentyp zusammenpassen; Text und Datum stehen in einfachen Anführungszeichen. Nicht genannte Spalten erhalten ihren `DEFAULT`-Wert oder NULL – bei einer `NOT NULL`-Spalte ohne Default ist das ein Fehler. Die Datenbank prüft alle Constraints (Primärschlüssel, UNIQUE, CHECK, Fremdschlüssel); wird einer verletzt, wird die **gesamte Anweisung abgelehnt**. Mehrere Zeilen in einer Anweisung (`VALUES (…), (…)`) kennen SQLite und MySQL. SQLite prüft Fremdschlüssel nur, wenn `PRAGMA foreign_keys = ON` gesetzt ist (in der App der Fall).
 
 ### Beispiel
 ```sql
@@ -614,7 +614,7 @@ Mehr: Deep Dive 11, A5
 ## Interpolation
 <!-- id: interpolation · quellen: Karte DD4, DD4 2.2 · stand: 2026-11 -->
 
-Schätzung eines Werts innerhalb des beobachteten Wertebereichs der Einflussgröße – im Unterschied zur Extrapolation außerhalb davon, daher deutlich verlässlicher.
+Schätzung eines Werts innerhalb des beobachteten Wertebereichs der Einflussgröße – im Unterschied zur Extrapolation außerhalb davon, daher meist verlässlicher.
 
 ### Erklärung
 Bei einer Regression setzt du ein x ein, das zwischen dem kleinsten und größten beobachteten x liegt. Auch ein fehlender Wert zwischen zwei Nachbarn lässt sich so schätzen; bei der **linearen Interpolation** liegt er auf der Geraden zwischen den Nachbarpunkten: $y = y_1 + \frac{x - x_1}{x_2 - x_1} \cdot (y_2 - y_1)$. Das nutzen auch Tabellenwerkzeuge, etwa bei Quartilen (QUARTILE.INKL). Verlässlich ist das aber nur, wenn der Bereich dicht mit Daten belegt ist und der Zusammenhang dort glatt verläuft; große Datenlücken und starke Streuung bleiben Unsicherheiten.

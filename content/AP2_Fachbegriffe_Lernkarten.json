@@ -318,7 +318,7 @@
         {
           "id": "FB-delete-from",
           "frage": "DELETE FROM",
-          "antwort": "SQL-Anweisung (DML), die Zeilen einer Tabelle löscht; ohne WHERE alle Zeilen, die Tabelle bleibt bestehen und das Löschen lässt sich per ROLLBACK zurücknehmen (anders als TRUNCATE und DROP).",
+          "antwort": "SQL-Anweisung (DML), die Zeilen einer Tabelle löscht; ohne WHERE alle Zeilen, die Tabelle bleibt bestehen. In einer Transaktion lässt sich das Löschen per ROLLBACK zurücknehmen; TRUNCATE und DROP sind DDL und je nach System (z. B. MySQL, Oracle) nicht per ROLLBACK umkehrbar.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -348,7 +348,7 @@
         {
           "id": "FB-round",
           "frage": "ROUND",
-          "antwort": "SQL-Funktion ROUND(x, n): rundet kaufmännisch auf n Nachkommastellen; rundet nur das Abfrageergebnis, nicht die gespeicherten Daten.",
+          "antwort": "SQL-Funktion ROUND(x, n): rundet auf n Nachkommastellen (üblicherweise kaufmännisch); rundet nur das Abfrageergebnis, nicht die gespeicherten Daten.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -368,7 +368,7 @@
         {
           "id": "FB-concat",
           "frage": "CONCAT",
-          "antwort": "SQL-Funktion zum Verketten von Texten (Standard-Operator: ||); bei NULL verhalten sich die Systeme verschieden, || liefert NULL.",
+          "antwort": "SQL-Funktion zum Verketten von Texten (Standard-Operator: ||); bei NULL verhalten sich die Systeme verschieden, || liefert meist NULL (Oracle: nicht).",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -2826,7 +2826,7 @@
         {
           "id": "FB-dimensionsreduktion",
           "frage": "Dimensionsreduktion",
-          "antwort": "Unüberwachte Verfahren, die viele Merkmale zu wenigen verdichten oder auswählen, ohne viel Information zu verlieren – z. B. PCA; verringert Spalten, nicht Zeilen.",
+          "antwort": "Verfahren, die viele Merkmale zu wenigen verdichten oder auswählen (meist unüberwacht), ohne viel Information zu verlieren – z. B. PCA; verringert Spalten, nicht Zeilen.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -3196,7 +3196,7 @@
         {
           "id": "FB-entscheidungsschwelle",
           "frage": "Entscheidungsschwelle",
-          "antwort": "Grenze für den Score eines Klassifikators, ab der ein Fall als positiv gilt (meist 0,5, aber änderbar). Senken: mehr Recall, weniger Precision; Wahl nach den Fehlerkosten.",
+          "antwort": "Grenze für den Score eines Klassifikators, ab der ein Fall als positiv gilt (meist 0,5, aber änderbar). Senken: Recall steigt oder bleibt gleich, Precision sinkt meist; Wahl nach den Fehlerkosten.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -3686,7 +3686,7 @@
         {
           "id": "FB-change-data-capture",
           "frage": "Change Data Capture (CDC)",
-          "antwort": "Technik, die Änderungen (Einfügen, Ändern, Löschen) in einer Quelldatenbank erkennt und als Änderungsstrom weitergibt – meist über das Transaktionsprotokoll; erkennt im Gegensatz zu Zeitstempeln auch Löschungen.",
+          "antwort": "Technik, die Änderungen (Einfügen, Ändern, Löschen) in einer Quelldatenbank erkennt und als Änderungsstrom weitergibt – meist über das Transaktionsprotokoll; erkennt im Gegensatz zu reinen Zeitstempeln auch physische Löschungen.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -8671,7 +8671,7 @@
         {
           "id": "FB-sperren",
           "frage": "Sperren (Locking)",
-          "antwort": "Mechanismus zur Koordination gleichzeitiger Zugriffe: Lesesperren sind parallel möglich, Schreibsperren sind exklusiv; gesperrt wird je nach Granularität Zeile, Tabelle oder mehr – bis zum Ende der Transaktion.",
+          "antwort": "Mechanismus zur Koordination gleichzeitiger Zugriffe: Lesesperren sind parallel möglich, Schreibsperren sind exklusiv; gesperrt wird je nach Granularität Zeile, Tabelle oder mehr; Schreibsperren gelten bis zum Ende der Transaktion, Lesesperren je nach Isolationsstufe kürzer oder bis dahin.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [

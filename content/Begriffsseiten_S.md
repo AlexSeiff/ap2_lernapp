@@ -51,7 +51,7 @@ Mehr: Deep Dive 10, 4.2
 Formel, mit der man bedingte Wahrscheinlichkeiten umkehrt: Aus P(B | A) wird P(A | B) berechnet – unter Einbeziehung der Ausgangshäufigkeit von A.
 
 ### Erklärung
-$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$ mit $P(B) = P(B \mid A) \cdot P(A) + P(B \mid \bar{A}) \cdot P(\bar{A})$. P(A) ist die Ausgangswahrscheinlichkeit (Basisrate, Prävalenz), P(A | B) die aktualisierte Wahrscheinlichkeit nach der Beobachtung B. Kernaussage: Ist A selten, sind selbst bei einem guten Test die meisten Alarme Fehlalarme (**Basisratenfehler**, wenn man das ignoriert). Auf dieselbe Weise hängen Recall und Precision zusammen. Der Naive-Bayes-Klassifikator im Machine Learning nutzt den Satz mit der vereinfachenden Annahme unabhängiger Merkmale.
+$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$ mit $P(B) = P(B \mid A) \cdot P(A) + P(B \mid \bar{A}) \cdot P(\bar{A})$. P(A) ist die Ausgangswahrscheinlichkeit (Basisrate, Prävalenz), P(A | B) die aktualisierte Wahrscheinlichkeit nach der Beobachtung B. Kernaussage: Ist A selten, sind selbst bei einem guten Test die meisten Alarme Fehlalarme (**Basisratenfehler**, wenn man das ignoriert). Auf dieselbe Weise hängen Recall und Precision zusammen. Der Naive-Bayes-Klassifikator im Machine Learning nutzt den Satz mit der vereinfachenden Annahme, dass die Merkmale bei bekannter Klasse voneinander unabhängig sind.
 
 ### Beispiel
 Im Kundenimport sind 2 % der Datensätze fehlerhaft. Eine Prüfregel schlägt bei 90 % der fehlerhaften an (Recall) und fälschlich bei 5 % der fehlerfreien (Falsch-Positiv-Rate). Wie wahrscheinlich ist ein Datensatz fehlerhaft, wenn die Regel anschlägt?
@@ -221,7 +221,7 @@ Quellsysteme ändern sich: Der Onlineshop liefert plötzlich eine neue Spalte. M
 Plattformen wie Delta Lake oder Iceberg lehnen Schreibzugriffe mit abweichendem Schema standardmäßig ab (Schemaprüfung) und erlauben Änderungen nur, wenn man sie ausdrücklich zulässt (Schema Evolution). Bewährt sind Schema-Versionen, Kompatibilitätsregeln, Tests und eine Information an alle Abnehmer.
 
 ### Beispiel
-Der Webshop der Möbelhaus Nordholz GmbH ergänzt die Spalte `versandart`. Bei strenger Schemaprüfung bricht der nächtliche Ladelauf ab. Mit erlaubter Schema Evolution wird die Spalte in der Zieltabelle ergänzt; die 180.000 bereits geladenen Zeilen haben dort NULL. Würde der Shop `preis` von Euro in Cent umstellen, wäre das eine verändernde Änderung: Der Lauf liefe durch, die Zahlen wären aber falsch.
+Der Webshop der Möbelhaus Nordholz GmbH ergänzt die Spalte `versandart`. Bei strenger Schemaprüfung bricht der nächtliche Ladelauf ab. Mit erlaubter Schema Evolution wird die Spalte in der Zieltabelle ergänzt; die 180.000 bereits geladenen Zeilen haben dort NULL. Würde der Shop dagegen `preis` von Euro in Cent umstellen, ändert sich das Schema gar nicht (gleicher Name, gleicher Typ): Der Lauf liefe durch, die Zahlen wären aber falsch – so etwas fängt nur eine Datenqualitätsprüfung (Plausibilität, Abstimmsummen) ab, nicht die Schemaprüfung.
 
 ### Abgrenzung
 **Schema-on-Write** prüft das Schema beim Laden, **Schema-on-Read** erst beim Lesen. Die **Historisierung** (Slowly Changing Dimensions) bewahrt alte **Inhalte** einer Dimension, Schema Evolution ändert die **Struktur** der Tabelle.
@@ -1088,7 +1088,7 @@ Ein Signifikanztest geht von der **Nullhypothese** aus („kein Zusammenhang“,
 Bei 2 Mio. Kundendatensätzen ist die Korrelation zwischen Alter und Warenkorbwert mit r = 0,03 hochsignifikant (p < 0,001). Praktisch ist sie bedeutungslos: $R^2 = 0{,}03^2 = 0{,}0009$, das Alter erklärt rund 0,1 % der Streuung.
 
 ### Abgrenzung
-**Signifikanz** beantwortet „Ist der Effekt wahrscheinlich echt?“, die **Stärke** (r, R²) „Wie groß ist er?“. Bei sehr großen Datenmengen wird fast alles signifikant, bei sehr kleinen kann selbst ein auffälliges r Zufall sein.
+**Signifikanz** beantwortet „Lässt sich der Effekt durch Zufall erklären?“, die **Stärke** (r, R²) „Wie groß ist er?“. Bei sehr großen Datenmengen wird fast alles signifikant, bei sehr kleinen kann selbst ein auffälliges r Zufall sein.
 
 ### Prüfungsfalle
 „Signifikant, also ist der Zusammenhang stark bzw. ursächlich“ – beides folgt nicht.
@@ -1366,7 +1366,7 @@ Mehr: Deep Dive 16, 2.4
 Synthetic Minority Over-sampling Technique: Oversampling-Verfahren, das für die seltene Klasse künstliche Datensätze zwischen vorhandenen Fällen und ihren nächsten Nachbarn erzeugt.
 
 ### Erklärung
-Bei unausgeglichenen Klassen lernt ein Modell die seltene Klasse schlecht. Statt Fälle der Minderheit einfach zu kopieren, wählt SMOTE zu einem Fall einen seiner k nächsten Nachbarn aus derselben Klasse und erzeugt einen neuen Punkt auf der Verbindungsstrecke dazwischen: $x_{neu} = x + \lambda \cdot (x_{Nachbar} - x)$. Dabei ist $x$ der Ausgangsfall, $x_{Nachbar}$ der gewählte Nachbar und $\lambda$ eine Zufallszahl zwischen 0 und 1 (0 ergibt den Ausgangsfall, 1 den Nachbarn; die Rechnung gilt für jedes Merkmal einzeln). So entstehen neue, ähnliche, aber nicht identische Fälle. Weil die Nachbarn über Abstände gesucht werden, müssen die Merkmale skaliert sein; kategoriale Merkmale benötigen eine angepasste Variante. SMOTE wird nur auf die Trainingsdaten angewendet – und zwar nach dem Train-Test-Split.
+Bei unausgeglichenen Klassen lernt ein Modell die seltene Klasse schlecht. Statt Fälle der Minderheit einfach zu kopieren, wählt SMOTE zu einem Fall einen seiner k nächsten Nachbarn aus derselben Klasse und erzeugt einen neuen Punkt auf der Verbindungsstrecke dazwischen: $x_{neu} = x + \lambda \cdot (x_{Nachbar} - x)$. Dabei ist $x$ der Ausgangsfall, $x_{Nachbar}$ der gewählte Nachbar und $\lambda$ eine Zufallszahl zwischen 0 und 1 (0 ergibt den Ausgangsfall, 1 den Nachbarn; die Rechnung wird für jedes Merkmal mit demselben λ ausgeführt). So entstehen neue, ähnliche, aber nicht identische Fälle. Weil die Nachbarn über Abstände gesucht werden, müssen die Merkmale skaliert sein; kategoriale Merkmale benötigen eine angepasste Variante. SMOTE wird nur auf die Trainingsdaten angewendet – und zwar nach dem Train-Test-Split.
 
 ### Beispiel
 Im Reklamationsmodell sind 10 % der Aufträge reklamiert. Zwischen einem reklamierten Auftrag mit 3 Tagen Lieferzeit und seinem Nachbarn mit 5 Tagen entsteht bei $\lambda = 0{,}6$ ein synthetischer Fall mit $3 + 0{,}6 \cdot (5 - 3) = 4{,}2$ Tagen. Die Testmenge behält ihre reale Verteilung.
@@ -1758,12 +1758,12 @@ Korrelationsmaß r_s zwischen −1 und +1, das nicht mit den Messwerten, sondern
 Auch: Rangkorrelation nach Spearman, Rangkorrelationskoeffizient
 
 ### Erklärung
-Vorgehen: Die Werte jedes Merkmals in eine Rangfolge bringen (kleinster Wert = Rang 1), je Merkmalsträger die Rangdifferenz d bilden, einsetzen:
+Vorgehen: Die Werte jedes Merkmals in eine Rangfolge bringen (z. B. kleinster Wert = Rang 1; beide Merkmale werden in dieselbe Richtung gerankt), je Merkmalsträger die Rangdifferenz d bilden, einsetzen:
 $r_s = 1 - \frac{6 \cdot \sum d^2}{n \cdot (n^2 - 1)}$.
 Gleiche Werte (Bindungen) erhalten den Mittelwert ihrer Rangplätze; die Kurzformel gilt dann nur näherungsweise (exakt: Pearson-r auf den Rängen). Gedeutet wird $r_s$ wie Pearsons r: Vorzeichen = Richtung, Betrag = Stärke. Weil nur die Reihenfolge zählt, ist Spearman robust gegen Ausreißer und erfasst auch gekrümmte, aber stets steigende oder fallende Zusammenhänge. Auch ein hohes $r_s$ ist kein Kausalitätsbeleg.
 
 ### Beispiel
-Fünf Filialen, Rangfolge nach Kundenzufriedenheit (Schulnotenranking) und nach Umsatz:
+Fünf Filialen, Rangfolge nach Kundenzufriedenheit (Rang 1 = zufriedenste Filiale) und nach Umsatz (Rang 1 = höchster Umsatz):
 
 | Filiale | A | B | C | D | E |
 |---|---|---|---|---|---|
@@ -1825,12 +1825,12 @@ Mechanismus, mit dem ein Datenbanksystem gleichzeitige Zugriffe koordiniert, ind
 ### Erklärung
 **Sperrarten:** Eine **Lesesperre** (shared) erlaubt anderen weiteres Lesen, aber kein Schreiben. Eine **Schreibsperre** (exclusive) ist ausschließlich: Andere dürfen die Daten weder mit Sperre lesen noch schreiben.
 
-| gehalten \ angefordert | Lesen | Schreiben |
+| gehalten \ angefordert | Lesesperre | Schreibsperre |
 |---|---|---|
 | Lesesperre | möglich | wartet |
 | Schreibsperre | wartet | wartet |
 
-**Granularität:** gesperrt werden kann eine Zeile, eine Seite, die Tabelle oder die Datenbank. Feine Sperren erlauben viel Parallelität, kosten aber Verwaltungsaufwand; grobe sind billig, lassen andere länger warten. Üblicherweise werden Sperren bis zum Ende der Transaktion (COMMIT oder ROLLBACK) gehalten. Höhere Isolationsstufen sperren mehr oder länger; manche Systeme arbeiten zusätzlich mit Versionen (MVCC), damit Leser Schreiber nicht blockieren. Risiken: Wartezeiten und **Deadlocks**.
+**Granularität:** gesperrt werden kann eine Zeile, eine Seite, die Tabelle oder die Datenbank. Feine Sperren erlauben viel Parallelität, kosten aber Verwaltungsaufwand; grobe sind billig, lassen andere länger warten. Schreibsperren werden bis zum Ende der Transaktion (COMMIT oder ROLLBACK) gehalten, Lesesperren je nach Isolationsstufe kürzer oder bis dahin. Höhere Isolationsstufen sperren mehr oder länger. Systeme mit MVCC (Versionen) lassen normale Lesezugriffe trotz Schreibsperre zu: Sie lesen die letzte bestätigte Version. Risiken: Wartezeiten und **Deadlocks**.
 
 ### Beispiel
 Zwei Disponenten ändern den Bestand in der Tabelle `lager` mit 5.000 Artikeln. Bei einer Zeilensperre blockiert Disponent 1 nur Artikel 10; Disponent 2 kann Artikel 11 ungestört ändern. Bei einer Tabellensperre müsste er auf alle 5.000 Artikel warten.
@@ -1842,7 +1842,7 @@ Zwei Disponenten ändern den Bestand in der Tabelle `lager` mit 5.000 Artikeln. 
 Annehmen, eine Lesesperre blockiere andere Leser. Mehrere Lesesperren sind gleichzeitig möglich; ein Schreiber muss warten.
 
 ### Merksatz
-Fein sperren erlaubt Parallelität, grob sperren spart Aufwand – gehalten wird bis zum Transaktionsende.
+Fein sperren erlaubt Parallelität, grob sperren spart Aufwand – Schreibsperren gelten bis zum Transaktionsende.
 
 Siehe auch: Pessimistisches Sperren · Optimistisches Sperren · Deadlock · Transaktion · Isolationsstufen · Lost Update
 Mehr: Deep Dive 15, 4.2

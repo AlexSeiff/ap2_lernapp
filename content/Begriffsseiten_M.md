@@ -616,7 +616,7 @@ Schichtenmodell in Lakehouse-Plattformen: Daten werden stufenweise von roh (Bron
 ### Erklärung
 | Stufe | Inhalt | Typische Schritte |
 |---|---|---|
-| Bronze | Rohdaten unverändert wie geliefert, mit Quelle und Ladezeit | nur anhängen, nichts löschen |
+| Bronze | Rohdaten unverändert wie geliefert (keine fachliche Bereinigung), mit Quelle und Ladezeit | nur anhängen; Löschfristen und Löschanträge gelten auch hier |
 | Silver | bereinigt und vereinheitlicht | Dubletten entfernen, Typen und Formate angleichen, Schlüssel harmonisieren, fehlerhafte Sätze in Quarantäne |
 | Gold | fachlich aufbereitet für Berichte und Modelle | aggregieren, Kennzahlen berechnen, Star-Schema und Data Marts |
 
@@ -629,7 +629,7 @@ Kassenbons der Möbelhaus Nordholz GmbH: Bronze enthält 180.000 Positionen roh.
 Die Medaillen beschreiben den **Veredelungsgrad**, nicht die Wichtigkeit oder eine Schutzklasse. Die **Medallion-Architektur** ist ein Muster im Lakehouse; **ETL** ist der Prozess, der zwischen den Stufen arbeitet.
 
 ### Prüfungsfalle
-Die Bronze-Schicht nach der Bereinigung löschen. Sie bleibt als unveränderte Quelle erhalten, damit sich Fehler korrigieren und Regeln später neu anwenden lassen.
+Die Bronze-Schicht nach der Bereinigung löschen. Sie bleibt als unveränderte Quelle erhalten, damit sich Fehler korrigieren und Regeln später neu anwenden lassen – aber nur, solange Aufbewahrung und Datenschutz es erlauben.
 
 ### Merksatz
 Bronze bewahrt, Silver putzt, Gold liefert.
@@ -973,7 +973,8 @@ An der Warenausgabe der Möbelhaus Nordholz GmbH (Samstag, lange Schlangen):
 | Zeitmessung | Dauer je Abholung von „Abholschein vorgelegt“ bis „Ware übergeben“ stoppen |
 | Interview | Mitarbeiter der Warenausgabe nach Engpässen fragen |
 | Fragebogen | Kunden an der Ausfahrt kurz zur Wartezeit befragen |
-| Dokumentenanalyse | Scannerprotokolle (Uhrzeit jeder Abholung) auswerten |
+| Dokumentenanalyse | Arbeitsanweisung und Abholschein-Formular auf Abweichungen prüfen |
+| Systemdaten | Scannerprotokolle (Uhrzeit jeder Abholung) auswerten |
 | Selbstaufschreibung | Mitarbeiter notieren eine Woche lang ihre Unterbrechungen |
 
 ### Abgrenzung

@@ -706,7 +706,7 @@ Mehr: Deep Dive 13, 3.4
 R²: Anteil der Streuung der Zielgröße y, den das Regressionsmodell erklärt.
 
 ### Erklärung
-Allgemein gilt $R^2 = 1 - \frac{\sum e^2}{S_{yy}}$ (unerklärte durch gesamte Streuung). Auf den Trainingsdaten liegt R² zwischen 0 und 1, auf Testdaten kann es negativ werden, wenn das Modell schlechter ist als der Mittelwert (Fehlerquadratsumme größer als $S_{yy}$). Bei der einfachen linearen Regression gilt $R^2 = r^2$. Ein hohes R² beweist weder Kausalität noch Prognosefähigkeit außerhalb des beobachteten Bereichs.
+Allgemein gilt $R^2 = 1 - \frac{\sum e^2}{S_{yy}}$ (unerklärte durch gesamte Streuung). Auf den Trainingsdaten liegt R² einer Kleinste-Quadrate-Regression mit Achsenabschnitt zwischen 0 und 1, auf Testdaten kann es negativ werden, wenn das Modell schlechter ist als der Mittelwert (Fehlerquadratsumme größer als $S_{yy}$). Bei der einfachen linearen Regression gilt $R^2 = r^2$. Ein hohes R² beweist weder Kausalität noch Prognosefähigkeit außerhalb des beobachteten Bereichs.
 
 **Mehrere Einflussgrößen:** Mit jeder zusätzlichen Variablen sinkt R² auf den Trainingsdaten nie und steigt meist leicht, auch wenn die Variable nichts erklärt. Deshalb vergleicht man Modelle mit unterschiedlich vielen Einflussgrößen über das **korrigierte (adjustierte) R²**: $R^2_{\text{korr}} = 1 - (1 - R^2) \cdot \frac{n - 1}{n - k - 1}$ mit n = Zahl der Beobachtungen und k = Zahl der Einflussgrößen. Es sinkt, wenn eine neue Variable zu wenig beiträgt.
 

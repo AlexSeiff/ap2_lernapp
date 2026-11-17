@@ -131,7 +131,7 @@ Ein Token `xxxxx.yyyyy.zzzzz` enthält im Mittelteil `{"iss": "auth.nordholz.exa
 Vertrauliche Daten in ein JWT schreiben, weil es „sicher signiert“ ist – Base64url ist keine Verschlüsselung. Ebenso falsch: nur die Signatur prüfen und `exp`, `iss` und `aud` ignorieren.
 
 ### Merksatz
-JWT: lesbar für alle, fälschbar für niemanden – solange die Signatur geprüft wird.
+JWT: lesbar für alle, fälschbar nur mit dem Schlüssel – solange die Signatur geprüft wird.
 
 Siehe auch: JSON · REST · OAuth 2.0
 Mehr: Deep Dive 15, 3.3

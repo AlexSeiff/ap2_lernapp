@@ -60,19 +60,19 @@ CDC ist eine Technik, mit der sich die Deltaextraktion umsetzen lässt. Die Änd
 | Variante | Funktionsweise | Eigenschaft |
 |---|---|---|
 | log-basiert | liest das Transaktionsprotokoll der Datenbank | geringe Last auf der Quelle, erkennt auch Löschungen |
-| trigger-basiert | Trigger schreiben jede Änderung in eine Änderungstabelle | belastet die Quelle bei jeder Änderung |
-| zeitstempel-basiert | Abfrage auf eine Spalte wie „geändert_am“ | einfach, aber Löschungen bleiben unbemerkt |
+| trigger-basiert | Trigger schreiben jede Änderung in eine Änderungstabelle | belastet die Quelle bei jeder Änderung, erkennt auch Löschungen |
+| zeitstempel-basiert | Abfrage auf eine Spalte wie „geändert_am“ | einfach, aber physisch gelöschte Zeilen bleiben unbemerkt (außer bei Soft Delete) und Zwischenstände gehen verloren |
 
-Jedes Änderungsereignis enthält Art der Änderung, Zeitpunkt und betroffenen Datensatz (oft alter und neuer Wert). Typische Verwendung: DWH oder Data Lake aktuell halten, Systeme replizieren, Streaming-Auswertungen füttern. Zum Start braucht es einen vollständigen Ausgangsstand (Initial Load), danach genügen die Änderungen.
+Jedes Änderungsereignis enthält Art der Änderung, Zeitpunkt und betroffenen Datensatz (oft alter und neuer Wert). Typische Verwendung: DWH oder Data Lake aktuell halten, Systeme replizieren, Streaming-Auswertungen füttern. Zum Start braucht es einen vollständigen Ausgangsstand (Initial Load), danach genügen die Änderungen. Das Ziel muss auch die Lösch-Ereignisse anwenden, sonst bleiben veraltete Zeilen stehen.
 
 ### Beispiel
-Die Tabelle `bestellung` hat 400.000 Zeilen. An einem Tag werden 1.200 Zeilen neu angelegt oder geändert und 15 gelöscht. Die Vollextraktion liest 400.000 Zeilen. Eine zeitstempelbasierte Abfrage findet 1.200 Zeilen, übersieht aber die 15 Löschungen. Log-basiertes CDC liefert 1.215 Ereignisse, also nur $\frac{1215}{400000} \approx 0{,}3\,\%$ des Bestands – einschließlich der Löschungen.
+Die Tabelle `bestellung` hat 400.000 Zeilen. An einem Tag werden 1.200 Zeilen neu angelegt oder geändert und 15 gelöscht. Die Vollextraktion liest 400.000 Zeilen. Eine zeitstempelbasierte Abfrage findet 1.200 Zeilen, übersieht aber die 15 Löschungen. Log-basiertes CDC liefert 1.215 Ereignisse (bei höchstens einer Änderung je Zeile), also nur $\frac{1215}{400000} \approx 0{,}3\,\%$ des Bestands – einschließlich der Löschungen.
 
 ### Abgrenzung
 Die **Deltaextraktion** beschreibt das Ziel („nur Änderungen laden“), CDC eine Technik, mit der man die Änderungen findet. Die **Vollextraktion** liest immer alles.
 
 ### Prüfungsfalle
-Zeitstempel-basiert „alles erkannt“ annehmen – gelöschte Zeilen haben keinen neuen Zeitstempel und fehlen im Ziel weiter.
+Zeitstempel-basiert „alles erkannt“ annehmen – physisch gelöschte Zeilen haben keinen neuen Zeitstempel und bleiben im Ziel stehen.
 
 ### Merksatz
 CDC fragt nicht „wie sieht die Tabelle aus?“, sondern „was hat sich geändert?“.
@@ -197,14 +197,14 @@ Auch: Cloud-Datenbank, Datenspeicherung in der Cloud
 - **Laufende Kosten**, die mit Datenmenge und Abrufen wachsen (Bilddaten werden dauerhaft teuer).
 - **Angriffsfläche** über das Internet.
 
-**Datenschutz:** Der Cloud-Anbieter ist bei personenbezogenen Daten **Auftragsverarbeiter**; nötig ist ein Vertrag nach Art. 28 DSGVO. Liegen die Daten in einem Drittland, braucht man zusätzlich eine Grundlage für den Transfer, z. B. Standardvertragsklauseln. Verantwortlich bleibt das Unternehmen selbst. Typische Maßnahmen: Standort in der EU, Verschlüsselung (idealerweise mit eigenem Schlüssel), Rollen und Rechte, Protokollierung. Die Cloud kann auch Teil der Datensicherung sein, z. B. als externe Kopie der 3-2-1-Regel.
+**Datenschutz:** Der Cloud-Anbieter ist bei personenbezogenen Daten in der Regel **Auftragsverarbeiter**; nötig ist ein Vertrag nach Art. 28 DSGVO. Liegen die Daten in einem Drittland, braucht man zusätzlich eine Grundlage für den Transfer, z. B. Standardvertragsklauseln. Verantwortlich bleibt das Unternehmen selbst. Typische Maßnahmen: Standort in der EU, Verschlüsselung (idealerweise mit eigenem Schlüssel), Rollen und Rechte, Protokollierung. Die Cloud kann auch Teil der Datensicherung sein, z. B. als externe Kopie der 3-2-1-Regel.
 
 ### Beispiel
 In der Nordholz Manufaktur liegen die Messdaten der Klimasensoren und die Bilder des Kamerawagens in einer Cloud-Datenbank. Den Schutzbedarf bestimmt man je Schutzziel:
 
 | Schutzziel | Einstufung | Begründung |
 |---|---|---|
-| Verfügbarkeit | hoch | Messwerte laufen ständig ein; ein kurzer Ausfall lässt sich am Sensor überbrücken, ein langer führt zu Lücken |
+| Verfügbarkeit | normal | Kurze Ausfälle lassen sich am Sensor überbrücken; erst bei längerem Ausfall entstehen Lücken in der Messreihe |
 | Integrität | sehr hoch | Verfälschte Werte führen zu falsch getrockneten Chargen – Serienschäden |
 | Vertraulichkeit | normal | Klimawerte und Holzbilder, keine personenbezogenen Daten |
 
@@ -291,7 +291,7 @@ Bild: in jeder der vier Zeilen `0 0 1 1`. Filter (2 × 2): obere Zeile −1, 1; 
 
 Position links oben: $-1 \cdot 0 + 1 \cdot 0 + (-1) \cdot 0 + 1 \cdot 0 = 0$. Eine Spalte weiter: $-1 \cdot 0 + 1 \cdot 1 + (-1) \cdot 0 + 1 \cdot 1 = 2$. Noch eine Spalte weiter: $-1 \cdot 1 + 1 \cdot 1 + (-1) \cdot 1 + 1 \cdot 1 = 0$. Jede Zeile der Feature Map lautet `0 2 0` – der hohe Wert in der Mitte zeigt, wo die Kante liegt.
 
-Größenbeispiele bei einem 28 × 28-Bild und 3 × 3-Filter: Padding 0, Stride 1 → 26 × 26; Padding 1, Stride 1 → 28 × 28; Padding 0, Stride 2 → 13 × 13. Gewichte: Eine vollvernetzte Schicht mit 100 Neuronen braucht 784 · 100 = 78.400 Gewichte, 8 Filter à 3 × 3 (je ein Bias) nur 8 · (9 + 1) = 80 Parameter.
+Größenbeispiele bei einem 28 × 28-Bild und 3 × 3-Filter: Padding 0, Stride 1 → 26 × 26; Padding 1, Stride 1 → 28 × 28; Padding 0, Stride 2 → 13 × 13. Gewichte: Eine vollvernetzte Schicht mit 100 Neuronen braucht 784 · 100 + 100 = 78.500 Parameter (Gewichte und Bias), 8 Filter à 3 × 3 mit je einem Bias nur 8 · (9 + 1) = 80 Parameter.
 
 ### Abgrenzung
 | | Mehrschichtiges Perzeptron | CNN |
@@ -372,7 +372,7 @@ Auch: Verkettung, Zeichenkettenverkettung
 ### Erklärung
 Verkettet wird **innerhalb einer Zeile**: `CONCAT(name, ' (', ort, ')')` setzt Name und Ort zusammen. Feste Textteile stehen in einfachen Anführungszeichen, Leerzeichen und Trennzeichen muss man selbst einfügen. `CONCAT_WS(trenner, a, b, …)` setzt das Trennzeichen automatisch.
 
-NULL und Dialekt: Hier unterscheiden sich die Systeme. Der Standard-Operator `||` liefert bei einem NULL-Operanden **NULL**. `CONCAT` überspringt NULL in SQLite (ab 3.44), PostgreSQL und SQL Server, liefert in MySQL dagegen NULL. `CONCAT_WS` überspringt NULL. Portabel ist `COALESCE(ort, '')`. In MySQL ist `||` standardmäßig der ODER-Operator, dort also `CONCAT` verwenden.
+NULL und Dialekt: Hier unterscheiden sich die Systeme. Der Standard-Operator `||` liefert bei einem NULL-Operanden **NULL** (Ausnahme Oracle: dort wird NULL wie ein leerer Text behandelt). `CONCAT` überspringt NULL in SQLite (ab 3.44), PostgreSQL und SQL Server, liefert in MySQL dagegen NULL. `CONCAT_WS` überspringt NULL. Portabel ist `COALESCE(ort, '')`. In MySQL ist `||` standardmäßig der ODER-Operator, dort also `CONCAT` verwenden.
 
 ### Beispiel
 ```sql
@@ -386,10 +386,10 @@ SELECT 'a' || NULL AS mit_pipes, CONCAT('a', NULL, 'b') AS mit_concat;
 Ergebnis in SQLite: NULL und `ab` – dieselbe Aufgabe, zwei Ergebnisse.
 
 ### Abgrenzung
-`CONCAT` verbindet Texte **einer Zeile**. `GROUP_CONCAT` (SQLite, MySQL) bzw. `STRING_AGG` (Standard, PostgreSQL) verbindet die Werte **mehrerer Zeilen** einer Gruppe zu einem Text (Aggregatfunktion). `UNION` stapelt Zeilen untereinander und verkettet nichts.
+`CONCAT` verbindet Texte **einer Zeile**. `GROUP_CONCAT` (SQLite, MySQL), `STRING_AGG` (PostgreSQL, SQL Server, SQLite ab 3.44) bzw. `LISTAGG` (Standard, Oracle) verbindet die Werte **mehrerer Zeilen** einer Gruppe zu einem Text (Aggregatfunktion). `UNION` stapelt Zeilen untereinander und verkettet nichts.
 
 ### Prüfungsfalle
-Mit `+` verketten: In SQLite und MySQL addiert `+` Zahlen – `'a' + 'b'` ergibt 0, nicht „ab“ (nur SQL Server verkettet damit). Zweite Falle: eine NULL-Spalte in einer `||`-Kette macht das ganze Ergebnis NULL.
+Mit `+` verketten: In SQLite und MySQL addiert `+` Zahlen – `'a' + 'b'` ergibt 0, nicht „ab“ (nur SQL Server verkettet damit). Zweite Falle: eine NULL-Spalte in einer `||`-Kette macht das ganze Ergebnis NULL (nicht in Oracle).
 
 ### Merksatz
 Verketten mit CONCAT oder `||` – und NULL vorher mit COALESCE abfangen.

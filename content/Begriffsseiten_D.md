@@ -187,10 +187,10 @@ Mehr: Deep Dive 8, 5.1
 Datenleck beim Modellbau: Das Modell nutzt beim Training Informationen, die zum Zeitpunkt der echten Vorhersage nicht vorliegen würden oder aus den Testdaten stammen – die Testgüte fällt dadurch unrealistisch gut aus.
 
 ### Erklärung
-Es gibt zwei Hauptformen. **Target Leakage:** Ein Merkmal enthält die Antwort oder entsteht erst nach dem vorherzusagenden Ereignis (z. B. „Gutschrift erstellt“ bei der Vorhersage von Reklamationen). **Train-Test-Kontamination:** Informationen aus den Testdaten fließen ins Training, etwa wenn Skalierungswerte (Minimum, Maximum, Mittelwert) aus allen Daten berechnet, Resampling oder SMOTE vor dem Split angewendet, Dubletten in beiden Mengen gelassen oder bei Zeitreihen zufällig statt chronologisch geteilt wird. Warnzeichen sind auffällig gute Kennzahlen (Recall nahe 100 %) und ein Einbruch im Betrieb. Die Prüffrage für jedes Merkmal lautet: War diese Information zum Entscheidungszeitpunkt bereits bekannt? Die richtige Reihenfolge ist: zuerst aufteilen, dann Skalierung, Kodierung und Resampling nur aus den Trainingsdaten lernen und anschließend auf die Testdaten anwenden.
+Es gibt zwei Hauptformen. **Target Leakage:** Ein Merkmal enthält die Antwort oder entsteht erst nach dem vorherzusagenden Ereignis (z. B. „Gutschrift erstellt“ bei der Vorhersage von Reklamationen). **Train-Test-Kontamination:** Informationen aus den Testdaten fließen ins Training, etwa wenn Skalierungswerte (Minimum, Maximum, Mittelwert) aus allen Daten berechnet, Resampling oder SMOTE vor dem Split angewendet, Dubletten in beiden Mengen gelassen oder bei Zeitreihen zufällig statt chronologisch geteilt wird. Warnzeichen sind auffällig gute Kennzahlen (Recall nahe 100 %) und ein Einbruch im Betrieb. Die Prüffrage für jedes Merkmal lautet: War diese Information zum Entscheidungszeitpunkt bereits bekannt? Die richtige Reihenfolge ist: zuerst aufteilen. Skalierung und Kodierung werden nur aus den Trainingsdaten gelernt und dann unverändert auf die Testdaten angewendet. Resampling (Oversampling, SMOTE, Undersampling) verändert ausschließlich die Trainingsdaten – die Testdaten behalten ihre reale Klassenverteilung.
 
 ### Beispiel
-Das Reklamationsmodell der Möbelhaus Nordholz GmbH soll bei Auftragsabschluss das Risiko vorhersagen. Unter den Merkmalen steckt „Gutschrift erstellt (ja/nein)“, das erst nach einer Reklamation gesetzt wird. Auf den 1.000 Testaufträgen (100 Reklamationen) findet das Modell alle: TP = 100, FN = 0, FP = 0, TN = 900, also $\text{Recall} = \frac{100}{100 + 0} = 100\ \%$ und $\text{Precision} = \frac{100}{100 + 0} = 100\ \%$. Im Betrieb ist das Merkmal bei Auftragsabschluss immer „nein“; das Modell sagt nie „Reklamation“ voraus: TP = 0, FN = 100, Recall $= \frac{0}{0 + 100} = 0\ \%$, bei 90 % Accuracy. Das Ergebnis im Test war ein Trugbild.
+Das Reklamationsmodell der Möbelhaus Nordholz GmbH soll bei Auftragsabschluss das Risiko vorhersagen. Unter den Merkmalen steckt „Gutschrift erstellt (ja/nein)“, das erst nach einer Reklamation gesetzt wird. Auf den 1.000 Testaufträgen (100 Reklamationen) findet das Modell alle: TP = 100, FN = 0, FP = 0, TN = 900, also $\text{Recall} = \frac{100}{100 + 0} = 100\ \%$ und $\text{Precision} = \frac{100}{100 + 0} = 100\ \%$. Im Betrieb ist das Merkmal bei Auftragsabschluss immer „nein“. Verlässt sich das Modell fast nur darauf, sagt es kaum noch „Reklamation“ voraus – im Extremfall TP = 0, FN = 100, Recall $= \frac{0}{0 + 100} = 0\ \%$, bei 90 % Accuracy. Das Ergebnis im Test war ein Trugbild.
 
 ### Abgrenzung
 **Overfitting** zeigt sich schon im Test (große Lücke zu den Trainingsdaten); Data Leakage verdeckt sich im Test – dort sieht alles gut aus, der Fehler tritt erst im Betrieb auf. **Model Drift** entsteht später, weil sich die Realität ändert; Leakage ist von Anfang an ein Konstruktionsfehler.
@@ -745,7 +745,7 @@ Beide Prüfungen sichern die Datenqualität, fragen aber Verschiedenes:
 **Doppelerfassung:** Zwei Personen erfassen dieselben Daten unabhängig voneinander, abweichende Werte werden geklärt. Eine **Prüfsumme** zeigt, ob Daten bei der Übertragung unverändert geblieben sind.
 
 ### Beispiel
-Das Messgerät „HolzCheck“ der Nordholz Manufaktur liefert für eine Lagerbox die Holzfeuchte 12,4 %. Die Importprüfung (Validierung) lässt den Wert durch: Er ist eine Zahl und liegt im zulässigen Bereich von 6 bis 20 %. Ein Techniker misst mit einem zweiten Handgerät 17,2 % – die **Verifizierung** zeigt, dass der Sensor falsch misst. Der Wert war zulässig, aber nicht richtig.
+Das Messgerät „HolzCheck“ der Nordholz Manufaktur liefert für eine Lagerbox die Holzfeuchte 12,4 %. Die Importprüfung (Validierung) lässt den Wert durch: Er ist eine Zahl und liegt im zulässigen Bereich von 6 bis 20 %. Ein Techniker misst mit einem kalibrierten Referenzgerät 17,2 % – die **Verifizierung** zeigt, dass der Sensor falsch misst. Der Wert war zulässig, aber nicht richtig.
 
 ### Abgrenzung
 Mit „Validierung“ sind auch andere Dinge gemeint: **Valide** beim XML-Dokument heißt „entspricht dem Schema“, **Validierungsdaten** im maschinellen Lernen sind Daten zum Abstimmen eines Modells. Die **Plausibilitätsprüfung** ist eine Form der Validierung: Sie prüft, ob Werte zueinander passen.
@@ -1144,11 +1144,11 @@ Die erste Anweisung entfernt 1 Zeile (2 Schreibtischlampen), die zweite die Best
 ### Abgrenzung
 | Befehl | Gruppe | Wirkung |
 |---|---|---|
-| DELETE FROM | DML | löscht ausgewählte Zeilen (WHERE), per ROLLBACK umkehrbar |
-| TRUNCATE TABLE | DDL | leert die ganze Tabelle, kein WHERE |
-| DROP TABLE | DDL | entfernt Tabelle samt Struktur |
+| DELETE FROM | DML | löscht ausgewählte Zeilen (WHERE), in einer Transaktion per ROLLBACK umkehrbar |
+| TRUNCATE TABLE | DDL | leert die ganze Tabelle, kein WHERE; je nach System (z. B. MySQL, Oracle) nicht per ROLLBACK umkehrbar |
+| DROP TABLE | DDL | entfernt Tabelle samt Struktur; je nach System nicht per ROLLBACK umkehrbar |
 
-Dialekt: SQLite kennt kein TRUNCATE; dort leert `DELETE FROM tabelle` die Tabelle. Mit der HTTP-Methode DELETE (REST) hat der SQL-Befehl nur den Namen gemeinsam.
+Dialekt: SQLite kennt kein TRUNCATE; dort leert `DELETE FROM tabelle` die Tabelle. SQLite prüft Fremdschlüssel nur, wenn `PRAGMA foreign_keys = ON` gesetzt ist (in der App der Fall). Mit der HTTP-Methode DELETE (REST) hat der SQL-Befehl nur den Namen gemeinsam.
 
 ### Prüfungsfalle
 `DELETE FROM kunde;` ohne WHERE löscht alle Kunden. Und `DELETE FROM kunde WHERE kunden_id NOT IN (SELECT kunden_id FROM bestellung)` löscht nichts, sobald die Unterabfrage ein NULL enthält – dann NOT EXISTS verwenden.
@@ -1169,7 +1169,7 @@ Die Daten selbst liegen als Parquet-Dateien. Ein Protokoll hält jede Änderung 
 - **ACID-Transaktionen:** Ein Schreibvorgang gilt ganz oder gar nicht; Leser sehen nie halbfertige Stände. Gleichzeitige Schreiber werden per optimistischer Nebenläufigkeitskontrolle abgeglichen.
 - **Schemaprüfung:** Schreibversuche mit abweichendem Schema werden abgelehnt, solange man die Änderung nicht ausdrücklich erlaubt (siehe Schema Evolution).
 - **Zeitreise (Time Travel):** ältere Versionen abfragen oder die Tabelle auf einen früheren Stand zurücksetzen.
-- **UPDATE, DELETE und MERGE** auch auf Lake-Daten, z. B. für Korrekturen oder Löschanträge nach DSGVO.
+- **UPDATE, DELETE und MERGE** auch auf Lake-Daten, z. B. für Korrekturen. Für Löschanträge nach DSGVO reicht DELETE allein nicht: Die alten Dateien bleiben per Zeitreise lesbar, bis `VACUUM` sie nach der Aufbewahrungsfrist physisch entfernt (danach geht auch die Zeitreise zu diesen Ständen verloren).
 - Batch und Streaming können dieselbe Tabelle nutzen.
 
 Vergleichbare Tabellenformate sind Apache Iceberg und Apache Hudi.
@@ -1470,7 +1470,7 @@ Mehr: Deep Dive 10, 4.2
 ## Dimensionsreduktion
 <!-- id: dimensionsreduktion · quellen: DD6 2.2 · stand: 2026-11 -->
 
-Unüberwachte Verfahren, die viele Merkmale zu wenigen verdichten oder auf die wichtigsten beschränken, ohne den Großteil der Information zu verlieren.
+Verfahren, die viele Merkmale zu wenigen verdichten oder auf die wichtigsten beschränken (meist unüberwacht, z. B. PCA), ohne den Großteil der Information zu verlieren.
 
 ### Erklärung
 Viele Merkmale machen Modelle langsam und anfälliger für Overfitting; zudem verlieren Abstände in sehr vielen Dimensionen an Aussagekraft („Fluch der Dimensionalität“). Dimensionsreduktion hilft auch beim Visualisieren (z. B. auf zwei Achsen) und beim Bündeln stark korrelierter Merkmale. Zwei Wege: **Merkmalsauswahl** lässt Merkmale weg (z. B. eines von zwei fast identischen); **Merkmalsextraktion** bildet aus den alten Merkmalen neue, weniger zahlreiche – das bekannteste Verfahren ist die **PCA**. Der Preis: Neu gebildete Merkmale sind schwerer zu deuten. Vorher werden die Merkmale skaliert.
