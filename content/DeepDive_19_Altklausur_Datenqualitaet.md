@@ -245,7 +245,7 @@ Aktuell werden alle Anlieferer an den Rampen persönlich kontrolliert. Im Rahmen
 
 ## Block B – Automatisierte Etikettenerkennung (28 P)
 
-Eine Sicherheitsrichtlinie schreibt vor, dass nur **angemeldete Lieferungen** entladen werden dürfen. Sie entwickeln mit an einer automatisierten Prüfung am Wareneingang, die Kosten sparen und die Mitarbeiter entlasten soll.
+Eine Sicherheitsrichtlinie schreibt vor, dass nur **angemeldete Lieferungen** entladen werden dürfen. Sie entwickeln an einer automatisierten Prüfung am Wareneingang mit, die Kosten sparen und die Mitarbeiter entlasten soll.
 
 **B1 (4 P):** Nennen Sie für die Umsetzung der Richtlinie **zwei weitere Merkmale** und geben Sie an, wie diese bei der **erstmaligen Registrierung** einer Spedition überprüft werden können.
 

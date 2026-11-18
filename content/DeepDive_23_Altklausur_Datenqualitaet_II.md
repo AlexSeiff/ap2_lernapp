@@ -243,7 +243,7 @@ Hinweise:
 - Ist die Kostenstelle 0 oder negativ, wird die Kostenstelle 4100 (Küchenstudio) eingetragen.
 - Wochenstunden über 40 werden auf 40 begrenzt.
 - `importieren()` gibt die Anzahl der gespeicherten Mitarbeiter zurück.
-- Alle Attribute haben Getter und Setter, die im Klassendiagramm nicht dargestellt sind.
+- Alle Attribute haben Getter und Setter, die im obigen Auszug nicht aufgeführt sind.
 
 *Programmieren* Sie die Methode `importieren()` in Pseudocode oder einer Programmiersprache Ihrer Wahl.
 
