@@ -269,13 +269,6 @@ Die Geschäftsleitung überlegt, HolzCheck samt App in der Manufaktur fest einzu
 | Gewinn | 25 % | 112.200 | | |
 | Umsatz | | 561.000 | | |
 
-> **Formeln:**
-> - Herstellkosten = Materialkosten + Personalkosten + Abschreibung + sonstige Kosten
-> - sonstige Gemeinkosten = Herstellkosten · Zuschlagsatz
-> - Selbstkosten = Herstellkosten + sonstige Gemeinkosten
-> - Gewinn = Umsatz − Selbstkosten
-> - Gewinnzuschlag in % = Gewinn / Selbstkosten · 100 %
-
 **D2 (8 P):** Im Idealfall sinkt die Holzfeuchte im Lager gleichmäßig mit der Zeit. Seit der Probephase mit HolzCheck werden die Holzfeuchte, der Anteil schlecht durchlüfteter Stapel und die Arbeitsstunden im Lager erfasst. *Stellen* Sie die Daten der beiden folgenden Übersichten in **zwei** übersichtlichen Diagrammen *dar* (Papier).
 
 **Anteil schlecht durchlüfteter Stapel in % je Lagerbox**

@@ -182,8 +182,6 @@ Sachverhalte: a) Gehaltssätze der einzelnen Entgeltgruppen · b) Kündigungsfri
 
 **B6 (4 P):** Die Möbelhaus Nordholz GmbH hat ein Stammkapital von 450.000,00 EUR und zwei Gesellschafter. Herr Brodersen hält einen Geschäftsanteil von 270.000,00 EUR, Frau Jessen den Rest. Es werden 96.500,00 EUR Gewinn nach Steuern im Verhältnis der Geschäftsanteile ausgeschüttet. Berechnen Sie den Gewinnanteil von **Frau Jessen**. *(Ergebnis in EUR eintragen)*
 
-> **Formel:** Gewinnanteil = Gewinn · Geschäftsanteil / Stammkapital
-
 ## Block C – Soziale Sicherung (20 P)
 
 **C1 (3 P):** Die Krankenkasse einer Mitarbeiterin bewilligt für eine Zahnbehandlung einen geringeren Zuschuss als erwartet. Ihr Widerspruch bleibt erfolglos, sie will klagen. Welches Gericht ist zuständig? *(Ziffer eintragen)*
@@ -224,8 +222,6 @@ Sachverhalte: a) Gehaltssätze der einzelnen Entgeltgruppen · b) Kündigungsfri
 
 **C6 (4 P):** Der IT-Leiter des Möbelhauses verdient 9.200,00 EUR brutto im Monat. Die Beitragsbemessungsgrenze der Rentenversicherung beträgt 8.450,00 EUR im Monat, der Beitragssatz 18,6 %; Arbeitgeber und Arbeitnehmer tragen ihn je zur Hälfte (Stand 2026). Berechnen Sie den monatlichen **Arbeitnehmeranteil** zur Rentenversicherung. *(Ergebnis in EUR eintragen)*
 
-> **Formel:** Arbeitnehmeranteil = beitragspflichtiges Entgelt · Beitragssatz / 2
-
 ## Block D – Unternehmen und Wirtschaft (20 P)
 
 **D1 (3 P):** Ihnen liegt ein Auszug mit folgenden Angaben vor: „Möbelhaus Nordholz GmbH, Sitz Oldenburg, Stammkapital 450.000,00 EUR, Geschäftsführerin: Dr. Maren Jessen“. Aus welcher Quelle stammen diese Angaben? *(Ziffer eintragen)*
@@ -264,8 +260,6 @@ Sachverhalte: a) Gehaltssätze der einzelnen Entgeltgruppen · b) Kündigungsfri
 | Ertrag (EUR) | 531.000 | 343.000 | 150.000 | 768.000 |
 
 Welcher Auftrag wurde am wirtschaftlichsten abgewickelt? *(Nummer des Auftrags eintragen)*
-
-> **Formel:** Wirtschaftlichkeit = Ertrag / Aufwand
 
 **D6 (4 P):** Welche **zwei** Bezeichnungen treffen auf die Möbelhaus Nordholz GmbH als Handelsunternehmen zu? *(Ziffern eintragen)*
 - (1) Unternehmen des primären Sektors

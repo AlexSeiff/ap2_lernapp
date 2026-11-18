@@ -254,15 +254,7 @@ Nordholz Objekt bietet zwei SLAs an: **SLA Premium** (Reaktionszeit vier Stunden
 | Gewinn/Stunde | €/Stunde | | |
 | Gewinnzuschlag | % | | |
 
-> **Formeln:**
-> - Ø Personalkosten/Stunde = Personalkosten/Monat IST / Stunden/Monat IST
-> - Gewinn/Kunde/Monat = Preis SLA-Pauschale − Personalkosten/Monat IST
-> - Gewinn/Stunde = Gewinn/Kunde/Monat / Stunden/Monat IST
-> - Gewinnzuschlag = Gewinn/Stunde / Ø Personalkosten/Stunde · 100 %
-
 **D2 (4 P):** *Beschreiben* Sie das Ergebnis der Nachkalkulation mit Blick auf die Preisgestaltung der beiden SLAs. Grundlage sind die Kennzahlen aus D1 (bei Bedarf mit den Kalkulationstabellen des Blocks selbst ermitteln) im Vergleich zum geplanten Gewinnzuschlag der Vorkalkulation.
-
-> **Formel:** Gewinnzuschlag = Gewinn/Stunde / Ø Personalkosten/Stunde · 100 %
 
 **D3 (6 P):** Die Geschäftsleitung möchte zur Überprüfung der Wirtschaftlichkeit einen monatlichen Statusbericht. Neben dem Gewinn interessiert sie sich für die **Attraktivität** der SLAs. *Nennen* Sie **zwei** Inhalte des Berichts und *begründen* Sie Ihre Wahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 

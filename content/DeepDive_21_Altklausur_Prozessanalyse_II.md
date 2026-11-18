@@ -251,11 +251,6 @@ Für die Abhol-Software liegen zwei Angebote vor. Benötigt werden **acht Lizenz
 
 **D2 (5 P):** *Ermitteln* Sie den Break-even-Point der Abholschränke und *stellen* Sie ihn grafisch *dar* (Papier, korrekte Achsenbeschriftung). *Nennen* Sie den genauen Break-even-Point in einem Antwortsatz.
 
-> **Formeln:**
-> - kumulierte Kosten nach t Jahren = jährliche Kosten · t
-> - kumulierte Einsparung nach t Jahren = jährliche Einsparung · (t − 1)
-> - Break-even-Point: kumulierte Kosten = kumulierte Einsparung
-
 **D3 (13 P):** Sie sollen eine Empfehlung für einen Anbieter aussprechen. *Führen* Sie einen Angebotsvergleich über die gesamte Nutzungsdauer *durch*, *tragen* Sie die Beträge in die Tabelle *ein* und *ermitteln* Sie den Differenzbetrag. *Geben* Sie eine Empfehlung *ab*.
 
 | Position | Angebot A (€) | Angebot B (€) |
@@ -267,10 +262,6 @@ Für die Abhol-Software liegen zwei Angebote vor. Benötigt werden **acht Lizenz
 | Updates | | |
 | Support | | |
 | Summe | | |
-
-> **Formeln:**
-> - Gesamtkosten = einmalige Kosten + Σ (laufende Kosten je Jahr · Anzahl der Jahre)
-> - Differenzbetrag = Gesamtkosten des teureren Angebots − Gesamtkosten des günstigeren Angebots
 
 ## Lernziel-Check (am Ende des Themas alles mit Ja beantworten)
 

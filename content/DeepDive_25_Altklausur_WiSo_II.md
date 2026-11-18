@@ -144,8 +144,6 @@ Beispiele: a) Ein Mitarbeiter kommt trotz zweier Abmahnungen wiederholt zu spät
 
 **B2 (4 P):** Die Gesellschafterin Frau Jessen hat eine Stammeinlage von 420.000 EUR eingebracht. Nach dem Beschluss der Gesellschafterversammlung erhält sie für 2025 einen Gewinnanteil von 37.800 EUR. Ermitteln Sie ihre Eigenkapitalrentabilität in Prozent. *(Ergebnis eintragen)*
 
-> **Formel:** Eigenkapitalrentabilität = Gewinn / Eigenkapital · 100 %
-
 **B3 (3 P):** Ein Kollege überlegt, sich nach seiner Ausbildung als IT-Dienstleister selbstständig zu machen. Welche Aussage zur Existenzgründung ist zutreffend? *(Ziffer eintragen)*
 - (1) Gründer sind automatisch über die gesetzliche Rentenversicherung abgesichert.
 - (2) Ein Businessplan mit Markt- und Wettbewerbsanalyse ist eine wichtige Grundlage für Kreditgespräche.
@@ -200,8 +198,6 @@ Auszug aus dem Betriebsverfassungsgesetz:
 > **§ 9 Zahl der Betriebsratsmitglieder:** Der Betriebsrat besteht in Betrieben mit in der Regel 5 bis 20 wahlberechtigten Arbeitnehmern aus einer Person, 21 bis 50 wahlberechtigten Arbeitnehmern aus 3 Mitgliedern, 51 wahlberechtigten Arbeitnehmern bis 100 Arbeitnehmern aus 5 Mitgliedern, 101 bis 200 Arbeitnehmern aus 7 Mitgliedern, 201 bis 400 Arbeitnehmern aus 9 Mitgliedern, 401 bis 700 Arbeitnehmern aus 11 Mitgliedern, …
 
 Wie viele Betriebsratsmitglieder sind zu wählen? *(Ergebnis eintragen)*
-
-> **Formel:** Wahlberechtigte = Arbeitnehmer ab 16 Jahren + Leiharbeitnehmer mit mehr als drei Monaten Einsatz
 
 **C2 (3 P):** Bei welcher Angelegenheit hat der Betriebsrat ein **Mitbestimmungsrecht**? *(Ziffer eintragen)*
 - (1) Bau einer neuen Ausstellungshalle

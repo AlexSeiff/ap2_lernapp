@@ -253,8 +253,6 @@ In der Umsetzungsphase zeichnen sich erste Risiken ab, und der Fachbereich melde
 | (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | | |
 | (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | | |
 
-> **Formel:** Risikowert = Eintrittswahrscheinlichkeit W · Schadensausmaß S
-
 **B4 (3 P):** *Erläutern* Sie den Begriff **Scope Creep** und *nennen* Sie **zwei** Maßnahmen dagegen.
 
 **B5 (3 P):** *Erläutern* Sie, was ein Soll-Ist-Vergleich am Projektende umfassen muss und warum er für Ihre Projektdokumentation unverzichtbar ist.
@@ -275,25 +273,11 @@ Für die Terminplanung hat die Projektleiterin folgende Vorgangsliste erstellt:
 
 **C1 (16 P):** *Berechnen* Sie für alle Vorgänge FAZ, FEZ, SAZ und SEZ. *Stellen* Sie das Ergebnis tabellarisch dar. Projektstart ist Tag 0.
 
-> **Formeln:**
-> - Vorwärtsrechnung: FAZ = größtes FEZ aller Vorgänger (Start: 0); FEZ = FAZ + Dauer
-> - Rückwärtsrechnung: SEZ = kleinstes SAZ aller Nachfolger (Ende: Projektdauer); SAZ = SEZ − Dauer
-
 **C2 (4 P):** *Bestimmen* Sie die Projektdauer und den kritischen Pfad.
-
-> **Formeln:**
-> - Projektdauer = größtes FEZ
-> - kritischer Pfad: GP = SAZ − FAZ = 0
 
 **C3 (6 P):** *Berechnen* Sie für die Vorgänge B und E jeweils Gesamtpuffer und freien Puffer. *Erläutern* Sie den Unterschied beider Puffergrößen am Vorgang B.
 
-> **Formeln:**
-> - Gesamtpuffer GP = SAZ − FAZ (= SEZ − FEZ)
-> - freier Puffer FP = kleinstes FAZ der Nachfolger − FEZ
-
 **C4 (2 P):** Vorgang C verzögert sich um zwei Tage. *Beurteilen* Sie die Auswirkung auf den Projekttermin.
-
-> **Formel:** Gesamtpuffer GP = SAZ − FAZ (= SEZ − FEZ)
 
 ## Block D – Wirtschaftlichkeit (26 P)
 
@@ -304,21 +288,11 @@ a) *Berechnen* Sie die Amortisationszeit. (3 P)
 b) *Berechnen* Sie den ROI über die gesamte Nutzungsdauer. (3 P)
 c) *Beurteilen* Sie die Investition. (2 P)
 
-> **Formeln:**
-> - Amortisationszeit = Investition / jährliche Ersparnis
-> - ROI = (Gesamtersparnis − Investition) / Investition · 100 %
-
 **D2 (10 P):** Zwei Anbieter stehen zur Auswahl. Gewichtung: Funktionsumfang 40 %, Kosten 30 %, Integrationsfähigkeit 20 %, Support 10 %. Punktvergabe (1–10): Anbieter A = 8 / 5 / 9 / 7; Anbieter B = 6 / 9 / 7 / 8.
 a) *Führen* Sie die Nutzwertanalyse *durch* und *stellen* Sie die Teilnutzen tabellarisch dar. (6 P)
 b) *Beurteilen* Sie das Ergebnis kritisch. (4 P)
 
-> **Formeln:**
-> - Teilnutzen = Gewichtung · Punkte
-> - Nutzwert = Summe der Teilnutzen
-
 **D3 (4 P):** *Berechnen* Sie die Break-even-Menge bei Fixkosten von 24.000 € pro Jahr, einem Verkaufspreis von 80 € und variablen Stückkosten von 50 €.
-
-> **Formel:** Break-even-Menge = Fixkosten / (Verkaufspreis − variable Stückkosten)
 
 **D4 (4 P):** *Erläutern* Sie den Begriff **TCO** und *nennen* Sie **drei** Kostenpositionen, die in D1 nicht berücksichtigt wurden.
 

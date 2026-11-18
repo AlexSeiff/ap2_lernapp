@@ -411,17 +411,9 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 **A4 (4 P):** Lea (24, kinderlos) erhält eine Bruttovergütung von 1.200 €. Wie hoch ist ihr Arbeitnehmeranteil zur Sozialversicherung in Euro? *(Ergebnis eintragen)*
 
-> **Formel:** Arbeitnehmeranteil = Bruttoentgelt · Summe der Arbeitnehmer-Beitragssätze (KV, PV, RV, ALV)
-
 **A5 (4 P):** Herr Kaya (ein Kind) verdient 3.200 € brutto. Die Lohnsteuer beträgt laut Tabelle 205,00 €, er ist kirchensteuerpflichtig (9 %), Solidaritätszuschlag fällt nicht an. Wie hoch ist sein Nettoentgelt in Euro? *(Ergebnis eintragen)*
 
-> **Formeln:**
-> - Nettoentgelt = Bruttoentgelt − SV-Arbeitnehmeranteil − Lohnsteuer − Kirchensteuer
-> - Kirchensteuer = Lohnsteuer · Kirchensteuersatz
-
 **A6 (3 P):** Die Minijob-Grenze beträgt 603 € im Monat, der Mindestlohn 13,90 €. Wie viele volle Stunden darf eine Aushilfe zum Mindestlohn höchstens im Monat arbeiten, ohne die Grenze zu überschreiten? *(Ergebnis eintragen)*
-
-> **Formel:** höchste Stundenzahl = Minijob-Grenze / Stundenlohn
 
 ## Block B – Rechtsgeschäfte und Vertragsarten (20 P)
 
@@ -508,11 +500,7 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 **D1 (4 P):** Auf einem Markt gilt: Preis 10 € – Nachfrage 900, Angebot 300; 12 € – 800 / 500; 14 € – 650 / 650; 16 € – 500 / 800; 18 € – 350 / 950. Wie hoch ist der Gleichgewichtspreis in Euro? *(Ergebnis eintragen)*
 
-> **Formel:** Gleichgewichtspreis: angebotene Menge = nachgefragte Menge
-
 **D2 (4 P):** Der Verbraucherpreisindex steigt von 120,0 auf 123,0. Wie hoch ist die Inflationsrate in Prozent (zwei Nachkommastellen)? *(Ergebnis eintragen)*
-
-> **Formel:** Inflationsrate = (neuer Indexwert − alter Indexwert) / alter Indexwert · 100 %
 
 **D3 (3 P):** Welches Ziel gehört **nicht** zum magischen Viereck des Stabilitätsgesetzes? *(Ziffer eintragen)*
 - (1) stabiles Preisniveau

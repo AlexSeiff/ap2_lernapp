@@ -198,14 +198,7 @@ Die Nutzung der MDE-Geräte soll künftig nach Verbrauch abgerechnet werden („
 | t_wartend | Prozess wartet | | 0 ms |
 | t_token | Gesamtzeit der Token-Erzeugung | | |
 
-> **Formel:** Gesamtzeit = Laufzeit + Wartezeit
-
 **B3 (7 P):** Sie beraten die **Küstenklang Veranstaltungs GmbH**, die für ein Open-Air-Konzert Leih-Sitzkissen ausgibt. Das Konzert ist mit **36.000 Besuchern** ausverkauft; jeder Besucher hat ein Sitzkissen gebucht. Die Ausgabe erfolgt zwischen 18:00 und 19:00 Uhr an **acht Ausgabestellen**. Jede Ausgabe wird mit einem MDE-Gerät gebucht und dauert im Mittel **4 Sekunden**. Je Ausgabestelle können mehrere Geräte eingesetzt werden. *Berechnen* Sie die Anzahl der mindestens benötigten MDE-Geräte, wenn alle Besucher kommen und sich gleichmäßig auf die Ausgabestellen und die Ausgabezeit verteilen. *Planen* Sie insgesamt **10 % Reserve** für defekte Geräte *ein*. Der Lösungsweg ist anzugeben.
-
-> **Formeln:**
-> - Vorgänge je Gerät = verfügbare Zeit / Zeit je Vorgang
-> - Geräte = Anzahl der Vorgänge / Vorgänge je Gerät
-> - Geräte mit Reserve = Geräte · (1 + Reservesatz)
 
 **B4 (2 P):** *Beschreiben* Sie **eine** Maßnahme, die verhindert, dass eine Störung des Authentifizierungsservers die Ausgabe der Sitzkissen verzögert.
 
@@ -227,10 +220,6 @@ Zur Komplettlösung gehören mobile Etikettendrucker. Die Drucker des bisherigen
 | Qualität | 0,30 | | | | | | |
 | Summe | 1,00 | | | | | | |
 
-> **Formeln:**
-> - gewichteter Wert = Punkte · Faktor
-> - Nutzwert = Summe der gewichteten Werte
-
 **C2 (3 P):** *Entscheiden* Sie sich für ein Angebot und *begründen* Sie Ihre Entscheidung.
 
 **C3 (4 P):** Kunden können die Drucker kaufen oder mieten. *Beschreiben* Sie **zwei** Vorteile des Kaufmodells für den Kunden.
@@ -238,8 +227,6 @@ Zur Komplettlösung gehören mobile Etikettendrucker. Die Drucker des bisherigen
 **C4 (2 P):** *Beschreiben* Sie **einen** Vorteil des Kaufmodells für den Nordholz Eventservice.
 
 **C5 (5 P):** Ein Kunde überlegt, einen Etikettendrucker zu kaufen statt zu mieten. Der Drucker kostet **252,00 EUR**, seine Nutzungsdauer wird mit **vier Jahren** angesetzt. Je Monat werden **3.600 Etiketten** gedruckt. Eine Etikettenrolle mit 600 Etiketten kostet **6,50 EUR**, ein Farbband für 1.200 Etiketten **12,00 EUR**. Die Miete beträgt **95,00 EUR** je Monat einschließlich aller Verbrauchsmaterialien. *Berechnen* Sie die Kosten je Monat im Kaufmodell und *entscheiden* Sie auf dieser Grundlage, ob der Kunde kaufen oder mieten sollte.
-
-> **Formel:** Kosten je Monat (Kauf) = Anschaffungspreis / Nutzungsdauer in Monaten + Verbrauchsmaterial je Monat
 
 ## Block D – Rücknahme gemieteter Geräte (27 P)
 

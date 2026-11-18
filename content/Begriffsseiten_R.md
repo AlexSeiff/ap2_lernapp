@@ -625,8 +625,25 @@ Auch: Regressionsgleichung
 ### Erklärung
 b ist die Steigung: Um so viel ändert sich ŷ, wenn x um eine Einheit steigt – die inhaltlich wichtigste Zahl. a ist der Achsenabschnitt, der rechnerische Wert bei x = 0. Berechnung: $b = \frac{S_{xy}}{S_{xx}}$ und $a = \bar{y} - b \cdot \bar{x}$. Die Formel der Geraden heißt Regressionsgleichung.
 
+**So kommt man auf $S_{xx}$ und $S_{xy}$:** Beide sind Summen über alle $n$ Datenpunkte.
+- $S_{xx} = \sum (x_i - \bar{x})^2$ – Summe der quadrierten Abweichungen der x-Werte vom Mittelwert (misst, wie stark x streut).
+- $S_{xy} = \sum (x_i - \bar{x})(y_i - \bar{y})$ – Summe der Produkte der Abweichungen von x und y (positiv, wenn große x-Werte mit großen y-Werten zusammentreffen).
+- Rechenweg: erst $\bar{x}$ und $\bar{y}$ bestimmen, dann je Zeile $x_i - \bar{x}$, $y_i - \bar{y}$, das Produkt und das Quadrat $(x_i - \bar{x})^2$ ausrechnen und die beiden Spalten aufsummieren.
+- Kurzform zur Probe: $S_{xx} = \sum x_i^2 - n \cdot \bar{x}^2$ und $S_{xy} = \sum x_i y_i - n \cdot \bar{x} \cdot \bar{y}$.
+
 ### Beispiel
-Werbebudget x und Umsatz y (je T€) über fünf Monate: $\bar{x} = 3$, $\bar{y} = 44$, $S_{xy} = 64$, $S_{xx} = 10$.
+Werbebudget x und Umsatz y (je T€) über fünf Monate. Mittelwerte: $\bar{x} = \frac{15}{5} = 3$, $\bar{y} = \frac{220}{5} = 44$. Abweichungstabelle:
+
+| x | y | x − x̄ | y − ȳ | (x − x̄)(y − ȳ) | (x − x̄)² |
+|---|---|---|---|---|---|
+| 1 | 30 | −2 | −14 | 28 | 4 |
+| 2 | 40 | −1 | −4 | 4 | 1 |
+| 3 | 42 | 0 | −2 | 0 | 0 |
+| 4 | 52 | 1 | 8 | 8 | 1 |
+| 5 | 56 | 2 | 12 | 24 | 4 |
+| Summe | | 0 | 0 | 64 | 10 |
+
+Also $S_{xy} = 64$ und $S_{xx} = 10$. Probe mit der Kurzform: $S_{xx} = 55 - 5 \cdot 3^2 = 10$ und $S_{xy} = 724 - 5 \cdot 3 \cdot 44 = 64$. Die Abweichungen von x und von y summieren sich jeweils zu 0 – daran erkennt man Rechenfehler beim Mittelwert.
 - $b = \frac{64}{10} = 6{,}4$
 - $a = 44 - 6{,}4 \cdot 3 = 24{,}8$
 
@@ -650,7 +667,7 @@ Mehr: Deep Dive 4, 2.1 · Deep Dive 4, 2.2
 Zahl vor einer Einflussgröße in der Regressionsgleichung (bei einem x die Steigung b): Sie gibt an, um wie viel sich der geschätzte Wert ŷ ändert, wenn die Einflussgröße um eine Einheit steigt.
 
 ### Erklärung
-Einfache Regression: $\hat{y} = a + b \cdot x$. Multiple Regression mit mehreren Einflussgrößen: $\hat{y} = a + b_1 \cdot x_1 + b_2 \cdot x_2$. Jedes $b_j$ gilt bei **konstant gehaltenen übrigen Größen** („unter sonst gleichen Bedingungen“). Die Einheit ist „Einheit von y je Einheit von x_j“; deshalb sind Koeffizienten verschiedener Variablen nicht direkt vergleichbar – einen Vergleich erlauben standardisierte Koeffizienten. Das Vorzeichen zeigt die Richtung. Bei einer Einflussgröße gilt $b = \frac{S_{xy}}{S_{xx}} = r \cdot \frac{s_y}{s_x}$. Bestimmt werden die Koeffizienten mit der Methode der kleinsten Quadrate. Sie beschreiben einen Zusammenhang, keine nachgewiesene Ursache.
+Einfache Regression: $\hat{y} = a + b \cdot x$. Multiple Regression mit mehreren Einflussgrößen: $\hat{y} = a + b_1 \cdot x_1 + b_2 \cdot x_2$. Jedes $b_j$ gilt bei **konstant gehaltenen übrigen Größen** („unter sonst gleichen Bedingungen“). Die Einheit ist „Einheit von y je Einheit von x_j“; deshalb sind Koeffizienten verschiedener Variablen nicht direkt vergleichbar – einen Vergleich erlauben standardisierte Koeffizienten. Das Vorzeichen zeigt die Richtung. Bei einer Einflussgröße gilt $b = \frac{S_{xy}}{S_{xx}} = r \cdot \frac{s_y}{s_x}$ ($S_{xx}$ und $S_{xy}$ sind Summen der Abweichungsquadrate bzw. -produkte, Rechenweg siehe Regressionsgerade). Bestimmt werden die Koeffizienten mit der Methode der kleinsten Quadrate. Sie beschreiben einen Zusammenhang, keine nachgewiesene Ursache.
 
 ### Beispiel
 Einfach: Werbebudget und Umsatz, $b = \frac{64}{10} = 6{,}4$: Je 1 T€ mehr Werbung steigt der Umsatz im Mittel um 6,4 T€. Kontrolle über r: $0{,}983 \cdot \sqrt{424 / 10} = 0{,}983 \cdot 6{,}51 = 6{,}4$.

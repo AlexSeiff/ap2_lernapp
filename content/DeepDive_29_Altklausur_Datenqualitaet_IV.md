@@ -203,13 +203,7 @@ Von einigen Brettern ist bekannt, ob sie von einem Pilz befallen sind (**P**) od
 
 **A6 (4 P):** Die Klasse eines Bretts lässt sich in zwei Schritten berechnen: (1) Zum Wert x des Messpunkts den Funktionswert der Trenngeraden ermitteln. (2) Die Differenz zwischen dem Wert y des Messpunkts und diesem Funktionswert bilden. *Berechnen* Sie beide Schritte für die Punkte (2 | 8) und (6 | 5). Verwenden Sie die Gerade 2: y = 1,5 · x − 1.
 
-> **Formeln:**
-> - Funktionswert der Trenngeraden: f(x) = m · x + b
-> - Differenz: d = y − f(x)
-
 **A7 (3 P):** *Entscheiden* Sie für die beiden Messpunkte (2 | 8) und (6 | 5) anhand der Differenz zur Geraden 2 (y = 1,5 · x − 1), welcher Klasse sie zuzuordnen sind, und *begründen* Sie Ihre Entscheidung.
-
-> **Formel:** d = y − f(x)
 
 **A8 (3 P):** *Ordnen* Sie die Arbeitsschritte eines Machine-Learning-Prozesses in eine sinnvolle Reihenfolge und *tragen* Sie die Ziffern in die Tabelle *ein*. Der erste Schritt ist vorgegeben.
 

@@ -193,10 +193,6 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 
 **B5 (4 P):** Ein Mitarbeiter der Warenausgabe erhält für März 2026 folgende Abrechnung: Stundenlohn 17,50 EUR · 168 Arbeitsstunden, davon 16 Stunden an Samstagen · für Samstagsarbeit zusätzlich 25 % Zuschlag auf den Stundenlohn · einmaliges Urlaubsgeld von 300,00 EUR brutto. Berechnen Sie a) den Bruttolohn für März und b) den Arbeitnehmeranteil zur gesetzlichen Rentenversicherung (Beitragssatz 18,6 %, je zur Hälfte von Arbeitgeber und Arbeitnehmer, Stand 2026). *(Ergebnisse in EUR eintragen: a, b)*
 
-> **Formeln:**
-> - Bruttolohn = Stunden · Stundenlohn + Zuschlagsstunden · Stundenlohn · Zuschlagssatz + Sonderzahlung
-> - Arbeitnehmeranteil = Bruttolohn · Beitragssatz / 2
-
 **B6 (4 P):** Der Tarifvertrag des Einzelhandels wurde gekündigt, es wird neu verhandelt. Welche **zwei** Parteien schließen den Tarifvertrag ab? *(Ziffern eintragen)*
 - (1) Bundesministerium für Arbeit und Soziales
 - (2) Gewerkschaft
@@ -288,10 +284,6 @@ Zu welchem Datum kann die Mitarbeiterin ihr Arbeitsverhältnis **frühestens** b
 - (5) Die Verbraucherpreise steigen stark an.
 
 **D5 (4 P):** Die Geschäftsführung will prüfen, ob sich die Einstellung neuer Beschäftigter im Online-Vertrieb auf den Umsatz ausgewirkt hat. 2025 arbeiteten dort 38 Beschäftigte, der Umsatz je Mitarbeiter betrug 92.000,00 EUR. 2026 waren es 42 Beschäftigte bei einem Umsatz von 4.116.000,00 EUR. Berechnen Sie a) den Umsatz je Mitarbeiter 2026 und b) die prozentuale Veränderung des Umsatzes je Mitarbeiter von 2025 auf 2026, gerundet auf zwei Nachkommastellen. *(Ergebnisse eintragen: a in EUR, b in Prozent)*
-
-> **Formeln:**
-> - Umsatz je Mitarbeiter = Umsatz / Anzahl der Mitarbeiter
-> - prozentuale Veränderung = (neuer Wert − alter Wert) / alter Wert · 100 %
 
 **D6 (4 P):** Das Möbelhaus hat Geschäftspartner mit unterschiedlichen Rechtsformen. Ordnen Sie die Unternehmen den Aussagen zu; ein Unternehmen kann zwei Aussagen zugeordnet werden. *(Ziffern eintragen: a … e)*
 - (1) Hansen Küchen GmbH

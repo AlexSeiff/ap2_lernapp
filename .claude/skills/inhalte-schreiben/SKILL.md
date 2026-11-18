@@ -49,15 +49,12 @@ exam papers or textbook passages.
   WiSo variant: `references/formate.md` § 3a. Never copy original exam text (© ZPA) – rebuild type and level in the Nordholz scenario. When
   reworking an existing exam keep every task code and the 100 P – renumbering needs a new id map and progress version (as in
   `shared/aufgabenUmzug.ts`, Oktober 2026), so ask the owner first.
-- **Calculation tasks always state the formula they need** (owner's rule). In an exam task, add a quote block in plain-text
-  notation right after the task text (after its a)/b) lines): `> **Formel:** VK = σ / x̄ · 100 %`, or for several
-  `> **Formeln:**` + `> - …` lines. Give the general formula, never the numbers or the result, and only the formula – no explanation,
-  no value range („mit −1 ≤ r ≤ 1“), no hint why or how (owner's rule, like the IHK appendix); don't ask the student to
-  „*Geben* Sie die Formel *an*“ (and drop such points from the solution). A task that interprets or judges a computed value
-  (*Interpretieren* Sie r / R² / den Lift …, *Beurteilen* Sie auf Grundlage der Fehlerkosten …) repeats the formula of that value –
-  in the single-task view the preceding task isn't visible. Rechenübungen with a `vorlage` show their formulas
-  automatically from `src/rechnen/formeln.ts` (`AufgabenFormeln`) – a new vorlage needs its entries there. Without a `vorlage`, end
-  the `aufgabe` text with the same `> **Formel:** …` block. Pure legal rules (Ruhepausen, JArbSchG-Urlaub …) are not formulas.
+- **Calculation tasks do NOT state their formula** (owner's rule since 2026-11-18, replacing the earlier "always show the formula"): like
+  in the real IHK exam the learner finds formulas only in the **Formelsammlung** (appendix panel / `/material/formeln`, rebuilt from the
+  IHK Belegsatz in `src/lib/pruefungsanhang.ts`, data in `src/rechnen/formeln.ts`). So no `> **Formel:** …` block under a task, no
+  "benötigte Formel" hint in Rechenübungen. Tasks with *berechnen/ermitteln/bestimmen/interpretieren* get the Formelsammlung panel
+  automatically (`anhangFuer`). If a task needs a formula that the Formelsammlung lacks, add it there (or accept it as exam knowledge),
+  don't put it into the task. Pure legal rules (Ruhepausen, JArbSchG-Urlaub …) are not formulas.
 - Modelling tasks (ERM, EPK/eEPK, BPMN, Use-Case-Diagramm, Relationenmodell/Star-Schema, Normalisierung) are answered in an **editor**,
   detected from the task text (`editorFuer`, `src/lib/editorAufgabe.ts`): use a create operator (*Erstellen*, *Modellieren*, *Zeichnen*,
   *Entwerfen*; *Überführen* for Relationenmodell/Normalform) and name the diagram type. Write the model solution of a relation schema as

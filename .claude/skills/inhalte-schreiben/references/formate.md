@@ -164,7 +164,7 @@ Szenario Möbelhaus Nordholz). So sehen die Aufgaben dort aus:
   Originalwortlaut sind amtliche Texte und dürfen zitiert werden; sonstige englische Texte selbst schreiben) mit deutschen Fragen dazu,
   Klassendiagramme, Datenbankschemata mit Felderklärungen, Diagrammgerüste (Ishikawa mit den 5M und einer vorgegebenen Ursache,
   Lebenslinien eines Sequenzdiagramms, Schwimmbahnen, Entscheidungsbaum-Gerüst) – als Text oder Tabelle beschrieben.
-- **Formeln** stehen in der Aufgabe (`> **Formel:** …`), wie im Original die Entropieformel.
+- **Formeln** stehen nicht in der Aufgabe, sondern nur in der Formelsammlung (Anhang-Panel, `src/lib/pruefungsanhang.ts`) – wie in der echten Prüfung.
 - Operatoren wie im Original: *Nennen*, *Beschreiben*, *Erläutern*, *Erklären*, *Begründen*, *Ermitteln*, *Berechnen*, *Erstellen*,
   *Stellen* Sie … *dar*, *Vervollständigen*, *Ergänzen*, *Analysieren*, *Leiten* Sie … *ab*, *Identifizieren*, *Entscheiden*, *Prüfen*,
   *Formulieren* (SQL), *Programmieren*. Fallen in der App kursiv, im Original nicht.

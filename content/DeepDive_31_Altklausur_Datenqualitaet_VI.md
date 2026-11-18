@@ -369,18 +369,9 @@ Die Tabelle `lagerbestand` enthält je Artikel den Lagerbestand am Ende jeder Ka
 
 **C5 (7 P):** *Formulieren* Sie eine SQL-Abfrage, die je Artikel den Mittelwert und die Standardabweichung des Lagerbestands über alle vorliegenden Wochen (Grundgesamtheit) ausgibt, jeweils auf eine ganze Zahl gerundet. Die Ergebnisspalten heißen `artikelnr`, `mittelwert` und `standardabweichung`. In MySQL oder PostgreSQL können Sie `STDDEV_POP()` verwenden. Im SQLite-Editor der App stehen für die Umformung aus der Formel `AVG()`, `SQRT()` und `ROUND()` zur Verfügung.
 
-> **Formel:** σ = √(Mittelwert der Quadrate − Quadrat des Mittelwerts)
-
 **C6 (6 P):** *Berechnen* Sie Mittelwert und Standardabweichung des Lagerbestands von **Artikel 1** von Hand (Rechenweg angeben, Standardabweichung auf zwei Nachkommastellen) und *interpretieren* Sie das Ergebnis.
 
-> **Formeln:**
-> - Mittelwert: μ = (1 / n) · Σ x_i
-> - Varianz: σ² = (1 / n) · Σ (x_i − μ)²
-> - Standardabweichung: σ = √(σ²)
-
 **C7 (3 P):** *Berechnen* Sie den Median des Lagerbestands von **Artikel 1** und *interpretieren* Sie das Ergebnis.
-
-> **Formel:** Median = mittlerer Wert der sortierten Werte (bei ungerader Anzahl)
 
 ## Block D – Lagerdaten für eine Analyse aufbereiten (21 P)
 

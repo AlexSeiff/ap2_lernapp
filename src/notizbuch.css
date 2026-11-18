@@ -266,7 +266,7 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 @media screen and (max-width: 600px) {
   .formel-raster { grid-template-columns: minmax(0, 1fr); }
   /* Jede Gleichung bleibt zusammen. Bei sehr langen Ausdrücken scrollt nur die jeweilige Formel. */
-  .fc-hinten.rechnung .katex, .aufgaben-formeln .katex, .rw-zeilen .katex, .formel-tex .katex { white-space: nowrap; }
+  .fc-hinten.rechnung .katex, .rw-zeilen .katex, .formel-tex .katex { white-space: nowrap; }
   .fc-hinten.rechnung .md > p:has(.katex), .rw-zeilen dd { min-width: 0; overflow-x: auto; }
   .fc-hinten.rechnung .md > p:has(.katex) { padding-block: 3px; }
 }

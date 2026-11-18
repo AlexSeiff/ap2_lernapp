@@ -326,8 +326,6 @@ Um den unbekannten Antrieb sind drei Kreise gezogen. Die Auszählung der Abbildu
 | bekannt | K | 46,5 | 2840 | 2,1 | 260 | 0 |
 | zu klassifizieren | K | 43,5 | 2800 | 1,7 | 248 | – |
 
-> **Formel:** d(p, q) = √(Σ (q_i − p_i)²)
-
 ## Block C – Von der relationalen zur Dokumentendatenbank (25 P)
 
 Die Informationen über die Tische und ihre Sensoren liegen bisher zentral in einer relationalen Datenbank. Um die Ausfallsicherheit zu erhöhen, sollen sie künftig verteilt gespeichert werden: Jeder Kundenstandort erhält eine Teildatenbank in einem verteilten, **dokumentenorientierten** Datenbanksystem, das JSON-Dokumente verwendet.

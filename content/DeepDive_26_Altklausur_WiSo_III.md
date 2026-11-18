@@ -118,8 +118,6 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 
 Zu welcher Uhrzeit darf Ben am Mittwoch frühestens mit der Arbeit beginnen? *(Uhrzeit hh:mm eintragen)*
 
-> **Formel:** frühester Beginn = Ende der Arbeitszeit am Vortag + 12 Stunden, jedoch nicht vor 6:00 Uhr
-
 **A4 (3 P):** Welche Vorschrift des Jugendarbeitsschutzgesetzes gilt für den 17-jährigen Auszubildenden Ben Kowalski? *(Ziffer eintragen)*
 - (1) Jugendliche dürfen höchstens 48 Stunden in der Woche beschäftigt werden.
 - (2) Jugendliche dürfen nur an fünf Tagen in der Woche beschäftigt werden.
@@ -133,8 +131,6 @@ Zu welcher Uhrzeit darf Ben am Mittwoch frühestens mit der Arbeit beginnen? *(U
 > **Tarifvertrag, § 12 Erholungsurlaub (Auszug):** Der Urlaub beträgt für alle Beschäftigten 24 Arbeitstage. Arbeitstage sind alle Kalendertage außer Samstagen, Sonntagen und gesetzlichen Feiertagen.
 
 Auf wie viele **Arbeitstage** Urlaub hat Lina 2026 Anspruch? *(Ergebnis eintragen)*
-
-> **Formel:** Arbeitstage = Werktage · 5 / 6
 
 **A6 (3 P):** Der Auszubildende Ben Kowalski fragt, wozu er den Ausbildungsnachweis (das „Berichtsheft“) führen muss. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
 - (1) Der Ausbildungsnachweis ist freiwillig.
@@ -262,8 +258,6 @@ Sachverhalte: a) Ein Forstbetrieb fällt Buchen für die Möbelherstellung. b) E
 | Ertrag (EUR) | 96.000 | 31.000 | 138.000 | 51.000 |
 
 Ermitteln Sie, welcher Auftrag am wirtschaftlichsten abgewickelt wurde. *(Auftragsnummer eintragen)*
-
-> **Formel:** Wirtschaftlichkeit = Ertrag / Aufwand
 
 **D4 (3 P):** Das Möbelhaus erwirbt die Mehrheit an der Polsterei Wiesmoor GmbH. Die Polsterei bleibt unter ihrem Namen als GmbH bestehen, wird aber von der Geschäftsleitung des Möbelhauses gesteuert. Um welche Form des Unternehmenszusammenschlusses handelt es sich? *(Ziffer eintragen)*
 - (1) Fusion

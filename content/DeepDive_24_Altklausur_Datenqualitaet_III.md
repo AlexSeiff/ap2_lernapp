@@ -147,8 +147,6 @@ Die App erfasst, wie oft ein Ausstellungsstück aufgerufen und wie lange die Inf
 
 **A5 (6 P):** Von 2.400 Ausstellungsstücken wurden 96 als „Publikumsmagnet“, 528 als „Durchschnitt“ und der Rest als „Ladenhüter“ eingestuft. *Berechnen* Sie die Entropie aller Ausstellungsstücke im Hinblick auf ihre Publikumswirkung. *Geben* Sie den Rechenweg *an*.
 
-> **Formel:** H = Σ p · log₂(1/p), mit p = Anteil einer Klasse an allen Ausstellungsstücken
-
 **A6 (3 P):** Der ID3-Algorithmus nutzt die Entwicklung der Entropie für den Aufbau des Entscheidungsbaums. Bei Aufteilung nach **Warengruppe** sinkt die Summe der gewichteten Entropien auf 58,4 % des Ausgangswerts, bei Aufteilung nach **Preisklasse** auf 71,2 %. *Entscheiden* Sie, welches Merkmal in die erste Ebene gehört, und *begründen* Sie Ihre Entscheidung.
 
 ## Block B – Produktdatenbank und SQL (25 P)

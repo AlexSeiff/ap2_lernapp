@@ -191,11 +191,6 @@ Altersgruppen: A1 bis 30 Jahre, A2 31 bis 50 Jahre, A3 über 50 Jahre. Die Erken
 | Newsletter | Ja | | |
 | Newsletter | Nein | | |
 
-> **Formeln:**
-> - Entropie H(T) = −Σ p_i · log₂(p_i), mit p_i = Anteil der Klasse i in der Teilmenge
-> - gewichtete Entropie eines Merkmals = Σ (Größe der Teilmenge / Größe von T) · H(Teilmenge)
-> - Informationsgewinn = H(T) − gewichtete Entropie
-
 ## Block B – Übernahme der Beschäftigten des Küchenstudios (25 P)
 
 Die 14 Beschäftigten des Küchenstudios werden in das Personalsystem der Möbelhaus Nordholz GmbH übernommen. Ihre Daten liegen nur als CSV-Datei vor.
@@ -248,8 +243,6 @@ Hinweise:
 *Programmieren* Sie die Methode `importieren()` in Pseudocode oder einer Programmiersprache Ihrer Wahl.
 
 **B3 (2 P):** Die Tabelle `verguetung` enthält das Feld `stundenlohn`. Nach der Übernahme erhalten alle Beschäftigten eine Lohnerhöhung. *Formulieren* Sie eine SQL-Anweisung, die den Stundenlohn aller Beschäftigten um 3 % erhöht.
-
-> **Formel:** neuer Stundenlohn = alter Stundenlohn · (1 + Erhöhung in % / 100)
 
 ## Block C – Zugriffsrechte und Datenbanksysteme (25 P)
 

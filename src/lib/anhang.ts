@@ -7,11 +7,8 @@ import { findeOperatoren } from './operatoren';
 /** SQL in der Aufgabe: Codeblock, das Wort „SQL“ oder typische Schlüsselwörter (großgeschrieben, wie in den Lernblättern). */
 const SQL = /```sql|\bSQL\b|\b(?:SELECT|JOIN|GROUP BY|INSERT INTO|UPDATE|DELETE FROM|CREATE (?:TABLE|VIEW|INDEX))\b/;
 
-/** Operatoren, die eine Rechnung verlangen. */
-const RECHNEN = new Set(['berechnen', 'ermitteln']);
-
-/** Formelblock unter der Aufgabe – auch Deutungsaufgaben, die auf einem Rechenergebnis aufbauen („Interpretieren Sie r …“). */
-const FORMELBLOCK = /^> \*\*Formeln?:\*\*/m;
+/** Operatoren, die eine Rechnung verlangen oder ein Rechenergebnis deuten (die Formeln stehen nur in der Formelsammlung, nicht in der Aufgabe). */
+const RECHNEN = new Set(['berechnen', 'ermitteln', 'bestimmen', 'interpretieren']);
 
 export interface AnhangTeile {
   sql: boolean;
@@ -22,7 +19,7 @@ export interface AnhangTeile {
 export function anhangFuer(tasks: Task[]): AnhangTeile {
   const sql = tasks.some((t) => !!t.sqlUebung || SQL.test(t.markdown));
   const formeln = tasks.some(
-    (t) => t.type === 'rechnen' || FORMELBLOCK.test(t.markdown) || findeOperatoren(t.markdown).some((o) => RECHNEN.has(o.operatorId)),
+    (t) => t.type === 'rechnen' || findeOperatoren(t.markdown).some((o) => RECHNEN.has(o.operatorId)),
   );
   return { sql, formeln };
 }

@@ -112,7 +112,7 @@ describe('SQL-Belegsatz', () => {
     const c1 = content.tasks['03-B1'];
     expect(c1.markdown).toContain('*Berechnen*');
     expect(anhangFuer([c1])).toEqual({ sql: false, formeln: true });
-    // Deutungsaufgabe zu einem Rechenergebnis: kein Rechen-Operator, aber ein Formelblock.
+    // Deutungsaufgabe zu einem Rechenergebnis: Operator „interpretieren“ zeigt ebenfalls die Formelübersicht.
     const a3 = content.tasks['04-A3'];
     expect(a3.markdown).toContain('*Interpretieren*');
     expect(anhangFuer([a3]).formeln).toBe(true);

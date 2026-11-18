@@ -610,7 +610,7 @@ two-column table with grey group rows (statistics, random variables, regression,
 the prefixes, and the SQL-Syntax-Auszug (Stand 2024-10-07) as Syntax | Beschreibung grouped like the appendix. Only formulas and syntax,
 descriptions in our own words, no tips – those stay in Deep Dive 17 (Teil 7), the Formelsammlung and the detailed SQL-Belegsatz (both
 linked from the panel). Where: SQL editor and SQL exercises (Belegsatz), Rechenübungen (formulas), task page and exam
-(`anhangFuer` in `src/lib/anhang.ts`: Belegsatz for tasks with SQL, formulas for tasks with *berechnen*/*ermitteln* or a `> **Formel:**` block; an exam gets what
+(`anhangFuer` in `src/lib/anhang.ts`: Belegsatz for tasks with SQL, formulas for tasks with *berechnen*/*ermitteln*/*bestimmen*/*interpretieren* (formulas appear only in the appendix, never in the task text); an exam gets what
 any of its tasks needs). `tests/belegsatz.test.ts` checks order and rendering of the rebuilt appendix.
 
 ### Lernplan im Kalender (October 2026)
