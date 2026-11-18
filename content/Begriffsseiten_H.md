@@ -280,6 +280,49 @@ Fünf Spediteure nach durchschnittlicher Lieferdauer in Tagen: A = 1, B = 2, C =
 
 Schnitt bei Höhe 5 → drei Cluster {A, B}, {C, D}, {E}; Schnitt bei Höhe 10 → {A, B, C, D} und {E}. Mit **Single Linkage** wären die Höhen 1, 2, 4 und 12 – derselbe Baum, anderes Maß.
 
+Das Dendrogramm zeigt die Verschmelzungen bei den Höhen 1, 2, 7 und 19; die gestrichelten Linien sind die Schnitte bei 5 und 10.
+
+**Abbildung: Dendrogramm der fünf Spediteure (Complete Linkage)**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 246" width="340" height="246" role="img" aria-label="Dendrogramm der fünf Spediteure A bis E mit Complete Linkage: Verschmelzungen bei den Höhen 1, 2, 7 und 19, Schnitte bei 5 und 10">
+<line x1="36" y1="218" x2="232" y2="218" class="dg-linie"/>
+<line x1="36" y1="218" x2="36" y2="38" class="dg-linie"/>
+<line x1="32" y1="218" x2="36" y2="218" class="dg-linie"/>
+<text x="28" y="218" text-anchor="end" dominant-baseline="middle" class="dg-klein">0</text>
+<line x1="32" y1="173" x2="36" y2="173" class="dg-linie"/>
+<text x="28" y="173" text-anchor="end" dominant-baseline="middle" class="dg-klein">5</text>
+<line x1="32" y1="128" x2="36" y2="128" class="dg-linie"/>
+<text x="28" y="128" text-anchor="end" dominant-baseline="middle" class="dg-klein">10</text>
+<line x1="32" y1="83" x2="36" y2="83" class="dg-linie"/>
+<text x="28" y="83" text-anchor="end" dominant-baseline="middle" class="dg-klein">15</text>
+<line x1="32" y1="38" x2="36" y2="38" class="dg-linie"/>
+<text x="28" y="38" text-anchor="end" dominant-baseline="middle" class="dg-klein">20</text>
+<text x="10" y="128" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 10 128)">Abstand (Complete Linkage)</text>
+<text x="56" y="232" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">A</text>
+<text x="94" y="232" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">B</text>
+<text x="132" y="232" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">C</text>
+<text x="170" y="232" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">D</text>
+<text x="208" y="232" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">E</text>
+<polyline points="56,218 56,209 94,209 94,218" class="dg-linie dg-dick"/>
+<polyline points="132,218 132,200 170,200 170,218" class="dg-linie dg-dick"/>
+<polyline points="75,209 75,155 151,155 151,200" class="dg-linie dg-dick"/>
+<polyline points="113,155 113,47 208,47 208,218" class="dg-linie dg-dick"/>
+<text x="101" y="209" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">1</text>
+<text x="177" y="200" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">2</text>
+<text x="158" y="155" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">7</text>
+<text x="160.5" y="39" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">19</text>
+<line x1="36" y1="173" x2="240" y2="173" class="dg-linie-akzent dg-strich"/>
+<line x1="36" y1="128" x2="240" y2="128" class="dg-linie-akzent dg-strich"/>
+<text x="246" y="166" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Schnitt bei 5</text>
+<text x="246" y="180" text-anchor="start" dominant-baseline="middle" class="dg-klein">3 Cluster</text>
+<text x="246" y="121" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Schnitt bei 10</text>
+<text x="246" y="135" text-anchor="start" dominant-baseline="middle" class="dg-klein">2 Cluster</text>
+<text x="246" y="195" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">{A,B} {C,D} {E}</text>
+<text x="246" y="150" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">{A,B,C,D} {E}</text>
+</svg>
+```
+
 ### Abgrenzung
 | | k-Means | Hierarchisches Clustering |
 |---|---|---|

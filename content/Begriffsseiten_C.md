@@ -261,6 +261,44 @@ Es gibt keine Zielvariable; das Verfahren entdeckt Struktur. Das bekannteste Ver
 ### Beispiel
 Sechs Kunden nach Bestellungen pro Jahr und Bestellwert: P1(2,2), P2(3,1), P3(1,3), P4(7,8), P5(8,7), P6(9,9). Mit k = 2 ergeben sich die Zentren (2 | 2) und (8 | 8) – Gelegenheitskunden und Stammkunden.
 
+In der Abbildung sind links die Rohdaten ohne Gruppen, rechts die beiden gefundenen Cluster zu sehen.
+
+**Abbildung: Clustering ohne vorgegebene Gruppen (Kunden aus dem Beispiel)**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 212" width="340" height="212" role="img" aria-label="Clustering: links Kundendaten ohne Gruppenzuordnung, rechts zwei gefundene Cluster, Gelegenheitskunden und Stammkunden">
+<text x="94" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Rohdaten</text>
+<text x="94" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">keine Gruppen vorgegeben</text>
+<line x1="24" y1="160" x2="174" y2="160" class="dg-linie"/>
+<line x1="24" y1="160" x2="24" y2="30" class="dg-linie"/>
+<circle cx="54" cy="127.6" r="3.8" class="dg-grau"/>
+<circle cx="67" cy="138.8" r="3.8" class="dg-grau"/>
+<circle cx="41" cy="116.4" r="3.8" class="dg-grau"/>
+<circle cx="119" cy="60.4" r="3.8" class="dg-grau"/>
+<circle cx="132" cy="71.6" r="3.8" class="dg-grau"/>
+<circle cx="145" cy="49.2" r="3.8" class="dg-grau"/>
+<text x="99" y="174" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Bestellungen pro Jahr</text>
+<text x="13" y="95" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 13 95)">Bestellwert (100 €)</text>
+<text x="264" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Gefundene Cluster</text>
+<text x="264" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">k = 2, nur nach Ähnlichkeit</text>
+<line x1="194" y1="160" x2="344" y2="160" class="dg-linie"/>
+<line x1="194" y1="160" x2="194" y2="30" class="dg-linie"/>
+<ellipse cx="224" cy="127.6" rx="28" ry="22" class="dg-akzent dg-strich"/>
+<ellipse cx="302" cy="60.4" rx="28" ry="22" class="dg-mittel dg-strich"/>
+<circle cx="224" cy="127.6" r="3.8" class="dg-akzent"/>
+<circle cx="237" cy="138.8" r="3.8" class="dg-akzent"/>
+<circle cx="211" cy="116.4" r="3.8" class="dg-akzent"/>
+<rect x="285.4" y="56.8" width="7.2" height="7.2" class="dg-mittel"/>
+<rect x="298.4" y="68" width="7.2" height="7.2" class="dg-mittel"/>
+<rect x="311.4" y="45.6" width="7.2" height="7.2" class="dg-mittel"/>
+<text x="227.9" y="79.4" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Gelegenheits-</text>
+<text x="227.9" y="92.9" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">kunden</text>
+<text x="302" y="95.1" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Stammkunden</text>
+<text x="269" y="174" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Bestellungen pro Jahr</text>
+<text x="170" y="200" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Clustering ordnet Punkte nach Abstand zueinander – ohne Zielvariable</text>
+</svg>
+```
+
 ### Abgrenzung
 Klassifikation (überwacht) ordnet Fälle bekannten Klassen zu, Clustering (unüberwacht) findet die Gruppen erst. k-NN ist ein Klassifikationsverfahren, k-Means ein Clusteringverfahren.
 

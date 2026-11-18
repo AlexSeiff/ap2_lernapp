@@ -310,6 +310,36 @@ Unteranpassung: Das Modell ist zu einfach und erfasst schon in den Trainingsdate
 ### Erklärung
 Erkennbar ist Underfitting daran, dass Trainings- **und** Testgüte niedrig sind. Ursachen sind ein zu simples Verfahren (z. B. eine Gerade für einen gekrümmten Zusammenhang), fehlende aussagekräftige Merkmale oder zu kurzes Training. Gegenmaßnahmen: komplexeres Modell, bessere Merkmale bilden (Feature Engineering), länger trainieren, Regularisierung lockern.
 
+Die Abbildung zeigt den Verlauf schematisch: Der Trainingsfehler sinkt mit der Komplexität immer weiter, der Testfehler sinkt zuerst und steigt dann wieder. Links vom Optimum liegt Underfitting.
+
+**Abbildung: Trainings- und Testfehler bei wachsender Modellkomplexität**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 264" width="340" height="264" role="img" aria-label="Fehler auf Trainings- und Testdaten über der Modellkomplexität: links Underfitting mit beiden Fehlern hoch, rechts Overfitting mit steigendem Testfehler, dazwischen das Optimum">
+<rect x="40" y="40" width="102.2" height="150" class="dg-mittel dg-duenn"/>
+<rect x="142.2" y="40" width="177.8" height="150" class="dg-rot dg-duenn"/>
+<line x1="40" y1="190" x2="326" y2="190" class="dg-linie"/>
+<line x1="40" y1="190" x2="40" y2="34" class="dg-linie"/>
+<polyline points="40,58 47,72.1 54,84.5 61,95.5 68,105.2 75,113.8 82,121.3 89,128 96,133.9 103,139 110,143.6 117,147.7 124,151.2 131,154.4 138,157.1 145,159.6 152,161.8 159,163.7 166,165.4 173,166.8 180,168.1 187,169.3 194,170.3 201,171.2 208,172 215,172.7 222,173.3 229,173.9 236,174.4 243,174.8 250,175.2 257,175.5 264,175.8 271,176.1 278,176.3 285,176.5 292,176.7 299,176.8 306,177 313,177.1 320,177.2" class="dg-linie-akzent dg-dick"/>
+<polyline points="40,58 47,72.1 54,84.5 61,95.4 68,105 75,113.3 82,120.5 89,126.7 96,131.9 103,136.3 110,139.9 117,142.7 124,144.7 131,146.1 138,146.9 145,146.9 152,146.4 159,145.2 166,143.5 173,141.1 180,138.1 187,134.6 194,130.4 201,125.6 208,120.2 215,114.1 222,107.4 229,100.1 236,92.1 243,83.3 250,73.9 257,63.8 264,52.9 271,41.3 278,28.9 285,15.7 292,1.7 299,-13.1 306,-28.8 313,-45.4 320,-62.8" class="dg-linie dg-dick dg-strich"/>
+<line x1="142.2" y1="190" x2="142.2" y2="40" class="dg-linie dg-punkt"/>
+<text x="91.1" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Underfitting</text>
+<text x="91.1" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">zu einfach</text>
+<text x="231.1" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Overfitting</text>
+<text x="231.1" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">zu komplex</text>
+<text x="142.2" y="204" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Optimum</text>
+<text x="180" y="220" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Modellkomplexität (z. B. Baumtiefe)</text>
+<text x="12" y="115" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 12 115)">Fehler</text>
+<text x="50" y="175" text-anchor="start" dominant-baseline="middle" class="dg-klein">beide Fehler hoch</text>
+<text x="196.8" y="160" text-anchor="start" dominant-baseline="middle" class="dg-klein">Training sinkt weiter</text>
+<text x="213.6" y="91" text-anchor="end" dominant-baseline="middle" class="dg-klein">Test steigt</text>
+<line x1="20" y1="236" x2="40" y2="236" class="dg-linie-akzent dg-dick"/>
+<text x="46" y="236" text-anchor="start" dominant-baseline="middle" class="dg-klein">Fehler auf den Trainingsdaten</text>
+<line x1="20" y1="252" x2="40" y2="252" class="dg-linie dg-dick dg-strich"/>
+<text x="46" y="252" text-anchor="start" dominant-baseline="middle" class="dg-klein">Fehler auf den Testdaten</text>
+</svg>
+```
+
 ### Beispiel
 Ein Entscheidungsbaum mit Tiefe 1 sagt Reklamationen vorher und erreicht 62 % im Training und 60 % im Test – beide schwach, kaum Lücke: Underfitting.
 

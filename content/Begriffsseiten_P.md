@@ -384,6 +384,54 @@ Die erste **Hauptkomponente** zeigt in die Richtung der größten Streuung der D
 ### Beispiel
 Vier standardisierte Kundenmerkmale ergeben die Eigenwerte 2,4; 1,1; 0,4 und 0,1 (Summe 4 = Anzahl der Merkmale). Erklärte Varianz: $\frac{2{,}4}{4} = 60\ \%$, $\frac{1{,}1}{4} = 27{,}5\ \%$, $\frac{0{,}4}{4} = 10\ \%$, $\frac{0{,}1}{4} = 2{,}5\ \%$. Kumuliert: 60 %, 87,5 %, 97,5 %, 100 %. Zwei Komponenten erklären 87,5 % der Gesamtvarianz: Aus 4 Merkmalen werden 2. Ob das für die Aufgabe reicht, muss gesondert geprüft werden.
 
+Die Abbildung zeigt die Anteile des Beispiels als Balken und die kumulierte Linie: Zwei Komponenten erklären 87,5 %.
+
+**Abbildung: Erklärte Varianz der vier Hauptkomponenten**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 250" width="340" height="250" role="img" aria-label="Balkendiagramm der erklärten Varianz der vier Hauptkomponenten mit 60, 27,5, 10 und 2,5 Prozent und der kumulierten Linie 60, 87,5, 97,5 und 100 Prozent">
+<line x1="50" y1="168" x2="320" y2="168" class="dg-linie"/>
+<line x1="50" y1="168" x2="50" y2="34" class="dg-linie"/>
+<line x1="46" y1="168" x2="50" y2="168" class="dg-linie"/>
+<text x="43" y="168" text-anchor="end" dominant-baseline="middle" class="dg-klein">0 %</text>
+<line x1="46" y1="135.5" x2="50" y2="135.5" class="dg-linie"/>
+<text x="43" y="135.5" text-anchor="end" dominant-baseline="middle" class="dg-klein">25 %</text>
+<line x1="46" y1="103" x2="50" y2="103" class="dg-linie"/>
+<text x="43" y="103" text-anchor="end" dominant-baseline="middle" class="dg-klein">50 %</text>
+<line x1="46" y1="70.5" x2="50" y2="70.5" class="dg-linie"/>
+<text x="43" y="70.5" text-anchor="end" dominant-baseline="middle" class="dg-klein">75 %</text>
+<line x1="46" y1="38" x2="50" y2="38" class="dg-linie"/>
+<text x="43" y="38" text-anchor="end" dominant-baseline="middle" class="dg-klein">100 %</text>
+<rect x="66" y="90" width="36" height="78" class="dg-akzent"/>
+<text x="84" y="181" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">HK 1</text>
+<text x="84" y="195" text-anchor="middle" dominant-baseline="middle" class="dg-klein">60 %</text>
+<rect x="132" y="132.3" width="36" height="35.8" class="dg-akzent"/>
+<text x="150" y="181" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">HK 2</text>
+<text x="150" y="195" text-anchor="middle" dominant-baseline="middle" class="dg-klein">27,5 %</text>
+<rect x="198" y="155" width="36" height="13" class="dg-akzent"/>
+<text x="216" y="181" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">HK 3</text>
+<text x="216" y="195" text-anchor="middle" dominant-baseline="middle" class="dg-klein">10 %</text>
+<rect x="264" y="164.8" width="36" height="3.3" class="dg-akzent"/>
+<text x="282" y="181" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">HK 4</text>
+<text x="282" y="195" text-anchor="middle" dominant-baseline="middle" class="dg-klein">2,5 %</text>
+<polyline points="84,90 150,54.3 216,41.3 282,38" class="dg-linie dg-dick dg-strich"/>
+<circle cx="84" cy="90" r="4" class="dg-form"/>
+<circle cx="150" cy="54.3" r="4" class="dg-form"/>
+<circle cx="216" cy="41.3" r="4" class="dg-form"/>
+<circle cx="282" cy="38" r="4" class="dg-form"/>
+<text x="106" y="88" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">60 %</text>
+<text x="146" y="43.3" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">87,5 %</text>
+<text x="216" y="30.3" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">97,5 %</text>
+<text x="282" y="27" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">100 %</text>
+<rect x="14" y="212" width="14" height="10" class="dg-akzent"/>
+<text x="34" y="217" text-anchor="start" dominant-baseline="middle" class="dg-klein">Anteil der Komponente (λ / 4)</text>
+<line x1="14" y1="234" x2="28" y2="234" class="dg-linie dg-dick dg-strich"/>
+<circle cx="21" cy="234" r="4" class="dg-form"/>
+<text x="34" y="234" text-anchor="start" dominant-baseline="middle" class="dg-klein">kumuliert: zwei Komponenten erklären 87,5 %</text>
+<text x="199" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Erklärte Varianz je Hauptkomponente (HK)</text>
+</svg>
+```
+
 ### Abgrenzung
 **Merkmalsauswahl** streicht vorhandene Spalten, PCA bildet neue Spalten aus allen alten. PCA ist unüberwacht; sie sucht Streuung, nicht Trennung zwischen Klassen.
 
