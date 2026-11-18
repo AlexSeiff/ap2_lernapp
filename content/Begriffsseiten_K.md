@@ -651,6 +651,58 @@ Habe ich Labels und suche eine Kategorie? Dann Klassifikation.
 Siehe auch: Regression · K-Nächste-Nachbarn · ID3 · Konfusionsmatrix
 Mehr: Deep Dive 6, 2.3 · Deep Dive 6, Teil 7
 
+## Klassifikation, Regression und Clustering im Vergleich
+<!-- id: klassifikation-regression-und-clustering-im-vergleich · quellen: Karte DD6, DD6 2.2, DD6 2.3, DD6 Teil 3 · stand: 2026-11 -->
+
+Die drei Grundaufgaben des Machine Learning unterscheiden sich darin, ob es zu den Daten eine bekannte richtige Antwort gibt und was herauskommen soll: eine Kategorie, eine Zahl oder eine Gruppeneinteilung.
+
+### Erklärung
+Der Weg zur richtigen Aufgabe führt über zwei Fragen: Gibt es eine Spalte mit der bekannten richtigen Antwort (Label, Zielvariable)? Und wenn ja: Ist sie eine Kategorie oder eine Zahl?
+
+| Kriterium | Klassifikation | Regression | Clustering |
+|---|---|---|---|
+| Lernart | überwacht | überwacht | unüberwacht |
+| Labels nötig | ja | ja | nein |
+| Zielvariable | Kategorie (diskret) | Zahl (stetig) | gibt es nicht |
+| Frage | „Zu welcher Klasse gehört der Fall?“ | „Wie groß ist der Wert?“ | „Welche Fälle sind einander ähnlich?“ |
+| Ergebnis | Klasse (oder Klassenwahrscheinlichkeit) | Zahl | Gruppennummern ohne Namen |
+| Typische Verfahren | Entscheidungsbaum, k-NN, logistische Regression, Random Forest | lineare Regression, Regressionsbaum | k-Means, hierarchisches Clustering, DBSCAN |
+| Güte | Konfusionsmatrix, Accuracy, Precision, Recall, F1 | MAE, RMSE, R² | kein Trefferwert; Elbow-Methode, fachliche Deutung |
+| Stärke | klare Entscheidung, gut erklärbar (Baum) | liefert eine konkrete Prognose | braucht keine Vorarbeit mit Labels |
+| Grenze | seltene Klassen verzerren die Accuracy | gilt nur im Bereich der Trainingsdaten | Gruppen müssen fachlich benannt werden |
+
+**Wann nehme ich was?** Ist die gesuchte Antwort in früheren Fällen bekannt und eine Kategorie, nimmst du Klassifikation. Ist sie bekannt und eine Zahl, nimmst du Regression. Ist sie nicht bekannt und du willst erst Strukturen entdecken, bleibt Clustering. Das Wort „Zahl“ täuscht manchmal: Eine Kundengruppe „1, 2, 3“ oder eine Postleitzahl ist eine Kategorie, kein Messwert. Umgekehrt wird aus einer Regression eine Klassifikation, wenn man die Zahl in Klassen schneidet („Lieferdauer über 5 Tage: ja/nein“).
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH hat 5.000 abgeschlossene Aufträge. Dieselbe Datenbasis führt je nach Frage zu drei verschiedenen Aufgaben:
+
+| Frage des Fachbereichs | Label vorhanden? | Aufgabe | Ergebnis für einen neuen Auftrag |
+|---|---|---|---|
+| Wird der Auftrag reklamiert? | ja, Spalte „reklamiert“ (ja/nein) | Klassifikation | „ja“, weil die geschätzte Wahrscheinlichkeit 0,62 über der Schwelle 0,5 liegt |
+| Wie viele Tage dauert die Lieferung? | ja, Spalte „Lieferdauer in Tagen“ | Regression | 4,0 Tage |
+| Welche Kundengruppen gibt es? | nein, keine Gruppenspalte | Clustering | Gruppe 2 |
+
+Zu den Ergebnissen im Einzelnen:
+
+- **Regression:** Die Gerade $\hat{y} = 1{,}0 + 0{,}02 \cdot x$ mit $x$ = Entfernung in km sagt für 150 km voraus: $\hat{y} = 1{,}0 + 0{,}02 \cdot 150 = 1{,}0 + 3{,}0 = 4{,}0$ Tage. Das Ergebnis ist eine Zahl, die sich an echten Lieferdauern messen lässt (z. B. mit dem RMSE).
+- **Klassifikation:** Die Schwelle macht aus der Wahrscheinlichkeit die Klasse: $0{,}62 \ge 0{,}5$, also „reklamationsgefährdet“. Gemessen wird später mit der Konfusionsmatrix.
+- **Clustering:** Für Kunden mit den Merkmalen (Bestellungen pro Jahr | Bestellwert in T€) gibt es die Zentren Z1 = (2 | 2) und Z2 = (8 | 8). Ein neuer Kunde (6 | 7) hat den euklidischen Abstand $\sqrt{(6-2)^2 + (7-2)^2} = \sqrt{41} \approx 6{,}40$ zu Z1 und $\sqrt{(6-8)^2 + (7-8)^2} = \sqrt{5} \approx 2{,}24$ zu Z2 – er gehört zu Gruppe 2. Ob Gruppe 2 „Stammkunden“ heißt, entscheidet der Fachbereich, nicht der Algorithmus.
+
+### Abgrenzung
+- Die **logistische Regression** heißt zwar Regression, schätzt aber die Wahrscheinlichkeit einer Klasse – sie ist ein Klassifikationsverfahren.
+- **k-NN** (überwacht, klassifiziert) und **k-Means** (unüberwacht, bildet Gruppen) haben nur den Buchstaben k gemeinsam.
+- Ein **Entscheidungsbaum** kann beides: als Klassifikationsbaum eine Klasse, als Regressionsbaum eine Zahl vorhersagen.
+- Clustering ist keine Klassifikation mit unbekannten Klassen: Es gibt keine Vorgabe, an der man „richtig“ oder „falsch“ messen könnte.
+
+### Prüfungsfalle
+Eine Aufgabe ohne Labels („Kundengruppen finden“) als Klassifikation bezeichnen – ohne vorgegebene Gruppen ist es Clustering. Ebenso häufig: Gütemaße vermischen, etwa den RMSE für ein Klassifikationsmodell oder die Accuracy für eine Mengenprognose angeben. Und: die logistische Regression für ein Regressionsverfahren halten.
+
+### Merksatz
+Label da? Kategorie → Klassifikation, Zahl → Regression; kein Label → Clustering.
+
+Siehe auch: Klassifikation · Regression · Clustering · Überwachtes Lernen · Unüberwachtes Lernen · Logistische Regression · K-Means · K-Nächste-Nachbarn · Konfusionsmatrix · RMSE · Zielvariable
+Mehr: Deep Dive 6, 2.2 · Deep Dive 6, 2.3 · Deep Dive 6, Teil 3
+
 ## Koalitionsfreiheit
 <!-- id: koalitionsfreiheit · quellen: Karte DD13, DD13 5.1 · stand: 2026-10 -->
 
@@ -1179,6 +1231,60 @@ Korrelation zeigt, dass sich etwas gemeinsam bewegt – nicht, warum.
 
 Siehe auch: Kausalität · Korrelationskoeffizient nach Pearson · Spearman-Rangkorrelation · Streudiagramm · Regression · Multikollinearität
 Mehr: Deep Dive 4, 1.1 · Deep Dive 4, 1.3
+
+## Korrelation und Kausalität im Vergleich
+<!-- id: korrelation-und-kausalitat-im-vergleich · quellen: Karte DD4, DD4 1.2, DD4 1.3 · stand: 2026-11 -->
+
+Korrelation beschreibt, dass sich zwei Merkmale gemeinsam verändern; Kausalität behauptet, dass die Veränderung des einen die des anderen verursacht. Aus der ersten folgt die zweite nicht.
+
+### Erklärung
+| Kriterium | Korrelation | Kausalität |
+|---|---|---|
+| Aussage | „x und y bewegen sich gemeinsam“ | „x verursacht y“ |
+| Frage | Wie stark, in welche Richtung? | Warum, wodurch? |
+| Kennzahl | Korrelationskoeffizient r (−1 bis +1) | keine Kennzahl, nur Begründung und Beleg |
+| Belegt durch | Streudiagramm, Pearson r, Spearman | Experiment (A/B-Test, Vergleichsgruppe), Wirkmechanismus, zeitliche Abfolge |
+| Richtung | symmetrisch: r(x, y) = r(y, x) | gerichtet: Ursache vor Wirkung |
+| Risiko | Scheinkorrelation, Ausreißer, nichtlineare Muster | falsche Ursache, übersehene Drittvariable |
+| Nutzen | Zusammenhänge entdecken, prognostizieren | Maßnahmen begründen, Wirkung vorhersagen |
+
+Eine hohe Korrelation lässt vier Erklärungen zu: x verursacht y, y verursacht x, eine **Drittvariable** beeinflusst beide, oder es ist Zufall bzw. ein gemeinsamer Zeittrend. Der Korrelationskoeffizient allein kann diese vier nicht unterscheiden.
+
+**Wann nehme ich was?** Zum Beschreiben und Prognostizieren genügt die Korrelation (oder Regression): „Je höher x, desto höher y“. Sobald eine Maßnahme begründet werden soll („Mehr Werbung steigert den Umsatz“), brauchst du Kausalität – und dafür ein kontrolliertes Experiment, eine Vergleichsgruppe oder wenigstens einen plausiblen Wirkmechanismus mit richtiger zeitlicher Reihenfolge. In Antworten schreibst du „Zusammenhang“ oder „geht einher mit“, nicht „führt zu“, solange kein Beleg vorliegt.
+
+### Beispiel
+**Teil 1 – Korrelation ohne Kausalität.** Das Möbelhaus vergleicht über fünf Monate die verkauften Gartenmöbel mit den in der Cafeteria verkauften Eisbechern (in Hundert):
+
+| Monat | 1 | 2 | 3 | 4 | 5 | Mittelwert |
+|---|---|---|---|---|---|---|
+| Gartenmöbel x (Stück) | 10 | 20 | 30 | 40 | 50 | 30 |
+| Eisbecher y (in 100) | 4 | 5 | 7 | 8 | 11 | 7 |
+
+Abweichungen $x_i - \bar{x}$: −20, −10, 0, 10, 20; $y_i - \bar{y}$: −3, −2, 0, 1, 4. Dann $S_{xy} = 60 + 20 + 0 + 10 + 80 = 170$, $S_{xx} = 400 + 100 + 0 + 100 + 400 = 1000$, $S_{yy} = 9 + 4 + 0 + 1 + 16 = 30$ und $r = \frac{170}{\sqrt{1000 \cdot 30}} = \frac{170}{173{,}2} \approx 0{,}98$ – ein sehr starker positiver Zusammenhang. Trotzdem verursachen Eisbecher keine Gartenmöbelkäufe. Die Drittvariable sind die Sonnenstunden (100, 130, 180, 220, 270 in den fünf Monaten): Sie korrelieren mit beiden Größen (r ≈ 0,997 bzw. 0,991). Würde die Cafeteria die Eisbecher aus dem Sortiment nehmen, ändert das den Gartenmöbelabsatz nicht.
+
+**Teil 2 – Kausalität prüfen.** Ob Werbung den Umsatz steigert, klärt ein Vergleich: Filiale Nord erhält zusätzliche Werbung, die vergleichbare Filiale Süd nicht.
+
+| | Umsatz vorher | Umsatz nachher | Veränderung |
+|---|---|---|---|
+| Filiale Nord (mit Werbung) | 200 T€ | 230 T€ | $\frac{230 - 200}{200} = +15\,\%$ |
+| Filiale Süd (ohne Werbung) | 190 T€ | 199,5 T€ | $\frac{199{,}5 - 190}{190} = +5\,\%$ |
+
+Beide Filialen wachsen (Saison, Markt), aber Nord um 10 Prozentpunkte mehr. Diese Differenz kann man der Werbung zuschreiben – unter der Annahme, dass die Filialen sonst vergleichbar waren. Erst dieser Vergleich trägt eine Aussage über Ursache und Wirkung; die hohe Korrelation von Werbebudget und Umsatz allein täte es nicht.
+
+### Abgrenzung
+- Die **Scheinkorrelation** ist ein Sonderfall: Zusammenhang in den Zahlen, nicht in der Sache (Zufall, gemeinsamer Zeittrend, Drittvariable).
+- **Signifikant** heißt nur „vermutlich kein Zufall“, nicht „kausal“ und nicht „stark“.
+- **Regression** liefert eine Gleichung für Prognosen; auch eine gute Regression (hohes R²) belegt keine Ursache.
+- Kein Zusammenhang im Pearson-r ($r \approx 0$) schließt einen nichtlinearen (z. B. U-förmigen) Zusammenhang nicht aus.
+
+### Prüfungsfalle
+Aus einem hohen r oder R² auf „x verursacht y“ schließen. Punkte bringt eine Formulierung wie: „Die Daten zeigen einen starken positiven Zusammenhang; ein ursächlicher Wirkungszusammenhang lässt sich daraus allein nicht ableiten, dafür wäre ein kontrollierter Test oder ein erklärbarer Wirkmechanismus nötig.“
+
+### Merksatz
+Korrelation ist ein Hinweis, Kausalität braucht einen Beleg – r misst Gleichlauf, nicht Ursache.
+
+Siehe auch: Korrelation · Kausalität · Scheinkorrelation · Drittvariable · Korrelationskoeffizient nach Pearson · Spearman-Rangkorrelation · Streudiagramm · Signifikanz · Zeitreihe · Regression
+Mehr: Deep Dive 4, 1.2 · Deep Dive 4, 1.3
 
 ## Korrelationskoeffizient nach Pearson
 <!-- id: korrelationskoffizient-nach-pearson · quellen: Karte DD4, DD4 1.2 · stand: 2026-10 -->

@@ -270,6 +270,73 @@ Hohe Accuracy bei seltenen Fällen beweist nichts – erst mit der Baseline verg
 Siehe auch: Konfusionsmatrix · Precision · Recall · Balanced Accuracy · Unausgeglichene Klassen
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.3
 
+## Accuracy, Precision, Recall und F1 im Vergleich
+<!-- id: accuracy-precision-recall-und-f1-im-vergleich · quellen: Karte DD7, DD7 2.2, DD7 2.3, DD7 2.4, DD7 4.5 · stand: 2026-11 -->
+
+Alle diese Kennzahlen werten dieselbe Konfusionsmatrix aus, beantworten aber verschiedene Fragen: wie viel insgesamt richtig ist, wie verlässlich ein Alarm ist, wie viele echte Fälle gefunden werden und wie beides zusammenpasst.
+
+### Erklärung
+Zuerst die positive Klasse festlegen (meist das seltene, interessierende Ereignis), dann die vier Felder TP, FP, FN, TN füllen. Die Kennzahlen unterscheiden sich nur darin, welche Felder sie ins Verhältnis setzen:
+
+| Kennzahl | Formel | Frage und Blick | Stärke und Schwäche |
+|---|---|---|---|
+| Accuracy | (TP + TN) / alle | Wie viel insgesamt richtig? Blick auf alle Fälle | einfach, bei ausgeglichenen Klassen brauchbar; täuscht bei seltener Klasse (Accuracy-Paradox) |
+| Precision | TP / (TP + FP) | Wie oft stimmt ein Alarm? Blick auf die Spalte „vorhergesagt positiv“ | wichtig, wenn Fehlalarme teuer sind; sagt nichts über übersehene Fälle |
+| Recall | TP / (TP + FN) | Wie viele echte Fälle wurden gefunden? Blick auf die Zeile „tatsächlich positiv“ | wichtig, wenn übersehene Fälle teuer sind; belohnt „im Zweifel immer Alarm“ |
+| F1-Maß | 2 · P · R / (P + R) | Passen Precision und Recall zusammen? Blick auf P und R, ohne TN | eine Zahl, bei Ungleichgewicht robust; verdeckt, welche der beiden schwach ist |
+| Balanced Accuracy | (Recall + Spezifität) / 2 | Wie gut ist jede Klasse für sich? Beide Zeilen gleich gewichtet | Zufall und Mehrheitsraten landen bei 50 %; kein Blick auf die Alarm-Verlässlichkeit |
+
+Dabei ist Spezifität = TN / (TN + FP), also der Anteil der tatsächlich Negativen, die richtig als negativ erkannt werden.
+
+**Wann nehme ich was?**
+- Klassen ausgeglichen und beide Fehlerarten gleich teuer: Accuracy genügt.
+- Ein übersehener Fall (FN) ist der teure Fehler, z. B. gefährdete Aufträge erkennen: Recall.
+- Ein Fehlalarm (FP) ist der teure Fehler, z. B. jede Meldung löst eine aufwendige Prüfung aus: Precision.
+- Beide Fehlerarten zählen und die positive Klasse ist selten: F1-Maß.
+- Beide Klassen sollen gleich wichtig sein und die Klassen sind ungleich groß: Balanced Accuracy.
+
+Precision und Recall lassen sich meist nur gegeneinander verbessern: Eine niedrigere Entscheidungsschwelle erhöht den Recall und senkt in der Regel die Precision.
+
+### Beispiel
+1.000 Aufträge, davon 100 tatsächlich reklamiert. Modell A sagt 150 Reklamationen voraus:
+
+| | Vorhersage: Reklamation | Vorhersage: keine |
+|---|---|---|
+| tatsächlich Reklamation | TP = 60 | FN = 40 |
+| tatsächlich keine | FP = 90 | TN = 810 |
+
+Gerechnet: Accuracy $\frac{60 + 810}{1000} = 87\,\%$, Precision $\frac{60}{150} = 40\,\%$, Recall $\frac{60}{100} = 60\,\%$, Spezifität $\frac{810}{900} = 90\,\%$, Balanced Accuracy $\frac{60 + 90}{2} = 75\,\%$, F1 $\frac{2 \cdot 0{,}40 \cdot 0{,}60}{0{,}40 + 0{,}60} = 48\,\%$.
+
+Zum Vergleich zwei weitere Modelle auf denselben 1.000 Aufträgen: Modell B ist vorsichtig (nur sichere Fälle werden gemeldet: TP = 30, FN = 70, FP = 10, TN = 890), die Baseline sagt immer „keine Reklamation“ (TP = 0, FN = 100, FP = 0, TN = 900).
+
+| Kennzahl | Modell A | Modell B | Baseline „immer nein“ |
+|---|---|---|---|
+| Accuracy | 87,0 % | 92,0 % | 90,0 % |
+| Precision | 40,0 % | 75,0 % | nicht definiert (0 von 0 Alarmen) |
+| Recall | 60,0 % | 30,0 % | 0,0 % |
+| Spezifität | 90,0 % | 98,9 % | 100,0 % |
+| Balanced Accuracy | 75,0 % | 64,4 % | 50,0 % |
+| F1-Maß | 48,0 % | 42,9 % | 0,0 % |
+
+Modell B im Einzelnen: $\text{Accuracy} = \frac{30 + 890}{1000} = 92\,\%$, $\text{Precision} = \frac{30}{40} = 75\,\%$, $\text{Recall} = \frac{30}{100} = 30\,\%$, Spezifität $\frac{890}{900} \approx 98{,}9\,\%$, Balanced Accuracy $\frac{30 + 98{,}9}{2} \approx 64{,}4\,\%$, $F_1 = \frac{2 \cdot 0{,}75 \cdot 0{,}30}{0{,}75 + 0{,}30} = \frac{0{,}45}{1{,}05} \approx 42{,}9\,\%$. Das arithmetische Mittel $(0{,}75 + 0{,}30) / 2 = 52{,}5\,\%$ wäre dagegen zu optimistisch.
+
+Was die Tabelle zeigt: Nach der Accuracy ist Modell B am besten und die wertlose Baseline noch vor Modell A – genau das ist das Accuracy-Paradox. Nach Recall, F1 und Balanced Accuracy liegt Modell A vorn, nach der Precision Modell B. Welches Modell „besser“ ist, entscheidet also erst die Frage, welcher Fehler teurer ist.
+
+### Abgrenzung
+- **Recall** heißt auch Sensitivität oder Richtig-Positiv-Rate; die **Spezifität** ist sein Gegenstück für die Negativen und keine Precision.
+- Precision rechnet mit der **Spalte** der Vorhersagen, Recall mit der **Zeile** der tatsächlichen Fälle – daher der unterschiedliche Nenner.
+- „Genauigkeit“ ist doppeldeutig (Accuracy oder Precision): immer den englischen Begriff oder die Formel dazuschreiben.
+- Alle fünf Werte gelten für **eine** Entscheidungsschwelle; die ROC-Kurve zeigt das Verhalten über alle Schwellen.
+
+### Prüfungsfalle
+Eine hohe Accuracy bei seltener Klasse als gutes Ergebnis werten, ohne die Baseline zu nennen. Außerdem: Precision und Recall über den falschen Nenner rechnen und F1 als arithmetisches Mittel ausrechnen. In Antworten steht die Formel mit eingesetzten Zahlen und ein Satz, welcher Fehler im Anwendungsfall teurer ist.
+
+### Merksatz
+Accuracy: alles richtig? Precision: Alarm berechtigt? Recall: Fälle gefunden? F1: beides zusammen.
+
+Siehe auch: Accuracy · Balanced Accuracy · Precision · Recall · F1-Maß · Spezifität · Konfusionsmatrix · Unausgeglichene Klassen · Baseline · Entscheidungsschwelle · ROC-Kurve · Falsch-Positiv-Rate
+Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.3 · Deep Dive 7, 2.4 · Deep Dive 7, 4.5
+
 ## Achsenabschnitt (Intercept)
 <!-- id: achsenabschnitt · quellen: Karte DD4, DD4 2.1, DD4 2.2 · stand: 2026-11 -->
 
@@ -1266,6 +1333,59 @@ Namen durch Nummern ersetzen und das „anonymisiert“ nennen – das ist Pseud
 Anonym ist nur, was niemand mehr zurückführen kann.
 
 Siehe auch: Pseudonymisierung · K-Anonymität · Personenbezogene Daten · DSGVO · Datenminimierung
+Mehr: Deep Dive 10, Teil 3 · Deep Dive 5, 5.4
+
+## Anonymisierung und Pseudonymisierung im Vergleich
+<!-- id: anonymisierung-und-pseudonymisierung-im-vergleich · quellen: Karte DD10, DD10 Teil 3, DD5 5.4 · stand: 2026-11 -->
+
+Beide Verfahren nehmen Daten den direkten Personenbezug, aber nur bei der Anonymisierung ist er dauerhaft weg; pseudonymisierte Daten lassen sich mit einem getrennt aufbewahrten Schlüssel wieder einer Person zuordnen.
+
+### Erklärung
+| Kriterium | Pseudonymisierung | Anonymisierung |
+|---|---|---|
+| Zweck | Risiko senken, Auswertung mit Rückführbarkeit | Personenbezug endgültig entfernen |
+| Funktionsweise | Kennzeichen (Namen, Nummern) durch Pseudonyme ersetzen; Zuordnungstabelle getrennt und geschützt aufbewahren | Merkmale aggregieren, vergröbern, unterdrücken; Einzelzeilen entfallen |
+| Rückführung | mit Zusatzinformation (Schlüssel) möglich | mit vertretbarem Aufwand nicht möglich |
+| Rechtsgrundlage | Art. 4 Nr. 5 DSGVO; Schutzmaßnahme nach Art. 25 und Art. 32 | keine eigene Definition; Maßstab ist Erwägungsgrund 26 |
+| DSGVO anwendbar | ja, vollständig | nein, für wirklich anonyme Daten |
+| Betroffenenrechte, Löschpflichten | gelten weiter | entfallen für die anonymen Daten |
+| Vorteil | Einzelfälle bleiben nachvollziehbar, Daten lassen sich später zusammenführen | frei nutzbar und weitergebbar |
+| Nachteil | bleibt personenbezogen, Schlüssel ist Angriffsziel | Informationsverlust, Einzelfallbezug und Längsschnitt gehen verloren |
+
+Erwägungsgrund 26 zieht die Linie: Pseudonymisierte Daten, die durch Hinzuziehung zusätzlicher Informationen einer Person zugeordnet werden könnten, gelten als Informationen über eine identifizierbare Person. Anonym sind Daten erst, wenn die Person unter Berücksichtigung aller Mittel, die nach allgemeinem Ermessen wahrscheinlich genutzt werden (Kosten, Zeitaufwand, verfügbare Technik), nicht mehr identifiziert werden kann. Der **Vorgang** des Anonymisierens ist selbst noch eine Verarbeitung personenbezogener Daten und braucht eine Rechtsgrundlage, zumeist über die Vereinbarkeit mit dem ursprünglichen Zweck. Bleiben die Rohdaten beim Verantwortlichen erhalten, sind einzelne „anonymisierte“ Datensätze oft nur pseudonymisiert; sicher anonym sind in der Regel nur ausreichend aggregierte Auswertungen.
+
+**Wann nehme ich was?** Brauchst du nur Muster und Kennzahlen (Durchschnitte, Verteilungen, Berichte), anonymisiere durch Aggregation – dann entfallen die Pflichten der DSGVO für das Ergebnis. Brauchst du Einzelfälle, etwa um Fehler zu korrigieren, Datensätze über Zeit zu verknüpfen oder nachträglich Betroffenenrechte zu bedienen, pseudonymisiere und halte alle DSGVO-Pflichten ein. In der Praxis arbeiten Analysten oft mit pseudonymisierten Daten und veröffentlichen anonyme Berichte.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH wertet die Reparaturzeiten ihrer 20 Techniker aus. Die Werkstatt Nord hat 12, die Werkstatt Süd 8 Techniker; nach Altersband verteilen sie sich so:
+
+| Altersband | Nord | Süd | zusammen |
+|---|---|---|---|
+| unter 30 | 4 | 1 | 5 |
+| 30 bis 49 | 5 | 4 | 9 |
+| ab 50 | 3 | 3 | 6 |
+| Summe | 12 | 8 | 20 |
+
+- **Pseudonymisiert:** Die Namen sind durch „T-01“ bis „T-20“ ersetzt, die Zuordnungstabelle liegt nur bei der Personalabteilung. Es bleiben 20 Einzelzeilen mit Werkstatt, Alter und Dauer. Die Daten sind weiter personenbezogen: Wer den Schlüssel hat, findet jede Person. Und auch ohne Schlüssel gibt es einen Schwachpunkt: Die Kombination „Süd, unter 30“ trifft nur auf **eine** Person zu, die Kolleginnen und Kollegen erkennen sie sofort.
+- **Anonymisiert, Versuch 1:** Auswertung nach Werkstatt und Altersband. Die kleinste Gruppe hat 1 Person, also k = 1 – nicht anonym.
+- **Versuch 2:** Nur zwei Altersbänder (unter 50 / ab 50) je Werkstatt: Nord 9 und 3, Süd 5 und 3. Die kleinste Gruppe hat 3 Personen, k = 3 – unter der Mindestgröße 5.
+- **Versuch 3:** Nur nach Altersband, ohne Werkstatt: Gruppen von 5, 9 und 6 Personen, kleinste Gruppe 5, also k = 5. Die Mindestgruppengröße von fünf Personen ist erfüllt; die Einzelzeilen sind verschwunden. Je Gruppe wird nur die Durchschnittsdauer ausgewiesen.
+
+Die Zahl k ist die Größe der kleinsten Gruppe; sie ist ein Hilfsmaß und keine Garantie, weil auch Zusatzwissen der Betrachter zählt.
+
+### Abgrenzung
+- **Verschlüsselung** schützt die Vertraulichkeit, ändert aber den Personenbezug nicht: Mit dem Schlüssel sind die Daten wieder lesbar.
+- **Hashing** von Namen oder Kundennummern ist meist nur eine Pseudonymisierung, weil man bekannte Werte durchprobieren und vergleichen kann.
+- **Datenminimierung** und **Löschung** sind eigene Grundsätze; sie ersetzen weder das eine noch das andere Verfahren.
+- Pseudonymisierung ersetzt nicht die Mitbestimmung des Betriebsrats, wenn das System weiter zur Leistungskontrolle geeignet ist.
+
+### Prüfungsfalle
+„Wir haben die Namen durch Nummern ersetzt, also ist das anonymisiert und die DSGVO gilt nicht mehr“ – das ist der Klassiker. Richtig: Pseudonymisierte Daten bleiben personenbezogen, die DSGVO gilt vollständig, das Verfahren ist nur eine Schutzmaßnahme. Umgekehrt nicht „Anonymisierung“ für Maßnahmen schreiben, bei denen der Schlüssel im selben Ordner liegt.
+
+### Merksatz
+Pseudonym = Maske mit Schlüssel, anonym = Maske ohne Schlüssel.
+
+Siehe auch: Anonymisierung · Pseudonymisierung · K-Anonymität · Personenbezogene Daten · DSGVO · Datenminimierung · Hashing · Verantwortlicher · Betroffene Person
 Mehr: Deep Dive 10, Teil 3 · Deep Dive 5, 5.4
 
 ## Anreichern
