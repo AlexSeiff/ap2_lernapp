@@ -1258,7 +1258,7 @@ Nur 4 von 10 Alarmen sind berechtigt.
 ### Merksatz
 Precision: Wenn das Modell Alarm schlägt – wie oft zu Recht?
 
-Siehe auch: Recall · F1-Maß · Accuracy · Konfusionsmatrix
+Siehe auch: Recall · F1-Maß · Accuracy · Konfusionsmatrix · Accuracy, Precision, Recall und F1 im Vergleich
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.4
 
 ## Prepared Statements
@@ -1879,7 +1879,7 @@ Im Event Log des Reparaturservices wird die Spalte resource („Tim Meyer“) du
 ### Merksatz
 Pseudonym = Maske mit Schlüssel, anonym = Maske ohne Schlüssel.
 
-Siehe auch: Anonymisierung · Personenbezogene Daten · K-Anonymität · Mitbestimmung des Betriebsrats
+Siehe auch: Anonymisierung · Personenbezogene Daten · K-Anonymität · Mitbestimmung des Betriebsrats · Anonymisierung und Pseudonymisierung im Vergleich
 Mehr: Deep Dive 10, Teil 3 · Deep Dive 5, 5.4
 
 ## PUE

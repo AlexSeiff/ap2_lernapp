@@ -86,7 +86,7 @@ Ein Lakehouse ist kein Data Lake mit neuem Namen – ohne Transaktionen, Schema 
 ### Merksatz
 Lakehouse = Speicher des Sees plus Ordnung des Lagerhauses.
 
-Siehe auch: Data Lake · Data Warehouse · ACID · Staging Area
+Siehe auch: Data Lake · Data Warehouse · ACID · Staging Area · Data Lake, Data Warehouse und Lakehouse im Vergleich
 Mehr: Deep Dive 8, 5.1
 
 ## Lane
@@ -452,7 +452,7 @@ Eine Bedingung auf die rechte Tabelle ins WHERE schreiben (`WHERE b.bestelldatum
 ### Merksatz
 Links bleibt alles, rechts füllt NULL die Lücken.
 
-Siehe auch: INNER JOIN · NULL · NULL-Logik (Prüferklassiker)
+Siehe auch: INNER JOIN · NULL · NULL-Logik (Prüferklassiker) · JOIN-Arten im Vergleich
 Mehr: Deep Dive 1, 2.2
 
 ## Leiharbeit
@@ -942,7 +942,7 @@ Sie wegen des Wortes „Regression“ der Regression statt der Klassifikation zu
 ### Merksatz
 Logistisch heißt: Wahrscheinlichkeit rein, Klasse raus.
 
-Siehe auch: Klassifikation · Regression · Entscheidungsschwelle · Entscheidungsbaum · Random Forest
+Siehe auch: Klassifikation · Regression · Entscheidungsschwelle · Entscheidungsbaum · Random Forest · Klassifikation, Regression und Clustering im Vergleich
 Mehr: Deep Dive 6, 2.4
 
 ## Lohnsteuer

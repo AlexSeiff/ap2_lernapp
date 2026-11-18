@@ -448,7 +448,7 @@ ELT als „ETL ohne Transformation“ beschreiben – transformiert wird auch hi
 ### Merksatz
 ETL putzt vor dem Einräumen, ELT danach.
 
-Siehe auch: ETL · Data Lake · Schema-on-Read · Lakehouse · T – Transform
+Siehe auch: ETL · Data Lake · Schema-on-Read · Lakehouse · T – Transform · ETL und ELT im Vergleich
 Mehr: Deep Dive 8, 3.2
 
 ## Elternzeit
@@ -1297,7 +1297,7 @@ ETL als bloßes „Kopieren“ beschreiben oder fehlerhafte Sätze stillschweige
 ### Merksatz
 Lesen, veredeln, liefern – und jeden abgewiesenen Satz protokollieren.
 
-Siehe auch: E – Extract · T – Transform · L – Load · ELT · Quarantäne
+Siehe auch: E – Extract · T – Transform · L – Load · ELT · Quarantäne · ETL und ELT im Vergleich
 Mehr: Deep Dive 8, 3.1 · Deep Dive 8, 3.2 · Deep Dive 8, 3.3
 
 ## ETL und ELT im Vergleich

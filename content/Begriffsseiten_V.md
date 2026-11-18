@@ -37,7 +37,7 @@ Den Systemtest gegen das Lastenheft und den Abnahmetest gegen das Pflichtenheft 
 ### Merksatz
 Links entwerfen, rechts prüfen – jede Ebene hat ihr Gegenüber.
 
-Siehe auch: Wasserfallmodell · V-Modell XT · Komponententest · Abnahmetest · Systemtest
+Siehe auch: Wasserfallmodell · V-Modell XT · Komponententest · Abnahmetest · Systemtest · Wasserfall, V-Modell, Scrum und Kanban im Vergleich
 Mehr: Deep Dive 12, Teil 2 · Deep Dive 16, 2.1
 
 ## V-Modell XT
@@ -1093,7 +1093,7 @@ Eine Vollsicherung auf demselben System oder NAS im selben Netz lagern – Ranso
 ### Merksatz
 Voll dauert lang, stellt aber am schnellsten wieder her.
 
-Siehe auch: Differenzielle Sicherung · Inkrementelle Sicherung · 3-2-1-Regel · Generationenprinzip (Großvater-Vater-Sohn)
+Siehe auch: Differenzielle Sicherung · Inkrementelle Sicherung · 3-2-1-Regel · Generationenprinzip (Großvater-Vater-Sohn) · Vollsicherung, differenzielle und inkrementelle Sicherung im Vergleich
 Mehr: Deep Dive 10, 4.4
 
 ## Vollsicherung, differenzielle und inkrementelle Sicherung im Vergleich

@@ -84,7 +84,7 @@ Die logistische Regression ist trotz des Namens ein Klassifikationsverfahren –
 ### Merksatz
 Gibt es eine Spalte mit der richtigen Antwort, ist es überwachtes Lernen.
 
-Siehe auch: Unüberwachtes Lernen · Klassifikation · Regression · Regressionskoeffizient · Zielvariable · Validierungsdaten
+Siehe auch: Unüberwachtes Lernen · Klassifikation · Regression · Regressionskoeffizient · Zielvariable · Validierungsdaten · Klassifikation, Regression und Clustering im Vergleich
 Mehr: Deep Dive 6, 2.2 · Deep Dive 6, 2.3
 
 ## UG (haftungsbeschränkt)
@@ -326,7 +326,7 @@ Gegen Underfitting „mehr Daten“ vorschlagen – das hilft vor allem gegen Ov
 ### Merksatz
 Overfitting lernt auswendig, Underfitting lernt gar nicht.
 
-Siehe auch: Overfitting · Kreuzvalidierung · Trainingsdaten · Testdaten · Lernkurve · Bias-Variance-Trade-off · Regularisierung
+Siehe auch: Overfitting · Kreuzvalidierung · Trainingsdaten · Testdaten · Lernkurve · Bias-Variance-Trade-off · Regularisierung · Overfitting und Underfitting im Vergleich
 Mehr: Deep Dive 7, 1.2
 
 ## Undersampling
@@ -670,7 +670,7 @@ Eine Aufgabe als Klassifikation einordnen, obwohl die Gruppen vorher nicht bekan
 ### Merksatz
 Keine Labels? Dann finden statt vorhersagen.
 
-Siehe auch: Überwachtes Lernen · Clustering · Assoziationsanalyse · K-Means · Dimensionsreduktion
+Siehe auch: Überwachtes Lernen · Clustering · Assoziationsanalyse · K-Means · Dimensionsreduktion · Klassifikation, Regression und Clustering im Vergleich
 Mehr: Deep Dive 6, 2.2 · Deep Dive 6, Teil 3
 
 ## Unvollständige Fälle

@@ -17,7 +17,7 @@ Wer $(P + R) / 2$ rechnet, bekommt das arithmetische Mittel: Bei P = 0,6 und R =
 ### Merksatz
 F1 ist nur gut, wenn Precision **und** Recall gut sind.
 
-Siehe auch: Precision · Recall · Konfusionsmatrix · Accuracy · Unausgeglichene Klassen
+Siehe auch: Precision · Recall · Konfusionsmatrix · Accuracy · Unausgeglichene Klassen · Accuracy, Precision, Recall und F1 im Vergleich
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.3
 
 ## Fachgespräch

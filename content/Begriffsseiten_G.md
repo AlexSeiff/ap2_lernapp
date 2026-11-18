@@ -60,7 +60,7 @@ Den Lagerbestand aus `fakt_lagerbestand` über Monate summieren – er ist semi-
 ### Merksatz
 Galaxy: viele Sterne, gemeinsame Dimensionen.
 
-Siehe auch: Star-Schema · Snowflake-Schema · Conformed Dimensions · Faktentabelle
+Siehe auch: Star-Schema · Snowflake-Schema · Conformed Dimensions · Faktentabelle · Star-, Snowflake- und Galaxy-Schema im Vergleich
 Mehr: Deep Dive 8, 4.3
 
 ## Gantt-Diagramm
@@ -341,7 +341,7 @@ Das Generationenprinzip regelt, **wie lange** Stände aufbewahrt werden; voll, d
 ### Merksatz
 Söhne für Tage, Väter für Wochen, Großväter für Monate.
 
-Siehe auch: 3-2-1-Regel · Vollsicherung · Inkrementelle Sicherung · Ransomware · RPO
+Siehe auch: 3-2-1-Regel · Vollsicherung · Inkrementelle Sicherung · Ransomware · RPO · Vollsicherung, differenzielle und inkrementelle Sicherung im Vergleich
 Mehr: Deep Dive 10, 4.4
 
 ## Generative KI
@@ -1196,7 +1196,7 @@ Eine Fensterfunktion (`OVER (PARTITION BY …)`) rechnet ebenfalls je Gruppe, be
 ### Merksatz
 Was nicht aggregiert ist, gehört ins GROUP BY.
 
-Siehe auch: HAVING · WHERE · Fensterfunktion · COALESCE
+Siehe auch: HAVING · WHERE · Fensterfunktion · COALESCE · WHERE und HAVING im Vergleich
 Mehr: Deep Dive 1, 2.1
 
 ## Grundfreibetrag

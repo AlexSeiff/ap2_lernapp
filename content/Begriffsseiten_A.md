@@ -267,7 +267,7 @@ $\text{Accuracy} = \frac{60 + 810}{1000} = 87\ \%$. Ein triviales Modell, das im
 ### Merksatz
 Hohe Accuracy bei seltenen Fällen beweist nichts – erst mit der Baseline vergleichen.
 
-Siehe auch: Konfusionsmatrix · Precision · Recall · Balanced Accuracy · Unausgeglichene Klassen
+Siehe auch: Konfusionsmatrix · Precision · Recall · Balanced Accuracy · Unausgeglichene Klassen · Accuracy, Precision, Recall und F1 im Vergleich
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.3
 
 ## Accuracy, Precision, Recall und F1 im Vergleich
@@ -622,7 +622,7 @@ Ein **hybrides** Vorgehen kombiniert festen Rahmen mit Meilensteinen und iterati
 ### Merksatz
 Unklare Anforderungen: kurz planen, liefern, lernen, anpassen.
 
-Siehe auch: Scrum · Kanban · Wasserfallmodell · V-Modell · Sprint
+Siehe auch: Scrum · Kanban · Wasserfallmodell · V-Modell · Sprint · Wasserfall, V-Modell, Scrum und Kanban im Vergleich
 Mehr: Deep Dive 12, Teil 2
 
 ## Akteur
@@ -1332,7 +1332,7 @@ Namen durch Nummern ersetzen und das „anonymisiert“ nennen – das ist Pseud
 ### Merksatz
 Anonym ist nur, was niemand mehr zurückführen kann.
 
-Siehe auch: Pseudonymisierung · K-Anonymität · Personenbezogene Daten · DSGVO · Datenminimierung
+Siehe auch: Pseudonymisierung · K-Anonymität · Personenbezogene Daten · DSGVO · Datenminimierung · Anonymisierung und Pseudonymisierung im Vergleich
 Mehr: Deep Dive 10, Teil 3 · Deep Dive 5, 5.4
 
 ## Anonymisierung und Pseudonymisierung im Vergleich

@@ -270,7 +270,7 @@ Ohne Skalierung clustern – dann entscheidet allein das Merkmal mit der größt
 ### Merksatz
 Keine Labels, aber Ähnlichkeit – das ist Clustering.
 
-Siehe auch: K-Means · DBSCAN · Hierarchisches Clustering · Unüberwachtes Lernen · Euklidischer Abstand · Skalierung · Klassifikation
+Siehe auch: K-Means · DBSCAN · Hierarchisches Clustering · Unüberwachtes Lernen · Euklidischer Abstand · Skalierung · Klassifikation · Klassifikation, Regression und Clustering im Vergleich
 Mehr: Deep Dive 6, Teil 3
 
 ## CNN (Convolutional Neural Network)

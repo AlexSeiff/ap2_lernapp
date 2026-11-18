@@ -178,7 +178,7 @@ Die Möbelhaus Nordholz GmbH speichert Klickdaten des Onlineshops, Kundenbewertu
 ### Merksatz
 Erst speichern, später verstehen – aber nur mit Katalog.
 
-Siehe auch: Data Warehouse · Schema-on-Read · ELT · Lakehouse · Big Data
+Siehe auch: Data Warehouse · Schema-on-Read · ELT · Lakehouse · Big Data · Data Lake, Data Warehouse und Lakehouse im Vergleich
 Mehr: Deep Dive 8, 5.1
 
 ## Data Lake, Data Warehouse und Lakehouse im Vergleich
@@ -446,7 +446,7 @@ ETL nur als „Daten kopieren“ beschreiben – Bereinigen, Vereinheitlichen un
 ### Merksatz
 Themenorientiert, integriert, zeitbezogen, beständig.
 
-Siehe auch: OLAP · OLTP · ETL · Data Mart · Star-Schema
+Siehe auch: OLAP · OLTP · ETL · Data Mart · Star-Schema · Data Lake, Data Warehouse und Lakehouse im Vergleich
 Mehr: Deep Dive 8, Teil 2 · Deep Dive 2, Denormalisierung
 
 ## Data-Ink-Ratio
@@ -1494,7 +1494,7 @@ Differenziell und inkrementell vertauschen – merk dir: inkrementell sichert am
 ### Merksatz
 Differenziell: immer seit der Vollsicherung – also wächst sie.
 
-Siehe auch: Vollsicherung · Inkrementelle Sicherung · 3-2-1-Regel · RTO und RPO · Generationenprinzip (Großvater-Vater-Sohn)
+Siehe auch: Vollsicherung · Inkrementelle Sicherung · 3-2-1-Regel · RTO und RPO · Generationenprinzip (Großvater-Vater-Sohn) · Vollsicherung, differenzielle und inkrementelle Sicherung im Vergleich
 Mehr: Deep Dive 10, 4.4
 
 ## Digitale Signatur
@@ -2031,7 +2031,7 @@ Aus einem hohen r eine Handlungsempfehlung ableiten, ohne eine Drittvariable zu 
 ### Merksatz
 Korrelation ≠ Kausalität – oft steckt eine Dritte dahinter.
 
-Siehe auch: Scheinkorrelation · Kausalität · Korrelation · Zufall / Scheinkorrelation · Korrelationskoeffizient nach Pearson
+Siehe auch: Scheinkorrelation · Kausalität · Korrelation · Zufall / Scheinkorrelation · Korrelationskoeffizient nach Pearson · Korrelation und Kausalität im Vergleich
 Mehr: Deep Dive 4, 1.3
 
 ## DSGVO

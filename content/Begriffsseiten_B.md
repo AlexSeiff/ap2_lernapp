@@ -66,7 +66,7 @@ Bei 1 % Betrugsfällen eine Accuracy von 99 % als gutes Ergebnis werten – das 
 ### Merksatz
 Jede Klasse zählt gleich viel – Zufall und Mehrheitsraten landen bei 50 %.
 
-Siehe auch: Accuracy · Recall · Spezifität · Unausgeglichene Klassen · Baseline
+Siehe auch: Accuracy · Recall · Spezifität · Unausgeglichene Klassen · Baseline · Accuracy, Precision, Recall und F1 im Vergleich
 Mehr: Deep Dive 7, 4.5
 
 ## Balanced Scorecard
@@ -294,7 +294,7 @@ Batch pauschal als „veraltet“ und Streaming als „immer besser“ bezeichne
 ### Merksatz
 Batch sammelt und verarbeitet im Stapel – aktuell ist nur, was der letzte Lauf geholt hat.
 
-Siehe auch: Stream-Verarbeitung · ETL · Deltaextraktion · Velocity
+Siehe auch: Stream-Verarbeitung · ETL · Deltaextraktion · Velocity · Batch- und Stream-Verarbeitung im Vergleich
 Mehr: Deep Dive 8, 5.2
 
 ## BBiG
@@ -1157,7 +1157,7 @@ Annehmen, ein komplexeres Modell sei immer besser: Es senkt zwar den Fehler auf 
 ### Merksatz
 Zu einfach trifft daneben, zu komplex zittert – gesucht ist die goldene Mitte.
 
-Siehe auch: Overfitting · Underfitting · Bias · Varianz · Kreuzvalidierung
+Siehe auch: Overfitting · Underfitting · Bias · Varianz · Kreuzvalidierung · Overfitting und Underfitting im Vergleich
 Mehr: Deep Dive 7, 1.2
 
 ## Big Data

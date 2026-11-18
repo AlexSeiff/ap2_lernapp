@@ -183,7 +183,7 @@ Auswertungen direkt auf dem OLTP-System empfehlen – das bremst das Tagesgesch�
 ### Merksatz
 OLTP führt das Geschäft, OLAP versteht es.
 
-Siehe auch: OLTP · OLAP-Würfel · Data Warehouse · Star-Schema · Drill-down
+Siehe auch: OLTP · OLAP-Würfel · Data Warehouse · Star-Schema · Drill-down · OLTP und OLAP im Vergleich
 Mehr: Deep Dive 8, Teil 1 · Deep Dive 8, 4.5
 
 ## OLAP-Würfel
@@ -236,7 +236,7 @@ Ein normalisiertes Datenmodell im DWH als Fehler und im OLTP als Pflicht darstel
 ### Merksatz
 OLTP: viele kleine Transaktionen, immer der aktuelle Stand.
 
-Siehe auch: OLAP · ACID · ETL · 3. Normalform · Data Warehouse
+Siehe auch: OLAP · ACID · ETL · 3. Normalform · Data Warehouse · OLTP und OLAP im Vergleich
 Mehr: Deep Dive 8, Teil 1
 
 ## OLTP und OLAP im Vergleich
@@ -746,7 +746,7 @@ Ein Modell nach der Trainingsgüte beurteilen – aussagekräftig ist nur die G�
 ### Merksatz
 Wer auswendig lernt, besteht nur die Übung, nicht die Prüfung.
 
-Siehe auch: Underfitting · Kreuzvalidierung · Train-Test-Split · Entscheidungsbaum · Regularisierung · Early Stopping · Lernkurve · Bias-Variance-Trade-off
+Siehe auch: Underfitting · Kreuzvalidierung · Train-Test-Split · Entscheidungsbaum · Regularisierung · Early Stopping · Lernkurve · Bias-Variance-Trade-off · Overfitting und Underfitting im Vergleich
 Mehr: Deep Dive 7, 1.2 · Deep Dive 6, 7.3
 
 ## Overfitting und Underfitting im Vergleich

@@ -297,7 +297,7 @@ Precision und Recall werden über den falschen Nenner verwechselt – vorher die
 ### Merksatz
 Recall: Wie viele der Gesuchten habe ich erwischt?
 
-Siehe auch: Precision · Spezifität · F1-Maß · Konfusionsmatrix · Falsch negativ
+Siehe auch: Precision · Spezifität · F1-Maß · Konfusionsmatrix · Falsch negativ · Accuracy, Precision, Recall und F1 im Vergleich
 Mehr: Deep Dive 7, 2.2 · Deep Dive 7, 2.4
 
 ## Rechenschaftspflicht
@@ -612,7 +612,7 @@ Die **logistische** Regression ist trotz ihres Namens ein Klassifikationsverfahr
 ### Merksatz
 Zahl vorhersagen = Regression, Klasse vorhersagen = Klassifikation.
 
-Siehe auch: Klassifikation · Überwachtes Lernen · Regressionsgerade · Regressionskoeffizient · Logistische Regression · RMSE · Residuum · Interpolation · Extrapolation · Overfitting · Underfitting · Multikollinearität · Kausalität
+Siehe auch: Klassifikation · Überwachtes Lernen · Regressionsgerade · Regressionskoeffizient · Logistische Regression · RMSE · Residuum · Interpolation · Extrapolation · Overfitting · Underfitting · Multikollinearität · Kausalität · Klassifikation, Regression und Clustering im Vergleich
 Mehr: Deep Dive 6, 2.3 · Deep Dive 4, Teil 2
 
 ## Regressionsgerade

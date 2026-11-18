@@ -205,7 +205,7 @@ Aus r = 0,9 auf „x verursacht y“ schließen. Richtig: „starker Zusammenhan
 ### Merksatz
 Korrelation zeigt, dass etwas zusammen auftritt – nicht, warum.
 
-Siehe auch: Korrelation · Kausalität · Drittvariable · Signifikanz
+Siehe auch: Korrelation · Kausalität · Drittvariable · Signifikanz · Korrelation und Kausalität im Vergleich
 Mehr: Deep Dive 4, 1.3
 
 ## Schema Evolution
@@ -575,7 +575,7 @@ Backlog Refinement als Event nennen – es ist eine laufende Tätigkeit, kein Ev
 ### Merksatz
 3 – 5 – 3: drei Verantwortlichkeiten, fünf Events, drei Artefakte.
 
-Siehe auch: Sprint · Scrum Master · Product Owner · Kanban · Wasserfallmodell
+Siehe auch: Sprint · Scrum Master · Product Owner · Kanban · Wasserfallmodell · Wasserfall, V-Modell, Scrum und Kanban im Vergleich
 Mehr: Deep Dive 12, Teil 2
 
 ## Scrum Master
@@ -1459,7 +1459,7 @@ Die Abbildung zeigt die Kette Produkt → Warengruppe → Kategorie; die ausgela
 ### Merksatz
 Schneeflocke spart Speicher, Stern spart Joins.
 
-Siehe auch: Star-Schema · Galaxy-Schema · Dimensionstabelle · Normalisierung
+Siehe auch: Star-Schema · Galaxy-Schema · Dimensionstabelle · Normalisierung · Star-, Snowflake- und Galaxy-Schema im Vergleich
 Mehr: Deep Dive 8, 4.3 · Deep Dive 17, 3.5
 
 ## SOAP
@@ -1945,7 +1945,7 @@ Spezifität mit Precision verwechseln – die Spezifität schaut nur auf die tat
 ### Merksatz
 Spezifität: Wie oft schlägt das Modell zu Recht keinen Alarm?
 
-Siehe auch: Recall · Precision · Falsch-Positiv-Rate · Konfusionsmatrix
+Siehe auch: Recall · Precision · Falsch-Positiv-Rate · Konfusionsmatrix · Accuracy, Precision, Recall und F1 im Vergleich
 Mehr: Deep Dive 7, 2.2
 
 ## Sprint
@@ -2185,7 +2185,7 @@ In der Staging Area schon bereinigen – dann gehen die Rohdaten für Nachladen 
 ### Merksatz
 Erst roh ablegen, dann veredeln.
 
-Siehe auch: ETL · Data Warehouse · Data Mart · Data Lake
+Siehe auch: ETL · Data Warehouse · Data Mart · Data Lake · ETL und ELT im Vergleich
 Mehr: Deep Dive 8, Teil 2
 
 ## Stakeholder
@@ -2553,7 +2553,7 @@ Kennzahlen in die Dimension oder beschreibende Merkmale in die Faktentabelle leg
 ### Merksatz
 In der Mitte die Zahlen, außen die Beschreibungen.
 
-Siehe auch: Faktentabelle · Dimensionstabelle · Snowflake-Schema · Galaxy-Schema · OLAP
+Siehe auch: Faktentabelle · Dimensionstabelle · Snowflake-Schema · Galaxy-Schema · OLAP · Star-, Snowflake- und Galaxy-Schema im Vergleich
 Mehr: Deep Dive 8, 4.2 · Deep Dive 17, 3.4
 
 ## Stärke
@@ -2842,7 +2842,7 @@ Streaming für jede Auswertung fordern. Ein Monatsbericht braucht keinen Datenst
 ### Merksatz
 Stream: jedes Ereignis sofort. Batch: der ganze Stapel später.
 
-Siehe auch: Batch-Verarbeitung · Velocity · Change Data Capture · ETL
+Siehe auch: Batch-Verarbeitung · Velocity · Change Data Capture · ETL · Batch- und Stream-Verarbeitung im Vergleich
 Mehr: Deep Dive 8, 5.2
 
 ## Streik

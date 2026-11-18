@@ -180,7 +180,7 @@ Wer bei unklaren, sich ändernden Anforderungen das Wasserfallmodell begründet,
 ### Merksatz
 Wasser fließt nicht bergauf – zurück in eine frühere Phase ist teuer.
 
-Siehe auch: V-Modell · Scrum · Agile Vorgehensmodelle · Lastenheft
+Siehe auch: V-Modell · Scrum · Agile Vorgehensmodelle · Lastenheft · Wasserfall, V-Modell, Scrum und Kanban im Vergleich
 Mehr: Deep Dive 12, Teil 2
 
 ## WCAG
@@ -509,7 +509,7 @@ DataFit: Nur Clara (Köln), David (München) und Emre (Hamburg) erfüllen die Be
 ### Merksatz
 WHERE siebt Zeilen, HAVING siebt Gruppen.
 
-Siehe auch: HAVING · GROUP BY · NULL
+Siehe auch: HAVING · GROUP BY · NULL · WHERE und HAVING im Vergleich
 Mehr: SQL-Zusatz 3.1
 
 ## WHERE und HAVING im Vergleich

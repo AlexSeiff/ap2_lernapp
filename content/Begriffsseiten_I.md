@@ -421,7 +421,7 @@ Inkrementell und differenziell vertauscht – entscheidend ist der Bezugspunkt: 
 ### Merksatz
 Inkrementell sichert am schnellsten und stellt am langsamsten wieder her.
 
-Siehe auch: Vollsicherung · Differenzielle Sicherung · 3-2-1-Regel
+Siehe auch: Vollsicherung · Differenzielle Sicherung · 3-2-1-Regel · Vollsicherung, differenzielle und inkrementelle Sicherung im Vergleich
 Mehr: Deep Dive 10, 4.4
 
 ## Innentäter
@@ -516,7 +516,7 @@ In der Übungsdatenbank: 6 Zeilen (jede Bestellung hat einen Kunden). `kunde LEF
 ### Merksatz
 INNER JOIN zeigt nur Paare – wer keinen Partner hat, verschwindet.
 
-Siehe auch: LEFT JOIN · Fremdschlüssel · Primärschlüssel
+Siehe auch: LEFT JOIN · Fremdschlüssel · Primärschlüssel · JOIN-Arten im Vergleich
 Mehr: Deep Dive 1, 2.2
 
 ## INSERT

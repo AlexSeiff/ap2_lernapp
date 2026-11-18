@@ -19,7 +19,7 @@ Annehmen, das Entfernen von Name und Kundennummer mache einen Datensatz anonym �
 ### Merksatz
 K-Anonymität: Jeder sieht aus wie mindestens k − 1 andere.
 
-Siehe auch: Anonymisierung · Pseudonymisierung · Personenbezogene Daten
+Siehe auch: Anonymisierung · Pseudonymisierung · Personenbezogene Daten · Anonymisierung und Pseudonymisierung im Vergleich
 Mehr: Deep Dive 10, Teil 3
 
 ## K-Means
@@ -111,7 +111,7 @@ Kanban mit einer reinen To-do-Liste gleichsetzen – ohne WIP-Limits fehlt das K
 ### Merksatz
 Weniger gleichzeitig anfangen, mehr fertig machen.
 
-Siehe auch: Kanban-Board · Scrum · WIP-Limit
+Siehe auch: Kanban-Board · Scrum · WIP-Limit · Wasserfall, V-Modell, Scrum und Kanban im Vergleich
 Mehr: Deep Dive 12, Teil 2 · Deep Dive 17, 5.4
 
 ## Kanban-Board
@@ -361,7 +361,7 @@ Aus einem hohen r oder R² auf eine Ursache schließen.
 ### Merksatz
 Korrelation ist ein Hinweis, Kausalität braucht einen Beweis.
 
-Siehe auch: Korrelation · Korrelationskoeffizient nach Pearson · Drittvariable
+Siehe auch: Korrelation · Korrelationskoeffizient nach Pearson · Drittvariable · Korrelation und Kausalität im Vergleich
 Mehr: Deep Dive 4, 1.3
 
 ## Kennzahlentypen
@@ -648,7 +648,7 @@ Die logistische Regression wegen ihres Namens für ein Regressionsverfahren halt
 ### Merksatz
 Habe ich Labels und suche eine Kategorie? Dann Klassifikation.
 
-Siehe auch: Regression · K-Nächste-Nachbarn · ID3 · Konfusionsmatrix
+Siehe auch: Regression · K-Nächste-Nachbarn · ID3 · Konfusionsmatrix · Klassifikation, Regression und Clustering im Vergleich
 Mehr: Deep Dive 6, 2.3 · Deep Dive 6, Teil 7
 
 ## Klassifikation, Regression und Clustering im Vergleich
@@ -927,7 +927,7 @@ FN und FP vertauschen – FN ist ein übersehener positiver Fall, nicht ein Fehl
 ### Merksatz
 Erst die positive Klasse festlegen, dann die vier Felder füllen.
 
-Siehe auch: Precision · Recall · Accuracy · ROC-Kurve
+Siehe auch: Precision · Recall · Accuracy · ROC-Kurve · Accuracy, Precision, Recall und F1 im Vergleich
 Mehr: Deep Dive 7, Teil 2 · Deep Dive 17, 6.10
 
 ## Konjunkturphasen
@@ -1229,7 +1229,7 @@ Aus r ≈ 0 auf „kein Zusammenhang“ schließen – ein U-förmiger Zusammenh
 ### Merksatz
 Korrelation zeigt, dass sich etwas gemeinsam bewegt – nicht, warum.
 
-Siehe auch: Kausalität · Korrelationskoeffizient nach Pearson · Spearman-Rangkorrelation · Streudiagramm · Regression · Multikollinearität
+Siehe auch: Kausalität · Korrelationskoeffizient nach Pearson · Spearman-Rangkorrelation · Streudiagramm · Regression · Multikollinearität · Korrelation und Kausalität im Vergleich
 Mehr: Deep Dive 4, 1.1 · Deep Dive 4, 1.3
 
 ## Korrelation und Kausalität im Vergleich

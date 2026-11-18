@@ -159,7 +159,7 @@ DataFit-Daten: Köln 2, Hamburg 2; München (1) fällt durch HAVING heraus.
 ### Merksatz
 WHERE vor, HAVING nach der Gruppierung.
 
-Siehe auch: GROUP BY · WHERE · Fensterfunktion · Unterabfrage
+Siehe auch: GROUP BY · WHERE · Fensterfunktion · Unterabfrage · WHERE und HAVING im Vergleich
 Mehr: Deep Dive 1, 2.1 · SQL-Zusatz, 3.1
 
 ## HDFS
