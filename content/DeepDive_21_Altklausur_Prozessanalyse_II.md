@@ -199,7 +199,7 @@ Um die Abholung zu beschleunigen, wurde die **Nordholz-Kundenkarte** eingeführt
 
 **B3 (13 P):** Der Antragsprozess soll über die geplante App laufen. Kundinnen und Kunden sollen die Karte wahlweise **digital** (QR-Code in der App) oder als **Plastikkarte per Post** erhalten. *Erstellen* Sie für den optimierten Prozess eine **eEPK** von der Registrierung in der App bis zur aktiven Kundenkarte. *Geben* Sie dabei die erzeugten **Informationsobjekte** *an*.
 
-**B4 (4 P):** *Beschreiben* Sie mit **zwei** Argumenten, worin die Optimierung dieses Prozesses besteht. *Beziehen* Sie sich dabei auf die Einflussgrößen aus B2.
+**B4 (4 P):** *Beschreiben* Sie mit **zwei** Argumenten, worin die Optimierung dieses Prozesses besteht. *Beziehen* Sie sich dabei auf die Schwachstellen des beschriebenen Antragsprozesses, die Sie als Einflussgrößen im Ishikawa-Diagramm (B2) gefunden haben.
 
 ## Block C – Projekt ABHOLAPP (30 P)
 
@@ -227,7 +227,7 @@ Die Geschäftsleitung richtet das Projekt **„ABHOLAPP“** ein: Kunden buchen 
 
 Die Geschäftsleitung hat sich für die Abholschränke entschieden. Miete und Wartung kosten **9.000 € pro Jahr**. Eine Teilzeitkraft der Warenausgabe geht **ein Jahr nach dem Start** in den Ruhestand und wird dann wegen der Abholschränke nicht ersetzt; für diese Stelle fallen derzeit **15.000 € pro Jahr** an.
 
-Für die Abhol-Software liegen zwei Angebote vor. Benötigt werden **acht Lizenzen** und **acht Handscanner**, die Software soll **acht Jahre** genutzt werden. Ab dem **zweiten Jahr** ist **ein Update pro Jahr** einzuplanen, außerdem rechnet die IT mit **40 Support-Anfragen pro Jahr**.
+Für die Abhol-Software liegen zwei Angebote vor. Benötigt werden **acht Lizenzen**, **acht Handscanner** und **ein Etikettendrucker**, die Software soll **acht Jahre** genutzt werden. Ab dem **zweiten Jahr** ist **ein Update pro Jahr** einzuplanen, außerdem rechnet die IT mit **40 Support-Anfragen pro Jahr**.
 
 | Angebot A | Preis |
 |---|---|

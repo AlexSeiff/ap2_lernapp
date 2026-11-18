@@ -328,19 +328,17 @@ Die Geschäftsleitung beauftragt Sie, die Kosten der Kundenhotline zu analysiere
 
 Schlussfolgerung: …
 
-**Nachkalkulation (D3a bis D3c, zusammen 11 P):** In Ihren Überlegungen identifizieren Sie die Personalkosten als einen Haupttreiber. Sie führen deshalb eine Nachkalkulation für das Jahr 2025 mit folgenden Daten durch: Die Hotline ist an **zwei Standorten** besetzt. An jedem Standort arbeiten immer **vier Mitarbeiter gleichzeitig**. Die Hotline muss **12 Stunden pro Tag von Montag bis Freitag** abgedeckt sein. Ein Jahr hat 52 Wochen.
-
-**D3a (2 P):** Berechnen Sie die Anzahl der Arbeitsstunden, die für den Betrieb der Hotline für ein Jahr anfallen.
+**D3a (2 P):** In Ihren Überlegungen identifizieren Sie die Personalkosten als einen Haupttreiber. Sie führen deshalb eine Nachkalkulation für das Jahr 2025 durch (Aufgaben D3a bis D3c, zusammen 11 P) mit folgenden Daten: Die Hotline ist an **zwei Standorten** besetzt. An jedem Standort arbeiten immer **vier Mitarbeiter gleichzeitig**. Die Hotline muss **12 Stunden pro Tag von Montag bis Freitag** abgedeckt sein. Ein Jahr hat 52 Wochen. Berechnen Sie die Anzahl der Arbeitsstunden, die für den Betrieb der Hotline für ein Jahr anfallen.
 
 > **Formel:** Jahresstunden = Öffnungsstunden pro Tag · Mitarbeiter je Standort · Standorte · Arbeitstage pro Woche · 52 Wochen
 
-**D3b (5 P):** Da Mitarbeiter aufgrund von Fortbildungen und Krankheit gefehlt haben, waren Vertretungen einzusetzen. Der zusätzliche Stundenbedarf ergibt sich aus einer Abwesenheitsquote von **12 %**, bezogen auf die in D3a berechneten Stunden pro Jahr. Außerdem sind **30 Urlaubstage** zu berücksichtigen (Tagesstunden der gesamten Besetzung). Ermitteln Sie aufgrund eines kalkulatorischen Stundensatzes von **58,00 EUR** die Personalkosten der beiden Hotline-Standorte.
+**D3b (5 P):** Für die Nachkalkulation gelten die Hotline-Daten aus D3a (zwei Standorte, je vier Mitarbeiter gleichzeitig, 12 Stunden pro Tag, Montag bis Freitag, 52 Wochen). Da Mitarbeiter aufgrund von Fortbildungen und Krankheit gefehlt haben, waren Vertretungen einzusetzen. Der zusätzliche Stundenbedarf ergibt sich aus einer Abwesenheitsquote von **12 %**, bezogen auf die in D3a berechneten Stunden pro Jahr. Außerdem sind **30 Urlaubstage** zu berücksichtigen (Tagesstunden der gesamten Besetzung). Ermitteln Sie aufgrund eines kalkulatorischen Stundensatzes von **58,00 EUR** die Personalkosten der beiden Hotline-Standorte.
 
 > **Formeln:**
 > - Gesamtstunden = Jahresstunden + Jahresstunden · Abwesenheitsquote + Tagesstunden der gesamten Besetzung · Urlaubstage
 > - Personalkosten = Gesamtstunden · Stundensatz
 
-**D3c (4 P):** Tragen Sie Ihren errechneten Wert in die Kostenübersicht (2025) ein und leiten Sie aus der Lage des Wertes zur Kurve ein Urteil über die Datengrundlage der Kurve ab.
+**D3c (4 P):** Grundlage sind die Personalkosten der beiden Hotline-Standorte aus D3b (Daten aus D3a und D3b; bei Bedarf selbst neu berechnen). Tragen Sie Ihren errechneten Wert in die Kostenübersicht (2025) ein und leiten Sie aus der Lage des Wertes zur Kurve ein Urteil über die Datengrundlage der Kurve ab.
 
 **D4 (4 P):** In einem letzten Schritt überprüfen Sie noch einmal, ob der kalkulatorische Stundensatz alle Kosten abdeckt. Nennen Sie neben dem Lohn- bzw. Gehaltsstundensatz **vier weitere Bestandteile**, die in jedem Fall im durchschnittlichen Stundensatz enthalten sein müssen, um eine sinnvolle Kalkulation erstellen zu können.
 

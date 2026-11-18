@@ -260,9 +260,9 @@ Gemietete MDE-Geräte kommen nach der Veranstaltung zurück in das Servicelager.
 
 **D2 (4 P):** Im laufenden Betrieb beschweren sich Kunden, dass sich die Geräte mitten im Einsatz abschalten und lange geladen werden müssen. Bei der Ausgabe von Leihartikeln kam es dadurch mehrfach zu Staus. *Beschreiben* Sie **zwei** mögliche Ursachen für dieses Problem.
 
-**D3 (4 P):** *Beschreiben* Sie **zwei** Maßnahmen, mit denen dem Problem begegnet werden kann.
+**D3 (4 P):** Gemietete Geräte schalten sich im Einsatz mitten in der Veranstaltung ab und müssen lange geladen werden; bei der Ausgabe von Leihartikeln kommt es dadurch zu Staus. *Beschreiben* Sie **zwei** Maßnahmen, mit denen diesem Problem begegnet werden kann.
 
-**D4 (3 P):** *Erläutern* Sie, an welcher Stelle der Rücknahmeprozess aus D1 geändert werden muss, um das Problem dauerhaft zu lösen.
+**D4 (3 P):** Gemietete Geräte schalten sich im Einsatz ab und müssen lange geladen werden (siehe D2). *Erläutern* Sie, an welcher Stelle der beschriebene Rücknahmeprozess (Stichworte des Blocks, in der EPK aus D1 umgesetzt) geändert werden muss, um dieses Problem dauerhaft zu lösen.
 
 ## Lernziel-Check (am Ende des Themas alles mit Ja beantworten)
 

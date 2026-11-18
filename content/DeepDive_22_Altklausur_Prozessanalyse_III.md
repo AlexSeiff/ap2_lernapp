@@ -260,7 +260,7 @@ Nordholz Objekt bietet zwei SLAs an: **SLA Premium** (Reaktionszeit vier Stunden
 > - Gewinn/Stunde = Gewinn/Kunde/Monat / Stunden/Monat IST
 > - Gewinnzuschlag = Gewinn/Stunde / Ø Personalkosten/Stunde · 100 %
 
-**D2 (4 P):** *Beschreiben* Sie das Ergebnis der Nachkalkulation mit Blick auf die Preisgestaltung der beiden SLAs.
+**D2 (4 P):** *Beschreiben* Sie das Ergebnis der Nachkalkulation mit Blick auf die Preisgestaltung der beiden SLAs. Grundlage sind die Kennzahlen aus D1 (bei Bedarf mit den Kalkulationstabellen des Blocks selbst ermitteln) im Vergleich zum geplanten Gewinnzuschlag der Vorkalkulation.
 
 > **Formel:** Gewinnzuschlag = Gewinn/Stunde / Ø Personalkosten/Stunde · 100 %
 
