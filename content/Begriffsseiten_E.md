@@ -1246,6 +1246,44 @@ Extract – Transform – Load: Daten aus Quellsystemen lesen, vor dem Laden ber
 ### Beispiel
 Im Ladelauf der Möbelhaus Nordholz GmbH werden 12 von 8.400 Bestellungen wegen fehlender Kundennummer abgewiesen. Sie landen in der Quarantäne mit Fehlerprotokoll; der Data Steward klärt sie, und das Protokoll weist 8.388 geladene Sätze aus.
 
+Die Abbildung zeigt die Strecke mit der Quarantäne und der Abstimmung der Satzzahlen.
+
+**Abbildung: ETL-Strecke mit Quarantäne und Abstimmsumme**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 288" width="360" height="288" role="img" aria-label="ETL-Strecke: Quellsysteme, Extract, Staging Area, Transform, Load, Data Warehouse; 12 von 8.400 Sätzen gehen in die Quarantäne, 8.388 werden geladen">
+<defs><marker id="etl-pfeil" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker></defs>
+<rect x="75" y="6" width="140" height="26" class="dg-form"/>
+<text x="145" y="19" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Quellsysteme</text>
+<rect x="75" y="50" width="140" height="26" class="dg-grau"/>
+<text x="145" y="63" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">E – Extract</text>
+<rect x="75" y="94" width="140" height="26" class="dg-form"/>
+<text x="145" y="107" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Staging Area</text>
+<rect x="75" y="138" width="140" height="26" class="dg-grau"/>
+<text x="145" y="151" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">T – Transform</text>
+<rect x="75" y="182" width="140" height="26" class="dg-grau"/>
+<text x="145" y="195" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">L – Load</text>
+<rect x="75" y="226" width="140" height="26" class="dg-form"/>
+<text x="145" y="239" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Data Warehouse</text>
+<line x1="145" y1="32" x2="145" y2="49" class="dg-linie" marker-end="url(#etl-pfeil)"/>
+<line x1="145" y1="76" x2="145" y2="93" class="dg-linie" marker-end="url(#etl-pfeil)"/>
+<line x1="145" y1="120" x2="145" y2="137" class="dg-linie" marker-end="url(#etl-pfeil)"/>
+<line x1="145" y1="164" x2="145" y2="181" class="dg-linie" marker-end="url(#etl-pfeil)"/>
+<line x1="145" y1="208" x2="145" y2="225" class="dg-linie" marker-end="url(#etl-pfeil)"/>
+<text x="153" y="41" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">8.400 Bestellungen</text>
+<text x="153" y="85" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Rohkopie 1 : 1</text>
+<text x="153" y="129" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">bereinigen, prüfen</text>
+<text x="153" y="173" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">8.388 Sätze</text>
+<text x="153" y="217" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">mit Ladeprotokoll</text>
+<rect x="262" y="128" width="94" height="46" class="dg-rot"/>
+<text x="309" y="143" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Quarantäne</text>
+<text x="309" y="158" text-anchor="middle" dominant-baseline="middle" class="dg-klein">12 abgewiesen</text>
+<line x1="215" y1="151" x2="262" y2="151" class="dg-linie dg-strich" marker-end="url(#etl-pfeil)"/>
+<text x="238" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Fehler</text>
+<text x="180" y="276" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Abstimmung: 8.400 gelesen − 12 abgewiesen = 8.388 geladen</text>
+</svg>
+```
+
 ### Abgrenzung
 | | ETL | ELT |
 |---|---|---|

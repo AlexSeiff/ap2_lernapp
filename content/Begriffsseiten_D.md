@@ -1556,6 +1556,49 @@ Wird die schreibende Transaktion danach per ROLLBACK zurückgesetzt, hat die les
 ### Beispiel
 Transaktion A setzt den Lagerbestand eines Bürostuhls der Möbelhaus Nordholz GmbH von 10 auf 0, Transaktion B liest 0 und meldet „ausverkauft“ an den Onlineshop. Danach bricht A mit ROLLBACK ab – der Bestand ist wieder 10, der Shop zeigt trotzdem „ausverkauft“.
 
+Die Abbildung zeigt den zeitlichen Ablauf; die Mitte ist der Wert in der Datenbank.
+
+**Abbildung: Dirty Read im zeitlichen Ablauf**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 266" width="360" height="266" role="img" aria-label="Zeitablauf eines Dirty Reads: Transaktion A setzt den Bestand auf 0, Transaktion B liest die 0, danach macht A ein ROLLBACK und der Bestand ist wieder 10">
+<defs><marker id="dirty-read-pfeil" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker></defs>
+<text x="6" y="52" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Zeit ↓</text>
+<line x1="69" y1="34" x2="69" y2="222" class="dg-linie dg-punkt"/>
+<line x1="291" y1="34" x2="291" y2="222" class="dg-linie dg-punkt"/>
+<rect x="14" y="4" width="110" height="32" class="dg-grau"/>
+<text x="69" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Transaktion A</text>
+<text x="69" y="28" text-anchor="middle" dominant-baseline="middle" class="dg-klein">schreibt</text>
+<rect x="236" y="4" width="110" height="32" class="dg-grau"/>
+<text x="291" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Transaktion B</text>
+<text x="291" y="28" text-anchor="middle" dominant-baseline="middle" class="dg-klein">liest</text>
+<rect x="140" y="4" width="80" height="32" class="dg-form"/>
+<text x="180" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Datenbank</text>
+<text x="180" y="28" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bestand: 10</text>
+<rect x="140" y="36" width="80" height="112" class="dg-mittel"/>
+<text x="180" y="80" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">bestand: 0</text>
+<text x="180" y="96" text-anchor="middle" dominant-baseline="middle" class="dg-klein">unbestätigt</text>
+<rect x="140" y="148" width="80" height="72" class="dg-gut"/>
+<text x="180" y="176" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">bestand: 10</text>
+<text x="180" y="192" text-anchor="middle" dominant-baseline="middle" class="dg-klein">zurückgesetzt</text>
+<rect x="14" y="68" width="110" height="24" class="dg-form"/>
+<text x="69" y="80" text-anchor="middle" dominant-baseline="middle" class="dg-klein">UPDATE bestand = 0</text>
+<line x1="124" y1="80" x2="140" y2="80" class="dg-linie" marker-end="url(#dirty-read-pfeil)"/>
+<rect x="236" y="98" width="110" height="32" class="dg-rot"/>
+<text x="291" y="108" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">SELECT liest 0</text>
+<text x="291" y="122" text-anchor="middle" dominant-baseline="middle" class="dg-klein">= Dirty Read</text>
+<line x1="220" y1="114" x2="236" y2="114" class="dg-linie" marker-end="url(#dirty-read-pfeil)"/>
+<rect x="14" y="160" width="110" height="24" class="dg-form"/>
+<text x="69" y="172" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">ROLLBACK</text>
+<line x1="124" y1="172" x2="140" y2="172" class="dg-linie" marker-end="url(#dirty-read-pfeil)"/>
+<rect x="236" y="178" width="110" height="34" class="dg-rot"/>
+<text x="291" y="189" text-anchor="middle" dominant-baseline="middle" class="dg-klein">meldet</text>
+<text x="291" y="203" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">„ausverkauft“</text>
+<text x="180" y="240" text-anchor="middle" dominant-baseline="middle" class="dg-klein">B hat mit einem Wert gearbeitet, den es nie gab.</text>
+<text x="180" y="256" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Ab READ COMMITTED liest B weiter die 10.</text>
+</svg>
+```
+
 ### Abgrenzung
 | Anomalie | Problem | verhindert ab |
 |---|---|---|

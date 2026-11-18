@@ -184,6 +184,57 @@ Zusatzstruktur in der Datenbank, die Suchen, Joins und Sortierungen auf einer Sp
 ### Erklärung
 Ein Index funktioniert wie das Stichwortverzeichnis eines Buchs: Die Datenbank springt direkt zu den passenden Zeilen, statt die ganze Tabelle zu lesen – nach demselben Prinzip wie die binäre Suche. Primärschlüssel und UNIQUE-Spalten sind automatisch indiziert, Fremdschlüssel nicht in jedem System (PostgreSQL nicht, MySQL/InnoDB schon). Sinnvoll ist ein Index bei großen Tabellen und Spalten mit vielen verschiedenen Werten, nach denen oft gefiltert oder gejoint wird.
 
+Intern ist ein Index meist ein **B-Baum** (in der Praxis oft als B+-Baum): sortierte Schlüssel in Knoten, die wie ein Wegweiser nach unten verzweigen. Die Suche braucht wenige Schritte statt eines Durchlaufs aller Zeilen (siehe Abbildung).
+
+**Abbildung: Suche in einem B-Baum-Index**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 322" width="360" height="322" role="img" aria-label="B-Baum mit Wurzel und drei Knoten für die Schlüssel 10 bis 80; die Suche nach 50 führt über die Wurzel und den mittleren Knoten direkt zur Tabellenzeile">
+<defs><marker id="index-pfeil" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll-akzent"/></marker></defs>
+<text x="180" y="8" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Wurzel</text>
+<line x1="130" y1="44" x2="80" y2="86" class="dg-linie"/>
+<line x1="180" y1="44" x2="180" y2="86" class="dg-linie-akzent dg-dick"/>
+<line x1="230" y1="44" x2="280" y2="86" class="dg-linie"/>
+<rect x="130" y="20" width="50" height="24" class="dg-form"/>
+<text x="155" y="32" text-anchor="middle" dominant-baseline="middle" class="dg-fett">30</text>
+<rect x="180" y="20" width="50" height="24" class="dg-form"/>
+<text x="205" y="32" text-anchor="middle" dominant-baseline="middle" class="dg-fett">60</text>
+<rect x="40" y="86" width="40" height="24" class="dg-form"/>
+<text x="60" y="98" text-anchor="middle" dominant-baseline="middle" class="dg-fett">10</text>
+<rect x="80" y="86" width="40" height="24" class="dg-form"/>
+<text x="100" y="98" text-anchor="middle" dominant-baseline="middle" class="dg-fett">20</text>
+<rect x="140" y="86" width="40" height="24" class="dg-form"/>
+<text x="160" y="98" text-anchor="middle" dominant-baseline="middle" class="dg-fett">40</text>
+<rect x="180" y="86" width="40" height="24" class="dg-akzent"/>
+<text x="200" y="98" text-anchor="middle" dominant-baseline="middle" class="dg-fett">50</text>
+<rect x="240" y="86" width="40" height="24" class="dg-form"/>
+<text x="260" y="98" text-anchor="middle" dominant-baseline="middle" class="dg-fett">70</text>
+<rect x="280" y="86" width="40" height="24" class="dg-form"/>
+<text x="300" y="98" text-anchor="middle" dominant-baseline="middle" class="dg-fett">80</text>
+<line x1="200" y1="110" x2="200" y2="152" class="dg-linie-akzent dg-dick" marker-end="url(#index-pfeil)"/>
+<text x="160" y="134" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">Zeiger</text>
+<rect x="130" y="154" width="160" height="20" class="dg-akzent"/>
+<text x="210" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">kunden_id 50 · …</text>
+<rect x="130" y="174" width="160" height="20" class="dg-form"/>
+<text x="210" y="184" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kunden_id 17 · …</text>
+<rect x="130" y="194" width="160" height="20" class="dg-form"/>
+<text x="210" y="204" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kunden_id 80 · …</text>
+<text x="210" y="222" text-anchor="middle" dominant-baseline="middle" class="dg-klein">⋮</text>
+<text x="120" y="184" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">Tabelle kunde</text>
+<circle cx="110" cy="32" r="8" class="dg-form"/>
+<text x="110" y="32" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">1</text>
+<circle cx="160" cy="70" r="8" class="dg-form"/>
+<text x="160" y="70" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">2</text>
+<circle cx="310" cy="164" r="8" class="dg-form"/>
+<text x="310" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">3</text>
+<text x="10" y="248" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Suche kunden_id = 50</text>
+<text x="10" y="264" text-anchor="start" dominant-baseline="middle" class="dg-klein">1  Wurzel: 30 ≤ 50 &lt; 60 → mittlerer Ast</text>
+<text x="10" y="280" text-anchor="start" dominant-baseline="middle" class="dg-klein">2  Knoten: 50 gefunden → Zeiger auf die Zeile</text>
+<text x="10" y="296" text-anchor="start" dominant-baseline="middle" class="dg-klein">3  Zeile lesen – statt alle Zeilen zu prüfen</text>
+<text x="10" y="312" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Die Baumtiefe wächst nur langsam mit der Zeilenzahl.</text>
+</svg>
+```
+
 ### Beispiel
 ```sql
 CREATE INDEX idx_bestellung_kunde ON bestellung (kunden_id);
@@ -403,6 +454,46 @@ SQL-Verknüpfung, die nur die Zeilen liefert, zu denen es in **beiden** Tabellen
 
 ### Erklärung
 Die Join-Bedingung steht hinter ON, meist Fremdschlüssel = Primärschlüssel. Zeilen ohne Partner fallen stillschweigend weg. `JOIN` ohne Zusatz ist in SQL ein INNER JOIN.
+
+Die Abbildung zeigt die vier JOIN-Arten als Mengenbild; die Zeilenzahlen gelten für `kunde … JOIN bestellung` in der Übungsdatenbank.
+
+**Abbildung: Die vier JOIN-Arten als Mengenbild**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 272" width="360" height="272" role="img" aria-label="Vier Mengenbilder der JOIN-Arten: INNER JOIN nur die Überschneidung, LEFT JOIN die ganze linke Menge, RIGHT JOIN die ganze rechte Menge, FULL JOIN beide Mengen">
+<text x="90" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-fett">INNER JOIN</text>
+<path d="M90,36.4 A28,28 0 0 0 90,83.6 A28,28 0 0 0 90,36.4 Z" class="dg-voll-akzent" opacity="0.4"/>
+<circle cx="75" cy="60" r="28" class="dg-linie"/>
+<circle cx="105" cy="60" r="28" class="dg-linie"/>
+<text x="62" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-fett">K</text>
+<text x="118" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-fett">B</text>
+<text x="90" y="102" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">nur Paare: 6 Zeilen</text>
+<text x="270" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-fett">LEFT JOIN</text>
+<circle cx="255" cy="60" r="28" class="dg-voll-akzent" opacity="0.4"/>
+<circle cx="255" cy="60" r="28" class="dg-linie"/>
+<circle cx="285" cy="60" r="28" class="dg-linie"/>
+<text x="242" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-fett">K</text>
+<text x="298" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-fett">B</text>
+<text x="270" y="102" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">alle K: 8 Zeilen</text>
+<text x="90" y="132" text-anchor="middle" dominant-baseline="middle" class="dg-fett">RIGHT JOIN</text>
+<circle cx="105" cy="178" r="28" class="dg-voll-akzent" opacity="0.4"/>
+<circle cx="75" cy="178" r="28" class="dg-linie"/>
+<circle cx="105" cy="178" r="28" class="dg-linie"/>
+<text x="62" y="178" text-anchor="middle" dominant-baseline="middle" class="dg-fett">K</text>
+<text x="118" y="178" text-anchor="middle" dominant-baseline="middle" class="dg-fett">B</text>
+<text x="90" y="220" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">alle B: 6 Zeilen</text>
+<text x="270" y="132" text-anchor="middle" dominant-baseline="middle" class="dg-fett">FULL JOIN</text>
+<circle cx="255" cy="178" r="28" class="dg-voll-akzent" opacity="0.4"/>
+<circle cx="285" cy="178" r="28" class="dg-voll-akzent" opacity="0.4"/>
+<circle cx="255" cy="178" r="28" class="dg-linie"/>
+<circle cx="285" cy="178" r="28" class="dg-linie"/>
+<text x="242" y="178" text-anchor="middle" dominant-baseline="middle" class="dg-fett">K</text>
+<text x="298" y="178" text-anchor="middle" dominant-baseline="middle" class="dg-fett">B</text>
+<text x="270" y="220" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">alle: 8 Zeilen</text>
+<text x="180" y="246" text-anchor="middle" dominant-baseline="middle" class="dg-klein">K = kunde (links), B = bestellung (rechts)</text>
+<text x="180" y="262" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">farbig = steht im Ergebnis</text>
+</svg>
+```
 
 ### Beispiel
 ```sql

@@ -375,6 +375,69 @@ WHERE b.bestell_id IS NULL;   -- Weber, Braun
 ```
 `kunde LEFT JOIN bestellung` liefert 8 Zeilen: Huber 3×, Fischer 2×, Schmidt 1×, Weber und Braun je 1× mit NULL.
 
+Die Abbildung ordnet die acht Ergebniszeilen den Kunden zu: Wer keine Bestellung hat, bleibt mit NULL erhalten.
+
+**Abbildung: kunde LEFT JOIN bestellung – 8 Ergebniszeilen**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 254" width="360" height="254" role="img" aria-label="Kunden links, Ergebniszeilen rechts: Huber mit drei, Fischer mit zwei, Schmidt mit einer Bestellung, Weber und Braun ohne Bestellung mit NULL, insgesamt acht Zeilen">
+<text x="60" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-fett">kunde (links)</text>
+<rect x="196" y="4" width="70" height="22" class="dg-grau"/>
+<rect x="266" y="4" width="84" height="22" class="dg-grau"/>
+<text x="231" y="15" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">name</text>
+<text x="308" y="15" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">bestell_id</text>
+<rect x="10" y="36" width="100" height="62" class="dg-form"/>
+<text x="60" y="67" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Huber</text>
+<path d="M110,67 H186 M194,37 H186 V97 H194" class="dg-linie"/>
+<rect x="196" y="34" width="70" height="22" class="dg-form"/>
+<rect x="266" y="34" width="84" height="22" class="dg-form"/>
+<text x="231" y="45" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Huber</text>
+<text x="308" y="45" text-anchor="middle" dominant-baseline="middle" class="dg-klein">100</text>
+<rect x="196" y="56" width="70" height="22" class="dg-form"/>
+<rect x="266" y="56" width="84" height="22" class="dg-form"/>
+<text x="231" y="67" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Huber</text>
+<text x="308" y="67" text-anchor="middle" dominant-baseline="middle" class="dg-klein">102</text>
+<rect x="196" y="78" width="70" height="22" class="dg-form"/>
+<rect x="266" y="78" width="84" height="22" class="dg-form"/>
+<text x="231" y="89" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Huber</text>
+<text x="308" y="89" text-anchor="middle" dominant-baseline="middle" class="dg-klein">105</text>
+<rect x="10" y="102" width="100" height="18" class="dg-form"/>
+<text x="60" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Schmidt</text>
+<path d="M110,111 H186 M194,103 H186 V119 H194" class="dg-linie"/>
+<rect x="196" y="100" width="70" height="22" class="dg-form"/>
+<rect x="266" y="100" width="84" height="22" class="dg-form"/>
+<text x="231" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Schmidt</text>
+<text x="308" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein">103</text>
+<rect x="10" y="124" width="100" height="40" class="dg-form"/>
+<text x="60" y="144" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Fischer</text>
+<path d="M110,144 H186 M194,125 H186 V163 H194" class="dg-linie"/>
+<rect x="196" y="122" width="70" height="22" class="dg-form"/>
+<rect x="266" y="122" width="84" height="22" class="dg-form"/>
+<text x="231" y="133" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Fischer</text>
+<text x="308" y="133" text-anchor="middle" dominant-baseline="middle" class="dg-klein">101</text>
+<rect x="196" y="144" width="70" height="22" class="dg-form"/>
+<rect x="266" y="144" width="84" height="22" class="dg-form"/>
+<text x="231" y="155" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Fischer</text>
+<text x="308" y="155" text-anchor="middle" dominant-baseline="middle" class="dg-klein">104</text>
+<rect x="10" y="168" width="100" height="18" class="dg-mittel"/>
+<text x="60" y="177" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Weber</text>
+<path d="M110,177 H186 M194,169 H186 V185 H194" class="dg-linie"/>
+<rect x="196" y="166" width="70" height="22" class="dg-mittel"/>
+<rect x="266" y="166" width="84" height="22" class="dg-mittel"/>
+<text x="231" y="177" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Weber</text>
+<text x="308" y="177" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">NULL</text>
+<rect x="10" y="190" width="100" height="18" class="dg-mittel"/>
+<text x="60" y="199" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Braun</text>
+<path d="M110,199 H186 M194,191 H186 V207 H194" class="dg-linie"/>
+<rect x="196" y="188" width="70" height="22" class="dg-mittel"/>
+<rect x="266" y="188" width="84" height="22" class="dg-mittel"/>
+<text x="231" y="199" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Braun</text>
+<text x="308" y="199" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">NULL</text>
+<text x="180" y="228" text-anchor="middle" dominant-baseline="middle" class="dg-klein">gelb: kein Partner in bestellung, rechts steht NULL</text>
+<text x="180" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Ergebnis: 3 + 1 + 2 + 1 + 1 = 8 Zeilen</text>
+</svg>
+```
+
 ### Abgrenzung
 | JOIN | Ergebnis |
 |---|---|

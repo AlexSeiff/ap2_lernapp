@@ -85,6 +85,38 @@ Auch: Wasserfall
 ### Erklärung
 Typische Phasen: Anforderungsanalyse (Lastenheft, Pflichtenheft) – Entwurf – Implementierung – Test – Einführung und Betrieb. Jede Phase endet mit einem Dokument oder Meilenstein, das die nächste Phase als Eingabe nutzt. Stärken sind klare Planung, feste Termine und Kosten; Schwächen: Änderungen sind teuer und der Auftraggeber sieht das Ergebnis erst am Ende. Das Modell passt, wenn Anforderungen **klar und stabil** sind.
 
+Die Abbildung zeigt die Phasen als Treppe: Jede Stufe liefert ein Dokument für die nächste, ein Rücksprung kostet viel.
+
+**Abbildung: Wasserfallmodell mit Rücksprung**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 224" width="360" height="224" role="img" aria-label="Wasserfallmodell als Treppe mit fünf Phasen: Anforderungen, Entwurf, Implementierung, Test, Einführung; ein gestrichelter Pfeil zeigt den teuren Rücksprung vom Test zum Entwurf">
+<defs><marker id="wasserfallmodell-pfeil" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker><marker id="wasserfallmodell-rueck" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker></defs>
+<path d="M190,143 H44 V63 H64" class="dg-linie dg-strich" marker-end="url(#wasserfallmodell-rueck)"/>
+<rect x="4" y="10" width="96" height="26" class="dg-akzent"/>
+<text x="52" y="23" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Anforderungen</text>
+<text x="104" y="23" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">→ Lasten- und Pflichtenheft</text>
+<line x1="84" y1="36" x2="84" y2="50" class="dg-linie" marker-end="url(#wasserfallmodell-pfeil)"/>
+<rect x="66" y="50" width="96" height="26" class="dg-akzent"/>
+<text x="114" y="63" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Entwurf</text>
+<text x="166" y="63" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">→ Entwurfsdokumente</text>
+<line x1="146" y1="76" x2="146" y2="90" class="dg-linie" marker-end="url(#wasserfallmodell-pfeil)"/>
+<rect x="128" y="90" width="96" height="26" class="dg-akzent"/>
+<text x="176" y="103" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Implementierung</text>
+<text x="228" y="103" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">→ Quellcode</text>
+<line x1="208" y1="116" x2="208" y2="130" class="dg-linie" marker-end="url(#wasserfallmodell-pfeil)"/>
+<rect x="190" y="130" width="96" height="26" class="dg-akzent"/>
+<text x="238" y="143" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test</text>
+<text x="290" y="143" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">→ Protokoll</text>
+<line x1="270" y1="156" x2="270" y2="170" class="dg-linie" marker-end="url(#wasserfallmodell-pfeil)"/>
+<rect x="252" y="170" width="96" height="26" class="dg-akzent"/>
+<text x="300" y="183" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Einführung</text>
+<text x="50" y="168" text-anchor="start" dominant-baseline="middle" class="dg-klein">Fehler im Test: Rücksprung</text>
+<text x="50" y="182" text-anchor="start" dominant-baseline="middle" class="dg-klein">zum Entwurf ist teuer</text>
+<text x="180" y="214" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Jede Phase endet mit einem Dokument oder Meilenstein.</text>
+</svg>
+```
+
 ### Beispiel
 Die Umstellung des Möbelhauses auf ein gesetzlich vorgeschriebenes Exportformat ist vollständig spezifiziert – das Wasserfallmodell mit festem Endtermin passt hier gut.
 
