@@ -224,6 +224,54 @@ Basic Auth nie ohne HTTPS.
 Siehe auch: API-Schlüssel · OAuth 2.0 · Nur HTTPS · Authentifizierung an APIs
 Mehr: Deep Dive 15, 3.3
 
+## Batch- und Stream-Verarbeitung im Vergleich
+<!-- id: batch-und-stream-verarbeitung-im-vergleich · quellen: DD8 5.2, DD8 3.1 · stand: 2026-11 -->
+
+Batch-Verarbeitung sammelt Daten und verarbeitet sie in einem Lauf zu festen Zeiten, Stream-Verarbeitung verarbeitet jedes Ereignis fortlaufend, sobald es entsteht. Entscheidend ist, wie aktuell eine Information sein muss, damit die Entscheidung noch etwas nützt.
+
+Auch: Batch vs. Streaming, Batch vs. Stream
+
+### Erklärung
+| Kriterium | Batch-Verarbeitung | Stream-Verarbeitung |
+|---|---|---|
+| Auslöser | feste Zeit oder Anstoß (z. B. nachts) | jedes einzelne Ereignis |
+| Datenmenge je Lauf | ein ganzer Stapel | ein Ereignis oder ein kurzes Zeitfenster |
+| Latenz | Stunden bis Tage (Wartezeit bis zum Lauf plus Laufzeit) | Millisekunden bis wenige Sekunden |
+| Ergebnis | Stand des letzten Laufs, vollständig | laufend aktualisiert, oft nur „nahezu“ in Echtzeit |
+| Fehlerbehandlung | Lauf wiederholen | Ereignisse können doppelt, verspätet oder in falscher Reihenfolge ankommen |
+| Aufwand | gering, robust, gut planbar | höher: Nachrichtensystem, Zeitfenster, Dauerbetrieb, Überwachung |
+| Auslastung | Last lässt sich ins Nachtfenster legen | Rechenkapazität läuft rund um die Uhr |
+| Typisch | nächtlicher ETL-Lauf, Monatsabrechnung | Betrugserkennung, Bestandswarnung, Sensorüberwachung |
+
+Zwischenform: **Micro-Batch** – sehr kurze Läufe im Abstand von Sekunden bis Minuten.
+
+**Wann nehme ich was?** Frage: Verliert die Entscheidung ihren Wert, wenn die Information Stunden alt ist? Nein (Wochenbericht, Monatsabschluss, Controlling) → **Batch**. Ja (Betrug, drohender Lieferengpass, Störung) → **Stream** – oder Micro-Batch, wenn Minuten genügen. Im Zweifel die einfachere Lösung nehmen, solange sie die Anforderung erfüllt.
+
+### Beispiel
+Möbelhaus Nordholz: Von der Dockingstation sind 7 Stück im Bestand, der Mindestbestand beträgt 5. Um **14:20 Uhr** wird ein Bon mit 3 Stück gebucht – der Bestand sinkt auf 7 − 3 = 4 und liegt unter dem Mindestbestand. Es gilt die Annahme: nächtlicher Lauf um 02:00 Uhr, Laufzeit 45 Minuten; Micro-Batch alle 15 Minuten mit 2 Minuten Laufzeit.
+
+| Variante | Rechnung | Warnung sichtbar nach |
+|---|---|---|
+| Batch | 14:20 bis 02:00 Uhr = 11 h 40 min, plus 45 min Laufzeit | 12 h 25 min |
+| Micro-Batch | höchstens 15 min Intervall + 2 min Laufzeit | höchstens 17 min |
+| Stream | Ereignis wird sofort verarbeitet | rund 3 Sekunden (Annahme) |
+
+Im ungünstigsten Fall – der Bon entsteht kurz nach dem Stichtag 02:00 Uhr – dauert es beim Batch sogar 24 h 45 min. Noch ein Blick auf die Auslastung: 180.000 Positionen am Tag bei 10 Stunden Öffnungszeit sind 18.000 Positionen je Stunde, also 5 je Sekunde. Der Batch-Lauf braucht dafür 45 min von 24 h, das sind 0,75 : 24 ≈ 3,1 % der Zeit. Das Streaming-System muss dieselbe Datenmenge rund um die Uhr bereithalten.
+
+Deutung: Für die Bestandswarnung rechtfertigt sich der Aufwand des Streamings oder Micro-Batches; für den Wochenbericht des Controllings reicht der nächtliche Batch.
+
+### Abgrenzung
+Batch und Stream sind unabhängig von ETL und ELT: Ein ETL-Lauf kann nächtlich im Batch oder laufend im Stream arbeiten. „Echtzeit“ bedeutet in der Praxis „nahezu in Echtzeit“ mit Verzögerung im Sekundenbereich. Nicht verwechseln: Latenz (Alter der Information) und Durchsatz (Menge je Zeit) – Batch ist oft gut im Durchsatz, aber schlecht in der Latenz.
+
+### Prüfungsfalle
+Streaming pauschal als „besser“ und Batch als „veraltet“ bezeichnen. Wer nicht prüft, ob die Entscheidung von der aktuellen Information abhängt, begründet zu viel Aufwand. Umgekehrt: Für die Betrugserkennung einen nächtlichen Batch vorzuschlagen heißt, den Betrug erst am nächsten Tag zu bemerken.
+
+### Merksatz
+Batch: der ganze Stapel später. Stream: jedes Ereignis sofort. Gewählt wird nach der nötigen Aktualität, nicht nach der Mode.
+
+Siehe auch: Batch-Verarbeitung · Stream-Verarbeitung · ETL · Deltaextraktion · Change Data Capture · Velocity
+Mehr: Deep Dive 8, 5.2 · Deep Dive 8, 3.1
+
 ## Batch-Verarbeitung
 <!-- id: batch-verarbeitung · quellen: DD8 5.2, DD8 3.1 · stand: 2026-11 -->
 

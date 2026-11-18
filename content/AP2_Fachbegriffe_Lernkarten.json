@@ -3,11 +3,11 @@
     "titel": "AP2 Fachbegriffe – Begriffskarten zu allen Deep Dives",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-10-06",
-    "aktualisiert_am": "2026-11-16",
+    "aktualisiert_am": "2026-11-18",
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 905,
+    "anzahl_karten": 912,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -23,7 +23,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 1",
       "status": "behandelt",
-      "anzahl_karten": 35,
+      "anzahl_karten": 37,
       "karten": [
         {
           "id": "FB-primarschlussel",
@@ -371,6 +371,26 @@
           "antwort": "SQL-Funktion zum Verketten von Texten (Standard-Operator: ||); bei NULL verhalten sich die Systeme verschieden, || liefert meist NULL (Oracle: nicht).",
           "typ": "begriff",
           "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-join-arten-im-vergleich",
+          "frage": "JOIN-Arten im Vergleich",
+          "antwort": "INNER JOIN liefert nur Zeilen mit Partner in beiden Tabellen, LEFT JOIN zusätzlich alle linken Zeilen ohne Partner (rechts NULL), CROSS JOIN jede Kombination ohne Bedingung (Zeilen links · Zeilen rechts). „Kunden ohne Bestellung“ braucht LEFT JOIN mit IS NULL.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-where-und-having-im-vergleich",
+          "frage": "WHERE und HAVING im Vergleich",
+          "antwort": "WHERE filtert einzelne Zeilen vor GROUP BY und darf keine Aggregatfunktion enthalten; HAVING filtert fertige Gruppen danach und darf Aggregate wie SUM oder COUNT prüfen. Bedingungen ohne Aggregat gehören ins WHERE.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
           "tags": [
             "fachbegriff"
           ]
@@ -3241,7 +3261,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 8",
       "status": "behandelt",
-      "anzahl_karten": 52,
+      "anzahl_karten": 57,
       "karten": [
         {
           "id": "FB-oltp",
@@ -3759,6 +3779,56 @@
           "antwort": "Durchsuchbares Verzeichnis der Datenbestände mit Metadaten wie Bedeutung, Herkunft, Verantwortlichem und Schutzklasse; speichert nicht die Daten selbst.",
           "typ": "begriff",
           "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-oltp-und-olap-im-vergleich",
+          "frage": "OLTP und OLAP im Vergleich",
+          "antwort": "OLTP erfasst das Tagesgeschäft mit vielen kleinen Transaktionen auf aktuellen, normalisierten Daten; OLAP wertet wenige, große Abfragen auf historisierten, denormalisierten Daten im Data Warehouse aus. Auswertungen gehören nicht ins Produktivsystem.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-star-snowflake-und-galaxy-schema-im-vergleich",
+          "frage": "Star-, Snowflake- und Galaxy-Schema im Vergleich",
+          "antwort": "Star: eine Faktentabelle mit flachen Dimensionen (wenige Joins, schnell); Snowflake: Dimensionen normalisiert (weniger Redundanz, mehr Joins); Galaxy: mehrere Faktentabellen mit gemeinsamen Dimensionen. Snowflake betrifft die Dimensionen, Galaxy die Zahl der Faktentabellen.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-data-lake-data-warehouse-und-lakehouse-im-vergleich",
+          "frage": "Data Lake, Data Warehouse und Lakehouse im Vergleich",
+          "antwort": "Das Data Warehouse speichert geprüfte, strukturierte Daten (Schema-on-Write), der Data Lake Rohdaten in allen Formaten (Schema-on-Read, Risiko Data Swamp), das Lakehouse verbindet den günstigen Speicher des Lakes mit ACID und Schemaprüfung des Warehouse.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-etl-und-elt-im-vergleich",
+          "frage": "ETL und ELT im Vergleich",
+          "antwort": "ETL transformiert vor dem Laden (im Ziel nur geprüfte Daten), ELT lädt zuerst roh und transformiert im Zielsystem (Rohdaten bleiben erhalten, Logik lässt sich neu laufen, Governance aufwendiger).",
+          "typ": "begriff",
+          "schwierigkeit": 2,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-batch-und-stream-verarbeitung-im-vergleich",
+          "frage": "Batch- und Stream-Verarbeitung im Vergleich",
+          "antwort": "Batch verarbeitet gesammelte Daten in Läufen zu festen Zeiten (einfach, robust, Latenz Stunden), Stream jedes Ereignis sofort (Latenz Sekunden, aufwendiger). Gewählt wird nach der nötigen Aktualität der Information.",
+          "typ": "begriff",
+          "schwierigkeit": 2,
           "tags": [
             "fachbegriff"
           ]

@@ -2366,6 +2366,73 @@ Hart ist, was man in Euro rechnen kann; weich ist, was Menschen anzieht.
 Siehe auch: Nutzwertanalyse · Wirtschaftlichkeitsbetrachtung · Arbeitsteilung
 Mehr: Deep Dive 33, Teil 4
 
+## Star-, Snowflake- und Galaxy-Schema im Vergleich
+<!-- id: star-snowflake-und-galaxy-schema-im-vergleich · quellen: DD8 4.2, DD8 4.3 · stand: 2026-11 -->
+
+Star-, Snowflake- und Galaxy-Schema sind Entwurfsmuster für das Datenmodell eines Data Warehouse. Sie unterscheiden sich in der Zahl der Faktentabellen und darin, ob die Dimensionstabellen flach (denormalisiert) oder in Hierarchieebenen aufgeteilt (normalisiert) sind.
+
+Auch: Star vs. Snowflake vs. Galaxy, Schemata im Data Warehouse
+
+### Erklärung
+| Kriterium | Star-Schema | Snowflake-Schema | Galaxy-Schema |
+|---|---|---|---|
+| Faktentabellen | eine | eine | mehrere |
+| Dimensionen | flach, denormalisiert | normalisiert, Hierarchien in Unterdimensionen | gemeinsam genutzt (Conformed Dimensions) |
+| Joins je Abfrage | wenige (einer je Dimension) | mehr (zusätzlich je Hierarchiestufe) | wie Star oder Snowflake, je Faktentabelle |
+| Abfragetempo | hoch | geringer | je nach Aufbau |
+| Redundanz, Speicher | höher | geringer | wie die zugrunde liegenden Dimensionen |
+| Pflege | Hierarchieänderung an mehreren Stellen | Hierarchie an einer Stelle | gemeinsame Dimensionen nur einmal pflegen |
+| Verständlichkeit | sehr gut | schwerer | gut, wenn die Dimensionen einheitlich sind |
+| Typischer Einsatz | Normalfall für einen Geschäftsprozess | sehr große Dimensionen mit oft geänderten Hierarchien | mehrere Prozesse (Verkauf, Lager, Reklamation) auswerten |
+
+Die Kriterien liegen auf **zwei Achsen**: Star und Snowflake unterscheiden sich in der **Normalisierung der Dimensionen**, Galaxy in der **Zahl der Faktentabellen**. Ein Galaxy-Schema kann daher aus Star- oder aus Snowflake-Dimensionen bestehen.
+
+**Wann nehme ich was?** Ein Prozess, schnelle und verständliche Auswertung → **Star**. Dimension sehr groß, Hierarchie ändert sich oft, Speicher oder Pflege sind das Problem → **Snowflake**. Mehrere Prozesse sollen gemeinsam ausgewertet werden und teilen Zeit, Produkt oder Filiale → **Galaxy**.
+
+### Beispiel
+Möbelhaus Nordholz: `fakt_verkauf` entsteht aus der Übungsdatenbank, je Bestellposition eine Zeile (Bestellung, Produkt, Menge, Umsatz = Menge · Preis); `dim_produkt` ist die Tabelle `produkt` mit der Warengruppe als Textspalte. **Frage:** Umsatz je Warengruppe.
+
+```sql
+-- Star: Warengruppe steht direkt in dim_produkt (1 Join)
+SELECT p.kategorie, SUM(f.umsatz) AS umsatz
+FROM fakt_verkauf f
+JOIN dim_produkt p ON p.produkt_id = f.produkt_id
+GROUP BY p.kategorie;
+
+-- Snowflake: Warengruppe in eigener Tabelle (2 Joins)
+SELECT k.name, SUM(f.umsatz) AS umsatz
+FROM fakt_verkauf f
+JOIN dim_produkt p ON p.produkt_id = f.produkt_id
+JOIN dim_kategorie k ON k.kategorie_id = p.kategorie_id
+GROUP BY k.name;
+```
+
+Beide liefern dasselbe Ergebnis: Elektronik 1.839,00 €, Möbel 1.146,00 €, Zubehör 199,50 €; die Summe 3.184,50 € stimmt mit dem Gesamtumsatz der 8 Positionen überein. Der Unterschied liegt im Aufwand: Star 1 Join, Snowflake 2 Joins; dafür steht der Name „Möbel“ im Snowflake nur einmal in `dim_kategorie`, im Star in jeder Produktzeile dieser Gruppe (bei 5 Produkten: 2-mal Möbel, 2-mal Elektronik, 1-mal Zubehör).
+
+**Galaxy:** Kommt `fakt_lager` (produkt_id, bestand) dazu und nutzt dieselbe `dim_produkt`, entsteht ein Galaxy-Schema. Beispielwerte Bestand: Bürostuhl 12, Schreibtisch 4, Monitor 9, Dockingstation 20, Lampe 35 (zusammen 80 Stück). Absatz und Bestand je Produkt nebeneinander (der Absatz wird vorher je Produkt verdichtet):
+
+| Produkt | Absatz (Stück) | Bestand (Stück) |
+|---|---|---|
+| Bürostuhl Comfort | 3 | 12 |
+| Schreibtisch Basic | 1 | 4 |
+| Monitor 27 Zoll | 7 | 9 |
+| Dockingstation | 4 | 20 |
+| Schreibtischlampe | 5 | 35 |
+
+Verknüpft man beide Faktentabellen dagegen **ohne** vorherige Verdichtung über das Produkt, wird der Bestand je Verkaufszeile mitgezählt: Bürostuhl 24 statt 12 (2 Verkaufszeilen), Monitor 18 statt 9, Lampe 70 statt 35 – der Gesamtbestand wäre 136 statt 80 Stück.
+
+### Abgrenzung
+Snowflake ist nicht „besser, weil normalisiert“: Im Data Warehouse zählt das Abfragetempo, deshalb ist das Star-Schema der Normalfall. Galaxy ist keine dritte Spielart der Dimensionsgestaltung, sondern die Antwort auf mehrere Geschäftsprozesse mit gemeinsamen Dimensionen. Verwechsle auch nicht Fakten- und Dimensionstabelle: Kennzahlen (Menge, Umsatz, Bestand) gehören in die Faktentabelle, beschreibende Merkmale (Bezeichnung, Warengruppe) in die Dimension.
+
+### Prüfungsfalle
+Zwei Faktentabellen direkt über die gemeinsame Dimension verknüpfen und dann summieren: Die Kennzahlen werden vervielfacht (im Beispiel 136 statt 80). Erst je Faktentabelle verdichten, dann zusammenführen. Außerdem: Den Lagerbestand über Monate zu summieren ist falsch, er ist nur über die Zeit gemittelt oder zum Stichtag sinnvoll (semi-additiv).
+
+### Merksatz
+Star: ein Faktenstern mit flachen Dimensionen. Snowflake: dieselben Dimensionen, aber aufgeteilt. Galaxy: mehrere Sterne teilen sich die Dimensionen.
+
+Siehe auch: Star-Schema · Snowflake-Schema · Galaxy-Schema · Faktentabelle · Dimensionstabelle · Conformed Dimensions · Normalisierung · Denormalisierung
+Mehr: Deep Dive 8, 4.2 · Deep Dive 8, 4.3
+
 ## Star-Schema
 <!-- id: star-schema · quellen: Karte DD8, DD8 4.2, DD8 4.3, DD17 3.4 · stand: 2026-10 -->
 

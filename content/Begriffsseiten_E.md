@@ -1262,6 +1262,54 @@ Lesen, veredeln, liefern – und jeden abgewiesenen Satz protokollieren.
 Siehe auch: E – Extract · T – Transform · L – Load · ELT · Quarantäne
 Mehr: Deep Dive 8, 3.1 · Deep Dive 8, 3.2 · Deep Dive 8, 3.3
 
+## ETL und ELT im Vergleich
+<!-- id: etl-und-elt-im-vergleich · quellen: DD8 3.1, DD8 3.2 · stand: 2026-11 -->
+
+ETL und ELT beschreiben zwei Reihenfolgen, wie Daten aus Quellsystemen in ein Zielsystem kommen: Beim ETL werden sie vor dem Laden bereinigt und umgeformt, beim ELT zuerst unverändert geladen und im Zielsystem umgeformt. Die Wahl bestimmt, wo die Prüfregeln laufen und ob die Rohdaten erhalten bleiben.
+
+Auch: ETL vs. ELT
+
+### Erklärung
+| Kriterium | ETL | ELT |
+|---|---|---|
+| Reihenfolge | Extract → Transform → Load | Extract → Load → Transform |
+| Ort der Transformation | eigener ETL-Server bzw. Staging Area | im Zielsystem (Data Lake, Lakehouse, Cloud-Plattform) |
+| Im Ziel liegen | nur geprüfte, fertig geformte Daten | zunächst auch ungeprüfte Rohdaten |
+| Rohdaten erhalten | meist nicht, nur im Archiv oder in der Quelle | ja, dauerhaft |
+| Logik ändern | Daten müssen neu aus der Quelle geladen werden | Transformation auf den vorhandenen Rohdaten neu starten |
+| Fehlerhafte Sätze | Quarantäne vor dem Laden | im Ziel markiert oder in die nächste Stufe nicht übernommen |
+| Typisches Ziel | klassisches Data Warehouse | Data Lake, Lakehouse |
+| Aufwand und Risiko | Entwicklung im ETL-Werkzeug; Ladelauf als Flaschenhals | Rechenleistung im Ziel; Governance und Datenschutz für Rohdaten aufwendiger |
+
+**Wann nehme ich was?** Braucht das Ziel nur sauber geprüfte Daten in einem festen Schema, und sind die Regeln stabil? → **ETL**. Sollen Rohdaten erhalten bleiben, wird die Logik oft geändert oder das Ziel hat viel Rechenleistung (Data Lake, Cloud)? → **ELT**. Datenschutzkritische Felder (personenbezogene Daten) sprechen für Transformation vor dem Laden oder für strenge Zugriffsrechte auf der Rohschicht.
+
+### Beispiel
+Möbelhaus Nordholz: Der nächtliche Lauf bekommt **8.400 Bestellungen**. Davon haben **12** keine Kundennummer.
+
+| Schritt | ETL | ELT |
+|---|---|---|
+| Laden | 8.400 − 12 = 8.388 Sätze ins DWH, 12 in die Quarantäne | alle 8.400 Sätze roh in den Lake |
+| Prüfen | vor dem Laden, abgewiesene Sätze mit Fehlerprotokoll | im Lake: 12 Sätze erhalten das Kennzeichen „ungültig“ |
+| Stand im Ziel | 8.388 Sätze | 8.400 Rohsätze, 8.388 davon in der bereinigten Stufe |
+
+Dann wird die Anforderung geändert: Das Controlling will Umsatz **netto** statt brutto sehen (19 % Umsatzsteuer, Stand 2026). Ein Tag mit 238.000,00 € brutto ergibt 238.000 : 1,19 = 200.000,00 € netto.
+- **ETL:** Im DWH steht der Bruttowert. Um alle bisherigen Tage umzustellen, müssen sie neu aus der Quelle extrahiert und durch die geänderte Transformation geschickt werden – sofern die Quelle die alten Daten noch hat.
+- **ELT:** Die Rohdaten liegen im Lake, die geänderte Transformation läuft einfach erneut über alle Tage.
+
+Deutung: Beide Wege liefern dieselben Zahlen. ETL schützt das Ziel besser vor Fehlern, ELT macht spätere Änderungen billiger.
+
+### Abgrenzung
+ELT ist nicht „ETL ohne Transformation“ – transformiert wird auch hier, nur später und im Ziel. Und ELT heißt nicht „ohne Qualitätsprüfung“: Die Prüfregeln laufen in der Transformationsstufe, die Rohschicht bleibt gesondert gekennzeichnet. ETL und ELT sind außerdem unabhängig von der Frage **Batch oder Stream**: Beide können nachts im Stapel oder laufend arbeiten.
+
+### Prüfungsfalle
+ETL als bloßes „Kopieren“ beschreiben oder fehlerhafte Sätze stillschweigend verwerfen – sie gehören mit Protokoll in die Quarantäne. Beim ELT den Nachteil vergessen: Im Ziel liegen auch ungeprüfte Daten, Zugriffsrechte und Datenschutz müssen dort geregelt sein.
+
+### Merksatz
+ETL putzt, bevor eingeräumt wird; ELT räumt zuerst ein und putzt im Regal.
+
+Siehe auch: ETL · ELT · E – Extract · T – Transform · L – Load · Quarantäne · Data Lake · Data Warehouse · Staging Area · Batch-Verarbeitung
+Mehr: Deep Dive 8, 3.1 · Deep Dive 8, 3.2
+
 ## Euklidischer Abstand
 <!-- id: euklidischer-abstand · quellen: Karte DD6, DD6 3.1 · stand: 2026-10 -->
 

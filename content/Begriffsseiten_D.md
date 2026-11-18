@@ -181,6 +181,62 @@ Erst speichern, später verstehen – aber nur mit Katalog.
 Siehe auch: Data Warehouse · Schema-on-Read · ELT · Lakehouse · Big Data
 Mehr: Deep Dive 8, 5.1
 
+## Data Lake, Data Warehouse und Lakehouse im Vergleich
+<!-- id: data-lake-data-warehouse-und-lakehouse-im-vergleich · quellen: DD8 Teil 2, DD8 5.1 · stand: 2026-11 -->
+
+Data Warehouse, Data Lake und Lakehouse sind drei Architekturen, um Unternehmensdaten für Auswertungen vorzuhalten: geprüft und strukturiert, roh und flexibel oder beides in einem System. Die Wahl hängt von Datenart, Nutzern und den Anforderungen an Qualität und Flexibilität ab.
+
+Auch: Data Lake vs. Data Warehouse vs. Lakehouse
+
+### Erklärung
+| Kriterium | Data Warehouse | Data Lake | Lakehouse |
+|---|---|---|---|
+| Daten | strukturiert, aufbereitet | roh, beliebige Formate (Tabellen, Logs, Texte, Bilder) | roh und strukturiert in Stufen |
+| Schema | Schema-on-Write (vor dem Laden festgelegt) | Schema-on-Read (erst beim Lesen) | beides, mit Schemaprüfung |
+| Befüllung | ETL: erst transformieren, dann laden | ELT: erst laden, dann transformieren | ELT in Stufen (roh → bereinigt → auswertungsfertig) |
+| Qualität, Transaktionen | hoch, ACID | ohne Katalog und Regeln unsicher | ACID und Versionierung über Tabellenformat |
+| Speicher | meist teurer, abgestimmt auf Abfragen | günstiger Objektspeicher | günstiger Objektspeicher in offenen Formaten |
+| Typische Nutzer | Fachbereich, Controlling, Berichtswesen | Data Scientists, Entwickler | beide Gruppen |
+| Flexibilität | gering: neue Fragen brauchen neue Modellierung | hoch: Rohdaten bleiben erhalten | hoch bei gleichzeitiger Ordnung |
+| Risiko | starr, aufwendige Änderungen | Data Swamp ohne Katalog und Governance | höherer Aufbau- und Betriebsaufwand |
+
+**Wann nehme ich was?**
+- Feste Kennzahlen und Berichte für den Fachbereich auf geprüften, strukturierten Daten → **Data Warehouse**.
+- Große Mengen unterschiedlicher Rohdaten speichern, deren spätere Nutzung noch offen ist (Explorieren, Machine Learning) → **Data Lake**, aber mit Katalog und Governance.
+- Berichte **und** Data Science sollen auf denselben Daten laufen, ohne sie zu kopieren → **Lakehouse**.
+
+### Beispiel
+Möbelhaus Nordholz mit vier Datenquellen. Die Mengen sind **angenommene Beispielwerte**:
+
+| Quelle | Menge | Größe je Satz | Volumen je Tag | Volumen je Jahr |
+|---|---|---|---|---|
+| Kassenbons (strukturiert) | 180.000 Positionen | 0,2 KB | 36.000 KB = 36 MB | 36 MB · 365 = 13.140 MB ≈ 13,14 GB |
+| Klickdaten des Onlineshops (JSON) | 2.000.000 Ereignisse | 0,5 KB | 1.000.000 KB = 1 GB | 1 GB · 365 = 365 GB |
+| Kundenbewertungen (Text) | wenige Hundert | – | kaum ins Gewicht | – |
+| Produktfotos (Bilder) | selten neu | groß | – | – |
+
+Die Klickdaten sind mit 365 GB gegenüber 13,14 GB rund 28-mal so groß wie die Kassenbons (365 : 13,14 ≈ 27,8).
+
+| Architektur | Was landet dort? | Begründung |
+|---|---|---|
+| Data Warehouse | nur Kassenbons (und je Sitzung verdichtete Klickzahlen) | festes Schema, geprüfte Kennzahlen fürs Controlling |
+| Data Lake | Klickdaten, Bewertungen, Fotos roh | zu groß und uneinheitlich für das DWH; Nutzung noch offen |
+| Lakehouse | Bons und Klicks im selben Speicher | Controlling-Dashboard und Prognosemodell nutzen dieselben, versionierten Tabellen |
+
+Deutung: Mit einem Data Warehouse allein blieben die Klickdaten ungenutzt; mit einem Data Lake allein fehlten dem Controlling ACID-Garantien und Schemaprüfung. Das Lakehouse vermeidet das Kopieren zwischen beiden – dafür muss das Team Tabellenformat, Katalog und Rechte betreiben.
+
+### Abgrenzung
+Ein Lakehouse ist kein Data Lake mit neuem Namen: Ohne Transaktionen, Schemaprüfung und Katalog bleibt es ein Data Lake mit der Gefahr des Data Swamp. Umgekehrt ersetzt ein Data Lake das Data Warehouse nicht automatisch – für stabile Berichte mit abgestimmten Kennzahlen bleibt das Warehouse oder die Gold-Stufe des Lakehouse nötig. Ein **Data Mart** ist eine themenbezogene Teilsicht auf ein Warehouse, keine vierte Architektur.
+
+### Prüfungsfalle
+„Schema-on-Read“ als „ohne Regeln“ erklären: Die Prüfung wandert nur in die Auswertung bzw. in die ELT-Strecke. Und: Pauschal „Data Lake ist besser, weil flexibler“ antworten, ohne den Einsatzzweck zu nennen – für die Wochenberichte des Controllings ist das Warehouse die richtige Wahl.
+
+### Merksatz
+Warehouse: geprüft und fertig eingeräumt. Lake: alles roh auf Vorrat. Lakehouse: der Vorrat mit der Ordnung des Lagers.
+
+Siehe auch: Data Warehouse · Data Lake · Lakehouse · Schema-on-Write · Schema-on-Read · ETL · ELT · Data Mart · ACID
+Mehr: Deep Dive 8, Teil 2 · Deep Dive 8, 5.1
+
 ## Data Leakage
 <!-- id: data-leakage · quellen: DD6 Teil 5, DD7 1.1 · stand: 2026-11 -->
 

@@ -26,6 +26,76 @@ Unter 18 gilt das JArbSchG – Stichtag für den Urlaub ist der 1. Januar.
 Siehe auch: BBiG · IHK · Jugend- und Auszubildendenvertretung
 Mehr: Deep Dive 13, 1.1 · Deep Dive 13, 2.1
 
+## JOIN-Arten im Vergleich
+<!-- id: join-arten-im-vergleich · quellen: DD1 2.2, SQL-Belegsatz 2 · stand: 2026-11 -->
+
+Die SQL-Verknüpfungen INNER JOIN, LEFT JOIN und CROSS JOIN unterscheiden sich darin, welche Zeilen im Ergebnis bleiben: nur Paare mit Partner, zusätzlich alle linken Zeilen ohne Partner oder einfach jede mögliche Kombination. Diese Seite hilft bei der Entscheidung, welche Verknüpfung zur Fragestellung passt.
+
+Auch: INNER JOIN vs. LEFT JOIN vs. CROSS JOIN, Join-Arten
+
+### Erklärung
+| Kriterium | INNER JOIN | LEFT JOIN | CROSS JOIN |
+|---|---|---|---|
+| Zweck | zusammengehörige Zeilen verbinden | wie INNER, aber links soll nichts verloren gehen | alle Kombinationen zweier Mengen bilden |
+| Bedingung | `ON` nötig (meist Fremdschlüssel = Primärschlüssel) | `ON` nötig | keine – ohne `ON` |
+| Ergebnis | nur Zeilen mit Partner in **beiden** Tabellen | **alle** linken Zeilen; ohne Partner steht rechts NULL | jede linke mit jeder rechten Zeile |
+| Zeilenzahl | nur Treffer | mindestens so viele wie links | Zeilen links · Zeilen rechts |
+| Vorteil | sauber, Normalfall, schnell | findet Lücken („ohne Bestellung“), zählt auch 0 | liefert Kombinationslisten (Kunde × Produkt, Filiale × Monat) |
+| Risiko | Zeilen ohne Partner verschwinden still | NULL-Zeilen; ein Filter auf rechts im `WHERE` macht daraus einen INNER JOIN | explodiert bei großen Tabellen; entsteht ungewollt bei vergessener Bedingung |
+| Wann einsetzen | „Welche Bestellung gehört zu welchem Kunden?“ | „Kunden ohne Bestellung“, „Bestellungen je Kunde, auch 0“ | Planungs-, Test- oder Matrixdaten |
+
+**Weitere Arten, kurz:** `RIGHT JOIN` ist ein LEFT JOIN mit vertauschten Tabellen; `FULL OUTER JOIN` liefert alle Zeilen beider Seiten (MySQL kennt ihn nicht; SQLite kennt RIGHT und FULL seit 3.39, der Editor der App rechnet mit 3.49). In der Prüfung genügt meist LEFT – man schreibt die Tabelle, die vollständig bleiben soll, nach links.
+
+**Wann nehme ich was?**
+1. Sollen **alle** Kombinationen entstehen, ohne dass es eine Beziehung gibt? → CROSS JOIN.
+2. Darf eine Zeile der Hauptmenge ohne Partner **nicht** verschwinden, oder suchst du gerade die Zeilen ohne Partner? → LEFT JOIN (bei „ohne Partner“ zusätzlich `WHERE rechts.schluessel IS NULL`).
+3. Sonst → INNER JOIN.
+
+### Beispiel
+Möbelhaus Nordholz: `kunde` hat 5 Zeilen, `bestellung` 6, `produkt` 5. Alle drei Verknüpfungen nebeneinander (die Ergebnisse stammen aus der Übungsdatenbank, nachrechenbar im SQL-Editor):
+
+```sql
+-- INNER JOIN
+SELECT k.name, b.bestell_id
+FROM kunde k INNER JOIN bestellung b ON b.kunden_id = k.kunden_id;
+-- LEFT JOIN
+SELECT k.name, b.bestell_id
+FROM kunde k LEFT JOIN bestellung b ON b.kunden_id = k.kunden_id;
+-- CROSS JOIN
+SELECT k.name, p.bezeichnung
+FROM kunde k CROSS JOIN produkt p;
+```
+
+| Verknüpfung | Zeilen | Rechnung | Weber und Braun |
+|---|---|---|---|
+| INNER JOIN | 6 | eine Zeile je Bestellung | fehlen |
+| LEFT JOIN | 8 | 6 Bestellzeilen + 2 Kunden ohne Bestellung | je einmal mit NULL |
+| CROSS JOIN | 25 | 5 Kunden · 5 Produkte | je 5-mal, jeweils mit jedem Produkt |
+
+Zählt man mit `COUNT(b.bestell_id)` je Kunde, ergibt sich:
+
+| Kunde | über INNER JOIN | über LEFT JOIN |
+|---|---|---|
+| Huber GmbH | 3 | 3 |
+| Schmidt AG | 1 | 1 |
+| Fischer KG | 2 | 2 |
+| Weber e.K. | (Zeile fehlt) | 0 |
+| Braun GmbH | (Zeile fehlt) | 0 |
+
+Deutung: Der INNER JOIN zeigt nur drei Kunden; die zwei Kunden ohne Bestellung tauchen im Bericht gar nicht auf. Erst der LEFT JOIN meldet sie mit 0. Zur Probe: `RIGHT JOIN` liefert hier 6 Zeilen (jede Bestellung hat wegen des Fremdschlüssels einen Kunden), `FULL JOIN` 8 – genau wie der LEFT JOIN.
+
+### Abgrenzung
+Ein CROSS JOIN sucht keine Treffer, er prüft nichts und bildet das kartesische Produkt. Auch die alte Schreibweise `FROM kunde, produkt` ohne `WHERE` ist ein CROSS JOIN – wer die Bedingung vergisst, erhält ungewollt 25 statt 6 Zeilen. Wichtig ist außerdem der Unterschied zwischen `ON` und `WHERE`: Beim INNER JOIN ist er egal, beim LEFT JOIN nicht. Mit `LEFT JOIN bestellung b ON … AND b.bestelldatum >= '2026-03-01'` bleiben alle 5 Kunden erhalten (Weber und Braun mit NULL), mit demselben Filter im `WHERE` nur 3 Zeilen – Fischer, Huber, Schmidt.
+
+### Prüfungsfalle
+„Kunden ohne Bestellung“ oder „alle Kunden mit Anzahl ihrer Bestellungen“ mit INNER JOIN lösen: Die gesuchten Kunden fallen genau heraus. Zweite Falle: `COUNT(*)` statt `COUNT(b.bestell_id)` beim LEFT JOIN – dann zählt die NULL-Zeile als 1, Weber hätte scheinbar eine Bestellung.
+
+### Merksatz
+INNER zeigt nur Paare, LEFT lässt links keinen fallen, CROSS paart jeden mit jedem.
+
+Siehe auch: INNER JOIN · LEFT JOIN · Fremdschlüssel · Primärschlüssel · NULL · WHERE · GROUP BY
+Mehr: Deep Dive 1, 2.2
+
 ## JSON
 <!-- id: json · quellen: Karte DD15, DD15 2.2 · stand: 2026-10 -->
 

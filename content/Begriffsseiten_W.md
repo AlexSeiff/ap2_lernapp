@@ -433,6 +433,61 @@ WHERE siebt Zeilen, HAVING siebt Gruppen.
 Siehe auch: HAVING · GROUP BY · NULL
 Mehr: SQL-Zusatz 3.1
 
+## WHERE und HAVING im Vergleich
+<!-- id: where-und-having-im-vergleich · quellen: DD1 2.1, SQL-Belegsatz 1 · stand: 2026-11 -->
+
+WHERE und HAVING filtern beide Ergebnisse einer SQL-Abfrage, aber an verschiedenen Stellen: WHERE sortiert einzelne Zeilen aus, bevor gruppiert wird, HAVING prüft die fertigen Gruppen. Die Entscheidung hängt davon ab, ob die Bedingung eine einzelne Zeile oder einen berechneten Gruppenwert betrifft.
+
+Auch: WHERE vs. HAVING
+
+### Erklärung
+| Kriterium | WHERE | HAVING |
+|---|---|---|
+| Zweck | einzelne Zeilen aussortieren | ganze Gruppen aussortieren |
+| Zeitpunkt | nach FROM/JOIN, **vor** GROUP BY | **nach** GROUP BY |
+| Bedingung betrifft | Spaltenwerte einer Zeile (`preis > 100`, `ort = 'Köln'`) | berechnete Gruppenwerte (`SUM(…) > 500`, `COUNT(*) >= 2`) |
+| Aggregatfunktionen | nicht erlaubt | erlaubt |
+| Wirkung auf die Aggregate | sie rechnen nur mit den übrig gebliebenen Zeilen | sie rechnen mit allen Zeilen der Gruppe, erst danach fällt die Gruppe weg |
+| Aufwand | senkt die Zeilenzahl früh, effizient | arbeitet auf den fertigen Gruppen |
+| Spalten ohne Aggregat | beliebige Spalten der Tabellen | nur Gruppierungsspalten (sonst Fehler oder zufälliger Wert) |
+
+Beide dürfen in **derselben** Abfrage stehen und wirken nacheinander: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY.
+
+**Wann nehme ich was?** Frage dich: Kann ich die Bedingung an einer einzelnen Zeile ablesen? Dann WHERE. Muss ich erst summieren, zählen oder mitteln, bevor ich die Bedingung prüfen kann? Dann HAVING. Bedingungen ohne Aggregat schreibst du auch dann ins WHERE, wenn HAVING technisch ginge (z. B. `HAVING kunden_id = 1`) – das ist schneller und leichter zu lesen.
+
+### Beispiel
+Möbelhaus Nordholz: Umsatz je Bestellung aus `bestellposition` und `produkt`. Die Abfrage ist in vier Varianten möglich:
+
+```sql
+SELECT bp.bestell_id, SUM(bp.menge * p.preis) AS umsatz
+FROM bestellposition bp
+JOIN produkt p ON p.produkt_id = bp.produkt_id
+WHERE p.kategorie = 'Elektronik'          -- Variante B und D
+GROUP BY bp.bestell_id
+HAVING SUM(bp.menge * p.preis) > 500;     -- Variante C und D
+```
+
+| Variante | Filter | Ergebnis (Bestellung: Umsatz in €) |
+|---|---|---|
+| A | keiner | 100: 876,00 · 101: 518,70 · 102: 516,00 · 103: 945,00 · 104: 249,00 · 105: 79,80 |
+| B | nur WHERE (Elektronik) | 100: 378,00 · 102: 516,00 · 103: 945,00 |
+| C | nur HAVING (Umsatz > 500) | 100: 876,00 · 101: 518,70 · 102: 516,00 · 103: 945,00 |
+| D | beide | 102: 516,00 · 103: 945,00 |
+
+Nachgerechnet: Bestellung 100 besteht aus 2 Bürostühlen (2 · 249,00 = 498,00 €) und 2 Monitoren (2 · 189,00 = 378,00 €), zusammen 876,00 €. In Variante C zählt der ganze Bestellwert, deshalb bleibt sie. In Variante D rechnet die Summe nur mit den Elektronik-Zeilen: 378,00 € sind nicht mehr als 500 €, die Bestellung fällt heraus. Bestellung 101 (Schreibtisch und Lampen, 518,70 €) enthält keine Elektronik und fehlt in B und D. Die Fragen sind also verschieden: C beantwortet „Welche Bestellungen sind insgesamt größer als 500 €?“, D „Bei welchen Bestellungen liegt der **Elektronik**-Umsatz über 500 €?“.
+
+### Abgrenzung
+Weder WHERE noch HAVING ist das bessere Werkzeug – sie beantworten verschiedene Fragen. Verwechsle HAVING nicht mit `ORDER BY` oder mit `LIMIT`: HAVING entfernt Gruppen, es sortiert und begrenzt nicht. Auch ein Aliasname aus dem SELECT (`umsatz`) hilft im Standard-SQL weder im WHERE noch im HAVING: Dort steht die Berechnung selbst.
+
+### Prüfungsfalle
+`WHERE SUM(bp.menge * p.preis) > 500` oder `WHERE COUNT(*) > 1` schreiben – in der Prüfung ein Syntaxfehler (SQLite meldet „misuse of aggregate“), weil es zum Zeitpunkt des WHERE noch keine Gruppen gibt. Auch die Gegenrichtung kostet Punkte: Einen Zeilenfilter wie `kategorie = 'Elektronik'` ins HAVING zu schreiben, obwohl die Spalte nicht gruppiert ist. Standard-SQL lehnt das ab, SQLite nimmt stillschweigend den Wert irgendeiner Zeile der Gruppe – das Ergebnis ist dann nicht verlässlich.
+
+### Merksatz
+WHERE siebt Zeilen vor dem Gruppieren, HAVING siebt Gruppen danach – und nur HAVING darf Aggregate prüfen.
+
+Siehe auch: WHERE · HAVING · GROUP BY · NULL
+Mehr: Deep Dive 1, 2.1
+
 ## Whisker
 <!-- id: whisker · quellen: Karte DD3, DD3 5.1 · stand: 2026-10 -->
 

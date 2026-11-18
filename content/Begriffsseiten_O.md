@@ -239,6 +239,73 @@ OLTP: viele kleine Transaktionen, immer der aktuelle Stand.
 Siehe auch: OLAP · ACID · ETL · 3. Normalform · Data Warehouse
 Mehr: Deep Dive 8, Teil 1
 
+## OLTP und OLAP im Vergleich
+<!-- id: oltp-und-olap-im-vergleich · quellen: DD8 Teil 1, DD8 4.5 · stand: 2026-11 -->
+
+OLTP-Systeme führen das Tagesgeschäft mit vielen kleinen Schreib- und Lesevorgängen, OLAP-Systeme werten große, historische Datenmengen mit wenigen umfangreichen Leseabfragen aus. Die Entscheidung folgt der Frage, ob Daten **erfasst und geändert** oder **ausgewertet** werden sollen.
+
+Auch: OLTP vs. OLAP
+
+### Erklärung
+| Kriterium | OLTP | OLAP |
+|---|---|---|
+| Zweck | Tagesgeschäft abwickeln | Entscheidungen unterstützen |
+| Typischer Vorgang | Bestellung anlegen, Bestand buchen | Umsatz je Region und Quartal vergleichen |
+| Zugriff | sehr viele kurze Lese- und Schreibzugriffe auf einzelne Datensätze | wenige, aufwendige Leseabfragen über viele Millionen Zeilen |
+| Schreiben | laufend (INSERT, UPDATE, DELETE) | nur durch den Ladevorgang (ETL), sonst lesend |
+| Datenmodell | normalisiert (3. Normalform) | denormalisiert (Star- oder Snowflake-Schema) |
+| Datenbestand | aktuell, Änderungen überschreiben | historisiert, Änderungen bleiben nachvollziehbar |
+| Antwortzeit | Millisekunden | Sekunden bis Minuten sind tragbar |
+| Konsistenz | Transaktionen mit ACID | geprüfter, zum Ladezeitpunkt konsistenter Bestand |
+| Nutzer | Sachbearbeiter, Kunden, Webshop | Controlling, Management, Analysten |
+| Beispiel | Warenwirtschaft, Webshop, CRM | Data Warehouse mit BI-Dashboard |
+
+**Wann nehme ich was?** Soll ein Vorgang **erfasst oder geändert** werden und muss sofort stimmen (Kauf, Buchung, Stammdatenänderung)? → OLTP. Soll über viele Vorgänge, Zeiträume und Dimensionen **ausgewertet** werden? → OLAP, also nicht im Produktivsystem, sondern in einem Data Warehouse, das per ETL gespeist wird. Die beiden Systeme ersetzen sich nicht: Das OLTP-System liefert die Daten, das OLAP-System macht sie auswertbar.
+
+### Beispiel
+Möbelhaus Nordholz, Übungsdatenbank. **OLTP-Vorgang:** Weber e.K. bestellt am 2026-07-02 einen Bürostuhl und zwei Schreibtischlampen. Die Anwendung schreibt in einer Transaktion genau 3 Zeilen:
+
+```sql
+BEGIN TRANSACTION;
+INSERT INTO bestellung (bestell_id, kunden_id, bestelldatum) VALUES (106, 4, '2026-07-02');
+INSERT INTO bestellposition (bestell_id, produkt_id, menge) VALUES (106, 10, 1), (106, 14, 2);
+COMMIT;
+```
+
+Eine Bestellung, zwei Positionen: 1 + 2 = 3 geschriebene Zeilen, Antwort in Millisekunden. **OLAP-Abfrage** (Stand vor dieser Bestellung): Umsatz je Quartal und Warengruppe, dafür müssen alle 8 vorhandenen Bestellpositionen gelesen und über `bestellung` und `produkt` verknüpft werden:
+
+```sql
+SELECT CASE WHEN CAST(STRFTIME('%m', b.bestelldatum) AS INTEGER) <= 3 THEN 'Q1' ELSE 'Q2' END AS quartal,
+       p.kategorie, SUM(bp.menge * p.preis) AS umsatz
+FROM bestellposition bp
+JOIN bestellung b ON b.bestell_id = bp.bestell_id
+JOIN produkt p ON p.produkt_id = bp.produkt_id
+GROUP BY quartal, p.kategorie
+ORDER BY quartal, p.kategorie;
+```
+
+| Quartal | Warengruppe | Umsatz in € |
+|---|---|---|
+| Q1 | Elektronik | 1.839,00 |
+| Q1 | Möbel | 897,00 |
+| Q1 | Zubehör | 119,70 |
+| Q2 | Möbel | 249,00 |
+| Q2 | Zubehör | 79,80 |
+
+Probe: 1.839,00 + 897,00 + 119,70 + 249,00 + 79,80 = 3.184,50 € – die Summe aller 8 Positionen. Im echten Betrieb mit rund 180.000 Positionen pro Tag liest dieselbe Auswertung für ein Jahr 180.000 · 365 = 65.700.000 Zeilen. Der OLTP-Vorgang bleibt bei 3 Zeilen; läuft die Auswertung im selben System, bremst sie die Kasse, und die frühere Historie fehlt, wenn Daten überschrieben wurden.
+
+### Abgrenzung
+OLAP ist kein „schnelleres OLTP“, sondern ein anderes Einsatzziel mit anderem Datenmodell. Ein normalisiertes Modell ist im OLTP richtig (jede Änderung nur an einer Stelle) und im Data Warehouse bewusst aufgegeben (weniger Joins). Beides ist im jeweiligen Kontext begründet, kein Widerspruch. Nicht verwechseln: OLAP beschreibt die Art der Nutzung, das **Data Warehouse** ist das System, in dem sie meist stattfindet.
+
+### Prüfungsfalle
+Auswertungen „direkt im Produktivsystem“ vorschlagen. Es fehlen die drei klassischen Gründe für die Trennung: Last auf dem Tagesgeschäft, fehlende Historie, verteilte Quellen. Ebenso falsch: OLAP-Daten als „immer tagesaktuell“ bezeichnen – sie sind so aktuell wie der letzte Ladelauf.
+
+### Merksatz
+OLTP führt das Geschäft und schreibt viel in kleinen Portionen, OLAP versteht das Geschäft und liest wenig in großen Portionen.
+
+Siehe auch: OLTP · OLAP · OLAP-Würfel · Data Warehouse · ETL · ACID · 3. Normalform · Star-Schema
+Mehr: Deep Dive 8, Teil 1 · Deep Dive 8, 4.5
+
 ## One-Hot-Encoding
 <!-- id: one-hot-encoding · quellen: Karte DD6, DD6 Teil 5 · stand: 2026-10 -->
 
