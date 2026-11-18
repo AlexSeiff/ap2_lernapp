@@ -300,7 +300,14 @@ Die Geschäftsleitung überlegt, HolzCheck samt App in der Manufaktur fest einzu
 | Malte Hinrichs | 50 | 52 | 32 | 50 | 20 | 22 |
 | Summe | 340 | 284 | 180 | 310 | 98 | 88 |
 
-**D3 (6 P):** Ein Liniendiagramm zeigt die mittlere Holzfeuchte im Lager: Monat 1: 28 %, Monat 2: 22 %, Monat 3: 22 %, Monat 4: 21 %, Monat 5: 16 %, Monat 6: 11 %. *Analysieren* Sie die Daten aus D2 in Verbindung mit diesem Verlauf: *Stellen* Sie einen Zusammenhang *her* und *leiten* Sie **zwei** Gründe für den ungewöhnlichen Verlauf der Holzfeuchte *ab*.
+**D3 (6 P):** Ein Liniendiagramm zeigt die mittlere Holzfeuchte im Lager: Monat 1: 28 %, Monat 2: 22 %, Monat 3: 22 %, Monat 4: 21 %, Monat 5: 16 %, Monat 6: 11 %. Aus den Übersichten in D2 stehen Ihnen außerdem der durchschnittliche Anteil schlecht durchlüfteter Stapel und die Summe der Arbeitsstunden im Lager je Monat zur Verfügung:
+
+| Monat | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| Ø Anteil schlecht durchlüfteter Stapel in % | 18 | 28 | 41 | 52 | 7 | 4 |
+| Arbeitsstunden im Lager (Summe) | 340 | 284 | 180 | 310 | 98 | 88 |
+
+*Analysieren* Sie diese Daten in Verbindung mit dem Verlauf der Holzfeuchte: *Stellen* Sie einen Zusammenhang *her* und *leiten* Sie **zwei** Gründe für den ungewöhnlichen Verlauf der Holzfeuchte *ab*.
 
 ## Lernziel-Check (am Ende des Themas alles mit Ja beantworten)
 
