@@ -63,6 +63,43 @@ Die drei Kopien (Original plus zwei Sicherungen) schützen vor dem Ausfall einer
 ### Beispiel
 Die Möbelhaus-Datenbank läuft auf dem Server (Kopie 1), wird nachts auf ein NAS gesichert (Kopie 2, Medium Festplatte) und wöchentlich auf ein Band, das im Bankschließfach liegt (Kopie 3, anderes Medium, offsite, offline).
 
+Die Abbildung zeigt, welche Kopie welche der drei Zahlen erfüllt.
+
+**Abbildung: 3-2-1-Regel am Beispiel des Möbelhauses**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 238" width="360" height="238" role="img" aria-label="Drei Kopien auf zwei Medien, eine außer Haus: Server und NAS auf Festplatte im Möbelhaus, ein Band im Bankschließfach außer Haus">
+<defs><marker id="drei-zwei-eins-pfeil" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker></defs>
+<rect x="4" y="8" width="218" height="150" class="dg-linie dg-strich"/>
+<rect x="238" y="8" width="118" height="150" class="dg-linie dg-strich"/>
+<text x="113" y="22" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">vor Ort (Möbelhaus)</text>
+<text x="297" y="22" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">außer Haus</text>
+<rect x="12" y="40" width="84" height="56" class="dg-akzent"/>
+<text x="54" y="58" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Server</text>
+<text x="54" y="78" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Festplatte</text>
+<text x="54" y="112" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Kopie 1</text>
+<text x="54" y="126" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Original</text>
+<rect x="124" y="40" width="84" height="56" class="dg-akzent"/>
+<text x="166" y="58" text-anchor="middle" dominant-baseline="middle" class="dg-fett">NAS</text>
+<text x="166" y="78" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Festplatte</text>
+<text x="166" y="112" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Kopie 2</text>
+<text x="166" y="126" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">nachts</text>
+<rect x="254" y="40" width="84" height="56" class="dg-mittel"/>
+<text x="296" y="58" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Band</text>
+<text x="296" y="78" text-anchor="middle" dominant-baseline="middle" class="dg-klein">offline</text>
+<text x="296" y="112" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Kopie 3</text>
+<text x="296" y="126" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">wöchentlich</text>
+<line x1="96" y1="68" x2="122" y2="68" class="dg-linie" marker-end="url(#drei-zwei-eins-pfeil)"/>
+<line x1="208" y1="68" x2="252" y2="68" class="dg-linie" marker-end="url(#drei-zwei-eins-pfeil)"/>
+<text x="10" y="180" text-anchor="start" dominant-baseline="middle" class="dg-fett">3 Kopien</text>
+<text x="120" y="180" text-anchor="start" dominant-baseline="middle" class="dg-klein">Server, NAS, Band</text>
+<text x="10" y="202" text-anchor="start" dominant-baseline="middle" class="dg-fett">2 Medien</text>
+<text x="120" y="202" text-anchor="start" dominant-baseline="middle" class="dg-klein">Festplatte und Band</text>
+<text x="10" y="224" text-anchor="start" dominant-baseline="middle" class="dg-fett">1 außer Haus</text>
+<text x="120" y="224" text-anchor="start" dominant-baseline="middle" class="dg-klein">Band im Bankschließfach</text>
+</svg>
+```
+
 ### Abgrenzung
 **RAID** spiegelt Änderungen sofort auf alle Platten und ersetzt kein Backup – versehentliches Löschen und Verschlüsselung landen ebenfalls auf allen Platten.
 

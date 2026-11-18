@@ -1394,6 +1394,57 @@ Durch die Normalisierung sinkt die Redundanz in den Dimensionen, Hierarchien sin
 ### Beispiel
 `fakt_verkauf` → `dim_produkt` (produkt_id, bezeichnung, warengruppe_id) → `dim_warengruppe` (warengruppe_id, name, kategorie_id) → `dim_kategorie`. Für „Umsatz je Kategorie“ sind drei Joins statt einem nötig.
 
+Die Abbildung zeigt die Kette Produkt → Warengruppe → Kategorie; die ausgelagerten Ebenen sind grün.
+
+**Abbildung: Snowflake-Schema mit normalisierter Produktdimension**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 384" width="360" height="384" role="img" aria-label="Snowflake-Schema: Faktentabelle mit Dimensionen; die Dimension Produkt ist normalisiert und über Warengruppe bis zur Kategorie in weitere Tabellen aufgeteilt">
+<line x1="180" y1="68" x2="180" y2="110" class="dg-linie"/>
+<line x1="104" y1="150" x2="130" y2="150" class="dg-linie"/>
+<line x1="230" y1="150" x2="256" y2="150" class="dg-linie"/>
+<line x1="54" y1="180" x2="54" y2="218" class="dg-linie-akzent dg-dick"/>
+<line x1="54" y1="280" x2="54" y2="326" class="dg-linie-akzent dg-dick"/>
+<rect x="130" y="110" width="100" height="88" class="dg-akzent"/>
+<text x="180" y="122" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">fakt_verkauf</text>
+<text x="180" y="138" text-anchor="middle" dominant-baseline="middle" class="dg-klein">zeit_id↑</text>
+<text x="180" y="152" text-anchor="middle" dominant-baseline="middle" class="dg-klein">produkt_id↑</text>
+<text x="180" y="166" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kunde_id↑</text>
+<text x="180" y="186" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">menge, umsatz</text>
+<rect x="130" y="6" width="100" height="66" class="dg-form"/>
+<text x="180" y="17" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_zeit</text>
+<text x="180" y="33" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">zeit_id</text>
+<text x="180" y="47" text-anchor="middle" dominant-baseline="middle" class="dg-klein">datum</text>
+<text x="180" y="61" text-anchor="middle" dominant-baseline="middle" class="dg-klein">jahr</text>
+<rect x="256" y="126" width="100" height="66" class="dg-form"/>
+<text x="306" y="137" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_kunde</text>
+<text x="306" y="153" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">kunde_id</text>
+<text x="306" y="167" text-anchor="middle" dominant-baseline="middle" class="dg-klein">name</text>
+<text x="306" y="181" text-anchor="middle" dominant-baseline="middle" class="dg-klein">ort</text>
+<rect x="4" y="118" width="100" height="66" class="dg-form"/>
+<text x="54" y="129" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_produkt</text>
+<text x="54" y="145" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">produkt_id</text>
+<text x="54" y="159" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bezeichnung</text>
+<text x="54" y="173" text-anchor="middle" dominant-baseline="middle" class="dg-klein">warengruppe_id↑</text>
+<rect x="4" y="218" width="100" height="66" class="dg-gut"/>
+<text x="54" y="229" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_warengruppe</text>
+<text x="54" y="245" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">warengruppe_id</text>
+<text x="54" y="259" text-anchor="middle" dominant-baseline="middle" class="dg-klein">name</text>
+<text x="54" y="273" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kategorie_id↑</text>
+<rect x="4" y="326" width="100" height="52" class="dg-gut"/>
+<text x="54" y="337" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_kategorie</text>
+<text x="54" y="353" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">kategorie_id</text>
+<text x="54" y="367" text-anchor="middle" dominant-baseline="middle" class="dg-klein">name</text>
+<text x="130" y="230" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Umsatz je Kategorie:</text>
+<text x="130" y="246" text-anchor="start" dominant-baseline="middle" class="dg-klein">3 Joins</text>
+<text x="130" y="262" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">fakt → produkt →</text>
+<text x="130" y="276" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">warengruppe → kategorie</text>
+<text x="130" y="304" text-anchor="start" dominant-baseline="middle" class="dg-klein">Im Star-Schema: 1 Join</text>
+<text x="130" y="320" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">(Kategorie steht in dim_produkt)</text>
+<text x="356" y="368" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">↑ Fremdschlüssel · grün = ausgelagert</text>
+</svg>
+```
+
 ### Abgrenzung
 | | Star | Snowflake |
 |---|---|---|
@@ -2443,6 +2494,52 @@ Die **Faktentabelle** enthält messbare Kennzahlen (Menge, Umsatz) und je einen 
 
 ### Beispiel
 `fakt_verkauf(zeit_id, produkt_id, kunde_id, filial_id, menge, umsatz)` mit den Dimensionen `dim_zeit`, `dim_produkt`, `dim_kunde` und `dim_filiale`. „Umsatz je Warengruppe und Quartal“ braucht genau zwei Joins.
+
+Die Abbildung zeigt den Stern: in der Mitte die Kennzahlen, außen je eine Dimension mit ihrer vollständigen Hierarchie.
+
+**Abbildung: Star-Schema mit Faktentabelle und vier Dimensionen**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 370" width="360" height="370" role="img" aria-label="Star-Schema: die Faktentabelle fakt_verkauf in der Mitte, sternförmig verbunden mit den Dimensionen Zeit, Produkt, Kunde und Filiale">
+<line x1="180" y1="82" x2="180" y2="112" class="dg-linie"/>
+<line x1="104" y1="162" x2="130" y2="162" class="dg-linie"/>
+<line x1="230" y1="162" x2="256" y2="162" class="dg-linie"/>
+<line x1="180" y1="220" x2="180" y2="246" class="dg-linie"/>
+<rect x="130" y="112" width="100" height="108" class="dg-akzent"/>
+<text x="180" y="124" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">fakt_verkauf</text>
+<text x="180" y="140" text-anchor="middle" dominant-baseline="middle" class="dg-klein">zeit_id↑</text>
+<text x="180" y="154" text-anchor="middle" dominant-baseline="middle" class="dg-klein">produkt_id↑</text>
+<text x="180" y="168" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kunde_id↑</text>
+<text x="180" y="182" text-anchor="middle" dominant-baseline="middle" class="dg-klein">filial_id↑</text>
+<line x1="130" y1="196" x2="230" y2="196" class="dg-linie dg-duenn"/>
+<text x="180" y="208" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">menge, umsatz</text>
+<rect x="130" y="6" width="100" height="80" class="dg-form"/>
+<text x="180" y="17" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_zeit</text>
+<text x="180" y="33" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">zeit_id</text>
+<text x="180" y="47" text-anchor="middle" dominant-baseline="middle" class="dg-klein">datum</text>
+<text x="180" y="61" text-anchor="middle" dominant-baseline="middle" class="dg-klein">monat, quartal</text>
+<text x="180" y="75" text-anchor="middle" dominant-baseline="middle" class="dg-klein">jahr</text>
+<rect x="4" y="124" width="100" height="80" class="dg-form"/>
+<text x="54" y="135" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_produkt</text>
+<text x="54" y="151" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">produkt_id</text>
+<text x="54" y="165" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bezeichnung</text>
+<text x="54" y="179" text-anchor="middle" dominant-baseline="middle" class="dg-klein">warengruppe</text>
+<text x="54" y="193" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kategorie</text>
+<rect x="256" y="124" width="100" height="66" class="dg-form"/>
+<text x="306" y="135" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_kunde</text>
+<text x="306" y="151" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">kunde_id</text>
+<text x="306" y="165" text-anchor="middle" dominant-baseline="middle" class="dg-klein">name</text>
+<text x="306" y="179" text-anchor="middle" dominant-baseline="middle" class="dg-klein">ort</text>
+<rect x="130" y="246" width="100" height="66" class="dg-form"/>
+<text x="180" y="257" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">dim_filiale</text>
+<text x="180" y="273" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-akzent-text dg-fett">filial_id</text>
+<text x="180" y="287" text-anchor="middle" dominant-baseline="middle" class="dg-klein">filialname</text>
+<text x="180" y="301" text-anchor="middle" dominant-baseline="middle" class="dg-klein">region</text>
+<text x="180" y="328" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Mitte: Kennzahlen · außen: Beschreibungen (Dimensionen)</text>
+<text x="180" y="344" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Warengruppe und Kategorie stehen direkt in dim_produkt</text>
+<text x="180" y="360" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">↑ = Fremdschlüssel · fett = Schlüssel</text>
+</svg>
+```
 
 ### Abgrenzung
 | | Star | Snowflake | Galaxy |

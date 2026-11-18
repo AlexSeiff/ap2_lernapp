@@ -267,6 +267,66 @@ A (3 Tage) vor B (4) und C (2), beide vor D (1):
 
 Projektdauer 8 Tage, kritischer Pfad A – B – D.
 
+Die Abbildung zeigt dasselbe Netz mit den Zeitwerten in den Knoten; der kritische Pfad A – B – D ist hervorgehoben.
+
+**Abbildung: Netzplan mit FAZ, FEZ, SAZ, SEZ und Puffern**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 244" width="360" height="244" role="img" aria-label="Netzplan mit den Vorgängen A, B, C und D: A vor B und C, beide vor D; kritischer Pfad A, B, D mit 8 Tagen Projektdauer, Vorgang C hat 2 Tage Puffer">
+<defs><marker id="netzplan-pfeil" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker><marker id="netzplan-pfeil-krit" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll-akzent"/></marker></defs>
+<line x1="80" y1="94" x2="142" y2="42" class="dg-linie-akzent dg-dick" marker-end="url(#netzplan-pfeil-krit)"/>
+<line x1="80" y1="94" x2="142" y2="146" class="dg-linie" marker-end="url(#netzplan-pfeil)"/>
+<line x1="220" y1="42" x2="280" y2="94" class="dg-linie-akzent dg-dick" marker-end="url(#netzplan-pfeil-krit)"/>
+<line x1="220" y1="146" x2="280" y2="94" class="dg-linie" marker-end="url(#netzplan-pfeil)"/>
+<rect x="4" y="62" width="76" height="64" class="dg-akzent"/>
+<line x1="4" y1="82" x2="80" y2="82" class="dg-linie dg-duenn"/>
+<line x1="4" y1="106" x2="80" y2="106" class="dg-linie dg-duenn"/>
+<line x1="42" y1="62" x2="42" y2="82" class="dg-linie dg-duenn"/>
+<line x1="42" y1="106" x2="42" y2="126" class="dg-linie dg-duenn"/>
+<text x="23" y="72" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0</text>
+<text x="61" y="72" text-anchor="middle" dominant-baseline="middle" class="dg-klein">3</text>
+<text x="42" y="94" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">A · 3 T</text>
+<text x="23" y="116" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0</text>
+<text x="61" y="116" text-anchor="middle" dominant-baseline="middle" class="dg-klein">3</text>
+<text x="42" y="140" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">GP 0 · FP 0</text>
+<rect x="144" y="10" width="76" height="64" class="dg-akzent"/>
+<line x1="144" y1="30" x2="220" y2="30" class="dg-linie dg-duenn"/>
+<line x1="144" y1="54" x2="220" y2="54" class="dg-linie dg-duenn"/>
+<line x1="182" y1="10" x2="182" y2="30" class="dg-linie dg-duenn"/>
+<line x1="182" y1="54" x2="182" y2="74" class="dg-linie dg-duenn"/>
+<text x="163" y="20" text-anchor="middle" dominant-baseline="middle" class="dg-klein">3</text>
+<text x="201" y="20" text-anchor="middle" dominant-baseline="middle" class="dg-klein">7</text>
+<text x="182" y="42" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">B · 4 T</text>
+<text x="163" y="64" text-anchor="middle" dominant-baseline="middle" class="dg-klein">3</text>
+<text x="201" y="64" text-anchor="middle" dominant-baseline="middle" class="dg-klein">7</text>
+<text x="182" y="88" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">GP 0 · FP 0</text>
+<rect x="144" y="114" width="76" height="64" class="dg-form"/>
+<line x1="144" y1="134" x2="220" y2="134" class="dg-linie dg-duenn"/>
+<line x1="144" y1="158" x2="220" y2="158" class="dg-linie dg-duenn"/>
+<line x1="182" y1="114" x2="182" y2="134" class="dg-linie dg-duenn"/>
+<line x1="182" y1="158" x2="182" y2="178" class="dg-linie dg-duenn"/>
+<text x="163" y="124" text-anchor="middle" dominant-baseline="middle" class="dg-klein">3</text>
+<text x="201" y="124" text-anchor="middle" dominant-baseline="middle" class="dg-klein">5</text>
+<text x="182" y="146" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">C · 2 T</text>
+<text x="163" y="168" text-anchor="middle" dominant-baseline="middle" class="dg-klein">5</text>
+<text x="201" y="168" text-anchor="middle" dominant-baseline="middle" class="dg-klein">7</text>
+<text x="182" y="192" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">GP 2 · FP 2</text>
+<rect x="280" y="62" width="76" height="64" class="dg-akzent"/>
+<line x1="280" y1="82" x2="356" y2="82" class="dg-linie dg-duenn"/>
+<line x1="280" y1="106" x2="356" y2="106" class="dg-linie dg-duenn"/>
+<line x1="318" y1="62" x2="318" y2="82" class="dg-linie dg-duenn"/>
+<line x1="318" y1="106" x2="318" y2="126" class="dg-linie dg-duenn"/>
+<text x="299" y="72" text-anchor="middle" dominant-baseline="middle" class="dg-klein">7</text>
+<text x="337" y="72" text-anchor="middle" dominant-baseline="middle" class="dg-klein">8</text>
+<text x="318" y="94" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">D · 1 T</text>
+<text x="299" y="116" text-anchor="middle" dominant-baseline="middle" class="dg-klein">7</text>
+<text x="337" y="116" text-anchor="middle" dominant-baseline="middle" class="dg-klein">8</text>
+<text x="318" y="140" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">GP 0 · FP 0</text>
+<text x="180" y="218" text-anchor="middle" dominant-baseline="middle" class="dg-klein">oben: FAZ | FEZ · Mitte: Vorgang · Dauer · unten: SAZ | SEZ</text>
+<text x="180" y="234" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Projektdauer 8 Tage · kritischer Pfad A – B – D (farbig, dick)</text>
+</svg>
+```
+
 ### Abgrenzung
 Das **Gantt-Diagramm** zeigt dieselben Vorgänge als Balken über der Zeitachse – gut zum Kommunizieren, der Netzplan ist das Rechenwerkzeug.
 
@@ -480,6 +540,61 @@ Ohne Normalisierung drohen Einfüge-, Änderungs- und Löschanomalien. Normalisi
 
 ### Beispiel
 Die Bestellliste des Altsystems speichert Kundenname und -ort in jeder Bestellung. Zieht die Huber GmbH um, müsste jede ihrer Bestellungen geändert werden. Nach der 3. NF steht der Ort nur noch einmal in der Tabelle kunde.
+
+Die Abbildung zerlegt eine Positionstabelle des Altsystems (mit zusätzlichem Kundenort) in drei Schritten: erst nur atomare Werte (1. NF), dann Teilabhängigkeiten auslagern (2. NF), dann die transitive Abhängigkeit (3. NF).
+
+**Abbildung: Tabellenzerlegung von der 1. bis zur 3. Normalform**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" width="360" height="320" role="img" aria-label="Zerlegung einer Bestellpositions-Tabelle: erst 1. Normalform, dann 2. Normalform mit drei Tabellen, dann 3. Normalform mit der zusätzlichen Tabelle kunde">
+<defs><marker id="normalisierung-pfeil" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker></defs>
+<rect x="6" y="4" width="348" height="72" class="dg-form"/>
+<text x="180" y="16" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">1. NF: bestellposition (alles in einer Tabelle)</text>
+<text x="180" y="32" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">bestell_id, produkt_id</text>
+<text x="180" y="46" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bestelldatum, kunden_id, kunden_ort</text>
+<text x="180" y="60" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bezeichnung, preis, menge</text>
+<line x1="180" y1="76" x2="180" y2="104" class="dg-linie" marker-end="url(#normalisierung-pfeil)"/>
+<text x="190" y="90" text-anchor="start" dominant-baseline="middle" class="dg-klein">2. NF: Teilabhängigkeiten auslagern</text>
+<rect x="6" y="108" width="108" height="84" class="dg-akzent"/>
+<text x="60" y="120" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">bestellung</text>
+<text x="60" y="136" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">bestell_id</text>
+<text x="60" y="150" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bestelldatum</text>
+<text x="60" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kunden_id</text>
+<text x="60" y="178" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kunden_ort</text>
+<rect x="126" y="108" width="108" height="84" class="dg-akzent"/>
+<text x="180" y="120" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">produkt</text>
+<text x="180" y="136" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">produkt_id</text>
+<text x="180" y="150" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bezeichnung</text>
+<text x="180" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">preis</text>
+<rect x="246" y="108" width="108" height="84" class="dg-akzent"/>
+<text x="300" y="120" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">bestellposition</text>
+<text x="300" y="136" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">bestell_id</text>
+<text x="300" y="150" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">produkt_id</text>
+<text x="300" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">menge</text>
+<line x1="60" y1="192" x2="60" y2="220" class="dg-linie" marker-end="url(#normalisierung-pfeil)"/>
+<text x="70" y="206" text-anchor="start" dominant-baseline="middle" class="dg-klein">3. NF: transitive Abhängigkeit auslagern</text>
+<rect x="2" y="224" width="76" height="70" class="dg-form"/>
+<text x="40" y="236" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">bestellung</text>
+<text x="40" y="252" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">bestell_id</text>
+<text x="40" y="266" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bestelldatum</text>
+<text x="40" y="280" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kunden_id↑</text>
+<rect x="84" y="224" width="70" height="70" class="dg-akzent"/>
+<text x="119" y="236" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">kunde</text>
+<text x="119" y="252" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">kunden_id</text>
+<text x="119" y="266" text-anchor="middle" dominant-baseline="middle" class="dg-klein">kunden_ort</text>
+<rect x="160" y="224" width="76" height="70" class="dg-form"/>
+<text x="198" y="236" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">produkt</text>
+<text x="198" y="252" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">produkt_id</text>
+<text x="198" y="266" text-anchor="middle" dominant-baseline="middle" class="dg-klein">bezeichnung</text>
+<text x="198" y="280" text-anchor="middle" dominant-baseline="middle" class="dg-klein">preis</text>
+<rect x="242" y="224" width="116" height="70" class="dg-form"/>
+<text x="300" y="236" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">bestellposition</text>
+<text x="300" y="252" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">bestell_id↑</text>
+<text x="300" y="266" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-akzent-text">produkt_id↑</text>
+<text x="300" y="280" text-anchor="middle" dominant-baseline="middle" class="dg-klein">menge</text>
+<text x="180" y="310" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">fett = Schlüssel, ↑ = Fremdschlüssel, farbig = neu entstanden</text>
+</svg>
+```
 
 ### Abgrenzung
 **Denormalisierung** fasst Tabellen bewusst wieder zusammen, z. B. im Star-Schema eines Data Warehouse, weil dort Lesegeschwindigkeit wichtiger ist als Redundanzfreiheit.

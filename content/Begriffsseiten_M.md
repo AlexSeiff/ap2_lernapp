@@ -625,6 +625,37 @@ Jede Stufe erhöht die Qualität; die Schichten lassen sich getrennt berechtigen
 ### Beispiel
 Kassenbons der Möbelhaus Nordholz GmbH: Bronze enthält 180.000 Positionen roh. Silver entfernt 1.800 Dubletten (1 %) und leitet 600 fehlerhafte Sätze in die Quarantäne – übrig bleiben 177.600. Gold liefert den Tagesumsatz je Filiale (12 Filialen, also 12 Zeilen pro Tag) für das Dashboard.
 
+Die Abbildung zeigt den Trichter: Die Datenmenge sinkt, die Qualität steigt.
+
+**Abbildung: Bronze, Silver und Gold mit den Zahlen des Beispiels**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 316" width="360" height="316" role="img" aria-label="Medallion-Architektur als Trichter: Bronze mit 180.000 Rohdaten-Positionen, Silver mit 177.600 bereinigten Positionen, Gold mit 12 Zeilen je Tag, danach das Dashboard">
+<defs><marker id="medallion-pfeil" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker></defs>
+<rect x="110" y="4" width="140" height="22" class="dg-form"/>
+<text x="180" y="15" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Kassen (Quellsysteme)</text>
+<line x1="180" y1="26" x2="180" y2="50" class="dg-linie" marker-end="url(#medallion-pfeil)"/>
+<text x="190" y="38" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">unverändert laden</text>
+<rect x="10" y="52" width="340" height="46" class="dg-rot"/>
+<text x="180" y="68" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Bronze</text>
+<text x="180" y="85" text-anchor="middle" dominant-baseline="middle" class="dg-klein">180.000 Positionen roh, mit Quelle und Ladezeit</text>
+<line x1="180" y1="98" x2="180" y2="132" class="dg-linie" marker-end="url(#medallion-pfeil)"/>
+<text x="190" y="108" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">− 1.800 Dubletten</text>
+<text x="190" y="122" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">− 600 in die Quarantäne</text>
+<rect x="45" y="134" width="270" height="46" class="dg-grau"/>
+<text x="180" y="150" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Silver</text>
+<text x="180" y="167" text-anchor="middle" dominant-baseline="middle" class="dg-klein">177.600 bereinigte Positionen</text>
+<line x1="180" y1="180" x2="180" y2="214" class="dg-linie" marker-end="url(#medallion-pfeil)"/>
+<text x="190" y="195" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">aggregieren: Tagesumsatz je Filiale</text>
+<rect x="80" y="216" width="200" height="46" class="dg-mittel"/>
+<text x="180" y="232" text-anchor="middle" dominant-baseline="middle" class="dg-fett">Gold</text>
+<text x="180" y="249" text-anchor="middle" dominant-baseline="middle" class="dg-klein">12 Zeilen je Tag (eine je Filiale)</text>
+<line x1="180" y1="262" x2="180" y2="284" class="dg-linie" marker-end="url(#medallion-pfeil)"/>
+<rect x="110" y="286" width="140" height="22" class="dg-form"/>
+<text x="180" y="297" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Dashboard</text>
+</svg>
+```
+
 ### Abgrenzung
 Die Medaillen beschreiben den **Veredelungsgrad**, nicht die Wichtigkeit oder eine Schutzklasse. Die **Medallion-Architektur** ist ein Muster im Lakehouse; **ETL** ist der Prozess, der zwischen den Stufen arbeitet.
 
