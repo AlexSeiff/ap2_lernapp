@@ -1169,7 +1169,7 @@ Die Daten selbst liegen als Parquet-Dateien. Ein Protokoll hält jede Änderung 
 - **ACID-Transaktionen:** Ein Schreibvorgang gilt ganz oder gar nicht; Leser sehen nie halbfertige Stände. Gleichzeitige Schreiber werden per optimistischer Nebenläufigkeitskontrolle abgeglichen.
 - **Schemaprüfung:** Schreibversuche mit abweichendem Schema werden abgelehnt, solange man die Änderung nicht ausdrücklich erlaubt (siehe Schema Evolution).
 - **Zeitreise (Time Travel):** ältere Versionen abfragen oder die Tabelle auf einen früheren Stand zurücksetzen.
-- **UPDATE, DELETE und MERGE** auch auf Lake-Daten, z. B. für Korrekturen. Für Löschanträge nach DSGVO reicht DELETE allein nicht: Die alten Dateien bleiben per Zeitreise lesbar, bis `VACUUM` sie nach der Aufbewahrungsfrist physisch entfernt (danach geht auch die Zeitreise zu diesen Ständen verloren).
+- **UPDATE, DELETE und MERGE** auch auf Lake-Daten, z. B. für Korrekturen. Für Löschanträge nach DSGVO reicht DELETE allein nicht: Die alten Dateien bleiben per Zeitreise lesbar, bis `VACUUM` sie nach der Aufbewahrungsfrist physisch entfernt (danach geht auch die Zeitreise zu diesen Ständen verloren). Bei aktivierten Deletion Vectors stehen gelöschte Zeilen zudem noch in den aktiven Dateien; diese müssen zuerst umgeschrieben werden (z. B. `REORG TABLE … APPLY (PURGE)`), erst danach kann `VACUUM` die alten Dateien entfernen.
 - Batch und Streaming können dieselbe Tabelle nutzen.
 
 Vergleichbare Tabellenformate sind Apache Iceberg und Apache Hudi.

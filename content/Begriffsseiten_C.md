@@ -183,7 +183,7 @@ Mehr: Deep Dive 2, 1.3 · Deep Dive 17, 3.1
 ## Cloud-Speicherung
 <!-- id: cloud-speicherung · quellen: Karte DD29, DD29 5.1, DD19 4.1 · stand: 2026-11 -->
 
-Ablage von Daten auf den Servern eines externen Anbieters, auf die man über das Internet zugreift und die meist nach Nutzung abgerechnet werden.
+Ablage von Daten auf den Servern eines externen Anbieters (Public Cloud), auf die man über das Internet zugreift und die meist nach Nutzung abgerechnet werden. Als Private Cloud lässt sich Cloud-Speicher auch auf eigener Infrastruktur betreiben.
 
 Auch: Cloud-Datenbank, Datenspeicherung in der Cloud
 
@@ -222,7 +222,7 @@ Der Anbieter sichert das Rechenzentrum; für Daten, Zugriffsrechte und Konfigura
 Nachteile nur nennen („Abhängigkeit“) und nicht erläutern – dann fehlt die Hälfte der Punkte. Und: Die Verantwortung für den Datenschutz geht **nicht** an den Cloud-Anbieter über.
 
 ### Merksatz
-Cloud heißt: fremde Hardware, eigene Verantwortung.
+Public Cloud heißt: fremde Hardware, eigene Verantwortung.
 
 Siehe auch: Auftragsverarbeiter · Standardvertragsklauseln · Schutzbedarfsfeststellung · Schutzziele · 3-2-1-Regel · Georedundanz
 Mehr: Deep Dive 29, 5.1 · Deep Dive 19, 4.1

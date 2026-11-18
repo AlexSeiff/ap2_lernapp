@@ -376,7 +376,7 @@ Angabe nach DIN EN 60529, wie gut das Gehäuse eines Geräts gegen das Eindringe
 Auch: IP-Schutzart, IP-Code
 
 ### Erklärung
-„IP“ steht für Ingress Protection (Eindringschutz). Die **erste Ziffer** (0 bis 6) gibt den Schutz gegen feste Fremdkörper und Staub an, die **zweite Ziffer** (0 bis 9) den Schutz gegen Wasser. Je höher die Ziffer, desto besser der Schutz. Ein „X“ bedeutet: nicht geprüft.
+„IP“ steht für Ingress Protection (Eindringschutz). Die **erste Ziffer** (0 bis 6) gibt den Schutz gegen feste Fremdkörper und Staub an, die **zweite Ziffer** (0 bis 9) den Schutz gegen Wasser. Innerhalb einer Ziffer steht eine höhere Zahl meist für schärfere Anforderungen, bei Wasser decken die Ziffern aber nicht automatisch alle niedrigeren Prüfarten ab (Untertauchen und Strahlwasser sind getrennt zu betrachten). Ein „X“ bedeutet: für diese Stelle ist keine Schutzart angegeben.
 
 | Ziffer | 1. Stelle: Fremdkörper, Staub | 2. Stelle: Wasser |
 |---|---|---|
@@ -687,7 +687,7 @@ Auch: SELECT-Anweisung, SELECT DISTINCT
 ### Erklärung
 SELECT wählt die **Spalten** des Ergebnisses (Projektion) und kann Ausdrücke, Aggregatfunktionen und Aliase enthalten; die **Zeilen** wählt WHERE (Selektion). `SELECT *` liefert alle Spalten, `SELECT DISTINCT` entfernt doppelte Ergebniszeilen (NULL-Werte gelten dabei als gleich).
 
-Geschrieben wird in der Reihenfolge SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT, **ausgeführt** wird so: FROM/JOIN → WHERE → GROUP BY → HAVING → **SELECT** → DISTINCT → ORDER BY → LIMIT. Deshalb kennt ORDER BY die Aliase aus dem SELECT, WHERE aber nicht. Jede Spalte im SELECT, die nicht aggregiert wird, gehört bei GROUP BY auch in die Gruppierung.
+Geschrieben wird in der Reihenfolge SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT, **ausgeführt** wird so: FROM/JOIN → WHERE → GROUP BY → HAVING → **SELECT** → DISTINCT → ORDER BY → LIMIT. Deshalb kennt ORDER BY die Aliase aus dem SELECT, WHERE aber nicht. Als portable Grundregel gehört jede Spalte im SELECT, die nicht aggregiert wird, auch in die GROUP-BY-Gruppierung (je nach DBMS dürfen funktional abhängige Spalten entfallen, etwa bei Gruppierung nach dem Primärschlüssel).
 
 Dialekt: Die Zeilenzahl begrenzt man in SQLite und MySQL mit `LIMIT n`, in SQL Server mit `TOP n`, in Oracle und Standard-SQL mit `FETCH FIRST n ROWS ONLY`.
 
@@ -1830,7 +1830,7 @@ Mechanismus, mit dem ein Datenbanksystem gleichzeitige Zugriffe koordiniert, ind
 | Lesesperre | möglich | wartet |
 | Schreibsperre | wartet | wartet |
 
-**Granularität:** gesperrt werden kann eine Zeile, eine Seite, die Tabelle oder die Datenbank. Feine Sperren erlauben viel Parallelität, kosten aber Verwaltungsaufwand; grobe sind billig, lassen andere länger warten. Schreibsperren werden bis zum Ende der Transaktion (COMMIT oder ROLLBACK) gehalten, Lesesperren je nach Isolationsstufe kürzer oder bis dahin. Höhere Isolationsstufen sperren mehr oder länger. Systeme mit MVCC (Versionen) lassen normale Lesezugriffe trotz Schreibsperre zu: Sie lesen die letzte bestätigte Version. Risiken: Wartezeiten und **Deadlocks**.
+**Granularität:** gesperrt werden kann eine Zeile, eine Seite, die Tabelle oder die Datenbank. Feine Sperren erlauben viel Parallelität, kosten aber Verwaltungsaufwand; grobe sind billig, lassen andere länger warten. Schreibsperren werden bis zum Ende der Transaktion (COMMIT oder ROLLBACK) gehalten, Lesesperren je nach Isolationsstufe kürzer oder bis dahin. Höhere Isolationsstufen können längere Sperren oder zusätzliche Konfliktprüfungen mit Transaktionsabbrüchen erfordern. Systeme mit MVCC (Versionen) lassen normale Lesezugriffe trotz Schreibsperre zu: Sie lesen die zu ihrem Snapshot passende Version (je nach System und Isolationsstufe der Stand bei Transaktions- oder Anweisungsbeginn). Risiken: Wartezeiten und **Deadlocks**.
 
 ### Beispiel
 Zwei Disponenten ändern den Bestand in der Tabelle `lager` mit 5.000 Artikeln. Bei einer Zeilensperre blockiert Disponent 1 nur Artikel 10; Disponent 2 kann Artikel 11 ungestört ändern. Bei einer Tabellensperre müsste er auf alle 5.000 Artikel warten.

@@ -232,10 +232,10 @@ Auch: Batch Processing, Stapelverarbeitung
 Verarbeitung gesammelter Datenmengen in einem Lauf (Stapel) zu festen Zeiten oder auf Anstoß – z. B. der nächtliche ETL-Lauf ins Data Warehouse.
 
 ### Erklärung
-Daten sammeln sich zunächst im Quellsystem. Ein Job liest den ganzen Stapel, verarbeitet ihn und schreibt das Ergebnis. Vorteile: einfach, robust und wiederholbar (bei einem Fehler startet man den Lauf erneut), gut für große Mengen, die Last lässt sich in ein Nachtfenster legen. Nachteil: Die Auswertung zeigt höchstens den Stand des letzten Laufs; die **Latenz** entspricht ungefähr dem Laufintervall. Zwischenform: **Micro-Batches** mit sehr kurzem Intervall (Sekunden bis Minuten).
+Daten sammeln sich zunächst im Quellsystem. Ein Job liest den ganzen Stapel, verarbeitet ihn und schreibt das Ergebnis. Vorteile: einfach, robust und wiederholbar (bei einem Fehler startet man den Lauf erneut), gut für große Mengen, die Last lässt sich in ein Nachtfenster legen. Nachteil: Die Auswertung zeigt höchstens den Stand des letzten Laufs; die **Latenz** ist Wartezeit bis zum nächsten Lauf plus Laufzeit (maximal etwa Laufintervall plus Laufzeit, im Mittel rund ein halbes Intervall plus Laufzeit). Zwischenform: **Micro-Batches** mit sehr kurzem Intervall (Sekunden bis Minuten).
 
 ### Beispiel
-Die Möbelhaus Nordholz GmbH lädt die Kassenbons jede Nacht um 02:00 Uhr ins DWH (rund 180.000 Positionen, Laufzeit etwa 45 Minuten). Ein Bon von 10:15 Uhr ist daher erst gut 15 Stunden später im Dashboard sichtbar, einer von 02:05 Uhr fast 24 Stunden später. Für den Wochenbericht des Controllings reicht das völlig.
+Die Möbelhaus Nordholz GmbH lädt die Kassenbons jede Nacht um 02:00 Uhr ins DWH (rund 180.000 Positionen, Laufzeit etwa 45 Minuten). Der Lauf liest alle Bons bis 02:00 Uhr und stellt sein Ergebnis gegen 02:45 Uhr bereit. Ein Bon von 10:15 Uhr ist daher erst nach 16 Stunden 30 Minuten im Dashboard sichtbar, einer von 02:05 Uhr (knapp nach dem Stichtag, also erst im nächsten Lauf) nach 24 Stunden 40 Minuten. Für den Wochenbericht des Controllings reicht das völlig.
 
 ### Abgrenzung
 Die **Stream-Verarbeitung** verarbeitet jedes Ereignis fortlaufend, sobald es entsteht – aktueller, aber aufwendiger. Entscheidend ist die Frage, wie aktuell die Information sein muss, damit die Entscheidung noch etwas nützt.

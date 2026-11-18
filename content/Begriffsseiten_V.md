@@ -959,7 +959,7 @@ Hier geht es um die **Datenschutz-Seite** (Stand 2026). Wer Kameras betreibt, br
 
 **Verboten bzw. besonders heikel:** Kameras in Toiletten, Umkleiden, Sanitär- und Pausenräumen; Ton aufnehmen (§ 201 StGB); dauernde Überwachung von Beschäftigten am Arbeitsplatz. **Biometrische Gesichtserkennung** betrifft besondere Kategorien nach Art. 9 DSGVO und ist nur in engen Ausnahmen erlaubt.
 
-**Beschäftigte:** Der Betriebsrat hat nach § 87 Abs. 1 Nr. 6 BetrVG mitzubestimmen; üblich ist eine **Betriebsvereinbarung**. Eine Einwilligung der Beschäftigten taugt kaum als Grundlage, weil sie wegen des Abhängigkeitsverhältnisses als nicht freiwillig gilt.
+**Beschäftigte:** Der Betriebsrat hat nach § 87 Abs. 1 Nr. 6 BetrVG mitzubestimmen; üblich ist eine **Betriebsvereinbarung**. Bei einer Einwilligung der Beschäftigten ist die Freiwilligkeit wegen des Abhängigkeitsverhältnisses besonders kritisch zu prüfen (§ 26 Abs. 2 BDSG); für dauernde Überwachung am Arbeitsplatz ist sie regelmäßig keine tragfähige Grundlage.
 
 ### Beispiel
 Im Verkaufsraum der Möbelhaus Nordholz GmbH sollen zwei Kameras am Eingang und an der Kasse Diebstahl verhindern. Das Möbelhaus legt den Zweck „Schutz vor Diebstahl und Raub“ fest, filmt nur diese zwei Bereiche (nicht die Umkleide der Beschäftigten und nicht den Gehweg), hängt Hinweisschilder am Eingang auf, löscht die Aufnahmen automatisch nach 72 Stunden, beschränkt den Zugriff auf die Marktleitung und schließt mit dem Betriebsrat eine Betriebsvereinbarung. Fragt eine Klausur nach zwei Maßnahmen für den rechtskonformen Betrieb, sind Hinweisschilder und automatische Löschung die naheliegenden Antworten.
@@ -971,7 +971,7 @@ Im Verkaufsraum der Möbelhaus Nordholz GmbH sollen zwei Kameras am Eingang und 
 | Personen im Bild | Hauptgegenstand | unerwünschter Beifang |
 | typische Maßnahme | Hinweisschild, kurze Löschfrist | nur die Etikettenregion speichern, Personen unkenntlich machen |
 
-Beide brauchen Rechtsgrundlage, Hinweisschilder und eine Löschfrist. Eine **Zutrittskontrolle** per Chip oder Schloss ist dagegen eine technische und organisatorische Maßnahme und kein Ersatz für Kameras, sondern oft das mildere Mittel.
+Beide unterliegen den DSGVO-Anforderungen (Rechtsgrundlage, Hinweisschilder, Löschfrist), soweit personenbezogene Daten verarbeitet werden; rein sachbezogene Bilderkennung ohne Personenbezug fällt nicht darunter. Auch Personen unkenntlich zu machen heilt nicht die Verarbeitung der Rohbilder davor. Eine **Zutrittskontrolle** per Chip oder Schloss ist dagegen eine technische und organisatorische Maßnahme und kein Ersatz für Kameras, sondern oft das mildere Mittel.
 
 ### Prüfungsfalle
 Das Hinweisschild für die Rechtsgrundlage halten: Es stellt nur Transparenz her. Zulässig wird die Überwachung erst durch Rechtsgrundlage, Erforderlichkeit und Interessenabwägung. Außerdem „Einwilligung der Mitarbeiter“ als Standardlösung nennen – im Arbeitsverhältnis ist sie problematisch, besser sind Betriebsvereinbarung und berechtigtes Interesse.

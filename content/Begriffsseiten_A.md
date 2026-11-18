@@ -881,7 +881,7 @@ Ein Alias benennt nur in der Ausgabe um; die Tabelle behält ihre Spaltennamen. 
 Den Spaltenalias im WHERE verwenden (`WHERE brutto > 200`) – nach Standard-SQL ein Fehler; in der Prüfung die Rechnung ausschreiben. Ebenso häufig: eine Spalte, die in beiden JOIN-Tabellen vorkommt, ohne Präfix schreiben (`kunden_id` statt `k.kunden_id`) – Fehler „mehrdeutig“.
 
 ### Merksatz
-Der Alias entsteht im SELECT – davor kennt ihn niemand.
+Tabellenaliase werden in FROM vergeben, Spaltenaliase entstehen im SELECT – dort kennt sie WHERE noch nicht.
 
 Siehe auch: SELECT · ORDER BY · INNER JOIN · WHERE · Unterabfrage
 Mehr: Deep Dive 1, 1.4 · Deep Dive 1, 2.6
@@ -2408,7 +2408,7 @@ Die Schrittfolge, mit der das Datenbanksystem eine SQL-Abfrage tatsächlich ausf
 ### Erklärung
 Der Plan besteht aus Operatoren: **Tabellen-Scan** (alle Zeilen lesen), **Index-Zugriff** (über einen Index gezielt zu den Treffern springen), **Join-Verfahren** (z. B. Nested Loop, Hash Join), Sortieren und Aggregieren. Zu jedem Schritt zeigen die meisten Systeme die geschätzten Kosten und Zeilenzahlen. `EXPLAIN` vor einer Abfrage zeigt den Plan, ohne das Ergebnis zu liefern. Systeme mit `EXPLAIN ANALYZE` (z. B. PostgreSQL) führen die Abfrage zusätzlich aus und messen die echten Zeilenzahlen und Zeiten; SQLite nutzt `EXPLAIN QUERY PLAN`, SQL Server einen grafischen Plan.
 
-So liest du einen Plan bei einer langsamen Abfrage: Steht bei einem selektiven Filter ein Scan über die ganze große Tabelle, fehlt ein passender Index oder er ist nicht nutzbar (z. B. wegen einer Funktion um die Spalte). Weichen geschätzte und tatsächliche Zeilenzahlen stark voneinander ab, sind die Statistiken veraltet.
+So liest du einen Plan bei einer langsamen Abfrage: Steht bei einem selektiven Filter ein Scan über die ganze große Tabelle, fehlt ein passender Index oder er ist nicht nutzbar (z. B. wegen einer Funktion um die Spalte). Weichen geschätzte und tatsächliche Zeilenzahlen stark voneinander ab, können die Statistiken veraltet oder unzureichend sein (z. B. fehlen Informationen über korrelierte Spalten): Ursache prüfen, Statistiken ggf. aktualisieren oder erweitern.
 
 ### Beispiel
 In SQLite zeigt die Möbelhaus Nordholz GmbH den Plan für eine Kundenabfrage:

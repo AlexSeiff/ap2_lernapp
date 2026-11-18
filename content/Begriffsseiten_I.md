@@ -109,7 +109,7 @@ Auch: IN-Operator, BETWEEN, LIKE, Wildcard
 | `x BETWEEN a AND b` | x liegt im Bereich, **Grenzen eingeschlossen** | `x >= a AND x <= b` |
 | `x LIKE muster` | Text passt zum Muster | – |
 
-Bei `BETWEEN` steht die **untere Grenze zuerst**: `BETWEEN 249 AND 129` liefert nie eine Zeile. Es gilt auch für Datum und Text. Im Muster von `LIKE` steht `%` für beliebig viele Zeichen (auch keines) und `_` für genau ein Zeichen; `'S%'` = beginnt mit S, `'%tisch%'` = enthält „tisch“, `'_ischer%'` = ein beliebiges Zeichen, dann „ischer“. Ein Muster ohne Platzhalter wirkt wie `=`. Alle drei lassen sich mit `NOT` verneinen (`NOT IN`, `NOT BETWEEN`, `NOT LIKE`).
+Bei `BETWEEN` steht die **untere Grenze zuerst**: `BETWEEN 249 AND 129` liefert nie eine Zeile. Es gilt auch für Datum und Text. Im Muster von `LIKE` steht `%` für beliebig viele Zeichen (auch keines) und `_` für genau ein Zeichen; `'S%'` = beginnt mit S, `'%tisch%'` = enthält „tisch“, `'_ischer%'` = ein beliebiges Zeichen, dann „ischer“. Ein Muster ohne Platzhalter verlangt Übereinstimmung des ganzen Textes, folgt dabei aber den Vergleichsregeln von `LIKE` (in SQLite z. B. ist `'a' LIKE 'A'` wahr, `'a' = 'A'` nicht), liefert also nicht zwingend dasselbe wie `=`. Alle drei lassen sich mit `NOT` verneinen (`NOT IN`, `NOT BETWEEN`, `NOT LIKE`).
 
 NULL: Ist der geprüfte Wert NULL, erfüllt die Zeile keinen der Operatoren (Ergebnis UNKNOWN), auch nicht `NOT IN`. Enthält die Liste von `NOT IN` ein NULL, liefert die Bedingung nie eine Zeile.
 
@@ -710,7 +710,7 @@ Ein IoT-System besteht aus vier Teilen, die in Prüfungen (oft in einem englisch
 
 **Sicherheit** gehört in jede Ebene: Verschlüsselung der Übertragung, Authentifizierung jedes Geräts, signierte Firmware-Updates. Ungesicherte IoT-Geräte werden gekapert und als Botnetz für DDoS-Angriffe missbraucht.
 
-**Recht in Deutschland:** Die DSGVO gilt, sobald Daten einer Person zuzuordnen sind (bei Pflegebetten sogar Gesundheitsdaten nach Art. 9); mit dem Plattformbetreiber braucht man einen Vertrag zur Auftragsverarbeitung. Bei Medizinprodukten kommt das Medizinprodukterecht dazu.
+**Recht in Deutschland:** Die DSGVO gilt, sobald Daten einer Person zuzuordnen sind (bei Pflegebetten sogar Gesundheitsdaten nach Art. 9); verarbeitet der Plattformbetreiber die Daten weisungsgebunden im Auftrag, braucht man mit ihm einen Vertrag zur Auftragsverarbeitung (Art. 28 DSGVO); verfolgt er eigene Zwecke, ist die Verantwortlichkeit gesondert zu klären. Bei Medizinprodukten kommt das Medizinprodukterecht dazu.
 
 **Vorteile:** Störungen werden erkannt, bevor der Kunde anruft; Wartung nach Zustand statt nach Kalender; Daten in Echtzeit. **Nachteile:** hohe Investition, Datenschutz- und Sicherheitsaufwand, Abhängigkeit von Netz und Plattformanbieter.
 

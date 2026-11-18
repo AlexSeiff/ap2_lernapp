@@ -844,7 +844,7 @@ Mehr: Deep Dive 2, 1.4
 Datenbank, die ihre Daten in Tabellen (Relationen) mit festem Schema speichert; Beziehungen zwischen den Tabellen entstehen über Primär- und Fremdschlüssel, abgefragt wird sie mit SQL.
 
 ### Erklärung
-Eine **Tabelle** besteht aus Zeilen (Datensätzen) und Spalten (Attributen). Jede Spalte hat einen festen **Datentyp**, jede Zeile einen **Primärschlüssel**. Zusammengehörige Daten liegen nicht in einer großen Tabelle, sondern verteilt auf mehrere Tabellen, die über **Fremdschlüssel** verknüpft sind (**Normalisierung** vermeidet Redundanz). Zum Lesen verbindet man die Tabellen mit einem `JOIN`. Das Datenbanksystem prüft Datentypen, Pflichtfelder und Fremdschlüssel selbst (**Schema-on-Write**) und führt Änderungen als **Transaktionen** nach **ACID** aus – deshalb sind relationale Datenbanken die erste Wahl für Buchhaltung, Bestände und Aufträge.
+Eine **Tabelle** besteht aus Zeilen (Datensätzen) und Spalten (Attributen). Tabellen haben ein festes Schema (Spalten mit Datentyp); ein **Primärschlüssel** soll jede Zeile eindeutig identifizieren. Zusammengehörige Daten liegen nicht in einer großen Tabelle, sondern verteilt auf mehrere Tabellen, die über **Fremdschlüssel** verknüpft sind (**Normalisierung** vermeidet Redundanz). Zum Lesen verbindet man die Tabellen mit einem `JOIN`. Das Datenbanksystem erzwingt die eingerichteten Regeln (Datentypen, Pflichtfelder, Fremdschlüssel als Constraints) beim Schreiben (**Schema-on-Write**; Einzelheiten hängen vom System und seiner Konfiguration ab) und führt Änderungen als **Transaktionen** nach **ACID** aus – deshalb sind relationale Datenbanken die erste Wahl für Buchhaltung, Bestände und Aufträge.
 
 Die Begriffe im Vergleich zur Dokumentendatenbank:
 
@@ -1531,10 +1531,10 @@ FROM produkt;
 Ergebnis: Bürostuhl Comfort 296,31 · Schreibtisch Basic 474,81 · Monitor 27 Zoll 224,91 · Dockingstation 153,51 · Schreibtischlampe 47,48. Die Lampe zeigt die Rundung: 39,90 · 1,19 = 47,481 → 47,48.
 
 ### Abgrenzung
-`ROUND` rundet zum nächsten Wert, `CAST(2.7 AS INTEGER)` ergibt in SQLite und SQL Server 2 (abgeschnitten), `ROUND(2.7)` dagegen 3; MySQL, PostgreSQL und Oracle runden beim CAST ebenfalls auf 3. Wer abschneiden will, nutzt `FLOOR` bzw. `TRUNC`. Eine bloße Formatierung der Anzeige (z. B. `FORMAT` in MySQL) ändert den Zahlenwert nicht und erzeugt Text.
+`ROUND` rundet zum nächsten Wert, `CAST(2.7 AS INTEGER)` ergibt in SQLite und SQL Server 2 (abgeschnitten), `ROUND(2.7)` dagegen 3; MySQL, PostgreSQL und Oracle runden beim CAST ebenfalls auf 3. Zum Abschneiden Richtung null dient `TRUNC` (bzw. die entsprechende Dialektfunktion); `FLOOR` rundet stets ab und schneidet nur bei nichtnegativen Zahlen genauso ab (`FLOOR(-2.7)` = −3, `TRUNC(-2.7)` = −2). Eine bloße Formatierung der Anzeige (z. B. `FORMAT` in MySQL) ändert den Zahlenwert nicht und erzeugt Text.
 
 ### Prüfungsfalle
-Ganzzahldivision: `ROUND(5 / 2)` liefert 2, weil schon `5 / 2` mit zwei ganzen Zahlen auf 2 abgeschnitten wird (SQLite, SQL Server; MySQL rechnet hier 2,5). Mindestens ein Operand muss eine Kommazahl sein: `ROUND(5 * 1.0 / 2)` = 3.
+Ganzzahldivision: Ganzzahldivision: `ROUND(5 / 2)` liefert in SQLite 2, weil schon `5 / 2` mit zwei ganzen Zahlen auf 2 abgeschnitten wird (SQL Server ebenso, dort verlangt `ROUND` aber ein zweites Argument: `ROUND(5 / 2, 0)` = 2; MySQL rechnet hier 2,5). Mindestens ein Operand muss eine Kommazahl sein: `ROUND(5 * 1.0 / 2)` = 3 (SQL Server: `ROUND(5 * 1.0 / 2, 0)`).
 
 ### Merksatz
 Erst rechnen, zuletzt runden – und auf ganzzahlige Division achten.
