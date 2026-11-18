@@ -209,7 +209,7 @@ Erläuterungen: Klasse des Antriebs: S = Standard, K = Komfort, P = Premium; die
 
 **A3 (6 P):** *Beschreiben* Sie **Datenvalidierung** und **Datenverifizierung**. *Nennen* Sie für jede der beiden Arten ein Beispiel aus der Stichprobe.
 
-**A4 (10 P):** *Formulieren* Sie eine E-Mail an Frau Marquardt mit **zwei** Einschätzungen zur Datenqualität der Stichprobe. Gehen Sie dabei auf Ihre Erkenntnisse aus A2 ein und *beschreiben* Sie **zwei** Maßnahmen, mit denen die erkannten Probleme bereinigt und die Datenqualität verbessert werden können.
+**A4 (10 P):** *Formulieren* Sie eine E-Mail an Frau Marquardt mit **zwei** Einschätzungen zur Datenqualität der Stichprobe. Gehen Sie dabei auf die Probleme ein, die Sie in der Stichprobe erkennen, und *beschreiben* Sie **zwei** Maßnahmen, mit denen die erkannten Probleme bereinigt und die Datenqualität verbessert werden können.
 
 ## Block B – Ausfälle vorhersagen (28 P)
 
@@ -309,7 +309,7 @@ Um den unbekannten Antrieb sind drei Kreise gezogen. Die Auszählung der Abbildu
 
 **B1 (6 P):** Zur Wahl stehen der Algorithmus **k-nächste Nachbarn (kNN)** und ein Entscheidungsbaum nach dem **ID3**-Algorithmus. *Erklären* Sie kurz beide Algorithmen.
 
-**B2 (5 P):** *Entscheiden* Sie sich für einen der beiden Algorithmen und *begründen* Sie Ihre Entscheidung mit **zwei** Argumenten.
+**B2 (5 P):** *Entscheiden* Sie sich für einen der beiden Algorithmen k-nächste Nachbarn (kNN) oder ID3 und *begründen* Sie Ihre Entscheidung mit **zwei** Argumenten.
 
 **B3 (1 P):** *Beurteilen* Sie anhand der Abbildung, ob der unbekannte Antrieb in nächster Zeit gewartet werden sollte.
 
@@ -362,7 +362,7 @@ Die Informationen über die Tische und ihre Sensoren liegen bisher zentral in ei
 
 **C3 (7 P):** *Überführen* Sie die beiden dargestellten Zeilen der Tabelle `sensor` in die JavaScript Object Notation (JSON). Nutzen Sie die angegebene JSON-Syntax.
 
-**C4 (7 P):** Auf Tisch- und Sensordaten wird fast immer gemeinsam zugegriffen, und die Anzahl der Sensoren je Tisch ist begrenzt. In solchen Fällen werden die Daten in einer Dokumentendatenbank gemeinsam gespeichert. *Ergänzen* Sie das folgende Tischdokument so, dass die beiden Sensordokumente als Array Teil des Tischdokuments sind.
+**C4 (7 P):** Auf Tisch- und Sensordaten wird fast immer gemeinsam zugegriffen, und die Anzahl der Sensoren je Tisch ist begrenzt. In solchen Fällen werden die Daten in einer Dokumentendatenbank gemeinsam gespeichert. *Ergänzen* Sie das folgende Tischdokument so, dass die beiden Sensoren des Tischs 1 (die beiden Zeilen der Tabelle `sensor`) als Array Teil des Tischdokuments sind.
 
 ```json
 [

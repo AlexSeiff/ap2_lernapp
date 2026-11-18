@@ -192,14 +192,14 @@ Von einigen Brettern ist bekannt, ob sie von einem Pilz befallen sind (**P**) od
 
 **A3 (2 P):** *Beschreiben* Sie, warum sich mithilfe einer Trenngeraden angeben lässt, ob ein Brett gesund oder befallen ist.
 
-**A4 (2 P):** *Zeichnen* Sie nun die Testdaten in das Koordinatensystem aus A1 ein und umrahmen Sie jeden Testpunkt mit einem Kästchen. *Ermitteln* Sie für beide Geraden die Anzahl der richtigen und der falschen Vorhersagen und *tragen* Sie sie in die Tabelle *ein*.
+**A4 (2 P):** *Zeichnen* Sie nun die Testdaten in Ihr Koordinatensystem (Papier; Achsen wie in A1) ein und umrahmen Sie jeden Testpunkt mit einem Kästchen. *Ermitteln* Sie für die beiden Geraden (Gerade 1: y = 7,5 und Gerade 2: y = 1,5 · x − 1) die Anzahl der richtigen und der falschen Vorhersagen und *tragen* Sie sie in die Tabelle *ein*.
 
 | Gerade | richtig | falsch |
 |---|---|---|
 | 1 | | |
 | 2 | | |
 
-**A5 (4 P):** *Entscheiden* Sie, welche der beiden Geraden die Klassen besser trennt, und *formulieren* Sie eine Handlungsempfehlung, wie sich eine möglichst gute Trenngerade finden lässt.
+**A5 (4 P):** *Entscheiden* Sie anhand der Vorhersagen auf den Testdaten, welche der beiden Geraden (Gerade 1: y = 7,5 und Gerade 2: y = 1,5 · x − 1) die Klassen besser trennt, und *formulieren* Sie eine Handlungsempfehlung, wie sich eine möglichst gute Trenngerade finden lässt.
 
 **A6 (4 P):** Die Klasse eines Bretts lässt sich in zwei Schritten berechnen: (1) Zum Wert x des Messpunkts den Funktionswert der Trenngeraden ermitteln. (2) Die Differenz zwischen dem Wert y des Messpunkts und diesem Funktionswert bilden. *Berechnen* Sie beide Schritte für die Punkte (2 | 8) und (6 | 5). Verwenden Sie die Gerade 2: y = 1,5 · x − 1.
 
@@ -207,7 +207,7 @@ Von einigen Brettern ist bekannt, ob sie von einem Pilz befallen sind (**P**) od
 > - Funktionswert der Trenngeraden: f(x) = m · x + b
 > - Differenz: d = y − f(x)
 
-**A7 (3 P):** *Entscheiden* Sie anhand der Differenzen aus A6, welcher Klasse die beiden Messpunkte zuzuordnen sind, und *begründen* Sie Ihre Entscheidung.
+**A7 (3 P):** *Entscheiden* Sie für die beiden Messpunkte (2 | 8) und (6 | 5) anhand der Differenz zur Geraden 2 (y = 1,5 · x − 1), welcher Klasse sie zuzuordnen sind, und *begründen* Sie Ihre Entscheidung.
 
 > **Formel:** d = y − f(x)
 
@@ -251,7 +251,35 @@ Im zusammengeführten Datenbestand `daten` steht jede Zeile der Kameradatei zusa
 
 > *Filtering a DataFrame: `people[people.city == 'Kiel']` returns all rows whose column `city` equals 'Kiel'. Several conditions are combined with `&` (and) or `|` (or); each condition is put in parentheses, for example `people[(people.age > 30) & (people.city == 'Kiel')]` or `people[(people.age > 30) | (people.city == 'Kiel')]`.*
 
-**B1 (6 P):** Die Daten sollen nach dem Vorgehensmodell **CRISP-DM** aufbereitet werden. Im Diagramm sind sechs Felder kreisförmig um das Feld „Daten“ angeordnet: Feld A und Feld B sind durch Pfeile in beide Richtungen verbunden, von B führt ein Pfeil zu C, C und D sind durch Pfeile in beide Richtungen verbunden, von D führt ein Pfeil zu E; von E führt ein Pfeil zurück zu A und ein weiterer zu F. *Ordnen* Sie die sechs Phasen den Feldern zu und *tragen* Sie die Ziffern in die Tabelle *ein*.
+**B1 (6 P):** Die Daten sollen nach dem Vorgehensmodell **CRISP-DM** aufbereitet werden. Die Abbildung zeigt den Kreislauf mit sechs Feldern A bis F um das Feld „Daten“. *Ordnen* Sie die sechs Phasen den Feldern zu und *tragen* Sie die Ziffern in die Tabelle *ein*.
+
+**Abbildung – Kreislauf der sechs Phasen (Felder A bis F)**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" width="360" height="255" role="img" aria-label="Sechs Felder A bis F kreisförmig um das Feld Daten: A und B sowie C und D sind durch Doppelpfeile verbunden, von B führt ein Pfeil zu C, von D zu E, von E zurück zu A und weiter zu F">
+<defs><marker id="cm-pfeil" viewBox="0 0 10 10" markerWidth="9" markerHeight="9" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker><marker id="cm-pfeil-r" viewBox="0 0 10 10" markerWidth="9" markerHeight="9" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M10,0 L0,5 L10,10 z" class="dg-voll"/></marker></defs>
+<ellipse cx="240" cy="170" rx="50" ry="26" class="dg-grau"/>
+<text x="240" y="175" text-anchor="middle" class="dg-gross dg-fett">Daten</text>
+<line x1="270" y1="64" x2="340" y2="96" class="dg-linie" marker-end="url(#cm-pfeil)" marker-start="url(#cm-pfeil-r)"/>
+<line x1="370" y1="130" x2="370" y2="210" class="dg-linie" marker-end="url(#cm-pfeil)"/>
+<line x1="340" y1="244" x2="270" y2="276" class="dg-linie" marker-end="url(#cm-pfeil)" marker-start="url(#cm-pfeil-r)"/>
+<line x1="210" y1="276" x2="140" y2="244" class="dg-linie" marker-end="url(#cm-pfeil)"/>
+<line x1="124" y1="211" x2="226" y2="69" class="dg-linie" marker-end="url(#cm-pfeil)"/>
+<line x1="110" y1="210" x2="110" y2="130" class="dg-linie" marker-end="url(#cm-pfeil)"/>
+<rect x="214" y="34" width="52" height="32" rx="6" class="dg-form"/>
+<text x="240" y="55" text-anchor="middle" class="dg-gross dg-fett">A</text>
+<rect x="344" y="94" width="52" height="32" rx="6" class="dg-form"/>
+<text x="370" y="115" text-anchor="middle" class="dg-gross dg-fett">B</text>
+<rect x="344" y="214" width="52" height="32" rx="6" class="dg-form"/>
+<text x="370" y="235" text-anchor="middle" class="dg-gross dg-fett">C</text>
+<rect x="214" y="274" width="52" height="32" rx="6" class="dg-form"/>
+<text x="240" y="295" text-anchor="middle" class="dg-gross dg-fett">D</text>
+<rect x="84" y="214" width="52" height="32" rx="6" class="dg-form"/>
+<text x="110" y="235" text-anchor="middle" class="dg-gross dg-fett">E</text>
+<rect x="84" y="94" width="52" height="32" rx="6" class="dg-form"/>
+<text x="110" y="115" text-anchor="middle" class="dg-gross dg-fett">F</text>
+</svg>
+```
 
 1 Modeling · 2 Deployment · 3 Data Understanding · 4 Evaluation · 5 Business Understanding · 6 Data Preparation
 
