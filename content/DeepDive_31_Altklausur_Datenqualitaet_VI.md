@@ -190,16 +190,47 @@ Der Zustand der Geräteakkus wird über zwei Messwerte überwacht: **m1** (Innen
 | 7,0 | 4,2 | schlecht |
 | 7,4 | 4,9 | schlecht |
 
-Die Klassifizierung soll mit einem einfachen **Perzeptron** (Neuron) erfolgen. Die Skizze des Perzeptrons zeigt von links nach rechts sechs gekennzeichnete Stellen:
+Die Klassifizierung soll mit einem einfachen **Perzeptron** (Neuron) erfolgen. Die Skizze des Perzeptrons zeigt von links nach rechts sechs gekennzeichnete Stellen (A bis F):
 
-| Stelle | Darstellung in der Skizze |
-|---|---|
-| A | konstanter Eingang „1“ mit dem Gewicht w₀ |
-| B | die Eingänge m1 und m2 |
-| C | die Werte w₁ und w₂ an den Verbindungslinien |
-| D | Kreis mit dem Summenzeichen Σ wᵢ · xᵢ |
-| E | Kreis mit einer Stufe (0 oder 1) |
-| F | der Wert y am rechten Ende; von dort führt ein Pfeil „Fehler“ zurück zu den Gewichten |
+**Abbildung – Skizze des Perzeptrons**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 280" width="360" height="194" role="img" aria-label="Skizze eines Perzeptrons von links nach rechts: Eingang 1 und Eingänge m1 und m2 führen über die Werte w0, w1 und w2 in einen Kreis mit Summenzeichen, dann in einen Kreis mit Stufe, dann zum Wert y; von y führt ein Pfeil Fehler zurück zu den Gewichten. Sechs Stellen sind mit A bis F gekennzeichnet">
+<defs><marker id="pz-pfeil" viewBox="0 0 10 10" markerWidth="9" markerHeight="9" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" class="dg-voll"/></marker></defs>
+<line x1="76" y1="50" x2="266" y2="113" class="dg-linie" marker-end="url(#pz-pfeil)"/>
+<line x1="80" y1="130" x2="262" y2="130" class="dg-linie" marker-end="url(#pz-pfeil)"/>
+<line x1="80" y1="210" x2="266" y2="148" class="dg-linie" marker-end="url(#pz-pfeil)"/>
+<line x1="140" y1="46" x2="140" y2="205" class="dg-linie dg-punkt dg-duenn"/>
+<rect x="127" y="62" width="26" height="18" rx="4" class="dg-flaeche"/>
+<text x="140" y="76" text-anchor="middle" class="dg-gross">w₀</text>
+<rect x="127" y="121" width="26" height="18" rx="4" class="dg-flaeche"/>
+<text x="140" y="135" text-anchor="middle" class="dg-gross">w₁</text>
+<rect x="127" y="181" width="26" height="18" rx="4" class="dg-flaeche"/>
+<text x="140" y="195" text-anchor="middle" class="dg-gross">w₂</text>
+<circle cx="60" cy="50" r="20" class="dg-form"/>
+<text x="60" y="55" text-anchor="middle" class="dg-gross dg-fett">1</text>
+<circle cx="60" cy="130" r="20" class="dg-form"/>
+<text x="60" y="135" text-anchor="middle" class="dg-gross dg-fett">m1</text>
+<circle cx="60" cy="210" r="20" class="dg-form"/>
+<text x="60" y="215" text-anchor="middle" class="dg-gross dg-fett">m2</text>
+<circle cx="300" cy="130" r="38" class="dg-form"/>
+<text x="300" y="135" text-anchor="middle" class="dg-gross">Σ w·x</text>
+<line x1="338" y1="130" x2="372" y2="130" class="dg-linie" marker-end="url(#pz-pfeil)"/>
+<circle cx="400" cy="130" r="28" class="dg-form"/>
+<path d="M386,142 L386,132 L400,132 L400,118 L414,118" class="dg-linie"/>
+<line x1="428" y1="130" x2="462" y2="130" class="dg-linie" marker-end="url(#pz-pfeil)"/>
+<text x="478" y="136" text-anchor="middle" class="dg-gross dg-fett">y</text>
+<path d="M478,148 L478,252 L190,252 L190,175" class="dg-linie-akzent dg-strich" marker-end="url(#pz-pfeil)"/>
+<text x="334" y="245" text-anchor="middle" class="dg-gross dg-akzent-text">Fehler</text>
+<text x="18" y="55" text-anchor="middle" class="dg-gross dg-fett dg-akzent-text">A</text>
+<text x="18" y="175" text-anchor="middle" class="dg-gross dg-fett dg-akzent-text">B</text>
+<text x="140" y="34" text-anchor="middle" class="dg-gross dg-fett dg-akzent-text">C</text>
+<text x="300" y="76" text-anchor="middle" class="dg-gross dg-fett dg-akzent-text">D</text>
+<text x="400" y="86" text-anchor="middle" class="dg-gross dg-fett dg-akzent-text">E</text>
+<text x="478" y="100" text-anchor="middle" class="dg-gross dg-fett dg-akzent-text">F</text>
+<line x1="30" y1="112" x2="30" y2="228" class="dg-linie dg-duenn"/>
+</svg>
+```
 
 Zum Perzeptron gehört die Klasse `Perzeptron` mit den Attributen `gewichte: Double[3]` und `epochen: Integer` sowie den Methoden `Perzeptron(epochen: Integer)`, `lernen(daten: Double[][]): void` und `vorhersage(x: Double[]): Integer`. Die Trainingsdaten liegen in einem zweidimensionalen Array `daten`: Die Spalten mit Index 0 und 1 enthalten die Messwerte, die Spalte mit Index 2 das Label (1 = gut, 0 = schlecht).
 
@@ -222,15 +253,35 @@ Zum Perzeptron gehört die Klasse `Perzeptron` mit den Attributen `gewichte: Dou
 | E | |
 | F | |
 
-**A5 (5 P):** *Erläutern* Sie die Funktionsweise des Perzeptrons anhand der beschriebenen Skizze.
+**A5 (5 P):** *Erläutern* Sie die Funktionsweise des Perzeptrons anhand der Skizze.
 
-**A6 (5 P):** Die Gewichte werden mit dem Perzeptron-Lernalgorithmus gelernt. Das Struktogramm der Methode `lernen(daten)` hat zehn leere Felder:
+**A6 (5 P):** Die Gewichte werden mit dem Perzeptron-Lernalgorithmus gelernt. Das Struktogramm der Methode `lernen(daten)` hat zehn leere Felder. Feld 2 ist der Kopf der **äußeren Schleife**, Feld 3 der Kopf der **inneren Schleife**, Feld 7 die **Bedingung einer Verzweigung**.
 
-- Feld 1 und Feld 2 stehen untereinander nach der ersten Anweisung `e := 0`; Feld 2 ist der Kopf der **äußeren Schleife**.
-- Feld 3 ist der Kopf der **inneren Schleife**.
-- In der inneren Schleife stehen untereinander die Felder 4, 5 und 6, danach Feld 7 als **Bedingung einer Verzweigung**.
-- Im Ja-Zweig der Verzweigung stehen die Felder 8 und 9, der Nein-Zweig bleibt leer.
-- Feld 10 steht nach der inneren Schleife als letzte Anweisung der äußeren Schleife.
+**Abbildung – Struktogramm der Methode `lernen(daten)` mit zehn leeren Feldern**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 350" width="360" height="315" role="img" aria-label="Struktogramm der Methode lernen mit zehn leeren Feldern: nach der Anweisung e gleich 0 folgen Feld 1 und die äußere Schleife mit Feld 2 als Kopf; darin die innere Schleife mit Feld 3 als Kopf, den Feldern 4 bis 6 und der Verzweigung mit Feld 7, im Ja-Zweig die Felder 8 und 9; Feld 10 steht nach der inneren Schleife">
+<rect x="10" y="10" width="380" height="30" class="dg-grau"/><text x="200" y="29" text-anchor="middle" class="dg-klein">e := 0</text>
+<rect x="10" y="40" width="380" height="30" class="dg-form"/><text x="200" y="59" text-anchor="middle" class="dg-klein">Feld 1</text>
+<rect x="10" y="70" width="380" height="30" class="dg-form"/><text x="200" y="89" text-anchor="middle" class="dg-klein">Feld 2</text>
+<rect x="10" y="100" width="24" height="240" class="dg-form"/>
+<rect x="34" y="100" width="356" height="30" class="dg-form"/><text x="212" y="119" text-anchor="middle" class="dg-klein">Feld 3</text>
+<rect x="34" y="130" width="24" height="180" class="dg-form"/>
+<rect x="58" y="130" width="332" height="30" class="dg-form"/><text x="224" y="149" text-anchor="middle" class="dg-klein">Feld 4</text>
+<rect x="58" y="160" width="332" height="30" class="dg-form"/><text x="224" y="179" text-anchor="middle" class="dg-klein">Feld 5</text>
+<rect x="58" y="190" width="332" height="30" class="dg-form"/><text x="224" y="209" text-anchor="middle" class="dg-klein">Feld 6</text>
+<rect x="58" y="220" width="332" height="30" class="dg-form"/>
+<line x1="58" y1="220" x2="224" y2="250" class="dg-linie"/>
+<line x1="390" y1="220" x2="224" y2="250" class="dg-linie"/>
+<text x="224" y="239" text-anchor="middle" class="dg-klein">Feld 7</text>
+<text x="66" y="246" text-anchor="start" class="dg-klein dg-leise">Ja</text>
+<text x="382" y="246" text-anchor="end" class="dg-klein dg-leise">Nein</text>
+<rect x="58" y="250" width="166" height="30" class="dg-form"/><text x="141" y="269" text-anchor="middle" class="dg-klein">Feld 8</text>
+<rect x="58" y="280" width="166" height="30" class="dg-form"/><text x="141" y="299" text-anchor="middle" class="dg-klein">Feld 9</text>
+<rect x="224" y="250" width="166" height="60" class="dg-form"/>
+<rect x="34" y="310" width="356" height="30" class="dg-form"/><text x="212" y="329" text-anchor="middle" class="dg-klein">Feld 10</text>
+</svg>
+```
 
 *Ordnen* Sie die folgenden Anweisungen den Feldern zu und *tragen* Sie die Ziffern in die Tabelle *ein*.
 
@@ -274,7 +325,7 @@ Bisher werden die technischen Daten aller vermieteten MDE-Geräte in einer CSV-D
 
 **B2 (4 P):** Ein vorbereiteter Cursor führt SQL-Anweisungen mit gebundenen Parametern aus (**Prepared Statements**). *Erklären* Sie den Begriff und **einen** Vorteil.
 
-**B3 (9 P):** *Ergänzen* Sie das folgende Python-Skript so, dass es eine Tabelle für die Mieter anlegt und den ersten Mieter aus dem Auszug einfügt. Denken Sie an den Primärschlüssel.
+**B3 (9 P):** *Ergänzen* Sie das folgende Python-Skript so, dass es eine Tabelle für die Mieter (Mieter, Ansprechpartner, Telefon) anlegt und den ersten Mieter aus dem Auszug einfügt. Denken Sie an den Primärschlüssel.
 
 ```python
 import mysql.connector
