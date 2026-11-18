@@ -606,6 +606,62 @@ Das Möbelhaus prognostiziert aus Werbebudget, Saison und Filiale den Monatsumsa
 | Zielvariable | Zahl (stetig) | Kategorie (diskret) |
 | Gütemaße | MAE, RMSE, R² | Accuracy, Precision, Recall, F1 |
 
+Die Abbildung stellt beides nebeneinander: Links liefert das Modell eine Zahl (Umsatz), rechts eine Klasse (Reklamation ja oder nein).
+
+**Abbildung: Regression und Klassifikation im Vergleich**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 282" width="340" height="282" role="img" aria-label="Gegenüberstellung: Regression sagt eine Zahl voraus, Klassifikation eine Klasse">
+<text x="95" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Regression</text>
+<text x="95" y="29" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Ziel ist eine Zahl</text>
+<line x1="30" y1="150" x2="160" y2="150" class="dg-linie"/>
+<line x1="30" y1="150" x2="30" y2="50" class="dg-linie"/>
+<line x1="46" y1="137" x2="158" y2="55.9" class="dg-linie-akzent dg-dick"/>
+<circle cx="56" cy="125.8" r="3.5" class="dg-akzent"/>
+<circle cx="70" cy="124" r="3.5" class="dg-akzent"/>
+<circle cx="82" cy="107.8" r="3.5" class="dg-akzent"/>
+<circle cx="98" cy="104.2" r="3.5" class="dg-akzent"/>
+<circle cx="112" cy="84.4" r="3.5" class="dg-akzent"/>
+<circle cx="124" cy="88" r="3.5" class="dg-akzent"/>
+<circle cx="138" cy="68.2" r="3.5" class="dg-akzent"/>
+<circle cx="150" cy="59.2" r="3.5" class="dg-akzent"/>
+<line x1="130" y1="150" x2="130" y2="76.2" class="dg-linie dg-punkt"/>
+<line x1="30" y1="76.2" x2="130" y2="76.2" class="dg-linie dg-punkt"/>
+<circle cx="130" cy="76.2" r="4" class="dg-form"/>
+<text x="34" y="68.2" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Prognose ŷ</text>
+<text x="95" y="170" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Werbebudget</text>
+<text x="10" y="100" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 10 100)">Umsatz (T€)</text>
+<text x="95" y="190" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Ergebnis: eine Zahl</text>
+<text x="95" y="206" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Gütemaß: MAE, RMSE, R²</text>
+<text x="265" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Klassifikation</text>
+<text x="265" y="29" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Ziel ist eine Klasse</text>
+<line x1="200" y1="150" x2="330" y2="150" class="dg-linie"/>
+<line x1="200" y1="150" x2="200" y2="50" class="dg-linie"/>
+<circle cx="224" cy="71.8" r="3.5" class="dg-grau"/>
+<circle cx="238" cy="55.6" r="3.5" class="dg-grau"/>
+<circle cx="248" cy="84.4" r="3.5" class="dg-grau"/>
+<circle cx="232" cy="95.2" r="3.5" class="dg-grau"/>
+<circle cx="260" cy="61" r="3.5" class="dg-grau"/>
+<rect x="276.5" y="120.5" width="7" height="7" class="dg-rot"/>
+<rect x="292.5" y="102.5" width="7" height="7" class="dg-rot"/>
+<rect x="308.5" y="124.1" width="7" height="7" class="dg-rot"/>
+<rect x="300.5" y="84.5" width="7" height="7" class="dg-rot"/>
+<rect x="316.5" y="104.3" width="7" height="7" class="dg-rot"/>
+<line x1="262" y1="41.2" x2="296" y2="138.4" class="dg-linie dg-strich"/>
+<polygon points="292,89.2 298,95.2 292,101.2 286,95.2" class="dg-voll-akzent"/>
+<text x="265" y="170" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Lieferdauer</text>
+<text x="180" y="100" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 180 100)">Packstücke</text>
+<text x="265" y="190" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Ergebnis: eine Klasse</text>
+<text x="265" y="206" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Gütemaß: Accuracy, F1</text>
+<circle cx="30" cy="236" r="3.5" class="dg-grau"/>
+<text x="40" y="236" text-anchor="start" dominant-baseline="middle" class="dg-klein">keine Reklamation</text>
+<rect x="26.5" y="248.5" width="7" height="7" class="dg-rot"/>
+<text x="40" y="252" text-anchor="start" dominant-baseline="middle" class="dg-klein">Reklamation</text>
+<polygon points="30,262 36,268 30,274 24,268" class="dg-voll-akzent"/>
+<text x="40" y="268" text-anchor="start" dominant-baseline="middle" class="dg-klein">neuer Fall: rechts der Grenze → Reklamation</text>
+</svg>
+```
+
 ### Prüfungsfalle
 Die **logistische** Regression ist trotz ihres Namens ein Klassifikationsverfahren – sie schätzt die Wahrscheinlichkeit einer Klasse. Und: Ein gutes Regressionsmodell zeigt einen Zusammenhang, aber keine Kausalität – und gilt nur im Bereich der Trainingsdaten.
 
@@ -648,6 +704,69 @@ Also $S_{xy} = 64$ und $S_{xx} = 10$. Probe mit der Kurzform: $S_{xx} = 55 - 5 \
 - $a = 44 - 6{,}4 \cdot 3 = 24{,}8$
 
 Regressionsgleichung: $\hat{y} = 24{,}8 + 6{,}4 \cdot x$. Je 1.000 € mehr Werbung steigt der Umsatz im Mittel um 6.400 €. Prognose für x = 6: $24{,}8 + 6{,}4 \cdot 6 = 63{,}2$ T€ (leichte Extrapolation).
+
+In der Abbildung liegen die fünf Punkte um die Gerade; die roten Striche sind die Residuen $e = y - \hat{y}$ (Summe 0), der gestrichelte Teil ist die Extrapolation bis x = 6.
+
+**Abbildung: Regressionsgerade mit Residuen (Daten des Beispiels)**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 306" width="340" height="306" role="img" aria-label="Streudiagramm Werbebudget und Umsatz mit Regressionsgerade, Residuen als rote senkrechte Strecken und Prognose bei x gleich 6">
+<line x1="45" y1="265" x2="315" y2="265" class="dg-linie"/>
+<line x1="45" y1="265" x2="45" y2="36" class="dg-linie"/>
+<line x1="45" y1="265" x2="45" y2="269" class="dg-linie"/>
+<text x="45" y="278" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0</text>
+<line x1="83" y1="265" x2="83" y2="269" class="dg-linie"/>
+<text x="83" y="278" text-anchor="middle" dominant-baseline="middle" class="dg-klein">1</text>
+<line x1="121" y1="265" x2="121" y2="269" class="dg-linie"/>
+<text x="121" y="278" text-anchor="middle" dominant-baseline="middle" class="dg-klein">2</text>
+<line x1="159" y1="265" x2="159" y2="269" class="dg-linie"/>
+<text x="159" y="278" text-anchor="middle" dominant-baseline="middle" class="dg-klein">3</text>
+<line x1="197" y1="265" x2="197" y2="269" class="dg-linie"/>
+<text x="197" y="278" text-anchor="middle" dominant-baseline="middle" class="dg-klein">4</text>
+<line x1="235" y1="265" x2="235" y2="269" class="dg-linie"/>
+<text x="235" y="278" text-anchor="middle" dominant-baseline="middle" class="dg-klein">5</text>
+<line x1="273" y1="265" x2="273" y2="269" class="dg-linie"/>
+<text x="273" y="278" text-anchor="middle" dominant-baseline="middle" class="dg-klein">6</text>
+<line x1="311" y1="265" x2="311" y2="269" class="dg-linie"/>
+<text x="311" y="278" text-anchor="middle" dominant-baseline="middle" class="dg-klein">7</text>
+<line x1="41" y1="265" x2="45" y2="265" class="dg-linie"/>
+<text x="37" y="265" text-anchor="end" dominant-baseline="middle" class="dg-klein">20</text>
+<line x1="41" y1="215" x2="45" y2="215" class="dg-linie"/>
+<text x="37" y="215" text-anchor="end" dominant-baseline="middle" class="dg-klein">30</text>
+<line x1="41" y1="165" x2="45" y2="165" class="dg-linie"/>
+<text x="37" y="165" text-anchor="end" dominant-baseline="middle" class="dg-klein">40</text>
+<line x1="41" y1="115" x2="45" y2="115" class="dg-linie"/>
+<text x="37" y="115" text-anchor="end" dominant-baseline="middle" class="dg-klein">50</text>
+<line x1="41" y1="65" x2="45" y2="65" class="dg-linie"/>
+<text x="37" y="65" text-anchor="end" dominant-baseline="middle" class="dg-klein">60</text>
+<text x="180" y="296" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Werbebudget x (T€)</text>
+<text x="9" y="150" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 9 150)">Umsatz y (T€) – Achse ab 20</text>
+<line x1="45" y1="241" x2="235" y2="81" class="dg-linie-akzent dg-dick"/>
+<line x1="235" y1="81" x2="273" y2="49" class="dg-linie-akzent dg-dick dg-strich"/>
+<line x1="83" y1="215" x2="83" y2="209" class="dg-rot dg-dick"/>
+<text x="91" y="214" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">−1,2</text>
+<line x1="121" y1="165" x2="121" y2="177" class="dg-rot dg-dick"/>
+<text x="113" y="169" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">+2,4</text>
+<line x1="159" y1="155" x2="159" y2="145" class="dg-rot dg-dick"/>
+<text x="167" y="152" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">−2,0</text>
+<line x1="197" y1="105" x2="197" y2="113" class="dg-rot dg-dick"/>
+<text x="189" y="107" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">+1,6</text>
+<line x1="235" y1="85" x2="235" y2="81" class="dg-rot dg-dick"/>
+<text x="243" y="85" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">−0,8</text>
+<circle cx="83" cy="215" r="4" class="dg-akzent"/>
+<circle cx="121" cy="165" r="4" class="dg-akzent"/>
+<circle cx="159" cy="155" r="4" class="dg-akzent"/>
+<circle cx="197" cy="105" r="4" class="dg-akzent"/>
+<circle cx="235" cy="85" r="4" class="dg-akzent"/>
+<circle cx="273" cy="49" r="4" class="dg-form"/>
+<text x="273" y="38" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Prognose 63,2</text>
+<circle cx="45" cy="241" r="3" class="dg-voll"/>
+<text x="51" y="252" text-anchor="start" dominant-baseline="middle" class="dg-klein">a = 24,8</text>
+<text x="55" y="46" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">ŷ = 24,8 + 6,4 · x</text>
+<text x="55" y="62" text-anchor="start" dominant-baseline="middle" class="dg-klein">rot: Residuum e = y − ŷ</text>
+<text x="55" y="78" text-anchor="start" dominant-baseline="middle" class="dg-klein">gestrichelt: Extrapolation</text>
+</svg>
+```
 
 ### Abgrenzung
 Der Korrelationskoeffizient r beschreibt nur die Stärke des Zusammenhangs; die Regressionsgerade liefert eine Gleichung für Prognosen.
@@ -1058,6 +1177,59 @@ Residuen zeigen, wo die Regressionsgerade danebenliegt. Bei der Kleinste-Quadrat
 ### Beispiel
 Gerade $\hat{y} = 24{,}8 + 6{,}4 \cdot x$, Monat 2: x = 2, y = 40. Geschätzt $\hat{y} = 37{,}6$, also $e = 40 - 37{,}6 = 2{,}4$ T€. Alle Residuen: −1,2 / +2,4 / −2,0 / +1,6 / −0,8 – Summe 0, Quadratsumme 14,4, kein erkennbares Muster.
 
+Die Abbildung trägt die Residuen gegen x auf: links die Werte des Beispiels (zufällig um null), rechts zum Vergleich ein U-förmiges Muster, bei dem eine Gerade nicht passt.
+
+**Abbildung: Residuen auftragen – Zufall oder Muster**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 206" width="340" height="206" role="img" aria-label="Zwei Residuendiagramme: links zufällig um null verteilte Residuen, rechts ein U-förmiges Muster">
+<text x="95" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">zufällig um null</text>
+<text x="95" y="29" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Gerade passt</text>
+<line x1="25" y1="41" x2="25" y2="159" class="dg-linie"/>
+<line x1="25" y1="100" x2="165" y2="100" class="dg-linie dg-strich"/>
+<text x="22" y="91" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">e</text>
+<text x="165" y="111" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">x</text>
+<text x="29" y="47" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">+3</text>
+<text x="29" y="153" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">−3</text>
+<line x1="50.6" y1="100" x2="50.6" y2="122" class="dg-rot"/>
+<circle cx="50.6" cy="122" r="3.5" class="dg-akzent"/>
+<line x1="73.8" y1="100" x2="73.8" y2="56" class="dg-rot"/>
+<circle cx="73.8" cy="56" r="3.5" class="dg-akzent"/>
+<line x1="97" y1="100" x2="97" y2="136.7" class="dg-rot"/>
+<circle cx="97" cy="136.7" r="3.5" class="dg-akzent"/>
+<line x1="120.2" y1="100" x2="120.2" y2="70.7" class="dg-rot"/>
+<circle cx="120.2" cy="70.7" r="3.5" class="dg-akzent"/>
+<line x1="143.4" y1="100" x2="143.4" y2="114.7" class="dg-rot"/>
+<circle cx="143.4" cy="114.7" r="3.5" class="dg-akzent"/>
+<text x="260" y="14" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Muster (U-Form)</text>
+<text x="260" y="29" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Gerade passt nicht</text>
+<line x1="190" y1="41" x2="190" y2="159" class="dg-linie"/>
+<line x1="190" y1="100" x2="330" y2="100" class="dg-linie dg-strich"/>
+<text x="187" y="91" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">e</text>
+<text x="330" y="111" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">x</text>
+<text x="194" y="47" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">+3</text>
+<text x="194" y="153" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">−3</text>
+<line x1="212.3" y1="100" x2="212.3" y2="52.3" class="dg-rot"/>
+<circle cx="212.3" cy="52.3" r="3.5" class="dg-akzent"/>
+<line x1="228.9" y1="100" x2="228.9" y2="96.3" class="dg-rot"/>
+<circle cx="228.9" cy="96.3" r="3.5" class="dg-akzent"/>
+<line x1="245.4" y1="100" x2="245.4" y2="129.3" class="dg-rot"/>
+<circle cx="245.4" cy="129.3" r="3.5" class="dg-akzent"/>
+<line x1="262" y1="100" x2="262" y2="144" class="dg-rot"/>
+<circle cx="262" cy="144" r="3.5" class="dg-akzent"/>
+<line x1="278.6" y1="100" x2="278.6" y2="129.3" class="dg-rot"/>
+<circle cx="278.6" cy="129.3" r="3.5" class="dg-akzent"/>
+<line x1="295.1" y1="100" x2="295.1" y2="96.3" class="dg-rot"/>
+<circle cx="295.1" cy="96.3" r="3.5" class="dg-akzent"/>
+<line x1="311.7" y1="100" x2="311.7" y2="52.3" class="dg-rot"/>
+<circle cx="311.7" cy="52.3" r="3.5" class="dg-akzent"/>
+<text x="95" y="176" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Summe der Residuen: 0</text>
+<text x="260" y="176" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Summe der Residuen: 0</text>
+<text x="95" y="192" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">kein erkennbares Muster</text>
+<text x="260" y="192" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Kurve statt Gerade nötig</text>
+</svg>
+```
+
 ### Abgrenzung
 Ein Residuum ist der Fehler eines einzelnen Punktes; MAE und RMSE fassen alle Fehler zu einer Kennzahl zusammen.
 
@@ -1435,6 +1607,50 @@ Ein Klassifikator liefert zunächst einen Score; erst die Schwelle macht daraus 
 Reklamationsmodell bei Schwelle 50 %: FPR = $\frac{90}{900}$ = 10 %, Recall = 60 % → Punkt (0,10 | 0,60), deutlich über der Diagonale.
 
 Kleines Beispiel zum Nachrechnen: Zehn Aufträge, 4 Reklamationen und 6 ohne; die Scores der Reklamationen sind 0,90; 0,80; 0,55 und 0,40, die der übrigen sechs 0,65; 0,45; 0,35; 0,25; 0,15 und 0,10. Bei Schwelle 0,5 sind TP = 3, FN = 1, FP = 1, TN = 5 → TPR $= \frac{3}{4} = 0{,}75$, FPR $= \frac{1}{6} = 0{,}17$. Bei Schwelle 0,4 sind TP = 4, FN = 0, FP = 2, TN = 4 → TPR $= 1{,}00$, FPR $= \frac{2}{6} = 0{,}33$. Bei Schwelle 0,3 sind TP = 4, FP = 3, TN = 3 → TPR $= 1{,}00$, FPR $= \frac{3}{6} = 0{,}50$. Die Punkte (0,17 | 0,75), (0,33 | 1,00) und (0,50 | 1,00) wandern mit sinkender Schwelle nach oben rechts; die vollständige Kurve ergibt eine AUC von 0,875 (siehe AUC).
+
+Die Abbildung zeigt die Treppe der zehn Aufträge: Die markierten Punkte gehören zu den Schwellen 0,5, 0,4 und 0,3, die schattierte Fläche ist die AUC = 21 / 24 = 0,875.
+
+**Abbildung: ROC-Kurve der zehn Aufträge (Treppe) mit AUC**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 326" width="340" height="326" role="img" aria-label="ROC-Kurve als Treppe mit drei markierten Schwellen 0,5, 0,4 und 0,3, schattierte Fläche darunter AUC 0,875">
+<polygon points="52,270 52,207.5 52,145 93.7,145 93.7,82.5 135.3,82.5 135.3,20 177,20 218.7,20 260.3,20 302,20 302,270" class="dg-akzent dg-duenn"/>
+<rect x="52" y="20" width="250" height="250" class="dg-linie"/>
+<line x1="52" y1="270" x2="52" y2="274" class="dg-linie"/>
+<text x="52" y="283" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0</text>
+<line x1="48" y1="270" x2="52" y2="270" class="dg-linie"/>
+<text x="45" y="270" text-anchor="end" dominant-baseline="middle" class="dg-klein">0</text>
+<line x1="114.5" y1="270" x2="114.5" y2="274" class="dg-linie"/>
+<text x="114.5" y="283" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0,25</text>
+<line x1="48" y1="207.5" x2="52" y2="207.5" class="dg-linie"/>
+<text x="45" y="207.5" text-anchor="end" dominant-baseline="middle" class="dg-klein">0,25</text>
+<line x1="177" y1="270" x2="177" y2="274" class="dg-linie"/>
+<text x="177" y="283" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0,50</text>
+<line x1="48" y1="145" x2="52" y2="145" class="dg-linie"/>
+<text x="45" y="145" text-anchor="end" dominant-baseline="middle" class="dg-klein">0,50</text>
+<line x1="239.5" y1="270" x2="239.5" y2="274" class="dg-linie"/>
+<text x="239.5" y="283" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0,75</text>
+<line x1="48" y1="82.5" x2="52" y2="82.5" class="dg-linie"/>
+<text x="45" y="82.5" text-anchor="end" dominant-baseline="middle" class="dg-klein">0,75</text>
+<line x1="302" y1="270" x2="302" y2="274" class="dg-linie"/>
+<text x="302" y="283" text-anchor="middle" dominant-baseline="middle" class="dg-klein">1</text>
+<line x1="48" y1="20" x2="52" y2="20" class="dg-linie"/>
+<text x="45" y="20" text-anchor="end" dominant-baseline="middle" class="dg-klein">1</text>
+<line x1="52" y1="270" x2="302" y2="20" class="dg-linie dg-strich"/>
+<polyline points="52,270 52,207.5 52,145 93.7,145 93.7,82.5 135.3,82.5 135.3,20 177,20 218.7,20 260.3,20 302,20" class="dg-linie-akzent dg-dick"/>
+<circle cx="93.7" cy="82.5" r="4.5" class="dg-voll-akzent"/>
+<text x="101.7" y="93.5" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Schwelle 0,5</text>
+<circle cx="135.3" cy="20" r="4.5" class="dg-voll-akzent"/>
+<text x="135.3" y="34" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">0,4</text>
+<circle cx="177" cy="20" r="4.5" class="dg-voll-akzent"/>
+<text x="177" y="34" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">0,3</text>
+<text x="207" y="190" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">AUC = 21 / 24</text>
+<text x="207" y="205" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">= 0,875</text>
+<text x="177" y="300" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Falsch-Positiv-Rate (1 − Spezifität)</text>
+<text x="10" y="145" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 10 145)">Richtig-Positiv-Rate (Recall)</text>
+<text x="52" y="316" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">gestrichelt: Raten (AUC 0,5) · Zahl am Punkt: Schwelle</text>
+</svg>
+```
 
 ### Abgrenzung
 Die AUC ist schwellenunabhängig und gut zum Modellvergleich; welche Schwelle im Betrieb gilt, entscheiden die Kosten von FP und FN. Bei stark unausgeglichenen Klassen ist die Precision-Recall-Kurve aussagekräftiger.

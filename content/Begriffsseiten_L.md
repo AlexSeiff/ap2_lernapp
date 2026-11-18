@@ -568,6 +568,77 @@ F1-Wert des Reklamationsmodells bei 500, 2.000 und 8.000 Trainingsfällen:
 
 Der tiefe Baum überanpasst (große Lücke), mehr Daten verkleinern sie von 0,40 auf 0,21 – mehr Daten helfen. Der Baum mit Tiefe 1 hat keine Lücke, aber beide Werte bleiben bei etwa 0,62: Underfitting, mehr Daten ändern daran nichts.
 
+Die Abbildung zeichnet die Werte der Tabelle: Links schließt sich die Lücke zwischen Training und Validierung nur langsam, rechts liegen beide Kurven von Anfang an eng beieinander und niedrig.
+
+**Abbildung: Lernkurven des Beispiels (F1-Wert)**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 256" width="340" height="256" role="img" aria-label="Zwei Lernkurven mit F1-Wert über 500, 2.000 und 8.000 Trainingsfällen: ein tiefer Baum mit großer Lücke zwischen Training und Validierung, ein flacher Baum mit beiden Kurven bei etwa 0,62">
+<text x="86" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Baum ohne Begrenzung</text>
+<text x="86" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Overfitting</text>
+<line x1="22" y1="148" x2="174" y2="148" class="dg-linie"/>
+<line x1="22" y1="148" x2="22" y2="42" class="dg-linie"/>
+<line x1="18" y1="127.2" x2="22" y2="127.2" class="dg-linie"/>
+<text x="17" y="127.2" text-anchor="end" dominant-baseline="middle" class="dg-klein">0,6</text>
+<line x1="18" y1="85.6" x2="22" y2="85.6" class="dg-linie"/>
+<text x="17" y="85.6" text-anchor="end" dominant-baseline="middle" class="dg-klein">0,8</text>
+<line x1="18" y1="44" x2="22" y2="44" class="dg-linie"/>
+<text x="17" y="44" text-anchor="end" dominant-baseline="middle" class="dg-klein">1,0</text>
+<text x="40" y="160" text-anchor="middle" dominant-baseline="middle" class="dg-klein">500</text>
+<text x="92" y="160" text-anchor="middle" dominant-baseline="middle" class="dg-klein">2.000</text>
+<text x="144" y="160" text-anchor="middle" dominant-baseline="middle" class="dg-klein">8.000</text>
+<text x="96" y="174" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Trainingsfälle</text>
+<polyline points="40,44 92,48.2 144,54.4" class="dg-linie-akzent dg-dick"/>
+<polyline points="40,127.2 92,110.6 144,98.1" class="dg-linie dg-dick dg-strich"/>
+<circle cx="40" cy="44" r="3.6" class="dg-akzent"/>
+<circle cx="92" cy="48.2" r="3.6" class="dg-akzent"/>
+<circle cx="144" cy="54.4" r="3.6" class="dg-akzent"/>
+<rect x="36.8" y="124" width="6.4" height="6.4" class="dg-form"/>
+<rect x="88.8" y="107.4" width="6.4" height="6.4" class="dg-form"/>
+<rect x="140.8" y="94.9" width="6.4" height="6.4" class="dg-form"/>
+<text x="45" y="56" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">1,00</text>
+<text x="139" y="45.4" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">0,95</text>
+<text x="45" y="139.2" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">0,60</text>
+<text x="139" y="110.1" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">0,74</text>
+<text x="248" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Baum der Tiefe 1</text>
+<text x="248" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Underfitting</text>
+<line x1="184" y1="148" x2="336" y2="148" class="dg-linie"/>
+<line x1="184" y1="148" x2="184" y2="42" class="dg-linie"/>
+<line x1="180" y1="127.2" x2="184" y2="127.2" class="dg-linie"/>
+<text x="179" y="127.2" text-anchor="end" dominant-baseline="middle" class="dg-klein">0,6</text>
+<line x1="180" y1="85.6" x2="184" y2="85.6" class="dg-linie"/>
+<text x="179" y="85.6" text-anchor="end" dominant-baseline="middle" class="dg-klein">0,8</text>
+<line x1="180" y1="44" x2="184" y2="44" class="dg-linie"/>
+<text x="179" y="44" text-anchor="end" dominant-baseline="middle" class="dg-klein">1,0</text>
+<text x="202" y="160" text-anchor="middle" dominant-baseline="middle" class="dg-klein">500</text>
+<text x="254" y="160" text-anchor="middle" dominant-baseline="middle" class="dg-klein">2.000</text>
+<text x="306" y="160" text-anchor="middle" dominant-baseline="middle" class="dg-klein">8.000</text>
+<text x="258" y="174" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Trainingsfälle</text>
+<polyline points="202,118.9 254,121 306,123" class="dg-linie-akzent dg-dick"/>
+<polyline points="202,127.2 254,125.1 306,123" class="dg-linie dg-dick dg-strich"/>
+<circle cx="202" cy="118.9" r="3.6" class="dg-akzent"/>
+<circle cx="254" cy="121" r="3.6" class="dg-akzent"/>
+<circle cx="306" cy="123" r="3.6" class="dg-akzent"/>
+<rect x="198.8" y="124" width="6.4" height="6.4" class="dg-form"/>
+<rect x="250.8" y="121.9" width="6.4" height="6.4" class="dg-form"/>
+<rect x="302.8" y="119.8" width="6.4" height="6.4" class="dg-form"/>
+<text x="207" y="108.9" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">0,64</text>
+<text x="301" y="113" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">0,62</text>
+<text x="207" y="139.2" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">0,60</text>
+<text x="92" y="208" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Lücke 0,40 → 0,21</text>
+<text x="92" y="222" text-anchor="middle" dominant-baseline="middle" class="dg-klein">mehr Daten helfen</text>
+<text x="254" y="208" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Lücke 0,04 → 0,00</text>
+<text x="254" y="222" text-anchor="middle" dominant-baseline="middle" class="dg-klein">beide Werte bleiben niedrig</text>
+<line x1="12" y1="244" x2="30" y2="244" class="dg-linie-akzent dg-dick"/>
+<circle cx="21" cy="244" r="3.6" class="dg-akzent"/>
+<text x="36" y="244" text-anchor="start" dominant-baseline="middle" class="dg-klein">Training</text>
+<line x1="100" y1="244" x2="118" y2="244" class="dg-linie dg-dick dg-strich"/>
+<rect x="105.8" y="240.8" width="6.4" height="6.4" class="dg-form"/>
+<text x="124" y="244" text-anchor="start" dominant-baseline="middle" class="dg-klein">Validierung</text>
+<text x="332" y="244" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">Güte: F1-Wert</text>
+</svg>
+```
+
 ### Abgrenzung
 Die **Lernkurve** zeigt Güte über Datenmenge oder Epochen; die **ROC-Kurve** zeigt Recall gegen Falsch-Positiv-Rate über alle Schwellen; die **Lernrate** ist eine Schrittweite des Trainings.
 
@@ -590,6 +661,71 @@ In der Perzeptron-Lernregel steht die Lernrate als Faktor vor der Korrektur: w�
 
 ### Beispiel
 Perzeptron mit w₂ = 0,5, Fehler e = −1 und x₂ = 1: Mit η = 0,2 wird w₂ = 0,5 − 0,2 = 0,3, mit η = 1 dagegen −0,5 – ein großer Sprung.
+
+Zur Anschauung eine einfache Fehlerfunktion (nicht die des Perzeptrons): $E(w) = (w - 3)^2$ mit dem Gewicht $w$, Start bei $w = 0$. Ihre Steigung ist $2 \cdot (w - 3)$, ein Lernschritt lautet $w_{neu} = w - \eta \cdot 2 \cdot (w - 3)$. Mit $\eta = 0{,}1$ ist man nach 6 Schritten erst bei $w \approx 2{,}2$, mit $\eta = 0{,}4$ nach 4 Schritten fast am Minimum $w = 3$, mit $\eta = 1{,}05$ springt $w$ hin und her und der Fehler wächst.
+
+**Abbildung: Dieselbe Fehlerfunktion mit drei Lernraten**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 270" width="340" height="270" role="img" aria-label="Drei Verläufe des Gradientenabstiegs auf einer Parabel mit Lernrate 0,1 (zu klein), 0,4 (passend) und 1,05 (zu groß, springt auseinander)">
+<text x="64" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">zu klein</text>
+<text x="64" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">η = 0,1</text>
+<line x1="14" y1="164" x2="114" y2="164" class="dg-linie"/>
+<line x1="14" y1="164" x2="14" y2="54" class="dg-linie"/>
+<polyline points="14,85.5 16.4,93.1 18.8,100.4 21.1,107.3 23.5,113.7 25.9,119.8 28.3,125.5 30.7,130.8 33,135.7 35.4,140.2 37.8,144.4 40.2,148.1 42.6,151.4 45,154.4 47.3,156.9 49.7,159.1 52.1,160.9 54.5,162.2 56.9,163.2 59.2,163.8 61.6,164 64,163.8 66.4,163.2 68.8,162.2 71.1,160.9 73.5,159.1 75.9,156.9 78.3,154.4 80.7,151.4 83,148.1 85.4,144.4 87.8,140.2 90.2,135.7 92.6,130.8 95,125.5 97.3,119.8 99.7,113.7 102.1,107.3 104.5,100.4 106.9,93.1 109.2,85.5 111.6,77.4 114,69" class="dg-linie dg-duenn"/>
+<circle cx="61.6" cy="164" r="3" class="dg-voll"/>
+<line x1="25.9" y1="119.8" x2="33" y2="135.7" class="dg-linie-akzent dg-strich"/>
+<line x1="33" y1="135.7" x2="38.8" y2="145.9" class="dg-linie-akzent dg-strich"/>
+<line x1="38.8" y1="145.9" x2="43.3" y2="152.4" class="dg-linie-akzent dg-strich"/>
+<line x1="43.3" y1="152.4" x2="47" y2="156.6" class="dg-linie-akzent dg-strich"/>
+<line x1="47" y1="156.6" x2="49.9" y2="159.3" class="dg-linie-akzent dg-strich"/>
+<line x1="49.9" y1="159.3" x2="52.3" y2="161" class="dg-linie-akzent dg-strich"/>
+<circle cx="25.9" cy="119.8" r="4.2" class="dg-voll-akzent"/>
+<circle cx="33" cy="135.7" r="3.2" class="dg-akzent"/>
+<circle cx="38.8" cy="145.9" r="3.2" class="dg-akzent"/>
+<circle cx="43.3" cy="152.4" r="3.2" class="dg-akzent"/>
+<circle cx="47" cy="156.6" r="3.2" class="dg-akzent"/>
+<circle cx="49.9" cy="159.3" r="3.2" class="dg-akzent"/>
+<circle cx="52.3" cy="161" r="3.2" class="dg-akzent"/>
+<text x="175" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">passend</text>
+<text x="175" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">η = 0,4</text>
+<line x1="125" y1="164" x2="225" y2="164" class="dg-linie"/>
+<line x1="125" y1="164" x2="125" y2="54" class="dg-linie"/>
+<polyline points="125,85.5 127.4,93.1 129.8,100.4 132.1,107.3 134.5,113.7 136.9,119.8 139.3,125.5 141.7,130.8 144,135.7 146.4,140.2 148.8,144.4 151.2,148.1 153.6,151.4 156,154.4 158.3,156.9 160.7,159.1 163.1,160.9 165.5,162.2 167.9,163.2 170.2,163.8 172.6,164 175,163.8 177.4,163.2 179.8,162.2 182.1,160.9 184.5,159.1 186.9,156.9 189.3,154.4 191.7,151.4 194,148.1 196.4,144.4 198.8,140.2 201.2,135.7 203.6,130.8 206,125.5 208.3,119.8 210.7,113.7 213.1,107.3 215.5,100.4 217.9,93.1 220.2,85.5 222.6,77.4 225,69" class="dg-linie dg-duenn"/>
+<circle cx="172.6" cy="164" r="3" class="dg-voll"/>
+<line x1="136.9" y1="119.8" x2="165.5" y2="162.2" class="dg-linie-akzent dg-strich"/>
+<line x1="165.5" y1="162.2" x2="171.2" y2="163.9" class="dg-linie-akzent dg-strich"/>
+<line x1="171.2" y1="163.9" x2="172.3" y2="164" class="dg-linie-akzent dg-strich"/>
+<line x1="172.3" y1="164" x2="172.6" y2="164" class="dg-linie-akzent dg-strich"/>
+<circle cx="136.9" cy="119.8" r="4.2" class="dg-voll-akzent"/>
+<circle cx="165.5" cy="162.2" r="3.2" class="dg-akzent"/>
+<circle cx="171.2" cy="163.9" r="3.2" class="dg-akzent"/>
+<circle cx="172.3" cy="164" r="3.2" class="dg-akzent"/>
+<circle cx="172.6" cy="164" r="3.2" class="dg-akzent"/>
+<text x="286" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">zu groß</text>
+<text x="286" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">η = 1,05</text>
+<line x1="236" y1="164" x2="336" y2="164" class="dg-linie"/>
+<line x1="236" y1="164" x2="236" y2="54" class="dg-linie"/>
+<polyline points="236,85.5 238.4,93.1 240.8,100.4 243.1,107.3 245.5,113.7 247.9,119.8 250.3,125.5 252.7,130.8 255,135.7 257.4,140.2 259.8,144.4 262.2,148.1 264.6,151.4 267,154.4 269.3,156.9 271.7,159.1 274.1,160.9 276.5,162.2 278.9,163.2 281.2,163.8 283.6,164 286,163.8 288.4,163.2 290.8,162.2 293.1,160.9 295.5,159.1 297.9,156.9 300.3,154.4 302.7,151.4 305,148.1 307.4,144.4 309.8,140.2 312.2,135.7 314.6,130.8 317,125.5 319.3,119.8 321.7,113.7 324.1,107.3 326.5,100.4 328.9,93.1 331.2,85.5 333.6,77.4 336,69" class="dg-linie dg-duenn"/>
+<circle cx="283.6" cy="164" r="3" class="dg-voll"/>
+<line x1="247.9" y1="119.8" x2="322.9" y2="110.5" class="dg-linie-akzent dg-strich"/>
+<line x1="322.9" y1="110.5" x2="240.4" y2="99.3" class="dg-linie-akzent dg-strich"/>
+<line x1="240.4" y1="99.3" x2="331.2" y2="85.7" class="dg-linie-akzent dg-strich"/>
+<circle cx="247.9" cy="119.8" r="4.2" class="dg-voll-akzent"/>
+<circle cx="322.9" cy="110.5" r="3.2" class="dg-akzent"/>
+<circle cx="240.4" cy="99.3" r="3.2" class="dg-akzent"/>
+<circle cx="331.2" cy="85.7" r="3.2" class="dg-akzent"/>
+<text x="64" y="190" text-anchor="middle" dominant-baseline="middle" class="dg-klein">nach 6 Schritten</text>
+<text x="64" y="204" text-anchor="middle" dominant-baseline="middle" class="dg-klein">erst w ≈ 2,2</text>
+<text x="175" y="190" text-anchor="middle" dominant-baseline="middle" class="dg-klein">nach 4 Schritten</text>
+<text x="175" y="204" text-anchor="middle" dominant-baseline="middle" class="dg-klein">fast am Minimum</text>
+<text x="286" y="190" text-anchor="middle" dominant-baseline="middle" class="dg-klein">springt hin und her,</text>
+<text x="286" y="204" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Fehler wächst</text>
+<text x="170" y="226" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Fehler E(w) = (w − 3)², Start bei w = 0</text>
+<text x="170" y="242" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Schritt: w neu = w − η · 2 · (w − 3)</text>
+<text x="170" y="258" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">x: Gewicht w, y: Fehler E, Punkt: Minimum bei w = 3</text>
+</svg>
+```
 
 ### Prüfungsfalle
 Die Lernrate in der Lernregel weglassen und nur w + (t − y) · x rechnen.

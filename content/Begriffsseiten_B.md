@@ -1294,23 +1294,30 @@ Grafik der Verteilung aus Box (Q1 bis Q3 mit Median-Strich), Whiskern bis zum le
 Der Boxplot nach Tukey zeigt Lage, Streuung, Schiefe und Ausreißer auf einen Blick. Die Zäune liegen bei Q1 − 1,5 · IQR und Q3 + 1,5 · IQR; der Whisker endet beim letzten tatsächlichen Datenwert innerhalb des Zauns. Mehrere Boxplots nebeneinander vergleichen Gruppen, z. B. Filialen.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 110" width="400" height="110" role="img" aria-label="Boxplot der Bearbeitungsdauer mit Ausreißer">
-<line x1="20" y1="80" x2="380" y2="80" class="dg-linie"/>
-<text x="20" y="96" text-anchor="middle" class="dg-klein">0</text>
-<text x="140" y="96" text-anchor="middle" class="dg-klein">80</text>
-<text x="260" y="96" text-anchor="middle" class="dg-klein">160</text>
-<text x="380" y="96" text-anchor="middle" class="dg-klein">240</text>
-<line x1="72.5" y1="45" x2="80" y2="45" class="dg-linie"/>
-<line x1="125" y1="45" x2="155" y2="45" class="dg-linie"/>
-<line x1="72.5" y1="35" x2="72.5" y2="55" class="dg-linie"/>
-<line x1="155" y1="35" x2="155" y2="55" class="dg-linie"/>
-<rect x="80" y="28" width="45" height="34" class="dg-akzent"/>
-<line x1="102.5" y1="28" x2="102.5" y2="62" class="dg-linie dg-dick"/>
-<line x1="192.5" y1="20" x2="192.5" y2="70" class="dg-linie dg-strich"/>
-<circle cx="350" cy="45" r="4" class="dg-form"/>
-<text x="102.5" y="20" text-anchor="middle" class="dg-klein">Median 55</text>
-<text x="192.5" y="14" text-anchor="middle" class="dg-klein">Zaun 115</text>
-<text x="350" y="32" text-anchor="middle" class="dg-klein">Ausreißer 220</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 132" width="340" height="132" role="img" aria-label="Boxplot der Bearbeitungsdauer in Minuten mit Ausreißer bei 220">
+<line x1="20" y1="92" x2="320" y2="92" class="dg-linie"/>
+<line x1="20" y1="92" x2="20" y2="96" class="dg-linie"/>
+<text x="20" y="108" text-anchor="middle" class="dg-klein">0</text>
+<line x1="120" y1="92" x2="120" y2="96" class="dg-linie"/>
+<text x="120" y="108" text-anchor="middle" class="dg-klein">80</text>
+<line x1="220" y1="92" x2="220" y2="96" class="dg-linie"/>
+<text x="220" y="108" text-anchor="middle" class="dg-klein">160</text>
+<line x1="320" y1="92" x2="320" y2="96" class="dg-linie"/>
+<text x="320" y="108" text-anchor="middle" class="dg-klein">240</text>
+<text x="170" y="124" text-anchor="middle" class="dg-klein">Bearbeitungsdauer (Minuten)</text>
+<line x1="63.75" y1="45" x2="70" y2="45" class="dg-linie"/>
+<line x1="107.5" y1="45" x2="132.5" y2="45" class="dg-linie"/>
+<line x1="63.75" y1="35" x2="63.75" y2="55" class="dg-linie"/>
+<line x1="132.5" y1="35" x2="132.5" y2="55" class="dg-linie"/>
+<rect x="70" y="28" width="37.5" height="34" class="dg-akzent"/>
+<line x1="88.75" y1="28" x2="88.75" y2="62" class="dg-linie dg-dick"/>
+<line x1="163.75" y1="20" x2="163.75" y2="80" class="dg-linie dg-strich"/>
+<circle cx="295" cy="45" r="4" class="dg-form"/>
+<text x="70" y="76" text-anchor="middle" class="dg-klein">Q1 40</text>
+<text x="107.5" y="76" text-anchor="middle" class="dg-klein">Q3 70</text>
+<text x="88.75" y="18" text-anchor="middle" class="dg-klein">Median 55</text>
+<text x="163.75" y="14" text-anchor="middle" class="dg-klein">Zaun 115</text>
+<text x="295" y="32" text-anchor="middle" class="dg-klein">Ausreißer 220</text>
 </svg>
 ```
 

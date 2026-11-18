@@ -730,6 +730,69 @@ Mehr: Deep Dive 5, 2.3 · Deep Dive 17, 1.2
 ### Erklärung
 Ursachen sind ein zu komplexes Modell, zu wenige Daten oder zu langes Training. Erkennbar ist Overfitting an der großen Lücke zwischen Trainings- und Testgüte. In der Sprache des Bias-Variance-Trade-offs: geringer Bias, aber hohe Varianz. Gegenmaßnahmen: mehr Daten, einfacheres Modell, **Regularisierung** (große Gewichte bestrafen), Entscheidungsbäume beschneiden (Pruning) oder in der Tiefe begrenzen, **Early Stopping** (Training abbrechen, wenn der Validierungsfehler steigt), Kreuzvalidierung zur zuverlässigen Messung. Die **Lernkurve** zeigt, ob mehr Daten die Lücke verkleinern.
 
+Die Abbildung zeigt dieselben sieben Trainingspunkte (erfundene Daten) mit drei Modellen: Die Gerade trifft schon die Trainingspunkte schlecht, die Kurve mit vielen Windungen trifft alle, patzt aber beim neuen Fall (Testpunkt).
+
+**Abbildung: Dieselben Trainingsdaten, drei Modelle**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 216" width="340" height="216" role="img" aria-label="Drei Modelle auf denselben sieben Trainingspunkten: eine Gerade (Underfitting), eine passende Kurve und ein Polynom, das alle Punkte trifft (Overfitting), jeweils mit dem Fehler bei einem neuen Fall">
+<text x="62" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Underfitting</text>
+<text x="62" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">zu einfach</text>
+<line x1="12" y1="144" x2="112" y2="144" class="dg-linie"/>
+<line x1="12" y1="144" x2="12" y2="48" class="dg-linie"/>
+<polyline points="16,85.5 17.5,85.5 19.1,85.4 20.6,85.4 22.1,85.3 23.7,85.2 25.2,85.2 26.7,85.1 28.3,85.1 29.8,85 31.3,85 32.9,84.9 34.4,84.9 35.9,84.8 37.5,84.7 39,84.7 40.5,84.6 42.1,84.6 43.6,84.5 45.1,84.5 46.7,84.4 48.2,84.4 49.7,84.3 51.3,84.2 52.8,84.2 54.3,84.1 55.9,84.1 57.4,84 58.9,84 60.5,83.9 62,83.8 63.5,83.8 65.1,83.7 66.6,83.7 68.1,83.6 69.7,83.6 71.2,83.5 72.7,83.5 74.3,83.4 75.8,83.3 77.3,83.3 78.9,83.2 80.4,83.2 81.9,83.1 83.5,83.1 85,83 86.5,83 88.1,82.9 89.6,82.8 91.1,82.8 92.7,82.7 94.2,82.7 95.7,82.6 97.3,82.6 98.8,82.5 100.3,82.5 101.9,82.4 103.4,82.3 104.9,82.3 106.5,82.2 108,82.2" class="dg-linie-akzent dg-dick"/>
+<line x1="96" y1="91.8" x2="96" y2="82.6" class="dg-rot dg-dick"/>
+<circle cx="21.5" cy="95" r="3.2" class="dg-akzent"/>
+<circle cx="34.4" cy="95" r="3.2" class="dg-akzent"/>
+<circle cx="47.3" cy="68.7" r="3.2" class="dg-akzent"/>
+<circle cx="62" cy="77.4" r="3.2" class="dg-akzent"/>
+<circle cx="74.9" cy="65.4" r="3.2" class="dg-akzent"/>
+<circle cx="87.8" cy="91.6" r="3.2" class="dg-akzent"/>
+<circle cx="100.6" cy="94" r="3.2" class="dg-akzent"/>
+<rect x="92.4" y="88.2" width="7.2" height="7.2" class="dg-form"/>
+<text x="62" y="158" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Training: schlecht</text>
+<text x="62" y="172" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test: schlecht</text>
+<text x="173" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">passend</text>
+<text x="173" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">ausgewogen</text>
+<line x1="123" y1="144" x2="223" y2="144" class="dg-linie"/>
+<line x1="123" y1="144" x2="123" y2="48" class="dg-linie"/>
+<polyline points="127,106.8 128.5,104.5 130.1,102.4 131.6,100.3 133.1,98.3 134.7,96.3 136.2,94.5 137.7,92.7 139.3,91 140.8,89.3 142.3,87.8 143.9,86.3 145.4,84.9 146.9,83.6 148.5,82.3 150,81.1 151.5,80 153.1,79 154.6,78.1 156.1,77.2 157.7,76.4 159.2,75.7 160.7,75 162.3,74.4 163.8,73.9 165.3,73.5 166.9,73.2 168.4,72.9 169.9,72.7 171.5,72.6 173,72.5 174.5,72.6 176.1,72.7 177.6,72.8 179.1,73.1 180.7,73.4 182.2,73.8 183.7,74.3 185.3,74.9 186.8,75.5 188.3,76.2 189.9,77 191.4,77.9 192.9,78.8 194.5,79.8 196,80.9 197.5,82.1 199.1,83.3 200.6,84.6 202.1,86 203.7,87.5 205.2,89 206.7,90.7 208.3,92.4 209.8,94.1 211.3,96 212.9,97.9 214.4,99.9 215.9,102 217.5,104.1 219,106.3" class="dg-linie-akzent dg-dick"/>
+<line x1="207" y1="91.8" x2="207" y2="91" class="dg-rot dg-dick"/>
+<circle cx="132.5" cy="95" r="3.2" class="dg-akzent"/>
+<circle cx="145.4" cy="95" r="3.2" class="dg-akzent"/>
+<circle cx="158.3" cy="68.7" r="3.2" class="dg-akzent"/>
+<circle cx="173" cy="77.4" r="3.2" class="dg-akzent"/>
+<circle cx="185.9" cy="65.4" r="3.2" class="dg-akzent"/>
+<circle cx="198.8" cy="91.6" r="3.2" class="dg-akzent"/>
+<circle cx="211.6" cy="94" r="3.2" class="dg-akzent"/>
+<rect x="203.4" y="88.2" width="7.2" height="7.2" class="dg-form"/>
+<text x="173" y="158" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Training: gut</text>
+<text x="173" y="172" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test: gut</text>
+<text x="284" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Overfitting</text>
+<text x="284" y="24" text-anchor="middle" dominant-baseline="middle" class="dg-klein">zu komplex</text>
+<line x1="234" y1="144" x2="334" y2="144" class="dg-linie"/>
+<line x1="234" y1="144" x2="234" y2="48" class="dg-linie"/>
+<polyline points="238,56 239.5,56 241.1,56 242.6,81 244.1,102.4 245.7,115.2 247.2,121.3 248.7,122.3 250.3,119.9 251.8,115 253.3,108.8 254.9,101.9 256.4,95 257.9,88.5 259.5,82.7 261,77.8 262.5,74 264.1,71.2 265.6,69.4 267.1,68.6 268.7,68.5 270.2,69.1 271.7,70.2 273.3,71.5 274.8,73 276.3,74.5 277.9,75.8 279.4,76.8 280.9,77.5 282.5,77.7 284,77.4 285.5,76.7 287.1,75.5 288.6,74 290.1,72.3 291.7,70.5 293.2,68.6 294.7,67 296.3,65.8 297.8,65.1 299.3,65.1 300.9,66 302.4,67.9 303.9,70.9 305.5,75 307,80.1 308.5,86.2 310.1,93 311.6,100.2 313.1,107.3 314.7,113.6 316.2,118.3 317.7,120.5 319.3,118.9 320.8,111.9 322.3,97.9 323.9,74.7 325.4,56 326.9,56 328.5,56 330,56" class="dg-linie-akzent dg-dick"/>
+<line x1="318" y1="91.8" x2="318" y2="120.5" class="dg-rot dg-dick"/>
+<circle cx="243.5" cy="95" r="3.2" class="dg-akzent"/>
+<circle cx="256.4" cy="95" r="3.2" class="dg-akzent"/>
+<circle cx="269.3" cy="68.7" r="3.2" class="dg-akzent"/>
+<circle cx="284" cy="77.4" r="3.2" class="dg-akzent"/>
+<circle cx="296.9" cy="65.4" r="3.2" class="dg-akzent"/>
+<circle cx="309.8" cy="91.6" r="3.2" class="dg-akzent"/>
+<circle cx="322.6" cy="94" r="3.2" class="dg-akzent"/>
+<rect x="314.4" y="88.2" width="7.2" height="7.2" class="dg-form"/>
+<text x="284" y="158" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Training: sehr gut</text>
+<text x="284" y="172" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test: schlecht</text>
+<circle cx="18" cy="204" r="3.2" class="dg-akzent"/>
+<text x="26" y="204" text-anchor="start" dominant-baseline="middle" class="dg-klein">Trainingsdaten</text>
+<rect x="120.4" y="200.4" width="7.2" height="7.2" class="dg-form"/>
+<text x="133" y="204" text-anchor="start" dominant-baseline="middle" class="dg-klein">neuer Fall (Test)</text>
+<line x1="232" y1="204" x2="248" y2="204" class="dg-rot dg-dick"/>
+<text x="254" y="204" text-anchor="start" dominant-baseline="middle" class="dg-klein">Fehler</text>
+</svg>
+```
+
 ### Beispiel
 Ein ungeschnittener ID3-Baum zur Reklamationsvorhersage erreicht 99 % Accuracy auf den Trainingsdaten, aber nur 71 % auf den Testdaten. Mit begrenzter Baumtiefe sinkt die Trainingsgüte auf 85 %, die Testgüte steigt auf 82 %.
 

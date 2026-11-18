@@ -33,6 +33,97 @@ Unüberwachtes Clusterverfahren, das Datenpunkte in k Gruppen um k Zentren einte
 ### Beispiel
 Sechs Kunden (Bestellungen pro Jahr | Bestellwert in 100 €): P1(2|2), P2(3|1), P3(1|3), P4(7|8), P5(8|7), P6(9|9); Startzentren Z1(4|4), Z2(6|6). P1–P3 gehen zu Z1, P4–P6 zu Z2. Neue Zentren: Z1 = (2|2), Z2 = (8|8). In der zweiten Runde ändert sich nichts → Gelegenheits- und Stammkunden.
 
+Die Abbildung zeigt die Schritte des Beispiels: Startzentren, Zuordnung zum nächsten Zentrum, neue Zentren (2 | 2) und (8 | 8) und eine zweite Runde ohne Änderung.
+
+**Abbildung: K-Means Schritt für Schritt (Kunden aus dem Beispiel)**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 422" width="340" height="422" role="img" aria-label="K-Means in vier Schritten: Startzentren, Punkte zuordnen, Zentren neu berechnen, zweite Runde ohne Änderung">
+<text x="85" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">1  Startzentren</text>
+<line x1="15" y1="138" x2="165" y2="138" class="dg-linie"/>
+<line x1="15" y1="138" x2="15" y2="26" class="dg-linie"/>
+<polygon points="71,82.2 78,89.2 71,96.2 64,89.2" class="dg-voll-akzent"/>
+<polygon points="98,61.8 105,68.8 98,75.8 91,68.8" class="dg-voll"/>
+<circle cx="44" cy="109.6" r="3.4" class="dg-grau"/>
+<circle cx="57.5" cy="119.8" r="3.4" class="dg-grau"/>
+<circle cx="30.5" cy="99.4" r="3.4" class="dg-grau"/>
+<circle cx="111.5" cy="48.4" r="3.4" class="dg-grau"/>
+<circle cx="125" cy="58.6" r="3.4" class="dg-grau"/>
+<circle cx="138.5" cy="38.2" r="3.4" class="dg-grau"/>
+<text x="62" y="80.2" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-fett">Z1</text>
+<text x="107" y="79.8" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Z2</text>
+<text x="53" y="105.6" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">P1</text>
+<text x="65.5" y="122.8" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">P2</text>
+<text x="30.5" y="90.4" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">P3</text>
+<text x="103.5" y="45.4" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">P4</text>
+<text x="133" y="62.6" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">P5</text>
+<text x="138.5" y="29.2" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">P6</text>
+<text x="85" y="154" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Z1 = (4 | 4), Z2 = (6 | 6)</text>
+<text x="85" y="168" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">zwei Zentren gewählt</text>
+<text x="255" y="10" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">2  Punkte zuordnen</text>
+<line x1="185" y1="138" x2="335" y2="138" class="dg-linie"/>
+<line x1="185" y1="138" x2="185" y2="26" class="dg-linie"/>
+<line x1="214" y1="109.6" x2="241" y2="89.2" class="dg-linie dg-punkt dg-duenn"/>
+<line x1="227.5" y1="119.8" x2="241" y2="89.2" class="dg-linie dg-punkt dg-duenn"/>
+<line x1="200.5" y1="99.4" x2="241" y2="89.2" class="dg-linie dg-punkt dg-duenn"/>
+<line x1="281.5" y1="48.4" x2="268" y2="68.8" class="dg-linie dg-punkt dg-duenn"/>
+<line x1="295" y1="58.6" x2="268" y2="68.8" class="dg-linie dg-punkt dg-duenn"/>
+<line x1="308.5" y1="38.2" x2="268" y2="68.8" class="dg-linie dg-punkt dg-duenn"/>
+<polygon points="241,82.2 248,89.2 241,96.2 234,89.2" class="dg-voll-akzent"/>
+<polygon points="268,61.8 275,68.8 268,75.8 261,68.8" class="dg-voll"/>
+<circle cx="214" cy="109.6" r="3.4" class="dg-akzent"/>
+<circle cx="227.5" cy="119.8" r="3.4" class="dg-akzent"/>
+<circle cx="200.5" cy="99.4" r="3.4" class="dg-akzent"/>
+<rect x="278.3" y="45.2" width="6.4" height="6.4" class="dg-mittel"/>
+<rect x="291.8" y="55.4" width="6.4" height="6.4" class="dg-mittel"/>
+<rect x="305.3" y="35" width="6.4" height="6.4" class="dg-mittel"/>
+<text x="250" y="97.2" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Z1</text>
+<text x="277" y="77.8" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Z2</text>
+<text x="255" y="154" text-anchor="middle" dominant-baseline="middle" class="dg-klein">jeder Punkt zum nächsten Zentrum</text>
+<text x="255" y="168" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">P1–P3 → Z1, P4–P6 → Z2</text>
+<text x="85" y="200" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">3  Zentren neu berechnen</text>
+<line x1="15" y1="328" x2="165" y2="328" class="dg-linie"/>
+<line x1="15" y1="328" x2="15" y2="216" class="dg-linie"/>
+<polygon points="71,273.2 77,279.2 71,285.2 65,279.2" class="dg-form dg-duenn"/>
+<polygon points="98,252.8 104,258.8 98,264.8 92,258.8" class="dg-form dg-duenn"/>
+<line x1="65.6" y1="283.3" x2="52.1" y2="293.5" class="dg-linie dg-punkt"/>
+<line x1="103.4" y1="254.7" x2="116.9" y2="244.5" class="dg-linie dg-punkt"/>
+<polygon points="44,292.6 51,299.6 44,306.6 37,299.6" class="dg-voll-akzent"/>
+<polygon points="125,231.4 132,238.4 125,245.4 118,238.4" class="dg-voll"/>
+<circle cx="44" cy="299.6" r="3.4" class="dg-akzent"/>
+<circle cx="57.5" cy="309.8" r="3.4" class="dg-akzent"/>
+<circle cx="30.5" cy="289.4" r="3.4" class="dg-akzent"/>
+<rect x="108.3" y="235.2" width="6.4" height="6.4" class="dg-mittel"/>
+<rect x="121.8" y="245.4" width="6.4" height="6.4" class="dg-mittel"/>
+<rect x="135.3" y="225" width="6.4" height="6.4" class="dg-mittel"/>
+<text x="44" y="285.6" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Z1</text>
+<text x="115" y="228.4" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-fett">Z2</text>
+<text x="85" y="344" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Mittelwert je Gruppe:</text>
+<text x="85" y="358" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Z1 = (2 | 2), Z2 = (8 | 8)</text>
+<text x="255" y="200" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">4  Zweite Runde</text>
+<line x1="185" y1="328" x2="335" y2="328" class="dg-linie"/>
+<line x1="185" y1="328" x2="185" y2="216" class="dg-linie"/>
+<polygon points="214,292.6 221,299.6 214,306.6 207,299.6" class="dg-voll-akzent"/>
+<polygon points="295,231.4 302,238.4 295,245.4 288,238.4" class="dg-voll"/>
+<circle cx="214" cy="299.6" r="3.4" class="dg-akzent"/>
+<circle cx="227.5" cy="309.8" r="3.4" class="dg-akzent"/>
+<circle cx="200.5" cy="289.4" r="3.4" class="dg-akzent"/>
+<rect x="278.3" y="235.2" width="6.4" height="6.4" class="dg-mittel"/>
+<rect x="291.8" y="245.4" width="6.4" height="6.4" class="dg-mittel"/>
+<rect x="305.3" y="225" width="6.4" height="6.4" class="dg-mittel"/>
+<text x="214" y="285.6" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Z1</text>
+<text x="285" y="228.4" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-fett">Z2</text>
+<text x="255" y="344" text-anchor="middle" dominant-baseline="middle" class="dg-klein">gleiche Zuordnung wie zuvor</text>
+<text x="255" y="358" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">nichts ändert sich → fertig</text>
+<circle cx="18" cy="392" r="3.4" class="dg-akzent"/>
+<rect x="30.8" y="388.8" width="6.4" height="6.4" class="dg-mittel"/>
+<text x="44" y="392" text-anchor="start" dominant-baseline="middle" class="dg-klein">= Cluster 1 / 2</text>
+<polygon points="158,386 164,392 158,398 152,392" class="dg-voll-akzent"/>
+<text x="168" y="392" text-anchor="start" dominant-baseline="middle" class="dg-klein">= Zentrum Z1 / Z2</text>
+<text x="12" y="410" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">x: Bestellungen pro Jahr, y: Bestellwert (100 €)</text>
+</svg>
+```
+
 ### Abgrenzung
 **K-Nächste-Nachbarn** ist überwacht und klassifiziert (k = Anzahl Nachbarn); k-Means ist unüberwacht und bildet Cluster (k = Anzahl Cluster). Gemeinsam ist nur der Abstandsbegriff.
 
@@ -55,6 +146,81 @@ Mehr: Deep Dive 6, 2.4 · Deep Dive 6, Teil 3
 
 ### Beispiel
 Neuer Auftrag N(4|3) (Lieferdauer | Packstücke), k = 3. Nächste Nachbarn: P3(5|3) d = 1,00 „ja“, P2(3|2) d = 1,41 „nein“, P5(3|5) d = 2,24 „nein“ → 2 : 1 für **keine Reklamation**. Mit k = 1 wäre die Vorhersage „ja“.
+
+In der Abbildung zieht der Kreis um N die drei nächsten Nachbarn P3, P2 und P5 ein (Radius 2,24); der kleine Punktkreis zeigt k = 1.
+
+**Abbildung: k-NN mit k = 3 und k = 1 für den neuen Auftrag**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 330" width="340" height="330" role="img" aria-label="k-Nächste-Nachbarn: sechs Aufträge nach Lieferdauer und Packstücken, neuer Auftrag N bei 4 und 3, Kreis um die drei nächsten Nachbarn P3, P2 und P5">
+<line x1="34" y1="230" x2="322" y2="230" class="dg-linie"/>
+<line x1="34" y1="230" x2="34" y2="14" class="dg-linie"/>
+<line x1="34" y1="230" x2="34" y2="234" class="dg-linie"/>
+<text x="34" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">0</text>
+<line x1="70" y1="230" x2="70" y2="234" class="dg-linie"/>
+<text x="70" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">1</text>
+<line x1="106" y1="230" x2="106" y2="234" class="dg-linie"/>
+<text x="106" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">2</text>
+<line x1="142" y1="230" x2="142" y2="234" class="dg-linie"/>
+<text x="142" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">3</text>
+<line x1="178" y1="230" x2="178" y2="234" class="dg-linie"/>
+<text x="178" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">4</text>
+<line x1="214" y1="230" x2="214" y2="234" class="dg-linie"/>
+<text x="214" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">5</text>
+<line x1="250" y1="230" x2="250" y2="234" class="dg-linie"/>
+<text x="250" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">6</text>
+<line x1="286" y1="230" x2="286" y2="234" class="dg-linie"/>
+<text x="286" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">7</text>
+<line x1="322" y1="230" x2="322" y2="234" class="dg-linie"/>
+<text x="322" y="244" text-anchor="middle" dominant-baseline="middle" class="dg-klein">8</text>
+<line x1="30" y1="230" x2="34" y2="230" class="dg-linie"/>
+<text x="26" y="230" text-anchor="end" dominant-baseline="middle" class="dg-klein">0</text>
+<line x1="30" y1="194" x2="34" y2="194" class="dg-linie"/>
+<text x="26" y="194" text-anchor="end" dominant-baseline="middle" class="dg-klein">1</text>
+<line x1="30" y1="158" x2="34" y2="158" class="dg-linie"/>
+<text x="26" y="158" text-anchor="end" dominant-baseline="middle" class="dg-klein">2</text>
+<line x1="30" y1="122" x2="34" y2="122" class="dg-linie"/>
+<text x="26" y="122" text-anchor="end" dominant-baseline="middle" class="dg-klein">3</text>
+<line x1="30" y1="86" x2="34" y2="86" class="dg-linie"/>
+<text x="26" y="86" text-anchor="end" dominant-baseline="middle" class="dg-klein">4</text>
+<line x1="30" y1="50" x2="34" y2="50" class="dg-linie"/>
+<text x="26" y="50" text-anchor="end" dominant-baseline="middle" class="dg-klein">5</text>
+<line x1="30" y1="14" x2="34" y2="14" class="dg-linie"/>
+<text x="26" y="14" text-anchor="end" dominant-baseline="middle" class="dg-klein">6</text>
+<text x="178" y="260" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Lieferdauer (Tage)</text>
+<text x="10" y="122" text-anchor="middle" dominant-baseline="middle" class="dg-klein" transform="rotate(-90 10 122)">Packstücke</text>
+<circle cx="178" cy="122" r="80.5" class="dg-akzent dg-strich dg-duenn" opacity="0.5"/>
+<circle cx="178" cy="122" r="36" class="dg-linie dg-punkt"/>
+<line x1="178" y1="122" x2="70" y2="158" class="dg-linie dg-duenn dg-punkt"/>
+<line x1="178" y1="122" x2="142" y2="158" class="dg-linie dg-duenn dg-punkt"/>
+<line x1="178" y1="122" x2="214" y2="122" class="dg-linie dg-duenn dg-punkt"/>
+<line x1="178" y1="122" x2="250" y2="50" class="dg-linie dg-duenn dg-punkt"/>
+<line x1="178" y1="122" x2="142" y2="50" class="dg-linie dg-duenn dg-punkt"/>
+<line x1="178" y1="122" x2="286" y2="50" class="dg-linie dg-duenn dg-punkt"/>
+<circle cx="70" cy="158" r="4.5" class="dg-grau"/>
+<circle cx="142" cy="158" r="4.5" class="dg-grau"/>
+<rect x="209.5" y="117.5" width="9" height="9" class="dg-rot"/>
+<rect x="245.5" y="45.5" width="9" height="9" class="dg-rot"/>
+<circle cx="142" cy="50" r="4.5" class="dg-grau"/>
+<rect x="281.5" y="45.5" width="9" height="9" class="dg-rot"/>
+<polygon points="178,114.5 185.5,122 178,129.5 170.5,122" class="dg-voll-akzent"/>
+<text x="178" y="141" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">N (4 | 3)</text>
+<text x="70" y="173" text-anchor="middle" dominant-baseline="middle" class="dg-klein">P1  d = 3,16</text>
+<text x="151" y="173" text-anchor="start" dominant-baseline="middle" class="dg-klein">P2  d = 1,41</text>
+<text x="223" y="113" text-anchor="start" dominant-baseline="middle" class="dg-klein">P3  d = 1,00</text>
+<text x="242" y="38" text-anchor="end" dominant-baseline="middle" class="dg-klein">P4  d = 2,83</text>
+<text x="134" y="41" text-anchor="end" dominant-baseline="middle" class="dg-klein">P5  d = 2,24</text>
+<text x="286" y="38" text-anchor="middle" dominant-baseline="middle" class="dg-klein">P6  d = 3,61</text>
+<circle cx="12" cy="282" r="4" class="dg-grau"/>
+<text x="22" y="282" text-anchor="start" dominant-baseline="middle" class="dg-klein">keine Reklamation</text>
+<rect x="138" y="278" width="8" height="8" class="dg-rot"/>
+<text x="151" y="282" text-anchor="start" dominant-baseline="middle" class="dg-klein">Reklamation</text>
+<polygon points="240,276 246,282 240,288 234,282" class="dg-voll-akzent"/>
+<text x="249" y="282" text-anchor="start" dominant-baseline="middle" class="dg-klein">neuer Auftrag N</text>
+<text x="12" y="300" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Kreis: k = 3 (P3, P2, P5 → 2 : 1 keine Reklamation)</text>
+<text x="12" y="316" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Punktkreis: k = 1 (nur P3 → Reklamation)</text>
+</svg>
+```
 
 ### Abgrenzung
 **K-Means** ist unüberwacht und bildet Cluster. **ID3** liefert ein lesbares Regelwerk; k-NN ist nur am Einzelfall erklärbar („die drei ähnlichsten Aufträge …“).
@@ -886,6 +1052,51 @@ Lieferzeiten: 100 Aufträge, $\bar{x} = 60$ min, $s = 12$ min.
 
 Bei 400 statt 100 Aufträgen (gleiches s): Standardfehler 0,6 min, $60 \pm 1{,}96 \cdot 0{,}6 = 60 \pm 1{,}18$ → [58,82 ; 61,18] min – die Genauigkeit der Schätzung verdoppelt sich.
 
+Auf dem Zahlenstrahl ist das Intervall schmal gegenüber dem Streubereich der Einzelwerte (60 ± 12) und halbiert sich bei vierfacher Stichprobe.
+
+**Abbildung: Konfidenzintervall und Streubereich der Einzelwerte**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 190" width="340" height="190" role="img" aria-label="Zahlenstrahl der Lieferzeit in Minuten: Streubereich der Einzelwerte 48 bis 72, Konfidenzintervall bei 100 Aufträgen 57,65 bis 62,35 und bei 400 Aufträgen 58,82 bis 61,18">
+<line x1="28" y1="150" x2="296.8" y2="150" class="dg-linie"/>
+<line x1="47.2" y1="150" x2="47.2" y2="154" class="dg-linie"/>
+<text x="47.2" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">48</text>
+<line x1="85.6" y1="150" x2="85.6" y2="154" class="dg-linie"/>
+<text x="85.6" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">52</text>
+<line x1="124" y1="150" x2="124" y2="154" class="dg-linie"/>
+<text x="124" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">56</text>
+<line x1="162.4" y1="150" x2="162.4" y2="154" class="dg-linie"/>
+<text x="162.4" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">60</text>
+<line x1="200.8" y1="150" x2="200.8" y2="154" class="dg-linie"/>
+<text x="200.8" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">64</text>
+<line x1="239.2" y1="150" x2="239.2" y2="154" class="dg-linie"/>
+<text x="239.2" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">68</text>
+<line x1="277.6" y1="150" x2="277.6" y2="154" class="dg-linie"/>
+<text x="277.6" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">72</text>
+<text x="162.4" y="180" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Lieferzeit in Minuten</text>
+<line x1="162.4" y1="14" x2="162.4" y2="150" class="dg-linie dg-punkt"/>
+<line x1="47.2" y1="52" x2="277.6" y2="52" class="dg-linie dg-strich dg-dick"/>
+<line x1="47.2" y1="46" x2="47.2" y2="58" class="dg-linie dg-strich dg-dick"/>
+<line x1="277.6" y1="46" x2="277.6" y2="58" class="dg-linie dg-strich dg-dick"/>
+<circle cx="162.4" cy="52" r="4" class="dg-voll"/>
+<text x="30" y="27" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Einzelwerte: 60 ± s</text>
+<text x="30" y="39" text-anchor="start" dominant-baseline="middle" class="dg-klein">48 bis 72 min (s = 12)</text>
+<line x1="139.8" y1="96" x2="185" y2="96" class="dg-linie-akzent dg-dick"/>
+<line x1="139.8" y1="90" x2="139.8" y2="102" class="dg-linie-akzent dg-dick"/>
+<line x1="185" y1="90" x2="185" y2="102" class="dg-linie-akzent dg-dick"/>
+<circle cx="162.4" cy="96" r="4" class="dg-voll"/>
+<text x="30" y="71" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">95-%-Intervall, n = 100</text>
+<text x="30" y="83" text-anchor="start" dominant-baseline="middle" class="dg-klein">57,65 bis 62,35 min</text>
+<line x1="151.1" y1="134" x2="173.7" y2="134" class="dg-linie-akzent dg-dick"/>
+<line x1="151.1" y1="128" x2="151.1" y2="140" class="dg-linie-akzent dg-dick"/>
+<line x1="173.7" y1="128" x2="173.7" y2="140" class="dg-linie-akzent dg-dick"/>
+<circle cx="162.4" cy="134" r="4" class="dg-voll"/>
+<text x="30" y="109" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">n = 400</text>
+<text x="30" y="121" text-anchor="start" dominant-baseline="middle" class="dg-klein">58,82 bis 61,18 min</text>
+<text x="167.4" y="24" text-anchor="start" dominant-baseline="middle" class="dg-klein">Mittelwert 60</text>
+</svg>
+```
+
 ### Abgrenzung
 - **Konfidenz** (Assoziationsanalyse) ist eine Kennzahl für Regeln im Warenkorb und hat mit Stichprobenunsicherheit nichts zu tun.
 - Der **Streubereich** der Einzelwerte (Mittelwert ± Standardabweichung) ist viel breiter als das Konfidenzintervall des Mittelwerts.
@@ -917,6 +1128,47 @@ Zuerst wird die **positive Klasse** festgelegt, meist das seltene, interessieren
 | tatsächlich nein | FP = 90 | TN = 810 |
 
 Accuracy 87 %, Precision 40 %, Recall 60 %, Spezifität 90 %. Ein Modell, das immer „nein“ sagt, käme auf 90 % Accuracy bei 0 % Recall.
+
+Die Abbildung zeigt die vier Felder mit den Zahlen des Beispiels; die Randsummen sind die Nenner von Recall (100) und Precision (150).
+
+**Abbildung: Konfusionsmatrix mit den Zahlen des Beispiels**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 326" width="340" height="326" role="img" aria-label="Konfusionsmatrix eines Reklamationsmodells mit TP 60, FN 40, FP 90 und TN 810 sowie Accuracy, Precision, Recall und Spezifität">
+<text x="200" y="12" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Vorhersage</text>
+<text x="150" y="36" text-anchor="middle" dominant-baseline="middle" class="dg-klein">Reklamation</text>
+<text x="250" y="36" text-anchor="middle" dominant-baseline="middle" class="dg-klein">keine</text>
+<text x="12" y="122" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett" transform="rotate(-90 12 122)">Tatsächlich</text>
+<text x="94" y="87" text-anchor="end" dominant-baseline="middle" class="dg-klein">Reklamation</text>
+<text x="94" y="157" text-anchor="end" dominant-baseline="middle" class="dg-klein">keine</text>
+<rect x="100" y="52" width="100" height="70" class="dg-gut"/>
+<text x="150" y="74" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-gross">TP = 60</text>
+<text x="150" y="94" text-anchor="middle" dominant-baseline="middle" class="dg-klein">richtig positiv</text>
+<text x="150" y="108" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Treffer</text>
+<rect x="200" y="52" width="100" height="70" class="dg-rot"/>
+<text x="250" y="74" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-gross">FN = 40</text>
+<text x="250" y="94" text-anchor="middle" dominant-baseline="middle" class="dg-klein">falsch negativ</text>
+<text x="250" y="108" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Fehler 2. Art</text>
+<rect x="100" y="122" width="100" height="70" class="dg-rot"/>
+<text x="150" y="144" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-gross">FP = 90</text>
+<text x="150" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">falsch positiv</text>
+<text x="150" y="178" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Fehler 1. Art</text>
+<rect x="200" y="122" width="100" height="70" class="dg-gut"/>
+<text x="250" y="144" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett dg-gross">TN = 810</text>
+<text x="250" y="164" text-anchor="middle" dominant-baseline="middle" class="dg-klein">richtig negativ</text>
+<text x="250" y="178" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">richtig erkannt</text>
+<text x="306" y="87" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">= 100</text>
+<text x="306" y="157" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">= 900</text>
+<text x="150" y="204" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">150</text>
+<text x="250" y="204" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">850</text>
+<text x="94" y="204" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">Summe</text>
+<text x="12" y="236" text-anchor="start" dominant-baseline="middle" class="dg-klein">Accuracy = (60 + 810) / 1.000 = 87 %</text>
+<text x="12" y="254" text-anchor="start" dominant-baseline="middle" class="dg-klein">Precision = 60 / 150 = 40 %  (Spalte „Vorhersage Reklamation“)</text>
+<text x="12" y="272" text-anchor="start" dominant-baseline="middle" class="dg-klein">Recall = 60 / 100 = 60 %  (Zeile „tatsächlich Reklamation“)</text>
+<text x="12" y="290" text-anchor="start" dominant-baseline="middle" class="dg-klein">Spezifität = 810 / 900 = 90 %</text>
+<text x="12" y="310" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-leise">Positive Klasse = Reklamation (vorher festlegen)</text>
+</svg>
+```
 
 ### Abgrenzung
 Die **ROC-Kurve** zeigt Recall und Falsch-Positiv-Rate über alle Schwellenwerte; die Konfusionsmatrix gilt für genau einen Schwellenwert.
@@ -1217,6 +1469,87 @@ Statistischer Zusammenhang zwischen zwei Merkmalen, die sich gemeinsam veränder
 ### Erklärung
 Eine Korrelation kann positiv (gleichläufig) oder negativ (gegenläufig), stark oder schwach sein. Für metrische Merkmale misst man den linearen Zusammenhang mit dem Korrelationskoeffizienten nach Pearson, für ordinale Daten mit der Rangkorrelation nach Spearman. Vor jeder Rechnung gehört ein Blick ins Streudiagramm, weil nichtlineare Zusammenhänge und Ausreißer den Wert verfälschen.
 
+Die Abbildung zeigt vier erfundene Datensätze mit je zwölf Punkten und ihrem gerundeten r. Beim U-förmigen Zusammenhang ist r nahe null, obwohl x und y eng zusammenhängen – deshalb gehört vor jede Rechnung ein Blick ins Streudiagramm.
+
+**Abbildung: Vier Streudiagramme mit Korrelationskoeffizient r**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 322" width="340" height="322" role="img" aria-label="Vier Streudiagramme: positive Korrelation, negative Korrelation, kein Zusammenhang und ein nichtlinearer U-förmiger Zusammenhang mit jeweils dem Korrelationskoeffizienten r">
+<text x="90" y="48" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">positiv</text>
+<text x="90" y="62" text-anchor="middle" dominant-baseline="middle" class="dg-klein">r ≈ +0,88</text>
+<line x1="30" y1="162" x2="150" y2="162" class="dg-linie"/>
+<line x1="30" y1="162" x2="30" y2="68" class="dg-linie"/>
+<text x="150" y="172" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">x</text>
+<text x="24" y="72" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">y</text>
+<circle cx="36.5" cy="151.2" r="3" class="dg-akzent"/>
+<circle cx="43.6" cy="134" r="3" class="dg-akzent"/>
+<circle cx="53.3" cy="135.9" r="3" class="dg-akzent"/>
+<circle cx="65.2" cy="142.5" r="3" class="dg-akzent"/>
+<circle cx="77.6" cy="118.2" r="3" class="dg-akzent"/>
+<circle cx="85.9" cy="122.7" r="3" class="dg-akzent"/>
+<circle cx="95" cy="98.2" r="3" class="dg-akzent"/>
+<circle cx="104" cy="121.8" r="3" class="dg-akzent"/>
+<circle cx="117.1" cy="86.4" r="3" class="dg-akzent"/>
+<circle cx="122.3" cy="109.9" r="3" class="dg-akzent"/>
+<circle cx="137.2" cy="98.7" r="3" class="dg-akzent"/>
+<circle cx="143.1" cy="93.1" r="3" class="dg-akzent"/>
+<text x="255" y="48" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">negativ</text>
+<text x="255" y="62" text-anchor="middle" dominant-baseline="middle" class="dg-klein">r ≈ −0,94</text>
+<line x1="195" y1="162" x2="315" y2="162" class="dg-linie"/>
+<line x1="195" y1="162" x2="195" y2="68" class="dg-linie"/>
+<text x="315" y="172" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">x</text>
+<text x="189" y="72" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">y</text>
+<circle cx="201.5" cy="94" r="3" class="dg-akzent"/>
+<circle cx="208.6" cy="71.8" r="3" class="dg-akzent"/>
+<circle cx="218.3" cy="90.4" r="3" class="dg-akzent"/>
+<circle cx="230.2" cy="92" r="3" class="dg-akzent"/>
+<circle cx="242.6" cy="88.5" r="3" class="dg-akzent"/>
+<circle cx="250.9" cy="117.3" r="3" class="dg-akzent"/>
+<circle cx="260" cy="115.5" r="3" class="dg-akzent"/>
+<circle cx="269" cy="124.8" r="3" class="dg-akzent"/>
+<circle cx="282.1" cy="142" r="3" class="dg-akzent"/>
+<circle cx="287.3" cy="130.6" r="3" class="dg-akzent"/>
+<circle cx="302.2" cy="153" r="3" class="dg-akzent"/>
+<circle cx="308.1" cy="157.8" r="3" class="dg-akzent"/>
+<text x="90" y="188" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">kein Zusammenhang</text>
+<text x="90" y="202" text-anchor="middle" dominant-baseline="middle" class="dg-klein">r ≈ −0,05</text>
+<line x1="30" y1="302" x2="150" y2="302" class="dg-linie"/>
+<line x1="30" y1="302" x2="30" y2="208" class="dg-linie"/>
+<text x="150" y="312" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">x</text>
+<text x="24" y="212" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">y</text>
+<circle cx="36.5" cy="226.4" r="3" class="dg-akzent"/>
+<circle cx="43.6" cy="236.4" r="3" class="dg-akzent"/>
+<circle cx="53.3" cy="288.2" r="3" class="dg-akzent"/>
+<circle cx="65.2" cy="225" r="3" class="dg-akzent"/>
+<circle cx="77.6" cy="283.5" r="3" class="dg-akzent"/>
+<circle cx="85.9" cy="225.6" r="3" class="dg-akzent"/>
+<circle cx="95" cy="254.2" r="3" class="dg-akzent"/>
+<circle cx="104" cy="275.7" r="3" class="dg-akzent"/>
+<circle cx="117.1" cy="244.5" r="3" class="dg-akzent"/>
+<circle cx="122.3" cy="284.9" r="3" class="dg-akzent"/>
+<circle cx="137.2" cy="238.1" r="3" class="dg-akzent"/>
+<circle cx="143.1" cy="229.5" r="3" class="dg-akzent"/>
+<text x="255" y="188" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">nichtlinear (U-förmig)</text>
+<text x="255" y="202" text-anchor="middle" dominant-baseline="middle" class="dg-klein">r ≈ −0,02</text>
+<line x1="195" y1="302" x2="315" y2="302" class="dg-linie"/>
+<line x1="195" y1="302" x2="195" y2="208" class="dg-linie"/>
+<text x="315" y="312" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">x</text>
+<text x="189" y="212" text-anchor="end" dominant-baseline="middle" class="dg-klein dg-leise">y</text>
+<circle cx="201.5" cy="258.1" r="3" class="dg-akzent"/>
+<circle cx="208.6" cy="270.5" r="3" class="dg-akzent"/>
+<circle cx="218.3" cy="274.2" r="3" class="dg-akzent"/>
+<circle cx="230.2" cy="292.3" r="3" class="dg-akzent"/>
+<circle cx="242.6" cy="290.5" r="3" class="dg-akzent"/>
+<circle cx="250.9" cy="289.1" r="3" class="dg-akzent"/>
+<circle cx="260" cy="290.6" r="3" class="dg-akzent"/>
+<circle cx="269" cy="290.8" r="3" class="dg-akzent"/>
+<circle cx="282.1" cy="285.9" r="3" class="dg-akzent"/>
+<circle cx="287.3" cy="287.8" r="3" class="dg-akzent"/>
+<circle cx="302.2" cy="265.1" r="3" class="dg-akzent"/>
+<circle cx="308.1" cy="258.5" r="3" class="dg-akzent"/>
+</svg>
+```
+
 ### Beispiel
 Werbebudget und Umsatz der Möbelhaus Nordholz GmbH korrelieren mit r = 0,983 – ein starker positiver Zusammenhang. Ob die Werbung den Umsatz verursacht, ist damit noch nicht belegt.
 
@@ -1460,6 +1793,88 @@ In k Durchläufen wird das Modell auf k − 1 Teilen trainiert und auf dem verbl
 
 ### Beispiel
 1.000 Aufträge, k = 5: fünf Teile à 200. Durchlauf 1 trainiert auf Teil 2–5 (800) und testet auf Teil 1, Durchlauf 2 testet auf Teil 2 usw. Recall-Werte 0,58; 0,62; 0,60; 0,57; 0,63 ergeben im Mittel $\frac{0{,}58 + 0{,}62 + 0{,}60 + 0{,}57 + 0{,}63}{5} = \frac{3{,}00}{5} = 0{,}60$.
+
+Die Abbildung zeigt die fünf Durchläufe: In jeder Zeile ist ein anderer Teil die Testmenge, die übrigen vier bilden das Training.
+
+**Abbildung: 5-fache Kreuzvalidierung – wer ist wann Testmenge**
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 262" width="340" height="262" role="img" aria-label="Fünffache Kreuzvalidierung: fünf Durchläufe, in jedem ist ein anderer Teil die Testmenge, mit den fünf Recall-Werten und ihrem Mittelwert 0,60">
+<text x="93" y="12" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Teil 1</text>
+<text x="135" y="12" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Teil 2</text>
+<text x="177" y="12" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Teil 3</text>
+<text x="219" y="12" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Teil 4</text>
+<text x="261" y="12" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Teil 5</text>
+<text x="312" y="12" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Recall</text>
+<text x="177" y="26" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">je 200 Aufträge</text>
+<text x="64" y="51" text-anchor="end" dominant-baseline="middle" class="dg-klein">Durchlauf 1</text>
+<rect x="72" y="38" width="40" height="26" class="dg-akzent"/>
+<text x="92" y="51" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test</text>
+<rect x="114" y="38" width="40" height="26" class="dg-grau"/>
+<text x="134" y="51" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="156" y="38" width="40" height="26" class="dg-grau"/>
+<text x="176" y="51" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="198" y="38" width="40" height="26" class="dg-grau"/>
+<text x="218" y="51" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="240" y="38" width="40" height="26" class="dg-grau"/>
+<text x="260" y="51" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<text x="312" y="51" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">0,58</text>
+<text x="64" y="81" text-anchor="end" dominant-baseline="middle" class="dg-klein">Durchlauf 2</text>
+<rect x="72" y="68" width="40" height="26" class="dg-grau"/>
+<text x="92" y="81" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="114" y="68" width="40" height="26" class="dg-akzent"/>
+<text x="134" y="81" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test</text>
+<rect x="156" y="68" width="40" height="26" class="dg-grau"/>
+<text x="176" y="81" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="198" y="68" width="40" height="26" class="dg-grau"/>
+<text x="218" y="81" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="240" y="68" width="40" height="26" class="dg-grau"/>
+<text x="260" y="81" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<text x="312" y="81" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">0,62</text>
+<text x="64" y="111" text-anchor="end" dominant-baseline="middle" class="dg-klein">Durchlauf 3</text>
+<rect x="72" y="98" width="40" height="26" class="dg-grau"/>
+<text x="92" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="114" y="98" width="40" height="26" class="dg-grau"/>
+<text x="134" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="156" y="98" width="40" height="26" class="dg-akzent"/>
+<text x="176" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test</text>
+<rect x="198" y="98" width="40" height="26" class="dg-grau"/>
+<text x="218" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="240" y="98" width="40" height="26" class="dg-grau"/>
+<text x="260" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<text x="312" y="111" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">0,60</text>
+<text x="64" y="141" text-anchor="end" dominant-baseline="middle" class="dg-klein">Durchlauf 4</text>
+<rect x="72" y="128" width="40" height="26" class="dg-grau"/>
+<text x="92" y="141" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="114" y="128" width="40" height="26" class="dg-grau"/>
+<text x="134" y="141" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="156" y="128" width="40" height="26" class="dg-grau"/>
+<text x="176" y="141" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="198" y="128" width="40" height="26" class="dg-akzent"/>
+<text x="218" y="141" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test</text>
+<rect x="240" y="128" width="40" height="26" class="dg-grau"/>
+<text x="260" y="141" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<text x="312" y="141" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">0,57</text>
+<text x="64" y="171" text-anchor="end" dominant-baseline="middle" class="dg-klein">Durchlauf 5</text>
+<rect x="72" y="158" width="40" height="26" class="dg-grau"/>
+<text x="92" y="171" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="114" y="158" width="40" height="26" class="dg-grau"/>
+<text x="134" y="171" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="156" y="158" width="40" height="26" class="dg-grau"/>
+<text x="176" y="171" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="198" y="158" width="40" height="26" class="dg-grau"/>
+<text x="218" y="171" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-leise">Train</text>
+<rect x="240" y="158" width="40" height="26" class="dg-akzent"/>
+<text x="260" y="171" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">Test</text>
+<text x="312" y="171" text-anchor="middle" dominant-baseline="middle" class="dg-klein dg-fett">0,63</text>
+<line x1="72" y1="192" x2="332" y2="192" class="dg-linie dg-duenn"/>
+<text x="12" y="210" text-anchor="start" dominant-baseline="middle" class="dg-klein dg-fett">Mittelwert = (0,58 + 0,62 + 0,60 + 0,57 + 0,63) / 5 = 0,60</text>
+<rect x="12" y="224" width="14" height="10" class="dg-grau"/>
+<text x="32" y="230" text-anchor="start" dominant-baseline="middle" class="dg-klein">Training (je 800 Aufträge)</text>
+<rect x="12" y="242" width="14" height="10" class="dg-akzent"/>
+<text x="32" y="248" text-anchor="start" dominant-baseline="middle" class="dg-klein">Test (200 Aufträge): jeder Teil kommt einmal dran</text>
+</svg>
+```
 
 ### Abgrenzung
 Der einfache **Train-Test-Split** prüft nur einmal und kann zufällig günstig ausfallen. Bei Zeitreihen wird statt zufällig **chronologisch** getrennt, damit keine Zukunftsinformation ins Training gelangt.
