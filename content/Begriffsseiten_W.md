@@ -76,6 +76,53 @@ Beim Walkthrough führt der Autor durch sein Werk.
 Siehe auch: Review · Inspektion · Statische Prüfung
 Mehr: Deep Dive 16, 1.2
 
+## Wasserfall, V-Modell, Scrum und Kanban im Vergleich
+<!-- id: wasserfall-v-modell-scrum-und-kanban-im-vergleich · quellen: Karte DD12, DD12 Teil 2 · stand: 2026-11 -->
+
+Vier Vorgehensmodelle für IT-Projekte: Wasserfall und V-Modell planen alle Phasen im Voraus nacheinander (klassisch), Scrum und Kanban liefern in kleinen Schritten und passen sich laufend an (agil).
+
+### Erklärung
+| Kriterium | Wasserfall | V-Modell | Scrum | Kanban |
+|---|---|---|---|---|
+| Prinzip | Phasen streng nacheinander | wie Wasserfall, jeder Entwurfsstufe steht eine Teststufe gegenüber | iterativ-inkrementell in Sprints (höchstens ein Monat) | kontinuierlicher Fluss, Arbeit wird gezogen (Pull) |
+| Planung | vorab vollständig | vorab vollständig, Tests früh mitgeplant | je Sprint, Product Backlog laufend priorisiert | keine feste Planung, WIP-Limits steuern |
+| Rollen | Projektleiter, Fachabteilung, Entwicklung | wie Wasserfall, mit Qualitätssicherung | Product Owner, Scrum Master, Developers | keine vorgeschrieben |
+| Änderungen | teuer, Rückschritt in frühere Phase | teuer, Entwurf und Testfälle der Ebene ändern sich mit | jederzeit über das Backlog | jederzeit als neue Karte |
+| Ergebnis sichtbar | am Ende | am Ende | nach jedem Sprint | laufend, Karte für Karte |
+| Qualitätssicherung | Test am Ende | Teststufen je Entwurfsebene, hohe Nachweisbarkeit | Definition of Done je Inkrement | Prüfspalte, Fertig-Kriterien |
+| Dokumentation | hoch | sehr hoch | so viel wie nötig | gering |
+| Stärke | klare Termine und Kosten | Qualitätsnachweis | schnelle Rückmeldung, flexibel | einfach einführbar, deckt Engpässe auf |
+| Schwäche | starr, Fehler spät entdeckt | starr, dokumentationsintensiv | Endtermin und Aufwand schwer festzulegen | keine Planungsstruktur |
+| passt, wenn | Anforderungen klar und stabil | zusätzlich Prüf- und Nachweispflicht (z. B. Behörden, V-Modell XT) | Anforderungen unklar oder veränderlich, Fachbereich arbeitet mit | laufender Betrieb mit unregelmäßigen Aufgaben |
+
+**Wann nehme ich was?** Frage zuerst: Sind die Anforderungen klar und stabil? Dann reicht ein klassisches Modell; kommen Prüf- und Nachweispflichten hinzu, ist das V-Modell passender als der reine Wasserfall. Sind sie unklar oder ändern sie sich und der Fachbereich kann laufend mitarbeiten, wähle Scrum. Kommen die Aufgaben als Strom unterschiedlich großer Anfragen und gibt es keine Projektlaufzeit, wähle Kanban. Bei einer festen Frist mit unklaren Details (typisch IHK-Projekt) ist oft ein **hybrides** Vorgehen sinnvoll: fester Rahmen mit Meilensteinen, iterative Umsetzung darin. Eine Auswahl wird immer mit dem Szenario begründet, nicht mit „agil ist moderner“.
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH will ein Reporting-Dashboard bauen. Dasselbe Vorhaben in den vier Modellen:
+
+**Wasserfall:** Anforderungen (Lasten- und Pflichtenheft) 3 Wochen, Entwurf 2, Implementierung 6, Test 2, Einführung 1: $3 + 2 + 6 + 2 + 1 = 14$ Wochen. Der Vertrieb sieht das erste lauffähige Dashboard in Woche 14.
+
+**V-Modell:** Plan ebenfalls 14 Wochen. Die Testfälle entstehen aber mit der jeweiligen Entwurfsstufe: Abnahmekriterien aus dem Lastenheft, Systemtestfälle aus dem Pflichtenheft. Der Fachbereich sieht das Ergebnis ebenfalls erst am Ende, aber der Qualitätsnachweis liegt lückenlos vor.
+
+**Scrum:** Das Product Backlog umfasst 120 Story Points, das Team schafft 20 Punkte je Zwei-Wochen-Sprint: $\frac{120}{20} = 6$ Sprints, $6 \cdot 2 = 12$ Wochen. Nach Sprint 1 (Woche 2) gibt es ein erstes nutzbares Inkrement. In Woche 8 wünscht der Vertrieb eine weitere Kennzahl mit 20 Punkten: $\frac{140}{20} = 7$ Sprints, also 14 Wochen – oder der Product Owner tauscht die Kennzahl gegen 20 Punkte weniger wichtige Wünsche, dann bleibt es bei 12 Wochen. Im Wasserfall wäre dieselbe Änderung ein Änderungsantrag mit Rückschritt in den Entwurf.
+
+**Kanban:** Nach dem Livegang kommen Berichtsanfragen unregelmäßig herein. Das Team arbeitet höchstens 6 Anfragen gleichzeitig ab (WIP-Limit) und schließt im Schnitt 3 Anfragen pro Woche ab. Faustformel für einen stabilen Fluss: Durchlaufzeit $= \frac{\text{WIP}}{\text{Durchsatz}} = \frac{6}{3} = 2$ Wochen. Ohne Limit, etwa 12 angefangene Anfragen bei gleichem Durchsatz, wären es $\frac{12}{3} = 4$ Wochen: Mit WIP-Limit wird jede Anfrage im Schnitt in der halben Zeit fertig.
+
+### Abgrenzung
+- **Wasserfall und V-Modell** sind klassisch (sequenziell), **Scrum und Kanban** agil; das V-Modell ist keine agile Methode, nur weil es Tests früh plant.
+- **Scrum** ist ein Rahmenwerk mit Rollen (Verantwortlichkeiten), Events und Artefakten; **Kanban** ist eine Methode ohne Sprints und Pflichtrollen, das **Kanban-Board** ist ihr Werkzeug.
+- Das **V-Modell XT** ist das Vorgehensmodell des Bundes mit Projekttypen und Tailoring, nicht dasselbe wie das allgemeine V-Modell.
+- Der **Scrum Master** ist kein Projektleiter, sondern verantwortet Scrum und räumt Hindernisse aus dem Weg.
+
+### Prüfungsfalle
+Das Wasserfallmodell bei unklaren, veränderlichen Anforderungen begründen oder Scrum bei festem Pflichtenheft und Festpreis – die Begründung muss zum Szenario passen. Weitere Klassiker: Kanban mit Sprints, „agil heißt ohne Planung und Dokumentation“, Backlog Refinement als Scrum-Event nennen und V-Modell und Wasserfall gleichsetzen, obwohl das V-Modell jeder Entwurfsstufe eine Teststufe zuordnet.
+
+### Merksatz
+Klar und stabil: klassisch (mit Nachweispflicht V-Modell); unklar und veränderlich: Scrum; Dauerbetrieb mit Anfragenstrom: Kanban.
+
+Siehe auch: Wasserfallmodell · V-Modell · V-Modell XT · Scrum · Kanban · Agile Vorgehensmodelle · Kanban-Board · WIP-Limit · Sprint · Product Backlog · Product Owner · Scrum Master · Lastenheft · Pflichtenheft · Durchlaufzeit
+Mehr: Deep Dive 12, Teil 2
+
 ## Wasserfallmodell
 <!-- id: wasserfallmodell · quellen: Karte DD12, DD12 Teil 2 · stand: 2026-10 -->
 

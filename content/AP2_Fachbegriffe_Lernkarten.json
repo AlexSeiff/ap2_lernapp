@@ -3,11 +3,11 @@
     "titel": "AP2 Fachbegriffe – Begriffskarten zu allen Deep Dives",
     "pruefung": "IHK Abschlussprüfung Teil 2",
     "erstellt_am": "2026-10-06",
-    "aktualisiert_am": "2026-11-16",
+    "aktualisiert_am": "2026-11-18",
     "version": "1.0",
     "sprache": "de",
     "anzahl_decks": 16,
-    "anzahl_karten": 905,
+    "anzahl_karten": 912,
     "felder": {
       "id": "FB- + Begriff als Kürzel (stabil, unabhängig von der Reihenfolge)",
       "frage": "der Fachbegriff (Vorderseite)",
@@ -1069,7 +1069,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 4",
       "status": "behandelt",
-      "anzahl_karten": 33,
+      "anzahl_karten": 34,
       "karten": [
         {
           "id": "FB-streudiagramm",
@@ -1086,6 +1086,16 @@
           "id": "FB-korrelation",
           "frage": "Korrelation",
           "antwort": "Statistischer Zusammenhang zwischen zwei Merkmalen – sagt nichts über Ursache und Wirkung.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-korrelation-und-kausalitat-im-vergleich",
+          "frage": "Korrelation und Kausalität im Vergleich",
+          "antwort": "Korrelation beschreibt Gleichlauf zweier Merkmale (Kennzahl r), Kausalität eine Ursache-Wirkungs-Beziehung. Ein hohes r lässt Ursache, Gegenrichtung, Drittvariable oder Zufall zu; Kausalität belegt erst ein Experiment oder ein Wirkmechanismus.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -2211,7 +2221,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 6",
       "status": "behandelt",
-      "anzahl_karten": 68,
+      "anzahl_karten": 69,
       "karten": [
         {
           "id": "FB-crisp-dm",
@@ -2307,6 +2317,16 @@
           "id": "FB-klassifikation",
           "frage": "Klassifikation",
           "antwort": "Überwachtes Verfahren, das eine Kategorie vorhersagt (Reklamation ja/nein).",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-klassifikation-regression-und-clustering-im-vergleich",
+          "frage": "Klassifikation, Regression und Clustering im Vergleich",
+          "antwort": "Mit Label und Kategorie als Ziel: Klassifikation; mit Label und Zahl als Ziel: Regression; ohne Label, nur Ähnlichkeit: Clustering (unüberwacht). Die logistische Regression klassifiziert, k-NN klassifiziert, k-Means clustert.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -2901,7 +2921,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 7",
       "status": "behandelt",
-      "anzahl_karten": 33,
+      "anzahl_karten": 35,
       "karten": [
         {
           "id": "FB-konfusionsmatrix",
@@ -2964,6 +2984,16 @@
           ]
         },
         {
+          "id": "FB-accuracy-precision-recall-und-f1-im-vergleich",
+          "frage": "Accuracy, Precision, Recall und F1 im Vergleich",
+          "antwort": "Accuracy: alles Richtige durch alle Fälle (täuscht bei seltener Klasse); Precision: TP / (TP + FP), wie oft ein Alarm stimmt; Recall: TP / (TP + FN), wie viele echte Fälle gefunden werden; F1: harmonisches Mittel aus Precision und Recall; Balanced Accuracy: Mittel aus Recall und Spezifität. Teurer Fehler FN → Recall, teurer Fehler FP → Precision.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
           "id": "FB-precision",
           "frage": "Precision",
           "antwort": "TP / (TP + FP): Wie viele der als positiv **vorhergesagten** Fälle sind wirklich positiv? Wichtig, wenn Fehlalarme teuer sind.",
@@ -3007,6 +3037,16 @@
           "id": "FB-overfitting",
           "frage": "Overfitting",
           "antwort": "Überanpassung: Das Modell lernt die Trainingsdaten auswendig (inklusive Rauschen) und ist auf neuen Daten deutlich schlechter.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-overfitting-und-underfitting-im-vergleich",
+          "frage": "Overfitting und Underfitting im Vergleich",
+          "antwort": "Overfitting: Training sehr gut, Test deutlich schlechter (große Lücke), Modell zu komplex. Underfitting: Training und Test schlecht, Modell zu einfach. Gegenmittel sind gegensätzlich: einfacher machen, mehr Daten, Regularisierung bzw. komplexer machen, bessere Merkmale.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -4091,7 +4131,7 @@
       "pruefungsbereich": "Sicherstellen der Datenqualität",
       "quelle": "Deep Dive 10",
       "status": "behandelt",
-      "anzahl_karten": 85,
+      "anzahl_karten": 87,
       "karten": [
         {
           "id": "FB-dsgvo",
@@ -4177,6 +4217,16 @@
           "id": "FB-anonymisierung",
           "frage": "Anonymisierung",
           "antwort": "Personenbezug wird unumkehrbar entfernt – anonyme Daten fallen nicht mehr unter die DSGVO.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-anonymisierung-und-pseudonymisierung-im-vergleich",
+          "frage": "Anonymisierung und Pseudonymisierung im Vergleich",
+          "antwort": "Pseudonymisiert: Personenbezug mit getrennt aufbewahrtem Schlüssel wiederherstellbar, die DSGVO gilt weiter (Art. 4 Nr. 5, Erwägungsgrund 26). Anonymisiert: Rückführung mit vertretbarem Aufwand nicht mehr möglich, die DSGVO gilt nicht mehr.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -4477,6 +4527,16 @@
           "id": "FB-vollsicherung",
           "frage": "Vollsicherung",
           "antwort": "Datensicherung von allem – lange Laufzeit, Wiederherstellung aus einem Medium.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-vollsicherung-differenzielle-und-inkrementelle-sicherung-im-vergleich",
+          "frage": "Vollsicherung, differenzielle und inkrementelle Sicherung im Vergleich",
+          "antwort": "Voll sichert alles (Rücksicherung: 1 Medium), differenziell alles seit der letzten Vollsicherung (Voll + letzte differenzielle = 2 Medien), inkrementell alles seit der letzten Sicherung (Voll + alle Inkremente). Inkrementell sichert am schnellsten, stellt am langsamsten wieder her.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [
@@ -5442,7 +5502,7 @@
       "pruefungsbereich": "Durchführen einer Prozessanalyse",
       "quelle": "Deep Dive 12",
       "status": "behandelt",
-      "anzahl_karten": 59,
+      "anzahl_karten": 60,
       "karten": [
         {
           "id": "FB-projekt",
@@ -5518,6 +5578,16 @@
           "id": "FB-wasserfallmodell",
           "frage": "Wasserfallmodell",
           "antwort": "Klassisches Vorgehensmodell mit streng sequenziellen Phasen; passt bei klaren, stabilen Anforderungen.",
+          "typ": "begriff",
+          "schwierigkeit": 1,
+          "tags": [
+            "fachbegriff"
+          ]
+        },
+        {
+          "id": "FB-wasserfall-v-modell-scrum-und-kanban-im-vergleich",
+          "frage": "Wasserfall, V-Modell, Scrum und Kanban im Vergleich",
+          "antwort": "Wasserfall und V-Modell (jeder Entwurfsstufe eine Teststufe) planen sequenziell und passen bei klaren, stabilen Anforderungen; Scrum (Sprints, Product Backlog) passt bei unklaren oder veränderlichen Anforderungen; Kanban (Fluss, WIP-Limit) passt für laufenden Betrieb mit unregelmäßigen Aufgaben.",
           "typ": "begriff",
           "schwierigkeit": 1,
           "tags": [

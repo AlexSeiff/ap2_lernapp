@@ -1096,6 +1096,68 @@ Voll dauert lang, stellt aber am schnellsten wieder her.
 Siehe auch: Differenzielle Sicherung · Inkrementelle Sicherung · 3-2-1-Regel · Generationenprinzip (Großvater-Vater-Sohn)
 Mehr: Deep Dive 10, 4.4
 
+## Vollsicherung, differenzielle und inkrementelle Sicherung im Vergleich
+<!-- id: vollsicherung-differenzielle-und-inkrementelle-sicherung-im-vergleich · quellen: Karte DD10, DD10 4.4 · stand: 2026-11 -->
+
+Die drei Sicherungsarten unterscheiden sich darin, was sie sichern – alles, die Änderungen seit der letzten Vollsicherung oder die Änderungen seit der letzten Sicherung – und damit in Sicherungsdauer, Speicherbedarf und Aufwand der Wiederherstellung.
+
+### Erklärung
+| Kriterium | Vollsicherung | Differenzielle Sicherung | Inkrementelle Sicherung |
+|---|---|---|---|
+| Bezugspunkt | – (alles) | letzte **Voll**sicherung | letzte Sicherung, gleich welcher Art |
+| Gesichert wird | alle ausgewählten Daten | alle Änderungen seit der Vollsicherung | nur die Änderungen seit der vorherigen Sicherung |
+| Größe über die Woche | immer gleich groß | wächst täglich | klein und etwa konstant |
+| Sicherungsdauer | lang | mittel, wächst | kurz |
+| Speicherbedarf | hoch | mittel | gering |
+| Wiederherstellung braucht | 1 Medium | Voll + letzte differenzielle (2 Medien) | Voll + **alle** Inkremente in Reihenfolge |
+| Wiederherstellungsdauer | am kürzesten | kurz | am längsten |
+| Risiko | Sicherungsfenster zu klein | Größe nähert sich der Vollsicherung | eine defekte Stelle unterbricht die Kette |
+
+**Wann nehme ich was?** Entscheidend sind zwei Fragen: Wie viel Zeit und Platz hat die tägliche Sicherung (Sicherungsfenster)? Und wie schnell muss nach einem Ausfall alles wieder laufen (RTO)? Ist das Sicherungsfenster knapp und darf die Wiederherstellung länger dauern, nimm inkrementell. Muss die Wiederherstellung schnell und einfach sein, nimm differenziell. Ist die Datenmenge klein oder die Wiederherstellung kritisch, ist die tägliche Vollsicherung am sichersten. Üblich ist die Kombination: wöchentlich voll, dazwischen differenziell oder inkrementell. Wie oft gesichert wird, bestimmt das RPO, nicht die Art der Sicherung.
+
+### Beispiel
+Der Dateiserver der Möbelhaus Nordholz GmbH hat 800 GB. An jedem Tag ändern sich 40 GB, jeweils in anderen Dateien. Sonntag wird voll gesichert, Montag bis Samstag jeweils abends. Jede Sicherung liegt auf einem eigenen Medium, die Sicherungsrate beträgt 200 GB pro Stunde.
+
+| Sicherung | Voll (täglich) | Differenziell | Inkrementell |
+|---|---|---|---|
+| Sonntag | 800 GB | 800 GB (voll) | 800 GB (voll) |
+| Montag | 800 GB | 40 GB | 40 GB |
+| Dienstag | 800 GB | 80 GB | 40 GB |
+| Mittwoch | 800 GB | 120 GB | 40 GB |
+| Donnerstag | 800 GB | 160 GB | 40 GB |
+| Freitag | 800 GB | 200 GB | 40 GB |
+| Samstag | 800 GB | 240 GB | 40 GB |
+
+Speicherbedarf der Woche: täglich voll $7 \cdot 800 = 5.600$ GB; differenziell $800 + (40 + 80 + 120 + 160 + 200 + 240) = 800 + 840 = 1.640$ GB; inkrementell $800 + 6 \cdot 40 = 800 + 240 = 1.040$ GB. Sicherungsdauer am Mittwochabend: voll $\frac{800}{200} = 4$ Stunden, differenziell $\frac{120}{200} = 0{,}6$ Stunden (36 Minuten), inkrementell $\frac{40}{200} = 0{,}2$ Stunden (12 Minuten).
+
+**Ausfall am Donnerstagmorgen** (letzte Sicherung: Mittwochabend):
+
+| | Voll (täglich) | Differenziell | Inkrementell |
+|---|---|---|---|
+| nötige Medien | Mittwoch (1) | Sonntag + Mittwoch (2) | Sonntag + Montag + Dienstag + Mittwoch (4) |
+| einzuspielende Daten | 800 GB | $800 + 120 = 920$ GB | $800 + 3 \cdot 40 = 920$ GB |
+| reine Lesezeit bei 200 GB/h | 4,0 h | 4,6 h | 4,6 h |
+
+**Ausfall am Samstagmorgen** (letzte Sicherung: Freitagabend): differenziell weiterhin 2 Medien (Sonntag + Freitag, $800 + 200 = 1.000$ GB), inkrementell jetzt 6 Medien (Sonntag bis Freitag, $800 + 5 \cdot 40 = 1.000$ GB). Die Datenmenge ist gleich, aber bei inkrementell wächst die Zahl der Medien und Schritte mit jedem Tag. Sicherungszeit und Wiederherstellungszeit laufen also gegeneinander.
+
+**Defektes Medium:** Fällt das Dienstags-Medium aus, lässt sich der Stand vom Mittwoch inkrementell nicht mehr herstellen – es bleibt nur der Montagsstand, 80 GB Änderungen sind verloren. Differenziell braucht der Mittwochsstand nur Sonntag und Mittwoch; das Dienstags-Medium ist egal. Fällt dagegen die Vollsicherung aus, sind beide Ketten unbrauchbar.
+
+(Annahme: Die Änderungen betreffen jeden Tag andere Dateien. Ändern sich dieselben Dateien mehrfach, wächst die differenzielle Sicherung langsamer als gerechnet; die Zahlen sind dann Obergrenzen.)
+
+### Abgrenzung
+- Das **Generationenprinzip** (Großvater-Vater-Sohn) regelt, wie lange Stände aufbewahrt werden; die drei Sicherungsarten regeln, **was** gesichert wird; die **3-2-1-Regel** regelt, **wo** die Kopien liegen.
+- **RPO** (tolerierbarer Datenverlust) bestimmt die Sicherungshäufigkeit, **RTO** (tolerierbare Wiederherstellungsdauer) das Verfahren und die Infrastruktur.
+- **RAID, Spiegelung und Snapshots auf demselben System** sind kein Backup: Löschfehler und Ransomware werden sofort mitgespiegelt.
+
+### Prüfungsfalle
+Differenziell und inkrementell vertauschen – merke dir den Bezugspunkt: „seit der letzten Vollsicherung“ oder „seit der letzten Sicherung“. Und: für die Wiederherstellung bei inkrementell nur die Vollsicherung und das letzte Inkrement nennen; es braucht alle Inkremente seit der Vollsicherung in der richtigen Reihenfolge, also bei Ausfall am Donnerstag vier Medien, nicht zwei.
+
+### Merksatz
+Inkrementell sichert am schnellsten und stellt am langsamsten wieder her, differenziell umgekehrt, voll ist am einfachsten wiederherzustellen.
+
+Siehe auch: Vollsicherung · Differenzielle Sicherung · Inkrementelle Sicherung · Generationenprinzip (Großvater-Vater-Sohn) · 3-2-1-Regel · RPO · RTO · Wiederherstellungszeit · Ransomware
+Mehr: Deep Dive 10, 4.4
+
 ## Vollständigkeit
 <!-- id: vollstandigkeit · quellen: Karte DD9, DD9 Teil 1 · stand: 2026-10 -->
 

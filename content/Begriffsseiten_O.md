@@ -682,6 +682,59 @@ Wer auswendig lernt, besteht nur die Übung, nicht die Prüfung.
 Siehe auch: Underfitting · Kreuzvalidierung · Train-Test-Split · Entscheidungsbaum · Regularisierung · Early Stopping · Lernkurve · Bias-Variance-Trade-off
 Mehr: Deep Dive 7, 1.2 · Deep Dive 6, 7.3
 
+## Overfitting und Underfitting im Vergleich
+<!-- id: overfitting-und-underfitting-im-vergleich · quellen: Karte DD7, DD7 1.2, DD7 1.3, DD6 7.3 · stand: 2026-11 -->
+
+Zwei entgegengesetzte Fehler bei der Modellanpassung: Beim Overfitting ist das Modell zu komplex und lernt die Trainingsdaten samt Rauschen auswendig, beim Underfitting ist es zu einfach und erfasst nicht einmal das Grundmuster.
+
+### Erklärung
+Die Diagnose gelingt mit zwei Zahlen, der Güte auf den Trainingsdaten und der Güte auf zurückgehaltenen Testdaten (oder Validierungsdaten). Entscheidend sind ihr Niveau und die **Lücke** zwischen beiden.
+
+| Kriterium | Overfitting (Überanpassung) | Underfitting (Unteranpassung) |
+|---|---|---|
+| Güte im Training | sehr gut | schlecht |
+| Güte im Test | deutlich schlechter als im Training | schlecht, ähnlich wie im Training |
+| Lücke Training – Test | groß | klein |
+| Ursache | Modell zu komplex, zu wenige Daten, zu langes Training | Modell zu einfach, aussagekräftige Merkmale fehlen, zu kurzes Training |
+| Bias und Varianz | geringer Bias, hohe Varianz | hoher Bias, geringe Varianz |
+| Bild | Rauschen wird mitgelernt | Gerade durch eine Kurve |
+| Gegenmaßnahmen | mehr Daten, einfacheres Modell, Regularisierung, Baum beschneiden oder in der Tiefe begrenzen, Early Stopping | komplexeres Modell, bessere Merkmale (Feature Engineering), länger trainieren, Regularisierung lockern |
+
+**Wann nehme ich was?** Zuerst beide Gütewerte nebeneinanderlegen. Beide niedrig: Underfitting, das Modell muss mehr können. Training stark, Test schwach: Overfitting, das Modell muss einfacher werden oder mehr Daten bekommen. Beide gut und nah beieinander: das Modell verallgemeinert. Die passende Maßnahme folgt aus der Diagnose; dieselbe Maßnahme kann bei der anderen Fehlerart schaden:
+
+| Maßnahme | bei Overfitting | bei Underfitting |
+|---|---|---|
+| mehr Trainingsdaten | hilft | hilft kaum |
+| komplexeres Modell (tieferer Baum, höherer Polynomgrad) | verschlimmert | hilft |
+| Regularisierung stärken | hilft | verschlimmert (eher lockern) |
+| Merkmale anpassen | überflüssige Merkmale entfernen hilft | aussagekräftige Merkmale ergänzen hilft |
+| länger trainieren | schadet ohne Early Stopping | hilft |
+
+### Beispiel
+Die Möbelhaus Nordholz GmbH trainiert Entscheidungsbäume verschiedener Tiefe für die Reklamationsvorhersage und misst die Accuracy auf Trainings- und Testdaten:
+
+| Modell | Training | Test | Lücke | Diagnose |
+|---|---|---|---|---|
+| Baum Tiefe 1 | 62 % | 60 % | 2 Punkte | beide schwach: Underfitting |
+| Baum Tiefe 4 | 85 % | 82 % | 3 Punkte | gut verallgemeinernd |
+| Baum ohne Tiefenbegrenzung | 99 % | 71 % | 28 Punkte | großer Einbruch: Overfitting |
+
+Die Lücken: $62 - 60 = 2$, $85 - 82 = 3$, $99 - 71 = 28$. Wer nur auf die Trainingswerte schaut, wählte den ungeschnittenen Baum (99 %) – und läge auf neuen Aufträgen bei nur 71 %, schlechter als der Baum mit Tiefe 4 (82 %). Der Baum mit Tiefe 1 ist dagegen zu einfach: Auch mehr Daten würden seine 60 % kaum anheben, er braucht mehr Tiefe oder bessere Merkmale.
+
+### Abgrenzung
+- Der **Bias-Variance-Trade-off** beschreibt dasselbe Phänomen als Fehlerzerlegung: Underfitting entspricht hohem Bias, Overfitting hoher Varianz.
+- Eine **zu gute Testgüte** durch Data Leakage (Testinformationen sickern ins Training) ist kein Overfitting, sondern ein Messfehler – das Modell wirkt besser, als es ist.
+- Gemessen wird immer an Daten, die das Modell nicht gesehen hat (Train-Test-Split, Kreuzvalidierung); die Trainingsgüte allein sagt über beide Fehler nichts.
+
+### Prüfungsfalle
+Ein Modell nach seiner Trainingsgüte beurteilen. Dazu: gegen Underfitting „mehr Daten“ oder „Regularisierung“ vorschlagen – beides zielt auf Overfitting. Und: Die Baumtiefe nicht wiederholt an den Testdaten auswählen; dafür gehören Validierungsdaten oder die Kreuzvalidierung hin, die Testdaten werden nur einmal am Schluss benutzt.
+
+### Merksatz
+Overfitting lernt auswendig, Underfitting lernt zu wenig – die Lücke zwischen Training und Test verrät, welches von beiden vorliegt.
+
+Siehe auch: Overfitting · Underfitting · Bias-Variance-Trade-off · Regularisierung · Kreuzvalidierung · Train-Test-Split · Trainingsdaten · Testdaten · Lernkurve · Early Stopping · Entscheidungsbaum
+Mehr: Deep Dive 7, 1.2 · Deep Dive 7, 1.3 · Deep Dive 6, 7.3
+
 ## Oversampling
 <!-- id: oversampling · quellen: Karte DD7, DD7 4.5 · stand: 2026-10 -->
 
