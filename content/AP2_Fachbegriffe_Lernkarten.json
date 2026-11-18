@@ -4815,7 +4815,7 @@
         },
         {
           "id": "FB-technische-und-organisatorische-massnahmen",
-          "frage": "Technische und organisatorische Maßnahmen",
+          "frage": "TOM (Technische und organisatorische Maßnahmen)",
           "antwort": "TOM nach Art. 32 DSGVO: Schutzmaßnahmen wie Verschlüsselung, Pseudonymisierung, Zugriffskontrolle, Backup und regelmäßige Überprüfung.",
           "typ": "begriff",
           "schwierigkeit": 1,

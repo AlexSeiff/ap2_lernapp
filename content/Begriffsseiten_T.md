@@ -235,10 +235,12 @@ Cookie nur mit Ja – außer der Shop funktioniert sonst nicht.
 Siehe auch: Einwilligung · DSGVO · DDG · Privacy by Design · Personenbezogene Daten
 Mehr: Deep Dive 10, 2.4
 
-## Technische und organisatorische Maßnahmen
-<!-- id: technische-und-organisatorische-massnahmen · quellen: Karte DD10 · stand: 2026-10 -->
+## TOM (Technische und organisatorische Maßnahmen)
+<!-- id: tom · quellen: Karte DD10 · stand: 2026-10 -->
 
 TOM nach Art. 32 DSGVO: Schutzmaßnahmen, mit denen der Verantwortliche ein dem Risiko angemessenes Schutzniveau für personenbezogene Daten sicherstellt.
+
+Auch: Technische und organisatorische Maßnahmen, TOM
 
 ### Erklärung
 Art. 32 nennt beispielhaft Pseudonymisierung und Verschlüsselung, die dauerhafte Sicherstellung von Vertraulichkeit, Integrität, Verfügbarkeit und Belastbarkeit der Systeme, die rasche Wiederherstellbarkeit nach einem Zwischenfall und ein Verfahren zur regelmäßigen Überprüfung der Wirksamkeit. Was angemessen ist, richtet sich nach Stand der Technik, Kosten, Art der Verarbeitung und Risiko für die Betroffenen. Auftragsverarbeiter müssen ebenfalls TOM nachweisen.
