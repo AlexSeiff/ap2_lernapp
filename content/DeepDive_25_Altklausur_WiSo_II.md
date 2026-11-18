@@ -307,7 +307,7 @@ Wie viele Betriebsratsmitglieder sind zu wählen? *(Ergebnis eintragen)*
 
 Begriffe: a) Verbotszeichen · b) Warnzeichen · c) Gebotszeichen · d) Rettungszeichen · e) Brandschutzzeichen · f) Gefahrenpiktogramm
 
-**E3 (3 P):** Worauf weist Zeichen Nr. 3 aus E2 hin? *(Ziffer eintragen)*
+**E3 (3 P):** Ein Sicherheitszeichen im Lager ist ein grünes Quadrat mit einem weißen Kreuz. Worauf weist dieses Zeichen hin? *(Ziffer eintragen)*
 - (1) Sammelstelle im Gefahrenfall
 - (2) Erste Hilfe
 - (3) Krankenhaus in der Nähe
@@ -321,16 +321,14 @@ Begriffe: a) Verbotszeichen · b) Warnzeichen · c) Gebotszeichen · d) Rettungs
 - (4) Sie kommunizieren sicher auf Deutsch und Englisch.
 - (5) Sie arbeiten gern im Team.
 
-**Situation zu E5 und E6:** Bei IT-Projekten des Möbelhauses ändern sich die Wünsche der Fachabteilungen häufig noch während der Umsetzung. Tims Team soll im nächsten Projekt deshalb agil arbeiten.
-
-**E5 (3 P):** Welcher Gesichtspunkt gehört **nicht** zu agilem Arbeiten? *(Ziffer eintragen)*
+**E5 (3 P):** Bei IT-Projekten des Möbelhauses ändern sich die Wünsche der Fachabteilungen häufig noch während der Umsetzung. Tims Team soll im nächsten Projekt deshalb agil arbeiten. Welcher Gesichtspunkt gehört **nicht** zu agilem Arbeiten? *(Ziffer eintragen)*
 - (1) Das Team organisiert seine Arbeit selbst.
 - (2) Der Fortschritt wird auf einem Board für alle sichtbar gemacht.
 - (3) Die Planung wird regelmäßig an neue Erkenntnisse angepasst.
 - (4) Der Vorgesetzte legt zu Beginn jeden Arbeitsschritt verbindlich fest.
 - (5) Wissen wird im Team offen geteilt.
 
-**E6 (4 P):** Welche **zwei** Punkte sind Vorteile agilen Projektmanagements? *(Ziffern eintragen)*
+**E6 (4 P):** Tims Team soll im nächsten IT-Projekt agil arbeiten, weil sich die Wünsche der Fachabteilungen häufig noch während der Umsetzung ändern. Welche **zwei** Punkte sind Vorteile agilen Projektmanagements? *(Ziffern eintragen)*
 - (1) Termin und Umfang stehen von Anfang an unveränderlich fest.
 - (2) Neue Anforderungen können kurzfristig eingeplant werden.
 - (3) Es entsteht kaum Abstimmungsaufwand.

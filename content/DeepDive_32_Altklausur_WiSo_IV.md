@@ -126,7 +126,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein Handelsunternehmen mit rund 140 Beschä
 - (4) Erst, wenn die IHK das Zeugnis zugestellt hat.
 - (5) Mit dem Ende der Berufsschulpflicht.
 
-**A4 (3 P):** Nach der Ausbildung soll Finn für ein Jahr befristet übernommen werden. Welche Aussage zu diesem befristeten Arbeitsverhältnis trifft zu? *(Ziffer eintragen)*
+**A4 (3 P):** Nach der Ausbildung soll der Auszubildende Finn Asmussen für ein Jahr befristet übernommen werden. Welche Aussage zu diesem befristeten Arbeitsverhältnis trifft zu? *(Ziffer eintragen)*
 - (1) Es endet nach einem Jahr, ohne dass es gekündigt werden muss.
 - (2) Die Befristung ist nur mit Zustimmung der Agentur für Arbeit zulässig.
 - (3) Ein befristeter Arbeitsvertrag muss mindestens zwei Jahre laufen.

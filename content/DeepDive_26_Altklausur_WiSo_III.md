@@ -103,7 +103,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 - (4) Ein Arbeitsvertrag ist nur gültig, wenn kein Tarifvertrag besteht.
 - (5) Der Arbeitsvertrag muss vom Betriebsrat unterschrieben werden.
 
-**A2 (4 P):** Im Vertrag von Frau Brauer soll eine Probezeit stehen. Welche **zwei** Aussagen sind zutreffend? *(Ziffern eintragen)*
+**A2 (4 P):** Im Arbeitsvertrag der neuen Datenanalystin Nele Brauer soll eine Probezeit stehen. Welche **zwei** Aussagen sind zutreffend? *(Ziffern eintragen)*
 - (1) Auf eine Probezeit kann ganz verzichtet werden.
 - (2) Die Probezeit muss mindestens drei Monate betragen.
 - (3) Während einer vereinbarten Probezeit kann mit einer Frist von zwei Wochen gekündigt werden.
@@ -120,7 +120,7 @@ Zu welcher Uhrzeit darf Ben am Mittwoch frühestens mit der Arbeit beginnen? *(U
 
 > **Formel:** frühester Beginn = Ende der Arbeitszeit am Vortag + 12 Stunden, jedoch nicht vor 6:00 Uhr
 
-**A4 (3 P):** Welche Vorschrift des Jugendarbeitsschutzgesetzes gilt für Ben? *(Ziffer eintragen)*
+**A4 (3 P):** Welche Vorschrift des Jugendarbeitsschutzgesetzes gilt für den 17-jährigen Auszubildenden Ben Kowalski? *(Ziffer eintragen)*
 - (1) Jugendliche dürfen höchstens 48 Stunden in der Woche beschäftigt werden.
 - (2) Jugendliche dürfen nur an fünf Tagen in der Woche beschäftigt werden.
 - (3) Die erste Nachuntersuchung muss drei Monate nach Ausbildungsbeginn stattfinden.
@@ -136,7 +136,7 @@ Auf wie viele **Arbeitstage** Urlaub hat Lina 2026 Anspruch? *(Ergebnis eintrage
 
 > **Formel:** Arbeitstage = Werktage · 5 / 6
 
-**A6 (3 P):** Ben fragt, wozu er den Ausbildungsnachweis (das „Berichtsheft“) führen muss. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
+**A6 (3 P):** Der Auszubildende Ben Kowalski fragt, wozu er den Ausbildungsnachweis (das „Berichtsheft“) führen muss. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
 - (1) Der Ausbildungsnachweis ist freiwillig.
 - (2) Der Ausbildungsnachweis muss in der Freizeit geführt werden.
 - (3) Der ordnungsgemäß geführte Ausbildungsnachweis ist Voraussetzung für die Zulassung zur Abschlussprüfung.
