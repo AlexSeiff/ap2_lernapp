@@ -638,7 +638,7 @@ Zuständig sind die **Länder**; der Name wechselt (Gewerbeaufsichtsamt, Amt ode
 Eine Beschäftigte meldet, dass im Lager der Möbelhaus Nordholz GmbH ein Fluchtweg zugestellt ist. Die Gewerbeaufsicht besichtigt, ordnet die Räumung mit Frist an und kann bei Verstoß ein Bußgeld verhängen. Die Berufsgenossenschaft berät unabhängig davon zur DGUV Vorschrift 1.
 
 ### Abgrenzung
-Das **Gewerbeamt** (Ordnungsamt) nimmt Gewerbeanmeldungen entgegen, hat mit dem Arbeitsschutz aber nichts zu tun. Die **Unfallanzeige** geht an die Berufsgenossenschaft, nicht an die Gewerbeaufsicht. Gegen Bescheide der Gewerbeaufsicht ist das **Verwaltungsgericht** zuständig.
+Das **Gewerbeamt** (Ordnungsamt) nimmt Gewerbeanmeldungen entgegen, hat mit dem Arbeitsschutz aber nichts zu tun. Die **Unfallanzeige** geht an den Unfallversicherungsträger (z. B. die Berufsgenossenschaft); bei Unternehmen unter allgemeiner Arbeitsschutzaufsicht erhält die Gewerbeaufsicht eine Durchschrift (§ 193 Abs. 7 SGB VII). Gegen Bescheide der Gewerbeaufsicht ist das **Verwaltungsgericht** zuständig.
 
 ### Prüfungsfalle
 Die Gewerbeaufsicht für den Träger der Unfallversicherung halten oder umgekehrt die Berufsgenossenschaft für eine staatliche Behörde.

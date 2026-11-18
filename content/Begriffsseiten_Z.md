@@ -339,7 +339,7 @@ Grundlage ist das Fertigungsmaterial (für MGK), die Fertigungslöhne (für FGK)
 
 $\text{Gewinnzuschlag} = \frac{\text{Gewinn}}{\text{Selbstkosten}} \cdot 100\,\% \qquad \text{Gewinn} = \text{Verkaufspreis} - \text{Selbstkosten}$
 
-Die Selbstkosten sind die Preisuntergrenze auf lange Sicht. Wird weiter bis zum Listenpreis gerechnet (Skonto, Rabatt, Umsatzsteuer), geschieht dies „im Hundert“ jeweils auf dem höheren Preis. In AP2-Aufgaben ist das Schema oft **verkürzt** vorgegeben (z. B. Materialkosten, Personalkosten, sonstige Gemeinkosten, Selbstkosten, Gewinn, Umsatz): dann nur die genannten Zeilen und Sätze verwenden und Zwischenzeilen nachrechnen.
+Die Selbstkosten sind die Preisuntergrenze auf lange Sicht. Wird weiter bis zum Listenpreis gerechnet, werden Skonto und Rabatt „im Hundert“ berücksichtigt (durch 1 minus Abzugssatz teilen, also jeweils bezogen auf den höheren Preis); die Umsatzsteuer wird danach auf den Nettolistenpreis aufgeschlagen (bei 19 % mal 1,19). In AP2-Aufgaben ist das Schema oft **verkürzt** vorgegeben (z. B. Materialkosten, Personalkosten, sonstige Gemeinkosten, Selbstkosten, Gewinn, Umsatz): dann nur die genannten Zeilen und Sätze verwenden und Zwischenzeilen nachrechnen.
 
 ### Beispiel
 Die Werkstatt der Möbelhaus Nordholz GmbH kalkuliert ein Eigenmarken-Regal. Fertigungsmaterial 100,00 €, Fertigungslöhne 80,00 €, MGK 10 %, FGK 150 %, VwGK 10 %, VtGK 5 %, Gewinnzuschlag 12 %.

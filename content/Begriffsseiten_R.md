@@ -464,10 +464,10 @@ Grundsätzlich unterscheidet man **Einzelunternehmen**, **Personengesellschaften
 | AG | 50.000 € Grundkapital | Gesellschaftsvermögen | Handelsregister B |
 | eG | Geschäftsanteile der Mitglieder | Genossenschaftsvermögen | Genossenschaftsregister |
 
-Die Beträge gelten nach dem Stand 2026. Bei der GmbH muss das Stammkapital bei der Gründung nicht voll eingezahlt sein; mindestens die Hälfte, also 12.500 €, ist vor der Anmeldung zu leisten. Die **GmbH & Co. KG** ist eine KG, deren Komplementär eine GmbH ist – eine Personengesellschaft (Abteilung A) mit faktisch beschränkter Haftung. Die Wahl der Rechtsform hängt von Haftungsrisiko, Kapitalbedarf, Leitung, Gründungsaufwand und Steuern ab.
+Die Beträge gelten nach dem Stand 2026. Bei der GmbH muss das Stammkapital bei der Gründung nicht voll eingezahlt sein: Bei Bargründung ist vor der Anmeldung mindestens ein Viertel jedes Geschäftsanteils, insgesamt aber mindestens 12.500 € einzuzahlen (Sacheinlagen sind vollständig zu leisten). Die **GmbH & Co. KG** ist eine KG, deren Komplementär eine GmbH ist – eine Personengesellschaft (Abteilung A) mit faktisch beschränkter Haftung. Die Wahl der Rechtsform hängt von Haftungsrisiko, Kapitalbedarf, Leitung, Gründungsaufwand und Steuern ab.
 
 ### Beispiel
-Drei Gründer wollen ein Möbelhandelsunternehmen starten, haben zusammen 40.000 € und möchten nicht mit dem Privatvermögen haften. Die AG scheidet aus (50.000 € Grundkapital nötig). Die GmbH passt: 25.000 € Stammkapital, davon bei der Gründung mindestens 12.500 € einzuzahlen. Gerät das Unternehmen in Verluste von 100.000 €, haftet in der GmbH das Gesellschaftsvermögen; die Gesellschafter verlieren höchstens ihre Einlagen. Beim Einzelunternehmen wären die vollen 100.000 € eine Forderung gegen das Privatvermögen des Inhabers.
+Drei Gründer wollen ein Möbelhandelsunternehmen starten, haben zusammen 40.000 € und möchten nicht mit dem Privatvermögen haften. Die AG passt nicht: Sie braucht 50.000 € Grundkapital (bei Bargründung ohne Aufgeld zunächst nur mindestens 25 %, also 12.500 €, einzuzahlen; den Rest schulden die Gründer) und mit Vorstand, Aufsichtsrat und Satzungsformalien ist sie für drei Gründer mit 40.000 € unverhältnismäßig. Die GmbH passt: 25.000 € Stammkapital, davon bei der Gründung mindestens 12.500 € einzuzahlen. Gerät das Unternehmen in Verluste von 100.000 €, haftet in der GmbH das Gesellschaftsvermögen; die Gesellschafter verlieren höchstens ihre Einlagen. Beim Einzelunternehmen wären die vollen 100.000 € eine Forderung gegen das Privatvermögen des Inhabers.
 
 ### Abgrenzung
 Die **Personengesellschaft** haftet über die Personen, die **Kapitalgesellschaft** nur mit dem Gesellschaftsvermögen. Handelsregister **A** gilt für eingetragene Einzelkaufleute sowie OHG und KG, **B** für Kapitalgesellschaften; die GbR steht (freiwillig) im Gesellschaftsregister.
@@ -966,7 +966,7 @@ Mehr: Deep Dive 6, 9.3
 Verhältnis des Gewinns zum eingesetzten Kapital oder zum Umsatz, ausgedrückt in Prozent – sie zeigt, wie ertragreich ein Unternehmen wirtschaftet.
 
 ### Erklärung
-Es gibt drei Kennzahlen, die sich nur in der Bezugsgröße unterscheiden:
+Es gibt drei Kennzahlen, die sich in der Bezugsgröße unterscheiden (bei der Gesamtkapitalrentabilität kommen zusätzlich die Fremdkapitalzinsen in den Zähler):
 - **Eigenkapitalrentabilität:** $\text{EKR} = \frac{\text{Gewinn}}{\text{Eigenkapital}} \cdot 100\,\%$ – wie hoch verzinst sich das Geld der Eigentümer?
 - **Gesamtkapitalrentabilität:** $\text{GKR} = \frac{\text{Gewinn} + \text{Fremdkapitalzinsen}}{\text{Gesamtkapital}} \cdot 100\,\%$ – wie hoch verzinst sich alles Kapital im Unternehmen? Die Zinsen werden addiert, weil sie das Entgelt für das Fremdkapital sind und den Gewinn schon gemindert haben.
 - **Umsatzrentabilität:** $\text{UR} = \frac{\text{Gewinn}}{\text{Umsatz}} \cdot 100\,\%$ – wie viel Gewinn bleibt von 100 € Umsatz übrig?

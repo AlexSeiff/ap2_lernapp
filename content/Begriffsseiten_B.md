@@ -388,13 +388,13 @@ Die Befristung braucht die **Schriftform** und muss **vor Arbeitsaufnahme** vere
 
 Ausnahmen: In den ersten vier Jahren nach Gründung eines Unternehmens sind bis zu vier Jahre ohne Sachgrund möglich (Abs. 2a); Arbeitnehmer ab 52 Jahren nach mindestens vier Monaten Arbeitslosigkeit dürfen bis zu fünf Jahre sachgrundlos befristet werden (Abs. 3); Tarifverträge können abweichen.
 
-**Ende:** Eine Zeitbefristung endet automatisch mit Fristablauf; eine ordentliche Kündigung ist nur möglich, wenn sie vereinbart wurde (§ 15 Abs. 4). Arbeitet der Arbeitnehmer mit Wissen des Arbeitgebers nach Ablauf weiter und widerspricht dieser nicht unverzüglich, wird der Vertrag unbefristet (§ 15 Abs. 5). Befristet Beschäftigte dürfen nicht schlechter behandelt werden als vergleichbare unbefristete (§ 4 Abs. 2), haben also Anspruch auf Urlaub; will der Arbeitnehmer die Unwirksamkeit geltend machen, muss er innerhalb von **drei Wochen** nach dem vereinbarten Ende klagen (§ 17).
+**Ende:** Eine Zeitbefristung endet automatisch mit Fristablauf; eine ordentliche Kündigung ist nur möglich, wenn sie vereinbart wurde (§ 15 Abs. 4). Arbeitet der Arbeitnehmer mit Wissen des Arbeitgebers nach Ablauf weiter und widerspricht dieser nicht unverzüglich, wird der Vertrag unbefristet (§ 15 Abs. 6). Befristet Beschäftigte dürfen nicht schlechter behandelt werden als vergleichbare unbefristete (§ 4 Abs. 2), haben also Anspruch auf Urlaub; will der Arbeitnehmer die Unwirksamkeit geltend machen, muss er innerhalb von **drei Wochen** nach dem vereinbarten Ende klagen (§ 17).
 
 ### Beispiel
 Tim schließt seine Ausbildung bei der Möbelhaus Nordholz GmbH ab und erhält einen auf zwölf Monate befristeten Vertrag, schriftlich vor Beginn unterzeichnet (Sachgrund: Anschluss an die Ausbildung). Ein anderer Neueinsteiger wird ohne Sachgrund für 12 Monate befristet und zweimal um je sechs Monate verlängert: Gesamtdauer 24 Monate, zwei Verlängerungen – zulässig. Eine weitere Verlängerung wäre unzulässig, weil sie die Zwei-Jahres-Grenze überschritte. Wäre die Befristung nur per E-Mail vereinbart, bestünde ein unbefristetes Arbeitsverhältnis.
 
 ### Abgrenzung
-Die **Kündigung** beendet ein Arbeitsverhältnis durch Erklärung, die Befristung durch Zeitablauf. Die **Probezeit** ist keine Befristung, sondern eine kurze Kündigungsfrist im unbefristeten Vertrag (eine Befristung zur Erprobung ist dagegen möglich). Das **Ausbildungsverhältnis** endet nach dem BBiG mit der Prüfung. Bei der **Leiharbeit** kann der Leiharbeitnehmer beim Verleiher unbefristet angestellt sein.
+Die **Kündigung** beendet ein Arbeitsverhältnis durch Erklärung, die Befristung durch Zeitablauf. Die **Probezeit** ist keine Befristung, sondern eine kurze Kündigungsfrist im unbefristeten Vertrag (eine Befristung zur Erprobung ist dagegen möglich). Das **Ausbildungsverhältnis** endet nach dem BBiG grundsätzlich mit Ablauf der Ausbildungsdauer, bei früher bestandener Abschlussprüfung mit Bekanntgabe des Ergebnisses durch den Prüfungsausschuss (§ 21 BBiG); bei Nichtbestehen kann der Auszubildende eine Verlängerung verlangen. Bei der **Leiharbeit** kann der Leiharbeitnehmer beim Verleiher unbefristet angestellt sein.
 
 ### Prüfungsfalle
 Eine mündliche, E-Mail- oder nachträgliche Befristung für wirksam halten, oder annehmen, die Befristung selbst bedürfe der Zustimmung von Betriebsrat oder Agentur für Arbeit. (Der Betriebsrat wird bei der Einstellung nach § 99 BetrVG beteiligt, nicht aber zur Befristungsabrede als solcher.) Falsch ist auch, befristet Beschäftigten Urlaub abzusprechen oder sie bei der Betriebsratsgröße nicht mitzuzählen.
@@ -843,7 +843,7 @@ Auch: Betriebsarten, erwerbswirtschaftlicher Betrieb, gemeinwirtschaftlicher Bet
 | Handel | Waren ohne wesentliche Bearbeitung weiterverkaufen (Groß- und Einzelhandel) |
 | Dienstleistung | immaterielle Leistung (Banken, Verkehr, IT, Beratung) |
 
-Industrie und Handwerk gehören zum sekundären, Handel und Dienstleistung zum tertiären Sektor (Wirtschaftssektoren). Ein Betrieb ist die technisch-organisatorische Einheit, ein Unternehmen die rechtlich-wirtschaftliche Einheit; ein Unternehmen kann mehrere Betriebe haben.
+Industrie und produzierendes Handwerk gehören zum sekundären, Handel und Dienstleistung (auch Dienstleistungshandwerke wie Friseure) zum tertiären Sektor (Wirtschaftssektoren). Ein Betrieb ist die technisch-organisatorische Einheit, ein Unternehmen die rechtlich-wirtschaftliche Einheit; ein Unternehmen kann mehrere Betriebe haben.
 
 ### Beispiel
 Die Möbelhaus Nordholz GmbH ist ein **erwerbswirtschaftlicher Handelsbetrieb** (tertiärer Sektor). Die Stadtwerke, die das Gebäude mit Strom versorgen, sind **gemeinwirtschaftlich** organisiert: Sie sollen die Versorgung zu fairen Preisen sichern und müssen keine hohen Gewinne erzielen.

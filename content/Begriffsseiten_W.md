@@ -245,7 +245,7 @@ Das Gesetz zählt Urlaub in **Werktagen** (BUrlG, JArbSchG). Tarif- und Arbeitsv
 
 $\text{Arbeitstage} = \text{Werktage} \cdot \frac{\text{Arbeitstage je Woche}}{6}$
 
-Bei der Fünf-Tage-Woche also Arbeitstage = Werktage · 5/6, umgekehrt Werktage = Arbeitstage · 6/5. Bei einer Vier-Tage-Woche rechnet man mit 4/6. Gesetzliche Feiertage zählen nicht als Urlaubstage.
+Bei der Fünf-Tage-Woche also Arbeitstage = Werktage · 5/6, umgekehrt Werktage = Arbeitstage · 6/5. Bei einer Vier-Tage-Woche rechnet man mit 4/6. Feiertage, an denen ohnehin keine Arbeitspflicht besteht, zählen nicht als Urlaubstage; bei zulässiger dienstplanmäßiger Feiertagsarbeit kann dagegen ein Urlaubstag nötig sein.
 
 ### Beispiel
 Mia ist am 01.01.2026 16 Jahre alt, also „noch nicht 17“: Das JArbSchG gibt ihr **27 Werktage**. Der Tarifvertrag der Möbelhaus Nordholz GmbH nennt **26 Arbeitstage**.
@@ -799,7 +799,7 @@ Auch: Drei-Sektoren-Modell, Primärer Sektor, Sekundärer Sektor, Tertiärer Sek
 | Sektor | Tätigkeit | Beispiele |
 |---|---|---|
 | primär | Gewinnung von Rohstoffen und Naturprodukten (Urproduktion) | Land- und Forstwirtschaft, Fischerei, Bergbau |
-| sekundär | Be- und Verarbeitung von Rohstoffen zu Gütern | Industrie, Handwerk, Bau |
+| sekundär | Be- und Verarbeitung von Rohstoffen zu Gütern | Industrie, produzierendes Handwerk, Bau |
 | tertiär | Dienstleistungen ohne eigene Gütererzeugung | Handel, Logistik, IT, Banken, Gesundheit |
 
 Der Bergbau wird in der Lehre meist zum primären Sektor gezählt (Rohstoffgewinnung); die amtliche Statistik rechnet ihn zum produzierenden Gewerbe. In Industrieländern verschiebt sich die Beschäftigung im Strukturwandel vom primären über den sekundären zum tertiären Sektor. Zusätzlich unterscheidet man Betriebe nach dem Ziel: **erwerbswirtschaftlich** (Gewinnerzielung) und **gemeinwirtschaftlich** (Bedarfsdeckung, z. B. Stadtwerke).

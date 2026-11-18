@@ -265,7 +265,7 @@ Der **Blaue Engel** wurde 1978 eingeführt und ist das staatliche Umweltzeichen 
 | Grüner Punkt | Hersteller beteiligt sich an einem dualen System der Verpackungsentsorgung; **kein** Gütesiegel |
 
 ### Beispiel
-Die Möbelhaus Nordholz GmbH kauft Büropapier mit dem Blauen Engel. Das zeigt, dass das Papier ressourcenschonend hergestellt wurde. Holzmöbel mit FSC-Zeichen belegen verantwortungsvolle Forstwirtschaft; der Grüne Punkt auf der Verpackung sagt nichts über die Umweltqualität.
+Die Möbelhaus Nordholz GmbH kauft Büropapier mit dem Blauen Engel. Das zeigt, dass das Papier ressourcenschonend hergestellt wurde. Holzmöbel mit FSC-Zeichen belegen eine zertifizierte Forstwirtschaft, doch je nach Kennzeichen (FSC 100 %, Recycled, Mix) stammt nicht das gesamte Holz aus FSC-Wäldern; der Grüne Punkt auf der Verpackung sagt nichts über die Umweltqualität.
 
 ### Abgrenzung
 Das **EU-Energielabel** (Effizienzklassen) ist eine Pflichtkennzeichnung mit Verbrauchsangaben und kein Umweltzeichen. **Umweltmanagementsysteme** (ISO 14001, EMAS) bewerten Organisationen, Umweltzeichen Produkte.
@@ -771,7 +771,7 @@ Auch: Urlaubsanspruch, Bundesurlaubsgesetz, BUrlG, Mindesturlaub, Teilurlaub, Ur
 | Übertragung (§ 7) | Urlaub ist im laufenden Jahr zu gewähren und zu nehmen; Übertragung nur aus dringenden betrieblichen oder persönlichen Gründen bis **31. März** des Folgejahres. Nach der Rechtsprechung verfällt er nur, wenn der Arbeitgeber rechtzeitig auf den Anspruch und den Verfall hingewiesen und zum Nehmen aufgefordert hat |
 | Krankheit (§ 9) | durch ärztliches Zeugnis nachgewiesene Krankheitstage im Urlaub werden **nicht** angerechnet |
 | Abgeltung (§ 7 Abs. 4) | Auszahlung statt Urlaub nur, wenn das Arbeitsverhältnis endet und der Urlaub nicht mehr genommen werden kann |
-| Urlaubsentgelt (§ 11) | Durchschnittsverdienst der letzten 13 Wochen, vor Urlaubsantritt auszuzahlen |
+| Urlaubsentgelt (§ 11) | Durchschnittsverdienst der letzten 13 Wochen ohne zusätzliches Überstundenentgelt, vor Urlaubsantritt auszuzahlen |
 | Urlaubsbescheinigung (§ 6 Abs. 2) | bei Ende des Arbeitsverhältnisses stellt der Arbeitgeber eine Bescheinigung über den im laufenden Jahr gewährten oder abgegoltenen Urlaub aus; der neue Arbeitgeber verlangt sie, weil im selben Jahr kein Doppelanspruch besteht (§ 6 Abs. 1) |
 | Mitbestimmung (§ 87 Abs. 1 Nr. 5 BetrVG) | der Betriebsrat bestimmt bei **Urlaubsgrundsätzen** (allgemeine Regeln, z. B. Betriebsferien, Sperrzeiten) und beim **Urlaubsplan** mit – und bei der zeitlichen Lage für einzelne Beschäftigte, wenn keine Einigung zustande kommt. Die **Dauer** des Urlaubs legen Gesetz, Tarif- oder Arbeitsvertrag fest, nicht der Betriebsrat |
 
@@ -791,7 +791,7 @@ Ab dem 01.03.2027 ist die Wartezeit erfüllt, für 2027 gilt der volle Anspruch.
 Werktage und Arbeitstage gleichsetzen („24 Tage Gesetz, 24 Tage Tarif – gleich“) oder Urlaub vor Ablauf der Wartezeit ganz verweigern (Teilurlaub steht zu). Auch typisch: Urlaubsübertragung „bis zu sechs Monate“ statt bis 31. März, das Alter Jugendlicher am Geburtstag statt am 1. Januar zu prüfen und den Betriebsrat über die **Dauer** des Urlaubs mitbestimmen zu lassen.
 
 ### Merksatz
-24 Werktage sind 20 Arbeitstage; nach sechs Monaten voll, davor ein Zwölftel je Monat; Übertragung nur bis 31. März.
+24 Werktage sind 20 Arbeitstage; nach sechs Monaten voll, davor ein Zwölftel je Monat; Übertragener Urlaub ist grundsätzlich bis 31. März zu nehmen (Sonderregeln u. a. bei Langzeiterkrankung, fehlender Mitwirkung des Arbeitgebers und Teilurlaub nach § 5 Abs. 1 Buchst. a BUrlG).
 
 Siehe auch: Werktage und Arbeitstage · JArbSchG · Mitbestimmung · Entgeltfortzahlung · Tarifvertrag · Günstigkeitsprinzip · Schwerbehinderte Menschen · Arbeitsvertrag
 Mehr: Deep Dive 13, 2.3 · Deep Dive 25, Teil 4 · Deep Dive 26, Teil 1 · Deep Dive 33, Teil 1

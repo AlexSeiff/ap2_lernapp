@@ -481,7 +481,7 @@ Jahreskosten: $12 \cdot 3.908{,}80$ = 46.905,60 €. Produktive Stunden: 52 Woch
 $\frac{46.905{,}60}{1.680}$ = **27,92 € je produktive Stunde**
 
 ### Abgrenzung
-Das **Bruttoentgelt** ist die Sicht des Arbeitnehmers, das **Nettoentgelt** sein Auszahlungsbetrag. Die Personalkosten sind die Sicht des Arbeitgebers und liegen deutlich über dem Brutto. **Prozesskosten je Fall** verteilen sie auf einen Vorgang; in der **Zuschlagskalkulation** gehen sie als Fertigungslöhne ein.
+Das **Bruttoentgelt** ist die Sicht des Arbeitnehmers, das **Nettoentgelt** sein Auszahlungsbetrag. Die Personalkosten sind die Sicht des Arbeitgebers und liegen deutlich über dem Brutto. **Prozesskosten je Fall** verteilen sie auf einen Vorgang; in der **Zuschlagskalkulation** gehen direkt zurechenbare Fertigungslöhne als Einzelkosten ein, die übrigen Personalkosten (z. B. Verwaltungsgehälter) über die Gemeinkosten.
 
 ### Prüfungsfalle
 Den Arbeitnehmeranteil zusätzlich zum Brutto aufschlagen (er steckt schon im Brutto), die Unfallversicherung vergessen oder als Abzug vom Arbeitnehmer behandeln und den Stundensatz mit allen bezahlten statt den produktiven Stunden berechnen.
@@ -1185,7 +1185,7 @@ Befristetes Verhältnis, in dem jemand praktische Kenntnisse und Erfahrungen fü
 Auch: Praktikant, Schülerpraktikum, Pflichtpraktikum, Orientierungspraktikum
 
 ### Erklärung
-Für Praktikanten gelten nach § 26 BBiG einzelne Regeln des Ausbildungsrechts entsprechend (z. B. Pflichten, Zeugnis); eine schriftliche Vertragsabfassung ist nicht vorgeschrieben, aber üblich und sinnvoll. Wer in Wahrheit ein reguläres Arbeitsverhältnis führt, ist Arbeitnehmer, egal wie der Vertrag heißt.
+Für Praktikanten gelten nach § 26 BBiG einzelne Regeln des Ausbildungsrechts entsprechend (z. B. Pflichten, Zeugnis); der Vertragsschluss ist grundsätzlich formfrei, für Praktikanten, die nach § 22 Abs. 1 MiLoG als Arbeitnehmer gelten, ist aber vor Tätigkeitsaufnahme ein schriftlicher Nachweis der wesentlichen Bedingungen auszuhändigen (§ 2 Abs. 1a NachwG). Wer in Wahrheit ein reguläres Arbeitsverhältnis führt, ist Arbeitnehmer, egal wie der Vertrag heißt.
 
 **Mindestlohn (§ 22 MiLoG):** Praktikanten gelten grundsätzlich als Arbeitnehmer und erhalten den gesetzlichen Mindestlohn (2026: 13,90 € je Stunde). Ausgenommen sind: ein **Pflichtpraktikum** (Schul-, Ausbildungs- oder Hochschulordnung), ein **Orientierungspraktikum** bis drei Monate, ein **ausbildungsbegleitendes Praktikum** bis drei Monate (nicht, wenn zuvor schon eines beim selben Betrieb bestand) sowie Einstiegsqualifizierung und Berufsausbildungsvorbereitung. Minderjährige ohne abgeschlossene Berufsausbildung haben ebenfalls keinen Mindestlohnanspruch.
 
@@ -1201,7 +1201,7 @@ Das **Ausbildungsverhältnis** folgt dem BBiG mit Ausbildungsplan, Prüfung und 
 Jedes Praktikum für mindestlohnfrei halten. Mindestlohnfrei sind nur die genannten Fälle (Pflicht, Orientierung oder begleitend bis drei Monate); ein freiwilliges Praktikum über drei Monate ist es nicht.
 
 ### Merksatz
-Praktikum heißt lernen statt arbeiten; mindestlohnfrei nur bei Pflicht oder bis drei Monate Orientierung.
+Praktikum heißt lernen statt arbeiten; mindestlohnfrei sind vor allem Pflichtpraktika und kurze Orientierungspraktika bis drei Monate (weitere Ausnahmen in § 22 MiLoG).
 
 Siehe auch: BBiG · JArbSchG · Mindestlohn · Wahlberechtigt · Arbeitsvertrag · Unfallversicherung
 Mehr: Deep Dive 13, 2.4 · Deep Dive 25, Teil 4 · Deep Dive 33, Teil 3
