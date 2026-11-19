@@ -5,6 +5,7 @@ import type { Content, Exam, ExamBlock, Flashcard, ImportIssue, MaterialDoc, Sec
 import { parseLernkarten } from './lernkarten.ts';
 import { readPrueferfrage } from './prueferfragen.ts';
 import { parseDiagrammUebungen } from './diagrammUebungen.ts';
+import { parseJsonUebungen } from './jsonUebungen.ts';
 import { parseRechenUebungen, type RechenUebungPruefer } from './rechenUebungen.ts';
 import { parseSqlUebungen, verknuepfeSqlUebungen } from './sqlUebungen.ts';
 import { pruefeSvg, svgBloecke, svgIds } from './svgDiagramm.ts';
@@ -422,6 +423,7 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
     sqlExercises: [],
     rechenUebungen: [],
     diagrammUebungen: [],
+    jsonUebungen: [],
     issues: [],
   };
 
@@ -488,6 +490,13 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
   for (const f of files.filter((x) => /Diagramm_Uebungen.*\.json$/i.test(x.name))) {
     const parsed = parseDiagrammUebungen(f.name, f.text);
     content.diagrammUebungen!.push(...parsed.uebungen);
+    content.issues.push(...parsed.issues);
+  }
+
+  // JSON-Übungen (JSON selbst als Text schreiben)
+  for (const f of files.filter((x) => /Json_Uebungen.*\.json$/i.test(x.name))) {
+    const parsed = parseJsonUebungen(f.name, f.text);
+    content.jsonUebungen!.push(...parsed.uebungen);
     content.issues.push(...parsed.issues);
   }
 

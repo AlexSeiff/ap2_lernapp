@@ -33,6 +33,7 @@ export function isContentFile(name: string): boolean {
     /SQL_Uebungen.*\.json$/i.test(name) ||
     /Rechen_Uebungen.*\.json$/i.test(name) ||
     /Diagramm_Uebungen.*\.json$/i.test(name) ||
+    /Json_Uebungen.*\.json$/i.test(name) ||
     /^AP2_Quellen\.json$/.test(name)
   );
 }

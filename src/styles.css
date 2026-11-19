@@ -1544,3 +1544,13 @@ button.stand-frage[aria-expanded='true'] .icon { transform: rotate(90deg); }
 .ko-gerade { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ko-gerade input { flex: 1 1 12em; min-width: 0; }
 .ko-liste ul { margin: 6px 0 0; padding-left: 1.2em; }
+
+/* JSON-Übungen (pages/JsonUebung.tsx) */
+.json-feld { display: grid; gap: 4px; margin-top: 12px; }
+.json-eingabe { width: 100%; font-size: 0.95rem; line-height: 1.5; tab-size: 2; white-space: pre; overflow: auto; }
+.json-status { margin: 6px 0 4px; min-height: 1.6em; }
+.json-fehlerzeile { margin: 6px 0 0; padding: 6px 10px; background: var(--low-soft); color: var(--low); border-radius: var(--radius); font-size: 0.85rem; overflow-x: auto; }
+.json-regeln { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; }
+.json-regeln li.ok { color: var(--good); }
+.json-regeln li.bad { color: var(--low); }
+.json-loesung { margin: 0; overflow-x: auto; }

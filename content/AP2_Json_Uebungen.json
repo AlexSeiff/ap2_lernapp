@@ -1,0 +1,650 @@
+{
+  "meta": {
+    "titel": "JSON-Übungen",
+    "beschreibung": "JSON-Dokumente selbst als Text schreiben. Eigene Aufgaben im Stil der AP2 (Datenbereitstellung); die App prüft Syntax und Struktur, nicht den Wortlaut."
+  },
+  "uebungen": [
+    {
+      "id": "JSON-001",
+      "titel": "Ein Kunde als Objekt",
+      "stufe": 1,
+      "topicId": "15",
+      "aufgabe": "Die Möbelhaus Nordholz GmbH tauscht Kundendaten im JSON-Format aus. *Schreiben* Sie ein JSON-Objekt für diesen Kunden: Kundennummer 4711, Name „Meier GmbH“, Ort „Hannover“; der Kunde ist aktiv.\n\nVerwenden Sie die Schlüssel `kundennr`, `name`, `ort` und `aktiv`.",
+      "loesung": "{\n  \"kundennr\": 4711,\n  \"name\": \"Meier GmbH\",\n  \"ort\": \"Hannover\",\n  \"aktiv\": true\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "kundennr",
+          "wert": 4711
+        },
+        {
+          "pfad": "name",
+          "wert": "Meier GmbH"
+        },
+        {
+          "pfad": "ort",
+          "wert": "Hannover"
+        },
+        {
+          "pfad": "aktiv",
+          "wert": true
+        }
+      ],
+      "hinweise": [
+        "Ein Objekt beginnt mit { und endet mit }. Jeder Eintrag besteht aus einem Schlüssel in doppelten Anführungszeichen, einem Doppelpunkt und dem Wert. Die Einträge trennt ein Komma.",
+        "Texte stehen in doppelten Anführungszeichen. Zahlen und die Wahrheitswerte true und false stehen ohne Anführungszeichen."
+      ],
+      "erklaerung": "Ein **Objekt** ist eine Menge von Schlüssel-Wert-Paaren. Die Schlüssel sind immer Texte in doppelten Anführungszeichen. Werte sind Text, Zahl, true/false, null, Liste oder wieder ein Objekt.\n\n**Prüfungsfalle:** Einfache Anführungszeichen ('name') sind kein gültiges JSON.",
+      "tags": [
+        "objekt",
+        "grundlagen"
+      ]
+    },
+    {
+      "id": "JSON-002",
+      "titel": "Artikel mit Preis und Bestand",
+      "stufe": 1,
+      "topicId": "15",
+      "aufgabe": "*Schreiben* Sie einen Artikel als JSON-Objekt: Artikelnummer „A-100“, Bezeichnung „Schraube M6“, Preis 0,12 €, Bestand 2500 Stück, nicht lieferbar.\n\nSchlüssel: `artikelnr`, `bezeichnung`, `preis`, `bestand`, `lieferbar`.",
+      "loesung": "{\n  \"artikelnr\": \"A-100\",\n  \"bezeichnung\": \"Schraube M6\",\n  \"preis\": 0.12,\n  \"bestand\": 2500,\n  \"lieferbar\": false\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "artikelnr",
+          "wert": "A-100"
+        },
+        {
+          "pfad": "bezeichnung",
+          "wert": "Schraube M6"
+        },
+        {
+          "pfad": "preis",
+          "wert": 0.12,
+          "hinweis": "Der Preis ist eine Zahl mit Dezimalpunkt (0.12), kein Text und kein Komma."
+        },
+        {
+          "pfad": "bestand",
+          "wert": 2500
+        },
+        {
+          "pfad": "lieferbar",
+          "wert": false
+        }
+      ],
+      "hinweise": [
+        "Dezimalzahlen schreibt man in JSON mit **Punkt**: 0.12, nicht 0,12.",
+        "Die Artikelnummer enthält einen Bindestrich – sie ist ein Text und steht in Anführungszeichen."
+      ],
+      "erklaerung": "JSON kennt nur **eine** Zahlenart – ohne Währung, ohne Tausenderpunkt, mit Dezimalpunkt. „0,12“ wäre ein Syntaxfehler, „0.12“ in Anführungszeichen ein Text.\n\n**Prüfungsfalle:** Kennungen mit Buchstaben oder Bindestrichen sind immer Texte.",
+      "tags": [
+        "zahl",
+        "text",
+        "grundlagen"
+      ]
+    },
+    {
+      "id": "JSON-003",
+      "titel": "Messreihe als Liste",
+      "stufe": 1,
+      "topicId": "15",
+      "aufgabe": "Ein Sensor im Holzlager liefert nacheinander vier Temperaturwerte: 21,5 °C, 22,0 °C, 22,4 °C und 21,9 °C. *Schreiben* Sie die vier Werte als JSON-Liste – ohne Schlüssel, in dieser Reihenfolge.",
+      "loesung": "[21.5, 22.0, 22.4, 21.9]",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "array"
+        },
+        {
+          "pfad": "",
+          "laenge": 4
+        },
+        {
+          "pfad": "[0]",
+          "wert": 21.5
+        },
+        {
+          "pfad": "[1]",
+          "wert": 22
+        },
+        {
+          "pfad": "[2]",
+          "wert": 22.4
+        },
+        {
+          "pfad": "[3]",
+          "wert": 21.9
+        }
+      ],
+      "hinweise": [
+        "Eine Liste (Array) beginnt mit [ und endet mit ]. Die Elemente stehen durch Kommas getrennt darin.",
+        "Die Reihenfolge der Elemente bleibt erhalten."
+      ],
+      "erklaerung": "Eine **Liste** (Array) ist eine geordnete Folge von Werten. Das Dokument darf mit einer Liste beginnen – es muss kein Objekt sein.\n\nIm Gegensatz zum Objekt hat die Liste keine Schlüssel; man spricht die Elemente über die Position an (0, 1, 2 …).",
+      "tags": [
+        "liste",
+        "grundlagen"
+      ]
+    },
+    {
+      "id": "JSON-004",
+      "titel": "Mitarbeiter mit Adresse",
+      "stufe": 2,
+      "topicId": "15",
+      "aufgabe": "*Schreiben* Sie einen Mitarbeiter als JSON-Objekt mit einem **verschachtelten** Objekt für die Adresse.\n\n- `personalnr`: 1042\n- `name`: „Lena Hoff“\n- `abteilung`: „IT“\n- `adresse` (Objekt) mit `strasse`: „Marktstraße 5“, `plz`: „30159“, `ort`: „Hannover“\n\nDie Postleitzahl ist keine Rechengröße und wird als Text gespeichert.",
+      "loesung": "{\n  \"personalnr\": 1042,\n  \"name\": \"Lena Hoff\",\n  \"abteilung\": \"IT\",\n  \"adresse\": {\n    \"strasse\": \"Marktstraße 5\",\n    \"plz\": \"30159\",\n    \"ort\": \"Hannover\"\n  }\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "personalnr",
+          "wert": 1042
+        },
+        {
+          "pfad": "name",
+          "wert": "Lena Hoff"
+        },
+        {
+          "pfad": "abteilung",
+          "wert": "IT"
+        },
+        {
+          "pfad": "adresse",
+          "typ": "object",
+          "hinweis": "Die Adresse ist ein eigenes Objekt: \"adresse\": { … }."
+        },
+        {
+          "pfad": "adresse.strasse",
+          "wert": "Marktstraße 5"
+        },
+        {
+          "pfad": "adresse.plz",
+          "wert": "30159",
+          "hinweis": "Die PLZ ist ein Text (\"30159\"): Mit ihr wird nicht gerechnet, und eine führende Null ginge als Zahl verloren."
+        },
+        {
+          "pfad": "adresse.ort",
+          "wert": "Hannover"
+        }
+      ],
+      "hinweise": [
+        "Der Wert eines Schlüssels darf selbst ein Objekt sein: `\"adresse\": { … }`.",
+        "Prüfe die Klammern: Jedes { braucht ein passendes }."
+      ],
+      "erklaerung": "Objekte lassen sich **verschachteln**. Auf den Straßennamen greift man mit dem Pfad `adresse.strasse` zu.\n\n**Prüfungsfalle:** Postleitzahlen, Telefonnummern und Kontonummern sind Texte – „01067“ als Zahl wäre 1067.",
+      "tags": [
+        "objekt",
+        "verschachtelt"
+      ]
+    },
+    {
+      "id": "JSON-005",
+      "titel": "Bestellung mit Positionen",
+      "stufe": 2,
+      "topicId": "15",
+      "aufgabe": "*Schreiben* Sie die Bestellung 101 der „Meier GmbH“ als JSON-Dokument. Sie enthält zwei Positionen, die Versandkosten entfallen.\n\n| Artikel | Menge | Einzelpreis (€) |\n|---|---|---|\n| Schraube M6 | 200 | 0,12 |\n| Mutter M6 | 200 | 0,08 |\n\nSchlüssel der Bestellung: `bestellnr`, `kunde`, `positionen` (Liste von Objekten mit `artikel`, `menge`, `einzelpreis`) und `versandkostenfrei`.",
+      "loesung": "{\n  \"bestellnr\": 101,\n  \"kunde\": \"Meier GmbH\",\n  \"positionen\": [\n    {\n      \"artikel\": \"Schraube M6\",\n      \"menge\": 200,\n      \"einzelpreis\": 0.12\n    },\n    {\n      \"artikel\": \"Mutter M6\",\n      \"menge\": 200,\n      \"einzelpreis\": 0.08\n    }\n  ],\n  \"versandkostenfrei\": true\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "bestellnr",
+          "wert": 101
+        },
+        {
+          "pfad": "kunde",
+          "wert": "Meier GmbH"
+        },
+        {
+          "pfad": "positionen",
+          "typ": "array"
+        },
+        {
+          "pfad": "positionen",
+          "laenge": 2
+        },
+        {
+          "pfad": "positionen[0].artikel",
+          "wert": "Schraube M6"
+        },
+        {
+          "pfad": "positionen[0].menge",
+          "wert": 200
+        },
+        {
+          "pfad": "positionen[0].einzelpreis",
+          "wert": 0.12
+        },
+        {
+          "pfad": "positionen[1].artikel",
+          "wert": "Mutter M6"
+        },
+        {
+          "pfad": "positionen[1].menge",
+          "wert": 200
+        },
+        {
+          "pfad": "positionen[1].einzelpreis",
+          "wert": 0.08
+        },
+        {
+          "pfad": "versandkostenfrei",
+          "wert": true
+        }
+      ],
+      "hinweise": [
+        "Mehrere gleichartige Einträge gehören in eine **Liste**: `\"positionen\": [ … ]`. Jedes Element der Liste ist ein Objekt.",
+        "Zwischen zwei Positionen steht ein Komma, nach der letzten nicht."
+      ],
+      "erklaerung": "Das typische Muster: ein Objekt für den „Kopf“ (Bestellnummer, Kunde) und eine **Liste von Objekten** für die Positionen. Die Position 1 erreicht man mit `positionen[0]`.\n\nEine relationale Tabelle wird so zu einer Liste von Objekten – jede Zeile ein Objekt, jede Spalte ein Schlüssel.",
+      "tags": [
+        "liste",
+        "verschachtelt",
+        "tabelle"
+      ]
+    },
+    {
+      "id": "JSON-006",
+      "titel": "Fehlender Messwert",
+      "stufe": 2,
+      "topicId": "15",
+      "aufgabe": "Der Sensor „S-07“ sollte am 14.03.2026 um 08:30:00 Uhr die Temperatur melden, die Messung ist aber ausgefallen. *Schreiben* Sie den Datensatz als JSON-Objekt.\n\n- `sensor`: „S-07“\n- `zeitpunkt`: Datum und Uhrzeit als Text im ISO-Format `2026-03-14T08:30:00`\n- `temperatur`: kein Wert vorhanden\n- `einheit`: „°C“",
+      "loesung": "{\n  \"sensor\": \"S-07\",\n  \"zeitpunkt\": \"2026-03-14T08:30:00\",\n  \"temperatur\": null,\n  \"einheit\": \"°C\"\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "sensor",
+          "wert": "S-07"
+        },
+        {
+          "pfad": "zeitpunkt",
+          "wert": "2026-03-14T08:30:00"
+        },
+        {
+          "pfad": "temperatur",
+          "wert": null,
+          "hinweis": "Ein fehlender Wert wird mit null angegeben – ohne Anführungszeichen, nicht 0 und nicht \"null\"."
+        },
+        {
+          "pfad": "einheit",
+          "wert": "°C"
+        }
+      ],
+      "hinweise": [
+        "Für „kein Wert“ gibt es in JSON das Schlüsselwort `null`.",
+        "Datum und Uhrzeit kennt JSON nicht als eigenen Typ – sie stehen als Text."
+      ],
+      "erklaerung": "**null** bedeutet „kein Wert“ und ist etwas anderes als 0 (gemessen: null Grad) oder ein leerer Text. In SQL entspricht es NULL.\n\nDatum und Uhrzeit sind in JSON Texte; das ISO-Format `2026-03-14T08:30:00` ist sortierbar und eindeutig.",
+      "tags": [
+        "null",
+        "datum"
+      ]
+    },
+    {
+      "id": "JSON-007",
+      "titel": "Tabelle in JSON überführen",
+      "stufe": 2,
+      "topicId": "15",
+      "aufgabe": "*Überführen* Sie die beiden Datensätze der Tabelle `sensor` in ein JSON-Dokument: eine Liste mit einem Objekt je Zeile, die Spaltennamen sind die Schlüssel. Die Spalte `aktiv` ist ein Wahrheitswert.\n\n| id | standort | aktiv |\n|---|---|---|\n| 1 | Lager A | true |\n| 2 | Lager B | false |",
+      "loesung": "[\n  {\n    \"id\": 1,\n    \"standort\": \"Lager A\",\n    \"aktiv\": true\n  },\n  {\n    \"id\": 2,\n    \"standort\": \"Lager B\",\n    \"aktiv\": false\n  }\n]",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "array"
+        },
+        {
+          "pfad": "",
+          "laenge": 2
+        },
+        {
+          "pfad": "[0].id",
+          "wert": 1
+        },
+        {
+          "pfad": "[0].standort",
+          "wert": "Lager A"
+        },
+        {
+          "pfad": "[0].aktiv",
+          "wert": true
+        },
+        {
+          "pfad": "[1].id",
+          "wert": 2
+        },
+        {
+          "pfad": "[1].standort",
+          "wert": "Lager B"
+        },
+        {
+          "pfad": "[1].aktiv",
+          "wert": false
+        }
+      ],
+      "hinweise": [
+        "Eine JSON-Datei beginnt mit { (Objekt) oder [ (Liste). Einträge trennt ein Komma, nach dem letzten steht keins.",
+        "Eine Zeile der Tabelle wird ein Objekt, mehrere Zeilen werden eine Liste solcher Objekte."
+      ],
+      "erklaerung": "Zeile → Objekt, Spalte → Schlüssel, Tabelle → Liste. So übertragen Schnittstellen Tabelleninhalte.\n\nDie Reihenfolge der Schlüssel innerhalb eines Objekts spielt keine Rolle, die Reihenfolge der Listenelemente schon.",
+      "tags": [
+        "tabelle",
+        "liste"
+      ]
+    },
+    {
+      "id": "JSON-008",
+      "titel": "Antwort einer Schnittstelle",
+      "stufe": 2,
+      "topicId": "15",
+      "aufgabe": "Eine REST-Schnittstelle antwortet auf die Anfrage „alle Artikel der Kategorie Befestigung“ erfolgreich. *Schreiben* Sie die Antwort als JSON-Objekt:\n\n- `status`: 200\n- `meldung`: „OK“\n- `daten`: Liste mit zwei Objekten (`id` und `name`): 7 „Schraube“ und 8 „Mutter“\n- `fehler`: kein Fehler vorhanden",
+      "loesung": "{\n  \"status\": 200,\n  \"meldung\": \"OK\",\n  \"daten\": [\n    {\n      \"id\": 7,\n      \"name\": \"Schraube\"\n    },\n    {\n      \"id\": 8,\n      \"name\": \"Mutter\"\n    }\n  ],\n  \"fehler\": null\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "status",
+          "wert": 200
+        },
+        {
+          "pfad": "meldung",
+          "wert": "OK"
+        },
+        {
+          "pfad": "daten",
+          "laenge": 2
+        },
+        {
+          "pfad": "daten[0].id",
+          "wert": 7
+        },
+        {
+          "pfad": "daten[0].name",
+          "wert": "Schraube"
+        },
+        {
+          "pfad": "daten[1].id",
+          "wert": 8
+        },
+        {
+          "pfad": "daten[1].name",
+          "wert": "Mutter"
+        },
+        {
+          "pfad": "fehler",
+          "wert": null
+        }
+      ],
+      "hinweise": [
+        "Der Statuscode ist eine Zahl, die Meldung ein Text.",
+        "Kein Fehler: der Schlüssel bleibt, der Wert ist `null`."
+      ],
+      "erklaerung": "Antworten von Web-Schnittstellen haben oft einen festen Rahmen (Status, Meldung, Fehler) um die eigentlichen Daten. Ob ein Schlüssel mit `null` vorhanden ist oder ganz fehlt, ist eine Vereinbarung der Schnittstelle.\n\n**Prüfungsfalle:** Statuscodes (200, 404 …) sind Zahlen, keine Texte.",
+      "tags": [
+        "rest",
+        "schnittstelle",
+        "null"
+      ]
+    },
+    {
+      "id": "JSON-009",
+      "titel": "Mehrere Telefonnummern",
+      "stufe": 2,
+      "topicId": "15",
+      "aufgabe": "*Schreiben* Sie einen Kunden als JSON-Objekt. Er hat zwei Telefonnummern, die als Texte gespeichert werden.\n\n- `name`: „Jonas Weber“\n- `telefon`: „0511 123456“ und „0170 9876543“\n- `kunde_seit`: 2019\n- `newsletter`: nein",
+      "loesung": "{\n  \"name\": \"Jonas Weber\",\n  \"telefon\": [\n    \"0511 123456\",\n    \"0170 9876543\"\n  ],\n  \"kunde_seit\": 2019,\n  \"newsletter\": false\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "name",
+          "wert": "Jonas Weber"
+        },
+        {
+          "pfad": "telefon",
+          "typ": "array",
+          "hinweis": "Mehrere Nummern gehören in eine Liste: \"telefon\": [ …, … ]."
+        },
+        {
+          "pfad": "telefon",
+          "laenge": 2
+        },
+        {
+          "pfad": "telefon[0]",
+          "wert": "0511 123456",
+          "hinweis": "Telefonnummern sind Texte (führende 0, Leerzeichen) – in Anführungszeichen."
+        },
+        {
+          "pfad": "telefon[1]",
+          "wert": "0170 9876543"
+        },
+        {
+          "pfad": "kunde_seit",
+          "wert": 2019
+        },
+        {
+          "pfad": "newsletter",
+          "wert": false
+        }
+      ],
+      "hinweise": [
+        "Eine Liste darf auch nur Texte enthalten: `[\"a\", \"b\"]`.",
+        "„Nein“ ist als Wahrheitswert `false`."
+      ],
+      "erklaerung": "Wenn ein Merkmal mehrfach vorkommen kann, nimmt man eine **Liste**. In einer relationalen Datenbank wäre dafür eine eigene Tabelle nötig – in JSON genügt ein Array im selben Objekt.",
+      "tags": [
+        "liste",
+        "text"
+      ]
+    },
+    {
+      "id": "JSON-010",
+      "titel": "Konfiguration einer Anwendung",
+      "stufe": 3,
+      "topicId": "15",
+      "aufgabe": "*Schreiben* Sie die Konfiguration der Lager-App als JSON-Dokument.\n\n- `server`: Objekt mit `host` „db01“, `port` 5432 und `ssl` an\n- `wiederholungen`: 3\n- `timeouts`: Liste der Sekunden 5, 10 und 30\n- `funktionen`: Objekt mit `export` an und `import` aus",
+      "loesung": "{\n  \"server\": {\n    \"host\": \"db01\",\n    \"port\": 5432,\n    \"ssl\": true\n  },\n  \"wiederholungen\": 3,\n  \"timeouts\": [\n    5,\n    10,\n    30\n  ],\n  \"funktionen\": {\n    \"export\": true,\n    \"import\": false\n  }\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "server",
+          "typ": "object"
+        },
+        {
+          "pfad": "server.host",
+          "wert": "db01"
+        },
+        {
+          "pfad": "server.port",
+          "wert": 5432
+        },
+        {
+          "pfad": "server.ssl",
+          "wert": true
+        },
+        {
+          "pfad": "wiederholungen",
+          "wert": 3
+        },
+        {
+          "pfad": "timeouts",
+          "typ": "array"
+        },
+        {
+          "pfad": "timeouts",
+          "laenge": 3
+        },
+        {
+          "pfad": "timeouts[0]",
+          "wert": 5
+        },
+        {
+          "pfad": "timeouts[1]",
+          "wert": 10
+        },
+        {
+          "pfad": "timeouts[2]",
+          "wert": 30
+        },
+        {
+          "pfad": "funktionen.export",
+          "wert": true
+        },
+        {
+          "pfad": "funktionen.import",
+          "wert": false
+        }
+      ],
+      "hinweise": [
+        "Es sind zwei verschachtelte Objekte und eine Liste. Schreib zuerst das Gerüst mit allen Schlüsseln, dann die Werte.",
+        "Achte auf die Kommas zwischen den vier Schlüsseln der obersten Ebene."
+      ],
+      "erklaerung": "Konfigurationsdateien sind das häufigste Anwendungsgebiet von JSON außerhalb von Schnittstellen. Typische Fehler sind ein vergessenes Komma zwischen zwei Blöcken und ein Komma nach dem letzten Eintrag.",
+      "tags": [
+        "objekt",
+        "liste",
+        "verschachtelt"
+      ]
+    },
+    {
+      "id": "JSON-011",
+      "titel": "Fehler finden und korrigieren",
+      "stufe": 3,
+      "topicId": "15",
+      "aufgabe": "Das folgende JSON-Dokument beschreibt eine Bestellung, enthält aber **fünf Fehler**. *Korrigieren* Sie es im Eingabefeld, sodass es gültiges JSON ist und die Bestellung 101 der „Meier GmbH“ über 1299,50 € mit einer Position (Schraube M6, 200 Stück) richtig wiedergibt. Die Bestellung ist noch nicht bezahlt.",
+      "vorgabe": "{\n  'id': 101,\n  \"kunde\": \"Meier GmbH\",\n  \"betrag\": 1299,50,\n  \"positionen\": [\n    {\"artikel\": \"Schraube M6\", \"menge\": 200,},\n  ]\n  \"bezahlt\": \"false\"\n}",
+      "loesung": "{\n  \"id\": 101,\n  \"kunde\": \"Meier GmbH\",\n  \"betrag\": 1299.5,\n  \"positionen\": [\n    {\n      \"artikel\": \"Schraube M6\",\n      \"menge\": 200\n    }\n  ],\n  \"bezahlt\": false\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "id",
+          "wert": 101
+        },
+        {
+          "pfad": "kunde",
+          "wert": "Meier GmbH"
+        },
+        {
+          "pfad": "betrag",
+          "wert": 1299.5
+        },
+        {
+          "pfad": "positionen",
+          "laenge": 1
+        },
+        {
+          "pfad": "positionen[0].artikel",
+          "wert": "Schraube M6"
+        },
+        {
+          "pfad": "positionen[0].menge",
+          "wert": 200
+        },
+        {
+          "pfad": "bezahlt",
+          "wert": false,
+          "hinweis": "„bezahlt“ ist ein Wahrheitswert: false ohne Anführungszeichen, nicht der Text \"false\"."
+        }
+      ],
+      "hinweise": [
+        "Die App meldet den ersten Syntaxfehler mit Zeile und Spalte. Behebe ihn, dann kommt der nächste.",
+        "Die fünf Fehler: Anführungszeichen, Dezimalzahl, Komma am Ende, fehlendes Komma, falscher Typ."
+      ],
+      "erklaerung": "1. `'id'` → `\"id\"` (nur doppelte Anführungszeichen)\n2. `1299,50` → `1299.5` (Dezimalpunkt)\n3. `\"menge\": 200,}` → `\"menge\": 200}` (kein Komma nach dem letzten Eintrag)\n4. nach `]` fehlte das Komma zum nächsten Schlüssel\n5. `\"false\"` → `false` (Wahrheitswert statt Text)",
+      "tags": [
+        "fehlersuche",
+        "syntax"
+      ]
+    },
+    {
+      "id": "JSON-012",
+      "titel": "Lagerbewegung mit Lager und Positionen",
+      "stufe": 3,
+      "topicId": "15",
+      "aufgabe": "*Schreiben* Sie die folgende Lagerbewegung als JSON-Dokument. Wählen Sie selbst sinnvolle Schlüssel nach den Vorgaben:\n\n- `bewegungsnr`: 5001, `datum`: „2026-05-12“ (Text), `art`: „Zugang“\n- `lager` (Objekt): `id` „L-02“ und `name` „Hauptlager“\n- `positionen` (Liste von Objekten mit `artikel` und `menge`): „A-100“ mit 500 Stück und „A-205“ mit 120 Stück\n- `bemerkung`: keine",
+      "loesung": "{\n  \"bewegungsnr\": 5001,\n  \"datum\": \"2026-05-12\",\n  \"art\": \"Zugang\",\n  \"lager\": {\n    \"id\": \"L-02\",\n    \"name\": \"Hauptlager\"\n  },\n  \"positionen\": [\n    {\n      \"artikel\": \"A-100\",\n      \"menge\": 500\n    },\n    {\n      \"artikel\": \"A-205\",\n      \"menge\": 120\n    }\n  ],\n  \"bemerkung\": null\n}",
+      "pruefungen": [
+        {
+          "pfad": "",
+          "typ": "object"
+        },
+        {
+          "pfad": "bewegungsnr",
+          "wert": 5001
+        },
+        {
+          "pfad": "datum",
+          "wert": "2026-05-12"
+        },
+        {
+          "pfad": "art",
+          "wert": "Zugang"
+        },
+        {
+          "pfad": "lager.id",
+          "wert": "L-02"
+        },
+        {
+          "pfad": "lager.name",
+          "wert": "Hauptlager"
+        },
+        {
+          "pfad": "positionen",
+          "laenge": 2
+        },
+        {
+          "pfad": "positionen[0].artikel",
+          "wert": "A-100"
+        },
+        {
+          "pfad": "positionen[0].menge",
+          "wert": 500
+        },
+        {
+          "pfad": "positionen[1].artikel",
+          "wert": "A-205"
+        },
+        {
+          "pfad": "positionen[1].menge",
+          "wert": 120
+        },
+        {
+          "pfad": "bemerkung",
+          "wert": null
+        }
+      ],
+      "hinweise": [
+        "Drei Ebenen: Kopf, `lager` als Objekt, `positionen` als Liste von Objekten.",
+        "Keine Bemerkung heißt: Schlüssel vorhanden, Wert `null`."
+      ],
+      "erklaerung": "Hier kommt alles zusammen: Text, Zahl, verschachteltes Objekt, Liste von Objekten und `null`. In der Prüfung zählt vor allem die korrekte Syntax (Klammern, Kommas, Anführungszeichen) und der passende Datentyp je Wert.",
+      "tags": [
+        "objekt",
+        "liste",
+        "null",
+        "verschachtelt"
+      ]
+    }
+  ]
+}

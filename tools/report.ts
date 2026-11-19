@@ -40,6 +40,10 @@ if (byVorlage.size) console.log(`  je Vorlage: ${[...byVorlage].map(([v, n]) => 
 const rechenByTopic = new Map<string, number>();
 for (const u of rechnen) rechenByTopic.set(u.topicId ?? '–', (rechenByTopic.get(u.topicId ?? '–') ?? 0) + 1);
 if (rechenByTopic.size) console.log(`  je Deep Dive: ${[...rechenByTopic].map(([t, n]) => `${t}: ${n}`).join(', ')}`);
+const jsonUebungen = c.jsonUebungen ?? [];
+console.log(
+  `\nJSON-Übungen: ${jsonUebungen.length} (${[1, 2, 3].map((s) => `Stufe ${s}: ${jsonUebungen.filter((u) => u.stufe === s).length}`).join(', ')})`,
+);
 console.log(`\nMaterialien: ${c.materials.map((m) => m.title).join(', ')}`);
 console.log(`\nHinweise (${c.issues.length}):`);
 for (const i of c.issues) console.log(`  - ${i.file}: ${i.message}`);

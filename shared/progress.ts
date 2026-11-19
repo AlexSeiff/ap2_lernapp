@@ -132,6 +132,9 @@ export type SqlState = {
   zuletztRichtig?: boolean;
 };
 
+/** Stand einer JSON-Übung (seit Version 10). Wiederholung wie bei den Diagramm-Übungen; der Text im Eingabefeld wird nicht gespeichert. */
+export type JsonState = DiagrammState;
+
 /** Stand einer Rechenübung (seit Version 6). Wiederholung wie bei den SQL-Übungen. */
 export type RechenState = {
   /** Gezählte „Prüfen“-Klicks. */
@@ -257,6 +260,8 @@ export type Progress = {
   diagrammDays: Record<string, number>;
   /** Textmarken in Aufgabentexten und Ausgangssituationen je Bereichs-Id (seit Version 10, ältere Dateien: leer). */
   hervorhebungen: Record<string, Hervorhebung>;
+  /** Stand der JSON-Übungen je Übungs-ID (seit Version 10, ältere Dateien: leer). */
+  json: Record<string, JsonState>;
 };
 
 /** Aktuelle Formatversion von data/fortschritt.json. Bei jeder Formatänderung erhöhen und in MIGRATIONS nachziehen. */
@@ -280,6 +285,7 @@ export const emptyProgress = (): Progress => ({
   diagramme: {},
   diagrammDays: {},
   hervorhebungen: {},
+  json: {},
 });
 
 type Raw = Record<string, unknown>;
@@ -546,7 +552,7 @@ const MIGRATIONS: Record<number, (raw: Raw) => Raw> = {
   7: (raw) => ({ ...raw, version: 8 }),
   // 8 → 9: Übungsklausuren im Format der Altklausuren – Aufgaben mit neuem Code ziehen um (shared/aufgabenUmzug.ts).
   8: (raw) => ({ ...zieheAufgabenUm(raw, AUFGABEN_UMZUG_V9), version: 9 }),
-  // 9 → 10: Textmarken (hervorhebungen); starten leer, aufgefüllt wird unten in migrateProgress.
+  // 9 → 10: Textmarken (hervorhebungen) und JSON-Übungen (json); starten leer, aufgefüllt wird unten in migrateProgress.
   9: (raw) => ({ ...raw, version: 10 }),
 };
 
@@ -584,6 +590,7 @@ export function migrateProgress(raw: unknown): Progress {
     diagramme: filterRecord(data.diagramme, migrateDiagrammState),
     diagrammDays: filterRecord(data.diagrammDays, dayCount),
     hervorhebungen: filterRecord(data.hervorhebungen, migrateHervorhebung),
+    json: filterRecord(data.json, migrateDiagrammState),
   };
 }
 
@@ -718,6 +725,7 @@ export const ProgressSchema = z.looseObject({
   diagramme: z.record(z.string(), DiagrammStateSchema).default({}),
   diagrammDays: z.record(z.string(), z.number()).default({}),
   hervorhebungen: z.record(z.string(), HervorhebungSchema).default({}),
+  json: z.record(z.string(), DiagrammStateSchema).default({}),
 });
 
 export type ProgressData = z.infer<typeof ProgressSchema>;

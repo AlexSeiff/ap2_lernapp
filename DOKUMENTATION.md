@@ -362,6 +362,17 @@ add it to the table above, add a sheet example to `tests/rechenVorlagen.test.ts`
 pick it up automatically. Add at least one formula with the template id in `vorlagen` to `src/rechnen/formeln.ts` and use
 `F.<id>.latex` as the step `formel` where the general formula appears as is (`tests/formeln.test.ts` checks both).
 
+### 4.4c JSON-Übungen `AP2_Json_Uebungen.json`
+
+Write JSON as text. `{ meta, uebungen: [{ id, titel, stufe 1–3, topicId?, aufgabe (Markdown, "Sie"-form with an operator in italics), vorgabe?
+(prefilled text, e.g. faulty JSON to correct), loesung (JSON as text), pruefungen: [{ pfad, typ? | wert? | laenge? | schluessel? | fehlt?,
+hinweis? }], hinweise[], erklaerung?, tags[] }] }`. `shared/jsonUebungen.ts`: `pruefeJsonSyntax` is an own strict RFC 8259 parser (line/column and German hints
+for single quotes, trailing comma, missing comma, unquoted key, decimal comma, leading zero, `True`/`undefined` …); `pruefeJsonAntwort` then checks the rules
+against the parsed value – paths like `positionen[0].menge`, type and value must match exactly (`"false"` is not `false`), numbers with a tiny tolerance –
+so key order and indentation are free. The importer skips (and reports) an exercise whose `loesung` is not valid JSON or fails its own rules, or whose
+`vorgabe` already satisfies them. Pages `/json` and `/json/:id` (`src/pages/JsonUebungen.tsx`, `JsonUebung.tsx`): textarea with Tab → two spaces, live status,
+Prüfen / Hinweis / Lösung zeigen; progress `json` (§ 6) with the repetition of the other exercises (`src/lib/jsonUebungen.ts`). Not (yet) part of "Heute lernen".
+
 ### 4.4b Diagramm-Übungen `AP2_Diagramm_Uebungen.json` (plan phase 7)
 
 `{ meta, uebungen: [...] }`, parsed by `parseDiagrammUebungen` (`shared/diagrammUebungen.ts`, zod + `pruefeDiagrammUebung`; a broken
@@ -996,6 +1007,9 @@ type Progress = {
   diagramme: Record<string, DiagrammState>; // Diagramm-Übungen per exercise id (v8): attempts, solvedAt, lastCheckedAt, hintsUsed,
                                            // solutionShown, stage, due, zuletztRichtig (an old belegung is dropped on load)
   diagrammDays: Record<string, number>;    // checked Diagramm-Übungen per day, for the streak (v8)
+  hervorhebungen: Record<string, Hervorhebung>; // Textmarker per area id (task id or attachment id) (v10): { marken: { von, bis, text, farbe }[], am }
+                                           // – offsets into the rendered text of the area, `text` checks that the text is unchanged; merge: newer `am` wins
+  json: Record<string, JsonState>;         // JSON-Übungen per exercise id (v10): same fields as DiagrammState
 };
 
 type Markierung = { an: boolean; am: string }; // am = ISO timestamp of the last change; unmarking keeps the entry with an: false

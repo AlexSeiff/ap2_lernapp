@@ -220,10 +220,10 @@ describe('Fortschritt (Version 8)', () => {
     expect(PROGRESS_VERSION).toBeGreaterThanOrEqual(9);
     const v7 = fixture('fortschritt-v7-2026-10-09.json');
     expect(migrateProgress(v7)).toEqual(
-      ohneAntworten({ ...umgezogen(v7), version: PROGRESS_VERSION, diagramme: {}, diagrammDays: {}, hervorhebungen: {} }),
+      ohneAntworten({ ...umgezogen(v7), version: PROGRESS_VERSION, diagramme: {}, diagrammDays: {}, hervorhebungen: {}, json: {} }),
     );
     const v8 = fixture('fortschritt-v8-2026-10-09.json');
-    expect(migrateProgress(v8)).toEqual(ohneAntworten({ ...umgezogen(v8), version: PROGRESS_VERSION, hervorhebungen: {} }));
+    expect(migrateProgress(v8)).toEqual(ohneAntworten({ ...umgezogen(v8), version: PROGRESS_VERSION, hervorhebungen: {}, json: {} }));
     expect(ProgressSchema.safeParse(v8).success).toBe(true);
     expect(checkProgressPut(migrateProgress(v8), v8)).toMatchObject({ ok: true, progress: { revision: 46 } });
   });
