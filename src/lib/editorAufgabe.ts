@@ -1,6 +1,7 @@
 // Modellierungsaufgaben im Editor statt im Textfeld: ERM, EPK, BPMN, Use-Case und Aktivitätsdiagramm im Diagramm-Editor, Normalisierung und
 // Relationenmodell/Star-Schema im Tabellen-Editor, ausdrücklich verlangte Tabellen (Häufigkeitstabelle, Rechenweg „tabellarisch“)
-// als Wertetabelle, ein zu skizzierender Boxplot als Kennwert-Eingabe mit Zeichnung, ein Struktogramm im Baukasten. Erkannt wird am Aufgabentext (Operator + Diagrammtyp bzw. Tabelle + Lösungstabelle), die Blätter bleiben,
+// als Wertetabelle, ein zu skizzierender Boxplot als Kennwert-Eingabe mit Zeichnung, ein Struktogramm im Baukasten, ein Koordinatensystem
+// mit Punkten und Geraden. Erkannt wird am Aufgabentext (Operator + Diagrammtyp bzw. Tabelle + Lösungstabelle), die Blätter bleiben,
 // wie sie sind. Die Antwort bleibt ein String (JSON), so ändern sich Fortschritt, Klausur und Sicherungen nicht. Rein, ohne React.
 
 import { z } from 'zod';
@@ -19,6 +20,13 @@ import { istTabellenLeer, leereTabellenAntwort, tabellenAlsText, type TabellenAn
 import { istWerteLeer, leereWerteAntwort, passeAn, werteAlsText, werteVorlage, type WerteAntwort, type WerteVorlage } from './werteTabelle';
 import { boxplotAlsText, istBoxplotLeer, KENNWERTE, leereBoxplotAntwort, type BoxplotAntwort } from './boxplotAntwort';
 import {
+  istKoordinatenLeer,
+  koordinatenAlsText,
+  leereKoordinatenAntwort,
+  FORMEN as PUNKT_FORMEN,
+  type KoordinatenAntwort,
+} from './koordinatenAntwort';
+import {
   istStruktogrammLeer,
   leereStruktogrammAntwort,
   struktogrammAlsText,
@@ -27,12 +35,12 @@ import {
 } from './struktogramm';
 
 /** Antwortformate mit eigenem Modell (weder Diagramm-Editor noch Tabellenschema). */
-const EIGENE_ARTEN = ['werte', 'boxplot', 'struktogramm'] as const;
+const EIGENE_ARTEN = ['werte', 'boxplot', 'struktogramm', 'koordinaten'] as const;
 type EigeneArt = (typeof EIGENE_ARTEN)[number];
 const istEigeneArt = (art: EditorArt): art is EigeneArt => (EIGENE_ARTEN as readonly string[]).includes(art);
 
 export type EditorArt = DiagrammNotation | TabellenArt | EigeneArt;
-export type EditorAntwort = DiagrammAntwort | TabellenAntwort | WerteAntwort | BoxplotAntwort | StruktogrammAntwort;
+export type EditorAntwort = DiagrammAntwort | TabellenAntwort | WerteAntwort | BoxplotAntwort | StruktogrammAntwort | KoordinatenAntwort;
 /** Was die Erkennung braucht: Aufgabentext, Typ und – für die Wertetabelle – die Musterlösung. */
 type AufgabeFuerEditor = Pick<Task, 'markdown' | 'type' | 'sqlUebung'> & Partial<Pick<Task, 'solution'>>;
 type AufgabeFuerVorlage = Pick<Task, 'markdown'> & Partial<Pick<Task, 'solution'>>;
@@ -48,6 +56,7 @@ export const EDITOR_NAMEN: Record<EditorArt, string> = {
   werte: 'Tabellen',
   boxplot: 'Boxplot',
   struktogramm: 'Struktogramm',
+  koordinaten: 'Koordinatensystem',
 };
 
 export const istDiagrammArt = (art: EditorArt): art is DiagrammNotation =>
@@ -80,6 +89,8 @@ export function editorFuer(task: AufgabeFuerEditor): EditorArt | undefined {
     if (/Aktivitätsdiagramm/i.test(t)) return 'aktivitaet';
     if (/Boxplot/i.test(t)) return 'boxplot';
     if (/Struktogramm|Nassi-Shneiderman/i.test(t)) return 'struktogramm';
+    // Datenpunkte/Geraden ins Koordinatensystem: eine zusätzlich verlangte Tabelle (z. B. richtig/falsch eintragen) geht vor.
+    if (/Koordinatensystem/i.test(t) && !werteVorlage(task)) return 'koordinaten';
   }
   return werteVorlage(task) ? 'werte' : undefined;
 }
@@ -97,6 +108,7 @@ export function leereEditorAntwort(art: EditorArt, task: AufgabeFuerVorlage): Ed
   if (art === 'werte') return leereWerteAntwort(vorlageFuer(task));
   if (art === 'boxplot') return leereBoxplotAntwort();
   if (art === 'struktogramm') return leereStruktogrammAntwort();
+  if (art === 'koordinaten') return leereKoordinatenAntwort();
   if (istDiagrammArt(art)) return leereDiagrammAntwort(art);
   return leereTabellenAntwort(art, art === 'normalform' ? normalformSchritte(task.markdown) : 1);
 }
@@ -152,6 +164,12 @@ const StruktogrammSchema = z.object({
   bausteine: z.array(BausteinSchema),
   notiz: z.string().optional(),
 });
+const KoordinatenSchema = z.object({
+  editor: z.literal('koordinaten'),
+  punkte: z.array(z.object({ x: z.number(), y: z.number(), form: z.enum(PUNKT_FORMEN) })),
+  geraden: z.array(z.string()),
+  notiz: z.string().optional(),
+});
 const TabellenSchema = z.object({
   editor: z.enum(['relationen', 'normalform']),
   schritte: z.array(z.object({ titel: z.string(), text: z.string(), tabellen: z.array(TabelleSchema) })).min(1),
@@ -174,7 +192,9 @@ function parse(raw: string): EditorAntwort | undefined {
     const b = BoxplotSchema.safeParse(json);
     if (b.success) return b.data;
     const s = StruktogrammSchema.safeParse(json);
-    return s.success ? s.data : undefined;
+    if (s.success) return s.data;
+    const k = KoordinatenSchema.safeParse(json);
+    return k.success ? k.data : undefined;
   } catch {
     return undefined;
   }
@@ -190,7 +210,7 @@ export function leseEditorAntwort(art: EditorArt, task: AufgabeFuerVorlage, raw:
   const a = parse(raw);
   if (a && familie(art) === familie(a.editor)) {
     if (art === 'werte') return passeAn(vorlageFuer(task), a as WerteAntwort);
-    if (art === 'boxplot' || art === 'struktogramm') return a;
+    if (art === 'boxplot' || art === 'struktogramm' || art === 'koordinaten') return a;
     if (!istDiagrammArt(art) && a.editor !== art) return { ...(a as TabellenAntwort), editor: art };
     return istDiagrammArt(art) ? { ...(a as DiagrammAntwort), editor: art } : a;
   }
@@ -209,9 +229,11 @@ export function schreibeEditorAntwort(a: EditorAntwort, task?: AufgabeFuerVorlag
         ? istBoxplotLeer(a)
         : a.editor === 'struktogramm'
           ? istStruktogrammLeer(a)
-          : istDiagrammArt(a.editor)
-            ? istLeer(a as DiagrammAntwort)
-            : istTabellenLeer(a as TabellenAntwort);
+          : a.editor === 'koordinaten'
+            ? istKoordinatenLeer(a)
+            : istDiagrammArt(a.editor)
+              ? istLeer(a as DiagrammAntwort)
+              : istTabellenLeer(a as TabellenAntwort);
   return leer ? '' : JSON.stringify(a);
 }
 
@@ -219,6 +241,7 @@ export function editorAlsText(a: EditorAntwort): string {
   if (a.editor === 'werte') return werteAlsText(a);
   if (a.editor === 'boxplot') return boxplotAlsText(a);
   if (a.editor === 'struktogramm') return struktogrammAlsText(a);
+  if (a.editor === 'koordinaten') return koordinatenAlsText(a);
   return istDiagrammArt(a.editor) ? diagrammAlsText(a as DiagrammAntwort) : tabellenAlsText(a as TabellenAntwort);
 }
 

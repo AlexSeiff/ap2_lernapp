@@ -10,11 +10,13 @@ import { EDITOR_NAMEN, istDiagrammArt, leseEditorAntwort, schreibeEditorAntwort,
 import { abgleichOk, gleicheAb, musterFuerSchritt, musterTabellen, relationText, type TabellenAntwort } from '../lib/tabellenEditor';
 import { gleicheWerteAb, type WerteAntwort } from '../lib/werteTabelle';
 import type { BoxplotAntwort } from '../lib/boxplotAntwort';
+import { kontextAus, type KoordinatenAntwort } from '../lib/koordinatenAntwort';
 import type { StruktogrammAntwort } from '../lib/struktogramm';
 import { useStore } from '../lib/store';
 import { BoxplotAnsicht, BoxplotEditor, BoxplotPruefung } from './BoxplotEditor';
 import { DiagrammAnsicht, DiagrammEditor, Formhinweise } from './DiagrammEditor';
 import { Icon } from './Icon';
+import { KoordinatenAnsicht, KoordinatenEditor, KoordinatenPruefung } from './KoordinatenEditor';
 import { StruktogrammAnsicht, StruktogrammEditor, StruktogrammPruefung } from './StruktogrammEditor';
 import { TabellenAnsicht, TabellenEditor } from './TabellenEditor';
 import { WerteAnsicht, WerteEditor } from './WerteEditor';
@@ -25,6 +27,8 @@ const NACH_ABGABE = 'Nach der Abgabe vergleichst du deine Lösung mit der Muster
 const EINLEITUNG: Partial<Record<EditorArt, string>> = {
   werte: 'Trag deine Lösung in die Tabelle ein – wie auf dem Prüfungsbogen.',
   boxplot: 'Rechne die Kennwerte selbst aus und trag sie ein – die App zeichnet daraus den Boxplot maßstäblich.',
+  koordinaten:
+    'Zeichne im Koordinatensystem: Punkte per Klick (Kreis, Kreuz, Kästchen), Geraden als Gleichung – die App zeichnet sie maßstäblich.',
   struktogramm:
     'Bau dein Struktogramm aus Bausteinen: „+ Baustein“ fügt am Ende einer Folge an, in Zweige und Schleifen genauso. Texte schreibst du direkt in die Kästen.',
 };
@@ -34,6 +38,7 @@ const NOTIZ: Partial<Record<EditorArt, string>> = {
   werte: 'Was nicht in die Tabelle gehört: Ergebnis, Rechenweg, Begründung',
   boxplot: 'Rechenweg: Quartile, Zäune, Begründung der Whisker-Enden (optional)',
   struktogramm: 'Anmerkungen, z. B. Annahmen zu den Daten (optional)',
+  koordinaten: 'Achsenbeschriftung, Legende, Anmerkungen (optional)',
 };
 
 interface Props {
@@ -52,12 +57,15 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
   const diagramm = istDiagrammArt(art);
   const anlagen = content.topics.find((t) => t.id === task.topicId)?.exam?.attachments ?? [];
   const setze = (a: typeof wert) => onChange(schreibeEditorAntwort(a, task));
+  // Datentabelle und Achsen einer Zeichenaufgabe stehen oft im Einleitungstext des Blocks, nicht in der Teilaufgabe.
+  const mitKontext = { markdown: task.markdown, kontext: kontextAus(content.topics, task) };
 
   if (disabled) {
     const ansicht = (): ReactNode => {
       if (art === 'werte') return <WerteAnsicht wert={wert as WerteAntwort} />;
       if (art === 'boxplot') return <BoxplotAnsicht wert={wert as BoxplotAntwort} />;
       if (art === 'struktogramm') return <StruktogrammAnsicht wert={wert as StruktogrammAntwort} />;
+      if (art === 'koordinaten') return <KoordinatenAnsicht wert={wert as KoordinatenAntwort} task={mitKontext} />;
       if (diagramm) return <DiagrammAnsicht wert={wert as DiagrammAntwort} />;
       return <TabellenAnsicht wert={wert as TabellenAntwort} />;
     };
@@ -76,6 +84,8 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
     if (art === 'werte') return <WerteEditor wert={wert as WerteAntwort} vorlage={vorlageFuer(task)} onChange={setze} />;
     if (art === 'boxplot') return <BoxplotEditor wert={wert as BoxplotAntwort} onChange={setze} hilfen={hilfen} />;
     if (art === 'struktogramm') return <StruktogrammEditor wert={wert as StruktogrammAntwort} onChange={setze} hilfen={hilfen} />;
+    if (art === 'koordinaten')
+      return <KoordinatenEditor wert={wert as KoordinatenAntwort} onChange={setze} task={mitKontext} hilfen={hilfen} />;
     if (diagramm) return <DiagrammEditor wert={wert as DiagrammAntwort} onChange={setze} hilfen={hilfen} />;
     return <TabellenEditor wert={wert as TabellenAntwort} onChange={setze} anlagen={anlagen} />;
   };
@@ -103,10 +113,18 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
 
 /** Beim Bewerten: Formprüfung bzw. Tabellenabgleich als Hilfe neben der Musterlösung. */
 export function EditorPruefung({ task, art, answer }: { task: Task; art: EditorArt; answer: string | undefined }) {
+  const { content } = useStore();
   const wert = useMemo(() => leseEditorAntwort(art, task, answer), [art, task, answer]);
   if (art === 'werte') return <WertePruefung task={task} wert={wert as WerteAntwort} />;
   if (art === 'boxplot') return <BoxplotPruefung task={task} wert={wert as BoxplotAntwort} />;
   if (art === 'struktogramm') return <StruktogrammPruefung wert={wert as StruktogrammAntwort} />;
+  if (art === 'koordinaten')
+    return (
+      <KoordinatenPruefung
+        task={{ markdown: task.markdown, kontext: kontextAus(content.topics, task) }}
+        wert={wert as KoordinatenAntwort}
+      />
+    );
   if (istDiagrammArt(art)) {
     const d = wert as DiagrammAntwort;
     if (!d.knoten.length) return null;

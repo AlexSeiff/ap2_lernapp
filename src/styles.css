@@ -1529,3 +1529,18 @@ button.stand-frage[aria-expanded='true'] .icon { transform: rotate(90deg); }
 .textmarker-leiste .marke-2 { background: var(--marke-2); }
 .textmarker-leiste button:hover:not(:disabled) { filter: none; border-color: var(--accent); }
 .textmarker-weg { margin: 2px 0 0; }
+
+/* Koordinatensystem-Editor (components/KoordinatenEditor.tsx) */
+.ko { display: grid; gap: 10px; }
+.ko-werkzeuge { display: flex; flex-wrap: wrap; gap: 8px; }
+.ko-eingabe { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: end; }
+.ko-eingabe label { display: grid; gap: 3px; }
+.ko-eingabe input { width: 5.5em; font-variant-numeric: tabular-nums; }
+.ko-zeichnung { margin: 0; }
+.diagramm .ko-raster { stroke: var(--border); }
+.diagramm .ko-rahmen { stroke: var(--muted); }
+.ko-klickbar { cursor: crosshair; touch-action: manipulation; }
+.ko-geraden { display: grid; gap: 6px; }
+.ko-gerade { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ko-gerade input { flex: 1 1 12em; min-width: 0; }
+.ko-liste ul { margin: 6px 0 0; padding-left: 1.2em; }

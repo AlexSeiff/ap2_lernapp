@@ -114,6 +114,7 @@ describe('Erkennung', () => {
       '31-B1': 'normalform',
       '03-D3': 'boxplot', // tests/boxplotAntwort.test.ts
       '11-D2': 'struktogramm', // tests/struktogramm.test.ts
+      '29-A1': 'koordinaten', // tests/koordinatenAntwort.test.ts (29-A4 verlangt zusätzlich eine Tabelle und bleibt eine Wertetabelle)
       // Verlangte Tabellen (tests/werteTabelle.test.ts)
       ...Object.fromEntries(
         [
