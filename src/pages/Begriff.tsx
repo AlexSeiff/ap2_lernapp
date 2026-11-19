@@ -9,6 +9,8 @@ import { Icon, type IconName } from '../components/Icon';
 import { MarkierStern } from '../components/MarkierStern';
 import { Markdown } from '../components/Markdown';
 import { QuellenListe, useQuellen } from '../components/Quellen';
+import { ThemaBlaettern } from '../components/ThemaBlaettern';
+import { begriffsFolge, nachbarn } from '../lib/blaettern';
 import { begriffPfad, ladeBegriffe, seitenFinder, uebungenZuBegriff, verweisAufloeser } from '../lib/begriffe';
 import { cardPool } from '../lib/cards';
 import { glossarVon, type GlossarEintrag } from '../lib/glossar';
@@ -49,7 +51,7 @@ export function Begriff() {
   if (!seiten || !inhalt) return <div className="page loading">Lädt …</div>;
   const seite = seiten.find((s) => s.id === id);
   if (!seite) return <OhneSeite id={id} seiten={seiten} />;
-  return <BegriffsSeiteAnsicht seite={seite} />;
+  return <BegriffsSeiteAnsicht seite={seite} seiten={seiten} />;
 }
 
 /** Keine Seite mit dieser id: andere Schreibweise einer Seite → dorthin, sonst zum Eintrag im Glossar. */
@@ -60,8 +62,14 @@ function OhneSeite({ id, seiten }: { id: string; seiten: BegriffsSeite[] }) {
   return <Navigate to={andere ? begriffPfad(andere) : `/glossar?stelle=g-${encodeURIComponent(id)}`} replace />;
 }
 
-export function BegriffsSeiteAnsicht({ seite }: { seite: BegriffsSeite }) {
+/** `seiten`: alle Begriffsseiten – für „Voriger/Nächster Begriff“ (alphabetisch); ohne sie gibt es kein Blättern. */
+export function BegriffsSeiteAnsicht({ seite, seiten }: { seite: BegriffsSeite; seiten?: BegriffsSeite[] }) {
   const { content, progress } = useStore();
+  const folge = useMemo(() => nachbarn(begriffsFolge(seiten ?? []), seite.id), [seiten, seite.id]);
+  const blaetterZiel = (id: string | undefined) => {
+    const s = id ? seiten?.find((x) => x.id === id) : undefined;
+    return s ? { to: begriffPfad(s.id), titel: s.begriff } : undefined;
+  };
   // Begriff() wartet auf den vollen Inhalt; das Glossar ist je Inhalt nur einmal gebaut (glossarVon).
   const { inhalt } = useVollerInhalt();
   const glossar = useMemo(() => (inhalt ? glossarVon(inhalt) : KEIN_GLOSSAR), [inhalt]);
@@ -136,6 +144,7 @@ export function BegriffsSeiteAnsicht({ seite }: { seite: BegriffsSeite }) {
         </section>
       )}
       {seite.stand && <p className="hint">Stand der Seite: {seite.stand}</p>}
+      <ThemaBlaettern aktuell={seite.id} art="Begriff" zurueck={blaetterZiel(folge.zurueck)} weiter={blaetterZiel(folge.weiter)} />
     </article>
   );
 }

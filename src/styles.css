@@ -460,6 +460,17 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 .blaettern-optionen { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 8px; }
 .blaettern-optionen input[type='range'] { flex: 1 1 160px; }
 .blaettern-nav { justify-content: space-between; }
+/* Voriges/Nächstes Thema bzw. Begriff am Seitenende */
+.blaettern-seiten { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0 8px; }
+.blaettern-seiten a { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); text-decoration: none; min-height: 44px; }
+.blaettern-seiten a:hover { border-color: var(--accent); }
+.blaettern-seiten .blaettern-weiter { text-align: right; grid-column: 2; }
+.blaettern-richtung { font-size: 0.85rem; color: var(--muted); }
+.blaettern-titel { font-weight: 600; overflow-wrap: anywhere; }
+@media (max-width: 520px) {
+  .blaettern-seiten { grid-template-columns: 1fr; }
+  .blaettern-seiten .blaettern-weiter { grid-column: 1; }
+}
 .leicht-optionen { display: grid; gap: 8px; margin: 12px 0; }
 .leicht-option { justify-content: flex-start; text-align: left; white-space: normal; background: var(--surface); color: var(--text); border: 1px solid var(--border); font-weight: 500; padding: 10px 14px; }
 .leicht-option kbd { flex: none; margin-right: 6px; }

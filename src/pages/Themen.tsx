@@ -14,6 +14,8 @@ import { istAusgeblendet, setzeAusgeblendet } from '../lib/settings';
 import { TheoryMarkdown } from '../components/TheoryMarkdown';
 import type { Topic } from '../../shared/types';
 import { Icon } from '../components/Icon';
+import { ThemaBlaettern } from '../components/ThemaBlaettern';
+import { nachbarn, themenFolge } from '../lib/blaettern';
 import { hatPodcastThema } from '../lib/podcast';
 import { farbKlasse, themaFarbe } from '../lib/farben';
 import { kartenstand, STAENDE } from '../lib/kartenstand';
@@ -104,6 +106,12 @@ export function Thema() {
     );
   const cards = cardPool(content.flashcards, progress.settings).filter((c) => c.topicId === topic.id).length;
   const ausgeblendet = istAusgeblendet(progress.settings, topic.id);
+  // Voriges/Nächstes Thema in der Reihenfolge der Themenliste (ausgeblendete Blätter übersprungen).
+  const folge = nachbarn(themenFolge(content.topics, progress.settings, topic.id), topic.id);
+  const ziel = (id: string | undefined) => {
+    const t = id ? content.topics.find((x) => x.id === id) : undefined;
+    return t ? { to: `/lernen/${t.id}`, titel: `${topicLabel(t)} · ${t.title}` } : undefined;
+  };
   const notiz = (randnotizen as Record<string, string>)[topic.id];
 
   return (
@@ -218,6 +226,7 @@ export function Thema() {
             })}
           </section>
         )}
+        <ThemaBlaettern aktuell={topic.id} art="Thema" zurueck={ziel(folge.zurueck)} weiter={ziel(folge.weiter)} />
       </article>
     </div>
   );
