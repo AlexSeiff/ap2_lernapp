@@ -30,6 +30,8 @@ Auf Anweisung des Auftraggebers nach dem Review umgesetzt, auf einem eigenen Bra
 - **H8:** Node-Version in der CI auf 24 festgelegt.
 - **H5** entfällt: Die dort genannten Werkzeuge (`mc-entwurf`, `sync-content`) gibt es nicht mehr.
 
+Stand 19. November 2026: Alle Branches sind in `main` aufgegangen und gelöscht (lokal und auf GitHub bleibt nur `main`). Der erste CI-Lauf auf GitHub ist grün (`1a563dc`, nach einer Prettier-Korrektur an `src/lib/anhang.ts`). Damit ist der oben als offen genannte CI-Lauf erledigt.
+
 Die lokale Betriebsart mit Server und KI ist entfernt; die Abschnitte unten nennen deshalb teils Dateien (`server/…`) und Befehle (`build:pages`), die es auf `nur-online` nicht mehr gibt.
 
 ## 1. Gesamturteil

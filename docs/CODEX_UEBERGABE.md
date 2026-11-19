@@ -1,10 +1,6 @@
 # Übergabe – offene Punkte
 
-Stand: 14. November 2026. Arbeitsbranch: `altklausur-training-dd27-33`.
-
-## Alte Branches
-
-- Die alten Branches sind vollständig in `main` enthalten. Vor dem Löschen die Freigabe einholen und die Spitzen erneut prüfen. Lokal betrifft das `dwh-quellsysteme` und `notizbuch-design`, auf GitHub `dwh-quellsysteme` und `nur-online`.
+Stand: 19. November 2026. Alle Arbeit liegt auf `main`; weitere Branches gibt es lokal und auf GitHub nicht mehr.
 
 ## Fehlende Vorlagen und jährliche Pflege
 
