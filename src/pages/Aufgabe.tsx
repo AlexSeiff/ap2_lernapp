@@ -8,6 +8,7 @@ import { Markdown } from '../components/Markdown';
 import { SicherheitWahl } from '../components/SicherheitWahl';
 import { Attachments, GradePanel, TaskText } from '../components/TaskParts';
 import { anhangFuer } from '../lib/anhang';
+import { aufgabenImModus, naechsteAufgabe } from '../lib/aufgabenFolge';
 import { formatPoints } from '../lib/grading';
 import { sicherheitLabel } from '../lib/kalibrierung';
 import { isDue, recordAttempt, resetAufgabenAntworten, setzeFehlergrund } from '../lib/progress';
@@ -52,6 +53,11 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
 
   const unterVoll = points !== undefined && points < task.points;
   const anhang = anhangFuer([task]);
+  // Einzelaufgaben-Modus „nur Altklausur-Themen“ (aus /aufgaben?altklausur=1): „Nächste Aufgabe“ bleibt in diesem Kreis.
+  const nurAltklausur = params.get('altklausur') === '1';
+  const naechste = nurAltklausur
+    ? naechsteAufgabe(aufgabenImModus(content.topics, content.tasks, true), task.id, new Set(progress.attempts.map((a) => a.taskId)))
+    : undefined;
 
   const save = () => {
     if (points === undefined) return;
@@ -84,8 +90,10 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
         <span>{formatPoints(task.points)} Punkte</span>
       </div>
       <p className="crumbs">
-        <Link to={repeat ? '/fehlerjournal' : `/aufgaben?thema=${task.topicId}`}>{repeat ? 'Fehlerjournal' : 'Einzelaufgaben'}</Link> /{' '}
-        {topic?.title} {block && `/ Block ${block.letter} – ${block.title}`}
+        <Link to={repeat ? '/fehlerjournal' : `/aufgaben?thema=${task.topicId}${nurAltklausur ? '&altklausur=1' : ''}`}>
+          {repeat ? 'Fehlerjournal' : 'Einzelaufgaben'}
+        </Link>{' '}
+        / {topic?.title} {block && `/ Block ${block.letter} – ${block.title}`}
       </p>
       <h1>Einzelaufgabe {task.code}</h1>
       {journal && !journal.resolvedAt && (
@@ -139,8 +147,13 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
                   Nächste Wiederholung →
                 </button>
               )}
+              {saved && !repeat && naechste && (
+                <button type="button" onClick={() => navigate(`/aufgabe/${naechste}?altklausur=1`)}>
+                  Nächste Aufgabe →
+                </button>
+              )}
               {saved && !repeat && (
-                <Link className="button secondary" to={`/aufgaben?thema=${task.topicId}`}>
+                <Link className="button secondary" to={`/aufgaben?thema=${task.topicId}${nurAltklausur ? '&altklausur=1' : ''}`}>
                   Weitere Aufgaben
                 </Link>
               )}

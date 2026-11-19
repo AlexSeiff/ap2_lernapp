@@ -8,6 +8,7 @@ import { SqlUebungLinks } from '../components/SqlUebungLinks';
 import { KartenAntwort, KartenFrage } from '../components/KartenText';
 import { Markdown } from '../components/Markdown';
 import { useCardFilters, useCardSession } from '../hooks/useCardSession';
+import { istAltklausurKarte } from '../lib/altklausur';
 import { fallenKarten, rundenKarten } from '../lib/cards';
 import { leichtZahlen } from '../lib/leicht';
 import { shuffle } from '../lib/shuffle';
@@ -42,7 +43,7 @@ const KIND_LABELS: Record<Flashcard['kind'], string> = {
 export function Karteikarten() {
   const { content, progress, update } = useStore();
   const { settings } = progress;
-  const { f, set, deck, alle, pool, leicht, leichtModus, markiert, auswahl, ausSuche, vonBegriff, vonStand } = useCardFilters();
+  const { f, set, deck, alle, pool, leicht, leichtModus, markiert, altklausur, auswahl, ausSuche, vonBegriff, vonStand } = useCardFilters();
   const {
     session,
     index,
@@ -296,8 +297,9 @@ export function Karteikarten() {
   const typLeicht = (typ: string) => pool.filter((c) => c.typ === typ && leicht.has(c.id)).length;
   const setMode = (an: boolean) => update((p) => withSettings(p, { leichtModus: an }));
   const known = (ids: Flashcard[]) => ids.filter((c) => (progress.cards[c.id]?.box ?? 0) >= 3).length;
-  const aktiveFilter = [f.thema, f.deck, f.art, f.typ, f.stufe, f.markiert].filter((x) => x !== 'alle').length;
+  const aktiveFilter = [f.thema, f.deck, f.art, f.typ, f.stufe, f.markiert, f.altklausur].filter((x) => x !== 'alle').length;
   const anzahlMarkiert = pool.filter((c) => markiert.has(c.id)).length;
+  const anzahlAltklausur = pool.filter((c) => istAltklausurKarte(c, altklausur)).length;
 
   return (
     <div className="page">
@@ -429,6 +431,13 @@ export function Karteikarten() {
           <label className="check" title="Markieren mit dem Stern während einer Runde oder beim Durchblättern (Taste M)">
             <input type="checkbox" checked={f.markiert === '1'} onChange={(e) => set({ markiert: e.target.checked ? '1' : 'alle' })} />
             <Icon name="star" /> Nur markierte ({anzahlMarkiert})
+          </label>
+          <label
+            className="check"
+            title="Karten aus dem Altklausur-Training (Deep Dive 18–33) und Begriffe, die in den Altklausuren vorkommen"
+          >
+            <input type="checkbox" checked={f.altklausur === '1'} onChange={(e) => set({ altklausur: e.target.checked ? '1' : 'alle' })} />
+            <Icon name="file-text" /> Nur Altklausur-Themen ({anzahlAltklausur})
           </label>
           <label className="check" title="Auch unter Einstellungen – ausgeblendete Karten behalten ihren Lernstand">
             <input

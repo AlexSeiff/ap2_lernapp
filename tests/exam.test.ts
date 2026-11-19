@@ -76,6 +76,7 @@ describe('Karteikarten-Filter', () => {
       typ: 'falle',
       stufe: 'alle',
       markiert: 'alle',
+      altklausur: 'alle',
     });
   });
 

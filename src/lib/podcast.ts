@@ -5,6 +5,7 @@
 // Nicht für WiSo (eigener Prüfungsteil), nicht für Fachgespräch und Prüfungsablauf; Themen ohne Begriffsseiten bekommen keine Folge.
 
 import type { BegriffsSeite, Flashcard, Topic } from '../../shared/types';
+import { istAltklausurThema } from './altklausur';
 import { PRUEFUNGSBEREICHE } from './uebersicht';
 
 export type Sprecher = 'lea' | 'ben';
@@ -40,7 +41,7 @@ const OHNE_PODCAST = new Set(PRUEFUNGSBEREICHE.find((b) => b.id === 'wiso')?.the
  * ohne eigene Teile. Ob es Begriffe gibt, zeigt erst bauePodcast.
  */
 export const hatPodcastThema = (t: Pick<Topic, 'id' | 'title'> & { sections: { level: number }[] }) =>
-  !OHNE_PODCAST.has(t.id) && !/^Altklausur/i.test(t.title) && t.sections.some((s) => s.level === 1);
+  !OHNE_PODCAST.has(t.id) && !istAltklausurThema(t) && t.sections.some((s) => s.level === 1);
 
 // ---------- Text zum Vorlesen ----------
 

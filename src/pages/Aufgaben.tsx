@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { aufgabenImModus } from '../lib/aufgabenFolge';
+import { istAltklausurThema } from '../lib/altklausur';
 import { difficulty, formatPoints, percent } from '../lib/grading';
 import { useStore } from '../lib/store';
 import { Icon } from '../components/Icon';
@@ -15,6 +17,9 @@ export function Aufgaben() {
     status: params.get('status') ?? 'alle',
     suche: params.get('suche') ?? '',
   };
+  // Einzelaufgaben-Modus „nur Altklausur-Themen“: Liste, Themenauswahl, Zufallsaufgabe und „Nächste Aufgabe“ folgen ihm.
+  const nurAltklausur = params.get('altklausur') === '1';
+  const modus = nurAltklausur ? '?altklausur=1' : '';
   // Mehrere Filter in einem Schritt: zwei setParams-Aufrufe nacheinander gingen beide von denselben alten Parametern aus,
   // der zweite überschrieb dann den ersten (Themenwechsel setzt den Block zurück).
   const set = (werte: Record<string, string>) => {
@@ -33,10 +38,8 @@ export function Aufgaben() {
     return m;
   }, [progress.attempts]);
 
-  const topicOrder = new Map(content.topics.map((t, i) => [t.id, i]));
-  const all = Object.values(content.tasks).sort(
-    (a, b) => topicOrder.get(a.topicId)! - topicOrder.get(b.topicId)! || a.id.localeCompare(b.id, 'de', { numeric: true }),
-  );
+  const all = aufgabenImModus(content.topics, content.tasks, nurAltklausur);
+  const themenListe = nurAltklausur ? content.topics.filter(istAltklausurThema) : content.topics;
   const blocks = [...new Set(all.filter((t) => f.thema === 'alle' || t.topicId === f.thema).map((t) => t.block))].sort();
   const needle = f.suche.toLowerCase();
 
@@ -74,7 +77,7 @@ export function Aufgaben() {
           Thema
           <select value={f.thema} onChange={(e) => set({ thema: e.target.value, block: 'alle' })}>
             <option value="alle">Alle Themen</option>
-            {content.topics.map((t) => (
+            {themenListe.map((t) => (
               <option key={t.id} value={t.id}>
                 {t.title}
               </option>
@@ -114,6 +117,24 @@ export function Aufgaben() {
           Suche
           <input type="search" value={f.suche} placeholder="z. B. HAVING" onChange={(e) => set({ suche: e.target.value })} />
         </label>
+        <label className="check" title="Nur Aufgaben aus dem Altklausur-Training (Deep Dive 18–33)">
+          <input
+            type="checkbox"
+            checked={nurAltklausur}
+            // Ein gewähltes Thema, das im neuen Modus nicht vorkommt, würde die Liste leeren – es wird zurückgesetzt.
+            onChange={(e) =>
+              set({
+                altklausur: e.target.checked ? '1' : 'alle',
+                ...(e.target.checked &&
+                f.thema !== 'alle' &&
+                !istAltklausurThema(content.topics.find((t) => t.id === f.thema) ?? { title: '' })
+                  ? { thema: 'alle', block: 'alle' }
+                  : {}),
+              })
+            }
+          />
+          <Icon name="file-text" /> Nur Altklausur-Themen
+        </label>
       </div>
 
       <div className="selection-bar">
@@ -138,7 +159,7 @@ export function Aufgaben() {
         )}
         {tasks.length > 0 && (
           // Zufall erst beim Klick ziehen – beim Rendern wäre er unrein und bei jedem Neurendern anders.
-          <button type="button" onClick={() => navigate(`/aufgabe/${tasks[Math.floor(Math.random() * tasks.length)].id}`)}>
+          <button type="button" onClick={() => navigate(`/aufgabe/${tasks[Math.floor(Math.random() * tasks.length)].id}${modus}`)}>
             <Icon name="dices" /> Zufallsaufgabe
           </button>
         )}
@@ -150,7 +171,7 @@ export function Aufgaben() {
           return (
             <li key={t.id}>
               <input type="checkbox" checked={selected.has(t.id)} onChange={() => toggle(t.id)} aria-label={`${t.code} auswählen`} />
-              <Link to={`/aufgabe/${t.id}`} className="task-link">
+              <Link to={`/aufgabe/${t.id}${modus}`} className="task-link">
                 <span className="task-code">{t.code}</span>
                 <span className="task-preview">
                   {t.markdown

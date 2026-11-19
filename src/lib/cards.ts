@@ -2,9 +2,18 @@
 
 import type { Settings } from '../../shared/progress';
 import type { Flashcard } from '../../shared/types';
+import { istAltklausurKarte } from './altklausur';
 
-/** `markiert`: '1' = nur markierte Karten (Phase 4), sonst 'alle'. */
-export type CardFilter = { thema: string; deck: string; art: string; typ: string; stufe: string; markiert: string };
+/** `markiert`: '1' = nur markierte Karten (Phase 4), sonst 'alle'. `altklausur`: '1' = nur Karten aus dem Altklausur-Training. */
+export type CardFilter = {
+  thema: string;
+  deck: string;
+  art: string;
+  typ: string;
+  stufe: string;
+  markiert: string;
+  altklausur: string;
+};
 
 /** Liest die Filter aus den URL-Parametern; fehlende Werte bedeuten „alle". */
 export function readCardFilter(params: URLSearchParams): CardFilter {
@@ -15,6 +24,7 @@ export function readCardFilter(params: URLSearchParams): CardFilter {
     typ: params.get('typ') ?? 'alle',
     stufe: params.get('stufe') ?? 'alle',
     markiert: params.get('markiert') === '1' ? '1' : 'alle',
+    altklausur: params.get('altklausur') === '1' ? '1' : 'alle',
   };
 }
 
@@ -28,8 +38,16 @@ export function withCardFilter(params: URLSearchParams, changes: Partial<CardFil
   return next;
 }
 
-/** `markiert`: die Ids der markierten Karten – nötig für den Filter „Nur markierte“ (ohne sie bleibt dabei nichts übrig). */
-export function filterCards(cards: Flashcard[], f: CardFilter, markiert: ReadonlySet<string> = new Set()): Flashcard[] {
+/**
+ * `markiert`: die Ids der markierten Karten – nötig für den Filter „Nur markierte“ (ohne sie bleibt dabei nichts übrig).
+ * `altklausurThemen`: die Ids der Altklausur-Themen (`altklausurThemen(topics)`) – ohne sie zählt nur das Tag `altklausur`.
+ */
+export function filterCards(
+  cards: Flashcard[],
+  f: CardFilter,
+  markiert: ReadonlySet<string> = new Set(),
+  altklausurThemen: ReadonlySet<string> = new Set(),
+): Flashcard[] {
   return cards.filter(
     (c) =>
       (f.thema === 'alle' || c.topicId === f.thema) &&
@@ -37,7 +55,8 @@ export function filterCards(cards: Flashcard[], f: CardFilter, markiert: Readonl
       (f.art === 'alle' || c.kind === f.art) &&
       (f.typ === 'alle' || c.typ === f.typ) &&
       (f.stufe === 'alle' || String(c.schwierigkeit) === f.stufe) &&
-      (f.markiert !== '1' || markiert.has(c.id)),
+      (f.markiert !== '1' || markiert.has(c.id)) &&
+      (f.altklausur !== '1' || istAltklausurKarte(c, altklausurThemen)),
   );
 }
 
