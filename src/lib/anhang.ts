@@ -18,8 +18,6 @@ export interface AnhangTeile {
 /** Anhang für eine Aufgabe oder eine ganze Klausur (dann reicht eine passende Aufgabe). */
 export function anhangFuer(tasks: Task[]): AnhangTeile {
   const sql = tasks.some((t) => !!t.sqlUebung || SQL.test(t.markdown));
-  const formeln = tasks.some(
-    (t) => t.type === 'rechnen' || findeOperatoren(t.markdown).some((o) => RECHNEN.has(o.operatorId)),
-  );
+  const formeln = tasks.some((t) => t.type === 'rechnen' || findeOperatoren(t.markdown).some((o) => RECHNEN.has(o.operatorId)));
   return { sql, formeln };
 }
