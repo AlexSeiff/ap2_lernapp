@@ -300,7 +300,7 @@ function StandZeile({ eintrag }: { eintrag: StandEintrag }) {
           <Icon name="chevron-right" />
           <span className={card.typ === 'begriff' ? 'stand-begriff' : ''}>{card.question}</span>
         </button>
-        <MarkierStern cardId={card.id} nurIcon />
+        <MarkierStern id={card.id} nurIcon />
       </div>
       <div className="stand-meta">
         {card.typ && <span className={`badge typ-${card.typ}`}>{CARD_TYPE_LABELS[card.typ]}</span>}

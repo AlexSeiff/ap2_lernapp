@@ -93,7 +93,7 @@ export function BegriffsSeiteAnsicht({ seite }: { seite: BegriffsSeite }) {
       </p>
       <div className="begriff-kopf">
         <h1>{seite.begriff}</h1>
-        {uebungen.begriffskarte && <MarkierStern cardId={uebungen.begriffskarte.id} text="Karte markieren" />}
+        {uebungen.begriffskarte && <MarkierStern id={uebungen.begriffskarte.id} text="Karte markieren" />}
       </div>
       {seite.auch && <p className="begriff-auch muted">Auch: {seite.auch.join(' · ')}</p>}
       <Markdown math={seite.markdown.includes('$')} source={false} className="begriff-text">
@@ -221,7 +221,7 @@ function UebenGruppe(props: {
       <ul className="begriff-liste">
         {sichtbar.map((e) => (
           <li key={e.key} className={e.karte ? 'mit-stern' : undefined}>
-            {e.karte && <MarkierStern cardId={e.karte} nurIcon label={`Markieren: ${e.text.slice(0, 80)}`} />}
+            {e.karte && <MarkierStern id={e.karte} nurIcon label={`Markieren: ${e.text.slice(0, 80)}`} />}
             <Link to={e.to}>{e.text}</Link>
           </li>
         ))}

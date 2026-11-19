@@ -366,6 +366,7 @@ h2.part { font-size: 1.5rem; border-bottom: 2px solid var(--border); padding-bot
 .task-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 18px 20px; margin: 14px 0; box-shadow: var(--shadow); }
 .task-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
 .task-head .task-code { font-size: 1.1rem; }
+.task-head .task-stern { margin-left: auto; }
 textarea.answer { width: 100%; margin-top: 12px; resize: vertical; line-height: 1.5; }
 textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-size: 0.92rem; }
 .choices, .blanks, .pairs { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }

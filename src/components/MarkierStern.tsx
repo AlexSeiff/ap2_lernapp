@@ -1,4 +1,5 @@
-// Stern zum Markieren einer Karteikarte (Umsetzungsplan Phase 4). Gespeichert in progress.markiert, ohne Einfluss auf das Leitner-Fach.
+// Stern zum Markieren einer Karteikarte (Umsetzungsplan Phase 4) oder einer Aufgabe. Gespeichert in progress.markiert (Schlüssel = Karten- bzw.
+// Aufgaben-Id, die sich nicht überschneiden), ohne Einfluss auf das Leitner-Fach oder die Aufgabenergebnisse.
 
 import { useEffect } from 'react';
 import { istMarkiert, wechsleMarkierung } from '../lib/markiert';
@@ -6,16 +7,25 @@ import { useStore } from '../lib/store';
 import { Icon } from './Icon';
 
 /**
- * Umschaltknopf (aria-pressed) mit Stern; gefüllt, solange die Karte markiert ist.
- * `taste`: zusätzlich Kurzbefehl M (nicht beim Tippen, nicht mit Strg/Alt/⌘) – nur für die gerade gezeigte Karte setzen.
+ * Umschaltknopf (aria-pressed) mit Stern; gefüllt, solange der Eintrag markiert ist.
+ * `id`: Id der Karte bzw. Aufgabe. `gegenstand`: „Karte“ (Standard) oder „Aufgabe“ – nur für Titel und Namen des Knopfs.
+ * `taste`: zusätzlich Kurzbefehl M (nicht beim Tippen, nicht mit Strg/Alt/⌘) – nur für den gerade gezeigten Eintrag setzen.
  * `nurIcon`: ohne sichtbaren Text, z. B. in Listen; der Name steht dann im aria-label (`label`, sonst „Karte markieren“).
  * `text`: sichtbarer Text (Standard „Markieren“).
  */
-export function MarkierStern(props: { cardId: string; taste?: boolean; nurIcon?: boolean; label?: string; text?: string }) {
-  const { cardId, taste = false, nurIcon = false, label = 'Karte markieren', text = 'Markieren' } = props;
+export function MarkierStern(props: {
+  id: string;
+  gegenstand?: 'Karte' | 'Aufgabe';
+  taste?: boolean;
+  nurIcon?: boolean;
+  label?: string;
+  text?: string;
+}) {
+  const { id, gegenstand = 'Karte', taste = false, nurIcon = false, text = 'Markieren' } = props;
+  const label = props.label ?? `${gegenstand} markieren`;
   const { progress, update } = useStore();
-  const an = istMarkiert(progress, cardId);
-  const wechsle = () => update((p) => wechsleMarkierung(p, cardId));
+  const an = istMarkiert(progress, id);
+  const wechsle = () => update((p) => wechsleMarkierung(p, id));
 
   useEffect(() => {
     if (!taste) return;
@@ -25,11 +35,11 @@ export function MarkierStern(props: { cardId: string; taste?: boolean; nurIcon?:
       const target = e.target instanceof Element ? e.target : null;
       if (target?.closest('input, select, textarea, [contenteditable="true"]')) return;
       e.preventDefault();
-      update((p) => wechsleMarkierung(p, cardId));
+      update((p) => wechsleMarkierung(p, id));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [taste, cardId, update]);
+  }, [taste, id, update]);
 
   return (
     <button
@@ -37,7 +47,7 @@ export function MarkierStern(props: { cardId: string; taste?: boolean; nurIcon?:
       className={`stern ${nurIcon ? 'nur-icon' : ''}`}
       aria-pressed={an}
       aria-label={nurIcon ? label : undefined}
-      title={an ? 'Markiert – zum Entfernen klicken' : 'Karte markieren'}
+      title={an ? 'Markiert – zum Entfernen klicken' : label}
       onClick={wechsle}
     >
       <Icon name="star" />

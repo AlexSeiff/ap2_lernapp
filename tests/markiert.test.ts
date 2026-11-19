@@ -27,6 +27,16 @@ describe('Markierungen – reine Funktionen', () => {
     expect([...markierteIds(p)]).toEqual(['ML-001']);
   });
 
+  it('Aufgaben-Ids (15-B2) werden wie Karten-Ids markiert und überschneiden sich nicht mit Karten', () => {
+    let p = setzeMarkierung(emptyProgress(), '15-B2', true, T1);
+    p = setzeMarkierung(p, 'FB-json', true, T1);
+    expect(istMarkiert(p, '15-B2')).toBe(true);
+    expect(istMarkiert(p, '15-B1')).toBe(false);
+    expect([...markierteIds(p)].sort()).toEqual(['15-B2', 'FB-json']);
+    // Die Prüfung gegen das Schema (Speichern, Sicherung) akzeptiert beide Schlüsselarten.
+    expect(ProgressSchema.safeParse(p).success).toBe(true);
+  });
+
   it('gleicher Zustand ändert nichts (auch nicht den Zeitpunkt)', () => {
     const p = setzeMarkierung(emptyProgress(), 'a', true, T1);
     expect(setzeMarkierung(p, 'a', true, T2)).toBe(p);

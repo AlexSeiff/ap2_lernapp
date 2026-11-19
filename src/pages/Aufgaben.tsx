@@ -3,8 +3,10 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { aufgabenImModus } from '../lib/aufgabenFolge';
 import { istAltklausurThema } from '../lib/altklausur';
 import { difficulty, formatPoints, percent } from '../lib/grading';
+import { markierteIds } from '../lib/markiert';
 import { useStore } from '../lib/store';
 import { Icon } from '../components/Icon';
+import { MarkierStern } from '../components/MarkierStern';
 
 export function Aufgaben() {
   const { content, progress } = useStore();
@@ -20,6 +22,9 @@ export function Aufgaben() {
   // Einzelaufgaben-Modus „nur Altklausur-Themen“: Liste, Themenauswahl, Zufallsaufgabe und „Nächste Aufgabe“ folgen ihm.
   const nurAltklausur = params.get('altklausur') === '1';
   const modus = nurAltklausur ? '?altklausur=1' : '';
+  // „Nur markierte“: die mit dem Stern gemerkten Aufgaben (progress.markiert, Schlüssel = Aufgaben-Id).
+  const nurMarkiert = params.get('markiert') === '1';
+  const markiert = useMemo(() => markierteIds(progress), [progress]);
   // Mehrere Filter in einem Schritt: zwei setParams-Aufrufe nacheinander gingen beide von denselben alten Parametern aus,
   // der zweite überschrieb dann den ersten (Themenwechsel setzt den Block zurück).
   const set = (werte: Record<string, string>) => {
@@ -46,6 +51,7 @@ export function Aufgaben() {
   const tasks = all.filter((t) => {
     if (f.thema !== 'alle' && t.topicId !== f.thema) return false;
     if (f.block !== 'alle' && t.block !== f.block) return false;
+    if (nurMarkiert && !markiert.has(t.id)) return false;
     if (f.stufe !== 'alle' && difficulty(t.points) !== f.stufe) return false;
     const s = lastScore.get(t.id);
     if (f.status === 'neu' && s !== undefined) return false;
@@ -135,6 +141,10 @@ export function Aufgaben() {
           />
           <Icon name="file-text" /> Nur Altklausur-Themen
         </label>
+        <label className="check" title="Aufgaben mit dem Stern (auch auf der Aufgabenseite, Taste M)">
+          <input type="checkbox" checked={nurMarkiert} onChange={(e) => set({ markiert: e.target.checked ? '1' : 'alle' })} />
+          <Icon name="star" /> Nur markierte ({all.filter((t) => markiert.has(t.id)).length})
+        </label>
       </div>
 
       <div className="selection-bar">
@@ -180,6 +190,7 @@ export function Aufgaben() {
                     .slice(0, 140)}
                 </span>
               </Link>
+              <MarkierStern id={t.id} gegenstand="Aufgabe" nurIcon label={`Aufgabe ${t.code} markieren`} />
               <span className="muted small">{topicTitle(t.topicId)}</span>
               <span className="badge">{formatPoints(t.points)} P</span>
               <span className={`status ${s === undefined ? '' : s >= 100 ? 'good' : s >= 50 ? 'mid' : 'low'}`}>

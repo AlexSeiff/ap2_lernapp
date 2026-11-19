@@ -96,7 +96,7 @@ export function Karteikarten() {
           <span>
             <Icon name="list-checks" /> Leicht · Karte {index + 1} / {session.length}
           </span>
-          <MarkierStern cardId={card.id} taste />
+          <MarkierStern id={card.id} taste />
         </div>
         <RundenBalken index={index} gesamt={session.length} />
         <KartenWechsel id={String(index)}>
@@ -197,7 +197,7 @@ export function Karteikarten() {
               <Icon name="rotate-ccw" /> Rückgängig
             </button>
           )}
-          <MarkierStern cardId={card.id} taste />
+          <MarkierStern id={card.id} taste />
         </div>
         <RundenBalken index={index} gesamt={session.length} />
         {/* Kein <button>: die Karte enthält Markdown mit Absätzen, Listen und Codeblöcken – das ist in einem Button ungültig. */}
@@ -619,7 +619,7 @@ export function KartenBlaettern({ cards, onEnde }: { cards: Flashcard[]; onEnde:
         <span>
           <Icon name="book-open" /> Karte {i + 1} / {reihe.length}
         </span>
-        <MarkierStern cardId={card.id} taste />
+        <MarkierStern id={card.id} taste />
       </div>
       <div className="blaettern-optionen">
         <label className="check">
