@@ -5,7 +5,7 @@ import { FehlergrundWahl } from '../components/FehlergrundWahl';
 import { Markdown } from '../components/Markdown';
 import { SicherheitWahl } from '../components/SicherheitWahl';
 import { Attachments, GradePanel, TaskText } from '../components/TaskParts';
-import { AnhangPanel } from '../components/Belegsatz';
+import { AnhangPanel, hatAnhang } from '../components/Belegsatz';
 import { useConfirm } from '../hooks/useConfirm';
 import { useExamRun } from '../hooks/useExamRun';
 import { anhangFuer } from '../lib/anhang';
@@ -319,9 +319,9 @@ export function Klausur() {
       )}
 
       <Attachments items={exam.attachments} open={!submitted} />
-      {(anhang.sql || anhang.formeln) && (
-        <div className="anhang-leiste no-print">
-          <AnhangPanel {...anhang} />
+      {hatAnhang({ ...anhang, situation: exam.attachments }) && (
+        <div className={`anhang-leiste no-print${exam.attachments.length ? ' klebt' : ''}`}>
+          <AnhangPanel {...anhang} situation={exam.attachments} />
         </div>
       )}
 
