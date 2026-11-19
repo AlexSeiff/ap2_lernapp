@@ -152,6 +152,7 @@ describe('migrateProgress', () => {
       markiert: {},
       diagramme: {},
       diagrammDays: {},
+      hervorhebungen: {},
     });
     expect(migrated.attempts).toHaveLength(16);
     expect(migrated.exams).toHaveLength(1);
@@ -201,6 +202,7 @@ describe('migrateProgress', () => {
       markiert: {},
       diagramme: {},
       diagrammDays: {},
+      hervorhebungen: {},
     });
     expect(migrated.revision).toBe(7);
     expect(migrated.cardReviewDays).toEqual({ '2026-09-26': 4, '2026-09-27': 2 });
@@ -219,6 +221,7 @@ describe('migrateProgress', () => {
       markiert: {},
       diagramme: {},
       diagrammDays: {},
+      hervorhebungen: {},
     });
     expect(migrated.settings).toEqual({ prueferfragen: true, fachgespraech: true, leichtModus: false, backupReminderDays: 7 });
     expect(migrated.settings).not.toHaveProperty('examDate');
@@ -241,6 +244,7 @@ describe('migrateProgress', () => {
       markiert: {},
       diagramme: {},
       diagrammDays: {},
+      hervorhebungen: {},
     });
     expect(migrated.settings).toEqual(raw.settings);
     expect(migrated.revision).toBe(21);
@@ -256,7 +260,7 @@ describe('migrateProgress', () => {
     const raw = fixture('fortschritt-v6-2026-10-01.json');
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual(
-      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }),
+      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {}, hervorhebungen: {} }),
     );
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
     const r = checkProgressPut(migrated, raw);

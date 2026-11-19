@@ -1,0 +1,151 @@
+{
+  "version": 9,
+  "revision": 45,
+  "attempts": [
+    {
+      "taskId": "01-A1",
+      "date": "2026-09-25T10:00:00.000Z",
+      "points": 3,
+      "max": 6,
+      "mode": "einzel"
+    },
+    {
+      "taskId": "03-B1",
+      "date": "2026-09-29T18:30:00.000Z",
+      "points": 10,
+      "max": 10,
+      "mode": "einzel"
+    },
+    {
+      "taskId": "03-B2",
+      "date": "2026-09-30T18:30:00.000Z",
+      "points": 2,
+      "max": 6,
+      "mode": "klausur"
+    }
+  ],
+  "exams": [
+    {
+      "id": "ex-abc",
+      "topicId": "03",
+      "startedAt": "2026-09-30T17:00:00.000Z",
+      "answers": {
+        "03-B2": "Median ist robuster"
+      },
+      "scores": {
+        "03-B2": 2
+      },
+      "max": 100,
+      "submittedAt": "2026-09-30T18:20:00.000Z",
+      "finishedAt": "2026-09-30T18:30:00.000Z",
+      "total": 2
+    }
+  ],
+  "cards": {
+    "01-pf1": {
+      "box": 2,
+      "due": "2026-09-27",
+      "reviews": 3,
+      "last": "gewusst"
+    }
+  },
+  "journal": {
+    "01-A1": {
+      "taskId": "01-A1",
+      "addedAt": "2026-09-25",
+      "stage": 0,
+      "due": "2026-09-26",
+      "lastPoints": 3,
+      "max": 6
+    },
+    "03-B2": {
+      "taskId": "03-B2",
+      "addedAt": "2026-09-30",
+      "stage": 0,
+      "due": "2026-10-01",
+      "lastPoints": 2,
+      "max": 6
+    }
+  },
+  "lernziele": {
+    "03-1": true
+  },
+  "cardReviewDays": {
+    "2026-09-27": 2
+  },
+  "sql": {
+    "SQL-MH-001": {
+      "attempts": 2,
+      "hintsUsed": 1,
+      "solvedAt": "2026-09-29",
+      "lastCheckedAt": "2026-09-29T08:00:00.000Z",
+      "lastQuery": "SELECT 1;"
+    }
+  },
+  "sqlDays": {
+    "2026-09-29": 2
+  },
+  "settings": {
+    "prueferfragen": true,
+    "fachgespraech": false,
+    "leichtModus": true,
+    "backupReminderDays": 7,
+    "examDate": "2026-11-25",
+    "lastBackupDownloadAt": "2026-09-28",
+    "leichtAutomatisch": false
+  },
+  "rechnen": {
+    "RE-ST1-001": {
+      "attempts": 2,
+      "hintsUsed": 1,
+      "solvedAt": "2026-09-30",
+      "lastCheckedAt": "2026-09-30",
+      "lastSeed": 12345
+    }
+  },
+  "rechnenDays": {
+    "2026-09-30": 2
+  },
+  "markiert": {
+    "01-pf1": {
+      "an": true,
+      "am": "2026-10-08T19:12:03.511Z"
+    },
+    "FB-normalisierung": {
+      "an": true,
+      "am": "2026-10-09T07:40:00.000Z"
+    },
+    "ML-012": {
+      "an": false,
+      "am": "2026-10-09T07:45:10.000Z"
+    }
+  },
+  "diagramme": {
+    "DG-EPK-001": {
+      "attempts": 2,
+      "hintsUsed": 1,
+      "solvedAt": "2026-10-09",
+      "lastCheckedAt": "2026-10-09"
+    },
+    "DG-BPMN-002": {
+      "attempts": 1,
+      "hintsUsed": 0,
+      "lastCheckedAt": "2026-10-09",
+      "stage": 1,
+      "due": "2026-10-10"
+    }
+  },
+  "diagrammDays": {
+    "2026-10-09": 3
+  },
+  "activeExam": {
+    "id": "ex-def",
+    "topicId": "04",
+    "startedAt": "2026-10-01T08:00:00.000Z",
+    "answers": {
+      "04-A1": "r = 0,8"
+    },
+    "scores": {},
+    "max": 100
+  }
+}

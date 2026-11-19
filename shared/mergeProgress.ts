@@ -8,6 +8,7 @@ import {
   type CardState,
   type ExamRun,
   type JournalEntry,
+  type Hervorhebung,
   type Markierung,
   type Progress,
 } from './progress';
@@ -83,6 +84,9 @@ const newerCard = (x: CardState, y: CardState) => (y.reviews > x.reviews || (y.r
 /** Markierung: die neuere Aktion gewinnt (markiert oder entmarkiert), bei Gleichstand der aktuelle Stand. */
 const newerMarkierung = (x: Markierung, y: Markierung) => (time(y.am) > time(x.am) ? y : x);
 
+/** Textmarken eines Bereichs: die neuere Änderung (`am`) gewinnt als Ganzes, bei Gleichstand der aktuelle Stand. */
+const newerHervorhebung = (x: Hervorhebung, y: Hervorhebung) => (time(y.am) > time(x.am) ? y : x);
+
 /** Gemeinsame Felder von SQL- und Rechenübungen (SqlState, RechenState). */
 type UebungState = { attempts: number; hintsUsed: number; lastCheckedAt?: string; solvedAt?: string };
 
@@ -116,6 +120,7 @@ function mergeDays(a: Record<string, number>, b: Record<string, number>): Record
  * - journal: je Aufgabe der Eintrag der Seite mit dem neueren Versuch zu dieser Aufgabe (dann höhere Stufe, dann späteres due).
  * - lernziele: abgehakt, wenn auf einer Seite abgehakt.
  * - markiert: je Karte die neuere Aktion (`am`), auch ein Entmarkieren – so taucht eine entfernte Markierung nicht wieder auf.
+ * - hervorhebungen: je Bereich (Aufgabe, Ausgangssituation) die Textmarken der neueren Änderung (`am`), auch eine leere Liste.
  * - cardReviewDays / sqlDays / rechnenDays / diagrammDays: je Tag das Maximum.
  * - settings, revision und unbekannte Felder: vom aktuellen Stand (Einstellungen gehören zu diesem Browser;
  *   die Revision muss zum Gespeicherten passen, sonst lehnt checkProgressPut das Speichern als veraltet ab).
@@ -164,6 +169,7 @@ export function mergeProgress(current: Progress, incoming: Progress): Progress {
     markiert: mergeRecord(current.markiert, incoming.markiert, newerMarkierung),
     diagramme: mergeRecord(current.diagramme, incoming.diagramme, newerUebung),
     diagrammDays: mergeDays(current.diagrammDays, incoming.diagrammDays),
+    hervorhebungen: mergeRecord(current.hervorhebungen, incoming.hervorhebungen, newerHervorhebung),
     settings: current.settings,
   };
 }

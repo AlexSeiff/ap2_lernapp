@@ -60,7 +60,7 @@ describe('Markierungen – Format Version 7', () => {
     const migrated = migrateProgress(raw);
     expect(PROGRESS_VERSION).toBeGreaterThanOrEqual(7);
     expect(migrated).toEqual(
-      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {} }),
+      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, markiert: {}, diagramme: {}, diagrammDays: {}, hervorhebungen: {} }),
     );
     expect(checkProgressPut(migrated, raw)).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35 } });
   });
@@ -68,7 +68,9 @@ describe('Markierungen – Format Version 7', () => {
   it('Version 7 lädt unverändert, auch entmarkierte Einträge und markierte Karten ohne Lernstand', () => {
     const raw = JSON.parse(roh('fortschritt-v7-2026-10-09.json'));
     const migrated = migrateProgress(raw);
-    expect(migrated).toEqual(ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, diagramme: {}, diagrammDays: {} }));
+    expect(migrated).toEqual(
+      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, diagramme: {}, diagrammDays: {}, hervorhebungen: {} }),
+    );
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
     expect([...markierteIds(migrated)].sort()).toEqual(['01-pf1', 'FB-normalisierung']);
     expect(migrated.cards['FB-normalisierung']).toBeUndefined();

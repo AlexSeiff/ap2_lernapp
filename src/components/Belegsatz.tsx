@@ -9,6 +9,7 @@ import type { Section } from '../../shared/types';
 import { useStore } from '../lib/store';
 import { Icon, type IconName } from './Icon';
 import { Markdown } from './Markdown';
+import { Textmarker } from './Textmarker';
 
 const FormelUebersicht = lazy(() => import('./PruefungsAnhang').then((m) => ({ default: m.FormelUebersicht })));
 const SqlAuszug = lazy(() => import('./PruefungsAnhang').then((m) => ({ default: m.SqlAuszug })));
@@ -134,7 +135,9 @@ export function AnhangPanel({
             (situation ?? []).map((a) => (
               <section key={a.id} className="situation-teil">
                 <h3>{a.title}</h3>
-                <Markdown source={false}>{a.markdown}</Markdown>
+                <Textmarker bereich={a.id}>
+                  <Markdown source={false}>{a.markdown}</Markdown>
+                </Textmarker>
               </section>
             ))
           ) : (

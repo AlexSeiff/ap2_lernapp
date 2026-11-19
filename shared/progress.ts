@@ -76,6 +76,27 @@ export type Markierung = {
   am: string;
 };
 
+/** Eine markierte Textstelle (Textmarker, seit Version 10). */
+export type Textmarke = {
+  /** Beginn und Ende (exklusiv) als Zeichenstellen im Text des Bereichs, so wie er auf der Seite steht. */
+  von: number;
+  bis: number;
+  /** Der markierte Wortlaut – zur Kontrolle: passt er nicht mehr zum Text (Aufgabe geändert), wird die Marke nicht angezeigt. */
+  text: string;
+  /** Farbe 1 oder 2. */
+  farbe: number;
+};
+
+/**
+ * Alle Textmarken eines Bereichs (Aufgabentext, Ausgangssituation …), Schlüssel = Id des Bereichs. Eine leere Liste bleibt mit
+ * Zeitpunkt stehen, damit das Zusammenführen zweier Stände ein Entfernen erkennt (wie bei `Markierung`).
+ */
+export type Hervorhebung = {
+  marken: Textmarke[];
+  /** Zeitpunkt der letzten Änderung (ISO, mit Uhrzeit). */
+  am: string;
+};
+
 export type JournalEntry = {
   taskId: string;
   addedAt: string;
@@ -234,10 +255,12 @@ export type Progress = {
   diagramme: Record<string, DiagrammState>;
   /** Anzahl geprüfter Diagramm-Übungen je lokalem Datum, für die Lernserie (seit Version 8, ältere Dateien: leer). */
   diagrammDays: Record<string, number>;
+  /** Textmarken in Aufgabentexten und Ausgangssituationen je Bereichs-Id (seit Version 10, ältere Dateien: leer). */
+  hervorhebungen: Record<string, Hervorhebung>;
 };
 
 /** Aktuelle Formatversion von data/fortschritt.json. Bei jeder Formatänderung erhöhen und in MIGRATIONS nachziehen. */
-export const PROGRESS_VERSION = 9;
+export const PROGRESS_VERSION = 10;
 
 export const emptyProgress = (): Progress => ({
   version: PROGRESS_VERSION,
@@ -256,6 +279,7 @@ export const emptyProgress = (): Progress => ({
   markiert: {},
   diagramme: {},
   diagrammDays: {},
+  hervorhebungen: {},
 });
 
 type Raw = Record<string, unknown>;
@@ -397,6 +421,19 @@ function migrateMarkierung(v: unknown): Markierung | undefined {
   return { ...v, an: v.an, am: v.am };
 }
 
+function migrateTextmarke(v: unknown): Textmarke | undefined {
+  if (!isObject(v) || typeof v.text !== 'string') return undefined;
+  const { von, bis } = v;
+  if (typeof von !== 'number' || typeof bis !== 'number' || !Number.isInteger(von) || !Number.isInteger(bis) || von < 0 || bis <= von)
+    return undefined;
+  return { von, bis, text: v.text, farbe: v.farbe === 2 ? 2 : 1 };
+}
+
+function migrateHervorhebung(v: unknown): Hervorhebung | undefined {
+  if (!isObject(v) || typeof v.am !== 'string' || !Array.isArray(v.marken)) return undefined;
+  return { ...v, am: v.am, marken: v.marken.map(migrateTextmarke).filter((m) => m !== undefined) };
+}
+
 /** Ist `v` ein gültiges Kalenderdatum im Format YYYY-MM-DD? */
 export function isIsoDate(v: unknown): v is string {
   if (typeof v !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
@@ -509,6 +546,8 @@ const MIGRATIONS: Record<number, (raw: Raw) => Raw> = {
   7: (raw) => ({ ...raw, version: 8 }),
   // 8 → 9: Übungsklausuren im Format der Altklausuren – Aufgaben mit neuem Code ziehen um (shared/aufgabenUmzug.ts).
   8: (raw) => ({ ...zieheAufgabenUm(raw, AUFGABEN_UMZUG_V9), version: 9 }),
+  // 9 → 10: Textmarken (hervorhebungen); starten leer, aufgefüllt wird unten in migrateProgress.
+  9: (raw) => ({ ...raw, version: 10 }),
 };
 
 /**
@@ -544,6 +583,7 @@ export function migrateProgress(raw: unknown): Progress {
     markiert: filterRecord(data.markiert, migrateMarkierung),
     diagramme: filterRecord(data.diagramme, migrateDiagrammState),
     diagrammDays: filterRecord(data.diagrammDays, dayCount),
+    hervorhebungen: filterRecord(data.hervorhebungen, migrateHervorhebung),
   };
 }
 
@@ -581,6 +621,18 @@ export const CardStateSchema = z.looseObject({
 
 export const MarkierungSchema = z.looseObject({
   an: z.boolean(),
+  am: z.string(),
+});
+
+export const TextmarkeSchema = z.looseObject({
+  von: z.number().int().min(0),
+  bis: z.number().int().min(1),
+  text: z.string(),
+  farbe: z.number(),
+});
+
+export const HervorhebungSchema = z.looseObject({
+  marken: z.array(TextmarkeSchema),
   am: z.string(),
 });
 
@@ -665,6 +717,7 @@ export const ProgressSchema = z.looseObject({
   markiert: z.record(z.string(), MarkierungSchema).default({}),
   diagramme: z.record(z.string(), DiagrammStateSchema).default({}),
   diagrammDays: z.record(z.string(), z.number()).default({}),
+  hervorhebungen: z.record(z.string(), HervorhebungSchema).default({}),
 });
 
 export type ProgressData = z.infer<typeof ProgressSchema>;

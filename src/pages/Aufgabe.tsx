@@ -6,7 +6,7 @@ import { AnhangPanel, hatAnhang } from '../components/Belegsatz';
 import { FehlergrundWahl } from '../components/FehlergrundWahl';
 import { Markdown } from '../components/Markdown';
 import { SicherheitWahl } from '../components/SicherheitWahl';
-import { Attachments, GradePanel, TaskText } from '../components/TaskParts';
+import { GradePanel, TaskText } from '../components/TaskParts';
 import { anhangFuer } from '../lib/anhang';
 import { aufgabenImModus, naechsteAufgabe } from '../lib/aufgabenFolge';
 import { formatPoints } from '../lib/grading';
@@ -102,7 +102,6 @@ function AufgabeSeite({ taskId }: { taskId: string | undefined }) {
           {new Date(journal.due).toLocaleDateString('de-DE')}
         </p>
       )}
-      {topic?.exam && <Attachments items={topic.exam.attachments} />}
       {hatAnhang({ ...anhang, situation: topic?.exam?.attachments }) && (
         <div className={`anhang-leiste no-print${topic?.exam?.attachments.length ? ' klebt' : ''}`}>
           <AnhangPanel {...anhang} situation={topic?.exam?.attachments} />

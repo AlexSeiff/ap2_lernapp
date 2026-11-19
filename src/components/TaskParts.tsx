@@ -9,6 +9,7 @@ import { useStore } from '../lib/store';
 import { decodeAnswer } from './AnswerInput';
 import { Markdown } from './Markdown';
 import { MarkierStern } from './MarkierStern';
+import { Textmarker } from './Textmarker';
 import { Icon } from './Icon';
 
 const SqlPruefung = lazy(() => import('./SqlPruefung'));
@@ -29,13 +30,15 @@ export function TaskText({ task, showMeta }: { task: Task; showMeta?: boolean })
           <MarkierStern id={task.id} gegenstand="Aufgabe" nurIcon taste={showMeta} label={`Aufgabe ${task.code} markieren`} />
         </span>
       </div>
-      <Markdown source={false} operatoren>
-        {task.type === 'lueckentext'
-          ? numberBlanks(task.markdown)
-          : editorFuer(task) === 'werte'
-            ? ohneVorlageTabelle(task.markdown) // die Tabelle steht als Antworttabelle darunter
-            : task.markdown}
-      </Markdown>
+      <Textmarker bereich={task.id}>
+        <Markdown source={false} operatoren>
+          {task.type === 'lueckentext'
+            ? numberBlanks(task.markdown)
+            : editorFuer(task) === 'werte'
+              ? ohneVorlageTabelle(task.markdown) // die Tabelle steht als Antworttabelle darunter
+              : task.markdown}
+        </Markdown>
+      </Textmarker>
     </div>
   );
 }
@@ -49,7 +52,9 @@ export function Attachments({ items, open }: { items: Section[]; open?: boolean 
           <summary>
             <Icon name="paperclip" /> {a.title}
           </summary>
-          <Markdown source={false}>{a.markdown}</Markdown>
+          <Textmarker bereich={a.id}>
+            <Markdown source={false}>{a.markdown}</Markdown>
+          </Textmarker>
         </details>
       ))}
     </div>
