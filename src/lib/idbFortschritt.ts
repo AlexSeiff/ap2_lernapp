@@ -22,9 +22,10 @@ export interface IdbFortschritt {
   readText(): Promise<string | null>;
   /** Gespeicherter Stand oder null (noch nichts gespeichert). */
   read(): Promise<unknown>;
-  save(body: unknown): Promise<void>;
+  /** Speichert und liefert den Text, der vorher gespeichert war (für die Tagessicherung), oder null. */
+  save(body: unknown): Promise<string | null>;
   /** Bewusstes Ersetzen aus Daten & Import; inzwischen fremd gespeicherte Änderungen bleiben erhalten. */
-  replace(body: unknown): Promise<void>;
+  replace(body: unknown): Promise<string | null>;
   /**
    * Übernimmt einen fertigen Stand (Text), aber nur, wenn noch nichts gespeichert ist – für den einmaligen Umzug aus dem localStorage.
    * Liefert 'uebernommen' oder 'vorhanden' (es war schon etwas da, nichts wurde überschrieben).
@@ -52,23 +53,29 @@ export function oeffneDb(factory: () => IDBFactory = () => indexedDB, timeoutMs 
       reject(e);
       return;
     }
-    const timer = setTimeout(() => reject(new Error('IndexedDB antwortet nicht')), timeoutMs);
+    // Nach Ablauf der Zeit (oder blockiert) gilt das Öffnen als gescheitert. Öffnet die Verbindung später doch noch, wird sie sofort geschlossen, damit sie
+    // nicht ohne Besitzer offen bleibt und eine spätere Datenbankänderung blockiert.
+    let aufgegeben = false;
+    const gibAuf = (fehler: Error) => {
+      aufgegeben = true;
+      clearTimeout(timer);
+      reject(fehler);
+    };
+    const timer = setTimeout(() => gibAuf(new Error('IndexedDB antwortet nicht')), timeoutMs);
     open.onupgradeneeded = () => {
       if (!open.result.objectStoreNames.contains(STORE)) open.result.createObjectStore(STORE);
     };
     open.onsuccess = () => {
       clearTimeout(timer);
+      if (aufgegeben) {
+        open.result.close();
+        return;
+      }
       open.result.onversionchange = () => open.result.close();
       resolve(open.result);
     };
-    open.onerror = () => {
-      clearTimeout(timer);
-      reject(open.error ?? new Error('IndexedDB konnte nicht geöffnet werden'));
-    };
-    open.onblocked = () => {
-      clearTimeout(timer);
-      reject(new Error('IndexedDB ist blockiert (die App ist in einem alten Tab geöffnet)'));
-    };
+    open.onerror = () => gibAuf(open.error ?? new Error('IndexedDB konnte nicht geöffnet werden'));
+    open.onblocked = () => gibAuf(new Error('IndexedDB ist blockiert (die App ist in einem alten Tab geöffnet)'));
   });
 }
 
@@ -139,20 +146,20 @@ export function createIdbFortschritt(
     }
   };
 
-  async function schreibe(body: unknown, replace: boolean): Promise<void> {
+  async function schreibe(body: unknown, replace: boolean): Promise<string | null> {
     try {
-      await laufe(
+      return await laufe(
         'readwrite',
         (store, text) => {
           const { text: neu, progress } = berechneSpeicherstand(body, lese(store, text), known, replace);
           store.put(neu, KEY);
-          return progress;
+          return { progress, vorher: text };
         },
-        (progress) => {
+        ({ progress }) => {
           known = progress;
           melde();
         },
-      );
+      ).then((r) => r.vorher);
     } catch (e) {
       throw alsSpeicherFehler(e);
     }

@@ -260,3 +260,22 @@ describe('Umzug mit den echten Lernständen', () => {
     }
   });
 });
+
+describe('oeffneDb: späte Verbindung', () => {
+  it('eine Verbindung, die erst nach Ablauf der Zeit öffnet, wird sofort geschlossen', async () => {
+    vi.useFakeTimers();
+    try {
+      const close = vi.fn();
+      const anfrage: { result?: unknown; onsuccess?: () => void } = {};
+      const factory = () => ({ open: () => anfrage }) as unknown as IDBFactory;
+      const ergebnis = oeffneDb(factory, 100).catch((e: Error) => e);
+      await vi.advanceTimersByTimeAsync(150);
+      expect(((await ergebnis) as Error).message).toMatch(/antwortet nicht/);
+      anfrage.result = { close };
+      anfrage.onsuccess?.();
+      expect(close).toHaveBeenCalledOnce();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});

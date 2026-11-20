@@ -76,4 +76,32 @@ test.describe('Zwei Tabs', () => {
     await a.getByRole('button', { name: /Gewusst/ }).click();
     await expect.poll(async () => Object.keys(((await lernstand(a))?.cards ?? {}) as object).length).toBe(2);
   });
+
+  test('beide Tabs mit gleichzeitig ungespeicherten Änderungen: keine Endlosschleife, nichts bleibt auf „Speichert …“ stehen', async ({
+    context,
+  }) => {
+    const a = await context.newPage();
+    const b = await context.newPage();
+    const zaehler = await context.newPage();
+    await oeffne(a, '/einstellungen');
+    await oeffne(b, '/einstellungen');
+    await oeffne(zaehler, '/');
+    // Ein dritter Tab zählt die Nachrichten auf dem Kanal des Lernstands.
+    await zaehler.evaluate(() => {
+      const fenster = window as unknown as { __nachrichten: number };
+      fenster.__nachrichten = 0;
+      new BroadcastChannel('ap2-lernstand').onmessage = () => fenster.__nachrichten++;
+    });
+
+    // Beide Tabs ändern kurz nacheinander (innerhalb der Verzögerung des Speicherns): Beide haben dann Ungespeichertes, wenn der andere schreibt.
+    await a.locator('input[type="date"]').first().fill('2027-01-15');
+    await b.locator('input[type="date"]').first().fill('2027-02-20');
+    await a.waitForTimeout(4000);
+
+    const nachrichten = await zaehler.evaluate(() => (window as unknown as { __nachrichten: number }).__nachrichten);
+    expect(nachrichten, 'Die Tabs stoßen sich endlos gegenseitig an').toBeLessThanOrEqual(6);
+    for (const tab of [a, b]) await expect(tab.getByText('Speichert …')).toHaveCount(0);
+    const stand = await lernstand(a);
+    expect(['2027-01-15', '2027-02-20']).toContain((stand?.settings as { examDate?: string }).examDate);
+  });
 });

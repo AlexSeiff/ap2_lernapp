@@ -60,12 +60,25 @@ export function createProgressSaver({ send, onState, delay = SAVE_DELAY_MS }: Sa
     get pending() {
       return latest !== null && changeSeq !== savedSeq;
     },
+    /** Der Stand, der noch nicht gespeichert ist (für die Sicherheitskopie beim Schließen), sonst null. */
+    get pendingState(): Progress | null {
+      return latest !== null && changeSeq !== savedSeq ? latest : null;
+    },
     /** Der lokale Schreibweg schreibt synchron, bevor sein Promise zurückkehrt (auch bei pagehide). */
     flush() {
       if (this.pending) {
         clearTimeout(timer);
+        const seq = changeSeq;
+        const sentWriter = writer;
         return writer(latest as Progress).then(
-          () => true,
+          () => {
+            // Wie beim normalen Speichern als erledigt vermerken. Sonst bliebe „ausstehend“ für immer stehen, die Kopfzeile zeigte dauerhaft „Speichert …“,
+            // und zwei Tabs mit ungespeicherten Änderungen würden sich über watchOtherTabs endlos gegenseitig zum Schreiben anstoßen.
+            savedSeq = Math.max(savedSeq, seq);
+            if (seq === changeSeq && writer === sentWriter) writer = send;
+            onState(savedSeq === changeSeq ? 'gespeichert' : 'speichert', null);
+            return true;
+          },
           (e: Error) => {
             onState('fehler', e.message);
             return false;

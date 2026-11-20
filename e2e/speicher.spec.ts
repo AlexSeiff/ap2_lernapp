@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test } from '@playwright/test';
+import { migrateProgress } from '../domain/progress';
 import { lernstand, oeffne, warteAufSpeichern } from './hilfen';
 
 // Wo liegt der Lernstand? Seit Phase 5 des Umbauplans in IndexedDB; der alte localStorage-Eintrag zieht einmal verlustfrei um und bleibt
@@ -16,11 +17,8 @@ const mitAltemStand = (page: import('@playwright/test').Page, ohneIndexedDb = fa
   page.addInitScript(
     ({ text, ohne }) => {
       if (ohne) {
-        Object.defineProperty(window, 'indexedDB', {
-          get() {
-            throw new Error('IndexedDB gesperrt');
-          },
-        });
+        // Wie in Browsern ohne IndexedDB: Es gibt sie schlicht nicht (typeof liefert 'undefined').
+        Object.defineProperty(window, 'indexedDB', { value: undefined, configurable: true });
       }
       if (localStorage.getItem('ap2-fortschritt') === null) localStorage.setItem('ap2-fortschritt', text);
     },
@@ -72,5 +70,66 @@ test.describe('Lernstand speichern', () => {
     // Der übrige Stand ist unverändert erhalten, und es wurde nichts umgezogen.
     expect((await imLocalStorage())!.attempts).toEqual(ALT_STAND.attempts);
     expect(await page.evaluate(() => localStorage.getItem('ap2-fortschritt-in-indexeddb'))).toBeNull();
+  });
+
+  test('eine übrig gebliebene Sicherheitskopie vom Schließen des Tabs wird beim nächsten Start eingearbeitet', async ({ page }) => {
+    await mitAltemStand(page);
+    // So, als wäre der Tab geschlossen worden, bevor IndexedDB fertig geschrieben hatte: Die Kopie steht im localStorage.
+    const kopie = JSON.stringify(
+      migrateProgress({
+        ...ALT_STAND,
+        attempts: [...ALT_STAND.attempts, { taskId: '99-Z9', date: '2026-11-20', points: 1, max: 1, mode: 'einzel' }],
+      }),
+    );
+    await page.addInitScript((text) => {
+      if (localStorage.getItem('ap2-fortschritt-nachtrag') === null && localStorage.getItem('__kopie-gesetzt') === null) {
+        localStorage.setItem('ap2-fortschritt-nachtrag', text);
+        localStorage.setItem('__kopie-gesetzt', '1');
+      }
+    }, kopie);
+    await page.goto('./#/');
+    await expect(page.locator('.loading')).toHaveCount(0, { timeout: 30_000 });
+    await expect
+      .poll(async () => ((await lernstand(page))?.attempts as { taskId: string }[] | undefined)?.some((a) => a.taskId === '99-Z9'))
+      .toBe(true);
+    const stand = (await lernstand(page))!;
+    expect((stand.attempts as unknown[]).length).toBe(ALT_STAND.attempts.length + 1);
+    expect(await page.evaluate(() => localStorage.getItem('ap2-fortschritt-nachtrag'))).toBeNull();
+  });
+
+  test('IndexedDB fällt nach dem Umzug aus und kommt wieder: Eingaben aus der Ausfallzeit sind danach da', async ({ page }) => {
+    await page.addInitScript((text) => {
+      if (localStorage.getItem('__idbAus') !== null) {
+        // Wie in Browsern ohne IndexedDB: Es gibt sie schlicht nicht (typeof liefert 'undefined').
+        Object.defineProperty(window, 'indexedDB', { value: undefined, configurable: true });
+      }
+      if (localStorage.getItem('ap2-fortschritt') === null) localStorage.setItem('ap2-fortschritt', text);
+    }, ALT);
+
+    // Tag 1: Umzug nach IndexedDB.
+    await oeffne(page, '/einstellungen');
+    await warteAufSpeichern(page);
+
+    // Tag 2: IndexedDB geht nicht. Die App läuft mit der älteren Kopie im localStorage weiter und sagt das auf Daten & Import.
+    await page.evaluate(() => localStorage.setItem('__idbAus', '1'));
+    await page.reload();
+    await oeffne(page, '/daten');
+    await expect(page.getByRole('alert').filter({ hasText: 'IndexedDB ist in diesem Browser gerade nicht verfügbar' })).toBeVisible();
+    await expect(page.getByText('Gespeichert in diesem Browser (localStorage)')).toBeVisible();
+    await oeffne(page, '/einstellungen');
+    await page.locator('input[type="date"]').first().fill(NEUES_DATUM);
+    await expect
+      .poll(async () => {
+        const raw = await page.evaluate(() => localStorage.getItem('ap2-fortschritt'));
+        return raw ? examDateIn(JSON.parse(raw) as Record<string, unknown>) : undefined;
+      })
+      .toBe(NEUES_DATUM);
+
+    // Tag 3: IndexedDB geht wieder, und die Eingabe von Tag 2 ist da.
+    await page.evaluate(() => localStorage.removeItem('__idbAus'));
+    await page.reload();
+    await expect(page.locator('.loading')).toHaveCount(0, { timeout: 30_000 });
+    await expect.poll(async () => examDateIn(await lernstand(page))).toBe(NEUES_DATUM);
+    expect(((await lernstand(page))!.attempts as unknown[]).length).toBe(ALT_STAND.attempts.length);
   });
 });

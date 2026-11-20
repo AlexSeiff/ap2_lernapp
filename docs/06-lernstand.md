@@ -120,6 +120,16 @@ type Settings = {
   - **Fallback:** if IndexedDB is not available (blocked, some private windows, no answer within 4 s) or a step fails, the app keeps working with the
     `localStorage` store (`src/lib/localFortschritt.ts`, key `ap2-fortschritt`, unreadable value → `ap2-fortschritt-defekt`) for that session. Nothing is lost.
   - Tests: `tests/idbFortschritt.test.ts` (with `fake-indexeddb`, incl. all real progress files from `data/` when the folder exists), `e2e/speicher.spec.ts`.
+  - **Closing the tab** (`src/lib/nachtrag.ts`): IndexedDB writes asynchronously, and a browser does not guarantee that a write started in `pagehide` still finishes (Safari and phones are the likeliest to drop it). So the
+    writer starts at once (it returns the previous text for the daily backup, no read before it) and `pagehide` also writes the not-yet-saved state **synchronously** to `localStorage` (`ap2-fortschritt-nachtrag`).
+    When the save is confirmed the tab deletes that copy; otherwise the next start merges it into the progress (`arbeiteNachtragEin`: the copy is the younger state, its settings win) and deletes it.
+  - **IndexedDB failing after the move** (`arbeiteAusfallAenderungenEin`): the move stores a fingerprint of the copied text in `ap2-fortschritt-in-indexeddb` (`{am, hash}`). A session without IndexedDB keeps working on the old
+    `localStorage` copy; at the next start with IndexedDB a changed fingerprint means "edits from the outage", which are merged into the IndexedDB state (nothing is lost). Without a marker (older move) only the starting
+    point is remembered. While the fallback is active after a move, *Daten & Import* shows a warning and names the real store (`api.speicherInfo()`).
+  - **Saving**: `flush()` (on `pagehide` and when another tab saved) marks what it wrote as saved. Before, "pending" stayed set forever: the header showed "Speichert ...", and two tabs with unsaved edits triggered each other
+    endlessly through `watchOtherTabs`. Taking over another tab's state (`src/lib/fremdUebernahme.ts`) merges instead of overwrites when the user did something in the meantime.
+  - Tests: `tests/progressSaver.test.ts` (flush, endless loop), `tests/nachtrag.test.ts`, `tests/ausfallNachUmzug.test.ts` (day 1 move / day 2 outage with edits / day 3 back), `tests/fremdUebernahme.test.ts`,
+    `tests/speichernOhneVorlesen.test.ts`, and in the browser `e2e/zweiTabs.spec.ts` (both tabs with unsaved edits: message count bounded), `e2e/speicher.spec.ts` (copy at start, outage and return with warning).
 - **Pages protection (phase 3):**
   - `navigator.storage.persist()` once per page load after the first successful save (`persistentStorage.ts`, via `createStaticApi`);
     *Daten & Import* shows "Speicher dauerhaft: ja/nein/unbekannt". Unsupported or throwing → ignored.

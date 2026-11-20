@@ -25,11 +25,14 @@ export function createLocalProgressStore(storage: () => KeyValueStorage) {
     }
   }
 
-  function write(body: unknown, replace = false): void {
+  /** Schreibt und liefert den Text, der vorher gespeichert war (für die Tagessicherung), oder null. */
+  function write(body: unknown, replace = false): string | null {
     try {
+      const vorher = storage().getItem(PROGRESS_KEY);
       const { text, progress } = berechneSpeicherstand(body, readRaw(), known, replace);
       storage().setItem(PROGRESS_KEY, text);
       known = progress;
+      return vorher;
     } catch (e) {
       throw alsSpeicherFehler(e);
     }

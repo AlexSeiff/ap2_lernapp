@@ -145,4 +145,54 @@ describe('createProgressSaver', () => {
     await vi.runAllTimersAsync();
     expect(send).toHaveBeenCalledOnce();
   });
+
+  it('nach einem erfolgreichen Flush ist nichts mehr ausstehend und der Zustand heißt „gespeichert“', async () => {
+    const send = vi.fn().mockResolvedValue(undefined);
+    const saver = createProgressSaver({ send, onState });
+    saver.schedule(withAttempts(2));
+    expect(saver.pending).toBe(true);
+    expect(await saver.flush()).toBe(true);
+    expect(saver.pending).toBe(false);
+    expect(states.at(-1)).toEqual(['gespeichert', null]);
+    // Ein zweiter Flush hat nichts mehr zu schreiben.
+    expect(await saver.flush()).toBe(true);
+    expect(send).toHaveBeenCalledOnce();
+  });
+
+  it('eine Änderung während des Flush bleibt ausstehend und wird danach gespeichert', async () => {
+    const storage = fakeStorage();
+    const saver = createProgressSaver({ send: storage.send, onState });
+    saver.schedule(withAttempts(1));
+    const flushed = saver.flush();
+    saver.schedule(withAttempts(2));
+    storage.calls[0].resolve();
+    expect(await flushed).toBe(true);
+    expect(saver.pending).toBe(true);
+    await vi.advanceTimersByTimeAsync(400);
+    expect(storage.calls.map((c) => (c.body as Progress).attempts.length)).toEqual([1, 2]);
+    storage.calls[1].resolve();
+    await vi.runAllTimersAsync();
+    expect(saver.pending).toBe(false);
+    expect(states.at(-1)).toEqual(['gespeichert', null]);
+  });
+
+  it('zwei Tabs mit ungespeicherten Änderungen stoßen sich nicht endlos gegenseitig an', async () => {
+    // Jeder Tab flusht, wenn der andere schreibt (so arbeitet watchOtherTabs in store.tsx). Mit einem hängenbleibenden „ausstehend“ würde das ewig weitergehen.
+    let schreibvorgaenge = 0;
+    const tab: Record<'a' | 'b', ReturnType<typeof createProgressSaver>> = {} as never;
+    const schreibe = (anderer: 'a' | 'b') =>
+      vi.fn(async () => {
+        schreibvorgaenge++;
+        if (schreibvorgaenge < 50) queueMicrotask(() => void tab[anderer].flush());
+      });
+    tab.a = createProgressSaver({ send: schreibe('b'), onState });
+    tab.b = createProgressSaver({ send: schreibe('a'), onState });
+    tab.a.schedule(withAttempts(1));
+    tab.b.schedule(withAttempts(2));
+    await tab.a.flush();
+    await vi.runAllTimersAsync();
+    expect(schreibvorgaenge).toBeLessThanOrEqual(3);
+    expect(tab.a.pending).toBe(false);
+    expect(tab.b.pending).toBe(false);
+  });
 });

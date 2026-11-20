@@ -1,6 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { hatDetails, type KernInhalt, type StartInhalt } from '../../domain/texte';
 import { api } from './api';
+import { uebernehmeFremdenStand } from './fremdUebernahme';
+import { loescheNachtrag, schreibeNachtrag } from './nachtrag';
 import { createProgressSaver, type SaveState } from './progressSaver';
 import { emptyProgress, migrateProgress, type Progress } from '../../domain/progress';
 
@@ -67,6 +69,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       onState: (state, err) => {
         setSaveState(state);
         if (err !== undefined) setSaveError(err);
+        // Alles gespeichert: Die Sicherheitskopie vom Schließen (nachtrag.ts) wird nicht mehr gebraucht.
+        if (state === 'gespeichert') loescheNachtrag();
       },
     }),
   );
@@ -85,11 +89,25 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   // Beim Schließen des Tabs noch nicht bestätigte Änderungen senden.
   useEffect(() => {
     const flush = () => {
-      saver.flush();
+      // Zuerst die garantiert synchrone Kopie (IndexedDB schreibt asynchron und wird beim Schließen eventuell nicht mehr fertig), dann der normale Schreibvorgang.
+      const offen = saver.pendingState;
+      if (offen) schreibeNachtrag(offen);
+      void saver.flush();
     };
     window.addEventListener('pagehide', flush);
     return () => window.removeEventListener('pagehide', flush);
   }, [saver]);
+
+  // Den neuen Stand außerhalb des State-Updaters berechnen und speichern – Updater müssen rein sein (StrictMode ruft sie doppelt auf).
+  const commit = useCallback(
+    (next: Progress, write?: typeof api.saveProgress) => {
+      progressRef.current = next;
+      setProgress(next);
+      setFirstVisit(false);
+      saver.schedule(next, write);
+    },
+    [saver],
+  );
 
   // Fremden Stand übernehmen; eigene ausstehende Änderungen vorher mit dem aktuellen Speicher zusammenführen. Die Seite lädt dabei
   // nicht neu: Eine laufende Kartenrunde oder eine angefangene Klausurantwort in diesem Tab bleibt erhalten.
@@ -102,23 +120,17 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             if (!saved) return;
             const stored = await api.progress();
             if (!stored) return;
-            progressRef.current = migrateProgress(stored);
-            setProgress(progressRef.current);
+            // Hat der Nutzer in der Zwischenzeit etwas getan (ausstehend), wird sein Tipp mit dem gespeicherten Stand zusammengeführt statt überschrieben.
+            const { stand, speichern } = uebernehmeFremdenStand(progressRef.current ?? emptyProgress(), stored, saver.pending);
+            if (speichern) commit(stand);
+            else {
+              progressRef.current = stand;
+              setProgress(stand);
+            }
           })
           .catch((e: Error) => setSaveError(e.message));
       }),
-    [saver],
-  );
-
-  // Den neuen Stand außerhalb des State-Updaters berechnen und speichern – Updater müssen rein sein (StrictMode ruft sie doppelt auf).
-  const commit = useCallback(
-    (next: Progress, write?: typeof api.saveProgress) => {
-      progressRef.current = next;
-      setProgress(next);
-      setFirstVisit(false);
-      saver.schedule(next, write);
-    },
-    [saver],
+    [saver, commit],
   );
 
   const update = useCallback((fn: (p: Progress) => Progress) => commit(fn(progressRef.current ?? emptyProgress())), [commit]);

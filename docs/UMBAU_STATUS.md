@@ -377,3 +377,22 @@ Das ist fragil in einem anderen Sinn als der Parser: Ein Autor, der eine Aufgabe
 ## Phase 6 abgeschlossen (Alternative b)
 
 Noch nicht begonnen.
+
+## Nach dem Review: Korrekturen am Speicher (20.11.2026)
+
+Der Code-Review des Branches (`/code-review high main..umbau`) fand vier wichtige und vier kleine Punkte im Speicher (Phase 2 und 5). Jeder wurde zuerst mit einem Test nachgestellt, dann behoben (Gegenproben, wo sinnvoll).
+
+| Befund | Was war falsch | Korrektur |
+|---|---|---|
+| 1 wichtig | `saver.flush()` vermerkte das Schreiben nie als erledigt: "ausstehend" blieb für immer, die Kopfzeile zeigte dauerhaft "Speichert ...", und zwei Tabs mit ungespeicherten Änderungen stießen sich endlos gegenseitig an (im Test bis zur Sicherung bei 50 Schreibvorgängen). Entstanden in Phase 2. | `flush()` zieht `savedSeq` nach und meldet "gespeichert" (`src/lib/progressSaver.ts`). Tests: Saver (Flush, Änderung während des Flush, Endlosschleife zweier Tabs) und im Browser mit einem dritten Tab, der die Nachrichten zählt. |
+| 2 wichtig | Beim Schließen des Tabs begann das Schreiben in IndexedDB erst nach einem zusätzlichen Lesevorgang; Browser garantieren nicht, dass es fertig wird. | Das Speichern liefert den vorherigen Text für die Tagessicherung selbst zurück (kein Lesen davor), und `pagehide` schreibt eine **synchrone Sicherheitskopie** nach `localStorage`, die nach dem Speichern gelöscht oder sonst beim nächsten Start eingearbeitet wird (`src/lib/nachtrag.ts`). |
+| 3 wichtig | Fiel IndexedDB nach dem Umzug in einer Sitzung aus, liefen Eingaben in die alte `localStorage`-Kopie und waren verloren, sobald IndexedDB wieder ging. | Beim Umzug wird ein Fingerabdruck des kopierten Texts gemerkt; ein geänderter Fingerabdruck beim nächsten Start mit IndexedDB heißt "Eingaben aus dem Ausfall" und wird zusammengeführt. Daten & Import warnt im Rückfall und nennt den echten Speicher. Test: Tag 1 Umzug, Tag 2 Ausfall mit Eingabe, Tag 3 zurück (Gegenprobe: ohne die Zusammenführung scheitert er); im Browser derselbe Ablauf. |
+| 4 wichtig | Beim Übernehmen des Stands eines anderen Tabs konnte ein Tipp, der erst während des Wartens kam, überschrieben werden. | Reine Entscheidung `uebernehmeFremdenStand` (`src/lib/fremdUebernahme.ts`): Gibt es offene eigene Änderungen, werden beide Stände zusammengeführt und gespeichert, sonst wird der gespeicherte Stand exakt übernommen. |
+| klein | Eine zu spät öffnende IndexedDB-Verbindung wurde nie geschlossen. | `oeffneDb` schließt sie. Test mit künstlich verzögerter Verbindung. |
+| klein | Daten & Import nannte immer "IndexedDB". | Zeigt den tatsächlich genutzten Speicher. |
+| klein, **bewusst nicht geändert** | Nach einem Zusammenführen sei die Vergleichsbasis der eigene statt des gespeicherten Stands, gelöschte Einträge könnten wiederkehren. | Der vorgeschlagene Umbau wurde ausprobiert: Er lässt zwei bestehende richtige Tests scheitern, weil ein Tab, der den fremden Stand noch nicht übernommen hat, seinen eigenen Stand dann als "Rückgang" ablehnt. Im echten Ablauf setzt das Übernehmen über die Nachricht des anderen Tabs die Basis ohnehin neu. Zurückgenommen. |
+| klein, **bewusst nicht geändert** | Eine blockierte IndexedDB verzögert den Start um bis zu 4 s. | Die Wartezeit ist ein Kompromiss gegen vorschnellen Rückfall auf langsamen Geräten (und der Rückfall ist nach Befund 3 nicht mehr verlustbehaftet). Bleibt bei 4 s. |
+
+Beim Nachstellen fiel auf: Ein künstlich "werfendes" `indexedDB` im Browsertest ließ die Seite Daten & Import abstürzen (`typeof indexedDB` warf). Das tut kein echter Browser; der Test simuliert "IndexedDB fehlt" jetzt mit `undefined`.
+
+Pixelvergleich nach den Korrekturen: 88 von 92 Bilder unverändert; die vier von `/daten` wurden bewusst erneuert (295 abweichende Pixel in einem 13 Zeilen hohen Streifen, auf der Nahaufnahme identisch: Glättung, weil der Satz "Gespeichert in diesem Browser (...)" jetzt den Speichernamen als eigenen Ausdruck enthält).

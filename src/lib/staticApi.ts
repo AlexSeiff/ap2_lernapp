@@ -13,13 +13,17 @@ import { PROGRESS_KEY } from './localFortschritt';
 export { BROKEN_KEY, createLocalProgressStore, PROGRESS_KEY } from './localFortschritt';
 
 export function createStaticApi(
-  store: FortschrittsSpeicher & { watch?: (onChange: () => void) => () => void } = createAutoProgressStore(),
+  store: FortschrittsSpeicher & {
+    watch?: (onChange: () => void) => () => void;
+    speicherInfo?: () => Promise<{ art: 'indexeddb' | 'localstorage'; umgezogen: boolean }>;
+  } = createAutoProgressStore(),
   requestPersist: () => Promise<unknown> = createPersistRequest(),
   backups: BrowserBackups = createBrowserBackups(() => openIndexedDbBackups()),
 ) {
-  const persist = async (p: Progress, write: (p: Progress) => Promise<void> | void) => {
-    const before = await store.readText();
-    await write(p);
+  const persist = async (p: Progress, write: (p: Progress) => Promise<string | null | void> | string | null | void) => {
+    // Das Schreiben beginnt sofort (beim Schließen des Tabs zählt jeder zusätzliche Schritt davor) und liefert den vorherigen Stand für die Tagessicherung mit.
+    const result = await write(p);
+    const before = typeof result === 'string' ? result : null;
     // Die Tagessicherung und die Speicherfreigabe dürfen das Speichern nicht aufhalten.
     void backups.backupBeforeSave(before, localDate());
     void requestPersist().catch(() => {});
@@ -50,6 +54,9 @@ export function createStaticApi(
     replaceProgress: (p: Progress) => persist(p, store.replace),
     backups: () => backups.info(),
     readBackup: (date: string) => backups.read(date),
+    /** Welcher Speicher hält den Lernstand, und ist er schon nach IndexedDB umgezogen? (Anzeige auf Daten & Import.) */
+    speicherInfo: async (): Promise<{ art: 'indexeddb' | 'localstorage'; umgezogen: boolean }> =>
+      store.speicherInfo ? store.speicherInfo() : { art: 'localstorage', umgezogen: false },
     watchOtherTabs: (onChange: () => void) => {
       if (store.watch) return store.watch(onChange);
       // Das storage-Ereignis kommt nur in den anderen Tabs an – dieser Tab ist dann veraltet.

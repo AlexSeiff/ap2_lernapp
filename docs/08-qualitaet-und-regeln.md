@@ -67,7 +67,7 @@ The CI runs the same chain (`.github/workflows/pages.yml`); only `main` deploys.
   backup, SQL, diagram exercise, search, theme, Rechenübung with solution, diagram editor, table editor), `handy.spec.ts` (no horizontal overflow at phone
   width), `postits.spec.ts` (the notes at the book edge and the diagram sheet), `zugaenglichkeit.spec.ts` (axe-core, WCAG 2.1 A/AA, 20 pages × light/dark; serious/critical violations fail the test; known open ones are listed in the
   file), `offline.spec.ts` (precache complete, then offline: every main page and a SQL query), `zweiTabs.spec.ts` (two tabs: nothing is lost, no reload loop, a running card round and a half-written exam answer survive), `speicher.spec.ts` (the
-  move from `localStorage` to IndexedDB and the fallback). The helper `lernstand()` in `e2e/hilfen.ts` reads IndexedDB and **does not open a missing database**
+  move from `localStorage` to IndexedDB, the fallback, the copy from closing a tab, and IndexedDB failing and returning). The helper `lernstand()` in `e2e/hilfen.ts` reads IndexedDB and **does not open a missing database**
   (that would stop the app from creating its store).
 - **Pixel comparison** (`e2e/visuell.spec.ts`, only with `E2E_VISUELL=1`, reference images local in `e2e-visuell/`): for refactorings that must not change the
   look (§ 3.2). Allow 0 differing pixels; masks only for content that changes by itself (import time on `/daten`).
