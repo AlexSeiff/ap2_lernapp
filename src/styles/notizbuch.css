@@ -161,6 +161,8 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 /* ── Knöpfe ──────────────────────────────────────────────────────────────── */
 button, .button { border-radius: 6px; }
 button:not([class]), .button:not(.secondary) { background-image: none; box-shadow: 0 3px 0 color-mix(in srgb, var(--accent-fill) 60%, #000); }
+/* Tastenhinweis auf gefüllten Knöpfen: durchscheinend statt weißer Fläche mit weißer Schrift. */
+button:not([class]) kbd, .button:not(.secondary) kbd { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.35); color: inherit; }
 button.secondary, .button.secondary { background: var(--papier); color: var(--accent); border: 2px solid var(--accent); }
 button.good, button.mid, button.low { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28); }
 .mode-switch { border-radius: 8px; }

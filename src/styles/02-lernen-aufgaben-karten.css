@@ -163,6 +163,7 @@ textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-s
 .leicht-optionen { display: grid; gap: 8px; margin: 12px 0; }
 .leicht-option { justify-content: flex-start; text-align: left; white-space: normal; background: var(--surface); color: var(--text); border: 1px solid var(--border); font-weight: 500; padding: 10px 14px; }
 .leicht-option kbd { flex: none; margin-right: 6px; }
+.leicht-option-text { min-width: 0; overflow-wrap: anywhere; }
 .leicht-option:disabled { opacity: 1; cursor: default; }
 .leicht-option.richtig { background: var(--good-soft); border-color: var(--good); }
 .leicht-option.falsch { background: var(--low-soft); border-color: var(--low); }

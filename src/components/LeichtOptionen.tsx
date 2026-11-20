@@ -27,7 +27,10 @@ export function LeichtOptionen(props: {
           >
             {tasten && !fertig && <kbd>{i + 1}</kbd>}
             {fertig && (o.richtig ? '✓ ' : i === gewaehlt ? '✗ ' : '')}
-            <HochTief text={o.text} />
+            {/* Eigene Hülle: Knöpfe sind Flex-Container, sonst würde jedes Hoch-/Tiefzeichen zu einer eigenen Spalte. */}
+            <span className="leicht-option-text">
+              <HochTief text={o.text} />
+            </span>
           </button>
         );
       })}
