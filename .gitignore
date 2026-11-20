@@ -8,3 +8,6 @@ tsconfig.tsbuildinfo
 *.defekt-*
 # Originalfotos, Ausschnitte und quellennahe Abschriften bleiben lokal.
 /foto_transkription/
+
+playwright-report
+test-results

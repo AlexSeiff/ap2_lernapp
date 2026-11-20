@@ -140,7 +140,7 @@ export function Daten() {
         ) : (
           <p className="ok">✓ Keine Auffälligkeiten – jede Aufgabe hat eine Musterlösung.</p>
         )}
-        <div className="table-wrap">
+        <div className="table-wrap" tabIndex={0} role="region" aria-label="Importstatistik je Thema">
           <table className="stats">
             <thead>
               <tr>
@@ -206,7 +206,7 @@ export function Daten() {
           Stände bleiben) oder „einspielen“ (ersetzt).
         </p>
         {backups?.items?.length ? (
-          <div className="table-wrap">
+          <div className="table-wrap" tabIndex={0} role="region" aria-label="Tagessicherungen">
             <table className="stats">
               <thead>
                 <tr>

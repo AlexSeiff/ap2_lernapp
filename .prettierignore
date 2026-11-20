@@ -9,3 +9,5 @@ tests/fixtures/
 # Markdown-Texte und das kompakte CSS (eine Regel pro Zeile) bleiben von Hand formatiert
 *.md
 *.css
+playwright-report/
+test-results/
