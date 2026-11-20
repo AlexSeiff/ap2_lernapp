@@ -88,7 +88,11 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .paper-front { background: var(--surface); }
 .paper-back { transform: rotateY(180deg); background: var(--surface); }
 .paper-back .fc-answer { margin-top: 0; padding-top: 0; animation: none; }
-@media (prefers-reduced-motion: reduce) { .paper-turn { transition: none; } }
+/* Absicherung, falls ein Browser backface-visibility ignoriert (z. B. ohne GPU-Beschleunigung):
+   Die abgewandte Seite wird genau zur Hälfte der Drehung (Kante zum Betrachter) unsichtbar. */
+.paper-face { transition: visibility 0s linear .32s; }
+.paper-turn:not(.is-turned) > .paper-back, .paper-turn.is-turned > .paper-front { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) { .paper-turn, .paper-face { transition: none; } }
 /* Alle Lernbereiche verwenden die gemeinsame Tintenfarbe. */
 .layout[data-bereich] { --accent: var(--shell-blue); --accent-fill: var(--notebook-blue-fill); --accent-soft: color-mix(in srgb, var(--shell-blue) 10%, var(--surface)); }
 .welcome-symbol { background: var(--notebook-blue-fill); border-radius: 7px; box-shadow: var(--shadow); }
