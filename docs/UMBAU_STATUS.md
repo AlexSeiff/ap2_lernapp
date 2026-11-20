@@ -364,6 +364,16 @@ Das ist fragil in einem anderen Sinn als der Parser: Ein Autor, der eine Aufgabe
   (b) Die erratene Bedeutung der Aufgaben **sichtbar und prüfbar machen**: im Importbericht eine Tabelle „Aufgaben nach erkanntem Antworttyp, Anhang und Operator“ und ein Test, der eine umformulierte Aufgabe nicht stillschweigend ihren Editor verlieren lässt. Das ändert das Format nicht.
 - Entscheidung steht beim Besitzer; bis dahin ist Phase 6 **nicht begonnen**.
 
-## Offen: Phase 6 (Entscheidung ausstehend)
+**Entscheidung des Besitzers (20.11.2026): nur Alternative (b), keine Umstellung auf JSON, das alte SQL-Blatt bleibt, wie es ist.** Umgesetzt:
+- `src/lib/aufgabenBedeutung.ts`: für jede Aufgabe Antwort-Editor, Anhang (SQL, Formeln, Diagramme) und Operator an einer Stelle (`aufgabenBedeutung`, `bedeutungKurz`) sowie die Regel `editorVerdacht`:
+  Eine Aufgabe, die eine Notation nennt (ER, EPK, BPMN, Use-Case, Aktivität, Struktogramm, Boxplot, Koordinatensystem, Relationenmodell, Normalform), dazu einen Zeichen-Operator **oder gar keinen Operator** hat,
+  aber keinen Editor bekommt, wird gemeldet. „Oder keinen“ ist nötig: Wer „Erstellen Sie“ zu „Fertigen Sie … an“ umformuliert, hat danach keinen erkannten Operator mehr.
+- **Importbericht** (`npm run import-report`): neuer Abschnitt „Aufgaben nach erkannter Bedeutung“ (Editor je Art, Anhang, ohne Operator, Verdachtsfälle).
+- **`tests/aufgabenBedeutung.test.ts`** (8 Tests): Snapshot `id → Editor | Anhang | Operator` für alle 633 Aufgaben (bei einer Änderung nennt der Test die Aufgabe), „keine Aufgabe sieht nach Editor aus, hat aber keinen“ (heute 0 Treffer, also keine Fehlalarme im Bestand),
+  und künstliche Beispiele, die beweisen, dass die Regel anschlägt (`Fertigen Sie das ER-Diagramm … an` → gemeldet; `Beschreiben Sie …` → nicht).
+  Gegenprobe: Entfernt man „erstellen“ aus der Erkennung in `editorFuer`, werden drei Tests rot (geprüft, danach zurückgesetzt).
+- Das Verhalten der App ist unverändert (keine Änderung an `editorAufgabe.ts` und `anhang.ts`; Inhalts-Snapshot grün).
+
+## Phase 6 abgeschlossen (Alternative b)
 
 Noch nicht begonnen.

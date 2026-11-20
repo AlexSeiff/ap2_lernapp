@@ -1,5 +1,6 @@
 // Importbericht: `npm run import-report`
 import { CONTENT_DIR, loadContent } from '../build/inhalt.ts';
+import { aufgabenBedeutung } from '../src/lib/aufgabenBedeutung.ts';
 import { VORLAGEN } from '../src/rechnen/vorlagen/index.ts';
 
 const c = loadContent();
@@ -58,6 +59,22 @@ const zaehle = <T>(liste: T[], schluessel: (x: T) => string | number) => {
 console.log(
   `\nDiagramm-Übungen: ${diagramme.length} (je Typ: ${zaehle(diagramme, (u) => u.typ)}; je Stufe: ${zaehle(diagramme, (u) => u.stufe)})`,
 );
+// Was die App aus dem Aufgabentext erschließt (der Parser selbst setzt nur type „offen“): Antwort-Editor, Anhang, Operator.
+const aufgaben = Object.values(c.tasks);
+const bedeutung = aufgaben.map((t) => ({ t, b: aufgabenBedeutung(t) }));
+console.log(`\nAufgaben nach erkannter Bedeutung (aus dem Text erschlossen, ${aufgaben.length} Aufgaben):`);
+console.log(`  Antwort-Editor: ${zaehle(bedeutung, (x) => x.b.editor)}`);
+console.log(
+  `  Anhang: SQL ${bedeutung.filter((x) => x.b.sql).length}, Formeln ${bedeutung.filter((x) => x.b.formeln).length}, Diagrammelemente ${bedeutung.filter((x) => x.b.diagramme.length).length}`,
+);
+console.log(`  ohne Operator: ${bedeutung.filter((x) => x.b.operator === 'keiner').length}`);
+const verdacht = bedeutung.filter((x) => x.b.verdacht);
+if (verdacht.length) {
+  console.log(
+    `  Sieht nach Editor aus, hat aber keinen (${verdacht.length}; oft richtig, manchmal hat eine Umformulierung die Erkennung gebrochen):`,
+  );
+  for (const x of verdacht) console.log(`    - ${x.t.id}: ${x.b.verdacht}`);
+}
 console.log(`\nMaterialien: ${c.materials.map((m) => m.title).join(', ')}`);
 console.log(`\nHinweise (${c.issues.length}):`);
 for (const i of c.issues) console.log(`  - ${i.file}: ${i.message}`);

@@ -75,7 +75,7 @@ The CI runs the same chain (`.github/workflows/pages.yml`); only `main` deploys.
   file in `data/` survives migration and a JSON round trip), `rechenVorlagenGleichheit.test.ts` (task, solution, worked solution and typical mistakes of all
   Rechenübungen for fixed seeds; renew the snapshot only on purpose: `npx vitest run tests/rechenVorlagenGleichheit.test.ts -u`), `inhaltsdateien.test.ts`
   (which files are content), `vorlagen.test.ts` (every Rechenvorlage: required fields, schema, finite results, reproducible), `idbFortschritt.test.ts` (IndexedDB store, move
-  from `localStorage`, simultaneous saves, all real progress files), `diagrammPlatz.test.ts` (where a new diagram element appears).
+  from `localStorage`, simultaneous saves, all real progress files), `diagrammPlatz.test.ts` (where a new diagram element appears). `aufgabenBedeutung.test.ts` pins what the app infers from every task text (answer editor, appendix, operator – the parser only sets `type: 'offen'`) and fails with the task id when a rewording breaks the detection; its „Verdacht“ rule flags a task that names a notation with a drawing verb (or no operator at all) but gets no editor. `npm run import-report` prints the same summary.
 - One commit per logical change; formatting-only changes in their own commit.
 
 ## 10. Rules for future changes (for AI agents)
