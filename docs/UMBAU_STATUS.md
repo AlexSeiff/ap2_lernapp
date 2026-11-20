@@ -147,6 +147,44 @@ Die Seiten Dashboard, Karteikarten, Klausur und der Diagramm-Editor werden zusä
 Befehle: `npm run import-report` (Hinweise 0), `npm test` (94 Dateien, 1512 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`,
 `npm run test:e2e` (49 Tests): alle grün.
 
-## Phasen 4 bis 10
+## Phase 4 – CSS vereinheitlichen
+
+Status: erledigt (20.11.2026), von Hand umgesetzt. Ziel: Ordnung ohne Änderung des Aussehens. Alle Änderungen sind mit Skripten (PostCSS)
+gemacht und an zwei harten Messlatten geprüft.
+
+Messlatten (vorher aufgenommen, nach jedem Schritt verglichen):
+1. **Pixelvergleich** (`e2e/visuell.spec.ts`, nur mit `E2E_VISUELL=1`): 23 Seiten × hell/dunkel × Desktop (1280 px)/Handy (390 px) = 92 Bilder,
+   0 abweichende Pixel erlaubt. Die Bilder entstehen lokal aus dem **alten** CSS-Stand (`e2e-visuell/`, nicht im Repository, weil sie vom Rechner
+   abhängen). Aufnahme mit festem Datum, ruhiger Seitenhöhe und ohne Ladetexte; der Importzeitpunkt auf `/daten` ist maskiert. Stabil in 4 von 4
+   Läufen. Erste Läufe waren unruhig (Seite noch im Ladezustand aufgenommen); Ursache behoben und die Basislinie danach aus dem alten CSS neu erzeugt.
+2. **Berechnete CSS-Variablen**: alle benutzerdefinierten Eigenschaften in 72 Kombinationen (hell/dunkel × `data-theme` × Karo-Stärke × 4 Breiten),
+   119 Eigenschaften, 0 Abweichungen.
+
+Schritte:
+- **`src/styles/tokens.css`**: alle 507 Token-Deklarationen aus den vier CSS-Dateien an einer Stelle; 149 überschriebene entfielen (die spätere im
+  selben Selektor und Kontext gewinnt immer). 8 nirgends benutzte Tokens entfernt (`--glanz`, `--seite-max`, `--paper-rule`, `--shell-sidebar`,
+  `--shell-glass`, `--shell-selected`, `--ring-loch`, `--notebook-clay-fill`).
+- **Überschriebene Deklarationen** (gleicher Selektor und Kontext, spätere Regel setzt dieselbe Eigenschaft): 122 entfernt. Doppelte Eigenschaften
+  in einer Regel (Fallbacks) und `!important` blieben unberührt.
+- **Tote Selektoren**: 59 Selektoren (56 Regeln) mit Klassen, die nirgends vorkommen (Reste der früheren Startseiten-Entwürfe: `dashboard-kopf`,
+  `widget-weiter`, `bereich-ringe`, `notebook-plan`, `nav-badge`, `bottom-nav` …). Als „benutzt“ zählt eine Klasse, sobald ihr Name irgendwo als Text
+  vorkommt (auch in Textvorlagen mit `${…}`, Inhaltsdateien, KaTeX/CodeMirror/Markdown).
+- **Aufteilung**: `styles.css` (1421 Zeilen) liegt jetzt in `src/styles/01-…` bis `08-…` (je 150–250 Zeilen), `index.css` importiert alles in der
+  verbindlichen Reihenfolge, `apple.css`, `paper.css`, `notizbuch.css` und `glossar-register.css` sind in denselben Ordner gezogen. Reihenfolge
+  unverändert, deshalb ist die Kaskade unverändert; verlustfrei geprüft (Text ohne Leerraum vor und nach dem Schnitt gleich).
+
+Bewusst nicht gemacht und warum:
+- **Keine Zusammenlegung nach Funktionsbereich** (z. B. eine `karten.css`): Das würde Regeln in der Kaskade verschieben. Das lässt sich nicht beweisen,
+  und die 92 Bilder zeigen weder Hover-, Fokus-, geöffnete Dialoge noch das Ziehen im Diagramm-Editor.
+- **Die drei Gestaltungsschichten** (`apple`, `paper`, `notizbuch`) bleiben getrennt, weil sie sich gegenseitig gezielt überschreiben. Auflösen wäre ein
+  eigener, sichtbarer Gestaltungsumbau.
+- Die Pixeltests prüfen Ruhezustände. Hover, Fokus, offene Dialoge und die Editoren beim Bedienen sind durch die Rauch- und axe-Tests nur auf
+  Funktion, nicht auf Aussehen abgesichert.
+
+Befehle: `npm run import-report` (Hinweise 0), `npm test` (94 Dateien, 1512 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`,
+`npm run test:e2e` (49 Tests), Pixelvergleich (92 Bilder): alle grün. In `DOKUMENTATION.md` stehen noch alte CSS-Pfade; sie werden in Phase 9
+mit der Aufteilung der Dokumentation erneuert.
+
+## Phasen 5 bis 10
 
 Noch nicht begonnen.

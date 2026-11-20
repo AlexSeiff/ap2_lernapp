@@ -8,120 +8,8 @@
  */
 
 /* ── Farben ──────────────────────────────────────────────────────────────── */
-:root {
-  --k: 26px;
-  --papier: #fdfcf8;
-  --linie: rgba(72, 118, 184, 0.2);
-  --blau: #1c4699;
-  --rot: #b4301f;
-  --tisch: #cbc4b5;
-  --deckel: #22344f;
-  --haft: #ffe98a;
-  --haft-text: #3a3000;
-  --haft-gruen: #c3e39b;
-  --marker: rgba(255, 224, 51, 0.6);
-  --schatten: rgba(20, 24, 32, 0.28);
-  --ring-loch: rgba(16, 21, 29, 0.62);
-  --schrift: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --hand: 'Kalam', 'Segoe Print', 'Bradley Hand', cursive;
-  --karo-farbe: var(--linie);
-
-  --bg: var(--tisch);
-  --surface: #ffffff;
-  --surface-2: #f3f1ea;
-  --text: #18202c;
-  --muted: #525c6b;
-  --border: #cdd1d8;
-  --card-border: #cdd1d8;
-  --fill: #e8e6de;
-  --fill-aktiv: #ffffff;
-  --paper-ink: #18202c;
-  --paper-ink-fill: #3b4658;
-  --paper-soft: #eef0f4;
-  --notebook-blue: var(--blau);
-  --notebook-blue-fill: #1c4699;
-  --notebook-clay: var(--rot);
-  --notebook-clay-fill: #b4301f;
-  --paper-line: var(--linie);
-  --paper-margin: color-mix(in srgb, var(--rot) 55%, transparent);
-  --paper-cover: var(--deckel);
-  --paper-good: #1b7742;
-  --paper-mid: #8a5d00;
-  --paper-low: #b4301f;
-  --shell-blue: var(--blau);
-  --shadow: 0 1px 1px rgba(20, 24, 32, 0.08), 0 8px 14px -10px var(--schatten);
-  --shadow-schwebe: 0 2px 3px rgba(20, 24, 32, 0.1), 0 16px 22px -14px var(--schatten);
-  --radius: 3px;
-  --radius-klein: 3px;
-  --kopf-hoehe: 0px;
-  --kopf-gesamt: 0px;
-}
-:root[data-theme='dark'] {
-  --papier: #1f242b;
-  --linie: rgba(150, 184, 230, 0.13);
-  --blau: #9fc3ff;
-  --rot: #ff9488;
-  --tisch: #0e1013;
-  --deckel: #090c11;
-  --haft: #5a5020;
-  --haft-text: #fff3bf;
-  --haft-gruen: #374c32;
-  --marker: rgba(255, 214, 64, 0.28);
-  --schatten: rgba(0, 0, 0, 0.6);
-  --ring-loch: rgba(0, 0, 0, 0.7);
-  --surface: #2a3039;
-  --surface-2: #323944;
-  --text: #edece7;
-  --muted: #aab3c0;
-  --border: #454d59;
-  --card-border: #454d59;
-  --fill: #3a424e;
-  --fill-aktiv: #4a5361;
-  --paper-ink: #edece7;
-  --paper-ink-fill: #56627a;
-  --paper-soft: #343b46;
-  --notebook-blue-fill: #3564c2;
-  --notebook-clay-fill: #b4301f;
-  --paper-good: #7fd8a4;
-  --paper-mid: #f0c463;
-  --paper-low: #ff9488;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --papier: #1f242b;
-    --linie: rgba(150, 184, 230, 0.13);
-    --blau: #9fc3ff;
-    --rot: #ff9488;
-    --tisch: #0e1013;
-    --deckel: #090c11;
-    --haft: #5a5020;
-    --haft-text: #fff3bf;
-    --haft-gruen: #374c32;
-    --marker: rgba(255, 214, 64, 0.28);
-    --schatten: rgba(0, 0, 0, 0.6);
-    --ring-loch: rgba(0, 0, 0, 0.7);
-    --surface: #2a3039;
-    --surface-2: #323944;
-    --text: #edece7;
-    --muted: #aab3c0;
-    --border: #454d59;
-    --card-border: #454d59;
-    --fill: #3a424e;
-    --fill-aktiv: #4a5361;
-    --paper-ink: #edece7;
-    --paper-ink-fill: #56627a;
-    --paper-soft: #343b46;
-    --notebook-blue-fill: #3564c2;
-    --notebook-clay-fill: #b4301f;
-    --paper-good: #7fd8a4;
-    --paper-mid: #f0c463;
-    --paper-low: #ff9488;
-  }
-}
 
 /* Die Karo-Wahl betrifft Papierlinien. Rahmen und Fortschrittskästchen behalten ihre Konturen. */
-:root[data-karo='kraeftig'] { --karo-farbe: color-mix(in srgb, var(--blau) 34%, transparent); }
-:root[data-karo='aus'] { --karo-farbe: transparent; }
 
 /* ── Grundschrift ────────────────────────────────────────────────────────── */
 html { background: var(--tisch); }
@@ -166,7 +54,6 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 .etikett b { display: block; font-size: 18px; line-height: 28px; color: var(--blau); }
 .etikett span { display: block; font: 15px / 22px var(--hand); border-bottom: 1px solid var(--border); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .inhalt-gruppe { display: block; margin-bottom: var(--k); }
-.inhalt-titel { margin: 0; font: 700 12.5px / var(--k) var(--schrift); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .inhalt { margin: 0; padding: 0; list-style: none; }
 .inhalt > li { display: flex; align-items: baseline; gap: 6px; min-height: var(--k); font-size: 15.5px; line-height: var(--k); }
 .inhalt > li::after { content: ''; order: 2; flex: 1; min-width: 8px; border-bottom: 2px dotted color-mix(in srgb, var(--muted) 55%, transparent); transform: translateY(-6px); }
@@ -236,7 +123,7 @@ mark { color: inherit; background: linear-gradient(transparent 10%, var(--marker
 #inhalt h1 .icon { width: 30px; height: 30px; vertical-align: -4px; }
 #inhalt h2 .icon { width: 20px; height: 20px; vertical-align: -3px; padding: 0; background: none; box-shadow: none; }
 #inhalt :is(.card, .widget, .zettel, .flashcard, dialog) :is(h2, h3) { text-decoration: none; }
-#inhalt .lead, #inhalt .dashboard-untertitel { margin-top: 0; font: 17px / var(--k) var(--schrift); font-style: normal; color: var(--muted); }
+#inhalt .lead { margin-top: 0; font: 17px / var(--k) var(--schrift); font-style: normal; color: var(--muted); }
 #inhalt .crumbs { font-size: 14.5px; line-height: var(--k); }
 #inhalt .md { line-height: var(--k); }
 #inhalt .md :is(p, li) { line-height: var(--k); }

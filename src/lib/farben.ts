@@ -1,5 +1,5 @@
 // Farben der Oberfläche: Jedes Thema, jeder Kartentyp und jedes Widget bekommt eine Farbe aus derselben Palette.
-// Die Werte stehen als CSS-Variablen in styles.css (--c-<name>, -fill, -soft; hell und dunkel); hier nur die Zuordnung.
+// Die Werte stehen als CSS-Variablen in styles/tokens.css (--c-<name>, -fill, -soft; hell und dunkel); hier nur die Zuordnung.
 // Eine Klasse `farbe-<name>` setzt --f, --f-fill und --f-soft für das Element und seine Kinder.
 
 import type { CardType } from '../../domain/types';

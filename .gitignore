@@ -11,3 +11,6 @@ tsconfig.tsbuildinfo
 
 playwright-report
 test-results
+
+# Bilder für den lokalen Pixelvergleich (e2e/visuell.spec.ts)
+e2e-visuell

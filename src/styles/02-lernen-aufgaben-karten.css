@@ -1,0 +1,171 @@
+/* Rechenweg (components/Rechenweg.tsx): nummerierte Schritte Formel → Einsetzen → Ergebnis */
+.rechenweg { list-style: none; counter-reset: rw; padding: 0; margin: 1em 0; }
+.rw-schritt { counter-increment: rw; position: relative; padding: 0.7em 0 0.7em 2.5em; border-top: 1px solid var(--border); break-inside: avoid; }
+.rw-schritt:first-child { border-top: none; }
+.rw-schritt::before { content: counter(rw); position: absolute; left: 0; top: 0.7em; width: 1.8em; height: 1.8em; line-height: 1.8em; text-align: center; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+.rw-titel { font-weight: 600; }
+.rw-zeilen { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; align-items: baseline; margin: 0.35em 0 0; }
+.rw-zeilen dt { color: var(--muted); font-size: 0.85rem; }
+.rw-zeilen dd { margin: 0; overflow-x: auto; }
+.rw-tex .katex { font-size: 1.1em; }
+.rw-ergebnis { display: inline-block; padding: 0 8px; border: 1.5px solid var(--good); border-radius: 6px; background: var(--surface); font-variant-numeric: tabular-nums; }
+.rw-schritt > .hint { margin: 0.3em 0 0; }
+.badge { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--surface-2); color: var(--text); white-space: nowrap; }
+.badge.muted { color: var(--muted); }
+.badge.diff-leicht { background: var(--good-soft); color: var(--good); }
+.badge.diff-mittel { background: var(--mid-soft); color: var(--mid); }
+.badge.diff-schwer { background: var(--low-soft); color: var(--low); }
+
+.bar { position: relative; display: inline-block; width: 110px; height: 20px; background: var(--surface-2); border-radius: 6px; overflow: hidden; vertical-align: middle; }
+.bar-fill { position: absolute; inset: 0 auto 0 0; }
+.bar-fill.good { background: var(--good); }
+.sparkline { vertical-align: middle; overflow: visible; }
+.sparkline polyline { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.sparkline circle { fill: var(--accent); }
+.sparkline-pass { stroke: var(--border); stroke-width: 1; stroke-dasharray: 3 3; }
+
+/* Lernen */
+.with-toc { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 32px; max-width: 1250px; }
+.toc { position: sticky; top: calc(var(--kopf-gesamt) + 16px); align-self: start; max-height: calc(100vh - var(--kopf-gesamt) - 32px); overflow-y: auto; display: flex; flex-direction: column; font-size: 0.87rem; gap: 2px; }
+.toc a { color: var(--muted); padding: 2px 0; }
+.toc a:hover { color: var(--accent); }
+.toc .toc-l1 { font-weight: 700; color: var(--text); margin-top: 8px; }
+.toc .toc-l3 { padding-left: 12px; }
+.theory { scroll-margin-top: calc(var(--kopf-gesamt) + 16px); }
+h2.part { font-size: 1.5rem; border-bottom: 2px solid var(--border); padding-bottom: 4px; margin-top: 2em; }
+.choice { display: flex; gap: 10px; align-items: flex-start; padding: 5px 0; cursor: pointer; }
+.choice input { margin-top: 0.35em; }
+
+/* Filter & Listen */
+.filters { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0; }
+.filters label { display: flex; flex-direction: column; font-size: 0.82rem; color: var(--muted); gap: 3px; }
+.filters select, .filters input { min-width: 160px; }
+.selection-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); margin-bottom: 6px; }
+.selection-bar > span { margin-right: auto; color: var(--muted); }
+.task-list { list-style: none; padding: 0; margin: 0; }
+.task-list li { display: flex; align-items: center; gap: 10px; padding: 8px 4px; border-bottom: 1px solid var(--border); }
+.task-link { display: flex; gap: 10px; flex: 1; min-width: 0; color: var(--text); }
+.task-link:hover { text-decoration: none; color: var(--accent); }
+.task-code { font-weight: 700; min-width: 2.6em; color: var(--accent); }
+.task-preview { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.status { min-width: 3.5em; text-align: right; font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+.status.good { color: var(--good); }
+.status.mid { color: var(--mid); }
+.status.low { color: var(--low); }
+
+/* Aufgaben & Bewertung */
+.task-card { background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 18px 20px; margin: 14px 0; box-shadow: var(--shadow); }
+.task-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+.task-head .task-code { font-size: 1.1rem; }
+.task-head .task-stern { margin-left: auto; }
+textarea.answer { width: 100%; margin-top: 12px; resize: vertical; line-height: 1.5; }
+textarea.answer.mono { font-family: 'Cascadia Code', Consolas, monospace; font-size: 0.92rem; }
+.choices, .blanks, .pairs { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.blanks label, .pairs label { display: flex; gap: 10px; align-items: center; }
+.pair-left { min-width: 35%; font-weight: 600; }
+.pairs select { flex: 1; min-width: 0; }
+.numeric { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+.attachments details { background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 10px 16px; margin: 8px 0; box-shadow: var(--shadow); }
+.attachments summary { cursor: pointer; font-weight: 600; }
+.grade-panel { margin-top: 16px; border-top: 2px dashed var(--border); padding-top: 12px; }
+.solution { background: var(--good-soft); border-radius: 8px; padding: 12px 16px; }
+.solution h4 { margin: 0 0 6px; color: var(--good); }
+.grading { margin-top: 12px; }
+.points-input { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.points-input button { padding: 4px 12px; }
+.points-input input { width: 80px; }
+.criteria { margin-bottom: 10px; }
+
+/* Klausur */
+.exam-bar {
+  position: sticky; top: var(--kopf-gesamt); z-index: 5; display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 0 0 var(--radius) var(--radius);
+  padding: 10px 16px; margin: -28px 0 16px; box-shadow: var(--shadow);
+}
+.exam-bar b { margin-right: auto; }
+.timer { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.15rem; }
+.timer.low { color: var(--low); }
+/* Nur für Screenreader sichtbar (z. B. Zeitansage der Klausur) */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.exam-block h2 { border-bottom: 2px solid var(--border); padding-bottom: 4px; }
+/* Gemischte Probeklausur (8.5): Herkunft einer Aufgabengruppe */
+.exam-quelle { font-size: 0.95rem; color: var(--muted); margin: 18px 0 6px; }
+.misch-quellen { margin: 2px 0 6px 1.2em; }
+.misch-start h2 { margin-top: 0; }
+.result { display: flex; flex-direction: column; align-items: center; padding: 24px; border-radius: var(--radius); margin: 16px 0; background: var(--surface-2); }
+.result-points { font-size: 2.4rem; font-weight: 800; }
+.result-grade { font-size: 1.2rem; font-weight: 600; }
+.result.grade-1, .result.grade-2 { background: var(--good-soft); color: var(--good); }
+.result.grade-3, .result.grade-4 { background: var(--mid-soft); color: var(--mid); }
+.result.grade-5, .result.grade-6 { background: var(--low-soft); color: var(--low); }
+
+/* Karteikarten */
+.session-head { display: flex; justify-content: space-between; align-items: center; color: var(--muted); }
+/* Oberste Karte eines Stapels: zwei Karten schauen unten heraus – passend zum Umblättern */
+.flashcard {
+  background: var(--surface); border: 1px solid var(--card-border); min-height: 280px; cursor: pointer; margin: 14px 0 30px;
+}
+.flashcard:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fc-meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
+.fc-question { font-weight: 640; letter-spacing: -0.012em; }
+.fc-answer { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
+.rate-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.rate-buttons button { justify-content: center; padding: 12px; min-height: 48px; border-radius: 14px; }
+.rate-buttons kbd { background: rgba(255, 255, 255, 0.25); border-color: transparent; color: inherit; }
+
+/* Bewegung: neue Karte gleitet herein, Umdrehen kippt kurz, Antwort und Bewertung blenden auf (bei „Bewegung reduzieren“ aus, s. u.) */
+@keyframes karte-umdrehen { 0% { transform: perspective(1400px) rotateX(0); } 45% { transform: perspective(1400px) rotateX(7deg) scale(0.985); } 100% { transform: none; } }
+@keyframes aufblenden { from { opacity: 0; transform: translateY(8px); } }
+@keyframes ploppen { 40% { transform: scale(1.025); } }
+@keyframes wackeln { 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+/* Umblättern (components/KartenWechsel.tsx): Die alte Karte schlägt nach links um wie eine Buchseite, die neue liegt schon darunter.
+   Zurück: Die neue Karte schlägt von links her zu. Im Abbild laufen keine eigenen Animationen (sonst blendet die Antwort neu auf). */
+.karte-wechsel { position: relative; perspective: 1800px; }
+.blatt-ebene { position: absolute; top: 0; left: 0; right: 0; z-index: 2; pointer-events: none; }
+.blatt-ebene[data-art='darunter'] { z-index: 0; }
+.blatt-seite { position: relative; z-index: 1; }
+.blatt-abbild *:not(.flashcard) { animation: none !important; }
+.blatt-abbild .flashcard { box-shadow: var(--shadow); }
+.blatt-ebene[data-art='weg'] .blatt-abbild { transform-origin: left center; backface-visibility: hidden; animation: blatt-weg 0.62s cubic-bezier(0.45, 0.05, 0.3, 1) forwards; }
+.blatt-ebene[data-art='weg'] .blatt-abbild .flashcard { animation: blatt-schatten 0.62s ease-in forwards; }
+.blatt-ebene[data-art='darunter'] .blatt-abbild { animation: blatt-sinkt 0.55s ease-out forwards; }
+.blatt-seite.liegt-unten { animation: blatt-darunter 0.62s ease-out; }
+.blatt-seite.kommt-zurueck { transform-origin: left center; animation: blatt-zurueck 0.55s cubic-bezier(0.2, 0.7, 0.3, 1); }
+@keyframes blatt-weg { 0% { transform: rotateY(0); } 75% { opacity: 1; } 100% { transform: rotateY(-118deg); opacity: 0; } }
+@keyframes blatt-schatten { to { filter: brightness(0.84); box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.35); } }
+@keyframes blatt-darunter { from { transform: scale(0.965) translateY(6px); filter: brightness(0.94); } }
+@keyframes blatt-zurueck { from { transform: rotateY(-118deg); opacity: 0; } 25% { opacity: 1; } }
+@keyframes blatt-sinkt { to { transform: scale(0.965) translateY(6px); opacity: 0; } }
+.flashcard .fc-answer, .rate-buttons { animation: aufblenden 0.28s ease-out both; }
+.rate-buttons { animation-delay: 0.06s; }
+.leicht-option.richtig.gewaehlt { animation: ploppen 0.32s ease-out; }
+.leicht-option.falsch { animation: wackeln 0.38s ease-out; }
+
+/* Leicht-Modus: Moduswahl und 4 Antworten (Karteikarten und Rechenübungen) */
+.mode-switch { display: inline-flex; gap: 2px; margin: 4px 0 12px; }
+.mode-switch button { border: 0; min-height: 34px; background: transparent; color: var(--text); font-weight: 500; padding: 6px 14px; }
+.mode-switch button[aria-pressed='true'] { background: var(--fill-aktiv); color: var(--text); font-weight: 600; }
+.mode-switch button:hover:not(:disabled) { filter: none; }
+.blaettern-optionen { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 8px; }
+.blaettern-optionen input[type='range'] { flex: 1 1 160px; }
+.blaettern-nav { justify-content: space-between; }
+/* Voriges/Nächstes Thema bzw. Begriff am Seitenende */
+.blaettern-seiten { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0 8px; }
+.blaettern-seiten a { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); text-decoration: none; min-height: 44px; }
+.blaettern-seiten a:hover { border-color: var(--accent); }
+.blaettern-seiten .blaettern-weiter { text-align: right; grid-column: 2; }
+.blaettern-richtung { font-size: 0.85rem; color: var(--muted); }
+.blaettern-titel { font-weight: 600; overflow-wrap: anywhere; }
+@media (max-width: 520px) {
+  .blaettern-seiten { grid-template-columns: 1fr; }
+  .blaettern-seiten .blaettern-weiter { grid-column: 1; }
+}
+.leicht-optionen { display: grid; gap: 8px; margin: 12px 0; }
+.leicht-option { justify-content: flex-start; text-align: left; white-space: normal; background: var(--surface); color: var(--text); border: 1px solid var(--border); font-weight: 500; padding: 10px 14px; }
+.leicht-option kbd { flex: none; margin-right: 6px; }
+.leicht-option:disabled { opacity: 1; cursor: default; }
+.leicht-option.richtig { background: var(--good-soft); border-color: var(--good); }
+.leicht-option.falsch { background: var(--low-soft); border-color: var(--low); }
+.leicht-option.gewaehlt { box-shadow: 0 0 0 2px var(--text) inset; }
+.leicht-feedback { margin-top: 8px; }
+.badge.auto { background: var(--mid-soft); color: var(--mid); }

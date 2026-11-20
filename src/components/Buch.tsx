@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { aktiverBereich, aktivesUnterziel, badgeSumme, bereich, BEREICHE, type NavBadge } from '../lib/navigation';
 import { Icon } from './Icon';
 
-// Rahmen des Notizbuchs (notizbuch.css): links die Inhaltsseite, in der Mitte die Ringe, rechts das Blatt mit Kopfzeile und Seite,
+// Rahmen des Notizbuchs (styles/notizbuch.css): links die Inhaltsseite, in der Mitte die Ringe, rechts das Blatt mit Kopfzeile und Seite,
 // die Bereichsnavigation auf der Inhaltsseite. Auf dem Handy: ein Spiralblock mit Inhaltsseite als Einschub.
 
 type Badges = Record<NavBadge, number>;

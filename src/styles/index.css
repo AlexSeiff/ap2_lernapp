@@ -1,0 +1,19 @@
+/* Alle Stile der App. DIE REIHENFOLGE IST VERBINDLICH: Bei gleicher Spezifität gewinnt die spätere Regel, und die Dateien
+   bauen aufeinander auf (die Gestaltungsschichten unten überschreiben die Grundstile gezielt). Nicht umsortieren, ohne die
+   Seiten hell und dunkel, auf Desktop und Handy zu vergleichen (npm run test:e2e mit E2E_VISUELL=1, siehe e2e/visuell.spec.ts).
+
+   1. tokens.css – alle Design-Werte (Farben, Radien, Schatten, Maße), hell, dunkel und nach Systemeinstellung
+   2. 01 … 08 – die Grundstile, in der Reihenfolge, in der sie gewachsen sind (je Datei mehrere Abschnitte mit Überschriften)
+   3. apple.css, paper.css, notizbuch.css – die Gestaltungsschichten (Lernraum, Papier, Notizbuch), jede überschreibt gezielt die davor */
+@import './tokens.css';
+@import './01-grundlagen.css';
+@import './02-lernen-aufgaben-karten.css';
+@import './03-dialoge-sql-diagramme.css';
+@import './04-uebungen-einstellungen-suche.css';
+@import './05-begriffe-belegsatz-klausurdruck.css';
+@import './06-uebersicht-editoren-podcast.css';
+@import './07-farben-kartenstand-textmarker.css';
+@import './08-koordinaten-json.css';
+@import './apple.css';
+@import './paper.css';
+@import './notizbuch.css';

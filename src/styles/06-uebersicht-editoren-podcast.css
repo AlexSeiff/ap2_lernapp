@@ -1,0 +1,259 @@
+/* Quellen und Lehrvideos (Umsetzungsplan Phase 8) */
+.quellen-box { margin: 14px 0 6px; padding: 10px 14px; background: var(--surface-2); font-size: 0.92rem; }
+.begriff-block .quellen-box { background: transparent; padding: 0; }
+.quellen-titel { margin: 0 0 4px; font-weight: 600; color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.begriff-block .quellen-titel { display: none; }
+.quellen-liste { list-style: none; margin: 0; padding: 0; }
+.quellen-liste li { padding: 4px 0; }
+.quellen-liste .icon { width: 1em; height: 1em; }
+.video-hinweis { margin: 6px 0; padding: 10px 12px; border-radius: var(--radius-klein); background: var(--fill); }
+.video-hinweis p { margin: 0 0 8px; }
+.video-rahmen { position: relative; width: 100%; max-width: 640px; aspect-ratio: 16 / 9; margin: 8px 0; }
+.video-rahmen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: var(--radius-klein); }
+
+/* Übersicht als Widget-Raster im Stil von iOS (Umsetzungsplan Phase 9): ab 900 px 4 Spalten (klein = 1, sonst 2), darunter 2 Spalten
+   (klein = halbe, sonst volle Breite). */
+.widgets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row dense; margin: 12px 0 16px; }
+.widgets > * { grid-column: span 2; margin: 0; min-width: 0; }
+.widget, .widgets > .card { background: var(--surface); border: 1px solid var(--card-border); box-shadow: var(--shadow); color: var(--text); }
+.widget h2, .widgets > .card h2 { font-size: 1.05rem; margin: 0 0 10px; }
+.widget p:last-child { margin-bottom: 0; }
+.widget.kpi { justify-content: space-between; gap: 4px; }
+.w-titel { font-weight: 600; }
+/* Einstieg der Übersicht: ein Hauch Akzent, damit der Weg zum Lernen sofort ins Auge fällt */
+.weiterlesen { margin: 0; }
+.kpi.w-innen { background: none; border: 0; box-shadow: none; padding: 0; border-radius: 0; margin-bottom: 6px; }
+a.kpi.w-innen:hover { transform: none; }
+.w-liste li { margin: 4px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w-zeilen { list-style: none; margin: 0; padding: 0; }
+.w-zeilen a { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 4px 0; color: var(--text); border-bottom: 0.5px solid var(--border); }
+.w-zeilen li:last-child a { border-bottom: 0; }
+.w-zeilen a:hover { text-decoration: none; }
+.w-zeilen a:hover .w-zeile-text { text-decoration: underline; }
+.w-zeilen .icon { color: var(--accent); }
+.w-zeile-text { flex: 1; min-width: 0; }
+.w-zahl { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.w-begriff { font-size: 1.25rem; margin: 0 0 6px; }
+.w-definition { margin: 0 0 6px; display: -webkit-box; -webkit-line-clamp: 4; line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.klausur-kopf { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.klausur-kopf .kpi-label { color: var(--muted); font-size: 0.88rem; }
+.w-unter { font-size: 0.9rem; color: var(--muted); margin: 12px 0 4px; }
+/* Ringe (components/Ring.tsx) */
+.ringe { flex: none; }
+.ring circle { fill: none; }
+.ring-spur { stroke: var(--fill); }
+.ring-wert { stroke-linecap: round; }
+.ring-karten .ring-spur { stroke: color-mix(in srgb, var(--accent-fill) 18%, transparent); }
+.ring-karten .ring-wert { stroke: var(--accent-fill); }
+.ring-uebungen .ring-spur { stroke: color-mix(in srgb, var(--c-teal-fill) 20%, transparent); }
+.ring-uebungen .ring-wert { stroke: var(--v-gewusst); }
+.ring.good .ring-wert { stroke: var(--good); }
+.ring.mid .ring-wert { stroke: var(--mid); }
+.ring.low .ring-wert { stroke: var(--low); }
+.punkt { display: inline-block; width: 0.6em; height: 0.6em; border-radius: 50%; vertical-align: 0.05em; }
+.punkt.ring-karten { background: var(--accent-fill); }
+.punkt.ring-uebungen { background: var(--v-gewusst); }
+.mini-ring { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+/* Fortschritt je Thema: Zeilen statt Tabelle, mobil Werte mit Beschriftung unter dem Titel */
+.thema-fortschritt { list-style: none; margin: 0; padding: 0; }
+.thema-fortschritt li { display: grid; grid-template-columns: minmax(0, 1fr) repeat(5, 7.5rem); gap: 4px 12px; align-items: center; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
+.thema-fortschritt .tf-kopf { font-size: 0.85rem; font-weight: 600; color: var(--muted); padding-top: 0; }
+.tf-wert { display: flex; flex-direction: column; font-variant-numeric: tabular-nums; min-width: 0; }
+.tf-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 899px) {
+  .widgets { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+@media (max-width: 760px) {
+  .thema-fortschritt .tf-kopf { display: none; }
+  .thema-fortschritt li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 10px 0; }
+  .tf-titel { flex: 1 0 100%; font-weight: 600; }
+  .tf-wert { flex-direction: row-reverse; align-items: center; gap: 5px; font-size: 0.9rem; white-space: nowrap; }
+  .tf-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; font-size: 0.82rem; color: var(--muted); }
+}
+@media (max-width: 599px) {
+  .widget, .widgets > .card { padding: 14px 16px; border-radius: 18px; }
+  .widget.kpi { min-height: 116px; }
+  /* Tippflächen: Links in Widgets und Thema-Titel höher */
+  .widget p a, .widget .plain li > a, .w-begriff a { display: inline-block; padding-block: 6px; }
+  .tf-titel { display: flex; align-items: center; min-height: 40px; }
+}
+
+/* Karteikarten je Art: Begriff, Frage, Rechnung */
+.fc-label { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.fc-vorne.frage { border-left: 4px solid var(--accent); padding-left: 14px; }
+.fc-vorne.begriff { text-align: center; padding: 12px 0; }
+.fc-vorne.begriff .fc-label { justify-content: center; }
+.fc-vorne.rechnung { border-left: 4px solid var(--accent); padding-left: 14px; }
+.fc-hinten.rechnung { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; font-variant-numeric: tabular-nums; line-height: 1.7; }
+.fc-hinten.rechnung .katex-display { margin: 0.6em 0; overflow-x: auto; }
+.fc-kontext { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); }
+
+.runden-balken { height: 6px; border-radius: 999px; background: var(--fill); overflow: hidden; margin: 6px 0 8px; }
+.runden-balken > div { height: 100%; border-radius: inherit; transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.wisch-hinweis { display: none; text-align: center; }
+@media (pointer: coarse) { .wisch-hinweis { display: block; } }
+
+.mehr-widgets { margin: 12px 0; }
+.mehr-widgets > summary { cursor: pointer; border-radius: 12px; font-weight: 500; list-style: none; }
+.mehr-widgets > summary::-webkit-details-marker { display: none; }
+.mehr-widgets[open] > summary { margin-bottom: 12px; }
+
+.lernplan { padding-left: 1.2em; } .lernplan > li { margin-bottom: 0.8em; }
+
+/* Podcast (pages/Podcast.tsx): Folgenliste, Player, Kapitel, Mitlesetext */
+.podcast-liste { list-style: none; padding: 0; display: grid; gap: 10px; }
+.podcast-folge { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; }
+.podcast-folge > .icon { width: 1.8em; height: 1.8em; color: var(--accent); }
+.podcast-nr { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+.podcast-folge .tile-title, .podcast-folge .tile-meta { display: block; }
+.podcast-player { position: sticky; top: calc(var(--kopf-gesamt) + 8px); z-index: 5; background: linear-gradient(135deg, var(--accent-soft), var(--surface) 70%); }
+.podcast-kapitel { margin: 0 0 6px; color: var(--muted); }
+.podcast-kapitel b { color: var(--text); }
+.podcast-knoepfe { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 10px 0 6px; }
+.podcast-knoepfe button.ghost .icon { width: 1.6em; height: 1.6em; }
+.podcast-haupt { width: 64px; height: 64px; border-radius: 50%; justify-content: center; padding: 0; }
+.podcast-haupt .icon { width: 1.7em; height: 1.7em; }
+.podcast-einstellungen { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 8px; }
+.podcast-einstellungen select { max-width: 220px; }
+.podcast-inhalt { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.podcast-inhalt button { min-height: 32px; padding: 4px 12px; font-size: 0.85rem; font-weight: 500; }
+.podcast-inhalt button.aktiv { background: var(--accent-fill); color: var(--accent-text); }
+.podcast-text { list-style: none; padding: 0; margin: 0; }
+.podcast-text h2 { font-size: 1.05rem; margin: 1.4em 0 0.4em; }
+.podcast-zeile { display: block; width: 100%; text-align: left; font: inherit; font-weight: 400; color: var(--text); background: transparent; border: 0; box-shadow: none; padding: 6px 10px; border-radius: 10px; line-height: 1.55; min-height: 0; }
+.podcast-zeile:hover:not(:disabled) { background: var(--fill); filter: none; }
+.podcast-text li.ben .podcast-zeile b { color: var(--accent); }
+.podcast-text li.lea .podcast-zeile b { color: var(--good); }
+.podcast-text li.aktuell .podcast-zeile { background: var(--accent-soft); }
+.podcast-text li.pause { padding: 2px 10px; }
+/* Auf dem Handy nicht festhalten – der Player bräuchte sonst den halben Bildschirm */
+@media (max-width: 599px) { .podcast-player { position: static; } }
+
+/* Editor-Aufgaben: Diagramm-Editor (ERM, EPK, BPMN, Use-Case) und Tabellen-Editor (Normalisierung, Relationenmodell) */
+.editor-antwort { margin-top: 12px; display: grid; gap: 10px; min-width: 0; }
+.ed-titel { margin: 0; color: var(--muted); }
+.ed-titel .icon { color: var(--accent); }
+.diagramm-editor { display: grid; gap: 8px; min-width: 0; }
+.diagramm-editor.vollbild {
+  position: fixed; inset: 0; z-index: 80; background: var(--bg); padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto; overflow: auto;
+}
+.ed-leiste { display: flex; flex-wrap: wrap; gap: 6px; }
+.ed-leiste .palette-element { padding: 4px 10px 4px 6px; font-size: 0.86rem; min-height: 36px; touch-action: manipulation; }
+.ed-werkzeuge { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.ed-werkzeuge button.ghost { min-height: 34px; }
+.ed-abstand { flex: 1; }
+.ed-schalter { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--muted); }
+.ed-zoom { min-width: 3.4em; text-align: center; }
+.ed-scroll {
+  position: relative; overflow: auto; max-height: 70vh; border: 1px solid var(--border); border-radius: 10px; background: var(--surface);
+  -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+}
+.diagramm-editor.vollbild .ed-scroll { max-height: none; }
+svg.diagramm.ed-svg { display: block; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; max-width: none; user-select: none; -webkit-user-select: none; }
+.ed-rasterpunkt { fill: var(--border); }
+.diagramm .ed-treffer { fill: transparent; stroke: none; }
+.ed-knoten { cursor: grab; touch-action: none; outline: none; }
+.ed-svg.verbinden .ed-knoten { cursor: crosshair; }
+.diagramm .ed-knoten:focus-visible .ed-treffer { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 3; }
+.diagramm .ed-rahmen { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 4; pointer-events: none; }
+.ed-griff { cursor: crosshair; touch-action: none; }
+.ed-griff.groesse { cursor: nwse-resize; }
+.diagramm .ed-griff-treffer { fill: transparent; stroke: none; }
+.diagramm .ed-griff-punkt { fill: var(--accent-fill); stroke: var(--surface); stroke-width: 2; }
+.diagramm .ed-griff-pfeil { fill: none; stroke: var(--accent-text); stroke-width: 1.6; pointer-events: none; }
+.ed-kante { cursor: pointer; }
+.diagramm .ed-kante-treffer { stroke: transparent; stroke-width: 16; fill: none; }
+.diagramm .dg-linie.ed-kante-gewaehlt { stroke: var(--accent); stroke-width: 2.5; }
+.diagramm .ed-vorschau { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 6 4; pointer-events: none; }
+.ed-leer { position: absolute; left: 24px; top: 24px; max-width: 26em; margin: 0; pointer-events: none; }
+.ed-auswahl-feld { min-height: 44px; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); }
+.ed-auswahl-feld p { margin: 0; }
+.ed-feld { display: grid; gap: 8px; }
+.ed-text { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ed-text > span { font-size: 0.85rem; color: var(--muted); min-width: 6.5em; }
+.ed-text input, .ed-text select { flex: 1; min-width: 12em; }
+.ed-knoepfe { display: flex; flex-wrap: wrap; gap: 4px; }
+.ed-knoepfe button.ghost { min-height: 32px; }
+.ed-knoepfe button.aktiv { background: var(--accent-soft); color: var(--accent); }
+.ed-verbindungen { margin: 0; color: var(--muted); }
+.ed-verbindungen button.ghost { padding: 2px 8px; font-size: 0.85rem; }
+.ed-hinweis { color: var(--accent); font-weight: 500; }
+.ed-pruefung { display: grid; gap: 6px; justify-items: start; }
+.ed-notiz, .te-schritt-text { display: grid; gap: 4px; }
+.ed-notiz textarea.answer, .te-schritt-text textarea.answer { margin-top: 0; }
+.ed-ansicht { overflow-x: auto; }
+.ed-ansicht svg { max-width: 100%; height: auto; }
+.editor-pruefung { margin: 4px 0 12px; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); }
+.editor-pruefung h4 { margin: 0 0 6px; }
+.editor-pruefung h5 { margin: 10px 0 4px; font-size: 0.9rem; }
+.editor-pruefung .hint { margin-bottom: 0; }
+
+.tabellen-editor { display: grid; gap: 10px; min-width: 0; }
+.tabellen-editor .mode-switch { margin: 0; flex-wrap: wrap; justify-self: start; }
+.te-karte { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; background: var(--surface); display: grid; gap: 8px; min-width: 0; }
+.te-kopf, .te-fuss { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.te-name { font-weight: 600; flex: 1 1 12em; min-width: 0; max-width: 22em; margin-right: auto; }
+.ed-text-symbol { display: inline-flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+.te-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.te-tabelle { border-collapse: collapse; width: auto; margin: 0; }
+.te-tabelle th, .te-tabelle td { padding: 4px; vertical-align: top; text-align: left; border-bottom: 1px solid var(--border); }
+.te-tabelle th { background: var(--surface-2); font-weight: 400; }
+.te-tabelle input { width: auto; padding: 4px 6px; font-size: 0.9rem; min-height: 0; }
+.te-tabelle th.pk input { font-weight: 700; text-decoration: underline; }
+.te-tabelle th.fk input { border-bottom: 2px dashed var(--accent); }
+.te-spalte-knoepfe { display: flex; gap: 2px; margin-top: 4px; align-items: center; }
+.te-spalte-knoepfe button.ghost { padding: 1px 6px; font-size: 0.75rem; min-height: 26px; }
+.te-spalte-knoepfe button[aria-pressed='true'] { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+select.te-aktion { width: 2.8em; min-height: 26px; padding: 2px 4px; font-size: 0.85rem; background: var(--surface); }
+select.te-ziel { display: block; margin-top: 4px; min-height: 28px; padding: 2px 26px 2px 6px; font-size: 0.8rem; max-width: 12em; }
+.te-tabelle .te-neu { white-space: nowrap; background: transparent; border-bottom: 0; vertical-align: middle; }
+.te-relation { min-width: 0; }
+.te-relation code, .tabellen-ansicht code { white-space: normal; overflow-wrap: anywhere; }
+.te-pk { text-decoration: underline; }
+.te-aktionen { margin: 0; }
+.tabellen-ansicht h4 { margin: 12px 0 4px; }
+.tabellen-ansicht th.pk { text-decoration: underline; }
+.te-text { white-space: pre-wrap; margin: 4px 0; }
+.te-abgleich table { width: 100%; font-size: 0.88rem; }
+.te-abgleich td { vertical-align: top; }
+.te-befund { margin: 0; padding-left: 1.1em; }
+/* Wertetabelle: aussehen wie eine Tabelle auf dem Blatt (Kopfzeile, waagerechte Linien), die Zellen sind randlose Eingabefelder. */
+.wt { display: grid; gap: 4px; }
+.wt .table-wrap { margin: 0.4em 0 0; }
+.wt-tabelle { min-width: 100%; }
+.wt-tabelle td:not(.wt-fest):not(.wt-aktion) { padding: 0; }
+.wt-tabelle td { vertical-align: middle; }
+.editor-antwort .wt-tabelle input.wt-zelle {
+  width: 100%; min-width: 5.5em; min-height: 0; margin: 0; padding: 8px 12px; border: 0; border-radius: 0;
+  background: transparent; box-shadow: none; font-variant-numeric: tabular-nums;
+}
+.wt-tabelle td:first-child input.wt-zelle { padding-left: 0; }
+.editor-antwort .wt-tabelle input.wt-zelle:focus { box-shadow: inset 0 -2px 0 var(--accent); }
+.editor-antwort .wt-tabelle input.wt-zelle:hover:not(:focus) { box-shadow: inset 0 -1px 0 var(--muted); }
+.wt-tabelle .wt-aktion { width: 1%; padding: 0 0 0 4px; white-space: nowrap; vertical-align: middle; }
+.wt-tabelle .wt-aktion button { min-height: 30px; padding: 2px 6px; color: var(--muted); }
+.wt-tabelle td.wt-kreuz { padding: 8px 12px; }
+.wt-tabelle td.wt-kreuz input { width: 20px; height: 20px; min-height: 0; margin: 0; }
+.wt-neu { justify-self: start; }
+/* Handy: Felder wachsen mit dem Inhalt (lange Begriffe bleiben lesbar), die Tabelle scrollt seitlich. */
+@media (max-width: 600px) {
+  .editor-antwort .wt-tabelle input.wt-zelle { width: auto; field-sizing: content; min-width: 4.5em; }
+}
+.wt-abgleich td.wt-gleich { color: var(--good); }
+.wt-abgleich td.wt-abweichend, .wt-abgleich td.wt-fehlt { color: var(--low); background: var(--low-soft); }
+.wt-muster { display: block; font-size: 0.8rem; color: var(--muted); }
+/* Boxplot-Eingabe: fünf Kennwerte nebeneinander (auf dem Handy umbrechend), Ausreißer über die ganze Breite, darunter die Zeichnung. */
+.bp { display: grid; gap: 10px; }
+.bp-felder { display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5em, 1fr)); gap: 8px 12px; margin-top: 4px; }
+.bp-felder label { display: grid; gap: 3px; align-content: end; }
+.bp-felder input { width: 100%; font-variant-numeric: tabular-nums; }
+.bp-felder .bp-ausreisser { grid-column: 1 / -1; }
+.bp-zeichnung { margin: 0; }
+/* Struktogramm-Baukasten: Nassi-Shneiderman-Kästen mit Linien in der Textfarbe (wie die Blatt-Diagramme), Felder randlos im Kasten. */
+.sg-arbeit { display: grid; gap: 8px; }
+.sg-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 2px 0; }
+/* Breiter als der Bildschirm, wenn die Verschachtelung es braucht – dann scrollt .sg-scroll, statt die Spalten zu stauchen. */
+.sg { --sg-linie: 1.5px solid currentColor; width: max-content; min-width: 100%; color: var(--text); background: var(--surface); border: var(--sg-linie); }
+.sg-folge { display: flex; flex-direction: column; min-width: 11em; }
+.sg-folge > .sg-b + .sg-b { border-top: var(--sg-linie); }

@@ -6,8 +6,10 @@ export const PROGRESS_KEY = 'ap2-fortschritt';
 /** Öffnet eine Adresse der App (HashRouter) und schließt die Willkommensseite, falls sie erscheint. */
 export async function oeffne(page: Page, hash = '/'): Promise<void> {
   await page.goto(`./#${hash}`);
+  // Erst den Ladezustand abwarten: Die Willkommensseite erscheint erst, wenn der Lernstand geladen ist (unter Last dauert das länger).
+  await expect(page.locator('.loading')).toHaveCount(0, { timeout: 30_000 });
   const los = page.getByRole('button', { name: /Los geht/ });
-  if (await los.isVisible({ timeout: 3000 }).catch(() => false)) await los.click();
+  if (await los.isVisible({ timeout: 1000 }).catch(() => false)) await los.click();
   await expect(page.locator('.page, .buch, main').first()).toBeVisible();
 }
 

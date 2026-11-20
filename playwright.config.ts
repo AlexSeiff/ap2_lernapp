@@ -8,6 +8,8 @@ const kanal = process.env.E2E_KANAL ?? (process.env.CI ? undefined : 'msedge');
 
 export default defineConfig({
   testDir: 'e2e',
+  // Bilder für den Pixelvergleich liegen lokal außerhalb der Versionsverwaltung (siehe e2e/visuell.spec.ts).
+  snapshotPathTemplate: 'e2e-visuell/{projectName}/{arg}{ext}',
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: true,
@@ -22,10 +24,23 @@ export default defineConfig({
     trace: 'retain-on-failure',
     acceptDownloads: true,
   },
-  projects: [
-    { name: 'desktop', use: { viewport: { width: 1280, height: 900 } } },
-    { name: 'handy', use: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true }, testMatch: /handy\.spec\.ts/ },
-  ],
+  projects: process.env.E2E_VISUELL
+    ? [
+        { name: 'visuell', use: { viewport: { width: 1280, height: 900 } }, testMatch: /visuell\.spec\.ts/ },
+        {
+          name: 'visuell-handy',
+          use: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true },
+          testMatch: /visuell\.spec\.ts/,
+        },
+      ]
+    : [
+        { name: 'desktop', use: { viewport: { width: 1280, height: 900 } }, testIgnore: /visuell\.spec\.ts/ },
+        {
+          name: 'handy',
+          use: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true },
+          testMatch: /handy\.spec\.ts/,
+        },
+      ],
   webServer: {
     command: `npx vite preview --port ${PORT} --strictPort`,
     url: `http://localhost:${PORT}/`,
