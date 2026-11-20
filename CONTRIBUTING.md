@@ -33,9 +33,10 @@ npm run typecheck
 npm run lint
 npm run format:check
 npm run build
+npm run test:e2e
 ```
 
-Der Importbericht soll mit **Hinweise (0)** enden; mit Hinweisen bricht `npm run build` ab. Wenn du Quellen änderst, führe zusätzlich `npm run quellen-pruefen` mit Internetzugang aus. Eine HTTP-Antwort belegt die Erreichbarkeit. Prüfe die Aussage selbst anhand der genannten Fundstelle. Für Darstellungsänderungen kontrolliere die betreffende Seite in der Pages-Vorschau auf Desktop und Handy, hell und dunkel. Die Befehle und Beispiele für Edge stehen in der [Browserprüfung](.claude/skills/app-pruefen/SKILL.md).
+Der Importbericht soll mit **Hinweise (0)** enden; mit Hinweisen bricht `npm run build` ab. Wenn du Quellen änderst, führe zusätzlich `npm run quellen-pruefen` mit Internetzugang aus. Eine HTTP-Antwort belegt die Erreichbarkeit. Prüfe die Aussage selbst anhand der genannten Fundstelle. Für Darstellungsänderungen kontrolliere die betreffende Seite in der Pages-Vorschau auf Desktop und Handy, hell und dunkel. Die Befehle und Beispiele für Edge stehen in der [Browserprüfung](.claude/skills/app-pruefen/SKILL.md). `npm run test:e2e` prüft die wichtigsten Wege im Browser (Playwright) und die Barrierefreiheit der Hauptseiten (axe). Ändert sich nur das Aussehen nicht, aber der CSS-Aufbau, vergleicht der Pixelvergleich vorher und nachher (siehe [Stile](docs/02-architektur.md), § 3.2).
 
 ## Pull Request
 

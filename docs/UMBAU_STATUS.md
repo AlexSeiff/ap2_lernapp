@@ -257,6 +257,30 @@ angelegt wurden, sind per `git diff --name-status main HEAD` als „neu“ gepr�
 
 Befehle: `npm run import-report` (Hinweise 0), `npm test` (98 Dateien, 1786 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run test:e2e` (52 Tests): alle grün.
 
-## Offen: Phasen 6, 8, 9 und 10
+## Phase 9 – Dokumentation (vor Phase 6 gezogen)
+
+Status: erledigt (20.11.2026), von Hand umgesetzt.
+
+- **`DOKUMENTATION.md` (1241 Zeilen) ist jetzt ein Inhaltsverzeichnis**, der Inhalt liegt in acht Dateien unter `docs/` (`01-ueberblick` bis `08-qualitaet-und-regeln`).
+  Der Schnitt ist **verlustfrei** (geprüft: alle 1106 Zeilen ohne Leerzeilen und Trenner sind vorher und nachher gleich). Die **Abschnittsnummern bleiben** (`§ 3.1`, `§ 4.4`, `§ 6` …),
+  weil Code-Kommentare, `content/AP2_Rechen_Uebungen.json` und `domain/types.ts` darauf verweisen; das Inhaltsverzeichnis ordnet jede Nummer ihrer Datei zu. Diese Verweise habe ich
+  nicht angefasst (die Inhaltsdatei hätte sonst den Inhalts-Snapshot aus Phase 0 geändert); im Skill `inhalte-schreiben` zeigen sie jetzt direkt auf `docs/03-inhalte.md`.
+- **Inhaltlich erneuert** (nur, was durch die Umbauten falsch geworden war):
+  - `02-architektur`: neue Ordner (`pages/uebersicht|karten|rechenuebung|klausur`, `components/diagramm|tabellen`, `styles/`, `e2e/`), neue Dateien (Speicher, `diagrammPlatz`,
+    `domain/inhaltsdateien`), 36 statt 28 Vorlagen, neuer Abschnitt **§ 3.2 Styles** (bindende Importreihenfolge, drei Gestaltungsschichten, Pixelvergleich).
+  - `06-lernstand`: `PROGRESS_VERSION` 10 (stand noch auf 9), das entfernte `revision`-Feld, `checkProgressPut`/409/PUT ersetzt durch `berechneSpeicherstand`, neuer Absatz
+    **Wo der Lernstand liegt** (IndexedDB, Umzug, Rückfall, mehrere Tabs).
+  - `08-qualitaet-und-regeln`: `npm run test:e2e`, Browser-, Pixel- und Gleichheitstests, drei neue Regeln (Stile, neue Inhaltsarten/Vorlagen, Speicher; darunter „vor dem Anlegen einer
+    Testdatei prüfen, ob der Name frei ist“).
+  - `01-ueberblick`: Stil-Aufbau, Speicher, CI-Kette mit Browser-Tests; `03`/`05`: CSS-Pfade.
+- **README:** Zahlen an den Importbericht angeglichen (Begriffsseiten 1.119 statt 1.011, Begriffskarten 919 statt 816, Rechenübungen 122 statt 109, Diagramm-Übungen 32 statt 30), Hinweis
+  auf den Umzug nach IndexedDB, Prüfbefehle samt `npm run test:e2e`, Ordner `e2e/` und `docs/`. `CONTRIBUTING.md`: `npm run test:e2e` und der Pixelvergleich.
+- Alle relativen Links in den 15 Dokumenten zeigen auf vorhandene Dateien (Skript).
+- Bewusst nicht gemacht: die englischen Verlaufstexte der Features (`04`, `05`) wurden nicht umgeschrieben, nur wo sie falsche Pfade oder Mechanismen nannten.
+  Eine inhaltliche Gesamtdurchsicht aller Feature-Abschnitte gegen den heutigen Code steht noch aus.
+
+Befehle: `npm test` (98 Dateien, 1786 Tests), `npm run lint`, `npm run format:check`: grün (keine Code-Änderung in dieser Phase).
+
+## Offen: Phasen 6, 8 und 10
 
 Noch nicht begonnen.
