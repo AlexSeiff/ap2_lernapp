@@ -34,9 +34,40 @@ export function aktualisieren() {
 /** Wie oft eine offene App nach einer neuen Version fragt (der HashRouter navigiert nie, sonst prüft der Browser selbst). */
 const PRUEF_INTERVALL_MS = 60 * 60 * 1000;
 
+/** So lange ohne Bedienung (Navigation, Antippen, Taste) gilt die Seite als ruhig. */
+export const RUHE_MS = 4000;
+/** Längstens so lange wird auf Ruhe gewartet; danach wird trotzdem registriert. */
+export const WARTEN_HOECHSTENS_MS = 60 * 1000;
+
+/**
+ * Wartet, bis der Nutzer kurz nichts bedient hat. Beim allerersten Besuch lädt der Service Worker rund 3 MB vor (der Vorabspeicher für
+ * den Offline-Betrieb), und das bremst auf einem langsamen Netz jede Seite, die der Nutzer in dieser Zeit öffnet. Wer gerade klickt,
+ * wartet deshalb nicht auch noch darauf; gelesen wird beim Lesen vorab gespeichert.
+ */
+export function wartebisRuhig(ruheMs = RUHE_MS, hoechstens = WARTEN_HOECHSTENS_MS): Promise<void> {
+  return new Promise((fertig) => {
+    const start = Date.now();
+    let zuletzt = start;
+    const bump = () => (zuletzt = Date.now());
+    const ereignisse = ['hashchange', 'pointerdown', 'keydown'] as const;
+    for (const e of ereignisse) window.addEventListener(e, bump, { passive: true });
+    const timer = setInterval(() => {
+      const jetzt = Date.now();
+      if (jetzt - zuletzt >= ruheMs || jetzt - start >= hoechstens) {
+        clearInterval(timer);
+        for (const e of ereignisse) window.removeEventListener(e, bump);
+        fertig();
+      }
+    }, 500);
+  });
+}
+
 export async function registriereServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
   try {
+    // Wer die App schon hatte, registriert sofort (nichts Großes zu laden, die Update-Prüfung soll früh laufen). Der erste Besuch wartet auf Ruhe.
+    const vorhanden = await navigator.serviceWorker.getRegistration(import.meta.env.BASE_URL);
+    if (!vorhanden) await wartebisRuhig();
     const { Workbox } = await import('workbox-window');
     const wb = new Workbox(`${import.meta.env.BASE_URL}sw.js`, { scope: import.meta.env.BASE_URL });
     // Auch beim Start gemeldet, wenn schon eine neue Version aus einem früheren Besuch wartet.

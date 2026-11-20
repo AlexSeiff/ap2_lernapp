@@ -175,7 +175,7 @@ Under **Einstellungen → Design → Karo-Stärke**, learners can choose **Kräf
   (high-quality bicubic) and committed – no image library in the project. `tests/pwa.test.ts` checks that every icon exists with the declared size.
 - **Precache** (`globPatterns` `**/*.{html,js,css,json,wasm,woff2}` + manifest + icons): index.html, all JS chunks including the lazy ones
   (SQL, Rechnen, KaTeX, CodeMirror, the lazy pages), CSS, `content.json`, `texte/*.json`, `sql-wasm.wasm`, the KaTeX **woff2** fonts (woff/ttf
-  are not cached; every current browser uses woff2), `begriffe.json`. Today **98 entries, about 6.4 MB**. `maximumFileSizeToCacheInBytes` is
+  are not cached; every current browser uses woff2), `begriffe.json`. Today **155 entries, 8.5 MB raw / 3.1 MB gzip** (the original figure of 98 entries was from phase 7.1). `maximumFileSizeToCacheInBytes` is
   8 MB (content.json ~1.3 MB, begriffe.json ~1.5 MB).
   Navigations fall back to the cached `index.html`, so the app starts offline after the first visit (SQL editor and formulas included).
 - **Updates** (`registerType: 'prompt'`, no `skipWaiting`/`clientsClaim`): every precached file has a revision hash in `sw.js`, so any change
@@ -186,6 +186,15 @@ Under **Einstellungen → Design → Karo-Stärke**, learners can choose **Kräf
   is never interrupted); after "Später" the new version takes over once all tabs of the app were closed. Because the HashRouter never
   navigates, an open app also asks for a new `sw.js` every hour and when the tab becomes visible again (at most every 10 minutes).
   Progress is unaffected (the service worker doesn't touch localStorage/IndexedDB; the saver flushes on `pagehide` before the reload).
+- **First visit: registration waits for quiet** (November 2026, `wartebisRuhig` in `src/lib/pwa.ts`). Workbox already installs the precache one file at a
+  time, but on a slow network those ~3 MB still slow down every page the user opens during the first seconds. A throttled-network measurement
+  (`tools/messung/`: `drossel-server.js` ≈ 1.6 Mbit/s, 150 ms latency, gzip; `start-messung.js`; CPU ×4; median of 3 runs) showed the start itself is unaffected
+  (LCP 1.8 s with and without the worker) but a click 1.5 s after load took **4.2 s instead of 2.1 s** (a click after 4 s: 1.9 s → 1.5 s; after 8 s: 1.5 s → 1.8 s,
+  because the load only moves later). So on the **first visit only** (no registration yet) `registriereServiceWorker` waits until 4 s without navigation, tap or
+  key press (at most 60 s) before it registers; returning visitors register at once (nothing big to load, early update check). The offline-ready time grows by
+  about 4 s (≈ 42 s → 46 s on that network). The Workbox precache itself is unchanged (all files, one consistent set per version), because splitting it would
+  have meant a hand-written service worker and the risk of mixed versions offline. Tests: `tests/pwaRegistrierung.test.ts` and `e2e/offline.spec.ts` (first visit,
+  wait for the precache, go offline, reload, open every main page and run a SQL query; a counter-check proves "offline" really is offline).
 - Checked in a headless Edge against `npx vite preview --mode pages`: worker active with 45 cache entries, toast after a rebuild, "Neu laden"
   activates the new build; offline reload of `/sql` runs queries (WASM) and the Rechenweg renders KaTeX with the cached fonts.
 - **Testing locally:** the worker caches the preview origin (`localhost:<port>`). After a new `npm run build` reload once and click

@@ -281,6 +281,28 @@ Status: erledigt (20.11.2026), von Hand umgesetzt.
 
 Befehle: `npm test` (98 Dateien, 1786 Tests), `npm run lint`, `npm run format:check`: grün (keine Code-Änderung in dieser Phase).
 
-## Offen: Phasen 6, 8 und 10
+## Phase 8 – Erster Start schneller, Offline unverändert
+
+Status: erledigt (20.11.2026), von Hand umgesetzt. **Abweichung vom Plan, bewusst und gemessen:** Der Vorabspeicher wird **nicht** aufgeteilt, sondern nur sein **Zeitpunkt** geändert.
+
+Messung (neu: `tools/messung/drossel-server.js` und `start-messung.js`; gedrosselter Server mit 200 KB/s ≈ 1,6 Mbit/s, 150 ms Latenz, gzip; Handy-Fenster, CPU ×4; frisches Profil; Median von 3 Läufen):
+- Der **Start selbst** ist nie betroffen: LCP 1,8 s mit und ohne Service Worker (die Registrierung geschah schon nach `load`).
+- Eine **Navigation kurz nach dem Start** ist betroffen: Klick nach 1,5 s → **4,2 s statt 2,1 s**, weil der Vorabspeicher (155 Dateien, 3,1 MB gzip) gleichzeitig lädt.
+- Workbox 7.4.1 installiert den Vorabspeicher **schon jetzt eine Datei nach der anderen**; weniger Parallelität ist nicht möglich. Übrig bleibt der Zeitpunkt.
+
+Änderung (`src/lib/pwa.ts`, `wartebisRuhig`): Beim **allerersten Besuch** (noch keine Registrierung) wartet die Registrierung, bis 4 s lang nichts navigiert, angetippt oder getippt wurde (höchstens 60 s). Wer die App schon hatte,
+registriert sofort. Ergebnis (Navigation nach Klick): nach 1,5 s **4.209 → 2.112 ms** (gleich wie ganz ohne Service Worker), nach 4 s 1.884 → 1.474 ms, nach 8 s 1.475 → 1.761 ms (die Last wandert nur nach hinten, +0,3 s s). Der
+Vorabspeicher ist dafür ca. 4 s später komplett (42 → 46 s auf diesem Netz).
+
+Warum keine Aufteilung des Vorabspeichers: Sie hätte einen selbst geschriebenen Service Worker verlangt (eigene Caches, eigene Abruflogik) und die Gefahr gemischter Versionen offline (`content.json` neu, `details.json` alt → die App wirft „Seite neu laden“).
+Ein kaputter Service Worker trifft jeden Nutzer; der Gewinn wäre auf das erste Weiterklicken im ersten Besuch auf langsamem Netz begrenzt. Die Änderung am Zeitpunkt bringt den größten Teil davon mit wenigen Zeilen.
+
+Tests: `tests/pwaRegistrierung.test.ts` (4 Tests: Ruhezeit, Neustart bei jeder Bedienung, Höchstzeit, Zuhörer werden abgemeldet) und **`e2e/offline.spec.ts`** (die Bedingung des Plans): erster Besuch → warten, bis der Vorabspeicher voll ist (≥ 150 Dateien) →
+offline gehen → neu laden → Lernblatt, Karteikarten, Begriffsseite, Formelsammlung (KaTeX-Schriften), SQL-Abfrage (WASM), Rechenübung, Diagramm-Übung und Klausur öffnen. Eine Gegenprobe im Test beweist, dass „offline“ wirklich offline ist; entfernt man das Warten auf den Vorabspeicher,
+scheitert der Test (geprüft).
+
+Befehle: `npm run import-report` (Hinweise 0), `npm test` (99 Dateien, 1790 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run test:e2e` (53 Tests): alle grün.
+
+## Offen: Phasen 6 und 10
 
 Noch nicht begonnen.
