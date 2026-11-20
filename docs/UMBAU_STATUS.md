@@ -185,6 +185,51 @@ Befehle: `npm run import-report` (Hinweise 0), `npm test` (94 Dateien, 1512 Test
 `npm run test:e2e` (49 Tests), Pixelvergleich (92 Bilder): alle grün. In `DOKUMENTATION.md` stehen noch alte CSS-Pfade; sie werden in Phase 9
 mit der Aufteilung der Dokumentation erneuert.
 
-## Phasen 5 bis 10
+## Phase 5 – Lernstand nach IndexedDB
+
+Status: erledigt (20.11.2026), von Hand umgesetzt. **Abweichung vom Plan, bewusst:** Der Lernstand liegt als **ein Eintrag** (derselbe JSON-Text wie
+eine heruntergeladene Sicherung) in IndexedDB, nicht als ein Datensatz je Versuch, Karte und Markierung. Gründe: Der echte Stand ist rund 74 KB, ein
+Umschreiben des ganzen Eintrags kostet nichts; Datensätze je Eintrag hätten eine neue Zusammenführungslogik und ein neues Dateiformat verlangt, also
+genau das Risiko, das bei Lernfortschritt vermieden werden soll. Der Gewinn, den der Plan wollte, ist trotzdem da: Das 5-MB-Limit des localStorage
+entfällt (IndexedDB hat deutlich mehr Platz), und Lesen + Schreiben laufen in **einer Transaktion**, zwei Tabs können sich also nicht mehr
+überschreiben. Das Sicherungsformat, `PROGRESS_VERSION` und `mergeProgress` sind unverändert.
+
+Neu:
+- `src/lib/progressSchreiben.ts`: die Rechenlogik des Speicherns (prüfen, Schutz vor Versuchs-Rückgang, fremde Änderungen zusammenführen), wörtlich aus
+  dem bisherigen Code gezogen und vom localStorage- **und** vom IndexedDB-Speicher benutzt. Die 57 bestehenden Speichertests blieben dabei unverändert grün.
+- `src/lib/idbFortschritt.ts`: der IndexedDB-Speicher (Datenbank `ap2-lernstand`, Eintrag `fortschritt`, nicht lesbarer Text wird unter
+  `fortschritt-defekt` gesichert). Andere Tabs erfahren von Änderungen über einen `BroadcastChannel`.
+- `src/lib/fortschrittSpeicher.ts`: wählt den Speicher und macht den Umzug. `src/lib/localFortschritt.ts`: der bisherige localStorage-Speicher (jetzt eigene
+  Datei, `staticApi.ts` exportiert ihn weiter).
+
+Sicherheit des Umzugs (alles getestet):
+- Es wird nur übernommen, wenn IndexedDB noch leer ist; vorhandener Fortschritt wird nie überschrieben (auch nicht von einem älteren localStorage-Stand).
+- Der Text wird 1:1 kopiert und danach zurückgelesen und verglichen.
+- Der **alte localStorage-Eintrag bleibt unverändert stehen** (Rückfall) und wird **nicht gelöscht**; das ist frühestens in einer späteren Version vorgesehen.
+  Vermerkt wird der Umzug unter `ap2-fortschritt-in-indexeddb`.
+- Geht IndexedDB nicht (gesperrt, privates Fenster, Zeitüberschreitung nach 4 s) oder schlägt irgendein Schritt fehl, arbeitet die App in dieser Sitzung mit dem
+  localStorage weiter. Es geht nichts verloren.
+
+Prüfungen:
+- `tests/idbFortschritt.test.ts` (14 Tests, mit `fake-indexeddb`): Lesen/Schreiben, Zusammenführen zweier Tabs, **gleichzeitiges Speichern aus zwei Tabs**, Schutz vor
+  leerem Stand, ungültige Daten, kaputter Text, Benachrichtigung nur an andere Tabs, Umzug (1:1, nie überschreiben, ohne/kaputten alten Stand), automatische Wahl und
+  Rückfall, und der Umzug **aller echten Lernstände aus `data/`** (nur lesend; läuft nur, wenn der Ordner da ist). Gegenprobe: Ein absichtlich eingebauter Fehler im
+  Kopieren macht vier Tests rot, darunter den mit den echten Ständen.
+- Browser (`e2e/speicher.spec.ts`, 3 Tests): alter Stand im localStorage zieht um und die Willkommensseite bleibt weg; danach wird nur noch in IndexedDB gespeichert
+  und nach dem Neuladen ist alles da; ohne IndexedDB läuft die App mit dem localStorage weiter. Dazu bestehen die Zwei-Tab-Tests jetzt über den BroadcastChannel.
+  Die Hilfsfunktion `lernstand()` in `e2e/hilfen.ts` liest aus IndexedDB und öffnet eine fehlende Datenbank nicht (das würde der App das Anlegen verbauen).
+- **Einmalprobe im echten Browser** (frisches Profil, `data/` unverändert): Alle 14 echten Stände (`fortschritt.json` v9 mit 47 Versuchen/464 Karten und alle 13
+  Sicherungen v1 bis v9) kommen **Byte für Byte identisch** in IndexedDB an, die App zeigt jeweils die Übersicht, kein Seitenfehler.
+- Sichtbar geändert: zwei Sätze nennen jetzt IndexedDB statt localStorage (`Datenschutz.tsx` auf Einstellungen, `Daten.tsx`). Die acht betroffenen Pixelbilder
+  wurden bewusst erneuert, das Diff-Bild zeigt nur diesen Satz.
+
+Offen / Hinweise:
+- Die Pixelvergleiche flackern unter voller Parallelität gelegentlich bei `/lernen/01` (allein laufen sie stabil); mit `--workers=2` stabil.
+- In `DOKUMENTATION.md` und `README.md` steht noch „localStorage“ als Speicher des Lernstands; das erneuert Phase 9.
+
+Befehle: `npm run import-report` (Hinweise 0), `npm test` (95 Dateien, 1526 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run test:e2e`
+(52 Tests), Pixelvergleich (92 Bilder, `--workers=2`): alle grün.
+
+## Phasen 6 bis 10
 
 Noch nicht begonnen.

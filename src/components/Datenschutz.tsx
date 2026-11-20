@@ -11,8 +11,8 @@ export function Datenschutz() {
         <li>Kein Konto, keine Anmeldung.</li>
         <li>Kein Tracking, keine Statistik-Tools, keine Cookies, keine Werbung.</li>
         <li>
-          Dein Fortschritt und deine Einstellungen bleiben <b>nur in diesem Browser</b> (localStorage) und werden nirgendwohin übertragen.
-          Löschst du die Browserdaten, sind sie weg – lade deshalb ab und zu eine Sicherung herunter.
+          Dein Fortschritt und deine Einstellungen bleiben <b>nur in diesem Browser</b> (IndexedDB, notfalls localStorage) und werden
+          nirgendwohin übertragen. Löschst du die Browserdaten, sind sie weg – lade deshalb ab und zu eine Sicherung herunter.
         </li>
         <li>
           Geladen werden nur die App und die Lerninhalte von GitHub Pages – nichts von anderen Anbietern. Wie bei jeder Website sieht der

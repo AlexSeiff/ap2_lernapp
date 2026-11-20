@@ -180,7 +180,7 @@ export function Daten() {
       <section className="card">
         <h2>Fortschritt</h2>
         <p>
-          Gespeichert in diesem Browser (localStorage) – nur auf diesem Gerät. {progress.attempts.length} Versuche, {progress.exams.length}{' '}
+          Gespeichert in diesem Browser (IndexedDB) – nur auf diesem Gerät. {progress.attempts.length} Versuche, {progress.exams.length}{' '}
           Klausuren, {Object.keys(progress.cards).length} gelernte Karten.
         </p>
         {persisted !== null && (
