@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Flashcard, Task } from '../shared/types';
+import type { Flashcard, Task } from '../domain/types';
 import { ALTKLAUSUR_TAG, altklausurThemen, istAltklausurAufgabe, istAltklausurKarte, istAltklausurThema } from '../src/lib/altklausur';
 import { aufgabenGeordnet, aufgabenImModus, naechsteAufgabe } from '../src/lib/aufgabenFolge';
 import { filterCards, readCardFilter, withCardFilter } from '../src/lib/cards';

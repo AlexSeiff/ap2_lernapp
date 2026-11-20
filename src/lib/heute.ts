@@ -2,9 +2,9 @@
 // Rein (ohne React, ohne Speicher): gleicher Stand + gleicher Tag → gleicher Plan. Die Sitzung (welcher Schritt gerade dran ist)
 // steht in lib/heuteSitzung.ts, die Seite in pages/Heute.tsx.
 
-import { HEUTE_KARTEN_BLOCK, HEUTE_MINUTEN, HEUTE_ZEITEN, NEW_PER_SESSION } from '../../shared/config';
-import type { Progress } from '../../shared/progress';
-import type { Flashcard, Task } from '../../shared/types';
+import { HEUTE_KARTEN_BLOCK, HEUTE_MINUTEN, HEUTE_ZEITEN, NEW_PER_SESSION } from '../../domain/config';
+import type { Progress } from '../../domain/progress';
+import type { Flashcard, Task } from '../../domain/types';
 import { erzeugeZufall, seedAusText } from '../rechnen/zufall';
 import { cardPool, rundenKarten } from './cards';
 import { leichtAutomatischAn, leichtKartenGemerkt } from './leicht';
@@ -14,7 +14,7 @@ import { istAusgeblendet } from './settings';
 import { topicStats } from './stats';
 import { letzterStand } from './wiederholung';
 import type { IconName } from './icons';
-import type { KernInhalt } from '../../shared/texte';
+import type { KernInhalt } from '../../domain/texte';
 
 export type HeuteArt = 'wiederholung' | 'aufgabe' | 'sql' | 'rechnen' | 'diagramm' | 'karten';
 

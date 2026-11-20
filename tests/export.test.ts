@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { emptyProgress } from '../shared/progress';
-import type { Flashcard } from '../shared/types';
+import { emptyProgress } from '../domain/progress';
+import type { Flashcard } from '../domain/types';
 import { ankiText, kalenderIcs } from '../src/lib/export';
 
 const content = { decks: [{ id: 'd1', title: 'Fachbegriffe – SQL' }], topics: [], tasks: {} } as never;

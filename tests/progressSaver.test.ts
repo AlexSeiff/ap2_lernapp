@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { CONFLICT_MESSAGE, emptyProgress, type Progress } from '../shared/progress';
+import { emptyProgress, type Progress } from '../domain/progress';
 import { recordAttempt } from '../src/lib/progress';
 import { createProgressSaver, type SaveState } from '../src/lib/progressSaver';
 
@@ -9,21 +9,10 @@ const withAttempts = (n: number): Progress => {
   return p;
 };
 
-/** Server-Attrappe: jede Anfrage bleibt offen, bis der Test sie beantwortet. Erfolg erhöht die Revision wie der echte Server. */
-function fakeServer(startRevision = 0) {
-  let revision = startRevision;
-  const calls: { body: unknown; resolve: () => void; reject: (e: Error) => void; conflict: () => void }[] = [];
-  const send = vi.fn(
-    (body: unknown) =>
-      new Promise<{ revision: number }>((resolve, reject) => {
-        calls.push({
-          body,
-          resolve: () => resolve({ revision: ++revision }),
-          reject,
-          conflict: () => reject(Object.assign(new Error('Fortschritt nicht gespeichert: …'), { status: 409 })),
-        });
-      }),
-  );
+/** Speicher-Attrappe mit kontrollierbar verzögertem Abschluss. */
+function fakeStorage() {
+  const calls: { body: unknown; resolve: () => void; reject: (e: Error) => void }[] = [];
+  const send = vi.fn((body: unknown) => new Promise<void>((resolve, reject) => calls.push({ body, resolve, reject })));
   return { calls, send };
 }
 
@@ -40,125 +29,170 @@ afterEach(() => {
 
 describe('createProgressSaver', () => {
   it('fasst schnelle Änderungen zu einem Speichern mit dem neuesten Stand zusammen', async () => {
-    const server = fakeServer();
-    const saver = createProgressSaver({ send: server.send, onState });
+    const storage = fakeStorage();
+    const saver = createProgressSaver({ send: storage.send, onState });
     saver.schedule(withAttempts(1));
     saver.schedule(withAttempts(2));
     saver.schedule(withAttempts(3));
-    expect(server.send).not.toHaveBeenCalled();
+    expect(storage.send).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(400);
-    expect(server.calls.map((c) => (c.body as Progress).attempts.length)).toEqual([3]);
-    server.calls[0].resolve();
+    expect(storage.calls.map((c) => (c.body as Progress).attempts.length)).toEqual([3]);
+    storage.calls[0].resolve();
     await vi.runAllTimersAsync();
     expect(states.at(-1)).toEqual(['gespeichert', null]);
   });
 
   it('meldet erst nach dem Speichern nichts Ausstehendes mehr (für den pagehide-Flush)', async () => {
-    const server = fakeServer();
-    const saver = createProgressSaver({ send: server.send, onState });
-    expect(saver.flushBody()).toBeUndefined();
+    const storage = fakeStorage();
+    const saver = createProgressSaver({ send: storage.send, onState });
+    expect(saver.pending).toBe(false);
     saver.schedule(withAttempts(1));
-    expect(saver.flushBody()).toEqual(withAttempts(1));
+    expect(saver.pending).toBe(true);
     await vi.advanceTimersByTimeAsync(400);
     // Unterwegs, aber noch nicht bestätigt → weiterhin ausstehend.
     expect(saver.pending).toBe(true);
-    server.calls[0].resolve();
+    storage.calls[0].resolve();
     await vi.runAllTimersAsync();
     expect(saver.pending).toBe(false);
-    expect(saver.flushBody()).toBeUndefined();
   });
 
   it('speichert nie parallel: eine Änderung während des Speicherns wird danach gesendet', async () => {
-    const server = fakeServer();
-    const saver = createProgressSaver({ send: server.send, onState });
+    const storage = fakeStorage();
+    const saver = createProgressSaver({ send: storage.send, onState });
     saver.schedule(withAttempts(1));
     await vi.advanceTimersByTimeAsync(400);
     saver.schedule(withAttempts(2));
     await vi.advanceTimersByTimeAsync(400);
-    expect(server.send).toHaveBeenCalledTimes(1);
-    server.calls[0].resolve();
+    expect(storage.send).toHaveBeenCalledTimes(1);
+    storage.calls[0].resolve();
     await vi.advanceTimersByTimeAsync(0);
     expect(states.at(-1)).toEqual(['speichert', null]);
-    expect(server.send).toHaveBeenCalledTimes(2);
-    expect((server.calls[1].body as Progress).attempts).toHaveLength(2);
-    server.calls[1].resolve();
+    expect(storage.send).toHaveBeenCalledTimes(2);
+    expect((storage.calls[1].body as Progress).attempts).toHaveLength(2);
+    storage.calls[1].resolve();
     await vi.runAllTimersAsync();
     expect(saver.pending).toBe(false);
     expect(states.at(-1)).toEqual(['gespeichert', null]);
   });
 
-  it('sendet reset: true, bis ein Zurücksetzen bestätigt ist', async () => {
-    const server = fakeServer();
-    const saver = createProgressSaver({ send: server.send, onState });
-    saver.schedule(emptyProgress(), true);
-    await vi.advanceTimersByTimeAsync(400);
-    expect(server.calls[0].body).toMatchObject({ reset: true });
-    server.calls[0].reject(new Error('Netz weg'));
-    await vi.runAllTimersAsync();
-    expect(states.at(-1)).toEqual(['fehler', 'Netz weg']);
-    // Fehlgeschlagen → ausstehend, und das nächste Speichern trägt das reset-Flag weiter.
-    expect(saver.flushBody()).toMatchObject({ reset: true });
+  it('behält Fehler und ausstehende Änderungen bis zum erfolgreichen Wiederholen', async () => {
+    const storage = fakeStorage();
+    const saver = createProgressSaver({ send: storage.send, onState });
     saver.schedule(withAttempts(1));
     await vi.advanceTimersByTimeAsync(400);
-    expect(server.calls[1].body).toMatchObject({ reset: true });
-    server.calls[1].resolve();
+    storage.calls[0].reject(new Error('Speicher voll'));
+    await vi.runAllTimersAsync();
+    expect(states.at(-1)).toEqual(['fehler', 'Speicher voll']);
+    expect(saver.pending).toBe(true);
+    saver.schedule(withAttempts(2));
+    await vi.advanceTimersByTimeAsync(400);
+    storage.calls[1].resolve();
+    await vi.runAllTimersAsync();
+    expect(saver.pending).toBe(false);
+    expect(states.at(-1)).toEqual(['gespeichert', null]);
+  });
+
+  it('behält bewusstes Ersetzen bei Fehlern und beim Schließen bei', async () => {
+    const storage = fakeStorage();
+    const replacement = fakeStorage();
+    const saver = createProgressSaver({ send: storage.send, onState });
+    saver.schedule(emptyProgress(), replacement.send);
+    await vi.advanceTimersByTimeAsync(400);
+    replacement.calls[0].reject(new Error('Speicher voll'));
+    await vi.runAllTimersAsync();
+    saver.schedule(withAttempts(1));
+    saver.flush();
+    expect(replacement.calls[1].body).toEqual(withAttempts(1));
+    expect(storage.send).not.toHaveBeenCalled();
+    replacement.calls[1].resolve();
+    await vi.runAllTimersAsync();
+  });
+
+  it('eine späte Bestätigung verwirft kein neueres bewusstes Ersetzen', async () => {
+    const storage = fakeStorage();
+    const replacement = fakeStorage();
+    const saver = createProgressSaver({ send: storage.send, onState });
+    saver.schedule(withAttempts(1));
+    await vi.advanceTimersByTimeAsync(400);
+    saver.schedule(emptyProgress(), replacement.send);
+    storage.calls[0].resolve();
+    await vi.advanceTimersByTimeAsync(400);
+    expect(replacement.calls[0].body).toEqual(emptyProgress());
+    replacement.calls[0].resolve();
     await vi.runAllTimersAsync();
     saver.schedule(withAttempts(2));
     await vi.advanceTimersByTimeAsync(400);
-    expect(server.calls[2].body).not.toHaveProperty('reset');
+    expect(storage.calls[1].body).toEqual(withAttempts(2));
+  });
+  it('meldet einen fehlgeschlagenen Flush, damit fremde Änderungen kein Neuladen mit Datenverlust auslösen', async () => {
+    const send = vi.fn().mockRejectedValue(new Error('Speicher voll'));
+    const saver = createProgressSaver({ send, onState });
+    saver.schedule(withAttempts(1));
+    expect(await saver.flush()).toBe(false);
+    expect(saver.pending).toBe(true);
+    expect(states.at(-1)).toEqual(['fehler', 'Speicher voll']);
   });
 
-  it('eine späte Bestätigung löscht keine neuere Reset-Anforderung', async () => {
-    const server = fakeServer();
-    const saver = createProgressSaver({ send: server.send, onState });
-    saver.schedule(withAttempts(1));
-    await vi.advanceTimersByTimeAsync(400);
-    saver.schedule(emptyProgress(), true);
-    server.calls[0].resolve();
-    await vi.advanceTimersByTimeAsync(400);
-    expect(server.calls[1].body).toMatchObject({ reset: true, attempts: [] });
-  });
-
-  it('sendet die Basis-Revision und übernimmt die neue Revision aus der Antwort', async () => {
-    const server = fakeServer(7);
-    const saver = createProgressSaver({ send: server.send, onState });
-    saver.setBaseRevision(7);
-    saver.schedule(withAttempts(1));
-    await vi.advanceTimersByTimeAsync(400);
-    expect(server.calls[0].body).toMatchObject({ revision: 7 });
-    server.calls[0].resolve();
-    await vi.runAllTimersAsync();
-    // Eine eingespielte Sicherung bringt ihre alte Revision mit – gesendet wird trotzdem die aktuelle.
-    saver.schedule({ ...emptyProgress(), revision: 2 }, true);
-    await vi.advanceTimersByTimeAsync(400);
-    expect(server.calls[1].body).toMatchObject({ revision: 8, reset: true });
-  });
-
-  it('hört nach 409 (anderer Tab) ganz auf zu speichern – auch beim Schließen des Tabs', async () => {
-    const server = fakeServer();
-    const saver = createProgressSaver({ send: server.send, onState });
-    saver.schedule(withAttempts(1));
-    await vi.advanceTimersByTimeAsync(400);
+  it('schreibt beim Flush sofort den neuesten Stand und ohne Änderungen gar nichts', async () => {
+    const send = vi.fn().mockResolvedValue(undefined);
+    const saver = createProgressSaver({ send, onState });
+    expect(await saver.flush()).toBe(true);
+    expect(send).not.toHaveBeenCalled();
     saver.schedule(withAttempts(2));
-    server.calls[0].conflict();
+    const flushed = saver.flush();
+    expect(send).toHaveBeenCalledWith(withAttempts(2));
+    expect(await flushed).toBe(true);
     await vi.runAllTimersAsync();
-    expect(states.at(-1)).toEqual(['konflikt', CONFLICT_MESSAGE]);
-    expect(saver.flushBody()).toBeUndefined();
-    saver.schedule(withAttempts(3));
-    await vi.runAllTimersAsync();
-    expect(server.send).toHaveBeenCalledTimes(1);
-    expect(states.at(-1)).toEqual(['konflikt', CONFLICT_MESSAGE]);
+    expect(send).toHaveBeenCalledOnce();
   });
 
-  it('markConflict (anderer Tab hat im Browser gespeichert) verwirft das geplante Speichern', async () => {
-    const server = fakeServer();
-    const saver = createProgressSaver({ send: server.send, onState });
+  it('nach einem erfolgreichen Flush ist nichts mehr ausstehend und der Zustand heißt „gespeichert“', async () => {
+    const send = vi.fn().mockResolvedValue(undefined);
+    const saver = createProgressSaver({ send, onState });
+    saver.schedule(withAttempts(2));
+    expect(saver.pending).toBe(true);
+    expect(await saver.flush()).toBe(true);
+    expect(saver.pending).toBe(false);
+    expect(states.at(-1)).toEqual(['gespeichert', null]);
+    // Ein zweiter Flush hat nichts mehr zu schreiben.
+    expect(await saver.flush()).toBe(true);
+    expect(send).toHaveBeenCalledOnce();
+  });
+
+  it('eine Änderung während des Flush bleibt ausstehend und wird danach gespeichert', async () => {
+    const storage = fakeStorage();
+    const saver = createProgressSaver({ send: storage.send, onState });
     saver.schedule(withAttempts(1));
-    saver.markConflict();
-    saver.markConflict();
+    const flushed = saver.flush();
+    saver.schedule(withAttempts(2));
+    storage.calls[0].resolve();
+    expect(await flushed).toBe(true);
+    expect(saver.pending).toBe(true);
+    await vi.advanceTimersByTimeAsync(400);
+    expect(storage.calls.map((c) => (c.body as Progress).attempts.length)).toEqual([1, 2]);
+    storage.calls[1].resolve();
     await vi.runAllTimersAsync();
-    expect(server.send).not.toHaveBeenCalled();
-    expect(saver.flushBody()).toBeUndefined();
-    expect(states.filter(([s]) => s === 'konflikt')).toEqual([['konflikt', CONFLICT_MESSAGE]]);
+    expect(saver.pending).toBe(false);
+    expect(states.at(-1)).toEqual(['gespeichert', null]);
+  });
+
+  it('zwei Tabs mit ungespeicherten Änderungen stoßen sich nicht endlos gegenseitig an', async () => {
+    // Jeder Tab flusht, wenn der andere schreibt (so arbeitet watchOtherTabs in store.tsx). Mit einem hängenbleibenden „ausstehend“ würde das ewig weitergehen.
+    let schreibvorgaenge = 0;
+    const tab: Record<'a' | 'b', ReturnType<typeof createProgressSaver>> = {} as never;
+    const schreibe = (anderer: 'a' | 'b') =>
+      vi.fn(async () => {
+        schreibvorgaenge++;
+        if (schreibvorgaenge < 50) queueMicrotask(() => void tab[anderer].flush());
+      });
+    tab.a = createProgressSaver({ send: schreibe('b'), onState });
+    tab.b = createProgressSaver({ send: schreibe('a'), onState });
+    tab.a.schedule(withAttempts(1));
+    tab.b.schedule(withAttempts(2));
+    await tab.a.flush();
+    await vi.runAllTimersAsync();
+    expect(schreibvorgaenge).toBeLessThanOrEqual(3);
+    expect(tab.a.pending).toBe(false);
+    expect(tab.b.pending).toBe(false);
   });
 });

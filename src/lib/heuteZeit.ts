@@ -1,6 +1,6 @@
 // Gewählte Dauer der Tagesrunde („Ich habe nur 10 Minuten“): pro Gerät im localStorage, Standard HEUTE_MINUTEN.
 
-import { HEUTE_MINUTEN } from '../../shared/config';
+import { HEUTE_MINUTEN } from '../../domain/config';
 
 export const HEUTE_DAUERN = [10, 20, 40] as const;
 export const HEUTE_DAUER_SPEICHER = 'ap2-heute-dauer';

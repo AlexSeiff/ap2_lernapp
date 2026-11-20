@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { emptyProgress, ProgressSchema } from '../shared/progress';
+import { emptyProgress, ProgressSchema } from '../domain/progress';
 import { addDays } from '../src/lib/progress';
 import { rechenStatus, rechenSummary, recordRechenCheck, recordRechenHint, recordRechenLoesung, setRechenSeed } from '../src/lib/rechnen';
 import { activityDays, studyStreak } from '../src/lib/stats';

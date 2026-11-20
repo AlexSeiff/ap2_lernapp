@@ -1,9 +1,9 @@
 import { cardPool } from './cards';
 import { percent } from './grading';
 import { addDays, localDate } from './progress';
-import type { Progress } from '../../shared/progress';
-import { isIsoDate } from '../../shared/progress';
-import type { KernTopic, StartInhalt } from '../../shared/texte';
+import type { Progress } from '../../domain/progress';
+import { isIsoDate } from '../../domain/progress';
+import type { KernTopic, StartInhalt } from '../../domain/texte';
 
 /** Tage bis zum eigenen Prüfungstermin (YYYY-MM-DD); 0 = heute, negativ = vorbei, undefined = keiner eingetragen. */
 export function daysUntilExam(examDate: string | undefined, today = new Date()): number | undefined {

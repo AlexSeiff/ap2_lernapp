@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import type { BackupInfo } from '../../shared/api';
-import { mergeProgress } from '../../shared/mergeProgress';
-import { emptyProgress } from '../../shared/progress';
+import type { BackupInfo } from '../../domain/api';
+import { mergeProgress } from '../../domain/mergeProgress';
+import { emptyProgress } from '../../domain/progress';
 import { localDate, resetAufgabenAntworten } from '../lib/progress';
 import { useBackupDownload } from '../hooks/useBackupDownload';
 import { useConfirm } from '../hooks/useConfirm';
@@ -44,11 +44,15 @@ export function Daten() {
   const [backups, setBackups] = useState<BackupInfo | null>(null);
   /** Pages: Ist der Browser-Speicher dauerhaft (navigator.storage.persisted)? undefined = unbekannt. */
   const [persisted, setPersisted] = useState<boolean | undefined | null>(null);
+  /** Welcher Speicher hält den Lernstand? (Zeigt den Rückfall auf localStorage, wenn IndexedDB nicht verfügbar ist.) */
+  const [speicher, setSpeicher] = useState<{ art: 'indexeddb' | 'localstorage'; umgezogen: boolean } | null>(null);
+  const speicherName = speicher?.art === 'localstorage' ? 'localStorage' : 'IndexedDB';
 
   useEffect(() => {
     // Tagessicherungen liegen im IndexedDB des Browsers.
     api.backups().then(setBackups, () => setBackups(null));
     isStoragePersisted().then(setPersisted);
+    api.speicherInfo().then(setSpeicher, () => setSpeicher(null));
   }, []);
 
   const tasks = Object.values(content.tasks);
@@ -140,7 +144,7 @@ export function Daten() {
         ) : (
           <p className="ok">✓ Keine Auffälligkeiten – jede Aufgabe hat eine Musterlösung.</p>
         )}
-        <div className="table-wrap">
+        <div className="table-wrap" tabIndex={0} role="region" aria-label="Importstatistik je Thema">
           <table className="stats">
             <thead>
               <tr>
@@ -180,9 +184,16 @@ export function Daten() {
       <section className="card">
         <h2>Fortschritt</h2>
         <p>
-          Gespeichert in diesem Browser (localStorage) – nur auf diesem Gerät. {progress.attempts.length} Versuche, {progress.exams.length}{' '}
-          Klausuren, {Object.keys(progress.cards).length} gelernte Karten.
+          Gespeichert in diesem Browser ({speicherName}) – nur auf diesem Gerät. {progress.attempts.length} Versuche,{' '}
+          {progress.exams.length} Klausuren, {Object.keys(progress.cards).length} gelernte Karten.
         </p>
+        {speicher?.art === 'localstorage' && speicher.umgezogen && (
+          <p className="card warn" role="alert">
+            <Icon name="triangle-alert" /> IndexedDB ist in diesem Browser gerade nicht verfügbar. Die App arbeitet vorübergehend mit einer
+            älteren Kopie deines Lernstands (localStorage); was du jetzt lernst, wird zusammengeführt, sobald IndexedDB wieder geht. Lade
+            zur Sicherheit eine Sicherung herunter.
+          </p>
+        )}
         {persisted !== null && (
           <p className="hint">
             <Icon name="hard-drive" /> Speicher dauerhaft:{' '}
@@ -206,7 +217,7 @@ export function Daten() {
           Stände bleiben) oder „einspielen“ (ersetzt).
         </p>
         {backups?.items?.length ? (
-          <div className="table-wrap">
+          <div className="table-wrap" tabIndex={0} role="region" aria-label="Tagessicherungen">
             <table className="stats">
               <thead>
                 <tr>

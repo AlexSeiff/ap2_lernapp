@@ -4,7 +4,7 @@ import { shuffledOrder } from '../components/AnswerInput';
 import { Markdown } from '../components/Markdown';
 import { formatPoints, GRADE_SCALE } from '../lib/grading';
 import { istMischId } from '../lib/mischKlausur';
-import { EXAM_MINUTES } from '../../shared/config';
+import { EXAM_MINUTES } from '../../domain/config';
 import {
   downloadText,
   examSheet,
@@ -17,7 +17,7 @@ import {
   type SheetKind,
 } from '../lib/sheets';
 import { useStore } from '../lib/store';
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 import { Icon } from '../components/Icon';
 
 /** Text für CSS `content: "…"` (Anführungszeichen und Backslashes maskiert, Zeilenumbrüche raus). */

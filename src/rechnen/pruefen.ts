@@ -2,7 +2,7 @@
 // Vorlage bekannt, Daten gültig, jede Eingabe vorhanden, Zahlen endlich, Platzhalter bekannt – mit den festen Daten
 // und, wenn „🎲 Neue Zahlen“ angeboten wird, auch für einige Zufalls-Seeds.
 
-import type { RechenUebung, RechenWert } from '../../shared/types.ts';
+import type { RechenUebung, RechenWert } from '../../domain/types.ts';
 import { baueInstanz } from './instanz.ts';
 
 /** Seeds, mit denen „Neue Zahlen“ beim Import ausprobiert wird. */

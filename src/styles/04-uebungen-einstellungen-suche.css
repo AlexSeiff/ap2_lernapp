@@ -1,0 +1,170 @@
+/* Rechenübungen */
+.re-daten { margin: 10px 0; }
+.re-daten .result-table td, .re-layout .result-table td { white-space: nowrap; }
+.re-eingaben { display: flex; flex-direction: column; gap: 10px; }
+.re-eingaben .actions { margin: 4px 0 0; }
+.re-eingaben > .hint { margin: 0; }
+.re-feld label { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.re-label { flex: 1 1 14em; font-weight: 600; }
+.re-input { display: inline-flex; align-items: center; gap: 6px; }
+.re-input input { width: 11em; font-variant-numeric: tabular-nums; }
+.re-einheit { color: var(--muted); min-width: 2.5em; }
+.re-icon { font-weight: 700; width: 1.2em; text-align: center; }
+.re-richtig input { border-color: var(--good); background: var(--good-soft); }
+.re-falsch input, .re-ungueltig input { border-color: var(--low); background: var(--low-soft); }
+.re-richtig .re-icon, td.re-ok { color: var(--good); }
+.re-falsch .re-icon, .re-ungueltig .re-icon, td.re-falsch { color: var(--low); }
+.re-meldung { margin: 4px 0 0; color: var(--text); }
+.re-feld .re-meldung { padding-left: 0.2em; }
+.re-meldung .md p { margin: 0; display: inline; }
+.re-meldung .md { display: inline; }
+.re-meldungen { margin: 0; padding-left: 20px; }
+.re-meldungen .re-meldung { display: inline; }
+.re-hinweis p { margin: 0; }
+.re-zelle { display: inline-flex; align-items: center; gap: 4px; }
+.re-zelle input { width: 5.5em; padding: 3px 6px; font-variant-numeric: tabular-nums; }
+.re-layout .result-table th[scope='row'] { text-align: left; white-space: nowrap; }
+.re-layout-einheit { margin: 4px 8px; }
+.re-vergleich { margin: 8px 0 14px; }
+
+/* Einstellungen */
+.field { display: flex; flex-direction: column; gap: 3px; font-size: 0.85rem; color: var(--muted); }
+/* Lernzeiten (Einstellungen): je Gruppe Wochentage als Chips, Beginn und Dauer */
+.lernzeiten { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0; }
+.lernzeit { border: 0; margin: 0; padding: 14px 16px; border-radius: var(--radius-klein); background: var(--surface-2); min-width: 0; }
+.lernzeit legend { float: left; width: 100%; padding: 0; margin-bottom: 10px; font-weight: 650; }
+.lernzeit .actions { margin: 12px 0 0; }
+.wochentage { display: flex; flex-wrap: wrap; gap: 6px; clear: both; }
+.wochentag { position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 46px; height: 38px; padding: 0 12px; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow); font-weight: 600; cursor: pointer; user-select: none; transition: background-color 0.15s, color 0.15s; }
+.wochentag input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.wochentag:has(input:checked) { background: var(--accent-fill); color: var(--accent-text); box-shadow: none; }
+.wochentag:has(input:focus-visible) { outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 2px; }
+.field input, .field select { font-size: 1rem; color: var(--text); }
+.welcome { padding-left: 1.3em; }
+.welcome li { margin: 0.8em 0; }
+.welcome .field { margin-top: 8px; max-width: 260px; }
+.filters input[type='checkbox'] { min-width: 0; }
+.filters label.check { flex-direction: row; align-items: center; align-self: flex-end; gap: 6px; font-size: 0.9rem; color: var(--text); padding-bottom: 8px; cursor: pointer; }
+
+/* Prüferfragen in der Theorie */
+.pf-box { margin: 1em 0; padding: 0.7em 1em; border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
+.pf-label { font-weight: 600; font-size: 0.92rem; }
+.pf-label .muted { color: color-mix(in srgb, var(--text) 70%, var(--accent-soft)); } /* sonst 4,45:1 auf dem getönten Kasten */
+.pf-question p { margin: 0.3em 0; }
+.pf-answer > summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.92rem; margin-top: 0.3em; }
+.pf-answer[open] > summary { margin-bottom: 0.2em; }
+.pf-answer .md { border-top: 1px dashed var(--border); padding-top: 0.3em; }
+
+/* Update-Hinweis (Service Worker) */
+.toast { position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; max-width: min(460px, calc(100vw - 32px)); padding: 12px 16px; background: var(--glas); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border: none; border-radius: 16px; box-shadow: var(--shadow-hoch); }
+.toast span { flex: 1 1 14em; font-weight: 600; }
+@media print { .toast { display: none; } }
+
+/* Handy (unter 600 px): schlanke Kopfleiste mit Titel und Lupe oben, Tab-Bar unten (Umsetzungsplan Phase 2) */
+@media (max-width: 599px) {
+  :root { --kopf-hoehe: 48px; }
+  main { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  .toast { left: 8px; right: 8px; max-width: none; bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+  .filters label:not(.check) { flex: 1 1 140px; min-width: 0; }
+  .filters select, .filters input:not([type='checkbox']) { min-width: 0; width: 100%; }
+  .md { overflow-wrap: break-word; }
+}
+
+/* Touch (Roadmap 7.3): auf dem Handy mindestens 44 px hohe Tippflächen */
+@media (max-width: 599px) {
+  button:not(.small):not(.schema-col):not(.history-item), .button:not(.small), select, input:not([type='checkbox']):not([type='radio']):not(.re-zelle input) { min-height: 44px; }
+  .re-zelle input { min-height: 36px; }
+  input[type='checkbox'], input[type='radio'] { width: 20px; height: 20px; }
+  .choice { padding: 9px 0; }
+  .filters label.check { min-height: 44px; padding-bottom: 0; }
+  summary { padding: 8px 0; }
+}
+
+/* Formelsammlung (/material/formeln) */
+.formel-aktionen { margin: 8px 0 12px; }
+.formel-inhalt { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 16px; font-size: 0.9rem; }
+.formel-gruppe { margin-top: 24px; }
+.formel-raster { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.formel { background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 12px 16px; box-shadow: var(--shadow); min-width: 0; }
+.formel h3 { margin: 0 0 8px; font-size: 1rem; }
+.formel-tex { overflow-x: auto; padding: 6px 0; font-size: 1.1rem; }
+.formel p { margin: 6px 0; color: var(--muted); font-size: 0.9rem; }
+.formel-variablen { margin: 6px 0 0; font-size: 0.85rem; }
+.formel-variablen > div { display: flex; gap: 8px; align-items: baseline; }
+.formel-variablen dt { flex: 0 0 auto; }
+.formel-variablen dd { margin: 0; color: var(--muted); }
+.formel-link { display: inline-block; margin-top: 8px; font-size: 0.9rem; }
+@media print {
+  .formel-raster { display: block; }
+  .formel { break-inside: avoid; box-shadow: none; margin-bottom: 8px; padding: 6px 10px; }
+  .formel-gruppe h2 { break-after: avoid; }
+}
+
+/* „Heute lernen“ (ROADMAP 8.1) */
+.heute-leiste { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.heute-liste { padding-left: 0; list-style: none; }
+.heute-liste li { display: flex; gap: 10px; align-items: baseline; padding: 6px 8px; border-radius: 8px; animation: aufblenden 0.3s ease-out both; animation-delay: calc(var(--i, 0) * 45ms); transition: background-color 0.25s; }
+.heute-liste li.aktuell { background: var(--accent-soft); font-weight: 600; }
+.heute-liste li.erledigt { color: var(--muted); }
+.heute-status { width: 1.4em; flex: none; text-align: center; }
+
+/* „Deine Antwort“ auf Karteikarten (ROADMAP 8.2) */
+.eigene-antwort { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 12px; }
+.eigene-antwort label { font-weight: 600; }
+.eigene-antwort textarea { width: 100%; font: inherit; }
+.antwort-vergleich { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.antwort-vergleich h4 { margin-top: 0; }
+.eigene-text { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--accent-soft); border-radius: 8px; padding: 8px 10px; }
+@media (max-width: 600px) { .antwort-vergleich { grid-template-columns: 1fr; } }
+
+/* „Wie sicher bist du?“ (ROADMAP 8.3) */
+.sicherheit { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+.sicherheit-frage { font-weight: 600; margin-right: 4px; }
+.sicherheit button[aria-pressed='true'] { background: var(--accent-fill); color: var(--accent-text); }
+
+/* Operatoren in Aufgabentexten (ROADMAP 8.4) */
+.operator { position: relative; text-decoration: underline dotted var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; cursor: help; }
+.operator:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.operator-tipp { display: none; position: absolute; left: 0; top: calc(100% + 6px); z-index: 20; width: max-content; max-width: min(340px, 80vw); padding: 8px 10px; border-radius: 8px; background: var(--surface); color: var(--text); border: 1px solid var(--border); box-shadow: var(--shadow); font-size: 0.85rem; font-style: normal; font-weight: normal; line-height: 1.4; white-space: normal; }
+.operator:hover .operator-tipp, .operator:focus .operator-tipp { display: block; }
+@media print { .operator { text-decoration: none; } .operator-tipp { display: none !important; } }
+
+/* Ausgeblendete Lösungsbeispiele der Rechenübungen (8.6) */
+.beispiel summary { cursor: pointer; font-weight: 600; }
+.beispiel-aufgabe { background: var(--surface-2); border-radius: var(--radius); padding: 8px 12px; margin: 10px 0; }
+.rw-verdeckt .rw-titel { color: var(--muted); }
+.fehlergrund-badge { margin-left: 6px; }
+.stelle-ziel { scroll-margin-top: calc(var(--kopf-gesamt) + 16px); outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 6px; transition: outline-color 0.5s; }
+
+/* Globale Suche (8.8) */
+.suche-overlay::backdrop { background: rgba(0, 0, 0, .3); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.suche-overlay[open] { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0; background: transparent; display: flex; justify-content: center; align-items: flex-start; padding: 8vh 16px 16px; }
+.suche-dialog { width: 100%; max-width: 680px; max-height: 80vh; display: flex; flex-direction: column; background: var(--surface); color: var(--text); border: none; border-radius: 18px; box-shadow: var(--shadow-hoch); overflow: hidden; }
+.suche-kopf { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.suche-kopf input { flex: 1; min-width: 0; font-size: 1.05rem; border: none; background: transparent; color: var(--text); outline: none; padding: 6px 2px; }
+.suche-kopf input::placeholder { color: var(--muted); opacity: 1; }
+.suche-kopf input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.suche-leer { padding: 12px 16px; margin: 0; }
+.suche-liste { list-style: none; margin: 0; padding: 4px; overflow-y: auto; flex: 1; }
+.suche-liste li { display: flex; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.suche-liste li.aktiv { background: var(--accent-soft); }
+.suche-art { flex: none; width: 1.6em; text-align: center; color: var(--accent); }
+.suche-inhalt { display: flex; flex-direction: column; min-width: 0; }
+.suche-titel { font-weight: 600; overflow-wrap: anywhere; }
+.suche-ausschnitt { color: var(--muted); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.suche-fuss { margin: 0; padding: 8px 14px; border-top: 1px solid var(--border); }
+@media print { .suche-overlay[open], .suche-overlay::backdrop { display: none; } }
+
+/* Glossar (8.9) */
+.glossar-filter { display: flex; align-items: center; gap: 10px; margin: 8px 0 12px; }
+.glossar-filter input { max-width: 320px; width: 100%; }
+.glossar-abc { top: var(--kopf-gesamt); z-index: 2; display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+.glossar-abc a, .glossar-abc span { display: inline-block; min-width: 1.7em; text-align: center; padding: 2px 4px; border-radius: 6px; font-weight: 600; }
+.glossar-abc a:hover { background: var(--accent-soft); text-decoration: none; }
+.glossar-gruppe h2 { border-bottom: 2px solid var(--border); padding-bottom: 4px; scroll-margin-top: calc(var(--kopf-gesamt) + 48px); }
+.glossar-gruppe dl { margin: 0; }
+.glossar-eintrag { padding: 8px 0; border-bottom: 1px solid var(--border); scroll-margin-top: calc(var(--kopf-gesamt) + 48px); }
+.glossar-eintrag dt { font-weight: 700; }
+.glossar-eintrag dd { margin: 2px 0 0; }
+.glossar-def p { margin: 0.2em 0; }
+.glossar-quellen { margin: 4px 0 0; color: var(--muted); }

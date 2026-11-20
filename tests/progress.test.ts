@@ -1,22 +1,35 @@
+import { ohneRevision } from './ohneRevision';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
-  checkProgressPut,
   defaultSettings,
   emptyProgress,
   isSuspiciousAttemptDrop,
   migrateProgress,
   migrateSettings,
   PROGRESS_VERSION,
-  ProgressPutSchema,
   ProgressSchema,
   type Progress,
-} from '../shared/progress';
+} from '../domain/progress';
 import { recordAttempt } from '../src/lib/progress';
 import type { z } from 'zod';
 import { ohneAntworten } from './ohneAntworten';
 import { umgezogen } from './umgezogen';
+
+import { createLocalProgressStore } from '../src/lib/staticApi';
+
+const gespeichert = (p: unknown): Progress => {
+  let text: string | null = null;
+  const store = createLocalProgressStore(() => ({
+    getItem: () => text,
+    setItem: (_key, value) => {
+      text = value;
+    },
+  }));
+  store.save(p);
+  return migrateProgress(store.read());
+};
 
 const withAttempts = (n: number) => {
   let p = emptyProgress();
@@ -34,9 +47,7 @@ describe('ProgressSchema', () => {
   it('Typen und Schema passen zusammen: jeder Progress der App erfüllt das Schema', () => {
     // Wird von `npm run typecheck` geprüft – weicht ein Typ vom Schema ab, schlägt der Typcheck fehl.
     const asStored = (p: Progress): z.input<typeof ProgressSchema> => p;
-    const asPut = (p: Progress): z.input<typeof ProgressPutSchema> => ({ ...p, reset: true });
     expect(ProgressSchema.safeParse(asStored(withAttempts(1))).success).toBe(true);
-    expect(ProgressPutSchema.safeParse(asPut(withAttempts(1))).success).toBe(true);
   });
 
   it('behält unbekannte Felder und ergänzt fehlende Sammlungen', () => {
@@ -58,62 +69,7 @@ describe('ProgressSchema', () => {
   });
 });
 
-describe('checkProgressPut', () => {
-  it('lehnt ungültige Bodies mit deutscher Meldung ab', () => {
-    const r = checkProgressPut({}, withAttempts(2));
-    expect(r.ok).toBe(false);
-    if (!r.ok) expect(r.error).toMatch(/^Fortschritt nicht gespeichert: Die Daten sind ungültig \(Fehler bei /);
-  });
-
-  it('erlaubt normales Weiterlernen und einen ersten Stand ohne Datei', () => {
-    expect(checkProgressPut(withAttempts(11), withAttempts(10)).ok).toBe(true);
-    expect(checkProgressPut(withAttempts(0), null).ok).toBe(true);
-  });
-
-  it('lehnt deutlich weniger Versuche ohne reset ab', () => {
-    const r = checkProgressPut(emptyProgress(), withAttempts(16));
-    expect(r.ok).toBe(false);
-    if (!r.ok) expect(r.error).toContain('nur 0 statt 16 Versuche');
-  });
-
-  it('erlaubt das bewusste Zurücksetzen und speichert das reset-Flag nicht mit', () => {
-    const r = checkProgressPut({ ...emptyProgress(), reset: true }, withAttempts(16));
-    expect(r.ok).toBe(true);
-    if (r.ok) expect(r.progress).not.toHaveProperty('reset');
-  });
-
-  it('erstes Speichern auf eine Datei ohne revision (Kopie der echten Datei) klappt und vergibt Revision 1', () => {
-    const stored = JSON.parse(readFileSync(join(import.meta.dirname, 'fixtures', 'fortschritt-v1-2026-09-22.json'), 'utf8'));
-    const r = checkProgressPut(migrateProgress(stored), stored);
-    expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 1 } });
-    if (r.ok) expect(r.progress.attempts).toEqual(umgezogen(stored).attempts);
-  });
-
-  it('zählt die Revision hoch und lehnt einen veralteten Tab mit 409 ab', () => {
-    const stored = { ...withAttempts(3), revision: 4 };
-    expect(checkProgressPut({ ...withAttempts(4), revision: 4 }, stored)).toMatchObject({ ok: true, progress: { revision: 5 } });
-    for (const body of [
-      { ...withAttempts(4), revision: 3 },
-      { ...withAttempts(4), revision: 5 },
-      { ...withAttempts(4), revision: undefined },
-    ]) {
-      expect(checkProgressPut(body, stored)).toEqual({
-        ok: false,
-        status: 409,
-        error: 'Fortschritt nicht gespeichert: Die App ist in einem anderen Tab geöffnet – bitte neu laden.',
-      });
-    }
-  });
-
-  it('auch reset: true braucht die aktuelle Revision', () => {
-    const stored = { ...withAttempts(16), revision: 2 };
-    expect(checkProgressPut({ ...emptyProgress(), revision: 1, reset: true }, stored)).toMatchObject({ ok: false, status: 409 });
-    expect(checkProgressPut({ ...emptyProgress(), revision: 2, reset: true }, stored)).toMatchObject({
-      ok: true,
-      progress: { revision: 3 },
-    });
-  });
-
+describe('isSuspiciousAttemptDrop', () => {
   it('Schwelle: mehr als 5 weniger oder weniger als die Hälfte', () => {
     expect(isSuspiciousAttemptDrop(10, 10)).toBe(false);
     expect(isSuspiciousAttemptDrop(10, 12)).toBe(false);
@@ -137,12 +93,11 @@ describe('migrateProgress', () => {
   it('übernimmt den aktuellen Stand (Kopie von data/fortschritt.json vom 22.09.2026) ohne Verlust', () => {
     const raw = fixture('fortschritt-v1-2026-09-22.json');
     const migrated = migrateProgress(raw);
-    // Einzige Änderungen: aktuelle Version, Revisionszähler 0 (Version 2), leere Karteikarten-Lerntage (Version 3),
+    // Einzige Änderungen: aktuelle Version, leere Karteikarten-Lerntage (Version 3),
     // leere SQL-Übungen (Version 4), Standard-Einstellungen (Version 5), leere Rechenübungen (Version 6) und keine Markierungen (Version 7).
     expect(migrated).toEqual({
-      ...umgezogen(raw),
+      ...ohneRevision(umgezogen(raw)),
       version: PROGRESS_VERSION,
-      revision: 0,
       cardReviewDays: {},
       sql: {},
       sqlDays: {},
@@ -167,7 +122,7 @@ describe('migrateProgress', () => {
     const migrated = migrateProgress(raw);
     expect(migrated.version).toBe(PROGRESS_VERSION);
     // Alle Einträge bleiben erhalten, fehlende Felder werden ergänzt, unbekannte bleiben stehen.
-    // 03-C1 ist seit Version 9 03-B1 (shared/aufgabenUmzug.ts).
+    // 03-C1 ist seit Version 9 03-B1 (domain/aufgabenUmzug.ts).
     expect(migrated.attempts.map((a) => a.taskId)).toEqual(['01-A1', '02-B2', '03-B1']);
     expect(migrated.attempts[1]).toEqual({ taskId: '02-B2', date: '', points: 4, max: 4, mode: 'einzel' });
     expect(migrated.attempts[2]).toMatchObject({ mode: 'wiederholung', notiz: 'alt' });
@@ -193,7 +148,7 @@ describe('migrateProgress', () => {
     const raw = fixture('fortschritt-v3-2026-09-28.json');
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual({
-      ...umgezogen(raw),
+      ...ohneRevision(umgezogen(raw)),
       version: PROGRESS_VERSION,
       sql: {},
       sqlDays: {},
@@ -206,7 +161,7 @@ describe('migrateProgress', () => {
       hervorhebungen: {},
       json: {},
     });
-    expect(migrated.revision).toBe(7);
+    expect(migrated).not.toHaveProperty('revision');
     expect(migrated.cardReviewDays).toEqual({ '2026-09-26': 4, '2026-09-27': 2 });
     expect(ProgressSchema.safeParse(migrated).success).toBe(true);
   });
@@ -215,7 +170,7 @@ describe('migrateProgress', () => {
     const raw = fixture('fortschritt-v4-2026-09-30.json');
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual({
-      ...umgezogen(raw),
+      ...ohneRevision(umgezogen(raw)),
       version: PROGRESS_VERSION,
       settings: defaultSettings(),
       rechnen: {},
@@ -228,19 +183,19 @@ describe('migrateProgress', () => {
     });
     expect(migrated.settings).toEqual({ prueferfragen: true, fachgespraech: true, leichtModus: false, backupReminderDays: 7 });
     expect(migrated.settings).not.toHaveProperty('examDate');
-    expect(migrated.revision).toBe(12);
+    expect(migrated).not.toHaveProperty('revision');
     expect(ProgressSchema.safeParse(migrated).success).toBe(true);
-    // Erstes Speichern nach dem Update: Revision passt, nichts geht verloren.
-    const r = checkProgressPut(migrated, raw);
-    expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 13, settings: defaultSettings() } });
-    if (r.ok) expect(r.progress.sql).toEqual(raw.sql);
+    // Auch nach dem Speichern bleibt der migrierte Stand erhalten.
+    const r = gespeichert(migrated);
+    expect(r).toMatchObject({ version: PROGRESS_VERSION, settings: defaultSettings() });
+    expect(r.sql).toEqual(raw.sql);
   });
 
   it('Version 5 → 6: ergänzt leere Rechenübungen und Rechen-Lerntage, Einstellungen und alles andere bleiben', () => {
     const raw = fixture('fortschritt-v5-2026-09-30.json');
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual({
-      ...umgezogen(raw),
+      ...ohneRevision(umgezogen(raw)),
       version: PROGRESS_VERSION,
       rechnen: {},
       rechnenDays: {},
@@ -251,12 +206,12 @@ describe('migrateProgress', () => {
       json: {},
     });
     expect(migrated.settings).toEqual(raw.settings);
-    expect(migrated.revision).toBe(21);
+    expect(migrated).not.toHaveProperty('revision');
     expect(ProgressSchema.safeParse(migrated).success).toBe(true);
-    // Erstes Speichern nach dem Update: Revision passt, nichts geht verloren.
-    const r = checkProgressPut(migrated, raw);
-    expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 22, rechnen: {}, rechnenDays: {} } });
-    if (r.ok) expect(r.progress.attempts).toEqual(umgezogen(raw).attempts);
+    // Auch nach dem Speichern bleibt der migrierte Stand erhalten.
+    const r = gespeichert(migrated);
+    expect(r).toMatchObject({ version: PROGRESS_VERSION, rechnen: {}, rechnenDays: {} });
+    expect(r.attempts).toEqual(umgezogen(raw).attempts);
     expect(migrateProgress(migrated)).toEqual(migrated);
   });
 
@@ -265,7 +220,7 @@ describe('migrateProgress', () => {
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual(
       ohneAntworten({
-        ...umgezogen(raw),
+        ...ohneRevision(umgezogen(raw)),
         version: PROGRESS_VERSION,
         markiert: {},
         diagramme: {},
@@ -275,8 +230,8 @@ describe('migrateProgress', () => {
       }),
     );
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
-    const r = checkProgressPut(migrated, raw);
-    expect(r).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35, markiert: {} } });
+    const r = gespeichert(migrated);
+    expect(r).toMatchObject({ version: PROGRESS_VERSION, markiert: {} });
   });
 
   it('Selbsteinschätzung (ROADMAP 8.3): optional ohne neue Version; gültige Werte bleiben, ungültige fallen weg', () => {
@@ -290,14 +245,14 @@ describe('migrateProgress', () => {
     expect(migrated.attempts.map((a) => a.sicherheit)).toEqual([3, undefined, undefined]);
     expect('sicherheit' in migrated.attempts[1]).toBe(false);
     expect(migrated.activeExam?.sicherheit).toEqual({ '04-A1': 2 });
-    // 03-C2 ist seit Version 9 03-B2 (shared/aufgabenUmzug.ts).
+    // 03-C2 ist seit Version 9 03-B2 (domain/aufgabenUmzug.ts).
     expect(migrated.exams[0].sicherheit).toEqual({ '03-B2': 1 });
     expect(ProgressSchema.safeParse(migrated).success).toBe(true);
-    expect(checkProgressPut(migrated, raw).ok).toBe(true);
+    expect(gespeichert(migrated)).toEqual(migrated);
     expect(migrateProgress(migrated)).toEqual(migrated);
-    // Ein ungültiger Wert im PUT wird abgelehnt (die App schreibt nur 1–3).
+    // Ein ungültiger Wert beim Speichern wird abgelehnt (die App schreibt nur 1–3).
     const bad = { ...migrated, attempts: [{ ...migrated.attempts[0], sicherheit: 5 }, ...migrated.attempts.slice(1)] };
-    expect(checkProgressPut(bad, raw)).toMatchObject({ ok: false, status: 400 });
+    expect(() => gespeichert(bad)).toThrow(/Die Daten sind ungültig/);
   });
 
   it('Fehlergrund (ROADMAP 8.7): optional ohne neue Version; gültige Werte bleiben, ungültige fallen weg', () => {
@@ -313,12 +268,12 @@ describe('migrateProgress', () => {
     expect(migrated.activeExam?.fehlergrund).toEqual({ '04-A1': 'zeit' });
     expect(migrated.exams[0].fehlergrund).toEqual({ '03-B2': 'formel' });
     expect(ProgressSchema.safeParse(migrated).success).toBe(true);
-    expect(checkProgressPut(migrated, raw).ok).toBe(true);
+    expect(gespeichert(migrated)).toEqual(migrated);
     expect(migrateProgress(migrated)).toEqual(migrated);
     const bad = { ...migrated, attempts: [{ ...migrated.attempts[0], fehlergrund: 'faul' }, ...migrated.attempts.slice(1)] };
-    expect(checkProgressPut(bad, raw)).toMatchObject({ ok: false, status: 400 });
+    expect(() => gespeichert(bad)).toThrow(/Die Daten sind ungültig/);
     const badExam = { ...migrated, exams: [{ ...migrated.exams[0], fehlergrund: { x: 'faul' } }] };
-    expect(checkProgressPut(badExam, raw)).toMatchObject({ ok: false, status: 400 });
+    expect(() => gespeichert(badExam)).toThrow(/Die Daten sind ungültig/);
   });
 
   it('alle alten Fixtures laden in das aktuelle Format und erfüllen das Schema', () => {
@@ -500,7 +455,7 @@ describe('migrateProgress', () => {
 describe('fuelleFehlerjournal', () => {
   it('nimmt Aufgaben mit schlechtem letztem Versuch auf, sofort fällig; sonst unverändert', async () => {
     const { fuelleFehlerjournal } = await import('../src/lib/progress');
-    const { emptyProgress } = await import('../shared/progress');
+    const { emptyProgress } = await import('../domain/progress');
     const p = {
       ...emptyProgress(),
       attempts: [

@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { emptyProgress, type Progress, type RechenState } from '../shared/progress';
+import { emptyProgress, type Progress, type RechenState } from '../domain/progress';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { Rechenweg } from '../src/components/Rechenweg';
 import { ConfirmContext } from '../src/hooks/useConfirm';

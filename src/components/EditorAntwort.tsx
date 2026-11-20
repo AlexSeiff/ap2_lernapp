@@ -4,7 +4,7 @@
 // Punkte vergibst du selbst. Lazy geladen (nur bei solchen Aufgaben).
 
 import { useMemo, type ReactNode } from 'react';
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 import { pruefeDiagrammAntwort, type DiagrammAntwort } from '../lib/diagrammEditor';
 import { EDITOR_NAMEN, istDiagrammArt, leseEditorAntwort, schreibeEditorAntwort, vorlageFuer, type EditorArt } from '../lib/editorAufgabe';
 import { abgleichOk, gleicheAb, musterFuerSchritt, musterTabellen, relationText, type TabellenAntwort } from '../lib/tabellenEditor';
@@ -14,7 +14,9 @@ import { kontextAus, type KoordinatenAntwort } from '../lib/koordinatenAntwort';
 import type { StruktogrammAntwort } from '../lib/struktogramm';
 import { useStore } from '../lib/store';
 import { BoxplotAnsicht, BoxplotEditor, BoxplotPruefung } from './BoxplotEditor';
-import { DiagrammAnsicht, DiagrammEditor, Formhinweise } from './DiagrammEditor';
+import { DiagrammEditor } from './DiagrammEditor';
+import { Formhinweise } from './diagramm/Formhinweise';
+import { DiagrammAnsicht } from './diagramm/Zeichnung';
 import { Icon } from './Icon';
 import { KoordinatenAnsicht, KoordinatenEditor, KoordinatenPruefung } from './KoordinatenEditor';
 import { StruktogrammAnsicht, StruktogrammEditor, StruktogrammPruefung } from './StruktogrammEditor';

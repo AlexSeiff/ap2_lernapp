@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import type { ExamRun, Fehlergrund, Sicherheit } from '../../shared/progress';
-import type { Task } from '../../shared/types';
+import type { ExamRun, Fehlergrund, Sicherheit } from '../../domain/progress';
+import type { Task } from '../../domain/types';
 import { examMinutes, examRemaining } from '../lib/examTimer';
 import { klausurFuer } from '../lib/mischKlausur';
 import { finishExam, submitExam } from '../lib/progress';

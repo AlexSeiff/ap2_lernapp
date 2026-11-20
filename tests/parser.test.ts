@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { buildContent, parseCriteria, parseSolutions, parseTopic, stripKw, toLines } from '../shared/parser';
+import { buildContent, parseCriteria, parseSolutions, parseTopic, stripKw, toLines } from '../domain/parser';
 import { loadContent } from '../build/inhalt';
 
 // Kleine Lernblatt-Fixtures im Format der echten Blätter – so bricht das Bearbeiten eines Lernblatts keine Formattests.

@@ -1,4 +1,4 @@
-import type { Sicherheit } from '../../shared/progress';
+import type { Sicherheit } from '../../domain/progress';
 import { SICHERHEIT_STUFEN } from '../lib/kalibrierung';
 
 /** „Wie sicher bist du?“ (1–3) vor dem Abgeben (ROADMAP 8.3). Freiwillig; ein zweiter Klick auf die gewählte Stufe hebt sie auf. */

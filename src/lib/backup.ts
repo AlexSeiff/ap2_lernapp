@@ -1,6 +1,6 @@
 // Sicherungsdatei einlesen (Daten & Import, Willkommensseite): rein, damit testbar.
 
-import { migrateProgress, PROGRESS_VERSION, type Progress } from '../../shared/progress';
+import { migrateProgress, PROGRESS_VERSION, type Progress } from '../../domain/progress';
 
 /** Dateiname einer heruntergeladenen Sicherung, z. B. ap2-lernapp-sicherung-2026-09-30.json (gilt in allen Varianten der App). */
 export const backupFileName = (date: string) => `ap2-lernapp-sicherung-${date}.json`;

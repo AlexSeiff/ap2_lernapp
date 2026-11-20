@@ -6,8 +6,8 @@ import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
-import { mergeProgress } from '../shared/mergeProgress';
-import { emptyProgress, migrateProgress, ProgressSchema } from '../shared/progress';
+import { mergeProgress } from '../domain/mergeProgress';
+import { emptyProgress, migrateProgress, ProgressSchema } from '../domain/progress';
 import {
   beschreibeRegel,
   parseJsonUebungen,
@@ -18,7 +18,7 @@ import {
   wertAm,
   zeileSpalte,
   type JsonRegel,
-} from '../shared/jsonUebungen';
+} from '../domain/jsonUebungen';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { jsonStatus, jsonSummary, jsonUebungen, recordJsonCheck, recordJsonHint, recordJsonLoesung } from '../src/lib/jsonUebungen';
 

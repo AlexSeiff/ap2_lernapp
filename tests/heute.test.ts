@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { HEUTE_KARTEN_BLOCK, HEUTE_MINUTEN } from '../shared/config';
-import { emptyProgress, type Progress } from '../shared/progress';
-import type { Content, Flashcard, RechenUebung, SqlExercise, Task, Topic } from '../shared/types';
-import type { DiagrammUebung } from '../shared/diagrammUebungen';
+import { HEUTE_KARTEN_BLOCK, HEUTE_MINUTEN } from '../domain/config';
+import { emptyProgress, type Progress } from '../domain/progress';
+import type { Content, Flashcard, RechenUebung, SqlExercise, Task, Topic } from '../domain/types';
+import type { DiagrammUebung } from '../domain/diagrammUebungen';
 import { letzterStand } from '../src/lib/wiederholung';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { aufgabeMinuten, planeHeute, verschraenke } from '../src/lib/heute';

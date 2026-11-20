@@ -1,7 +1,7 @@
 import 'katex/dist/katex.min.css';
 import katex from 'katex';
 import { useMemo } from 'react';
-import { formatErgebnis, type RechenSchritt, rundungsHinweis } from '../../shared/rechenweg';
+import { formatErgebnis, type RechenSchritt, rundungsHinweis } from '../../domain/rechenweg';
 import type { SchrittSicht } from '../rechnen/beispiel';
 import { Icon } from './Icon';
 

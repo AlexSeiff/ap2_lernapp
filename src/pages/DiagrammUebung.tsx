@@ -13,11 +13,13 @@ import {
   formregeln,
   musterBelegung,
   slotsVon,
-} from '../../shared/diagrammUebungen';
+} from '../../domain/diagrammUebungen';
+import { AnhangPanel } from '../components/Belegsatz';
 import { DiagrammSvg, FormSymbol, formName } from '../components/DiagrammSvg';
 import { Icon } from '../components/Icon';
 import { Markdown } from '../components/Markdown';
 import { useConfirm } from '../hooks/useConfirm';
+import { BEIBLATT_ZU_TYP } from '../lib/diagrammBeiblatt';
 import { diagrammStatus, diagrammUebungen, recordDiagrammCheck, recordDiagrammHint, recordDiagrammLoesung } from '../lib/diagramme';
 import { useStore } from '../lib/store';
 import { STATUS_LABELS } from '../lib/uebungLabels';
@@ -169,6 +171,10 @@ function DiagrammUebungView({ u }: { u: DiagrammUebungTyp }) {
           {u.stufe === 1 ? 'Setze die passenden Elemente in die Lücken.' : 'Bring die Schritte in die richtige Reihenfolge.'} Ziehen oder
           tippen: erst ein Element, dann die Lücke. Eine belegte Lücke antippen nimmt das Element wieder heraus.
         </p>
+      </div>
+
+      <div className="anhang-leiste no-print">
+        <AnhangPanel diagramme={[BEIBLATT_ZU_TYP[u.typ]]} />
       </div>
 
       <div className="diagramm-arbeit">

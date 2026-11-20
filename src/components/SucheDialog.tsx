@@ -5,7 +5,7 @@
 
 import { type KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { BegriffsSeite } from '../../shared/types';
+import type { BegriffsSeite } from '../../domain/types';
 import { ladeBegriffe } from '../lib/begriffe';
 import { useStore } from '../lib/store';
 import { SUCH_ART, sucheBegriffe } from '../lib/suche';

@@ -2,7 +2,7 @@
 // ?vorlage=a,b (Link aus der Formelsammlung) zeigt nur Übungen dieser Rechenvorlagen.
 
 import { Link, useSearchParams } from 'react-router-dom';
-import type { RechenUebung } from '../../shared/types';
+import type { RechenUebung } from '../../domain/types';
 import { rechenStatus, rechenSummary } from '../lib/rechnen';
 import { useStore } from '../lib/store';
 import { findeVorlage } from '../rechnen/vorlagen/index';

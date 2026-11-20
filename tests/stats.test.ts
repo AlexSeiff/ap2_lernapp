@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { emptyProgress, type ExamRun, type Progress } from '../shared/progress';
-import type { Content, Topic } from '../shared/types';
+import { emptyProgress, type ExamRun, type Progress } from '../domain/progress';
+import type { Content, Topic } from '../domain/types';
 import { rateCard } from '../src/lib/progress';
 import { activityDays, examTrends, studyStreak, toLocalDay } from '../src/lib/stats';
 

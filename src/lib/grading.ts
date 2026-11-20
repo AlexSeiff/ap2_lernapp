@@ -1,4 +1,4 @@
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 
 /** IHK-Notenschlüssel (Punkte → Note). */
 export const GRADE_SCALE = [

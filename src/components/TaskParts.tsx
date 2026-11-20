@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import type { Section, Task } from '../../shared/types';
+import type { Section, Task } from '../../domain/types';
 import { editorFuer } from '../lib/editorAufgabe';
 import { autoGrade, difficulty, formatPoints } from '../lib/grading';
 import { numberBlanks, solutionMarkdown } from '../lib/sheets';

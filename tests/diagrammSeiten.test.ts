@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { emptyProgress, type Progress } from '../shared/progress';
+import { emptyProgress, type Progress } from '../domain/progress';
 import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { aktiverBereich, aktivesUnterziel, bereich } from '../src/lib/navigation';

@@ -4,7 +4,7 @@
 // Die Rotation ist rein (planBackup), der Speicher austauschbar (BackupStorage), damit alles ohne Browser testbar ist.
 // Fehler beim Sichern werden verschluckt: Eine fehlende Sicherung darf das Speichern nie verhindern.
 
-import type { BackupInfo, BackupItem } from '../../shared/api';
+import type { BackupInfo, BackupItem } from '../../domain/api';
 
 /** Anzahl der aufbewahrten Tagessicherungen im Browser. */
 export const BROWSER_BACKUP_KEEP = 7;

@@ -3,8 +3,8 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { emptyProgress } from '../shared/progress';
-import { parseQuellen, pruefeQuellenZiele, quellenNachZiel, type Quelle } from '../shared/quellen';
+import { emptyProgress } from '../domain/progress';
+import { parseQuellen, pruefeQuellenZiele, quellenNachZiel, type Quelle } from '../domain/quellen';
 import { CONTENT_DIR, ladeInhalt, isContentFile } from '../build/inhalt';
 
 // Quellen und Lehrvideos (Umsetzungsplan Phase 8): Import, Ziele, Anzeige auf Begriffsseiten und Lernblättern, Zwei-Klick-Video.

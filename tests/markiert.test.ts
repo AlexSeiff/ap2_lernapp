@@ -1,10 +1,11 @@
+import { ohneRevision } from './ohneRevision';
 // Karten markieren (Umsetzungsplan Phase 4): Datenmodell (Version 7), Migration, Zusammenführen, reine Funktionen.
 
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { mergeProgress } from '../shared/mergeProgress';
-import { checkProgressPut, emptyProgress, migrateProgress, PROGRESS_VERSION, ProgressSchema, type Progress } from '../shared/progress';
+import { mergeProgress } from '../domain/mergeProgress';
+import { emptyProgress, migrateProgress, PROGRESS_VERSION, ProgressSchema, type Progress } from '../domain/progress';
 import { parseBackup } from '../src/lib/backup';
 import { istMarkiert, markierteIds, setzeMarkierung, wechsleMarkierung } from '../src/lib/markiert';
 import { rateCard } from '../src/lib/progress';
@@ -61,7 +62,7 @@ describe('Markierungen – Format Version 7', () => {
     expect(PROGRESS_VERSION).toBeGreaterThanOrEqual(7);
     expect(migrated).toEqual(
       ohneAntworten({
-        ...umgezogen(raw),
+        ...ohneRevision(umgezogen(raw)),
         version: PROGRESS_VERSION,
         markiert: {},
         diagramme: {},
@@ -70,19 +71,26 @@ describe('Markierungen – Format Version 7', () => {
         json: {},
       }),
     );
-    expect(checkProgressPut(migrated, raw)).toMatchObject({ ok: true, progress: { version: PROGRESS_VERSION, revision: 35 } });
+    expect(ProgressSchema.safeParse(migrated).success).toBe(true);
   });
 
   it('Version 7 lädt unverändert, auch entmarkierte Einträge und markierte Karten ohne Lernstand', () => {
     const raw = JSON.parse(roh('fortschritt-v7-2026-10-09.json'));
     const migrated = migrateProgress(raw);
     expect(migrated).toEqual(
-      ohneAntworten({ ...umgezogen(raw), version: PROGRESS_VERSION, diagramme: {}, diagrammDays: {}, hervorhebungen: {}, json: {} }),
+      ohneAntworten({
+        ...ohneRevision(umgezogen(raw)),
+        version: PROGRESS_VERSION,
+        diagramme: {},
+        diagrammDays: {},
+        hervorhebungen: {},
+        json: {},
+      }),
     );
     expect(ProgressSchema.safeParse(raw).success).toBe(true);
     expect([...markierteIds(migrated)].sort()).toEqual(['01-pf1', 'FB-normalisierung']);
     expect(migrated.cards['FB-normalisierung']).toBeUndefined();
-    expect(checkProgressPut(migrated, raw)).toMatchObject({ ok: true, progress: { revision: 41 } });
+    expect(ProgressSchema.safeParse(migrated).success).toBe(true);
   });
 
   it('alte Sicherungen bleiben importierbar (parseBackup), ohne Markierungen', () => {

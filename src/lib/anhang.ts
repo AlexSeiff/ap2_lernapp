@@ -1,7 +1,8 @@
 // Welche Teile des Prüfungsanhangs zu Aufgaben passen (components/Belegsatz.tsx, AnhangPanel): der SQL-Belegsatz zu SQL-Aufgaben,
-// die Formelübersicht zu Rechenaufgaben. In der AP2 liegt der Anhang immer bei – hier soll er dort griffbereit sein, wo man ihn braucht.
+// die Formelübersicht zu Rechenaufgaben, die Diagrammelemente zu Aufgaben mit Diagrammen. In der AP2 liegt der Anhang immer bei – hier soll er dort griffbereit sein, wo man ihn braucht.
 
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
+import { beiblattFuerText, beiblattVereinigen, type BeiblattArt } from './diagrammBeiblatt';
 import { findeOperatoren } from './operatoren';
 
 /** SQL in der Aufgabe: Codeblock, das Wort „SQL“ oder typische Schlüsselwörter (großgeschrieben, wie in den Lernblättern). */
@@ -13,11 +14,15 @@ const RECHNEN = new Set(['berechnen', 'ermitteln', 'bestimmen', 'interpretieren'
 export interface AnhangTeile {
   sql: boolean;
   formeln: boolean;
+  /** Notationen, deren Elemente das Beiblatt „Diagrammelemente“ beschreibt (leer = kein Diagramm in den Aufgaben). */
+  diagramme: BeiblattArt[];
 }
 
 /** Anhang für eine Aufgabe oder eine ganze Klausur (dann reicht eine passende Aufgabe). */
 export function anhangFuer(tasks: Task[]): AnhangTeile {
   const sql = tasks.some((t) => !!t.sqlUebung || SQL.test(t.markdown));
   const formeln = tasks.some((t) => t.type === 'rechnen' || findeOperatoren(t.markdown).some((o) => RECHNEN.has(o.operatorId)));
-  return { sql, formeln };
+  // Das Beiblatt gibt es, wenn eine Aufgabe mit einer Notation arbeitet (zeichnen oder lesen), und nur für diese Notationen.
+  const diagramme = beiblattVereinigen(...tasks.map((t) => beiblattFuerText(t.markdown)));
+  return { sql, formeln, diagramme };
 }

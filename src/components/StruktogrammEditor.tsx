@@ -18,7 +18,7 @@ import {
   type Ort,
   type StruktogrammAntwort,
 } from '../lib/struktogramm';
-import { Formhinweise } from './DiagrammEditor';
+import { Formhinweise } from './diagramm/Formhinweise';
 import { Icon } from './Icon';
 
 interface Ctx {

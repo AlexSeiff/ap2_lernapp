@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { defaultSettings, emptyProgress, migrateSettings, ProgressSchema, type Progress } from '../shared/progress';
+import { defaultSettings, emptyProgress, migrateSettings, ProgressSchema, type Progress } from '../domain/progress';
 import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 import { planeHeute } from '../src/lib/heute';
 import { istAusgeblendet, setzeAusgeblendet } from '../src/lib/settings';

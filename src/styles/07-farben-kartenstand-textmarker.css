@@ -1,0 +1,182 @@
+/* Die Zeile „+ Baustein“ gehört nicht zum Struktogramm: gestrichelt und gedämpft abgesetzt. */
+.sg-folge > .sg-b + .sg-neu-zeile, .sg-folge > .sg-leer + .sg-neu-zeile { border-top: 1px dashed var(--border); }
+.sg-anweisung, .sg-kopf { display: flex; align-items: center; gap: 4px; padding: 2px 6px; min-height: 38px; }
+.sg-kopf .sg-text { font-weight: 600; }
+.sg-text { flex: 1 1 auto; min-width: 8em; font-variant-numeric: tabular-nums; field-sizing: content; }
+span.sg-text { padding: 6px 4px; overflow-wrap: anywhere; }
+.editor-antwort input.sg-text { width: 100%; min-height: 0; margin: 0; padding: 6px 4px; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.editor-antwort input.sg-text:focus { box-shadow: inset 0 -2px 0 var(--accent); }
+.sg-wenn-kopf { position: relative; display: flex; justify-content: center; padding: 4px 40px 24px; min-height: 66px; border-bottom: var(--sg-linie); }
+.sg-wenn-kopf .sg-text { position: relative; flex: 0 1 22em; text-align: center; }
+.sg-dreieck { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.sg-dreieck line { stroke: currentColor; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.sg-ja, .sg-nein { position: absolute; bottom: 4px; font-size: 0.78rem; color: var(--muted); }
+.sg-ja { left: 8px; }
+.sg-nein { right: 8px; }
+.sg-wenn-kopf .sg-aktionen { position: absolute; top: 2px; right: 2px; }
+.sg-zweige { display: grid; grid-template-columns: auto auto; }
+.sg-zweige > .sg-folge + .sg-folge { border-left: var(--sg-linie); }
+.sg-rumpf { margin-left: 1.8em; border-left: var(--sg-linie); }
+.sg-solange > .sg-rumpf { border-top: var(--sg-linie); }
+.sg-wiederhole > .sg-rumpf { border-bottom: var(--sg-linie); }
+.sg-leer { display: grid; place-items: center; min-height: 38px; color: var(--muted); }
+/* ↑ ↓ ✕ nehmen keinen Platz weg: mit Maus erst beim Darüberfahren bzw. Fokus, auf Touch-Geräten immer sichtbar im Kasten. */
+.sg-anweisung, .sg-kopf { position: relative; }
+.sg-aktionen { position: absolute; top: 3px; right: 3px; display: flex; gap: 1px; background: var(--surface); border-radius: 6px; opacity: 0; transition: opacity 0.12s; }
+.sg-aktionen button { min-height: 28px; padding: 1px 6px; color: var(--muted); }
+.sg-anweisung:hover > .sg-aktionen, .sg-anweisung:focus-within > .sg-aktionen, .sg-kopf:hover > .sg-aktionen, .sg-kopf:focus-within > .sg-aktionen,
+.sg-wenn-kopf:hover > .sg-aktionen, .sg-wenn-kopf:focus-within > .sg-aktionen { opacity: 1; }
+@media (hover: none) {
+  .sg-aktionen { position: static; opacity: 1; flex: none; }
+  .sg-wenn-kopf .sg-aktionen { position: absolute; }
+}
+.sg-neu-zeile { padding: 2px 4px; }
+/* Feste, schmale Breite – sonst bestimmt die längste Option die Mindestbreite jeder Spalte. */
+select.sg-neu { width: 8.5em; max-width: 100%; min-height: 28px; padding: 1px 26px 1px 6px; font-size: 0.8rem; color: var(--muted); background-color: transparent; border-color: transparent; }
+select.sg-neu:hover, select.sg-neu:focus { border-color: var(--border); }
+.sg-gliederung { margin: 6px 0; padding: 8px 10px; font-size: 0.85rem; white-space: pre-wrap; background: var(--surface); border-radius: 8px; }
+@media (max-width: 600px) {
+  .te-tabelle input, .ed-text input, .ed-text select, select.te-aktion, select.te-ziel, .wt-tabelle input.wt-zelle, input.sg-text, select.sg-neu { font-size: 16px; }
+  .ed-scroll { max-height: 60vh; }
+  .diagramm-editor.vollbild { padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); }
+}
+@media print {
+  .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe, .wt-neu, .wt-aktion, .sg-aktionen, .sg-neu-zeile { display: none; }
+}
+
+/* Farben (lib/farben.ts): `farbe-<name>` setzt --f (Text/Linie), --f-fill (Fläche mit weißer Schrift) und --f-soft (zarter Grund) */
+.farbe-indigo { --f: var(--c-indigo); --f-fill: var(--c-indigo-fill); --f-soft: var(--c-indigo-soft); }
+.farbe-violet { --f: var(--c-violet); --f-fill: var(--c-violet-fill); --f-soft: var(--c-violet-soft); }
+.farbe-pink { --f: var(--c-pink); --f-fill: var(--c-pink-fill); --f-soft: var(--c-pink-soft); }
+.farbe-red { --f: var(--c-red); --f-fill: var(--c-red-fill); --f-soft: var(--c-red-soft); }
+.farbe-orange { --f: var(--c-orange); --f-fill: var(--c-orange-fill); --f-soft: var(--c-orange-soft); }
+.farbe-amber { --f: var(--c-amber); --f-fill: var(--c-amber-fill); --f-soft: var(--c-amber-soft); }
+.farbe-green { --f: var(--c-green); --f-fill: var(--c-green-fill); --f-soft: var(--c-green-soft); }
+.farbe-teal { --f: var(--c-teal); --f-fill: var(--c-teal-fill); --f-soft: var(--c-teal-soft); }
+.farbe-sky { --f: var(--c-sky); --f-fill: var(--c-sky-fill); --f-soft: var(--c-sky-soft); }
+.farbe-slate { --f: var(--c-slate); --f-fill: var(--c-slate-fill); --f-soft: var(--c-slate-soft); }
+.mid-text { color: var(--mid); }
+
+/* Bereichsfarben (App.tsx: .layout[data-bereich]): Lernen Indigo, Glossar Türkis, SQL Orange, Einstellungen Schiefer.
+   Die Kopfleiste zeigt jeden Bereich in seiner eigenen Farbe (Kopfleiste.tsx: .kopf-<bereich>). */
+.layout[data-bereich='glossar'] { --accent: var(--c-teal); --accent-fill: var(--c-teal-fill); --accent-soft: var(--c-teal-soft); }
+.layout[data-bereich='sql'] { --accent: var(--c-orange); --accent-fill: var(--c-orange-fill); --accent-soft: var(--c-orange-soft); }
+.layout[data-bereich='einstellungen'] { --accent: var(--c-slate); --accent-fill: var(--c-slate-fill); --accent-soft: var(--c-slate-soft); }
+/* Hauptknöpfe mit leichtem Glanz von oben */
+h1 .icon { color: var(--accent-fill); }
+
+/* Widgets: Icon im farbigen Quadrat wie in den iOS-Einstellungen */
+.widget h2 .icon, .widgets > .card h2 .icon {
+  box-sizing: content-box; width: 0.95em; height: 0.95em; padding: 5px; margin-right: 3px; border-radius: 8px; vertical-align: -0.38em;
+  background: var(--f-fill, var(--accent-fill)); color: #fff; stroke-width: 2.2;
+}
+.widget.kpi[class*='farbe-'] { background: linear-gradient(160deg, var(--f-soft), var(--surface) 72%); }
+.widget.kpi[class*='farbe-'] .kpi-value, .widget.kpi[class*='farbe-'] .kpi-value .icon { color: var(--f); }
+.widget.kpi[class*='farbe-'] .w-titel { color: var(--f); }
+.w-serie .kpi-value .icon { color: var(--c-orange-fill); }
+/* Einstieg: kräftiger Farbverlauf, weiße Schrift */
+
+/* Kennzahlen mit Farbe (Karteikarten) */
+.kpi[class*='farbe-'] .kpi-value { color: var(--f); }
+@media (max-width: 599px) {
+  .kpis.drei { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .kpis.drei .kpi { padding: 10px 12px; }
+  .kpis.drei .kpi-value { font-size: 1.2rem; }
+  .kpis.drei .kpi-label { font-size: 0.76rem; }
+}
+
+/* Themen-Kacheln: Farbe je Deep Dive, Nummer im farbigen Feld, Kartenbalken unten */
+/* Streifen als Hintergrundbild: gerade Kante, die Rundung der Kachel schneidet ihn sauber ab */
+.thema-kachel { gap: 4px; }
+.thema-kachel .tile-num { display: inline-grid; place-items: center; margin: 2px 0 4px; background: var(--f-soft); color: var(--f); font-size: 0.9rem; }
+.thema-kachel .verteilung-balken { margin-top: auto; }
+.thema-kachel .tile-meta { margin-bottom: 8px; }
+
+/* Karteikarten: Streifen oben und Etikett in der Farbe des Kartentyps */
+.flashcard[class*='farbe-'] .fc-label { color: var(--f); }
+.flashcard[class*='farbe-'] .fc-vorne.frage, .flashcard[class*='farbe-'] .fc-vorne.rechnung { border-left-color: var(--f-fill); }
+.runden-balken > div { background: var(--held); }
+
+/* Kartenstand (pages/Kartenstand.tsx, components/KartenstandLeiste.tsx) */
+.stand-gewusst { --s: var(--c-green); --s-fill: var(--c-green-fill); --s-soft: var(--c-green-soft); --s-vivid: var(--v-gewusst); }
+.stand-unsicher { --s: var(--c-amber); --s-fill: var(--c-amber-fill); --s-soft: var(--c-amber-soft); --s-vivid: var(--v-unsicher); }
+.stand-nicht { --s: var(--c-red); --s-fill: var(--c-red-fill); --s-soft: var(--c-red-soft); --s-vivid: var(--v-nicht); }
+.verteilung-balken { display: flex; gap: 2px; height: 14px; border-radius: 999px; overflow: hidden; background: var(--v-neu); }
+.verteilung-balken.schmal { height: 7px; gap: 1px; }
+.verteilung-balken > span { display: block; min-width: 3px; transition: flex-grow 0.4s ease; }
+.vb-gewusst { background: var(--v-gewusst); }
+.vb-unsicher { background: var(--v-unsicher); }
+.vb-nicht { background: var(--v-nicht); }
+.vb-neu { background: var(--v-neu); }
+.verteilung { padding: 16px 20px; }
+.verteilung-legende { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; margin: 12px 0 0; padding: 0; font-size: 0.92rem; }
+.verteilung-legende .punkt { width: 0.75em; height: 0.75em; }
+.stand-kacheln { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+button.stand-kachel {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 0; padding: 14px 16px; text-align: left; white-space: normal;
+  background: linear-gradient(160deg, var(--s-soft), var(--surface) 78%); color: var(--text); border: 2px solid transparent; border-radius: var(--radius);
+  box-shadow: var(--shadow); font-weight: 500; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+button.stand-kachel:hover:not(:disabled) { filter: none; transform: translateY(-2px); box-shadow: var(--shadow-schwebe); }
+button.stand-kachel[aria-pressed='true'] { border-color: var(--s-vivid); box-shadow: 0 0 0 4px color-mix(in srgb, var(--s-vivid) 22%, transparent), var(--shadow-schwebe); }
+.stand-kachel-kopf { display: flex; align-items: center; gap: 6px; font-weight: 650; color: var(--s); }
+.stand-kachel-zahl { font-size: 2.2rem; font-weight: 750; line-height: 1.1; letter-spacing: -0.02em; color: var(--s); font-variant-numeric: tabular-nums; }
+.stand-kachel-fuss { font-size: 0.85rem; color: var(--muted); }
+.stand-filter { margin: 4px 0 6px; }
+.stand-aktionen .button:not(.secondary) { background-color: var(--s-fill); }
+.stand-aktionen .button.secondary { background: var(--s-soft); color: var(--s); }
+.stand-gruppe-titel { display: flex; align-items: center; gap: 8px; font-size: 1rem; color: var(--f); margin: 1.4em 0 0.4em; }
+.stand-gruppe-titel::before { content: ''; width: 10px; height: 10px; border-radius: 3px; background: var(--f-fill); flex: none; }
+.stand-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.stand-zeile { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); border-left: 4px solid var(--f-fill, var(--border)); }
+.stand-zeile-kopf { display: flex; align-items: flex-start; gap: 6px; }
+button.stand-frage {
+  flex: 1; min-width: 0; min-height: 0; display: flex; align-items: flex-start; gap: 8px; padding: 2px 0; text-align: left; white-space: normal;
+  background: none; color: var(--text); border: 0; font-weight: 600; line-height: 1.4; box-shadow: none;
+}
+button.stand-frage:hover:not(:disabled) { filter: none; color: var(--accent); }
+button.stand-frage .icon { margin-top: 0.15em; color: var(--muted); transition: transform 0.15s; }
+button.stand-frage[aria-expanded='true'] .icon { transform: rotate(90deg); }
+.stand-begriff { font-size: 1.05rem; }
+.stand-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 4px 0 0 1.75em; }
+.badge.fach { background: var(--fill); color: var(--text); }
+.stand-faellig { color: var(--c-orange); font-weight: 600; }
+.stand-antwort { margin: 10px 0 2px 1.75em; padding: 12px 14px; border-radius: 10px; background: var(--surface-2); animation: aufblenden 0.2s ease-out both; }
+.stand-antwort .fc-hinten.rechnung { background: var(--surface); }
+.stand-leiste { margin: 12px 0; }
+.stand-leiste ul { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 10px 0 0; padding: 0; }
+.stand-chip { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 999px; background: var(--s-soft); color: var(--s); font-size: 0.9rem; font-weight: 500; }
+.stand-chip:hover { text-decoration: none; filter: brightness(0.97); }
+.stand-chip.mehr { background: var(--fill); color: var(--text); }
+.stand-chip.mehr .icon { color: var(--accent); }
+.runde-ende { justify-content: space-between; }
+/* Kartenstand auf der Übersicht: drei Zahlen nebeneinander */
+.stand-zahlen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; list-style: none; margin: 12px 0 8px; padding: 0; }
+.stand-zahlen a { display: flex; flex-direction: column; padding: 10px 12px; border-radius: 14px; background: var(--s-soft); color: var(--s); transition: transform 0.15s; }
+.stand-zahlen a:hover { text-decoration: none; transform: translateY(-2px); }
+.stand-zahlen b { font-size: 1.7rem; line-height: 1.15; font-weight: 750; font-variant-numeric: tabular-nums; }
+.stand-zahlen span { font-size: 0.82rem; font-weight: 600; }
+@media (max-width: 599px) {
+  .stand-kacheln { gap: 8px; }
+  button.stand-kachel { padding: 10px; }
+  .stand-kachel-kopf { font-size: 0.8rem; gap: 4px; }
+  .stand-kachel-zahl { font-size: 1.6rem; }
+  .stand-kachel-fuss { font-size: 0.74rem; }
+  .stand-meta, .stand-antwort { margin-left: 0; }
+}
+@media print { .stand-kacheln, .stand-aktionen, .stand-filter { display: none; } }
+
+/* „Bewegung reduzieren“ im Betriebssystem und beim Drucken: keine Animationen und Übergänge */
+@media (prefers-reduced-motion: reduce), print {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* Textmarker: markierte Stellen im Aufgabentext (CSS Custom Highlight API) und die Auswahlleiste */
+::highlight(textmarker-1) { background-color: var(--marke-1); color: inherit; }
+::highlight(textmarker-2) { background-color: var(--marke-2); color: inherit; }
+.textmarker-leiste { position: fixed; z-index: 45; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; box-shadow: var(--shadow-schwebe); }
+.textmarker-leiste .marke-farbe { width: 30px; height: 30px; min-height: 0; padding: 0; border-radius: 50%; border: 2px solid var(--border); flex: none; }
+.textmarker-leiste .marke-1 { background: var(--marke-1); }
+.textmarker-leiste .marke-2 { background: var(--marke-2); }
+.textmarker-leiste button:hover:not(:disabled) { filter: none; border-color: var(--accent); }
+.textmarker-weg { margin: 2px 0 0; }

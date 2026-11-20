@@ -3,7 +3,7 @@
 // außerhalb der Whisker), nie auf die Lösung. Nach der Abgabe vergleicht der Abgleich die Werte mit den „erforderlichen Elementen“
 // der Musterlösung. Rein, ohne React.
 
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 import { zahlAus } from './werteTabelle';
 
 export const KENNWERTE = ['min', 'q1', 'median', 'q3', 'max'] as const;

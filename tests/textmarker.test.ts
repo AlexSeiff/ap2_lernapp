@@ -3,8 +3,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { mergeProgress } from '../shared/mergeProgress';
-import { checkProgressPut, emptyProgress, migrateProgress, ProgressSchema, PROGRESS_VERSION } from '../shared/progress';
+import { mergeProgress } from '../domain/mergeProgress';
+import { emptyProgress, migrateProgress, ProgressSchema, PROGRESS_VERSION } from '../domain/progress';
 import { parseBackup } from '../src/lib/backup';
 import { beruehrt, entferne, gueltigeMarken, loescheMarken, markenVon, markiere, setzeMarken, type Textmarke } from '../src/lib/textmarker';
 
@@ -107,7 +107,7 @@ describe('Speicherung im Fortschritt', () => {
   it('Schema und Speichern lassen Textmarken zu', () => {
     const p = setzeMarken(emptyProgress(), '01-A1', [wort('Nennen')], T1);
     expect(ProgressSchema.safeParse(p).success).toBe(true);
-    expect(checkProgressPut(p, p)).toMatchObject({ ok: true });
+    expect(ProgressSchema.safeParse(p).success).toBe(true);
   });
 });
 
@@ -122,7 +122,7 @@ describe('Version 10: Migration und Zusammenführen', () => {
     expect(hervorhebungen).toEqual({});
     expect(version).toBe(PROGRESS_VERSION);
     const { version: _v, ...ursprung } = v9;
-    expect(rest).toMatchObject({ revision: ursprung.revision, attempts: ursprung.attempts });
+    expect(rest).toMatchObject({ attempts: ursprung.attempts });
     expect(ProgressSchema.safeParse(migrateProgress(v9)).success).toBe(true);
   });
 

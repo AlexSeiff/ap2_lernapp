@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import type { CardState, Rating } from '../../shared/progress';
-import type { Flashcard } from '../../shared/types';
+import type { CardState, Rating } from '../../domain/progress';
+import type { Flashcard } from '../../domain/types';
 import { cardPool, filterCards, isKindEnabled, readCardFilter, withCardFilter, type CardFilter } from '../lib/cards';
 import { altklausurThemen } from '../lib/altklausur';
 import { markierteIds } from '../lib/markiert';

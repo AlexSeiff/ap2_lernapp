@@ -1,4 +1,4 @@
-import { splitPrueferfragen, stripPrueferfragen, type TheorySegment } from '../../shared/prueferfragen';
+import { splitPrueferfragen, stripPrueferfragen, type TheorySegment } from '../../domain/prueferfragen';
 import { Markdown } from './Markdown';
 import { Icon } from './Icon';
 

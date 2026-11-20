@@ -1,8 +1,8 @@
 // Textmarker: Wörter im Aufgabentext oder in der Ausgangssituation farbig markieren (Keywords, Zahlen, Bedingungen). Reine Funktionen
 // auf Zeichenstellen (von/bis im Text des Bereichs); die Anzeige per CSS Custom Highlight API steht in lib/textmarkerDom.ts,
-// die Auswahlleiste in components/Textmarker.tsx. Gespeichert in progress.hervorhebungen (shared/progress.ts, Version 10).
+// die Auswahlleiste in components/Textmarker.tsx. Gespeichert in progress.hervorhebungen (domain/progress.ts, Version 10).
 
-import type { Progress, Textmarke } from '../../shared/progress';
+import type { Progress, Textmarke } from '../../domain/progress';
 
 export type { Textmarke };
 

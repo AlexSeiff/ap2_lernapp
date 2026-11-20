@@ -3,7 +3,7 @@
 // das Abbild der alten sinkt darunter weg.
 // Das Abbild ist eine DOM-Kopie aus getSnapshotBeforeUpdate (also vor dem Austausch – danach gibt es die alte Karte nicht mehr). Sie
 // liegt in einer eigenen Ebene, deren Inhalt React nie anfasst, und verschwindet nach der Animation. Deshalb eine Klassenkomponente:
-// Nur sie kommt vor dem Austausch an das alte DOM. Bei „Bewegung reduzieren“ endet die Animation sofort (styles.css).
+// Nur sie kommt vor dem Austausch an das alte DOM. Bei „Bewegung reduzieren“ endet die Animation sofort (styles/02-lernen-aufgaben-karten.css).
 
 import { Component, createRef, type ReactNode } from 'react';
 

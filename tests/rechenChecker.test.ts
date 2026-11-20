@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { RechenUebung } from '../shared/types';
+import type { RechenUebung } from '../domain/types';
 import {
   einheitPasst,
   formatWert,

@@ -48,7 +48,7 @@ exam papers or textbook passages.
   Handlungssituation intro, explicit quantities, small point steps, pre-structured answer tables, legal/English source texts. Details and the
   WiSo variant: `references/formate.md` § 3a. Never copy original exam text (© ZPA) – rebuild type and level in the Nordholz scenario. When
   reworking an existing exam keep every task code and the 100 P – renumbering needs a new id map and progress version (as in
-  `shared/aufgabenUmzug.ts`, Oktober 2026), so ask the owner first.
+  `domain/aufgabenUmzug.ts`, Oktober 2026), so ask the owner first.
 - **Calculation tasks do NOT state their formula** (owner's rule since 2026-11-18, replacing the earlier "always show the formula"): like
   in the real IHK exam the learner finds formulas only in the **Formelsammlung** (appendix panel / `/material/formeln`, rebuilt from the
   IHK Belegsatz in `src/lib/pruefungsanhang.ts`, data in `src/rechnen/formeln.ts`). So no `> **Formel:** …` block under a task, no

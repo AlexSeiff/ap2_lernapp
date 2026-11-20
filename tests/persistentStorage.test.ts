@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { emptyProgress } from '../shared/progress';
+import { emptyProgress } from '../domain/progress';
 import { createPersistRequest, isStoragePersisted } from '../src/lib/persistentStorage';
 import { createLocalProgressStore, createStaticApi } from '../src/lib/staticApi';
 

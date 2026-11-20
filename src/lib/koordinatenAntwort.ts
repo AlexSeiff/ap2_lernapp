@@ -4,7 +4,7 @@
 // Nach der Abgabe vergleicht der Abgleich deine Punkte mit der Tabelle der Aufgabe und die Geraden mit den genannten Gleichungen – eine
 // Hilfe zur Selbstbewertung, die Punkte vergibst du selbst. Rein, ohne React.
 
-import type { Task, Topic } from '../../shared/types';
+import type { Task, Topic } from '../../domain/types';
 import { markdownTabellen } from './tabellenEditor';
 import { zahlAus } from './werteTabelle';
 

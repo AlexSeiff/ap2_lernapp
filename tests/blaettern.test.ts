@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { emptyProgress } from '../shared/progress';
+import { emptyProgress } from '../domain/progress';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
 
 // Durchblättern der Karteikarten (?blaettern=1): ohne Bewertung, Begriffskarten als Hauptfall.

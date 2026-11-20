@@ -1,10 +1,10 @@
 // Begriffsseiten im Client (Umsetzungsplan Phase 3): Laden (getrennt von content.json), Verweise auflösen und die passenden Übungen
 // eines Begriffs finden. Rein bis auf ladeBegriffe(); getestet in tests/begriffe.test.ts.
 
-import { namensSchluessel, seitenNachName } from '../../shared/begriffsseiten';
-import { DIAGRAMM_TYP_NAMEN, type DiagrammTyp, type DiagrammUebung } from '../../shared/diagrammUebungen';
-import type { KernInhalt } from '../../shared/texte';
-import type { BegriffKurz, BegriffsSeite, Flashcard, RechenUebung, SqlExercise, Task } from '../../shared/types';
+import { namensSchluessel, seitenNachName } from '../../domain/begriffsseiten';
+import { DIAGRAMM_TYP_NAMEN, type DiagrammTyp, type DiagrammUebung } from '../../domain/diagrammUebungen';
+import type { KernInhalt } from '../../domain/texte';
+import type { BegriffKurz, BegriffsSeite, Flashcard, RechenUebung, SqlExercise, Task } from '../../domain/types';
 import { api } from './api';
 import { glossarSchluessel, ueberschriftKern, type GlossarEintrag } from './glossar';
 import { normalisiere } from './normalisiere';

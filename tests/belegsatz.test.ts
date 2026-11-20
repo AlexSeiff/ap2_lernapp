@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { emptyProgress } from '../shared/progress';
+import { emptyProgress } from '../domain/progress';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { aktivesUnterziel, bereich } from '../src/lib/navigation';
 
@@ -111,13 +111,13 @@ describe('SQL-Belegsatz', () => {
     for (const t of sqlAufgaben) expect(anhangFuer([t]).sql, t.id).toBe(true);
     const c1 = content.tasks['03-B1'];
     expect(c1.markdown).toContain('*Berechnen*');
-    expect(anhangFuer([c1])).toEqual({ sql: false, formeln: true });
+    expect(anhangFuer([c1])).toEqual({ sql: false, formeln: true, diagramme: [] });
     // Deutungsaufgabe zu einem Rechenergebnis: Operator „interpretieren“ zeigt ebenfalls die Formelübersicht.
     const a3 = content.tasks['04-A3'];
     expect(a3.markdown).toContain('*Interpretieren*');
     expect(anhangFuer([a3]).formeln).toBe(true);
     // Eine Klausur bekommt, was eine ihrer Aufgaben braucht.
-    expect(anhangFuer([c1, sqlAufgaben[0]])).toEqual({ sql: true, formeln: true });
+    expect(anhangFuer([c1, sqlAufgaben[0]])).toEqual({ sql: true, formeln: true, diagramme: [] });
     const wiso = Object.values(content.tasks).filter((t) => t.topicId === '13' && !anhangFuer([t]).sql && !anhangFuer([t]).formeln);
     expect(wiso.length).toBeGreaterThan(0);
   });

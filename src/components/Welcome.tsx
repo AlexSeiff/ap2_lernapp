@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { isIsoDate } from '../../shared/progress';
+import { isIsoDate } from '../../domain/progress';
 import { parseBackup } from '../lib/backup';
 import { withSettings } from '../lib/settings';
 import { useStartStore } from '../lib/store';

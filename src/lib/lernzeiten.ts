@@ -2,7 +2,7 @@
 // Prüfung (lib/lernplan.ts) werden Lerntermine – als .ics-Datei für Google, Outlook, Apple oder jedes andere Kalenderprogramm.
 // Rein (ohne React, ohne Speicher). Uhrzeiten sind „schwebend“ (ohne Zeitzone): Der Kalender zeigt sie in der Ortszeit des Geräts.
 
-import { type Lernzeit, type Settings, WERKTAGE, WOCHENENDTAGE } from '../../shared/progress';
+import { type Lernzeit, type Settings, WERKTAGE, WOCHENENDTAGE } from '../../domain/progress';
 import { addDays } from './progress';
 import { ics } from './export';
 import { PUFFER_TAGE, type Lernplan } from './lernplan';

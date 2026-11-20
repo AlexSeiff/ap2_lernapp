@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { RechenWert } from '../shared/types';
+import type { RechenWert } from '../domain/types';
 import { formatWert, pruefeEingabe, toleranz } from '../src/rechnen/checker';
 import type { AufgeloesteEingabe } from '../src/rechnen/instanz';
 import type { Loesung } from '../src/rechnen/typen';

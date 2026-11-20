@@ -1,6 +1,6 @@
 // Erinnerung an eine heruntergeladene Sicherung (Banner auf der Übersicht): rein, damit testbar.
 
-import type { Progress } from '../../shared/progress';
+import type { Progress } from '../../domain/progress';
 import { localDate } from './progress';
 import { activityDays } from './stats';
 

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { defaultSettings, emptyProgress, ProgressSchema } from '../shared/progress';
+import { defaultSettings, emptyProgress, ProgressSchema } from '../domain/progress';
 import { withSettings } from '../src/lib/settings';
 
 describe('withSettings', () => {
   it('ändert nur die übergebenen Einstellungen und lässt den Rest des Fortschritts gleich', () => {
-    const p = { ...emptyProgress(), revision: 3 };
+    const p = emptyProgress();
     const next = withSettings(p, { prueferfragen: false, backupReminderDays: 14 });
     expect(next.settings).toEqual({ ...defaultSettings(), prueferfragen: false, backupReminderDays: 14 });
     expect({ ...next, settings: p.settings }).toEqual(p);

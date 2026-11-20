@@ -8,3 +8,9 @@ tsconfig.tsbuildinfo
 *.defekt-*
 # Originalfotos, Ausschnitte und quellennahe Abschriften bleiben lokal.
 /foto_transkription/
+
+playwright-report
+test-results
+
+# Bilder für den lokalen Pixelvergleich (e2e/visuell.spec.ts)
+e2e-visuell

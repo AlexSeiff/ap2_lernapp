@@ -1,7 +1,7 @@
 // Karteikarten-Filter: reine Funktionen, der Zustand steht in der URL (?thema=…&deck=…).
 
-import type { Settings } from '../../shared/progress';
-import type { Flashcard } from '../../shared/types';
+import type { Settings } from '../../domain/progress';
+import type { Flashcard } from '../../domain/types';
 import { istAltklausurKarte } from './altklausur';
 
 /** `markiert`: '1' = nur markierte Karten (Phase 4), sonst 'alle'. `altklausur`: '1' = nur Karten aus dem Altklausur-Training. */

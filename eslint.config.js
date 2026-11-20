@@ -6,7 +6,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist/', 'node_modules/', 'content/', 'data/', '.claude/'] },
+  { ignores: ['dist/', 'node_modules/', 'content/', 'data/', '.claude/', 'playwright-report/', 'test-results/', 'e2e-visuell/'] },
   js.configs.recommended,
   tseslint.configs.recommended,
   {

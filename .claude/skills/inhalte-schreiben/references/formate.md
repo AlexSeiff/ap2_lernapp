@@ -1,7 +1,7 @@
 # Formate der Inhaltsdateien
 
 Kurzreferenz mit Beispielen aus `content/`. Die vollständige technische Beschreibung (Parser, Prüfungen, alle Rechen-Vorlagen)
-steht in `DOKUMENTATION.md` § 4 – dort nachlesen, bevor du SQL-, Rechen- oder Diagramm-Übungen anlegst.
+steht in `docs/03-inhalte.md` § 4 – dort nachlesen, bevor du SQL-, Rechen- oder Diagramm-Übungen anlegst.
 
 Inhalt: 1 Lernkarten · 2 Deep Dive (Lernblatt) · 3 Übungsklausur · 4 Lösungsdatei · 5 Begriffsseiten · 6 Übungen (Verweise)
 
@@ -105,7 +105,7 @@ Text …
 - **Lernziele**: `- [ ]` unter `## Lernziel-Check…` (abhakbar in der App).
 - Kein `(KW …)` und keine persönlichen Zeitbezüge in Titeln.
 - Formeln: `$…$` auf einer Zeile, `{,}` als Dezimalkomma, `\%`, `\text{…}` für Wörter. Blockformeln `$$` auf eigenen Zeilen.
-- Diagramme: ```` ```svg ````-Block, nur Zeichenelemente und `dg-*`-Klassen (siehe DOKUMENTATION § 4.1 „Diagrams“ und DD17 als Vorlage).
+- Diagramme: ```` ```svg ````-Block, nur Zeichenelemente und `dg-*`-Klassen (siehe docs/03-inhalte.md § 4.1 „Diagrams“ und DD17 als Vorlage).
 - Rechenbeispiele im Theorieteil, die eine Rechenübung nachbildet, verweisen dort mit `quelleAufgabe: "DDn Teil 4.3"` – ihre Zahlen
   müssen zum Text passen (Smoke-Test).
 
@@ -253,9 +253,9 @@ Mehr: Deep Dive 12, Teil 2
 
 | Datei | Wichtigste Regeln | Nachlesen |
 |---|---|---|
-| `AP2_SQL_Uebungen.json` | id `SQL-MH-NNN` (moebelhaus), `SQL-DF-NNN` (datafit), `SQL-DQ-NNN` (kundenimport), `SQL-HL-NNN` (holzlager, DD29), `SQL-EL-NNN` (eventlager, DD31), `loesung` muss im Datensatz laufen, `vergleich` passend, optional `aufgaben`/`karten` verknüpfen | DOKUMENTATION § 4.3, § 7 |
-| `AP2_Rechen_Uebungen.json` | id `RE-<BEREICH>-NNN`, möglichst mit `vorlage` + `daten`; feste Zahlen müssen die Musterlösung reproduzieren (`quelleAufgabe`) | DOKUMENTATION § 4.4 (Tabelle aller Vorlagen) |
-| `AP2_Diagramm_Uebungen.json` | jede Lücke in `loesung`, Lösung verletzt keine Formregel | DOKUMENTATION § 4.4b |
-| `AP2_Quellen.json` | nur https, `ziel` muss existieren, `geprueft` = `JJJJ-MM`; Links mit `npm run quellen-pruefen` testen | DOKUMENTATION § 4.4c |
+| `AP2_SQL_Uebungen.json` | id `SQL-MH-NNN` (moebelhaus), `SQL-DF-NNN` (datafit), `SQL-DQ-NNN` (kundenimport), `SQL-HL-NNN` (holzlager, DD29), `SQL-EL-NNN` (eventlager, DD31), `loesung` muss im Datensatz laufen, `vergleich` passend, optional `aufgaben`/`karten` verknüpfen | docs/03-inhalte.md § 4.3, § 7 |
+| `AP2_Rechen_Uebungen.json` | id `RE-<BEREICH>-NNN`, möglichst mit `vorlage` + `daten`; feste Zahlen müssen die Musterlösung reproduzieren (`quelleAufgabe`) | docs/03-inhalte.md § 4.4 (Tabelle aller Vorlagen) |
+| `AP2_Diagramm_Uebungen.json` | jede Lücke in `loesung`, Lösung verletzt keine Formregel | docs/03-inhalte.md § 4.4b |
+| `AP2_Quellen.json` | nur https, `ziel` muss existieren, `geprueft` = `JJJJ-MM`; Links mit `npm run quellen-pruefen` testen | docs/03-inhalte.md § 4.4c |
 
 Bestehende Einträge derselben Art sind die beste Vorlage: eine ähnliche Übung suchen und deren Aufbau übernehmen.

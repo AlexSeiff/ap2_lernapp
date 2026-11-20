@@ -1,10 +1,11 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
-import { namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../shared/begriffsseiten.ts';
-import { buildContent } from '../shared/parser.ts';
-import { parseQuellen, pruefeQuellenZiele } from '../shared/quellen.ts';
-import { ergaenzeVerwandte } from '../shared/verwandt.ts';
-import type { BegriffsSeite, Content } from '../shared/types.ts';
+import { namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../domain/begriffsseiten.ts';
+import { istJsonArt, istJsonInhalt } from '../domain/inhaltsdateien.ts';
+import { buildContent } from '../domain/parser.ts';
+import { parseQuellen, pruefeQuellenZiele } from '../domain/quellen.ts';
+import { ergaenzeVerwandte } from '../domain/verwandt.ts';
+import type { BegriffsSeite, Content } from '../domain/types.ts';
 import { baueGlossar, ueberschriftKern } from '../src/lib/glossar.ts';
 import { ergaenzeGlossarThema } from '../src/lib/glossarThema.ts';
 import { pruefeRechenUebung } from '../src/rechnen/pruefen.ts';
@@ -27,15 +28,7 @@ const INHALT_MD = [
 
 /** Dateiname eines Lernblatts (siehe INHALT_MD), einer Lernkarten-JSON, der SQL- oder der Rechenübungen-JSON? */
 export function isContentFile(name: string): boolean {
-  return (
-    INHALT_MD.some((re) => re.test(name)) ||
-    /Lernkarten.*\.json$/i.test(name) ||
-    /SQL_Uebungen.*\.json$/i.test(name) ||
-    /Rechen_Uebungen.*\.json$/i.test(name) ||
-    /Diagramm_Uebungen.*\.json$/i.test(name) ||
-    /Json_Uebungen.*\.json$/i.test(name) ||
-    /^AP2_Quellen\.json$/.test(name)
-  );
+  return INHALT_MD.some((re) => re.test(name)) || istJsonInhalt(name);
 }
 
 /** Liegt `file` direkt im Quellordner und wird von loadContent() gelesen? (Für den Datei-Watcher.) */
@@ -82,7 +75,7 @@ export function ladeInhalt(dir = CONTENT_DIR): Inhalt {
   // Thema „Glossar & Diagramme“: Platzhalter durch das aktuelle Glossar A–Z ersetzen (src/lib/glossarThema.ts).
   ergaenzeGlossarThema(content);
   // Quellen und Lehrvideos (Umsetzungsplan Phase 8): Ziele müssen Abschnitte bzw. – wenn es Begriffsseiten gibt – Begriffe sein.
-  const quellenDatei = files.find((f) => f.name === 'AP2_Quellen.json');
+  const quellenDatei = files.find((f) => istJsonArt(f.name, 'quellen'));
   if (quellenDatei) {
     const q = parseQuellen(quellenDatei.name, quellenDatei.text);
     content.issues.push(...q.issues);

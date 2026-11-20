@@ -2,9 +2,9 @@
 // tests/leicht.test.ts. Quelle der Antworten: der geprüfte Block „mc“ der Karte, sonst (abschaltbar) automatisch die Antworten
 // verwandter bzw. ähnlicher Karten – siehe leichtKarten().
 
-import { mcNorm } from '../../shared/lernkarten';
-import type { Settings } from '../../shared/progress';
-import type { CardType, Flashcard } from '../../shared/types';
+import { mcNorm } from '../../domain/lernkarten';
+import type { Settings } from '../../domain/progress';
+import type { CardType, Flashcard } from '../../domain/types';
 import { shuffle } from './shuffle';
 
 /** Kartentypen, für die automatische Antworten erzeugt werden (ROADMAP 6.1). `anwendung` nur mit eigenem mc-Block. */

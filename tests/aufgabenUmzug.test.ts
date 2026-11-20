@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
-import { AUFGABEN_UMZUG_V9 } from '../shared/aufgabenUmzug';
-import { migrateProgress, PROGRESS_VERSION } from '../shared/progress';
+import { AUFGABEN_UMZUG_V9 } from '../domain/aufgabenUmzug';
+import { migrateProgress, PROGRESS_VERSION } from '../domain/progress';
 
 // Übungsklausuren im Format der Altklausuren (Oktober 2026): Aufgaben mit neuem Code ziehen beim Laden um (Fortschritt Version 9).
 

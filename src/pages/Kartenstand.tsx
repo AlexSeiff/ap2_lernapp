@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import type { Rating } from '../../shared/progress';
-import type { Flashcard } from '../../shared/types';
+import type { Rating } from '../../domain/progress';
+import type { Flashcard } from '../../domain/types';
 import { Icon, type IconName } from '../components/Icon';
 import { KartenAntwort } from '../components/KartenText';
 import { MarkierStern } from '../components/MarkierStern';
@@ -20,7 +20,7 @@ import {
 } from '../lib/kartenstand';
 import { isDue, localDate } from '../lib/progress';
 import { useStore } from '../lib/store';
-import { CARD_TYPE_LABELS } from './Karteikarten';
+import { CARD_TYPE_LABELS } from './karten/kartenAnzeige';
 
 const STAND_ICON: Record<Rating, IconName> = { gewusst: 'circle-check', unsicher: 'circle-question-mark', nicht: 'circle-x' };
 const SORTIERUNGEN: { wert: StandSortierung; text: string }[] = [

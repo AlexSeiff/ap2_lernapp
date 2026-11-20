@@ -1,9 +1,9 @@
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { SICHER_RICHTIG_AB } from '../shared/config';
-import { emptyProgress, type Attempt, type ExamRun, type Sicherheit } from '../shared/progress';
-import type { Task } from '../shared/types';
+import { SICHER_RICHTIG_AB } from '../domain/config';
+import { emptyProgress, type Attempt, type ExamRun, type Sicherheit } from '../domain/progress';
+import type { Task } from '../domain/types';
 import { SicherheitWahl } from '../src/components/SicherheitWahl';
 import { istRichtig, kalibrierung, KALIBRIERUNG_MIN } from '../src/lib/kalibrierung';
 import { finishExam } from '../src/lib/progress';

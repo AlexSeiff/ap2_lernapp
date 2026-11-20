@@ -2,7 +2,7 @@
 // Standardgrößen, Kantenarten), Geometrie und Formprüfung. Anders als die Diagramm-Übungen gibt es kein Gerüst – man zeichnet alles
 // selbst und vergleicht danach mit der Musterlösung. Die Formprüfung sind Hinweise zur Selbstbewertung, keine Punkte. Rein, ohne React.
 
-import { formregeln, type DiagrammUebung, type Form } from '../../shared/diagrammUebungen';
+import { formregeln, type DiagrammUebung, type Form } from '../../domain/diagrammUebungen';
 
 export const DIAGRAMM_NOTATIONEN = ['erm', 'epk', 'bpmn', 'usecase', 'aktivitaet'] as const;
 export type DiagrammNotation = (typeof DIAGRAMM_NOTATIONEN)[number];

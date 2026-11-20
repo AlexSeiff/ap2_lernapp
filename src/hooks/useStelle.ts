@@ -19,7 +19,7 @@ export function useStelle(bereit = true) {
       el.classList.add('stelle-ziel');
       window.setTimeout(() => el.classList.remove('stelle-ziel'), 2500);
       // Nachladende Teile darüber (Formeln, Diagramme) verschieben das Ziel während des sanften Scrollens noch. Sobald das Scrollen
-      // steht, einmal nachkorrigieren, damit das Ziel nicht unter der Kopfleiste landet (scroll-margin-top in styles.css).
+      // steht, einmal nachkorrigieren, damit das Ziel nicht unter der Kopfleiste landet (scroll-margin-top in styles/02-lernen-aufgaben-karten.css).
       let letzteY = -1;
       let runden = 0;
       nachher = window.setInterval(() => {

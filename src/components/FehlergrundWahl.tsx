@@ -1,4 +1,4 @@
-import type { Fehlergrund } from '../../shared/progress';
+import type { Fehlergrund } from '../../domain/progress';
 import { FEHLERGRUND_LISTE } from '../lib/fehlergruende';
 import { Icon } from './Icon';
 

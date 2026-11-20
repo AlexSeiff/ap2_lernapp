@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 
-// Zeichnungen wie von Hand ins karierte Heft (notizbuch.css): Fortschritt als ausgemalte Kästchen, Tage als Strichliste.
+// Zeichnungen wie von Hand ins karierte Heft (styles/notizbuch.css): Fortschritt als ausgemalte Kästchen, Tage als Strichliste.
 
 type Farbe = 'blau' | 'rot' | 'gruen';
 

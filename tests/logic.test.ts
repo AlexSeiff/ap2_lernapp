@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import type { Task } from '../shared/types';
+import type { Task } from '../domain/types';
 import { autoGrade, ihkGrade, parseGermanNumber } from '../src/lib/grading';
-import { emptyProgress } from '../shared/progress';
+import { emptyProgress } from '../domain/progress';
 import { addDays, LEICHT_MAX_BOX, rateCard, rateCardLeicht, recordAttempt } from '../src/lib/progress';
 import { daysUntilExam, formatIsoDate } from '../src/lib/stats';
 

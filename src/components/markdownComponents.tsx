@@ -6,7 +6,7 @@ import { rehypeLoesung, rehypeTabellen } from '../lib/loesungStil';
 import { rehypeOperatoren } from '../lib/operatorStil';
 import { OperatorTipp } from './OperatorTipp';
 import { datasetForSource, sqlEditorLink } from '../lib/sqlLinks';
-import { pruefeSvg } from '../../shared/svgDiagramm';
+import { pruefeSvg } from '../../domain/svgDiagramm';
 import { Icon } from './Icon';
 import { SvgDiagramm } from './SvgDiagramm';
 
@@ -54,7 +54,7 @@ function makeComponents(source?: string | false): Components {
       if (typeof op === 'string') return <OperatorTipp id={op}>{children}</OperatorTipp>;
       return <span {...rest}>{children}</span>;
     },
-    // ```svg-Blöcke: handgezeichnetes Diagramm (shared/svgDiagramm.ts prüft die Positivliste), sonst als Code.
+    // ```svg-Blöcke: handgezeichnetes Diagramm (domain/svgDiagramm.ts prüft die Positivliste), sonst als Code.
     // ```sql-Blöcke: Link in den SQL-Editor mit vorausgefüllter Abfrage und passendem Datensatz.
     pre: ({ node, children }) => {
       const svg = codeOfPre(node, 'svg');

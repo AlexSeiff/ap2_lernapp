@@ -1,6 +1,6 @@
 // Lernzeiten (Einstellungen) und der Knopf „Lernplan in den Kalender“ (Einstellungen und Lernplan auf „Heute lernen“).
 
-import { WERKTAGE, type Lernzeit } from '../../shared/progress';
+import { WERKTAGE, type Lernzeit } from '../../domain/progress';
 import { ladeHerunter } from '../lib/export';
 import { planeLernplan } from '../lib/lernplan';
 import {

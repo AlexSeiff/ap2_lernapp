@@ -1,7 +1,7 @@
 // Aufgaben und Karteikarten mit verknüpfter SQL-Übung (Felder „aufgaben“ / „karten“ in AP2_SQL_Uebungen.json).
 // Rein und klein – wird von AnswerInput, GradePanel und den Karteikarten genutzt, ohne sql.js oder CodeMirror zu laden.
 
-import type { Content, SqlDataset, SqlExercise, Task } from '../../shared/types';
+import type { Content, SqlDataset, SqlExercise, Task } from '../../domain/types';
 
 /** SQL-Übung samt Datensatz, mit der eine Aufgabe im SQL-Editor beantwortet wird – oder undefined. */
 export function sqlUebungZuAufgabe(

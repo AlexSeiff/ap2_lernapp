@@ -1,0 +1,75 @@
+/* Lernraum: eine gemeinsame Gestaltung für Navigation, Lernen und Nachschlagen. */
+h1 { font-size: clamp(2rem, 3.2vw, 2.75rem); letter-spacing: -.045em; }
+h2 { font-weight: 650; }
+.page { padding: 36px 32px 72px; }
+.card, .widget, .tile, .kpi, .flashcard { border-color: var(--card-border); }
+.card { padding: 24px; }
+.card > h2:first-child { margin-top: 0; }
+.tile { padding: 22px; border-radius: 20px; }
+button, .button { letter-spacing: -.012em; font-weight: 600; box-shadow: none; }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+input:not([type='checkbox']):not([type='radio']), select, textarea { border-radius: 10px; }
+.mode-switch { padding: 4px; background: var(--fill); box-shadow: none; }
+.filter-box { border: 1px solid var(--card-border); background: var(--surface); border-radius: 16px; padding: 4px 16px; }
+.filter-box > summary { padding-block: 12px; }
+.filter-box .filters { padding-bottom: 12px; }
+.karten-start { background: var(--shell-hero); padding: 28px; border: 1px solid var(--card-border); }
+.karten-start .karten-start-titel { font-size: 1.35rem; letter-spacing: -.03em; }
+.flashcard { border-radius: 26px; padding: 36px; box-shadow: var(--shadow-schwebe); }
+.flashcard[class*='farbe-'] { background: var(--surface); border-top: 3px solid var(--f-fill); }
+.fc-question { font-size: 1.4rem; line-height: 1.5; }
+.thema-kachel { background: var(--surface); border-top: 0; }
+.thema-kachel:hover { background: var(--surface); }
+.thema-kachel .tile-num { width: 40px; height: 40px; border-radius: 13px; margin-bottom: 12px; }
+.kpi[class*='farbe-'] { background: var(--surface); }
+.kpis .kpi { padding: 20px; }
+.stand-zeile { border-left-width: 3px; padding: 14px 16px; }
+.quellen-box { border-radius: 14px; }
+.welcome-page { padding-top: 56px; }
+.welcome-symbol { display: grid; place-items: center; width: 68px; height: 68px; margin-bottom: 26px; color: #fff; }
+.welcome-symbol .icon { width: 38px; height: 38px; }
+.welcome-page .lead { color: var(--muted); max-width: 32em; }
+.welcome-page .welcome { list-style: none; padding: 0; counter-reset: welcome; display: grid; gap: 12px; margin: 28px 0; }
+.welcome-page .welcome > li { counter-increment: welcome; position: relative; margin: 0; padding: 22px 22px 22px 64px; }
+.welcome-page .welcome > li::before { content: counter(welcome); position: absolute; top: 22px; left: 20px; display: grid; place-items: center; width: 28px; height: 28px; background: var(--accent-soft); color: var(--accent); border-radius: 9px; font-size: .8rem; font-weight: 650; }
+.welcome-page > .actions button:first-child { min-height: 46px; padding-inline: 28px; }
+
+/* Übersicht: klare Hierarchie zwischen Einstieg, Weiterlernen und Fortschritt. */
+.seiten-auftakt { font-size: .69rem; font-weight: 700; letter-spacing: .13em; color: var(--muted); margin: 0 0 8px; }
+.widgets { gap: 18px; }
+.widget, .widgets > .card { border-radius: 24px; padding: 24px; }
+.widget h2 { font-size: .9rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 16px; }
+.widget h2 > .icon, .w-titel > .icon { background: var(--f-soft, var(--accent-soft)); color: var(--f, var(--accent)); box-shadow: none; border-radius: 9px; }
+.widget.widget-weiter { position: relative; isolation: isolate; overflow: hidden; background: var(--shell-hero); color: var(--text); box-shadow: var(--shadow); }
+.widget.kpi { min-height: 188px; }
+.widget .kpi-value { font-size: 2.6rem; font-weight: 600; letter-spacing: -.06em; }
+.w-titel { font-size: .8rem; color: var(--muted); }
+.mehr-widgets > summary { padding: 16px 20px; color: var(--muted); box-shadow: none; border: 1px solid var(--border); background: transparent; }
+.thema-fortschritt li { padding-block: 12px; }
+
+/* Große Bildschirme */
+@media screen and (min-width: 1100px) {
+  .page { padding: 40px 36px 80px; }
+  .page.with-toc { grid-template-columns: 200px minmax(0, 1fr); gap: 26px; }
+  .toast { max-width: min(460px, calc(100vw - 280px)); }
+}
+@media screen and (min-width: 760px) and (max-width: 1099px) {
+  .widgets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* Kleine Bildschirme */
+@media screen and (max-width: 759px) {
+  :root { --kopf-hoehe: 58px; }
+  .page { padding: 26px 18px 36px; }
+  .widgets { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .widget, .widgets > .card { padding: 20px; border-radius: 22px; }
+  .widget.kpi { min-height: 150px; padding: 18px; }
+  .widget .kpi-value { font-size: 2.1rem; }
+  .card { padding: 20px; }
+  .karten-start { padding: 22px; align-items: stretch; flex-direction: column; }
+  .karten-start button { justify-content: center; }
+  .flashcard { padding: 26px 22px; }
+  .toast { left: 12px; right: 12px; }
+}
+@media print {
+  .layout > main { margin-left: 0; }
+}

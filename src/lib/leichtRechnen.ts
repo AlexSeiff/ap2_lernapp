@@ -5,7 +5,7 @@
 import { formatWert } from '../rechnen/checker';
 import type { AufgeloesteEingabe, RechenInstanz } from '../rechnen/instanz';
 import type { Fehlerbild } from '../rechnen/typen';
-import type { RechenWert } from '../../shared/types';
+import type { RechenWert } from '../../domain/types';
 import { shuffle } from './shuffle';
 
 export interface RechenOption {

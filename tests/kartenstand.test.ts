@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { emptyProgress, type Progress } from '../shared/progress';
-import type { Flashcard } from '../shared/types';
+import { emptyProgress, type Progress } from '../domain/progress';
+import type { Flashcard } from '../domain/types';
 import { FARBEN, themaFarbe, TYP_FARBE } from '../src/lib/farben';
 import { faelligText, kartenstand, passtZurSuche, sortiereStand, standVon } from '../src/lib/kartenstand';
 import { rateCard, rateCardLeicht } from '../src/lib/progress';

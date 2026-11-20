@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { emptyProgress, migrateProgress, type Progress } from '../shared/progress';
+import { emptyProgress, migrateProgress, type Progress } from '../domain/progress';
 import { createBrowserBackups, planBackup, summarizeBackup, type BackupRecord, type BackupStorage } from '../src/lib/browserBackups';
 import { recordAttempt } from '../src/lib/progress';
 import { createLocalProgressStore, createStaticApi } from '../src/lib/staticApi';
@@ -100,12 +100,12 @@ describe('Tagessicherungen im Browser', () => {
     );
     let p: Progress = emptyProgress();
     await api.saveProgress(p); // erster Besuch: noch nichts zu sichern
-    p = recordAttempt({ ...p, revision: 1 }, { taskId: '01-A1', date: 'd', points: 1, max: 1, mode: 'einzel' });
+    p = recordAttempt(p, { taskId: '01-A1', date: 'd', points: 1, max: 1, mode: 'einzel' });
     await api.saveProgress(p);
     const info = await api.backups();
     expect(info.count).toBe(1);
     const restored = migrateProgress(JSON.parse(await api.readBackup(info.newest!)));
     expect(restored.attempts).toHaveLength(0);
-    expect(restored.revision).toBe(1);
+    expect(restored).not.toHaveProperty('revision');
   });
 });

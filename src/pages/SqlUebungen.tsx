@@ -1,7 +1,7 @@
 // Liste der SQL-Übungen (/sql/uebungen). Filter stehen in der URL (?thema=…&stufe=…&tag=…&status=…) wie bei den Karteikarten.
 
 import { Link, useSearchParams } from 'react-router-dom';
-import type { SqlExercise } from '../../shared/types';
+import type { SqlExercise } from '../../domain/types';
 import { sqlStatus, sqlSummary } from '../lib/sql';
 import { useStore } from '../lib/store';
 import { LEVEL_LABELS, stars, STATUS_CLASS, STATUS_LABELS } from '../lib/uebungLabels';

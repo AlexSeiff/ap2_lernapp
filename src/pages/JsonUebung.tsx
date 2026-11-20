@@ -9,7 +9,7 @@ import {
   type JsonUebung as JsonUebungTyp,
   pruefeJsonAntwort,
   pruefeJsonSyntax,
-} from '../../shared/jsonUebungen';
+} from '../../domain/jsonUebungen';
 import { Icon } from '../components/Icon';
 import { Markdown } from '../components/Markdown';
 import { useConfirm } from '../hooks/useConfirm';

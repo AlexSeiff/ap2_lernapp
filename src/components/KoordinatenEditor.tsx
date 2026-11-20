@@ -18,7 +18,7 @@ import {
   type PunktForm,
 } from '../lib/koordinatenAntwort';
 import { zahlAus } from '../lib/werteTabelle';
-import { Formhinweise } from './DiagrammEditor';
+import { Formhinweise } from './diagramm/Formhinweise';
 import { Icon } from './Icon';
 
 const B = 640;

@@ -5,7 +5,8 @@
 
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { Section } from '../../shared/types';
+import type { Section } from '../../domain/types';
+import type { BeiblattArt } from '../lib/diagrammBeiblatt';
 import { useStore } from '../lib/store';
 import { Icon, type IconName } from './Icon';
 import { Markdown } from './Markdown';
@@ -13,6 +14,7 @@ import { Textmarker } from './Textmarker';
 
 const FormelUebersicht = lazy(() => import('./PruefungsAnhang').then((m) => ({ default: m.FormelUebersicht })));
 const SqlAuszug = lazy(() => import('./PruefungsAnhang').then((m) => ({ default: m.SqlAuszug })));
+const DiagrammBeiblatt = lazy(() => import('./DiagrammBeiblatt').then((m) => ({ default: m.DiagrammBeiblatt })));
 
 export const BELEGSATZ_ID = 'sql-belegsatz';
 export const BELEGSATZ_PFAD = `/material/${BELEGSATZ_ID}`;
@@ -26,10 +28,15 @@ export function useBelegsatz() {
 /** Inhalt ohne die erste Überschrift (die Seite bzw. das Panel setzt eine eigene). */
 export const ohneTitel = (md: string) => md.replace(/^#\s+[^\n]*\n+/, '');
 
-type Art = 'situation' | 'sql' | 'formeln';
+type Art = 'situation' | 'sql' | 'formeln' | 'diagramme';
 
-const TITEL: Record<Art, string> = { situation: 'Ausgangssituation', sql: 'SQL-Belegsatz', formeln: 'Formelübersicht' };
-const ICON: Record<Art, IconName> = { situation: 'paperclip', sql: 'book-open', formeln: 'sigma' };
+const TITEL: Record<Art, string> = {
+  situation: 'Ausgangssituation',
+  sql: 'SQL-Belegsatz',
+  formeln: 'Formelübersicht',
+  diagramme: 'Diagrammelemente',
+};
+const ICON: Record<Art, IconName> = { situation: 'paperclip', sql: 'book-open', formeln: 'sigma', diagramme: 'workflow' };
 
 /** Weiter zum ausführlichen Material der App (die Ausgangssituation hat keins). */
 const MEHR: Partial<Record<Art, { to: string; label: string }>> = {
@@ -38,11 +45,12 @@ const MEHR: Partial<Record<Art, { to: string; label: string }>> = {
 };
 
 /** Gibt es etwas anzuzeigen? Für die Bedingung um die Knopfleiste (nicht leer rendern). */
-export const hatAnhang = (a: { sql?: boolean; formeln?: boolean; situation?: readonly Section[] }) =>
-  !!(a.sql || a.formeln || a.situation?.length);
+export const hatAnhang = (a: { sql?: boolean; formeln?: boolean; diagramme?: readonly BeiblattArt[]; situation?: readonly Section[] }) =>
+  !!(a.sql || a.formeln || a.diagramme?.length || a.situation?.length);
 
 /**
- * Knöpfe „Ausgangssituation“, „SQL-Belegsatz“ und/oder „Formelübersicht“ und das Seitenpanel dazu (rechts, auf dem Handy über die ganze
+ * Knöpfe „Ausgangssituation“, „SQL-Belegsatz“, „Formelübersicht“ und/oder „Diagrammelemente“ (auf dem Desktop als Post-its am Buchrand, siehe
+ * styles/postits.css) und das Seitenpanel dazu (rechts, auf dem Handy über die ganze
  * Breite; immer nur eins offen). Esc oder „Schließen“ schließen es, der Fokus geht dann zurück auf den Knopf.
  * `situation`: die Anlagen der Übungsklausur (Ausgangssituation, Tabellen …) – jederzeit einblendbar, auch mit der Taste A
  * (nicht beim Tippen, nicht mit Strg/Alt/⌘), damit man beim Beantworten nicht zum Seitenanfang scrollen muss.
@@ -50,10 +58,13 @@ export const hatAnhang = (a: { sql?: boolean; formeln?: boolean; situation?: rea
 export function AnhangPanel({
   sql = false,
   formeln = false,
+  diagramme,
   situation,
 }: {
   sql?: boolean;
   formeln?: boolean;
+  /** Notationen, deren Elemente das Beiblatt beschreibt. */
+  diagramme?: readonly BeiblattArt[];
   situation?: readonly Section[];
 }) {
   const [offen, setOffen] = useState<Art | null>(null);
@@ -80,6 +91,7 @@ export function AnhangPanel({
     ...(mitSituation ? (['situation'] as const) : []),
     ...(sql ? (['sql'] as const) : []),
     ...(formeln ? (['formeln'] as const) : []),
+    ...(diagramme?.length ? (['diagramme'] as const) : []),
   ];
 
   useEffect(() => {
@@ -107,6 +119,7 @@ export function AnhangPanel({
           className="secondary"
           aria-expanded={offen === a}
           aria-controls="anhang-panel"
+          title={a === 'situation' ? `${TITEL[a]} (Taste A)` : TITEL[a]}
           onClick={() => setOffen((x) => (x === a ? null : a))}
         >
           <Icon name={ICON[a]} /> {TITEL[a]}
@@ -141,7 +154,15 @@ export function AnhangPanel({
               </section>
             ))
           ) : (
-            <Suspense fallback={<p className="muted">Lädt …</p>}>{offen === 'sql' ? <SqlAuszug /> : <FormelUebersicht />}</Suspense>
+            <Suspense fallback={<p className="muted">Lädt …</p>}>
+              {offen === 'sql' ? (
+                <SqlAuszug />
+              ) : offen === 'diagramme' ? (
+                <DiagrammBeiblatt arten={diagramme ?? []} />
+              ) : (
+                <FormelUebersicht />
+              )}
+            </Suspense>
           )}
         </aside>
       )}

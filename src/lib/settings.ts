@@ -1,6 +1,6 @@
-// Persönliche Einstellungen (Progress.settings): reine Update-Funktion. Typ, Standardwerte und Migration stehen in shared/progress.ts.
+// Persönliche Einstellungen (Progress.settings): reine Update-Funktion. Typ, Standardwerte und Migration stehen in domain/progress.ts.
 
-import type { Progress, Settings } from '../../shared/progress';
+import type { Progress, Settings } from '../../domain/progress';
 
 /** Übernimmt Änderungen an den Einstellungen; ein leerer oder fehlender Prüfungstermin wird entfernt. */
 export function withSettings(p: Progress, changes: Partial<Settings>): Progress {

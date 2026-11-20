@@ -1,9 +1,9 @@
 // Lernplan bis zum Prüfungstermin: verteilt die Themen nach Schwäche und Umfang auf die Wochen und rechnet das nötige Tempo aus.
 // Rein (ohne React, ohne Speicher): gleicher Stand + gleicher Tag → gleicher Plan.
 
-import { CARD_INTERVALS, HEUTE_ZEITEN } from '../../shared/config';
-import type { Progress } from '../../shared/progress';
-import type { KernInhalt } from '../../shared/texte';
+import { CARD_INTERVALS, HEUTE_ZEITEN } from '../../domain/config';
+import type { Progress } from '../../domain/progress';
+import type { KernInhalt } from '../../domain/texte';
 import { cardPool } from './cards';
 import { istAusgeblendet } from './settings';
 import { daysUntilExam, topicStats } from './stats';

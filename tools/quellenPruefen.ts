@@ -4,7 +4,7 @@
 
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { parseQuellen } from '../shared/quellen.ts';
+import { parseQuellen } from '../domain/quellen.ts';
 import { CONTENT_DIR } from '../build/inhalt.ts';
 
 const DATEI = join(CONTENT_DIR, 'AP2_Quellen.json');

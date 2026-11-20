@@ -1,0 +1,95 @@
+/* Post-its am Buchrand: Auf dem Desktop werden die Knöpfe für Ausgangssituation, SQL-Belegsatz, Formelübersicht und Diagrammelemente (components/Belegsatz.tsx, AnhangPanel)
+   zu farbigen Zetteln, die rechts aus der Buchkante ragen – wie die Buchstaben im Glossar (glossar-register.css). Ein Klick lässt das Blatt daneben aufploppen.
+   Es sind dieselben Knöpfe wie auf dem Handy (aria-expanded, Tastatur, Esc): nur die Darstellung ändert sich, und nur ab 1100 px Breite. Unter 1100 px bleibt die Knopfleiste
+   im Text, wie sie war. Diese Datei steht in index.css zuletzt, weil sie die Gestaltungsschichten gezielt überschreibt (daher #inhalt für die Spezifität). */
+
+/* Das Beiblatt „Diagrammelemente“ (components/DiagrammBeiblatt.tsx) – gilt auf jeder Breite */
+.beiblatt-art h3 { margin: 1.2em 0 0.4em; font-size: 1rem; }
+.beiblatt-tabelle .beiblatt-symbol { width: 68px; text-align: center; padding: 4px; }
+.beiblatt-tabelle .form-symbol { display: block; margin: 0 auto; width: 56px; height: 38px; }
+.beiblatt-tabelle tbody th[scope='row'] { white-space: nowrap; }
+.beiblatt-notiz { font-weight: 600; color: var(--muted); }
+
+@keyframes postit-auf {
+  from { opacity: 0; transform: translateX(28px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+
+@media screen and (min-width: 1100px) {
+  #inhalt .anhang-leiste {
+    position: fixed;
+    z-index: 45;
+    top: 104px;
+    right: calc((100vw - var(--buch-breite)) / 2 - 28px);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    gap: 8px;
+    width: 60px;
+    max-height: calc(100dvh - 116px);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  #inhalt .anhang-leiste > button {
+    writing-mode: vertical-rl;
+    display: block;
+    flex: none;
+    width: 34px;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 12px 0;
+    border: 0;
+    border-radius: 0 6px 6px 0;
+    background: #e5d784;
+    color: #302b1b;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: 0.02em;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 2px 2px 3px #0004;
+    transition: width 0.15s ease, filter 0.15s ease;
+  }
+
+  #inhalt .anhang-leiste > button:nth-child(4n + 2) { background: #b3d99e; }
+  #inhalt .anhang-leiste > button:nth-child(4n + 3) { background: #e9b1a2; }
+  #inhalt .anhang-leiste > button:nth-child(4n + 4) { background: #a8c7df; }
+
+  /* Symbol und Tastenhinweis passen nicht auf den Zettel (die Taste A steht im title) */
+  #inhalt .anhang-leiste > button .icon,
+  #inhalt .anhang-leiste > button kbd { display: none; }
+
+  #inhalt .anhang-leiste > button:hover { filter: brightness(1.08); transform: none; color: #1e2430; }
+
+  /* Der offene Zettel steht weiter heraus und ist hervorgehoben, wie der gewählte Buchstabe im Glossar */
+  #inhalt .anhang-leiste > button[aria-expanded='true'] {
+    width: 40px;
+    border-left: 4px solid #da814c;
+    background: #f4e269;
+    color: #1e2430;
+    font-weight: 800;
+  }
+
+  #inhalt .anhang-leiste > button:focus-visible { outline: 2px solid #17429b; outline-offset: -3px; }
+
+  /* Das Blatt steht links neben den Zetteln und verdeckt sie nicht; es ploppt von ihnen aus auf */
+  #inhalt .anhang-leiste .belegsatz-panel {
+    right: calc((100vw - var(--buch-breite)) / 2 - 28px + 46px);
+    transform-origin: right 140px;
+    animation: postit-auf 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.15);
+    border-radius: 8px 0 0 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #inhalt .anhang-leiste > button { transition: none; }
+    #inhalt .anhang-leiste .belegsatz-panel { animation: none; }
+  }
+}

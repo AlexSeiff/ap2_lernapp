@@ -3,7 +3,7 @@
 // nur die Kopfzeile – aus der Musterlösung; Inhalte der Lösung werden nie vorab gezeigt. Nach der Abgabe vergleicht der Abgleich
 // Zahlen- und Kreuzzellen mit der Musterlösung (Hilfe zur Selbstbewertung). Rein, ohne React.
 
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 import { markdownTabellen } from './tabellenEditor';
 
 export interface WerteAntwort {

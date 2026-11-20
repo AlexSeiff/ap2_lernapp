@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { buildContent } from '../shared/parser';
-import { parseRechenUebungen } from '../shared/rechenUebungen';
+import { buildContent } from '../domain/parser';
+import { parseRechenUebungen } from '../domain/rechenUebungen';
 
 const topics = new Map([
   ['03', 'Statistik I'],

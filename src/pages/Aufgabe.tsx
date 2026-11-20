@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Fehlergrund, Sicherheit } from '../../shared/progress';
+import type { Fehlergrund, Sicherheit } from '../../domain/progress';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { AnswerInput } from '../components/AnswerInput';
 import { AnhangPanel, hatAnhang } from '../components/Belegsatz';

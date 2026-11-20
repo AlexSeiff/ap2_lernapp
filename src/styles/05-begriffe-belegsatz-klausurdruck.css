@@ -1,0 +1,239 @@
+/* Icons in Rückmeldungen und Überschriften (Phase 1) */
+.verdict .icon, .leicht-feedback .icon { width: 1.25em; height: 1.25em; }
+h1 .icon, h2 .icon { color: var(--accent); }
+.heute-status .icon { color: var(--accent); }
+.save-state.gespeichert::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--good); margin-right: 6px; vertical-align: 0.1em; }
+.save-state.fehler::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--low); margin-right: 6px; vertical-align: 0.1em; }
+@media print { .icon { display: none; } }
+
+/* iPhone-Korrekturen (Umsetzungsplan Phase 2, Befunde aus Messung_Ausgangslage.md) */
+@media (max-width: 599px) {
+  /* ab 16 px zoomt iOS Safari beim Antippen nicht mehr hinein */
+  input, select, textarea, textarea.answer.mono, .sql-editor .cm-content, .re-zelle input { font-size: 16px; }
+  .page { padding: 16px 16px 32px; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.5em; }
+  .card, .task-card { padding: 14px 16px; border-radius: 16px; }
+  /* Kennzahlen zweispaltig statt einzeln untereinander */
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .kpi { padding: 12px 14px; border-radius: 16px; }
+  .kpi-value { font-size: 1.5rem; }
+  .kpi-label { font-size: 0.82rem; }
+  /* Tabellen: Spalten nicht auf ein Wort quetschen, lieber wischen; Schatten rechts zeigt, dass es weitergeht */
+  .table-wrap {
+    background:
+      linear-gradient(to left, var(--tabelle-bg, var(--bg)) 30%, transparent) right / 28px 100% local no-repeat,
+      linear-gradient(to left, rgba(0, 0, 0, 0.14), transparent) right / 12px 100% scroll no-repeat;
+  }
+  .card, .task-card, .flashcard { --tabelle-bg: var(--surface); }
+  table { font-size: 0.88rem; }
+  th, td { padding: 6px 10px; min-width: 6.5em; }
+  th.num, td.num, table.stats td, table.stats th { min-width: 0; }
+  .nur-breit { display: none; }
+  /* Knopfgruppen gleichmäßig statt ungleich umbrochen */
+  .sicherheit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .sicherheit-frage { grid-column: 1 / -1; }
+  .sicherheit button { justify-content: center; }
+  .rate-buttons { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .rate-buttons button { padding: 10px 6px; flex-direction: column; gap: 2px; font-size: 0.9rem; }
+  .rate-buttons kbd, button.stern kbd { display: none; }
+  .flashcard { padding: 20px; min-height: 220px; border-radius: 18px; }
+  .mode-switch { display: flex; }
+  .mode-switch button { flex: 1; justify-content: center; padding: 8px 6px; font-size: 0.9rem; }
+  /* keine Karte in der Karte: innere Karten flach */
+  .card .card, .card .task-card, .task-card .card { background: var(--surface-2); box-shadow: none; }
+  /* Klausur-Leiste kompakt: Titel einzeilig, Zeit und Knöpfe in einer Reihe */
+  .exam-bar { margin: -16px -16px 16px; border-radius: 0; gap: 4px 10px; padding: 8px 16px; }
+  .exam-bar b { flex: 1 1 100%; margin: 0; font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .exam-bar .timer { font-size: 1.05rem; }
+  .exam-bar .muted { margin-right: auto; }
+  .page .exam-bar button:not(.small) { min-height: 36px; padding: 5px 10px; font-size: 0.9rem; }
+  .exam-bar .muted { font-size: 0.8rem; }
+  /* Reihen nur aus Knöpfen: zweispaltig, der Hauptknopf (gefüllt, zuerst) über die ganze Breite */
+  .actions:not(:has(> :not(button, .button))) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .actions:not(:has(> :not(button, .button))) > :is(button, .button) { justify-content: center; text-align: center; }
+  .actions:not(:has(> :not(button, .button))) > :first-child:not(.secondary):not(.ghost) { grid-column: 1 / -1; }
+}
+/* Filter der Karteikarten: aufklappbar (Handy zu, Desktop offen) */
+.filter-box > summary { cursor: pointer; font-weight: 600; color: var(--accent); list-style: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 0; }
+.filter-box > summary::-webkit-details-marker { display: none; }
+.filter-box > summary .icon { transition: transform 0.15s; }
+.filter-box[open] > summary .icon { transform: rotate(90deg); }
+
+/* Begriffsseiten (/glossar/:id, Umsetzungsplan Phase 3) */
+.begriff-seite h1 { margin-bottom: 0.2em; }
+.begriff-kopf { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; }
+.begriff-liste li.mit-stern { display: flex; align-items: center; gap: 4px; }
+.begriff-auch { margin: 0 0 1em; font-size: 0.95rem; }
+.begriff-text > p:first-child { font-size: 1.12rem; line-height: 1.55; }
+.begriff-text h2 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 1.8em 0 0.4em; }
+.begriff-block { margin: 2em 0 1em; }
+.begriff-block h2, .begriff-ueben h2 { font-size: 1.15rem; }
+.begriff-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.begriff-chips a, .begriff-chips span { display: inline-block; padding: 6px 14px; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow); color: var(--accent); font-weight: 500; }
+.begriff-chips a:hover { text-decoration: none; background: var(--accent-soft); }
+.begriff-liste { list-style: none; padding: 0; margin: 0; }
+.begriff-liste li { padding: 7px 0; border-bottom: 1px solid var(--border); }
+.begriff-liste li:last-child { border-bottom: none; }
+.ueben-gruppe { margin: 14px 0 6px; }
+.ueben-gruppe h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 0 0 4px; font-size: 1rem; }
+.ueben-gruppe h3 .icon { color: var(--accent); }
+.ueben-gruppe h3 .button { margin-left: auto; }
+.glossar-seite-link { display: inline-flex; align-items: center; gap: 2px; font-weight: 700; }
+.glossar-seite-link .icon { width: 1em; height: 1em; }
+.suche-fuss button.ghost { padding: 0 4px; color: var(--accent); font-weight: 600; min-height: 0; }
+
+/* Karten markieren (Umsetzungsplan Phase 4): Stern als Umschaltknopf, gefüllt = markiert */
+button.stern { background: transparent; color: var(--text); border-color: transparent; font-weight: 500; padding: 6px 10px; }
+button.stern:hover { background: var(--fill); }
+button.stern .icon { color: var(--muted); }
+button.stern[aria-pressed='true'] .icon { color: var(--stern); fill: currentColor; }
+button.stern.nur-icon { padding: 4px 6px; flex: none; }
+.session-head button.stern kbd { margin-left: 2px; }
+.kpi-label .icon { width: 1em; height: 1em; vertical-align: -0.12em; }
+@media print { button.stern { display: none; } }
+
+/* Leicht-Modus umgekehrt (Umsetzungsplan Phase 5): Erklärung gegeben, Begriff gesucht */
+.leicht-richtung { margin: 0 0 4px; color: var(--muted); font-size: 0.88rem; font-weight: 600; }
+.leicht-richtung .icon { color: var(--accent); }
+.fc-question.umgekehrt { font-size: 1.05rem; font-weight: 500; }
+
+/* SQL-Belegsatz (Umsetzungsplan Phase 6): Seite unter Glossar, Seitenpanel im SQL-Editor, Druck auf etwa 3 Seiten A4 */
+.belegsatz-titel { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.belegsatz h2 { font-size: 1.1rem; margin: 1.4em 0 0.4em; }
+.belegsatz pre { font-size: 0.85rem; }
+.belegsatz table { font-size: 0.9rem; }
+.belegsatz-panel {
+  position: fixed; z-index: 40; top: var(--kopf-gesamt); right: 0; bottom: 0; width: min(560px, 100vw); overflow-y: auto;
+  background: var(--surface); box-shadow: var(--shadow-hoch); padding: 0 20px calc(20px + env(safe-area-inset-bottom));
+  border-left: 0.5px solid var(--border);
+}
+.belegsatz-kopf { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 12px 0; background: var(--surface); border-bottom: 0.5px solid var(--border); }
+.belegsatz-kopf h2 { margin: 0; font-size: 1.1rem; flex: 1; }
+/* Anhang der Prüfung (SQL-Belegsatz, Formelübersicht) über Aufgaben, Klausur und Rechenübungen */
+.anhang-leiste { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+/* Mit Ausgangssituation bleibt die Knopfleiste beim Scrollen oben stehen – das Panel ist so überall in der Klausur erreichbar. */
+.anhang-leiste.klebt { position: sticky; top: var(--kopf-gesamt); z-index: 30; padding: 6px 8px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); }
+@media (max-width: 700px) {
+  .anhang-leiste.klebt { gap: 4px; padding: 4px; margin: 6px 0; flex-wrap: nowrap; }
+  .anhang-leiste.klebt button { min-height: 36px; padding: 4px 8px; font-size: 0.85rem; flex: 1 1 auto; white-space: nowrap; }
+  .anhang-leiste.klebt button kbd { display: none; }
+}
+.situation-teil h3 { margin: 1em 0 0.3em; font-size: 1rem; }
+.anhang-leiste button kbd { margin-left: 4px; }
+/* Nachbau des Belegsatzes: Tabellen mit Rahmen, graue Gruppenzeilen, Formeln zentriert, Syntax in Schreibmaschinenschrift */
+.anhang-tabelle { width: 100%; margin: 0.6em 0; }
+.anhang-tabelle th, .anhang-tabelle td { border: 1px solid var(--border); padding: 6px 8px; color: var(--text); font-size: 0.88rem; }
+.anhang-tabelle th:first-child, .anhang-tabelle td:first-child { padding-left: 8px; }
+.anhang-tabelle tbody th { font-weight: 500; }
+.anhang-gruppe th { background: var(--surface-2); font-style: italic; font-weight: 600; }
+.anhang-formel { position: relative; text-align: center; overflow-x: auto; }
+.anhang-formel p { margin: 0 0 4px; text-align: left; }
+.anhang-formel .katex-display { margin: 0.2em 0; }
+.anhang-sql td:first-child { width: 60%; }
+@media (max-width: 600px) {
+  .anhang-formeln th, .anhang-formeln td { display: block; width: auto; }
+  .anhang-formeln tbody th[scope="row"] { border-bottom: none; padding-bottom: 0; }
+  .anhang-formeln td { border-top: none; }
+}
+.anhang-syntax { display: block; white-space: pre-wrap; background: none; padding: 0; font-size: 0.8rem; }
+.anhang-syntax b { font-weight: 700; }
+.anhang-knoten { display: inline-block; margin: 0.4em 0; font-size: 0.85rem; }
+.anhang-knoten table { min-width: 0; }
+.anhang-knoten td { border: 1px solid var(--text); padding: 4px 10px; text-align: center; }
+.anhang-knoten td:first-child { padding-left: 10px; }
+.anhang-knoten-ecken { display: flex; justify-content: space-between; font-weight: 600; }
+@media print {
+  .belegsatz-panel { display: none !important; }
+  .belegsatz-seite .belegsatz-titel button, .belegsatz-seite .nur-bildschirm { display: none; }
+  .belegsatz-seite { font-size: 8pt; line-height: 1.3; }
+  .belegsatz-seite h1 { font-size: 13pt; margin: 0 0 4pt; }
+  .belegsatz-seite .belegsatz { column-count: 2; column-gap: 14pt; }
+  .belegsatz-seite .belegsatz h2 { font-size: 9.5pt; margin: 6pt 0 2pt; break-after: avoid; }
+  .belegsatz-seite .belegsatz p, .belegsatz-seite .belegsatz ul { margin: 2pt 0; }
+  .belegsatz-seite .belegsatz li { margin: 0; }
+  .belegsatz-seite .belegsatz pre { font-size: 7pt; padding: 3pt 5pt; margin: 3pt 0; break-inside: avoid; }
+  .belegsatz-seite .belegsatz table { font-size: 7pt; margin: 3pt 0; break-inside: avoid; }
+  .belegsatz-seite .belegsatz th, .belegsatz-seite .belegsatz td { padding: 1pt 3pt; }
+  .belegsatz-seite .table-wrap { overflow: visible; }
+}
+
+/* Klausur drucken (Umsetzungsplan Phase 6): Deckblatt, Bewertungsbogen, jeder Block auf neuer Seite */
+.deckblatt, .bewertungsbogen { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid var(--text); }
+.deckblatt-art { color: var(--muted); font-size: 0.9rem; margin: 0; }
+.deckblatt h1 { font-size: 1.7rem; margin: 6px 0 2px; }
+.deckblatt-felder { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; margin: 22px 0; }
+.deckblatt-felder dt { font-size: 0.82rem; color: var(--muted); }
+.deckblatt-felder dd { margin: 2px 0 0; min-height: 1.6em; }
+.deckblatt-felder dd.feld { border-bottom: 1px solid var(--text); }
+.punkte-tabelle { border-collapse: collapse; width: 100%; max-width: 640px; margin: 12px 0; }
+.punkte-tabelle th, .punkte-tabelle td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.punkte-tabelle .num { text-align: right; width: 6em; }
+.punkte-tabelle .eintrag { min-width: 6em; }
+.punkte-tabelle .summe th, .punkte-tabelle .summe td { font-weight: 700; border-top: 2px solid var(--text); }
+.punkte-tabelle .block-zeile th { background: var(--surface-2); font-weight: 600; }
+
+@media screen and (max-width: 600px) {
+  .print-page { padding: 16px 14px 40px; overflow-wrap: anywhere; }
+  .sheet-head { flex-direction: column; gap: 8px; }
+  .sheet-meta { align-items: flex-start; white-space: normal; }
+  .punkte-tabelle th, .punkte-tabelle td { padding: 5px 6px; }
+  .punkte-tabelle .num { width: auto; }
+  .punkte-tabelle .eintrag { min-width: 3em; }
+}
+.notenschluessel { font-size: 0.85rem; color: var(--muted); }
+@media print {
+  .deckblatt { break-after: page; border: none; min-height: 240mm; }
+  .bewertungsbogen { break-after: page; border: none; }
+  .sheet-group.neuer-block { break-before: page; }
+  .punkte-tabelle .block-zeile th { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .bewertungsbogen .punkte-tabelle { font-size: 9pt; }
+  .bewertungsbogen .punkte-tabelle th, .bewertungsbogen .punkte-tabelle td { padding: 2pt 6pt; }
+  .write-space { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
+
+/* Diagramm-Übungen (Umsetzungsplan Phase 7): Gerüst mit Lücken als Knöpfe über dem SVG, Palette, Ziehen */
+.diagramm-arbeit { display: grid; gap: 14px; margin: 14px 0; }
+.diagramm-scroll { overflow-x: auto; padding: 8px 0; -webkit-overflow-scrolling: touch; }
+.diagramm-flaeche { position: relative; max-width: none; margin: 0 auto; }
+.diagramm-flaeche { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-sizing: content-box; }
+/* Die Fläche trägt Rahmen und Hintergrund; das SVG füllt sie ohne Abstand, sonst passen die Lücken-Knöpfe nicht über die Formen. */
+.diagramm-flaeche > svg.diagramm { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: none; overflow: visible; }
+svg.diagramm.form-symbol { margin: 0; padding: 0; border: 0; background: none; overflow: visible; }
+.diagramm-slot {
+  position: absolute; padding: 0; min-height: 0 !important; background: transparent; border: 2px solid transparent; border-radius: 8px;
+  color: inherit; cursor: pointer; transition: border-color 0.12s, background-color 0.12s;
+}
+.diagramm-slot:hover, .diagramm-slot.ziel { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); filter: none; }
+.diagramm-slot.waehlbar:not(.belegt) { border-color: color-mix(in srgb, var(--accent) 55%, transparent); border-style: dashed; }
+.diagramm-slot.richtig { border-color: var(--good); }
+.diagramm-slot.falsch { border-color: var(--low); background: color-mix(in srgb, var(--low) 10%, transparent); }
+.diagramm-slot:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 1px; }
+.diagramm-palette h2 { margin: 0 0 8px; font-size: 0.95rem; }
+.palette-liste { display: flex; flex-wrap: wrap; gap: 8px; }
+.palette-element {
+  display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--text); border: 1px solid var(--border);
+  font-weight: 500; padding: 6px 12px 6px 8px; touch-action: none; user-select: none; -webkit-user-select: none; text-align: left;
+}
+.palette-element:hover { background: var(--fill); filter: none; }
+.palette-element.gewaehlt { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px var(--accent); }
+.palette-element.wird-gezogen { opacity: 0.45; }
+.form-symbol { width: 40px; height: 28px; flex: none; }
+.zieh-element {
+  position: fixed; z-index: 60; pointer-events: none; transform: translate(-50%, -120%); padding: 6px 12px; border-radius: 10px;
+  background: var(--accent-fill); color: var(--accent-text); font-weight: 600; font-size: 0.9rem; box-shadow: var(--shadow-hoch); white-space: nowrap;
+}
+.diagramm-regeln { margin: 8px 0 0; padding-left: 0; list-style: none; }
+.diagramm-regeln li { margin: 4px 0; }
+.diagramm-regeln .icon { color: var(--mid); }
+@media (max-width: 600px) {
+  /* iPhone: Palette bleibt über der Tab-Bar sichtbar, damit man in eine sichtbare Lücke ziehen kann. */
+  .diagramm-palette {
+    position: sticky; bottom: calc(58px + env(safe-area-inset-bottom, 0px)); z-index: 20; margin: 0 -16px; padding: 8px 16px;
+    max-height: 34vh; overflow-y: auto; background: var(--glas); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+    border-top: 0.5px solid var(--border);
+  }
+  .diagramm-palette h2 { font-size: 0.82rem; }
+  .palette-liste { gap: 6px; }
+  .palette-element { font-size: 0.85rem; padding: 4px 10px 4px 6px; min-height: 40px !important; gap: 6px; }
+  .form-symbol { width: 30px; height: 21px; }
+}

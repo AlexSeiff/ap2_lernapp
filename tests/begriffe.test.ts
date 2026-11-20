@@ -2,8 +2,8 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { mehrZiel, namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../shared/begriffsseiten';
-import { emptyProgress } from '../shared/progress';
+import { mehrZiel, namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../domain/begriffsseiten';
+import { emptyProgress } from '../domain/progress';
 import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 
 // Begriffsseiten (Umsetzungsplan Phase 3): Parser, Prüfung, Verweise, Übungen zum Begriff, Suche und Seite.

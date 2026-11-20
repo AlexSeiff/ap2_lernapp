@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
-import { mcNorm } from '../shared/lernkarten';
-import type { Flashcard } from '../shared/types';
+import { mcNorm } from '../domain/lernkarten';
+import type { Flashcard } from '../domain/types';
 import { cardPool } from '../src/lib/cards';
 import {
   kartenOptionen,

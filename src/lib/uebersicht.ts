@@ -1,9 +1,9 @@
 // Neue Übersicht (Umsetzungsplan Phase 9): reine Auswertungen für die Widgets der Startseite – Fortschritt je Prüfungsbereich
 // (Ringe), fällige Wiederholungen, Begriff des Tages, Klausurverlauf. Die Seite selbst steht in pages/Dashboard.tsx.
 
-import { SICHER_RICHTIG_AB } from '../../shared/config';
-import type { Progress } from '../../shared/progress';
-import type { BegriffKurz, Content, Flashcard } from '../../shared/types';
+import { SICHER_RICHTIG_AB } from '../../domain/config';
+import type { Progress } from '../../domain/progress';
+import type { BegriffKurz, Content, Flashcard } from '../../domain/types';
 import { cardPool } from './cards';
 import { diagrammSummary, diagrammUebungen } from './diagramme';
 import { glossarSchluessel } from './glossar';
@@ -13,7 +13,7 @@ import { isDue, localDate } from './progress';
 import { rechenSummary } from './rechnen';
 import { sqlSummary } from './sql';
 import { percent } from './grading';
-import type { StartInhalt } from '../../shared/texte';
+import type { StartInhalt } from '../../domain/texte';
 
 export type PruefungsbereichId = 'prozess' | 'qualitaet' | 'wiso';
 

@@ -13,8 +13,8 @@ import {
   type BoxplotAntwort,
   type BoxplotZahlen,
 } from '../lib/boxplotAntwort';
-import type { Task } from '../../shared/types';
-import { Formhinweise } from './DiagrammEditor';
+import type { Task } from '../../domain/types';
+import { Formhinweise } from './diagramm/Formhinweise';
 
 const B = 640;
 const ZEILE = 78;
