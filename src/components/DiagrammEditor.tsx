@@ -4,56 +4,30 @@
 // auch über die Leiste und den Bereich „Auswahl“ (Tastatur: Tab zum Element, Pfeiltasten verschieben, Entf löscht, Strg+Z macht
 // rückgängig).
 
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from 'react';
+import { type Form } from '../../domain/diagrammUebungen';
 import {
-  useEffect,
-  useId,
-  useRef,
-  useState,
-  type KeyboardEvent as ReactKeyboardEvent,
-  type PointerEvent as ReactPointerEvent,
-  type RefObject,
-} from 'react';
-import type { Form } from '../../domain/diagrammUebungen';
-import {
-  beschriftungsPunkt,
-  behaelterVon,
+  type DiagrammAntwort,
+  type EditorKante,
+  type EditorKnoten,
   einrasten,
   inhaltVon,
   istBehaelter,
-  KANTEN_NAMEN,
-  kantenLinien,
-  knotenName,
+  mitte,
   neueId,
-  NIE_TEXT,
   NOTATIONEN,
   OHNE_TEXT,
   pruefeDiagrammAntwort,
-  standardKante,
-  umriss,
-  mitte,
-  waechter,
-  type DiagrammAntwort,
-  type EditorKante,
-  type EditorKantenArt,
-  type EditorKnoten,
   type Punkt,
+  standardKante,
 } from '../lib/diagrammEditor';
-import { FormSymbol, FormZeichnung, formName } from './DiagrammSvg';
+import { formName, FormSymbol } from './DiagrammSvg';
 import { Icon } from './Icon';
-
-type Auswahl = { typ: 'knoten' | 'kante'; id: string } | null;
-
-type Zug =
-  | { art: 'verschieben'; ids: string[]; start: Punkt; dx: number; dy: number; bewegt: boolean; pointer: number }
-  | { art: 'groesse'; id: string; start: Punkt; dw: number; dh: number; pointer: number }
-  | { art: 'linie'; von: string; p: Punkt; pointer: number };
-
-/** Kardinalitäten zum Antippen (Min-Max und Chen). */
-const KARDINALITAETEN = ['(0,1)', '(1,1)', '(0,n)', '(1,n)', '1', 'n', 'm'];
-/** Senkrecht arbeitende Notationen: Neue Elemente kommen unter das ausgewählte. */
-const SENKRECHT = new Set(['epk', 'usecase', 'aktivitaet']);
-/** Kleinste Größe beim Ziehen am Griff; der Balken (Fork/Join) darf dünn bleiben. */
-const minGroesse = (f: Form) => (f === 'gabel' ? 6 : 24);
+import { neuerPlatz } from '../lib/diagrammPlatz';
+import { KantenFeld, KnotenFeld } from './diagramm/Felder';
+import { Formhinweise } from './diagramm/Formhinweise';
+import { Zeichnung } from './diagramm/Zeichnung';
+import { minGroesse, type Auswahl, type Zug } from './diagramm/typen';
 
 interface Props {
   wert: DiagrammAntwort;
@@ -139,81 +113,16 @@ export function DiagrammEditor({ wert, onChange, hilfen }: Props) {
     return { ...basis, kanten: [...basis.kanten, kante] };
   };
 
-  const ueberlappt = (x: number, y: number, w: number, h: number) =>
-    knoten.some((k) => !istBehaelter(k.form) && x < k.x + k.w && x + w > k.x && y < k.y + k.h && y + h > k.y);
-
   /** Platz für ein neues Element: an der Auswahl (rechts bzw. darunter), sonst im sichtbaren Bereich. */
-  function platz(form: Form, w: number, h: number): { x: number; y: number; h?: number; pool?: EditorKnoten } {
-    if (form === 'schwimmbahn') {
-      // Neue Schwimmbahn rechts neben die letzte, gleich hoch – so entstehen nebeneinanderliegende Bahnen.
-      const bahnen = knoten.filter((k) => k.form === 'schwimmbahn');
-      if (bahnen.length) {
-        const rechts = bahnen.reduce((a, b) => (b.x + b.w > a.x + a.w ? b : a));
-        return { x: rechts.x + rechts.w, y: rechts.y, h: rechts.h };
-      }
-      return { x: 40, y: 40 };
-    }
-    if (form === 'lane') {
-      const pool =
-        (gewaehlterKnoten?.form === 'pool' ? gewaehlterKnoten : undefined) ??
-        (gewaehlterKnoten ? behaelterVon(gewaehlterKnoten, knoten, 'pool') : undefined) ??
-        knoten.find((k) => k.form === 'pool');
-      if (pool) {
-        const lanes = knoten.filter((k) => k.form === 'lane' && behaelterVon(k, knoten, 'pool')?.id === pool.id);
-        const y = lanes.length ? Math.max(...lanes.map((l) => l.y + l.h)) : pool.y;
-        return { x: pool.x + 26, y, pool };
-      }
-    }
-    if (istBehaelter(form)) {
-      const unten = knoten.length ? Math.max(...knoten.map((k) => k.y + k.h)) + 40 : 40;
-      return { x: form === 'systemgrenze' ? 160 : 40, y: knoten.some((k) => istBehaelter(k.form)) || !knoten.length ? unten : 40 };
-    }
-    const sel = gewaehlterKnoten;
-    const grenze = knoten.find((k) => k.form === 'systemgrenze');
-    if (form === 'akteur' && grenze) {
-      // Akteure stehen links außerhalb der Systemgrenze, auf Höhe des ausgewählten Anwendungsfalls.
-      const x = Math.max(10, grenze.x - w - 60);
-      let y = sel && !istBehaelter(sel.form) ? mitte(sel)[1] - h / 2 : grenze.y + 20;
-      for (let i = 0; i < 20 && ueberlappt(x, y, w, h); i++) y += h + 30;
-      return { x: einrasten(x), y: Math.max(10, einrasten(y)) };
-    }
-    if (sel && istBehaelter(sel.form)) {
-      // In den ausgewählten Pool, die Lane, die Schwimmbahn oder die Systemgrenze hinein (links beginnend, nach rechts weiter).
-      // Systemgrenze und Schwimmbahn: untereinander, unter dem Kopf der Bahn.
-      const untereinander = sel.form === 'systemgrenze' || sel.form === 'schwimmbahn';
-      let x = untereinander ? sel.x + sel.w / 2 - w / 2 : sel.x + (sel.form === 'pool' ? 60 : 40);
-      let y = untereinander ? sel.y + (sel.form === 'schwimmbahn' ? 60 : 40) : sel.y + sel.h / 2 - h / 2;
-      for (let i = 0; i < 20 && ueberlappt(x, y, w, h); i++) {
-        if (untereinander) y += h + 30;
-        else x += w + 40;
-      }
-      return { x: einrasten(x), y: einrasten(y) };
-    }
-    if (sel && anhaengen) {
-      const [cx, cy] = mitte(sel);
-      const senkrecht = SENKRECHT.has(wert.editor);
-      let x = senkrecht ? cx - w / 2 : sel.x + sel.w + 50;
-      let y = senkrecht ? sel.y + sel.h + 40 : cy - h / 2;
-      for (let i = 0; i < 12 && ueberlappt(x, y, w, h); i++) {
-        if (senkrecht) x += w + 30;
-        else y += h + 30;
-      }
-      return { x: Math.max(10, einrasten(x)), y: Math.max(10, einrasten(y)) };
-    }
-    const sc = scrollRef.current;
-    const x0 = sc ? sc.scrollLeft / zoom + 40 : 40;
-    let x = x0;
-    let y = 40;
-    for (let i = 0; i < 60 && ueberlappt(x, y, w, h); i++) {
-      x += w + 30;
-      if (x > x0 + 600) {
-        x = x0;
-        y += h + 40;
-      }
-    }
-    return { x: einrasten(x), y: einrasten(y) };
-  }
-
+  const platz = (form: Form, w: number, h: number) =>
+    neuerPlatz(form, w, h, {
+      knoten,
+      gewaehlt: gewaehlterKnoten,
+      anhaengen,
+      editor: wert.editor,
+      scrollLinks: scrollRef.current ? scrollRef.current.scrollLeft : null,
+      zoom,
+    });
   const hinzufuegen = (vorlage: (typeof notation.formen)[number]) => {
     const { form, w, text } = vorlage;
     const { x, y, pool, h = vorlage.h } = platz(form, w, vorlage.h);
@@ -546,346 +455,5 @@ export function DiagrammEditor({ wert, onChange, hilfen }: Props) {
         </div>
       )}
     </div>
-  );
-}
-
-/** Hinweise der Formprüfung (oder: alles in Ordnung). */
-export function Formhinweise({ meldungen }: { meldungen: string[] }) {
-  if (!meldungen.length)
-    return <p className="ok small">Keine Formfehler gefunden. Ob Inhalt und Beschriftungen stimmen, zeigt dir die Musterlösung.</p>;
-  return (
-    <ul className="diagramm-regeln">
-      {meldungen.map((m) => (
-        <li key={m}>
-          <Icon name="triangle-alert" /> {m}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function KnotenFeld({
-  k,
-  antwort,
-  textRef,
-  onText,
-  onSchluessel,
-  onDrehen,
-  onVerbinden,
-  onKante,
-  onDuplizieren,
-  onLoeschen,
-}: {
-  k: EditorKnoten;
-  antwort: DiagrammAntwort;
-  textRef: RefObject<HTMLInputElement | null>;
-  onText: (t: string) => void;
-  onSchluessel: (s: boolean) => void;
-  onDrehen: () => void;
-  onVerbinden: () => void;
-  onKante: (id: string) => void;
-  onDuplizieren: () => void;
-  onLoeschen: () => void;
-}) {
-  const kanten = antwort.kanten.filter((e) => e.von === k.id || e.nach === k.id);
-  const name = (id: string) => {
-    const x = antwort.knoten.find((n) => n.id === id);
-    return x ? knotenName(x, antwort.knoten, antwort.kanten) : '?';
-  };
-  return (
-    <div className="ed-feld">
-      {NIE_TEXT.includes(k.form) ? (
-        <p className="small">{knotenName(k, antwort.knoten, antwort.kanten)}</p>
-      ) : (
-        <label className="ed-text">
-          <span>{formName(k.form)}</span>
-          <input ref={textRef} type="text" value={k.text} placeholder="Beschriftung" onChange={(e) => onText(e.target.value)} />
-        </label>
-      )}
-      {k.form === 'attribut' && (
-        <label className="ed-schalter">
-          <input type="checkbox" checked={!!k.schluessel} onChange={(e) => onSchluessel(e.target.checked)} /> Schlüsselattribut
-          (unterstrichen)
-        </label>
-      )}
-      <div className="ed-knoepfe">
-        <button type="button" className="secondary" onClick={onVerbinden}>
-          Verbinden mit …
-        </button>
-        {k.form === 'gabel' && (
-          <button type="button" className="ghost" onClick={onDrehen}>
-            {k.w >= k.h ? 'Senkrecht stellen' : 'Waagerecht legen'}
-          </button>
-        )}
-        <button type="button" className="ghost" onClick={onDuplizieren}>
-          Duplizieren
-        </button>
-        <button type="button" className="ghost danger" onClick={onLoeschen}>
-          Löschen
-        </button>
-      </div>
-      {kanten.length > 0 && (
-        <p className="small ed-verbindungen">
-          Verbindungen:{' '}
-          {kanten.map((e) => (
-            <button key={e.id} type="button" className="ghost" onClick={() => onKante(e.id)}>
-              {e.von === k.id ? `→ ${name(e.nach)}` : `← ${name(e.von)}`}
-            </button>
-          ))}
-        </p>
-      )}
-    </div>
-  );
-}
-
-function KantenFeld({
-  e,
-  antwort,
-  arten,
-  onAendern,
-  onLoeschen,
-}: {
-  e: EditorKante;
-  antwort: DiagrammAntwort;
-  arten: EditorKantenArt[];
-  onAendern: (teil: Partial<EditorKante>, zusammen?: string) => void;
-  onLoeschen: () => void;
-}) {
-  const von = antwort.knoten.find((k) => k.id === e.von)!;
-  const nach = antwort.knoten.find((k) => k.id === e.nach)!;
-  const erm = antwort.editor === 'erm';
-  const aktivitaet = antwort.editor === 'aktivitaet';
-  const entitaet = [von, nach].find((k) => k.form === 'entitaet');
-  return (
-    <div className="ed-feld">
-      <p className="small">
-        Verbindung {knotenName(von, antwort.knoten, antwort.kanten)} → {knotenName(nach, antwort.knoten, antwort.kanten)}
-      </p>
-      {arten.length > 1 && (
-        <label className="ed-text">
-          <span>Art</span>
-          <select value={e.art} onChange={(ev) => onAendern({ art: ev.target.value as EditorKantenArt })}>
-            {arten.map((a) => (
-              <option key={a} value={a}>
-                {KANTEN_NAMEN[a]}
-              </option>
-            ))}
-          </select>
-        </label>
-      )}
-      <label className="ed-text">
-        <span>
-          {erm ? `Kardinalität${entitaet ? ` (an ${entitaet.text || 'der Entität'})` : ''}` : aktivitaet ? 'Bedingung' : 'Beschriftung'}
-        </span>
-        <input
-          type="text"
-          value={e.text ?? ''}
-          placeholder={
-            erm
-              ? 'z. B. (1,n)'
-              : antwort.editor === 'bpmn'
-                ? 'z. B. ja / angenommen'
-                : aktivitaet && von.form === 'entscheidung'
-                  ? 'z. B. bezahlt – wird zu [bezahlt]'
-                  : 'optional'
-          }
-          onChange={(ev) => onAendern({ text: ev.target.value }, `kante:${e.id}`)}
-        />
-      </label>
-      {erm && (
-        <div className="ed-knoepfe" aria-label="Kardinalität wählen">
-          {KARDINALITAETEN.map((k) => (
-            <button key={k} type="button" className={`ghost${e.text === k ? ' aktiv' : ''}`} onClick={() => onAendern({ text: k })}>
-              {k}
-            </button>
-          ))}
-        </div>
-      )}
-      <div className="ed-knoepfe">
-        {!erm && (
-          <button type="button" className="ghost" onClick={() => onAendern({ von: e.nach, nach: e.von })}>
-            Richtung umkehren
-          </button>
-        )}
-        <button type="button" className="ghost danger" onClick={onLoeschen}>
-          Löschen
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ---------- Zeichnung (Editor und Ansicht) ----------
-
-interface ZeichnungProps {
-  antwort: DiagrammAntwort;
-  auswahl?: Auswahl;
-  knotenDruck?: (k: EditorKnoten) => (e: ReactPointerEvent<SVGGElement>) => void;
-  kanteDruck?: (e: EditorKante) => (ev: ReactPointerEvent<SVGGElement>) => void;
-  griffDruck?: (k: EditorKnoten, art: 'groesse' | 'linie') => (e: ReactPointerEvent<SVGElement>) => void;
-  onFokus?: (id: string) => void;
-}
-
-function Zeichnung({ antwort, auswahl, knotenDruck, kanteDruck, griffDruck, onFokus }: ZeichnungProps) {
-  const roh = useId().replace(/[^a-zA-Z0-9]/g, '');
-  const ids = { pfeil: `ep${roh}`, offen: `eo${roh}`, kreis: `ek${roh}` };
-  const bearbeitbar = !!knotenDruck;
-  const nachId = new Map(antwort.knoten.map((k) => [k.id, k]));
-  const linien = kantenLinien(antwort.knoten, antwort.kanten);
-  // Behälter zuerst (große unten), dann Kanten, dann die übrigen Formen.
-  const behaelter = antwort.knoten.filter((k) => istBehaelter(k.form)).sort((a, b) => b.w * b.h - a.w * a.h);
-  const formen = antwort.knoten.filter((k) => !istBehaelter(k.form));
-
-  const knotenZeichnung = (k: EditorKnoten) => {
-    const gewaehlt = auswahl?.typ === 'knoten' && auswahl.id === k.id;
-    const [cx, cy] = mitte(k);
-    return (
-      <g
-        key={k.id}
-        data-knoten={k.id}
-        className={`ed-knoten${gewaehlt ? ' gewaehlt' : ''}${istBehaelter(k.form) ? ' behaelter' : ''}`}
-        {...(bearbeitbar
-          ? {
-              tabIndex: 0,
-              role: 'button',
-              'aria-label': knotenName(k, antwort.knoten, antwort.kanten),
-              'aria-pressed': gewaehlt,
-              onPointerDown: knotenDruck!(k),
-              onFocus: () => onFokus?.(k.id),
-            }
-          : {})}
-      >
-        {/* Dünne Formen (Balken) bekommen eine größere Tippfläche. */}
-        <rect
-          x={k.x - Math.max(0, 24 - k.w) / 2}
-          y={k.y - Math.max(0, 24 - k.h) / 2}
-          width={Math.max(k.w, 24)}
-          height={Math.max(k.h, 24)}
-          className="ed-treffer"
-        />
-        <FormZeichnung form={k.form} k={k} text={k.text} />
-        {k.schluessel && k.text && (
-          <line
-            x1={cx - Math.min(k.w - 16, k.text.length * 6.6) / 2}
-            x2={cx + Math.min(k.w - 16, k.text.length * 6.6) / 2}
-            y1={cy + 8}
-            y2={cy + 8}
-            className="dg-linie dg-duenn"
-          />
-        )}
-        {gewaehlt && bearbeitbar && (
-          <>
-            <rect x={k.x - 5} y={k.y - 5} width={k.w + 10} height={k.h + 10} rx={6} className="ed-rahmen" />
-            <g className="ed-griff" onPointerDown={griffDruck!(k, 'linie')} aria-hidden="true">
-              <circle cx={k.x + k.w + 16} cy={cy} r={14} className="ed-griff-treffer" />
-              <circle cx={k.x + k.w + 16} cy={cy} r={7} className="ed-griff-punkt" />
-              <path d={`M${k.x + k.w + 12},${cy} h8 m-3,-3 l3,3 l-3,3`} className="ed-griff-pfeil" />
-            </g>
-            <g className="ed-griff groesse" onPointerDown={griffDruck!(k, 'groesse')} aria-hidden="true">
-              <rect x={k.x + k.w - 4} y={k.y + k.h - 4} width={22} height={22} className="ed-griff-treffer" />
-              <rect x={k.x + k.w} y={k.y + k.h} width={10} height={10} rx={2} className="ed-griff-punkt" />
-            </g>
-          </>
-        )}
-      </g>
-    );
-  };
-
-  return (
-    <>
-      <defs>
-        <marker
-          id={ids.pfeil}
-          viewBox="0 0 10 10"
-          markerWidth="10"
-          markerHeight="10"
-          refX="10"
-          refY="5"
-          orient="auto"
-          markerUnits="userSpaceOnUse"
-        >
-          <path d="M0,0 L10,5 L0,10 z" className="dg-voll" />
-        </marker>
-        <marker
-          id={ids.offen}
-          viewBox="0 0 10 10"
-          markerWidth="11"
-          markerHeight="11"
-          refX="10"
-          refY="5"
-          orient="auto"
-          markerUnits="userSpaceOnUse"
-        >
-          <path d="M0,0 L10,5 L0,10" className="dg-linie" />
-        </marker>
-        <marker
-          id={ids.kreis}
-          viewBox="0 0 10 10"
-          markerWidth="10"
-          markerHeight="10"
-          refX="5"
-          refY="5"
-          orient="auto"
-          markerUnits="userSpaceOnUse"
-        >
-          <circle cx="5" cy="5" r="4" className="dg-form" />
-        </marker>
-      </defs>
-      {behaelter.map(knotenZeichnung)}
-      {antwort.kanten.map((e) => {
-        const linie = linien.get(e.id);
-        if (!linie) return null;
-        const [[x1, y1], [x2, y2]] = linie;
-        const gewaehlt = auswahl?.typ === 'kante' && auswahl.id === e.id;
-        const gestrichelt = e.art === 'nachricht' || e.art === 'include' || e.art === 'extend';
-        const gepunktet = e.art === 'zuordnung' && antwort.editor === 'bpmn';
-        const ende = e.art === 'fluss' ? ids.pfeil : gestrichelt ? ids.offen : undefined;
-        const von = nachId.get(e.von)!;
-        const nach = nachId.get(e.nach)!;
-        const erm = antwort.editor === 'erm';
-        const [lx, ly] = beschriftungsPunkt(linie, erm && von.form === 'entitaet', erm && nach.form === 'entitaet');
-        const beschriftung = antwort.editor === 'aktivitaet' ? waechter(e.text ?? '') : (e.text?.trim() ?? '');
-        const text = [e.art === 'include' ? '«include»' : e.art === 'extend' ? '«extend»' : '', beschriftung].filter(Boolean).join(' ');
-        return (
-          <g key={e.id} className={`ed-kante${gewaehlt ? ' gewaehlt' : ''}`} {...(kanteDruck ? { onPointerDown: kanteDruck(e) } : {})}>
-            {bearbeitbar && <line x1={x1} y1={y1} x2={x2} y2={y2} className="ed-kante-treffer" />}
-            <line
-              x1={x1}
-              y1={y1}
-              x2={x2}
-              y2={y2}
-              className={`dg-linie${gestrichelt ? ' dg-strich' : ''}${gepunktet ? ' dg-punkt' : ''}${gewaehlt ? ' ed-kante-gewaehlt' : ''}`}
-              {...(ende ? { markerEnd: `url(#${ende})` } : {})}
-              {...(e.art === 'nachricht' ? { markerStart: `url(#${ids.kreis})` } : {})}
-            />
-            {text && (
-              <text x={lx} y={ly} textAnchor="middle" dominantBaseline="middle" className="dg-klein dg-kantentext">
-                {text}
-              </text>
-            )}
-          </g>
-        );
-      })}
-      {formen.map(knotenZeichnung)}
-    </>
-  );
-}
-
-/** Die gezeichnete Lösung ohne Bedienelemente (nach der Abgabe, neben der Musterlösung). */
-export function DiagrammAnsicht({ wert }: { wert: DiagrammAntwort }) {
-  if (!wert.knoten.length) return <p className="muted">Kein Diagramm gezeichnet.</p>;
-  const u = umriss(wert.knoten);
-  return (
-    <figure className="diagramm ed-ansicht">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={`${u.x} ${u.y} ${u.w} ${u.h}`}
-        width={u.w}
-        role="img"
-        aria-label={`Dein ${NOTATIONEN[wert.editor].name} mit ${wert.knoten.length} Elementen`}
-      >
-        <Zeichnung antwort={wert} />
-      </svg>
-    </figure>
   );
 }

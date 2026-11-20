@@ -14,7 +14,7 @@ import {
   type BoxplotZahlen,
 } from '../lib/boxplotAntwort';
 import type { Task } from '../../domain/types';
-import { Formhinweise } from './DiagrammEditor';
+import { Formhinweise } from './diagramm/Formhinweise';
 
 const B = 640;
 const ZEILE = 78;

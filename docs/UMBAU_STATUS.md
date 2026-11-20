@@ -114,6 +114,39 @@ Prüfungen (Windows-Starter `npm.cmd`, ohne Installation):
 - `npm run test:e2e`: ausdrücklich nicht ausgeführt (Edge im Sandkasten nicht startbar); übernimmt der Besitzer-Lauf.
 - Kein `npm install`, `git add`, `git mv` oder Commit; kein Schreibzugriff auf `.git`.
 
-## Phasen 3 bis 9
+## Phase 3 – Große Seiten aufteilen
+
+Status: erledigt (20.11.2026), von Hand umgesetzt (Codex hatte sein Nutzungslimit erreicht, Rücksetzung am 21.11. um 12:23 Uhr).
+
+Reiner Umbau, kein neues Verhalten: Die Teile wurden mit Skripten 1:1 verschoben (kein Abtippen), die DOM-Struktur, Klassen- und aria-Namen
+blieben unverändert. Zeilenzahlen alt → neu:
+
+- `src/pages/Dashboard.tsx` 729 → 124. Neu in `src/pages/uebersicht/`: `Weiterlernen`, `RandNotizen` (Countdown, Lernserie), `BereichRinge`,
+  `Widgets` (Fällig, Übungen, Kartenstand, Markiert, Begriff des Tages, Klausuren), `Verlauf` (Sparkline, Delta), `Hinweise` (Selbsteinschätzung,
+  Sicherungs-Erinnerung), `ThemaFortschritt`, `KlausurTrend`.
+- `src/pages/Karteikarten.tsx` 724 → 233. Neu in `src/pages/karten/`: `LeichtRunde`, `AufdeckRunde`, `KartenBlaettern`, `KartenFilter`,
+  `DeckTabelle`, `RundenBalken`, `kartenAnzeige` (Beschriftungen und Farbklasse; `Kartenstand.tsx` importiert `CARD_TYPE_LABELS` von dort).
+  Alle Hooks bleiben im Container; der Wischen-Merker (`touch`) liegt jetzt in `AufdeckRunde`, wo er allein gebraucht wird.
+- `src/pages/RechenUebung.tsx` 562 → 370. Neu `src/pages/rechenuebung/Bausteine.tsx` (Beispielkarte, Datentabelle, Eingabefeld, Rückmeldung,
+  Layout, Meldungen und das lazy geladene `Rechenweg`).
+- `src/components/DiagrammEditor.tsx` 891 → 459. Neu in `src/components/diagramm/`: `Felder` (Knoten-/Kantenfelder), `Zeichnung` (inkl.
+  `DiagrammAnsicht`), `Formhinweise`, `typen`. Die Platzwahl für neue Elemente ist als reine Funktion `neuerPlatz` nach `src/lib/diagrammPlatz.ts`
+  gewandert (Unit-Test `tests/diagrammPlatz.test.ts`, 9 Fälle). Importe in `BoxplotEditor`, `KoordinatenEditor`, `StruktogrammEditor`,
+  `EditorAntwort` zeigen auf die neuen Dateien.
+- `src/components/DiagrammSvg.tsx` 684 → 349; `FormZeichnung` (alle Formen, 344 Zeilen) liegt in `src/components/diagramm/FormZeichnung.tsx`.
+- `src/components/TabellenEditor.tsx` 451 → 221; `TabellenKarte` und `RelationText` in `src/components/tabellen/TabellenKarte.tsx`.
+- `src/pages/Klausur.tsx` 420 → 292; `KlausurAuswahl` (mit `useNeueMischKlausur`) und `ExamResult` in `src/pages/klausur/`. `Klausur.tsx` exportiert
+  `KlausurAuswahl` weiter, damit App und Tests eine Seite mit einem Ladeschritt behalten.
+
+Bewusst nicht weiter zerlegt: `DiagrammEditor.tsx` (459 Zeilen) – die Hauptkomponente hält eng gekoppelte Zeiger-, Tastatur- und Rückgängig-Zustände in
+Closures; ein weiterer Schnitt hätte viele Parameter durchreichen müssen, ohne das Lesen zu erleichtern.
+
+Neue Browser-Tests in `e2e/rauch.spec.ts` (Rechenübung mit Lösung und Rechenweg, Diagramm-Editor einfügen und rückgängig, Tabellen-Editor).
+Die Seiten Dashboard, Karteikarten, Klausur und der Diagramm-Editor werden zusätzlich von den axe- und Rauchtests aus Phase 1 berührt.
+
+Befehle: `npm run import-report` (Hinweise 0), `npm test` (94 Dateien, 1512 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`,
+`npm run test:e2e` (49 Tests): alle grün.
+
+## Phasen 4 bis 10
 
 Noch nicht begonnen.

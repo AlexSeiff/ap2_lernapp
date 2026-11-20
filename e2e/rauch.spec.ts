@@ -100,4 +100,41 @@ test.describe('Rauchtests: die wichtigsten Wege durch die App', () => {
     await gruppe.getByRole('button', { name: /hell/i }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   });
+
+  test('Rechenübung: Eingabefelder, Prüfen und Lösung mit Rechenweg', async ({ page }) => {
+    await oeffne(page, '/rechnen');
+    await page.locator('a[href*="#/rechnen/"]').first().click();
+    await expect(page.getByRole('button', { name: /Prüfen/ }).first()).toBeVisible();
+    await expect(page.locator('input[inputmode], input[type="text"]').first()).toBeVisible();
+    await page
+      .getByRole('button', { name: /Lösung zeigen/ })
+      .first()
+      .click();
+    await page.getByRole('dialog').getByRole('button', { name: 'Lösung zeigen' }).click();
+    await expect(page.getByRole('heading', { name: 'Rechenweg' })).toBeVisible();
+  });
+
+  test('Diagramm-Editor (ERM-Aufgabe): Element einfügen, Rückgängig', async ({ page }) => {
+    await oeffne(page, '/aufgabe/02-B1');
+    const leiste = page.getByRole('toolbar', { name: /Elemente einfügen/ });
+    await expect(leiste).toBeVisible();
+    const flaeche = page.getByRole('img', { name: /Zeichenfläche mit 0 Elementen/ });
+    await expect(flaeche).toBeVisible();
+    await leiste.getByRole('button').first().click();
+    await expect(page.getByRole('img', { name: /Zeichenfläche mit 1 Elementen/ })).toBeVisible();
+    await page
+      .getByRole('button', { name: /Rückgängig/ })
+      .first()
+      .click();
+    await expect(page.getByRole('img', { name: /Zeichenfläche mit 0 Elementen/ })).toBeVisible();
+  });
+
+  test('Tabellen-Editor (Relationen-Aufgabe): Tabelle mit Spalten erscheint', async ({ page }) => {
+    await oeffne(page, '/aufgabe/02-B2');
+    await page.getByRole('button', { name: '+ Tabelle' }).click();
+    const name = page.getByRole('textbox', { name: 'Tabellenname' }).first();
+    await expect(name).toBeVisible();
+    await name.fill('kunde');
+    await expect(page.getByRole('region', { name: 'Tabelle kunde' })).toBeVisible();
+  });
 });
