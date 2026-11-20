@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { parseSqlUebungen, verknuepfeSqlUebungen } from '../shared/sqlUebungen';
-import type { Flashcard, Task } from '../shared/types';
+import { parseSqlUebungen, verknuepfeSqlUebungen } from '../domain/sqlUebungen';
+import type { Flashcard, Task } from '../domain/types';
 
 const topics = new Map([
   ['01', 'SQL'],

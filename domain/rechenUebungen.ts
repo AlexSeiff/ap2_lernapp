@@ -1,6 +1,6 @@
 // Import der Rechenübungen (AP2_Rechen_Uebungen.json). Tolerant wie der SQL-Import: Fehlerhafte Übungen werden
 // übersprungen und als ImportIssue gemeldet. Ob Vorlage, Daten und Eingaben zusammenpassen, prüft eine optionale
-// Funktion `pruefe` (src/rechnen/pruefen.ts) – shared/ kennt die Rechenvorlagen selbst nicht.
+// Funktion `pruefe` (src/rechnen/pruefen.ts) – domain/ kennt die Rechenvorlagen selbst nicht.
 
 import { z } from 'zod';
 import { topicFromSource } from './lernkarten.ts';

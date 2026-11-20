@@ -1,13 +1,3 @@
-// Typen rund ums Speichern des Fortschritts im Browser (src/lib/staticApi.ts, browserBackups.ts, progressSaver.ts).
-
-import type { Progress } from './progress.ts';
-
-/**
- * Speichern des Fortschritts: der Stand plus optional `reset: true` für bewusstes Zurücksetzen/Einspielen.
- * Geprüft wird mit ProgressPutSchema/checkProgressPut aus shared/progress.ts.
- */
-export type SaveProgressRequest = Progress & { reset?: boolean };
-
 /** Übersicht der automatischen Tagessicherungen im Browser (IndexedDB). */
 export interface BackupInfo {
   /** Datum der neuesten Tagessicherung (YYYY-MM-DD) oder null. */

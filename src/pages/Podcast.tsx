@@ -4,7 +4,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import type { BegriffsSeite } from '../../shared/types';
+import type { BegriffsSeite } from '../../domain/types';
 import { Icon } from '../components/Icon';
 import { ladeBegriffe } from '../lib/begriffe';
 import { bauePodcast, dauerMinuten, hatPodcastThema, SPRECHER_NAMEN, type Folge, type Sprecher, type Zeile } from '../lib/podcast';

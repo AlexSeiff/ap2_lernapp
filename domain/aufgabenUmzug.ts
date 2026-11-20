@@ -1,6 +1,6 @@
 // Umzug von Aufgaben-IDs (Oktober 2026): Die Übungsklausuren 01–16 wurden auf das Format der Altklausuren umgebaut – Fachklausuren
 // mit vier Aufgaben à 20–30 P, WiSo mit 30 Aufgaben in fünf Blöcken à 20 P. Dabei bekamen Aufgaben neue Codes. Alte ID → neue ID;
-// die Migration 8 → 9 (shared/progress.ts) schreibt damit Versuche, Fehlerjournal und Klausurläufe um. Nie nachträglich ändern:
+// die Migration 8 → 9 (domain/progress.ts) schreibt damit Versuche, Fehlerjournal und Klausurläufe um. Nie nachträglich ändern:
 // ein älterer Stand muss genau so umziehen wie beim ersten Mal. Neue Aufgaben (WiSo) stehen nicht hier – sie haben noch keinen Stand.
 export const AUFGABEN_UMZUG_V9: Readonly<Record<string, string>> = {
   '01-B10': '01-D2',

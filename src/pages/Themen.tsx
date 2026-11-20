@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useParams } from 'react-router-dom';
-import { quellenNachZiel } from '../../shared/quellen';
+import { quellenNachZiel } from '../../domain/quellen';
 import { QuellenListe } from '../components/Quellen';
 import { Markdown } from '../components/Markdown';
 import { useLeseStelle } from '../hooks/useLeseStelle';
@@ -12,7 +12,7 @@ import { useThemaTexte } from '../lib/texte';
 import { cardPool } from '../lib/cards';
 import { istAusgeblendet, setzeAusgeblendet } from '../lib/settings';
 import { TheoryMarkdown } from '../components/TheoryMarkdown';
-import type { Topic } from '../../shared/types';
+import type { Topic } from '../../domain/types';
 import { Icon } from '../components/Icon';
 import { ThemaBlaettern } from '../components/ThemaBlaettern';
 import { nachbarn, themenFolge } from '../lib/blaettern';

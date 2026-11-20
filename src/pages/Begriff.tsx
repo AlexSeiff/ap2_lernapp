@@ -3,8 +3,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { mehrZiel } from '../../shared/begriffsseiten';
-import type { BegriffsSeite } from '../../shared/types';
+import { mehrZiel } from '../../domain/begriffsseiten';
+import type { BegriffsSeite } from '../../domain/types';
 import { Icon, type IconName } from '../components/Icon';
 import { MarkierStern } from '../components/MarkierStern';
 import { Markdown } from '../components/Markdown';

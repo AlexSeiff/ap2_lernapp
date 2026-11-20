@@ -1,11 +1,11 @@
 // Erzeugt getrennte Aufgaben- und Lösungsblätter (Markdown) aus einer Aufgabenauswahl.
 
-import type { Section, Task } from '../../shared/types';
+import type { Section, Task } from '../../domain/types';
 import { examMinutes } from './examTimer';
 import { formatPoints } from './grading';
 import { klausurFuer, type MischKlausur, parseMischId } from './mischKlausur';
 import { localDate } from './progress';
-import type { KernInhalt } from '../../shared/texte';
+import type { KernInhalt } from '../../domain/texte';
 
 export type SheetKind = 'aufgaben' | 'loesungen';
 

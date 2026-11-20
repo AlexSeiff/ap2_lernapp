@@ -44,6 +44,76 @@ Status: erledigt (20.11.2026), von Hand statt durch Codex umgesetzt.
 - Befehle: `npm run import-report` (Hinweise 0), `npm test` (93 Dateien), `npm run typecheck`, `npm run lint`, `npm run format:check`,
   `npm run test:e2e` (43 Tests): alle grün.
 
-## Phasen 2 bis 9
+## Phase 2 – Server-Zeit-Schicht entfernen, `shared/` → `domain/`
+
+Status: umgesetzt auf `umbau`, uncommitted. Browser-Abnahme und Commit bleiben beim Besitzer-Lauf.
+
+- `shared/` mit PowerShell `Move-Item` nach `domain/` verschoben (alle 19 Dateien). Importe in App, Build, Werkzeugen und Tests,
+  `vite.config.ts`, `tsconfig.app.json`, Pfade in README, CONTRIBUTING, DOKUMENTATION und der Skill `inhalte-schreiben` angepasst.
+  `tsconfig.node.json`, ESLint und Prettier enthalten keine umzubenennenden Pfade. Historische Phasenbeschreibung im Umbauplan bleibt stehen.
+- Vollständig entfernte Datei: `src/lib/apiError.ts`. Keine Testdatei gelöscht. Die bisherigen Dateien `shared/api.ts`,
+  `shared/aufgabenUmzug.ts`, `shared/begriffsseiten.ts`, `shared/config.ts`, `shared/diagrammUebungen.ts`, `shared/jsonUebungen.ts`,
+  `shared/lernkarten.ts`, `shared/mergeProgress.ts`, `shared/parser.ts`, `shared/progress.ts`, `shared/prueferfragen.ts`,
+  `shared/quellen.ts`, `shared/rechenUebungen.ts`, `shared/rechenweg.ts`, `shared/sqlUebungen.ts`, `shared/svgDiagramm.ts`,
+  `shared/texte.ts`, `shared/types.ts` und `shared/verwandt.ts` liegen jetzt unter `domain/`.
+- Entfernt: `DataSource`, `ApiError`, `SaveProgressRequest`, Revisionszähler und Revisionsprüfung, HTTP-409-/Konfliktzustand,
+  `checkProgressPut`, `ProgressPutSchema`, `ProgressPutResult`, dessen ungenutzter Typ `ProgressData`, `revisionOf`, `isStaleRevision`, `CONFLICT_MESSAGE` und das
+  `reset`-Transportfeld. `domain/api.ts` enthält nur noch die tatsächlich verwendeten Sicherungs-Metadaten.
+- `PROGRESS_VERSION` bleibt 10; JSON-Sicherungen bleiben lesbar. Migration 1 → 2 bleibt als Versionsschritt erhalten.
+  Historisches `revision` wird beim Migrieren und Speichern verworfen. Keine Änderung an Aufgaben-IDs, Inhalten, `data/` oder `.env.local`.
+- Mehrere Tabs: Vor jedem Schreiben wird localStorage erneut gelesen. Weicht er vom zuletzt in diesem Tab bekannten Stand ab,
+  führt `mergeProgress` beide Stände zusammen, auch beim letzten Speichern vor dem Schließen. Wiederholtes Speichern vor Zustellung
+  des Storage-Ereignisses bewahrt ebenfalls den fremden Fortschritt. Ohne fremde Änderung wird der eigene Stand direkt geschrieben:
+  sonst würden entfernte Antworten, Kartenstände oder abgewählte Lernziele wieder auftauchen.
+  Das Storage-Ereignis speichert ausstehende eigene Änderungen zuerst und lädt dann die Seite neu. Scheitert das Speichern,
+  bleibt die Seite mit Fehlermeldung und ausstehenden Änderungen offen.
+- Nutzerwirkung: Lernabläufe, Sicherungen, bewusstes Zurücksetzen/Einspielen und die Fehlermeldung bei versehentlich leerem/zu kleinem
+  Stand bleiben erhalten. Im Mehrtab-Fall übernimmt der Tab den neuen Stand jetzt **ohne Neuladen** (Korrektur im Besitzer-Lauf:
+  Codex hatte, wie im Plan formuliert, die Seite neu geladen; ein Browsertest zeigte, dass dabei eine laufende Kartenrunde im zweiten Tab
+  verloren ging – der Schreibschutz allein reicht, und die Seite bleibt, wie sie ist; gesichert durch `e2e/zweiTabs.spec.ts`) statt
+  der alten dauerhaften Konfliktblockade. localStorage bleibt unverändert die Speichertechnik; Lesen/Zusammenführen/Schreiben ist keine tabübergreifende
+  Transaktion. Die spätere IndexedDB-Phase wird hier nicht vorgezogen.
+- `isSuspiciousAttemptDrop` bleibt mit unveränderten Schwellen und deutscher Meldung vor dem Schreiben wirksam.
+  Verglichen wird mit dem zuletzt in diesem Tab bekannten Stand, damit ein fremder Lernzuwachs nicht fälschlich als eigener
+  Versuchsverlust gilt. Bewusstes Ersetzen verwendet einen separaten lokalen Schreibweg; Schema-Prüfung, Tagessicherung und Schutz
+  zwischenzeitlicher fremder Änderungen gelten auch dort. Keine HTTP-Statuscodes oder Revisionsfelder nötig.
+
+Geänderte Tests und Gründe:
+
+- `progress.test.ts`: reine PUT-/409-/Revisionsvergabetests entfernt. Schema, Schwellen, Migrationen, unbekannte Felder und
+  ungültige Selbsteinschätzung/Fehlergründe bleiben geprüft; Speicherrundläufe verwenden den echten lokalen Speicher.
+  Historische Komplettvergleiche erwarten ausdrücklich nur das Wegfallen von `revision`.
+- `staticApi.test.ts`: Revisionszählung und 409-Ablehnung durch reale Zweitab-Zusammenführung ersetzt. Ergänzt: weiteres Schreiben
+  vor dem Storage-Ereignis, leerer/zu kleiner Stand ohne Überschreiben, bewusstes Ersetzen mit/ohne fremde Änderungen, erlaubtes
+  Entfernen eigener Daten, Schemafehler auch beim Ersetzen, alte Revisionen, Storage-Ereignis samt Abmeldung.
+  Defekte JSON-Daten und nicht verfügbarer Speicher bleiben geprüft.
+- `progressSaver.test.ts`: Revision/409/Konfliktstopp entfernt; die zwei bisherigen Reset-Transporttests prüfen nun den eigenen
+  Schreibweg für bewusstes Ersetzen bei Fehlern, beim Schließen und bei verspäteter Bestätigung.
+  Debounce, serielles Speichern, ausstehende Änderungen und Fehlermeldungen bleiben; Flush-Erfolg/-Fehler sind zusätzlich abgesichert.
+- `markiert.test.ts`, `diagrammUebungen.test.ts`: historische Komplettvergleiche ohne Revision, Schema-Akzeptanz statt PUT-Antwort.
+  `mergeProgress.test.ts`: Revisionsannahmen entfernt, Inhalte/Einstellungen bleiben geprüft; Versuchsverlustschwelle explizit geprüft.
+  `textmarker.test.ts`: Schema statt PUT, unveränderte Versuche statt Revisionsvergleich.
+  `browserBackups.test.ts`: Sicherung enthält weiterhin den vorherigen Stand, nun ausdrücklich ohne Revision.
+  `settings.test.ts`: überflüssigen Revisionswert aus der Testeingabe entfernt.
+- Neu: `tests/ohneRevision.ts`, explizite Erwartungsanpassung nur für das entfernte historische Feld.
+  Alle übrigen Teständerungen sind Pfadwechsel. `tests/umbauGleichheit.test.ts` wurde **ausschließlich am Importpfad** geändert;
+  Snapshot und Erwartungen sowie dessen Hilfslogik sind unverändert.
+
+Prüfungen (Windows-Starter `npm.cmd`, ohne Installation):
+
+- `npm run import-report`: grün, Hinweise (0).
+- `npm test`: grün, 93 Dateien / 1.503 Tests, einschließlich Inhalts-Snapshot und aller vorhandenen echten Sicherungen.
+- `npm run typecheck`: grün.
+- `npm run lint`: grün.
+- `npm run format:check`: grün.
+- `npm run build`: grün, PWA mit 154 Einträgen.
+- Zwischenläufe: zunächst noch drei historische Revisionserwartungen in Markierungs-/Diagrammtests; entsprechend dem gewollten
+  Entfernen dieses Feldes präzisiert. Typfehler an umgestellten Testhelfern korrigiert, Fehlerursache beim Weiterwerfen ergänzt
+  (Lint). Formatprüfung beanstandete die Zeilenenden der per Skript angepassten Dateien; mit Projekt-Prettier formatiert.
+  Keine fachliche Erwartung gelockert, kein Snapshot aktualisiert.
+- `npm run test:e2e`: ausdrücklich nicht ausgeführt (Edge im Sandkasten nicht startbar); übernimmt der Besitzer-Lauf.
+- Kein `npm install`, `git add`, `git mv` oder Commit; kein Schreibzugriff auf `.git`.
+
+## Phasen 3 bis 9
 
 Noch nicht begonnen.

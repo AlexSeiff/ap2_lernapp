@@ -4,8 +4,8 @@
 // Falsche Werte werden mit den Fehlerbildern der Vorlage verglichen und erklärt; dazu kommen allgemeine Fehlerbilder
 // (Anteil statt Prozent, Vorzeichen, zu früh oder falsch gerundet).
 
-import { formatZahl } from '../../shared/rechenweg';
-import type { RechenWert } from '../../shared/types';
+import { formatZahl } from '../../domain/rechenweg';
+import type { RechenWert } from '../../domain/types';
 import type { AufgeloesteEingabe, RechenInstanz } from './instanz';
 import type { Fehlerbild } from './typen';
 

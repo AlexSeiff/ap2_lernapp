@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import type { Flashcard } from '../../shared/types';
+import type { Flashcard } from '../../domain/types';
 import { kartenstand, STAENDE, STAND_TEXT } from '../lib/kartenstand';
 import { useStore } from '../lib/store';
 import { Icon } from './Icon';

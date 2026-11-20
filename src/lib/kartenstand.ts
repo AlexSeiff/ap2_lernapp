@@ -1,8 +1,8 @@
 // Kartenstand: alle schon bewerteten Karteikarten nach der letzten Bewertung – gewusst, unsicher, nicht gewusst.
 // Rein, ohne React; die Seite steht in pages/Kartenstand.tsx. Grundlage ist CardState.last (rateCard, rateCardLeicht).
 
-import type { CardState, Progress, Rating } from '../../shared/progress';
-import type { Flashcard } from '../../shared/types';
+import type { CardState, Progress, Rating } from '../../domain/progress';
+import type { Flashcard } from '../../domain/types';
 import { isDue, localDate } from './progress';
 
 export const STAENDE: Rating[] = ['gewusst', 'unsicher', 'nicht'];

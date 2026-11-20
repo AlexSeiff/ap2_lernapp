@@ -4,7 +4,7 @@
 // Punkte vergibst du selbst. Lazy geladen (nur bei solchen Aufgaben).
 
 import { useMemo, type ReactNode } from 'react';
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 import { pruefeDiagrammAntwort, type DiagrammAntwort } from '../lib/diagrammEditor';
 import { EDITOR_NAMEN, istDiagrammArt, leseEditorAntwort, schreibeEditorAntwort, vorlageFuer, type EditorArt } from '../lib/editorAufgabe';
 import { abgleichOk, gleicheAb, musterFuerSchritt, musterTabellen, relationText, type TabellenAntwort } from '../lib/tabellenEditor';

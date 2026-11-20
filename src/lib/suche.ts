@@ -8,9 +8,9 @@
 // Text-Wortanfang 2, im Text 1; der ganze Suchtext im Titel +10, Titel beginnt damit +6; dazu ein kleiner Bonus je Art
 // (Glossar, Formel, Operator, Abschnitt vor Karte, Aufgabe, Musterlösung, Übung). Gleichstand → kürzerer Titel, dann Index-Reihenfolge.
 
-import { stripPrueferfragen } from '../../shared/prueferfragen';
-import type { Settings } from '../../shared/progress';
-import type { BegriffsSeite, Content } from '../../shared/types';
+import { stripPrueferfragen } from '../../domain/prueferfragen';
+import type { Settings } from '../../domain/progress';
+import type { BegriffsSeite, Content } from '../../domain/types';
 import { FORMELN, THEMA_NAMEN } from '../rechnen/formeln';
 import { cardPool } from './cards';
 import { ueberschriftKern } from './glossar';

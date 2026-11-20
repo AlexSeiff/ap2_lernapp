@@ -1,8 +1,8 @@
 // Exporte: Karteikarten für Anki (Text mit Tabulatoren) und fällige Wiederholungen als Kalender (.ics).
 
-import type { Progress } from '../../shared/progress';
-import type { KernInhalt } from '../../shared/texte';
-import type { Flashcard } from '../../shared/types';
+import type { Progress } from '../../domain/progress';
+import type { KernInhalt } from '../../domain/texte';
+import type { Flashcard } from '../../domain/types';
 import { begriffsFrage, bereichAusDeck } from './begriffsFrage';
 
 const einzeilig = (s: string) => s.replace(/\r?\n/g, '<br>').replace(/\t/g, ' ').trim();

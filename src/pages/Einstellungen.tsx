@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { isIsoDate } from '../../shared/progress';
+import { isIsoDate } from '../../domain/progress';
 import { Datenschutz } from '../components/Datenschutz';
 import { LernzeitenEinstellung } from '../components/Lernzeiten';
 import { leichtAutomatischAn } from '../lib/leicht';

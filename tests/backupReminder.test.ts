@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { emptyProgress, type Progress } from '../shared/progress';
+import { emptyProgress, type Progress } from '../domain/progress';
 import { backupReminder } from '../src/lib/backupReminder';
 import { withSettings } from '../src/lib/settings';
 

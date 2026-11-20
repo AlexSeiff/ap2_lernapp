@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { EXAM_MINUTES } from '../shared/config';
+import { EXAM_MINUTES } from '../domain/config';
 import { examMinutes, examRemaining, formatRemaining, timerAnnouncement } from '../src/lib/examTimer';
 
 const min = 60_000;

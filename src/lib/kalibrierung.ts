@@ -1,8 +1,8 @@
 // Selbsteinschätzung „Wie sicher bist du?“ (ROADMAP 8.3): Beschriftungen und Kalibrierung (rein, getestet).
 // Zeigt, ob „sicher“ wirklich sicher ist – falsche Sicherheit vor der Prüfung erkennen.
 
-import { SICHER_RICHTIG_AB } from '../../shared/config';
-import type { Attempt, Sicherheit } from '../../shared/progress';
+import { SICHER_RICHTIG_AB } from '../../domain/config';
+import type { Attempt, Sicherheit } from '../../domain/progress';
 
 export const SICHERHEIT_STUFEN: { wert: Sicherheit; label: string; kurz: string }[] = [
   { wert: 1, label: 'unsicher', kurz: 'unsicher' },

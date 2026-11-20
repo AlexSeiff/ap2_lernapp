@@ -1,9 +1,9 @@
-// Texte der Karten und Aufgaben nachladen (Aufteilung in shared/texte.ts): einmal je Sitzung aus details.json
+// Texte der Karten und Aufgaben nachladen (Aufteilung in domain/texte.ts): einmal je Sitzung aus details.json
 // (offline aus dem Service-Worker-Cache). Die Übersicht kommt ohne sie aus; jede andere Seite steht unterhalb von <MitDetails>
 // und sieht über useStore() den Inhalt mit Texten. Bereits vollständiger Inhalt (Tests) wird direkt genommen.
 
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { hatDetails, inhaltMitDetails, type Details, type KernInhalt, type StartInhalt } from '../../shared/texte';
+import { hatDetails, inhaltMitDetails, type Details, type KernInhalt, type StartInhalt } from '../../domain/texte';
 import { api } from './api';
 import { StoreContext, useStartStore } from './store';
 

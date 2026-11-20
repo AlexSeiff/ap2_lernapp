@@ -1,7 +1,7 @@
 // „Altklausur“: Themen, Aufgaben und Karten, die aus dem Altklausur-Training stammen (Deep Dive 18 bis 33). Das Merkmal ist abgeleitet,
 // nicht gespeichert: ein Thema, dessen Titel mit „Altklausur“ beginnt, und – für Karten außerhalb dieser Themen – das Tag `altklausur`.
 
-import type { Flashcard, Task, Topic } from '../../shared/types';
+import type { Flashcard, Task, Topic } from '../../domain/types';
 
 /** Tag an Karten (z. B. Fachbegriffe), die in den Altklausuren vorkommen, aber zu einem anderen Thema gehören. */
 export const ALTKLAUSUR_TAG = 'altklausur';

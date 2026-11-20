@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
-import type { BegriffsSeite, Flashcard } from '../shared/types';
-import { abgrenzungsNamen, ergaenzeVerwandte } from '../shared/verwandt';
+import type { BegriffsSeite, Flashcard } from '../domain/types';
+import { abgrenzungsNamen, ergaenzeVerwandte } from '../domain/verwandt';
 
 // Verwandte Begriffskarten aus „Abgrenzung“ und „Siehe auch“ (Umsetzungsplan Phase 5) – Grundlage der kuratierten falschen Antworten.
 

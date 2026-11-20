@@ -4,7 +4,7 @@
 // Rein (ohne React): Die Seite (pages/Podcast.tsx) liest die Folge mit der Sprachausgabe des Browsers vor (lib/sprachausgabe.ts).
 // Nicht für WiSo (eigener Prüfungsteil), nicht für Fachgespräch und Prüfungsablauf; Themen ohne Begriffsseiten bekommen keine Folge.
 
-import type { BegriffsSeite, Flashcard, Topic } from '../../shared/types';
+import type { BegriffsSeite, Flashcard, Topic } from '../../domain/types';
 import { istAltklausurThema } from './altklausur';
 import { PRUEFUNGSBEREICHE } from './uebersicht';
 

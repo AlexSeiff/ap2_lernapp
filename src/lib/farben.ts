@@ -2,7 +2,7 @@
 // Die Werte stehen als CSS-Variablen in styles.css (--c-<name>, -fill, -soft; hell und dunkel); hier nur die Zuordnung.
 // Eine Klasse `farbe-<name>` setzt --f, --f-fill und --f-soft für das Element und seine Kinder.
 
-import type { CardType } from '../../shared/types';
+import type { CardType } from '../../domain/types';
 
 export const FARBEN = ['indigo', 'sky', 'teal', 'green', 'amber', 'orange', 'pink', 'violet'] as const;
 export type Farbe = (typeof FARBEN)[number] | 'red' | 'slate';

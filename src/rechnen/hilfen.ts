@@ -2,8 +2,8 @@
 // ein kleiner Baukasten für Lösungen (Werte, Felder, Schritte, Fehlerbilder) und `vorlage()` zum Definieren.
 
 import type { z } from 'zod';
-import { formatZahl, latexZahl, type RechenSchritt } from '../../shared/rechenweg.ts';
-import type { RechenWert } from '../../shared/types.ts';
+import { formatZahl, latexZahl, type RechenSchritt } from '../../domain/rechenweg.ts';
+import type { RechenWert } from '../../domain/types.ts';
 import type { EingabeLayout, Feld, Loesung, Params, Tabelle, Vorlage } from './typen.ts';
 import { erzeugeZufall, type Zufall } from './zufall.ts';
 

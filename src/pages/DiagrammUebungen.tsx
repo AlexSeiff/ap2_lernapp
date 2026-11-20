@@ -2,7 +2,7 @@
 // Rechenübungen; Links aus Lernblättern und Begriffsseiten nutzen ?typ=.
 
 import { Link, useSearchParams } from 'react-router-dom';
-import { DIAGRAMM_TYP_NAMEN, DIAGRAMM_TYPEN, type DiagrammUebung } from '../../shared/diagrammUebungen';
+import { DIAGRAMM_TYP_NAMEN, DIAGRAMM_TYPEN, type DiagrammUebung } from '../../domain/diagrammUebungen';
 import { Icon } from '../components/Icon';
 import { diagrammStatus, diagrammSummary, diagrammUebungen } from '../lib/diagramme';
 import { useStore } from '../lib/store';

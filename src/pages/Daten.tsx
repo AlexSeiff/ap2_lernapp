@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import type { BackupInfo } from '../../shared/api';
-import { mergeProgress } from '../../shared/mergeProgress';
-import { emptyProgress } from '../../shared/progress';
+import type { BackupInfo } from '../../domain/api';
+import { mergeProgress } from '../../domain/mergeProgress';
+import { emptyProgress } from '../../domain/progress';
 import { localDate, resetAufgabenAntworten } from '../lib/progress';
 import { useBackupDownload } from '../hooks/useBackupDownload';
 import { useConfirm } from '../hooks/useConfirm';

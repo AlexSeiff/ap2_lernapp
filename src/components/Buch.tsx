@@ -124,7 +124,7 @@ export function Kopfzeile({
   const { pathname } = useLocation();
   const aktiv = aktiverBereich(pathname);
   const ziel = aktiv ? aktivesUnterziel(pathname, bereich(aktiv)) : undefined;
-  const problem = saveState === 'fehler' || saveState === 'konflikt';
+  const problem = saveState === 'fehler';
   return (
     <header className="kopfzeile">
       <button type="button" className="inhalt-knopf" onClick={onInhalt} aria-expanded={inhaltOffen} aria-controls="inhaltsseite">

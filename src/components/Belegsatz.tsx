@@ -5,7 +5,7 @@
 
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { Section } from '../../shared/types';
+import type { Section } from '../../domain/types';
 import { useStore } from '../lib/store';
 import { Icon, type IconName } from './Icon';
 import { Markdown } from './Markdown';

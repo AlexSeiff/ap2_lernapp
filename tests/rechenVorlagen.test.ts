@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import katex from 'katex';
-import type { RechenWert } from '../shared/types';
+import type { RechenWert } from '../domain/types';
 import { quartil } from '../src/rechnen/hilfen';
 import { VORLAGEN } from '../src/rechnen/vorlagen/index';
 import { erzeugeZufall, seedAusText } from '../src/rechnen/zufall';

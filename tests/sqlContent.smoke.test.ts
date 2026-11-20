@@ -7,8 +7,8 @@ import initSqlJs, { type Database, type SqlJsStatic } from 'sql.js';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { CONTENT_DIR } from '../build/inhalt';
 import { lintSql } from '../src/sql/lint';
-import { parseSqlUebungen } from '../shared/sqlUebungen';
-import type { SqlDataset } from '../shared/types';
+import { parseSqlUebungen } from '../domain/sqlUebungen';
+import type { SqlDataset } from '../domain/types';
 
 const FILE = 'AP2_SQL_Uebungen.json';
 const json = readFileSync(join(CONTENT_DIR, FILE), 'utf8');

@@ -2,7 +2,7 @@
 // wie auf den Blättern (fett = PK, ↑ = FK), Ausgangstabelle aus der Anlage und der Abgleich mit den Tabellen der Musterlösung.
 // Der Abgleich ist eine Hilfe zur Selbstbewertung: Namen dürfen abweichen, entscheiden tust du. Rein, ohne React.
 
-import type { Section } from '../../shared/types';
+import type { Section } from '../../domain/types';
 
 export interface Spalte {
   name: string;

@@ -1,5 +1,5 @@
 // Begriffsseiten (Umsetzungsplan Phase 3): eine ausführliche Seite je Glossarbegriff aus content/Begriffsseiten_<Buchstabe>.md.
-// Rein, ohne Node/React – Server (Import, Prüfung) und Client (Verweise auflösen) nutzen es gemeinsam.
+// Rein, ohne Node/React – Build (Import, Prüfung) und Client (Verweise auflösen) nutzen es gemeinsam.
 //
 // Format einer Seite:
 //   ## <Begriff>

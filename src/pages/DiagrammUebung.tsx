@@ -13,7 +13,7 @@ import {
   formregeln,
   musterBelegung,
   slotsVon,
-} from '../../shared/diagrammUebungen';
+} from '../../domain/diagrammUebungen';
 import { DiagrammSvg, FormSymbol, formName } from '../components/DiagrammSvg';
 import { Icon } from '../components/Icon';
 import { Markdown } from '../components/Markdown';

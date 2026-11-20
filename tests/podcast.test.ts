@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { emptyProgress } from '../shared/progress';
+import { emptyProgress } from '../domain/progress';
 import { CONTENT_DIR, ladeInhalt } from '../build/inhalt';
 import {
   bauePodcast,

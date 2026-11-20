@@ -1,3 +1,4 @@
+import { ohneRevision } from './ohneRevision';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -9,9 +10,9 @@ import {
   musterBelegung,
   parseDiagrammUebungen,
   slotsVon,
-} from '../shared/diagrammUebungen';
-import { mergeProgress } from '../shared/mergeProgress';
-import { checkProgressPut, emptyProgress, migrateProgress, PROGRESS_VERSION, ProgressSchema } from '../shared/progress';
+} from '../domain/diagrammUebungen';
+import { mergeProgress } from '../domain/mergeProgress';
+import { emptyProgress, migrateProgress, PROGRESS_VERSION, ProgressSchema } from '../domain/progress';
 import { diagrammStatus, diagrammSummary, recordDiagrammCheck, recordDiagrammLoesung } from '../src/lib/diagramme';
 import { einsetzen } from '../src/pages/DiagrammUebung';
 import { ohneAntworten } from './ohneAntworten';
@@ -220,12 +221,21 @@ describe('Fortschritt (Version 8)', () => {
     expect(PROGRESS_VERSION).toBeGreaterThanOrEqual(9);
     const v7 = fixture('fortschritt-v7-2026-10-09.json');
     expect(migrateProgress(v7)).toEqual(
-      ohneAntworten({ ...umgezogen(v7), version: PROGRESS_VERSION, diagramme: {}, diagrammDays: {}, hervorhebungen: {}, json: {} }),
+      ohneAntworten({
+        ...ohneRevision(umgezogen(v7)),
+        version: PROGRESS_VERSION,
+        diagramme: {},
+        diagrammDays: {},
+        hervorhebungen: {},
+        json: {},
+      }),
     );
     const v8 = fixture('fortschritt-v8-2026-10-09.json');
-    expect(migrateProgress(v8)).toEqual(ohneAntworten({ ...umgezogen(v8), version: PROGRESS_VERSION, hervorhebungen: {}, json: {} }));
+    expect(migrateProgress(v8)).toEqual(
+      ohneAntworten({ ...ohneRevision(umgezogen(v8)), version: PROGRESS_VERSION, hervorhebungen: {}, json: {} }),
+    );
     expect(ProgressSchema.safeParse(v8).success).toBe(true);
-    expect(checkProgressPut(migrateProgress(v8), v8)).toMatchObject({ ok: true, progress: { revision: 46 } });
+    expect(ProgressSchema.safeParse(migrateProgress(v8)).success).toBe(true);
   });
 
   it('ungültige Einträge fallen weg, eine alte gespeicherte Belegung auch (Wiederholung beginnt leer)', () => {

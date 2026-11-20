@@ -1,6 +1,6 @@
 // Dauer und Restzeit der Übungsklausur: Bearbeitungszeit je Klausur, sichtbare Anzeige (mm:ss) und Ansage für Screenreader.
-import { EXAM_MINUTES } from '../../shared/config';
-import type { Exam } from '../../shared/types';
+import { EXAM_MINUTES } from '../../domain/config';
+import type { Exam } from '../../domain/types';
 
 /**
  * Bearbeitungszeit einer Klausur in Minuten. Sie steht im Titel der Übungsklausur („… (100 Punkte, 60 Minuten)“ – WiSo 60,

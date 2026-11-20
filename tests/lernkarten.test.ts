@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { answerToMarkdown, parseLernkarten, pruefeMc, topicFromSource } from '../shared/lernkarten';
+import { answerToMarkdown, parseLernkarten, pruefeMc, topicFromSource } from '../domain/lernkarten';
 import { loadContent } from '../build/inhalt';
 
 // Fixture im Format von AP2_FIDPA_Lernkarten.json (3 Decks, 7 Karten) – die echte Datei prüft inhalte.smoke.test.ts grob.

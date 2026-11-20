@@ -1,4 +1,4 @@
-// Datenmodell der Lern-App – wird von Server, Client und Tests gemeinsam genutzt.
+// Datenmodell der Lern-App – wird von Build, Client und Tests gemeinsam genutzt.
 
 import type { DiagrammUebung } from './diagrammUebungen.ts';
 import type { JsonUebung } from './jsonUebungen.ts';
@@ -37,12 +37,12 @@ export interface Flashcard {
   tags?: string[];
   /** Geprüfter Block „mc“ aus der Datei (Leicht-Modus); fehlt er, kann der Leicht-Modus automatische Antworten nutzen. */
   mc?: KartenMc;
-  /** Zeichnung zur Rückseite als SVG (Positivliste, shared/svgDiagramm.ts); die Antwort bleibt reiner Text für Suche und Leicht-Modus. */
+  /** Zeichnung zur Rückseite als SVG (Positivliste, domain/svgDiagramm.ts); die Antwort bleibt reiner Text für Suche und Leicht-Modus. */
   diagramm?: string;
   /** Rechenweg als Markdown mit Formeln ($…$); ersetzt bei Rechenkarten die Antwort auf der Rückseite. */
   rechenweg?: string;
   /**
-   * Nur Begriffskarten mit Begriffsseite (beim Laden ergänzt, shared/verwandt.ts): ids der Begriffskarten, gegen die der Begriff im
+   * Nur Begriffskarten mit Begriffsseite (beim Laden ergänzt, domain/verwandt.ts): ids der Begriffskarten, gegen die der Begriff im
    * Abschnitt „Abgrenzung“ abgegrenzt wird – die besten falschen Antworten im Leicht-Modus (Umsetzungsplan Phase 5).
    */
   abgrenzung?: string[];
@@ -50,7 +50,7 @@ export interface Flashcard {
   siehe?: string[];
   /** Nur Begriffskarten mit Begriffsseite: erste „Mehr:“-Angabe der Seite (z. B. „Deep Dive 1, 2.1“). */
   abschnitt?: string;
-  /** SQL-Übungen zum Üben im Editor (beim Laden aus deren Feld „karten“ ergänzt, shared/sqlUebungen.ts). */
+  /** SQL-Übungen zum Üben im Editor (beim Laden aus deren Feld „karten“ ergänzt, domain/sqlUebungen.ts). */
   sqlUebungen?: string[];
 }
 
@@ -91,7 +91,7 @@ export interface Task {
   auto?: AutoCheck;
   /**
    * SQL-Übung, mit der die Aufgabe im SQL-Editor beantwortet und nach der Abgabe automatisch geprüft wird
-   * (beim Laden aus dem Feld „aufgaben“ der Übung ergänzt, shared/sqlUebungen.ts).
+   * (beim Laden aus dem Feld „aufgaben“ der Übung ergänzt, domain/sqlUebungen.ts).
    */
   sqlUebung?: string;
 }

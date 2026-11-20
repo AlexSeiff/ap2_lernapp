@@ -1,7 +1,7 @@
-// Markierte Karteikarten (Umsetzungsplan Phase 4): reine Funktionen. Gespeichert in progress.markiert (shared/progress.ts, Version 7).
+// Markierte Karteikarten (Umsetzungsplan Phase 4): reine Funktionen. Gespeichert in progress.markiert (domain/progress.ts, Version 7).
 // Markieren ändert nichts an der Wiederholungsplanung (CardState bleibt unberührt).
 
-import type { Progress } from '../../shared/progress';
+import type { Progress } from '../../domain/progress';
 
 export const istMarkiert = (p: Pick<Progress, 'markiert'>, cardId: string) => p.markiert[cardId]?.an === true;
 

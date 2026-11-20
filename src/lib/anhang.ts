@@ -1,7 +1,7 @@
 // Welche Teile des Prüfungsanhangs zu Aufgaben passen (components/Belegsatz.tsx, AnhangPanel): der SQL-Belegsatz zu SQL-Aufgaben,
 // die Formelübersicht zu Rechenaufgaben. In der AP2 liegt der Anhang immer bei – hier soll er dort griffbereit sein, wo man ihn braucht.
 
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 import { findeOperatoren } from './operatoren';
 
 /** SQL in der Aufgabe: Codeblock, das Wort „SQL“ oder typische Schlüsselwörter (großgeschrieben, wie in den Lernblättern). */

@@ -1,6 +1,5 @@
 import { lazy, type ReactNode, Suspense, useCallback, useEffect, useState } from 'react';
 import { HashRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
-import { CONFLICT_MESSAGE } from '../shared/progress';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Icon } from './components/Icon';
 import { Inhaltsseite, Kopfzeile } from './components/Buch';
@@ -158,7 +157,6 @@ function useVorladen() {
 const SAVE_TEXT: Record<string, string> = {
   gespeichert: 'Gespeichert',
   speichert: 'Speichert …',
-  konflikt: 'Nicht gespeichert – neu laden',
   fehler: 'Speichern fehlgeschlagen',
 };
 
@@ -172,20 +170,7 @@ function SkipLink() {
 }
 
 function SaveErrorBanner() {
-  const { saveError, saveState } = useSpeicherStand();
-  if (saveState === 'konflikt') {
-    // Dieser Tab speichert nicht mehr, sonst würde er den Fortschritt aus dem anderen Tab überschreiben.
-    return (
-      <div className="card warn" role="alert">
-        <p>
-          <Icon name="triangle-alert" /> {CONFLICT_MESSAGE}. Änderungen in diesem Tab werden nicht mehr gespeichert.
-        </p>
-        <button type="button" onClick={() => window.location.reload()}>
-          <Icon name="rotate-cw" /> Neu laden
-        </button>
-      </div>
-    );
-  }
+  const { saveError } = useSpeicherStand();
   return saveError ? (
     <p className="card warn" role="alert">
       <Icon name="triangle-alert" /> {saveError}

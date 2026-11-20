@@ -3,7 +3,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { inhaltDateien } from '../build/inhaltPlugin';
-import { migrateProgress, ProgressSchema } from '../shared/progress';
+import { migrateProgress, ProgressSchema } from '../domain/progress';
 import { umgezogen } from './umgezogen';
 
 describe('Umbau: unveränderte ausgelieferte Inhalte', () => {

@@ -1,7 +1,7 @@
 // Rechenübungen: reine Update-Funktionen und Selektoren für den Fortschritt (Progress.rechnen / Progress.rechnenDays).
 // Wiederholung wie bei den SQL-Übungen (src/lib/wiederholung.ts, JOURNAL_INTERVALS).
 
-import type { Progress, RechenState } from '../../shared/progress';
+import type { Progress, RechenState } from '../../domain/progress';
 import { isDue, localDate } from './progress';
 import { nachPruefung, restartRepetition } from './wiederholung';
 

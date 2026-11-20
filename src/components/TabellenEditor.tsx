@@ -4,7 +4,7 @@
 // Relationenschreibweise wie auf den Blättern (fett = PK, ↑ = FK). TabellenAnsicht zeigt die Abgabe ohne Bedienelemente.
 
 import { useState } from 'react';
-import type { Section } from '../../shared/types';
+import type { Section } from '../../domain/types';
 import { useConfirm } from '../hooks/useConfirm';
 import { neueId } from '../lib/diagrammEditor';
 import {

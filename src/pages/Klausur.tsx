@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import type { ExamRun } from '../../shared/progress';
+import type { ExamRun } from '../../domain/progress';
 import { AnswerInput } from '../components/AnswerInput';
 import { FehlergrundWahl } from '../components/FehlergrundWahl';
 import { Markdown } from '../components/Markdown';

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { emptyProgress, type ExamRun, type Progress } from '../shared/progress';
-import type { Flashcard, Task } from '../shared/types';
+import { emptyProgress, type ExamRun, type Progress } from '../domain/progress';
+import type { Flashcard, Task } from '../domain/types';
 import { fallenKarten, filterCards, readCardFilter, withCardFilter } from '../src/lib/cards';
 import { finishExam, submitExam } from '../src/lib/progress';
 

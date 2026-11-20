@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { defaultSettings, PROGRESS_VERSION } from '../shared/progress';
+import { defaultSettings, PROGRESS_VERSION } from '../domain/progress';
 import { backupFileName, parseBackup } from '../src/lib/backup';
 
 const fixture = (name: string) => readFileSync(join(import.meta.dirname, 'fixtures', name), 'utf8');

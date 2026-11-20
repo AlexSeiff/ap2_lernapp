@@ -13,7 +13,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type RefObject,
 } from 'react';
-import type { Form } from '../../shared/diagrammUebungen';
+import type { Form } from '../../domain/diagrammUebungen';
 import {
   beschriftungsPunkt,
   behaelterVon,

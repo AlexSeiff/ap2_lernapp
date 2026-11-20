@@ -14,9 +14,9 @@
 // 4. Bleiben insgesamt Punkte offen, füllt ein zweiter Durchgang mit weiteren Anfängen (erst im selben Unterbereich, dann in allen),
 //    bis 100 erreicht sind oder nichts mehr passt. Nie über 100 Punkte, keine Aufgabe doppelt.
 
-import type { Exam, ExamBlock, MaterialDoc, Section, Task, Topic } from '../../shared/types';
+import type { Exam, ExamBlock, MaterialDoc, Section, Task, Topic } from '../../domain/types';
 import { erzeugeZufall } from '../rechnen/zufall';
-import type { KernInhalt, KernTopic, StartInhalt } from '../../shared/texte';
+import type { KernInhalt, KernTopic, StartInhalt } from '../../domain/texte';
 
 export type MischBereich = 'prozess' | 'qualitaet' | 'gemischt';
 

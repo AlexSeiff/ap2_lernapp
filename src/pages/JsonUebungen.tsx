@@ -2,7 +2,7 @@
 // Rechenübungen.
 
 import { Link, useSearchParams } from 'react-router-dom';
-import type { JsonUebung } from '../../shared/jsonUebungen';
+import type { JsonUebung } from '../../domain/jsonUebungen';
 import { Icon } from '../components/Icon';
 import { jsonStatus, jsonSummary, jsonUebungen } from '../lib/jsonUebungen';
 import { useStore } from '../lib/store';

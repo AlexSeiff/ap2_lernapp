@@ -122,8 +122,7 @@ function mergeDays(a: Record<string, number>, b: Record<string, number>): Record
  * - markiert: je Karte die neuere Aktion (`am`), auch ein Entmarkieren – so taucht eine entfernte Markierung nicht wieder auf.
  * - hervorhebungen: je Bereich (Aufgabe, Ausgangssituation) die Textmarken der neueren Änderung (`am`), auch eine leere Liste.
  * - cardReviewDays / sqlDays / rechnenDays / diagrammDays: je Tag das Maximum.
- * - settings, revision und unbekannte Felder: vom aktuellen Stand (Einstellungen gehören zu diesem Browser;
- *   die Revision muss zum Gespeicherten passen, sonst lehnt checkProgressPut das Speichern als veraltet ab).
+ * - settings und unbekannte Felder: vom aktuellen Stand (Einstellungen gehören zu diesem Browser).
  * Bei gleichen Ständen kommt der aktuelle Stand heraus (mergeProgress(p, p) ≈ p).
  */
 export function mergeProgress(current: Progress, incoming: Progress): Progress {
@@ -154,7 +153,6 @@ export function mergeProgress(current: Progress, incoming: Progress): Progress {
   return {
     ...base,
     version: PROGRESS_VERSION,
-    revision: current.revision,
     attempts,
     exams,
     ...(activeExam ? { activeExam } : {}),

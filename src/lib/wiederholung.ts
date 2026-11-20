@@ -2,7 +2,7 @@
 // falsch oder Lösung gezeigt → morgen wieder (Stufe 1), richtig bei fälliger Wiederholung → nächste Stufe (3, dann 7 Tage),
 // nach der letzten Stufe erledigt (keine Stufe, kein Fälligkeitsdatum).
 
-import { JOURNAL_INTERVALS } from '../../shared/config';
+import { JOURNAL_INTERVALS } from '../../domain/config';
 import { addDays, isDue } from './progress';
 
 type Wiederholbar = { stage?: number; due?: string };

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useMemo } from 'react';
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 import { editorFuer } from '../lib/editorAufgabe';
 import type { AutoAnswer } from '../lib/grading';
 import { sqlUebungZuAufgabe } from '../lib/sqlAufgabe';

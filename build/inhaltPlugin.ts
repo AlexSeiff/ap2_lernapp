@@ -3,8 +3,8 @@
 // Änderung an einem Lernblatt neu gebaut. Welche Dateien es gibt, steht an einer Stelle: inhaltDateien().
 
 import type { Plugin } from 'vite';
-import { teileInhalt } from '../shared/texte.ts';
-import type { ImportIssue } from '../shared/types.ts';
+import { teileInhalt } from '../domain/texte.ts';
+import type { ImportIssue } from '../domain/types.ts';
 import { CONTENT_DIR, isContentSource, ladeInhalt } from './inhalt.ts';
 
 export interface InhaltDateien {

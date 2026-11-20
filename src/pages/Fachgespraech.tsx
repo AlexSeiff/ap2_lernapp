@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { Rating } from '../../shared/progress';
-import type { Flashcard } from '../../shared/types';
+import type { Rating } from '../../domain/progress';
+import type { Flashcard } from '../../domain/types';
 import { Icon } from '../components/Icon';
 import { Markdown } from '../components/Markdown';
 import { rateCard } from '../lib/progress';

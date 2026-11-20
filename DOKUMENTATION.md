@@ -62,7 +62,7 @@ sql.js (SQLite/WASM), CodeMirror 6.
 
 ```
 lern-app/
-├─ shared/            used by app, build and tests (no file-system access)
+├─ domain/            used by app, build and tests (no file-system access)
 │  ├─ config.ts         constants: EXAM_MINUTES (fallback; the duration per exam comes from its title), NEW_PER_SESSION, JOURNAL_INTERVALS, CARD_INTERVALS, SAVE_DELAY_MS, DEV_PORT,
 │  │                    HEUTE_MINUTEN / HEUTE_ZEITEN / HEUTE_KARTEN_BLOCK (8.1), SICHER_RICHTIG_AB (8.3)
 │  ├─ types.ts          content model (Topic, Task, Flashcard, Deck, Exam, SqlDataset, SqlExercise, Content …)
@@ -116,7 +116,7 @@ lern-app/
 Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Messung/phase10/`, Lighthouse values in
 `AP-2/Messung_Ausgangslage.md`).
 
-- **Start and details** (`shared/texte.ts`, `src/lib/details.tsx`, November 2026): `content.json` is a `StartInhalt` – cards and tasks
+- **Start and details** (`domain/texte.ts`, `src/lib/details.tsx`, November 2026): `content.json` is a `StartInhalt` – cards and tasks
   only as heads (id, topic, deck, kind, typ, points …; ~0.8 MB instead of ~1.96 MB, gzip 167 kB instead of 506 kB). Questions, answers,
   `mc`, `rechenweg`, tags and cross references of the cards and `markdown`/`solution` of the tasks lie in `details.json`.
   The Übersicht and the app frame use `useStartStore()` and render as soon as `content.json` is there. Every other route sits below
@@ -125,7 +125,7 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
   Two widgets of the Übersicht need texts (Markiert, Begriff des Tages): `useDetailsWennDa()` fills them in when the details arrive.
   `ladeDetailsFuerAdresse` (main.tsx) requests the details at start for any address but the Übersicht; `useVorladen` loads them in
   idle time. Start and details of different versions throw ("bitte die Seite neu laden"). Tested in `tests/details.test.ts`.
-- **Core and texts** (`shared/texte.ts`): the content below `<MitDetails>` is a `KernInhalt` – everything except the section texts
+- **Core and texts** (`domain/texte.ts`): the content below `<MitDetails>` is a `KernInhalt` – everything except the section texts
   (`Section.markdown`, about a third of the content). The texts lie per topic in `texte/<id>.json` (section id →
   Markdown; DD17 includes the generated glossary list). The store's `content` is typed `KernInhalt`, so the compiler shows every place that
   needs texts. Only four do: the Lernblatt page (`useThemaTexte(topic)`), Glossar, Begriffsseite and search (`useVollerInhalt()`), all in
@@ -173,7 +173,7 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
 | everything else (`Lernplan_*.md`, `Prompt_*.md`, `Ideen.md`, `Begriffsseiten_Hinweise.md`, plan/measurement notes …) | **not read**: `isContentFile` is an **allow-list** (`INHALT_MD` in `build/inhalt.ts`: `DeepDive_NN_*.md`, `Deep_Dive_SQL*.md`, `Lernzettel_Kernthemen.md`, `AP2_Themenliste*.md`, `AP2_SQL_Belegsatz.md`, `Begriffsseiten_<Buchstabe>.md` + the JSON patterns incl. `AP2_Quellen.json`) – notes in the folder never end up in the app |
 
 - **Prüferfragen**: `> ❓ **Prüferfrage:** Frage` with the italic answer in the next quote line → `Flashcard{kind:'prueferfrage'}`.
-  They also remain inside the section Markdown, so they show up in the Lernen view. `shared/prueferfragen.ts` reads the block
+  They also remain inside the section Markdown, so they show up in the Lernen view. `domain/prueferfragen.ts` reads the block
   (`readPrueferfrage`, used by the parser) and splits/strips it for the Lernen view (`splitPrueferfragen`, `stripPrueferfragen`).
 - **Fachgespräch**: numbered list under `## Fachgespräch…` → `Flashcard{kind:'fachgespraech'}`.
 - A trailing `(KW …)` in a sheet or section title is removed (`stripKw`); there is no calendar week in the data model any more.
@@ -183,7 +183,7 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
   `## Fachgespräch…` / `## Lernziel…` heading then starts the appendix, so cards and Lernziele work as usual. The Lernen page hides
   Übungsklausur and Einzelaufgaben for such topics; `tests/inhalte.smoke.test.ts` lists them in `NACHSCHLAGEN`.
 - **Diagrams**: a ```` ```svg ```` block holds a hand-drawn SVG that `<Markdown>` shows as `<figure class="diagramm">` (inline, so it works
-  offline and in print). `shared/svgDiagramm.ts` (`pruefeSvg`) allows only drawing elements (`svg g defs marker path line polyline polygon rect
+  offline and in print). `domain/svgDiagramm.ts` (`pruefeSvg`) allows only drawing elements (`svg g defs marker path line polyline polygon rect
   circle ellipse text tspan title desc`) and drawing attributes – no scripts, events, links, `style`, comments or external `url(…)`; a block that
   fails is shown as code and reported as ImportIssue (`pruefeDiagramme`), as is an `id` used twice (markers are page-wide). Colours only via
   classes from `styles.css` (`dg-linie`, `dg-form`, `dg-grau`, `dg-akzent`, `dg-gut`, `dg-mittel`, `dg-rot`, `dg-voll`, `dg-linie-akzent`,
@@ -205,7 +205,7 @@ Rule of the phase: nothing visible changes (before/after screenshots in `AP-2/Me
 - `quelle` containing "Deep Dive N" maps the deck to a topic; decks without one (WiSo, project work) are reachable via the deck filter.
 - Progress is keyed by card `id`. **Never change IDs.**
 - Optional **`mc`** block per card for the Leicht-Modus (phase 6): `{ "richtig": "…", "falsch": ["…", "…", "…"], "erklaerung"?: "…" }`.
-  Validated by `KartenMcSchema` / `pruefeMc` (`shared/lernkarten.ts`): exactly 3 `falsch`, pairwise distinct and none equal to `richtig`
+  Validated by `KartenMcSchema` / `pruefeMc` (`domain/lernkarten.ts`): exactly 3 `falsch`, pairwise distinct and none equal to `richtig`
   (compared with `mcNorm`: case, whitespace and a final full stop ignored). An invalid block → ImportIssue, the card is imported without `mc`.
   Today no card has `mc`; the Leicht-Modus uses the automatic fallback (§ 5).
 
@@ -234,7 +234,7 @@ Currently 5 datasets (`moebelhaus`, `datafit`, `kundenimport`, `holzlager` for t
 IDs: `SQL-MH` (moebelhaus), `SQL-DF` (datafit), `SQL-DQ` (kundenimport), `SQL-HL` (holzlager), `SQL-EL` (eventlager). SQLite has no `STDDEV()`: SQL-EL-002 uses
 `SQRT(AVG(x * x) - AVG(x) * AVG(x))` and says so in the task text.
 
-- **Links** (optional, `shared/sqlUebungen.ts` → `verknuepfeSqlUebungen`, run in `buildContent`): `aufgaben` = task ids from the
+- **Links** (optional, `domain/sqlUebungen.ts` → `verknuepfeSqlUebungen`, run in `buildContent`): `aufgaben` = task ids from the
   Lernblätter that are answered **in the SQL editor** with this exercise (sets `Task.sqlUebung`; a task may belong to only one
   exercise); `karten` = card ids whose back shows „Im SQL-Editor üben: …“ (`Flashcard.sqlUebungen`). Unknown ids or a task linked
   twice → ImportIssue, link skipped. Tasks that ask to *predict* a result (DD1 A2/C1, DataFit W2) stay text tasks on purpose.
@@ -366,7 +366,7 @@ pick it up automatically. Add at least one formula with the template id in `vorl
 
 Write JSON as text. `{ meta, uebungen: [{ id, titel, stufe 1–3, topicId?, aufgabe (Markdown, "Sie"-form with an operator in italics), vorgabe?
 (prefilled text, e.g. faulty JSON to correct), loesung (JSON as text), pruefungen: [{ pfad, typ? | wert? | laenge? | schluessel? | fehlt?,
-hinweis? }], hinweise[], erklaerung?, tags[] }] }`. `shared/jsonUebungen.ts`: `pruefeJsonSyntax` is an own strict RFC 8259 parser (line/column and German hints
+hinweis? }], hinweise[], erklaerung?, tags[] }] }`. `domain/jsonUebungen.ts`: `pruefeJsonSyntax` is an own strict RFC 8259 parser (line/column and German hints
 for single quotes, trailing comma, missing comma, unquoted key, decimal comma, leading zero, `True`/`undefined` …); `pruefeJsonAntwort` then checks the rules
 against the parsed value – paths like `positionen[0].menge`, type and value must match exactly (`"false"` is not `false`), numbers with a tiny tolerance –
 so key order and indentation are free. The importer skips (and reports) an exercise whose `loesung` is not valid JSON or fails its own rules, or whose
@@ -375,7 +375,7 @@ Prüfen / Hinweis / Lösung zeigen; progress `json` (§ 6) with the repetition o
 
 ### 4.4b Diagramm-Übungen `AP2_Diagramm_Uebungen.json` (plan phase 7)
 
-`{ meta, uebungen: [...] }`, parsed by `parseDiagrammUebungen` (`shared/diagrammUebungen.ts`, zod + `pruefeDiagrammUebung`; a broken
+`{ meta, uebungen: [...] }`, parsed by `parseDiagrammUebungen` (`domain/diagrammUebungen.ts`, zod + `pruefeDiagrammUebung`; a broken
 exercise is skipped and reported as ImportIssue). One exercise:
 
 | Field | Meaning |
@@ -398,7 +398,7 @@ generated by `AP-2/Messung/diagramme_gen.py` (`python diagramme_gen.py <AP-2>/AP
 
 ### 4.4c Quellen `AP2_Quellen.json` (plan phase 8)
 
-`{ meta, quellen: [...] }`, parsed by `parseQuellen` (`shared/quellen.ts`, zod; a broken entry is skipped and reported as ImportIssue).
+`{ meta, quellen: [...] }`, parsed by `parseQuellen` (`domain/quellen.ts`, zod; a broken entry is skipped and reported as ImportIssue).
 One entry: `{ ziel, titel, url, anbieter, art, youtubeId?, geprueft }`.
 
 | Field | Meaning |
@@ -494,7 +494,7 @@ drops the mention.
   - `rehypeTabellen` (every `<Markdown>`): columns whose body cells are all numbers (German format, optional `Σ`, `%`, `€`, `P`; empty/`–` ignored)
     get `class="num"` (right-aligned, tabular figures) unless the column has an explicit alignment; rows whose first cell starts with
     `Σ`, `Summe`, `Gesamt` or `Insgesamt` get `class="sum-row"` (bold, top rule).
-- **Rechenweg** (`components/Rechenweg.tsx` + `shared/rechenweg.ts`): numbered steps, each `Formel` (KaTeX) → `Einsetzen` (KaTeX) →
+- **Rechenweg** (`components/Rechenweg.tsx` + `domain/rechenweg.ts`): numbered steps, each `Formel` (KaTeX) → `Einsetzen` (KaTeX) →
   `Ergebnis` (`formatErgebnis`: `Intl.NumberFormat('de-DE')`, fixed decimals from `runden`, typographic minus, unit with a space) plus a
   rounding note (`rundungsHinweis`, only if the shown value is actually rounded). `latexZahl` formats numbers for LaTeX (`70{,}00`).
   Used on the Rechenübung page (loaded lazily when the solution is opened); it imports KaTeX, so only use it in lazy-loaded pages.
@@ -528,7 +528,7 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
   **Selection of the wrong answers (plan phase 5, replaces "same deck, closest length"):** candidates are answers of other cards of the same
   *kind* – Begriffskarten only among Begriffskarten, Prüferfragen only among Prüferfragen, other Lernkarten among themselves – and ranked in tiers:
   1. **Curated** (Begriffskarten): the terms from the Begriffsseite's „Abgrenzung“ section (`Flashcard.abgrenzung`), then from „Siehe auch“
-     (`Flashcard.siehe`), also from other decks. Filled in at load time by `ergaenzeVerwandte` (`shared/verwandt.ts`, called in
+     (`Flashcard.siehe`), also from other decks. Filled in at load time by `ergaenzeVerwandte` (`domain/verwandt.ts`, called in
      `ladeInhalt`): names = header row and first column of the Abgrenzung tables plus bold words in its text, and the „Siehe auch“ names,
      resolved to Begriffskarten via `namensSchluessel` of the card question or the page's „Auch“ variants. Also `Flashcard.abschnitt` = the
      page's first „Mehr:“ reference. About 99 KB extra in `content.json` (uncompressed).
@@ -577,7 +577,7 @@ mode is meant as an entry point; the Dashboard shows "🟢 Leicht-Modus ist zum 
 The **Weiterlernen** button opens **Heute lernen**. The checklist below it shares the same daily session. Ticking the current step selects the next open step. Completed steps can be unchecked and checked again in any order, including after the round is complete. Points and card ratings come from the respective exercise.
 
 - **Planner** `planeHeute(content, progress, { today, zufall, minuten })` in `src/lib/heute.ts` (pure, `tests/heute.test.ts`). Target
-  `HEUTE_MINUTEN` = 20 min; estimates in `HEUTE_ZEITEN` (`shared/config.ts`): card 0.5 min (Leicht 0.33), task 0.9 min per point (min 3),
+  `HEUTE_MINUTEN` = 20 min; estimates in `HEUTE_ZEITEN` (`domain/config.ts`): card 0.5 min (Leicht 0.33), task 0.9 min per point (min 3),
   SQL 5, Rechnen 5, Diagramm 5. **Only things not yet done or last done wrong** – nothing whose last attempt was right (full points, or
   `zuletztRichtig`), even if a spaced repetition is due (owner decision, October 2026). Steps:
   1. **Fehlerjournal**: due open entries whose last attempt was below full points (oldest due first) until about half the time, at least one.
@@ -632,7 +632,7 @@ any of its tasks needs). `tests/belegsatz.test.ts` checks order and rendering of
   ratings `CARD_INTERVALS[2]` days apart to reach box 3. `kartenMinutenProTag` = ratings still needed (new: 2, started: 3 − box) ×
   `WIEDERHOLUNGS_FAKTOR` × `HEUTE_ZEITEN.karte` / usable days. `/heute` shows both and points to Karteikarten for what the daily round
   leaves out. Before: all cards incl. ~800 Begriffskarten counted, giving „42 Karten pro Tag“.
-- **Lernzeiten** (`Settings.lernzeiten`, optional, no version bump; read tolerantly by `leseLernzeiten` in `shared/progress.ts`):
+- **Lernzeiten** (`Settings.lernzeiten`, optional, no version bump; read tolerantly by `leseLernzeiten` in `domain/progress.ts`):
   `{ werktags, wochenende }`, each `{ tage (Date.getDay, Mo–Fr resp. Sa/So), von 'HH:MM', minuten 5–600 }`. Missing = standard
   (Mo–Fr 18:00 for 30 min, Sa 10:00 for 60 min, `STANDARD_LERNZEITEN` in `src/lib/lernzeiten.ts`). Set in Einstellungen → „Lernzeiten“
   (`components/Lernzeiten.tsx`, weekday chips, start time, duration).
@@ -861,7 +861,7 @@ only in `useCardSession` state and is cleared for the next card – **not persis
   One page per `## Begriff`, first line `<!-- id: <glossary id> · quellen: … · stand: JJJJ-MM -->`, then the definition paragraph, optional
   `Auch: …`, `### Erklärung/Beispiel/Abgrenzung/Prüfungsfalle/Merksatz`, `Siehe auch: A · B`, `Mehr: Deep Dive 5, 6.5 · …`; `## Ausgelassen`
   at the end of each file lists skipped labels and is ignored. Today **1,003 pages** for 1,135 glossary terms.
-- **Parser/check** `shared/begriffsseiten.ts` (pure, `tests/begriffe.test.ts`): `parseBegriffsseiten` (page without id comment → ImportIssue),
+- **Parser/check** `domain/begriffsseiten.ts` (pure, `tests/begriffe.test.ts`): `parseBegriffsseiten` (page without id comment → ImportIssue),
   `pruefeBegriffsseiten` (id must exist in the glossary, ids unique, every „Siehe auch“ name must lead to a page, a glossary term or a section
   heading), `mehrZiel` („Deep Dive 5, 6.5“ → section, „Teil 3“ → part, „A3“ → section „A3 …“ or else task `NN-A3`, „SQL-Zusatz 1.2“ → topic 00).
   `ladeInhalt(dir)` in `build/inhalt.ts` returns `{ content, seiten }`; `loadContent` = `ladeInhalt().content`.
@@ -985,7 +985,7 @@ Under **Einstellungen → Design → Karo-Stärke**, learners can choose **Kräf
 
 ## 6. Progress (persisted data)
 
-Defined in `shared/progress.ts`, **`PROGRESS_VERSION = 9`**.
+Defined in `domain/progress.ts`, **`PROGRESS_VERSION = 9`**.
 
 ```ts
 type Progress = {
@@ -1066,7 +1066,7 @@ type Settings = {
   app (e.g. a not yet updated PWA) keeps the fields too. `migrateAttempt`/`migrateExam` now drop invalid values (anything but 1, 2, 3);
   `checkProgressPut` rejects them. Fixture `tests/fixtures/fortschritt-v6-2026-10-01.json` (v6 before 8.3) is tested to load unchanged.
   **Phase 8.7** added `Attempt.fehlergrund` and `ExamRun.fehlergrund` by the same rule (optional, loose schemas, `migrateAttempt`/`migrateExam` kept
-  unknown fields): `FEHLERGRUENDE` in `shared/progress.ts`, invalid values dropped on migration (`isFehlergrund`) and rejected by
+  unknown fields): `FEHLERGRUENDE` in `domain/progress.ts`, invalid values dropped on migration (`isFehlergrund`) and rejected by
   `checkProgressPut` (`z.enum`); `PROGRESS_VERSION` stays **6**. Tested with the v6 fixture (which has no `fehlergrund`). Phases 8.5, 8.6, 8.8 and
   8.9 need no format change (mixed exam id in `topicId`; example stage from `RechenState`; search and glossary are derived data).
   Adding a **required** field or changing a meaning still needs a version bump.
@@ -1081,7 +1081,7 @@ type Settings = {
   (`localStorage` `ap2-lesestelle`, § 5 „Übersicht“) and the "Deine Antwort" text (not stored).
   Backup files are read with `parseBackup` (`src/lib/backup.ts`, used by Daten & Import and the welcome screen).
   **Version 9 (October 2026): task ids moved.** The Übungsklausuren 01–16 were rebuilt in the format of the Altklausuren (subject exams: four
-  Aufgaben of 20–30 P; WiSo: 30 tasks in five blocks of 20 P), which gave 84 tasks a new code. `shared/aufgabenUmzug.ts` (`AUFGABEN_UMZUG_V9`,
+  Aufgaben of 20–30 P; WiSo: 30 tasks in five blocks of 20 P), which gave 84 tasks a new code. `domain/aufgabenUmzug.ts` (`AUFGABEN_UMZUG_V9`,
   old id → new id, never edit afterwards) and `zieheAufgabenUm` rename them in attempts, journal (key and `taskId`) and exam runs (answers,
   scores, sicherheit, fehlergrund) – all at once, so no id moves twice. Three new WiSo tasks reuse freed codes (14-B6, 14-D5, 14-D6); their old
   state moved with the shifted task. Tests: `tests/aufgabenUmzug.test.ts`; old fixtures are compared via `tests/umgezogen.ts`. Renumbering tasks
@@ -1101,7 +1101,7 @@ type Settings = {
     it counts from the first learning day. "Später" hides it until reload. The number of days is adjustable on `/einstellungen` (Pages only).
   - Downloads go through `useBackupDownload` (all modes): file `ap2-lernapp-sicherung-YYYY-MM-DD.json` (`backupFileName`), then
     `settings.lastBackupDownloadAt = today`.
-- **Merge on import** (`shared/mergeProgress.ts`, `mergeProgress(current, incoming)`, pure, `tests/mergeProgress.test.ts`), both sides migrated:
+- **Merge on import** (`domain/mergeProgress.ts`, `mergeProgress(current, incoming)`, pure, `tests/mergeProgress.test.ts`), both sides migrated:
   - `attempts`: union, duplicate = same `taskId` + `date`, sorted by date (stable) → never fewer attempts than before. For a duplicate the
     current attempt wins, but a missing `sicherheit` (8.3) or `fehlergrund` (8.7) is taken from the backup.
   - `exams`: union by `id`; in both → the more advanced run (finished > submitted > started, then later time); sorted by finish time.
@@ -1170,7 +1170,7 @@ November 2026 (`server/ai.ts`, `/generator`, the "KI-Bewertung" button, `@anthro
 ```bash
 npm test            # Vitest: parser (fixtures), smoke test on real content/, progress migration, stats, SQL checker/lint/errors/runner,
                     # Rechenübungen (templates, properties, checker, content, pages)
-npm run typecheck   # tsc -b (tsconfig.app.json: src + shared without Node types; tsconfig.node.json: build, tools, tests)
+npm run typecheck   # tsc -b (tsconfig.app.json: src + domain without Node types; tsconfig.node.json: build, tools, tests)
 npm run lint        # ESLint flat config, typescript-eslint, react-hooks, --max-warnings=0
 npm run format:check
 npm run build        # tsc -b, then vite build; fails on ImportIssues in content/
@@ -1232,10 +1232,10 @@ npm run build        # tsc -b, then vite build; fails on ImportIssues in content
 3. **Multi-user on Pages:** no personal data, dates or names in code or UI; per-user settings go into progress (so they are in the backup)
    or `localStorage`; no server, no tracking.
 4. Keep content read-only in the app; content changes are edits in `content/` (`CONTRIBUTING.md`).
-5. Pure logic in `shared/` or `src/lib/` with tests; pages mostly render.
+5. Pure logic in `domain/` or `src/lib/` with tests; pages mostly render.
 6. German UI, existing tone and style (2 spaces, single quotes, printWidth ~140, trailing commas).
 7. **Section texts are not in the store** (§ 3.1): a page that needs `Section.markdown` uses `useThemaTexte` or `useVollerInhalt`; lib
    functions that don't need texts take `KernInhalt`. Keep the main bundle small: new pages are lazy, and add them to `SEITEN` in `App.tsx`.
 8. **Card and task texts are not in the start file** (§ 3.1): the Übersicht and everything in the app frame use `useStartStore()` and
    must not read `question`, `answer`, `markdown` or `solution`; new routes go inside the `<MitDetails>` layout route. A new text
-   field of cards or tasks belongs into `KARTEN_TEXT` / `AUFGABEN_TEXT` (`shared/texte.ts`). No server, no API key in the app.
+   field of cards or tasks belongs into `KARTEN_TEXT` / `AUFGABEN_TEXT` (`domain/texte.ts`). No server, no API key in the app.

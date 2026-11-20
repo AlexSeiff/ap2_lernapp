@@ -1,8 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { hatDetails, type KernInhalt, type StartInhalt } from '../../shared/texte';
+import { hatDetails, type KernInhalt, type StartInhalt } from '../../domain/texte';
 import { api } from './api';
 import { createProgressSaver, type SaveState } from './progressSaver';
-import { emptyProgress, migrateProgress, type Progress } from '../../shared/progress';
+import { emptyProgress, migrateProgress, type Progress } from '../../domain/progress';
 
 export interface Store<C extends StartInhalt = KernInhalt> {
   /**
@@ -77,7 +77,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setContent(c);
         setFirstVisit(p === null || p === undefined);
         progressRef.current = migrateProgress(p);
-        saver.setBaseRevision(progressRef.current.revision);
         setProgress(progressRef.current);
       })
       .catch((e: Error) => setError(e.message));
@@ -86,30 +85,45 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   // Beim Schließen des Tabs noch nicht bestätigte Änderungen senden.
   useEffect(() => {
     const flush = () => {
-      const body = saver.flushBody();
-      if (body !== undefined) api.saveProgressOnUnload(body);
+      saver.flush();
     };
     window.addEventListener('pagehide', flush);
     return () => window.removeEventListener('pagehide', flush);
   }, [saver]);
 
-  // Hat ein anderer Tab gespeichert, ist dieser veraltet – gleich den Hinweis „anderer Tab“ zeigen.
-  useEffect(() => api.watchOtherTabs(() => saver.markConflict()), [saver]);
+  // Fremden Stand übernehmen; eigene ausstehende Änderungen vorher mit dem aktuellen Speicher zusammenführen. Die Seite lädt dabei
+  // nicht neu: Eine laufende Kartenrunde oder eine angefangene Klausurantwort in diesem Tab bleibt erhalten.
+  useEffect(
+    () =>
+      api.watchOtherTabs(() => {
+        void saver
+          .flush()
+          .then(async (saved) => {
+            if (!saved) return;
+            const stored = await api.progress();
+            if (!stored) return;
+            progressRef.current = migrateProgress(stored);
+            setProgress(progressRef.current);
+          })
+          .catch((e: Error) => setSaveError(e.message));
+      }),
+    [saver],
+  );
 
   // Den neuen Stand außerhalb des State-Updaters berechnen und speichern – Updater müssen rein sein (StrictMode ruft sie doppelt auf).
   const commit = useCallback(
-    (next: Progress, reset = false) => {
+    (next: Progress, write?: typeof api.saveProgress) => {
       progressRef.current = next;
       setProgress(next);
       setFirstVisit(false);
-      saver.schedule(next, reset);
+      saver.schedule(next, write);
     },
     [saver],
   );
 
   const update = useCallback((fn: (p: Progress) => Progress) => commit(fn(progressRef.current ?? emptyProgress())), [commit]);
 
-  const replaceProgress = useCallback((p: Progress) => commit(migrateProgress(p), true), [commit]);
+  const replaceProgress = useCallback((p: Progress) => commit(migrateProgress(p), api.replaceProgress), [commit]);
 
   // Gleiches Objekt, solange sich nichts ändert – sonst rendert jeder useStore()-Nutzer bei jedem Rendern des Providers neu.
   const store = useMemo(

@@ -27,7 +27,7 @@ import { daysUntilExam, examTrends, formatIsoDate, studyStreak, topicStats } fro
 import { useDetailsWennDa } from '../lib/details';
 import { useStartStore } from '../lib/store';
 import { begriffDesTages, bereichFortschritt, faellig, klausurVerlauf, quote, type Anteil } from '../lib/uebersicht';
-import { SICHER_RICHTIG_AB } from '../../shared/config';
+import { SICHER_RICHTIG_AB } from '../../domain/config';
 import { Icon } from '../components/Icon';
 import type { IconName } from '../lib/icons';
 

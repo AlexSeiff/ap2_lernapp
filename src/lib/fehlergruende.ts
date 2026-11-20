@@ -1,7 +1,7 @@
 // Fehlergründe im Fehlerjournal (ROADMAP 8.7): Texte und Auswertung. Rein, ohne React.
 // Gespeichert wird der Grund am Versuch (Attempt.fehlergrund) bzw. während einer Klausur in ExamRun.fehlergrund.
 
-import { FEHLERGRUENDE, type Attempt, type Fehlergrund } from '../../shared/progress';
+import { FEHLERGRUENDE, type Attempt, type Fehlergrund } from '../../domain/progress';
 import type { IconName } from './icons';
 
 export interface FehlergrundInfo {

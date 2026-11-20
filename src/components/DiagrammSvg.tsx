@@ -3,8 +3,8 @@
 // was beim Antippen passiert, entscheidet die Seite.
 
 import type { ReactNode } from 'react';
-import type { DiagrammKante, DiagrammKnoten, DiagrammUebung, Eingesetzt, Form, KantenForm } from '../../shared/diagrammUebungen';
-import { KANTEN_FORMEN } from '../../shared/diagrammUebungen';
+import type { DiagrammKante, DiagrammKnoten, DiagrammUebung, Eingesetzt, Form, KantenForm } from '../../domain/diagrammUebungen';
+import { KANTEN_FORMEN } from '../../domain/diagrammUebungen';
 
 const FORM_NAMEN: Record<Form | KantenForm, string> = {
   ereignis: 'Ereignis',

@@ -5,8 +5,8 @@
 // wie sie sind. Die Antwort bleibt ein String (JSON), so ändern sich Fortschritt, Klausur und Sicherungen nicht. Rein, ohne React.
 
 import { z } from 'zod';
-import { FORMEN } from '../../shared/diagrammUebungen';
-import type { Task } from '../../shared/types';
+import { FORMEN } from '../../domain/diagrammUebungen';
+import type { Task } from '../../domain/types';
 import {
   DIAGRAMM_NOTATIONEN,
   diagrammAlsText,

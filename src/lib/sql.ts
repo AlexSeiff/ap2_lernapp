@@ -2,7 +2,7 @@
 // Wiederholung wie im Fehlerjournal (JOURNAL_INTERVALS): falsch oder Lösung gezeigt → morgen wieder,
 // richtig bei fälliger Wiederholung → nächste Stufe (3, dann 7 Tage), nach der letzten Stufe erledigt.
 
-import type { Progress, SqlState } from '../../shared/progress';
+import type { Progress, SqlState } from '../../domain/progress';
 import { isDue, localDate } from './progress';
 import { nachPruefung, restartRepetition } from './wiederholung';
 

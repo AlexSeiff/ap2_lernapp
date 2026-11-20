@@ -9,7 +9,7 @@ import { begriffPfad, seitenFinder } from '../lib/begriffe';
 import { glossarBuchstaben, glossarVon, type GlossarEintrag } from '../lib/glossar';
 import { normalisiere } from '../lib/normalisiere';
 import { useVollerInhalt } from '../lib/texte';
-import type { Content } from '../../shared/types';
+import type { Content } from '../../domain/types';
 import { KartenWechsel } from '../components/KartenWechsel';
 import { Icon } from '../components/Icon';
 import './glossar-register.css';

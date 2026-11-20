@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { formatZahl } from '../shared/rechenweg';
-import { parseRechenUebungen } from '../shared/rechenUebungen';
+import { formatZahl } from '../domain/rechenweg';
+import { parseRechenUebungen } from '../domain/rechenUebungen';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { formatWert, pruefeAntworten } from '../src/rechnen/checker';
 import { baueInstanz } from '../src/rechnen/instanz';

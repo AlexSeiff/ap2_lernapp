@@ -1,8 +1,8 @@
-// Lernfortschritt: reine Update-Funktionen (Fehlerjournal, Klausur, Karteikarten). Das gespeicherte Datenmodell liegt in shared/progress.ts.
+// Lernfortschritt: reine Update-Funktionen (Fehlerjournal, Klausur, Karteikarten). Das gespeicherte Datenmodell liegt in domain/progress.ts.
 
-import { CARD_INTERVALS, JOURNAL_INTERVALS } from '../../shared/config';
-import type { Attempt, ExamRun, Fehlergrund, Progress, Rating } from '../../shared/progress';
-import type { Task } from '../../shared/types';
+import { CARD_INTERVALS, JOURNAL_INTERVALS } from '../../domain/config';
+import type { Attempt, ExamRun, Fehlergrund, Progress, Rating } from '../../domain/progress';
+import type { Task } from '../../domain/types';
 
 export function localDate(d = new Date()): string {
   const pad = (n: number) => String(n).padStart(2, '0');

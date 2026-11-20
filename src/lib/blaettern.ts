@@ -1,8 +1,8 @@
 // Seitenblättern zwischen Themen (Deep-Dive-Blätter) und Begriffsseiten: reine Funktionen – Reihenfolge, Nachbarn, Wischrichtung.
 // Die Oberfläche (Knöpfe, Wischen, Pfeiltasten) steht in components/ThemaBlaettern.tsx.
 
-import type { Settings } from '../../shared/progress';
-import type { BegriffsSeite, Topic } from '../../shared/types';
+import type { Settings } from '../../domain/progress';
+import type { BegriffsSeite, Topic } from '../../domain/types';
 import { istAusgeblendet } from './settings';
 
 export interface Nachbarn {

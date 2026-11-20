@@ -13,7 +13,7 @@ import {
   type BoxplotAntwort,
   type BoxplotZahlen,
 } from '../lib/boxplotAntwort';
-import type { Task } from '../../shared/types';
+import type { Task } from '../../domain/types';
 import { Formhinweise } from './DiagrammEditor';
 
 const B = 640;

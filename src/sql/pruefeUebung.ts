@@ -1,7 +1,7 @@
 // Prüfung einer Abfrage gegen die Musterlösung einer SQL-Übung – genutzt von der Übungsseite (/sql/uebung/:id)
 // und von Aufgaben, die im SQL-Editor beantwortet werden (Einzelaufgabe, Übungsklausur).
 
-import type { SqlDataset, SqlExercise } from '../../shared/types';
+import type { SqlDataset, SqlExercise } from '../../domain/types';
 import { vergleichFuerAufgabe } from '../lib/sqlAufgabe';
 import { compareResults, lastResultSet } from './checker';
 import { getSqlEngine } from './engine';

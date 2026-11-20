@@ -3,7 +3,7 @@
 // Vor dem Klick lädt nichts von YouTube, danach nur über youtube-nocookie.com (Entscheidung E5, Hinweis in Datenschutz.tsx).
 
 import { useEffect, useMemo, useState } from 'react';
-import { quellenNachZiel, type Quelle } from '../../shared/quellen';
+import { quellenNachZiel, type Quelle } from '../../domain/quellen';
 import { useStore } from '../lib/store';
 import { Icon } from './Icon';
 

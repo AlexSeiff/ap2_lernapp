@@ -3,7 +3,7 @@
 // Geprüft wird erst nach der Abgabe (SqlPruefung). Lazy geladen, damit CodeMirror und sql.js nur bei SQL-Aufgaben kommen.
 
 import { useRef, useState } from 'react';
-import type { SqlDataset, SqlExercise } from '../../shared/types';
+import type { SqlDataset, SqlExercise } from '../../domain/types';
 import { useSqlSession } from '../hooks/useSqlSession';
 import { lintSql } from '../sql/lint';
 import type { ExecResult, LintWarning } from '../sql/types';

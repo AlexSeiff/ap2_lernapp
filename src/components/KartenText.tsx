@@ -1,5 +1,5 @@
-import type { Flashcard } from '../../shared/types';
-import { pruefeSvg } from '../../shared/svgDiagramm';
+import type { Flashcard } from '../../domain/types';
+import { pruefeSvg } from '../../domain/svgDiagramm';
 import { useStore } from '../lib/store';
 import { begriffsFrage, bereichAusDeck } from '../lib/begriffsFrage';
 import { Icon } from './Icon';

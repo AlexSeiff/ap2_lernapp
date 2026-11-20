@@ -22,7 +22,7 @@ In der Lösung steht unter `**A1 (4 P):**` die Rechnung mit den konkreten Zahlen
 
 Die beiden Karten-JSONs enthalten Decks mit einer Liste `karten`. Jede Karte braucht eine eindeutige Text-ID, eine Frage und eine Antwort. Verwende im Deck das bestehende Präfix und eine freie Nummer. Für Begriffskarten gilt `FB-<slug>`. Aktualisiere die Zähler und erhalte die JSON-Formatierung mit zwei Leerzeichen. Bei optionalem `mc` stehen einer richtigen Antwort genau drei verschiedene falsche gegenüber. Karten verwenden die Du-Form und Unicode-Formeln. In Lernblättern setzt KaTeX die LaTeX-Ausdrücke.
 
-Die bestehenden Parser in `shared/` prüfen unter anderem Karten, Rechen-, Diagramm- und SQL-Übungen. Der Importbericht nennt Datei und beanstandetes Feld. Die Tests prüfen zusätzlich fachnahe Eigenschaften wie Punktesummen, SQL-Ergebnisse, Rechenvarianten, Verweise und die Lesbarkeit alter Sicherungen. Bei einem neuen Fehler ergänze eine Gegenprobe, die mit der fehlerhaften Eingabe scheitert.
+Die bestehenden Parser in `domain/` prüfen unter anderem Karten, Rechen-, Diagramm- und SQL-Übungen. Der Importbericht nennt Datei und beanstandetes Feld. Die Tests prüfen zusätzlich fachnahe Eigenschaften wie Punktesummen, SQL-Ergebnisse, Rechenvarianten, Verweise und die Lesbarkeit alter Sicherungen. Bei einem neuen Fehler ergänze eine Gegenprobe, die mit der fehlerhaften Eingabe scheitert.
 
 ## Lokal prüfen
 

@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import { emptyProgress, type Progress } from '../shared/progress';
+import { emptyProgress, type Progress } from '../domain/progress';
 import { CONTENT_DIR, loadContent } from '../build/inhalt';
 import { cardPool } from '../src/lib/cards';
 import { leseLeseStelle, obersterAbschnitt } from '../src/lib/leseStelle';

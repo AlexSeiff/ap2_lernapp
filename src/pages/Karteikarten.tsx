@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import type { CardType, Flashcard } from '../../shared/types';
+import type { CardType, Flashcard } from '../../domain/types';
 import { AntwortVergleich, EigeneAntwortFeld } from '../components/EigeneAntwort';
 import { LeichtOptionen } from '../components/LeichtOptionen';
 import { MarkierStern } from '../components/MarkierStern';
@@ -15,7 +15,7 @@ import { shuffle } from '../lib/shuffle';
 import { isDue, LEICHT_MAX_BOX } from '../lib/progress';
 import { withSettings } from '../lib/settings';
 import { useStore } from '../lib/store';
-import { NEW_PER_SESSION } from '../../shared/config';
+import { NEW_PER_SESSION } from '../../domain/config';
 import { Icon, type IconName } from '../components/Icon';
 import { KartenWechsel } from '../components/KartenWechsel';
 import { KartenstandLeiste } from '../components/KartenstandLeiste';

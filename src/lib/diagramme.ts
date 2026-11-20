@@ -1,9 +1,9 @@
 // Diagramm-Übungen (Umsetzungsplan Phase 7): reine Update-Funktionen und Selektoren für den Fortschritt (Progress.diagramme /
 // Progress.diagrammDays). Wiederholung wie bei Rechen- und SQL-Übungen (src/lib/wiederholung.ts).
 
-import type { DiagrammState, Progress } from '../../shared/progress';
-import type { Content } from '../../shared/types';
-import type { DiagrammUebung } from '../../shared/diagrammUebungen';
+import type { DiagrammState, Progress } from '../../domain/progress';
+import type { Content } from '../../domain/types';
+import type { DiagrammUebung } from '../../domain/diagrammUebungen';
 import { isDue, localDate } from './progress';
 import { nachPruefung, restartRepetition } from './wiederholung';
 

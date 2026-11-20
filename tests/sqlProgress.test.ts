@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { emptyProgress, ProgressSchema, type Progress } from '../shared/progress';
+import { emptyProgress, ProgressSchema, type Progress } from '../domain/progress';
 import { addDays } from '../src/lib/progress';
 import { recordSolutionShown, recordSqlCheck, recordSqlHint, saveSqlQuery, sqlEntwurf, sqlStatus, sqlSummary } from '../src/lib/sql';
 import { activityDays, studyStreak } from '../src/lib/stats';

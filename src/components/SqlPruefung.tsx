@@ -4,7 +4,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { SqlDataset, SqlExercise, Task } from '../../shared/types';
+import type { SqlDataset, SqlExercise, Task } from '../../domain/types';
 import { formatPoints } from '../lib/grading';
 import { type CheckOutcome, pruefeAntwort, verdictMessage } from '../sql/pruefeUebung';
 import type { LintWarning } from '../sql/types';

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { CARD_INTERVALS } from '../shared/config';
-import { emptyProgress } from '../shared/progress';
+import { CARD_INTERVALS } from '../domain/config';
+import { emptyProgress } from '../domain/progress';
 import { PUFFER_TAGE, planeLernplan, THEMEN_PRO_WOCHE, ZIEL_KARTEN } from '../src/lib/lernplan';
 import { loadContent, CONTENT_DIR } from '../build/inhalt';
 

@@ -3,7 +3,7 @@
 
 import { lazy, type ReactNode, Suspense } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import type { RechenUebung as RechenUebungTyp } from '../../shared/types';
+import type { RechenUebung as RechenUebungTyp } from '../../domain/types';
 import type { Beispiel } from '../rechnen/beispiel';
 import { AnhangPanel } from '../components/Belegsatz';
 import { LeichtOptionen } from '../components/LeichtOptionen';

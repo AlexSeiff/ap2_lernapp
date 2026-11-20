@@ -3,7 +3,7 @@
 // Die Seite rendert nur.
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import type { RechenUebung } from '../../shared/types';
+import type { RechenUebung } from '../../domain/types';
 import { rechenAuswahl } from '../lib/leichtRechnen';
 import { meldeFertig } from '../lib/heuteSitzung';
 import { recordRechenCheck, recordRechenHint, recordRechenLeicht, recordRechenLoesung, setRechenSeed } from '../lib/rechnen';

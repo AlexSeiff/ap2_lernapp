@@ -2,9 +2,9 @@
 // Rechen- und SQL-Übungen (src/lib/wiederholung.ts). Der Text im Eingabefeld wird nicht gespeichert: Beim nächsten Öffnen beginnt
 // die Übung neu.
 
-import type { JsonState, Progress } from '../../shared/progress';
-import type { JsonUebung } from '../../shared/jsonUebungen';
-import type { Content } from '../../shared/types';
+import type { JsonState, Progress } from '../../domain/progress';
+import type { JsonUebung } from '../../domain/jsonUebungen';
+import type { Content } from '../../domain/types';
 import { isDue, localDate } from './progress';
 import { nachPruefung, restartRepetition } from './wiederholung';
 

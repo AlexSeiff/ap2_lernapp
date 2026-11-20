@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import type { JournalEntry } from '../../shared/progress';
+import type { JournalEntry } from '../../domain/progress';
 import { FehlergrundKarte } from '../components/FehlergrundKarte';
 import { FEHLERGRUND_INFO, letzterFehlergrund } from '../lib/fehlergruende';
 import { formatPoints } from '../lib/grading';

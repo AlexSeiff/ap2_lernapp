@@ -1,5 +1,5 @@
 // Gespeicherter Lernfortschritt (localStorage, Sicherungsdatei): Typen, zod-Schema und Prüfung vor dem Speichern.
-// Liegt in shared/, weil Client (lib/progress.ts, store.tsx) und Server (apiPlugin.ts) dasselbe Format nutzen.
+// Gemeinsames Format für Browser-Speicher, Sicherungen und Tests.
 // Die Typen beschreiben, was die App schreibt. Das Schema ist bewusst toleranter (unbekannte Felder bleiben erhalten,
 // `mode` als beliebiger String, `null` statt NaN), damit ältere oder neuere Dateien nicht abgewiesen werden.
 // Ein Typtest in tests/progress.test.ts stellt sicher, dass jeder `Progress` das Schema erfüllt.
@@ -225,11 +225,6 @@ export const defaultSettings = (): Settings => ({ prueferfragen: true, fachgespr
 
 export type Progress = {
   version: typeof PROGRESS_VERSION;
-  /**
-   * Zähler, den der Server bei jedem Speichern erhöht. Ein PUT mit einem anderen Stand als dem gespeicherten
-   * kommt aus einem veralteten Tab und wird mit 409 abgelehnt (seit Version 2, ältere Dateien: 0).
-   */
-  revision: number;
   attempts: Attempt[];
   exams: ExamRun[];
   activeExam?: ExamRun;
@@ -269,7 +264,6 @@ export const PROGRESS_VERSION = 10;
 
 export const emptyProgress = (): Progress => ({
   version: PROGRESS_VERSION,
-  revision: 0,
   attempts: [],
   exams: [],
   cards: {},
@@ -536,8 +530,8 @@ export function zieheAufgabenUm(raw: Raw, umzug: Readonly<Record<string, string>
  * Version 1 ist das erste Format (Dateien ohne `version` gelten als Version 1).
  */
 const MIGRATIONS: Record<number, (raw: Raw) => Raw> = {
-  // 1 → 2: Revisionszähler gegen Überschreiben aus einem zweiten Tab.
-  1: (raw) => ({ ...raw, version: 2, revision: num(raw.revision) }),
+  // 1 → 2: historischer Versionsschritt; den damaligen Revisionszähler verwirft migrateProgress.
+  1: (raw) => ({ ...raw, version: 2 }),
   // 2 → 3: Karteikarten-Lerntage (cardReviewDays) für die Lernserie; startet leer, aufgefüllt wird unten in migrateProgress.
   2: (raw) => ({ ...raw, version: 3 }),
   // 3 → 4: SQL-Übungen (sql) und ihre Lerntage (sqlDays); starten leer, aufgefüllt wird unten in migrateProgress.
@@ -550,7 +544,7 @@ const MIGRATIONS: Record<number, (raw: Raw) => Raw> = {
   6: (raw) => ({ ...raw, version: 7 }),
   // 7 → 8: Diagramm-Übungen (diagramme) und ihre Lerntage (diagrammDays); starten leer, aufgefüllt wird unten in migrateProgress.
   7: (raw) => ({ ...raw, version: 8 }),
-  // 8 → 9: Übungsklausuren im Format der Altklausuren – Aufgaben mit neuem Code ziehen um (shared/aufgabenUmzug.ts).
+  // 8 → 9: Übungsklausuren im Format der Altklausuren – Aufgaben mit neuem Code ziehen um (domain/aufgabenUmzug.ts).
   8: (raw) => ({ ...zieheAufgabenUm(raw, AUFGABEN_UMZUG_V9), version: 9 }),
   // 9 → 10: Textmarken (hervorhebungen) und JSON-Übungen (json); starten leer, aufgefüllt wird unten in migrateProgress.
   9: (raw) => ({ ...raw, version: 10 }),
@@ -568,12 +562,11 @@ export function migrateProgress(raw: unknown): Progress {
   const start = Number.isSafeInteger(version) && version >= 1 ? version : 1;
   for (let v = start; v < PROGRESS_VERSION; v++) data = MIGRATIONS[v]?.(data) ?? data;
 
-  const { activeExam, ...rest } = data;
+  const { activeExam, revision: _revision, ...rest } = data;
   const exam = migrateExam(activeExam, 'aktiv');
   return {
     ...rest,
     version: PROGRESS_VERSION,
-    revision: revisionOf(data),
     attempts: Array.isArray(data.attempts) ? data.attempts.map(migrateAttempt).filter((a) => a !== undefined) : [],
     exams: Array.isArray(data.exams) ? data.exams.map(migrateExam).filter((e) => e !== undefined) : [],
     ...(exam ? { activeExam: exam } : {}),
@@ -707,8 +700,6 @@ export const SettingsSchema = z.looseObject({
 
 export const ProgressSchema = z.looseObject({
   version: z.number().int().min(1),
-  // Optional, damit Dateien von vor Version 2 gültig bleiben (fehlend = 0).
-  revision: z.number().int().min(0).optional(),
   attempts: z.array(AttemptSchema),
   exams: z.array(ExamRunSchema).default([]),
   activeExam: ExamRunSchema.optional(),
@@ -728,11 +719,6 @@ export const ProgressSchema = z.looseObject({
   json: z.record(z.string(), DiagrammStateSchema).default({}),
 });
 
-export type ProgressData = z.infer<typeof ProgressSchema>;
-
-/** Zu speichernder Stand: der Fortschritt plus optional `reset: true` für bewusstes Zurücksetzen/Einspielen. */
-export const ProgressPutSchema = ProgressSchema.extend({ reset: z.boolean().optional() });
-
 /**
  * Ab wann ein neuer Stand „viel weniger“ Versuche hat als der gespeicherte.
  * Versuche werden in der App nur angehängt, nie gelöscht. Ein Rückgang um mehr als 5 Versuche
@@ -740,59 +726,4 @@ export const ProgressPutSchema = ProgressSchema.extend({ reset: z.boolean().opti
  */
 export function isSuspiciousAttemptDrop(storedCount: number, newCount: number): boolean {
   return newCount < storedCount && (storedCount - newCount > 5 || newCount < storedCount / 2);
-}
-
-/** Revision eines gespeicherten oder gesendeten Stands; fehlend (ältere Datei, alter Tab) = 0. */
-export function revisionOf(data: unknown): number {
-  const revision = (data as { revision?: unknown } | null | undefined)?.revision;
-  return typeof revision === 'number' && Number.isInteger(revision) && revision >= 0 ? revision : 0;
-}
-
-/**
- * Ist der Stand, auf dem ein Tab aufbaut, veraltet? Bewusst streng (ungleich statt kleiner): Auch eine höhere
- * Revision als gespeichert heißt, dass die Datei inzwischen anders ist (z. B. von Hand zurückgespielt) – dann erst neu laden.
- */
-export function isStaleRevision(baseRevision: number, storedRevision: number): boolean {
-  return baseRevision !== storedRevision;
-}
-
-export const CONFLICT_MESSAGE = 'Die App ist in einem anderen Tab geöffnet – bitte neu laden';
-
-function formatIssue(issue: z.core.$ZodIssue): string {
-  return issue.path.length ? issue.path.join('.') : '(gesamt)';
-}
-
-export type ProgressPutResult =
-  { ok: true; progress: ProgressData & { revision: number } } | { ok: false; status: 400 | 409; error: string };
-
-/**
- * Prüft einen PUT-Body gegen das Schema und gegen den gespeicherten Stand.
- * Rein (ohne Dateizugriff), damit Server und Tests dieselbe Logik nutzen.
- * Bei Erfolg trägt der zurückgegebene Stand die nächste Revision; auch reset: true braucht die aktuelle Revision,
- * damit ein veralteter Tab nicht per „Zurücksetzen“ oder „Sicherung einspielen“ einen neueren Stand überschreibt.
- */
-export function checkProgressPut(body: unknown, stored: unknown): ProgressPutResult {
-  const parsed = ProgressPutSchema.safeParse(body);
-  if (!parsed.success) {
-    const where = parsed.error.issues.slice(0, 3).map(formatIssue).join(', ');
-    return { ok: false, status: 400, error: `Fortschritt nicht gespeichert: Die Daten sind ungültig (Fehler bei ${where}).` };
-  }
-  const { reset, ...progress } = parsed.data;
-  const storedRevision = revisionOf(stored);
-  if (isStaleRevision(revisionOf(progress), storedRevision)) {
-    return { ok: false, status: 409, error: `Fortschritt nicht gespeichert: ${CONFLICT_MESSAGE}.` };
-  }
-  const storedAttempts = (stored as { attempts?: unknown } | null)?.attempts;
-  const storedCount = Array.isArray(storedAttempts) ? storedAttempts.length : 0;
-  if (!reset && isSuspiciousAttemptDrop(storedCount, progress.attempts.length)) {
-    return {
-      ok: false,
-      status: 400,
-      error:
-        `Fortschritt nicht gespeichert: Er enthält nur ${progress.attempts.length} statt ${storedCount} Versuche. ` +
-        'Zum bewussten Zurücksetzen nutze „Fortschritt zurücksetzen“ oder „Sicherung einspielen“ auf der Seite Daten & Import. ' +
-        'Ist die App in einem anderen Tab offen? Dann bitte diese Seite neu laden.',
-    };
-  }
-  return { ok: true, progress: { ...progress, revision: storedRevision + 1 } };
 }

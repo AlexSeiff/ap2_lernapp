@@ -1,8 +1,9 @@
+import { isSuspiciousAttemptDrop, ProgressSchema } from '../domain/progress';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { mergeProgress } from '../shared/mergeProgress';
-import { checkProgressPut, emptyProgress, migrateProgress, type Attempt, type ExamRun, type Progress } from '../shared/progress';
+import { mergeProgress } from '../domain/mergeProgress';
+import { emptyProgress, migrateProgress, type Attempt, type ExamRun, type Progress } from '../domain/progress';
 import { parseBackup } from '../src/lib/backup';
 import { recordAttempt } from '../src/lib/progress';
 import { withSettings } from '../src/lib/settings';
@@ -79,22 +80,22 @@ describe('mergeProgress', () => {
     }
   });
 
-  it('in einen leeren Stand zusammengeführt: alle Daten der Sicherung, aber die eigenen Einstellungen und Revision', () => {
+  it('in einen leeren Stand zusammengeführt: alle Daten der Sicherung, aber die eigenen Einstellungen', () => {
     const backup = withSettings(fixture('fortschritt-v4-2026-09-30.json'), { prueferfragen: false, examDate: '2027-05-01' });
-    const current = withSettings({ ...emptyProgress(), revision: 4 }, { backupReminderDays: 3 });
+    const current = withSettings({ ...emptyProgress() }, { backupReminderDays: 3 });
     const merged = mergeProgress(current, backup);
-    expect({ ...merged, settings: backup.settings, revision: backup.revision }).toEqual(backup);
+    expect({ ...merged, settings: backup.settings }).toEqual(backup);
     expect(merged.settings).toEqual(current.settings);
-    expect(merged.revision).toBe(4);
   });
 
-  it('das anschließende Speichern wird weder als veraltet noch als Versuchs-Rückgang abgelehnt', () => {
+  it('das anschließende Speichern wird nicht als Versuchs-Rückgang abgelehnt', () => {
     const many = Array.from({ length: 12 }, (_, i) => attempt(`01-A${i}`, `2026-09-${10 + i}`));
-    const stored = { ...withAttempts(emptyProgress(), ...many), revision: 7 };
-    const backup = { ...withAttempts(emptyProgress(), attempt('02-A1', '2026-09-25')), revision: 1 };
+    const stored = { ...withAttempts(emptyProgress(), ...many) };
+    const backup = { ...withAttempts(emptyProgress(), attempt('02-A1', '2026-09-25')) };
     const merged = mergeProgress(stored, backup);
     expect(merged.attempts).toHaveLength(13);
-    expect(checkProgressPut(merged, stored)).toMatchObject({ ok: true, progress: { revision: 8 } });
+    expect(isSuspiciousAttemptDrop(stored.attempts.length, merged.attempts.length)).toBe(false);
+    expect(ProgressSchema.safeParse(merged).success).toBe(true);
   });
 
   it('Klausuren: Vereinigung nach id, die weiter fortgeschrittene gewinnt', () => {

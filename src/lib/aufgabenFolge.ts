@@ -1,7 +1,7 @@
 // Reihenfolge der Einzelaufgaben und „Nächste Aufgabe“: reine Funktionen für Aufgabenregister (/aufgaben) und Einzelaufgabe
 // (/aufgabe/:id). Im Altklausur-Modus (?altklausur=1) gehören nur Aufgaben der Altklausur-Themen zur Folge.
 
-import type { Task, Topic } from '../../shared/types';
+import type { Task, Topic } from '../../domain/types';
 import { altklausurThemen, istAltklausurAufgabe } from './altklausur';
 
 /** Alle Aufgaben: nach Thema (Reihenfolge der Themenliste), dann nach Aufgaben-Id (Zahlen als Zahlen). */

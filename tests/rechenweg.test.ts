@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { formatErgebnis, formatZahl, latexZahl, type RechenSchritt, rundungsHinweis } from '../shared/rechenweg';
+import { formatErgebnis, formatZahl, latexZahl, type RechenSchritt, rundungsHinweis } from '../domain/rechenweg';
 import { Rechenweg } from '../src/components/Rechenweg';
 
 describe('formatZahl', () => {

@@ -1,9 +1,9 @@
 // Suchindex einmal je Sitzung (Umsetzungsplan Phase 10): je vollem Inhalt, Begriffsseiten und Einstellung gebaut und gemerkt.
 // Der Suchdialog nimmt ihn von hier; bereiteSucheVor() baut ihn im Leerlauf vorab, damit die Suche beim Öffnen sofort antwortet.
 
-import type { Settings } from '../../shared/progress';
-import type { KernInhalt } from '../../shared/texte';
-import type { BegriffsSeite, Content } from '../../shared/types';
+import type { Settings } from '../../domain/progress';
+import type { KernInhalt } from '../../domain/texte';
+import type { BegriffsSeite, Content } from '../../domain/types';
 import { ladeBegriffe, seitenFinder } from './begriffe';
 import { glossarSuchEintraege, glossarVon } from './glossar';
 import { baueSuchIndex, begriffSuchEintraege, type SuchEintrag } from './suche';

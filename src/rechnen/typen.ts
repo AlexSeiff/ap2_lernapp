@@ -1,8 +1,8 @@
-// Datentypen der Rechenvorlagen (ROADMAP Phase 5). Rein, ohne React – auch Server (Importprüfung) und Tests nutzen sie.
+// Datentypen der Rechenvorlagen (ROADMAP Phase 5). Rein, ohne React – auch Build (Importprüfung) und Tests nutzen sie.
 
 import type { z } from 'zod';
-import type { RechenSchritt } from '../../shared/rechenweg';
-import type { RechenWert } from '../../shared/types';
+import type { RechenSchritt } from '../../domain/rechenweg';
+import type { RechenWert } from '../../domain/types';
 
 /**
  * Wie eine Eingabe verglichen wird: `zahl` mit Toleranz, `liste` als Zahlenmenge (Reihenfolge egal),

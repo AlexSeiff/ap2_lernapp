@@ -1,4 +1,4 @@
-// Abschnittstexte der Lernblätter nachladen (Umsetzungsplan Phase 10, Aufteilung in shared/texte.ts): je Thema einmal je Sitzung,
+// Abschnittstexte der Lernblätter nachladen (Umsetzungsplan Phase 10, Aufteilung in domain/texte.ts): je Thema einmal je Sitzung,
 // Sie kommen aus texte/<id>.json (offline aus dem Service-Worker-Cache). Nach dem Start lädt die App alle
 // Texte im Leerlauf vor, damit Lernblatt, Glossar und Suche beim Öffnen nicht erst warten.
 // Bereits vollständiger Inhalt (Tests, lokale Fixtures) wird direkt genommen.
@@ -12,8 +12,8 @@ import {
   type KernInhalt,
   type KernTopic,
   type ThemaTexte,
-} from '../../shared/texte';
-import type { Content, Topic } from '../../shared/types';
+} from '../../domain/texte';
+import type { Content, Topic } from '../../domain/types';
 import { api } from './api';
 import { useStore } from './store';
 

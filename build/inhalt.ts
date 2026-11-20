@@ -1,10 +1,10 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
-import { namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../shared/begriffsseiten.ts';
-import { buildContent } from '../shared/parser.ts';
-import { parseQuellen, pruefeQuellenZiele } from '../shared/quellen.ts';
-import { ergaenzeVerwandte } from '../shared/verwandt.ts';
-import type { BegriffsSeite, Content } from '../shared/types.ts';
+import { namensSchluessel, parseBegriffsseiten, pruefeBegriffsseiten } from '../domain/begriffsseiten.ts';
+import { buildContent } from '../domain/parser.ts';
+import { parseQuellen, pruefeQuellenZiele } from '../domain/quellen.ts';
+import { ergaenzeVerwandte } from '../domain/verwandt.ts';
+import type { BegriffsSeite, Content } from '../domain/types.ts';
 import { baueGlossar, ueberschriftKern } from '../src/lib/glossar.ts';
 import { ergaenzeGlossarThema } from '../src/lib/glossarThema.ts';
 import { pruefeRechenUebung } from '../src/rechnen/pruefen.ts';

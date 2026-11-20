@@ -47,7 +47,7 @@ Lernstand oder die Inhalte berührt, gelten zusätzliche Sicherungen (siehe „L
 - Entfernen: Revision/409/`reset`-Logik, `DataSource`, `ApiError`, `SaveProgressRequest`, Konfliktzustand in `progressSaver.ts`
   (betroffene Dateien: `shared/api.ts`, `shared/progress.ts`, `shared/mergeProgress.ts`, `src/lib/api.ts`, `apiError.ts`,
   `progressSaver.ts`, `staticApi.ts`, `store.tsx`, `App.tsx`, `Buch.tsx` und die zugehörigen Tests).
-- Mehrere Tabs: Es bleibt der Schutz, dass ein zweiter Tab fremden Fortschritt nicht überschreibt (Storage-Ereignis → neu laden,
+- Mehrere Tabs: Es bleibt der Schutz, dass ein zweiter Tab fremden Fortschritt nicht überschreibt (Storage-Ereignis → neuen Stand übernehmen (nicht neu laden: eine laufende Runde im Tab soll bleiben),
   vor dem Speichern aktuellen Stand lesen und zusammenführen). Der Schutz wird kleiner, aber nicht gestrichen.
 - Alte Sicherungen mit Feld `revision` bleiben lesbar (Migration `1 → 2` bleibt, das Feld wird beim Einlesen verworfen).
 - `shared/` in `domain/` umbenennen (`git mv`, Importe in `src`, `build`, `tools`, `tests`, Konfig), Kommentare mit „Server“ bereinigen.

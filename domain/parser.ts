@@ -1,5 +1,5 @@
 // Parser für die Markdown-Lernblätter (DeepDive_NN_*.md) und ihre Lösungsdateien (*_Loesungen.md).
-// Reine Funktionen ohne Dateisystemzugriff, damit Server und Tests sie gleichermaßen nutzen können.
+// Reine Funktionen ohne Dateisystemzugriff, damit Build und Tests sie gleichermaßen nutzen können.
 
 import type { Content, Exam, ExamBlock, Flashcard, ImportIssue, MaterialDoc, Section, Solution, Task, Topic } from './types.ts';
 import { parseLernkarten } from './lernkarten.ts';
@@ -515,7 +515,7 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
   return content;
 }
 
-/** ```svg-Diagramme in Theorie und Material: Positivliste (shared/svgDiagramm.ts) und eindeutige ids (Marker gelten seitenweit). */
+/** ```svg-Diagramme in Theorie und Material: Positivliste (domain/svgDiagramm.ts) und eindeutige ids (Marker gelten seitenweit). */
 export function pruefeDiagramme(content: Content): ImportIssue[] {
   const issues: ImportIssue[] = [];
   const ids = new Map<string, string>();

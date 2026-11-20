@@ -102,7 +102,7 @@ Jede Datei `*Lernkarten*.json` im gewählten Quellordner wird importiert (aktuel
 | Ort | Aufgabe |
 |---|---|
 | `content/` | Öffentliche Markdown-Lernblätter, Musterlösungen, Karten und Übungen als JSON |
-| `shared/` | Inhaltsparser, Prüfregeln, Datenmodelle und Migration des Fortschritts |
+| `domain/` | Inhaltsparser, Prüfregeln, Datenmodelle und Migration des Fortschritts |
 | `src/` | React-Oberfläche, Rechenvorlagen und SQL-Editor mit SQLite/WASM |
 | `build/` | Lernblätter lesen und als JSON-Dateien neben die App legen, Service Worker |
 | `tools/` | Importbericht und Quellenprüfung |

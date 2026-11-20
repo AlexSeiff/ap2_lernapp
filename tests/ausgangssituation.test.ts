@@ -4,7 +4,7 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
-import type { Section } from '../shared/types';
+import type { Section } from '../domain/types';
 import { AnhangPanel, hatAnhang } from '../src/components/Belegsatz';
 
 const anlage = (id: string, title: string): Section => ({ id, title, level: 3, markdown: 'Text' });

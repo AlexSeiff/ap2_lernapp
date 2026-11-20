@@ -12,8 +12,8 @@
 //   zeigt das Beispiel nur Schrittnamen und allgemeine Formeln – ohne Einsetzen und Ergebnis, Formeln mit konkreten Zahlen fallen weg.
 //   Ohne Rechenweg (Übungen ohne Vorlage) gibt es kein Beispiel.
 
-import type { RechenState } from '../../shared/progress';
-import type { RechenUebung } from '../../shared/types';
+import type { RechenState } from '../../domain/progress';
+import type { RechenUebung } from '../../domain/types';
 import { baueInstanz, type RechenInstanz } from './instanz';
 import { seedAusText } from './zufall';
 
