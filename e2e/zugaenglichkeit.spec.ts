@@ -13,6 +13,9 @@ const SEITEN = [
   '/karteikarten/stand',
   '/klausur',
   '/aufgaben',
+  '/aufgabe/02-B1', // ER-Diagramm-Editor und Zettel am Buchrand
+  '/aufgabe/05-B1', // BPMN-Editor
+  '/diagramme/DG-EPK-001',
   '/sql',
   '/sql/uebungen',
   '/rechnen',

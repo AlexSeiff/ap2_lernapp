@@ -65,8 +65,8 @@ The CI runs the same chain (`.github/workflows/pages.yml`); only `main` deploys.
 - **Browser tests** (`e2e/`, Playwright, new in the November 2026 restructuring; `playwright.config.ts`; every test starts with an empty browser profile, the
   service worker is blocked, the real progress is never touched): `rauch.spec.ts` (smoke paths: rate a card, hand in an exam, download/delete/restore a
   backup, SQL, diagram exercise, search, theme, Rechenübung with solution, diagram editor, table editor), `handy.spec.ts` (no horizontal overflow at phone
-  width), `zugaenglichkeit.spec.ts` (axe-core, WCAG 2.1 A/AA, 17 pages × light/dark; serious/critical violations fail the test; known open ones are listed in the
-  file), `zweiTabs.spec.ts` (two tabs: nothing is lost, no reload loop, a running card round and a half-written exam answer survive), `speicher.spec.ts` (the
+  width), `postits.spec.ts` (the notes at the book edge and the diagram sheet), `zugaenglichkeit.spec.ts` (axe-core, WCAG 2.1 A/AA, 20 pages × light/dark; serious/critical violations fail the test; known open ones are listed in the
+  file), `offline.spec.ts` (precache complete, then offline: every main page and a SQL query), `zweiTabs.spec.ts` (two tabs: nothing is lost, no reload loop, a running card round and a half-written exam answer survive), `speicher.spec.ts` (the
   move from `localStorage` to IndexedDB and the fallback). The helper `lernstand()` in `e2e/hilfen.ts` reads IndexedDB and **does not open a missing database**
   (that would stop the app from creating its store).
 - **Pixel comparison** (`e2e/visuell.spec.ts`, only with `E2E_VISUELL=1`, reference images local in `e2e-visuell/`): for refactorings that must not change the

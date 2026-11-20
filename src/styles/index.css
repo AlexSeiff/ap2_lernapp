@@ -4,7 +4,8 @@
 
    1. tokens.css – alle Design-Werte (Farben, Radien, Schatten, Maße), hell, dunkel und nach Systemeinstellung
    2. 01 … 08 – die Grundstile, in der Reihenfolge, in der sie gewachsen sind (je Datei mehrere Abschnitte mit Überschriften)
-   3. apple.css, paper.css, notizbuch.css – die Gestaltungsschichten (Lernraum, Papier, Notizbuch), jede überschreibt gezielt die davor */
+   3. apple.css, paper.css, notizbuch.css – die Gestaltungsschichten (Lernraum, Papier, Notizbuch), jede überschreibt gezielt die davor
+   4. postits.css – die Zettel am Buchrand (Desktop); steht zuletzt, weil es die Schichten gezielt überschreibt */
 @import './tokens.css';
 @import './01-grundlagen.css';
 @import './02-lernen-aufgaben-karten.css';
@@ -17,3 +18,4 @@
 @import './apple.css';
 @import './paper.css';
 @import './notizbuch.css';
+@import './postits.css';

@@ -124,6 +124,7 @@ later one wins, and the layers deliberately override each other. Do not reorder 
 3. `apple.css`, `paper.css`, `notizbuch.css` – three design layers (workspace, paper, squared notebook); each overrides the one before. They are
    kept separate on purpose: merging them rule by rule would be a visible design change, not a cleanup.
 4. `glossar-register.css` – imported by the Glossar page (the coloured register tabs on the book edge).
+5. `postits.css` – the notes at the book edge for the attachments (desktop only, § 5 „Anhang der Prüfung“); imported **last** because it deliberately overrides the layers.
 
 New styles for a component go into a **new numbered file before the layers** (add it to `index.css`), or at the end of the fitting file; check that no
 layer below overrides them unintentionally.

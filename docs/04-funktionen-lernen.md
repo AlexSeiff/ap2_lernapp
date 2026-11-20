@@ -204,6 +204,20 @@ linked from the panel). Where: SQL editor and SQL exercises (Belegsatz), Rechen�
 (`anhangFuer` in `src/lib/anhang.ts`: Belegsatz for tasks with SQL, formulas for tasks with *berechnen*/*ermitteln*/*bestimmen*/*interpretieren* (formulas appear only in the appendix, never in the task text); an exam gets what
 any of its tasks needs). `tests/belegsatz.test.ts` checks order and rendering of the rebuilt appendix.
 
+**Post-its at the book edge and the diagram sheet (November 2026, restructuring phase 10).** On the desktop (from 1100 px) the buttons of the
+`AnhangPanel` (Ausgangssituation, SQL-Belegsatz, Formelübersicht, **Diagrammelemente**) are drawn as coloured notes sticking out of the right edge of the book, with
+vertical lettering – like the register letters in the Glossar. A click opens the sheet next to them and it „pops up“ (0.18 s; without animation for
+`prefers-reduced-motion`); the open note stands out further and is highlighted. They are the **same buttons** as on the phone (`aria-expanded`, keyboard, Esc, focus returns,
+key `A` for the Ausgangssituation, now shown in the tooltip): only the look changes, in `src/styles/postits.css` (imported last, § 3.2). Below 1100 px the button row stays in the text
+as before. The sheet is **not modal** (no dimmed background): in an exam the answer fields stay usable while the Ausgangssituation is open (it covers the right part of the
+page like the old side panel).
+- **Diagrammelemente** is a new sheet like the one the real exam attaches to diagram tasks: per notation a table *symbol | element | meaning* (and the kinds of connections) –
+  ER diagram, EPK/eEPK, BPMN 2.0, use case, activity, sequence, state and class diagram. The symbols are drawn by the app itself (`FormSymbol`, so sheet, editor and exercise
+  show the same shapes); the texts are our own words (`src/lib/diagrammBeiblatt.ts`, component `components/DiagrammBeiblatt.tsx`, lazy). Where it appears: `anhangFuer` adds the
+  notations that a task text names (`beiblattFuerText`: *ER-Diagramm*, *BPMN*, *EPK*, *Use-Case-Diagramm* … – drawing or reading), an exam collects those of all its tasks, and a
+  **Diagramm-Übung** shows the notation of its type (`BEIBLATT_ZU_TYP`). Tests: `tests/diagrammBeiblatt.test.ts` (every palette element and connection of each editor is described, every symbol
+  draws, detection on real tasks), `e2e/postits.spec.ts` (position, open/close, focus, one sheet at a time, exam answer field stays usable, phone width, axe with the sheet open, reduced motion).
+
 ### Lernplan im Kalender (October 2026)
 
 - **Card target** (`planeLernplan`, `src/lib/lernplan.ts`, `tests/lernplan.test.ts`): only **exam cards** of the planned topics count

@@ -362,7 +362,7 @@ export function DiagrammEditor({ wert, onChange, hilfen }: Props) {
         </button>
       </div>
 
-      <div className="ed-scroll" ref={scrollRef}>
+      <div className="ed-scroll" ref={scrollRef} tabIndex={0} role="region" aria-label="Zeichenfläche, scrollbar">
         <svg
           ref={svgRef}
           xmlns="http://www.w3.org/2000/svg"

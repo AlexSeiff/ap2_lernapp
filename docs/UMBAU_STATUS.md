@@ -291,7 +291,7 @@ Messung (neu: `tools/messung/drossel-server.js` und `start-messung.js`; gedrosse
 - Workbox 7.4.1 installiert den Vorabspeicher **schon jetzt eine Datei nach der anderen**; weniger Parallelität ist nicht möglich. Übrig bleibt der Zeitpunkt.
 
 Änderung (`src/lib/pwa.ts`, `wartebisRuhig`): Beim **allerersten Besuch** (noch keine Registrierung) wartet die Registrierung, bis 4 s lang nichts navigiert, angetippt oder getippt wurde (höchstens 60 s). Wer die App schon hatte,
-registriert sofort. Ergebnis (Navigation nach Klick): nach 1,5 s **4.209 → 2.112 ms** (gleich wie ganz ohne Service Worker), nach 4 s 1.884 → 1.474 ms, nach 8 s 1.475 → 1.761 ms (die Last wandert nur nach hinten, +0,3 s s). Der
+registriert sofort. Ergebnis (Navigation nach Klick): nach 1,5 s **4.209 → 2.112 ms** (gleich wie ganz ohne Service Worker), nach 4 s 1.884 → 1.474 ms, nach 8 s 1.475 → 1.761 ms (die Last wandert nur nach hinten, +0,3 s). Der
 Vorabspeicher ist dafür ca. 4 s später komplett (42 → 46 s auf diesem Netz).
 
 Warum keine Aufteilung des Vorabspeichers: Sie hätte einen selbst geschriebenen Service Worker verlangt (eigene Caches, eigene Abruflogik) und die Gefahr gemischter Versionen offline (`content.json` neu, `details.json` alt → die App wirft „Seite neu laden“).
@@ -303,6 +303,31 @@ scheitert der Test (geprüft).
 
 Befehle: `npm run import-report` (Hinweise 0), `npm test` (99 Dateien, 1790 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run test:e2e` (53 Tests): alle grün.
 
-## Offen: Phasen 6 und 10
+## Phase 10 – Post-its am Buchrand und Beiblatt „Diagrammelemente“
+
+Status: erledigt (20.11.2026), von Hand umgesetzt. **Neue Funktion** (einzige im Plan); Auftrag des Besitzers, Klarstellung am 20.11.: Die Post-its gelten **für Übungen und Klausuren**, das Glossar bleibt, wie es ist; „Diagrammbeschreibungen“ meint das
+**Beiblatt der IHK-Prüfung**, auf dem die verwendeten Diagrammelemente beschrieben sind. Das ändert den Plan an zwei Stellen: (1) Die Zettel stehen nur dort, wo der Anhang schon angeboten wurde (Einzelaufgabe, Übungsklausur, Rechenübung, SQL-Editor/-Übung,
+Diagramm-Übung), nicht „auf allen Seiten“; damit entfällt die Frage nach dem Platz neben dem Glossarregister. (2) Das Beiblatt ist **neuer Inhalt**, nicht die Diagrammseite aus Deep Dive 17.
+
+- **Zettel (Desktop ab 1100 px, `src/styles/postits.css`, in `index.css` zuletzt):** Die vorhandenen Knöpfe des `AnhangPanel` werden per CSS zu farbigen Zetteln (gelb, grün, rosa, blau – dieselben Farben wie im Glossar) mit senkrechter Schrift, die rechts aus der Buchkante
+  ragen; der offene Zettel steht weiter heraus. Ein Klick öffnet das Blatt **links neben** den Zetteln (verdeckt sie nicht) und lässt es aufploppen (0,18 s; ohne Animation bei `prefers-reduced-motion`). Es sind **dieselben Knöpfe** wie auf dem Handy (kein zweiter Code-Pfad:
+  `aria-expanded`, Tastatur, Esc, Fokus zurück, Taste `A`, die jetzt im Tooltip steht). Unter 1100 px bleibt die Knopfleiste im Text, wie sie war (der Pixelvergleich der Handy-Seiten bestätigt das). Das Blatt ist **nicht modal**: In der Klausur bleibt das Antwortfeld bedienbar.
+  Die frühere klebende Leiste unter der Kopfzeile entfällt auf dem Desktop (die Zettel sind immer erreichbar).
+- **Beiblatt „Diagrammelemente“** (`src/lib/diagrammBeiblatt.ts`, `components/DiagrammBeiblatt.tsx`, lazy): je Notation eine Tabelle *Symbol | Element | Bedeutung* samt Verbindungsarten – ER, EPK/eEPK, BPMN 2.0, Anwendungsfall, Aktivität, Sequenz, Zustand, Klasse. Die **Symbole zeichnet die App selbst** (`FormSymbol`), das Blatt zeigt also dieselben
+  Formen wie Editor und Übung; die Beschreibungen sind **in eigenen Worten** geschrieben (nicht aus Prüfungen kopiert). Es erscheint, wenn der Aufgabentext eine Notation nennt (`anhangFuer`, `beiblattFuerText`), in einer Klausur die Vereinigung aller Aufgaben, bei einer Diagramm-Übung die Notation ihres Typs.
+  Beim Prüfen am Bild korrigiert: Der Editor zeichnet den Kontrollfluss mit gefüllter Pfeilspitze (das Blatt hatte „offen“ angenommen); BPMN heißt das Element „Datenobjekt“, nicht „Informationsobjekt“; die Notiz zeigt „Aa“ wie die Editorleiste.
+- **Gefunden und behoben unterwegs:** Der scrollbare Zeichenbereich des Diagramm-Editors (`.ed-scroll`) war per Tastatur nicht erreichbar (axe: `scrollable-region-focusable`, serious) – ein **bestehender** Fehler der Aufgabenseite, den die bisherigen axe-Tests nicht abdeckten. Jetzt `tabIndex`, Rolle und Beschriftung, ohne Änderung am Aussehen.
+  Die Aufgabenseiten mit Editor (`/aufgabe/02-B1`, `/aufgabe/05-B1`) und die Diagramm-Übung sind jetzt in der axe-Liste (20 Seiten).
+- **Tests:** `tests/diagrammBeiblatt.test.ts` (20: jedes Element der Palette und jede Verbindungsart jedes Editors ist beschrieben, jedes Symbol lässt sich zeichnen, Beschreibungen vollständig, Erkennung an echten Aufgaben, Anzeige), `e2e/postits.spec.ts` (11: Lage am Buchrand, farbig und senkrecht, Öffnen/Schließen/Esc/Fokus, das Blatt verdeckt die Zettel
+  nicht, immer nur eins offen, Klausur mit offener Ausgangssituation bleibt bedienbar, Rechenübung und SQL, Diagramm-Übung zeigt nur ihre Notation, axe mit offenem Blatt hell und dunkel, reduzierte Bewegung, Handybreite).
+  Ein bestehender Test (`tests/belegsatz.test.ts`) prüfte `anhangFuer` mit `toEqual({ sql, formeln })`; er erwartet jetzt zusätzlich `diagramme: []` – bewusste Erweiterung der Rückgabe, sonst nichts gelockert.
+- **Pixelvergleich:** Es änderten sich genau die Seiten mit Zetteln oder neuem Knopf: `/aufgabe/02-B1`, `/diagramme/DG-EPK-001` (Desktop und Handy) und `/heute` (nur Desktop: bettet die SQL-Aufgabe A1 mit ihrem Zettel ein; Handy unverändert). Diese 10 Bilder wurden bewusst erneuert, die übrigen 82 blieben
+  unverändert (0 Pixel). Beim Prüfen der Bilder kontrolliert: hell und dunkel, Klausur mit drei Zetteln, Handy mit Knopfleiste.
+
+Befehle: `npm run import-report` (Hinweise 0), `npm test` (100 Dateien, 1810 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run test:e2e` (70 Tests), Pixelvergleich (92 Bilder, `--workers=2`): alle grün.
+
+Nicht gemacht: Eine Aufklapp-Variante unter 1100 px (kein Platz am Rand), und die Beschreibungen des Beiblatts wurden nicht von einer Lehrkraft fachlich gegengelesen; sie folgen der üblichen Notation. Das sollte der Besitzer einmal lesen.
+
+## Offen: Phase 6
 
 Noch nicht begonnen.
