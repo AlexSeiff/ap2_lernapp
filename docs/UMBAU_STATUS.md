@@ -230,6 +230,33 @@ Offen / Hinweise:
 Befehle: `npm run import-report` (Hinweise 0), `npm test` (95 Dateien, 1526 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run test:e2e`
 (52 Tests), Pixelvergleich (92 Bilder, `--workers=2`): alle grün.
 
-## Phasen 6 bis 10
+## Phase 7 – Übungsarten einheitlich registrieren (vor Phase 6 gezogen)
+
+Status: erledigt (20.11.2026), von Hand umgesetzt, in kleinerem Umfang als im Plan, weil die Bestandsaufnahme zeigte, dass das Problem kleiner ist:
+- Alle Übungsarten (SQL, Rechnen, Diagramme, JSON, Lernkarten, Quellen) sind **schon** JSON-Dateien mit eigenem Parser; die Rechenübungen verweisen auf eine
+  Vorlage im Code und werden beim Import dagegen geprüft (`pruefeRechenUebung`). Doppelte IDs werden in allen Parsern gemeldet.
+- „Verweise aus Begriffsseiten“ gibt es nicht als feste Verweise: Die Übungen zu einem Begriff findet die App zur Laufzeit per Textsuche
+  (`uebungenZuBegriff`). Es kann dort keinen toten Verweis geben, also braucht es keine Prüfung.
+
+Echte Lücken, die geschlossen wurden:
+- **Dateimuster an einer Stelle:** `domain/inhaltsdateien.ts` (`JSON_DATEIEN`). Vorher standen dieselben fünf Muster in `isContentFile` (Build) und in `buildContent` (Import).
+  Beide benutzen jetzt die eine Liste (`tests/inhaltsdateien.test.ts`: enthält die alte Regel als Referenz und prüft jede Datei im Inhaltsordner sowie 20 Grenzfälle).
+- **Vorlagen-Liste prüft Doppelte:** `registriereVorlagen` bricht beim Laden ab, wenn zwei Vorlagen dieselbe ID haben (vorher überschrieb `Object.fromEntries` die erste
+  stillschweigend). `tests/vorlagen.test.ts`: jede der 36 Vorlagen bekommt automatisch dieselben Pflichtangaben und Gegenproben (Titel/Bereich/Beschreibung, Zufallsdaten
+  passen zum Schema, Lösung endlich und vollständig, Fehlerbilder und Felder zeigen auf vorhandene Ergebnisse, Platzhalter sind Texte, Seed reproduzierbar).
+- **Gleichheitstest der Vorlagen:** `tests/rechenVorlagenGleichheit.test.ts` hält für alle 122 Rechenübungen und – bei „Neue Zahlen“ – für 5 feste Seeds einen Hash der
+  erzeugten Aufgabe samt Lösung, Rechenweg und typischen Fehlern fest (631 Einträge, Snapshot `tests/__snapshots__/rechenVorlagenGleichheit.test.ts.snap`).
+  Gegenprobe: Eine einzige geänderte Fehlermeldung in einer Vorlage macht ihn rot. Den Snapshot nur bewusst erneuern (`npx vitest run tests/rechenVorlagenGleichheit.test.ts -u`).
+- **Importbericht** zeigt jetzt auch die Diagramm-Übungen (32, je Typ und Stufe) und, ob jede Vorlage mindestens eine Übung hat (36 von 36).
+
+Das Verhalten der App ist unverändert; der Inhalts-Snapshot aus Phase 0 und die 52 Browser-Tests blieben grün.
+
+Ein Versehen, das auffiel und behoben ist: Beim Anlegen des Gleichheitstests habe ich zunächst eine **bestehende** Testdatei gleichen Namens (`tests/rechenVorlagen.test.ts`, 556 Zeilen)
+überschrieben. Sofort aus Git wiederhergestellt (die Datei ist unverändert), mein Test heißt jetzt `rechenVorlagenGleichheit.test.ts`. Alle Testdateien, die auf dem Branch neu
+angelegt wurden, sind per `git diff --name-status main HEAD` als „neu“ geprüft; die einzigen Löschungen in bestehenden Tests sind die in Phase 2 dokumentierten.
+
+Befehle: `npm run import-report` (Hinweise 0), `npm test` (98 Dateien, 1786 Tests), `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run test:e2e` (52 Tests): alle grün.
+
+## Offen: Phasen 6, 8, 9 und 10
 
 Noch nicht begonnen.

@@ -2,6 +2,7 @@
 // Reine Funktionen ohne Dateisystemzugriff, damit Build und Tests sie gleichermaßen nutzen können.
 
 import type { Content, Exam, ExamBlock, Flashcard, ImportIssue, MaterialDoc, Section, Solution, Task, Topic } from './types.ts';
+import { istJsonArt } from './inhaltsdateien.ts';
 import { parseLernkarten } from './lernkarten.ts';
 import { readPrueferfrage } from './prueferfragen.ts';
 import { parseDiagrammUebungen } from './diagrammUebungen.ts';
@@ -463,7 +464,7 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
 
   // Lernkarten-Dateien (JSON mit Decks) den passenden Deep Dives zuordnen
   const topicTitles = new Map(content.topics.filter((t) => t.id !== '00').map((t) => [t.id, t.title]));
-  for (const f of files.filter((x) => /Lernkarten.*\.json$/i.test(x.name))) {
+  for (const f of files.filter((x) => istJsonArt(x.name, 'lernkarten'))) {
     const parsed = parseLernkarten(f.name, f.text, topicTitles);
     content.decks.push(...parsed.decks);
     content.flashcards.push(...parsed.cards);
@@ -472,7 +473,7 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
   }
 
   // SQL-Übungen (Übungsdatenbanken und Aufgaben für den SQL-Editor)
-  for (const f of files.filter((x) => /SQL_Uebungen.*\.json$/i.test(x.name))) {
+  for (const f of files.filter((x) => istJsonArt(x.name, 'sql'))) {
     const parsed = parseSqlUebungen(f.name, f.text, topicTitles);
     content.sqlDatasets.push(...parsed.datasets);
     content.sqlExercises.push(...parsed.exercises);
@@ -480,21 +481,21 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
   }
 
   // Rechenübungen (Vorlagen mit Zufallszahlen oder feste Aufgaben aus den Lernblättern)
-  for (const f of files.filter((x) => /Rechen_Uebungen.*\.json$/i.test(x.name))) {
+  for (const f of files.filter((x) => istJsonArt(x.name, 'rechnen'))) {
     const parsed = parseRechenUebungen(f.name, f.text, topicTitles, options.pruefeRechenUebung);
     content.rechenUebungen.push(...parsed.exercises);
     content.issues.push(...parsed.issues);
   }
 
   // Diagramm-Übungen (Umsetzungsplan Phase 7)
-  for (const f of files.filter((x) => /Diagramm_Uebungen.*\.json$/i.test(x.name))) {
+  for (const f of files.filter((x) => istJsonArt(x.name, 'diagramme'))) {
     const parsed = parseDiagrammUebungen(f.name, f.text);
     content.diagrammUebungen!.push(...parsed.uebungen);
     content.issues.push(...parsed.issues);
   }
 
   // JSON-Übungen (JSON selbst als Text schreiben)
-  for (const f of files.filter((x) => /Json_Uebungen.*\.json$/i.test(x.name))) {
+  for (const f of files.filter((x) => istJsonArt(x.name, 'json'))) {
     const parsed = parseJsonUebungen(f.name, f.text);
     content.jsonUebungen!.push(...parsed.uebungen);
     content.issues.push(...parsed.issues);

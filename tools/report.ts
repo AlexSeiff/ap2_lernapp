@@ -1,5 +1,6 @@
 // Importbericht: `npm run import-report`
 import { CONTENT_DIR, loadContent } from '../build/inhalt.ts';
+import { VORLAGEN } from '../src/rechnen/vorlagen/index.ts';
 
 const c = loadContent();
 console.log(`Quelle: ${CONTENT_DIR}\n`);
@@ -37,12 +38,25 @@ console.log(
 const byVorlage = new Map<string, number>();
 for (const u of rechnen) byVorlage.set(u.vorlage ?? '(ohne)', (byVorlage.get(u.vorlage ?? '(ohne)') ?? 0) + 1);
 if (byVorlage.size) console.log(`  je Vorlage: ${[...byVorlage].map(([v, n]) => `${v}: ${n}`).join(', ')}`);
+const ohneUebung = Object.keys(VORLAGEN).filter((id) => !byVorlage.has(id));
+console.log(
+  `  Vorlagen im Code: ${Object.keys(VORLAGEN).length}${ohneUebung.length ? `, ohne Übung: ${ohneUebung.join(', ')}` : ', jede hat mindestens eine Übung'}`,
+);
 const rechenByTopic = new Map<string, number>();
 for (const u of rechnen) rechenByTopic.set(u.topicId ?? '–', (rechenByTopic.get(u.topicId ?? '–') ?? 0) + 1);
 if (rechenByTopic.size) console.log(`  je Deep Dive: ${[...rechenByTopic].map(([t, n]) => `${t}: ${n}`).join(', ')}`);
 const jsonUebungen = c.jsonUebungen ?? [];
 console.log(
   `\nJSON-Übungen: ${jsonUebungen.length} (${[1, 2, 3].map((s) => `Stufe ${s}: ${jsonUebungen.filter((u) => u.stufe === s).length}`).join(', ')})`,
+);
+const diagramme = c.diagrammUebungen ?? [];
+const zaehle = <T>(liste: T[], schluessel: (x: T) => string | number) => {
+  const m = new Map<string | number, number>();
+  for (const x of liste) m.set(schluessel(x), (m.get(schluessel(x)) ?? 0) + 1);
+  return [...m].map(([k, n]) => `${k}: ${n}`).join(', ');
+};
+console.log(
+  `\nDiagramm-Übungen: ${diagramme.length} (je Typ: ${zaehle(diagramme, (u) => u.typ)}; je Stufe: ${zaehle(diagramme, (u) => u.stufe)})`,
 );
 console.log(`\nMaterialien: ${c.materials.map((m) => m.title).join(', ')}`);
 console.log(`\nHinweise (${c.issues.length}):`);
