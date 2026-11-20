@@ -1,7 +1,8 @@
 # Umbauplan – Architektur aufräumen, ohne die App zu verändern
 
 Stand: 20. November 2026. Ziel: Altlasten aus der Server-Zeit entfernen, den Lernstand robuster speichern, Inhalte und Styles ordnen und
-die App mit Browser-Tests absichern. **Für Lernende ändert sich nichts**, außer dass der erste Start schneller wird. Wo ein Schritt den
+die App mit Browser-Tests absichern. **Für Lernende ändert sich nichts**, außer dass der erste Start schneller wird und – als einzige neue
+Funktion – die Post-its am Buchrand in Phase 10 dazukommen. Wo ein Schritt den
 Lernstand oder die Inhalte berührt, gelten zusätzliche Sicherungen (siehe „Leitplanken“).
 
 ## Leitplanken (gelten für jede Phase)
@@ -117,6 +118,56 @@ Für jede Seite zuerst die vorhandenen Tests und Rauchtests laufen lassen, nach 
 - `DOKUMENTATION.md` (145 KB) in kleinere Themen-Dateien unter `docs/` aufteilen (Architektur, Lernstand/Speicherung, Inhalte,
   Übungen, Darstellung, Tests), Verweise in `README.md` und `CONTRIBUTING.md` nachziehen.
 - `README.md`: Abschnitte zu Speicherung (IndexedDB), Tests (`test:e2e`) und Inhaltsformat aktualisieren.
+
+## Phase 10 – Neue Funktion: Post-its am Buchrand (nach Phase 3 und 4)
+
+Das ist die einzige Phase, die für Lernende etwas **Neues** bringt; Leitplanke 2 („kein Verhaltenswechsel“) gilt hier nicht, alle anderen
+schon. Idee des Besitzers vom 20. November 2026. Sie kommt erst nach Phase 3 (Seiten aufgeteilt) und Phase 4 (CSS vereinheitlicht), weil sie
+Klausur-/Aufgabenseite und das Buch-Layout anfasst.
+
+**Was.** Wie die Buchstaben im Glossar (`src/pages/glossar-register.css`: gelbe, grüne, rosa und blaue Zettel, die rechts aus der Buchkante
+ragen) sollen **Ausgangssituation**, **Formelsammlung**, **SQL-Belegsatz** und **Diagrammbeschreibungen** als Post-its aus dem Notizbuch ragen.
+Ein Klick lässt den Zettel aufploppen und zeigt den Inhalt, ohne die Seite zu verlassen. Heute sind es Knöpfe in einer Leiste über dem
+Seitenpanel (`src/components/Belegsatz.tsx`, `AnhangPanel`) bzw. eigene Seiten (`/material/formeln`, `/material/sql-belegsatz`, Diagramme in
+Deep Dive 17 / `GLOSSAR_PFAD`).
+
+**Annahme zu „Diagrammbeschreibungen“** (vor Beginn mit dem Besitzer bestätigen): die Übersicht der Diagrammtypen aus Deep Dive 17 „Glossar &
+Diagramme“ (je Typ gezeichnetes Beispiel mit kurzer Beschreibung: BPMN, EPK, UML, ER, Star-Schema, PAP, Struktogramm, Netzplan, Gantt,
+Boxplot, ROC …). Gemeint sein könnten auch die Szenariotexte der Diagramm-Übungen; dann Umfang neu festlegen.
+
+**Verhalten.**
+- Desktop (ab 1100 px, wie das Glossarregister): Die Zettel stecken am rechten Buchrand, untereinander, mit senkrechter Beschriftung
+  („Ausgangssituation“, „Formeln“, „SQL-Belegsatz“, „Diagramme“), Farben aus derselben Palette wie das Glossar; der aktive Zettel steht weiter
+  heraus. Unter 1100 px bleiben die heutigen Knöpfe unverändert (kein Platz am Rand, weniger Risiko).
+- Klick: Der Inhalt „ploppt“ aus dem Zettel heraus (kurze Skalierung/Verschiebung ab dem Zettel; bei `prefers-reduced-motion` ohne Animation).
+  Erneuter Klick auf den Zettel, Esc oder ein Klick außerhalb schließt; der Fokus geht zurück auf den Zettel. Immer nur einer offen.
+- **Nicht modal und ohne abgedunkelten Hintergrund:** Man muss beim Beantworten einer Klausuraufgabe weiter tippen können, während die
+  Ausgangssituation offen ist (wie das jetzige Seitenpanel). Die Taste `A` für die Ausgangssituation bleibt.
+- Inhalte werden **wiederverwendet**, nicht kopiert: Ausgangssituation (inkl. Textmarker und gespeicherte Markierungen), `FormelUebersicht`,
+  `SqlAuszug`/Belegsatz-Markdown. Beim Diagramm-Zettel zeigt das Popup die Typenübersicht mit Kurzbeschreibung und einen Link „ganze Seite“;
+  Formeln und SQL-Belegsatz behalten ihren Link auf die ausführliche Seite. Die Seiten und das Menü bleiben bestehen.
+- **Wo welcher Zettel erscheint:** Ausgangssituation nur dort, wo es eine gibt (Übungsklausur, Einzelaufgabe). Formeln, SQL-Belegsatz und
+  Diagramme auf allen Seiten des Buchs zum Nachschlagen. In einer laufenden Übungsklausur nur die Anhänge, die diese Klausur auch hat
+  (wie heute `sql`/`formeln` an `AnhangPanel`), damit sie der echten Prüfung gleicht. Nicht im Druck (`@media print`) und nicht auf der
+  Druckseite.
+- **Zusammenspiel mit dem Glossar:** Auf `/glossar` belegen die Buchstaben schon den rechten Rand. Am Phasenanfang mit Screenshots (hell/dunkel,
+  1100/1280/1600 px, hohes und niedriges Fenster) die beste Lösung wählen (z. B. Post-its am unteren Rand, Buchstaben oben kürzen, oder
+  Post-its dort links), die Wahl in `docs/UMBAU_STATUS.md` begründen und dem Besitzer vorlegen. Kein Überlappen von Zetteln und Buchstaben.
+- Barrierefrei: echte `<button>`s mit `aria-expanded`/`aria-controls`, Popup mit sinnvoller Rolle und Beschriftung, Tastaturbedienung
+  (Tab, Enter/Leertaste, Esc), ausreichender Kontrast der Beschriftung (axe, hell und dunkel).
+
+**Umsetzung.**
+1. Zuerst die Auswahlregeln als reine Funktion mit Tests (`src/lib/…`): Welche Zettel gibt es bei welcher Seite und Klausur?
+2. Zettel-Leiste als Komponente im Buch (`Buch.tsx`), Popup auf Basis des vorhandenen `AnhangPanel`; Stile in der Feature-Datei aus Phase 4,
+   Farben aus den Design-Tokens, keine neuen Einzelwerte.
+3. Die alten Knöpfe bleiben für Breiten unter 1100 px (und für Geräte ohne Platz am Rand); auf Desktop zeigen die Seiten die Knopfleiste nicht
+   mehr zusätzlich.
+4. e2e-Tests (Phase 1): Zettel sichtbar bei 1280 px; Klick öffnet, Esc schließt, Fokus kehrt zurück; Klausur: Ausgangssituation offen lassen
+   und in ein Antwortfeld tippen; Textmarker in der Ausgangssituation funktioniert weiter; bei 390 px alte Knöpfe, keine Zettel; kein
+   Überlappen mit dem Glossarregister; axe-Prüfung mit offenem Popup.
+5. Screenshots (Skill `app-pruefen`): hell/dunkel, Desktop/Handy, mit und ohne offenes Popup, auf Klausur, Aufgabe, SQL-Editor, Rechenübung,
+   Glossar.
+6. `README.md` (Tabelle „Funktionen“, Abschnitt „Beim Lösen von Aufgaben“) und die Dokumentation um die Zettel ergänzen.
 
 ## Abschluss
 
