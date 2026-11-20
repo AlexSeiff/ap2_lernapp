@@ -328,6 +328,42 @@ Befehle: `npm run import-report` (Hinweise 0), `npm test` (100 Dateien, 1810 Tes
 
 Nicht gemacht: Eine Aufklapp-Variante unter 1100 px (kein Platz am Rand), und die Beschreibungen des Beiblatts wurden nicht von einer Lehrkraft fachlich gegengelesen; sie folgen der üblichen Notation. Das sollte der Besitzer einmal lesen.
 
-## Offen: Phase 6
+## Phase 6 – Inhalte strukturiert statt per Regex: Bestandsaufnahme (Umstellung noch nicht begonnen)
+
+Stand: 20.11.2026. Nur gemessen und gelesen, nichts am Inhaltsformat geändert. Grundlage: `domain/parser.ts` (546 Zeilen), alle 33 Lernblätter, 32 Lösungsdateien und das alte SQL-Blatt in `content/` (zusammen 1,5 MB), die App-Funktionen, die Aufgabentexte auswerten.
+
+**1. Das Markdown wird zuverlässig gelesen.** Der Parser liest alle 633 Aufgaben und ihre 633 Musterlösungen ohne einen Importhinweis (`npm run import-report`: Hinweise 0). Das Ergebnis ist durch den Inhalts-Snapshot aus Phase 0 (SHA-256 jeder ausgelieferten Datei) festgehalten.
+
+**2. Die Sonderfälle des Parsers sind fast tot.** Gezählt in den 33 aktuellen Blättern:
+
+| Format | Vorkommen |
+|---|---|
+| Aufgabe im Standardformat `**A1 (4 P):**` | 615 (und 615 passende Lösungen in den Lösungsdateien) |
+| Aufgabe als Listenpunkt `- **W1 (5 P):**` (älteres Format) | 0 |
+| Lösungsüberschrift `**C7 – …:**` (älteres Format) | 0 |
+| Block als `Teil A –` statt `Block A –` | 0 |
+| Titel mit Kalenderwoche `(KW …)` | 0 |
+| Musterlösungen im Blatt statt in der Lösungsdatei | 0 |
+
+Alle diese Sonderfälle bedient **eine einzige Datei**: `Deep_Dive_SQL_KW28_29.md` (das „Zusatzmaterial DataFit“, Thema 00, 18 Aufgaben mit Listenform, `Teil`-Blöcken und eingebauten Musterlösungen). Die 18 Aufgaben stehen im Gesamtbestand von 633 (615 + 18).
+Der Code dafür ist klein: wenige Regex-Alternativen (`TASK_START`, `SOLUTION_START`, `BLOCK_HEADING`), `stripKw`, die Einrückungsregel in `parseTasks` und der Zweig „Musterlösung im Blatt“ – rund 30 von 546 Zeilen. Das alte Blatt ist lebendig (Begriffsseiten verweisen mit „SQL-Zusatz 1.2“ darauf).
+
+**3. Die eigentliche Regex-Abhängigkeit liegt woanders: Die Bedeutung einer Aufgabe wird zur Laufzeit aus dem Aufgabentext erraten.** Der Parser setzt bei allen 633 Aufgaben `type: 'offen'`. Was eine Aufgabe sonst ist, schließt die App aus der Prosa:
+- **Antwort-Editor** (`editorFuer` in `src/lib/editorAufgabe.ts`): 90 von 633 Aufgaben bekommen einen Editor (74 Wertetabellen, je 1–3 EPK, BPMN, ER, Aktivität, Use-Case, Relationen, Normalform, Boxplot, Struktogramm, Koordinatensystem); 543 bleiben Textfeld.
+- **Anhang** (`anhangFuer`): SQL bei 48, Formeln bei 78, Diagrammelemente bei 18 Aufgaben – erkannt an Wörtern wie *SQL*, *Berechnen*, *BPMN*.
+- **Operator** (`findeOperatoren`): das erste kursive Wort; bei 226 Aufgaben keins.
+- Außerdem werten `begriffe.ts`, `suche.ts`, `leicht.ts`, `werteTabelle.ts` und `koordinatenAntwort.ts` Aufgabentexte per Muster aus.
+Das ist fragil in einem anderen Sinn als der Parser: Ein Autor, der eine Aufgabe umformuliert („Erstellen Sie“ → „Fertigen Sie an“), verliert unbemerkt den Editor. Abgesichert ist es heute nur durch Tests, die die erkannte Liste festhalten (`tests/editorAufgaben.test.ts`: „detection on `content/` = exact list“).
+
+**4. Warum Markdown für Aufgaben und Lösungen als Quelle richtig ist.** Aufgabentexte und Lösungen sind lang, mehrzeilig und voller Formeln (299 KaTeX-Stellen), Tabellen (10 Punktetabellen), SVG-Diagramme (47) und SQL-Blöcke (27). In JSON müssten sie als Zeichenketten mit `
+` und Escapes stehen: schwer zu lesen, schwer zu vergleichen (Diffs), und der ganze Schreib-Ablauf (Skill `inhalte-schreiben`, `CONTRIBUTING.md`) ist auf Markdown ausgelegt.
+
+**Bewertung (Empfehlung):**
+- Die im Plan vorgesehene Umstellung **aller Aufgaben und Lösungen auf JSON löst kein gemessenes Problem** (der Parser macht keine Fehler), verschlechtert das Schreiben der Inhalte und hat das größte Risiko aller Phasen (633 Aufgaben, 633 Lösungen). **Nicht empfohlen.**
+- Was sich lohnen könnte, ist **klein**: (a) das eine alte SQL-Blatt auf das Standardformat bringen (Listenpunkte → `**W1 (5 P):**`, `Teil` → `Block`, Musterlösungen in eine `_Loesungen.md`) und danach die ~30 Zeilen Sonderfälle löschen; der Nachweis wäre ein Vergleich von Aufgaben, Lösungen und Abschnitten vor und nach (die Inhalts-Hashes ändern sich dabei sichtbar nur für dieses Thema).
+  (b) Die erratene Bedeutung der Aufgaben **sichtbar und prüfbar machen**: im Importbericht eine Tabelle „Aufgaben nach erkanntem Antworttyp, Anhang und Operator“ und ein Test, der eine umformulierte Aufgabe nicht stillschweigend ihren Editor verlieren lässt. Das ändert das Format nicht.
+- Entscheidung steht beim Besitzer; bis dahin ist Phase 6 **nicht begonnen**.
+
+## Offen: Phase 6 (Entscheidung ausstehend)
 
 Noch nicht begonnen.
