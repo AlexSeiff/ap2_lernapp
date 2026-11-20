@@ -6,8 +6,5 @@ data
 !.env.local.example
 tsconfig.tsbuildinfo
 *.defekt-*
-# Lokale Kopie der Projekt-Skills für Codex (Original: .claude/skills)
-.agents/
-
 # Originalfotos, Ausschnitte und quellennahe Abschriften bleiben lokal.
 /foto_transkription/
