@@ -89,8 +89,10 @@ button, .button, input, select, textarea { border-radius: 5px; }
 .paper-back { transform: rotateY(180deg); background: var(--surface); }
 .paper-back .fc-answer { margin-top: 0; padding-top: 0; animation: none; }
 /* Absicherung, falls ein Browser backface-visibility ignoriert (z. B. ohne GPU-Beschleunigung):
-   Die abgewandte Seite wird genau zur Hälfte der Drehung (Kante zum Betrachter) unsichtbar. */
-.paper-face { transition: visibility 0s linear .32s; }
+   Die abgewandte Seite wird unsichtbar, sobald die Karte hochkant steht (90°). Wegen der Kurve
+   cubic-bezier(.2,.65,.3,1) ist das schon nach 17 % der Zeit: 0,17 × 0,65 s ≈ 0,11 s.
+   Wer Dauer oder Kurve von .paper-turn ändert, muss diese Verzögerung neu berechnen. */
+.paper-face { transition: visibility 0s linear .11s; }
 .paper-turn:not(.is-turned) > .paper-back, .paper-turn.is-turned > .paper-front { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) { .paper-turn, .paper-face { transition: none; } }
 /* Alle Lernbereiche verwenden die gemeinsame Tintenfarbe. */
