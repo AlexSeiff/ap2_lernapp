@@ -293,7 +293,20 @@ Die Geschäftsleitung überlegt, HolzCheck samt App in der Manufaktur fest einzu
 | Malte Hinrichs | 50 | 52 | 32 | 50 | 20 | 22 |
 | Summe | 340 | 284 | 180 | 310 | 98 | 88 |
 
-**D3 (6 P):** Ein Liniendiagramm zeigt die mittlere Holzfeuchte im Lager: Monat 1: 28 %, Monat 2: 22 %, Monat 3: 22 %, Monat 4: 21 %, Monat 5: 16 %, Monat 6: 11 %. Aus den Übersichten in D2 stehen Ihnen außerdem der durchschnittliche Anteil schlecht durchlüfteter Stapel und die Summe der Arbeitsstunden im Lager je Monat zur Verfügung:
+**D3 (6 P):** Das folgende Liniendiagramm zeigt die mittlere Holzfeuchte im Lager:
+
+```diagramm
+typ: linie
+titel: Mittlere Holzfeuchte im Lager
+x: Monat
+y: Holzfeuchte in %
+kategorien: 1; 2; 3; 4; 5; 6
+reihe: Holzfeuchte | 28; 22; 22; 21; 16; 11
+y-max: 30
+schritt: 5
+```
+
+Aus den Übersichten in D2 stehen Ihnen außerdem der durchschnittliche Anteil schlecht durchlüfteter Stapel und die Summe der Arbeitsstunden im Lager je Monat zur Verfügung:
 
 | Monat | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|

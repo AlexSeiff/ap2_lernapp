@@ -54,7 +54,17 @@ Beispiel (50 Reklamationen des Möbelhauses):
 
 Kontrolle: Die relativen Häufigkeiten summieren sich immer auf 1 bzw. 100 % – rechne das in der Prüfung nach, es deckt Rechenfehler sofort auf.
 
-**Pareto-Prinzip (80/20):** Sortiert man absteigend und kumuliert, zeigt sich, welche wenigen Ursachen den Großteil der Fälle verursachen. Hier decken die zwei häufigsten Gründe bereits 66 % ab – dort setzt die Prozessoptimierung an (→ Deep Dive 5). Das **Pareto-Diagramm** kombiniert Balken (absolute Häufigkeit) mit einer Linie (kumulierter Anteil).
+**Pareto-Prinzip (80/20):** Sortiert man absteigend und kumuliert, zeigt sich, welche wenigen Ursachen den Großteil der Fälle verursachen. Hier decken die zwei häufigsten Gründe bereits 66 % ab – dort setzt die Prozessoptimierung an (→ Deep Dive 5). Das **Pareto-Diagramm** kombiniert Balken (absolute Häufigkeit) mit einer Linie (kumulierter Anteil):
+
+```diagramm
+typ: pareto
+titel: Reklamationsgründe (50 Reklamationen)
+x: Grund
+y: Anzahl
+kategorien: Transportschaden; Montagefehler; Falschlieferung; Materialfehler; Sonstiges
+reihe: Anzahl | 18; 15; 9; 6; 2
+schritt: 10
+```
 
 **Klassenbildung** bei metrischen Daten: gleich breite Klassen, überschneidungsfrei und lückenlos definieren (z. B. „30 bis unter 45 Minuten"). Die **Klassenmitte** dient als Rechenwert, wenn nur klassierte Daten vorliegen – dadurch entsteht ein Genauigkeitsverlust.
 

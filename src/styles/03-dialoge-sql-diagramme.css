@@ -161,3 +161,49 @@ tr.diff-extra .diff-mark, .diff-key.extra { color: var(--low); }
   .sql-toolbar label, .sql-toolbar select { width: 100%; }
   .sql-status { min-width: 0; }
 }
+/* Datendiagramme aus ```diagramm-Blöcken (src/components/DatenDiagramm.tsx): Reihenfarben über die Status-Tokens, damit Hell/Dunkel stimmen. */
+.daten-diagramm { --dd-0: var(--accent); --dd-1: var(--mid); --dd-2: var(--good); --dd-3: var(--low); --dd-4: var(--muted); }
+.daten-diagramm .dd-titel { font-weight: 600; text-align: center; margin: 0 0 4px; }
+.daten-diagramm svg { width: 100%; max-width: 100%; height: auto; overflow: visible; }
+.daten-diagramm text.dd-tick { font-size: 11px; fill: var(--muted); }
+.daten-diagramm text.dd-achsentitel { font-size: 12px; font-weight: 600; }
+.daten-diagramm text.dd-wert { font-size: 11px; font-variant-numeric: tabular-nums; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.daten-diagramm text.dd-wert-innen { fill: var(--surface); stroke: none; font-weight: 600; }
+.daten-diagramm text.dd-wert-summe { font-weight: 600; }
+.daten-diagramm text.dd-wert-kum { fill: var(--mid); }
+.daten-diagramm .dd-gitter { stroke: var(--border); stroke-width: 1; stroke-dasharray: 2 3; }
+.daten-diagramm .dd-achse { stroke: currentColor; stroke-width: 1.2; fill: none; }
+.daten-diagramm .dd-linie { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.daten-diagramm .dd-marker { stroke: var(--surface); stroke-width: 1.5; }
+.daten-diagramm .dd-saeule { stroke: none; }
+.daten-diagramm .dd-hilfslinie { stroke: var(--text); stroke-width: 1; stroke-dasharray: 4 3; opacity: 0.7; }
+.daten-diagramm .dd-punkt-ring { fill: none; stroke: var(--text); stroke-width: 2; }
+.daten-diagramm text.dd-punkt-text { font-size: 12px; font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.daten-diagramm .dd-reihe-0 { --dd: var(--dd-0); }
+.daten-diagramm .dd-reihe-1 { --dd: var(--dd-1); }
+.daten-diagramm .dd-reihe-2 { --dd: var(--dd-2); }
+.daten-diagramm .dd-reihe-3 { --dd: var(--dd-3); }
+.daten-diagramm .dd-reihe-4 { --dd: var(--dd-4); }
+.daten-diagramm .dd-linie[class*='dd-reihe-'] { stroke: var(--dd); }
+.daten-diagramm .dd-marker[class*='dd-reihe-'], .daten-diagramm .dd-saeule[class*='dd-reihe-'] { fill: var(--dd); }
+/* Gestapelt/gruppiert: Reihen zusätzlich über die Helligkeit unterscheidbar (Graustufendruck, Farbsehschwäche). */
+.daten-diagramm .dd-saeule.dd-reihe-1 { fill: color-mix(in srgb, var(--dd) 80%, var(--surface)); }
+.daten-diagramm .dd-saeule.dd-reihe-3 { fill: color-mix(in srgb, var(--dd) 65%, var(--surface)); }
+.dd-legende { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; list-style: none; margin: 6px 0 0; padding: 0; font-size: 0.85rem; }
+.dd-legende li { display: inline-flex; align-items: center; gap: 6px; }
+.dd-symbol { display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: var(--dd); }
+.dd-symbol-linie { width: 20px; height: 3px; border-radius: 2px; }
+.dd-symbol.dd-reihe-1:not(.dd-symbol-linie) { background: color-mix(in srgb, var(--dd) 80%, var(--surface)); }
+.dd-symbol.dd-reihe-3:not(.dd-symbol-linie) { background: color-mix(in srgb, var(--dd) 65%, var(--surface)); }
+.dd-symbol.dd-reihe-0 { --dd: var(--dd-0); }
+.dd-symbol.dd-reihe-1 { --dd: var(--dd-1); }
+.dd-symbol.dd-reihe-2 { --dd: var(--dd-2); }
+.dd-symbol.dd-reihe-3 { --dd: var(--dd-3); }
+.dd-symbol.dd-reihe-4 { --dd: var(--dd-4); }
+.dd-tabelle { margin-top: 6px; font-size: 0.9rem; }
+.dd-tabelle summary { cursor: pointer; color: var(--accent); width: max-content; }
+.dd-tabelle table { margin: 6px auto 0; }
+.dd-tabelle td { text-align: right; font-variant-numeric: tabular-nums; }
+@media print {
+  .daten-diagramm { break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}

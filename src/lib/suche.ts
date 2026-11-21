@@ -63,6 +63,7 @@ export interface SuchTreffer {
 export function klartext(md: string): string {
   return md
     .replace(/```svg[\s\S]*?```/g, ' ') // Diagramme (SVG-Markup) nicht durchsuchen
+    .replace(/```diagramm[\s\S]*?```/g, (b) => ` ${b.match(/^\s*titel:\s*(.*)$/m)?.[1] ?? ''} `) // Datendiagramme: nur der Titel
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/\{\{\s*[\w.-]+\s*\}\}/g, ' … ')
