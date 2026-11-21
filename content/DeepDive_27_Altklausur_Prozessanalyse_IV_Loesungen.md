@@ -140,8 +140,34 @@ Der Gewinn steigt um 70.200 € (rund 63 %), obwohl die Abschreibung um 36.000 �
 
 **D2 (8 P):** *(je Diagramm 4 P: geeigneter Diagrammtyp 1 P, Achsen mit Beschriftung und Einheit 1 P, Werte richtig eingetragen 1 P, Titel und Legende 1 P)*
 
-- **Diagramm 1 – Anteil schlecht durchlüfteter Stapel:** Liniendiagramm, x-Achse „Monat“ (1 bis 6), y-Achse „Anteil in %“ (0 bis 60). Entweder eine Linie je Lagerbox mit Legende oder die Linie des Durchschnitts: 18 – 28 – 41 – 52 – 7 – 4.
-- **Diagramm 2 – Personaleinsatz:** gestapeltes Säulendiagramm, x-Achse „Monat“, y-Achse „Stunden“ (0 bis 350), je Monat eine Säule mit vier Abschnitten (Legende mit den Namen) oder Säulen der Monatssummen: 340 – 284 – 180 – 310 – 98 – 88.
+**Diagramm 1 – Anteil schlecht durchlüfteter Stapel:** Liniendiagramm über die Monate. Gezeigt ist die Linie des Durchschnitts; ebenso richtig ist eine Linie je Lagerbox mit Legende.
+
+```diagramm
+typ: linie
+titel: Anteil schlecht durchlüfteter Stapel (Durchschnitt der sechs Lagerboxen)
+x: Monat
+y: Anteil in %
+kategorien: 1; 2; 3; 4; 5; 6
+reihe: Durchschnitt | 18; 28; 41; 52; 7; 4
+y-max: 60
+schritt: 10
+```
+
+**Diagramm 2 – Personaleinsatz:** gestapeltes Säulendiagramm, je Monat eine Säule mit vier Abschnitten und Legende mit den Namen. Ebenso richtig sind einfache Säulen der Monatssummen (340, 284, 180, 310, 98, 88).
+
+```diagramm
+typ: gestapelt
+titel: Personaleinsatz im Lager
+x: Monat
+y: Stunden
+kategorien: 1; 2; 3; 4; 5; 6
+reihe: Jonas Reimers | 80; 72; 40; 88; 22; 16
+reihe: Aylin Demir | 150; 128; 80; 136; 56; 50
+reihe: Petra Lüders | 60; 32; 28; 36; 0; 0
+reihe: Malte Hinrichs | 50; 52; 32; 50; 20; 22
+y-max: 350
+schritt: 50
+```
 
 *Prüferkommentar: Ein Kreisdiagramm passt nicht – es zeigt Anteile an einem Ganzen, keinen Verlauf. Säulen beginnen bei null. Ohne Achsenbeschriftung gibt es je Diagramm höchstens 3 Punkte.*
 

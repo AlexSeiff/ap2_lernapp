@@ -10,6 +10,7 @@ import { parseJsonUebungen } from './jsonUebungen.ts';
 import { parseRechenUebungen, type RechenUebungPruefer } from './rechenUebungen.ts';
 import { parseSqlUebungen, verknuepfeSqlUebungen } from './sqlUebungen.ts';
 import { pruefeSvg, svgBloecke, svgIds } from './svgDiagramm.ts';
+import { diagrammBloecke, leseDiagramm } from './datenDiagramm.ts';
 
 interface Line {
   text: string;
@@ -516,7 +517,10 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
   return content;
 }
 
-/** ```svg-Diagramme in Theorie und Material: Positivliste (domain/svgDiagramm.ts) und eindeutige ids (Marker gelten seitenweit). */
+/**
+ * ```svg-Diagramme in Theorie und Material: Positivliste (domain/svgDiagramm.ts) und eindeutige ids (Marker gelten seitenweit).
+ * ```diagramm-Blöcke (Datendiagramme, domain/datenDiagramm.ts) überall, auch in Aufgaben, Anlagen und Lösungen: lesbar?
+ */
 export function pruefeDiagramme(content: Content): ImportIssue[] {
   const issues: ImportIssue[] = [];
   const ids = new Map<string, string>();
@@ -524,6 +528,27 @@ export function pruefeDiagramme(content: Content): ImportIssue[] {
     ...content.topics.flatMap((t) => t.sections.map((s) => ({ file: t.file, ort: s.title, md: s.markdown }))),
     ...content.materials.map((m) => ({ file: m.file, ort: m.title, md: m.markdown })),
   ];
+  const alleTexte = [
+    ...quellen,
+    ...content.topics.flatMap((t) => [
+      ...(t.exam?.attachments ?? []).map((a) => ({ file: t.file, ort: a.title, md: a.markdown })),
+      ...(t.exam?.blocks ?? []).map((b) => ({ file: t.file, ort: `Block ${b.letter}`, md: b.intro })),
+    ]),
+    ...Object.values(content.tasks).flatMap((task) => {
+      const t = content.topics.find((x) => x.id === task.topicId);
+      return [
+        { file: t?.file ?? task.topicId, ort: task.code, md: task.markdown },
+        ...(task.solution
+          ? [{ file: t?.solutionFile ?? t?.file ?? task.topicId, ort: `Lösung ${task.code}`, md: task.solution.markdown }]
+          : []),
+      ];
+    }),
+  ];
+  for (const q of alleTexte)
+    for (const block of diagrammBloecke(q.md)) {
+      const { fehler } = leseDiagramm(block);
+      if (fehler) issues.push({ file: q.file, message: `Diagramm in „${q.ort}“: ${fehler}` });
+    }
   for (const q of quellen) {
     for (const svg of svgBloecke(q.md)) {
       const fehler = pruefeSvg(svg);

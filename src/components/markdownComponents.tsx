@@ -7,6 +7,8 @@ import { rehypeOperatoren } from '../lib/operatorStil';
 import { OperatorTipp } from './OperatorTipp';
 import { datasetForSource, sqlEditorLink } from '../lib/sqlLinks';
 import { pruefeSvg } from '../../domain/svgDiagramm';
+import { leseDiagramm } from '../../domain/datenDiagramm';
+import { DatenDiagramm } from './DatenDiagramm';
 import { Icon } from './Icon';
 import { SvgDiagramm } from './SvgDiagramm';
 
@@ -55,10 +57,14 @@ function makeComponents(source?: string | false): Components {
       return <span {...rest}>{children}</span>;
     },
     // ```svg-Blöcke: handgezeichnetes Diagramm (domain/svgDiagramm.ts prüft die Positivliste), sonst als Code.
+    // ```diagramm-Blöcke: Datendiagramm aus einfacher Datenangabe (domain/datenDiagramm.ts), bei Fehlern als Code.
     // ```sql-Blöcke: Link in den SQL-Editor mit vorausgefüllter Abfrage und passendem Datensatz.
     pre: ({ node, children }) => {
       const svg = codeOfPre(node, 'svg');
       if (svg !== undefined && !pruefeSvg(svg)) return <SvgDiagramm svg={svg} />;
+      const daten = codeOfPre(node, 'diagramm');
+      const diagramm = daten === undefined ? undefined : leseDiagramm(daten).diagramm;
+      if (diagramm) return <DatenDiagramm daten={diagramm} />;
       const sql = source === false ? undefined : codeOfPre(node, 'sql');
       if (!sql?.trim()) return <pre>{children}</pre>;
       return (

@@ -142,7 +142,19 @@ $9.000 \cdot t = 15.000 \cdot (t - 1) \Rightarrow 6.000 \cdot t = 15.000 \Righta
 
 Kontrolle: Nach 2,5 Jahren stehen 22.500 € Kosten 22.500 € Einsparung gegenüber.
 
-Grafik: x-Achse „Zeit in Jahren“ (0 bis 4), y-Achse „kumulierte Kosten/Einsparung in €“; Kostengerade durch (0 | 0) und (4 | 36.000), Einsparungsgerade durch (1 | 0) und (4 | 45.000); Schnittpunkt bei (2,5 | 22.500) markieren.
+Grafik: Kostengerade durch (0 | 0) und (4 | 36.000), Einsparungsgerade durch (1 | 0) und (4 | 45.000), Schnittpunkt markiert.
+
+```diagramm
+typ: linie
+titel: Break-even der Abholschränke
+x: Zeit in Jahren
+y: kumulierte Kosten/Einsparung in €
+kategorien: 0; 1; 2; 3; 4
+reihe: Kosten | 0; 9.000; 18.000; 27.000; 36.000
+reihe: Einsparung | 0; 0; 15.000; 30.000; 45.000
+werte: nein
+punkt: 2,5 | 22.500 | Break-even nach 2,5 Jahren
+```
 
 Antwortsatz: **Nach zweieinhalb Jahren** sind die kumulierten Einsparungen so hoch wie die kumulierten Kosten der Abholschränke; danach lohnt sich die Maßnahme.
 

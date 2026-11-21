@@ -32,6 +32,13 @@
   fails is shown as code and reported as ImportIssue (`pruefeDiagramme`), as is an `id` used twice (markers are page-wide). Colours only via
   classes from `src/styles/` (`dg-linie`, `dg-form`, `dg-grau`, `dg-akzent`, `dg-gut`, `dg-mittel`, `dg-rot`, `dg-voll`, `dg-linie-akzent`,
   `dg-strich`, `dg-dick` …; text: `dg-klein`, `dg-fett`, `dg-leise` …), so light, dark and print mode work. The search ignores SVG markup.
+- **Data charts**: a ```` ```diagramm ```` block holds plain data (`typ` linie/saeulen/gestapelt/pareto, `titel`, `x`, `y`, `kategorien`,
+  `reihe: Name | 1; 2; …`, optional `y-min`, `y-max`, `schritt`, `werte`, `punkt`) instead of SVG. `domain/datenDiagramm.ts` (`leseDiagramm`)
+  parses it (German numbers, the written text of every value is kept for labels and table), `src/components/DatenDiagramm.tsx` draws it
+  as inline SVG at the container's real width (ResizeObserver, readable on phones), colours via `--accent/--mid/--good/--low` (light/dark/print),
+  plus a `<details>` value table for screen readers. Allowed everywhere Markdown is rendered (sections, tasks, attachments, solutions);
+  `pruefeDiagramme` reports broken blocks as ImportIssue, the search indexes only the title. Use it whenever a task or solution would
+  otherwise describe a chart's values in words.
 
 ### 4.2 Flashcards `AP2_FIDPA_Lernkarten.json`
 

@@ -11,11 +11,18 @@
 
 Geeignet ist ein **gruppiertes Säulendiagramm**: Auf der x-Achse stehen die Rampen (Rampe 1 bis 3), je Rampe gibt es drei Säulen für die Gruppen Lieferanten, Selbstabholer und Montageteams. Die y-Achse zeigt die **prozentuale Verteilung** (0–100 %) bzw. die absolute Anzahl der Personen.
 
-| Rampe | Lieferanten | Selbstabholer | Montageteams |
-|---|---|---|---|
-| Rampe 1 | 70 % | 20 % | 0 % |
-| Rampe 2 | 30 % | 0 % | 50 % |
-| Rampe 3 | 0 % | 80 % | 50 % |
+```diagramm
+typ: saeulen
+titel: Verteilung der Personengruppen auf die Rampen
+x: Rampe
+y: Anteil der Gruppe in %
+kategorien: Rampe 1; Rampe 2; Rampe 3
+reihe: Lieferanten | 70; 30; 0
+reihe: Selbstabholer | 20; 0; 80
+reihe: Montageteams | 0; 50; 50
+y-max: 100
+schritt: 20
+```
 
 Legende: Lieferanten, Selbstabholer, Montageteams (unterschiedliche Farben/Muster). Achsentitel: „Rampe“ und „Anteil der Gruppe in %“.
 

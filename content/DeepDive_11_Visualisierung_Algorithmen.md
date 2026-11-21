@@ -65,6 +65,29 @@ Das ist der prüfungsrelevanteste Teil. Die häufigsten Techniken:
 Tatsächliches Wachstum: +3,13 %, dann +3,03 %, insgesamt **+6,25 %** – ein flacher, leicht steigender Verlauf.
 Beginnt die y-Achse jedoch bei 4,70 Mio. €, betragen die sichtbaren Balkenhöhen 0,10; 0,25; 0,40. Das Verhältnis **1 : 2,5 : 4** suggeriert eine Vervierfachung. Die Zahlen stimmen, das Bild lügt.
 
+```diagramm
+typ: saeulen
+titel: Ehrlich – y-Achse ab 0
+x: Geschäftsjahr
+y: Umsatz in Mio. €
+kategorien: Jahr 1; Jahr 2; Jahr 3
+reihe: Umsatz | 4,80; 4,95; 5,10
+y-max: 6
+schritt: 1
+```
+
+```diagramm
+typ: saeulen
+titel: Verzerrt – y-Achse ab 4,70 Mio. €
+x: Geschäftsjahr
+y: Umsatz in Mio. €
+kategorien: Jahr 1; Jahr 2; Jahr 3
+reihe: Umsatz | 4,80; 4,95; 5,10
+y-min: 4,70
+y-max: 5,10
+schritt: 0,10
+```
+
 **Prüfungsformulierung:** „Die y-Achse beginnt nicht bei null. Dadurch erscheinen die Unterschiede erheblich größer, als sie sind – der tatsächliche Zuwachs beträgt lediglich 6,25 %. Für Balkendiagramme ist ein Nullpunkt zwingend, da die Balkenlänge den Wert codiert."
 
 **Lügenfaktor (Lie Factor)** nach Tufte – macht die Verzerrung messbar:
@@ -380,7 +403,20 @@ Im Jahresbericht des Vertriebs fällt Ihnen eine Grafik auf, die nicht zu den Za
 
 Die Geschäftsführung möchte den Reparaturservice täglich auf einen Blick überwachen.
 
-**B1 (12 P):** Ein Bericht zeigt ein Säulendiagramm der Jahresumsätze 4,80 / 4,95 / 5,10 Mio. €. Die y-Achse beginnt bei 4,70 Mio. €. Die Überschrift lautet „Umsatz explodiert".
+**B1 (12 P):** Ein Bericht zeigt das folgende Säulendiagramm der Jahresumsätze. Die y-Achse beginnt bei 4,70 Mio. €, die Überschrift lautet „Umsatz explodiert".
+
+```diagramm
+typ: saeulen
+titel: Umsatz explodiert
+x: Geschäftsjahr
+y: Umsatz in Mio. €
+kategorien: Jahr 1; Jahr 2; Jahr 3
+reihe: Umsatz | 4,80; 4,95; 5,10
+y-min: 4,70
+y-max: 5,10
+schritt: 0,10
+```
+
 a) *Berechnen* Sie das tatsächliche Gesamtwachstum in Prozent. (4 P)
 b) *Erläutern* Sie, welchen Eindruck die gewählte Achse erzeugt und warum. (4 P)
 c) *Beurteilen* Sie die Überschrift und *formulieren* Sie eine sachlich korrekte Alternative. (4 P)

@@ -308,11 +308,18 @@ Sie sollen den Prozess 2 „Eingangsrechnung digital unterstützt“ definieren.
 
 ## Block D – Kosten der Kundenhotline (25 P)
 
-Die Geschäftsleitung beauftragt Sie, die Kosten der Kundenhotline zu analysieren. Es werden nur die Kosten betrachtet, die sich aus den Tätigkeiten der beiden Hotline-Standorte ergeben. Sie erhalten folgende Kostenübersicht (die Grafik wird als Tabelle dargestellt):
+Die Geschäftsleitung beauftragt Sie, die Kosten der Kundenhotline zu analysieren. Es werden nur die Kosten betrachtet, die sich aus den Tätigkeiten der beiden Hotline-Standorte ergeben. Sie erhalten folgende Kostenübersicht:
 
-| Jahr | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Kosten in € | 400.000 | 450.000 | 450.000 | 600.000 | 650.000 | 700.000 | 800.000 | 850.000 | 950.000 | 1.000.000 |
+```diagramm
+typ: linie
+titel: Kosten der Kundenhotline
+x: Jahr
+y: Kosten in €
+kategorien: 2016; 2017; 2018; 2019; 2020; 2021; 2022; 2023; 2024; 2025
+reihe: Kosten | 400.000; 450.000; 450.000; 600.000; 650.000; 700.000; 800.000; 850.000; 950.000; 1.000.000
+y-max: 2.000.000
+schritt: 250.000
+```
 
 **D1 (2 P):** Formulieren Sie eine **quantitative Aussage** zum Kostenverlauf.
 

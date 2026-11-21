@@ -106,6 +106,27 @@ Text …
 - Kein `(KW …)` und keine persönlichen Zeitbezüge in Titeln.
 - Formeln: `$…$` auf einer Zeile, `{,}` als Dezimalkomma, `\%`, `\text{…}` für Wörter. Blockformeln `$$` auf eigenen Zeilen.
 - Diagramme: ```` ```svg ````-Block, nur Zeichenelemente und `dg-*`-Klassen (siehe docs/03-inhalte.md § 4.1 „Diagrams“ und DD17 als Vorlage).
+- **Datendiagramme** (Linien-, Säulen-, gestapelte Säulen-, Pareto-Diagramm mit Werten) nie in Worten beschreiben („Ein Liniendiagramm zeigt …:
+  Monat 1: 28 % …“), sondern als ```` ```diagramm ````-Block – geht in Theorie, Aufgaben, Anlagen und Lösungen. Die App zeichnet daraus ein SVG
+  (Hell/Dunkel/Handy/Druck) mit aufklappbarer Wertetabelle; Werte erscheinen genau so, wie sie im Block stehen:
+
+  ````
+  ```diagramm
+  typ: linie                  # linie | saeulen (mehrere Reihen = gruppiert) | gestapelt | pareto
+  titel: Mittlere Holzfeuchte im Lager
+  x: Monat                    # Achsentitel (optional)
+  y: Holzfeuchte in %
+  kategorien: 1; 2; 3; 4; 5; 6
+  reihe: Holzfeuchte | 28; 22; 22; 21; 16; 11   # beliebig viele Reihen, Zahlen deutsch (4,80 · 1.000.000), getrennt mit „;“
+  y-min: 0                    # optional; > 0 = abgeschnittene Achse mit Bruchzeichen
+  y-max: 30                   # optional, sonst gerundet
+  schritt: 5                  # optional
+  werte: ja                   # Werte beschriften (Standard ja)
+  punkt: 2,5 | 22.500 | Break-even nach 2,5 Jahren   # optional, markierter Punkt (x = Kategorie oder Zahl)
+  ```
+  ````
+
+  Pareto: genau eine Reihe, die kumulierte %-Linie rechnet die App. Ein fehlerhafter Block wird als Code gezeigt und im Import-Report gemeldet.
 - Rechenbeispiele im Theorieteil, die eine Rechenübung nachbildet, verweisen dort mit `quelleAufgabe: "DDn Teil 4.3"` – ihre Zahlen
   müssen zum Text passen (Smoke-Test).
 
