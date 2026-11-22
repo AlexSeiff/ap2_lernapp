@@ -1,5 +1,6 @@
-/* Die Zeile „+ Baustein“ gehört nicht zum Struktogramm: gestrichelt und gedämpft abgesetzt. */
-.sg-folge > .sg-b + .sg-neu-zeile, .sg-folge > .sg-leer + .sg-neu-zeile { border-top: 1px dashed var(--border); }
+/* Die Zeile „+ Baustein“ gehört nicht zum Struktogramm: schmal, gestrichelt und gedämpft abgesetzt, immer unten in der Folge –
+   so stehen die Zeilen nebeneinanderliegender Zweige auf einer Höhe. */
+.sg-folge > .sg-b + .sg-neu-zeile { margin-top: auto; border-top: 1px dashed var(--border); }
 .sg-anweisung, .sg-kopf { display: flex; align-items: center; gap: 4px; padding: 2px 6px; min-height: 38px; }
 .sg-kopf .sg-text { font-weight: 600; }
 .sg-text { flex: 1 1 auto; min-width: 8em; font-variant-numeric: tabular-nums; field-sizing: content; }
@@ -19,29 +20,61 @@ span.sg-text { padding: 6px 4px; overflow-wrap: anywhere; }
 .sg-rumpf { margin-left: 1.8em; border-left: var(--sg-linie); }
 .sg-solange > .sg-rumpf { border-top: var(--sg-linie); }
 .sg-wiederhole > .sg-rumpf { border-bottom: var(--sg-linie); }
-.sg-leer { display: grid; place-items: center; min-height: 38px; color: var(--muted); }
+.sg-leer { flex: 1 0 auto; display: grid; place-items: center; min-height: 38px; color: var(--muted); }
 /* ↑ ↓ ✕ nehmen keinen Platz weg: mit Maus erst beim Darüberfahren bzw. Fokus, auf Touch-Geräten immer sichtbar im Kasten. */
 .sg-anweisung, .sg-kopf { position: relative; }
 .sg-aktionen { position: absolute; top: 3px; right: 3px; display: flex; gap: 1px; background: var(--surface); border-radius: 6px; opacity: 0; transition: opacity 0.12s; }
 .sg-aktionen button { min-height: 28px; padding: 1px 6px; color: var(--muted); }
 .sg-anweisung:hover > .sg-aktionen, .sg-anweisung:focus-within > .sg-aktionen, .sg-kopf:hover > .sg-aktionen, .sg-kopf:focus-within > .sg-aktionen,
 .sg-wenn-kopf:hover > .sg-aktionen, .sg-wenn-kopf:focus-within > .sg-aktionen { opacity: 1; }
+/* Touch: erst wenn der Kasten den Fokus hat (Text angetippt) – sonst machten die Knöpfe jede Spalte breiter. */
 @media (hover: none) {
-  .sg-aktionen { position: static; opacity: 1; flex: none; }
+  .sg-aktionen { position: static; opacity: 1; flex: none; display: none; }
   .sg-wenn-kopf .sg-aktionen { position: absolute; }
+  .sg-anweisung:focus-within > .sg-aktionen, .sg-kopf:focus-within > .sg-aktionen, .sg-wenn-kopf:focus-within > .sg-aktionen { display: flex; }
 }
-.sg-neu-zeile { padding: 2px 4px; }
-/* Feste, schmale Breite – sonst bestimmt die längste Option die Mindestbreite jeder Spalte. */
-select.sg-neu { width: 8.5em; max-width: 100%; min-height: 28px; padding: 1px 26px 1px 6px; font-size: 0.8rem; color: var(--muted); background-color: transparent; border-color: transparent; }
-select.sg-neu:hover, select.sg-neu:focus { border-color: var(--border); }
+/* Der Kasten, an dem du gerade schreibst, ist zart hinterlegt – hilft in tiefer Verschachtelung. */
+.sg-arbeit :is(.sg-anweisung, .sg-kopf, .sg-wenn-kopf):focus-within { background: var(--accent-soft); }
+.sg-arbeit .sg-wenn-kopf:focus-within .sg-aktionen, .sg-arbeit .sg-kopf:focus-within .sg-aktionen, .sg-arbeit .sg-anweisung:focus-within .sg-aktionen { background: var(--accent-soft); }
+
+/* contain: die aufgeklappte Auswahl macht die Spalte nicht breiter, sie bricht in ihr um. */
+.sg-neu-zeile { contain: inline-size; display: flex; }
+.sg-plus { flex: 1; display: flex; align-items: center; justify-content: flex-start; gap: 10px; min-height: 26px; margin: 0; padding: 2px 8px; font-size: 0.75rem; font-weight: 500; color: var(--muted); background: transparent; border: 0; border-radius: 0; box-shadow: none; cursor: pointer; opacity: 0.75; transition: opacity 0.12s, color 0.12s, background-color 0.12s; }
+.sg-plus:hover, .sg-plus:focus-visible { opacity: 1; color: var(--accent); background: var(--accent-soft); }
+.sg-plus:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* Leerer Zweig: der ganze Kasten ist die Zeile, ∅ wie auf dem Prüfungsbogen in der Mitte. */
+.sg-neu-leer { flex: 1 0 auto; }
+.sg-neu-leer .sg-plus { justify-content: center; min-height: 38px; }
+.sg-leer-zeichen { font-size: 1rem; }
+.sg-neu-zeile.offen { flex-direction: column; padding: 5px; background: var(--accent-soft); }
+.sg-neu-leer.offen { justify-content: center; }
+.sg-wahl { display: flex; flex-wrap: wrap; gap: 4px; }
+.sg-wahl button { flex: 1 1 6.6em; display: flex; flex-direction: column; align-items: center; gap: 3px; min-height: 0; margin: 0; padding: 6px 4px 5px; font-size: 0.72rem; font-weight: 500; line-height: 1.15; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; box-shadow: none; }
+.sg-wahl button:hover { color: var(--accent); border-color: var(--accent); }
+.sg-wahl button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.sg-wahl .sg-wahl-zu { flex: none; flex-direction: row; align-self: center; padding: 6px; justify-content: center; color: var(--muted); background: transparent; border-color: transparent; }
+.sg-bildchen { width: 26px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: round; }
+/* Leeres Struktogramm: die Auswahl steht gleich offen, etwas großzügiger. */
+.sg-neu-start.offen { padding: 14px 12px 12px; }
+.sg-start-text { margin: 0 0 8px; font-size: 0.85rem; color: var(--muted); text-align: center; }
+.sg-neu-start .sg-wahl { gap: 8px; }
+.sg-neu-start .sg-wahl button { flex-basis: 8.5em; padding: 10px 6px 8px; font-size: 0.8rem; gap: 6px; }
+.sg-neu-start .sg-bildchen { width: 36px; height: 25px; }
 .sg-gliederung { margin: 6px 0; padding: 8px 10px; font-size: 0.85rem; white-space: pre-wrap; background: var(--surface); border-radius: 8px; }
 @media (max-width: 600px) {
-  .te-tabelle input, .ed-text input, .ed-text select, select.te-aktion, select.te-ziel, .wt-tabelle input.wt-zelle, input.sg-text, select.sg-neu { font-size: 16px; }
+  .te-tabelle input, .ed-text input, .ed-text select, select.te-aktion, select.te-ziel, .wt-tabelle input.wt-zelle, input.sg-text { font-size: 16px; }
+  /* Schmaler verschachteln: weniger Mindestbreite, schmalerer Schleifenbalken, weniger Rand neben der Bedingung. */
+  .sg-folge { min-width: 8em; }
+  .sg-text { min-width: 5em; }
+  .sg-rumpf { margin-left: 1.2em; }
+  .sg-wenn-kopf { padding-left: 22px; padding-right: 22px; }
+  .sg-plus { min-height: 34px; }
   .ed-scroll { max-height: 60vh; }
   .diagramm-editor.vollbild { padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); }
 }
 @media print {
-  .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe, .wt-neu, .wt-aktion, .sg-aktionen, .sg-neu-zeile { display: none; }
+  .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe, .wt-neu, .wt-aktion, .sg-aktionen, .sg-neu-zeile:not(.sg-neu-leer) { display: none; }
+  .sg-neu-leer .sg-plus > :not(.sg-leer-zeichen) { display: none; }
 }
 
 /* Farben (lib/farben.ts): `farbe-<name>` setzt --f (Text/Linie), --f-fill (Fläche mit weißer Schrift) und --f-soft (zarter Grund) */
