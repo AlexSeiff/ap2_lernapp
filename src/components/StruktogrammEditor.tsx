@@ -1,5 +1,6 @@
 // Struktogramm-Baukasten (src/lib/struktogramm.ts): Bausteine als verschachtelte Nassi-Shneiderman-Kästen – Verzweigung mit Dreieck
-// und ja/nein, Schleifen mit Balken links. Texte stehen direkt im Kasten, „+ Baustein“ am Ende jeder Folge fügt an, ↑ ↓ ✕ ordnen um.
+// und ja/nein, Schleifen mit Balken links. Texte stehen direkt im Kasten, die schmale Zeile „+ Baustein“ am Ende jeder Folge klappt
+// die vier Bausteine als kleine Bildchen auf (ein leerer Zweig ist selbst die Zeile), ↑ ↓ ✕ ordnen um.
 // StruktogrammAnsicht zeigt dasselbe ohne Bedienelemente (nach der Abgabe), StruktogrammPruefung beim Bewerten Formprüfung und Gliederung.
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
@@ -26,14 +27,126 @@ interface Ctx {
   aendere?: (fn: (liste: Baustein[]) => Baustein[]) => void;
   /** Eigener Inhalt der Textzelle (Zuordnungs-Struktogramm: Ziffernfeld bzw. Anweisung), statt Text oder Eingabefeld. */
   zelle?: (b: Baustein) => ReactNode;
+  /** Zuletzt angefügter Baustein: sein Textfeld bekommt gleich den Fokus. */
+  neuId?: string;
+  setNeuId?: (id: string) => void;
 }
 
 const ARTEN: BausteinArt[] = ['anweisung', 'wenn', 'solange', 'wiederhole'];
 
+/** Kurzname unter dem Bildchen; der volle Name steht im title. */
+const KURZ: Record<BausteinArt, string> = {
+  anweisung: 'Anweisung',
+  wenn: 'Verzweigung',
+  solange: 'Kopfgesteuert',
+  wiederhole: 'Fußgesteuert',
+};
+
+/** Jeder Baustein als Mini-Struktogramm – so, wie er nachher aussieht. */
+function Bildchen({ art }: { art: BausteinArt }) {
+  return (
+    <svg className="sg-bildchen" viewBox="0 0 26 18" aria-hidden="true" focusable="false">
+      <rect x="1" y="1" width="24" height="16" />
+      {art === 'wenn' && <path d="M1 1 13 9 25 1M1 9h24M13 9v8" />}
+      {art === 'solange' && <path d="M7 17V6h18" />}
+      {art === 'wiederhole' && <path d="M7 1v11h18" />}
+    </svg>
+  );
+}
+
+/**
+ * Anfügen am Ende einer Folge: zu eine schmale Zeile, offen die vier Bausteine. Ein leerer Zweig ist selbst diese Zeile (∅ + Baustein),
+ * ein leeres Struktogramm zeigt die Auswahl gleich offen. Escape oder Klick daneben klappt wieder zu.
+ */
+function NeuZeile({ ort, ctx, leer }: { ort: Ort; ctx: Ctx; leer: boolean }) {
+  const start = leer && ort.in === 'wurzel';
+  const [offen, setOffen] = useState(false);
+  const plus = useRef<HTMLButtonElement>(null);
+  const erster = useRef<HTMLButtonElement>(null);
+  const zurueck = useRef(false);
+  useEffect(() => {
+    if (offen) erster.current?.focus();
+    else if (zurueck.current) plus.current?.focus();
+    zurueck.current = false;
+  }, [offen]);
+  const waehle = (art: BausteinArt) => {
+    const b = neuerBaustein(art);
+    ctx.setNeuId?.(b.id);
+    ctx.aendere!((l) => fuegeAn(l, ort, b));
+    setOffen(false);
+  };
+  const klasse = `sg-neu-zeile${leer ? ' sg-neu-leer' : ''}${start ? ' sg-neu-start' : ''}`;
+  if (!offen && !start)
+    return (
+      <div className={klasse}>
+        <button
+          type="button"
+          ref={plus}
+          className="sg-plus"
+          aria-expanded={false}
+          aria-label={leer ? 'Leerer Zweig – Baustein hinzufügen' : 'Baustein hinzufügen'}
+          onClick={() => setOffen(true)}
+        >
+          {leer && (
+            <span className="sg-leer-zeichen" aria-hidden="true">
+              ∅
+            </span>
+          )}
+          <span aria-hidden="true">+ Baustein</span>
+        </button>
+      </div>
+    );
+  return (
+    <div
+      className={`${klasse} offen`}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape' && !start) {
+          e.stopPropagation();
+          zurueck.current = true;
+          setOffen(false);
+        }
+      }}
+      onBlur={(e) => {
+        if (!start && !e.currentTarget.contains(e.relatedTarget as Node | null)) setOffen(false);
+      }}
+    >
+      {start && <p className="sg-start-text">Womit beginnt dein Struktogramm?</p>}
+      <div className="sg-wahl" role="group" aria-label="Baustein hinzufügen">
+        {ARTEN.map((a, i) => (
+          <button
+            key={a}
+            ref={i === 0 && !start ? erster : undefined}
+            type="button"
+            className="sg-wahl-knopf"
+            title={BAUSTEIN_NAMEN[a]}
+            onClick={() => waehle(a)}
+          >
+            <Bildchen art={a} />
+            <span>{KURZ[a]}</span>
+          </button>
+        ))}
+        {!start && (
+          <button
+            type="button"
+            className="sg-wahl-zu"
+            aria-label="Abbrechen"
+            onClick={() => {
+              zurueck.current = true;
+              setOffen(false);
+            }}
+          >
+            <Icon name="x" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function Folge({ liste, ort, ctx }: { liste: Baustein[]; ort: Ort; ctx: Ctx }) {
   return (
     <div className="sg-folge">
-      {!liste.length && (
+      {!liste.length && !ctx.aendere && (
         <div className="sg-leer" title="leerer Zweig: keine Anweisung">
           ∅
         </div>
@@ -41,26 +154,7 @@ function Folge({ liste, ort, ctx }: { liste: Baustein[]; ort: Ort; ctx: Ctx }) {
       {liste.map((b, i) => (
         <BausteinKasten key={b.id} b={b} erster={i === 0} letzter={i === liste.length - 1} ctx={ctx} />
       ))}
-      {ctx.aendere && (
-        <div className="sg-neu-zeile">
-          <select
-            className="sg-neu"
-            value=""
-            aria-label="Baustein hinzufügen"
-            onChange={(e) => {
-              const art = e.target.value as BausteinArt;
-              if (art) ctx.aendere!((l) => fuegeAn(l, ort, neuerBaustein(art)));
-            }}
-          >
-            <option value="">+ Baustein</option>
-            {ARTEN.map((a) => (
-              <option key={a} value={a}>
-                {BAUSTEIN_NAMEN[a]}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
+      {ctx.aendere && <NeuZeile ort={ort} ctx={ctx} leer={!liste.length} />}
     </div>
   );
 }
@@ -74,6 +168,7 @@ function Text({ b, ctx, label }: { b: Baustein; ctx: Ctx; label: string }) {
       value={b.text}
       placeholder={PLATZHALTER[b.art]}
       aria-label={label}
+      autoFocus={b.id === ctx.neuId}
       onChange={(e) => ctx.aendere!((l) => setzeText(l, b.id, e.target.value))}
     />
   );
@@ -190,7 +285,8 @@ export function StruktogrammEditor({
   /** Formprüfung anzeigen (Einzelaufgabe ja, Klausur nein). */
   hilfen: boolean;
 }) {
-  const ctx: Ctx = { aendere: (fn) => onChange({ ...wert, bausteine: fn(wert.bausteine) }) };
+  const [neuId, setNeuId] = useState<string>();
+  const ctx: Ctx = { aendere: (fn) => onChange({ ...wert, bausteine: fn(wert.bausteine) }), neuId, setNeuId };
   return (
     <div className="sg-arbeit">
       <div className="sg-scroll">

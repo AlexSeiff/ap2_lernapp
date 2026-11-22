@@ -155,7 +155,10 @@ describe('Darstellung', () => {
     const h = editor(JSON.stringify(muster));
     expect(h.match(/class="sg-b sg-wenn"/g)).toHaveLength(2);
     expect(h).toContain('class="sg-b sg-schleife sg-solange"');
-    expect(h).toContain('>∅</div>');
+    // Leerer Zweig im Editor: ∅ und „+ Baustein“ in einem Kasten.
+    expect(h).toMatch(
+      /class="sg-neu-zeile sg-neu-leer"><button[^>]*aria-label="Leerer Zweig – Baustein hinzufügen"[^>]*><span class="sg-leer-zeichen"[^>]*>∅<\/span>/,
+    );
     expect(h).toContain('value="E-Mail vorhanden?"');
     expect(h).toContain('Keine Formfehler gefunden');
   });
