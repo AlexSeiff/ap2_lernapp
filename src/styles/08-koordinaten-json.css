@@ -22,6 +22,11 @@
 .json-regeln li.ok { color: var(--good); }
 .json-regeln li.bad { color: var(--low); }
 .json-loesung { margin: 0; overflow-x: auto; }
+/* XML-Übungen: Dokument zur XPath-Aufgabe, Eingabezeile, Ergebnisliste */
+.xml-dokument { margin: 12px 0 0; max-height: 26em; overflow: auto; font-size: 0.85rem; line-height: 1.45; }
+.xpath-eingabe { width: 100%; font-size: 1rem; }
+.xml-ergebnis { margin-top: 8px; }
+.xml-ergebnis ol { margin: 4px 0 0; padding-left: 1.6em; display: grid; gap: 2px; }
 
 /* ---------- Entscheidungsbaum zum Ausfüllen (ID3, EntscheidungsbaumEditor.tsx) ---------- */
 .eb-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 2px 0; }

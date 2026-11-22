@@ -50,6 +50,10 @@ const jsonUebungen = c.jsonUebungen ?? [];
 console.log(
   `\nJSON-Übungen: ${jsonUebungen.length} (${[1, 2, 3].map((s) => `Stufe ${s}: ${jsonUebungen.filter((u) => u.stufe === s).length}`).join(', ')})`,
 );
+const xmlUebungen = c.xmlUebungen ?? [];
+console.log(
+  `XML-Übungen: ${xmlUebungen.length} (Dokument: ${xmlUebungen.filter((u) => u.art === 'dokument').length}, XPath: ${xmlUebungen.filter((u) => u.art === 'xpath').length})`,
+);
 const diagramme = c.diagrammUebungen ?? [];
 const zaehle = <T>(liste: T[], schluessel: (x: T) => string | number) => {
   const m = new Map<string | number, number>();

@@ -8,6 +8,10 @@ export type IconElement = readonly [
 ];
 
 export const ICONS = {
+  code: [
+    ['polyline', { points: '16 18 22 12 16 6' }],
+    ['polyline', { points: '8 6 2 12 8 18' }],
+  ],
   archive: [
     ['rect', { width: '20', height: '5', x: '2', y: '3', rx: '1' }],
     ['path', { d: 'M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8' }],

@@ -34,8 +34,8 @@ export function JsonUebung() {
   return <JsonUebungView key={id} u={u} />;
 }
 
-/** Die fehlerhafte Zeile mit einem ^ unter der Stelle. */
-function Fehlerstelle({ text, fehler }: { text: string; fehler: JsonFehler }) {
+/** Die fehlerhafte Zeile mit einem ^ unter der Stelle (auch für die XML-Übungen). */
+export function Fehlerstelle({ text, fehler }: { text: string; fehler: Pick<JsonFehler, 'zeile' | 'spalte'> }) {
   const zeile = text.split('\n')[fehler.zeile - 1] ?? '';
   // lange Zeilen kürzen: höchstens 60 Zeichen vor und 20 nach der Stelle
   const von = Math.max(0, fehler.spalte - 1 - 60);

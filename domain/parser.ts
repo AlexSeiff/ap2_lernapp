@@ -7,6 +7,7 @@ import { parseLernkarten } from './lernkarten.ts';
 import { readPrueferfrage } from './prueferfragen.ts';
 import { parseDiagrammUebungen } from './diagrammUebungen.ts';
 import { parseJsonUebungen } from './jsonUebungen.ts';
+import { parseXmlUebungen } from './xmlUebungen.ts';
 import { parseRechenUebungen, type RechenUebungPruefer } from './rechenUebungen.ts';
 import { parseSqlUebungen, verknuepfeSqlUebungen } from './sqlUebungen.ts';
 import { pruefeSvg, svgBloecke, svgIds } from './svgDiagramm.ts';
@@ -427,6 +428,7 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
     rechenUebungen: [],
     diagrammUebungen: [],
     jsonUebungen: [],
+    xmlUebungen: [],
     issues: [],
   };
 
@@ -500,6 +502,13 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
   for (const f of files.filter((x) => istJsonArt(x.name, 'json'))) {
     const parsed = parseJsonUebungen(f.name, f.text);
     content.jsonUebungen!.push(...parsed.uebungen);
+    content.issues.push(...parsed.issues);
+  }
+
+  // XML-Übungen (XML schreiben, korrigieren, XPath)
+  for (const f of files.filter((x) => istJsonArt(x.name, 'xml'))) {
+    const parsed = parseXmlUebungen(f.name, f.text);
+    content.xmlUebungen!.push(...parsed.uebungen);
     content.issues.push(...parsed.issues);
   }
 

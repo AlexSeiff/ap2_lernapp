@@ -21,6 +21,7 @@ const alteRegel = (name: string): boolean =>
   /Rechen_Uebungen.*\.json$/i.test(name) ||
   /Diagramm_Uebungen.*\.json$/i.test(name) ||
   /Json_Uebungen.*\.json$/i.test(name) ||
+  /Xml_Uebungen.*\.json$/i.test(name) ||
   /^AP2_Quellen\.json$/.test(name);
 
 const GRENZFAELLE = [
@@ -32,6 +33,7 @@ const GRENZFAELLE = [
   'AP2_Rechen_Uebungen.json',
   'AP2_Diagramm_Uebungen.json',
   'AP2_Json_Uebungen.json',
+  'AP2_Xml_Uebungen.json',
   'AP2_Quellen.json',
   'AP2_Quellen_alt.json',
   'AP2_Quellen.json.bak',
@@ -58,7 +60,7 @@ describe('Inhaltsdateien: eine Stelle für die Dateimuster', () => {
   });
 
   it('die JSON-Muster sind vollständig und überschneiden sich nicht', () => {
-    expect(Object.keys(JSON_DATEIEN).sort()).toEqual(['diagramme', 'json', 'lernkarten', 'quellen', 'rechnen', 'sql']);
+    expect(Object.keys(JSON_DATEIEN).sort()).toEqual(['diagramme', 'json', 'lernkarten', 'quellen', 'rechnen', 'sql', 'xml']);
     for (const name of [...readdirSync(CONTENT_DIR), ...GRENZFAELLE]) {
       const treffer = Object.entries(JSON_DATEIEN).filter(([, re]) => re.test(name));
       expect(treffer.length, `${name} passt zu ${treffer.map(([a]) => a).join(' und ')}`).toBeLessThanOrEqual(1);

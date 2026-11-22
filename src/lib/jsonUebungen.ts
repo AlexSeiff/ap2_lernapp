@@ -1,9 +1,10 @@
-// JSON-Übungen: reine Update-Funktionen und Selektoren für den Fortschritt (Progress.json). Wiederholung wie bei den Diagramm-,
+// JSON- und XML-Übungen: reine Update-Funktionen und Selektoren für den Fortschritt (Progress.json). Wiederholung wie bei den Diagramm-,
 // Rechen- und SQL-Übungen (src/lib/wiederholung.ts). Der Text im Eingabefeld wird nicht gespeichert: Beim nächsten Öffnen beginnt
 // die Übung neu.
 
 import type { JsonState, Progress } from '../../domain/progress';
 import type { JsonUebung } from '../../domain/jsonUebungen';
+import type { XmlUebung } from '../../domain/xmlUebungen';
 import type { Content } from '../../domain/types';
 import { isDue, localDate } from './progress';
 import { nachPruefung, restartRepetition } from './wiederholung';
@@ -15,6 +16,9 @@ const mit = (p: Progress, id: string, s: JsonState): Progress => ({ ...p, json: 
 
 /** Alle JSON-Übungen des Inhalts (ältere Stände ohne das Feld: keine). */
 export const jsonUebungen = (content: Pick<Content, 'jsonUebungen'>): JsonUebung[] => content.jsonUebungen ?? [];
+
+/** Alle XML-Übungen. Ihr Fortschritt steht ebenfalls in Progress.json (IDs „XML-…“), die Funktionen hier gelten für beide. */
+export const xmlUebungen = (content: Pick<Content, 'xmlUebungen'>): XmlUebung[] => content.xmlUebungen ?? [];
 
 /**
  * „Prüfen“: zählt als Versuch. Alle Regeln erfüllt ohne vorher gezeigte Lösung → gelöst (erstes Mal).

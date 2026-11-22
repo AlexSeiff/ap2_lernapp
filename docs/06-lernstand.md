@@ -28,7 +28,7 @@ type Progress = {
   diagrammDays: Record<string, number>;    // checked Diagramm-Übungen per day, for the streak (v8)
   hervorhebungen: Record<string, Hervorhebung>; // Textmarker per area id (task id or attachment id) (v10): { marken: { von, bis, text, farbe }[], am }
                                            // – offsets into the rendered text of the area, `text` checks that the text is unchanged; merge: newer `am` wins
-  json: Record<string, JsonState>;         // JSON-Übungen per exercise id (v10): same fields as DiagrammState
+  json: Record<string, JsonState>;         // JSON- and XML-Übungen per exercise id (v10; XML-… ids since 2026-11): same fields as DiagrammState
 };
 
 type Markierung = { an: boolean; am: string }; // am = ISO timestamp of the last change; unmarking keeps the entry with an: false

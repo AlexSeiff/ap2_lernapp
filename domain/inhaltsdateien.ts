@@ -11,6 +11,7 @@ export const JSON_DATEIEN = {
   rechnen: /Rechen_Uebungen.*\.json$/i,
   diagramme: /Diagramm_Uebungen.*\.json$/i,
   json: /Json_Uebungen.*\.json$/i,
+  xml: /Xml_Uebungen.*\.json$/i,
   quellen: /^AP2_Quellen\.json$/,
 } as const;
 

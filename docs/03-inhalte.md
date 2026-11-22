@@ -224,6 +224,28 @@ so key order and indentation are free. The importer skips (and reports) an exerc
 `vorgabe` already satisfies them. Pages `/json` and `/json/:id` (`src/pages/JsonUebungen.tsx`, `JsonUebung.tsx`): textarea with Tab → two spaces, live status,
 Prüfen / Hinweis / Lösung zeigen; progress `json` (§ 6) with the repetition of the other exercises (`src/lib/jsonUebungen.ts`). Not (yet) part of "Heute lernen".
 
+### 4.4d XML-Übungen `AP2_Xml_Uebungen.json`
+
+Counterpart of the JSON-Übungen. `{ meta, uebungen: [{ id (XML-NNN), titel, stufe 1–3, topicId?, art: "dokument" | "xpath", aufgabe (Markdown, "Sie"-form,
+operator *Erstellen* / *Prüfen* / *Formulieren*), dokument? (only `xpath`: the XML the expression runs on, shown under the task), vorgabe? (prefilled text,
+e.g. a not well-formed document), loesung (XML document resp. XPath expression), alternativen? (`xpath`: further correct expressions, shown with the
+solution and checked by the importer), pruefungen: [{ xpath, wert? | anzahl? | fehlt?, text?, hinweis? }] (only `dokument`), hinweise[], erklaerung?,
+tags[] }] }`.
+
+`domain/xml.ts` is pure (no DOM): `pruefeXmlSyntax` checks well-formedness with German messages and line/column (missing end tag, wrong nesting, case,
+two root elements, unquoted or duplicate attribute, `&`/`<` in text, declaration not first …; reine Einrückung is not text), and `werteXpath` evaluates
+XPath 1.0 as far as an exam needs it (`/`, `//`, `*`, `@`, `text()`, `node()`, `.`, `..`, axes, predicates with position/comparison, `and`/`or`, arithmetic,
+`|`, count/sum/contains/starts-with/last/position/not/… with German syntax errors such as `==`, `&&`, decimal comma, typographic quotes).
+`domain/xmlUebungen.ts`: a `dokument` answer must be well-formed and satisfy every rule; a rule is an XPath expression with an expectation – `wert`
+compares the text of the first match (whitespace collapsed, numbers numerically, with a hint for decimal comma), `anzahl` the number of matches,
+`fehlt` that nothing matches; without expectation the path must exist. If `/a/@x` is missing but `/a/x` exists (or vice versa), the message says
+"element instead of attribute". `text` replaces the XPath in the display. An `xpath` answer is right when it yields the same as the model solution,
+compared by text values (so `/kunde/name` and `/kunde/name/text()` both count); the feedback names "finds nothing", "too many matches – missing condition?",
+"a number is wanted – count()/sum()". The importer skips (and reports) an exercise whose solution is not well-formed, fails its rules, finds nothing,
+or whose `vorgabe` already satisfies the rules. Pages `/xml` and `/xml/:id` (`src/pages/XmlUebungen.tsx` – the list is the shared `DatenformatListe` of
+`JsonUebungen.tsx` – and `XmlUebung.tsx`). Progress is stored in the same map `json` (§ 6) under the `XML-…` ids, with the same functions
+(`src/lib/jsonUebungen.ts`); no format change. Tests: `tests/xml.test.ts`, `tests/xmlUebungen.test.ts`.
+
 ### 4.4b Diagramm-Übungen `AP2_Diagramm_Uebungen.json` (plan phase 7)
 
 `{ meta, uebungen: [...] }`, parsed by `parseDiagrammUebungen` (`domain/diagrammUebungen.ts`, zod + `pruefeDiagrammUebung`; a broken

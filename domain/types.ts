@@ -2,6 +2,7 @@
 
 import type { DiagrammUebung } from './diagrammUebungen.ts';
 import type { JsonUebung } from './jsonUebungen.ts';
+import type { XmlUebung } from './xmlUebungen.ts';
 import type { Quelle } from './quellen.ts';
 
 export interface Section {
@@ -307,6 +308,8 @@ export interface Content {
   diagrammUebungen?: DiagrammUebung[];
   /** JSON-Übungen: JSON selbst schreiben (AP2_Json_Uebungen.json); fehlt in älteren Ständen. */
   jsonUebungen?: JsonUebung[];
+  /** XML-Übungen: XML schreiben und korrigieren, XPath (AP2_Xml_Uebungen.json); fehlt in älteren Ständen. */
+  xmlUebungen?: XmlUebung[];
   /** Quellen und Lehrvideos (AP2_Quellen.json, Umsetzungsplan Phase 8); fehlt in älteren Ständen. */
   quellen?: Quelle[];
   /** Verzeichnis der Begriffsseiten (ohne Seitentext); fehlt in älteren Ständen. */

@@ -255,7 +255,7 @@ export type Progress = {
   diagrammDays: Record<string, number>;
   /** Textmarken in Aufgabentexten und Ausgangssituationen je Bereichs-Id (seit Version 10, ältere Dateien: leer). */
   hervorhebungen: Record<string, Hervorhebung>;
-  /** Stand der JSON-Übungen je Übungs-ID (seit Version 10, ältere Dateien: leer). */
+  /** Stand der JSON- und XML-Übungen je Übungs-ID (seit Version 10, ältere Dateien: leer; XML-… seit November 2026). */
   json: Record<string, JsonState>;
 };
 

@@ -1,0 +1,457 @@
+{
+  "meta": {
+    "titel": "XML-Übungen",
+    "beschreibung": "XML-Dokumente selbst schreiben, fehlerhafte Dokumente korrigieren und XPath-Ausdrücke formulieren. Eigene Aufgaben im Stil der AP2 (Datenbereitstellung); die App prüft die Wohlgeformtheit und die Struktur, nicht den Wortlaut."
+  },
+  "uebungen": [
+    {
+      "id": "XML-001",
+      "titel": "Ein Kunde als XML-Dokument",
+      "stufe": 1,
+      "topicId": "15",
+      "art": "dokument",
+      "aufgabe": "Die Möbelhaus Nordholz GmbH tauscht Kundendaten mit einem Lieferdienst im XML-Format aus. *Erstellen* Sie ein wohlgeformtes XML-Dokument für diesen Kunden: Kundennummer 4711, Name „Meier GmbH“, Ort „Hannover“.\n\nDas Wurzelelement heißt `kunde`, darin stehen die Elemente `kundennr`, `name` und `ort`.",
+      "loesung": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<kunde>\n  <kundennr>4711</kundennr>\n  <name>Meier GmbH</name>\n  <ort>Hannover</ort>\n</kunde>",
+      "pruefungen": [
+        {
+          "xpath": "/kunde",
+          "text": "Das Wurzelelement heißt kunde",
+          "hinweis": "Das Wurzelelement muss <kunde> heißen – alle anderen Elemente stehen darin."
+        },
+        {
+          "xpath": "/kunde/kundennr",
+          "wert": 4711
+        },
+        {
+          "xpath": "/kunde/name",
+          "wert": "Meier GmbH"
+        },
+        {
+          "xpath": "/kunde/ort",
+          "wert": "Hannover"
+        }
+      ],
+      "hinweise": [
+        "Jedes Element hat ein Start-Tag und ein End-Tag mit demselben Namen: <name>Meier GmbH</name>. Das End-Tag beginnt mit </.",
+        "Ein XML-Dokument hat genau ein Wurzelelement. Hier umschließt <kunde> … </kunde> alle anderen Elemente."
+      ],
+      "erklaerung": "Ein XML-Dokument ist **wohlgeformt**, wenn die Syntax stimmt: genau ein Wurzelelement, jedes Start-Tag hat ein End-Tag, die Elemente sind korrekt verschachtelt, Attributwerte stehen in Anführungszeichen und die Groß- und Kleinschreibung von Start- und End-Tag stimmt überein.\n\nDie erste Zeile `<?xml version=\"1.0\" encoding=\"UTF-8\"?>` ist die **XML-Deklaration**. Sie ist freiwillig, steht aber meist da – und wenn, dann ganz am Anfang.\n\n**Prüfungsfalle:** Wohlgeformt heißt noch nicht valide. Valide ist ein Dokument erst, wenn es zusätzlich einem Schema (XSD oder DTD) entspricht.",
+      "tags": [
+        "element",
+        "grundlagen",
+        "wohlgeformt"
+      ]
+    },
+    {
+      "id": "XML-002",
+      "titel": "Artikel mit Attribut",
+      "stufe": 1,
+      "topicId": "15",
+      "art": "dokument",
+      "aufgabe": "*Erstellen* Sie ein XML-Dokument für diesen Artikel: Artikelnummer „A-100“, Bezeichnung „Schraube M6“, Preis 0,12 €, Bestand 2500 Stück.\n\nDas Wurzelelement heißt `artikel`. Die Artikelnummer steht als Attribut `nr` im Start-Tag, die übrigen Angaben als Kindelemente `bezeichnung`, `preis` und `bestand`. Schreiben Sie den Preis mit Dezimalpunkt.",
+      "loesung": "<artikel nr=\"A-100\">\n  <bezeichnung>Schraube M6</bezeichnung>\n  <preis>0.12</preis>\n  <bestand>2500</bestand>\n</artikel>",
+      "pruefungen": [
+        {
+          "xpath": "/artikel/@nr",
+          "wert": "A-100"
+        },
+        {
+          "xpath": "/artikel/bezeichnung",
+          "wert": "Schraube M6"
+        },
+        {
+          "xpath": "/artikel/preis",
+          "wert": 0.12
+        },
+        {
+          "xpath": "/artikel/bestand",
+          "wert": 2500
+        }
+      ],
+      "hinweise": [
+        "Ein Attribut steht im Start-Tag: <artikel nr=\"A-100\">. Der Wert steht immer in Anführungszeichen – auch bei Zahlen.",
+        "Das End-Tag hat keine Attribute, es heißt einfach </artikel>."
+      ],
+      "erklaerung": "**Element oder Attribut?** Attribute eignen sich für einfache Zusatzangaben, die genau einmal vorkommen – typisch für Kennungen wie eine Artikelnummer. Elemente eignen sich für den eigentlichen Inhalt, für Werte, die mehrfach vorkommen können, und für alles, was weiter gegliedert ist.\n\nEin Attribut darf je Element nur einmal vorkommen, kann nichts enthalten und hat keine feste Reihenfolge.\n\n**Prüfungsfalle:** XML kennt ohne Schema keine Datentypen. `<preis>0.12</preis>` ist zunächst nur Text – erst eine XSD legt fest, dass es eine Dezimalzahl sein muss.",
+      "tags": [
+        "attribut",
+        "element",
+        "grundlagen"
+      ]
+    },
+    {
+      "id": "XML-003",
+      "titel": "Bestellung mit mehreren Positionen",
+      "stufe": 2,
+      "topicId": "15",
+      "art": "dokument",
+      "aufgabe": "Ein Online-Marktplatz überträgt Bestellungen als XML an die Möbelhaus Nordholz GmbH. *Erstellen* Sie das Dokument für diese Bestellung:\n\n- Wurzelelement `bestellung` mit den Attributen `nr` (B-2026-117) und `datum` (2026-03-14)\n- Element `kunde` mit dem Attribut `nr` (1002) und dem Namen „Schulz KG“ als Text\n- drei Positionen, jeweils als Element `position` mit den Attributen `artikel` und `menge`: A-10 viermal, A-20 einmal, A-35 zweimal",
+      "loesung": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bestellung nr=\"B-2026-117\" datum=\"2026-03-14\">\n  <kunde nr=\"1002\">Schulz KG</kunde>\n  <position artikel=\"A-10\" menge=\"4\"/>\n  <position artikel=\"A-20\" menge=\"1\"/>\n  <position artikel=\"A-35\" menge=\"2\"/>\n</bestellung>",
+      "pruefungen": [
+        {
+          "xpath": "/bestellung/@nr",
+          "wert": "B-2026-117"
+        },
+        {
+          "xpath": "/bestellung/@datum",
+          "wert": "2026-03-14"
+        },
+        {
+          "xpath": "/bestellung/kunde/@nr",
+          "wert": 1002
+        },
+        {
+          "xpath": "/bestellung/kunde",
+          "wert": "Schulz KG"
+        },
+        {
+          "xpath": "/bestellung/position",
+          "anzahl": 3,
+          "hinweis": "Es braucht drei Elemente <position> direkt in <bestellung> – jede Position ein eigenes Element mit demselben Namen."
+        },
+        {
+          "xpath": "/bestellung/position[@artikel='A-10']/@menge",
+          "wert": 4,
+          "text": "Position A-10 mit Menge 4"
+        },
+        {
+          "xpath": "/bestellung/position[@artikel='A-20']/@menge",
+          "wert": 1,
+          "text": "Position A-20 mit Menge 1"
+        },
+        {
+          "xpath": "/bestellung/position[@artikel='A-35']/@menge",
+          "wert": 2,
+          "text": "Position A-35 mit Menge 2"
+        }
+      ],
+      "hinweise": [
+        "Was mehrfach vorkommt, sind mehrere Elemente mit demselben Namen: <position …/> <position …/> – nicht position1, position2.",
+        "Ein Element ohne Inhalt darf man kurz schreiben: <position artikel=\"A-10\" menge=\"4\"/>."
+      ],
+      "erklaerung": "Eine **Liste** gibt es in XML nicht als eigenes Zeichen wie `[ ]` in JSON. Man wiederholt einfach das Element: drei Positionen sind drei Elemente `<position>`. Die Reihenfolge der Elemente bleibt dabei erhalten.\n\nEin **leeres Element** kann als `<position …></position>` oder kurz als `<position …/>` geschrieben werden – beides ist dasselbe.",
+      "tags": [
+        "verschachtelung",
+        "attribut",
+        "liste"
+      ]
+    },
+    {
+      "id": "XML-004",
+      "titel": "Fehler finden: Lieferantendatei",
+      "stufe": 2,
+      "topicId": "15",
+      "art": "dokument",
+      "aufgabe": "Ein Kollege hat diese Lieferantendatei von Hand geschrieben. Der Import bricht ab, weil das Dokument nicht wohlgeformt ist. *Prüfen* Sie das Dokument im Eingabefeld und beheben Sie die vier Fehler so, dass alle Daten erhalten bleiben.",
+      "vorgabe": "<lieferant id=L-07>\n  <Name>Holzwerk Brandt</name>\n  <ort>Celle\n  <kontakt>\n    <telefon>05141 2290</kontakt>\n  </telefon>\n</lieferant>",
+      "loesung": "<lieferant id=\"L-07\">\n  <name>Holzwerk Brandt</name>\n  <ort>Celle</ort>\n  <kontakt>\n    <telefon>05141 2290</telefon>\n  </kontakt>\n</lieferant>",
+      "pruefungen": [
+        {
+          "xpath": "/lieferant/@id",
+          "wert": "L-07"
+        },
+        {
+          "xpath": "/lieferant/name | /lieferant/Name",
+          "wert": "Holzwerk Brandt",
+          "text": "Der Name „Holzwerk Brandt“ ist erhalten"
+        },
+        {
+          "xpath": "/lieferant/ort",
+          "wert": "Celle",
+          "hinweis": "<ort> enthält nur „Celle“ – das End-Tag </ort> gehört direkt dahinter."
+        },
+        {
+          "xpath": "/lieferant/kontakt/telefon",
+          "wert": "05141 2290",
+          "text": "Die Telefonnummer steht in <kontakt>"
+        }
+      ],
+      "hinweise": [
+        "Die Meldung unter dem Eingabefeld zeigt immer die erste Stelle, an der das Dokument nicht mehr wohlgeformt ist. Behebe einen Fehler nach dem anderen.",
+        "Achte auf Anführungszeichen bei Attributwerten, die gleiche Schreibweise in Start- und End-Tag, auf fehlende End-Tags und darauf, dass zuerst geschlossen wird, was zuletzt geöffnet wurde."
+      ],
+      "erklaerung": "Die vier Fehler:\n\n1. `id=L-07` – Attributwerte stehen immer in Anführungszeichen: `id=\"L-07\"`.\n2. `<Name>…</name>` – XML unterscheidet Groß- und Kleinschreibung, Start- und End-Tag müssen gleich heißen.\n3. `<ort>Celle` – das End-Tag `</ort>` fehlt.\n4. `<telefon>…</kontakt>` – falsch verschachtelt. Was zuletzt geöffnet wurde (`telefon`), wird zuerst geschlossen.\n\nEin XML-Parser bricht beim ersten Fehler ab. Deshalb werden die Fehler auch hier einer nach dem anderen gemeldet.",
+      "tags": [
+        "wohlgeformt",
+        "fehler-finden"
+      ]
+    },
+    {
+      "id": "XML-005",
+      "titel": "Fehler finden: Artikel für den Webshop",
+      "stufe": 2,
+      "topicId": "15",
+      "art": "dokument",
+      "aufgabe": "Diese Datei soll zwei Artikel an den Webshop übergeben, wird aber abgelehnt. *Prüfen* Sie das Dokument im Eingabefeld und beheben Sie die Fehler. Fassen Sie die beiden Artikel dazu in einem Wurzelelement `artikelliste` zusammen; die Texte der Bezeichnungen bleiben unverändert.",
+      "vorgabe": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<artikel nr=\"A-20\">\n  <bezeichnung>Tisch & Bank Fjord</bezeichnung>\n  <preis>649.00</preis>\n</artikel>\n<artikel nr=\"A-35\">\n  <bezeichnung>Regal Mika, Höhe < 80 cm</bezeichnung>\n  <preis>129.00</Preis>\n</artikel>",
+      "loesung": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<artikelliste>\n  <artikel nr=\"A-20\">\n    <bezeichnung>Tisch &amp; Bank Fjord</bezeichnung>\n    <preis>649.00</preis>\n  </artikel>\n  <artikel nr=\"A-35\">\n    <bezeichnung>Regal Mika, Höhe &lt; 80 cm</bezeichnung>\n    <preis>129.00</preis>\n  </artikel>\n</artikelliste>",
+      "pruefungen": [
+        {
+          "xpath": "/artikelliste/artikel",
+          "anzahl": 2,
+          "hinweis": "Beide <artikel> gehören direkt in ein gemeinsames Wurzelelement <artikelliste>."
+        },
+        {
+          "xpath": "/artikelliste/artikel[@nr='A-20']/bezeichnung",
+          "wert": "Tisch & Bank Fjord",
+          "text": "Bezeichnung von A-20: „Tisch & Bank Fjord“"
+        },
+        {
+          "xpath": "/artikelliste/artikel[@nr='A-35']/bezeichnung",
+          "wert": "Regal Mika, Höhe < 80 cm",
+          "text": "Bezeichnung von A-35: „Regal Mika, Höhe < 80 cm“"
+        },
+        {
+          "xpath": "/artikelliste/artikel[@nr='A-35']/preis",
+          "wert": 129,
+          "text": "Preis von A-35: 129.00"
+        }
+      ],
+      "hinweise": [
+        "Ein XML-Dokument hat genau ein Wurzelelement. Gleichartige Elemente brauchen ein gemeinsames Element drumherum.",
+        "Die Zeichen & und < haben in XML eine Bedeutung. Im Text schreibt man sie als &amp; und &lt; – angezeigt wird trotzdem & und <."
+      ],
+      "erklaerung": "Die Fehler: zwei Wurzelelemente, ein `&` und ein `<` im Text sowie `<preis>…</Preis>` mit unterschiedlicher Schreibweise.\n\nFünf Zeichen haben in XML vordefinierte **Entitäten**:\n\n| Zeichen | Entität |\n|---|---|\n| & | `&amp;` |\n| < | `&lt;` |\n| > | `&gt;` |\n| \" | `&quot;` |\n| ' | `&apos;` |\n\nPflicht sind `&amp;` und `&lt;` im Text. Alternativ kann ein Text in einen CDATA-Abschnitt gesetzt werden: `<![CDATA[Tisch & Bank]]>`.",
+      "tags": [
+        "wohlgeformt",
+        "fehler-finden",
+        "entitaeten"
+      ]
+    },
+    {
+      "id": "XML-006",
+      "titel": "JSON nach XML überführen",
+      "stufe": 2,
+      "topicId": "15",
+      "art": "dokument",
+      "aufgabe": "Die Lieferantendaten liegen als JSON vor und sollen für ein älteres ERP-System als XML bereitgestellt werden. *Erstellen* Sie das XML-Dokument mit dem Wurzelelement `lieferant`: Die `id` wird ein Attribut, der `name` ein Element, und jeder Ansprechpartner wird ein Element `ansprechpartner` mit dem Attribut `abteilung` und dem Namen als Text.\n\n```json\n{\n  \"id\": \"L-12\",\n  \"name\": \"Polster Krüger GmbH\",\n  \"ansprechpartner\": [\n    { \"name\": \"Jana Wolf\", \"abteilung\": \"Vertrieb\" },\n    { \"name\": \"Tim Krüger\", \"abteilung\": \"Buchhaltung\" }\n  ]\n}\n```",
+      "loesung": "<lieferant id=\"L-12\">\n  <name>Polster Krüger GmbH</name>\n  <ansprechpartner abteilung=\"Vertrieb\">Jana Wolf</ansprechpartner>\n  <ansprechpartner abteilung=\"Buchhaltung\">Tim Krüger</ansprechpartner>\n</lieferant>",
+      "pruefungen": [
+        {
+          "xpath": "/lieferant/@id",
+          "wert": "L-12"
+        },
+        {
+          "xpath": "/lieferant/name",
+          "wert": "Polster Krüger GmbH"
+        },
+        {
+          "xpath": "/lieferant//ansprechpartner",
+          "anzahl": 2,
+          "text": "Zwei Elemente ansprechpartner im Lieferanten"
+        },
+        {
+          "xpath": "/lieferant//ansprechpartner[@abteilung='Vertrieb']",
+          "wert": "Jana Wolf",
+          "text": "Vertrieb: Jana Wolf"
+        },
+        {
+          "xpath": "/lieferant//ansprechpartner[@abteilung='Buchhaltung']",
+          "wert": "Tim Krüger",
+          "text": "Buchhaltung: Tim Krüger"
+        }
+      ],
+      "hinweise": [
+        "Aus der JSON-Liste werden zwei Elemente mit demselben Namen. Ein umschließendes Element wie <ansprechpartnerliste> ist erlaubt, aber nicht nötig.",
+        "Der Name steht als Text zwischen Start- und End-Tag: <ansprechpartner abteilung=\"Vertrieb\">Jana Wolf</ansprechpartner>."
+      ],
+      "erklaerung": "JSON und XML bilden dieselben verschachtelten Daten ab, aber unterschiedlich:\n\n| JSON | XML |\n|---|---|\n| Objekt `{ … }` | Element mit Kindelementen oder Attributen |\n| Liste `[ … ]` | dasselbe Element mehrfach |\n| Zahl, true/false | ohne Schema immer Text |\n\nJSON ist kürzer und kennt einfache Datentypen. XML ist wortreicher, unterscheidet Elemente und Attribute und lässt sich mit XSD streng prüfen.",
+      "tags": [
+        "umwandlung",
+        "json",
+        "liste"
+      ]
+    },
+    {
+      "id": "XML-007",
+      "titel": "CSV-Auszug als XML",
+      "stufe": 2,
+      "topicId": "15",
+      "art": "dokument",
+      "aufgabe": "Aus dem Lager kommt dieser CSV-Auszug (Trennzeichen Semikolon):\n\n```\nartikelnr;lagerplatz;bestand;bemerkung\nA-10;R03-2;140;\nA-20;R07-1;12;Restposten\n```\n\n*Erstellen* Sie daraus ein XML-Dokument mit dem Wurzelelement `lagerbestand`. Jede Datenzeile wird ein Element `artikel` mit dem Attribut `nr`; Lagerplatz, Bestand und Bemerkung werden die Kindelemente `lagerplatz`, `bestand` und `bemerkung`. Eine leere Bemerkung bleibt als leeres Element erhalten.",
+      "loesung": "<lagerbestand>\n  <artikel nr=\"A-10\">\n    <lagerplatz>R03-2</lagerplatz>\n    <bestand>140</bestand>\n    <bemerkung/>\n  </artikel>\n  <artikel nr=\"A-20\">\n    <lagerplatz>R07-1</lagerplatz>\n    <bestand>12</bestand>\n    <bemerkung>Restposten</bemerkung>\n  </artikel>\n</lagerbestand>",
+      "pruefungen": [
+        {
+          "xpath": "/lagerbestand/artikel",
+          "anzahl": 2
+        },
+        {
+          "xpath": "/lagerbestand/artikel[@nr='A-10']/lagerplatz",
+          "wert": "R03-2",
+          "text": "A-10: Lagerplatz R03-2"
+        },
+        {
+          "xpath": "/lagerbestand/artikel[@nr='A-10']/bestand",
+          "wert": 140,
+          "text": "A-10: Bestand 140"
+        },
+        {
+          "xpath": "count(/lagerbestand/artikel[@nr='A-10']/bemerkung[not(node())])",
+          "wert": 1,
+          "text": "A-10: leeres Element bemerkung",
+          "hinweis": "Bei A-10 fehlt das leere Element <bemerkung/> (oder es ist nicht leer)."
+        },
+        {
+          "xpath": "/lagerbestand/artikel[@nr='A-20']/lagerplatz",
+          "wert": "R07-1",
+          "text": "A-20: Lagerplatz R07-1"
+        },
+        {
+          "xpath": "/lagerbestand/artikel[@nr='A-20']/bestand",
+          "wert": 12,
+          "text": "A-20: Bestand 12"
+        },
+        {
+          "xpath": "/lagerbestand/artikel[@nr='A-20']/bemerkung",
+          "wert": "Restposten",
+          "text": "A-20: Bemerkung „Restposten“"
+        },
+        {
+          "xpath": "//artikelnr",
+          "fehlt": true,
+          "hinweis": "Die Artikelnummer steht laut Aufgabe als Attribut nr im Start-Tag, nicht als eigenes Element."
+        }
+      ],
+      "hinweise": [
+        "Die Kopfzeile der CSV liefert die Namen, jede weitere Zeile wird ein <artikel>.",
+        "Ein leeres Element schreibt man <bemerkung/> oder <bemerkung></bemerkung> – beides ist dasselbe."
+      ],
+      "erklaerung": "CSV ist **flach**: eine Zeile je Datensatz, alle Werte sind Text, die Bedeutung steht nur in der Kopfzeile. XML ist **selbstbeschreibend**: Jeder Wert trägt seinen Namen mit und kann verschachtelt werden.\n\nEin leerer CSV-Wert sollte nicht einfach verschwinden: Das leere Element `<bemerkung/>` zeigt dem Empfänger, dass das Feld bekannt, aber leer ist.",
+      "tags": [
+        "umwandlung",
+        "csv",
+        "leeres-element"
+      ]
+    },
+    {
+      "id": "XML-008",
+      "titel": "XPath: alle Bestellnummern",
+      "stufe": 1,
+      "topicId": "15",
+      "art": "xpath",
+      "aufgabe": "Der Webshop der Möbelhaus Nordholz GmbH liefert die Bestellungen eines Tages als XML (siehe Dokument unter der Aufgabe).\n\n*Formulieren* Sie einen XPath-Ausdruck, der die Bestellnummern aller Bestellungen liefert.",
+      "dokument": "<bestellungen>\n  <bestellung nr=\"B-101\" datum=\"2026-04-02\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"4\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-20\" menge=\"1\">\n      <bezeichnung>Esstisch Fjord</bezeichnung>\n      <preis>649.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-102\" datum=\"2026-04-03\">\n    <kunde nr=\"1002\">Schulz KG</kunde>\n    <position artikel=\"A-35\" menge=\"2\">\n      <bezeichnung>Regal Mika</bezeichnung>\n      <preis>129.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-103\" datum=\"2026-04-03\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"2\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-41\" menge=\"6\">\n      <bezeichnung>Kissen Ole</bezeichnung>\n      <preis>14.50</preis>\n    </position>\n  </bestellung>\n</bestellungen>",
+      "loesung": "/bestellungen/bestellung/@nr",
+      "alternativen": [
+        "//bestellung/@nr"
+      ],
+      "hinweise": [
+        "Ein Pfad beginnt mit / an der Wurzel und geht Element für Element nach unten: /bestellungen/bestellung.",
+        "Ein Attribut wählst du mit @ aus: …/@nr."
+      ],
+      "erklaerung": "Ein **XPath-Ausdruck** beschreibt den Weg durch den Dokumentbaum. `/` am Anfang startet an der Wurzel, jedes weitere `/` geht eine Ebene tiefer zu den Kindelementen. `@nr` wählt das Attribut `nr`.\n\n`//bestellung/@nr` findet dasselbe: `//` sucht `bestellung` in beliebiger Tiefe.",
+      "tags": [
+        "xpath",
+        "attribut"
+      ]
+    },
+    {
+      "id": "XML-009",
+      "titel": "XPath: Kunde einer Bestellung",
+      "stufe": 2,
+      "topicId": "15",
+      "art": "xpath",
+      "aufgabe": "Der Webshop der Möbelhaus Nordholz GmbH liefert die Bestellungen eines Tages als XML (siehe Dokument unter der Aufgabe).\n\n*Formulieren* Sie einen XPath-Ausdruck, der den Kundennamen der Bestellung B-102 liefert.",
+      "dokument": "<bestellungen>\n  <bestellung nr=\"B-101\" datum=\"2026-04-02\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"4\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-20\" menge=\"1\">\n      <bezeichnung>Esstisch Fjord</bezeichnung>\n      <preis>649.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-102\" datum=\"2026-04-03\">\n    <kunde nr=\"1002\">Schulz KG</kunde>\n    <position artikel=\"A-35\" menge=\"2\">\n      <bezeichnung>Regal Mika</bezeichnung>\n      <preis>129.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-103\" datum=\"2026-04-03\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"2\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-41\" menge=\"6\">\n      <bezeichnung>Kissen Ole</bezeichnung>\n      <preis>14.50</preis>\n    </position>\n  </bestellung>\n</bestellungen>",
+      "loesung": "/bestellungen/bestellung[@nr='B-102']/kunde",
+      "alternativen": [
+        "//bestellung[@nr=\"B-102\"]/kunde/text()"
+      ],
+      "hinweise": [
+        "Eine Bedingung steht in eckigen Klammern direkt hinter dem Element, das sie filtert: bestellung[…].",
+        "Texte vergleichst du in Anführungszeichen: [@nr='B-102']."
+      ],
+      "erklaerung": "Eckige Klammern sind ein **Prädikat**: Sie filtern die gefundenen Knoten. `bestellung[@nr='B-102']` lässt nur die Bestellung mit dieser Nummer übrig, danach geht der Pfad weiter zu `kunde`.\n\nOb du das Element `kunde` oder mit `kunde/text()` nur seinen Text auswählst, ist hier gleichwertig.",
+      "tags": [
+        "xpath",
+        "praedikat"
+      ]
+    },
+    {
+      "id": "XML-010",
+      "titel": "XPath: teure Positionen",
+      "stufe": 2,
+      "topicId": "15",
+      "art": "xpath",
+      "aufgabe": "Der Webshop der Möbelhaus Nordholz GmbH liefert die Bestellungen eines Tages als XML (siehe Dokument unter der Aufgabe).\n\n*Formulieren* Sie einen XPath-Ausdruck, der die Bezeichnungen aller Positionen mit einem Einzelpreis über 100 Euro liefert.",
+      "dokument": "<bestellungen>\n  <bestellung nr=\"B-101\" datum=\"2026-04-02\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"4\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-20\" menge=\"1\">\n      <bezeichnung>Esstisch Fjord</bezeichnung>\n      <preis>649.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-102\" datum=\"2026-04-03\">\n    <kunde nr=\"1002\">Schulz KG</kunde>\n    <position artikel=\"A-35\" menge=\"2\">\n      <bezeichnung>Regal Mika</bezeichnung>\n      <preis>129.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-103\" datum=\"2026-04-03\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"2\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-41\" menge=\"6\">\n      <bezeichnung>Kissen Ole</bezeichnung>\n      <preis>14.50</preis>\n    </position>\n  </bestellung>\n</bestellungen>",
+      "loesung": "//position[preis > 100]/bezeichnung",
+      "alternativen": [
+        "/bestellungen/bestellung/position[preis > 100]/bezeichnung"
+      ],
+      "hinweise": [
+        "Der Preis ist ein Kindelement von position – im Prädikat schreibst du ihn ohne @: position[preis …].",
+        "Zahlen vergleichst du ohne Anführungszeichen: preis > 100."
+      ],
+      "erklaerung": "Im Prädikat ist der Kontext das gefilterte Element. `position[preis > 100]` heißt: Positionen, deren Kindelement `preis` größer als 100 ist. XPath wandelt den Text „649.00“ dafür in eine Zahl um.\n\n**Prüfungsfalle:** `@preis` sucht ein Attribut – hier ist der Preis aber ein Element.",
+      "tags": [
+        "xpath",
+        "praedikat",
+        "vergleich"
+      ]
+    },
+    {
+      "id": "XML-011",
+      "titel": "XPath: Bestellungen eines Kunden zählen",
+      "stufe": 2,
+      "topicId": "15",
+      "art": "xpath",
+      "aufgabe": "Der Webshop der Möbelhaus Nordholz GmbH liefert die Bestellungen eines Tages als XML (siehe Dokument unter der Aufgabe).\n\n*Formulieren* Sie einen XPath-Ausdruck, der die Anzahl der Bestellungen des Kunden mit der Kundennummer 1001 liefert.",
+      "dokument": "<bestellungen>\n  <bestellung nr=\"B-101\" datum=\"2026-04-02\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"4\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-20\" menge=\"1\">\n      <bezeichnung>Esstisch Fjord</bezeichnung>\n      <preis>649.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-102\" datum=\"2026-04-03\">\n    <kunde nr=\"1002\">Schulz KG</kunde>\n    <position artikel=\"A-35\" menge=\"2\">\n      <bezeichnung>Regal Mika</bezeichnung>\n      <preis>129.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-103\" datum=\"2026-04-03\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"2\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-41\" menge=\"6\">\n      <bezeichnung>Kissen Ole</bezeichnung>\n      <preis>14.50</preis>\n    </position>\n  </bestellung>\n</bestellungen>",
+      "loesung": "count(//bestellung[kunde/@nr='1001'])",
+      "alternativen": [
+        "count(/bestellungen/bestellung[kunde/@nr=1001])"
+      ],
+      "hinweise": [
+        "Gesucht ist eine Zahl, keine Knoten. Dafür gibt es die Funktion count( … ).",
+        "Die Kundennummer ist ein Attribut des Elements kunde innerhalb der Bestellung: bestellung[kunde/@nr=…]."
+      ],
+      "erklaerung": "`count()` zählt die Knoten, die der Ausdruck in den Klammern findet. Im Prädikat darf ein ganzer Pfad stehen: `kunde/@nr` geht vom jeweiligen `bestellung`-Element aus.\n\nWeitere oft gebrauchte Funktionen: `sum()`, `contains()`, `starts-with()`, `last()` und `position()`.",
+      "tags": [
+        "xpath",
+        "funktion",
+        "count"
+      ]
+    },
+    {
+      "id": "XML-012",
+      "titel": "XPath: Bestellmenge eines Artikels",
+      "stufe": 3,
+      "topicId": "15",
+      "art": "xpath",
+      "aufgabe": "Der Webshop der Möbelhaus Nordholz GmbH liefert die Bestellungen eines Tages als XML (siehe Dokument unter der Aufgabe).\n\n*Formulieren* Sie einen XPath-Ausdruck, der die gesamte bestellte Menge des Artikels A-10 über alle Bestellungen liefert.",
+      "dokument": "<bestellungen>\n  <bestellung nr=\"B-101\" datum=\"2026-04-02\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"4\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-20\" menge=\"1\">\n      <bezeichnung>Esstisch Fjord</bezeichnung>\n      <preis>649.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-102\" datum=\"2026-04-03\">\n    <kunde nr=\"1002\">Schulz KG</kunde>\n    <position artikel=\"A-35\" menge=\"2\">\n      <bezeichnung>Regal Mika</bezeichnung>\n      <preis>129.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-103\" datum=\"2026-04-03\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"2\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-41\" menge=\"6\">\n      <bezeichnung>Kissen Ole</bezeichnung>\n      <preis>14.50</preis>\n    </position>\n  </bestellung>\n</bestellungen>",
+      "loesung": "sum(//position[@artikel='A-10']/@menge)",
+      "hinweise": [
+        "Zuerst alle Positionen des Artikels A-10 finden, dann deren Attribut menge auswählen.",
+        "sum( … ) addiert die Werte aller gefundenen Knoten."
+      ],
+      "erklaerung": "`//position[@artikel='A-10']/@menge` findet die Mengen 4 und 2, `sum()` addiert sie zu 6.\n\n**Prüfungsfalle:** `count()` zählt nur, wie oft der Artikel bestellt wurde (2-mal), nicht wie viele Stück.",
+      "tags": [
+        "xpath",
+        "funktion",
+        "sum"
+      ]
+    },
+    {
+      "id": "XML-013",
+      "titel": "XPath: Bestellungen mit mehreren Positionen",
+      "stufe": 3,
+      "topicId": "15",
+      "art": "xpath",
+      "aufgabe": "Der Webshop der Möbelhaus Nordholz GmbH liefert die Bestellungen eines Tages als XML (siehe Dokument unter der Aufgabe).\n\n*Formulieren* Sie einen XPath-Ausdruck, der die Bestellnummern aller Bestellungen mit mehr als einer Position liefert.",
+      "dokument": "<bestellungen>\n  <bestellung nr=\"B-101\" datum=\"2026-04-02\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"4\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-20\" menge=\"1\">\n      <bezeichnung>Esstisch Fjord</bezeichnung>\n      <preis>649.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-102\" datum=\"2026-04-03\">\n    <kunde nr=\"1002\">Schulz KG</kunde>\n    <position artikel=\"A-35\" menge=\"2\">\n      <bezeichnung>Regal Mika</bezeichnung>\n      <preis>129.00</preis>\n    </position>\n  </bestellung>\n  <bestellung nr=\"B-103\" datum=\"2026-04-03\">\n    <kunde nr=\"1001\">Meier GmbH</kunde>\n    <position artikel=\"A-10\" menge=\"2\">\n      <bezeichnung>Stuhl Linn</bezeichnung>\n      <preis>89.00</preis>\n    </position>\n    <position artikel=\"A-41\" menge=\"6\">\n      <bezeichnung>Kissen Ole</bezeichnung>\n      <preis>14.50</preis>\n    </position>\n  </bestellung>\n</bestellungen>",
+      "loesung": "//bestellung[count(position) > 1]/@nr",
+      "hinweise": [
+        "Die Bedingung gehört an das Element bestellung. Darin zählt count(position) die Positionen genau dieser Bestellung.",
+        "Danach geht der Pfad weiter zum Attribut nr."
+      ],
+      "erklaerung": "Im Prädikat ist `position` relativ zur gerade geprüften Bestellung. `count(position) > 1` ist deshalb für B-101 und B-103 wahr.\n\n**Prüfungsfalle:** `count(//position)` im Prädikat zählt alle Positionen im ganzen Dokument, weil `//` am Anfang wieder bei der Wurzel beginnt.",
+      "tags": [
+        "xpath",
+        "funktion",
+        "praedikat"
+      ]
+    }
+  ]
+}
