@@ -64,6 +64,16 @@ export function DiagrammEditor({ wert, onChange, hilfen }: Props) {
     if (fokusText) textRef.current?.select();
   }, [fokusText]);
 
+  // Sichtbare Größe der Fläche: Die Zeichnung (mit Raster) füllt sie immer ganz aus, auch im Vollbild auf großen Bildschirmen.
+  const [sicht, setSicht] = useState({ w: 0, h: 0 });
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver(() => setSicht({ w: el.clientWidth, h: el.clientHeight }));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   // Vollbild: Esc schließt, die Seite dahinter scrollt nicht mit.
   useEffect(() => {
     if (!vollbild) return undefined;
@@ -302,148 +312,176 @@ export function DiagrammEditor({ wert, onChange, hilfen }: Props) {
     return k;
   };
   const gezeichnet = knoten.map(verschoben);
-  const breite = Math.max(960, ...gezeichnet.map((k) => k.x + k.w + 240));
-  const hoehe = Math.max(560, ...gezeichnet.map((k) => k.y + k.h + 200));
+  const breite = Math.max(960, Math.floor(sicht.w / zoom), ...gezeichnet.map((k) => k.x + k.w + 240));
+  const hoehe = Math.max(560, vollbild ? Math.floor(sicht.h / zoom) : 0, ...gezeichnet.map((k) => k.y + k.h + 200));
   const meldungen = pruefung ? pruefeDiagrammAntwort(wert) : [];
   const leer = !knoten.length;
 
   return (
     <div className={`diagramm-editor${vollbild ? ' vollbild' : ''}`} onKeyDown={taste}>
-      <div className="ed-leiste" role="toolbar" aria-label={`${notation.name}: Elemente einfügen`}>
-        {notation.formen.map((f) => (
-          <button
-            key={f.form}
-            type="button"
-            className="palette-element"
-            onClick={() => hinzufuegen(f)}
-            title={`${formName(f.form)} einfügen`}
-          >
-            {f.form === 'text' ? (
-              <span className="form-symbol ed-text-symbol" aria-hidden="true">
-                Aa
+      {/* Leiste, Fläche und Auswahl als ein Werkzeug: oben einfügen und bedienen, in der Mitte zeichnen, unten bearbeiten. */}
+      <div className="ed-karte">
+        <div className="ed-kopf">
+          <div className="ed-leiste" role="toolbar" aria-label={`${notation.name}: Elemente einfügen`}>
+            {notation.formen.map((f) => (
+              <button
+                key={f.form}
+                type="button"
+                className="palette-element"
+                onClick={() => hinzufuegen(f)}
+                title={`${formName(f.form)} einfügen`}
+              >
+                {f.form === 'text' ? (
+                  <span className="form-symbol ed-text-symbol" aria-hidden="true">
+                    Aa
+                  </span>
+                ) : (
+                  <FormSymbol form={f.form} />
+                )}
+                {formName(f.form)}
+              </button>
+            ))}
+          </div>
+          <div className="ed-werkzeuge">
+            <label className="ed-schalter" title="Ein neues Element wird an das ausgewählte angehängt und gleich verbunden.">
+              <input type="checkbox" checked={anhaengen} onChange={(e) => setAnhaengen(e.target.checked)} /> an Auswahl anhängen
+            </label>
+            <span className="ed-abstand" />
+            <span className="ed-gruppe">
+              <button
+                type="button"
+                className="ghost"
+                onClick={rueckgaengig}
+                disabled={!zurueck.length}
+                title="Rückgängig (Strg+Z)"
+                aria-label="Rückgängig"
+              >
+                <Icon name="rotate-ccw" />
+              </button>
+              <button
+                type="button"
+                className="ghost"
+                onClick={wiederholen}
+                disabled={!vor.length}
+                title="Wiederholen (Strg+Y)"
+                aria-label="Wiederholen"
+              >
+                <Icon name="rotate-cw" />
+              </button>
+            </span>
+            <span className="ed-gruppe">
+              <button
+                type="button"
+                className="ghost"
+                onClick={() => setZoom((z) => Math.max(0.5, +(z - 0.1).toFixed(1)))}
+                disabled={zoom <= 0.5}
+                aria-label="Verkleinern"
+              >
+                −
+              </button>
+              <span className="ed-zoom" aria-live="polite">
+                {Math.round(zoom * 100)} %
               </span>
-            ) : (
-              <FormSymbol form={f.form} />
-            )}
-            {formName(f.form)}
-          </button>
-        ))}
-      </div>
-      <div className="ed-werkzeuge">
-        <label className="ed-schalter" title="Ein neues Element wird an das ausgewählte angehängt und gleich verbunden.">
-          <input type="checkbox" checked={anhaengen} onChange={(e) => setAnhaengen(e.target.checked)} /> an Auswahl anhängen
-        </label>
-        <span className="ed-abstand" />
-        <button type="button" className="ghost" onClick={rueckgaengig} disabled={!zurueck.length} title="Rückgängig (Strg+Z)">
-          ↶ Rückgängig
-        </button>
-        <button type="button" className="ghost" onClick={wiederholen} disabled={!vor.length} title="Wiederholen (Strg+Y)">
-          ↷
-        </button>
-        <button
-          type="button"
-          className="ghost"
-          onClick={() => setZoom((z) => Math.max(0.5, +(z - 0.1).toFixed(1)))}
-          aria-label="Verkleinern"
-        >
-          −
-        </button>
-        <span className="muted small ed-zoom">{Math.round(zoom * 100)} %</span>
-        <button
-          type="button"
-          className="ghost"
-          onClick={() => setZoom((z) => Math.min(1.6, +(z + 0.1).toFixed(1)))}
-          aria-label="Vergrößern"
-        >
-          +
-        </button>
-        <button type="button" className="ghost" onClick={() => setVollbild((v) => !v)} aria-pressed={vollbild}>
-          {vollbild ? 'Vollbild beenden' : 'Vollbild'}
-        </button>
-      </div>
-
-      <div className="ed-scroll" ref={scrollRef} tabIndex={0} role="region" aria-label="Zeichenfläche, scrollbar">
-        <svg
-          ref={svgRef}
-          xmlns="http://www.w3.org/2000/svg"
-          className={`diagramm ed-svg${verbinden ? ' verbinden' : ''}`}
-          width={breite * zoom}
-          height={hoehe * zoom}
-          viewBox={`0 0 ${breite} ${hoehe}`}
-          aria-label={`${notation.name}-Zeichenfläche mit ${knoten.length} Elementen und ${wert.kanten.length} Verbindungen`}
-          onPointerDown={flaecheDruck}
-          onPointerMove={bewege}
-          onPointerUp={lasseLos}
-          onPointerCancel={abbrechen}
-        >
-          <defs>
-            <pattern id="ed-raster" width={20} height={20} patternUnits="userSpaceOnUse">
-              <circle cx={1} cy={1} r={1} className="ed-rasterpunkt" />
-            </pattern>
-          </defs>
-          <rect width={breite} height={hoehe} fill="url(#ed-raster)" />
-          <Zeichnung
-            antwort={{ ...wert, knoten: gezeichnet }}
-            auswahl={auswahl}
-            knotenDruck={knotenDruck}
-            kanteDruck={kanteDruck}
-            griffDruck={griffDruck}
-            onFokus={(id) => setAuswahl({ typ: 'knoten', id })}
-          />
-          {zug?.art === 'linie' && (
-            <line
-              x1={mitte(knoten.find((k) => k.id === zug.von)!)[0]}
-              y1={mitte(knoten.find((k) => k.id === zug.von)!)[1]}
-              x2={zug.p[0]}
-              y2={zug.p[1]}
-              className="ed-vorschau"
-            />
-          )}
-        </svg>
-        {leer && (
-          <p className="ed-leer muted">
-            Noch leer. Tippe oben ein Element an – es erscheint hier. Danach ziehen, um es zu verschieben; am blauen Punkt ziehen, um es zu
-            verbinden.
-          </p>
-        )}
-      </div>
-
-      <div className="ed-auswahl-feld" aria-live="polite">
-        {verbinden ? (
-          <p className="ed-hinweis">
-            Tippe jetzt das Ziel der Verbindung an.{' '}
-            <button type="button" className="ghost" onClick={() => setVerbinden(null)}>
-              Abbrechen
+              <button
+                type="button"
+                className="ghost"
+                onClick={() => setZoom((z) => Math.min(1.6, +(z + 0.1).toFixed(1)))}
+                disabled={zoom >= 1.6}
+                aria-label="Vergrößern"
+              >
+                +
+              </button>
+            </span>
+            <button type="button" className="ghost ed-vollbild" onClick={() => setVollbild((v) => !v)} aria-pressed={vollbild}>
+              <Icon name={vollbild ? 'minimize' : 'maximize'} />
+              <span>{vollbild ? 'Vollbild beenden' : 'Vollbild'}</span>
             </button>
-          </p>
-        ) : gewaehlterKnoten ? (
-          <KnotenFeld
-            k={gewaehlterKnoten}
-            antwort={wert}
-            textRef={textRef}
-            onText={(text) => setzeKnoten(gewaehlterKnoten.id, { text }, `text:${gewaehlterKnoten.id}`)}
-            onSchluessel={(schluessel) => setzeKnoten(gewaehlterKnoten.id, { schluessel })}
-            onDrehen={() => {
-              const { x, y, w, h } = gewaehlterKnoten;
-              const nx = Math.max(0, einrasten(x + w / 2 - h / 2));
-              setzeKnoten(gewaehlterKnoten.id, { x: nx, y: Math.max(0, einrasten(y + h / 2 - w / 2)), w: h, h: w });
-            }}
-            onVerbinden={() => setVerbinden(gewaehlterKnoten.id)}
-            onKante={(id) => setAuswahl({ typ: 'kante', id })}
-            onDuplizieren={duplizieren}
-            onLoeschen={loeschen}
-          />
-        ) : gewaehlteKante ? (
-          <KantenFeld
-            e={gewaehlteKante}
-            antwort={wert}
-            arten={notation.kanten}
-            onAendern={(teil, zusammen) => setzeKante(gewaehlteKante.id, teil, zusammen)}
-            onLoeschen={loeschen}
-          />
-        ) : (
-          <p className="muted small">{notation.tipp} Tippe ein Element oder eine Verbindung an, um sie zu bearbeiten.</p>
-        )}
+          </div>
+        </div>
+
+        <div className="ed-scroll" ref={scrollRef} tabIndex={0} role="region" aria-label="Zeichenfläche, scrollbar">
+          <svg
+            ref={svgRef}
+            xmlns="http://www.w3.org/2000/svg"
+            className={`diagramm ed-svg${verbinden ? ' verbinden' : ''}`}
+            width={breite * zoom}
+            height={hoehe * zoom}
+            viewBox={`0 0 ${breite} ${hoehe}`}
+            aria-label={`${notation.name}-Zeichenfläche mit ${knoten.length} Elementen und ${wert.kanten.length} Verbindungen`}
+            onPointerDown={flaecheDruck}
+            onPointerMove={bewege}
+            onPointerUp={lasseLos}
+            onPointerCancel={abbrechen}
+          >
+            <defs>
+              <pattern id="ed-raster" width={20} height={20} patternUnits="userSpaceOnUse">
+                <circle cx={1} cy={1} r={1} className="ed-rasterpunkt" />
+              </pattern>
+            </defs>
+            <rect width={breite} height={hoehe} fill="url(#ed-raster)" />
+            <Zeichnung
+              antwort={{ ...wert, knoten: gezeichnet }}
+              auswahl={auswahl}
+              knotenDruck={knotenDruck}
+              kanteDruck={kanteDruck}
+              griffDruck={griffDruck}
+              onFokus={(id) => setAuswahl({ typ: 'knoten', id })}
+            />
+            {zug?.art === 'linie' && (
+              <line
+                x1={mitte(knoten.find((k) => k.id === zug.von)!)[0]}
+                y1={mitte(knoten.find((k) => k.id === zug.von)!)[1]}
+                x2={zug.p[0]}
+                y2={zug.p[1]}
+                className="ed-vorschau"
+              />
+            )}
+          </svg>
+          {leer && (
+            <p className="ed-leer muted">
+              Noch leer. Tippe oben ein Element an – es erscheint hier. Danach ziehen, um es zu verschieben; am blauen Punkt ziehen, um es
+              zu verbinden.
+            </p>
+          )}
+        </div>
+
+        <div className="ed-auswahl-feld" aria-live="polite">
+          {verbinden ? (
+            <p className="ed-hinweis">
+              Tippe jetzt das Ziel der Verbindung an.{' '}
+              <button type="button" className="ghost" onClick={() => setVerbinden(null)}>
+                Abbrechen
+              </button>
+            </p>
+          ) : gewaehlterKnoten ? (
+            <KnotenFeld
+              k={gewaehlterKnoten}
+              antwort={wert}
+              textRef={textRef}
+              onText={(text) => setzeKnoten(gewaehlterKnoten.id, { text }, `text:${gewaehlterKnoten.id}`)}
+              onSchluessel={(schluessel) => setzeKnoten(gewaehlterKnoten.id, { schluessel })}
+              onDrehen={() => {
+                const { x, y, w, h } = gewaehlterKnoten;
+                const nx = Math.max(0, einrasten(x + w / 2 - h / 2));
+                setzeKnoten(gewaehlterKnoten.id, { x: nx, y: Math.max(0, einrasten(y + h / 2 - w / 2)), w: h, h: w });
+              }}
+              onVerbinden={() => setVerbinden(gewaehlterKnoten.id)}
+              onKante={(id) => setAuswahl({ typ: 'kante', id })}
+              onDuplizieren={duplizieren}
+              onLoeschen={loeschen}
+            />
+          ) : gewaehlteKante ? (
+            <KantenFeld
+              e={gewaehlteKante}
+              antwort={wert}
+              arten={notation.kanten}
+              onAendern={(teil, zusammen) => setzeKante(gewaehlteKante.id, teil, zusammen)}
+              onLoeschen={loeschen}
+            />
+          ) : (
+            <p className="muted small">{notation.tipp} Tippe ein Element oder eine Verbindung an, um sie zu bearbeiten.</p>
+          )}
+        </div>
       </div>
 
       {hilfen && (

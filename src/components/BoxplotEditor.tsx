@@ -121,27 +121,39 @@ export function BoxplotEditor({ wert, onChange, hilfen }: EditorProps) {
   const meldungen = pruefeBoxplot(wert);
   return (
     <div className="bp">
-      <div className="bp-felder">
-        {KENNWERTE.map((k) => (
-          <label key={k}>
-            <span className="small muted">{KENNWERT_NAMEN[k]}</span>
-            <input
-              inputMode="decimal"
-              value={wert.werte[k]}
-              onChange={(e) => onChange({ ...wert, werte: { ...wert.werte, [k]: e.target.value } })}
-            />
+      {/* Wie die anderen Editoren ein Rahmen: oben die Kennwerte (in der Reihenfolge des Boxplots), darunter die Zeichnung. */}
+      <div className="ed-karte">
+        <div className="ed-kopf bp-felder">
+          {KENNWERTE.map((k) => (
+            <label key={k}>
+              <span className="small muted">{KENNWERT_NAMEN[k]}</span>
+              <input
+                inputMode="decimal"
+                value={wert.werte[k]}
+                onChange={(e) => onChange({ ...wert, werte: { ...wert.werte, [k]: e.target.value } })}
+              />
+            </label>
+          ))}
+          <label className="bp-ausreisser">
+            <span className="small muted">Ausreißer (mehrere mit ; trennen, sonst leer)</span>
+            <input inputMode="decimal" value={wert.ausreisser} onChange={(e) => onChange({ ...wert, ausreisser: e.target.value })} />
           </label>
-        ))}
-        <label className="bp-ausreisser">
-          <span className="small muted">Ausreißer (mehrere mit ; trennen, sonst leer)</span>
-          <input inputMode="decimal" value={wert.ausreisser} onChange={(e) => onChange({ ...wert, ausreisser: e.target.value })} />
-        </label>
+        </div>
+        <div className="bp-flaeche">
+          {z ? (
+            <BoxplotSvg reihen={[{ z, akzent: true }]} label={beschreibung(z)} />
+          ) : (
+            <div className="bp-platzhalter">
+              {/* Skizze eines Boxplots: zeigt, wo die fünf Kennwerte hinkommen. */}
+              <svg viewBox="0 0 240 44" aria-hidden="true" focusable="false">
+                <path d="M20 22H80M160 22H220M20 12v20M220 12v20M126 6v32" />
+                <rect x="80" y="6" width="80" height="32" />
+              </svg>
+              <p>Sobald alle fünf Kennwerte eingetragen sind, zeichnet die App deinen Boxplot hier maßstäblich.</p>
+            </div>
+          )}
+        </div>
       </div>
-      {z ? (
-        <BoxplotSvg reihen={[{ z, akzent: true }]} label={beschreibung(z)} />
-      ) : (
-        <p className="hint">Sobald alle fünf Kennwerte eingetragen sind, zeichnet die App deinen Boxplot hier maßstäblich.</p>
-      )}
       {/* Formprüfung erst, wenn es etwas zu prüfen gibt – „trag alle Werte ein“ sagt schon der Hinweis oben. */}
       {hilfen && (z || meldungen.length > 1 || (meldungen[0] && !meldungen[0].startsWith('Trag alle'))) && (
         <Formhinweise meldungen={meldungen.filter((m) => !m.startsWith('Trag alle'))} />

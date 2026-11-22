@@ -70,10 +70,20 @@ span.sg-text { padding: 6px 4px; overflow-wrap: anywhere; }
   .sg-wenn-kopf { padding-left: 22px; padding-right: 22px; }
   .sg-plus { min-height: 34px; }
   .ed-scroll { max-height: 60vh; }
+  /* Handy: Elemente in einer Zeile zum Wischen statt fünf Zeilen über der Fläche; Werkzeuge in zwei aufgeräumten Zeilen. */
+  .ed-leiste { flex-wrap: nowrap; overflow-x: auto; margin: -2px -8px; padding: 2px 8px; scrollbar-width: none; overscroll-behavior-x: contain;
+    mask-image: linear-gradient(to right, transparent, #000 8px, #000 calc(100% - 24px), transparent); }
+  .ed-leiste::-webkit-scrollbar { display: none; }
+  .ed-leiste .palette-element { flex: none; }
+  .ed-werkzeuge .ed-schalter { flex-basis: 100%; }
+  .ed-werkzeuge .ed-abstand { display: none; }
+  .ed-vollbild { margin-left: auto; }
+  .ed-vollbild span { display: none; }
+  .ed-knoepfe button { padding-inline: 8px; font-size: 0.9rem; }
   .diagramm-editor.vollbild { padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px)); }
 }
 @media print {
-  .ed-leiste, .ed-werkzeuge, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe, .wt-neu, .wt-aktion, .sg-aktionen, .sg-neu-zeile:not(.sg-neu-leer) { display: none; }
+  .ed-kopf, .ed-auswahl-feld, .ed-pruefung, .te-aktionen, .te-spalte-knoepfe, .wt-neu, .wt-aktion, .sg-aktionen, .sg-neu-zeile:not(.sg-neu-leer) { display: none; }
   .sg-neu-leer .sg-plus > :not(.sg-leer-zeichen) { display: none; }
 }
 
