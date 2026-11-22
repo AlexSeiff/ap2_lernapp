@@ -5456,6 +5456,560 @@
     "include"
    ],
    "varianten": []
+  },
+  {
+   "varianten": [
+    {
+     "f1": [
+      "3"
+     ],
+     "f2": [
+      "5"
+     ],
+     "f3": [
+      "8"
+     ],
+     "f4": [
+      "6"
+     ],
+     "f5": [
+      "1"
+     ],
+     "f6": [
+      "2"
+     ],
+     "f7": [
+      "7"
+     ],
+     "f8": [
+      "4"
+     ]
+    }
+   ],
+   "typ": "struktogramm",
+   "stufe": 2,
+   "id": "DG-SG-001",
+   "titel": "Struktogramm: durchschnittliche Lieferzeit",
+   "szenario": "Die Spedition meldet je Auftrag die Lieferzeit in Tagen. Fehlt eine Meldung, steht in der Liste eine 0 – solche Werte sollen nicht in den Durchschnitt eingehen. Gibt es gar keinen gültigen Wert, liefert die Methode 0.\n\nOrdne die Anweisungen folgerichtig den leeren Feldern des Struktogramms der Methode `durchschnitt(lieferzeiten)` zu.",
+   "struktogramm": "titel: + durchschnitt(lieferzeiten : Double[]) : Double\nsumme := 0\n___\nschleife: ___\n  wenn: ___\n    ja:\n      ___\n      ___\n    nein:\nwenn: ___\n  ja:\n    ___\n  nein:\n    ___",
+   "palette": [
+    {
+     "id": "1",
+     "form": "text",
+     "text": "summe := summe + lieferzeiten[i]"
+    },
+    {
+     "id": "2",
+     "form": "text",
+     "text": "wenn anzahl > 0"
+    },
+    {
+     "id": "3",
+     "form": "text",
+     "text": "anzahl := 0"
+    },
+    {
+     "id": "4",
+     "form": "text",
+     "text": "gib 0 zurück"
+    },
+    {
+     "id": "5",
+     "form": "text",
+     "text": "für i := 0, solange i < Länge von lieferzeiten, i := i + 1"
+    },
+    {
+     "id": "6",
+     "form": "text",
+     "text": "anzahl := anzahl + 1"
+    },
+    {
+     "id": "7",
+     "form": "text",
+     "text": "gib summe / anzahl zurück"
+    },
+    {
+     "id": "8",
+     "form": "text",
+     "text": "wenn lieferzeiten[i] > 0"
+    }
+   ],
+   "loesung": {
+    "f1": [
+     "3"
+    ],
+    "f2": [
+     "5"
+    ],
+    "f3": [
+     "8"
+    ],
+    "f4": [
+     "1"
+    ],
+    "f5": [
+     "6"
+    ],
+    "f6": [
+     "2"
+    ],
+    "f7": [
+     "7"
+    ],
+    "f8": [
+     "4"
+    ]
+   },
+   "hinweise": [
+    "Vor der Schleife wird alles vorbelegt, was in der Schleife hochgezählt wird – die Summe steht schon da, was fehlt noch?",
+    "In der Schleife zählt nur, was gültig ist: Die Verzweigung prüft den einzelnen Wert, im Ja-Zweig wird addiert und gezählt.",
+    "Nach der Schleife: Durch 0 teilen geht nicht. Deshalb wird erst geprüft, ob überhaupt etwas gezählt wurde."
+   ],
+   "erklaerung": "Vorbelegen (3), Zählschleife über alle Werte (5), nur gültige Werte (8) addieren (1) und zählen (6) – die Reihenfolge von 1 und 6 ist egal. Nach der Schleife verhindert die Verzweigung (2) die Division durch 0: Ja → Mittelwert (7), Nein → 0 (4). Typischer Fehler: die Division in die Schleife zu ziehen – dann wird bei jedem Wert neu geteilt.",
+   "quelle": "DD11 B2 · B5",
+   "tags": [
+    "struktogramm",
+    "schleife",
+    "verzweigung",
+    "mittelwert"
+   ]
+  },
+  {
+   "varianten": [],
+   "typ": "struktogramm",
+   "stufe": 2,
+   "id": "DG-SG-002",
+   "titel": "Struktogramm: Meldebestand prüfen und nachbestellen",
+   "szenario": "Im Zentrallager wird jeden Abend geprüft, welche Artikel den Meldebestand erreicht oder unterschritten haben. Für sie wird bis zum Höchstbestand nachbestellt; die Bestellung geht nur raus, wenn mindestens ein Artikel betroffen ist. Eine der Anweisungen in der Liste passt nicht.\n\nOrdne die Anweisungen folgerichtig den leeren Feldern des Struktogramms der Methode `pruefeBestand(artikel)` zu.",
+   "struktogramm": "titel: + pruefeBestand(artikel : Artikel[]) : void\n___\nschleife: ___\n  wenn: ___\n    ja:\n      ___\n      ___\n    nein:\nwenn: ___\n  ja:\n    ___\n  nein:",
+   "palette": [
+    {
+     "id": "1",
+     "form": "text",
+     "text": "sendeBestellung(bestellliste)"
+    },
+    {
+     "id": "2",
+     "form": "text",
+     "text": "wenn a.bestand <= a.meldebestand"
+    },
+    {
+     "id": "3",
+     "form": "text",
+     "text": "menge := a.meldebestand − a.bestand"
+    },
+    {
+     "id": "4",
+     "form": "text",
+     "text": "bestellliste := leere Liste"
+    },
+    {
+     "id": "5",
+     "form": "text",
+     "text": "bestellliste.hinzufügen(a.nr, menge)"
+    },
+    {
+     "id": "6",
+     "form": "text",
+     "text": "für jeden Artikel a in artikel"
+    },
+    {
+     "id": "7",
+     "form": "text",
+     "text": "wenn bestellliste nicht leer"
+    },
+    {
+     "id": "8",
+     "form": "text",
+     "text": "menge := a.hoechstbestand − a.bestand"
+    }
+   ],
+   "loesung": {
+    "f1": [
+     "4"
+    ],
+    "f2": [
+     "6"
+    ],
+    "f3": [
+     "2"
+    ],
+    "f4": [
+     "8"
+    ],
+    "f5": [
+     "5"
+    ],
+    "f6": [
+     "7"
+    ],
+    "f7": [
+     "1"
+    ]
+   },
+   "hinweise": [
+    "Die Liste, in die die Schleife schreibt, muss vorher angelegt werden.",
+    "Nachbestellt wird bis zum Höchstbestand – nicht nur bis zum Meldebestand. Erst die Menge berechnen, dann eintragen.",
+    "Die Bestellung geht einmal nach der Schleife raus, und nur, wenn etwas in der Liste steht."
+   ],
+   "erklaerung": "Liste anlegen (4), über alle Artikel laufen (6), Meldebestand erreicht? (2) → Menge bis zum Höchstbestand berechnen (8) und eintragen (5). Nach der Schleife nur bestellen, wenn die Liste nicht leer ist (7 → 1). Ablenker 3 füllt nur bis zum Meldebestand auf – dann wäre der Artikel sofort wieder ein Fall für die Nachbestellung (Bestellpunktverfahren: auffüllen auf den Höchstbestand).",
+   "quelle": "DD11 B2 · B5",
+   "tags": [
+    "struktogramm",
+    "schleife",
+    "verzweigung",
+    "lager"
+   ]
+  },
+  {
+   "varianten": [],
+   "typ": "struktogramm",
+   "stufe": 2,
+   "id": "DG-SG-003",
+   "titel": "Struktogramm: Kunde suchen (lineare Suche)",
+   "szenario": "Die Kundenliste ist nicht sortiert. Die Methode `suche(kunden, nr)` soll von vorn nach hinten suchen, beim ersten Treffer aufhören und dessen Position liefern – gibt es die Kundennummer nicht, liefert sie −1.\n\nOrdne die Anweisungen folgerichtig den leeren Feldern des Struktogramms zu.",
+   "struktogramm": "titel: + suche(kunden : Kunde[], nr : Integer) : Integer\ni := 0\n___\nschleife: ___\n  wenn: ___\n    ja:\n      ___\n    nein:\n      ___\nwenn: ___\n  ja:\n    ___\n  nein:\n    ___",
+   "palette": [
+    {
+     "id": "1",
+     "form": "text",
+     "text": "wenn gefunden"
+    },
+    {
+     "id": "2",
+     "form": "text",
+     "text": "i := i + 1"
+    },
+    {
+     "id": "3",
+     "form": "text",
+     "text": "gib −1 zurück"
+    },
+    {
+     "id": "4",
+     "form": "text",
+     "text": "solange i < Länge von kunden und nicht gefunden"
+    },
+    {
+     "id": "5",
+     "form": "text",
+     "text": "gefunden := falsch"
+    },
+    {
+     "id": "6",
+     "form": "text",
+     "text": "gib i zurück"
+    },
+    {
+     "id": "7",
+     "form": "text",
+     "text": "wenn kunden[i].nr = nr"
+    },
+    {
+     "id": "8",
+     "form": "text",
+     "text": "gefunden := wahr"
+    }
+   ],
+   "loesung": {
+    "f1": [
+     "5"
+    ],
+    "f2": [
+     "4"
+    ],
+    "f3": [
+     "7"
+    ],
+    "f4": [
+     "8"
+    ],
+    "f5": [
+     "2"
+    ],
+    "f6": [
+     "1"
+    ],
+    "f7": [
+     "6"
+    ],
+    "f8": [
+     "3"
+    ]
+   },
+   "hinweise": [
+    "Die Schleife hat zwei Abbruchgründe: Ende der Liste oder Treffer. Dafür braucht es vorher eine Merkvariable.",
+    "Bei einem Treffer darf i nicht mehr weiterzählen – sonst zeigt es hinter den gefundenen Kunden.",
+    "Nach der Schleife entscheidet die Merkvariable, was zurückgegeben wird."
+   ],
+   "erklaerung": "Merkvariable vorbelegen (5), kopfgesteuerte Schleife mit zwei Bedingungen (4), Vergleich (7): Treffer → merken (8), sonst weiterzählen (2). Weil i beim Treffer stehen bleibt, liefert der Ja-Zweig nach der Schleife (1) genau die Position (6), sonst −1 (3). Lineare Suche braucht im schlechtesten Fall n Vergleiche; auf sortierten Daten wäre die binäre Suche schneller.",
+   "quelle": "DD11 B5 · B7",
+   "tags": [
+    "struktogramm",
+    "suchen",
+    "schleife"
+   ]
+  },
+  {
+   "varianten": [],
+   "typ": "struktogramm",
+   "stufe": 2,
+   "id": "DG-SG-004",
+   "titel": "Struktogramm: Bubblesort nach Umsatz",
+   "szenario": "Für den Monatsbericht sollen die Umsätze der Filialen aufsteigend sortiert werden. Die Methode `sortiere(umsatz)` arbeitet mit Bubblesort: In jeder Runde wandert der größte noch unsortierte Wert ans Ende. Eine der Anweisungen in der Liste passt nicht.\n\nOrdne die Anweisungen folgerichtig den leeren Feldern des Struktogramms zu.",
+   "struktogramm": "titel: + sortiere(umsatz : Double[]) : void\nn := Länge von umsatz\nschleife: ___\n  schleife: ___\n    wenn: ___\n      ja:\n        ___\n        ___\n        ___\n      nein:",
+   "palette": [
+    {
+     "id": "1",
+     "form": "text",
+     "text": "umsatz[i] := umsatz[i + 1]"
+    },
+    {
+     "id": "2",
+     "form": "text",
+     "text": "für runde := 1, solange runde < n, runde := runde + 1"
+    },
+    {
+     "id": "3",
+     "form": "text",
+     "text": "umsatz[i + 1] := tmp"
+    },
+    {
+     "id": "4",
+     "form": "text",
+     "text": "wenn umsatz[i] > umsatz[i + 1]"
+    },
+    {
+     "id": "5",
+     "form": "text",
+     "text": "tmp := umsatz[i]"
+    },
+    {
+     "id": "6",
+     "form": "text",
+     "text": "für i := 0, solange i < n − runde, i := i + 1"
+    },
+    {
+     "id": "7",
+     "form": "text",
+     "text": "umsatz[i + 1] := umsatz[i]"
+    }
+   ],
+   "loesung": {
+    "f1": [
+     "2"
+    ],
+    "f2": [
+     "6"
+    ],
+    "f3": [
+     "4"
+    ],
+    "f4": [
+     "5"
+    ],
+    "f5": [
+     "1"
+    ],
+    "f6": [
+     "3"
+    ]
+   },
+   "hinweise": [
+    "Außen zählen die Runden, innen läuft der Vergleich benachbarter Werte – nach jeder Runde einen Wert weniger.",
+    "Aufsteigend: getauscht wird, wenn der linke Wert größer ist als der rechte.",
+    "Ein Tausch braucht eine Hilfsvariable: erst sichern, dann überschreiben, dann den gesicherten Wert einsetzen."
+   ],
+   "erklaerung": "Äußere Schleife über die Runden (2), innere über die noch unsortierten Paare (6), Vergleich (4) und Dreieckstausch: sichern (5), links überschreiben (1), gesicherten Wert rechts einsetzen (3). Ablenker 7 überschreibt den rechten Wert ohne Sicherung – danach stehen zwei gleiche Werte da und einer ist verloren. Bubblesort braucht im schlechtesten Fall rund n²/2 Vergleiche.",
+   "quelle": "DD11 B7",
+   "tags": [
+    "struktogramm",
+    "sortieren",
+    "schleife"
+   ]
+  },
+  {
+   "varianten": [],
+   "typ": "struktogramm",
+   "stufe": 2,
+   "id": "DG-SG-005",
+   "titel": "Struktogramm: Menge erfassen, bis sie gültig ist",
+   "szenario": "An der Kasse wird die Stückzahl eingegeben. Erlaubt sind 1 bis 99; bei einer ungültigen Eingabe erscheint ein Hinweis und die Eingabe wird wiederholt. Weil mindestens einmal eingegeben wird, ist das eine fußgesteuerte Schleife. Eine der Anweisungen in der Liste passt nicht.\n\nOrdne die Anweisungen folgerichtig den leeren Feldern des Struktogramms der Methode `erfasseMenge()` zu.",
+   "struktogramm": "titel: + erfasseMenge() : Integer\nwiederhole:\n  ___\n  wenn: ___\n    ja:\n      ___\n    nein:\nbis: ___\n___",
+   "palette": [
+    {
+     "id": "1",
+     "form": "text",
+     "text": "wenn menge < 1 oder menge > 99"
+    },
+    {
+     "id": "2",
+     "form": "text",
+     "text": "gib menge zurück"
+    },
+    {
+     "id": "3",
+     "form": "text",
+     "text": "lies menge"
+    },
+    {
+     "id": "4",
+     "form": "text",
+     "text": "bis menge >= 1 und menge <= 99"
+    },
+    {
+     "id": "5",
+     "form": "text",
+     "text": "zeige „Bitte eine Menge von 1 bis 99 eingeben.“"
+    },
+    {
+     "id": "6",
+     "form": "text",
+     "text": "bis menge < 1 oder menge > 99"
+    }
+   ],
+   "loesung": {
+    "f1": [
+     "3"
+    ],
+    "f2": [
+     "1"
+    ],
+    "f3": [
+     "5"
+    ],
+    "f4": [
+     "4"
+    ],
+    "f5": [
+     "2"
+    ]
+   },
+   "hinweise": [
+    "Der Rumpf der fußgesteuerten Schleife läuft mindestens einmal: Was muss dort zuerst passieren?",
+    "Der Fuß („bis …“) nennt die Bedingung, bei der die Schleife endet – also die gültige Eingabe.",
+    "Erst nach der Schleife steht fest, dass die Menge gültig ist."
+   ],
+   "erklaerung": "Im Rumpf: einlesen (3), ungültig? (1) → Hinweis (5). Der Fuß beendet die Schleife, sobald die Menge gültig ist (4); danach wird sie zurückgegeben (2). Ablenker 6 dreht die Bedingung um: Die Schleife würde bei einer gültigen Menge weiterlaufen und bei einer ungültigen enden. Merke: „wiederhole … bis“ nennt die Abbruchbedingung, „solange“ die Bedingung zum Weitermachen.",
+   "quelle": "DD11 B1 · B2",
+   "tags": [
+    "struktogramm",
+    "fussgesteuert",
+    "schleife",
+    "eingabe"
+   ]
+  },
+  {
+   "varianten": [
+    {
+     "f1": [
+      "4"
+     ],
+     "f2": [
+      "7"
+     ],
+     "f3": [
+      "5"
+     ],
+     "f4": [
+      "3"
+     ],
+     "f5": [
+      "4"
+     ],
+     "f6": [
+      "1"
+     ],
+     "f7": [
+      "6"
+     ]
+    }
+   ],
+   "typ": "struktogramm",
+   "stufe": 2,
+   "id": "DG-SG-006",
+   "titel": "Struktogramm: Standardabweichung einer Stichprobe",
+   "szenario": "Aus einer Stichprobe von Lieferzeiten soll die Standardabweichung berechnet werden – mit dem Teiler für eine Stichprobe. Dafür braucht die Methode zwei Durchläufe: erst den Mittelwert, dann die quadrierten Abweichungen. Die Zählschleife darf zweimal verwendet werden; zwei Anweisungen in der Liste passen nicht.\n\nOrdne die Anweisungen folgerichtig den leeren Feldern des Struktogramms der Methode `standardabweichung(werte)` zu.",
+   "struktogramm": "titel: + standardabweichung(werte : Double[]) : Double\nn := Länge von werte\nsumme := 0\nschleife: ___\n  ___\n___\n___\nschleife: ___\n  ___\n___",
+   "palette": [
+    {
+     "id": "1",
+     "form": "text",
+     "text": "quadrate := quadrate + (werte[i] − mittel)²"
+    },
+    {
+     "id": "2",
+     "form": "text",
+     "text": "gib √(quadrate / n) zurück"
+    },
+    {
+     "id": "3",
+     "form": "text",
+     "text": "mittel := summe / n"
+    },
+    {
+     "id": "4",
+     "form": "text",
+     "text": "für i := 0, solange i < n, i := i + 1",
+     "mehrfach": true
+    },
+    {
+     "id": "5",
+     "form": "text",
+     "text": "quadrate := 0"
+    },
+    {
+     "id": "6",
+     "form": "text",
+     "text": "gib √(quadrate / (n − 1)) zurück"
+    },
+    {
+     "id": "7",
+     "form": "text",
+     "text": "summe := summe + werte[i]"
+    },
+    {
+     "id": "8",
+     "form": "text",
+     "text": "quadrate := quadrate + (werte[i] − mittel)"
+    }
+   ],
+   "loesung": {
+    "f1": [
+     "4"
+    ],
+    "f2": [
+     "7"
+    ],
+    "f3": [
+     "3"
+    ],
+    "f4": [
+     "5"
+    ],
+    "f5": [
+     "4"
+    ],
+    "f6": [
+     "1"
+    ],
+    "f7": [
+     "6"
+    ]
+   },
+   "hinweise": [
+    "Der Mittelwert steht erst nach dem ersten Durchlauf fest – vorher kann keine Abweichung berechnet werden.",
+    "Abweichungen werden quadriert, sonst heben sich positive und negative auf (ihre Summe ist immer 0).",
+    "Stichprobe: geteilt wird durch n − 1, nicht durch n."
+   ],
+   "erklaerung": "Erster Durchlauf (4): Summe bilden (7), danach Mittelwert (3) und Quadratsumme vorbelegen (5) – diese beiden in beliebiger Reihenfolge. Zweiter Durchlauf (4): quadrierte Abweichungen aufsummieren (1). Ergebnis bei einer Stichprobe: √(quadrate / (n − 1)) (6). Ablenker 8 vergisst das Quadrat (Summe der Abweichungen ist immer 0), Ablenker 2 teilt durch n – das wäre die Standardabweichung der Grundgesamtheit.",
+   "quelle": "DD11 B5 · DD3",
+   "tags": [
+    "struktogramm",
+    "schleife",
+    "standardabweichung",
+    "statistik"
+   ]
   }
  ]
 }

@@ -18,6 +18,7 @@ import { AnhangPanel } from '../components/Belegsatz';
 import { DiagrammSvg, FormSymbol, formName } from '../components/DiagrammSvg';
 import { Icon } from '../components/Icon';
 import { Markdown } from '../components/Markdown';
+import { StruktogrammLueckenBild } from '../components/ZuordnungsEditor';
 import { useConfirm } from '../hooks/useConfirm';
 import { BEIBLATT_ZU_TYP } from '../lib/diagrammBeiblatt';
 import { diagrammStatus, diagrammUebungen, recordDiagrammCheck, recordDiagrammHint, recordDiagrammLoesung } from '../lib/diagramme';
@@ -174,19 +175,47 @@ function DiagrammUebungView({ u }: { u: DiagrammUebungTyp }) {
       </div>
 
       <div className="anhang-leiste no-print">
-        <AnhangPanel diagramme={[BEIBLATT_ZU_TYP[u.typ]]} />
+        <AnhangPanel diagramme={BEIBLATT_ZU_TYP[u.typ] ? [BEIBLATT_ZU_TYP[u.typ]!] : []} />
       </div>
 
       <div className="diagramm-arbeit">
         <div className="diagramm-scroll">
-          <DiagrammSvg
-            uebung={u}
-            eingesetzt={belegung}
-            ergebnis={ergebnis?.slots}
-            ziel={ziehen?.ueber ?? null}
-            auswahl={!!auswahl}
-            onSlot={aufSlot}
-          />
+          {u.struktogramm ? (
+            <StruktogrammLueckenBild
+              text={u.struktogramm}
+              luecke={(n) => {
+                const slot = `f${n}`;
+                const p = belegung[slot] ? element(belegung[slot]) : undefined;
+                const status = ergebnis?.slots[slot];
+                return (
+                  <button
+                    type="button"
+                    data-slot={slot}
+                    className={`sg-text sz-slot${p ? ' belegt' : ''}${status === true ? ' richtig' : status === false ? ' falsch' : ''}${ziehen?.ueber === slot ? ' ziel' : ''}${auswahl ? ' waehlbar' : ''}`}
+                    aria-label={`Feld ${n}: ${p ? `${p.id} „${p.text}“` : 'leer'}${status === true ? ', richtig' : status === false ? ', falsch' : ''}`}
+                    onClick={() => aufSlot(slot)}
+                  >
+                    {p ? (
+                      <>
+                        <b className="sz-nr">{p.id}</b> <code>{p.text}</code>
+                      </>
+                    ) : (
+                      <span className="muted">Feld {n}</span>
+                    )}
+                  </button>
+                );
+              }}
+            />
+          ) : (
+            <DiagrammSvg
+              uebung={u}
+              eingesetzt={belegung}
+              ergebnis={ergebnis?.slots}
+              ziel={ziehen?.ueber ?? null}
+              auswahl={!!auswahl}
+              onSlot={aufSlot}
+            />
+          )}
         </div>
 
         <section className="diagramm-palette" aria-label="Elemente">
@@ -201,7 +230,7 @@ function DiagrammUebungView({ u }: { u: DiagrammUebungTyp }) {
                 type="button"
                 className={`palette-element${auswahl === p.id ? ' gewaehlt' : ''}${ziehen?.element === p.id ? ' wird-gezogen' : ''}`}
                 aria-pressed={auswahl === p.id}
-                title={formName(p.form)}
+                title={u.struktogramm ? undefined : formName(p.form)}
                 onClick={() => {
                   if (istGezogen.current) return;
                   setAuswahl((a) => (a === p.id ? null : p.id));
@@ -214,9 +243,18 @@ function DiagrammUebungView({ u }: { u: DiagrammUebungTyp }) {
                   setZiehen(null);
                 }}
               >
-                <FormSymbol form={p.form} />
-                <span>{p.text}</span>
-                <span className="sr-only"> ({formName(p.form)})</span>
+                {u.struktogramm ? (
+                  <>
+                    <b className="sz-nr">{p.id}</b>
+                    <code>{p.text}</code>
+                  </>
+                ) : (
+                  <>
+                    <FormSymbol form={p.form} />
+                    <span>{p.text}</span>
+                    <span className="sr-only"> ({formName(p.form)})</span>
+                  </>
+                )}
               </button>
             ))}
             {!frei.length && <p className="muted small">Alle Elemente sind eingesetzt.</p>}

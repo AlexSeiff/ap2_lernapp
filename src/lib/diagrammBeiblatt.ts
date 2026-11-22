@@ -290,7 +290,8 @@ export const BEIBLATT: Record<BeiblattArt, BeiblattEintrag> = {
 };
 
 /** Welche Notation gehört zu welchem Typ einer Diagramm-Übung? */
-export const BEIBLATT_ZU_TYP: Record<DiagrammTyp, BeiblattArt> = {
+/** Struktogramme haben kein Beiblatt (Nassi-Shneiderman steht nicht auf dem Blatt der Diagrammelemente). */
+export const BEIBLATT_ZU_TYP: Partial<Record<DiagrammTyp, BeiblattArt>> = {
   epk: 'epk',
   bpmn: 'bpmn',
   aktivitaet: 'aktivitaet',

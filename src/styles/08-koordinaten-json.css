@@ -75,3 +75,14 @@ input.sz-eingabe { flex: none; width: 3.4em; min-width: 3.4em; min-height: 32px;
   .eb-zweig { grid-template-columns: auto 1fr; align-items: start; justify-items: stretch; }
   .eb-ast { min-width: 4.5em; align-self: start; }
 }
+
+/* Diagramm-Übung vom Typ Struktogramm: Felder als Lücken zum Antippen (DiagrammUebung.tsx). */
+button.sz-slot { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 34px; margin: 0; padding: 4px 8px; font: inherit; font-weight: 400; text-align: left; color: var(--text); background: transparent; border: 1.5px dashed var(--border); border-radius: 4px; box-shadow: none; }
+button.sz-slot:hover { filter: none; background: var(--fill); }
+button.sz-slot.waehlbar { border-color: var(--accent); }
+button.sz-slot.ziel { background: var(--accent-soft); border-style: solid; }
+button.sz-slot.belegt { border-style: solid; border-color: transparent; }
+button.sz-slot.richtig { color: var(--good); background: var(--good-soft, transparent); border-color: var(--good); }
+button.sz-slot.falsch { color: var(--low); background: var(--low-soft); border-color: var(--low); }
+.palette-element .sz-nr { min-width: 1.4em; }
+.palette-element code { white-space: normal; text-align: left; }

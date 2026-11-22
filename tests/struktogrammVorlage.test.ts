@@ -9,6 +9,7 @@ import {
   struktogrammBlock,
 } from '../src/lib/struktogrammVorlage';
 import { editorFuer, leseEditorAntwort, schreibeEditorAntwort } from '../src/lib/editorAufgabe';
+import { bewerteDiagramm, musterBelegung, pruefeDiagrammUebung, slotsVon } from '../domain/diagrammUebungen';
 
 const VORLAGE = `titel: + zaehlen(liste : Integer[]) : Integer
 n := 0
@@ -109,5 +110,31 @@ describe('DD31 A6: Perzeptron-Lernalgorithmus zuordnen', () => {
     expect(leseEditorAntwort('zuordnung', t, schreibeEditorAntwort(a, t))).toEqual(a);
     const alt = JSON.stringify({ editor: 'werte', kopf: ['Feld', '1'], zeilen: [['Anweisung', '6']] });
     expect(leseEditorAntwort('zuordnung', t, alt)).toMatchObject({ editor: 'zuordnung', notiz: expect.stringContaining('6') });
+  });
+});
+
+describe('Diagramm-Übungen vom Typ Struktogramm', () => {
+  const content = loadContent(CONTENT_DIR);
+  const sg = (content.diagrammUebungen ?? []).filter((u) => u.typ === 'struktogramm');
+
+  it('es gibt sie, jedes Gerüst lässt sich lesen und hat so viele Felder wie Lücken (f1 … fn)', () => {
+    expect(sg.length).toBeGreaterThanOrEqual(6);
+    for (const u of sg) {
+      const { vorlage, fehler } = leseStruktogrammVorlage(u.struktogramm!);
+      expect(fehler, u.id).toBeUndefined();
+      expect(slotsVon(u), u.id).toEqual(Array.from({ length: vorlage!.anzahl }, (_, i) => `f${i + 1}`));
+      expect(vorlage!.auswahl, `${u.id}: die Anweisungen stehen in der Palette, nicht im Gerüst`).toEqual([]);
+    }
+  });
+
+  it('die Musterlösung ist vollständig richtig und nutzt jede einfache Anweisung höchstens einmal', () => {
+    for (const u of sg) {
+      expect(bewerteDiagramm(u, musterBelegung(u)).ok, u.id).toBe(true);
+      expect(pruefeDiagrammUebung(u), u.id).toEqual([]);
+      expect(
+        u.palette.every((p) => /^\d+$/.test(p.id)),
+        `${u.id}: Paletten-IDs sind die Ziffern der Liste`,
+      ).toBe(true);
+    }
   });
 });

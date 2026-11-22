@@ -26,7 +26,7 @@ describe('Beiblatt: Vollständigkeit gegenüber den Editoren', () => {
   });
 
   it('jeder Typ einer Diagramm-Übung hat ein Beiblatt', () => {
-    for (const typ of DIAGRAMM_TYPEN) expect(BEIBLATT_ARTEN, typ).toContain(BEIBLATT_ZU_TYP[typ]);
+    for (const typ of DIAGRAMM_TYPEN.filter((t) => t !== 'struktogramm')) expect(BEIBLATT_ARTEN, typ).toContain(BEIBLATT_ZU_TYP[typ]);
   });
 });
 

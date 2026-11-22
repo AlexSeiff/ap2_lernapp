@@ -5,7 +5,7 @@
 import { z } from 'zod';
 import type { ImportIssue } from './types.ts';
 
-export const DIAGRAMM_TYPEN = ['epk', 'bpmn', 'aktivitaet', 'sequenz', 'zustand', 'er', 'klasse', 'usecase'] as const;
+export const DIAGRAMM_TYPEN = ['epk', 'bpmn', 'aktivitaet', 'sequenz', 'zustand', 'er', 'klasse', 'usecase', 'struktogramm'] as const;
 export type DiagrammTyp = (typeof DIAGRAMM_TYPEN)[number];
 
 export const DIAGRAMM_TYP_NAMEN: Record<DiagrammTyp, string> = {
@@ -17,6 +17,7 @@ export const DIAGRAMM_TYP_NAMEN: Record<DiagrammTyp, string> = {
   er: 'ER-Modell',
   klasse: 'Klassendiagramm',
   usecase: 'Anwendungsfalldiagramm',
+  struktogramm: 'Struktogramm',
 };
 
 /** Formen der Knoten (gezeichnet von src/components/DiagrammSvg.tsx). */
@@ -120,6 +121,12 @@ export interface DiagrammUebung {
   stufe: 1 | 2;
   titel: string;
   szenario: string;
+  /**
+   * Nur bei typ „struktogramm“: das Gerüst als Text wie im ```struktogramm-Block (src/lib/struktogrammVorlage.ts), ohne „auswahl:“ –
+   * die Anweisungen stehen in der Palette (id = Ziffer). Jedes „___“ ist eine Lücke; ihre Slot-IDs sind f1, f2, … in Zeilenreihenfolge.
+   * Knoten, Kanten, Breite und Höhe entfallen dann.
+   */
+  struktogramm?: string;
   breite: number;
   hoehe: number;
   knoten: DiagrammKnoten[];
@@ -174,9 +181,10 @@ const uebungSchema = z.object({
   stufe: z.union([z.literal(1), z.literal(2)]),
   titel: text,
   szenario: text,
-  breite: z.number().positive().max(2000),
-  hoehe: z.number().positive().max(3000),
-  knoten: z.array(knotenSchema).min(1),
+  struktogramm: optText,
+  breite: z.number().positive().max(2000).default(600),
+  hoehe: z.number().positive().max(3000).default(400),
+  knoten: z.array(knotenSchema).default([]),
   kanten: z.array(kanteSchema).default([]),
   palette: z
     .array(z.object({ id: text, form: z.enum([...FORMEN, ...KANTEN_FORMEN]), text: text, mehrfach: z.boolean().optional() }))
@@ -190,13 +198,21 @@ const uebungSchema = z.object({
 });
 
 /** Alle Slot-IDs einer Übung in Lesereihenfolge (Knoten, dann Kanten). */
-export function slotsVon(u: Pick<DiagrammUebung, 'knoten' | 'kanten'>): string[] {
+export function slotsVon(u: Pick<DiagrammUebung, 'knoten' | 'kanten' | 'struktogramm'>): string[] {
+  if (u.struktogramm) return struktogrammLuecken(u.struktogramm).map((_, i) => `f${i + 1}`);
   return [...u.knoten.flatMap((k) => (k.slot ? [k.slot] : [])), ...u.kanten.flatMap((k) => (k.slot ? [k.slot] : []))];
+}
+
+/** Zeilen des Struktogramm-Gerüsts mit Lücke: „___“ allein oder als Kopf von schleife/wenn/bis (Zeilenreihenfolge = Feldnummer). */
+export function struktogrammLuecken(text: string): string[] {
+  return text.split('\n').filter((z) => /^(?:(?:schleife|wenn|bis):\s*)?_{3,}$/i.test(z.trim()));
 }
 
 /** Inhaltliche Prüfung: ids eindeutig, Kanten verbinden vorhandene Knoten, jeder Slot hat eine Lösung aus der Palette. */
 export function pruefeDiagrammUebung(u: DiagrammUebung): string[] {
   const fehler: string[] = [];
+  if (!u.struktogramm && !u.knoten.length) fehler.push('keine Knoten');
+  if (u.typ === 'struktogramm' && !u.struktogramm) fehler.push('Struktogramm-Gerüst fehlt');
   const knotenIds = new Set<string>();
   for (const k of u.knoten) {
     if (knotenIds.has(k.id)) fehler.push(`Knoten ${k.id} doppelt`);

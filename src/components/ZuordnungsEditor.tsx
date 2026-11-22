@@ -68,6 +68,29 @@ function statischeZelle(vorlage: StruktogrammVorlage, b: Baustein): ReactNode {
   );
 }
 
+/**
+ * Gerüst einer Diagramm-Übung vom Typ Struktogramm: die Lücken kommen von außen (Feld 1, 2, … in Zeilenreihenfolge),
+ * die Anweisungen stehen dort in der Palette.
+ */
+export function StruktogrammLueckenBild({ text, luecke }: { text: string; luecke: (feld: number) => ReactNode }) {
+  const { vorlage, fehler } = leseStruktogrammVorlage(text);
+  if (!vorlage) return <p className="bad">Das Struktogramm dieser Übung ist fehlerhaft: {fehler}</p>;
+  return (
+    <div className="sz">
+      {vorlage.titel && <p className="sz-titel">{vorlage.titel}</p>}
+      <div className="sg-scroll">
+        <StruktogrammGeruest
+          bausteine={vorlage.bausteine}
+          zelle={(b) => {
+            const n = vorlage.felder.get(b.id);
+            return n ? luecke(n) : statischeZelle(vorlage, b);
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
 export function StruktogrammVorlageBild({ vorlage }: { vorlage: StruktogrammVorlage }) {
   return <Bild vorlage={vorlage} zelle={(b) => statischeZelle(vorlage, b)} />;
 }
