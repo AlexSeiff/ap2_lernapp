@@ -172,7 +172,7 @@ Altersgruppen: A1 bis 30 Jahre, A2 31 bis 50 Jahre, A3 über 50 Jahre. Die Erken
 
 **A1 (4 P):** *Erläutern* Sie der Praktikantin Frau Behrens das Verfahren der Klassifizierung an diesem Beispiel.
 
-**A2 (3 P):** *Nennen* Sie **drei** Qualitätskriterien für diese Klassifizierung.
+**A2 (3 P):** *Nennen* Sie drei Qualitätskriterien für diese Klassifizierung.
 
 **A3 (3 P):** *Begründen* Sie, ob die Einteilung der Altersdaten in Gruppen sinnvoll ist.
 
@@ -282,7 +282,7 @@ Auszug aus dem Pflichtenheft:
 - Herr Janssen die Rolle erhält und zusätzlich die Tabelle `verguetung` ändern darf,
 - Herr Janssen sein Änderungsrecht weitergeben darf.
 
-**C3 (6 P):** Ein Kollege fragt, ob für die Personaldaten statt der relationalen auch eine dokumentenorientierte NoSQL-Datenbank infrage kommt. *Wählen* Sie **drei** Kriterien und *tragen* Sie die Unterschiede in die Tabelle *ein*.
+**C3 (6 P):** Ein Kollege fragt, ob für die Personaldaten statt der relationalen auch eine dokumentenorientierte NoSQL-Datenbank infrage kommt. *Wählen* Sie drei Kriterien und *tragen* Sie die Unterschiede in die Tabelle *ein*.
 
 | Kriterium | relationale Datenbank (SQL) | dokumentenorientierte Datenbank (NoSQL) |
 |---|---|---|
@@ -317,17 +317,17 @@ Article 32 GDPR (extract):
 | Speicherung der IBAN jedes Beschäftigten, um den Lohn zu überweisen | | |
 | Veröffentlichung der Geburtstage aller Beschäftigten mit Foto im Kundennewsletter, ohne dass sie eingewilligt haben | | |
 
-**D2 (2 P):** *Nennen* Sie anhand von Art. 32 Abs. 1 GDPR **zwei** Gesichtspunkte, die der Verantwortliche bei der Auswahl der Sicherheitsmaßnahmen berücksichtigen muss.
+**D2 (2 P):** *Nennen* Sie anhand von Art. 32 Abs. 1 GDPR zwei Gesichtspunkte, die der Verantwortliche bei der Auswahl der Sicherheitsmaßnahmen berücksichtigen muss.
 
 **D3 (4 P):** *Erläutern* Sie anhand von Art. 32 Abs. 2 GDPR, welche Risiken für die Bestimmung des angemessenen Schutzniveaus besonders zu berücksichtigen sind. *Geben* Sie ein Beispiel aus der Personalverwaltung *an*.
 
-**D4 (4 P):** *Nennen* Sie die **vier** Eigenschaften, die nach Art. 32 Abs. 1 Buchst. b GDPR für Systeme und Dienste dauerhaft sicherzustellen sind, mit ihrer deutschen Bezeichnung.
+**D4 (4 P):** *Nennen* Sie die vier Eigenschaften, die nach Art. 32 Abs. 1 Buchst. b GDPR für Systeme und Dienste dauerhaft sicherzustellen sind, mit ihrer deutschen Bezeichnung.
 
 **D5 (3 P):** *Beschreiben* Sie, welches regelmäßige Verfahren nach Art. 32 Abs. 1 Buchst. d GDPR etabliert sein muss, und *nennen* Sie ein Beispiel für das Möbelhaus.
 
 **D6 (4 P):** Neben dem Datenschutz soll auch die Informationssicherheit verbessert werden. *Erläutern* Sie den Unterschied zwischen Datenschutz und Informationssicherheit.
 
-**D7 (2 P):** *Geben* Sie **zwei** deutschsprachige, nicht branchenspezifische Regelwerke oder Standards zur Informationssicherheit *an*.
+**D7 (2 P):** *Geben* Sie zwei deutschsprachige, nicht branchenspezifische Regelwerke oder Standards zur Informationssicherheit *an*.
 
 ## Lernziel-Check (am Ende des Themas alles mit Ja beantworten)
 

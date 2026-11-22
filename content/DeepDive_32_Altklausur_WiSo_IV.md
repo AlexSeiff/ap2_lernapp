@@ -133,7 +133,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein Handelsunternehmen mit rund 140 Beschä
 - (4) Ehemalige Auszubildende dürfen nur befristet übernommen werden.
 - (5) Die Befristung kann auch mündlich wirksam vereinbart werden.
 
-**A5 (4 P):** Im Möbelhaus sind verschiedene Sachverhalte betrieblich und tariflich geregelt. Welche **zwei** Sachverhalte können durch eine **Betriebsvereinbarung** geregelt werden? *(Ziffern eintragen)*
+**A5 (4 P):** Im Möbelhaus sind verschiedene Sachverhalte betrieblich und tariflich geregelt. Welche zwei Sachverhalte können durch eine Betriebsvereinbarung geregelt werden? *(Ziffern eintragen)*
 - (1) Kürzung des tariflichen Urlaubs um zwei Tage
 - (2) Lage der Pausen in der Warenausgabe
 - (3) Höhe der Gehälter je Entgeltgruppe
@@ -141,7 +141,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein Handelsunternehmen mit rund 140 Beschä
 - (5) Grundsätze für den Urlaubsplan
 - (6) Verkürzung der gesetzlichen Entgeltfortzahlung im Krankheitsfall
 
-**A6 (4 P):** Zwei Mitarbeiterinnen erwarten ein Kind. Wie viele Wochen dürfen sie nach dem Mutterschutzgesetz **nach** der Entbindung nicht beschäftigt werden: a) Frau Lorenzen bei der Geburt eines Kindes zum errechneten Termin, b) Frau Yıldız bei der Geburt von Zwillingen zum errechneten Termin? *(Wochen eintragen: a, b)*
+**A6 (4 P):** Zwei Mitarbeiterinnen erwarten ein Kind. Wie viele Wochen dürfen sie nach dem Mutterschutzgesetz nach der Entbindung nicht beschäftigt werden: a) Frau Lorenzen bei der Geburt eines Kindes zum errechneten Termin, b) Frau Yıldız bei der Geburt von Zwillingen zum errechneten Termin? *(Wochen eintragen: a, b)*
 
 ## Block B – Mitbestimmung, Tarif und Rechtsform (20 P)
 
@@ -159,7 +159,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein Handelsunternehmen mit rund 140 Beschä
 - (4) Tarifverträge werden zwischen Gewerkschaften und Arbeitgeberverbänden ausgehandelt.
 - (5) Während der Laufzeit sind Arbeitskämpfe zulässig, wenn sie rechtzeitig angekündigt werden.
 
-**B3 (3 P):** Eine Kollegin fragt nach dem gesetzlichen Kündigungsschutz. Welche Personengruppe genießt **keinen** besonderen Kündigungsschutz? *(Ziffer eintragen)*
+**B3 (3 P):** Eine Kollegin fragt nach dem gesetzlichen Kündigungsschutz. Welche Personengruppe genießt keinen besonderen Kündigungsschutz? *(Ziffer eintragen)*
 - (1) Mitglieder des Betriebsrats
 - (2) Schwerbehinderte Menschen
 - (3) Schwangere
@@ -180,7 +180,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein Handelsunternehmen mit rund 140 Beschä
 
 Sachverhalte: a) Gehaltssätze der einzelnen Entgeltgruppen · b) Kündigungsfristen und Dauer des Jahresurlaubs · c) Zuschläge für Nacht- und Sonntagsarbeit · d) Höhe der Ausbildungsvergütung je Ausbildungsjahr · e) Beginn und Ende der täglichen Arbeitszeit in der Warenausgabe des Möbelhauses
 
-**B6 (4 P):** Die Möbelhaus Nordholz GmbH hat ein Stammkapital von 450.000,00 EUR und zwei Gesellschafter. Herr Brodersen hält einen Geschäftsanteil von 270.000,00 EUR, Frau Jessen den Rest. Es werden 96.500,00 EUR Gewinn nach Steuern im Verhältnis der Geschäftsanteile ausgeschüttet. Berechnen Sie den Gewinnanteil von **Frau Jessen**. *(Ergebnis in EUR eintragen)*
+**B6 (4 P):** Die Möbelhaus Nordholz GmbH hat ein Stammkapital von 450.000,00 EUR und zwei Gesellschafter. Herr Brodersen hält einen Geschäftsanteil von 270.000,00 EUR, Frau Jessen den Rest. Es werden 96.500,00 EUR Gewinn nach Steuern im Verhältnis der Geschäftsanteile ausgeschüttet. Berechnen Sie den Gewinnanteil von Frau Jessen. *(Ergebnis in EUR eintragen)*
 
 ## Block C – Soziale Sicherung (20 P)
 
@@ -212,7 +212,7 @@ Sachverhalte: a) Gehaltssätze der einzelnen Entgeltgruppen · b) Kündigungsfri
 - (4) Die Sozialversicherungszweige gleichen ihre Überschüsse untereinander aus.
 - (5) Er gilt nur für Beschäftigte, die vor 2005 in die Rentenversicherung eingetreten sind.
 
-**C5 (4 P):** Welche **zwei** Fälle sind durch die gesetzliche Unfallversicherung abgedeckt? *(Ziffern eintragen)*
+**C5 (4 P):** Welche zwei Fälle sind durch die gesetzliche Unfallversicherung abgedeckt? *(Ziffern eintragen)*
 - (1) Ein Lagerist verstaucht sich beim Fußballspielen am Sonntag den Knöchel.
 - (2) Eine Mitarbeiterin stürzt im Hochregallager von einer Leiter und bricht sich den Arm.
 - (3) Ein Mitarbeiter ist wegen einer Grippe eine Woche arbeitsunfähig.
@@ -220,7 +220,7 @@ Sachverhalte: a) Gehaltssätze der einzelnen Entgeltgruppen · b) Kündigungsfri
 - (5) Eine Mitarbeiterin bleibt zu Hause, um ihr krankes Kind zu betreuen.
 - (6) Ein Mitarbeiter lässt beim Augenarzt eine neue Brille anpassen.
 
-**C6 (4 P):** Der IT-Leiter des Möbelhauses verdient 9.200,00 EUR brutto im Monat. Die Beitragsbemessungsgrenze der Rentenversicherung beträgt 8.450,00 EUR im Monat, der Beitragssatz 18,6 %; Arbeitgeber und Arbeitnehmer tragen ihn je zur Hälfte (Stand 2026). Berechnen Sie den monatlichen **Arbeitnehmeranteil** zur Rentenversicherung. *(Ergebnis in EUR eintragen)*
+**C6 (4 P):** Der IT-Leiter des Möbelhauses verdient 9.200,00 EUR brutto im Monat. Die Beitragsbemessungsgrenze der Rentenversicherung beträgt 8.450,00 EUR im Monat, der Beitragssatz 18,6 %; Arbeitgeber und Arbeitnehmer tragen ihn je zur Hälfte (Stand 2026). Berechnen Sie den monatlichen Arbeitnehmeranteil zur Rentenversicherung. *(Ergebnis in EUR eintragen)*
 
 ## Block D – Unternehmen und Wirtschaft (20 P)
 
@@ -261,7 +261,7 @@ Sachverhalte: a) Gehaltssätze der einzelnen Entgeltgruppen · b) Kündigungsfri
 
 Welcher Auftrag wurde am wirtschaftlichsten abgewickelt? *(Nummer des Auftrags eintragen)*
 
-**D6 (4 P):** Welche **zwei** Bezeichnungen treffen auf die Möbelhaus Nordholz GmbH als Handelsunternehmen zu? *(Ziffern eintragen)*
+**D6 (4 P):** Welche zwei Bezeichnungen treffen auf die Möbelhaus Nordholz GmbH als Handelsunternehmen zu? *(Ziffern eintragen)*
 - (1) Unternehmen des primären Sektors
 - (2) Unternehmen des sekundären Sektors
 - (3) Unternehmen des tertiären Sektors
@@ -278,7 +278,7 @@ Welcher Auftrag wurde am wirtschaftlichsten abgewickelt? *(Nummer des Auftrags e
 - (4) Die ergonomische Gestaltung von Bildschirmarbeitsplätzen ist eine freiwillige Leistung.
 - (5) Arbeitsschutzvorschriften gelten nicht für Auszubildende.
 
-**E2 (3 P):** Im Lager ist eine Palette mit Verpackungsmaterial in Brand geraten. Was ist **zuerst** zu tun? *(Ziffer eintragen)*
+**E2 (3 P):** Im Lager ist eine Palette mit Verpackungsmaterial in Brand geraten. Was ist zuerst zu tun? *(Ziffer eintragen)*
 - (1) Fenster und Tore öffnen, damit der Rauch abzieht.
 - (2) Den Brand melden (Brandmelder betätigen bzw. Notruf 112).
 - (3) Sofort mit dem Löschen beginnen.
@@ -292,7 +292,7 @@ Welcher Auftrag wurde am wirtschaftlichsten abgewickelt? *(Nummer des Auftrags e
 - (4) Fluchtweg in Pfeilrichtung
 - (5) Verbandkasten
 
-**E4 (3 P):** Das Möbelhaus überprüft sein Diversity Management anhand des Allgemeinen Gleichbehandlungsgesetzes (AGG). Welches Merkmal schützt das AGG **nicht**? *(Ziffer eintragen)*
+**E4 (3 P):** Das Möbelhaus überprüft sein Diversity Management anhand des Allgemeinen Gleichbehandlungsgesetzes (AGG). Welches Merkmal schützt das AGG nicht? *(Ziffer eintragen)*
 - (1) Alter
 - (2) Religion
 - (3) Art des Schulabschlusses
@@ -314,7 +314,7 @@ Welcher Auftrag wurde am wirtschaftlichsten abgewickelt? *(Nummer des Auftrags e
 | d | Kreis | blau mit weißem Symbol | Stecker, aus einer Steckdose gezogen |
 | e | Rechteck | grün mit weißem Symbol | laufende Person, Tür und Pfeil |
 
-**E6 (4 P):** Das Möbelhaus will nachhaltiger wirtschaften. Welche **zwei** Maßnahmen zählen zum nachhaltigen Wirtschaften? *(Ziffern eintragen)*
+**E6 (4 P):** Das Möbelhaus will nachhaltiger wirtschaften. Welche zwei Maßnahmen zählen zum nachhaltigen Wirtschaften? *(Ziffern eintragen)*
 - (1) Verpackungsabfälle werden sortiert dem Recycling zugeführt.
 - (2) Für Dienstreisen zwischen den Filialen wird künftig grundsätzlich das Flugzeug genutzt.
 - (3) Beim Einkauf zählt ausschließlich der niedrigste Preis.

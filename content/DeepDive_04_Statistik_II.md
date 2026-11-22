@@ -243,9 +243,9 @@ Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Feh
 | x (Stunden) | 2 | 4 | 6 | 8 | 10 | 12 |
 | y (Fehlerquote %) | 9,0 | 8,5 | 7,5 | 6,5 | 5,5 | 5,0 |
 
-**A1 (6 P):** *Erläutern* Sie, welche **vier** Eigenschaften Sie einem Streudiagramm entnehmen, bevor Sie eine Kennzahl berechnen.
+**A1 (6 P):** *Erläutern* Sie, welche vier Eigenschaften Sie einem Streudiagramm entnehmen, bevor Sie eine Kennzahl berechnen.
 
-**A2 (8 P):** *Berechnen* Sie den Korrelationskoeffizienten für **Anlage 1**. *Stellen* Sie den Rechenweg tabellarisch *dar* (S_xy, S_xx, S_yy).
+**A2 (8 P):** *Berechnen* Sie den Korrelationskoeffizienten für Anlage 1. *Stellen* Sie den Rechenweg tabellarisch *dar* (S_xy, S_xx, S_yy).
 
 **A3 (6 P):** *Interpretieren* Sie Ihr Ergebnis nach Vorzeichen und Stärke und *formulieren* Sie eine Aussage, die für die Geschäftsführung verständlich ist.
 
@@ -253,17 +253,17 @@ Für sechs Montageteams wurden erfasst: absolvierte Schulungsstunden (x) und Feh
 
 Die Geschäftsführung zieht aus Ihren Ergebnissen erste Schlüsse – Sie sollen sie fachlich prüfen.
 
-**B1 (8 P):** Die Geschäftsführung folgert: „Mehr Schulung senkt die Fehlerquote – wir verdoppeln das Schulungsbudget." *Beurteilen* Sie diese Schlussfolgerung. *Nennen* Sie **drei** alternative Erklärungen für den beobachteten Zusammenhang.
+**B1 (8 P):** Die Geschäftsführung folgert: „Mehr Schulung senkt die Fehlerquote – wir verdoppeln das Schulungsbudget." *Beurteilen* Sie diese Schlussfolgerung. *Nennen* Sie drei alternative Erklärungen für den beobachteten Zusammenhang.
 
 **B2 (6 P):** *Beschreiben* Sie, wie ein Test aufgebaut sein müsste, um einen ursächlichen Zusammenhang zu belegen.
 
-**B3 (8 P):** In einem Bericht steht: „Die Anzahl der eingesetzten Servicefahrzeuge korreliert mit r = 0,91 mit dem Jahresumsatz. Wir sollten mehr Fahrzeuge kaufen." *Erläutern* Sie den Begriff **Scheinkorrelation** und *beurteilen* Sie die Empfehlung. *Nennen* Sie eine mögliche Drittvariable.
+**B3 (8 P):** In einem Bericht steht: „Die Anzahl der eingesetzten Servicefahrzeuge korreliert mit r = 0,91 mit dem Jahresumsatz. Wir sollten mehr Fahrzeuge kaufen." *Erläutern* Sie den Begriff Scheinkorrelation und *beurteilen* Sie die Empfehlung. *Nennen* Sie eine mögliche Drittvariable.
 
 ## Block C – Lineare Regression (30 P)
 
 Für die Budgetplanung des nächsten Jahres soll der Umsatz aus dem Werbebudget prognostiziert werden (**Anlage 2**).
 
-**C1 (12 P):** *Ermitteln* Sie für **Anlage 2** die Regressionsgleichung ŷ = a + b · x. *Stellen* Sie den Rechenweg tabellarisch *dar*.
+**C1 (12 P):** *Ermitteln* Sie für Anlage 2 die Regressionsgleichung ŷ = a + b · x. *Stellen* Sie den Rechenweg tabellarisch *dar*.
 
 **C2 (6 P):** *Interpretieren* Sie die Steigung b und den Achsenabschnitt a jeweils inhaltlich.
 
@@ -279,7 +279,7 @@ Das Controlling legt die Umsätze der letzten acht Monate vor. Monatsumsatz in T
 
 **D1 (6 P):** Für Anlage 2 gilt S_yy = 424. *Berechnen* Sie r und R².
 
-**D2 (6 P):** *Interpretieren* Sie R² in einem Satz und *nennen* Sie **zwei** Gründe, warum ein hohes R² allein keine verlässliche Prognose garantiert.
+**D2 (6 P):** *Interpretieren* Sie R² in einem Satz und *nennen* Sie zwei Gründe, warum ein hohes R² allein keine verlässliche Prognose garantiert.
 
 **D3 (4 P):** Ein Kollege ergänzt einen sechsten Monat mit x = 5, y = 15 (fehlerhaft erfasst, tatsächlich 55). *Erläutern* Sie ohne Rechnung, wie sich dieser eine Wert auf r, R² und die Regressionsgerade auswirkt.
 

@@ -220,11 +220,11 @@ Die **Möbelhaus Nordholz GmbH** erstellt ihre Umsatz- und Lagerberichte bisher 
 
 Für den Projektauftrag sollen Ziele und Anforderungen festgehalten werden. Der Leiter des Controllings hat bereits eine Wunschliste geschickt; ein Kollege bezweifelt, dass das Vorhaben überhaupt ein Projekt ist.
 
-**A1 (6 P):** *Nennen* Sie **vier** Merkmale eines Projekts und *begründen* Sie, warum die monatliche Umsatzauswertung kein Projekt ist.
+**A1 (6 P):** *Nennen* Sie vier Merkmale eines Projekts und *begründen* Sie, warum die monatliche Umsatzauswertung kein Projekt ist.
 
 **A2 (6 P):** *Grenzen* Sie Lastenheft und Pflichtenheft *ab*: Wer erstellt jeweils was, wann und mit welchem Inhalt?
 
-**A3 (4 P):** *Erläutern* Sie den Unterschied zwischen funktionalen und nicht-funktionalen Anforderungen und *geben* Sie für das Reporting-System je **zwei** Beispiele.
+**A3 (4 P):** *Erläutern* Sie den Unterschied zwischen funktionalen und nicht-funktionalen Anforderungen und *geben* Sie für das Reporting-System je zwei Beispiele.
 
 **A4 (4 P):** *Formulieren* Sie ein SMART-Ziel für das Projekt und *weisen* Sie alle fünf Kriterien in Ihrer Formulierung *nach*.
 
@@ -234,7 +234,7 @@ Die Projektleiterin lässt das Team entscheiden, nach welchem Vorgehensmodell ge
 
 In der Umsetzungsphase zeichnen sich erste Risiken ab, und der Fachbereich meldet laufend neue Wünsche an die Dashboards.
 
-**B1 (8 P):** *Vergleichen* Sie Wasserfallmodell und Scrum anhand von **vier** Kriterien. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**B1 (8 P):** *Vergleichen* Sie Wasserfallmodell und Scrum anhand von vier Kriterien. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Kriterium | Wasserfall | Scrum |
 |---|---|---|
@@ -243,7 +243,7 @@ In der Umsetzungsphase zeichnen sich erste Risiken ab, und der Fachbereich melde
 | | | |
 | | | |
 
-**B2 (6 P):** *Nennen* Sie die **drei** Scrum-Rollen mit je einer Hauptaufgabe. *Begründen* Sie anschließend, welches Vorgehensmodell Sie für dieses Projekt empfehlen, wenn die Anforderungen des Fachbereichs noch unklar sind, der Endtermin aber feststeht.
+**B2 (6 P):** *Nennen* Sie die drei Scrum-Rollen mit je einer Hauptaufgabe. *Begründen* Sie anschließend, welches Vorgehensmodell Sie für dieses Projekt empfehlen, wenn die Anforderungen des Fachbereichs noch unklar sind, der Endtermin aber feststeht.
 
 **B3 (6 P):** *Bewerten* Sie die folgenden Risiken mit einem Risikowert (Eintrittswahrscheinlichkeit W und Schadensausmaß S auf einer Skala 1–5) und *ordnen* Sie jedem Risiko eine der vier Risikostrategien *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
@@ -253,7 +253,7 @@ In der Umsetzungsphase zeichnen sich erste Risiken ab, und der Fachbereich melde
 | (b) Die Datenqualität der Quellsysteme ist schlechter als erwartet (W = 4, S = 4) | | |
 | (c) Der Fachbereich hat keine Zeit für Abstimmungen (W = 3, S = 3) | | |
 
-**B4 (3 P):** *Erläutern* Sie den Begriff **Scope Creep** und *nennen* Sie **zwei** Maßnahmen dagegen.
+**B4 (3 P):** *Erläutern* Sie den Begriff Scope Creep und *nennen* Sie zwei Maßnahmen dagegen.
 
 **B5 (3 P):** *Erläutern* Sie, was ein Soll-Ist-Vergleich am Projektende umfassen muss und warum er für Ihre Projektdokumentation unverzichtbar ist.
 
@@ -294,7 +294,7 @@ b) *Beurteilen* Sie das Ergebnis kritisch. (4 P)
 
 **D3 (4 P):** *Berechnen* Sie die Break-even-Menge bei Fixkosten von 24.000 € pro Jahr, einem Verkaufspreis von 80 € und variablen Stückkosten von 50 €.
 
-**D4 (4 P):** *Erläutern* Sie den Begriff **TCO** und *nennen* Sie **drei** Kostenpositionen, die in D1 nicht berücksichtigt wurden.
+**D4 (4 P):** *Erläutern* Sie den Begriff TCO und *nennen* Sie drei Kostenpositionen, die in D1 nicht berücksichtigt wurden.
 
 ---
 

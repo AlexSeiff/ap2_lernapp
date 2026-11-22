@@ -382,7 +382,7 @@ Für den neuen Monatsbericht liegen mehrere Auswertungswünsche vor. Ein Kollege
 
 Aus dem Bericht soll später auch ein Dashboard für die Geschäftsführung entstehen.
 
-**A1 (12 P):** *Ordnen* Sie den folgenden **sechs** Auswertungswünschen jeweils einen geeigneten Diagrammtyp *zu* und *begründen* Sie die Wahl kurz. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**A1 (12 P):** *Ordnen* Sie den folgenden sechs Auswertungswünschen jeweils einen geeigneten Diagrammtyp *zu* und *begründen* Sie die Wahl kurz. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | | Auswertung | Diagrammtyp | Begründung |
 |---|---|---|---|
@@ -393,9 +393,9 @@ Aus dem Bericht soll später auch ein Dashboard für die Geschäftsführung ents
 | e | Anteil der vier Produktkategorien am Gesamtumsatz | | |
 | f | Umsatz je Filiale und Monat in einer Übersicht | | |
 
-**A2 (8 P):** Ein Kollege stellt den Umsatz der acht Filialen als Kreisdiagramm mit 3D-Effekt dar, alphabetisch sortiert. *Benennen* Sie **drei** Mängel und *schlagen* Sie eine bessere Darstellung mit Begründung *vor*.
+**A2 (8 P):** Ein Kollege stellt den Umsatz der acht Filialen als Kreisdiagramm mit 3D-Effekt dar, alphabetisch sortiert. *Benennen* Sie drei Mängel und *schlagen* Sie eine bessere Darstellung mit Begründung *vor*.
 
-**A3 (6 P):** *Nennen* Sie **drei** Gestaltungsgrundsätze für Dashboards und *erläutern* Sie, warum jede Kennzahl einen Vergleichsmaßstab benötigt.
+**A3 (6 P):** *Nennen* Sie drei Gestaltungsgrundsätze für Dashboards und *erläutern* Sie, warum jede Kennzahl einen Vergleichsmaßstab benötigt.
 
 ## Block B – Diagramme beurteilen und Dashboard entwerfen (30 P)
 
@@ -421,11 +421,11 @@ a) *Berechnen* Sie das tatsächliche Gesamtwachstum in Prozent. (4 P)
 b) *Erläutern* Sie, welchen Eindruck die gewählte Achse erzeugt und warum. (4 P)
 c) *Beurteilen* Sie die Überschrift und *formulieren* Sie eine sachlich korrekte Alternative. (4 P)
 
-**B2 (6 P):** *Nennen* Sie **drei** weitere Techniken, mit denen Diagramme irreführend gestaltet werden können, und *erläutern* Sie je die Wirkung.
+**B2 (6 P):** *Nennen* Sie drei weitere Techniken, mit denen Diagramme irreführend gestaltet werden können, und *erläutern* Sie je die Wirkung.
 
-**B3 (4 P):** *Erläutern* Sie, warum Informationen in Diagrammen nicht ausschließlich über Farbe codiert werden sollten, und *nennen* Sie **zwei** Alternativen.
+**B3 (4 P):** *Erläutern* Sie, warum Informationen in Diagrammen nicht ausschließlich über Farbe codiert werden sollten, und *nennen* Sie zwei Alternativen.
 
-**B4 (8 P):** *Entwerfen* Sie ein Dashboard für die Geschäftsführung zur Überwachung des Reparaturservice. *Nennen* Sie **vier** Kennzahlen mit jeweils passender Darstellungsform und *begründen* Sie Ihre Auswahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**B4 (8 P):** *Entwerfen* Sie ein Dashboard für die Geschäftsführung zur Überwachung des Reparaturservice. *Nennen* Sie vier Kennzahlen mit jeweils passender Darstellungsform und *begründen* Sie Ihre Auswahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Kennzahl | Darstellung | Begründung |
 |---|---|---|
@@ -469,9 +469,9 @@ AUSGABE max, anzahl
 
 Die Kundendaten und die Reparaturdauern sollen vor jeder Auswertung automatisch geprüft werden.
 
-**D1 (12 P):** *Entwickeln* Sie einen Algorithmus in **Pseudocode**, der eine Liste von Reparaturdauern prüft. Der Algorithmus soll: alle Werte zählen, ungültige Werte (kleiner oder gleich 0 sowie fehlende Werte) separat zählen und nicht in die Berechnung einbeziehen, aus den gültigen Werten den Mittelwert berechnen und Anzahl gültiger Werte, Anzahl ungültiger Werte sowie den Mittelwert ausgeben. *Berücksichtigen* Sie den Fall, dass kein gültiger Wert vorhanden ist.
+**D1 (12 P):** *Entwickeln* Sie einen Algorithmus in Pseudocode, der eine Liste von Reparaturdauern prüft. Der Algorithmus soll: alle Werte zählen, ungültige Werte (kleiner oder gleich 0 sowie fehlende Werte) separat zählen und nicht in die Berechnung einbeziehen, aus den gültigen Werten den Mittelwert berechnen und Anzahl gültiger Werte, Anzahl ungültiger Werte sowie den Mittelwert ausgeben. *Berücksichtigen* Sie den Fall, dass kein gültiger Wert vorhanden ist.
 
-**D2 (10 P):** *Zeichnen* Sie ein **Struktogramm** für folgenden Ablauf: Für jeden Kundendatensatz wird geprüft, ob eine E-Mail-Adresse vorhanden ist. Fehlt sie, wird ein Fehlerzähler erhöht und der Datensatz protokolliert. Ist sie vorhanden, wird zusätzlich das Format geprüft; bei ungültigem Format wird ebenfalls der Fehlerzähler erhöht. Am Ende wird der Fehlerzähler ausgegeben.
+**D2 (10 P):** *Zeichnen* Sie ein Struktogramm für folgenden Ablauf: Für jeden Kundendatensatz wird geprüft, ob eine E-Mail-Adresse vorhanden ist. Fehlt sie, wird ein Fehlerzähler erhöht und der Datensatz protokolliert. Ist sie vorhanden, wird zusätzlich das Format geprüft; bei ungültigem Format wird ebenfalls der Fehlerzähler erhöht. Am Ende wird der Fehlerzähler ausgegeben.
 
 ---
 

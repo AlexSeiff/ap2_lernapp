@@ -235,15 +235,15 @@ Aktuell werden alle Anlieferer an den Rampen persönlich kontrolliert. Im Rahmen
 
 **A1 (9 P):** Um die Daten nutzbar zu machen, sollen sie visualisiert werden. Skizzieren Sie ein geeignetes Diagramm, das die Verteilung der drei Gruppen auf die drei Rampen darstellt. Beschriften Sie die Achsen und geben Sie eine Legende an.
 
-**A2 (6 P):** Die Kontrolle soll in Zukunft automatisiert erfolgen. Berechnen Sie, wie viele Personen **durchschnittlich pro Tag** durch jede Rampe gehen und wie hoch die **anteilige Auslastung der Rampen in Prozent** ist.
+**A2 (6 P):** Die Kontrolle soll in Zukunft automatisiert erfolgen. Berechnen Sie, wie viele Personen durchschnittlich pro Tag durch jede Rampe gehen und wie hoch die anteilige Auslastung der Rampen in Prozent ist.
 
-**A3 (6 P):** Beschreiben Sie je Rampe **eine statistische Erkenntnis**, die für die Planung des neuen Zufahrtssystems relevant ist.
+**A3 (6 P):** Beschreiben Sie je Rampe eine statistische Erkenntnis, die für die Planung des neuen Zufahrtssystems relevant ist.
 
 ## Block B – Automatisierte Etikettenerkennung (28 P)
 
 Eine Sicherheitsrichtlinie schreibt vor, dass nur **angemeldete Lieferungen** entladen werden dürfen. Sie entwickeln an einer automatisierten Prüfung am Wareneingang mit, die Kosten sparen und die Mitarbeiter entlasten soll.
 
-**B1 (4 P):** Nennen Sie für die Umsetzung der Richtlinie **zwei weitere Merkmale** und geben Sie an, wie diese bei der **erstmaligen Registrierung** einer Spedition überprüft werden können.
+**B1 (4 P):** Nennen Sie für die Umsetzung der Richtlinie zwei weitere Merkmale und geben Sie an, wie diese bei der erstmaligen Registrierung einer Spedition überprüft werden können.
 
 | Merkmal | Initiale Überprüfung bei der Registrierung |
 |---|---|
@@ -251,21 +251,21 @@ Eine Sicherheitsrichtlinie schreibt vor, dass nur **angemeldete Lieferungen** en
 | | |
 | | |
 
-**B2 (8 P):** Das Palettenetikett (Format „LS-JJJJ-NNNNNN“, z. B. LS-2026-004711) soll beim Eintreffen automatisch per Kamera geprüft werden. Entwerfen Sie einen **Workflow** und nennen Sie **vier sinnvolle Schritte mit ihrer Funktionalität**. Die Schritte „Bildaufnahme“ (Kamera erzeugt ein digitales Bild der Palette) und „Entscheidung: Freigabe oder nicht“ sind vorgegeben.
+**B2 (8 P):** Das Palettenetikett (Format „LS-JJJJ-NNNNNN“, z. B. LS-2026-004711) soll beim Eintreffen automatisch per Kamera geprüft werden. Entwerfen Sie einen Workflow und nennen Sie vier sinnvolle Schritte mit ihrer Funktionalität. Die Schritte „Bildaufnahme“ (Kamera erzeugt ein digitales Bild der Palette) und „Entscheidung: Freigabe oder nicht“ sind vorgegeben.
 
-**B3 (4 P):** Beschreiben Sie **zwei Gründe**, warum neuronale Netze für diese Aufgabe geeignet sind.
+**B3 (4 P):** Beschreiben Sie zwei Gründe, warum neuronale Netze für diese Aufgabe geeignet sind.
 
 **B4 (4 P):** Bei Ihrer Recherche finden Sie folgenden Text:
 
 > *A convolutional neural network (CNN) is a type of neural network designed for image data. Instead of treating all pixels independently, it slides small filters across the image to detect local patterns such as edges and corners. Because the filters keep the two-dimensional arrangement of the pixels, a CNN can recognise a shape even if it appears at a different position in the picture. Deeper layers combine simple patterns into complex shapes such as letters or labels.*
 
-Beschreiben Sie **zwei Gründe**, warum sich ein CNN für die Etikettenerkennung besonders gut eignet.
+Beschreiben Sie zwei Gründe, warum sich ein CNN für die Etikettenerkennung besonders gut eignet.
 
-**B5 (4 P):** Sie beginnen mit einem CNN-Verfahren und setzen ein **Standardmodell zur groben Vorklassifikation** ein. Das Modell liefert für das Kamerabild: *pallet (0,93)*, *person (0,97)*, *forklift (0,90)*, jeweils mit Rechteck (Bounding Box). Das Etikett auf der Palette wird nicht markiert. Beschreiben Sie **eine bereits vorhandene und eine noch fehlende Funktionalität** des Verfahrens.
+**B5 (4 P):** Sie beginnen mit einem CNN-Verfahren und setzen ein Standardmodell zur groben Vorklassifikation ein. Das Modell liefert für das Kamerabild: *pallet (0,93)*, *person (0,97)*, *forklift (0,90)*, jeweils mit Rechteck (Bounding Box). Das Etikett auf der Palette wird nicht markiert. Beschreiben Sie eine bereits vorhandene und eine noch fehlende Funktionalität des Verfahrens.
 
 **B6 (2 P):** Beschreiben Sie eine Möglichkeit, die noch fehlende Funktionalität im Verfahren zu realisieren.
 
-**B7 (2 P):** Nennen Sie **zwei Maßnahmen**, die aus datenschutzrechtlichen Gründen erforderlich sind, um einen rechtskonformen Betrieb der Kameras zu ermöglichen.
+**B7 (2 P):** Nennen Sie zwei Maßnahmen, die aus datenschutzrechtlichen Gründen erforderlich sind, um einen rechtskonformen Betrieb der Kameras zu ermöglichen.
 
 ## Block C – Datenhaltung, ETL und Datenschutz (25 P)
 
@@ -293,14 +293,14 @@ Rampe 3;9                            { "SID": 9, "firma": "Montage Süd GmbH",
 | 106 | 3 | 9 | Montage | Rampe 3 | Mo | 11 | 5 | 07:00 | 11:00 |
 | 59 | 4 | 4 | Lieferant | Rampe 2 | Mo | 11 | 5 | 08:30 | 09:00 |
 
-**C1 (8 P):** Der Anbieter des Zufahrtssystems bietet die Möglichkeit, die Berechtigungsdatenbank **zentral in der Cloud** zu speichern oder dezentral an den Rampen. Beschreiben Sie **zwei Vor- und zwei Nachteile einer zentralen Speicherung**. Tragen Sie die Antworten in die Tabelle ein.
+**C1 (8 P):** Der Anbieter des Zufahrtssystems bietet die Möglichkeit, die Berechtigungsdatenbank zentral in der Cloud zu speichern oder dezentral an den Rampen. Beschreiben Sie zwei Vor- und zwei Nachteile einer zentralen Speicherung. Tragen Sie die Antworten in die Tabelle ein.
 
 | Vorteil | Nachteil |
 |---|---|
 | | |
 | | |
 
-**C2 (3 P):** Kreuzen Sie in der Tabelle an, in welchen Datenbanken **personenbezogene Daten** gespeichert sind.
+**C2 (3 P):** Kreuzen Sie in der Tabelle an, in welchen Datenbanken personenbezogene Daten gespeichert sind.
 
 | Datenbank | personenbezogene Daten | nicht personenbezogene Daten |
 |---|---|---|
@@ -308,16 +308,16 @@ Rampe 3;9                            { "SID": 9, "firma": "Montage Süd GmbH",
 | Anlieferdatenbank | | |
 | Speditionsdatenbank | | |
 
-**C3 (4 P):** Beschreiben Sie **zwei Maßnahmen**, die in Bezug auf die Datenspeicherung von personenbezogenen Daten ergriffen werden müssen.
+**C3 (4 P):** Beschreiben Sie zwei Maßnahmen, die in Bezug auf die Datenspeicherung von personenbezogenen Daten ergriffen werden müssen.
 
-**C4 (8 P):** Für eine Analyse von Anlieferzeiten sollen die Daten zusammengeführt werden. Im Rahmen eines **ETL-Prozesses** werden die Rohdaten vorbereitet und entsprechend neue Attribute hinzugefügt oder angepasst. Nennen Sie **zwei Attribute** aus den gegebenen Datenbanken, die Sie im Rahmen der Transformation anpassen bzw. hinzufügen würden, und erläutern Sie den Zweck. Gehen Sie dabei auch auf die genutzten **Datentypen** ein.
+**C4 (8 P):** Für eine Analyse von Anlieferzeiten sollen die Daten zusammengeführt werden. Im Rahmen eines ETL-Prozesses werden die Rohdaten vorbereitet und entsprechend neue Attribute hinzugefügt oder angepasst. Nennen Sie zwei Attribute aus den gegebenen Datenbanken, die Sie im Rahmen der Transformation anpassen bzw. hinzufügen würden, und erläutern Sie den Zweck. Gehen Sie dabei auch auf die genutzten Datentypen ein.
 
 | Attribut | Erläuterung |
 |---|---|
 | | |
 | | |
 
-**C5 (2 P):** Beschreiben Sie einen Fall, in dem eine solche **Datenzusammenführung** aus Sicht von Datenschutz bzw. Mitarbeiterrecht **erlaubt** wäre.
+**C5 (2 P):** Beschreiben Sie einen Fall, in dem eine solche Datenzusammenführung aus Sicht von Datenschutz bzw. Mitarbeiterrecht erlaubt wäre.
 
 ## Block D – SQL für die Produktionsplanung (26 P)
 
@@ -331,7 +331,7 @@ Produktionsplan (M_ID PK/FK, Produktionsdatum PK, A_ID PK/FK, Anzahl)
 Anlage (A_ID PK, Bezeichnung)
 ```
 
-**D1 (4 P):** Erstellen Sie eine Liste der am **11.05.2026 und 12.05.2026** zu fertigenden Möbel. Sortieren Sie zuerst nach Datum und anschließend nach dem Namen des Möbelstücks. Erwartete Ausgabe:
+**D1 (4 P):** Erstellen Sie eine Liste der am 11.05.2026 und 12.05.2026 zu fertigenden Möbel. Sortieren Sie zuerst nach Datum und anschließend nach dem Namen des Möbelstücks. Erwartete Ausgabe:
 
 | Produktionsdatum | M_Name | Anzahl |
 |---|---|---|
@@ -343,7 +343,7 @@ Anlage (A_ID PK, Bezeichnung)
 | 2026-05-12 | Schreibtisch | 15 |
 | 2026-05-12 | Stuhl | 40 |
 
-**D2 (8 P):** Erstellen Sie eine Liste der Bauteile mit Namen und **gesamter Anzahl**, die am **12.05.2026** zu den Anlagen gebracht werden müssen. Beachten Sie, dass die gleichen Bauteile in verschiedene Möbel eingebaut werden können. Erwartete Ausgabe (Auszug):
+**D2 (8 P):** Erstellen Sie eine Liste der Bauteile mit Namen und gesamter Anzahl, die am 12.05.2026 zu den Anlagen gebracht werden müssen. Beachten Sie, dass die gleichen Bauteile in verschiedene Möbel eingebaut werden können. Erwartete Ausgabe (Auszug):
 
 | BT_ID | BT_Name | Gesamtzahl |
 |---|---|---|
@@ -352,9 +352,9 @@ Anlage (A_ID PK, Bezeichnung)
 | 13 | Regalboden | 150 |
 | 17 | Schraubensatz | 100 |
 
-**D3 (8 P):** Da der Preisdruck steigt, sollen Sie ermitteln, wo Verkaufspreise gesenkt werden können. Ermitteln Sie dazu den **Deckungsbeitrag** für jedes Möbelstück (Verkaufspreis minus Summe aus Stücklistenanzahl × Einkaufspreis). Sortieren Sie nach dem Deckungsbeitrag, sodass die höchsten oben stehen. Zeigen Sie **nur Möbel mit einem Deckungsbeitrag über 50 EUR** an.
+**D3 (8 P):** Da der Preisdruck steigt, sollen Sie ermitteln, wo Verkaufspreise gesenkt werden können. Ermitteln Sie dazu den Deckungsbeitrag für jedes Möbelstück (Verkaufspreis minus Summe aus Stücklistenanzahl × Einkaufspreis). Sortieren Sie nach dem Deckungsbeitrag, sodass die höchsten oben stehen. Zeigen Sie nur Möbel mit einem Deckungsbeitrag über 50 EUR an.
 
-**D4 (6 P):** Die Anlage „Fräse F2“ fällt aus und wird am 12.05.2026 repariert. **Verschieben Sie das Produktionsdatum** für die betroffenen Einträge des Produktionsplans um eine Woche.
+**D4 (6 P):** Die Anlage „Fräse F2“ fällt aus und wird am 12.05.2026 repariert. Verschieben Sie das Produktionsdatum für die betroffenen Einträge des Produktionsplans um eine Woche.
 
 ---
 

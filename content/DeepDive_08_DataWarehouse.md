@@ -328,11 +328,11 @@ In der ersten Projektbesprechung fragt die Geschäftsführung, warum überhaupt 
 
 Außerdem will sie künftig auch Daten aus Onlineshop und Lager auswerten.
 
-**A1 (10 P):** *Grenzen* Sie OLTP- und OLAP-Systeme anhand von **fünf** Kriterien *ab*. *Stellen* Sie die Antwort tabellarisch dar.
+**A1 (10 P):** *Grenzen* Sie OLTP- und OLAP-Systeme anhand von fünf Kriterien *ab*. *Stellen* Sie die Antwort tabellarisch dar.
 
-**A2 (8 P):** Ein Kollege schlägt vor, die Auswertungen direkt auf der operativen Datenbank durchzuführen: „Die Daten sind doch schon da." *Beurteilen* Sie den Vorschlag und *nennen* Sie **drei** fachliche Gründe, die dagegen sprechen.
+**A2 (8 P):** Ein Kollege schlägt vor, die Auswertungen direkt auf der operativen Datenbank durchzuführen: „Die Daten sind doch schon da." *Beurteilen* Sie den Vorschlag und *nennen* Sie drei fachliche Gründe, die dagegen sprechen.
 
-**A3 (5 P):** *Nennen* Sie die **fünf** V von Big Data und *ordnen* Sie jedem ein Beispiel aus dem Möbelhaus *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**A3 (5 P):** *Nennen* Sie die fünf V von Big Data und *ordnen* Sie jedem ein Beispiel aus dem Möbelhaus *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | V | Beispiel aus dem Möbelhaus |
 |---|---|
@@ -348,7 +348,7 @@ Außerdem will sie künftig auch Daten aus Onlineshop und Lager auswerten.
 
 Die Daten aus operativer Datenbank und CRM sollen jede Nacht ins Data Warehouse geladen werden. Im ersten Testlauf gibt es abgewiesene Datensätze.
 
-**B1 (8 P):** *Beschreiben* Sie die drei Phasen des ETL-Prozesses und *nennen* Sie für die Transformationsphase **vier** typische Aufgaben.
+**B1 (8 P):** *Beschreiben* Sie die drei Phasen des ETL-Prozesses und *nennen* Sie für die Transformationsphase vier typische Aufgaben.
 
 **B2 (6 P):** *Erläutern* Sie den Zweck einer Staging Area und den Unterschied zwischen Voll- und Deltaextraktion.
 
@@ -362,9 +362,9 @@ Für die Umsatzauswertung aus der Ausgangssituation soll das logische Datenmodel
 
 **C1 (16 P):** *Entwerfen* Sie ein Star-Schema für die beschriebene Umsatzauswertung. *Benennen* Sie die Faktentabelle mit mindestens zwei Kennzahlen sowie vier Dimensionstabellen mit je mindestens drei Attributen. *Kennzeichnen* Sie Primär- und Fremdschlüssel.
 
-**C2 (6 P):** *Erläutern* Sie den Begriff **Granularität** und *legen* Sie für Ihr Schema eine geeignete Granularität *fest*. *Begründen* Sie Ihre Wahl.
+**C2 (6 P):** *Erläutern* Sie den Begriff Granularität und *legen* Sie für Ihr Schema eine geeignete Granularität *fest*. *Begründen* Sie Ihre Wahl.
 
-**C3 (8 P):** *Vergleichen* Sie Star- und Snowflake-Schema anhand von **vier** Kriterien und *tragen* Sie den Vergleich in die Tabelle *ein*. *Sprechen* Sie unter der Tabelle eine begründete Empfehlung für dieses Projekt *aus*.
+**C3 (8 P):** *Vergleichen* Sie Star- und Snowflake-Schema anhand von vier Kriterien und *tragen* Sie den Vergleich in die Tabelle *ein*. *Sprechen* Sie unter der Tabelle eine begründete Empfehlung für dieses Projekt *aus*.
 
 | Kriterium | Star | Snowflake |
 |---|---|---|

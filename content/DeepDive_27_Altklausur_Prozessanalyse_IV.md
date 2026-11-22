@@ -187,17 +187,17 @@ Die **Möbelhaus Nordholz GmbH** fertigt in ihrer Werkstatt **Nordholz Manufaktu
 
 Die App wird für die Lagermeisterin und ihre Mitarbeiter entwickelt. Die Geschäftsleitung verlangt, dass die App mit **agilen Verfahren** entsteht und vor der Einführung umfassend getestet wird. In der Manufaktur gibt es Vorbehalte: Bisher werden die Messwerte von Hand in eine Kladde geschrieben.
 
-**A1 (3 P):** *Nennen* Sie **drei** funktionale Anforderungen an die HolzCheck-App.
+**A1 (3 P):** *Nennen* Sie drei funktionale Anforderungen an die HolzCheck-App.
 
-**A2 (6 P):** Die App soll agil entwickelt werden. *Beschreiben* Sie **drei** Aktivitäten, die bei einer agilen Entwicklung der App durchgeführt werden.
+**A2 (6 P):** Die App soll agil entwickelt werden. *Beschreiben* Sie drei Aktivitäten, die bei einer agilen Entwicklung der App durchgeführt werden.
 
-**A3 (2 P):** *Nennen* Sie **zwei** Gründe, die gegen den Einsatz von agilem Projektmanagement sprechen können.
+**A3 (2 P):** *Nennen* Sie zwei Gründe, die gegen den Einsatz von agilem Projektmanagement sprechen können.
 
-**A4 (6 P):** Die Funktionen der App sollen durch Tests abgesichert werden. *Beschreiben* Sie **drei** Inhalte eines Testkonzepts, die Sie für den Test der App planen.
+**A4 (6 P):** Die Funktionen der App sollen durch Tests abgesichert werden. *Beschreiben* Sie drei Inhalte eines Testkonzepts, die Sie für den Test der App planen.
 
-**A5 (3 P):** *Nennen* Sie **drei** Risiken, die sich auf das App-Projekt auswirken können.
+**A5 (3 P):** *Nennen* Sie drei Risiken, die sich auf das App-Projekt auswirken können.
 
-**A6 (6 P):** Sie rechnen mit Widerständen in der Manufaktur und laden die Beschäftigten deshalb zu einem Workshop ein. *Beschreiben* Sie **drei** Ziele, die Sie mit diesem Workshop erreichen wollen.
+**A6 (6 P):** Sie rechnen mit Widerständen in der Manufaktur und laden die Beschäftigten deshalb zu einem Workshop ein. *Beschreiben* Sie drei Ziele, die Sie mit diesem Workshop erreichen wollen.
 
 ## Block B – Lagerkontrolle: Ist-Prozess (25 P)
 
@@ -207,13 +207,13 @@ Die Lagermeisterin betreut sechs Lagerboxen. Von Montag bis Samstag kontrolliert
 
 Nach der Begutachtung entscheidet sich die Lagermeisterin für **eine** Tätigkeit. Bei Schimmelbefall bereitet sie das Behandlungsmittel vor, für das Umsetzen legt sie Stapelleisten bereit, für die Trockenkammer stellt sie den Hubwagen bereit. Ist keine dieser Tätigkeiten nötig, erledigt sie Büroarbeit. Fällt Arbeit an, beauftragt sie ihre Mitarbeiter, die die Tätigkeit ausführen. Am späten Nachmittag kontrolliert die Lagermeisterin die geleistete Arbeit.
 
-**B1 (4 P):** *Beschreiben* Sie **zwei** Vorteile, die sich aus der Verwendung der BPMN (Business Process Model and Notation) ergeben.
+**B1 (4 P):** *Beschreiben* Sie zwei Vorteile, die sich aus der Verwendung der BPMN (Business Process Model and Notation) ergeben.
 
-**B2 (13 P):** *Erstellen* Sie aufgrund der Beschreibung ein **BPMN-Diagramm** des Ist-Prozesses für eine Lagerbox mit den Lanes **Lagermeisterin** und **Mitarbeiter**.
+**B2 (13 P):** *Erstellen* Sie aufgrund der Beschreibung ein BPMN-Diagramm des Ist-Prozesses für eine Lagerbox mit den Lanes Lagermeisterin und Mitarbeiter.
 
-**B3 (6 P):** *Nennen* Sie **zwei** weitere Möglichkeiten, Geschäftsprozesse darzustellen, und *beschreiben* Sie zu jeder Möglichkeit **ein** Unterscheidungsmerkmal zur BPMN.
+**B3 (6 P):** *Nennen* Sie zwei weitere Möglichkeiten, Geschäftsprozesse darzustellen, und *beschreiben* Sie zu jeder Möglichkeit ein Unterscheidungsmerkmal zur BPMN.
 
-**B4 (2 P):** *Beschreiben* Sie **einen** Verbesserungsvorschlag für den beschriebenen Prozess.
+**B4 (2 P):** *Beschreiben* Sie einen Verbesserungsvorschlag für den beschriebenen Prozess.
 
 ## Block C – Stundenabrechnung der Aushilfen (23 P)
 
@@ -234,20 +234,20 @@ Für die Abrechnung der Arbeitsstunden der Aushilfen hat die Manufaktur ihren Ab
 | Mi | Stapel ums. | 2,4 |
 | Do | Schimmel | 3 |
 
-**C1 (2 P):** Die Prozessbeschreibung verwendet keine normierte Darstellungsform. *Beschreiben* Sie **ein** Problem, das dadurch entsteht.
+**C1 (2 P):** Die Prozessbeschreibung verwendet keine normierte Darstellungsform. *Beschreiben* Sie ein Problem, das dadurch entsteht.
 
-**C2 (3 P):** *Nennen* Sie **drei** Schnittstellen aus dem beschriebenen Prozess.
+**C2 (3 P):** *Nennen* Sie drei Schnittstellen aus dem beschriebenen Prozess.
 
 **C3 (3 P):** In Prozessbeschreibungen wird oft viel Aufwand betrieben, um Ausnahmefälle abzubilden – hier den Krankheitsfall. *Erläutern* Sie, worin die Problematik überbetonter Ausnahmefälle für eine Geschäftsprozessbeschreibung liegt.
 
-**C4 (12 P):** *Nennen* Sie **zwei** weitere Elemente, die in dem beschriebenen Prozess problematisch sein können. *Beschreiben* Sie je **zwei** Folgen daraus und *nennen* Sie je **eine** Möglichkeit, den Prozess zu verbessern. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C4 (12 P):** *Nennen* Sie zwei weitere Elemente, die in dem beschriebenen Prozess problematisch sein können. *Beschreiben* Sie je zwei Folgen daraus und *nennen* Sie je eine Möglichkeit, den Prozess zu verbessern. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Problem | Folgen | Verbesserung |
 |---|---|---|
 | | | |
 | | | |
 
-**C5 (3 P):** Änderungen an Geschäftsprozessen können große Risiken mit sich bringen. *Nennen* Sie **drei** Faktoren, mit denen mögliche Risiken bewertet werden.
+**C5 (3 P):** Änderungen an Geschäftsprozessen können große Risiken mit sich bringen. *Nennen* Sie drei Faktoren, mit denen mögliche Risiken bewertet werden.
 
 ## Block D – Wirtschaftlichkeit und Auswertung (26 P)
 
@@ -269,9 +269,9 @@ Die Geschäftsleitung überlegt, HolzCheck samt App in der Manufaktur fest einzu
 | Gewinn | 25 % | 112.200 | | |
 | Umsatz | | 561.000 | | |
 
-**D2 (8 P):** Im Idealfall sinkt die Holzfeuchte im Lager gleichmäßig mit der Zeit. Seit der Probephase mit HolzCheck werden die Holzfeuchte, der Anteil schlecht durchlüfteter Stapel und die Arbeitsstunden im Lager erfasst. *Stellen* Sie die Daten der beiden folgenden Übersichten in **zwei** übersichtlichen Diagrammen *dar* (Papier).
+**D2 (8 P):** Im Idealfall sinkt die Holzfeuchte im Lager gleichmäßig mit der Zeit. Seit der Probephase mit HolzCheck werden die Holzfeuchte, der Anteil schlecht durchlüfteter Stapel und die Arbeitsstunden im Lager erfasst. *Stellen* Sie die Daten der beiden folgenden Übersichten in zwei übersichtlichen Diagrammen *dar* (Papier).
 
-**Anteil schlecht durchlüfteter Stapel in % je Lagerbox**
+Anteil schlecht durchlüfteter Stapel in % je Lagerbox
 
 | Lagerbox | Monat 1 | Monat 2 | Monat 3 | Monat 4 | Monat 5 | Monat 6 |
 |---|---|---|---|---|---|---|
@@ -283,7 +283,7 @@ Die Geschäftsleitung überlegt, HolzCheck samt App in der Manufaktur fest einzu
 | Box 6 | 18 | 28 | 46 | 53 | 5 | 4 |
 | Durchschnitt | 18 | 28 | 41 | 52 | 7 | 4 |
 
-**Personaleinsatz im Lager in Stunden**
+Personaleinsatz im Lager in Stunden
 
 | Person | Monat 1 | Monat 2 | Monat 3 | Monat 4 | Monat 5 | Monat 6 |
 |---|---|---|---|---|---|---|
@@ -313,7 +313,7 @@ Aus den Übersichten in D2 stehen Ihnen außerdem der durchschnittliche Anteil s
 | Ø Anteil schlecht durchlüfteter Stapel in % | 18 | 28 | 41 | 52 | 7 | 4 |
 | Arbeitsstunden im Lager (Summe) | 340 | 284 | 180 | 310 | 98 | 88 |
 
-*Analysieren* Sie diese Daten in Verbindung mit dem Verlauf der Holzfeuchte: *Stellen* Sie einen Zusammenhang *her* und *leiten* Sie **zwei** Gründe für den ungewöhnlichen Verlauf der Holzfeuchte *ab*.
+*Analysieren* Sie diese Daten in Verbindung mit dem Verlauf der Holzfeuchte: *Stellen* Sie einen Zusammenhang *her* und *leiten* Sie zwei Gründe für den ungewöhnlichen Verlauf der Holzfeuchte *ab*.
 
 ## Lernziel-Check (am Ende des Themas alles mit Ja beantworten)
 

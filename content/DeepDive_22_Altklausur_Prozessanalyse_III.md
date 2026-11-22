@@ -134,20 +134,20 @@ Die **Möbelhaus Nordholz GmbH** beschäftigt rund 140 Mitarbeiter. Neben dem M�
 
 Der Erfolg des Projekts hängt maßgeblich von der Akzeptanz der eigenen Mitarbeiter ab. Geplant sind unter anderem ein Tablet für jeden Servicetechniker, eine digitale Einsatzplanung und vernetzte Pflegebetten.
 
-**A1 (8 P):** *Beschreiben* Sie für die Geschäftsleitung und für die Servicetechniker jeweils **eine** mögliche Befürchtung und *ordnen* Sie jeder Befürchtung eine geeignete Gegenmaßnahme *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**A1 (8 P):** *Beschreiben* Sie für die Geschäftsleitung und für die Servicetechniker jeweils eine mögliche Befürchtung und *ordnen* Sie jeder Befürchtung eine geeignete Gegenmaßnahme *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Stakeholder | Befürchtung | Gegenmaßnahme |
 |---|---|---|
 | Geschäftsleitung | | |
 | Servicetechniker | | |
 
-**A2 (4 P):** Sie organisieren das Kick-off-Meeting für das Projektteam und die Beteiligten und erstellen dafür eine inhaltliche Agenda. *Beschreiben* Sie **zwei** Themen der **Sachebene**, die im Kick-off-Meeting behandelt werden.
+**A2 (4 P):** Sie organisieren das Kick-off-Meeting für das Projektteam und die Beteiligten und erstellen dafür eine inhaltliche Agenda. *Beschreiben* Sie zwei Themen der Sachebene, die im Kick-off-Meeting behandelt werden.
 
-**A3 (4 P):** Die Gestaltung der Beziehungsebene ist eine zentrale Voraussetzung für einen guten Teamgeist. *Beschreiben* Sie **zwei** Aspekte, mit denen Sie die Teamarbeit fördern.
+**A3 (4 P):** Die Gestaltung der Beziehungsebene ist eine zentrale Voraussetzung für einen guten Teamgeist. *Beschreiben* Sie zwei Aspekte, mit denen Sie die Teamarbeit fördern.
 
-**A4 (4 P):** Wegen der hohen Qualitätsanforderungen im Servicegeschäft wird in einem Workshop „klassisches“ gegen „agiles“ Projektmanagement abgewogen. *Beschreiben* Sie die Grundzüge **beider** Vorgehensweisen.
+**A4 (4 P):** Wegen der hohen Qualitätsanforderungen im Servicegeschäft wird in einem Workshop „klassisches“ gegen „agiles“ Projektmanagement abgewogen. *Beschreiben* Sie die Grundzüge beider Vorgehensweisen.
 
-**A5 (4 P):** *Nennen* und *beschreiben* Sie **ein** Vorgehensmodell. *Geben* Sie *an*, ob es klassisch oder agil ist.
+**A5 (4 P):** *Nennen* und *beschreiben* Sie ein Vorgehensmodell. *Geben* Sie *an*, ob es klassisch oder agil ist.
 
 ## Block B – Wartungsprozess (29 P)
 
@@ -164,9 +164,9 @@ Ein wichtiges Geschäftsfeld ist die jährliche Wartung der Pflegebetten. Akkus,
 - Zum vereinbarten Termin führt der Techniker die Wartung und die sicherheitstechnische Kontrolle durch.
 - Fällt dabei ein Defekt auf, stößt er den Reparaturprozess an; sonst dokumentiert er die Wartung und schließt den Auftrag ab.
 
-*Erstellen* Sie für diesen Prozess ein **UML-Aktivitätsdiagramm** mit den Schwimmbahnen **Serviceteam** und **Zentrallager**.
+*Erstellen* Sie für diesen Prozess ein UML-Aktivitätsdiagramm mit den Schwimmbahnen Serviceteam und Zentrallager.
 
-**B2 (8 P):** Für die Bewertung des Wartungsprozesses wird bereits die **Gesamtdauer** vom Anlegen des Wartungsauftrags bis zum Abschluss genutzt. *Ergänzen* Sie die Tabelle um **zwei** weitere Kennzahlen und *erläutern* Sie deren Nutzen. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**B2 (8 P):** Für die Bewertung des Wartungsprozesses wird bereits die Gesamtdauer vom Anlegen des Wartungsauftrags bis zum Abschluss genutzt. *Ergänzen* Sie die Tabelle um zwei weitere Kennzahlen und *erläutern* Sie deren Nutzen. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Kennzahl | Nutzen |
 |---|---|
@@ -189,24 +189,24 @@ Zur Vorbereitung einer Entscheidung wertet die Geschäftsleitung folgende Herste
 
 > *"Connected care beds – what you need before you start.* (1) **Device level:** every bed needs a controller with sensors for motor current, motor run time, battery level and error codes, plus a communication module. (2) **Connectivity:** care homes rarely offer reliable Wi-Fi in every room. Beds should therefore support a fallback such as LTE-M or NB-IoT, and a gateway per floor can collect data via Bluetooth Low Energy. (3) **Service platform:** the service provider needs a central platform that receives, stores and analyses the data – in real time for alarms and over months for predictive maintenance. (4) **Security:** data must be encrypted end to end, every device must authenticate itself, and firmware updates must be signed. (5) **Integration:** alarms should appear directly in the service provider's dispatch system and on the technicians' tablets."*
 
-**C1 (12 P):** *Analysieren* Sie den abgelaufenen Prozess und *beschreiben* Sie **zwei** Probleme. *Beschreiben* Sie zu jedem Problem die Auswirkung auf den Störungsfall und einen konkreten Verbesserungsvorschlag. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C1 (12 P):** *Analysieren* Sie den abgelaufenen Prozess und *beschreiben* Sie zwei Probleme. *Beschreiben* Sie zu jedem Problem die Auswirkung auf den Störungsfall und einen konkreten Verbesserungsvorschlag. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Prozessproblem | Auswirkung | Verbesserungsvorschlag |
 |---|---|---|
 | | | |
 | | | |
 
-**C2 (2 P):** *Beschreiben* Sie anhand der Herstellerinformation **eine** technische Grundvoraussetzung für vernetzte Pflegebetten.
+**C2 (2 P):** *Beschreiben* Sie anhand der Herstellerinformation eine technische Grundvoraussetzung für vernetzte Pflegebetten.
 
-**C3 (2 P):** *Nennen* Sie **zwei** Daten, die die Sensoren der Betten erfassen und übertragen können.
+**C3 (2 P):** *Nennen* Sie zwei Daten, die die Sensoren der Betten erfassen und übertragen können.
 
-**C4 (2 P):** *Nennen* Sie **zwei** Technologien, mit denen die Betten vernetzt werden können.
+**C4 (2 P):** *Nennen* Sie zwei Technologien, mit denen die Betten vernetzt werden können.
 
 **C5 (2 P):** *Beschreiben* Sie, was Nordholz Objekt bereitstellen muss, um die Daten der Betten zu empfangen und zu verarbeiten.
 
-**C6 (3 P):** *Nennen* Sie **einen** rechtlichen Aspekt, der bei vernetzten Pflegebetten in Deutschland zu beachten ist, und *begründen* Sie Ihre Antwort.
+**C6 (3 P):** *Nennen* Sie einen rechtlichen Aspekt, der bei vernetzten Pflegebetten in Deutschland zu beachten ist, und *begründen* Sie Ihre Antwort.
 
-**C7 (4 P):** Die Geschäftsleitung hat zwei Optionen, auf den Kundenverlust zu reagieren: die **Verbesserung des Störungsprozesses** oder die **Einführung vernetzter Betten (IoT)**. *Nennen* Sie zu jeder Option einen Vorteil und einen Nachteil. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C7 (4 P):** Die Geschäftsleitung hat zwei Optionen, auf den Kundenverlust zu reagieren: die Verbesserung des Störungsprozesses oder die Einführung vernetzter Betten (IoT). *Nennen* Sie zu jeder Option einen Vorteil und einen Nachteil. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | | Prozessverbesserung | IoT-Einführung |
 |---|---|---|
@@ -256,7 +256,7 @@ Nordholz Objekt bietet zwei SLAs an: **SLA Premium** (Reaktionszeit vier Stunden
 
 **D2 (4 P):** *Beschreiben* Sie das Ergebnis der Nachkalkulation mit Blick auf die Preisgestaltung der beiden SLAs. Grundlage sind die Kennzahlen aus D1 (bei Bedarf mit den Kalkulationstabellen des Blocks selbst ermitteln) im Vergleich zum geplanten Gewinnzuschlag der Vorkalkulation.
 
-**D3 (6 P):** Die Geschäftsleitung möchte zur Überprüfung der Wirtschaftlichkeit einen monatlichen Statusbericht. Neben dem Gewinn interessiert sie sich für die **Attraktivität** der SLAs. *Nennen* Sie **zwei** Inhalte des Berichts und *begründen* Sie Ihre Wahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**D3 (6 P):** Die Geschäftsleitung möchte zur Überprüfung der Wirtschaftlichkeit einen monatlichen Statusbericht. Neben dem Gewinn interessiert sie sich für die Attraktivität der SLAs. *Nennen* Sie zwei Inhalte des Berichts und *begründen* Sie Ihre Wahl. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Inhalt | Begründung |
 |---|---|

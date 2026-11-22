@@ -104,7 +104,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 - (4) Ein befristeter Vertrag kann beliebig oft verlängert werden.
 - (5) Befristete Arbeitnehmer haben keinen Anspruch auf Urlaub.
 
-**A3 (3 P):** Mit dem Arbeitsvertrag übernimmt Tim Pflichten gegenüber dem Möbelhaus. Welche Pflicht trifft den **Arbeitnehmer**? *(Ziffer eintragen)*
+**A3 (3 P):** Mit dem Arbeitsvertrag übernimmt Tim Pflichten gegenüber dem Möbelhaus. Welche Pflicht trifft den Arbeitnehmer? *(Ziffer eintragen)*
 - (1) Fürsorgepflicht
 - (2) Verschwiegenheitspflicht über Betriebs- und Geschäftsgeheimnisse
 - (3) Zeugnispflicht
@@ -125,7 +125,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 
 Beispiele: a) Ein Mitarbeiter kommt trotz zweier Abmahnungen wiederholt zu spät. b) Die Filiale in Bremerhaven wird geschlossen. c) Eine Mitarbeiterin verliert ihren für die Tätigkeit nötigen Führerschein dauerhaft. d) Wegen sinkender Aufträge fällt eine Stelle in der Polsterei weg. e) Ein Mitarbeiter nimmt wiederholt Ware ohne Bezahlung mit nach Hause.
 
-**A6 (4 P):** Nach ihrer Ausbildung verlässt Frau Sander das Möbelhaus und verlangt ein qualifiziertes Zeugnis. Welche **zwei** Angaben machen das Zeugnis zu einem qualifizierten Zeugnis? *(Ziffern eintragen)*
+**A6 (4 P):** Nach ihrer Ausbildung verlässt Frau Sander das Möbelhaus und verlangt ein qualifiziertes Zeugnis. Welche zwei Angaben machen das Zeugnis zu einem qualifizierten Zeugnis? *(Ziffern eintragen)*
 - (1) Name und Geburtsdatum
 - (2) Dauer der Ausbildung
 - (3) Beurteilung der Leistung
@@ -176,7 +176,7 @@ Beispiele: a) Ein Mitarbeiter kommt trotz zweier Abmahnungen wiederholt zu spät
 | Tödliche Wegeunfälle | 6 | 8 | +33,33 |
 | Tödliche Unfälle zusammen | 20 | 17 | −15,00 |
 
-Welche **zwei** Aussagen lassen sich mit der Statistik belegen? *(Ziffern eintragen)*
+Welche zwei Aussagen lassen sich mit der Statistik belegen? *(Ziffern eintragen)*
 - (1) Die meldepflichtigen Arbeitsunfälle sind gestiegen.
 - (2) Die Zahl der meldepflichtigen Wegeunfälle ist gestiegen.
 - (3) Je 1.000 Vollarbeiter gab es im Berichtsjahr mehr Arbeitsunfälle als im Vorjahr.
@@ -194,12 +194,12 @@ Welche **zwei** Aussagen lassen sich mit der Statistik belegen? *(Ziffern eintra
 
 Auszug aus dem Betriebsverfassungsgesetz:
 
-> **§ 7 Wahlberechtigung:** Wahlberechtigt sind alle Arbeitnehmer des Betriebs, die das 16. Lebensjahr vollendet haben. Werden Arbeitnehmer eines anderen Arbeitgebers zur Arbeitsleistung überlassen, so sind diese wahlberechtigt, wenn sie länger als drei Monate im Betrieb eingesetzt werden.
-> **§ 9 Zahl der Betriebsratsmitglieder:** Der Betriebsrat besteht in Betrieben mit in der Regel 5 bis 20 wahlberechtigten Arbeitnehmern aus einer Person, 21 bis 50 wahlberechtigten Arbeitnehmern aus 3 Mitgliedern, 51 wahlberechtigten Arbeitnehmern bis 100 Arbeitnehmern aus 5 Mitgliedern, 101 bis 200 Arbeitnehmern aus 7 Mitgliedern, 201 bis 400 Arbeitnehmern aus 9 Mitgliedern, 401 bis 700 Arbeitnehmern aus 11 Mitgliedern, …
+> § 7 Wahlberechtigung: Wahlberechtigt sind alle Arbeitnehmer des Betriebs, die das 16. Lebensjahr vollendet haben. Werden Arbeitnehmer eines anderen Arbeitgebers zur Arbeitsleistung überlassen, so sind diese wahlberechtigt, wenn sie länger als drei Monate im Betrieb eingesetzt werden.
+> § 9 Zahl der Betriebsratsmitglieder: Der Betriebsrat besteht in Betrieben mit in der Regel 5 bis 20 wahlberechtigten Arbeitnehmern aus einer Person, 21 bis 50 wahlberechtigten Arbeitnehmern aus 3 Mitgliedern, 51 wahlberechtigten Arbeitnehmern bis 100 Arbeitnehmern aus 5 Mitgliedern, 101 bis 200 Arbeitnehmern aus 7 Mitgliedern, 201 bis 400 Arbeitnehmern aus 9 Mitgliedern, 401 bis 700 Arbeitnehmern aus 11 Mitgliedern, …
 
 Wie viele Betriebsratsmitglieder sind zu wählen? *(Ergebnis eintragen)*
 
-**C2 (3 P):** Bei welcher Angelegenheit hat der Betriebsrat ein **Mitbestimmungsrecht**? *(Ziffer eintragen)*
+**C2 (3 P):** Bei welcher Angelegenheit hat der Betriebsrat ein Mitbestimmungsrecht? *(Ziffer eintragen)*
 - (1) Bau einer neuen Ausstellungshalle
 - (2) Festlegung des Urlaubsplans für die Belegschaft
 - (3) Auswahl des neuen Geschäftsführers
@@ -227,7 +227,7 @@ Wie viele Betriebsratsmitglieder sind zu wählen? *(Ergebnis eintragen)*
 - (4) Eine Kündigung ist während der Schwangerschaft und bis zum Ablauf von vier Monaten nach der Entbindung grundsätzlich unzulässig.
 - (5) Die Elternzeit kann nur von der Mutter genommen werden.
 
-**C6 (4 P):** Welche **zwei** Regelungen gehören zum **Individualarbeitsrecht**? *(Ziffern eintragen)*
+**C6 (4 P):** Welche zwei Regelungen gehören zum Individualarbeitsrecht? *(Ziffern eintragen)*
 - (1) Betriebsvereinbarung über die Gleitzeit
 - (2) Kündigungsfristen nach dem Bürgerlichen Gesetzbuch
 - (3) Tarifvertrag des Einzelhandels
@@ -265,7 +265,7 @@ Wie viele Betriebsratsmitglieder sind zu wählen? *(Ergebnis eintragen)*
 - (4) Arbeitslosengeld wird nur an arbeitsunfähige Personen gezahlt.
 - (5) Die Höhe richtet sich ausschließlich nach dem letzten Monatsgehalt.
 
-**D5 (4 P):** Eine arbeitsuchende Fachinformatikerin möchte eine Umschulung machen. Bei welchen **zwei** Stellen kann sie eine finanzielle Förderung beantragen? *(Ziffern eintragen)*
+**D5 (4 P):** Eine arbeitsuchende Fachinformatikerin möchte eine Umschulung machen. Bei welchen zwei Stellen kann sie eine finanzielle Förderung beantragen? *(Ziffern eintragen)*
 - (1) Agentur für Arbeit
 - (2) Industrie- und Handelskammer
 - (3) Deutsche Rentenversicherung
@@ -273,7 +273,7 @@ Wie viele Betriebsratsmitglieder sind zu wählen? *(Ergebnis eintragen)*
 - (5) Handwerkskammer
 - (6) Gewerkschaft
 
-**D6 (4 P):** Tim prüft seine Lohnabrechnung. Welche **zwei** Aussagen zur gesetzlichen Pflegeversicherung sind zutreffend? *(Ziffern eintragen)*
+**D6 (4 P):** Tim prüft seine Lohnabrechnung. Welche zwei Aussagen zur gesetzlichen Pflegeversicherung sind zutreffend? *(Ziffern eintragen)*
 - (1) Die Beiträge zahlt allein der Arbeitnehmer.
 - (2) Kinderlose Versicherte ab 23 Jahren zahlen einen Beitragszuschlag.
 - (3) Rentner sind nicht pflegeversichert.
@@ -283,7 +283,7 @@ Wie viele Betriebsratsmitglieder sind zu wählen? *(Ergebnis eintragen)*
 
 ## Block E – Arbeitsschutz, Gleichbehandlung und agiles Arbeiten (20 P)
 
-**E1 (3 P):** Im Verpackungslager brennen Kartons. Welche Handlung sollte ein Mitarbeiter **auf keinen Fall** durchführen? *(Ziffer eintragen)*
+**E1 (3 P):** Im Verpackungslager brennen Kartons. Welche Handlung sollte ein Mitarbeiter auf keinen Fall durchführen? *(Ziffer eintragen)*
 - (1) Die Kollegen durch lautes Rufen warnen.
 - (2) Über die Notrufnummer 112 die Feuerwehr alarmieren.
 - (3) Die Fenster öffnen, damit der Rauch abziehen kann.
@@ -317,14 +317,14 @@ Begriffe: a) Verbotszeichen · b) Warnzeichen · c) Gebotszeichen · d) Rettungs
 - (4) Sie kommunizieren sicher auf Deutsch und Englisch.
 - (5) Sie arbeiten gern im Team.
 
-**E5 (3 P):** Bei IT-Projekten des Möbelhauses ändern sich die Wünsche der Fachabteilungen häufig noch während der Umsetzung. Tims Team soll im nächsten Projekt deshalb agil arbeiten. Welcher Gesichtspunkt gehört **nicht** zu agilem Arbeiten? *(Ziffer eintragen)*
+**E5 (3 P):** Bei IT-Projekten des Möbelhauses ändern sich die Wünsche der Fachabteilungen häufig noch während der Umsetzung. Tims Team soll im nächsten Projekt deshalb agil arbeiten. Welcher Gesichtspunkt gehört nicht zu agilem Arbeiten? *(Ziffer eintragen)*
 - (1) Das Team organisiert seine Arbeit selbst.
 - (2) Der Fortschritt wird auf einem Board für alle sichtbar gemacht.
 - (3) Die Planung wird regelmäßig an neue Erkenntnisse angepasst.
 - (4) Der Vorgesetzte legt zu Beginn jeden Arbeitsschritt verbindlich fest.
 - (5) Wissen wird im Team offen geteilt.
 
-**E6 (4 P):** Tims Team soll im nächsten IT-Projekt agil arbeiten, weil sich die Wünsche der Fachabteilungen häufig noch während der Umsetzung ändern. Welche **zwei** Punkte sind Vorteile agilen Projektmanagements? *(Ziffern eintragen)*
+**E6 (4 P):** Tims Team soll im nächsten IT-Projekt agil arbeiten, weil sich die Wünsche der Fachabteilungen häufig noch während der Umsetzung ändern. Welche zwei Punkte sind Vorteile agilen Projektmanagements? *(Ziffern eintragen)*
 - (1) Termin und Umfang stehen von Anfang an unveränderlich fest.
 - (2) Neue Anforderungen können kurzfristig eingeplant werden.
 - (3) Es entsteht kaum Abstimmungsaufwand.

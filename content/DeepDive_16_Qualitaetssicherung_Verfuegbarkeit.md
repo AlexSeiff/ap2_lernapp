@@ -281,7 +281,7 @@ Die **Möbelhaus Nordholz GmbH** führt ein neues **Umsatzreporting** ein: Eine 
 
 Für das Projekt soll ein Qualitätssicherungskonzept entstehen. In der Testphase sind mehrere Prüfungen geplant, ein erster Fehler ist schon aufgetreten.
 
-**A1 (6 P):** *Erläutern* Sie den Unterschied zwischen konstruktiver und analytischer Qualitätssicherung und *nennen* Sie für das Reporting-Projekt je **zwei** Maßnahmen.
+**A1 (6 P):** *Erläutern* Sie den Unterschied zwischen konstruktiver und analytischer Qualitätssicherung und *nennen* Sie für das Reporting-Projekt je zwei Maßnahmen.
 
 **A2 (8 P):** *Ordnen* Sie die folgenden Prüfungen jeweils einer Teststufe *zu* und *begründen* Sie kurz. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
@@ -323,7 +323,7 @@ Außerdem wird der Vertrag mit dem Rechenzentrum neu verhandelt; Sie sollen die 
 
 **C1 (6 P):** *Formulieren* Sie einen vollständigen Testfall, der prüft, ob die ETL-Strecke die Bestellungen eines Monats vollständig und mit korrekten Beträgen lädt.
 
-**C2 (6 P):** *Nennen* Sie **drei** weitere Prüfungen, mit denen Sie die Ergebnisse der ETL-Strecke absichern, und *erläutern* Sie, welchen Fehler jede aufdeckt. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C2 (6 P):** *Nennen* Sie drei weitere Prüfungen, mit denen Sie die Ergebnisse der ETL-Strecke absichern, und *erläutern* Sie, welchen Fehler jede aufdeckt. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Prüfung | aufgedeckter Fehler |
 |---|---|
@@ -331,9 +331,9 @@ Außerdem wird der Vertrag mit dem Rechenzentrum neu verhandelt; Sie sollen die 
 | | |
 | | |
 
-**C3 (8 P):** *Beschreiben* Sie **vier** Inhalte eines Abnahmeprotokolls und *erläutern* Sie **zwei** Rechtsfolgen der Abnahme.
+**C3 (8 P):** *Beschreiben* Sie vier Inhalte eines Abnahmeprotokolls und *erläutern* Sie zwei Rechtsfolgen der Abnahme.
 
-**C4 (6 P):** *Nennen* Sie **vier** Inhalte eines SLA und *grenzen* Sie Reaktionszeit und Wiederherstellungszeit *ab*.
+**C4 (6 P):** *Nennen* Sie vier Inhalte eines SLA und *grenzen* Sie Reaktionszeit und Wiederherstellungszeit *ab*.
 
 ## Block D – Verfügbarkeit und Redundanz (28 P)
 
@@ -350,7 +350,7 @@ a) *Berechnen* Sie die Gesamtverfügbarkeit. (4 P)
 b) Die Datenbank wird durch einen zweiten, gleichwertigen Server gespiegelt. *Berechnen* Sie die neue Gesamtverfügbarkeit. (4 P)
 c) *Begründen* Sie, warum gerade die Datenbank redundant ausgelegt wurde. (2 P)
 
-**D4 (6 P):** *Erläutern* Sie den Begriff Single Point of Failure an einem Beispiel aus dem Szenario und *nennen* Sie **zwei** Maßnahmen zur Erhöhung der Verfügbarkeit. *Begründen* Sie, warum diese Maßnahmen keine Datensicherung ersetzen.
+**D4 (6 P):** *Erläutern* Sie den Begriff Single Point of Failure an einem Beispiel aus dem Szenario und *nennen* Sie zwei Maßnahmen zur Erhöhung der Verfügbarkeit. *Begründen* Sie, warum diese Maßnahmen keine Datensicherung ersetzen.
 
 ---
 

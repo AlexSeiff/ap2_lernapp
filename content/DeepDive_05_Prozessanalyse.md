@@ -756,14 +756,14 @@ Außerdem soll geprüft werden, ob sich der Ablauf künftig auch aus den Daten d
 
 **A1 (6 P):** *Grenzen* Sie Kern-, Unterstützungs- und Führungsprozess *ab* und *ordnen* Sie den Reparaturservice begründet zu.
 
-**A2 (8 P):** *Nennen* Sie **vier** Methoden der Ist-Aufnahme. *Tragen* Sie für **zwei** dieser Methoden je einen Vorteil und einen Nachteil, bezogen auf den Reparaturservice, in die Tabelle *ein*.
+**A2 (8 P):** *Nennen* Sie vier Methoden der Ist-Aufnahme. *Tragen* Sie für zwei dieser Methoden je einen Vorteil und einen Nachteil, bezogen auf den Reparaturservice, in die Tabelle *ein*.
 
 | Methode | Vorteil | Nachteil |
 |---|---|---|
 | | | |
 | | | |
 
-**A3 (6 P):** *Nennen* Sie die **drei** Pflichtfelder eines Event Logs und *erläutern* Sie deren jeweilige Funktion.
+**A3 (6 P):** *Nennen* Sie die drei Pflichtfelder eines Event Logs und *erläutern* Sie deren jeweilige Funktion.
 
 ## Block B – Modellierung (26 P)
 
@@ -773,7 +773,7 @@ Für das Lastenheft des Auftragssystems soll der Ablauf aus **Anlage 1** modelli
 
 Ein Kunde meldet telefonisch einen Reparaturbedarf. Die Serviceannahme erfasst den Auftrag im System und erstellt einen Kostenvoranschlag, der dem Kunden zugesendet wird. Lehnt der Kunde ab, erhält er eine Absage und der Vorgang endet. Nimmt er an, werden **gleichzeitig** das benötigte Ersatzteil bestellt und ein Techniker eingeplant. Sobald beides erledigt ist, führt die Werkstatt die Reparatur durch. Anschließend stellt die Buchhaltung die Rechnung und sendet sie an den Kunden.
 
-**B1 (18 P):** *Modellieren* Sie den Prozess aus **Anlage 1** als BPMN-2.0-Diagramm. Verwenden Sie mindestens: einen Pool für das Möbelhaus mit drei Lanes, einen Pool für den Kunden, Start- und Endereignisse, ein XOR-Gateway mit beschrifteten Pfaden, ein AND-Gateway sowie mindestens einen Nachrichtenfluss.
+**B1 (18 P):** *Modellieren* Sie den Prozess aus Anlage 1 als BPMN-2.0-Diagramm. Verwenden Sie mindestens: einen Pool für das Möbelhaus mit drei Lanes, einen Pool für den Kunden, Start- und Endereignisse, ein XOR-Gateway mit beschrifteten Pfaden, ein AND-Gateway sowie mindestens einen Nachrichtenfluss.
 
 **B2 (8 P):** In einer EPK folgt auf das Ereignis „Kostenvoranschlag ist versendet" direkt ein XOR-Konnektor mit den Ereignissen „Auftrag angenommen" und „Auftrag abgelehnt". *Benennen* Sie die beiden Modellierungsfehler, *begründen* Sie sie und *beschreiben* Sie die korrigierte Reihenfolge.
 
@@ -792,7 +792,7 @@ Die Zeitaufnahme aus **Anlage 2** liegt vor. Die Geschäftsleitung will wissen, 
 
 Weitere Daten: 200 Aufträge im Betrachtungsmonat, davon 24 mit erforderlicher Nacharbeit. Kostensatz Werkstatt: 60 €/h.
 
-**C1 (8 P):** *Berechnen* Sie aus **Anlage 2** die Gesamtbearbeitungszeit, die Gesamtliegezeit und die Durchlaufzeit je Auftrag.
+**C1 (8 P):** *Berechnen* Sie aus Anlage 2 die Gesamtbearbeitungszeit, die Gesamtliegezeit und die Durchlaufzeit je Auftrag.
 
 **C2 (6 P):** *Berechnen* Sie den Wertschöpfungsanteil (Bearbeitungszeit an der Durchlaufzeit) und *beurteilen* Sie das Ergebnis. *Leiten* Sie daraus ab, wo der wirksamste Ansatzpunkt für eine Optimierung liegt.
 
@@ -820,7 +820,7 @@ Damit die Durchlaufzeiten künftig laufend überwacht werden, soll **Process Min
 | 5002 | Reparatur durchführen | 05.03. 08:45 | Petrow |
 | 5002 | Rechnung stellen | 05.03. 16:30 | Sander |
 
-**D1 (6 P):** *Nennen* Sie **drei** konkrete Maßnahmen zur Verkürzung der Durchlaufzeit im beschriebenen Prozess und *ordnen* Sie jede einer der vier Grundstrategien (Eliminieren, Standardisieren, Umstellen/Parallelisieren, Automatisieren) *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**D1 (6 P):** *Nennen* Sie drei konkrete Maßnahmen zur Verkürzung der Durchlaufzeit im beschriebenen Prozess und *ordnen* Sie jede einer der vier Grundstrategien (Eliminieren, Standardisieren, Umstellen/Parallelisieren, Automatisieren) *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Maßnahme | Grundstrategie |
 |---|---|
@@ -830,9 +830,9 @@ Damit die Durchlaufzeiten künftig laufend überwacht werden, soll **Process Min
 
 **D2 (8 P):** Ein digitales Auftragssystem kostet einmalig 18.000 €. Es spart je Auftrag 5 Minuten Bearbeitungszeit. Der Betrieb wickelt 2.400 Aufträge im Jahr ab, der Kostensatz beträgt 60 €/h. *Berechnen* Sie die jährliche Einsparung und die Amortisationszeit. *Beurteilen* Sie die Investition bei einer geplanten Nutzungsdauer von fünf Jahren.
 
-**D3 (4 P):** *Nennen* Sie **zwei** qualitative Faktoren, die in dieser Rechnung nicht erfasst sind, aber in die Entscheidung einfließen sollten.
+**D3 (4 P):** *Nennen* Sie zwei qualitative Faktoren, die in dieser Rechnung nicht erfasst sind, aber in die Entscheidung einfließen sollten.
 
-**D4 (6 P):** *Analysieren* Sie **Anlage 3**: *Benennen* Sie **zwei** Datenqualitätsprobleme und **eine** Prozessauffälligkeit (Case und Aktivität) und *beschreiben* Sie jeweils die Konsequenz für die Auswertung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**D4 (6 P):** *Analysieren* Sie Anlage 3: *Benennen* Sie zwei Datenqualitätsprobleme und eine Prozessauffälligkeit (Case und Aktivität) und *beschreiben* Sie jeweils die Konsequenz für die Auswertung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Befund (Case, Aktivität) | Art | Konsequenz für die Auswertung |
 |---|---|---|
@@ -840,7 +840,7 @@ Damit die Durchlaufzeiten künftig laufend überwacht werden, soll **Process Min
 | | Datenqualitätsproblem | |
 | | Prozessauffälligkeit | |
 
-**D5 (4 P):** Die Geschäftsführung möchte die Auswertung je Mitarbeiter aufschlüsseln. *Erläutern* Sie die rechtlichen Anforderungen und *nennen* Sie **zwei** Maßnahmen, mit denen die Analyse dennoch möglich wird.
+**D5 (4 P):** Die Geschäftsführung möchte die Auswertung je Mitarbeiter aufschlüsseln. *Erläutern* Sie die rechtlichen Anforderungen und *nennen* Sie zwei Maßnahmen, mit denen die Analyse dennoch möglich wird.
 
 ---
 

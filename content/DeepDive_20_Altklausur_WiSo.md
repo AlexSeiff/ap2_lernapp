@@ -262,7 +262,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (4) Eine Verlängerung bedarf der Zustimmung des Betriebsrats.
 - (5) Eine Verlängerung ist nur möglich, wenn der Betrieb zustimmt.
 
-**A5 (4 P):** Welche **zwei** Aussagen zu Rechten und Pflichten in der Ausbildung sind zutreffend? *(Ziffern eintragen)*
+**A5 (4 P):** Welche zwei Aussagen zu Rechten und Pflichten in der Ausbildung sind zutreffend? *(Ziffern eintragen)*
 - (1) Die Probezeit muss mindestens einen und darf höchstens vier Monate betragen.
 - (2) Die Ausbildungsvergütung muss spätestens am 15. des Folgemonats gezahlt werden.
 - (3) Bei mehr als sechs Stunden Arbeitszeit haben volljährige Auszubildende Anspruch auf mindestens 30 Minuten Ruhepause.
@@ -270,7 +270,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (5) Die Vergütung steigt nur, wenn der Betrieb dies freiwillig zusagt.
 - (6) Der Betrieb darf Auszubildenden dauerhaft Tätigkeiten ohne Ausbildungszweck übertragen.
 
-**A6 (4 P):** Welche **zwei** Pflichten treffen Mia als Auszubildende? *(Ziffern eintragen)*
+**A6 (4 P):** Welche zwei Pflichten treffen Mia als Auszubildende? *(Ziffern eintragen)*
 - (1) Sie muss die Weisungen der Ausbildenden befolgen, die im Rahmen der Ausbildung erteilt werden.
 - (2) Sie muss Überstunden ohne Ausgleich leisten.
 - (3) Sie muss am Berufsschulunterricht teilnehmen.
@@ -302,7 +302,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (4) Amtsgericht
 - (5) Landgericht
 
-**B4 (4 P):** Frau Dietrich ist seit 2024 bei der Möbelhaus Nordholz GmbH angestellt. Ihr Bruttogehalt beträgt 3.600,00 EUR. Der allgemeine Beitragssatz zur gesetzlichen Krankenversicherung beträgt 14,6 %. Ihre Krankenkasse erhebt einen Zusatzbeitrag von 2,9 %. Berechnen Sie den **Beitrag, den Frau Dietrich** zur gesetzlichen Krankenversicherung trägt. *(Ergebnis in EUR eintragen)*
+**B4 (4 P):** Frau Dietrich ist seit 2024 bei der Möbelhaus Nordholz GmbH angestellt. Ihr Bruttogehalt beträgt 3.600,00 EUR. Der allgemeine Beitragssatz zur gesetzlichen Krankenversicherung beträgt 14,6 %. Ihre Krankenkasse erhebt einen Zusatzbeitrag von 2,9 %. Berechnen Sie den Beitrag, den Frau Dietrich zur gesetzlichen Krankenversicherung trägt. *(Ergebnis in EUR eintragen)*
 
 **B5 (3 P):** Frau Dietrich ist schwanger und hat den Arbeitgeber informiert; der errechnete Geburtstermin ist der 12.11.2026. Welche Aussage zum Arbeitsverhältnis von Frau Dietrich trifft zu? *(Ziffer eintragen)*
 - (1) Das Arbeitsverhältnis endet mit der Geburt des Kindes.
@@ -320,14 +320,14 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 
 ## Block C – Tarif, Mitbestimmung, Rechtsform und Kennzahlen (20 P)
 
-**C1 (3 P):** Das Möbelhaus ist Mitglied des Arbeitgeberverbandes. In welchem der folgenden Bestandteile des Arbeitsvertrags ist es an **kollektives** Arbeitsrecht gebunden? *(Ziffer eintragen)*
+**C1 (3 P):** Das Möbelhaus ist Mitglied des Arbeitgeberverbandes. In welchem der folgenden Bestandteile des Arbeitsvertrags ist es an kollektives Arbeitsrecht gebunden? *(Ziffer eintragen)*
 - (1) Das Arbeitsverhältnis beginnt am 1. März.
 - (2) Mit Zustimmung des Vorgesetzten kann zweimal pro Woche im Homeoffice gearbeitet werden.
 - (3) Der Mitarbeiter erhält eine individuelle Leistungsprämie von 150 EUR.
 - (4) Das monatliche Grundgehalt richtet sich nach der Entgeltgruppe des Tarifvertrags.
 - (5) Der Arbeitsort ist der Standort Hamburg.
 
-**C2 (4 P):** In welchen **zwei** Angelegenheiten hat der Betriebsrat laut Betriebsverfassungsgesetz ein Mitbestimmungsrecht? *(Ziffern eintragen)*
+**C2 (4 P):** In welchen zwei Angelegenheiten hat der Betriebsrat laut Betriebsverfassungsgesetz ein Mitbestimmungsrecht? *(Ziffern eintragen)*
 - (1) Einführung eines Zeiterfassungssystems, das das Verhalten der Beschäftigten überwacht
 - (2) Entscheidung über das Produktsortiment
 - (3) Aufstellung allgemeiner Urlaubsgrundsätze und des Urlaubsplans
@@ -349,7 +349,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (4) Gesellschafter können zugleich Geschäftsführer der GmbH sein.
 - (5) Die GmbH entsteht ohne Eintragung in das Handelsregister.
 
-**C5 (4 P):** Das Möbelhaus erzielte im letzten Geschäftsjahr einen Gewinn von 31.500,00 EUR. Das Eigenkapital betrug 252.000,00 EUR. Berechnen Sie die **Eigenkapitalrentabilität**. *(Ergebnis in Prozent eintragen)*
+**C5 (4 P):** Das Möbelhaus erzielte im letzten Geschäftsjahr einen Gewinn von 31.500,00 EUR. Das Eigenkapital betrug 252.000,00 EUR. Berechnen Sie die Eigenkapitalrentabilität. *(Ergebnis in Prozent eintragen)*
 
 **C6 (3 P):** Die Geschäftsleitung will den Umsatz im nächsten Quartal kurzfristig und unmittelbar steigern. Welche Einzelmaßnahme ist dafür geeignet? *(Ziffer eintragen)*
 - (1) Der Neubau einer größeren Ausstellungsfläche
@@ -360,7 +360,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 
 ## Block D – Arbeitsschutz, Gesundheit und Umwelt (20 P)
 
-**D1 (3 P):** Nach der Ausbildung möchte Mia Albers einige Zeit im europäischen Ausland arbeiten. Welche Aussage zum **Europass** trifft zu? *(Ziffer eintragen)*
+**D1 (3 P):** Nach der Ausbildung möchte Mia Albers einige Zeit im europäischen Ausland arbeiten. Welche Aussage zum Europass trifft zu? *(Ziffer eintragen)*
 - (1) Er ist ein kostenpflichtiger Dienst der EU.
 - (2) Er unterstützt dabei, Qualifikationen, Fähigkeiten und Kompetenzen bei Bewerbungen europaweit verständlich darzustellen.
 - (3) Er ersetzt das Abschlusszeugnis der Ausbildung.
@@ -374,7 +374,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (4) Er darf bei Gefahr den Betrieb eigenständig stilllegen.
 - (5) Er erlässt Betriebsvereinbarungen zum Arbeitsschutz.
 
-**D3 (4 P):** In einem Seminar werden Sofortmaßnahmen im Brandfall besprochen. Welche **zwei** Maßnahmen müssen sofort ergriffen werden? *(Ziffern eintragen)*
+**D3 (4 P):** In einem Seminar werden Sofortmaßnahmen im Brandfall besprochen. Welche zwei Maßnahmen müssen sofort ergriffen werden? *(Ziffern eintragen)*
 - (1) Brandbekämpfung unbedingt unter Einsatz des eigenen Lebens
 - (2) Notruf 112 absetzen
 - (3) Aufzüge zur schnellen Räumung benutzen
@@ -382,7 +382,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (5) Alle Fenster öffnen, damit der Rauch abziehen kann
 - (6) Wertsachen aus den Büros sichern
 
-**D4 (4 P):** Das Möbelhaus sucht Maßnahmen, um Stress am Arbeitsplatz zu reduzieren. Welche **zwei** Maßnahmen sind dafür **nicht** geeignet? *(Ziffern eintragen)*
+**D4 (4 P):** Das Möbelhaus sucht Maßnahmen, um Stress am Arbeitsplatz zu reduzieren. Welche zwei Maßnahmen sind dafür nicht geeignet? *(Ziffern eintragen)*
 - (1) Flexible Arbeitszeitmodelle werden angeboten.
 - (2) Aufgaben werden dauerhaft verdichtet, ohne zusätzliches Personal einzustellen.
 - (3) Es werden Entspannungs- und Gesundheitskurse angeboten.
@@ -390,7 +390,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (5) Die Beschäftigten müssen auch im Urlaub ständig per Mobiltelefon erreichbar sein.
 - (6) Die Arbeitsplätze werden ergonomisch gestaltet.
 
-**D5 (3 P):** Das Möbelhaus formuliert für ein Audit Ziele. Welches Ziel stellt ein **ökologisches** Ziel dar? *(Ziffer eintragen)*
+**D5 (3 P):** Das Möbelhaus formuliert für ein Audit Ziele. Welches Ziel stellt ein ökologisches Ziel dar? *(Ziffer eintragen)*
 - (1) Der Umsatz soll um 10 % gesteigert werden.
 - (2) Der Energieverbrauch der Lagerhalle soll um 15 % gesenkt werden.
 - (3) Die Mitarbeiterzufriedenheit soll erhöht werden.
@@ -413,14 +413,14 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (4) Die Produktion wird zentral geplant.
 - (5) Die staatliche Wettbewerbspolitik hat das Ziel, den Wettbewerb auszuschalten.
 
-**E2 (3 P):** In welchem Fall handelt es sich um eine **betriebliche Arbeitsteilung** (Arbeitszerlegung)? *(Ziffer eintragen)*
+**E2 (3 P):** In welchem Fall handelt es sich um eine betriebliche Arbeitsteilung (Arbeitszerlegung)? *(Ziffer eintragen)*
 - (1) Das Möbelhaus lagert den Kundendienst an eine Fremdfirma aus.
 - (2) Die Lagerlogistik wird in Wareneingang prüfen, einlagern und kommissionieren zerlegt; verschiedene Mitarbeiter führen die Schritte aus.
 - (3) Ein Möbelstück wird aus Teilen mehrerer Zulieferer zusammengebaut.
 - (4) Das Möbelhaus schließt eine Filiale.
 - (5) Das Möbelhaus vernetzt Lieferanten, Abteilungen und Kunden zu einer „supply chain“.
 
-**E3 (4 P):** Die Küstenlogistik AG befördert Möbel im Auftrag anderer Unternehmen. Welche **zwei** Angaben treffen zu? *(Ziffern eintragen)*
+**E3 (4 P):** Die Küstenlogistik AG befördert Möbel im Auftrag anderer Unternehmen. Welche zwei Angaben treffen zu? *(Ziffern eintragen)*
 - (1) Unternehmen des primären Sektors
 - (2) Unternehmen des sekundären Sektors
 - (3) Unternehmen des tertiären Sektors
@@ -428,7 +428,7 @@ Möbelhaus Nordholz GmbH – 140 Beschäftigte, Betriebsrat vorhanden, Mitglied 
 - (5) Erwerbswirtschaftliches Unternehmen
 - (6) Personengesellschaft
 
-**E4 (3 P):** Die deutsche Volkswirtschaft profitiert von der Globalisierung. Welche Maßnahme **fördert** sie? *(Ziffer eintragen)*
+**E4 (3 P):** Die deutsche Volkswirtschaft profitiert von der Globalisierung. Welche Maßnahme fördert sie? *(Ziffer eintragen)*
 - (1) Die EU führt Importquoten für bestimmte Waren ein.
 - (2) Die EU schließt ein Freihandelsabkommen mit mehreren Staaten ab und baut Zölle ab.
 - (3) Die EU erhöht die Zölle auf Elektronikprodukte.

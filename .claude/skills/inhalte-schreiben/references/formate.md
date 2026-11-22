@@ -173,8 +173,10 @@ Szenario Möbelhaus Nordholz). So sehen die Aufgaben dort aus:
   „Beziehen Sie sich dabei auf Teilaufgabe b)“).
 - **Punkte je Teilaufgabe meist 2–6 P**; groß nur Modellierung (eEPK, Aktivitätsdiagramm 13–21 P), Programmieren/Pseudocode (15–20 P),
   Rechnen mit Tabelle (8–13 P), Diagrammvorlage füllen (10–12 P). Faustregel: *Nennen* 1 P je Angabe, *Beschreiben*/*Erläutern* 2 P je Punkt.
-- **Menge immer ausdrücklich**: „*Nennen* Sie **drei** …“, „*Beschreiben* Sie je **zwei** Vor- und Nachteile …“. Es zählen nur so viele
+- **Menge immer ausdrücklich**: „*Nennen* Sie drei …“, „*Beschreiben* Sie je zwei Vor- und Nachteile …“. Es zählen nur so viele
   Angaben, wie verlangt sind.
+- **Kein Fettdruck im Aufgabentext** (Entscheidung des Owners, 2026-11-22): weder Mengen noch Negationen, Fachbegriffe oder Labels in
+  zitiertem Material. Fett bleibt nur im Aufgabenkopf `**A1 (6 P):**`, in Block-Intros und in den Lösungen (`tests/inhalte.smoke.test.ts`).
 - **Vorstrukturierte Antworttabellen** statt Freitext, wo das Original sie hat – Kopfzeile plus leere Zeilen, manchmal eine vorgegebene
   Beispielzeile: `Risiko | Auswirkung | Ursache`, `Stakeholder | Befürchtung | Gegenmaßnahme`, `Prozessproblem | Auswirkung |
   Verbesserungsvorschlag`, `Kriterium | SQL | NoSQL`, `Sachverhalt | zulässig/nicht zulässig | Begründung`, Vor-/Nachteil-Matrix,
@@ -194,7 +196,7 @@ Szenario Möbelhaus Nordholz). So sehen die Aufgaben dort aus:
 
 **WiSo: 60 Minuten, 30 Aufgaben, 100 Punkte** (Original 3,33 P je Aufgabe; in der App 3 bzw. 4 P, Summe 100)
 - Kasten „Ausgangssituation“ (ein Unternehmen, wiederkehrende Personen), je Aufgabe 1–3 Sätze Situation, dann die Frage und
-  *(Ziffer eintragen)*. Fünf Antworten; sechs, wenn „**zwei** zutreffende“ verlangt sind. Negativfragen fett: **nicht**, **auf keinen Fall**.
+  *(Ziffer eintragen)*. Fünf Antworten; sechs, wenn „zwei zutreffende“ verlangt sind. Negativfragen ohne Fettdruck („nicht“, „auf keinen Fall“).
 - Weitere Formen: Zuordnung (a–e → Ziffern 1–3), Reihenfolge (1, 2, 3 …), Rechnen mit Ergebnisfeld (Prozent, Anzahl, Uhrzeit hh:mm,
   Urlaubstage, Auftragsnummer), Gesetzes- oder Tarifauszug zum Anwenden (BetrVG § 9 Staffel, JArbSchG § 14/§ 19), Statistik-Tabelle zum
   Auswerten, Sicherheitszeichen beschrieben (Form, Farbe, Bild). Teilbewertung im Original nur bei Zuordnung, Reihenfolge und „zwei“.
