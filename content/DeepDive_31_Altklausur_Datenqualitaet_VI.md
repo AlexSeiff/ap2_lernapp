@@ -255,50 +255,35 @@ Zum Perzeptron gehört die Klasse `Perzeptron` mit den Attributen `gewichte: Dou
 
 **A5 (5 P):** *Erläutern* Sie die Funktionsweise des Perzeptrons anhand der Skizze.
 
-**A6 (5 P):** Die Gewichte werden mit dem Perzeptron-Lernalgorithmus gelernt. Das Struktogramm der Methode `lernen(daten)` hat zehn leere Felder. Feld 2 ist der Kopf der äußeren Schleife, Feld 3 der Kopf der inneren Schleife, Feld 7 die Bedingung einer Verzweigung.
+**A6 (5 P):** Die Gewichte werden mit dem Perzeptron-Lernalgorithmus gelernt. *Ordnen* Sie die folgenden Anweisungen den leeren Feldern des Struktogramms der Methode `lernen(daten)` folgerichtig *zu*, indem Sie die Ziffern in das Struktogramm *eintragen*.
 
-Abbildung – Struktogramm der Methode `lernen(daten)` mit zehn leeren Feldern
-
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 350" width="360" height="315" role="img" aria-label="Struktogramm der Methode lernen mit zehn leeren Feldern: nach der Anweisung e gleich 0 folgen Feld 1 und die äußere Schleife mit Feld 2 als Kopf; darin die innere Schleife mit Feld 3 als Kopf, den Feldern 4 bis 6 und der Verzweigung mit Feld 7, im Ja-Zweig die Felder 8 und 9; Feld 10 steht nach der inneren Schleife">
-<rect x="10" y="10" width="380" height="30" class="dg-grau"/><text x="200" y="29" text-anchor="middle" class="dg-klein">e := 0</text>
-<rect x="10" y="40" width="380" height="30" class="dg-form"/><text x="200" y="59" text-anchor="middle" class="dg-klein">Feld 1</text>
-<rect x="10" y="70" width="380" height="30" class="dg-form"/><text x="200" y="89" text-anchor="middle" class="dg-klein">Feld 2</text>
-<rect x="10" y="100" width="24" height="240" class="dg-form"/>
-<rect x="34" y="100" width="356" height="30" class="dg-form"/><text x="212" y="119" text-anchor="middle" class="dg-klein">Feld 3</text>
-<rect x="34" y="130" width="24" height="180" class="dg-form"/>
-<rect x="58" y="130" width="332" height="30" class="dg-form"/><text x="224" y="149" text-anchor="middle" class="dg-klein">Feld 4</text>
-<rect x="58" y="160" width="332" height="30" class="dg-form"/><text x="224" y="179" text-anchor="middle" class="dg-klein">Feld 5</text>
-<rect x="58" y="190" width="332" height="30" class="dg-form"/><text x="224" y="209" text-anchor="middle" class="dg-klein">Feld 6</text>
-<rect x="58" y="220" width="332" height="30" class="dg-form"/>
-<line x1="58" y1="220" x2="224" y2="250" class="dg-linie"/>
-<line x1="390" y1="220" x2="224" y2="250" class="dg-linie"/>
-<text x="224" y="239" text-anchor="middle" class="dg-klein">Feld 7</text>
-<text x="66" y="246" text-anchor="start" class="dg-klein dg-leise">Ja</text>
-<text x="382" y="246" text-anchor="end" class="dg-klein dg-leise">Nein</text>
-<rect x="58" y="250" width="166" height="30" class="dg-form"/><text x="141" y="269" text-anchor="middle" class="dg-klein">Feld 8</text>
-<rect x="58" y="280" width="166" height="30" class="dg-form"/><text x="141" y="299" text-anchor="middle" class="dg-klein">Feld 9</text>
-<rect x="224" y="250" width="166" height="60" class="dg-form"/>
-<rect x="34" y="310" width="356" height="30" class="dg-form"/><text x="212" y="329" text-anchor="middle" class="dg-klein">Feld 10</text>
-</svg>
+```struktogramm
+titel: + lernen(daten : Double[][]) : void
+e := 0
+___
+schleife: ___
+  schleife: ___
+    ___
+    ___
+    ___
+    wenn: ___
+      ja:
+        ___
+        ___
+      nein:
+  ___
+auswahl:
+1 fehler := soll − vorhersage(x)
+2 für z := 0, solange z < Anzahl der Zeilen von daten, z := z + 1
+3 gewichte[2] := gewichte[2] + fehler
+4 e := e + 1
+5 x := daten[z][0, 1]
+6 gewichte := [0.0, 0.0, 0.0]
+7 wenn fehler != 0
+8 soll := daten[z][2]
+9 solange e < epochen
+10 gewichte[0, 1] := gewichte[0, 1] + (fehler * x)
 ```
-
-*Ordnen* Sie die folgenden Anweisungen den Feldern zu und *tragen* Sie die Ziffern in die Tabelle *ein*.
-
-1. `fehler := soll − vorhersage(x)`
-2. `für z := 0, solange z < Anzahl der Zeilen von daten, z := z + 1`
-3. `gewichte[2] := gewichte[2] + fehler`
-4. `e := e + 1`
-5. `x := daten[z][0, 1]`
-6. `gewichte := [0.0, 0.0, 0.0]`
-7. `wenn fehler != 0`
-8. `soll := daten[z][2]`
-9. `solange e < epochen`
-10. `gewichte[0, 1] := gewichte[0, 1] + (fehler * x)`
-
-| Feld | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Anweisung | | | | | | | | | | |
 
 ## Block B – Gerätedaten in eine Datenbank überführen (26 P)
 

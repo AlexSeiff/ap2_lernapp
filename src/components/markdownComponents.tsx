@@ -6,6 +6,8 @@ import { rehypeLoesung, rehypeTabellen } from '../lib/loesungStil';
 import { rehypeOperatoren } from '../lib/operatorStil';
 import { OperatorTipp } from './OperatorTipp';
 import { datasetForSource, sqlEditorLink } from '../lib/sqlLinks';
+import { entscheidungsbaumAusText } from './EntscheidungsbaumEditor';
+import { struktogrammAusText } from './ZuordnungsEditor';
 import { pruefeSvg } from '../../domain/svgDiagramm';
 import { leseDiagramm } from '../../domain/datenDiagramm';
 import { DatenDiagramm } from './DatenDiagramm';
@@ -58,6 +60,7 @@ function makeComponents(source?: string | false): Components {
     },
     // ```svg-Blöcke: handgezeichnetes Diagramm (domain/svgDiagramm.ts prüft die Positivliste), sonst als Code.
     // ```diagramm-Blöcke: Datendiagramm aus einfacher Datenangabe (domain/datenDiagramm.ts), bei Fehlern als Code.
+    // ```entscheidungsbaum / ```struktogramm: Formular wie auf dem Prüfungsbogen (Lücken leer, in der Lösung ausgefüllt).
     // ```sql-Blöcke: Link in den SQL-Editor mit vorausgefüllter Abfrage und passendem Datensatz.
     pre: ({ node, children }) => {
       const svg = codeOfPre(node, 'svg');
@@ -65,6 +68,12 @@ function makeComponents(source?: string | false): Components {
       const daten = codeOfPre(node, 'diagramm');
       const diagramm = daten === undefined ? undefined : leseDiagramm(daten).diagramm;
       if (diagramm) return <DatenDiagramm daten={diagramm} />;
+      const baum = codeOfPre(node, 'entscheidungsbaum');
+      const baumBild = baum === undefined ? undefined : entscheidungsbaumAusText(baum);
+      if (baumBild) return baumBild;
+      const sg = codeOfPre(node, 'struktogramm');
+      const sgBild = sg === undefined ? undefined : struktogrammAusText(sg);
+      if (sgBild) return sgBild;
       const sql = source === false ? undefined : codeOfPre(node, 'sql');
       if (!sql?.trim()) return <pre>{children}</pre>;
       return (

@@ -24,6 +24,8 @@ import { Icon } from './Icon';
 interface Ctx {
   /** undefined: nur ansehen. */
   aendere?: (fn: (liste: Baustein[]) => Baustein[]) => void;
+  /** Eigener Inhalt der Textzelle (Zuordnungs-Struktogramm: Ziffernfeld bzw. Anweisung), statt Text oder Eingabefeld. */
+  zelle?: (b: Baustein) => ReactNode;
 }
 
 const ARTEN: BausteinArt[] = ['anweisung', 'wenn', 'solange', 'wiederhole'];
@@ -64,6 +66,7 @@ function Folge({ liste, ort, ctx }: { liste: Baustein[]; ort: Ort; ctx: Ctx }) {
 }
 
 function Text({ b, ctx, label }: { b: Baustein; ctx: Ctx; label: string }) {
+  if (ctx.zelle) return ctx.zelle(b);
   if (!ctx.aendere) return <span className="sg-text">{b.text.trim() || '…'}</span>;
   return (
     <input
@@ -196,6 +199,15 @@ export function StruktogrammEditor({
         </div>
       </div>
       {hilfen && !!wert.bausteine.length && <Formhinweise meldungen={pruefeStruktogramm(wert)} />}
+    </div>
+  );
+}
+
+/** Vorgegebenes Gerüst (Zuordnungsaufgabe): dieselben Kästen, der Inhalt jeder Zelle kommt von außen. */
+export function StruktogrammGeruest({ bausteine, zelle }: { bausteine: Baustein[]; zelle: (b: Baustein) => ReactNode }) {
+  return (
+    <div className="sg">
+      <Folge liste={bausteine} ort={{ in: 'wurzel' }} ctx={{ zelle }} />
     </div>
   );
 }

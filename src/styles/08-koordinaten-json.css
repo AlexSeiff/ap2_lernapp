@@ -22,3 +22,56 @@
 .json-regeln li.ok { color: var(--good); }
 .json-regeln li.bad { color: var(--low); }
 .json-loesung { margin: 0; overflow-x: auto; }
+
+/* ---------- Entscheidungsbaum zum Ausfüllen (ID3, EntscheidungsbaumEditor.tsx) ---------- */
+.eb-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 2px 0; }
+.eb { display: grid; gap: 22px; width: 100%; min-width: 34em; max-width: 48em; margin: 8px 0; color: var(--text); }
+.eb-kasten { display: grid; gap: 4px; padding: 6px 8px; background: var(--surface); border: 1.5px solid currentColor; }
+.eb-wurzel { justify-self: center; min-width: 15em; }
+.eb-baum { display: grid; justify-items: center; }
+.eb-knoten { display: grid; place-items: center; min-width: 9em; min-height: 3em; padding: 6px 16px; font-weight: 600; background: var(--surface); border: 1.5px solid currentColor; border-radius: 50%; }
+.eb-linien { display: block; width: 100%; height: 2.2em; overflow: visible; }
+.eb-linien line { stroke: currentColor; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.eb-zweige { display: grid; gap: 10px; width: 100%; }
+.eb-zweig { display: grid; gap: 6px; align-content: start; justify-items: center; min-width: 0; }
+.eb-ast { min-width: 5.5em; padding: 3px 8px; text-align: center; background: var(--surface); border: 1.5px solid currentColor; }
+.eb-menge { width: 100%; box-sizing: border-box; }
+.eb-feld { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; font-variant-numeric: tabular-nums; }
+.eb-name { white-space: nowrap; }
+.eb-leer { display: inline-block; min-width: 5em; height: 1.2em; border-bottom: 1px solid currentColor; }
+input.eb-eingabe { flex: 1 1 4em; width: auto; min-width: 3.5em; max-width: 100%; min-height: 32px; margin: 0; padding: 3px 6px; box-sizing: border-box; }
+.eb-knoten input.eb-eingabe, .eb-ast input.eb-eingabe { text-align: center; }
+.eb-eigen { font-weight: 600; }
+.eb-gleich { color: var(--good); font-weight: 600; }
+.eb-abweichend { color: var(--low); background: var(--low-soft); }
+.eb-leer.eb-leer { color: inherit; }
+@media (max-width: 600px) { input.eb-eingabe { font-size: 16px; } }
+
+/* ---------- Struktogramm zum Zuordnen (ZuordnungsEditor.tsx) ---------- */
+.sz { display: grid; gap: 10px; margin: 8px 0; }
+.sz-auswahl { border-collapse: collapse; font-size: 0.9rem; }
+.sz-auswahl th, .sz-auswahl td { padding: 4px 8px; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+.sz-auswahl th { width: 2.4em; text-align: center; }
+.sz-vergeben td code { opacity: 0.55; }
+.sz-haken { width: 1.6em; color: var(--good); text-align: center; }
+.sz-titel { margin: 0; font-weight: 600; }
+.sz-zelle { display: flex; align-items: center; gap: 8px; }
+input.sz-eingabe { flex: none; width: 3.4em; min-width: 3.4em; min-height: 32px; margin: 0; padding: 2px 4px; text-align: center; font-weight: 600; }
+.sz-nr { min-width: 1.6em; text-align: center; }
+.sz-anweisung { flex: 1 1 auto; overflow-wrap: anywhere; }
+.sz-anweisung.bad { color: var(--low); }
+.sz-leer { min-height: 1.6em; }
+.sz-gefuellt code, .sz-anweisung code { font-size: 0.88em; }
+@media (max-width: 600px) { input.sz-eingabe { font-size: 16px; } }
+.eb-knoten input.eb-eingabe { width: 8em; flex: none; background: transparent; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; box-shadow: none; }
+.eb-knoten input.eb-eingabe:focus { border-bottom-color: var(--accent); }
+/* Handy: Zweige untereinander statt nebeneinander (die Äste fallen weg, Merkmal → Zweig steht als Einrückung da). */
+@media (max-width: 600px) {
+  .eb { min-width: 0; gap: 16px; }
+  .eb-wurzel { justify-self: stretch; min-width: 0; }
+  .eb-linien { display: none; }
+  .eb-knoten { justify-self: start; margin-bottom: 8px; }
+  .eb-zweige { grid-template-columns: 1fr !important; gap: 8px; padding-left: 14px; border-left: 1.5px solid currentColor; }
+  .eb-zweig { grid-template-columns: auto 1fr; align-items: start; justify-items: stretch; }
+  .eb-ast { min-width: 4.5em; align-self: start; }
+}

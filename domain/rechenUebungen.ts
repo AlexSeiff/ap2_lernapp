@@ -31,6 +31,8 @@ const eingabeSchema = z.union([
     runden: z.number().int().min(0).max(6).optional(),
     toleranz: z.number().nonnegative().optional(),
     loesung: wert.optional(),
+    /** Typische falsche Ergebnisse mit Erklärung (nur ohne Vorlage) – Rückmeldung beim Prüfen und Auswahl im Leicht-Modus. */
+    fehler: z.array(z.object({ wert, text })).optional(),
   }),
 ]);
 

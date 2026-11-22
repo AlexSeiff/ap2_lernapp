@@ -115,6 +115,8 @@ describe('Erkennung', () => {
       '03-D3': 'boxplot', // tests/boxplotAntwort.test.ts
       '11-D2': 'struktogramm', // tests/struktogramm.test.ts
       '29-A1': 'koordinaten', // tests/koordinatenAntwort.test.ts (29-A4 verlangt zusätzlich eine Tabelle und bleibt eine Wertetabelle)
+      '23-A5': 'baum', // Entscheidungsbaum mit Lücken (tests/entscheidungsbaum.test.ts)
+      '31-A6': 'zuordnung', // Struktogramm mit leeren Feldern (tests/struktogrammVorlage.test.ts)
       // Verlangte Tabellen (tests/werteTabelle.test.ts)
       ...Object.fromEntries(
         [
@@ -169,7 +171,6 @@ describe('Erkennung', () => {
           '22-C7',
           '22-D1',
           '22-D3',
-          '23-A5',
           '23-B1',
           '23-C1',
           '23-C3',
@@ -191,7 +192,6 @@ describe('Erkennung', () => {
           '30-C2',
           '30-D3',
           '31-A4',
-          '31-A6',
         ].map((id) => [id, 'werte']),
       ),
     });

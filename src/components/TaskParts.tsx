@@ -5,6 +5,8 @@ import { autoGrade, difficulty, formatPoints } from '../lib/grading';
 import { numberBlanks, solutionMarkdown } from '../lib/sheets';
 import { sqlUebungZuAufgabe } from '../lib/sqlAufgabe';
 import { ohneVorlageTabelle } from '../lib/werteTabelle';
+import { ohneBaum } from '../lib/entscheidungsbaum';
+import { ohneStruktogramm } from '../lib/struktogrammVorlage';
 import { useStore } from '../lib/store';
 import { decodeAnswer } from './AnswerInput';
 import { Markdown } from './Markdown';
@@ -32,15 +34,21 @@ export function TaskText({ task, showMeta }: { task: Task; showMeta?: boolean })
       </div>
       <Textmarker bereich={task.id}>
         <Markdown source={false} operatoren>
-          {task.type === 'lueckentext'
-            ? numberBlanks(task.markdown)
-            : editorFuer(task) === 'werte'
-              ? ohneVorlageTabelle(task.markdown) // die Tabelle steht als Antworttabelle darunter
-              : task.markdown}
+          {aufgabenText(task)}
         </Markdown>
       </Textmarker>
     </div>
   );
+}
+
+/** Text der Aufgabe; was als Antwortformular darunter steht (Tabelle, Baum, Struktogramm), steht nicht doppelt da. */
+function aufgabenText(task: Task): string {
+  if (task.type === 'lueckentext') return numberBlanks(task.markdown);
+  const art = editorFuer(task);
+  if (art === 'werte') return ohneVorlageTabelle(task.markdown);
+  if (art === 'baum') return ohneBaum(task.markdown);
+  if (art === 'zuordnung') return ohneStruktogramm(task.markdown);
+  return task.markdown;
 }
 
 export function Attachments({ items, open }: { items: Section[]; open?: boolean }) {

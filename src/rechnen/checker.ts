@@ -205,6 +205,14 @@ function listeGleich(a: number[], b: number[], tol: number): boolean {
   return x.every((v, i) => Math.abs(v - y[i]) <= tol);
 }
 
+/** Ganzzahlen in eckigen Klammern, z. B. „[2, 1]“ (Lösung) bzw. „[2,1]“, „2; 1“, „2 1“ (Eingabe) – sonst undefined. */
+function geordnet(text: string): number[] | undefined {
+  const t = text.trim();
+  const innen = t.replace(/^\[|\]$/g, '').trim();
+  if (!/^\d+(?:\s*[,;\s]\s*\d+)+$/.test(innen)) return undefined;
+  return innen.split(/[\s,;]+/).map(Number);
+}
+
 // ---------- Prüfen ----------
 
 /** Prüft eine Eingabe gegen den erwarteten Wert und erklärt erkannte Fehlerbilder. */
@@ -212,6 +220,17 @@ export function pruefeEingabe(e: AufgeloesteEingabe, text: string, fehlerbilder:
   if (!text.trim()) return { status: 'leer' };
   const eigene = fehlerbilder.filter((f) => f.eingabe === e.id);
 
+  if (e.vergleich === 'text' && /^\[.*\]$/.test(String(e.erwartet).trim()) && geordnet(String(e.erwartet))) {
+    // Teilmenge T = [ja, nein]: Reihenfolge zählt, Klammern und Trennzeichen sind egal.
+    const soll = geordnet(String(e.erwartet))!;
+    const ist = geordnet(text);
+    if (!ist)
+      return { status: 'ungueltig', meldung: `Gib die Anzahlen in Klammern ein, z. B. „${String(e.erwartet)}“ – erst ja, dann nein.` };
+    if (ist.length === soll.length && ist.every((v, i) => v === soll[i])) return { status: 'richtig' };
+    if (ist.length === soll.length && [...ist].reverse().every((v, i) => v === soll[i]))
+      return { status: 'falsch', meldung: 'Fast: Die Reihenfolge ist [Anzahl ja, Anzahl nein].', fehlerbild: true };
+    return { status: 'falsch' };
+  }
   if (e.vergleich === 'text' || e.vergleich === 'menge') {
     const erwartet = String(e.erwartet);
     const passt = (soll: string) => (e.vergleich === 'menge' ? mengePasst(text, soll) : textPasst(text, soll));

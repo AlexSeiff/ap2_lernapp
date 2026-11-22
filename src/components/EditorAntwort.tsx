@@ -6,7 +6,18 @@
 import { useMemo, type ReactNode } from 'react';
 import type { Task } from '../../domain/types';
 import { pruefeDiagrammAntwort, type DiagrammAntwort } from '../lib/diagrammEditor';
-import { EDITOR_NAMEN, istDiagrammArt, leseEditorAntwort, schreibeEditorAntwort, vorlageFuer, type EditorArt } from '../lib/editorAufgabe';
+import {
+  baumVorlage,
+  EDITOR_NAMEN,
+  istDiagrammArt,
+  leseEditorAntwort,
+  schreibeEditorAntwort,
+  struktogrammVorlage,
+  vorlageFuer,
+  type EditorArt,
+} from '../lib/editorAufgabe';
+import type { BaumAntwort } from '../lib/entscheidungsbaum';
+import type { ZuordnungAntwort } from '../lib/struktogrammVorlage';
 import { abgleichOk, gleicheAb, musterFuerSchritt, musterTabellen, relationText, type TabellenAntwort } from '../lib/tabellenEditor';
 import { gleicheWerteAb, type WerteAntwort } from '../lib/werteTabelle';
 import type { BoxplotAntwort } from '../lib/boxplotAntwort';
@@ -20,6 +31,8 @@ import { DiagrammAnsicht } from './diagramm/Zeichnung';
 import { Icon } from './Icon';
 import { KoordinatenAnsicht, KoordinatenEditor, KoordinatenPruefung } from './KoordinatenEditor';
 import { StruktogrammAnsicht, StruktogrammEditor, StruktogrammPruefung } from './StruktogrammEditor';
+import { BaumAnsicht, BaumEditor, BaumPruefung } from './EntscheidungsbaumEditor';
+import { ZuordnungAnsicht, ZuordnungEditor, ZuordnungPruefung } from './ZuordnungsEditor';
 import { TabellenAnsicht, TabellenEditor } from './TabellenEditor';
 import { WerteAnsicht, WerteEditor } from './WerteEditor';
 
@@ -31,6 +44,9 @@ const EINLEITUNG: Partial<Record<EditorArt, string>> = {
   boxplot: 'Rechne die Kennwerte selbst aus und trag sie ein – die App zeichnet daraus den Boxplot maßstäblich.',
   koordinaten:
     'Zeichne im Koordinatensystem: Punkte per Klick (Kreis, Kreuz, Kästchen), Geraden als Gleichung – die App zeichnet sie maßstäblich.',
+  baum: 'Trag die Werte direkt in den Baum ein – wie auf dem Prüfungsbogen: Merkmale, Zweige, Teilmengen T = [ja, nein] und Entropien.',
+  zuordnung:
+    'Trag in jedes leere Feld die Ziffer der passenden Anweisung ein – die App schreibt die Anweisung dazu, so siehst du das Struktogramm wachsen.',
   struktogramm:
     'Bau dein Struktogramm aus Bausteinen: „+ Baustein“ fügt am Ende einer Folge an, in Zweige und Schleifen genauso. Texte schreibst du direkt in die Kästen.',
 };
@@ -41,6 +57,8 @@ const NOTIZ: Partial<Record<EditorArt, string>> = {
   boxplot: 'Rechenweg: Quartile, Zäune, Begründung der Whisker-Enden (optional)',
   struktogramm: 'Anmerkungen, z. B. Annahmen zu den Daten (optional)',
   koordinaten: 'Achsenbeschriftung, Legende, Anmerkungen (optional)',
+  baum: 'Begründung deiner Entscheidung (welches Merkmal wird die Wurzel und warum?)',
+  zuordnung: 'Anmerkungen (optional)',
 };
 
 interface Props {
@@ -68,6 +86,14 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
       if (art === 'boxplot') return <BoxplotAnsicht wert={wert as BoxplotAntwort} />;
       if (art === 'struktogramm') return <StruktogrammAnsicht wert={wert as StruktogrammAntwort} />;
       if (art === 'koordinaten') return <KoordinatenAnsicht wert={wert as KoordinatenAntwort} task={mitKontext} />;
+      if (art === 'baum') {
+        const baum = baumVorlage(task.markdown);
+        return baum ? <BaumAnsicht baum={baum} wert={wert as BaumAntwort} /> : null;
+      }
+      if (art === 'zuordnung') {
+        const vorlage = struktogrammVorlage(task.markdown);
+        return vorlage ? <ZuordnungAnsicht vorlage={vorlage} wert={wert as ZuordnungAntwort} /> : null;
+      }
       if (diagramm) return <DiagrammAnsicht wert={wert as DiagrammAntwort} />;
       return <TabellenAnsicht wert={wert as TabellenAntwort} />;
     };
@@ -88,6 +114,14 @@ export default function EditorAntwort({ task, art, value, onChange, disabled, hi
     if (art === 'struktogramm') return <StruktogrammEditor wert={wert as StruktogrammAntwort} onChange={setze} hilfen={hilfen} />;
     if (art === 'koordinaten')
       return <KoordinatenEditor wert={wert as KoordinatenAntwort} onChange={setze} task={mitKontext} hilfen={hilfen} />;
+    if (art === 'baum') {
+      const baum = baumVorlage(task.markdown);
+      return baum ? <BaumEditor baum={baum} wert={wert as BaumAntwort} onChange={setze} /> : null;
+    }
+    if (art === 'zuordnung') {
+      const vorlage = struktogrammVorlage(task.markdown);
+      return vorlage ? <ZuordnungEditor vorlage={vorlage} wert={wert as ZuordnungAntwort} onChange={setze} hilfen={hilfen} /> : null;
+    }
     if (diagramm) return <DiagrammEditor wert={wert as DiagrammAntwort} onChange={setze} hilfen={hilfen} />;
     return <TabellenEditor wert={wert as TabellenAntwort} onChange={setze} anlagen={anlagen} />;
   };
@@ -120,6 +154,16 @@ export function EditorPruefung({ task, art, answer }: { task: Task; art: EditorA
   if (art === 'werte') return <WertePruefung task={task} wert={wert as WerteAntwort} />;
   if (art === 'boxplot') return <BoxplotPruefung task={task} wert={wert as BoxplotAntwort} />;
   if (art === 'struktogramm') return <StruktogrammPruefung wert={wert as StruktogrammAntwort} />;
+  if (art === 'baum') {
+    const baum = baumVorlage(task.markdown);
+    return baum ? <BaumPruefung baum={baum} wert={wert as BaumAntwort} loesungMarkdown={task.solution?.markdown ?? ''} /> : null;
+  }
+  if (art === 'zuordnung') {
+    const vorlage = struktogrammVorlage(task.markdown);
+    return vorlage ? (
+      <ZuordnungPruefung vorlage={vorlage} wert={wert as ZuordnungAntwort} loesungMarkdown={task.solution?.markdown ?? ''} />
+    ) : null;
+  }
   if (art === 'koordinaten')
     return (
       <KoordinatenPruefung

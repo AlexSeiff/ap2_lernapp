@@ -223,6 +223,8 @@ export interface RechenEingabe {
   toleranz?: number;
   /** Nur bei Übungen ohne Vorlage: der richtige Wert. */
   loesung?: RechenWert;
+  /** Nur bei Übungen ohne Vorlage: typische falsche Werte mit Erklärung (Rückmeldung und Auswahl im Leicht-Modus). */
+  fehler?: { wert: RechenWert; text: string }[];
 }
 
 /** Rechenübung (aus AP2_Rechen_Uebungen.json, Feld „uebungen“). */

@@ -42,9 +42,33 @@ A = Bias, B = Input, C = Gewichte, D = Nettoeingabefunktion, E = Sprungfunktion,
 
 **A6 (5 P):** *(je zwei richtige Felder 1 P)*
 
-| Feld | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Anweisung | 6 | 9 | 2 | 5 | 8 | 1 | 7 | 10 | 3 | 4 |
+```struktogramm
+titel: + lernen(daten : Double[][]) : void
+e := 0
+[6]
+schleife: [9]
+  schleife: [2]
+    [5]
+    [8]
+    [1]
+    wenn: [7]
+      ja:
+        [10]
+        [3]
+      nein:
+  [4]
+auswahl:
+1 fehler := soll − vorhersage(x)
+2 für z := 0, solange z < Anzahl der Zeilen von daten, z := z + 1
+3 gewichte[2] := gewichte[2] + fehler
+4 e := e + 1
+5 x := daten[z][0, 1]
+6 gewichte := [0.0, 0.0, 0.0]
+7 wenn fehler != 0
+8 soll := daten[z][2]
+9 solange e < epochen
+10 gewichte[0, 1] := gewichte[0, 1] + (fehler * x)
+```
 
 Der Algorithmus in Worten: Gewichte mit 0 vorbelegen (6) · solange noch Epochen übrig sind (9) · für jede Zeile der Trainingsdaten (2): Messwerte lesen (5), Label lesen (8), Fehler aus Label und Vorhersage bilden (1) · wenn der Fehler nicht 0 ist (7): Gewichte der Eingänge anpassen (10) und Bias-Gewicht anpassen (3) · nach der inneren Schleife den Epochenzähler erhöhen (4).
 

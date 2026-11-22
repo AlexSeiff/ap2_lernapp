@@ -178,18 +178,23 @@ Altersgruppen: A1 bis 30 Jahre, A2 31 bis 50 Jahre, A3 über 50 Jahre. Die Erken
 
 **A4 (3 P):** *Nennen* Sie das Kriterium, nach dem der ID3-Algorithmus die Knoten eines Entscheidungsbaums auswählt.
 
-**A5 (12 P):** *Ermitteln* Sie die erste Entscheidungsebene nach dem ID3-Algorithmus. *Tragen* Sie die Teilmengen T = [Anzahl ja, Anzahl nein] und ihre Entropien in die Tabelle *ein* (vier Nachkommastellen). *Begründen* Sie mithilfe des Ergebnisses, welches Merkmal die Wurzel des Baums wird.
+**A5 (12 P):** *Ermitteln* Sie die erste Entscheidungsebene nach dem ID3-Algorithmus. *Tragen* Sie die Merkmale, die Zweige, die Teilmengen und ihre Entropien (vier Nachkommastellen) in die Lücken des folgenden Diagramms *ein*. *Begründen* Sie mithilfe dieses Ergebnisses, welches Merkmal die Wurzel des Baums wird.
 
-| Knoten | Zweig | T = [ja, nein] | Entropie |
-|---|---|---|---|
-| Gesamtmenge | – | | |
-| Altersgruppe | A1 | [3, 0] | 0 |
-| Altersgruppe | A2 | | |
-| Altersgruppe | A3 | | |
-| Wohnform | Miete | | |
-| Wohnform | Eigentum | | |
-| Newsletter | Ja | | |
-| Newsletter | Nein | | |
+Im Diagramm steht T für die acht Kunden der Tabelle, T = [Anzahl ja, Anzahl nein] für die Zahl der Kunden mit und ohne Kauf von Naturmöbeln und Entropie(Tᵢ) für die Entropie der Teilmenge i.
+
+```entscheidungsbaum
+T = ___ | Entropie(T) = ___
+Altersgruppe
+  A1 | T₁ = [3, 0] | Entropie(T₁) = 0
+  ___ | T₂ = ___ | Entropie(T₂) = ___
+  ___ | T₃ = ___ | Entropie(T₃) = ___
+___
+  ___ | T₁ = ___ | Entropie(T₁) = ___
+  ___ | T₂ = ___ | Entropie(T₂) = ___
+___
+  ___ | T₁ = ___ | Entropie(T₁) = ___
+  ___ | T₂ = ___ | Entropie(T₂) = ___
+```
 
 ## Block B – Übernahme der Beschäftigten des Küchenstudios (25 P)
 

@@ -1028,6 +1028,253 @@
       "quelleAufgabe": "DD30 Übungsklausur B7"
     },
     {
+      "id": "RE-ML-019",
+      "thema": "Deep Dive 6",
+      "titel": "ID3 wie im Prüfungsbogen: Lieferung im Zeitfenster",
+      "schwierigkeit": 3,
+      "tags": [
+        "entscheidungsbaum",
+        "id3",
+        "entropie"
+      ],
+      "aufgabe": "Die Möbelhaus Nordholz GmbH will vorhersagen, ob eine Lieferung im angekündigten Zeitfenster ankommt. Zehn Aufträge liegen vor:\n\n| Nr. | Lieferart | Region | Sperrgut | im Zeitfenster? |\n|---|---|---|---|---|\n| 1 | Eigene Tour | Stadt | nein | ja |\n| 2 | Eigene Tour | Land | ja | ja |\n| 3 | Eigene Tour | Stadt | ja | ja |\n| 4 | Spedition | Land | ja | nein |\n| 5 | Spedition | Stadt | ja | ja |\n| 6 | Spedition | Land | nein | nein |\n| 7 | Paketdienst | Stadt | nein | ja |\n| 8 | Paketdienst | Land | nein | nein |\n| 9 | Eigene Tour | Land | nein | ja |\n| 10 | Paketdienst | Stadt | nein | ja |\n\nFülle die Lücken im Diagramm zur Ermittlung der ersten Entscheidungsebene nach dem ID3-Algorithmus aus: T = [Anzahl ja, Anzahl nein], Entropien auf vier Nachkommastellen. Bestimme dann das Merkmal für die Wurzel und seinen Informationsgewinn.\n\n```entscheidungsbaum\nT = ___ | Entropie(T) = ___\nLieferart\n  Eigene Tour | T₁ = ___ | Entropie(T₁) = ___\n  Spedition | T₂ = ___ | Entropie(T₂) = ___\n  Paketdienst | T₃ = ___ | Entropie(T₃) = ___\nRegion\n  Stadt | T₁ = ___ | Entropie(T₁) = ___\n  Land | T₂ = ___ | Entropie(T₂) = ___\nSperrgut\n  ja | T₁ = ___ | Entropie(T₁) = ___\n  nein | T₂ = ___ | Entropie(T₂) = ___\n```",
+      "eingaben": [
+        {
+          "id": "t",
+          "label": "T (alle Aufträge)",
+          "loesung": "[7, 3]"
+        },
+        {
+          "id": "h",
+          "label": "Entropie(T)",
+          "runden": 4,
+          "loesung": 0.8813
+        },
+        {
+          "id": "tour_t",
+          "label": "T Eigene Tour",
+          "loesung": "[4, 0]"
+        },
+        {
+          "id": "tour_h",
+          "label": "Entropie Eigene Tour",
+          "runden": 4,
+          "loesung": 0
+        },
+        {
+          "id": "sped_t",
+          "label": "T Spedition",
+          "loesung": "[1, 2]"
+        },
+        {
+          "id": "sped_h",
+          "label": "Entropie Spedition",
+          "runden": 4,
+          "loesung": 0.9183
+        },
+        {
+          "id": "paket_t",
+          "label": "T Paketdienst",
+          "loesung": "[2, 1]"
+        },
+        {
+          "id": "paket_h",
+          "label": "Entropie Paketdienst",
+          "runden": 4,
+          "loesung": 0.9183
+        },
+        {
+          "id": "stadt_t",
+          "label": "T Stadt",
+          "loesung": "[5, 0]"
+        },
+        {
+          "id": "stadt_h",
+          "label": "Entropie Stadt",
+          "runden": 4,
+          "loesung": 0
+        },
+        {
+          "id": "land_t",
+          "label": "T Land",
+          "loesung": "[2, 3]"
+        },
+        {
+          "id": "land_h",
+          "label": "Entropie Land",
+          "runden": 4,
+          "loesung": 0.971
+        },
+        {
+          "id": "sg_ja_t",
+          "label": "T Sperrgut ja",
+          "loesung": "[3, 1]"
+        },
+        {
+          "id": "sg_ja_h",
+          "label": "Entropie Sperrgut ja",
+          "runden": 4,
+          "loesung": 0.8113
+        },
+        {
+          "id": "sg_nein_t",
+          "label": "T Sperrgut nein",
+          "loesung": "[4, 2]"
+        },
+        {
+          "id": "sg_nein_h",
+          "label": "Entropie Sperrgut nein",
+          "runden": 4,
+          "loesung": 0.9183
+        },
+        {
+          "id": "wurzel",
+          "label": "Merkmal für die Wurzel",
+          "loesung": "Region",
+          "fehler": [
+            {
+              "wert": "Lieferart",
+              "text": "Die Lieferart hat zwar einen reinen Zweig (Eigene Tour) und drei Ausprägungen, ihr Informationsgewinn ist mit 0,3303 aber kleiner als der der Region (0,3958). Entscheidend ist die gewichtete Entropie, nicht die Zahl der Zweige."
+            },
+            {
+              "wert": "Sperrgut",
+              "text": "Sperrgut trennt kaum: Beide Teilmengen bleiben gemischt, der Informationsgewinn ist nur 0,0058."
+            }
+          ]
+        },
+        {
+          "id": "gewinn",
+          "label": "Informationsgewinn dieses Merkmals",
+          "runden": 4,
+          "loesung": 0.3958
+        }
+      ],
+      "hinweise": [
+        "Zähle zuerst in jeder Teilmenge, wie oft „ja“ und „nein“ vorkommt – erst ja, dann nein: [ja, nein].",
+        "Eine reine Teilmenge (nur ja oder nur nein) hat die Entropie 0, eine Verteilung 1 : 2 immer 0,9183 – egal in welcher Richtung.",
+        "Je Merkmal: Entropien der Teilmengen mit ihrem Anteil gewichten und addieren. Der Informationsgewinn ist die Entropie der Gesamtmenge minus diese Summe – das Merkmal mit dem größten Gewinn wird die Wurzel."
+      ],
+      "erklaerung": "Gewichtete Entropien: Lieferart $\\frac{3}{10} \\cdot 0{,}9183 + \\frac{3}{10} \\cdot 0{,}9183 = 0{,}5510$, Region $\\frac{5}{10} \\cdot 0{,}9710 = 0{,}4855$, Sperrgut $\\frac{4}{10} \\cdot 0{,}8113 + \\frac{6}{10} \\cdot 0{,}9183 = 0{,}8755$. Region hat mit $0{,}8813 - 0{,}4855 = 0{,}3958$ den größten Informationsgewinn (Lieferart 0,3303, Sperrgut 0,0058) und wird die Wurzel: Der Zweig „Stadt“ ist sofort rein, nur „Land“ muss weiter aufgeteilt werden. Die Lieferart hat zwar einen reinen Zweig (Eigene Tour), lässt aber zwei gemischte übrig."
+    },
+    {
+      "id": "RE-ML-020",
+      "thema": "Deep Dive 6",
+      "titel": "ID3 wie im Prüfungsbogen: Zusatzgarantie",
+      "schwierigkeit": 3,
+      "tags": [
+        "entscheidungsbaum",
+        "id3",
+        "entropie"
+      ],
+      "aufgabe": "Im Möbelhaus wird bei Polstermöbeln eine Zusatzgarantie angeboten. Zwölf Kaufvorgänge sind erfasst (Altersgruppe A1 bis 30 Jahre, A2 31 bis 50 Jahre, A3 über 50 Jahre):\n\n| Nr. | Altersgruppe | Kundenkarte | Kanal | Zusatzgarantie? |\n|---|---|---|---|---|\n| 1 | A1 | ja | Online | nein |\n| 2 | A1 | nein | Online | nein |\n| 3 | A1 | ja | Filiale | ja |\n| 4 | A2 | ja | Filiale | ja |\n| 5 | A2 | nein | Filiale | ja |\n| 6 | A2 | ja | Online | ja |\n| 7 | A2 | nein | Online | nein |\n| 8 | A3 | ja | Filiale | ja |\n| 9 | A3 | ja | Filiale | ja |\n| 10 | A3 | nein | Online | nein |\n| 11 | A3 | ja | Online | ja |\n| 12 | A1 | nein | Filiale | nein |\n\nFülle die Lücken im Diagramm zur Ermittlung der ersten Entscheidungsebene nach dem ID3-Algorithmus aus (Entropien auf vier Nachkommastellen). Der erste Zweig ist schon eingetragen. Bestimme dann das Merkmal für die Wurzel und seinen Informationsgewinn.\n\n```entscheidungsbaum\nT = ___ | Entropie(T) = ___\nAltersgruppe\n  A1 | T₁ = [1, 3] | Entropie(T₁) = 0,8113\n  A2 | T₂ = ___ | Entropie(T₂) = ___\n  A3 | T₃ = ___ | Entropie(T₃) = ___\nKundenkarte\n  ja | T₁ = ___ | Entropie(T₁) = ___\n  nein | T₂ = ___ | Entropie(T₂) = ___\nKanal\n  Filiale | T₁ = ___ | Entropie(T₁) = ___\n  Online | T₂ = ___ | Entropie(T₂) = ___\n```",
+      "eingaben": [
+        {
+          "id": "t",
+          "label": "T (alle Kaufvorgänge)",
+          "loesung": "[7, 5]"
+        },
+        {
+          "id": "h",
+          "label": "Entropie(T)",
+          "runden": 4,
+          "loesung": 0.9799
+        },
+        {
+          "id": "a2_t",
+          "label": "T A2",
+          "loesung": "[3, 1]"
+        },
+        {
+          "id": "a2_h",
+          "label": "Entropie A2",
+          "runden": 4,
+          "loesung": 0.8113
+        },
+        {
+          "id": "a3_t",
+          "label": "T A3",
+          "loesung": "[3, 1]"
+        },
+        {
+          "id": "a3_h",
+          "label": "Entropie A3",
+          "runden": 4,
+          "loesung": 0.8113
+        },
+        {
+          "id": "karte_ja_t",
+          "label": "T Kundenkarte ja",
+          "loesung": "[6, 1]"
+        },
+        {
+          "id": "karte_ja_h",
+          "label": "Entropie Kundenkarte ja",
+          "runden": 4,
+          "loesung": 0.5917
+        },
+        {
+          "id": "karte_nein_t",
+          "label": "T Kundenkarte nein",
+          "loesung": "[1, 4]"
+        },
+        {
+          "id": "karte_nein_h",
+          "label": "Entropie Kundenkarte nein",
+          "runden": 4,
+          "loesung": 0.7219
+        },
+        {
+          "id": "filiale_t",
+          "label": "T Filiale",
+          "loesung": "[5, 1]"
+        },
+        {
+          "id": "filiale_h",
+          "label": "Entropie Filiale",
+          "runden": 4,
+          "loesung": 0.65
+        },
+        {
+          "id": "online_t",
+          "label": "T Online",
+          "loesung": "[2, 4]"
+        },
+        {
+          "id": "online_h",
+          "label": "Entropie Online",
+          "runden": 4,
+          "loesung": 0.9183
+        },
+        {
+          "id": "wurzel",
+          "label": "Merkmal für die Wurzel",
+          "loesung": "Kundenkarte",
+          "fehler": [
+            {
+              "wert": "Altersgruppe",
+              "text": "Drei Zweige sind kein Vorteil: In jeder Altersgruppe steht es 3 : 1 bzw. 1 : 3, die gewichtete Entropie bleibt 0,8113 – Informationsgewinn nur 0,1686."
+            },
+            {
+              "wert": "Kanal",
+              "text": "Der Kanal trennt besser als die Altersgruppe (Gewinn 0,1957), aber schlechter als die Kundenkarte (0,3339)."
+            }
+          ]
+        },
+        {
+          "id": "gewinn",
+          "label": "Informationsgewinn dieses Merkmals",
+          "runden": 4,
+          "loesung": 0.3339
+        }
+      ],
+      "hinweise": [
+        "Gesamtmenge: 7 × ja, 5 × nein. Teilmengen genauso zählen – Reihenfolge [ja, nein].",
+        "Gleiche Verteilungen haben die gleiche Entropie: [1, 3] und [3, 1] ergeben beide 0,8113.",
+        "Gewichtete Entropie je Merkmal = Summe aus Anteil der Teilmenge mal ihrer Entropie. Der größte Informationsgewinn (Entropie der Gesamtmenge minus gewichtete Entropie) bestimmt die Wurzel."
+      ],
+      "erklaerung": "Gewichtete Entropien: Altersgruppe $3 \\cdot \\frac{4}{12} \\cdot 0{,}8113 = 0{,}8113$, Kundenkarte $\\frac{7}{12} \\cdot 0{,}5917 + \\frac{5}{12} \\cdot 0{,}7219 = 0{,}6459$, Kanal $\\frac{6}{12} \\cdot 0{,}6500 + \\frac{6}{12} \\cdot 0{,}9183 = 0{,}7842$. Die Kundenkarte bringt mit $0{,}9799 - 0{,}6459 = 0{,}3339$ den größten Informationsgewinn (Kanal 0,1957, Altersgruppe 0,1686) und wird die Wurzel. Die Altersgruppe hat zwar drei Zweige, aber in jedem dieselbe Mischung 3 : 1 – sie trennt kaum."
+    },
+    {
       "id": "RE-PA-001",
       "thema": "Deep Dive 5",
       "titel": "Durchlaufzeit und Wertschöpfungsanteil",

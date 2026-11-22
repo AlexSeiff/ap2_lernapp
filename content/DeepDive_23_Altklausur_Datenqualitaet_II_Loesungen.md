@@ -17,18 +17,23 @@
 
 **A4 (3 P):** Der **Informationsgewinn** (Information Gain): ID3 wählt das Merkmal, dessen Aufteilung die **Entropie am stärksten senkt**, also die kleinste gewichtete Restentropie hinterlässt.
 
-**A5 (12 P):** *(je richtige Zeile 1 P = 7 P, gewichtete Entropie und Informationsgewinn der drei Merkmale 3 P, Entscheidung mit Begründung 2 P)*
+**A5 (12 P):** *(je richtiger Knoten bzw. Zweig mit Teilmenge und Entropie 1 P = 7 P, gewichtete Entropie und Informationsgewinn der drei Merkmale 3 P, Entscheidung mit Begründung 2 P)*
 
-| Knoten | Zweig | T = [ja, nein] | Entropie |
-|---|---|---|---|
-| Gesamtmenge | – | [5, 3] | 0,9544 |
-| Altersgruppe | A1 | [3, 0] | 0 |
-| Altersgruppe | A2 | [2, 1] | 0,9183 |
-| Altersgruppe | A3 | [0, 2] | 0 |
-| Wohnform | Miete | [2, 2] | 1 |
-| Wohnform | Eigentum | [3, 1] | 0,8113 |
-| Newsletter | Ja | [4, 0] | 0 |
-| Newsletter | Nein | [1, 3] | 0,8113 |
+```entscheidungsbaum
+T = [5, 3] | Entropie(T) = 0,9544
+Altersgruppe
+  A1 | T₁ = [3, 0] | Entropie(T₁) = 0
+  A2 | T₂ = [2, 1] | Entropie(T₂) = 0,9183
+  A3 | T₃ = [0, 2] | Entropie(T₃) = 0
+Wohnform
+  Miete | T₁ = [2, 2] | Entropie(T₁) = 1
+  Eigentum | T₂ = [3, 1] | Entropie(T₂) = 0,8113
+Newsletter
+  Ja | T₁ = [4, 0] | Entropie(T₁) = 0
+  Nein | T₂ = [1, 3] | Entropie(T₂) = 0,8113
+```
+
+Die Reihenfolge der Merkmale Wohnform und Newsletter (und ihrer Zweige) ist frei.
 
 Entropie der Gesamtmenge:
 $H(T) = -\frac{5}{8} \cdot \log_2 \frac{5}{8} - \frac{3}{8} \cdot \log_2 \frac{3}{8}$ = **0,9544**

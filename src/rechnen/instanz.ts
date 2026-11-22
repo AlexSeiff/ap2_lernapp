@@ -51,7 +51,12 @@ export function baueInstanz(u: RechenUebung, seed?: number): RechenInstanz {
     const werte: Record<string, RechenWert> = {};
     for (const e of u.eingaben) werte[e.id] = e.loesung!;
     return {
-      loesung: { werte, felder: {}, schritte: [], fehlerbilder: [] },
+      loesung: {
+        werte,
+        felder: {},
+        schritte: [],
+        fehlerbilder: u.eingaben.flatMap((e) => (e.fehler ?? []).map((f) => ({ eingabe: e.id, wert: f.wert, text: f.text }))),
+      },
       eingaben: u.eingaben.map((e) => ({
         id: e.id,
         label: e.label ?? e.id,

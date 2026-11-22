@@ -33,14 +33,32 @@ import {
   type Baustein,
   type StruktogrammAntwort,
 } from './struktogramm';
+import { baumAntwortAlsText, baumBlock, istBaumLeer, leereBaumAntwort, leseBaum, passeBaumAn, type BaumAntwort } from './entscheidungsbaum';
+import {
+  istZuordnungLeer,
+  leereZuordnungAntwort,
+  leseStruktogrammVorlage,
+  passeZuordnungAn,
+  struktogrammBlock,
+  zuordnungAlsText,
+  type ZuordnungAntwort,
+} from './struktogrammVorlage';
 
 /** Antwortformate mit eigenem Modell (weder Diagramm-Editor noch Tabellenschema). */
-const EIGENE_ARTEN = ['werte', 'boxplot', 'struktogramm', 'koordinaten'] as const;
+const EIGENE_ARTEN = ['werte', 'boxplot', 'struktogramm', 'koordinaten', 'baum', 'zuordnung'] as const;
 type EigeneArt = (typeof EIGENE_ARTEN)[number];
 const istEigeneArt = (art: EditorArt): art is EigeneArt => (EIGENE_ARTEN as readonly string[]).includes(art);
 
 export type EditorArt = DiagrammNotation | TabellenArt | EigeneArt;
-export type EditorAntwort = DiagrammAntwort | TabellenAntwort | WerteAntwort | BoxplotAntwort | StruktogrammAntwort | KoordinatenAntwort;
+export type EditorAntwort =
+  | DiagrammAntwort
+  | TabellenAntwort
+  | WerteAntwort
+  | BoxplotAntwort
+  | StruktogrammAntwort
+  | KoordinatenAntwort
+  | BaumAntwort
+  | ZuordnungAntwort;
 /** Was die Erkennung braucht: Aufgabentext, Typ und – für die Wertetabelle – die Musterlösung. */
 type AufgabeFuerEditor = Pick<Task, 'markdown' | 'type' | 'sqlUebung'> & Partial<Pick<Task, 'solution'>>;
 type AufgabeFuerVorlage = Pick<Task, 'markdown'> & Partial<Pick<Task, 'solution'>>;
@@ -57,6 +75,8 @@ export const EDITOR_NAMEN: Record<EditorArt, string> = {
   boxplot: 'Boxplot',
   struktogramm: 'Struktogramm',
   koordinaten: 'Koordinatensystem',
+  baum: 'Entscheidungsbaum',
+  zuordnung: 'Struktogramm',
 };
 
 export const istDiagrammArt = (art: EditorArt): art is DiagrammNotation =>
@@ -75,6 +95,9 @@ const SCHEMA_ERSTELLEN = wort('überführen', 'entwerfen', 'erstellen', 'modelli
 export function editorFuer(task: AufgabeFuerEditor): EditorArt | undefined {
   if (task.type !== 'offen' || task.sqlUebung) return undefined;
   const t = task.markdown;
+  // Vorgegebenes Formular wie auf dem Prüfungsbogen: Entscheidungsbaum mit Lücken, Struktogramm mit leeren Feldern.
+  if (lueckenImBaum(t)) return 'baum';
+  if (felderImStruktogramm(t)) return 'zuordnung';
   if (/Normalform|\b[123]\.\s?NF\b/.test(t) && NORMALISIEREN.test(t)) return 'normalform';
   if (
     /Relationenmodell|Relationenschreibweise|Relationsschema|Star-Schema|Sternschema|Snowflake-Schema/i.test(t) &&
@@ -95,6 +118,22 @@ export function editorFuer(task: AufgabeFuerEditor): EditorArt | undefined {
   return werteVorlage(task) ? 'werte' : undefined;
 }
 
+/** Entscheidungsbaum der Aufgabe, wenn er Lücken hat. */
+export function baumVorlage(markdown: string) {
+  const block = baumBlock(markdown);
+  const baum = block === undefined ? undefined : leseBaum(block).baum;
+  return baum?.luecken ? baum : undefined;
+}
+const lueckenImBaum = (markdown: string) => baumVorlage(markdown)?.luecken ?? 0;
+
+/** Struktogramm-Gerüst der Aufgabe, wenn es leere Felder hat. */
+export function struktogrammVorlage(markdown: string) {
+  const block = struktogrammBlock(markdown);
+  const vorlage = block === undefined ? undefined : leseStruktogrammVorlage(block).vorlage;
+  return vorlage?.anzahl ? vorlage : undefined;
+}
+const felderImStruktogramm = (markdown: string) => struktogrammVorlage(markdown)?.anzahl ?? 0;
+
 /** Vorlage der Wertetabelle; passt keine Tabelle mehr (Aufgabe geändert), eine leere Spalte – die Antwort geht trotzdem nicht verloren. */
 export const vorlageFuer = (task: AufgabeFuerVorlage): WerteVorlage => werteVorlage(task) ?? { kopf: [''], zeilen: [['']] };
 
@@ -109,6 +148,8 @@ export function leereEditorAntwort(art: EditorArt, task: AufgabeFuerVorlage): Ed
   if (art === 'boxplot') return leereBoxplotAntwort();
   if (art === 'struktogramm') return leereStruktogrammAntwort();
   if (art === 'koordinaten') return leereKoordinatenAntwort();
+  if (art === 'baum') return leereBaumAntwort(lueckenImBaum(task.markdown));
+  if (art === 'zuordnung') return leereZuordnungAntwort(felderImStruktogramm(task.markdown));
   if (istDiagrammArt(art)) return leereDiagrammAntwort(art);
   return leereTabellenAntwort(art, art === 'normalform' ? normalformSchritte(task.markdown) : 1);
 }
@@ -170,6 +211,8 @@ const KoordinatenSchema = z.object({
   geraden: z.array(z.string()),
   notiz: z.string().optional(),
 });
+const BaumSchema = z.object({ editor: z.literal('baum'), luecken: z.array(z.string()), notiz: z.string().optional() });
+const ZuordnungSchema = z.object({ editor: z.literal('zuordnung'), felder: z.array(z.string()), notiz: z.string().optional() });
 const TabellenSchema = z.object({
   editor: z.enum(['relationen', 'normalform']),
   schritte: z.array(z.object({ titel: z.string(), text: z.string(), tabellen: z.array(TabelleSchema) })).min(1),
@@ -194,7 +237,11 @@ function parse(raw: string): EditorAntwort | undefined {
     const s = StruktogrammSchema.safeParse(json);
     if (s.success) return s.data;
     const k = KoordinatenSchema.safeParse(json);
-    return k.success ? k.data : undefined;
+    if (k.success) return k.data;
+    const baum = BaumSchema.safeParse(json);
+    if (baum.success) return baum.data;
+    const zu = ZuordnungSchema.safeParse(json);
+    return zu.success ? zu.data : undefined;
   } catch {
     return undefined;
   }
@@ -210,6 +257,8 @@ export function leseEditorAntwort(art: EditorArt, task: AufgabeFuerVorlage, raw:
   const a = parse(raw);
   if (a && familie(art) === familie(a.editor)) {
     if (art === 'werte') return passeAn(vorlageFuer(task), a as WerteAntwort);
+    if (art === 'baum') return passeBaumAn(a as BaumAntwort, lueckenImBaum(task.markdown));
+    if (art === 'zuordnung') return passeZuordnungAn(a as ZuordnungAntwort, felderImStruktogramm(task.markdown));
     if (art === 'boxplot' || art === 'struktogramm' || art === 'koordinaten') return a;
     if (!istDiagrammArt(art) && a.editor !== art) return { ...(a as TabellenAntwort), editor: art };
     return istDiagrammArt(art) ? { ...(a as DiagrammAntwort), editor: art } : a;
@@ -231,9 +280,13 @@ export function schreibeEditorAntwort(a: EditorAntwort, task?: AufgabeFuerVorlag
           ? istStruktogrammLeer(a)
           : a.editor === 'koordinaten'
             ? istKoordinatenLeer(a)
-            : istDiagrammArt(a.editor)
-              ? istLeer(a as DiagrammAntwort)
-              : istTabellenLeer(a as TabellenAntwort);
+            : a.editor === 'baum'
+              ? istBaumLeer(a)
+              : a.editor === 'zuordnung'
+                ? istZuordnungLeer(a)
+                : istDiagrammArt(a.editor)
+                  ? istLeer(a as DiagrammAntwort)
+                  : istTabellenLeer(a as TabellenAntwort);
   return leer ? '' : JSON.stringify(a);
 }
 
@@ -242,6 +295,8 @@ export function editorAlsText(a: EditorAntwort): string {
   if (a.editor === 'boxplot') return boxplotAlsText(a);
   if (a.editor === 'struktogramm') return struktogrammAlsText(a);
   if (a.editor === 'koordinaten') return koordinatenAlsText(a);
+  if (a.editor === 'baum') return baumAntwortAlsText(a);
+  if (a.editor === 'zuordnung') return zuordnungAlsText(a);
   return istDiagrammArt(a.editor) ? diagrammAlsText(a as DiagrammAntwort) : tabellenAlsText(a as TabellenAntwort);
 }
 

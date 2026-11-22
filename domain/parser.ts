@@ -155,8 +155,9 @@ function parseTasks(body: Line[], topicId: string, block: string): { intro: stri
       flush();
       current = { code: m[1], points: parseNumber(m[2]), lines: m[3] ? [m[3]] : [] };
     } else if (current) {
-      // Aufgaben aus Aufzählungen (älteres Format „- **W1 (5 P):**") sind eingerückt fortgesetzt.
-      current.lines.push(line.text.replace(/^ {2}(?=\S)/, ''));
+      // Aufgaben aus Aufzählungen (älteres Format „- **W1 (5 P):**") sind eingerückt fortgesetzt. In Codeblöcken bleibt die
+      // Einrückung, wie sie ist – sie gehört zum Code (JSON, Python, Entscheidungsbaum, Struktogramm).
+      current.lines.push(line.inFence ? line.text : line.text.replace(/^ {2}(?=\S)/, ''));
     } else {
       intro.push(line.text);
     }

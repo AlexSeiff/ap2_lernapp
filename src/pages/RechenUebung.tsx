@@ -15,6 +15,8 @@ import { LEVEL_LABELS, stars, STATUS_LABELS } from '../lib/uebungLabels';
 import { formatWert } from '../rechnen/checker';
 import type { AufgeloesteEingabe } from '../rechnen/instanz';
 import { Icon } from '../components/Icon';
+import { EntscheidungsbaumBild } from '../components/EntscheidungsbaumEditor';
+import { baumBlock, leseBaum, ohneBaum } from '../lib/entscheidungsbaum';
 import { BeispielKarte, DatenTabelle, EingabeFeld, LayoutEingaben, Meldungen, Rechenweg } from './rechenuebung/Bausteine';
 
 export function RechenUebung() {
@@ -69,7 +71,12 @@ function RechenUebungView({ u }: { u: RechenUebungTyp }) {
   const layout = inst?.loesung.layout;
   const imLayout = new Set(layout?.zeilen.flatMap((z) => z.ids.filter((x): x is string => !!x)) ?? []);
   const tabellenFelder = inst?.eingaben.filter((e) => imLayout.has(e.id)) ?? [];
-  const listenFelder = inst?.eingaben.filter((e) => !imLayout.has(e.id)) ?? [];
+  // ```entscheidungsbaum in der Aufgabe: die ersten Eingaben stehen als Lücken im Baum (Lesereihenfolge), der Rest darunter.
+  const baumText = inst ? baumBlock(inst.aufgabe) : undefined;
+  const baum = baumText === undefined ? undefined : leseBaum(baumText).baum;
+  const baumFelder = baum && inst && baum.luecken <= inst.eingaben.length ? inst.eingaben.slice(0, baum.luecken) : [];
+  const imBaum = new Set(baumFelder.map((e) => e.id));
+  const listenFelder = inst?.eingaben.filter((e) => !imLayout.has(e.id) && !imBaum.has(e.id)) ?? [];
 
   return (
     <div className="page rechnen-page paper-sheet">
@@ -94,7 +101,7 @@ function RechenUebungView({ u }: { u: RechenUebungTyp }) {
         </div>
         {inst ? (
           <>
-            <Markdown source={false}>{inst.aufgabe}</Markdown>
+            <Markdown source={false}>{baumFelder.length ? ohneBaum(inst.aufgabe) : inst.aufgabe}</Markdown>
             {inst.tabelle && <DatenTabelle t={inst.tabelle} />}
           </>
         ) : (
@@ -193,6 +200,12 @@ function RechenUebungView({ u }: { u: RechenUebungTyp }) {
           }}
         >
           {layout && tabellenFelder.length > 0 && <LayoutEingaben layout={layout} felder={tabellenFelder} feld={feld} />}
+          {baum && baumFelder.length > 0 && (
+            <>
+              <EntscheidungsbaumBild baum={baum} luecke={(i) => feld(baumFelder[i], true)} />
+              <Meldungen felder={baumFelder} ergebnis={ergebnis?.ergebnisse} />
+            </>
+          )}
           {listenFelder.map((e) => feld(e))}
           {layout && tabellenFelder.length > 0 && <Meldungen felder={tabellenFelder} ergebnis={ergebnis?.ergebnisse} />}
           <div className="actions">

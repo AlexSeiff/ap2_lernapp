@@ -58,6 +58,18 @@ function naheListen(l: number[], e: Pick<AufgeloesteEingabe, 'runden'>, rng: () 
 
 const JA_NEIN: Record<string, string> = { ja: 'nein', nein: 'ja' };
 
+/** Ergänzungen für Teilmengen „[ja, nein]“ (Entscheidungsbaum): vertauscht und je eine Anzahl um 1 daneben. */
+function nahePaare(text: string, rng: () => number): string[] {
+  const m = /^\[\s*(\d+(?:\s*,\s*\d+)+)\s*\]$/.exec(text.trim());
+  if (!m) return [];
+  const zahlen = m[1].split(/\s*,\s*/).map(Number);
+  const form = (l: number[]) => `[${l.join(', ')}]`;
+  const daneben = zahlen.flatMap((z, i) => [1, -1].map((d) => zahlen.map((y, j) => (j === i ? z + d : y))));
+  return [form([...zahlen].reverse()), ...shuffle(daneben.filter((l) => l.every((x) => x >= 0)).map(form), rng)].filter(
+    (t) => t !== form(zahlen),
+  );
+}
+
 /** Ergänzungen für Mengen (z. B. kritischer Pfad „A → C → D“): je ein Element weggelassen. */
 function naheMengen(text: string, rng: () => number): string[] {
   const teile = text.split(/\s*(?:→|->|,|;)\s*/).filter(Boolean);
@@ -95,6 +107,7 @@ export function rechenOptionen(e: AufgeloesteEingabe, fehlerbilder: Fehlerbild[]
   if (typeof w === 'number') for (const x of naheWerte(w, e, rng)) dazu(x);
   else if (Array.isArray(w)) for (const x of naheListen(w, e, rng)) dazu(x);
   else if (e.vergleich === 'menge') for (const x of naheMengen(w, rng)) dazu(x);
+  else if (/^\[[\d,\s]+\]$/.test(w.trim())) for (const x of nahePaare(w, rng)) dazu(x);
   else if (JA_NEIN[w.trim().toLowerCase()]) dazu(JA_NEIN[w.trim().toLowerCase()]);
   if (!falsch.length) return undefined;
   return {

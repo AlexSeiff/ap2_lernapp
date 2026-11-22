@@ -183,6 +183,17 @@ Szenario Möbelhaus Nordholz). So sehen die Aufgaben dort aus:
   SWOT-Vierfeld, Kennzahl | Nutzen. In der App: im Text „*Tragen* Sie … in die Tabelle ein“ und die Musterlösung beginnt mit der gefüllten
   Tabelle → Antworttabelle (`werteTabelle.ts`). Die Vorlagentabelle ist die **erste** Tabelle der Aufgabe; Material gehört davor ins
   Block-Intro oder in eine Anlage. Leere Zellen bleiben leer (kein `___`). Danach `tests/editorAufgaben.test.ts` ergänzen.
+- **Formulare wie auf dem Prüfungsbogen** (eingetragen wird direkt ins Bild, nicht in eine Tabelle):
+  - **Entscheidungsbaum (ID3)** als ```` ```entscheidungsbaum ````-Block: erste Zeile die Gesamtmenge (`T = ___ | Entropie(T) = ___`),
+    eine Zeile ohne Einrückung je Merkmal, darunter eingerückt je Zweig `Name | T₁ = ___ | Entropie(T₁) = ___`. `___` ist eine Lücke,
+    alles andere ist vorgegeben (z. B. der erste Zweig wie im Original). Die Musterlösung enthält denselben Block vollständig
+    ausgefüllt; beim Abgleich dürfen Merkmale und Zweige anders sortiert sein. Vorbild: DD23 A5 (`src/lib/entscheidungsbaum.ts`).
+  - **Struktogramm zum Zuordnen** als ```` ```struktogramm ````-Block: optional `titel: + methode(…)`, dann das Gerüst – Anweisung als
+    Zeile, `schleife: …` (kopfgesteuert), `wiederhole:` … `bis: …` (fußgesteuert), `wenn: …` mit eingerücktem `ja:`/`nein:`; `___` ist ein
+    leeres Feld. Unter `auswahl:` die nummerierten Anweisungen (`1 x := daten[j][0, 1]`). In der Musterlösung steht derselbe Block mit
+    `[6]` statt `___`. Felder zählen Zeile für Zeile. Vorbild: DD31 A6 (`src/lib/struktogrammVorlage.ts`).
+  - Ein Struktogramm **selbst zeichnen** („*Zeichnen*/*Erstellen* Sie ein Struktogramm …“) bleibt der Baukasten.
+  Danach `tests/editorAufgaben.test.ts` ergänzen.
 - **Material in der Aufgabe**: Gesetzesauszüge (DSGVO-Artikel, BetrVG, JArbSchG, Tarifvertrag), **englische Fachtexte** (GDPR-Artikel im
   Originalwortlaut sind amtliche Texte und dürfen zitiert werden; sonstige englische Texte selbst schreiben) mit deutschen Fragen dazu,
   Klassendiagramme, Datenbankschemata mit Felderklärungen, Diagrammgerüste (Ishikawa mit den 5M und einer vorgegebenen Ursache,
@@ -277,7 +288,7 @@ Mehr: Deep Dive 12, Teil 2
 | Datei | Wichtigste Regeln | Nachlesen |
 |---|---|---|
 | `AP2_SQL_Uebungen.json` | id `SQL-MH-NNN` (moebelhaus), `SQL-DF-NNN` (datafit), `SQL-DQ-NNN` (kundenimport), `SQL-HL-NNN` (holzlager, DD29), `SQL-EL-NNN` (eventlager, DD31), `loesung` muss im Datensatz laufen, `vergleich` passend, optional `aufgaben`/`karten` verknüpfen | docs/03-inhalte.md § 4.3, § 7 |
-| `AP2_Rechen_Uebungen.json` | id `RE-<BEREICH>-NNN`, möglichst mit `vorlage` + `daten`; feste Zahlen müssen die Musterlösung reproduzieren (`quelleAufgabe`) | docs/03-inhalte.md § 4.4 (Tabelle aller Vorlagen) |
+| `AP2_Rechen_Uebungen.json` | id `RE-<BEREICH>-NNN`, möglichst mit `vorlage` + `daten`; feste Zahlen müssen die Musterlösung reproduzieren (`quelleAufgabe`). Ein ```` ```entscheidungsbaum ````-Block mit `___` in der `aufgabe` bindet die ersten Eingaben (Lesereihenfolge) an seine Lücken; Teilmengen als Text `"[7, 3]"` (Reihenfolge [ja, nein] wird geprüft). Feste Übungen können je Eingabe `fehler: [{ wert, text }]` (typische Fehler mit Erklärung) angeben – nötig, wenn der Leicht-Modus für einen Text keine falschen Antworten findet | docs/03-inhalte.md § 4.4 (Tabelle aller Vorlagen) |
 | `AP2_Diagramm_Uebungen.json` | jede Lücke in `loesung`, Lösung verletzt keine Formregel | docs/03-inhalte.md § 4.4b |
 | `AP2_Quellen.json` | nur https, `ziel` muss existieren, `geprueft` = `JJJJ-MM`; Links mit `npm run quellen-pruefen` testen | docs/03-inhalte.md § 4.4c |
 
