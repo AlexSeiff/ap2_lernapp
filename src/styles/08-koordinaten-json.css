@@ -1,14 +1,27 @@
 /* Koordinatensystem-Editor (components/KoordinatenEditor.tsx) */
 .ko { display: grid; gap: 10px; }
-.ko-werkzeuge { display: flex; flex-wrap: wrap; gap: 8px; }
-.ko-eingabe { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: end; }
-.ko-eingabe label { display: grid; gap: 3px; }
-.ko-eingabe input { width: 5.5em; font-variant-numeric: tabular-nums; }
+.ko-kopf { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+/* Werkzeug als Umschalter: ein Feld, das gewählte hervorgehoben – wie Kreis/Kreuz/Kästchen in der Zeichnung. */
+.ko-werkzeuge { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 2px; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; }
+.ko-werkzeuge button.ko-werkzeug { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; margin: 0; padding: 4px 10px; font-size: 0.85rem; font-weight: 500; color: var(--muted); background: transparent; border: 0; border-radius: 7px; box-shadow: none; }
+.ko-werkzeuge button.ko-werkzeug:hover { color: var(--text); }
+.ko-werkzeuge button.ko-werkzeug[aria-checked='true'] { color: var(--accent); background: var(--accent-soft); }
+.ko-zeichen { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.ko-zeichen .ko-zeichen-voll { fill: currentColor; stroke: none; }
+.ko-eingabe { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.ko-eingabe label { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--muted); }
+.ko-eingabe input { width: 4.5em; min-height: 34px; margin: 0; padding: 4px 8px; font-variant-numeric: tabular-nums; }
+.ko-eingabe button { min-height: 34px; padding: 4px 12px; }
+.ko-flaeche { min-width: 0; overflow-x: auto; padding: 10px 12px 8px; }
+.ko-flaeche .ko-zeichnung { margin: 0; border: 0; padding: 0; background: none; }
+.ko-tipp { margin: 4px 0 0; font-size: 0.78rem; color: var(--muted); }
 .ko-zeichnung { margin: 0; }
 .diagramm .ko-raster { stroke: var(--border); }
 .diagramm .ko-rahmen { stroke: var(--muted); }
 .ko-klickbar { cursor: crosshair; touch-action: manipulation; }
-.ko-geraden { display: grid; gap: 6px; }
+.ko-geraden { display: grid; gap: 6px; justify-items: start; padding: 10px 12px; background: var(--surface-2); border-top: 1px solid var(--border); }
+.ko-geraden > p { margin: 0; }
+.ko-geraden .ko-gerade { justify-self: stretch; }
 .ko-gerade { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ko-gerade input { flex: 1 1 12em; min-width: 0; }
 .ko-liste ul { margin: 6px 0 0; padding-left: 1.2em; }
@@ -91,3 +104,12 @@ button.sz-slot.richtig { color: var(--good); background: var(--good-soft, transp
 button.sz-slot.falsch { color: var(--low); background: var(--low-soft); border-color: var(--low); }
 .palette-element .sz-nr { min-width: 1.4em; }
 .palette-element code { white-space: normal; text-align: left; }
+/* Handy: die vier Werkzeuge gleich breit nebeneinander, Symbol über dem Namen; Eingabe darunter über die ganze Breite. */
+@media (max-width: 600px) {
+  .ko-werkzeuge { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
+  .ko-werkzeuge button.ko-werkzeug { flex-direction: column; justify-content: center; gap: 2px; padding: 6px 2px; font-size: 0.75rem; }
+  .ko-eingabe { width: 100%; flex-wrap: nowrap; }
+  .ko-eingabe label { flex: 1; min-width: 0; }
+  .ko-eingabe input { width: 100%; }
+  .ko-eingabe button { flex: none; }
+}

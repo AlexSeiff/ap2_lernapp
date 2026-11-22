@@ -156,6 +156,18 @@ const beschreibung = (a: KoordinatenAntwort) =>
 /** Rasterung: auf halbe Einheiten, mit gedrückter Umschalttaste auf Zehntel. */
 const rastern = (v: number, fein: boolean) => (fein ? Math.round(v * 10) / 10 : Math.round(v * 2) / 2);
 
+/** Werkzeug-Symbol wie in der Zeichnung (Kreis gefüllt, Kreuz, Kästchen). */
+function FormZeichen({ form }: { form: PunktForm }) {
+  return (
+    <svg className="ko-zeichen" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      {form === 'kreis' && <circle cx="8" cy="8" r="4.5" className="ko-zeichen-voll" />}
+      {form === 'kreuz' && <path d="M3.5 3.5l9 9M3.5 12.5l9-9" />}
+      {form === 'kasten' && <rect x="3" y="3" width="10" height="10" />}
+    </svg>
+  );
+}
+const WERKZEUG_NAMEN: Record<PunktForm, string> = { kreis: 'Kreis', kreuz: 'Kreuz', kasten: 'Kästchen' };
+
 interface EditorProps {
   wert: KoordinatenAntwort;
   onChange: (w: KoordinatenAntwort) => void;
@@ -203,94 +215,103 @@ export function KoordinatenEditor({ wert, onChange, task, hilfen }: EditorProps)
 
   return (
     <div className="ko">
-      <div className="ko-werkzeuge" role="radiogroup" aria-label="Werkzeug">
-        {FORMEN.map((f) => (
-          <button
-            key={f}
-            type="button"
-            role="radio"
-            aria-checked={werkzeug === f}
-            className={werkzeug === f ? '' : 'secondary'}
-            onClick={() => setWerkzeug(f)}
-          >
-            {FORM_NAMEN[f]}
-          </button>
-        ))}
-        <button
-          type="button"
-          role="radio"
-          aria-checked={werkzeug === 'radierer'}
-          className={werkzeug === 'radierer' ? '' : 'secondary'}
-          onClick={() => setWerkzeug('radierer')}
-        >
-          <Icon name="x" /> Radierer
-        </button>
-      </div>
-      <p className="hint small">
-        Klick ins Raster setzt einen Punkt (auf halbe Einheiten gerastet, mit Umschalttaste auf Zehntel); ein zweiter Klick auf denselben
-        Punkt nimmt ihn weg. Mit dem Radierer entfernst du den nächsten Punkt. Oder gib die Koordinaten ein:
-      </p>
-      <form
-        className="ko-eingabe"
-        onSubmit={(e) => {
-          e.preventDefault();
-          fuegeHinzu();
-        }}
-      >
-        <label>
-          <span className="small muted">x</span>
-          <input
-            inputMode="decimal"
-            value={eingabe.x}
-            onChange={(e) => setEingabe({ ...eingabe, x: e.target.value })}
-            aria-label="x-Wert"
-          />
-        </label>
-        <label>
-          <span className="small muted">y</span>
-          <input
-            inputMode="decimal"
-            value={eingabe.y}
-            onChange={(e) => setEingabe({ ...eingabe, y: e.target.value })}
-            aria-label="y-Wert"
-          />
-        </label>
-        <button
-          type="submit"
-          className="secondary"
-          disabled={werkzeug === 'radierer' || zahlAus(eingabe.x) === undefined || zahlAus(eingabe.y) === undefined}
-        >
-          Punkt setzen
-        </button>
-      </form>
-
-      <KoordinatenSvg achsen={achsen} punkte={wert.punkte} geraden={geraden} label={beschreibung(wert)} onKlick={klick} />
-
-      <div className="ko-geraden">
-        <p className="small muted">Geraden als Gleichung, z. B. y = 7,5 oder y = 1,5 · x − 1:</p>
-        {wert.geraden.map((g, i) => (
-          <div key={i} className="ko-gerade">
-            <span className="small">Gerade {i + 1}</span>
-            <input
-              value={g}
-              aria-label={`Gleichung der Gerade ${i + 1}`}
-              placeholder="y = …"
-              onChange={(e) => onChange({ ...wert, geraden: wert.geraden.map((x, k) => (k === i ? e.target.value : x)) })}
-            />
-            {g.trim() && (leseGerade(g) ? <span className="ok">✓</span> : <span className="bad">nicht lesbar</span>)}
+      {/* Wie der Diagramm-Editor ein Werkzeug in einem Rahmen: oben Werkzeug und Eingabe, in der Mitte das Raster, unten die Geraden. */}
+      <div className="ed-karte">
+        <div className="ed-kopf ko-kopf">
+          <div className="ko-werkzeuge" role="radiogroup" aria-label="Werkzeug">
+            {FORMEN.map((f) => (
+              <button
+                key={f}
+                type="button"
+                role="radio"
+                aria-checked={werkzeug === f}
+                className="ko-werkzeug"
+                title={FORM_NAMEN[f]}
+                onClick={() => setWerkzeug(f)}
+              >
+                <FormZeichen form={f} />
+                {WERKZEUG_NAMEN[f]}
+              </button>
+            ))}
             <button
               type="button"
-              className="ghost small"
-              aria-label={`Gerade ${i + 1} entfernen`}
-              onClick={() => onChange({ ...wert, geraden: wert.geraden.filter((_, k) => k !== i) })}
+              role="radio"
+              aria-checked={werkzeug === 'radierer'}
+              className="ko-werkzeug"
+              onClick={() => setWerkzeug('radierer')}
             >
-              <Icon name="x" />
+              <Icon name="eraser" /> Radierer
             </button>
           </div>
-        ))}
-        <button type="button" className="secondary small" onClick={() => onChange({ ...wert, geraden: [...wert.geraden, ''] })}>
-          + Gerade
-        </button>
+          <form
+            className="ko-eingabe"
+            onSubmit={(e) => {
+              e.preventDefault();
+              fuegeHinzu();
+            }}
+          >
+            <label>
+              <span>x</span>
+              <input
+                inputMode="decimal"
+                value={eingabe.x}
+                onChange={(e) => setEingabe({ ...eingabe, x: e.target.value })}
+                aria-label="x-Wert"
+              />
+            </label>
+            <label>
+              <span>y</span>
+              <input
+                inputMode="decimal"
+                value={eingabe.y}
+                onChange={(e) => setEingabe({ ...eingabe, y: e.target.value })}
+                aria-label="y-Wert"
+              />
+            </label>
+            <button
+              type="submit"
+              className="secondary"
+              disabled={werkzeug === 'radierer' || zahlAus(eingabe.x) === undefined || zahlAus(eingabe.y) === undefined}
+            >
+              Punkt setzen
+            </button>
+          </form>
+        </div>
+
+        <div className="ko-flaeche">
+          <KoordinatenSvg achsen={achsen} punkte={wert.punkte} geraden={geraden} label={beschreibung(wert)} onKlick={klick} />
+          <p className="ko-tipp">
+            Klick ins Raster setzt einen Punkt (halbe Einheiten, mit Umschalttaste Zehntel), ein zweiter Klick nimmt ihn weg. Der Radierer
+            entfernt den nächsten Punkt.
+          </p>
+        </div>
+
+        <div className="ko-geraden">
+          <p className="small muted">Geraden als Gleichung, z. B. y = 7,5 oder y = 1,5 · x − 1:</p>
+          {wert.geraden.map((g, i) => (
+            <div key={i} className="ko-gerade">
+              <span className="small">Gerade {i + 1}</span>
+              <input
+                value={g}
+                aria-label={`Gleichung der Gerade ${i + 1}`}
+                placeholder="y = …"
+                onChange={(e) => onChange({ ...wert, geraden: wert.geraden.map((x, k) => (k === i ? e.target.value : x)) })}
+              />
+              {g.trim() && (leseGerade(g) ? <span className="ok">✓</span> : <span className="bad">nicht lesbar</span>)}
+              <button
+                type="button"
+                className="ghost small"
+                aria-label={`Gerade ${i + 1} entfernen`}
+                onClick={() => onChange({ ...wert, geraden: wert.geraden.filter((_, k) => k !== i) })}
+              >
+                <Icon name="x" />
+              </button>
+            </div>
+          ))}
+          <button type="button" className="secondary small" onClick={() => onChange({ ...wert, geraden: [...wert.geraden, ''] })}>
+            + Gerade
+          </button>
+        </div>
       </div>
 
       {wert.punkte.length > 0 && (
