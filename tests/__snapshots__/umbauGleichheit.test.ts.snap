@@ -3,7 +3,7 @@
 exports[`Umbau: unveränderte ausgelieferte Inhalte > hält den SHA-256 jeder erzeugten JSON-Datei fest 1`] = `
 {
   "begriffe.json": "a7e3c5b18fab3efffc1af339a4bfa594ad28c900e7ef464127e0afe8727c3050",
-  "content.json": "bdb85eaebf0e3539929ff1dfed7400a4ccf6efec582d5aa3e82718c031d9b060",
+  "content.json": "05788929833ccbc80768613c365ca8960f9efcc9882258e440afc05f042744fa",
   "details.json": "29c85920251cfb53cd1a01dc7258e3d32759118730242464016155410491e952",
   "texte/00.json": "d1daaaa362b1997a704af2e1503693d8a8b0565a97af9026b8f2433fd558c739",
   "texte/01.json": "9d807a2457fa80e466921662d7aeaff6043b67511ad085f19232baf6a1d315b1",

@@ -294,7 +294,7 @@
         "normalverteilung",
         "z-wert"
       ],
-      "aufgabe": "Reparaturzeiten sind normalverteilt mit Mittelwert 60 min und Standardabweichung 10 min.\n\nIn welchem Bereich liegen rund 95 % der Reparaturen? Welcher Anteil dauert länger als die obere Grenze? Welchen z-Wert hat ein Auftrag mit 95 min?\n\n> **Formeln:**\n> - Bereich mit rund 95 % der Werte = μ ± 2 · σ\n> - z = (x − μ) / σ",
+      "aufgabe": "Reparaturzeiten sind normalverteilt mit Mittelwert 60 min und Standardabweichung 10 min.\n\nIn welchem Bereich liegen rund 95 % der Reparaturen? Welcher Anteil dauert länger als die obere Grenze? Welchen z-Wert hat ein Auftrag mit 95 min?",
       "eingaben": [
         {
           "id": "untere",
@@ -339,7 +339,7 @@
         "wahrscheinlichkeit",
         "erwartungswert"
       ],
-      "aufgabe": "Je Garantievertrag tritt mit 5 % Wahrscheinlichkeit ein großer Schaden (400 €) ein, mit 10 % ein kleiner Schaden (150 €) und mit 85 % kein Schaden.\n\nWie hoch sind die erwarteten Kosten je Vertrag?\n\n> **Formel:** Erwartungswert E(X) = Σ x_i · p_i",
+      "aufgabe": "Je Garantievertrag tritt mit 5 % Wahrscheinlichkeit ein großer Schaden (400 €) ein, mit 10 % ein kleiner Schaden (150 €) und mit 85 % kein Schaden.\n\nWie hoch sind die erwarteten Kosten je Vertrag?",
       "eingaben": [
         {
           "id": "erwartungswert",
@@ -966,7 +966,7 @@
         "klassifikation",
         "trenngerade"
       ],
-      "aufgabe": "Eine Trenngerade y = 1,5 · x − 1 trennt gesunde Bretter (oberhalb) von befallenen (unterhalb). Geprüft werden die Messpunkte (2 | 8) und (6 | 5).\n\nBerechne je Punkt den Funktionswert der Geraden und die Differenz.\n\n> **Formeln:**\n> - Funktionswert der Trenngeraden: f(x) = m · x + b\n> - Differenz: d = y − f(x)",
+      "aufgabe": "Eine Trenngerade y = 1,5 · x − 1 trennt gesunde Bretter (oberhalb) von befallenen (unterhalb). Geprüft werden die Messpunkte (2 | 8) und (6 | 5).\n\nBerechne je Punkt den Funktionswert der Geraden und die Differenz.",
       "eingaben": [
         {
           "id": "f1",
@@ -1005,7 +1005,7 @@
         "knn",
         "distanz"
       ],
-      "aufgabe": "Zwei Hubantriebe derselben Klasse: bekannt (Motortemperatur 46,5 °C · Drehzahl 2840 1/min · Drehmoment 2,1 Nm · Laufzeit 260 min) und zu klassifizieren (43,5 °C · 2800 1/min · 1,7 Nm · 248 min). Die Klasse geht mit der Differenz 0 ein.\n\nBerechne die Summe der quadrierten Differenzen und die euklidische Distanz.\n\n> **Formel:** d(p, q) = √(Σ (q_i − p_i)²)",
+      "aufgabe": "Zwei Hubantriebe derselben Klasse: bekannt (Motortemperatur 46,5 °C · Drehzahl 2840 1/min · Drehmoment 2,1 Nm · Laufzeit 260 min) und zu klassifizieren (43,5 °C · 2800 1/min · 1,7 Nm · 248 min). Die Klasse geht mit der Differenz 0 ein.\n\nBerechne die Summe der quadrierten Differenzen und die euklidische Distanz.",
       "eingaben": [
         {
           "id": "summe",
@@ -1272,7 +1272,7 @@
         "kalkulation",
         "wirtschaftlichkeit"
       ],
-      "aufgabe": "Ist-Prozess: Materialkosten 252.000 €, Personalkosten 150.000 €, Abschreibung 2.000 €, sonstige Kosten 4.000 €, sonstige Gemeinkosten 10 % der Herstellkosten, Gewinn 112.200 €, Umsatz 561.000 €.\n\nNeuer Prozess: Umsatz +10 %, Personalkosten −20 %, Abschreibung 38.000 €, sonstige Gemeinkosten nur noch 5 % der Herstellkosten; Materialkosten und sonstige Kosten bleiben gleich.\n\nVervollständige die Kalkulation für den neuen Prozess.\n\n> **Formeln:**\n> - Herstellkosten = Materialkosten + Personalkosten + Abschreibung + sonstige Kosten\n> - sonstige Gemeinkosten = Herstellkosten · Zuschlagsatz\n> - Selbstkosten = Herstellkosten + sonstige Gemeinkosten\n> - Gewinn = Umsatz − Selbstkosten",
+      "aufgabe": "Die Kalkulation des Ist-Prozesses:\n\n| Kalkulation | Zuschlag | Ist (€) |\n|---|---|---|\n| = Materialkosten | | 252.000 |\n| + Personalkosten | | 150.000 |\n| + Abschreibung | | 2.000 |\n| + sonstige Kosten | | 4.000 |\n| = Herstellkosten | | 408.000 |\n| + sonstige Gemeinkosten | 10 % | 40.800 |\n| = Selbstkosten | | 448.800 |\n| Gewinn | 25 % | 112.200 |\n| Umsatz | | 561.000 |\n\nNeuer Prozess: Umsatz +10 %, Personalkosten −20 %, Abschreibung 38.000 €, sonstige Gemeinkosten nur noch 5 % der Herstellkosten; Materialkosten und sonstige Kosten bleiben gleich.\n\nVervollständige die Kalkulation für den neuen Prozess.",
       "eingaben": [
         {
           "id": "personal",
@@ -1334,7 +1334,7 @@
         "kapazität",
         "durchsatz"
       ],
-      "aufgabe": "36.000 Besucher holen zwischen 18:00 und 19:00 Uhr an acht Ausgabestellen je ein Sitzkissen ab. Jede Ausgabe wird mit einem MDE-Gerät gebucht und dauert 4 Sekunden. Die Besucher verteilen sich gleichmäßig; insgesamt sind 10 % Reserve einzuplanen.\n\nWie viele MDE-Geräte werden mindestens benötigt?\n\n> **Formeln:**\n> - Vorgänge je Gerät = verfügbare Zeit / Zeit je Vorgang\n> - Geräte = Anzahl der Vorgänge / Vorgänge je Gerät\n> - Geräte mit Reserve = Geräte · (1 + Reservesatz)",
+      "aufgabe": "36.000 Besucher holen zwischen 18:00 und 19:00 Uhr an acht Ausgabestellen je ein Sitzkissen ab. Jede Ausgabe wird mit einem MDE-Gerät gebucht und dauert 4 Sekunden. Die Besucher verteilen sich gleichmäßig; insgesamt sind 10 % Reserve einzuplanen.\n\nWie viele MDE-Geräte werden mindestens benötigt?",
       "eingaben": [
         {
           "id": "jeGeraet",
@@ -1374,7 +1374,7 @@
         "wirtschaftlichkeit",
         "kostenvergleich"
       ],
-      "aufgabe": "Ein Etikettendrucker kostet 252,00 € und wird vier Jahre genutzt. Je Monat werden 3.600 Etiketten gedruckt. Eine Rolle mit 600 Etiketten kostet 6,50 €, ein Farbband für 1.200 Etiketten 12,00 €. Die Miete beträgt 95,00 € je Monat einschließlich Verbrauchsmaterial.\n\nBerechne die Kosten je Monat im Kaufmodell und den Vorteil gegenüber der Miete.\n\n> **Formel:** Kosten je Monat (Kauf) = Anschaffungspreis / Nutzungsdauer in Monaten + Verbrauchsmaterial je Monat",
+      "aufgabe": "Ein Etikettendrucker kostet 252,00 € und wird vier Jahre genutzt. Je Monat werden 3.600 Etiketten gedruckt. Eine Rolle mit 600 Etiketten kostet 6,50 €, ein Farbband für 1.200 Etiketten 12,00 €. Die Miete beträgt 95,00 € je Monat einschließlich Verbrauchsmaterial.\n\nBerechne die Kosten je Monat im Kaufmodell und den Vorteil gegenüber der Miete.",
       "eingaben": [
         {
           "id": "anschaffung",
@@ -1822,7 +1822,7 @@
       "titel": "Arbeitszeit mit Berufsschultag",
       "schwierigkeit": 1,
       "tags": ["wiso", "jugendarbeitsschutz"],
-      "aufgabe": "Ein 17-jähriger Auszubildender hat eine regelmäßige Wochenarbeitszeit von 40 Stunden. Einmal pro Woche hat er einen Berufsschultag mit mehr als fünf Unterrichtsstunden à 45 Minuten.\n\nWie viele Stunden darf er in dieser Woche höchstens noch im Betrieb beschäftigt werden?\n\n> **Formel:** Stunden im Betrieb = Wochenarbeitszeit − angerechneter Berufsschultag (= Wochenarbeitszeit / 5)",
+      "aufgabe": "Ein 17-jähriger Auszubildender hat eine regelmäßige Wochenarbeitszeit von 40 Stunden. Einmal pro Woche hat er einen Berufsschultag mit mehr als fünf Unterrichtsstunden à 45 Minuten.\n\nWie viele Stunden darf er in dieser Woche höchstens noch im Betrieb beschäftigt werden?",
       "eingaben": [{ "id": "stunden", "label": "Stunden im Betrieb", "einheit": "Stunden", "loesung": 32 }],
       "hinweise": ["Ein solcher Berufsschultag wird mit der durchschnittlichen täglichen Arbeitszeit angerechnet (§ 9 Abs. 2 JArbSchG) – hier 40 / 5 = 8 Stunden.", "40 − 8 = ?"],
       "erklaerung": "Nach dem JArbSchG wird ein Berufsschultag mit mehr als fünf Unterrichtsstunden (à 45 Minuten) einmal pro Woche mit der **durchschnittlichen täglichen Arbeitszeit** angerechnet (§ 9 Abs. 2 Nr. 1, seit 2020; bei 40 Stunden an 5 Tagen = 8 Stunden); an diesem Tag ist keine Beschäftigung im Betrieb mehr zulässig. $40 - 8 = 32$ Stunden.",
@@ -1849,7 +1849,7 @@
       "titel": "Teilurlaub im ersten Jahr",
       "schwierigkeit": 1,
       "tags": ["wiso", "urlaub"],
-      "aufgabe": "Eine neue Mitarbeiterin tritt am 01.08. ein und arbeitet in einer Sechs-Tage-Woche. Es gilt nur der gesetzliche Mindesturlaub von 24 Werktagen.\n\nWie viele Werktage Urlaub stehen ihr im ersten Kalenderjahr zu?\n\n> **Formel:** Teilurlaub = Jahresurlaub · volle Beschäftigungsmonate / 12",
+      "aufgabe": "Eine neue Mitarbeiterin tritt am 01.08. ein und arbeitet in einer Sechs-Tage-Woche. Es gilt nur der gesetzliche Mindesturlaub von 24 Werktagen.\n\nWie viele Werktage Urlaub stehen ihr im ersten Kalenderjahr zu?",
       "eingaben": [{ "id": "teilurlaub", "label": "Teilurlaub im ersten Jahr", "einheit": "Werktage", "loesung": 10 }],
       "hinweise": [
         "Vor Ablauf der sechsmonatigen Wartezeit gibt es Teilurlaub: 1/12 je **vollem** Beschäftigungsmonat.",
@@ -1883,7 +1883,7 @@
       "titel": "Reallohn",
       "schwierigkeit": 2,
       "tags": ["wiso", "inflation", "prozent"],
-      "aufgabe": "Der Nominallohn steigt um 4 %, die Inflationsrate beträgt 2,5 %.\n\nUm wie viel Prozent steigt der Reallohn (die Kaufkraft) genau? Runde auf zwei Nachkommastellen.\n\n> **Formel:** Reallohnänderung = (1 + Nominallohnsteigerung) / (1 + Inflationsrate) − 1",
+      "aufgabe": "Der Nominallohn steigt um 4 %, die Inflationsrate beträgt 2,5 %.\n\nUm wie viel Prozent steigt der Reallohn (die Kaufkraft) genau? Runde auf zwei Nachkommastellen.",
       "eingaben": [{ "id": "reallohn", "label": "Veränderung des Reallohns", "einheit": "%", "runden": 2, "loesung": 1.46 }],
       "hinweise": ["Rechne mit Wachstumsfaktoren: 1,04 für den Lohn, 1,025 für die Preise.", "Reallohnänderung = 1,04 / 1,025 − 1."],
       "erklaerung": "Exakt: 1,04 / 1,025 − 1 = 0,0146 → **+1,46 %**. Die Näherung „Nominal minus Inflation“ ergibt rund 1,5 % – für eine schnelle Einschätzung in Ordnung, gefragt war aber der genaue Wert.",
@@ -1939,7 +1939,7 @@
         "gmbh",
         "gewinnverteilung"
       ],
-      "aufgabe": "Eine GmbH hat ein Stammkapital von 450.000,00 €. Herr Brodersen hält 270.000,00 €, Frau Jessen den Rest. Ausgeschüttet werden 96.500,00 € im Verhältnis der Geschäftsanteile.\n\nWie hoch ist der Gewinnanteil von Frau Jessen?\n\n> **Formel:** Gewinnanteil = Gewinn · Geschäftsanteil / Stammkapital",
+      "aufgabe": "Eine GmbH hat ein Stammkapital von 450.000,00 €. Herr Brodersen hält 270.000,00 €, Frau Jessen den Rest. Ausgeschüttet werden 96.500,00 € im Verhältnis der Geschäftsanteile.\n\nWie hoch ist der Gewinnanteil von Frau Jessen?",
       "eingaben": [
         {
           "id": "anteil",
@@ -1966,7 +1966,7 @@
         "sozialversicherung",
         "beitragsbemessungsgrenze"
       ],
-      "aufgabe": "Bruttoentgelt 9.200,00 € im Monat. Beitragsbemessungsgrenze der Rentenversicherung 8.450,00 € im Monat, Beitragssatz 18,6 %, je zur Hälfte von Arbeitgeber und Arbeitnehmer (Stand 2026).\n\nWie hoch ist der monatliche Arbeitnehmeranteil?\n\n> **Formel:** Arbeitnehmeranteil = beitragspflichtiges Entgelt · Beitragssatz / 2",
+      "aufgabe": "Bruttoentgelt 9.200,00 € im Monat. Beitragsbemessungsgrenze der Rentenversicherung 8.450,00 € im Monat, Beitragssatz 18,6 %, je zur Hälfte von Arbeitgeber und Arbeitnehmer (Stand 2026).\n\nWie hoch ist der monatliche Arbeitnehmeranteil?",
       "eingaben": [
         {
           "id": "anteil",
@@ -1993,7 +1993,7 @@
         "kennzahlen",
         "wirtschaftlichkeit"
       ],
-      "aufgabe": "Vier Aufträge (Aufwand / Ertrag in €): Auftrag 1: 450.000 / 531.000 · Auftrag 2: 280.000 / 343.000 · Auftrag 3: 120.000 / 150.000 · Auftrag 4: 640.000 / 768.000.\n\nBerechne die Wirtschaftlichkeit jedes Auftrags. Welcher Auftrag ist der wirtschaftlichste?\n\n> **Formel:** Wirtschaftlichkeit = Ertrag / Aufwand",
+      "aufgabe": "Vier Aufträge (Aufwand / Ertrag in €): Auftrag 1: 450.000 / 531.000 · Auftrag 2: 280.000 / 343.000 · Auftrag 3: 120.000 / 150.000 · Auftrag 4: 640.000 / 768.000.\n\nBerechne die Wirtschaftlichkeit jedes Auftrags. Welcher Auftrag ist der wirtschaftlichste?",
       "eingaben": [
         {
           "id": "w1",
@@ -2042,7 +2042,7 @@
         "entgelt",
         "sozialversicherung"
       ],
-      "aufgabe": "Stundenlohn 17,50 € · 168 Arbeitsstunden, davon 16 an Samstagen · 25 % Zuschlag auf den Stundenlohn für Samstagsarbeit · Urlaubsgeld 300,00 € brutto. Beitragssatz der Rentenversicherung 18,6 %, je zur Hälfte (Stand 2026).\n\nBerechne den Bruttolohn und den Arbeitnehmeranteil zur Rentenversicherung.\n\n> **Formeln:**\n> - Bruttolohn = Stunden · Stundenlohn + Zuschlagsstunden · Stundenlohn · Zuschlagssatz + Sonderzahlung\n> - Arbeitnehmeranteil = Bruttolohn · Beitragssatz / 2",
+      "aufgabe": "Stundenlohn 17,50 € · 168 Arbeitsstunden, davon 16 an Samstagen · 25 % Zuschlag auf den Stundenlohn für Samstagsarbeit · Urlaubsgeld 300,00 € brutto. Beitragssatz der Rentenversicherung 18,6 %, je zur Hälfte (Stand 2026).\n\nBerechne den Bruttolohn und den Arbeitnehmeranteil zur Rentenversicherung.",
       "eingaben": [
         {
           "id": "brutto",
@@ -2077,7 +2077,7 @@
         "kennzahlen",
         "prozentrechnung"
       ],
-      "aufgabe": "2025: 38 Beschäftigte, Umsatz je Mitarbeiter 92.000,00 €. 2026: 42 Beschäftigte, Umsatz 4.116.000,00 €.\n\nBerechne den Umsatz je Mitarbeiter 2026 und die prozentuale Veränderung gegenüber 2025.\n\n> **Formeln:**\n> - Umsatz je Mitarbeiter = Umsatz / Anzahl der Mitarbeiter\n> - prozentuale Veränderung = (neuer Wert − alter Wert) / alter Wert · 100 %",
+      "aufgabe": "2025: 38 Beschäftigte, Umsatz je Mitarbeiter 92.000,00 €. 2026: 42 Beschäftigte, Umsatz 4.116.000,00 €.\n\nBerechne den Umsatz je Mitarbeiter 2026 und die prozentuale Veränderung gegenüber 2025.",
       "eingaben": [
         {
           "id": "umsatz",

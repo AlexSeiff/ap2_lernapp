@@ -71,6 +71,11 @@ describe('Echte Lernblätter in content/', () => {
     expect(fett).toEqual([]);
   });
 
+  it('Rechenübungen nennen keine Formel – die steht wie in der Prüfung nur in der Formelsammlung', () => {
+    const mitFormel = content.rechenUebungen.filter((u) => /\*\*Formeln?:?\*\*/.test(u.aufgabe)).map((u) => u.id);
+    expect(mitFormel).toEqual([]);
+  });
+
   it('liefert Lernkarten mit eindeutigen IDs und Material (ohne persönlichen Lernplan)', () => {
     const cards = content.flashcards.filter((c) => c.kind === 'lernkarte');
     expect(content.decks.length).toBeGreaterThan(0);
