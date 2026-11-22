@@ -103,7 +103,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 - (4) Ein Arbeitsvertrag ist nur gültig, wenn kein Tarifvertrag besteht.
 - (5) Der Arbeitsvertrag muss vom Betriebsrat unterschrieben werden.
 
-**A2 (4 P):** Im Arbeitsvertrag der neuen Datenanalystin Nele Brauer soll eine Probezeit stehen. Welche **zwei** Aussagen sind zutreffend? *(Ziffern eintragen)*
+**A2 (4 P):** Im Arbeitsvertrag der neuen Datenanalystin Nele Brauer soll eine Probezeit stehen. Welche zwei Aussagen sind zutreffend? *(Ziffern eintragen)*
 - (1) Auf eine Probezeit kann ganz verzichtet werden.
 - (2) Die Probezeit muss mindestens drei Monate betragen.
 - (3) Während einer vereinbarten Probezeit kann mit einer Frist von zwei Wochen gekündigt werden.
@@ -113,8 +113,8 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 
 **A3 (4 P):** Ben Kowalski (17 Jahre) macht eine Ausbildung zum Fachinformatiker. Wegen einer Inventur arbeitet er am Dienstag ausnahmsweise bis 19:30 Uhr.
 
-> **§ 13 JArbSchG Tägliche Freizeit:** Nach Beendigung der täglichen Arbeitszeit dürfen Jugendliche nicht vor Ablauf einer ununterbrochenen Freizeit von mindestens 12 Stunden beschäftigt werden.
-> **§ 14 JArbSchG Nachtruhe (Auszug):** (1) Jugendliche dürfen nur in der Zeit von 6 bis 20 Uhr beschäftigt werden.
+> § 13 JArbSchG Tägliche Freizeit: Nach Beendigung der täglichen Arbeitszeit dürfen Jugendliche nicht vor Ablauf einer ununterbrochenen Freizeit von mindestens 12 Stunden beschäftigt werden.
+> § 14 JArbSchG Nachtruhe (Auszug): (1) Jugendliche dürfen nur in der Zeit von 6 bis 20 Uhr beschäftigt werden.
 
 Zu welcher Uhrzeit darf Ben am Mittwoch frühestens mit der Arbeit beginnen? *(Uhrzeit hh:mm eintragen)*
 
@@ -127,10 +127,10 @@ Zu welcher Uhrzeit darf Ben am Mittwoch frühestens mit der Arbeit beginnen? *(U
 
 **A5 (3 P):** Die Auszubildende Lina Brauer ist am 3. Mai 2010 geboren und arbeitet in der Fünf-Tage-Woche. Sie fragt, wie viel Urlaub ihr 2026 zusteht.
 
-> **§ 19 JArbSchG Urlaub (Auszug):** (2) Der Urlaub beträgt jährlich 1. mindestens 30 Werktage, wenn der Jugendliche zu Beginn des Kalenderjahrs noch nicht 16 Jahre alt ist, 2. mindestens 27 Werktage, wenn der Jugendliche zu Beginn des Kalenderjahrs noch nicht 17 Jahre alt ist, 3. mindestens 25 Werktage, wenn der Jugendliche zu Beginn des Kalenderjahrs noch nicht 18 Jahre alt ist.
-> **Tarifvertrag, § 12 Erholungsurlaub (Auszug):** Der Urlaub beträgt für alle Beschäftigten 24 Arbeitstage. Arbeitstage sind alle Kalendertage außer Samstagen, Sonntagen und gesetzlichen Feiertagen.
+> § 19 JArbSchG Urlaub (Auszug): (2) Der Urlaub beträgt jährlich 1. mindestens 30 Werktage, wenn der Jugendliche zu Beginn des Kalenderjahrs noch nicht 16 Jahre alt ist, 2. mindestens 27 Werktage, wenn der Jugendliche zu Beginn des Kalenderjahrs noch nicht 17 Jahre alt ist, 3. mindestens 25 Werktage, wenn der Jugendliche zu Beginn des Kalenderjahrs noch nicht 18 Jahre alt ist.
+> Tarifvertrag, § 12 Erholungsurlaub (Auszug): Der Urlaub beträgt für alle Beschäftigten 24 Arbeitstage. Arbeitstage sind alle Kalendertage außer Samstagen, Sonntagen und gesetzlichen Feiertagen.
 
-Auf wie viele **Arbeitstage** Urlaub hat Lina 2026 Anspruch? *(Ergebnis eintragen)*
+Auf wie viele Arbeitstage Urlaub hat Lina 2026 Anspruch? *(Ergebnis eintragen)*
 
 **A6 (3 P):** Der Auszubildende Ben Kowalski fragt, wozu er den Ausbildungsnachweis (das „Berichtsheft“) führen muss. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
 - (1) Der Ausbildungsnachweis ist freiwillig.
@@ -159,7 +159,7 @@ Hat Emily wirksam gekündigt? *(Ziffer eintragen)*
 - (4) Nein, weil die Unterschrift ihrer gesetzlichen Vertreter fehlt.
 - (5) Nein, weil Auszubildende nach der Probezeit gar nicht kündigen dürfen.
 
-**B3 (3 P):** Welche Formulierung in einem Zeugnis entspricht der Note **„gut“**? *(Ziffer eintragen)*
+**B3 (3 P):** Welche Formulierung in einem Zeugnis entspricht der Note „gut“? *(Ziffer eintragen)*
 - (1) „Sie erledigte die ihr übertragenen Aufgaben stets zu unserer vollsten Zufriedenheit.“
 - (2) „Sie erledigte die ihr übertragenen Aufgaben stets zu unserer vollen Zufriedenheit.“
 - (3) „Sie erledigte die ihr übertragenen Aufgaben zu unserer Zufriedenheit.“
@@ -173,7 +173,7 @@ Hat Emily wirksam gekündigt? *(Ziffer eintragen)*
 - (4) Der Betriebsrat darf für das Möbelhaus Kaufverträge abschließen.
 - (5) Der Betriebsrat muss der Eröffnung einer neuen Filiale zustimmen.
 
-**B5 (4 P):** Der Ausbilder informiert die neuen Auszubildenden über die Jugend- und Auszubildendenvertretung (JAV). Welche **zwei** Aussagen sind zutreffend? *(Ziffern eintragen)*
+**B5 (4 P):** Der Ausbilder informiert die neuen Auszubildenden über die Jugend- und Auszubildendenvertretung (JAV). Welche zwei Aussagen sind zutreffend? *(Ziffern eintragen)*
 - (1) In die JAV können Beschäftigte gewählt werden, die das 25. Lebensjahr noch nicht vollendet haben.
 - (2) In die JAV können nur Jugendliche unter 18 Jahren gewählt werden.
 - (3) Die JAV wird regelmäßig alle zwei Jahre gewählt.
@@ -190,7 +190,7 @@ Hat Emily wirksam gekündigt? *(Ziffer eintragen)*
 
 ## Block C – Tarif und Sozialversicherung (20 P)
 
-**C1 (4 P):** Welche **zwei** Aussagen zum Tarifvertrag sind zutreffend? *(Ziffern eintragen)*
+**C1 (4 P):** Welche zwei Aussagen zum Tarifvertrag sind zutreffend? *(Ziffern eintragen)*
 - (1) Tarifverträge werden von Gewerkschaften und Arbeitgebern bzw. Arbeitgeberverbänden ohne staatliche Beteiligung ausgehandelt.
 - (2) Ein Tarifvertrag wird erst durch die Genehmigung des Arbeitsministeriums gültig.
 - (3) Ein Tarifvertrag legt Höchstlöhne fest, die nicht überschritten werden dürfen.
@@ -198,14 +198,14 @@ Hat Emily wirksam gekündigt? *(Ziffer eintragen)*
 - (5) Ein Tarifvertrag gilt automatisch für alle Arbeitnehmer in Deutschland.
 - (6) Ein Tarifvertrag darf höchstens ein Jahr laufen.
 
-**C2 (3 P):** Neben dem Gehaltstarifvertrag schließen die Tarifpartner einen neuen **Manteltarifvertrag**. Was wird darin unter anderem geregelt? *(Ziffer eintragen)*
+**C2 (3 P):** Neben dem Gehaltstarifvertrag schließen die Tarifpartner einen neuen Manteltarifvertrag. Was wird darin unter anderem geregelt? *(Ziffer eintragen)*
 - (1) die Höhe des Ecklohns
 - (2) die Dauer der wöchentlichen Arbeitszeit
 - (3) die Höhe der Ausbildungsvergütung
 - (4) die Beschreibung der einzelnen Entgeltgruppen
 - (5) die Gewinnbeteiligung der Gesellschafter
 
-**C3 (4 P):** Ein Mitarbeiter fragt nach den Leistungen der gesetzlichen Rentenversicherung. Welche **zwei** Leistungen erbringt sie? *(Ziffern eintragen)*
+**C3 (4 P):** Ein Mitarbeiter fragt nach den Leistungen der gesetzlichen Rentenversicherung. Welche zwei Leistungen erbringt sie? *(Ziffern eintragen)*
 - (1) Krankengeld
 - (2) Altersrente
 - (3) Arbeitslosengeld
@@ -213,7 +213,7 @@ Hat Emily wirksam gekündigt? *(Ziffer eintragen)*
 - (5) Verletztengeld nach einem Arbeitsunfall
 - (6) Pflegegeld
 
-**C4 (3 P):** Eine Auszubildende will einen Teil ihrer Ausbildung in Dänemark absolvieren. Das Möbelhaus weist sie auf den **Europass** hin. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
+**C4 (3 P):** Eine Auszubildende will einen Teil ihrer Ausbildung in Dänemark absolvieren. Das Möbelhaus weist sie auf den Europass hin. Welche Aussage ist zutreffend? *(Ziffer eintragen)*
 - (1) Der Europass ist ein kostenpflichtiger Zertifizierungsdienst.
 - (2) Der Europass hilft, Qualifikationen und Kompetenzen europaweit verständlich darzustellen.
 - (3) Ohne Europass ist eine Ausbildung im europäischen Ausland verboten.
@@ -266,7 +266,7 @@ Ermitteln Sie, welcher Auftrag am wirtschaftlichsten abgewickelt wurde. *(Auftra
 - (4) Arbeitsgemeinschaft
 - (5) Interessengemeinschaft
 
-**D5 (3 P):** Im Möbelhaus erhält ein Einkäufer Weisungen sowohl vom Leiter der Abteilung **Einkauf** als auch von der Produktmanagerin für den Bereich **Schlafen**; ebenso arbeiten Verkauf und Logistik jeweils für die Produktbereiche Wohnen, Schlafen und Küche. Nach welchem Leitungssystem ist das Möbelhaus organisiert? *(Ziffer eintragen)*
+**D5 (3 P):** Im Möbelhaus erhält ein Einkäufer Weisungen sowohl vom Leiter der Abteilung Einkauf als auch von der Produktmanagerin für den Bereich Schlafen; ebenso arbeiten Verkauf und Logistik jeweils für die Produktbereiche Wohnen, Schlafen und Küche. Nach welchem Leitungssystem ist das Möbelhaus organisiert? *(Ziffer eintragen)*
 - (1) Einliniensystem
 - (2) Stabliniensystem
 - (3) Matrixorganisation
@@ -303,14 +303,14 @@ Bedeutungen: a) Warnung vor schwebender Last · b) Handschutz benutzen · c) Not
 - (4) Die Unterweisung übernimmt ausschließlich die Berufsgenossenschaft.
 - (5) Die Beschäftigten müssen die Unterweisung selbst bezahlen.
 
-**E3 (3 P):** Bei einer Brandschutzübung werden Regeln zum Löschen mit Feuerlöschern besprochen. Welche Regel ist **falsch**? *(Ziffer eintragen)*
+**E3 (3 P):** Bei einer Brandschutzübung werden Regeln zum Löschen mit Feuerlöschern besprochen. Welche Regel ist falsch? *(Ziffer eintragen)*
 - (1) Flächenbrände von vorn beginnend ablöschen.
 - (2) Wandbrände von oben nach unten löschen.
 - (3) In Windrichtung löschen.
 - (4) Ausreichend viele Feuerlöscher gleichzeitig einsetzen, nicht nacheinander.
 - (5) Nach dem Löschen die Brandstelle beobachten, um eine Wiederentzündung zu erkennen.
 
-**E4 (4 P):** Im Lager hängen **Aufladelöscher** mit Treibgaspatrone. Bringen Sie die Schritte der Bedienung in die richtige Reihenfolge. *(Für den ersten Schritt die Ziffer 1, für den zweiten die Ziffer 2 usw. eintragen; Buchstaben a bis e)*
+**E4 (4 P):** Im Lager hängen Aufladelöscher mit Treibgaspatrone. Bringen Sie die Schritte der Bedienung in die richtige Reihenfolge. *(Für den ersten Schritt die Ziffer 1, für den zweiten die Ziffer 2 usw. eintragen; Buchstaben a bis e)*
 - a) Sicherungsstift ziehen
 - b) Löschpistole auf den Brandherd richten und stoßweise betätigen
 - c) Feuerlöscher aus der Halterung nehmen und zum Brand bringen

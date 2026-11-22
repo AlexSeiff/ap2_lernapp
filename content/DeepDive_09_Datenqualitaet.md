@@ -266,7 +266,7 @@ Die **Möbelhaus Nordholz GmbH** führt die Kundendaten aus Onlineshop, Filialka
 
 Die Geschäftsleitung will eine **Datenqualitätsrichtlinie** für das CRM verabschieden. Sie sollen dafür die Grundlagen liefern.
 
-**A1 (15 P):** *Nennen* Sie **fünf** Dimensionen der Datenqualität. *Erläutern* Sie je Dimension kurz die Bedeutung und *nennen* Sie je eine Maßnahme zur Sicherstellung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**A1 (15 P):** *Nennen* Sie fünf Dimensionen der Datenqualität. *Erläutern* Sie je Dimension kurz die Bedeutung und *nennen* Sie je eine Maßnahme zur Sicherstellung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Dimension | Bedeutung | Maßnahme zur Sicherstellung |
 |---|---|---|
@@ -276,13 +276,13 @@ Die Geschäftsleitung will eine **Datenqualitätsrichtlinie** für das CRM verab
 | | | |
 | | | |
 
-**A2 (5 P):** *Erläutern* Sie den Unterschied zwischen **Gültigkeit** und **Korrektheit** und *belegen* Sie ihn mit einem Beispiel aus der Anlage.
+**A2 (5 P):** *Erläutern* Sie den Unterschied zwischen Gültigkeit und Korrektheit und *belegen* Sie ihn mit einem Beispiel aus der Anlage.
 
 ## Block B – Probleme identifizieren (24 P)
 
 Aus dem Altsystem liegt ein Auszug von zehn Datensätzen vor (**Anlage**). Er soll stellvertretend für den Gesamtbestand von rund 48.000 Kunden untersucht werden.
 
-**B1 (18 P):** *Analysieren* Sie die Anlage. *Benennen* Sie **sechs** Datenqualitätsprobleme. *Geben* Sie jeweils die betroffene Datensatznummer, die verletzte Dimension und die Konsequenz für eine Auswertung an.
+**B1 (18 P):** *Analysieren* Sie die Anlage. *Benennen* Sie sechs Datenqualitätsprobleme. *Geben* Sie jeweils die betroffene Datensatznummer, die verletzte Dimension und die Konsequenz für eine Auswertung an.
 
 **B2 (6 P):** Datensatz 3 und 7 enthalten das Geburtsdatum 01.01.1900. *Erläutern* Sie, welche Ursache typischerweise dahintersteckt und warum dieser Wert gefährlicher ist als ein leeres Feld.
 
@@ -298,7 +298,7 @@ Parallel liefert die Logistik einen Auftragsbestand mit Lieferdauern für eine A
 
 **C3 (4 P):** *Formulieren* Sie für das Feld E-Mail eine vollständige Datenqualitätskennzahl mit Zielwert, Messintervall und Verantwortlichkeit.
 
-**C4 (6 P):** Im Bestand der Logistik fehlen 12 % der Lieferdauern. *Nennen* Sie **drei** Strategien im Umgang mit fehlenden Werten und *bewerten* Sie je einen Vor- und einen Nachteil. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C4 (6 P):** Im Bestand der Logistik fehlen 12 % der Lieferdauern. *Nennen* Sie drei Strategien im Umgang mit fehlenden Werten und *bewerten* Sie je einen Vor- und einen Nachteil. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Strategie | Vorteil | Nachteil |
 |---|---|---|
@@ -306,7 +306,7 @@ Parallel liefert die Logistik einen Auftragsbestand mit Lieferdauern für eine A
 | | | |
 | | | |
 
-**C5 (4 P):** Bei der Prüfung fällt auf, dass die fehlenden Lieferdauern **ausschließlich** Aufträge eines bestimmten Spediteurs betreffen. *Beurteilen* Sie, ob ein Ersetzen durch den Mittelwert hier vertretbar ist.
+**C5 (4 P):** Bei der Prüfung fällt auf, dass die fehlenden Lieferdauern ausschließlich Aufträge eines bestimmten Spediteurs betreffen. *Beurteilen* Sie, ob ein Ersetzen durch den Mittelwert hier vertretbar ist.
 
 ## Block D – Bereinigen und vorbeugen (26 P)
 
@@ -314,9 +314,9 @@ Vor der Übernahme ins CRM werden die Daten bereinigt.
 
 Damit die Fehler nach der Migration nicht wiederkehren, sollen technische Prüfungen im CRM und klare Zuständigkeiten festgelegt werden.
 
-**D1 (8 P):** *Beschreiben* Sie das Vorgehen zur Erkennung und Behandlung der Dubletten in der Anlage. *Gehen* Sie auf exakte und unscharfe Dubletten getrennt *ein* und *erläutern* Sie den Begriff **Golden Record**.
+**D1 (8 P):** *Beschreiben* Sie das Vorgehen zur Erkennung und Behandlung der Dubletten in der Anlage. *Gehen* Sie auf exakte und unscharfe Dubletten getrennt *ein* und *erläutern* Sie den Begriff Golden Record.
 
-**D2 (10 P):** *Nennen* Sie **fünf** technische Maßnahmen, mit denen die in der Anlage gefundenen Fehler künftig verhindert werden. *Ordnen* Sie jeder Maßnahme das konkrete Problem aus der Anlage *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**D2 (10 P):** *Nennen* Sie fünf technische Maßnahmen, mit denen die in der Anlage gefundenen Fehler künftig verhindert werden. *Ordnen* Sie jeder Maßnahme das konkrete Problem aus der Anlage *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Maßnahme | Verhindert |
 |---|---|
@@ -326,7 +326,7 @@ Damit die Fehler nach der Migration nicht wiederkehren, sollen technische Prüfu
 | | |
 | | |
 
-**D3 (4 P):** *Erläutern* Sie die Rollen **Data Owner** und **Data Steward** und *grenzen* Sie sie voneinander ab.
+**D3 (4 P):** *Erläutern* Sie die Rollen Data Owner und Data Steward und *grenzen* Sie sie voneinander ab.
 
 **D4 (4 P):** Die Geschäftsführung fragt, warum in Prävention investiert werden soll, „wo man die Daten doch einmal im Jahr bereinigen kann". *Argumentieren* Sie mit der 1-10-100-Regel.
 

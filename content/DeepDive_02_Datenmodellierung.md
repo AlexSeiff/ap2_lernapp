@@ -244,7 +244,7 @@ Der Reparaturservice der **Möbelhaus Nordholz GmbH** verwaltet seine Aufträge 
 
 Der Serviceleiter fragt, warum die Exporttabelle überhaupt Probleme macht.
 
-**A1 (9 P):** *Nennen* Sie die **drei** Anomalien unnormalisierter Datenbestände und *erläutern* Sie jede an einem konkreten Beispiel aus Anlage 1.
+**A1 (9 P):** *Nennen* Sie die drei Anomalien unnormalisierter Datenbestände und *erläutern* Sie jede an einem konkreten Beispiel aus Anlage 1.
 
 **A2 (6 P):** *Definieren* Sie funktionale, partielle und transitive Abhängigkeit und *geben* Sie je ein Beispiel aus Anlage 1 *an*.
 
@@ -280,9 +280,9 @@ Ein Werkstudent hat für den Onlineshop einen ersten Tabellenentwurf geliefert, 
 
 **D1 (9 P):** Ein Kollege schlägt vor, den Kundennamen zusätzlich in der Auftragstabelle zu speichern, „damit die Auswertungen schneller laufen". *Beurteilen* Sie den Vorschlag. Gehen Sie auf Vor- und Nachteile ein und *geben* Sie eine differenzierte Empfehlung für das operative System einerseits und das Berichtswesen andererseits.
 
-**D2 (10 P):** Gegeben ist folgender Entwurf: bestellung(**bestell_id**, kunden_id↑, produkt_id, bezeichnung, preis, menge). *Benennen* Sie **zwei** Modellierungsschwächen und *skizzieren* Sie für jede die Verbesserung.
+**D2 (10 P):** Gegeben ist folgender Entwurf: bestellung(bestell_id, kunden_id↑, produkt_id, bezeichnung, preis, menge). *Benennen* Sie zwei Modellierungsschwächen und *skizzieren* Sie für jede die Verbesserung.
 
-**D3 (6 P):** *Bestimmen* Sie für die drei Situationen jeweils die Kardinalität in Min-Max- **und** Chen-Notation:
+**D3 (6 P):** *Bestimmen* Sie für die drei Situationen jeweils die Kardinalität in Min-Max- und Chen-Notation:
 a) Jeder Mitarbeiter nutzt höchstens einen Firmenwagen; jeder Firmenwagen ist genau einem Mitarbeiter zugeordnet.
 b) Eine Abteilung beschäftigt mindestens einen Mitarbeiter; jeder Mitarbeiter gehört genau einer Abteilung an.
 c) Ein Produkt lagert in mehreren Lagern, ein Lager führt viele Produkte; beides kann auch noch keinem zugeordnet sein.

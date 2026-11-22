@@ -164,11 +164,11 @@ An der Warenausgabe arbeitet je Schicht ein Mitarbeiter. Er gibt ausschließlich
 - Währenddessen druckt der Mitarbeiter den Lieferschein aus und lässt ihn vom Kunden unterschreiben.
 - Sind die Ware da und der Lieferschein unterschrieben, übergibt der Mitarbeiter die Ware.
 
-*Erstellen* Sie aufgrund dieser Beschreibung ein **UML-Aktivitätsdiagramm** mit den Schwimmbahnen **Kunde** und **Mitarbeiter Warenausgabe**.
+*Erstellen* Sie aufgrund dieser Beschreibung ein UML-Aktivitätsdiagramm mit den Schwimmbahnen Kunde und Mitarbeiter Warenausgabe.
 
-**A2 (6 P):** Der Mitarbeiter hört an Samstagen immer häufiger Beschwerden über die Wartezeit. Sie werden beauftragt, den Ablauf zu analysieren. *Nennen* Sie **drei** geeignete Methoden der Ist-Aufnahme und *wenden* Sie jede auf die Situation an der Warenausgabe *an*.
+**A2 (6 P):** Der Mitarbeiter hört an Samstagen immer häufiger Beschwerden über die Wartezeit. Sie werden beauftragt, den Ablauf zu analysieren. *Nennen* Sie drei geeignete Methoden der Ist-Aufnahme und *wenden* Sie jede auf die Situation an der Warenausgabe *an*.
 
-**A3 (4 P):** *Leiten* Sie **zwei** geeignete Indikatoren zur Bewertung des Ausgabeprozesses *ab* und *begründen* Sie Ihre Wahl.
+**A3 (4 P):** *Leiten* Sie zwei geeignete Indikatoren zur Bewertung des Ausgabeprozesses *ab* und *begründen* Sie Ihre Wahl.
 
 ## Block B – Kundenkarte: Prozess analysieren und optimieren (25 P)
 
@@ -179,15 +179,15 @@ Um die Abholung zu beschleunigen, wurde die **Nordholz-Kundenkarte** eingeführt
 - Der Kunde unterschreibt die Einwilligung.
 - Währenddessen wird die Karte gedruckt, eingeschweißt und ausgegeben.
 
-**B1 (4 P):** *Untersuchen* Sie den Antragsprozess mithilfe einer **SWOT-Analyse**. *Tragen* Sie je **ein** Merkmal in die Tabelle *ein*.
+**B1 (4 P):** *Untersuchen* Sie den Antragsprozess mithilfe einer SWOT-Analyse. *Tragen* Sie je ein Merkmal in die Tabelle *ein*.
 
 | Stärken (Strengths) | Schwächen (Weaknesses) |
 |---|---|
 | | |
-| **Chancen (Opportunities)** | **Risiken (Threats)** |
+| Chancen (Opportunities) | Risiken (Threats) |
 | | |
 
-**B2 (4 P):** Sie sollen ermitteln, wo anzusetzen ist, um die Wartezeit am Infopunkt zu verkürzen. Die Wirkung im Ishikawa-Diagramm lautet „Lange Wartezeit am Infopunkt“. *Nennen* Sie für die vier übrigen Kategorien je **eine** Einflussgröße und *tragen* Sie sie in die Tabelle *ein*.
+**B2 (4 P):** Sie sollen ermitteln, wo anzusetzen ist, um die Wartezeit am Infopunkt zu verkürzen. Die Wirkung im Ishikawa-Diagramm lautet „Lange Wartezeit am Infopunkt“. *Nennen* Sie für die vier übrigen Kategorien je eine Einflussgröße und *tragen* Sie sie in die Tabelle *ein*.
 
 | Kategorie (5M) | Einflussgröße |
 |---|---|
@@ -197,17 +197,17 @@ Um die Abholung zu beschleunigen, wurde die **Nordholz-Kundenkarte** eingeführt
 | Material | |
 | Milieu | |
 
-**B3 (13 P):** Der Antragsprozess soll über die geplante App laufen. Kundinnen und Kunden sollen die Karte wahlweise **digital** (QR-Code in der App) oder als **Plastikkarte per Post** erhalten. *Erstellen* Sie für den optimierten Prozess eine **eEPK** von der Registrierung in der App bis zur aktiven Kundenkarte. *Geben* Sie dabei die erzeugten **Informationsobjekte** *an*.
+**B3 (13 P):** Der Antragsprozess soll über die geplante App laufen. Kundinnen und Kunden sollen die Karte wahlweise digital (QR-Code in der App) oder als Plastikkarte per Post erhalten. *Erstellen* Sie für den optimierten Prozess eine eEPK von der Registrierung in der App bis zur aktiven Kundenkarte. *Geben* Sie dabei die erzeugten Informationsobjekte *an*.
 
-**B4 (4 P):** *Beschreiben* Sie mit **zwei** Argumenten, worin die Optimierung dieses Prozesses besteht. *Beziehen* Sie sich dabei auf die Schwachstellen des beschriebenen Antragsprozesses, die Sie als Einflussgrößen im Ishikawa-Diagramm (B2) gefunden haben.
+**B4 (4 P):** *Beschreiben* Sie mit zwei Argumenten, worin die Optimierung dieses Prozesses besteht. *Beziehen* Sie sich dabei auf die Schwachstellen des beschriebenen Antragsprozesses, die Sie als Einflussgrößen im Ishikawa-Diagramm (B2) gefunden haben.
 
 ## Block C – Projekt ABHOLAPP (30 P)
 
 Die Geschäftsleitung richtet das Projekt **„ABHOLAPP“** ein: Kunden buchen in der App ein Abholzeitfenster und erhalten einen Abholcode; kleine Waren liegen in **Abholschränken** im Eingangsbereich. Das Projektteam besteht aus Entwicklern des Softwarehauses **Codewerk Nord GmbH**, zwei Mitarbeitern der Warenausgabe, der IT-Abteilung und einer Projektleiterin. Schon im Kick-off-Meeting machen sich die Mitarbeiter der Warenausgabe Sorgen, die Abholschränke könnten ihre Arbeitsplätze überflüssig machen.
 
-**C1 (4 P):** *Beschreiben* Sie **zwei** Maßnahmen, mit denen den Befürchtungen der Mitarbeiter der Warenausgabe entgegengewirkt werden kann.
+**C1 (4 P):** *Beschreiben* Sie zwei Maßnahmen, mit denen den Befürchtungen der Mitarbeiter der Warenausgabe entgegengewirkt werden kann.
 
-**C2 (6 P):** Sie haben drei Risiken im Projekt identifiziert. *Tragen* Sie in die Tabelle zu jedem Risiko eine mögliche **Auswirkung** und eine mögliche **Ursache** *ein*.
+**C2 (6 P):** Sie haben drei Risiken im Projekt identifiziert. *Tragen* Sie in die Tabelle zu jedem Risiko eine mögliche Auswirkung und eine mögliche Ursache *ein*.
 
 | Risiko | Auswirkung | Ursache |
 |---|---|---|
@@ -215,13 +215,13 @@ Die Geschäftsleitung richtet das Projekt **„ABHOLAPP“** ein: Kunden buchen 
 | Schnittstelle zum Warenwirtschaftssystem nicht dokumentiert | | |
 | Betriebsrat stimmt der Einführung nicht zu | | |
 
-**C3 (8 P):** In der Initialisierungsphase sollen Sie eine Entscheidungsgrundlage erarbeiten, ob die Software für die Abholschränke von der eigenen IT-Abteilung oder von der Codewerk Nord GmbH erstellt werden soll. *Beschreiben* Sie je **zwei** Vor- und **zwei** Nachteile der Fremdvergabe.
+**C3 (8 P):** In der Initialisierungsphase sollen Sie eine Entscheidungsgrundlage erarbeiten, ob die Software für die Abholschränke von der eigenen IT-Abteilung oder von der Codewerk Nord GmbH erstellt werden soll. *Beschreiben* Sie je zwei Vor- und zwei Nachteile der Fremdvergabe.
 
-**C4 (4 P):** *Nennen* Sie **zwei** funktionale und **zwei** nichtfunktionale Anforderungen an die ABHOLAPP.
+**C4 (4 P):** *Nennen* Sie zwei funktionale und zwei nichtfunktionale Anforderungen an die ABHOLAPP.
 
-**C5 (4 P):** Für das Projekt wird ein Kostenplan benötigt. *Identifizieren* Sie **zwei** Kostenarten des Projekts und *nennen* Sie je Kostenart ein konkretes Beispiel.
+**C5 (4 P):** Für das Projekt wird ein Kostenplan benötigt. *Identifizieren* Sie zwei Kostenarten des Projekts und *nennen* Sie je Kostenart ein konkretes Beispiel.
 
-**C6 (4 P):** *Beschreiben* Sie **zwei** Maßnahmen, mit denen Sie die Qualität bei der Entwicklung der App sichern können.
+**C6 (4 P):** *Beschreiben* Sie zwei Maßnahmen, mit denen Sie die Qualität bei der Entwicklung der App sichern können.
 
 ## Block D – Wirtschaftlichkeit der Abholschränke (20 P)
 

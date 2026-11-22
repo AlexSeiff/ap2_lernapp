@@ -287,7 +287,7 @@ Bewertet wird die fachliche Logik. Ein vergessenes Semikolon oder Groß-/Kleinsc
 - **C4 (6 P):** Ermitteln Sie Vor- und Nachnamen aller Kunden, die noch keine Bestellung aufgegeben haben.
 - **C5 (10 P):** Ermitteln Sie je Kunde (Nachname) den Gesamtumsatz über alle *gelieferten* Bestellungen, absteigend nach Umsatz.
 - **C6 (5 P):** Geben Sie alle Produkte aus, die teurer sind als der Durchschnittspreis aller Produkte (Unterabfrage verwenden).
-- **C7 (8 P):** Die folgende Abfrage soll je Ort die Anzahl der Kunden ermitteln, die sich ab dem 01.01.2025 registriert haben, und nur Orte mit mehr als einem Kunden ausgeben. Sie enthält **vier Fehler** – finden und korrigieren Sie alle (je 2 P):
+- **C7 (8 P):** Die folgende Abfrage soll je Ort die Anzahl der Kunden ermitteln, die sich ab dem 01.01.2025 registriert haben, und nur Orte mit mehr als einem Kunden ausgeben. Sie enthält vier Fehler – finden und korrigieren Sie alle (je 2 P):
 
 ```sql
 SELECT ort, COUNT(kunden_id) AS anzahl
@@ -297,7 +297,7 @@ GROUP BY nachname
 HAVING registriert_am >= 01.01.2025;
 ```
 
-- **C8 (9 P):** Erstellen Sie per SQL die Tabelle **retoure** mit: retoure_id (Ganzzahl, Primärschlüssel), bestell_id (Ganzzahl, Pflichtfeld, Fremdschlüssel auf bestellung), grund (Text, max. 200 Zeichen, Pflichtfeld), erstattung (Dezimalzahl mit 2 Nachkommastellen), angelegt_am (Datum, Standardwert: aktuelles Datum).
+- **C8 (9 P):** Erstellen Sie per SQL die Tabelle retoure mit: retoure_id (Ganzzahl, Primärschlüssel), bestell_id (Ganzzahl, Pflichtfeld, Fremdschlüssel auf bestellung), grund (Text, max. 200 Zeichen, Pflichtfeld), erstattung (Dezimalzahl mit 2 Nachkommastellen), angelegt_am (Datum, Standardwert: aktuelles Datum).
 
 ---
 

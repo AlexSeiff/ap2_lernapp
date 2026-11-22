@@ -186,7 +186,7 @@ Von einigen Brettern ist bekannt, ob sie von einem Pilz befallen sind (**P**) od
 | Test 4 | 5,5 | 9 | G |
 | Test 5 | 3 | 12 | P |
 
-**A1 (7 P):** *Zeichnen* Sie die **Trainingsdaten** (nicht die Testdaten) in ein Koordinatensystem (Papier; x-Achse 0 bis 10, y-Achse 0 bis 13). Verwenden Sie für gesund (G) einen ausgefüllten Kreis und für befallen (P) ein Kreuz. *Zeichnen* Sie anschließend zwei mögliche Trenngeraden ein: Gerade 1: y = 7,5 und Gerade 2: y = 1,5 · x − 1.
+**A1 (7 P):** *Zeichnen* Sie die Trainingsdaten (nicht die Testdaten) in ein Koordinatensystem (Papier; x-Achse 0 bis 10, y-Achse 0 bis 13). Verwenden Sie für gesund (G) einen ausgefüllten Kreis und für befallen (P) ein Kreuz. *Zeichnen* Sie anschließend zwei mögliche Trenngeraden ein: Gerade 1: y = 7,5 und Gerade 2: y = 1,5 · x − 1.
 
 **A2 (2 P):** *Nennen* Sie die Form des maschinellen Lernens, die hier vorliegt, und *begründen* Sie Ihre Angabe.
 
@@ -245,9 +245,9 @@ Im zusammengeführten Datenbestand `daten` steht jede Zeile der Kameradatei zusa
 
 > *Filtering a DataFrame: `people[people.city == 'Kiel']` returns all rows whose column `city` equals 'Kiel'. Several conditions are combined with `&` (and) or `|` (or); each condition is put in parentheses, for example `people[(people.age > 30) & (people.city == 'Kiel')]` or `people[(people.age > 30) | (people.city == 'Kiel')]`.*
 
-**B1 (6 P):** Die Daten sollen nach dem Vorgehensmodell **CRISP-DM** aufbereitet werden. Die Abbildung zeigt den Kreislauf mit sechs Feldern A bis F um das Feld „Daten“. *Ordnen* Sie die sechs Phasen den Feldern zu und *tragen* Sie die Ziffern in die Tabelle *ein*.
+**B1 (6 P):** Die Daten sollen nach dem Vorgehensmodell CRISP-DM aufbereitet werden. Die Abbildung zeigt den Kreislauf mit sechs Feldern A bis F um das Feld „Daten“. *Ordnen* Sie die sechs Phasen den Feldern zu und *tragen* Sie die Ziffern in die Tabelle *ein*.
 
-**Abbildung – Kreislauf der sechs Phasen (Felder A bis F)**
+Abbildung – Kreislauf der sechs Phasen (Felder A bis F)
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" width="360" height="255" role="img" aria-label="Sechs Felder A bis F kreisförmig um das Feld Daten: A und B sowie C und D sind durch Doppelpfeile verbunden, von B führt ein Pfeil zu C, von D zu E, von E zurück zu A und weiter zu F">
@@ -286,7 +286,7 @@ Im zusammengeführten Datenbestand `daten` steht jede Zeile der Kameradatei zusa
 | E | |
 | F | |
 
-**B2 (4 P):** Das folgende Python-Skript soll beide Dateien einlesen und passend zusammenführen. Es enthält **zwei** Fehler. *Nennen* Sie die Fehler und *korrigieren* Sie sie.
+**B2 (4 P):** Das folgende Python-Skript soll beide Dateien einlesen und passend zusammenführen. Es enthält zwei Fehler. *Nennen* Sie die Fehler und *korrigieren* Sie sie.
 
 ```python
 # pandas importieren
@@ -303,9 +303,9 @@ klima_df = pd.read_csv("klima/2610.json")
 
 **B4 (4 P):** *Formulieren* Sie anhand der Beispiele aus dem Hinweis einen Befehl, der aus dem DataFrame `daten` alle Bretter der Holzart Buche auflistet.
 
-**B5 (4 P):** *Formulieren* Sie einen Befehl, der alle Bretter auflistet, deren Zustand gut ist **und** die keine Maßnahme benötigen.
+**B5 (4 P):** *Formulieren* Sie einen Befehl, der alle Bretter auflistet, deren Zustand gut ist und die keine Maßnahme benötigen.
 
-**B6 (4 P):** *Formulieren* Sie einen Befehl, der alle Bretter auflistet, die manuell behandelt werden müssen **oder** von Pilz befallen sind.
+**B6 (4 P):** *Formulieren* Sie einen Befehl, der alle Bretter auflistet, die manuell behandelt werden müssen oder von Pilz befallen sind.
 
 ## Block C – SQL: Holzchargen auswerten (28 P)
 
@@ -324,21 +324,21 @@ Die Daten der Holzchargen liegen in einer relationalen Datenbank. Jede Charge st
 
 Beziehungen: lieferant 1 : n charge · charge 1 : n messwert · eigenschaft 1 : n messwert · charge 1 : n charge_holzart · holzart 1 : n charge_holzart.
 
-**C1 (6 P):** *Formulieren* Sie eine SQL-Abfrage, die alle Chargen mit einer **Holzfeuchte unter 12** auflistet. Ausgegeben werden `c_bezeichnung`, `c_jahr`, `c_qualitaet` und `wert`. Die Chargen mit der niedrigsten Holzfeuchte stehen oben; bei gleicher Holzfeuchte steht die höhere Qualitätsstufe zuerst.
+**C1 (6 P):** *Formulieren* Sie eine SQL-Abfrage, die alle Chargen mit einer Holzfeuchte unter 12 auflistet. Ausgegeben werden `c_bezeichnung`, `c_jahr`, `c_qualitaet` und `wert`. Die Chargen mit der niedrigsten Holzfeuchte stehen oben; bei gleicher Holzfeuchte steht die höhere Qualitätsstufe zuerst.
 
 **C2 (7 P):** *Formulieren* Sie eine SQL-Abfrage, die für jede Region (`l_region`) die höchste, die niedrigste und die durchschnittliche Qualitätsstufe der Chargen ausgibt. Die Ergebnisspalten heißen `l_region`, `hoechste`, `niedrigste` und `durchschnitt`.
 
-**C3 (7 P):** *Formulieren* Sie eine SQL-Abfrage, die je Lieferant (`l_name`) die Anzahl der Chargen mit einer Qualitätsstufe von **7 oder höher** ausgibt (Spalte `anzahl`). Es sollen nur Lieferanten mit **mehr als zwei** solchen Chargen erscheinen, der Lieferant mit den meisten guten Chargen zuerst.
+**C3 (7 P):** *Formulieren* Sie eine SQL-Abfrage, die je Lieferant (`l_name`) die Anzahl der Chargen mit einer Qualitätsstufe von 7 oder höher ausgibt (Spalte `anzahl`). Es sollen nur Lieferanten mit mehr als zwei solchen Chargen erscheinen, der Lieferant mit den meisten guten Chargen zuerst.
 
-**C4 (5 P):** *Formulieren* Sie eine SQL-Abfrage, die alle Chargen auflistet, die die **höchste in der Datenbank vorkommende** Qualitätsstufe erreichen. Ausgegeben werden `c_bezeichnung`, `c_jahr` und `c_qualitaet`.
+**C4 (5 P):** *Formulieren* Sie eine SQL-Abfrage, die alle Chargen auflistet, die die höchste in der Datenbank vorkommende Qualitätsstufe erreichen. Ausgegeben werden `c_bezeichnung`, `c_jahr` und `c_qualitaet`.
 
-**C5 (3 P):** Die Chargendaten des Lieferanten **Holzkontor Tams** wurden bei einem Angriff auf das Lieferantenportal manipuliert. *Formulieren* Sie eine SQL-Anweisung, die die Chargen dieses Lieferanten aus der Datenbank entfernt. Für die Detailtabellen ist eine Löschweitergabe eingerichtet.
+**C5 (3 P):** Die Chargendaten des Lieferanten Holzkontor Tams wurden bei einem Angriff auf das Lieferantenportal manipuliert. *Formulieren* Sie eine SQL-Anweisung, die die Chargen dieses Lieferanten aus der Datenbank entfernt. Für die Detailtabellen ist eine Löschweitergabe eingerichtet.
 
 ## Block D – Cloud-Speicherung und Schutzbedarf (20 P)
 
 Alle Messdaten des Holzlagers – von den Klimasensoren und vom Kamerawagen – liegen in der Cloud-Datenbank. Bilder und Messdaten werden mit KI-Werkzeugen ausgewertet, die ebenfalls in der Cloud laufen. So lässt sich etwa der beste Zeitpunkt für die Verarbeitung einer Charge bestimmen; Behandlungsmittel gegen Pilzbefall sollen nur noch gezielt eingesetzt werden.
 
-**D1 (4 P):** *Nennen* Sie **zwei** Nachteile der Datenspeicherung in der Cloud und *erläutern* Sie jeden Nachteil in einem Satz.
+**D1 (4 P):** *Nennen* Sie zwei Nachteile der Datenspeicherung in der Cloud und *erläutern* Sie jeden Nachteil in einem Satz.
 
 **D2 (16 P):** *Ermitteln* Sie den Schutzbedarf (normal, hoch oder sehr hoch) für die folgenden Fälle und *begründen* Sie jede Einstufung – auch die vorgegebenen. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 

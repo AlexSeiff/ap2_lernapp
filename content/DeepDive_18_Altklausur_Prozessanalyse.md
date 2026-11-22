@@ -256,11 +256,11 @@ Die **Möbelhaus Nordholz GmbH** betreibt am Hauptstandort Verwaltung, Lager und
 
 Für die Einführung des Zeiterfassungssystems erfassen Terminals an den Eingängen und im Lager die Anwesenheitszeiten der Beschäftigten per Chipkarte. Die Daten werden an die Lohnabrechnung übergeben.
 
-**A1 (4 P):** Die EU-Datenschutz-Grundverordnung (DSGVO) stellt hohe Anforderungen an den Schutz personenbezogener Daten. Beschreiben Sie **zwei** Maßnahmen zur Einhaltung des Datenschutzes, um den Anforderungen der DSGVO gerecht zu werden.
+**A1 (4 P):** Die EU-Datenschutz-Grundverordnung (DSGVO) stellt hohe Anforderungen an den Schutz personenbezogener Daten. Beschreiben Sie zwei Maßnahmen zur Einhaltung des Datenschutzes, um den Anforderungen der DSGVO gerecht zu werden.
 
-**A2 (6 P):** Ein wichtiges Ziel der Geschäftsleitung ist eine fälschungssichere Zeiterfassung ohne Mehraufwand für die Beschäftigten. Beschreiben Sie **drei** technische Anforderungen, die das neue System dazu erfüllen muss.
+**A2 (6 P):** Ein wichtiges Ziel der Geschäftsleitung ist eine fälschungssichere Zeiterfassung ohne Mehraufwand für die Beschäftigten. Beschreiben Sie drei technische Anforderungen, die das neue System dazu erfüllen muss.
 
-**A3 (12 P):** Der Erfolg des Projekts hängt maßgeblich von der Akzeptanz der Beschäftigten im Lager und des Betriebsrats ab. Nennen Sie jeweils **zwei Befürchtungen** und beschreiben Sie zu jeder Befürchtung eine **geeignete Gegenmaßnahme**. Tragen Sie Ihre Antworten in die Tabelle ein.
+**A3 (12 P):** Der Erfolg des Projekts hängt maßgeblich von der Akzeptanz der Beschäftigten im Lager und des Betriebsrats ab. Nennen Sie jeweils zwei Befürchtungen und beschreiben Sie zu jeder Befürchtung eine geeignete Gegenmaßnahme. Tragen Sie Ihre Antworten in die Tabelle ein.
 
 | Betroffener | Befürchtungen | Gegenmaßnahmen |
 |---|---|---|
@@ -271,9 +271,9 @@ Für die Einführung des Zeiterfassungssystems erfassen Terminals an den Eingän
 
 Der Kundenservice bearbeitet Reklamationen bisher per E-Mail und Telefon. Es ist geplant, ein Reklamationssystem einzuführen.
 
-**B1 (4 P):** Beschreiben Sie **zwei** mögliche Vorteile eines Reklamationssystems (Ticketsystems) für den Kundenservice.
+**B1 (4 P):** Beschreiben Sie zwei mögliche Vorteile eines Reklamationssystems (Ticketsystems) für den Kundenservice.
 
-**B2 (3 P):** In Ereignisgesteuerten Prozessketten (EPK) gibt es drei mögliche Konnektoren. Geben Sie jeweils an, **welche Ereignisse eintreten müssen**, damit die Funktion ausgeführt wird. Die Konnektoren stehen jeweils zwischen **Ereignis 1**, **Ereignis 2** und der **Funktion**.
+**B2 (3 P):** In Ereignisgesteuerten Prozessketten (EPK) gibt es drei mögliche Konnektoren. Geben Sie jeweils an, welche Ereignisse eintreten müssen, damit die Funktion ausgeführt wird. Die Konnektoren stehen jeweils zwischen Ereignis 1, Ereignis 2 und der Funktion.
 
 | Konnektor | Welche Ereignisse müssen eintreten? |
 |---|---|
@@ -281,9 +281,9 @@ Der Kundenservice bearbeitet Reklamationen bisher per E-Mail und Telefon. Es ist
 | ∨ (ODER) | |
 | XOR | |
 
-**B3 (18 P):** Der Ablauf der Reklamationsbearbeitung ist wie folgt beschrieben: Geht eine Reklamation ein, muss der Kunde über den Eingang informiert werden. **Parallel** dazu wird die Reklamation einem Sachbearbeiter zugewiesen. Der Sachbearbeiter erfasst den Vorgang im Reklamationssystem. Danach prüft er anhand der Produktdokumentation, ob ein Mangel vorliegt. Liegt kein Mangel vor, wird dem Kunden eine Ablehnung gesendet. Liegt ein Mangel vor, wird geprüft, ob eine Reparatur möglich ist. Ist sie möglich, wird die Reparatur beauftragt, sonst wird ein Ersatzprodukt geliefert. Nach Ablehnung, Reparaturauftrag oder Ersatzlieferung wird die Reklamation im Reklamationssystem geschlossen.
+**B3 (18 P):** Der Ablauf der Reklamationsbearbeitung ist wie folgt beschrieben: Geht eine Reklamation ein, muss der Kunde über den Eingang informiert werden. Parallel dazu wird die Reklamation einem Sachbearbeiter zugewiesen. Der Sachbearbeiter erfasst den Vorgang im Reklamationssystem. Danach prüft er anhand der Produktdokumentation, ob ein Mangel vorliegt. Liegt kein Mangel vor, wird dem Kunden eine Ablehnung gesendet. Liegt ein Mangel vor, wird geprüft, ob eine Reparatur möglich ist. Ist sie möglich, wird die Reparatur beauftragt, sonst wird ein Ersatzprodukt geliefert. Nach Ablehnung, Reparaturauftrag oder Ersatzlieferung wird die Reklamation im Reklamationssystem geschlossen.
 
-Setzen Sie diese Prozessbeschreibung in einer **eEPK** um. Die Objekte „Reklamationssystem“ und „Produktdokumentation“ sollen dargestellt werden. Beschreiben Sie die eEPK in Textform als geordnete Liste (Ereignis → Funktion → Konnektor …) und geben Sie an, welche Objekte Sie welcher Funktion zuordnen.
+Setzen Sie diese Prozessbeschreibung in einer eEPK um. Die Objekte „Reklamationssystem“ und „Produktdokumentation“ sollen dargestellt werden. Beschreiben Sie die eEPK in Textform als geordnete Liste (Ereignis → Funktion → Konnektor …) und geben Sie an, welche Objekte Sie welcher Funktion zuordnen.
 
 ## Block C – Digitalisierung der Eingangsrechnungen (28 P)
 
@@ -295,14 +295,14 @@ Der Prozess 1 „Eingangsrechnung papiergesteuert“ soll digitalisiert werden. 
 | **2. Sachliche Prüfung** – Aktivitäten in der Fachabteilung: vergleichen die Rechnung mit dem Lieferschein aus der Ablage · prüfen Menge und Preis von Hand anhand der Bestellung · vermerken die Prüfung mit Unterschrift · geben die Mappe an die Buchhaltung weiter | Aktivität: rufen die Rechnung am Bildschirm auf · *drei ähnliche Aktivitäten zu beschreiben* |
 | **3. Freigabe und Buchung** – Aktivitäten in der Buchhaltung: legen die Rechnung dem Abteilungsleiter zur Freigabe vor · übertragen die Rechnungsdaten von Hand ins Buchhaltungssystem · heften die Rechnung in Aktenordnern ab | Aktivität: bestätigen die Freigabe im System · *drei ähnliche Aktivitäten zu beschreiben* |
 
-**C1 (6 P):** Beschreiben Sie **drei** Nachteile, die sich aus dem Prozess 1 „Eingangsrechnung papiergesteuert“ ergeben.
+**C1 (6 P):** Beschreiben Sie drei Nachteile, die sich aus dem Prozess 1 „Eingangsrechnung papiergesteuert“ ergeben.
 
 **C2 (18 P):** Zur Optimierung von Prozess 1 werden folgende Hilfsmittel angeschafft:
 - Dokumentenmanagementsystem mit Rechnungs-Workflow (Texterkennung/OCR),
 - digitale Endgeräte (PC und Tablet) für jeden Beteiligten,
 - Scanner im Posteingang, Anbindung an das Buchhaltungssystem.
 
-Sie sollen den Prozess 2 „Eingangsrechnung digital unterstützt“ definieren. Beschreiben Sie hierzu für **jeden Prozessschritt (1.–3.)** drei Aktivitäten, die aufgrund der technischen Hilfsmittel neu definiert bzw. angepasst werden können.
+Sie sollen den Prozess 2 „Eingangsrechnung digital unterstützt“ definieren. Beschreiben Sie hierzu für jeden Prozessschritt (1.–3.) drei Aktivitäten, die aufgrund der technischen Hilfsmittel neu definiert bzw. angepasst werden können.
 
 **C3 (4 P):** Die Geschäftsleitung hat das Ziel festgelegt, die Zeit vom Rechnungseingang bis zur Buchung um 30 % zu verkürzen. Erläutern Sie, wie dieses Ziel überprüft werden kann.
 
@@ -321,9 +321,9 @@ y-max: 2.000.000
 schritt: 250.000
 ```
 
-**D1 (2 P):** Formulieren Sie eine **quantitative Aussage** zum Kostenverlauf.
+**D1 (2 P):** Formulieren Sie eine quantitative Aussage zum Kostenverlauf.
 
-**D2 (8 P):** Nennen Sie **zwei Kriterien** zur Aussagekraft der Grafik, beschreiben Sie diese und ziehen Sie eine Schlussfolgerung. Tragen Sie Ihre Antworten in die Tabelle ein.
+**D2 (8 P):** Nennen Sie zwei Kriterien zur Aussagekraft der Grafik, beschreiben Sie diese und ziehen Sie eine Schlussfolgerung. Tragen Sie Ihre Antworten in die Tabelle ein.
 
 | Kriterium | Beschreibung |
 |---|---|
@@ -333,13 +333,13 @@ schritt: 250.000
 
 Schlussfolgerung: …
 
-**D3a (2 P):** In Ihren Überlegungen identifizieren Sie die Personalkosten als einen Haupttreiber. Sie führen deshalb eine Nachkalkulation für das Jahr 2025 durch (Aufgaben D3a bis D3c, zusammen 11 P) mit folgenden Daten: Die Hotline ist an **zwei Standorten** besetzt. An jedem Standort arbeiten immer **vier Mitarbeiter gleichzeitig**. Die Hotline muss **12 Stunden pro Tag von Montag bis Freitag** abgedeckt sein. Ein Jahr hat 52 Wochen. Berechnen Sie die Anzahl der Arbeitsstunden, die für den Betrieb der Hotline für ein Jahr anfallen.
+**D3a (2 P):** In Ihren Überlegungen identifizieren Sie die Personalkosten als einen Haupttreiber. Sie führen deshalb eine Nachkalkulation für das Jahr 2025 durch (Aufgaben D3a bis D3c, zusammen 11 P) mit folgenden Daten: Die Hotline ist an zwei Standorten besetzt. An jedem Standort arbeiten immer vier Mitarbeiter gleichzeitig. Die Hotline muss 12 Stunden pro Tag von Montag bis Freitag abgedeckt sein. Ein Jahr hat 52 Wochen. Berechnen Sie die Anzahl der Arbeitsstunden, die für den Betrieb der Hotline für ein Jahr anfallen.
 
-**D3b (5 P):** Für die Nachkalkulation gelten die Hotline-Daten aus D3a (zwei Standorte, je vier Mitarbeiter gleichzeitig, 12 Stunden pro Tag, Montag bis Freitag, 52 Wochen). Da Mitarbeiter aufgrund von Fortbildungen und Krankheit gefehlt haben, waren Vertretungen einzusetzen. Der zusätzliche Stundenbedarf ergibt sich aus einer Abwesenheitsquote von **12 %**, bezogen auf die in D3a berechneten Stunden pro Jahr. Außerdem sind **30 Urlaubstage** zu berücksichtigen (Tagesstunden der gesamten Besetzung). Ermitteln Sie aufgrund eines kalkulatorischen Stundensatzes von **58,00 EUR** die Personalkosten der beiden Hotline-Standorte.
+**D3b (5 P):** Für die Nachkalkulation gelten die Hotline-Daten aus D3a (zwei Standorte, je vier Mitarbeiter gleichzeitig, 12 Stunden pro Tag, Montag bis Freitag, 52 Wochen). Da Mitarbeiter aufgrund von Fortbildungen und Krankheit gefehlt haben, waren Vertretungen einzusetzen. Der zusätzliche Stundenbedarf ergibt sich aus einer Abwesenheitsquote von 12 %, bezogen auf die in D3a berechneten Stunden pro Jahr. Außerdem sind 30 Urlaubstage zu berücksichtigen (Tagesstunden der gesamten Besetzung). Ermitteln Sie aufgrund eines kalkulatorischen Stundensatzes von 58,00 EUR die Personalkosten der beiden Hotline-Standorte.
 
 **D3c (4 P):** Grundlage sind die Personalkosten der beiden Hotline-Standorte aus D3b (Daten aus D3a und D3b; bei Bedarf selbst neu berechnen). Tragen Sie Ihren errechneten Wert in die Kostenübersicht (2025) ein und leiten Sie aus der Lage des Wertes zur Kurve ein Urteil über die Datengrundlage der Kurve ab.
 
-**D4 (4 P):** In einem letzten Schritt überprüfen Sie noch einmal, ob der kalkulatorische Stundensatz alle Kosten abdeckt. Nennen Sie neben dem Lohn- bzw. Gehaltsstundensatz **vier weitere Bestandteile**, die in jedem Fall im durchschnittlichen Stundensatz enthalten sein müssen, um eine sinnvolle Kalkulation erstellen zu können.
+**D4 (4 P):** In einem letzten Schritt überprüfen Sie noch einmal, ob der kalkulatorische Stundensatz alle Kosten abdeckt. Nennen Sie neben dem Lohn- bzw. Gehaltsstundensatz vier weitere Bestandteile, die in jedem Fall im durchschnittlichen Stundensatz enthalten sein müssen, um eine sinnvolle Kalkulation erstellen zu können.
 
 ---
 

@@ -296,9 +296,9 @@ Der Datenschutzbeauftragte bittet Sie, für das Verzeichnis der Verarbeitungstä
 
 **A1 (6 P):** *Definieren* Sie „personenbezogene Daten" und *entscheiden* Sie begründet für je zwei Beispiele: Kundennummer, Firmenname „Huber GmbH", IP-Adresse, Durchschnittsumsatz aller Kunden.
 
-**A2 (10 P):** *Nennen* Sie **fünf** Grundsätze nach Art. 5 DSGVO und *erläutern* Sie jeden in einem Satz.
+**A2 (10 P):** *Nennen* Sie fünf Grundsätze nach Art. 5 DSGVO und *erläutern* Sie jeden in einem Satz.
 
-**A3 (8 P):** *Nennen* Sie **vier** Rechtsgrundlagen nach Art. 6 DSGVO und *ordnen* Sie jeder eine passende Verarbeitung aus der Ausgangssituation oder dem Möbelhausbetrieb *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**A3 (8 P):** *Nennen* Sie vier Rechtsgrundlagen nach Art. 6 DSGVO und *ordnen* Sie jeder eine passende Verarbeitung aus der Ausgangssituation oder dem Möbelhausbetrieb *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Rechtsgrundlage | passende Verarbeitung im Möbelhaus |
 |---|---|
@@ -311,7 +311,7 @@ Der Datenschutzbeauftragte bittet Sie, für das Verzeichnis der Verarbeitungstä
 
 Nach dem Start des Systems gehen die ersten Anfragen von Kunden ein, und der Cloud-Vertrag soll unterschrieben werden. Kurz darauf passiert eine Panne.
 
-**B1 (8 P):** *Nennen* Sie **vier** Betroffenenrechte mit Artikel und *erläutern* Sie deren Inhalt.
+**B1 (8 P):** *Nennen* Sie vier Betroffenenrechte mit Artikel und *erläutern* Sie deren Inhalt.
 
 **B2 (8 P):** Ein Kunde verlangt die vollständige Löschung aller seiner Daten. Er hat vor drei Jahren eine Küche gekauft und ist für den Newsletter angemeldet. *Beurteilen* Sie den Anspruch differenziert und *beschreiben* Sie das korrekte Vorgehen.
 
@@ -329,9 +329,9 @@ Zusätzlich sollen die Schutzziele für das Analysesystem festgelegt werden.
 
 **C1 (6 P):** *Grenzen* Sie anhand des Auszugs Anonymisierung und Pseudonymisierung *ab*. *Geben* Sie an, welche Variante weiterhin der DSGVO unterliegt, und *begründen* Sie.
 
-**C2 (10 P):** Die Bearbeitungszeiten sollen je Mitarbeiter ausgewertet werden. *Erläutern* Sie **zwei** rechtliche Anforderungen (mit Rechtsgrundlage) und *nennen* Sie **drei** Maßnahmen, mit denen die Auswertung dennoch zulässig durchgeführt werden kann.
+**C2 (10 P):** Die Bearbeitungszeiten sollen je Mitarbeiter ausgewertet werden. *Erläutern* Sie zwei rechtliche Anforderungen (mit Rechtsgrundlage) und *nennen* Sie drei Maßnahmen, mit denen die Auswertung dennoch zulässig durchgeführt werden kann.
 
-**C3 (6 P):** *Nennen* Sie die **drei** klassischen Schutzziele und *ordnen* Sie jedem eine konkrete Maßnahme für das Analysesystem *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C3 (6 P):** *Nennen* Sie die drei klassischen Schutzziele und *ordnen* Sie jedem eine konkrete Maßnahme für das Analysesystem *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Schutzziel | Maßnahme für das Analysesystem |
 |---|---|
@@ -347,7 +347,7 @@ Das Unternehmen sichert sonntags vollständig (800 GB) und montags bis samstags 
 
 **D1 (6 P):** *Grenzen* Sie symmetrische und asymmetrische Verschlüsselung *ab* und *erläutern* Sie, warum in der Praxis hybride Verfahren eingesetzt werden. *Erklären* Sie zusätzlich, warum Hashing keine Verschlüsselung ist.
 
-**D2 (6 P):** *Beschreiben* Sie ein rollenbasiertes Berechtigungskonzept für das Analysesystem mit **drei** Rollen und *erläutern* Sie die Prinzipien „Least Privilege" und „Need-to-know".
+**D2 (6 P):** *Beschreiben* Sie ein rollenbasiertes Berechtigungskonzept für das Analysesystem mit drei Rollen und *erläutern* Sie die Prinzipien „Least Privilege" und „Need-to-know".
 
 **D3 (4 P):** Eine Auswertung soll Kundendaten über ein Eingabefeld filtern. *Erläutern* Sie die Gefahr einer SQL-Injection und die wirksamste Gegenmaßnahme.
 

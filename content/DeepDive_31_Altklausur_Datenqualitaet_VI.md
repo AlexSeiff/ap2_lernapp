@@ -234,9 +234,9 @@ Die Klassifizierung soll mit einem einfachen **Perzeptron** (Neuron) erfolgen. D
 
 Zum Perzeptron gehört die Klasse `Perzeptron` mit den Attributen `gewichte: Double[3]` und `epochen: Integer` sowie den Methoden `Perzeptron(epochen: Integer)`, `lernen(daten: Double[][]): void` und `vorhersage(x: Double[]): Integer`. Die Trainingsdaten liegen in einem zweidimensionalen Array `daten`: Die Spalten mit Index 0 und 1 enthalten die Messwerte, die Spalte mit Index 2 das Label (1 = gut, 0 = schlecht).
 
-**A1 (6 P):** *Beschreiben* Sie die Begriffe **künstliche Intelligenz**, **maschinelles Lernen** und **Deep Learning** und wie sie zueinander in Beziehung stehen.
+**A1 (6 P):** *Beschreiben* Sie die Begriffe künstliche Intelligenz, maschinelles Lernen und Deep Learning und wie sie zueinander in Beziehung stehen.
 
-**A2 (4 P):** *Beschreiben* Sie die beiden Arten maschinellen Lernens **Supervised Learning** und **Unsupervised Learning**.
+**A2 (4 P):** *Beschreiben* Sie die beiden Arten maschinellen Lernens Supervised Learning und Unsupervised Learning.
 
 **A3 (2 P):** *Beschreiben* Sie, warum mit den gegebenen Trainingsdaten eine Klassifizierung durch maschinelles Lernen möglich ist.
 
@@ -255,9 +255,9 @@ Zum Perzeptron gehört die Klasse `Perzeptron` mit den Attributen `gewichte: Dou
 
 **A5 (5 P):** *Erläutern* Sie die Funktionsweise des Perzeptrons anhand der Skizze.
 
-**A6 (5 P):** Die Gewichte werden mit dem Perzeptron-Lernalgorithmus gelernt. Das Struktogramm der Methode `lernen(daten)` hat zehn leere Felder. Feld 2 ist der Kopf der **äußeren Schleife**, Feld 3 der Kopf der **inneren Schleife**, Feld 7 die **Bedingung einer Verzweigung**.
+**A6 (5 P):** Die Gewichte werden mit dem Perzeptron-Lernalgorithmus gelernt. Das Struktogramm der Methode `lernen(daten)` hat zehn leere Felder. Feld 2 ist der Kopf der äußeren Schleife, Feld 3 der Kopf der inneren Schleife, Feld 7 die Bedingung einer Verzweigung.
 
-**Abbildung – Struktogramm der Methode `lernen(daten)` mit zehn leeren Feldern**
+Abbildung – Struktogramm der Methode `lernen(daten)` mit zehn leeren Feldern
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 350" width="360" height="315" role="img" aria-label="Struktogramm der Methode lernen mit zehn leeren Feldern: nach der Anweisung e gleich 0 folgen Feld 1 und die äußere Schleife mit Feld 2 als Kopf; darin die innere Schleife mit Feld 3 als Kopf, den Feldern 4 bis 6 und der Verzweigung mit Feld 7, im Ja-Zweig die Felder 8 und 9; Feld 10 steht nach der inneren Schleife">
@@ -321,9 +321,9 @@ Bisher werden die technischen Daten aller vermieteten MDE-Geräte in einer CSV-D
 >
 > *`connection.commit()` – Makes all changes of the current transaction permanent.*
 
-**B1 (13 P):** *Überführen* Sie den Auszug der CSV-Datei in ein relationales Datenbankmodell in der **3. Normalform**. Geben Sie die Datentypen an, kennzeichnen Sie Primärschlüssel und Fremdschlüssel und geben Sie die Beziehungen mit Kardinalitäten an.
+**B1 (13 P):** *Überführen* Sie den Auszug der CSV-Datei in ein relationales Datenbankmodell in der 3. Normalform. Geben Sie die Datentypen an, kennzeichnen Sie Primärschlüssel und Fremdschlüssel und geben Sie die Beziehungen mit Kardinalitäten an.
 
-**B2 (4 P):** Ein vorbereiteter Cursor führt SQL-Anweisungen mit gebundenen Parametern aus (**Prepared Statements**). *Erklären* Sie den Begriff und **einen** Vorteil.
+**B2 (4 P):** Ein vorbereiteter Cursor führt SQL-Anweisungen mit gebundenen Parametern aus (Prepared Statements). *Erklären* Sie den Begriff und einen Vorteil.
 
 **B3 (9 P):** *Ergänzen* Sie das folgende Python-Skript so, dass es eine Tabelle für die Mieter (Mieter, Ansprechpartner, Telefon) anlegt und den ersten Mieter aus dem Auszug einfügt. Denken Sie an den Primärschlüssel.
 
@@ -369,9 +369,9 @@ Die Tabelle `lagerbestand` enthält je Artikel den Lagerbestand am Ende jeder Ka
 
 **C5 (7 P):** *Formulieren* Sie eine SQL-Abfrage, die je Artikel den Mittelwert und die Standardabweichung des Lagerbestands über alle vorliegenden Wochen (Grundgesamtheit) ausgibt, jeweils auf eine ganze Zahl gerundet. Die Ergebnisspalten heißen `artikelnr`, `mittelwert` und `standardabweichung`. In MySQL oder PostgreSQL können Sie `STDDEV_POP()` verwenden. Im SQLite-Editor der App stehen für die Umformung aus der Formel `AVG()`, `SQRT()` und `ROUND()` zur Verfügung.
 
-**C6 (6 P):** *Berechnen* Sie Mittelwert und Standardabweichung des Lagerbestands von **Artikel 1** von Hand (Rechenweg angeben, Standardabweichung auf zwei Nachkommastellen) und *interpretieren* Sie das Ergebnis.
+**C6 (6 P):** *Berechnen* Sie Mittelwert und Standardabweichung des Lagerbestands von Artikel 1 von Hand (Rechenweg angeben, Standardabweichung auf zwei Nachkommastellen) und *interpretieren* Sie das Ergebnis.
 
-**C7 (3 P):** *Berechnen* Sie den Median des Lagerbestands von **Artikel 1** und *interpretieren* Sie das Ergebnis.
+**C7 (3 P):** *Berechnen* Sie den Median des Lagerbestands von Artikel 1 und *interpretieren* Sie das Ergebnis.
 
 ## Block D – Lagerdaten für eine Analyse aufbereiten (21 P)
 
@@ -388,13 +388,13 @@ Die Lagerverwaltung soll mithilfe einer Datenanalyse verbessert werden. Die Besc
 | 7 | 13 | 2 | 1 | 7 | 190 | 220 | 250 |
 | 8 | 14 | 2 | 4 | null | 35,5 | 48 | 500 |
 
-**D1 (3 P):** *Nennen* Sie **drei** wichtige Schritte der Datenaufbereitung.
+**D1 (3 P):** *Nennen* Sie drei wichtige Schritte der Datenaufbereitung.
 
-**D2 (8 P):** *Beschreiben* Sie **vier** Probleme, die sich der Tabelle entnehmen lassen, jeweils mit einem Beispiel.
+**D2 (8 P):** *Beschreiben* Sie vier Probleme, die sich der Tabelle entnehmen lassen, jeweils mit einem Beispiel.
 
-**D3 (6 P):** *Formulieren* Sie anhand der Beispieldaten **drei** begründete Vorschläge, wie mit den problematischen Daten umgegangen werden kann.
+**D3 (6 P):** *Formulieren* Sie anhand der Beispieldaten drei begründete Vorschläge, wie mit den problematischen Daten umgegangen werden kann.
 
-**D4 (4 P):** Um die Wege zu verbessern, sollen die Laufwege der Beschäftigten im Lager aufgezeichnet werden. *Beschreiben* Sie **zwei** Aspekte, die aus datenschutzrechtlicher Sicht zu beachten sind.
+**D4 (4 P):** Um die Wege zu verbessern, sollen die Laufwege der Beschäftigten im Lager aufgezeichnet werden. *Beschreiben* Sie zwei Aspekte, die aus datenschutzrechtlicher Sicht zu beachten sind.
 
 ## Lernziel-Check (am Ende des Themas alles mit Ja beantworten)
 

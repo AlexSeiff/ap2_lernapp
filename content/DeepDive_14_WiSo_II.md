@@ -417,7 +417,7 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 ## Block B – Rechtsgeschäfte und Vertragsarten (20 P)
 
-**B1 (4 P):** Welche **zwei** Rechtsgeschäfte sind sofort wirksam? *(Ziffern eintragen)*
+**B1 (4 P):** Welche zwei Rechtsgeschäfte sind sofort wirksam? *(Ziffern eintragen)*
 - (1) Ein 6-Jähriger kauft von seinem Taschengeld ein Comicheft.
 - (2) Ein 16-Jähriger kauft ohne Zustimmung der Eltern ein Smartphone auf Raten.
 - (3) Ein 15-Jähriger kauft Kopfhörer für 40 € von seinem Taschengeld.
@@ -482,14 +482,14 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 - (4) keines – Online-Käufe sind endgültig
 - (5) nur bei mangelhafter Ware
 
-**C5 (4 P):** Welche **zwei** Geschäfte darf eine Prokuristin des Möbelhauses ohne besondere Befugnis abschließen? *(Ziffern eintragen)*
+**C5 (4 P):** Welche zwei Geschäfte darf eine Prokuristin des Möbelhauses ohne besondere Befugnis abschließen? *(Ziffern eintragen)*
 - (1) einen Bankkredit aufnehmen
 - (2) das Betriebsgrundstück verkaufen
 - (3) den Jahresabschluss unterschreiben
 - (4) ein Grundstück für ein neues Lager kaufen
 - (5) einem weiteren Mitarbeiter Prokura erteilen
 
-**C6 (4 P):** Welche **zwei** Aussagen zu Rechtsformen sind richtig? *(Ziffern eintragen)*
+**C6 (4 P):** Welche zwei Aussagen zu Rechtsformen sind richtig? *(Ziffern eintragen)*
 - (1) In der OHG haftet jeder Gesellschafter nur bis zur Höhe seiner Einlage.
 - (2) Der Kommanditist einer KG haftet nur bis zur Höhe seiner Einlage.
 - (3) Eine AG benötigt ein Grundkapital von mindestens 25.000 €.
@@ -502,7 +502,7 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 
 **D2 (4 P):** Der Verbraucherpreisindex steigt von 120,0 auf 123,0. Wie hoch ist die Inflationsrate in Prozent (zwei Nachkommastellen)? *(Ergebnis eintragen)*
 
-**D3 (3 P):** Welches Ziel gehört **nicht** zum magischen Viereck des Stabilitätsgesetzes? *(Ziffer eintragen)*
+**D3 (3 P):** Welches Ziel gehört nicht zum magischen Viereck des Stabilitätsgesetzes? *(Ziffer eintragen)*
 - (1) stabiles Preisniveau
 - (2) hoher Beschäftigungsstand
 - (3) außenwirtschaftliches Gleichgewicht
@@ -552,14 +552,14 @@ Personen: **Jonas Brandt** (17, 1. Ausbildungsjahr), **Lea Sommer** (24, kinderl
 **E4 (4 P):** Bringen Sie das Verhalten im Brandfall in die richtige Reihenfolge:
 a) Löschversuch unternehmen · b) Brand melden · c) Ruhe bewahren · d) in Sicherheit bringen
 
-**E5 (3 P):** Im Lager wird zum Reinigen ein lösemittelhaltiges Mittel verwendet. Welche Maßnahme ist nach dem STOP-Prinzip **zuerst** zu prüfen? *(Ziffer eintragen)*
+**E5 (3 P):** Im Lager wird zum Reinigen ein lösemittelhaltiges Mittel verwendet. Welche Maßnahme ist nach dem STOP-Prinzip zuerst zu prüfen? *(Ziffer eintragen)*
 - (1) Schutzhandschuhe und Atemschutz ausgeben
 - (2) das Mittel durch ein lösemittelfreies ersetzen
 - (3) eine Absauganlage installieren
 - (4) die Arbeitszeit mit dem Mittel begrenzen
 - (5) die Beschäftigten jährlich unterweisen
 
-**E6 (4 P):** Das Projektteam arbeitet teils im Homeoffice mit einem externen Dienstleister an Kundendaten. Welche **zwei** Maßnahmen schützen die vertraulichen Daten bei dieser Zusammenarbeit? *(Ziffern eintragen)*
+**E6 (4 P):** Das Projektteam arbeitet teils im Homeoffice mit einem externen Dienstleister an Kundendaten. Welche zwei Maßnahmen schützen die vertraulichen Daten bei dieser Zusammenarbeit? *(Ziffern eintragen)*
 - (1) Dateien über den privaten Messenger austauschen, weil das schneller geht
 - (2) die Zugänge mit Zwei-Faktor-Authentifizierung sichern
 - (3) Freigaben nur an Berechtigte und mit Ablaufdatum erteilen

@@ -269,7 +269,7 @@ Die Entwickler zeigen sehr gute Trainingsergebnisse. Die Geschäftsleitung fragt
 
 **A1 (6 P):** *Erläutern* Sie, warum Daten vor dem Training in Trainings- und Testdaten aufgeteilt werden, und *nennen* Sie eine typische Aufteilung.
 
-**A2 (8 P):** *Erklären* Sie Overfitting und Underfitting. *Geben* Sie für jeden Fall *an*, woran Sie ihn an den Gütewerten erkennen, und *nennen* Sie je **zwei** Gegenmaßnahmen. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**A2 (8 P):** *Erklären* Sie Overfitting und Underfitting. *Geben* Sie für jeden Fall *an*, woran Sie ihn an den Gütewerten erkennen, und *nennen* Sie je zwei Gegenmaßnahmen. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | | Overfitting | Underfitting |
 |---|---|---|
@@ -277,7 +277,7 @@ Die Entwickler zeigen sehr gute Trainingsergebnisse. Die Geschäftsleitung fragt
 | erkennbar an den Gütewerten | | |
 | zwei Gegenmaßnahmen | | |
 
-**A3 (6 P):** *Beschreiben* Sie die 5-fache Kreuzvalidierung und *nennen* Sie **zwei** Vorteile gegenüber einem einfachen Split.
+**A3 (6 P):** *Beschreiben* Sie die 5-fache Kreuzvalidierung und *nennen* Sie zwei Vorteile gegenüber einem einfachen Split.
 
 **A4 (4 P):** Ein Kollege sortiert die Daten nach Auftragsdatum und nimmt die ersten 80 % als Trainingsdaten. *Beurteilen* Sie das Vorgehen für zwei Fälle: (a) Vorhersage des Reklamationsrisikos je Auftrag, (b) Prognose des Monatsumsatzes.
 
@@ -289,7 +289,7 @@ Grundlage ist das Testergebnis aus der **Anlage**.
 
 **B2 (20 P):** *Berechnen* Sie Accuracy, Precision, Recall, F1-Maß und Spezifität.
 
-**B3 (6 P):** Ein triviales Modell sagt für **jeden** Auftrag „keine Reklamation" voraus. *Berechnen* Sie dessen Accuracy und Recall und *vergleichen* Sie mit dem Modell aus der Anlage.
+**B3 (6 P):** Ein triviales Modell sagt für jeden Auftrag „keine Reklamation" voraus. *Berechnen* Sie dessen Accuracy und Recall und *vergleichen* Sie mit dem Modell aus der Anlage.
 
 ## Block C – Interpretation und Auswahl (22 P)
 
@@ -311,7 +311,7 @@ Ein übersehener Reklamationsfall kostet durchschnittlich 120 €, eine unnötig
 
 **D1 (6 P):** *Berechnen* Sie die Fehlerkosten des Modells aus der Anlage sowie die des trivialen Modells aus B3.
 
-**D2 (6 P):** *Beurteilen* Sie auf dieser Grundlage, ob der Einsatz des Modells zu empfehlen ist, und *nennen* Sie **zwei** Faktoren, die in dieser Rechnung nicht enthalten sind.
+**D2 (6 P):** *Beurteilen* Sie auf dieser Grundlage, ob der Einsatz des Modells zu empfehlen ist, und *nennen* Sie zwei Faktoren, die in dieser Rechnung nicht enthalten sind.
 
 **D3 (8 P):** *Berechnen* Sie MAE und RMSE. *Stellen* Sie den Rechenweg tabellarisch dar.
 

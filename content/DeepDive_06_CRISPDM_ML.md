@@ -708,7 +708,7 @@ Für das Reklamationsmodell beginnt bereits die Datenaufbereitung.
 
 **A1 (12 P):** *Nennen* Sie die sechs Phasen von CRISP-DM in der richtigen Reihenfolge und *beschreiben* Sie für jede Phase in einem Satz, was im geschilderten Reklamationsprojekt konkret zu tun wäre.
 
-**A2 (6 P):** *Erläutern* Sie, warum CRISP-DM als iterativer Kreislauf dargestellt wird, und *nennen* Sie **zwei** typische Rücksprünge mit Auslöser.
+**A2 (6 P):** *Erläutern* Sie, warum CRISP-DM als iterativer Kreislauf dargestellt wird, und *nennen* Sie zwei typische Rücksprünge mit Auslöser.
 
 **A3 (4 P):** Ein Kollege plant für das Projekt: 5 % Zieldefinition, 10 % Datenaufbereitung, 70 % Modellierung, 15 % Auswertung. *Beurteilen* Sie diese Aufwandsverteilung.
 
@@ -720,7 +720,7 @@ Verschiedene Abteilungen melden Fragen an die Daten an. Sie sollen jeweils das p
 
 Für das Reklamationsmodell liegen erste Testergebnisse vor; die Geschäftsführung hat außerdem schon Pläne für den Einsatz.
 
-**B1 (8 P):** *Ordnen* Sie den folgenden **vier** Fragestellungen jeweils Lernart und Verfahrenstyp *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**B1 (8 P):** *Ordnen* Sie den folgenden vier Fragestellungen jeweils Lernart und Verfahrenstyp *zu*. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Fragestellung | Lernart | Verfahrenstyp |
 |---|---|---|
@@ -731,11 +731,11 @@ Für das Reklamationsmodell liegen erste Testergebnisse vor; die Geschäftsführ
 
 **B2 (6 P):** *Erläutern* Sie den Unterschied zwischen Klassifikation und Regression und *begründen* Sie, welcher Typ für die Reklamationsvorhersage geeignet ist.
 
-**B3 (6 P):** Zur Auswahl stehen ein Entscheidungsbaum und ein neuronales Netz. *Begründen* Sie anhand von **drei** Kriterien, welches Verfahren Sie dem Fachbereich empfehlen.
+**B3 (6 P):** Zur Auswahl stehen ein Entscheidungsbaum und ein neuronales Netz. *Begründen* Sie anhand von drei Kriterien, welches Verfahren Sie dem Fachbereich empfehlen.
 
 **B4 (5 P):** Ein Kollege nimmt das Feld „Reklamationsdatum" als Merkmal in das Modell auf. Das Modell erreicht daraufhin eine Trefferquote von 99,8 %. *Erläutern* Sie, welcher Fehler vorliegt und warum das Modell im Betrieb versagen wird.
 
-**B5 (5 P):** Die Geschäftsführung möchte Aufträge mit hohem Reklamationsrisiko **automatisch** ablehnen. *Nennen* Sie **zwei** rechtliche Anforderungen und je eine Maßnahme zu deren Umsetzung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**B5 (5 P):** Die Geschäftsführung möchte Aufträge mit hohem Reklamationsrisiko automatisch ablehnen. *Nennen* Sie zwei rechtliche Anforderungen und je eine Maßnahme zu deren Umsetzung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | rechtliche Anforderung | Maßnahme zur Umsetzung |
 |---|---|
@@ -770,11 +770,11 @@ Zehn Warenkörbe (S = Schreibtisch, B = Bürostuhl, M = Monitor, L = Lampe):
 
 **D1 (4 P):** *Berechnen* Sie den Support der Einzelartikel S, B, M und L.
 
-**D2 (8 P):** *Berechnen* Sie für die Regel **S → B** Support, Konfidenz und Lift.
+**D2 (8 P):** *Berechnen* Sie für die Regel S → B Support, Konfidenz und Lift.
 
 **D3 (4 P):** *Interpretieren* Sie den Lift-Wert und *leiten* Sie eine Handlungsempfehlung *ab*.
 
-**D4 (4 P):** Für die Regel **L → M** ergeben sich Support 10 %, Konfidenz 25 % und Lift 0,50. *Erläutern* Sie, was ein Lift unter 1 fachlich bedeutet und welche Konsequenz sich für die Produktplatzierung ergibt.
+**D4 (4 P):** Für die Regel L → M ergeben sich Support 10 %, Konfidenz 25 % und Lift 0,50. *Erläutern* Sie, was ein Lift unter 1 fachlich bedeutet und welche Konsequenz sich für die Produktplatzierung ergibt.
 
 ---
 

@@ -64,6 +64,13 @@ describe('Echte Lernblätter in content/', () => {
     expect(missing).toEqual([]);
   });
 
+  it('Aufgabentexte sind ohne Fettdruck (Owner-Entscheidung 2026-11-22)', () => {
+    const fett = Object.values(content.tasks)
+      .filter((t) => /\*\*\S/.test(t.markdown))
+      .map((t) => t.id);
+    expect(fett).toEqual([]);
+  });
+
   it('liefert Lernkarten mit eindeutigen IDs und Material (ohne persönlichen Lernplan)', () => {
     const cards = content.flashcards.filter((c) => c.kind === 'lernkarte');
     expect(content.decks.length).toBeGreaterThan(0);

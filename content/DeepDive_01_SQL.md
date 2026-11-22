@@ -419,7 +419,7 @@ Außerdem soll er eine bestehende Abfrage nachvollziehen.
 
 **A2 (4 P):** Die Tabelle *kunde* enthält 5 Zeilen; bei 2 Kunden ist die Spalte `telefon` NULL. *Geben* Sie die Ergebnisse von `SELECT COUNT(*) FROM kunde` und `SELECT COUNT(telefon) FROM kunde` *an* und *begründen* Sie den Unterschied.
 
-**A3 (9 P):** Die folgende Abfrage soll alle Orte ausgeben, in denen mehr als ein Kunde ansässig ist. Sie enthält **drei Fehler**. *Benennen* Sie jeden Fehler, *begründen* Sie ihn und *notieren* Sie die korrigierte Abfrage.
+**A3 (9 P):** Die folgende Abfrage soll alle Orte ausgeben, in denen mehr als ein Kunde ansässig ist. Sie enthält drei Fehler. *Benennen* Sie jeden Fehler, *begründen* Sie ihn und *notieren* Sie die korrigierte Abfrage.
 ```sql
 SELECT ort, COUNT(*) AS anzahl
 FROM kunde
@@ -453,7 +453,7 @@ Der Vertrieb schickt die folgenden Auswertungswünsche. *Formulieren* Sie für j
 
 Weitere Auswertungswünsche des Vertriebs brauchen Gruppen und mehrere Tabellen. *Formulieren* Sie für jeden Wunsch ein SQL-Statement, das genau die angegebenen Spalten liefert.
 
-**C1 (7 P):** Alle Bestellungen (bestell_id) mit der Anzahl ihrer Positionen – aber nur Bestellungen mit **mehr als einer** Position.
+**C1 (7 P):** Alle Bestellungen (bestell_id) mit der Anzahl ihrer Positionen – aber nur Bestellungen mit mehr als einer Position.
 
 **C2 (7 P):** Für jede Bestellung: bestell_id, bestelldatum und der Name des Kunden.
 
@@ -465,7 +465,7 @@ Zwei Auswertungen des Vertriebs lassen sich nur mit Unterabfragen oder Mengenver
 
 Für die Retourenabwicklung soll die Datenbank außerdem erweitert werden.
 
-**D1 (8 P):** Alle Kunden (name), die **noch nie** bestellt haben.
+**D1 (8 P):** Alle Kunden (name), die noch nie bestellt haben.
 
 **D2 (8 P):** Alle Produkte (bezeichnung, preis), die teurer sind als der Durchschnittspreis aller Produkte.
 

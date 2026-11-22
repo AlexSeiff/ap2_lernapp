@@ -117,7 +117,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 
 ## Block A – Einstellung und Ausbildung (20 P)
 
-**A1 (3 P):** Im Vorstellungsgespräch werden Frau Sievers verschiedene Fragen gestellt. Welche Frage ist **unzulässig**? *(Ziffer eintragen)*
+**A1 (3 P):** Im Vorstellungsgespräch werden Frau Sievers verschiedene Fragen gestellt. Welche Frage ist unzulässig? *(Ziffer eintragen)*
 - (1) Welche Berufserfahrung bringen Sie mit?
 - (2) Welches Gehalt stellen Sie sich vor?
 - (3) Planen Sie in den nächsten Jahren, eine Familie zu gründen?
@@ -153,7 +153,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 - e) Vorstellungsgespräch
 - f) Erster Arbeitstag
 
-**A6 (4 P):** Welche **zwei** Unterlagen muss Frau Sievers dem Möbelhaus als neuem Arbeitgeber auf Anforderung vorlegen bzw. mitteilen? *(Ziffern eintragen)*
+**A6 (4 P):** Welche zwei Unterlagen muss Frau Sievers dem Möbelhaus als neuem Arbeitgeber auf Anforderung vorlegen bzw. mitteilen? *(Ziffern eintragen)*
 - (1) Nachweis über eine private Haftpflichtversicherung
 - (2) Steuerliche Identifikationsnummer
 - (3) Geburtsurkunde
@@ -193,7 +193,7 @@ Die **Möbelhaus Nordholz GmbH** ist ein mittelständisches Handelsunternehmen m
 
 **B5 (4 P):** Ein Mitarbeiter der Warenausgabe erhält für März 2026 folgende Abrechnung: Stundenlohn 17,50 EUR · 168 Arbeitsstunden, davon 16 Stunden an Samstagen · für Samstagsarbeit zusätzlich 25 % Zuschlag auf den Stundenlohn · einmaliges Urlaubsgeld von 300,00 EUR brutto. Berechnen Sie a) den Bruttolohn für März und b) den Arbeitnehmeranteil zur gesetzlichen Rentenversicherung (Beitragssatz 18,6 %, je zur Hälfte von Arbeitgeber und Arbeitnehmer, Stand 2026). *(Ergebnisse in EUR eintragen: a, b)*
 
-**B6 (4 P):** Der Tarifvertrag des Einzelhandels wurde gekündigt, es wird neu verhandelt. Welche **zwei** Parteien schließen den Tarifvertrag ab? *(Ziffern eintragen)*
+**B6 (4 P):** Der Tarifvertrag des Einzelhandels wurde gekündigt, es wird neu verhandelt. Welche zwei Parteien schließen den Tarifvertrag ab? *(Ziffern eintragen)*
 - (1) Bundesministerium für Arbeit und Soziales
 - (2) Gewerkschaft
 - (3) Industrie- und Handelskammer
@@ -245,13 +245,13 @@ Auszug aus dem Betriebsverfassungsgesetz zu C1 und C5:
 - 4 volljährige Leiharbeitnehmer, die für sechs Wochen zur Inventur eingesetzt werden
 - 2 Schülerpraktikanten im Alter von 15 Jahren
 
-Ermitteln Sie mithilfe des Gesetzesauszugs, wie viele Personen bei der Betriebsratswahl **wählen** dürfen. *(Anzahl eintragen)*
+Ermitteln Sie mithilfe des Gesetzesauszugs, wie viele Personen bei der Betriebsratswahl wählen dürfen. *(Anzahl eintragen)*
 
 **C6 (4 P):** Eine seit drei Jahren im Möbelhaus beschäftigte Mitarbeiterin will zu einem anderen Arbeitgeber wechseln. Ihr Kündigungsschreiben geht der Personalabteilung am Montag, dem 8. März 2027, zu. Es gelten die gesetzlichen Kündigungsfristen.
 
-> **§ 622 BGB (Auszug):** (1) Das Arbeitsverhältnis eines Arbeiters oder eines Angestellten (Arbeitnehmers) kann mit einer Frist von vier Wochen zum Fünfzehnten oder zum Ende eines Kalendermonats gekündigt werden. (2) Für eine Kündigung durch den Arbeitgeber beträgt die Kündigungsfrist, wenn das Arbeitsverhältnis in dem Betrieb oder Unternehmen 1. zwei Jahre bestanden hat, einen Monat zum Ende eines Kalendermonats, 2. fünf Jahre bestanden hat, zwei Monate zum Ende eines Kalendermonats, …
+> § 622 BGB (Auszug): (1) Das Arbeitsverhältnis eines Arbeiters oder eines Angestellten (Arbeitnehmers) kann mit einer Frist von vier Wochen zum Fünfzehnten oder zum Ende eines Kalendermonats gekündigt werden. (2) Für eine Kündigung durch den Arbeitgeber beträgt die Kündigungsfrist, wenn das Arbeitsverhältnis in dem Betrieb oder Unternehmen 1. zwei Jahre bestanden hat, einen Monat zum Ende eines Kalendermonats, 2. fünf Jahre bestanden hat, zwei Monate zum Ende eines Kalendermonats, …
 
-Zu welchem Datum kann die Mitarbeiterin ihr Arbeitsverhältnis **frühestens** beenden? *(Datum eintragen: TT.MM.JJJJ)*
+Zu welchem Datum kann die Mitarbeiterin ihr Arbeitsverhältnis frühestens beenden? *(Datum eintragen: TT.MM.JJJJ)*
 
 ## Block D – Unternehmen und Wirtschaft (20 P)
 
@@ -269,7 +269,7 @@ Zu welchem Datum kann die Mitarbeiterin ihr Arbeitsverhältnis **frühestens** b
 - (4) Kommanditisten haften den Gläubigern nur bis zur Höhe ihrer im Handelsregister eingetragenen Haftsumme.
 - (5) Komplementäre haften nicht für die Schulden der Gesellschaft.
 
-**D3 (3 P):** Eine frühere Kollegin will ein Ladengeschäft mit Werkstatt für IT-Dienstleistungen eröffnen. Welcher Gesichtspunkt spielt bei der Wahl des Standorts innerhalb Deutschlands **keine** Rolle? *(Ziffer eintragen)*
+**D3 (3 P):** Eine frühere Kollegin will ein Ladengeschäft mit Werkstatt für IT-Dienstleistungen eröffnen. Welcher Gesichtspunkt spielt bei der Wahl des Standorts innerhalb Deutschlands keine Rolle? *(Ziffer eintragen)*
 - (1) Zahl und Größe der Wettbewerber in der Umgebung
 - (2) Höhe der Ladenmiete
 - (3) Verkehrsanbindung für Kunden und Lieferanten
@@ -295,7 +295,7 @@ Aussagen: a) Alle Gesellschafter haften unbeschränkt, auch mit ihrem Privatverm
 
 ## Block E – Jugendarbeitsschutz, Weiterbildung, Umwelt und Gleichbehandlung (20 P)
 
-**E1 (3 P):** Bei welcher Maßnahme handelt es sich um eine **Umschulung**? *(Ziffer eintragen)*
+**E1 (3 P):** Bei welcher Maßnahme handelt es sich um eine Umschulung? *(Ziffer eintragen)*
 - (1) Eine Fachinformatikerin besucht ein Seminar zur IT-Sicherheit.
 - (2) Ein Kaufmann für IT-System-Management bereitet sich auf die Ausbildereignungsprüfung vor.
 - (3) Ein Tischler kann wegen einer Holzstauballergie nicht mehr in seinem Beruf arbeiten und macht eine Ausbildung zum Fachinformatiker.
@@ -316,7 +316,7 @@ Aussagen: a) Alle Gesellschafter haften unbeschränkt, auch mit ihrem Privatverm
 - (4) Stellen müssen geschlechtsneutral ausgeschrieben werden.
 - (5) Betriebe mit weniger als 200 Beschäftigten sind vom AGG ausgenommen.
 
-**E4 (3 P):** Das Möbelhaus hat sich Verhaltensregeln gegeben, die verhindern sollen, dass einzelne Personen aus sachfremden Gründen bevorzugt oder benachteiligt werden. In welchem Fall wurden diese Regeln **beachtet**? *(Ziffer eintragen)*
+**E4 (3 P):** Das Möbelhaus hat sich Verhaltensregeln gegeben, die verhindern sollen, dass einzelne Personen aus sachfremden Gründen bevorzugt oder benachteiligt werden. In welchem Fall wurden diese Regeln beachtet? *(Ziffer eintragen)*
 - (1) Eine Bewerberin wird eingestellt, weil sie die Nichte des Abteilungsleiters ist.
 - (2) Ein Bewerber wird wegen fehlender Qualifikation nicht in das Projektteam aufgenommen.
 - (3) Ein Mitarbeiter wird bei einer Beförderung übergangen, weil er einen Lebenspartner hat.
@@ -325,7 +325,7 @@ Aussagen: a) Alle Gesellschafter haften unbeschränkt, auch mit ihrem Privatverm
 
 **E5 (4 P):** Leon, 17 Jahre alt, erhält für die Inventurwoche folgenden Dienstplan. Er meint, dass an einem Tag der Beginn der ersten Pause gegen das Jugendarbeitsschutzgesetz verstößt.
 
-> **§ 11 JArbSchG (Auszug):** (1) Jugendlichen müssen im voraus feststehende Ruhepausen von angemessener Dauer gewährt werden. Die Ruhepausen müssen mindestens betragen 1. 30 Minuten bei einer Arbeitszeit von mehr als viereinhalb bis zu sechs Stunden, 2. 60 Minuten bei einer Arbeitszeit von mehr als sechs Stunden. (2) Die Ruhepausen müssen in angemessener zeitlicher Lage gewährt werden, frühestens eine Stunde nach Beginn und spätestens eine Stunde vor Ende der Arbeitszeit. Länger als viereinhalb Stunden hintereinander dürfen Jugendliche nicht ohne Ruhepause beschäftigt werden.
+> § 11 JArbSchG (Auszug): (1) Jugendlichen müssen im voraus feststehende Ruhepausen von angemessener Dauer gewährt werden. Die Ruhepausen müssen mindestens betragen 1. 30 Minuten bei einer Arbeitszeit von mehr als viereinhalb bis zu sechs Stunden, 2. 60 Minuten bei einer Arbeitszeit von mehr als sechs Stunden. (2) Die Ruhepausen müssen in angemessener zeitlicher Lage gewährt werden, frühestens eine Stunde nach Beginn und spätestens eine Stunde vor Ende der Arbeitszeit. Länger als viereinhalb Stunden hintereinander dürfen Jugendliche nicht ohne Ruhepause beschäftigt werden.
 
 | Kennziffer | Wochentag | Arbeitszeit | Beginn der ersten Pause |
 |---|---|---|---|
@@ -337,7 +337,7 @@ Aussagen: a) Alle Gesellschafter haften unbeschränkt, auch mit ihrem Privatverm
 
 An welchem Wochentag verstößt der Beginn der ersten Pause gegen das Gesetz, und wann muss die erste Pause an diesem Tag spätestens beginnen? *(Kennziffer und Uhrzeit hh:mm eintragen)*
 
-**E6 (4 P):** Welche **zwei** Maßnahmen verringern die Umweltbelastung durch das Möbelhaus? *(Ziffern eintragen)*
+**E6 (4 P):** Welche zwei Maßnahmen verringern die Umweltbelastung durch das Möbelhaus? *(Ziffern eintragen)*
 - (1) Kartons werden durch mehrlagige Einwegfolie ersetzt.
 - (2) Die Auslieferfahrzeuge werden schrittweise auf Elektroantrieb mit Ökostrom umgestellt.
 - (3) Das Lager wird auch nachts und am Wochenende voll beheizt.

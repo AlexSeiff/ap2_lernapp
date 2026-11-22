@@ -332,7 +332,7 @@ Bevor Sie rechnen, prüfen Sie, welche Kennzahlen für die Merkmale der Auftrags
 
 Der Kundenservice hat die Reklamationen des letzten Quartals nach Fehlerart ausgezählt. Von 50 Reklamationen entfallen: Transportschaden 18, Montagefehler 15, Falschlieferung 9, Materialfehler 6, Sonstiges 2.
 
-**A1 (8 P):** *Ordnen* Sie den folgenden Merkmalen je das Skalenniveau *zu* und *tragen* Sie es in die Tabelle *ein*. *Begründen* Sie **zwei** Ihrer Zuordnungen unter der Tabelle.
+**A1 (8 P):** *Ordnen* Sie den folgenden Merkmalen je das Skalenniveau *zu* und *tragen* Sie es in die Tabelle *ein*. *Begründen* Sie zwei Ihrer Zuordnungen unter der Tabelle.
 
 | Merkmal | Skalenniveau |
 |---|---|
@@ -367,11 +367,11 @@ Beim Aufbereiten der Daten fällt Ihnen außerdem eine Auffälligkeit auf.
 
 **C1 (4 P):** *Berechnen* Sie die Spannweite der Anlage und *beurteilen* Sie deren Aussagekraft in diesem Fall.
 
-**C2 (10 P):** Für fünf Aufträge einer anderen Filiale wurden folgende Durchlaufzeiten (in Tagen) erfasst: 2, 4, 5, 6, 8. *Berechnen* Sie Varianz und Standardabweichung der **Grundgesamtheit**. *Stellen* Sie den Rechenweg tabellarisch *dar*.
+**C2 (10 P):** Für fünf Aufträge einer anderen Filiale wurden folgende Durchlaufzeiten (in Tagen) erfasst: 2, 4, 5, 6, 8. *Berechnen* Sie Varianz und Standardabweichung der Grundgesamtheit. *Stellen* Sie den Rechenweg tabellarisch *dar*.
 
 **C3 (4 P):** Filiale Nord: x̄ = 50 min, σ = 5 min. Filiale Süd: x̄ = 100 min, σ = 8 min. *Berechnen* Sie jeweils den Variationskoeffizienten und *beurteilen* Sie, welche Filiale gleichmäßiger arbeitet.
 
-**C4 (5 P):** In der Spalte „Reparaturdauer" fallen 14 Datensätze mit dem exakten Wert 0 auf. *Nennen* Sie **zwei** mögliche Ursachen und je eine Maßnahme, mit der Sie die Ursache klären bzw. künftig verhindern. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**C4 (5 P):** In der Spalte „Reparaturdauer" fallen 14 Datensätze mit dem exakten Wert 0 auf. *Nennen* Sie zwei mögliche Ursachen und je eine Maßnahme, mit der Sie die Ursache klären bzw. künftig verhindern. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Ursache | Maßnahme |
 |---|---|

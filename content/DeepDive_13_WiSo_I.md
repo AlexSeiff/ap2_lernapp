@@ -338,7 +338,7 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 - (4) Die IHK überwacht die Ausbildung, führt das Verzeichnis der Ausbildungsverhältnisse und nimmt die Prüfungen ab.
 - (5) Mit Beginn der Ausbildung entfällt die Berufsschulpflicht.
 
-**A2 (4 P):** Welche **zwei** Vereinbarungen in Jonas' Ausbildungsvertrag sind nichtig? *(Ziffern eintragen)*
+**A2 (4 P):** Welche zwei Vereinbarungen in Jonas' Ausbildungsvertrag sind nichtig? *(Ziffern eintragen)*
 - (1) Verpflichtung, nach der Ausbildung drei Jahre im Betrieb zu bleiben
 - (2) Probezeit von drei Monaten
 - (3) Tägliche Ausbildungszeit von 8 Stunden
@@ -402,7 +402,7 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 **C1 (3 P):** Herr Kaya ist seit sechs Jahren im Möbelhaus beschäftigt. Er kündigt selbst; die Kündigung geht am 10.03.2026 zu. Abweichende tarifliche oder vertragliche Regelungen gibt es nicht. Wann endet das Arbeitsverhältnis frühestens? *(Ziffer eintragen)*
 (1) 07.04.2026 · (2) 15.04.2026 · (3) 30.04.2026 · (4) 31.05.2026 · (5) 30.06.2026
 
-**C2 (4 P):** Wie C1, jedoch kündigt der **Arbeitgeber**. Wann endet das Arbeitsverhältnis frühestens? *(Ziffer eintragen)*
+**C2 (4 P):** Wie C1, jedoch kündigt der Arbeitgeber. Wann endet das Arbeitsverhältnis frühestens? *(Ziffer eintragen)*
 (1) 07.04.2026 · (2) 15.04.2026 · (3) 30.04.2026 · (4) 31.05.2026 · (5) 30.06.2026
 
 **C3 (3 P):** Welche Kündigung wahrt die gesetzliche Schriftform? *(Ziffer eintragen)*
@@ -412,7 +412,7 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 - (4) mündliche Kündigung vor zwei Zeugen
 - (5) Kündigung per Fax
 
-**C4 (4 P):** Welche **zwei** Voraussetzungen müssen für den allgemeinen Kündigungsschutz nach dem KSchG erfüllt sein? *(Ziffern eintragen)*
+**C4 (4 P):** Welche zwei Voraussetzungen müssen für den allgemeinen Kündigungsschutz nach dem KSchG erfüllt sein? *(Ziffern eintragen)*
 - (1) Mitgliedschaft in einer Gewerkschaft
 - (2) mehr als zehn Arbeitnehmer im Betrieb
 - (3) Existenz eines Betriebsrats
@@ -461,7 +461,7 @@ Möbelhaus Nordholz GmbH – 140 wahlberechtigte Beschäftigte, Betriebsrat vorh
 - (4) Sie wird zwischen Gewerkschaft und Arbeitgeberverband geschlossen.
 - (5) Sie kann mündlich vereinbart werden.
 
-**D6 (4 P):** Durch die Übernahme zweier Filialen wird das Möbelhaus auf über 600 Beschäftigte wachsen. Welche **zwei** Aussagen zur Mitbestimmung im Aufsichtsrat sind zutreffend? *(Ziffern eintragen)*
+**D6 (4 P):** Durch die Übernahme zweier Filialen wird das Möbelhaus auf über 600 Beschäftigte wachsen. Welche zwei Aussagen zur Mitbestimmung im Aufsichtsrat sind zutreffend? *(Ziffern eintragen)*
 - (1) Bei mehr als 500 Beschäftigten besteht der Aufsichtsrat zu einem Drittel aus Arbeitnehmervertretern.
 - (2) Bei mehr als 2.000 Beschäftigten ist der Aufsichtsrat paritätisch besetzt; bei Stimmengleichheit entscheidet der Vorsitzende.
 - (3) Bei mehr als 100 Beschäftigten stellen die Arbeitnehmer die Hälfte des Aufsichtsrats.
@@ -497,7 +497,7 @@ a) Urabstimmung über den Streik · b) Tarifverhandlungen · c) Streik · d) Sch
 - (4) „Muttersprachler (m/w/d) gesucht“
 - (5) „Bitte geben Sie im Lebenslauf Ihre Religionszugehörigkeit an.“
 
-**E6 (4 P):** Eine Bewerberin wurde wegen ihres Alters nicht eingestellt und beruft sich auf das AGG. Welche **zwei** Aussagen sind zutreffend? *(Ziffern eintragen)*
+**E6 (4 P):** Eine Bewerberin wurde wegen ihres Alters nicht eingestellt und beruft sich auf das AGG. Welche zwei Aussagen sind zutreffend? *(Ziffern eintragen)*
 - (1) Sie hat einen Anspruch darauf, eingestellt zu werden.
 - (2) Sie muss ihren Anspruch innerhalb von zwei Monaten schriftlich geltend machen.
 - (3) Wäre sie auch bei benachteiligungsfreier Auswahl nicht eingestellt worden, beträgt die Entschädigung höchstens drei Monatsgehälter.

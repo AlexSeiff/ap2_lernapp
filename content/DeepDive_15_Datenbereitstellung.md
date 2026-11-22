@@ -315,7 +315,7 @@ Für das Kundenportal und das Datenmodell der Schnittstelle sollen die Anforderu
 
 **A1 (6 P):** *Ordnen* Sie die folgenden Daten jeweils dem Strukturierungsgrad *zu* und *nennen* Sie eine Konsequenz für die Auswertung: (a) Kundentabelle der Datenbank, (b) JSON-Export der Bestellungen, (c) Fotos von Reklamationsschäden, (d) Freitext-Bewertungen aus dem Onlineshop.
 
-**A2 (6 P):** *Ordnen* Sie jeweils eine Schutzklasse *zu* und *nennen* Sie für die höchste Klasse **zwei** Schutzmaßnahmen: (a) Produktkatalog mit Preisen, (b) interne Telefonliste, (c) Kundenadressen mit Jahresumsätzen, (d) Gehaltsdaten der Beschäftigten.
+**A2 (6 P):** *Ordnen* Sie jeweils eine Schutzklasse *zu* und *nennen* Sie für die höchste Klasse zwei Schutzmaßnahmen: (a) Produktkatalog mit Preisen, (b) interne Telefonliste, (c) Kundenadressen mit Jahresumsätzen, (d) Gehaltsdaten der Beschäftigten.
 
 **A3 (6 P):** Kunden können im Portal eine Reparatur beauftragen; dafür müssen sie immer angemeldet sein. Optional können sie beim Beauftragen einen Expressservice wählen. Servicemitarbeiter bearbeiten die Aufträge. *Erstellen* Sie das Use-Case-Diagramm mit korrekter «include»- und «extend»-Beziehung.
 
@@ -325,7 +325,7 @@ Für das Kundenportal und das Datenmodell der Schnittstelle sollen die Anforderu
 
 Die ersten Lieferungen der Filialen kommen an – und machen Probleme beim Import.
 
-**B1 (8 P):** Eine Filiale liefert die unten stehende Datei. *Nennen* Sie **drei** Probleme beim Import und je eine Lösung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
+**B1 (8 P):** Eine Filiale liefert die unten stehende Datei. *Nennen* Sie drei Probleme beim Import und je eine Lösung. *Tragen* Sie Ihre Antworten in die Tabelle *ein*.
 
 | Problem | Lösung |
 |---|---|
@@ -344,7 +344,7 @@ kunden_id;name;ort;umsatz
 
 **B2 (8 P):** *Erstellen* Sie ein JSON-Dokument für Bestellung 101 vom 03.02.2026 der Fischer KG (Kunden-ID 3, Köln) mit den Positionen Schreibtisch Basic (Produkt 11, 1 Stück, 399,00 €) und Schreibtischlampe (Produkt 14, 3 Stück, 39,90 €). Die Bestellung ist noch nicht bezahlt.
 
-**B3 (8 P):** Das folgende JSON wird von der Schnittstelle abgelehnt. *Benennen* Sie **fünf** Fehler und *geben* Sie die korrigierte Fassung *an*.
+**B3 (8 P):** Das folgende JSON wird von der Schnittstelle abgelehnt. *Benennen* Sie fünf Fehler und *geben* Sie die korrigierte Fassung *an*.
 
 ```
 {
@@ -378,7 +378,7 @@ Statt E-Mail-Dateien soll eine REST-Schnittstelle die Reparaturaufträge bereits
 | (d) den Status eines Auftrags ändern | | | |
 | (e) einen Auftrag löschen | | | |
 
-**C2 (6 P):** Eine Filiale ruft die Daten so ab: `GET http://api.nordholz.de/reparaturauftraege?apikey=8f3a91c2&status=offen` – *Benennen* Sie **zwei** Sicherheitsmängel und *geben* Sie jeweils die Korrektur *an*.
+**C2 (6 P):** Eine Filiale ruft die Daten so ab: `GET http://api.nordholz.de/reparaturauftraege?apikey=8f3a91c2&status=offen` – *Benennen* Sie zwei Sicherheitsmängel und *geben* Sie jeweils die Korrektur *an*.
 
 **C3 (6 P):** *Erläutern* Sie die Statuscodes 401, 403 und 429 an je einem Beispiel aus dem Szenario.
 
@@ -397,7 +397,7 @@ Für den Online-Marktplatz prüft die IT, ob neben der relationalen Datenbank we
 | (c) Empfehlungen „Kunden, die X kauften, kauften auch Y“ über mehrere Stufen | | |
 | (d) Finanzbuchhaltung | | |
 
-**D2 (8 P):** Zwei Disponenten lesen gleichzeitig den Lagerbestand 10 eines Artikels, verkaufen je 3 Stück und speichern jeweils 7. *Benennen* Sie das Problem, *geben* Sie den korrekten Endbestand *an* und *beschreiben* Sie **zwei** Lösungen.
+**D2 (8 P):** Zwei Disponenten lesen gleichzeitig den Lagerbestand 10 eines Artikels, verkaufen je 3 Stück und speichern jeweils 7. *Benennen* Sie das Problem, *geben* Sie den korrekten Endbestand *an* und *beschreiben* Sie zwei Lösungen.
 
 **D3 (4 P):** *Erläutern* Sie, welche Folge der Verzicht auf ein festes Schema für die Datenqualität hat und wie Sie gegensteuern.
 

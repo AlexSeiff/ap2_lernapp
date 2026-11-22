@@ -205,11 +205,11 @@ Erläuterungen: Klasse des Antriebs: S = Standard, K = Komfort, P = Premium; die
 
 > *ETL stands for extract, transform, load. Data is first read from one or several source systems, then cleaned and converted into a common structure, and finally written to a target system such as a data warehouse, where it is available for analysis.*
 
-**A2 (3 P):** *Prüfen* Sie die Stichprobe auf Probleme der Datenqualität. *Nennen* Sie **drei** konkrete Probleme aus der Stichprobe.
+**A2 (3 P):** *Prüfen* Sie die Stichprobe auf Probleme der Datenqualität. *Nennen* Sie drei konkrete Probleme aus der Stichprobe.
 
-**A3 (6 P):** *Beschreiben* Sie **Datenvalidierung** und **Datenverifizierung**. *Nennen* Sie für jede der beiden Arten ein Beispiel aus der Stichprobe.
+**A3 (6 P):** *Beschreiben* Sie Datenvalidierung und Datenverifizierung. *Nennen* Sie für jede der beiden Arten ein Beispiel aus der Stichprobe.
 
-**A4 (10 P):** *Formulieren* Sie eine E-Mail an Frau Marquardt mit **zwei** Einschätzungen zur Datenqualität der Stichprobe. Gehen Sie dabei auf die Probleme ein, die Sie in der Stichprobe erkennen, und *beschreiben* Sie **zwei** Maßnahmen, mit denen die erkannten Probleme bereinigt und die Datenqualität verbessert werden können.
+**A4 (10 P):** *Formulieren* Sie eine E-Mail an Frau Marquardt mit zwei Einschätzungen zur Datenqualität der Stichprobe. Gehen Sie dabei auf die Probleme ein, die Sie in der Stichprobe erkennen, und *beschreiben* Sie zwei Maßnahmen, mit denen die erkannten Probleme bereinigt und die Datenqualität verbessert werden können.
 
 ## Block B – Ausfälle vorhersagen (28 P)
 
@@ -307,19 +307,19 @@ Um den unbekannten Antrieb sind drei Kreise gezogen. Die Auszählung der Abbildu
 | Mitte | 5 | 2 | 3 |
 | außen | 11 | 7 | 4 |
 
-**B1 (6 P):** Zur Wahl stehen der Algorithmus **k-nächste Nachbarn (kNN)** und ein Entscheidungsbaum nach dem **ID3**-Algorithmus. *Erklären* Sie kurz beide Algorithmen.
+**B1 (6 P):** Zur Wahl stehen der Algorithmus k-nächste Nachbarn (kNN) und ein Entscheidungsbaum nach dem ID3-Algorithmus. *Erklären* Sie kurz beide Algorithmen.
 
-**B2 (5 P):** *Entscheiden* Sie sich für einen der beiden Algorithmen k-nächste Nachbarn (kNN) oder ID3 und *begründen* Sie Ihre Entscheidung mit **zwei** Argumenten.
+**B2 (5 P):** *Entscheiden* Sie sich für einen der beiden Algorithmen k-nächste Nachbarn (kNN) oder ID3 und *begründen* Sie Ihre Entscheidung mit zwei Argumenten.
 
 **B3 (1 P):** *Beurteilen* Sie anhand der Abbildung, ob der unbekannte Antrieb in nächster Zeit gewartet werden sollte.
 
 **B4 (4 P):** Die Kreise um den unbekannten Antrieb sollen die Entscheidung unterstützen. *Erläutern* Sie, inwiefern die Größe des Parameters k für die Entscheidung ausschlaggebend ist.
 
-**B5 (4 P):** *Nennen* Sie **zwei** allgemein sinnvolle Kriterien für die Wahl von k und *begründen* Sie sie.
+**B5 (4 P):** *Nennen* Sie zwei allgemein sinnvolle Kriterien für die Wahl von k und *begründen* Sie sie.
 
 **B6 (4 P):** Die Klasse der Antriebe liegt als Buchstabe vor (S, K, P). *Erklären* Sie an diesem Beispiel, wie die Daten aufbereitet werden müssen, damit der kNN-Algorithmus sie verwenden kann.
 
-**B7 (4 P):** Die Abbildung berücksichtigt nur zwei Merkmale. Gegeben sind die Daten eines bereits klassifizierten und eines zu klassifizierenden Antriebs. *Berechnen* Sie die euklidische Distanz über **alle** Merkmale; die Klasse geht bei gleicher Klasse mit der Differenz 0 ein. Der Rechenweg ist anzugeben, das Ergebnis auf zwei Nachkommastellen zu runden.
+**B7 (4 P):** Die Abbildung berücksichtigt nur zwei Merkmale. Gegeben sind die Daten eines bereits klassifizierten und eines zu klassifizierenden Antriebs. *Berechnen* Sie die euklidische Distanz über alle Merkmale; die Klasse geht bei gleicher Klasse mit der Differenz 0 ein. Der Rechenweg ist anzugeben, das Ergebnis auf zwei Nachkommastellen zu runden.
 
 | Antrieb | Klasse | Motortemperatur [°C] | Drehzahl [1/min] | Drehmoment [Nm] | Laufzeit [min] | Ausfall |
 |---|---|---|---|---|---|---|
@@ -347,7 +347,7 @@ Die Informationen über die Tische und ihre Sensoren liegen bisher zentral in ei
 
 **JSON-Syntax (Auszug):** Ein Objekt steht in geschweiften Klammern und enthält Paare der Form `"attributname": wert`, getrennt durch Kommas. Ein Array steht in eckigen Klammern und enthält Werte oder Objekte, getrennt durch Kommas. Werte sind Text (in Anführungszeichen), Zahl, `true`/`false`, `null`, Objekt oder Array.
 
-**C1 (8 P):** Für Transaktionen in relationalen Datenbankmanagementsystemen sind die vier Eigenschaften des Akronyms **ACID** definiert. *Beschreiben* Sie die Bedeutung von Atomicity, Consistency, Isolation und Durability.
+**C1 (8 P):** Für Transaktionen in relationalen Datenbankmanagementsystemen sind die vier Eigenschaften des Akronyms ACID definiert. *Beschreiben* Sie die Bedeutung von Atomicity, Consistency, Isolation und Durability.
 
 **C2 (3 P):** *Ordnen* Sie den Begriffen der relationalen Datenbank die passenden Begriffe der Dokumentendatenbank zu und *tragen* Sie sie in die Tabelle *ein*. Zur Auswahl stehen: Collection · Feld · Datenbank · Dokument.
 
@@ -376,11 +376,11 @@ Die Informationen über die Tische und ihre Sensoren liegen bisher zentral in ei
 
 Sie sollen die Datenbankinfrastruktur des zentralen Servers verbessern: Verfügbarkeit und Integrität der Daten müssen gewährleistet sein, und beim Ausfall einer Festplatte dürfen keine Daten verloren gehen.
 
-**D1 (10 P):** *Nennen* und *beschreiben* Sie **zwei** gängige RAID-Level. *Nennen* Sie zu jedem der beiden RAID-Level je **einen** Vor- und **einen** Nachteil.
+**D1 (10 P):** *Nennen* und *beschreiben* Sie zwei gängige RAID-Level. *Nennen* Sie zu jedem der beiden RAID-Level je einen Vor- und einen Nachteil.
 
 **D2 (4 P):** *Entscheiden* Sie, welches RAID-Level Sie mit Blick auf Datenintegrität und Performance wählen, und *begründen* Sie Ihre Entscheidung.
 
-**D3 (5 P):** *Nennen* Sie je **eine** geeignete Maßnahme, um die Informationen der Datenbank auf den folgenden Ebenen vor fremdem Zugriff zu schützen, und *tragen* Sie sie in die Tabelle *ein*.
+**D3 (5 P):** *Nennen* Sie je eine geeignete Maßnahme, um die Informationen der Datenbank auf den folgenden Ebenen vor fremdem Zugriff zu schützen, und *tragen* Sie sie in die Tabelle *ein*.
 
 | Ebene | Maßnahme |
 |---|---|
