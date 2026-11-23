@@ -17,6 +17,7 @@
 import type { Exam, ExamBlock, MaterialDoc, Section, Task, Topic } from '../../domain/types';
 import { erzeugeZufall } from '../rechnen/zufall';
 import type { KernInhalt, KernTopic, StartInhalt } from '../../domain/texte';
+import { baueEigeneKlausur, istEigeneId, parseEigeneId, type EigeneKlausur } from './eigeneKlausur';
 
 export type MischBereich = 'prozess' | 'qualitaet' | 'gemischt';
 
@@ -273,6 +274,9 @@ export function parseMischId(id: string | undefined): { bereich: MischBereich; s
 
 export const istMischId = (id: string | undefined) => parseMischId(id) !== undefined;
 
+/** Zusammengestellte Klausur (gemischt oder eigene aus dem Klausur-Builder) – Aufgaben aus mehreren Deep Dives, Herkunft je Block. */
+export const istZusammengestellt = (id: string | undefined) => istMischId(id) || istEigeneId(id);
+
 export const bereichTitel = (b: MischBereich) => MISCH_BEREICHE.find((x) => x.id === b)!.titel;
 
 /** Höchstens so viele Zusammenstellungen probiert baueMischKlausur, um genau MISCH_PUNKTE zu erreichen. */
@@ -413,8 +417,8 @@ export interface KlausurQuelle {
   exam: Exam | MischKlausur;
   /** Nur bei der Klausur eines Deep Dives. */
   topic?: KernTopic;
-  /** Nur bei einer gemischten Klausur. */
-  misch?: MischKlausur;
+  /** Nur bei einer zusammengestellten Klausur (gemischt oder eigene aus dem Klausur-Builder). */
+  misch?: MischKlausur | EigeneKlausur;
   untertitel: string;
 }
 
@@ -425,6 +429,12 @@ export function klausurFuer(content: KernInhalt, id: string | undefined): Klausu
     if (!misch.blocks.length) return undefined;
     return { id: id!, exam: misch, misch, untertitel: `${bereichTitel(m.bereich)} · Nr. ${m.seed}` };
   }
+  const eigene = parseEigeneId(id);
+  if (eigene) {
+    const k = baueEigeneKlausur(content, eigene);
+    if (!k) return undefined;
+    return { id: id!, exam: k, misch: k, untertitel: `Selbst zusammengestellt · ${k.totalPoints} Punkte` };
+  }
   const topic = content.topics.find((t) => t.id === id);
   if (!topic?.exam) return undefined;
   return { id: topic.id, exam: topic.exam, topic, untertitel: `Deep Dive ${topic.number}: ${topic.title}` };
@@ -434,6 +444,7 @@ export function klausurFuer(content: KernInhalt, id: string | undefined): Klausu
 export function klausurName(content: StartInhalt, id: string): string {
   const m = parseMischId(id);
   if (m) return `Gemischt (${MISCH_BEREICHE.find((b) => b.id === m.bereich)!.kurz})`;
+  if (istEigeneId(id)) return 'Eigene Klausur';
   return content.topics.find((t) => t.id === id)?.title ?? id;
 }
 

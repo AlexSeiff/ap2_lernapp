@@ -64,6 +64,12 @@ export function Klausur() {
       <div className="page narrow">
         <p className="crumbs">
           <Link to="/klausur">Übungsklausur</Link>
+          {quelle.misch && 'eigene' in quelle.misch && (
+            <>
+              {' / '}
+              <Link to="/klausur/bauen">Klausur-Builder</Link>
+            </>
+          )}
         </p>
         <h1>{exam.title}</h1>
         <p className="lead">{quelle.untertitel}</p>
@@ -120,6 +126,11 @@ export function Klausur() {
             <button type="button" className="secondary" onClick={() => neueMisch(misch.bereich)}>
               <Icon name="dices" /> Neu mischen
             </button>
+          )}
+          {quelle.misch && 'eigene' in quelle.misch && (
+            <Link className="button secondary" to={`/klausur/bauen?aufgaben=${quelle.misch.blocks.flatMap((b) => b.taskIds).join('.')}`}>
+              <Icon name="pencil" /> Bearbeiten
+            </Link>
           )}
           {topic && traps > 0 && (
             <Link

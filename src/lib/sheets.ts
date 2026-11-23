@@ -3,7 +3,7 @@
 import type { Section, Task } from '../../domain/types';
 import { examMinutes } from './examTimer';
 import { formatPoints } from './grading';
-import { klausurFuer, type MischKlausur, parseMischId } from './mischKlausur';
+import { istZusammengestellt, klausurFuer } from './mischKlausur';
 import { localDate } from './progress';
 import type { KernInhalt } from '../../domain/texte';
 
@@ -53,13 +53,14 @@ function safeName(s: string): string {
 
 /** Blatt für eine komplette Übungsklausur eines Themas oder eine gemischte Probeklausur („mix-…“, ROADMAP 8.5). */
 export function examSheet(content: KernInhalt, topicId: string, kind: SheetKind): Sheet | null {
-  const misch = parseMischId(topicId) && klausurFuer(content, topicId);
-  if (misch) {
-    const exam = misch.exam as MischKlausur;
+  const misch = istZusammengestellt(topicId) ? klausurFuer(content, topicId) : undefined;
+  if (misch?.misch) {
+    const exam = misch.misch;
+    const art = 'eigene' in exam ? 'Eigene_Klausur' : `Probeklausur_${exam.bereich}_${exam.seed}`;
     return {
       title: exam.title,
       subtitle: misch.untertitel,
-      fileBase: `${kind === 'aufgaben' ? 'Aufgabenblatt' : 'Loesungsblatt'}_Probeklausur_${exam.bereich}_${exam.seed}_${localDate()}`,
+      fileBase: `${kind === 'aufgaben' ? 'Aufgabenblatt' : 'Loesungsblatt'}_${art}_${localDate()}`,
       attachments: exam.attachments,
       groups: exam.blocks.flatMap((b) =>
         b.gruppen.map((g, i) => ({

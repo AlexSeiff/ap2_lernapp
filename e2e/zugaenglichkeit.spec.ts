@@ -36,7 +36,8 @@ const OFFEN = new Set<string>([
 
 for (const farbe of ['light', 'dark'] as const) {
   test.describe(`axe, ${farbe}`, () => {
-    test.use({ colorScheme: farbe });
+    // Ohne Animationen: Sonst misst axe Zwischenfarben, solange Elemente noch einblenden (zufällige Kontrastfehler).
+    test.use({ colorScheme: farbe, reducedMotion: 'reduce' });
     for (const seite of SEITEN) {
       test(`${seite}`, async ({ page }) => {
         await oeffne(page, seite);

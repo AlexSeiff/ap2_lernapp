@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { examMinutes } from '../../lib/examTimer';
 import { ihkGrade, percent } from '../../lib/grading';
-import { istMischId, klausurName, MISCH_BEREICHE, type MischBereich, mischId } from '../../lib/mischKlausur';
+import { istMischId, istZusammengestellt, klausurName, MISCH_BEREICHE, type MischBereich, mischId } from '../../lib/mischKlausur';
 import { useStore } from '../../lib/store';
 import { neuerSeed } from '../../rechnen/zufall';
 import { Icon } from '../../components/Icon';
@@ -19,7 +19,7 @@ export function KlausurAuswahl() {
   // Neu gemischt zum Ausdrucken (Umsetzungsplan Phase 6): gleicher Seed → Aufgaben- und Lösungsblatt passen zusammen.
   const druckeMisch = () => navigate(`/druck?misch=${mischId('gemischt', neuerSeed())}&art=aufgaben`);
   const active = progress.activeExam;
-  const activeKnown = active && (istMischId(active.topicId) || content.topics.some((t) => t.id === active.topicId));
+  const activeKnown = active && (istZusammengestellt(active.topicId) || content.topics.some((t) => t.id === active.topicId));
   const mischRuns = progress.exams.filter((e) => istMischId(e.topicId) && e.total !== undefined && e.max > 0);
   const mischBest = mischRuns.length ? Math.max(...mischRuns.map((e) => percent(e.total!, e.max))) : undefined;
   return (
@@ -60,6 +60,20 @@ export function KlausurAuswahl() {
           >
             <Icon name="printer" /> Drucken
           </button>
+        </div>
+      </section>
+      <section className="card misch-start">
+        <h2>
+          <Icon name="pencil" /> Eigene Klausur zusammenstellen
+        </h2>
+        <p>
+          Wähle Aufgaben aus allen Übungsklausuren – über die Suche („Entropie“, „RAID“, „Kick-off“) oder automatisch aus Themen aufgefüllt.
+          Daraus wird eine Klausur mit Zeit, Bewertung und Druckansicht.
+        </p>
+        <div className="actions">
+          <Link className="button" to="/klausur/bauen">
+            <Icon name="pencil" /> Klausur-Builder öffnen
+          </Link>
         </div>
       </section>
       <h2>Je Deep Dive</h2>

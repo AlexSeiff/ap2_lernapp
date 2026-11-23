@@ -196,7 +196,7 @@ describe('IDs und Klausurquelle', () => {
     expect(klausurFuer(content, '03')?.topic?.id).toBe('03');
     const m = klausurFuer(content, 'mix-gemischt-42')!;
     expect(m.topic).toBeUndefined();
-    expect(m.misch?.seed).toBe(42);
+    expect(m.misch && 'seed' in m.misch ? m.misch.seed : undefined).toBe(42);
     expect(m.untertitel).toContain('Nr. 42');
     expect(klausurFuer(content, 'xx')).toBeUndefined();
   });

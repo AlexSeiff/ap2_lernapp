@@ -47,6 +47,7 @@ const Karteikarten = lazy(() => SEITEN.karteikarten().then((m) => ({ default: m.
 const Kartenstand = lazy(() => SEITEN.kartenstand().then((m) => ({ default: m.Kartenstand })));
 const Klausur = lazy(() => SEITEN.klausur().then((m) => ({ default: m.Klausur })));
 const KlausurAuswahl = lazy(() => SEITEN.klausur().then((m) => ({ default: m.KlausurAuswahl })));
+const KlausurBuilder = lazy(() => import('./pages/klausur/KlausurBuilder').then((m) => ({ default: m.KlausurBuilder })));
 const Material = lazy(() => SEITEN.material().then((m) => ({ default: m.Material })));
 const Themen = lazy(() => SEITEN.themen().then((m) => ({ default: m.Themen })));
 const Thema = lazy(() => SEITEN.themen().then((m) => ({ default: m.Thema })));
@@ -280,6 +281,7 @@ function Layout() {
                         <Route path="/karteikarten" element={<Karteikarten />} />
                         <Route path="/karteikarten/stand" element={<Kartenstand />} />
                         <Route path="/klausur" element={<KlausurAuswahl />} />
+                        <Route path="/klausur/bauen" element={<KlausurBuilder />} />
                         <Route path="/klausur/:topicId" element={<Klausur />} />
                         <Route path="/aufgaben" element={<Aufgaben />} />
                         <Route path="/aufgabe/:taskId" element={<Aufgabe />} />

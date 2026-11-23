@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { shuffledOrder } from '../components/AnswerInput';
 import { Markdown } from '../components/Markdown';
 import { formatPoints, GRADE_SCALE } from '../lib/grading';
-import { istMischId } from '../lib/mischKlausur';
+import { istZusammengestellt } from '../lib/mischKlausur';
 import { EXAM_MINUTES } from '../../domain/config';
 import {
   downloadText,
@@ -191,7 +191,7 @@ export function Druck() {
   const other = new URLSearchParams(params);
   other.set('art', kind === 'aufgaben' ? 'loesungen' : 'aufgaben');
   const klausur = !!sheet.bloecke?.length;
-  const misch = !!thema && istMischId(thema);
+  const misch = !!thema && istZusammengestellt(thema);
   const herkunft = (t: Task) => {
     const n = content.topics.find((x) => x.id === t.topicId)?.number;
     return n ? `DD ${n}` : 'SQL-Zusatz';
