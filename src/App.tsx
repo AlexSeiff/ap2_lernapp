@@ -64,6 +64,8 @@ const JsonUebungen = lazy(() => import('./pages/JsonUebungen').then((m) => ({ de
 const JsonUebung = lazy(() => import('./pages/JsonUebung').then((m) => ({ default: m.JsonUebung })));
 const XmlUebungen = lazy(() => import('./pages/XmlUebungen').then((m) => ({ default: m.XmlUebungen })));
 const XmlUebung = lazy(() => import('./pages/XmlUebung').then((m) => ({ default: m.XmlUebung })));
+const NormalisierungUebungen = lazy(() => import('./pages/NormalisierungUebungen').then((m) => ({ default: m.NormalisierungUebungen })));
+const NormalisierungUebung = lazy(() => import('./pages/NormalisierungUebung').then((m) => ({ default: m.NormalisierungUebung })));
 // „Heute lernen“ lazy: der Planer braucht nur diese Seite.
 const Heute = lazy(() => import('./pages/Heute').then((m) => ({ default: m.Heute })));
 // Operatoren-Trainer lazy: Quiz und Tabelle braucht nur diese Seite.
@@ -292,6 +294,8 @@ function Layout() {
                         <Route path="/json/:id" element={<JsonUebung />} />
                         <Route path="/xml" element={<XmlUebungen />} />
                         <Route path="/xml/:id" element={<XmlUebung />} />
+                        <Route path="/normalisierung" element={<NormalisierungUebungen />} />
+                        <Route path="/normalisierung/:id" element={<NormalisierungUebung />} />
                         <Route path="/fehlerjournal" element={<Fehlerjournal />} />
                         <Route path="/fachgespraech" element={<Fachgespraech />} />
                         <Route path="/podcast" element={<Podcasts />} />

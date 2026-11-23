@@ -1,0 +1,693 @@
+{
+  "meta": {
+    "titel": "Normalisierungs-Übungen",
+    "beschreibung": "Aus einer unnormalisierten Tabelle oder aus einem Beschreibungstext ein relationales Datenmodell in 3. Normalform erstellen. Eigene Aufgaben im Stil der AP2 (Sicherstellen der Datenqualität) im Szenario Möbelhaus Nordholz GmbH; die App gleicht Tabellen, Primär- und Fremdschlüssel je Schritt mit der Musterlösung ab."
+  },
+  "uebungen": [
+    {
+      "id": "NF-001",
+      "titel": "Mitarbeiterliste: Abteilung herauslösen",
+      "stufe": 1,
+      "topicId": "02",
+      "quelle": "tabelle",
+      "aufgabe": "Die Personalabteilung der Möbelhaus Nordholz GmbH führt ihre Mitarbeiter in einer einzigen Liste. Jeder Mitarbeiter gehört genau einer Abteilung an, jede Abteilung sitzt an genau einem Standort.\n\n*Überführen* Sie die Ausgangstabelle schrittweise in die 3. Normalform. *Begründen* Sie bei jedem Schritt, ob und warum sich etwas ändert, und kennzeichnen Sie Primär- und Fremdschlüssel. Verwenden Sie die Spaltennamen aus der Ausgangstabelle bzw. der Aufgabe; Tabellennamen wählen Sie selbst.",
+      "ausgang": {
+        "name": "mitarbeiterliste",
+        "kopf": [
+          "personal_nr",
+          "name",
+          "eintritt",
+          "abteilungs_nr",
+          "abteilungsname",
+          "standort"
+        ],
+        "zeilen": [
+          [
+            "P101",
+            "Kraus",
+            "2019-04-01",
+            "A1",
+            "Vertrieb",
+            "Haus 1"
+          ],
+          [
+            "P102",
+            "Weber",
+            "2021-08-15",
+            "A2",
+            "Lager",
+            "Halle B"
+          ],
+          [
+            "P103",
+            "Schulz",
+            "2022-01-10",
+            "A1",
+            "Vertrieb",
+            "Haus 1"
+          ],
+          [
+            "P104",
+            "Becker",
+            "2023-03-01",
+            "A3",
+            "IT",
+            "Haus 2"
+          ]
+        ]
+      },
+      "hinweise": [
+        "Prüfe zuerst: Steht in jeder Zelle genau ein Wert? Und welche Spalte identifiziert eine Zeile eindeutig?",
+        "Ein Primärschlüssel aus nur einer Spalte kann keine partielle Abhängigkeit haben – die 2. NF ist dann automatisch erfüllt.",
+        "Wovon hängt der Standort ab – von der Person oder von der Abteilung? Achtung: „Vertrieb, Haus 1“ steht zweimal in der Tabelle."
+      ],
+      "loesung": [
+        {
+          "titel": "1. NF",
+          "text": "Alle Werte sind bereits atomar, es gibt keine Wiederholungsgruppen. Primärschlüssel: **personal_nr**. Die Tabelle bleibt unverändert.",
+          "tabellen": [
+            "mitarbeiter(**personal_nr**, name, eintritt, abteilungs_nr, abteilungsname, standort)"
+          ]
+        },
+        {
+          "titel": "2. NF",
+          "text": "Der Primärschlüssel besteht aus einer einzigen Spalte – partielle Abhängigkeiten (von einem *Teil* des Schlüssels) sind gar nicht möglich. Die Tabelle ist automatisch in 2. NF und bleibt unverändert.",
+          "tabellen": [
+            "mitarbeiter(**personal_nr**, name, eintritt, abteilungs_nr, abteilungsname, standort)"
+          ]
+        },
+        {
+          "titel": "3. NF",
+          "text": "Transitive Abhängigkeit: personal_nr → abteilungs_nr → abteilungsname, standort. Name und Standort der Abteilung hängen von einem Nichtschlüsselattribut ab und wandern in eine eigene Tabelle; abteilungs_nr bleibt als Fremdschlüssel beim Mitarbeiter.",
+          "tabellen": [
+            "mitarbeiter(**personal_nr**, name, eintritt, abteilungs_nr↑)",
+            "abteilung(**abteilungs_nr**, abteilungsname, standort)"
+          ]
+        }
+      ],
+      "erklaerung": "Auch für die Schritte, in denen sich nichts ändert, gibt es Punkte – aber nur mit Begründung („einteiliger Schlüssel → automatisch 2. NF“). Häufigster Fehler: standort beim Mitarbeiter lassen. Er beschreibt die Abteilung, nicht die Person; zieht der Vertrieb um, müsste man sonst jede Vertriebszeile ändern (Änderungsanomalie).",
+      "tags": [
+        "normalisierung",
+        "3nf",
+        "transitive abhängigkeit"
+      ]
+    },
+    {
+      "id": "NF-002",
+      "titel": "Lagerbestand: zusammengesetzter Schlüssel",
+      "stufe": 1,
+      "topicId": "02",
+      "quelle": "tabelle",
+      "aufgabe": "Die Möbelhaus Nordholz GmbH erfasst ihre Bestände je Lager und Artikel. Ein Artikel kann in mehreren Lagern liegen, ein Lager führt viele Artikel.\n\n*Überführen* Sie die Ausgangstabelle schrittweise in die 3. Normalform. *Benennen* Sie dabei alle partiellen Abhängigkeiten und kennzeichnen Sie Primär- und Fremdschlüssel. Verwenden Sie die Spaltennamen aus der Ausgangstabelle bzw. der Aufgabe; Tabellennamen wählen Sie selbst.",
+      "ausgang": {
+        "name": "lagerbestand",
+        "kopf": [
+          "lager_nr",
+          "artikel_nr",
+          "lagerort",
+          "artikelbezeichnung",
+          "bestand"
+        ],
+        "zeilen": [
+          [
+            "L1",
+            "4711",
+            "Kiel",
+            "Bürostuhl Ergo",
+            "35"
+          ],
+          [
+            "L1",
+            "4720",
+            "Kiel",
+            "Schreibtisch Flex",
+            "12"
+          ],
+          [
+            "L2",
+            "4711",
+            "Lübeck",
+            "Bürostuhl Ergo",
+            "8"
+          ],
+          [
+            "L2",
+            "4735",
+            "Lübeck",
+            "Rollcontainer",
+            "20"
+          ]
+        ]
+      },
+      "hinweise": [
+        "Keine Spalte allein identifiziert eine Zeile: 4711 kommt zweimal vor, L1 auch. Der Primärschlüssel besteht aus zwei Spalten.",
+        "Prüfe jede Nichtschlüsselspalte: Hängt sie vom ganzen Schlüssel ab oder nur von lager_nr bzw. nur von artikel_nr?",
+        "Nur der Bestand hängt vom ganzen Schlüssel ab – er bleibt in der Tabelle mit beiden Schlüsselspalten, die dort zugleich Fremdschlüssel sind."
+      ],
+      "loesung": [
+        {
+          "titel": "1. NF",
+          "text": "Alle Werte sind atomar. Primärschlüssel ist die Kombination (**lager_nr, artikel_nr**) – keine der beiden Spalten ist allein eindeutig.",
+          "tabellen": [
+            "lagerbestand(**lager_nr, artikel_nr**, lagerort, artikelbezeichnung, bestand)"
+          ]
+        },
+        {
+          "titel": "2. NF",
+          "text": "Partielle Abhängigkeiten:\n- lager_nr → lagerort (hängt nur vom Lager ab)\n- artikel_nr → artikelbezeichnung (hängt nur vom Artikel ab)\n\nbestand hängt vom **ganzen** Schlüssel ab und bleibt.",
+          "tabellen": [
+            "lager(**lager_nr**, lagerort)",
+            "artikel(**artikel_nr**, artikelbezeichnung)",
+            "lagerbestand(**lager_nr↑, artikel_nr↑**, bestand)"
+          ]
+        },
+        {
+          "titel": "3. NF",
+          "text": "Keine transitiven Abhängigkeiten: In lager und artikel gibt es nur ein Nichtschlüsselattribut, in lagerbestand hängt bestand direkt vom Schlüssel ab. Das Schema aus der 2. NF ist bereits in 3. NF.",
+          "tabellen": [
+            "lager(**lager_nr**, lagerort)",
+            "artikel(**artikel_nr**, artikelbezeichnung)",
+            "lagerbestand(**lager_nr↑, artikel_nr↑**, bestand)"
+          ]
+        }
+      ],
+      "erklaerung": "Ohne die Liste der partiellen Abhängigkeiten gibt es auf die 2. NF höchstens die Hälfte der Punkte – schreib „lager_nr → lagerort“ ausdrücklich hin. In der Tabelle lagerbestand sind lager_nr und artikel_nr zugleich Primär- und Fremdschlüssel; beides muss gekennzeichnet sein (fett bzw. unterstrichen **und** ↑).",
+      "tags": [
+        "normalisierung",
+        "2nf",
+        "partielle abhängigkeit"
+      ]
+    },
+    {
+      "id": "NF-003",
+      "titel": "Schulungsteilnahmen: Liste in einer Zelle",
+      "stufe": 2,
+      "topicId": "02",
+      "quelle": "tabelle",
+      "aufgabe": "Die Möbelhaus Nordholz GmbH schult ihre Mitarbeiter intern. Bisher steht jede Schulung in einer Zeile, die Teilnehmer mit Ergebnis gesammelt in der Spalte teilnehmer. Jede Schulung hat genau einen Trainer.\n\n*Überführen* Sie die Ausgangstabelle schrittweise in die 3. Normalform. Zerlegen Sie die Spalte teilnehmer in die Spalten personal_nr, name und ergebnis. *Benennen* Sie je Schritt die Abhängigkeiten und kennzeichnen Sie Primär- und Fremdschlüssel.",
+      "ausgang": {
+        "name": "schulungen",
+        "kopf": [
+          "schulung_nr",
+          "titel",
+          "datum",
+          "trainer_nr",
+          "trainername",
+          "teilnehmer"
+        ],
+        "zeilen": [
+          [
+            "S10",
+            "Kassensystem Grundlagen",
+            "2026-02-03",
+            "T1",
+            "Ahrens",
+            "P101 Kraus (bestanden); P103 Schulz (bestanden)"
+          ],
+          [
+            "S11",
+            "Stapler Auffrischung",
+            "2026-02-10",
+            "T2",
+            "Brandt",
+            "P102 Weber (bestanden)"
+          ],
+          [
+            "S12",
+            "Datenschutz kompakt",
+            "2026-03-05",
+            "T1",
+            "Ahrens",
+            "P101 Kraus (nicht bestanden); P102 Weber (bestanden); P104 Becker (bestanden)"
+          ]
+        ]
+      },
+      "hinweise": [
+        "1. NF: eine Zeile je Schulung **und** Teilnehmer. Welche zwei Spalten machen eine Zeile dann eindeutig?",
+        "Das Ergebnis gehört weder allein zur Schulung noch allein zur Person: Kraus hat S10 bestanden, S12 nicht.",
+        "In der Schulungstabelle bleibt nach der 2. NF ein Name stehen, der gar nicht die Schulung beschreibt."
+      ],
+      "loesung": [
+        {
+          "titel": "1. NF",
+          "text": "Die Spalte teilnehmer enthält eine Wiederholungsgruppe. Sie wird aufgelöst: eine Zeile je Schulung und Teilnehmer, die Angaben werden auf personal_nr, name und ergebnis verteilt. Neuer Primärschlüssel: (**schulung_nr, personal_nr**).",
+          "tabellen": [
+            {
+              "relation": "schulungen(**schulung_nr, personal_nr**, titel, datum, trainer_nr, trainername, name, ergebnis)",
+              "zeilen": [
+                [
+                  "S10",
+                  "P101",
+                  "Kassensystem Grundlagen",
+                  "2026-02-03",
+                  "T1",
+                  "Ahrens",
+                  "Kraus",
+                  "bestanden"
+                ],
+                [
+                  "S10",
+                  "P103",
+                  "Kassensystem Grundlagen",
+                  "2026-02-03",
+                  "T1",
+                  "Ahrens",
+                  "Schulz",
+                  "bestanden"
+                ],
+                [
+                  "S11",
+                  "P102",
+                  "Stapler Auffrischung",
+                  "2026-02-10",
+                  "T2",
+                  "Brandt",
+                  "Weber",
+                  "bestanden"
+                ],
+                [
+                  "S12",
+                  "P101",
+                  "Datenschutz kompakt",
+                  "2026-03-05",
+                  "T1",
+                  "Ahrens",
+                  "Kraus",
+                  "nicht bestanden"
+                ],
+                [
+                  "S12",
+                  "P102",
+                  "Datenschutz kompakt",
+                  "2026-03-05",
+                  "T1",
+                  "Ahrens",
+                  "Weber",
+                  "bestanden"
+                ],
+                [
+                  "S12",
+                  "P104",
+                  "Datenschutz kompakt",
+                  "2026-03-05",
+                  "T1",
+                  "Ahrens",
+                  "Becker",
+                  "bestanden"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "titel": "2. NF",
+          "text": "Partielle Abhängigkeiten:\n- schulung_nr → titel, datum, trainer_nr, trainername\n- personal_nr → name\n\nergebnis hängt vom **ganzen** Schlüssel ab und bleibt in der Teilnahmetabelle.",
+          "tabellen": [
+            "schulung(**schulung_nr**, titel, datum, trainer_nr, trainername)",
+            "mitarbeiter(**personal_nr**, name)",
+            "teilnahme(**schulung_nr↑, personal_nr↑**, ergebnis)"
+          ]
+        },
+        {
+          "titel": "3. NF",
+          "text": "Transitive Abhängigkeit in schulung: schulung_nr → trainer_nr → trainername. Der Trainer bekommt eine eigene Tabelle, trainer_nr bleibt als Fremdschlüssel in der Schulung.",
+          "tabellen": [
+            "schulung(**schulung_nr**, titel, datum, trainer_nr↑)",
+            "trainer(**trainer_nr**, trainername)",
+            "mitarbeiter(**personal_nr**, name)",
+            "teilnahme(**schulung_nr↑, personal_nr↑**, ergebnis)"
+          ]
+        }
+      ],
+      "erklaerung": "Die 1. NF verlangt zwei Dinge: atomare Werte **und** einen neuen Primärschlüssel – wer den zusammengesetzten Schlüssel nicht nennt, verliert hier die Hälfte. Typischer Fehler in der 2. NF: ergebnis zur Schulung oder zum Mitarbeiter schieben. Es beschreibt die Teilnahme, also die Kombination aus beiden.",
+      "tags": [
+        "normalisierung",
+        "1nf",
+        "2nf",
+        "3nf"
+      ]
+    },
+    {
+      "id": "NF-004",
+      "titel": "Einkaufsbestellungen: zwei transitive Ketten",
+      "stufe": 2,
+      "topicId": "02",
+      "quelle": "tabelle",
+      "aufgabe": "Der Einkauf der Möbelhaus Nordholz GmbH exportiert seine Bestellungen bei Lieferanten als eine Zeile je Bestellposition. Jede Bestellung geht an genau einen Lieferanten, jeder Artikel gehört zu genau einer Warengruppe. Der Einkaufspreis wird bei jeder Bestellung neu verhandelt.\n\n*Überführen* Sie die Ausgangstabelle schrittweise in die 3. Normalform. *Benennen* Sie die partiellen und transitiven Abhängigkeiten und kennzeichnen Sie Primär- und Fremdschlüssel. Verwenden Sie die Spaltennamen aus der Ausgangstabelle bzw. der Aufgabe; Tabellennamen wählen Sie selbst.",
+      "ausgang": {
+        "name": "einkauf",
+        "kopf": [
+          "bestell_nr",
+          "bestelldatum",
+          "lieferanten_nr",
+          "lieferantenname",
+          "artikel_nr",
+          "artikelbezeichnung",
+          "warengruppen_nr",
+          "warengruppe",
+          "menge",
+          "einkaufspreis"
+        ],
+        "zeilen": [
+          [
+            "E501",
+            "2026-04-02",
+            "LF3",
+            "Holzwerk Nord KG",
+            "4711",
+            "Bürostuhl Ergo",
+            "WG1",
+            "Sitzmöbel",
+            "20",
+            "96,50"
+          ],
+          [
+            "E501",
+            "2026-04-02",
+            "LF3",
+            "Holzwerk Nord KG",
+            "4720",
+            "Schreibtisch Flex",
+            "WG2",
+            "Tische",
+            "5",
+            "210,00"
+          ],
+          [
+            "E502",
+            "2026-04-07",
+            "LF8",
+            "Metallbau Ost GmbH",
+            "4735",
+            "Rollcontainer",
+            "WG3",
+            "Aufbewahrung",
+            "15",
+            "58,00"
+          ],
+          [
+            "E503",
+            "2026-04-15",
+            "LF3",
+            "Holzwerk Nord KG",
+            "4711",
+            "Bürostuhl Ergo",
+            "WG1",
+            "Sitzmöbel",
+            "10",
+            "94,00"
+          ]
+        ]
+      },
+      "hinweise": [
+        "Die Werte sind schon atomar – die 1. NF verlangt hier nur den richtigen (zusammengesetzten) Primärschlüssel.",
+        "Der Einkaufspreis von 4711 ist in E501 und E503 verschieden: Er hängt vom ganzen Schlüssel ab, nicht nur vom Artikel.",
+        "Nach der 2. NF stecken in zwei Tabellen transitive Abhängigkeiten: eine beim Lieferanten, eine bei der Warengruppe."
+      ],
+      "loesung": [
+        {
+          "titel": "1. NF",
+          "text": "Alle Werte sind atomar, jede Zeile ist eine Bestellposition. Primärschlüssel: (**bestell_nr, artikel_nr**).",
+          "tabellen": [
+            "einkauf(**bestell_nr, artikel_nr**, bestelldatum, lieferanten_nr, lieferantenname, artikelbezeichnung, warengruppen_nr, warengruppe, menge, einkaufspreis)"
+          ]
+        },
+        {
+          "titel": "2. NF",
+          "text": "Partielle Abhängigkeiten:\n- bestell_nr → bestelldatum, lieferanten_nr, lieferantenname\n- artikel_nr → artikelbezeichnung, warengruppen_nr, warengruppe\n\nmenge und einkaufspreis hängen vom **ganzen** Schlüssel ab (der Preis wird je Bestellung verhandelt: 96,50 in E501, 94,00 in E503).",
+          "tabellen": [
+            "bestellung(**bestell_nr**, bestelldatum, lieferanten_nr, lieferantenname)",
+            "artikel(**artikel_nr**, artikelbezeichnung, warengruppen_nr, warengruppe)",
+            "bestellposition(**bestell_nr↑, artikel_nr↑**, menge, einkaufspreis)"
+          ]
+        },
+        {
+          "titel": "3. NF",
+          "text": "Transitive Abhängigkeiten:\n- bestell_nr → lieferanten_nr → lieferantenname\n- artikel_nr → warengruppen_nr → warengruppe\n\nLieferant und Warengruppe werden eigene Tabellen; ihre Nummern bleiben als Fremdschlüssel zurück.",
+          "tabellen": [
+            "bestellung(**bestell_nr**, bestelldatum, lieferanten_nr↑)",
+            "lieferant(**lieferanten_nr**, lieferantenname)",
+            "artikel(**artikel_nr**, artikelbezeichnung, warengruppen_nr↑)",
+            "warengruppe(**warengruppen_nr**, warengruppe)",
+            "bestellposition(**bestell_nr↑, artikel_nr↑**, menge, einkaufspreis)"
+          ]
+        }
+      ],
+      "erklaerung": "Wer den Einkaufspreis in die Artikeltabelle schiebt, verliert die verhandelten Preise – die Aufgabe sagt ausdrücklich, dass er je Bestellung neu verhandelt wird. Steht so ein Satz nicht da, schreib deine Annahme hin („Annahme: Preis je Bestellung verhandelt“), dann ist auch die andere Zuordnung vertretbar. Die zweite transitive Kette (Warengruppe) wird gern übersehen.",
+      "tags": [
+        "normalisierung",
+        "2nf",
+        "3nf",
+        "transitive abhängigkeit"
+      ]
+    },
+    {
+      "id": "NF-005",
+      "titel": "Montageaufträge: Monteure mit Rolle und Stunden",
+      "stufe": 3,
+      "topicId": "02",
+      "quelle": "tabelle",
+      "aufgabe": "Der Montageservice der Möbelhaus Nordholz GmbH baut gelieferte Möbel beim Kunden auf. Je Montage wird genau ein Artikel aufgebaut; mehrere Monteure können an einer Montage arbeiten, jeder mit einer Rolle und seinen Stunden. Bisher stehen die Monteure gesammelt in einer Zelle.\n\n*Überführen* Sie die Ausgangstabelle schrittweise in die 3. Normalform. Zerlegen Sie die Spalte monteure in die Spalten monteur_nr, monteurname, rolle und stunden. *Benennen* Sie je Schritt die Abhängigkeiten und kennzeichnen Sie Primär- und Fremdschlüssel.",
+      "ausgang": {
+        "name": "montagen",
+        "kopf": [
+          "montage_nr",
+          "termin",
+          "kunden_nr",
+          "kundenname",
+          "kundenort",
+          "artikel_nr",
+          "artikelbezeichnung",
+          "monteure"
+        ],
+        "zeilen": [
+          [
+            "7101",
+            "2026-05-04",
+            "K12",
+            "Kanzlei Rohde",
+            "Kiel",
+            "4720",
+            "Schreibtisch Flex",
+            "M3 Vogt (Leitung, 3,0 h); M8 Arslan (Helfer, 2,5 h)"
+          ],
+          [
+            "7102",
+            "2026-05-04",
+            "K15",
+            "Café Hafenblick",
+            "Eckernförde",
+            "4810",
+            "Wandregal Eiche",
+            "M8 Arslan (Leitung, 1,5 h)"
+          ],
+          [
+            "7103",
+            "2026-05-06",
+            "K12",
+            "Kanzlei Rohde",
+            "Kiel",
+            "4735",
+            "Rollcontainer",
+            "M3 Vogt (Leitung, 1,0 h)"
+          ]
+        ]
+      },
+      "hinweise": [
+        "1. NF: eine Zeile je Montage und Monteur – vier Zeilen. Der Schlüssel besteht aus montage_nr und monteur_nr.",
+        "Arslan ist bei 7101 Helfer, bei 7102 Leitung: rolle und stunden hängen vom ganzen Schlüssel ab.",
+        "In der Montagetabelle der 2. NF stecken zwei transitive Ketten – über den Kunden und über den Artikel."
+      ],
+      "loesung": [
+        {
+          "titel": "1. NF",
+          "text": "Die Spalte monteure enthält eine Wiederholungsgruppe mit zusammengesetzten Angaben. Auflösen in eine Zeile je Montage und Monteur, verteilt auf monteur_nr, monteurname, rolle und stunden. Neuer Primärschlüssel: (**montage_nr, monteur_nr**).",
+          "tabellen": [
+            {
+              "relation": "montagen(**montage_nr, monteur_nr**, termin, kunden_nr, kundenname, kundenort, artikel_nr, artikelbezeichnung, monteurname, rolle, stunden)",
+              "zeilen": [
+                [
+                  "7101",
+                  "M3",
+                  "2026-05-04",
+                  "K12",
+                  "Kanzlei Rohde",
+                  "Kiel",
+                  "4720",
+                  "Schreibtisch Flex",
+                  "Vogt",
+                  "Leitung",
+                  "3,0"
+                ],
+                [
+                  "7101",
+                  "M8",
+                  "2026-05-04",
+                  "K12",
+                  "Kanzlei Rohde",
+                  "Kiel",
+                  "4720",
+                  "Schreibtisch Flex",
+                  "Arslan",
+                  "Helfer",
+                  "2,5"
+                ],
+                [
+                  "7102",
+                  "M8",
+                  "2026-05-04",
+                  "K15",
+                  "Café Hafenblick",
+                  "Eckernförde",
+                  "4810",
+                  "Wandregal Eiche",
+                  "Arslan",
+                  "Leitung",
+                  "1,5"
+                ],
+                [
+                  "7103",
+                  "M3",
+                  "2026-05-06",
+                  "K12",
+                  "Kanzlei Rohde",
+                  "Kiel",
+                  "4735",
+                  "Rollcontainer",
+                  "Vogt",
+                  "Leitung",
+                  "1,0"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "titel": "2. NF",
+          "text": "Partielle Abhängigkeiten:\n- montage_nr → termin, kunden_nr, kundenname, kundenort, artikel_nr, artikelbezeichnung\n- monteur_nr → monteurname\n\nrolle und stunden hängen vom **ganzen** Schlüssel ab und bilden die Einsatztabelle.",
+          "tabellen": [
+            "montage(**montage_nr**, termin, kunden_nr, kundenname, kundenort, artikel_nr, artikelbezeichnung)",
+            "monteur(**monteur_nr**, monteurname)",
+            "einsatz(**montage_nr↑, monteur_nr↑**, rolle, stunden)"
+          ]
+        },
+        {
+          "titel": "3. NF",
+          "text": "Transitive Abhängigkeiten in montage:\n- montage_nr → kunden_nr → kundenname, kundenort\n- montage_nr → artikel_nr → artikelbezeichnung\n\nKunde und Artikel werden eigene Tabellen, montage behält kunden_nr und artikel_nr als Fremdschlüssel.",
+          "tabellen": [
+            "montage(**montage_nr**, termin, kunden_nr↑, artikel_nr↑)",
+            "kunde(**kunden_nr**, kundenname, kundenort)",
+            "artikel(**artikel_nr**, artikelbezeichnung)",
+            "monteur(**monteur_nr**, monteurname)",
+            "einsatz(**montage_nr↑, monteur_nr↑**, rolle, stunden)"
+          ]
+        }
+      ],
+      "erklaerung": "Volle Punkte gibt es für: vollständige 1. NF mit neuem zusammengesetztem Schlüssel, alle partiellen Abhängigkeiten benannt, **beide** transitiven Ketten benannt und ein Endschema mit fünf Tabellen, in dem jeder Fremdschlüssel gekennzeichnet ist. Typische Fehler: rolle beim Monteur speichern (sie wechselt je Einsatz) und die Artikelkette übersehen, weil artikel_nr wie ein „Schlüssel“ aussieht – in montage ist sie ein Nichtschlüsselattribut.",
+      "tags": [
+        "normalisierung",
+        "1nf",
+        "2nf",
+        "3nf"
+      ]
+    },
+    {
+      "id": "NF-006",
+      "titel": "Fahrtenbuch aus einer Beschreibung",
+      "stufe": 2,
+      "topicId": "02",
+      "quelle": "text",
+      "aufgabe": "Die Möbelhaus Nordholz GmbH will das Fahrtenbuch ihres Fuhrparks digitalisieren. Der Fuhrparkleiter beschreibt die Anforderungen so:\n\n> Zu jeder Fahrt halten wir die Fahrtnummer (fahrt_nr), das Datum (datum), den Zweck (zweck) und die Kilometerstände bei Start und Ende (km_start, km_ende) fest. Jede Fahrt wird mit genau einem Fahrzeug und von genau einem Fahrer gefahren. Ein Fahrzeug erkennen wir am Kennzeichen (kennzeichen), außerdem kennen wir seine Erstzulassung (erstzulassung). Jedes Fahrzeug ist von genau einem Fahrzeugtyp (typ_nr, typbezeichnung); der Typ legt fest, welche Führerscheinklasse man braucht (fuehrerscheinklasse). Fahrer sind Mitarbeiter mit Personalnummer (personal_nr) und Namen (fahrername).\n\n*Erstellen* Sie aus der Beschreibung ein relationales Datenmodell in der 3. Normalform. Verwenden Sie die Attributnamen in Klammern, kennzeichnen Sie Primär- und Fremdschlüssel und *benennen* Sie die funktionalen Abhängigkeiten, die Ihre Zerlegung begründen.",
+      "hinweise": [
+        "Such die „Dinge“ mit eigener Nummer: Fahrt, Fahrzeug, Fahrzeugtyp, Fahrer – jedes wird eine Tabelle.",
+        "„Jede Fahrt mit genau einem Fahrzeug“ heißt 1:n – der Fremdschlüssel steht auf der n-Seite, also in der Fahrt.",
+        "Die Führerscheinklasse hängt am Typ, nicht am einzelnen Fahrzeug: kennzeichen → typ_nr → fuehrerscheinklasse wäre transitiv."
+      ],
+      "loesung": [
+        {
+          "titel": "3. NF",
+          "text": "Funktionale Abhängigkeiten:\n- fahrt_nr → datum, zweck, km_start, km_ende, kennzeichen, personal_nr\n- kennzeichen → erstzulassung, typ_nr\n- typ_nr → typbezeichnung, fuehrerscheinklasse\n- personal_nr → fahrername\n\nStünde alles in einer Tabelle fahrt, wären z. B. fahrt_nr → kennzeichen → typ_nr → fuehrerscheinklasse und fahrt_nr → personal_nr → fahrername transitiv. Deshalb je eine Tabelle für Fahrzeug, Fahrzeugtyp und Fahrer.",
+          "tabellen": [
+            "fahrt(**fahrt_nr**, datum, zweck, km_start, km_ende, kennzeichen↑, personal_nr↑)",
+            "fahrzeug(**kennzeichen**, erstzulassung, typ_nr↑)",
+            "fahrzeugtyp(**typ_nr**, typbezeichnung, fuehrerscheinklasse)",
+            "fahrer(**personal_nr**, fahrername)"
+          ]
+        }
+      ],
+      "erklaerung": "Bei Aufgaben aus einem Text zählt dieselbe Logik wie beim schrittweisen Normalisieren – nur ohne Zwischenschritte. Begründe die Zerlegung mit den Abhängigkeiten, sonst wirkt das Schema geraten. Häufiger Fehler: fuehrerscheinklasse in fahrzeug, weil sie „zum Auto gehört“. Sie hängt aber am Typ; bei zehn Transportern desselben Typs stünde sie zehnmal da.",
+      "tags": [
+        "normalisierung",
+        "3nf",
+        "relationenmodell"
+      ]
+    },
+    {
+      "id": "NF-007",
+      "titel": "Kundenbewertungen im Onlineshop",
+      "stufe": 2,
+      "topicId": "02",
+      "quelle": "text",
+      "aufgabe": "Im Onlineshop der Möbelhaus Nordholz GmbH sollen Kunden Artikel bewerten können. Die Produktmanagerin beschreibt:\n\n> Kunden haben eine Kundennummer (kunden_nr), einen Namen (kundenname) und eine E-Mail-Adresse (email). Artikel haben eine Artikelnummer (artikel_nr) und eine Bezeichnung (artikelbezeichnung); jeder Artikel gehört zu genau einer Kategorie (kategorie_nr, kategoriename). Ein Kunde kann viele Artikel bewerten, ein Artikel wird von vielen Kunden bewertet – jeder Kunde aber jeden Artikel höchstens einmal. Zu einer Bewertung speichern wir die Sterne (sterne), einen Kommentar (kommentar) und das Datum (bewertet_am).\n\n*Erstellen* Sie aus der Beschreibung ein relationales Datenmodell in der 3. Normalform. Verwenden Sie die Attributnamen in Klammern und kennzeichnen Sie Primär- und Fremdschlüssel. *Begründen* Sie den Primärschlüssel der Bewertung.",
+      "hinweise": [
+        "Kunde und Artikel stehen in einer n:m-Beziehung – die braucht eine eigene Tabelle.",
+        "„Jeden Artikel höchstens einmal“ verrät den Primärschlüssel der Bewertung.",
+        "kategoriename hängt an der Kategorie, nicht am Artikel – sonst ist es eine transitive Abhängigkeit."
+      ],
+      "loesung": [
+        {
+          "titel": "3. NF",
+          "text": "Funktionale Abhängigkeiten:\n- kunden_nr → kundenname, email\n- artikel_nr → artikelbezeichnung, kategorie_nr\n- kategorie_nr → kategoriename\n- (kunden_nr, artikel_nr) → sterne, kommentar, bewertet_am\n\nDie n:m-Beziehung „bewertet“ wird zur Tabelle bewertung. Weil jeder Kunde jeden Artikel nur einmal bewertet, ist (**kunden_nr, artikel_nr**) eindeutig und damit Primärschlüssel; beide Spalten sind zugleich Fremdschlüssel. Die Kategorie bekommt eine eigene Tabelle (sonst artikel_nr → kategorie_nr → kategoriename transitiv).",
+          "tabellen": [
+            "kunde(**kunden_nr**, kundenname, email)",
+            "artikel(**artikel_nr**, artikelbezeichnung, kategorie_nr↑)",
+            "kategorie(**kategorie_nr**, kategoriename)",
+            "bewertung(**kunden_nr↑, artikel_nr↑**, sterne, kommentar, bewertet_am)"
+          ]
+        }
+      ],
+      "erklaerung": "Den Punkt für die Begründung des Schlüssels bekommt nur, wer den Satz aus der Beschreibung aufgreift („höchstens einmal“). Dürfte ein Kunde denselben Artikel mehrmals bewerten, bräuchte die Bewertung einen eigenen Schlüssel (z. B. bewertung_nr) – das wäre dann ebenfalls richtig. Fehler, der oft passiert: sterne in die Artikeltabelle (dort ist höchstens ein Durchschnitt sinnvoll, und der ist berechenbar, gehört also gar nicht gespeichert).",
+      "tags": [
+        "normalisierung",
+        "3nf",
+        "relationenmodell",
+        "n:m"
+      ]
+    },
+    {
+      "id": "NF-008",
+      "titel": "Projektzeiterfassung mit Projektleitung",
+      "stufe": 3,
+      "topicId": "02",
+      "quelle": "text",
+      "aufgabe": "Die IT-Abteilung der Möbelhaus Nordholz GmbH will die Arbeitszeit auf Projekte buchen. Aus dem Anforderungsgespräch:\n\n> Mitarbeiter haben eine Personalnummer (personal_nr) und einen Namen (name) und gehören zu genau einer Abteilung (abteilungs_nr, abteilungsname). Projekte haben eine Projektnummer (projekt_nr), einen Namen (projektname) und ein Budget (budget). Jedes Projekt hat genau einen Projektleiter, der selbst Mitarbeiter ist; gespeichert wird dessen Personalnummer als projektleiter_nr. Mitarbeiter buchen Stunden (stunden) auf Projekte, und zwar höchstens eine Buchung je Mitarbeiter, Projekt und Tag (datum).\n\n*Erstellen* Sie aus der Beschreibung ein relationales Datenmodell in der 3. Normalform. Verwenden Sie die Attributnamen in Klammern, kennzeichnen Sie Primär- und Fremdschlüssel und *begründen* Sie den Primärschlüssel der Zeitbuchung.",
+      "hinweise": [
+        "Vier Tabellen: Mitarbeiter, Abteilung, Projekt und die Buchungen.",
+        "projektleiter_nr ist ein Fremdschlüssel mit anderem Namen: Er verweist auf mitarbeiter. Wähle im Editor beim FK die Zieltabelle.",
+        "„Höchstens eine Buchung je Mitarbeiter, Projekt und Tag“: Der Primärschlüssel der Buchung hat drei Spalten."
+      ],
+      "loesung": [
+        {
+          "titel": "3. NF",
+          "text": "Funktionale Abhängigkeiten:\n- personal_nr → name, abteilungs_nr\n- abteilungs_nr → abteilungsname\n- projekt_nr → projektname, budget, projektleiter_nr\n- (personal_nr, projekt_nr, datum) → stunden\n\nDie Abteilung wird eigene Tabelle (sonst personal_nr → abteilungs_nr → abteilungsname transitiv). projektleiter_nr ist Fremdschlüssel auf mitarbeiter – die Beziehung „leitet“ (1:n) braucht keine eigene Tabelle. Die Buchung ist eindeutig über (**personal_nr, projekt_nr, datum**); datum gehört zum Schlüssel, ist aber kein Fremdschlüssel.",
+          "tabellen": [
+            "mitarbeiter(**personal_nr**, name, abteilungs_nr↑)",
+            "abteilung(**abteilungs_nr**, abteilungsname)",
+            "projekt(**projekt_nr**, projektname, budget, projektleiter_nr↑)",
+            "zeitbuchung(**personal_nr↑, projekt_nr↑, datum**, stunden)"
+          ],
+          "ziele": {
+            "projekt.projektleiter_nr": "mitarbeiter"
+          }
+        }
+      ],
+      "erklaerung": "Zwei Stolperstellen bringen hier die Punkte: Der Fremdschlüssel projektleiter_nr heißt anders als der Primärschlüssel, auf den er zeigt – kennzeichne ihn trotzdem mit ↑ und schreib das Ziel dazu („→ mitarbeiter“). Und datum gehört in den Primärschlüssel der Buchung; ohne datum dürfte ein Mitarbeiter nur einmal überhaupt auf ein Projekt buchen.",
+      "tags": [
+        "normalisierung",
+        "3nf",
+        "relationenmodell",
+        "fremdschlüssel"
+      ]
+    }
+  ]
+}

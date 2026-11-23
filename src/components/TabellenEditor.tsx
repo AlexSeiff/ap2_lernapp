@@ -1,7 +1,8 @@
 // Tabellen-Editor für Normalisierung (je Schritt 1. NF, 2. NF, 3. NF mit Abhängigkeiten) und Relationenmodell/Star-Schema:
 // Tabellen anlegen, Spalten als Primär-/Fremdschlüssel markieren, zwischen Tabellen verschieben, optional Beispieldaten.
 // Die Ausgangstabelle lässt sich aus der Anlage übernehmen, jeder Schritt aus dem vorigen. Darunter steht live die
-// Relationenschreibweise wie auf den Blättern (fett = PK, ↑ = FK). TabellenAnsicht zeigt die Abgabe ohne Bedienelemente.
+// Relationenschreibweise wie auf den Blättern (fett = PK, ↑ = FK), ab zwei Tabellen auch das Beziehungsdiagramm (SchemaDiagramm).
+// TabellenAnsicht zeigt die Abgabe ohne Bedienelemente.
 
 import { useState } from 'react';
 import type { Section } from '../../domain/types';
@@ -15,6 +16,7 @@ import {
   type TabellenAntwort,
   type TabellenSchritt,
 } from '../lib/tabellenEditor';
+import { SchemaDiagramm } from './SchemaDiagramm';
 import { RelationText, TabellenKarte, ohneSpalte } from './tabellen/TabellenKarte';
 
 interface Props {
@@ -113,7 +115,7 @@ export function TabellenEditor({ wert, onChange, anlagen }: Props) {
           className="answer"
           rows={3}
           value={aktuell.text}
-          placeholder={schrittHinweis(wert.editor, i + 1)}
+          placeholder={schrittHinweis(wert.editor, Number(/^([123])\. NF/.exec(aktuell.titel)?.[1] ?? i + 1))}
           onChange={(e) => setzeSchritt({ text: e.target.value })}
         />
       </label>
@@ -130,6 +132,12 @@ export function TabellenEditor({ wert, onChange, anlagen }: Props) {
           onSpalteNach={(s, ziel, verschieben) => spalteNach(t, s, ziel, verschieben)}
         />
       ))}
+      {aktuell.tabellen.length > 1 && (
+        <details className="te-diagramm" open>
+          <summary>Als Beziehungsdiagramm – so zeichnest du das Schema auf den Prüfungsbogen</summary>
+          <SchemaDiagramm tabellen={aktuell.tabellen} titel={`Beziehungsdiagramm ${aktuell.titel}`} />
+        </details>
+      )}
       {!aktuell.tabellen.length && (
         <p className="muted small">
           {wert.editor === 'normalform' && i === 0 && vorlagen.length
@@ -212,6 +220,7 @@ export function TabellenAnsicht({ wert }: { wert: TabellenAntwort }) {
               )}
             </div>
           ))}
+          {s.tabellen.length > 1 && <SchemaDiagramm tabellen={s.tabellen} titel={`Beziehungsdiagramm ${s.titel}`} />}
           {!s.text.trim() && !s.tabellen.length && <p className="muted small">Nichts eingetragen.</p>}
         </section>
       ))}

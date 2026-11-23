@@ -8,6 +8,7 @@ import { readPrueferfrage } from './prueferfragen.ts';
 import { parseDiagrammUebungen } from './diagrammUebungen.ts';
 import { parseJsonUebungen } from './jsonUebungen.ts';
 import { parseXmlUebungen } from './xmlUebungen.ts';
+import { parseNormalisierungUebungen } from './normalisierungUebungen.ts';
 import { parseRechenUebungen, type RechenUebungPruefer } from './rechenUebungen.ts';
 import { parseSqlUebungen, verknuepfeSqlUebungen } from './sqlUebungen.ts';
 import { pruefeSvg, svgBloecke, svgIds } from './svgDiagramm.ts';
@@ -429,6 +430,7 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
     diagrammUebungen: [],
     jsonUebungen: [],
     xmlUebungen: [],
+    normalisierungUebungen: [],
     issues: [],
   };
 
@@ -509,6 +511,13 @@ export function buildContent(files: SourceFile[], options: BuildOptions = {}): C
   for (const f of files.filter((x) => istJsonArt(x.name, 'xml'))) {
     const parsed = parseXmlUebungen(f.name, f.text);
     content.xmlUebungen!.push(...parsed.uebungen);
+    content.issues.push(...parsed.issues);
+  }
+
+  // Normalisierungs-Übungen (Tabelle oder Text → 3. NF)
+  for (const f of files.filter((x) => istJsonArt(x.name, 'normalisierung'))) {
+    const parsed = parseNormalisierungUebungen(f.name, f.text);
+    content.normalisierungUebungen!.push(...parsed.uebungen);
     content.issues.push(...parsed.issues);
   }
 

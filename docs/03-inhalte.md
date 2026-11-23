@@ -246,6 +246,25 @@ or whose `vorgabe` already satisfies the rules. Pages `/xml` and `/xml/:id` (`sr
 `JsonUebungen.tsx` – and `XmlUebung.tsx`). Progress is stored in the same map `json` (§ 6) under the `XML-…` ids, with the same functions
 (`src/lib/jsonUebungen.ts`); no format change. Tests: `tests/xml.test.ts`, `tests/xmlUebungen.test.ts`.
 
+### 4.4e Normalisierungs-Übungen `AP2_Normalisierung_Uebungen.json`
+
+A relational model in 3. NF from a table or from a text, answered in the Tabellen-Editor (the same one exam tasks use). `{ meta, uebungen: [{ id
+(NF-NNN), titel, stufe 1–3, topicId?, quelle: "tabelle" | "text", aufgabe (Markdown, "Sie"-form, operator *Überführen* or *Erstellen*, attribute names
+given in the text), ausgang? (only `tabelle`: `{ name, kopf[], zeilen[][] }`, shown under the task and offered as "Ausgangstabelle übernehmen"),
+hinweise[], loesung: [{ titel ("1. NF" … "3. NF"; `text`: one step "3. NF"), text (dependencies, Markdown), tabellen: ["name(**pk1, pk2↑**, a, b↑)" |
+{ relation, zeilen? }], ziele? ({ "tabelle.spalte": "zieltabelle" } for a FK whose name differs from the PK it points to) }], erklaerung? (Prüferkommentar),
+tags[] }] }`.
+
+`domain/normalisierungUebungen.ts` reads the relation notation (`leseRelation`) and finds FK targets (`fkZiel`: explicit target, else the other table whose
+PK has that column, single-column PK preferred). The importer skips (and reports) an exercise whose solution has a table without PK, a FK without target,
+a duplicate column/table, wrong step titles, or loses a column of the first step. "Prüfen" (`src/lib/normalisierung.ts`) compares every step with
+`gleicheAb` of the Tabellen-Editor (column names normalised; table names and column order free) and checks FK targets chosen in the editor; the feedback
+names the learner's own tables and how many tables/columns are missing, without revealing the solution. Pages `/normalisierung` (shared
+`DatenformatListe`) and `/normalisierung/:id`. The Tabellen-Editor (also in exam tasks) draws its tables as a Beziehungsdiagramm (`SchemaDiagramm`,
+layout in `src/lib/schemaDiagramm.ts`: columns by references, FK lines n … 1); the solution shows one per step. The editor state is kept as a draft in
+`localStorage` (`ap2-nf-entwurf`, per exercise, removed when solved) – a convenience, not progress. Progress in the map `json` (§ 6) under the `NF-…` ids,
+no format change. Tests: `tests/normalisierungUebungen.test.ts`.
+
 ### 4.4b Diagramm-Übungen `AP2_Diagramm_Uebungen.json` (plan phase 7)
 
 `{ meta, uebungen: [...] }`, parsed by `parseDiagrammUebungen` (`domain/diagrammUebungen.ts`, zod + `pruefeDiagrammUebung`; a broken

@@ -12,6 +12,7 @@ export const JSON_DATEIEN = {
   diagramme: /Diagramm_Uebungen.*\.json$/i,
   json: /Json_Uebungen.*\.json$/i,
   xml: /Xml_Uebungen.*\.json$/i,
+  normalisierung: /Normalisierung_Uebungen.*\.json$/i,
   quellen: /^AP2_Quellen\.json$/,
 } as const;
 

@@ -3,6 +3,7 @@
 import type { DiagrammUebung } from './diagrammUebungen.ts';
 import type { JsonUebung } from './jsonUebungen.ts';
 import type { XmlUebung } from './xmlUebungen.ts';
+import type { NormalisierungUebung } from './normalisierungUebungen.ts';
 import type { Quelle } from './quellen.ts';
 
 export interface Section {
@@ -310,6 +311,8 @@ export interface Content {
   jsonUebungen?: JsonUebung[];
   /** XML-Übungen: XML schreiben und korrigieren, XPath (AP2_Xml_Uebungen.json); fehlt in älteren Ständen. */
   xmlUebungen?: XmlUebung[];
+  /** Normalisierungs-Übungen: Tabelle oder Text in die 3. NF überführen (AP2_Normalisierung_Uebungen.json); fehlt in älteren Ständen. */
+  normalisierungUebungen?: NormalisierungUebung[];
   /** Quellen und Lehrvideos (AP2_Quellen.json, Umsetzungsplan Phase 8); fehlt in älteren Ständen. */
   quellen?: Quelle[];
   /** Verzeichnis der Begriffsseiten (ohne Seitentext); fehlt in älteren Ständen. */

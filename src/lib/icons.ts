@@ -8,6 +8,12 @@ export type IconElement = readonly [
 ];
 
 export const ICONS = {
+  table: [
+    ['rect', { width: '18', height: '18', x: '3', y: '3', rx: '2' }],
+    ['path', { d: 'M3 9h18' }],
+    ['path', { d: 'M3 15h18' }],
+    ['path', { d: 'M9 3v18' }],
+  ],
   code: [
     ['polyline', { points: '16 18 22 12 16 6' }],
     ['polyline', { points: '8 6 2 12 8 18' }],

@@ -118,3 +118,27 @@ button.sz-slot.falsch { color: var(--low); background: var(--low-soft); border-c
   .ko-eingabe input { width: 100%; }
   .ko-eingabe button { flex: none; }
 }
+
+/* Beziehungsdiagramm eines Tabellenschemas (SchemaDiagramm.tsx): Kästen wie von Hand gezeichnet, PK unterstrichen, FK-Linien n … 1. */
+.schema-diagramm { overflow-x: auto; margin: 6px 0; -webkit-overflow-scrolling: touch; }
+.schema-diagramm svg { display: block; }
+.sd-kasten rect { fill: var(--surface); stroke: var(--text); stroke-width: 1.4; }
+.sd-kasten .sd-kopf { fill: var(--accent-soft); }
+.sd-kasten line { stroke: var(--text); stroke-width: 1.2; }
+.sd-name { font-weight: 700; font-size: 14px; fill: var(--text); }
+.sd-spalte { font-family: 'Cascadia Code', Consolas, ui-monospace, monospace; font-size: 13px; fill: var(--text); }
+.sd-spalte.pk { font-weight: 700; text-decoration: underline; }
+.sd-spalte.fk { fill: var(--accent); }
+.sd-linie path { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+.sd-linie text { font-size: 12px; font-weight: 700; fill: var(--accent); }
+.te-diagramm summary { cursor: pointer; font-size: 0.9rem; color: var(--muted); }
+
+/* Normalisierungs-Übungen (NormalisierungUebung.tsx) */
+.nf-ausgang { margin: 10px 0 0; }
+.nf-ausgang table { font-size: 0.88rem; }
+.nf-ausgang caption { caption-side: top; text-align: left; font-weight: 600; padding-bottom: 4px; }
+.nf-schritt + .nf-schritt { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 4px; }
+.nf-schritt h3 { margin: 8px 0 4px; }
+.nf-befund { margin: 4px 0 0; padding-left: 0; list-style: none; display: grid; gap: 2px; font-size: 0.92rem; }
+.nf-befund .ok { color: var(--good); }
+.nf-befund .bad { color: var(--low); }

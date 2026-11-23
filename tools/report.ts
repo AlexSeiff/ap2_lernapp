@@ -54,6 +54,10 @@ const xmlUebungen = c.xmlUebungen ?? [];
 console.log(
   `XML-Übungen: ${xmlUebungen.length} (Dokument: ${xmlUebungen.filter((u) => u.art === 'dokument').length}, XPath: ${xmlUebungen.filter((u) => u.art === 'xpath').length})`,
 );
+const nfUebungen = c.normalisierungUebungen ?? [];
+console.log(
+  `Normalisierungs-Übungen: ${nfUebungen.length} (aus Tabelle: ${nfUebungen.filter((u) => u.quelle === 'tabelle').length}, aus Text: ${nfUebungen.filter((u) => u.quelle === 'text').length})`,
+);
 const diagramme = c.diagrammUebungen ?? [];
 const zaehle = <T>(liste: T[], schluessel: (x: T) => string | number) => {
   const m = new Map<string | number, number>();
