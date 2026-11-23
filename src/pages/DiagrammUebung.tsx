@@ -15,7 +15,7 @@ import {
   slotsVon,
 } from '../../domain/diagrammUebungen';
 import { AnhangPanel } from '../components/Belegsatz';
-import { DiagrammSvg, FormSymbol, formName } from '../components/DiagrammSvg';
+import { DiagrammSvg, FormSymbol, formName, istKantenForm, NACHRICHT_KURZ } from '../components/DiagrammSvg';
 import { Icon } from '../components/Icon';
 import { Markdown } from '../components/Markdown';
 import { StruktogrammLueckenBild } from '../components/ZuordnungsEditor';
@@ -252,6 +252,11 @@ function DiagrammUebungView({ u }: { u: DiagrammUebungTyp }) {
                   <>
                     <FormSymbol form={p.form} />
                     <span>{p.text}</span>
+                    {istKantenForm(p.form) && NACHRICHT_KURZ[p.form] && (
+                      <span className="palette-art" aria-hidden="true">
+                        {NACHRICHT_KURZ[p.form]}
+                      </span>
+                    )}
                     <span className="sr-only"> ({formName(p.form)})</span>
                   </>
                 )}

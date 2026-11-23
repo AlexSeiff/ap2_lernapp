@@ -57,6 +57,9 @@ const FORM_NAMEN: Record<Form | KantenForm, string> = {
   beschriftung: 'Beschriftung',
 };
 export const formName = (f: Form | KantenForm) => FORM_NAMEN[f];
+
+/** Sichtbares Kürzel der Nachrichtenart in der Elemente-Leiste – die Pfeilspitze allein ist dort klein. */
+export const NACHRICHT_KURZ: Partial<Record<KantenForm, string>> = { sync: 'synchron', async: 'asynchron', antwort: 'Antwort' };
 export const istKantenForm = (f: string): f is KantenForm => (KANTEN_FORMEN as readonly string[]).includes(f);
 
 type Punkt = [number, number];
@@ -336,8 +339,14 @@ export function FormSymbol({ form }: { form: Form | KantenForm }) {
     'gw-or',
     'entscheidung',
   ];
+  // Verbindungen mit derselben Pfeilspitze wie in der Zeichnung: synchron gefüllt, asynchron und Antwort offen.
+  const spitze = form === 'sync' || form === 'transition' ? 'gefuellt' : form === 'async' || form === 'antwort' ? 'offen' : undefined;
   const inhalt = istKantenForm(form) ? (
-    <line x1={2} y1={14} x2={36} y2={14} className={`dg-linie${form === 'antwort' ? ' dg-strich' : ''}`} />
+    <>
+      <line x1={3} y1={14} x2={spitze ? 32 : 37} y2={14} className={`dg-linie${form === 'antwort' ? ' dg-strich' : ''}`} />
+      {spitze === 'gefuellt' && <polygon points="38,14 31,10.5 31,17.5" className="dg-voll" />}
+      {spitze === 'offen' && <polyline points="31,10 37,14 31,18" className="dg-linie" fill="none" />}
+    </>
   ) : (
     <FormZeichnung form={form} k={form === 'gabel' ? balken : rund.includes(form) ? kreis : k} />
   );
