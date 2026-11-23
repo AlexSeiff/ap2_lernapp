@@ -164,10 +164,11 @@ export function SchemaZeichner({ tabellen: roh, onChange, andereIds, titel }: Pr
           </svg>
 
           {tabellen.map((t) => (
-            <div
+            <section
               key={t.id}
               className={`sz-tabelle${zug && zug.art !== 'tabelle' && zug.von !== t.id ? ' ziel' : ''}`}
               data-sz-tabelle={t.id}
+              aria-label={`Tabelle ${t.name.trim() || 'ohne Namen'}`}
               style={{ left: t.x, top: t.y, width: kastenBreite(t) }}
             >
               <div
@@ -270,7 +271,7 @@ export function SchemaZeichner({ tabellen: roh, onChange, andereIds, titel }: Pr
               <button type="button" className="ghost sz-neu" onClick={() => neueSpalte(t)}>
                 + Spalte
               </button>
-            </div>
+            </section>
           ))}
 
           {zug?.art === 'spalte' && (

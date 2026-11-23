@@ -135,6 +135,10 @@ test.describe('Rauchtests: die wichtigsten Wege durch die App', () => {
     const name = page.getByRole('textbox', { name: 'Tabellenname' }).first();
     await expect(name).toBeVisible();
     await name.fill('kunde');
+    // Zeichenfläche (Standard): der Kasten heißt wie die Tabelle.
+    await expect(page.getByRole('region', { name: 'Tabelle kunde' })).toBeVisible();
+    // Dieselbe Tabelle in der Tabellenform.
+    await page.getByRole('button', { name: 'Tabellenform' }).click();
     await expect(page.getByRole('region', { name: 'Tabelle kunde' })).toBeVisible();
   });
 });
