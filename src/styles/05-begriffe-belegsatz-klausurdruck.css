@@ -102,10 +102,12 @@ button.stern.nur-icon { padding: 4px 6px; flex: none; }
 .belegsatz h2 { font-size: 1.1rem; margin: 1.4em 0 0.4em; }
 .belegsatz pre { font-size: 0.85rem; }
 .belegsatz table { font-size: 0.9rem; }
+/* So hoch wie der Inhalt, höchstens bis zum unteren Bildschirmrand – eine kurze Ausgangssituation verdeckt nicht die ganze Seite. */
 .belegsatz-panel {
-  position: fixed; z-index: 40; top: var(--kopf-gesamt); right: 0; bottom: 0; width: min(560px, 100vw); overflow-y: auto;
-  background: var(--surface); box-shadow: var(--shadow-hoch); padding: 0 20px calc(20px + env(safe-area-inset-bottom));
-  border-left: 0.5px solid var(--border);
+  position: fixed; z-index: 40; top: var(--kopf-gesamt); right: 0; width: min(560px, 100vw); overflow-y: auto;
+  max-height: calc(100vh - var(--kopf-gesamt)); max-height: calc(100dvh - var(--kopf-gesamt));
+  background: var(--surface); box-shadow: var(--shadow-hoch); padding: 0 20px calc(16px + env(safe-area-inset-bottom));
+  border-left: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); border-bottom-left-radius: var(--radius);
 }
 .belegsatz-kopf { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 12px 0; background: var(--surface); border-bottom: 0.5px solid var(--border); }
 .belegsatz-kopf h2 { margin: 0; font-size: 1.1rem; flex: 1; }
