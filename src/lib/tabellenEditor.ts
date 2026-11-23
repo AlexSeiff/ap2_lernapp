@@ -18,6 +18,9 @@ export interface Tabelle {
   spalten: Spalte[];
   /** Beispieldaten (optional, z. B. für die 1. NF). */
   zeilen: string[][];
+  /** Lage auf der Zeichenfläche (SchemaZeichner); fehlt, ordnet die Fläche die Tabelle selbst an. */
+  x?: number;
+  y?: number;
 }
 
 export interface TabellenSchritt {

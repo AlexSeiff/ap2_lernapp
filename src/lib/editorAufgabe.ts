@@ -180,7 +180,14 @@ const DiagrammSchema = z.object({
   notiz: z.string().optional(),
 });
 const SpalteSchema = z.object({ name: z.string(), pk: z.boolean().optional(), fk: z.boolean().optional(), ziel: z.string().optional() });
-const TabelleSchema = z.object({ id: z.string(), name: z.string(), spalten: z.array(SpalteSchema), zeilen: z.array(z.array(z.string())) });
+const TabelleSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  spalten: z.array(SpalteSchema),
+  zeilen: z.array(z.array(z.string())),
+  x: z.number().optional(),
+  y: z.number().optional(),
+});
 const WerteSchema = z.object({
   editor: z.literal('werte'),
   kopf: z.array(z.string()),

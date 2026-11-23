@@ -142,3 +142,46 @@ button.sz-slot.falsch { color: var(--low); background: var(--low-soft); border-c
 .nf-befund { margin: 4px 0 0; padding-left: 0; list-style: none; display: grid; gap: 2px; font-size: 0.92rem; }
 .nf-befund .ok { color: var(--good); }
 .nf-befund .bad { color: var(--low); }
+
+/* Zeichenfläche für das Relationenmodell (SchemaZeichner.tsx): Kästen wie im Beziehungsfenster, Höhen fest (lib/schemaZeichner.ts). */
+.sz-anleitung { margin: 0; }
+.sz-flaeche {
+  position: relative; touch-action: pan-x pan-y;
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1.2px); background-size: 20px 20px;
+}
+.sz-flaeche.zug-tabelle, .sz-flaeche.zug-spalte { cursor: grabbing; user-select: none; -webkit-user-select: none; }
+.sz-flaeche.zug-fk { cursor: crosshair; user-select: none; -webkit-user-select: none; }
+.sz-linien { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+.sz-vorschau { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.sz-tabelle {
+  position: absolute; min-width: 170px; background: var(--surface); box-shadow: 0 0 0 1.5px var(--text), var(--shadow);
+  border-radius: 6px; overflow: hidden; display: grid;
+}
+.sz-tabelle.ziel { box-shadow: 0 0 0 2.5px var(--accent), var(--shadow); }
+.sz-kopf {
+  display: flex; align-items: center; gap: 4px; padding: 0 4px 0 8px; background: var(--accent-soft);
+  border-bottom: 1.5px solid var(--text); cursor: grab; touch-action: none; box-sizing: border-box;
+}
+.sz-tabelle input { font: inherit; min-height: 0; margin: 0; padding: 2px 4px; border: 1px solid transparent; border-radius: 4px; background: transparent; box-shadow: none; width: auto; }
+.sz-tabelle input:hover, .sz-tabelle input:focus { border-color: var(--border); background: var(--surface); }
+.sz-name { font-weight: 700; flex: 1; min-width: 0; }
+.sz-zeile { display: flex; align-items: center; gap: 2px; padding: 0 4px; box-sizing: border-box; font-family: 'Cascadia Code', Consolas, ui-monospace, monospace; font-size: 13px; }
+.sz-zeile input { flex: 1; min-width: 0; }
+.sz-zeile.pk input { font-weight: 700; text-decoration: underline; }
+.sz-zeile.fk input { color: var(--accent); }
+.sz-fk-text { width: 0.8em; color: var(--accent); font-weight: 700; }
+.sz-griff { cursor: grab; touch-action: none; color: var(--muted); padding: 0 2px; user-select: none; -webkit-user-select: none; }
+.sz-tabelle button.ghost { min-height: 0; padding: 0 5px; font-size: 0.75rem; line-height: 1.6; }
+.sz-pk { font-family: inherit; color: var(--muted); }
+.sz-pk[aria-pressed='true'] { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.sz-punkt {
+  flex: none; width: 14px; height: 14px; margin: 0 2px; border-radius: 50%; border: 2px solid var(--accent); background: var(--surface);
+  cursor: crosshair; touch-action: none;
+}
+.sz-punkt.an { background: var(--accent); }
+.sz-punkt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sz-weg { color: var(--muted); }
+.sz-neu { justify-self: start; margin: 2px 4px 4px; height: 26px; }
+.sz-geist { position: absolute; pointer-events: none; padding: 2px 8px; border-radius: 4px; background: var(--accent); color: var(--surface); font-size: 13px; font-family: 'Cascadia Code', Consolas, ui-monospace, monospace; }
+.sz-leer { position: absolute; left: 20px; top: 20px; margin: 0; }
+.te-ansichten { justify-self: start; }

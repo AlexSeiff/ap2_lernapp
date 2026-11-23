@@ -1,5 +1,6 @@
 // Tabellen-Editor für Normalisierung (je Schritt 1. NF, 2. NF, 3. NF mit Abhängigkeiten) und Relationenmodell/Star-Schema:
-// Tabellen anlegen, Spalten als Primär-/Fremdschlüssel markieren, zwischen Tabellen verschieben, optional Beispieldaten.
+// Zwei Ansichten desselben Modells: „Zeichnen“ (SchemaZeichner – Kästen frei platzieren, Spalten ziehen, FK-Linien ziehen) und
+// „Tabellenform“ (Tabellen anlegen, Spalten als Primär-/Fremdschlüssel markieren, zwischen Tabellen verschieben, optional Beispieldaten).
 // Die Ausgangstabelle lässt sich aus der Anlage übernehmen, jeder Schritt aus dem vorigen. Darunter steht live die
 // Relationenschreibweise wie auf den Blättern (fett = PK, ↑ = FK), ab zwei Tabellen auch das Beziehungsdiagramm (SchemaDiagramm).
 // TabellenAnsicht zeigt die Abgabe ohne Bedienelemente.
@@ -17,6 +18,7 @@ import {
   type TabellenSchritt,
 } from '../lib/tabellenEditor';
 import { SchemaDiagramm } from './SchemaDiagramm';
+import { SchemaZeichner } from './SchemaZeichner';
 import { RelationText, TabellenKarte, ohneSpalte } from './tabellen/TabellenKarte';
 
 interface Props {
@@ -38,6 +40,8 @@ const kopie = (t: Tabelle, id: string): Tabelle => ({
 export function TabellenEditor({ wert, onChange, anlagen }: Props) {
   const confirm = useConfirm();
   const [schritt, setSchritt] = useState(0);
+  // Zeichnen wie auf dem Prüfungsbogen; die Tabellenform bleibt für Beispieldaten und als Bedienung ohne Ziehen.
+  const [ansicht, setAnsicht] = useState<'zeichnen' | 'formular'>('zeichnen');
   const i = Math.min(schritt, wert.schritte.length - 1);
   const aktuell = wert.schritte[i];
   const vorlagen = anlageTabellen(anlagen);
@@ -120,25 +124,38 @@ export function TabellenEditor({ wert, onChange, anlagen }: Props) {
         />
       </label>
 
-      {aktuell.tabellen.map((t) => (
-        <TabellenKarte
-          key={t.id}
-          t={t}
-          andere={aktuell.tabellen.filter((x) => x.id !== t.id)}
-          alle={aktuell.tabellen}
-          onAendern={(teil) => setzeTabelle(t.id, teil)}
-          onDuplizieren={() => setzeTabellen(neueTabelle({ ...kopie(t, ''), name: `${t.name}_kopie` }))}
-          onLoeschen={() => tabelleLoeschen(t)}
-          onSpalteNach={(s, ziel, verschieben) => spalteNach(t, s, ziel, verschieben)}
-        />
-      ))}
-      {aktuell.tabellen.length > 1 && (
+      <div className="mode-switch te-ansichten" role="group" aria-label="Ansicht">
+        <button type="button" aria-pressed={ansicht === 'zeichnen'} onClick={() => setAnsicht('zeichnen')}>
+          Zeichnen
+        </button>
+        <button type="button" aria-pressed={ansicht === 'formular'} onClick={() => setAnsicht('formular')}>
+          Tabellenform
+        </button>
+      </div>
+
+      {ansicht === 'zeichnen' && (
+        <SchemaZeichner key={i} tabellen={aktuell.tabellen} onChange={setzeTabellen} andereIds={alleTabellen(wert)} titel={aktuell.titel} />
+      )}
+      {ansicht === 'formular' &&
+        aktuell.tabellen.map((t) => (
+          <TabellenKarte
+            key={t.id}
+            t={t}
+            andere={aktuell.tabellen.filter((x) => x.id !== t.id)}
+            alle={aktuell.tabellen}
+            onAendern={(teil) => setzeTabelle(t.id, teil)}
+            onDuplizieren={() => setzeTabellen(neueTabelle({ ...kopie(t, ''), name: `${t.name}_kopie` }))}
+            onLoeschen={() => tabelleLoeschen(t)}
+            onSpalteNach={(s, ziel, verschieben) => spalteNach(t, s, ziel, verschieben)}
+          />
+        ))}
+      {ansicht === 'formular' && aktuell.tabellen.length > 1 && (
         <details className="te-diagramm" open>
           <summary>Als Beziehungsdiagramm – so zeichnest du das Schema auf den Prüfungsbogen</summary>
           <SchemaDiagramm tabellen={aktuell.tabellen} titel={`Beziehungsdiagramm ${aktuell.titel}`} />
         </details>
       )}
-      {!aktuell.tabellen.length && (
+      {!aktuell.tabellen.length && ansicht === 'formular' && (
         <p className="muted small">
           {wert.editor === 'normalform' && i === 0 && vorlagen.length
             ? 'Übernimm die Ausgangstabelle aus der Anlage oder lege eine neue Tabelle an.'
@@ -149,13 +166,15 @@ export function TabellenEditor({ wert, onChange, anlagen }: Props) {
       )}
 
       <div className="actions te-aktionen">
-        <button
-          type="button"
-          className="secondary"
-          onClick={() => setzeTabellen(neueTabelle({ name: '', spalten: [{ name: '' }], zeilen: [] }))}
-        >
-          + Tabelle
-        </button>
+        {ansicht === 'formular' && (
+          <button
+            type="button"
+            className="secondary"
+            onClick={() => setzeTabellen(neueTabelle({ name: '', spalten: [{ name: '' }], zeilen: [] }))}
+          >
+            + Tabelle
+          </button>
+        )}
         {vorlagen.map((v, n) => (
           <button key={n} type="button" className="ghost" onClick={() => ausAnlage(n)} title={v.titel}>
             Ausgangstabelle „{v.tabelle.name}“ übernehmen

@@ -688,6 +688,79 @@
         "relationenmodell",
         "fremdschlüssel"
       ]
+    },
+    {
+      "id": "NF-009",
+      "titel": "Poolfahrzeuge: Datenmodell zeichnen",
+      "stufe": 3,
+      "topicId": "02",
+      "quelle": "text",
+      "aufgabe": "Die Möbelhaus Nordholz GmbH stellt ihren Mitarbeitern Poolfahrzeuge zur Verfügung. Die Ausleihen werden bisher in einer Tabellenkalkulation notiert; daraus soll eine Datenbank werden. Der Fuhrparkleiter beschreibt:\n\n> Jeder Mitarbeiter hat eine Personalnummer (personal_nr), einen Nachnamen (nachname) und einen Vornamen (vorname) und gehört zu genau einer Abteilung (abteilungs_nr, abteilungsname). Ein Fahrzeug erkennen wir am Kennzeichen (kennzeichen); wir speichern Erstzulassung (erstzulassung), Kilometerstand (km_stand) und Farbe. Farben führen wir als Liste (farbe_nr, farbbezeichnung), damit niemand „grau“ und „Grau“ schreibt. Jedes Fahrzeug ist genau ein Modell (modell_nr, modellname, sitzplaetze, kraftstoff); jedes Modell gehört zu genau einer Marke (marke_nr, markenname). Bei jeder Ausleihe (ausleihe_nr) halten wir fest, wer welches Fahrzeug wann abholt und zurückbringt (ausgabe_am, rueckgabe_am) und die Kilometerstände dabei (km_start, km_ende). Ein Mitarbeiter kann viele Fahrzeuge ausleihen, ein Fahrzeug wird oft ausgeliehen.\n\n*Erstellen* Sie aus der Beschreibung ein relationales Datenmodell in der 3. Normalform und zeichnen Sie es als Tabellenmodell: je Tabelle ein Kasten mit ihren Spalten, Primärschlüssel unterstrichen, Fremdschlüssel mit ↑ und einer Linie zur referenzierten Tabelle (1 : n). Verwenden Sie die Attributnamen in Klammern.",
+      "hinweise": [
+        "Sieben Tabellen. Zähl die „Dinge“ mit eigener Nummer oder eigenem Kennzeichen – auch die Farbe ist eine eigene Tabelle (Nachschlagetabelle).",
+        "Die Ausleihe verbindet Mitarbeiter und Fahrzeug, hat aber einen eigenen Schlüssel ausleihe_nr: Derselbe Mitarbeiter leiht dasselbe Fahrzeug oft mehrmals aus.",
+        "Kette Fahrzeug → Modell → Marke: Die Marke gehört nicht ins Fahrzeug, sondern ins Modell (sonst transitiv)."
+      ],
+      "loesung": [
+        {
+          "titel": "3. NF",
+          "text": "Funktionale Abhängigkeiten:\n- personal_nr → nachname, vorname, abteilungs_nr · abteilungs_nr → abteilungsname\n- kennzeichen → erstzulassung, km_stand, farbe_nr, modell_nr · farbe_nr → farbbezeichnung\n- modell_nr → modellname, sitzplaetze, kraftstoff, marke_nr · marke_nr → markenname\n- ausleihe_nr → personal_nr, kennzeichen, ausgabe_am, rueckgabe_am, km_start, km_ende\n\nJede Nachschlage-Information (Abteilung, Farbe, Modell, Marke) bekommt eine eigene Tabelle, sonst entstünden transitive Abhängigkeiten wie kennzeichen → modell_nr → marke_nr → markenname. Die Ausleihe hat einen eigenen Schlüssel und trägt die beiden Fremdschlüssel personal_nr und kennzeichen.",
+          "tabellen": [
+            "ausleihe(**ausleihe_nr**, personal_nr↑, kennzeichen↑, ausgabe_am, rueckgabe_am, km_start, km_ende)",
+            "mitarbeiter(**personal_nr**, nachname, vorname, abteilungs_nr↑)",
+            "abteilung(**abteilungs_nr**, abteilungsname)",
+            "fahrzeug(**kennzeichen**, erstzulassung, km_stand, farbe_nr↑, modell_nr↑)",
+            "farbe(**farbe_nr**, farbbezeichnung)",
+            "modell(**modell_nr**, modellname, sitzplaetze, kraftstoff, marke_nr↑)",
+            "marke(**marke_nr**, markenname)"
+          ]
+        }
+      ],
+      "erklaerung": "So eine Zeichenaufgabe wird nach Tabellen, Schlüsseln und Beziehungslinien bepunktet: jede richtige Tabelle mit Primärschlüssel, jeder Fremdschlüssel auf der n-Seite und jede Linie zur richtigen Tabelle. Häufigste Fehler: marke_nr im Fahrzeug statt im Modell, farbbezeichnung als Text im Fahrzeug (dann ist die Farbtabelle sinnlos) und die Ausleihe mit (personal_nr, kennzeichen) als Primärschlüssel – damit dürfte jeder Mitarbeiter jedes Fahrzeug nur ein einziges Mal ausleihen. Ein zusammengesetzter Schlüssel mit ausgabe_am wäre fachlich ebenfalls vertretbar.",
+      "tags": [
+        "normalisierung",
+        "3nf",
+        "relationenmodell",
+        "modell zeichnen"
+      ]
+    },
+    {
+      "id": "NF-010",
+      "titel": "Kunden mit mehreren Adressen: Datenmodell zeichnen",
+      "stufe": 3,
+      "topicId": "02",
+      "quelle": "text",
+      "aufgabe": "Der Onlineshop der Möbelhaus Nordholz GmbH liefert an Geschäftskunden, die oft eine Rechnungs- und mehrere Lieferadressen haben. Aus dem Anforderungsgespräch:\n\n> Kunden haben eine Kundennummer (kunden_nr), einen Firmennamen (firmenname) und einen Kundenstatus (kundenstatus_nr, statusbezeichnung – z. B. Neukunde, Stammkunde, gesperrt). Jeder Kunde kann beliebig viele Adressen haben (adress_nr, strasse, hausnummer, plz, ort); jede Adresse hat genau eine Adressart (adressart_nr, adressartbezeichnung – z. B. Rechnung, Lieferung). PLZ und Ort bleiben zusammen in der Adresse. Ein Auftrag (auftrag_nr, auftragsdatum) gehört zu genau einem Kunden und wird an genau eine seiner Adressen geliefert; gespeichert wird deren Nummer als lieferadress_nr. Ein Auftrag enthält mehrere Artikel (artikel_nr, bezeichnung, preis), jeweils mit einer Menge (menge); ein Artikel kommt in vielen Aufträgen vor.\n\n*Erstellen* Sie aus der Beschreibung ein relationales Datenmodell in der 3. Normalform und zeichnen Sie es als Tabellenmodell mit Primärschlüsseln, Fremdschlüsseln und Beziehungslinien. Verwenden Sie die Attributnamen in Klammern.",
+      "hinweise": [
+        "Sieben Tabellen: Kunde, Kundenstatus, Adresse, Adressart, Auftrag, Artikel und die Positionen des Auftrags.",
+        "Ein Kunde hat viele Adressen – der Fremdschlüssel kunden_nr steht also in der Adresse, nicht umgekehrt.",
+        "lieferadress_nr ist ein Fremdschlüssel mit anderem Namen: Er verweist auf adresse. Zieh im Editor die Linie zur Tabelle adresse."
+      ],
+      "loesung": [
+        {
+          "titel": "3. NF",
+          "text": "Funktionale Abhängigkeiten:\n- kunden_nr → firmenname, kundenstatus_nr · kundenstatus_nr → statusbezeichnung\n- adress_nr → kunden_nr, adressart_nr, strasse, hausnummer, plz, ort · adressart_nr → adressartbezeichnung\n- auftrag_nr → auftragsdatum, kunden_nr, lieferadress_nr\n- artikel_nr → bezeichnung, preis\n- (auftrag_nr, artikel_nr) → menge\n\nKundenstatus und Adressart sind Nachschlagetabellen (sonst kunden_nr → kundenstatus_nr → statusbezeichnung transitiv). Die 1:n-Beziehung Kunde–Adresse steckt in kunden_nr in adresse, die n:m-Beziehung Auftrag–Artikel in der Tabelle auftragsposition mit dem zusammengesetzten Schlüssel (**auftrag_nr, artikel_nr**). lieferadress_nr ist Fremdschlüssel auf adresse.",
+          "tabellen": [
+            "auftragsposition(**auftrag_nr↑, artikel_nr↑**, menge)",
+            "auftrag(**auftrag_nr**, auftragsdatum, kunden_nr↑, lieferadress_nr↑)",
+            "artikel(**artikel_nr**, bezeichnung, preis)",
+            "adresse(**adress_nr**, kunden_nr↑, adressart_nr↑, strasse, hausnummer, plz, ort)",
+            "kunde(**kunden_nr**, firmenname, kundenstatus_nr↑)",
+            "kundenstatus(**kundenstatus_nr**, statusbezeichnung)",
+            "adressart(**adressart_nr**, adressartbezeichnung)"
+          ],
+          "ziele": {
+            "auftrag.lieferadress_nr": "adresse"
+          }
+        }
+      ],
+      "erklaerung": "Punkte bringen sieben Tabellen mit Schlüsseln, die Fremdschlüssel auf der richtigen Seite und die Linien. Typische Fehler: rechnungsadresse und lieferadresse als Spalten in kunde (dann passt nur je eine Adresse hinein – genau das will die Beschreibung vermeiden), die Lieferadresse im Auftrag als Text statt als Verweis auf adresse und kunden_nr im Auftrag vergessen, weil er „über die Adresse“ ermittelbar scheint. Er bleibt, weil der Auftrag dem Kunden gehört, auch wenn eine Adresse später gelöscht wird. Wer plz → ort in eine eigene Tabelle auslagert, ist fachlich nicht falsch; die Aufgabe schließt das hier aber aus.",
+      "tags": [
+        "normalisierung",
+        "3nf",
+        "relationenmodell",
+        "modell zeichnen"
+      ]
     }
   ]
 }

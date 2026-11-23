@@ -11,6 +11,7 @@ import { emptyProgress } from '../domain/progress';
 import { ConfirmContext } from '../src/hooks/useConfirm';
 import { leereNfAntwort, leseNfAntwort, normalisierungUebungen, pruefeNfAntwort, tabellenDesSchritts } from '../src/lib/normalisierung';
 import { schemaLayout } from '../src/lib/schemaDiagramm';
+import { benenneUm, kastenBreite, kastenHoehe, mitLage, verbinde, verschiebeSpalte, zeichnerLinien } from '../src/lib/schemaZeichner';
 import type { TabellenAntwort } from '../src/lib/tabellenEditor';
 
 const content = loadContent(CONTENT_DIR);
@@ -175,6 +176,63 @@ describe('Beziehungsdiagramm', () => {
     expect(fkZiel(alleT, projekt, 'kunden_nr')).toBe(kunde);
     expect(fkZiel(alleT, projekt, 'leiter_nr')).toBeUndefined();
     expect(fkZiel(alleT, projekt, 'leiter_nr', 'kunde')).toBe(kunde);
+  });
+});
+
+describe('Zeichenfläche', () => {
+  const basis = () => [
+    {
+      id: 't1',
+      name: 'lagerbestand',
+      spalten: [{ name: 'lager_nr', pk: true }, { name: 'lagerort' }, { name: 'bestand' }],
+      zeilen: [['L1', 'Kiel', '3']],
+      x: 20,
+      y: 20,
+    },
+  ];
+
+  it('Spalte auf die freie Fläche ziehen: neue Tabelle, Daten wandern mit', () => {
+    const t = verschiebeSpalte(basis(), [], 't1', 1, { x: 401, y: 58 });
+    expect(t).toHaveLength(2);
+    expect(t[0].spalten.map((s) => s.name)).toEqual(['lager_nr', 'bestand']);
+    expect(t[0].zeilen).toEqual([['L1', '3']]);
+    expect(t[1]).toMatchObject({ id: 't2', spalten: [{ name: 'lagerort' }], x: 400, y: 60 });
+  });
+
+  it('Fremdschlüssel ziehen und Tabelle umbenennen', () => {
+    let t = verschiebeSpalte(basis(), [], 't1', 1, { x: 400, y: 20 });
+    t = t.map((x) => (x.id === 't2' ? { ...x, name: 'lager', spalten: [{ name: 'lager_nr', pk: true }, ...x.spalten] } : x));
+    t = verbinde(t, 't1', 0, 't2');
+    expect(t[0].spalten[0]).toMatchObject({ fk: true, ziel: 'lager' });
+    expect(zeichnerLinien(t)).toHaveLength(1);
+    t = benenneUm(t, 't2', 'lagerort_tabelle');
+    expect(t[0].spalten[0].ziel).toBe('lagerort_tabelle');
+    expect(zeichnerLinien(t)).toHaveLength(1);
+  });
+
+  it('Musterlösungen: alle Kästen platziert, keine Überlappung, eine Linie je Fremdschlüssel', () => {
+    for (const u of alle) {
+      const tabellen = mitLage(tabellenDesSchritts(u.loesung[u.loesung.length - 1]));
+      for (const [i, a] of tabellen.entries()) {
+        expect(a.x, `${u.id} ${a.name}`).toBeTypeOf('number');
+        for (const b of tabellen.slice(i + 1)) {
+          const getrennt =
+            a.x! + kastenBreite(a) <= b.x! ||
+            b.x! + kastenBreite(b) <= a.x! ||
+            a.y! + kastenHoehe(a) <= b.y! ||
+            b.y! + kastenHoehe(b) <= a.y!;
+          expect(getrennt, `${u.id}: ${a.name}/${b.name}`).toBe(true);
+        }
+      }
+      const fks = tabellen.flatMap((t) => t.spalten.filter((s) => s.fk)).length;
+      expect(zeichnerLinien(tabellen), u.id).toHaveLength(fks);
+    }
+  });
+
+  it('platzierte Tabellen bleiben, neue kommen darunter', () => {
+    const t = mitLage([...basis(), { id: 't2', name: 'neu', spalten: [{ name: 'a' }], zeilen: [] }]);
+    expect(t[0]).toMatchObject({ x: 20, y: 20 });
+    expect(t[1].y).toBeGreaterThanOrEqual(20 + kastenHoehe(t[0]));
   });
 });
 

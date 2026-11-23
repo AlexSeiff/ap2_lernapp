@@ -260,7 +260,7 @@ PK has that column, single-column PK preferred). The importer skips (and reports
 a duplicate column/table, wrong step titles, or loses a column of the first step. "Prüfen" (`src/lib/normalisierung.ts`) compares every step with
 `gleicheAb` of the Tabellen-Editor (column names normalised; table names and column order free) and checks FK targets chosen in the editor; the feedback
 names the learner's own tables and how many tables/columns are missing, without revealing the solution. Pages `/normalisierung` (shared
-`DatenformatListe`) and `/normalisierung/:id`. The Tabellen-Editor (also in exam tasks) draws its tables as a Beziehungsdiagramm (`SchemaDiagramm`,
+`DatenformatListe`) and `/normalisierung/:id`. The Tabellen-Editor (also in exam tasks) opens in the view "Zeichnen" (`SchemaZeichner`, model changes in `src/lib/schemaZeichner.ts`): tables as freely placed boxes (position `x`/`y` stored in the table), columns dragged at ⠿ into another table or onto the free area (new table), a FK drawn from ● to its target table (sets `fk` and `ziel`); "Tabellenform" is the form view with sample data. In the form view it draws the tables as a Beziehungsdiagramm (`SchemaDiagramm`,
 layout in `src/lib/schemaDiagramm.ts`: columns by references, FK lines n … 1); the solution shows one per step. The editor state is kept as a draft in
 `localStorage` (`ap2-nf-entwurf`, per exercise, removed when solved) – a convenience, not progress. Progress in the map `json` (§ 6) under the `NF-…` ids,
 no format change. Tests: `tests/normalisierungUebungen.test.ts`.
